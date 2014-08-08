@@ -10,20 +10,21 @@
     <!-- endinject -->
   </head>
   <body>
-    <h1>civicClient</h1>
-    <session-info></session-info>
-    <ng-view>
+    <ui-view>
 
-    </ng-view>
+    </ui-view>
     <!-- inject:vendor:js -->
     <script src="/angular/angular.js"></script>
-    <script src="/angular-route/angular-route.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endinject -->
 
     <!-- inject:js -->
+    <script src="/civic-client-templates.js"></script>
     <script src="/services/AuthService_testtt.js"></script>
     <script src="/app.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
+    <script src="/login/LoginCtrl.js"></script>
+    <script src="/pages/HomeCtrl.js"></script>
     <script src="/services/AuthService.js"></script>
     <script src="/services/ConfigService.js"></script>
     <!-- endinject -->

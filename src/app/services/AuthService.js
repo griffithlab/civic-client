@@ -1,6 +1,9 @@
 angular.module('civic.services')
   .service('AuthService', AuthService);
 
-function AuthService() {
-
+/**
+ * @ngInject
+ */
+function AuthService($log) {
+  $log.info('AuthService instantiated');
 }

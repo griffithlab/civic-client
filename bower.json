@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "angular": "~1.2.14",
-    "angular-route": "~1.2.14"
+    "angular-ui-router": "git:/srv/git/angular-ui-router.git"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.14"
