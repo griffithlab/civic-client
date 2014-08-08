@@ -2,16 +2,16 @@
 'use strict';
 
 var gulp = require('gulp'),
-    g = require('gulp-load-plugins')({lazy: false}),
-    noop = g.util.noop,
-    es = require('event-stream'),
-    bowerFiles = require('main-bower-files'),
-    rimraf = require('rimraf'),
-    queue = require('streamqueue'),
-    lazypipe = require('lazypipe'),
-    stylish = require('jshint-stylish'),
-    bower = require('./bower'),
-    isWatching = false;
+  g = require('gulp-load-plugins')({lazy: false, camelize: true}),
+  noop = g.util.noop,
+  es = require('event-stream'),
+  bowerFiles = require('main-bower-files'),
+  rimraf = require('rimraf'),
+  queue = require('streamqueue'),
+  lazypipe = require('lazypipe'),
+  stylish = require('jshint-stylish'),
+  bower = require('./bower'),
+  isWatching = false;
 
 var htmlminOpts = {
   removeComments: true,
@@ -102,7 +102,7 @@ function index () {
   var opt = {read: false};
   return gulp.src('./src/app/index.html')
     .pipe(g.inject(gulp.src(bowerFiles(), opt), {ignorePath: 'bower_components', starttag: '<!-- inject:vendor:{{ext}} -->'}))
-    .pipe(g.inject(es.merge(appFiles(), cssFiles(opt)), {ignorePath: ['.tmp', 'src/app']}))
+    .pipe(g.inject(es.merge(appFiles(), cssFiles(opt)), { ignorePath: ['.tmp', 'src/app'] }))
     .pipe(gulp.dest('./src/app/'))
     .pipe(g.embedlr())
     .pipe(gulp.dest('./.tmp/'))
@@ -132,7 +132,7 @@ gulp.task('dist', ['vendors', 'assets', 'styles-dist', 'scripts-dist'], function
  * Static file server
  */
 gulp.task('statics', g.serve({
-  port: 3000,
+  port: 3001,
   root: ['./.tmp', './.tmp/src/app', './src/app', './bower_components']
 }));
 
@@ -220,7 +220,7 @@ function cssFiles (opt) {
  */
 function appFiles () {
   var files = [
-    './.tmp/' + bower.name + '-templates.js',
+      './.tmp/' + bower.name + '-templates.js',
     './.tmp/src/app/**/*.js',
     '!./.tmp/src/app/**/*_test.js',
     './src/app/**/*.js',

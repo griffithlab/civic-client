@@ -6,17 +6,26 @@
     <!-- inject:vendor:css -->
     <!-- endinject -->
     <!-- inject:css -->
+    <link rel="stylesheet" href="/css/app.css">
     <!-- endinject -->
   </head>
   <body>
-    <hgroup>
-      <h1>civicClient</h1>
-      <h2>Your new AngularJS app is now ready...</h2>
-    </hgroup>
-    <ng-view></ng-view>
+    <h1>civicClient</h1>
+    <session-info></session-info>
+    <ng-view>
+
+    </ng-view>
     <!-- inject:vendor:js -->
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-route/angular-route.js"></script>
     <!-- endinject -->
+
     <!-- inject:js -->
+    <script src="/services/AuthService_testtt.js"></script>
+    <script src="/app.js"></script>
+    <script src="/common/directives/sessionInfo.js"></script>
+    <script src="/services/AuthService.js"></script>
+    <script src="/services/ConfigService.js"></script>
     <!-- endinject -->
   </body>
 </html>
