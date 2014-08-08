@@ -20,11 +20,15 @@ angular.module('civic.event', []);
 angular.module('civic.evidence', []);
 
 /**
- * @ngInject
+ * @name appConfig
+ * @desc Config function for main app
  * @param $stateProvider
  * @param $urlRouterProvider
+ * @ngInject
+ *
  */
 function appConfig($stateProvider, $urlRouterProvider ) {
+  'use strict';
   $stateProvider
     .state('home', {
       url: '/home',
@@ -32,19 +36,27 @@ function appConfig($stateProvider, $urlRouterProvider ) {
       templateUrl: '/civic-client/pages/home.html',
       authenticate: true
     })
-    .state("login", {
-      url: "/login",
-      templateUrl: "/civic-client/login/login.html",
-      controller: "LoginCtrl",
+    .state('login', {
+      url: '/login',
+      templateUrl: '/civic-client/login/login.html',
+      controller: 'LoginCtrl',
       authenticate: false
     });
   // Send to login if the URL was not found
-  $urlRouterProvider.otherwise("/home");
+  $urlRouterProvider.otherwise('/home');
 }
 
 /**
+ * @name appRun
+ * @desc run function for main app
  * @ngInject
  */
 function appRun($rootScope, $state, AuthService) {
-
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    if (toState.authenticate && !AuthService.isAuthenticated()){
+      // User isn’t authenticated
+      $state.transitionTo("login");
+      event.preventDefault();
+    }
+  });
 }

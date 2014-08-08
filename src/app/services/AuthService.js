@@ -5,5 +5,13 @@ angular.module('civic.services')
  * @ngInject
  */
 function AuthService($log) {
+  'use strict';
   $log.info('AuthService instantiated');
+  function isAuthenticated() {
+    return false;
+  }
+
+  return {
+    isAuthenticated: isAuthenticated
+  }
 }
