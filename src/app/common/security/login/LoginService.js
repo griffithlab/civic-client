@@ -1,0 +1,1 @@
+angular.module('civic.security.login', ['civic.security.login.form', 'civic.security.login.toolbar']);

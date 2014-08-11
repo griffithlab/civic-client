@@ -1,6 +1,7 @@
 angular.module('civicClient', [
   'ui.router'
   ,'ui.bootstrap'
+  ,'civic.security'
   ,'civic.services'
   ,'civic.common'
   ,'civic.pages'
