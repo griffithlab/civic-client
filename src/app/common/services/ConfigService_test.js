@@ -1,5 +1,5 @@
 /* jshint strict:false, globalstrict:false */
-/* global describe, it, beforeEach, inject, module */
+/* global describe, it, beforeEach, inject, module, expect */
 describe('ConfigService', function () {
 
   var configService,
@@ -13,6 +13,6 @@ describe('ConfigService', function () {
   }));
 
   it('should provide the CIViC server URL', function () {
-    expect(configService.serverUrl).to.equal('http://localhost:3000');
+    expect(configService.serverUrl).to.equal('http://localhost:3000/');
   });
 });

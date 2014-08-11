@@ -1,5 +1,6 @@
 angular.module('civicClient', [
   'ui.router'
+  ,'ui.bootstrap'
   ,'civic.services'
   ,'civic.common'
   ,'civic.pages'
@@ -51,12 +52,12 @@ function appConfig($stateProvider, $urlRouterProvider ) {
  * @desc run function for main app
  * @ngInject
  */
-function appRun($rootScope, $state, AuthService) {
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    if (toState.authenticate && !AuthService.isAuthenticated()){
-      // User isn’t authenticated
-      $state.transitionTo("login");
-      event.preventDefault();
-    }
-  });
+function appRun($rootScope, $state) {
+//  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+//    if (toState.authenticate && !AuthService.isAuthenticated()){
+//      // User isn’t authenticated
+//      $state.transitionTo("login");
+//      event.preventDefault();
+//    }
+//  });
 }
