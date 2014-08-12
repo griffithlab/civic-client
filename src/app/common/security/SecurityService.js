@@ -1,14 +1,13 @@
 // Based loosely around work by Witold Szczerba - https://github.com/witoldsz/angular-http-auth
 angular.module('civic.security.service', [
-  'civic.security.retryQueue'    // Keeps track of failed requests that need to be retried once the user logs in
-  ,'civic.security.login'         // Contains the login form template and controller
-  ,'ui.bootstrap.modal'     // Used to display the login form as a modal dialog.
+  'civic.security.retryQueue'
+  ,'civic.security.login'
+  ,'ui.bootstrap.modal'
 ])
-
   .factory('SecurityService', SecurityService);
 
 // @ngInject
-function SecurityService($http, $q, $location, queue, $modal) {
+function SecurityService($http, $q, $location, RetryQueue, $modal) {
   'use strict';
   // Redirect to the given url (defaults to '/')
   function redirect(url) {
@@ -23,7 +22,7 @@ function SecurityService($http, $q, $location, queue, $modal) {
       throw new Error('Trying to open a dialog that is already open!');
     }
     loginDialog = $modal.dialog();
-    loginDialog.open('security/login/form.tpl.html', 'LoginFormController').then(onLoginDialogClose);
+    loginDialog.open('common/security/login/LoginForm.tpl.html', 'LoginFormController').then(onLoginDialogClose);
   }
   function closeLoginDialog(success) {
     if (loginDialog) {
@@ -33,16 +32,16 @@ function SecurityService($http, $q, $location, queue, $modal) {
   function onLoginDialogClose(success) {
     loginDialog = null;
     if ( success ) {
-      queue.retryAll();
+      RetryQueue.retryAll();
     } else {
-      queue.cancelAll();
+      RetryQueue.cancelAll();
       redirect();
     }
   }
 
   // Register a handler for when an item is added to the retry queue
-  queue.onItemAddedCallbacks.push(function(retryItem) {
-    if ( queue.hasMore() ) {
+  RetryQueue.onItemAddedCallbacks.push(function(retryItem) {
+    if ( RetryQueue.hasMore() ) {
       service.showLogin();
     }
   });
@@ -52,7 +51,7 @@ function SecurityService($http, $q, $location, queue, $modal) {
 
     // Get the first reason for needing a login
     getLoginReason: function() {
-      return queue.retryReason();
+      return RetryQueue.retryReason();
     },
 
     // Show the modal login dialog

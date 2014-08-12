@@ -4,6 +4,8 @@
     <meta charset="utf-8"/>
     <title>civicClient</title>
     <!-- inject:vendor:css -->
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/angular-dialog-service/dialogs.min.css">
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/app.css">
@@ -17,15 +19,21 @@
     <script src="/angular/angular.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/angular-translate/angular-translate.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/angular-dialog-service/dialogs.min.js"></script>
+    <script src="/angular-dialog-service/dialogs-default-translations.min.js"></script>
     <!-- endinject -->
 
     <!-- inject:js -->
     <script src="/app.js"></script>
     <script src="/civic-client-templates.js"></script>
-    <script src="/common/security/AuthService.js"></script>
     <script src="/common/security/RetryQueue.js"></script>
     <script src="/common/security/login/LoginFormController.js"></script>
-    <script src="/common/security/login/toolbar.js"></script>
+    <script src="/common/security/login/loginToolbar.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
     <script src="/common/security/InterceptorService.js"></script>
     <script src="/common/security/login/LoginService.js"></script>
@@ -33,6 +41,7 @@
     <script src="/login/LoginCtrl.js"></script>
     <script src="/pages/HomeCtrl.js"></script>
     <script src="/common/security/SecurityService.js"></script>
+    <script src="/common/security/AuthService.js"></script>
     <script src="/common/security/index.js"></script>
     <!-- endinject -->
   </body>

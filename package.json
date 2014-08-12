@@ -31,6 +31,7 @@
     "gulp-serve": "~0.2.0",
     "gulp-uglify": "~0.3.0",
     "gulp-util": "^2.2.14",
+    "gulp-webserver": "^0.6.0",
     "jshint-stylish": "~0.4.0",
     "karma": "~0.12.16",
     "karma-chai": "~0.1.0",

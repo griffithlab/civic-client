@@ -1,17 +1,18 @@
 /* jshint node: true */
 'use strict';
 
-var gulp = require('gulp'),
-  g = require('gulp-load-plugins')({lazy: false, camelize: true}),
-  noop = g.util.noop,
-  es = require('event-stream'),
-  bowerFiles = require('main-bower-files'),
-  rimraf = require('rimraf'),
-  queue = require('streamqueue'),
-  lazypipe = require('lazypipe'),
-  stylish = require('jshint-stylish'),
-  bower = require('./bower'),
-  isWatching = false;
+var gulp = require('gulp')
+  ,g = require('gulp-load-plugins')({lazy: false, camelize: true})
+  ,noop = g.util.noop
+  ,es = require('event-stream')
+  ,bowerFiles = require('main-bower-files')
+  ,rimraf = require('rimraf')
+  ,queue = require('streamqueue')
+  ,lazypipe = require('lazypipe')
+  ,stylish = require('jshint-stylish')
+  ,bower = require('./bower');
+
+var isWatching = false;
 
 var htmlminOpts = {
   removeComments: true,
