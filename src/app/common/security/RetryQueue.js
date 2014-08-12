@@ -68,6 +68,7 @@ function RetryQueue($q, $log) {
       }
     },
     retryAll: function() {
+      $log.info('RetryQueue.retryall() called.');
       while(service.hasMore()) {
         retryQueue.shift().retry();
       }

@@ -18,7 +18,7 @@ function LoginFormController($scope, SecurityService) {
   $scope.authError = null;
 
   // The reason that we are being asked to login - for instance because we tried to access something to which we are not authorized
-  // We could do something diffent for each reason here but to keep it simple...
+  // We could do something different for each reason here but to keep it simple...
   $scope.authReason = null;
   if ( SecurityService.getLoginReason() ) {
     $scope.authReason = ( SecurityService.isAuthenticated() ) ?
