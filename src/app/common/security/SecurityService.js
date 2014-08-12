@@ -2,12 +2,12 @@
 angular.module('civic.security.service', [
   'civic.security.retryQueue'
   ,'civic.security.login'
-  ,'ui.bootstrap.modal'
+  ,'dialogs.main'
 ])
   .factory('SecurityService', SecurityService);
 
 // @ngInject
-function SecurityService($http, $q, $location, RetryQueue, $modal) {
+function SecurityService($http, $q, $location, RetryQueue, dialogs) {
   'use strict';
   // Redirect to the given url (defaults to '/')
   function redirect(url) {
@@ -21,8 +21,8 @@ function SecurityService($http, $q, $location, RetryQueue, $modal) {
     if ( loginDialog ) {
       throw new Error('Trying to open a dialog that is already open!');
     }
-    loginDialog = $modal.dialog();
-    loginDialog.open('common/security/login/LoginForm.tpl.html', 'LoginFormController').then(onLoginDialogClose);
+    var loginDialog= dialogs.create('common/security/login/LoginForm.tpl.html','LoginFormController',{},'lg');
+    loginDialog.result.then(onLoginDialogClose);
   }
   function closeLoginDialog(success) {
     if (loginDialog) {
