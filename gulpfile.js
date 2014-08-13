@@ -10,7 +10,9 @@ var gulp = require('gulp')
   ,queue = require('streamqueue')
   ,lazypipe = require('lazypipe')
   ,stylish = require('jshint-stylish')
-  ,bower = require('./bower');
+  ,bower = require('./bower')
+  ,url = require('url')
+  ,proxy = require('proxy-middleware');
 
 var isWatching = false;
 
@@ -135,7 +137,14 @@ gulp.task('dist', ['vendors', 'assets', 'styles-dist', 'scripts-dist'], function
 gulp.task('statics', function() {
     g.connect.server({
       root: ['./.tmp', './.tmp/src/app', './src/app', './bower_components'],
-      port: 3001
+      port: 3001,
+      middleware: function(connect, o) {
+        return [ (function() {
+          var options = url.parse('http://localhost:3000');
+          options.route = '/api';
+          return proxy(options);
+        })() ];
+      }
     })
   }
 );
