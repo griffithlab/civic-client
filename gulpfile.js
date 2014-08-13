@@ -141,7 +141,7 @@ gulp.task('statics', function() {
       middleware: function(connect, o) {
         return [ (function() {
           var options = url.parse('http://localhost:3000');
-          options.route = '/api';
+          options.route = ['/api', '/auth'];
           return proxy(options);
         })() ];
       }
