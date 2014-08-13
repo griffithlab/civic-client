@@ -136,12 +136,12 @@ gulp.task('dist', ['vendors', 'assets', 'styles-dist', 'scripts-dist'], function
  */
 gulp.task('statics', function() {
     g.connect.server({
-      root: ['./.tmp', './.tmp/src/app', './src/app', './bower_components'],
-      port: 3001,
-      middleware: function(connect, o) {
+      root: ['./.tmp', './.tmp/src/app', './src/app', './bower_components']
+      ,port: 3001
+      ,middleware: function(connect, o) {
         return [ (function() {
           var options = url.parse('http://localhost:3000');
-          options.route = ['/api', '/auth'];
+          options.route = '/api';
           return proxy(options);
         })() ];
       }

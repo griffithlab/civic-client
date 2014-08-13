@@ -2,6 +2,7 @@ angular.module('civicClient', [
   'ui.router'
   ,'ui.bootstrap'
   ,'dialogs.main'
+  ,'civic.pages'
   ,'civic.security'
   ,'civic.services'
   ,'civic.common'
@@ -9,8 +10,7 @@ angular.module('civicClient', [
   ,'civic.login'
   ,'civic-client-templates'
 ])
-  .config(appConfig)
-  .run(appRun);
+  .config(appConfig);
 
 angular.module('civic.services', []);
 angular.module('civic.common', []);
@@ -25,6 +25,7 @@ angular.module('civic.evidence', []);
 /**
  * @name appConfig
  * @desc Config function for main app
+ * @param $log
  * @param $stateProvider
  * @param $urlRouterProvider
  * @ngInject
@@ -32,34 +33,13 @@ angular.module('civic.evidence', []);
  */
 function appConfig($stateProvider, $urlRouterProvider ) {
   'use strict';
+  console.log('appConfig() called.');
   $stateProvider
-    .state('home', {
-      url: '/home',
-      controller: 'HomeCtrl',
-      templateUrl: '/civic-client/pages/home.html',
-      authenticate: true
-    })
     .state('login', {
       url: '/login',
       templateUrl: '/civic-client/login/login.html',
-      controller: 'LoginCtrl',
-      authenticate: false
+      controller: 'LoginCtrl'
     });
   // Send to login if the URL was not found
-  $urlRouterProvider.otherwise('/home');
-}
-
-/**
- * @name appRun
- * @desc run function for main app
- * @ngInject
- */
-function appRun($rootScope, $state) {
-//  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-//    if (toState.authenticate && !AuthService.isAuthenticated()){
-//      // User isn’t authenticated
-//      $state.transitionTo("login");
-//      event.preventDefault();
-//    }
-//  });
+//  $urlRouterProvider.otherwise('/login');
 }

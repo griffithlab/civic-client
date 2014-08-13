@@ -9,11 +9,10 @@
     <div class="alert alert-error" ng-show="authError">
       {{authError}}
     </div>
-    <div class="alert alert-info">Please enter your login details</div>
-    <label>E-mail</label>
-    <input name="login" type="email" ng-model="user.email" required autofocus>
-    <label>Password</label>
-    <input name="pass" type="password" ng-model="user.password" required>
+    <div class="alert alert-info">Login by choosing one of the methods below:</div>
+    <ul>
+      <li><a href="api/auth/github">Login with Github</a></li>
+    </ul>
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary login" ng-click="login()" ng-disabled='form.$invalid'>Sign in</button>

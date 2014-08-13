@@ -1,6 +1,8 @@
 angular.module('civicClient', [
   'ui.router'
   ,'ui.bootstrap'
+  ,'dialogs.main'
+  ,'civic.pages'
   ,'civic.security'
   ,'civic.services'
   ,'civic.common'
@@ -24,6 +26,7 @@ angular.module('civic.evidence', []);
 /**
  * @name appConfig
  * @desc Config function for main app
+ * @param $log
  * @param $stateProvider
  * @param $urlRouterProvider
  * @ngInject
@@ -31,21 +34,15 @@ angular.module('civic.evidence', []);
  */
 function appConfig($stateProvider, $urlRouterProvider ) {
   'use strict';
+  console.log('appConfig() called.');
   $stateProvider
-    .state('home', {
-      url: '/home',
-      controller: 'HomeCtrl',
-      templateUrl: '/civic-client/pages/home.html',
-      authenticate: true
-    })
     .state('login', {
       url: '/login',
       templateUrl: '/civic-client/login/login.html',
-      controller: 'LoginCtrl',
-      authenticate: false
+      controller: 'LoginCtrl'
     });
   // Send to login if the URL was not found
-  $urlRouterProvider.otherwise('/home');
+//  $urlRouterProvider.otherwise('/login');
 }
 appConfig.$inject = ["$stateProvider", "$urlRouterProvider"];
 
@@ -96,7 +93,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('/civic-client/common/security/login/LoginForm.tpl.html',
-    '<form name="form" novalidate class="login-form"><div class="modal-header"><h4>Sign in</h4></div><div class="modal-body"><div class="alert alert-warning" ng-show="authReason">{{authReason}}</div><div class="alert alert-error" ng-show="authError">{{authError}}</div><div class="alert alert-info">Please enter your login details</div><label>E-mail</label><input name="login" type="email" ng-model="user.email" required autofocus><label>Password</label><input name="pass" type="password" ng-model="user.password" required></div><div class="modal-footer"><button class="btn btn-primary login" ng-click="login()" ng-disabled="form.$invalid">Sign in</button> <button class="btn clear" ng-click="clearForm()">Clear</button> <button class="btn btn-warning cancel" ng-click="cancelLogin()">Cancel</button></div></form>');
+    '<form name="form" novalidate class="login-form"><div class="modal-header"><h4>Sign in</h4></div><div class="modal-body"><div class="alert alert-warning" ng-show="authReason">{{authReason}}</div><div class="alert alert-error" ng-show="authError">{{authError}}</div><div class="alert alert-info">Login by choosing one of the methods below:</div><ul><li><a href="api/auth/github">Login with Github</a></li></ul></div><div class="modal-footer"><button class="btn btn-primary login" ng-click="login()" ng-disabled="form.$invalid">Sign in</button> <button class="btn clear" ng-click="clearForm()">Clear</button> <button class="btn btn-warning cancel" ng-click="cancelLogin()">Cancel</button></div></form>');
 }]);
 })();
 
@@ -182,6 +179,7 @@ function RetryQueue($q, $log) {
       }
     },
     retryAll: function() {
+      $log.info('RetryQueue.retryall() called.');
       while(service.hasMore()) {
         retryQueue.shift().retry();
       }
@@ -211,7 +209,7 @@ function LoginFormController($scope, SecurityService) {
   $scope.authError = null;
 
   // The reason that we are being asked to login - for instance because we tried to access something to which we are not authorized
-  // We could do something diffent for each reason here but to keep it simple...
+  // We could do something different for each reason here but to keep it simple...
   $scope.authReason = null;
   if ( SecurityService.getLoginReason() ) {
     $scope.authReason = ( SecurityService.isAuthenticated() ) ?
@@ -350,26 +348,16 @@ function LoginCtrl($log) {
   $log.info("LoginCtrl instantiated");
 }
 LoginCtrl.$inject = ["$log"];
-angular.module('civic.pages')
-  .controller('HomeCtrl', HomeCtrl);
-
-/**
- * @ngInject
- */
-function HomeCtrl($log) {
-  $log.info("HomeCtrl instantiated");
-}
-HomeCtrl.$inject = ["$log"];
 // Based loosely around work by Witold Szczerba - https://github.com/witoldsz/angular-http-auth
 angular.module('civic.security.service', [
   'civic.security.retryQueue'
   ,'civic.security.login'
-  ,'dialogs'
+  ,'dialogs.main'
 ])
   .factory('SecurityService', SecurityService);
 
 // @ngInject
-function SecurityService($http, $q, $location, RetryQueue, $modal) {
+function SecurityService($http, $q, $location, $log, RetryQueue, dialogs) {
   'use strict';
   // Redirect to the given url (defaults to '/')
   function redirect(url) {
@@ -383,10 +371,11 @@ function SecurityService($http, $q, $location, RetryQueue, $modal) {
     if ( loginDialog ) {
       throw new Error('Trying to open a dialog that is already open!');
     }
-    loginDialog = $modal.dialog();
-    loginDialog.open('common/security/login/LoginForm.tpl.html', 'LoginFormController').then(onLoginDialogClose);
+    loginDialog= dialogs.create('common/security/login/LoginForm.tpl.html','LoginFormController',{},'lg');
+    loginDialog.result.then(onLoginDialogClose);
   }
   function closeLoginDialog(success) {
+    $log.info('SecurityService.closeLoginDialog() called.');
     if (loginDialog) {
       loginDialog.close(success);
     }
@@ -452,8 +441,8 @@ function SecurityService($http, $q, $location, RetryQueue, $modal) {
       if ( service.isAuthenticated() ) {
         return $q.when(service.currentUser);
       } else {
-        return $http.get('/current-user').then(function(response) {
-          service.currentUser = response.data.user;
+        return $http.get('/api/current_user.json').then(function(response) {
+          service.currentUser = response.data.email;
           return service.currentUser;
         });
       }
@@ -463,8 +452,11 @@ function SecurityService($http, $q, $location, RetryQueue, $modal) {
     currentUser: null,
 
     // Is the current user authenticated?
+//    isAuthenticated: function(){
+//      return !!service.currentUser;
+//    },
     isAuthenticated: function(){
-      return !!service.currentUser;
+      return true;
     },
 
     // Is the current user an adminstrator?
@@ -475,7 +467,7 @@ function SecurityService($http, $q, $location, RetryQueue, $modal) {
 
   return service;
 }
-SecurityService.$inject = ["$http", "$q", "$location", "RetryQueue", "$modal"];
+SecurityService.$inject = ["$http", "$q", "$location", "$log", "RetryQueue", "dialogs"];
 
 angular.module('civic.security.authorization', ['civic.security.service'])
 
@@ -529,3 +521,29 @@ angular.module('civic.security', [
   ,'civic.security.login'
   ,'civic.security.authorization'
 ]);
+
+angular.module('civic.pages', ['civic.security.authorization'])
+  .config(pagesConfig);
+
+// @ngInject
+function pagesConfig($stateProvider, $urlRouterProvider, AuthService) {
+  $log.info('pagesConfig called.');
+  $stateProvider.state('home', {
+    url: '/home',
+    controller: 'HomeCtrl',
+    templateUrl: '/civic-client/pages/home.html',
+    resolve: AuthService.requireAuthenticatedUser
+  });
+}
+pagesConfig.$inject = ["$stateProvider", "$urlRouterProvider", "AuthService"];
+
+angular.module('civic.pages')
+  .controller('HomeCtrl', HomeCtrl);
+
+/**
+ * @ngInject
+ */
+function HomeCtrl($log) {
+  $log.info("HomeCtrl instantiated");
+}
+HomeCtrl.$inject = ["$log"];

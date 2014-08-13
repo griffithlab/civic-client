@@ -4,7 +4,6 @@ angular.module('civic.security.authorization', ['civic.security.service'])
 // You can add them as resolves to routes to require authorization levels
 // before allowing a route change to complete
   .provider('AuthService', {
-
     requireAdminUser: function(AuthService) {
       return AuthService.requireAdminUser();
     },
@@ -14,6 +13,7 @@ angular.module('civic.security.authorization', ['civic.security.service'])
     },
 
     $get: function(SecurityService, RetryQueue) {
+      console.log('AuthService.$get() called.');
       var service = {
 
         // Require that there is an authenticated user

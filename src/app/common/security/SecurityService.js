@@ -91,8 +91,8 @@ function SecurityService($http, $q, $location, $log, RetryQueue, dialogs) {
       if ( service.isAuthenticated() ) {
         return $q.when(service.currentUser);
       } else {
-        return $http.get('/current-user').then(function(response) {
-          service.currentUser = response.data.user;
+        return $http.get('/api/current_user.json').then(function(response) {
+          service.currentUser = response.data.email;
           return service.currentUser;
         });
       }
@@ -102,8 +102,11 @@ function SecurityService($http, $q, $location, $log, RetryQueue, dialogs) {
     currentUser: null,
 
     // Is the current user authenticated?
+//    isAuthenticated: function(){
+//      return !!service.currentUser;
+//    },
     isAuthenticated: function(){
-      return !!service.currentUser;
+      return true;
     },
 
     // Is the current user an adminstrator?
