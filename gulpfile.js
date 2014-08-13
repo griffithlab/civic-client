@@ -132,10 +132,13 @@ gulp.task('dist', ['vendors', 'assets', 'styles-dist', 'scripts-dist'], function
 /**
  * Static file server
  */
-gulp.task('statics', g.serve({
-  port: 3001,
-  root: ['./.tmp', './.tmp/src/app', './src/app', './bower_components']
-}));
+gulp.task('statics', function() {
+    g.connect.server({
+      root: ['./.tmp', './.tmp/src/app', './src/app', './bower_components'],
+      port: 3001
+    })
+  }
+);
 
 /**
  * Watch
