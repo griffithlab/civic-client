@@ -4,10 +4,10 @@ angular.module('civic.security.service', [
   ,'civic.security.login'
   ,'dialogs.main'
 ])
-  .factory('SecurityService', SecurityService);
+  .factory('Security', Security);
 
 // @ngInject
-function SecurityService($http, $q, $location, $log, RetryQueue, dialogs) {
+function Security($http, $q, $location, $log, RetryQueue, dialogs) {
   'use strict';
   // Redirect to the given url (defaults to '/')
   function redirect(url) {
@@ -25,7 +25,7 @@ function SecurityService($http, $q, $location, $log, RetryQueue, dialogs) {
     loginDialog.result.then(onLoginDialogClose);
   }
   function closeLoginDialog(success) {
-    $log.info('SecurityService.closeLoginDialog() called.');
+    $log.info('Security.closeLoginDialog() called.');
     if (loginDialog) {
       loginDialog.close(success);
     }
