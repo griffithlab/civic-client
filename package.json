@@ -10,7 +10,7 @@
   "devDependencies": {
     "event-stream": "^3.1.5",
     "gulp": "^3.7.0",
-    "gulp-angular-filesort": "~0.1.1",
+    "gulp-angular-filesort": "~1.0.3",
     "gulp-cached": "^1.0.1",
     "gulp-concat": "^2.2.0",
     "gulp-connect": "^2.0.6",

@@ -6,21 +6,10 @@ angular.module('civicClient', [
   ,'civic.security'
   ,'civic.services'
   ,'civic.common'
-  ,'civic.pages'
   ,'civic.login'
   ,'civic-client-templates'
 ])
   .config(appConfig);
-
-angular.module('civic.services', []);
-angular.module('civic.common', []);
-angular.module('civic.pages', []);
-angular.module('civic.login', []);
-angular.module('civic.browse', []);
-angular.module('civic.search', []);
-angular.module('civic.gene', []);
-angular.module('civic.event', []);
-angular.module('civic.evidence', []);
 
 /**
  * @name appConfig
@@ -31,7 +20,7 @@ angular.module('civic.evidence', []);
  * @ngInject
  *
  */
-function appConfig($stateProvider, $urlRouterProvider ) {
+function appConfig($stateProvider, $urlRouterProvider) {
   'use strict';
   console.log('appConfig() called.');
   $stateProvider
@@ -43,3 +32,20 @@ function appConfig($stateProvider, $urlRouterProvider ) {
   // Send to login if the URL was not found
 //  $urlRouterProvider.otherwise('/login');
 }
+
+// define app modules
+angular.module('civic.security', [
+  'civic.security.authorization'
+  ,'civic.security.service'
+  ,'civic.security.interceptor'
+  ,'civic.security.login'
+]);
+angular.module('civic.services', []);
+angular.module('civic.pages', ['civic.security.authorization'])
+angular.module('civic.common', []);
+angular.module('civic.login', []);
+angular.module('civic.browse', []);
+angular.module('civic.search', []);
+angular.module('civic.gene', []);
+angular.module('civic.event', []);
+angular.module('civic.evidence', []);

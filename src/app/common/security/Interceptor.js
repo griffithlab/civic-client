@@ -1,16 +1,16 @@
 angular.module('civic.security.interceptor', ['civic.security.retryQueue'])
-  .factory('InterceptorService', InterceptorService)
+  .factory('Interceptor', Interceptor)
   .config(interceptorServiceConfig);
 
 /**
- * @name InterceptorService
+ * @name Interceptor
  * @desc listens for authentication failures
  * @param $injector
  * @param RetryQueue
  * @returns {Function}
  * @ngInject
  */
-function InterceptorService($injector, RetryQueue) {
+function Interceptor($injector, RetryQueue) {
   return function(promise) {
     // Intercept failed requests
     return promise.then(null, function(originalResponse) {
@@ -32,5 +32,5 @@ function InterceptorService($injector, RetryQueue) {
  * @param $httpProvider
  */
 function interceptorServiceConfig($httpProvider) {
-  $httpProvider.responseInterceptors.push('InterceptorService');
+  $httpProvider.responseInterceptors.push('Interceptor');
 }

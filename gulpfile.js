@@ -234,8 +234,8 @@ function cssFiles (opt) {
 function appFiles () {
   var files = [
       './.tmp/' + bower.name + '-templates.js',
-    './.tmp/src/app/**/*.js',
-    '!./.tmp/src/app/**/*_test.js',
+//    './.tmp/src/app/**/*.js',
+//    '!./.tmp/src/app/**/*_test.js',
     './src/app/**/*.js',
     '!./src/app/**/*_test.js'
   ];

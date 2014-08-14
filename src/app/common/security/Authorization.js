@@ -3,17 +3,17 @@ angular.module('civic.security.authorization', ['civic.security.service'])
 // This service provides guard methods to support AngularJS routes.
 // You can add them as resolves to routes to require authorization levels
 // before allowing a route change to complete
-  .provider('AuthService', {
-    requireAdminUser: function(AuthService) {
-      return AuthService.requireAdminUser();
+  .provider('Authorization', {
+    requireAdminUser: function(Authorization) {
+      return Authorization.requireAdminUser();
     },
 
-    requireAuthenticatedUser: function(AuthService) {
-      return AuthService.requireAuthenticatedUser();
+    requireAuthenticatedUser: function(Authorization) {
+      return Authorization.requireAuthenticatedUser();
     },
 
     $get: function(SecurityService, RetryQueue) {
-      console.log('AuthService.$get() called.');
+      console.log('Authorization.$get() called.');
       var service = {
 
         // Require that there is an authenticated user

@@ -10,8 +10,7 @@ angular.module('civicClient', [
   ,'civic.login'
   ,'civic-client-templates'
 ])
-  .config(appConfig)
-  .run(appRun);
+  .config(appConfig);
 
 angular.module('civic.services', []);
 angular.module('civic.common', []);
@@ -46,21 +45,6 @@ function appConfig($stateProvider, $urlRouterProvider ) {
 }
 appConfig.$inject = ["$stateProvider", "$urlRouterProvider"];
 
-/**
- * @name appRun
- * @desc run function for main app
- * @ngInject
- */
-function appRun($rootScope, $state) {
-//  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-//    if (toState.authenticate && !AuthService.isAuthenticated()){
-//      // User isn’t authenticated
-//      $state.transitionTo("login");
-//      event.preventDefault();
-//    }
-//  });
-}
-appRun.$inject = ["$rootScope", "$state"];
 (function(module) {
 try {
   module = angular.module('civic-client-templates');
@@ -475,7 +459,6 @@ angular.module('civic.security.authorization', ['civic.security.service'])
 // You can add them as resolves to routes to require authorization levels
 // before allowing a route change to complete
   .provider('AuthService', {
-
     requireAdminUser: function(AuthService) {
       return AuthService.requireAdminUser();
     },
@@ -485,6 +468,7 @@ angular.module('civic.security.authorization', ['civic.security.service'])
     },
 
     $get: ["SecurityService", "RetryQueue", function(SecurityService, RetryQueue) {
+      console.log('AuthService.$get() called.');
       var service = {
 
         // Require that there is an authenticated user
@@ -527,12 +511,13 @@ angular.module('civic.pages', ['civic.security.authorization'])
 
 // @ngInject
 function pagesConfig($stateProvider, $urlRouterProvider, AuthService) {
-  $log.info('pagesConfig called.');
+  'use strict';
+  console.log('pagesConfig called.');
   $stateProvider.state('home', {
     url: '/home',
     controller: 'HomeCtrl',
     templateUrl: '/civic-client/pages/home.html',
-    resolve: AuthService.requireAuthenticatedUser
+    // resolve: AuthService.requireAuthenticatedUser
   });
 }
 pagesConfig.$inject = ["$stateProvider", "$urlRouterProvider", "AuthService"];
