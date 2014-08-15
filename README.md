@@ -9,7 +9,7 @@ To start developing in the project run:
 gulp serve
 ```
 
-Then head to `http://localhost:3000` in your browser.
+Then head to `http://localhost:3001` in your browser. Currently the client expects the CIViC backend to be proxied through http://localhost:3000/api.
 
 The `serve` tasks starts a static file server, which serves the AngularJS application, and a watch task which watches all files for changes and lints, builds and injects them into the index.html accordingly.
 
