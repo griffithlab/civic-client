@@ -102,12 +102,12 @@ function Security($http, $q, $location, $log, RetryQueue, dialogs) {
     currentUser: null,
 
     // Is the current user authenticated?
-//    isAuthenticated: function(){
-//      return !!service.currentUser;
-//    },
     isAuthenticated: function(){
-      return true;
+      return !!service.currentUser;
     },
+//    isAuthenticated: function(){
+//      return false;
+//    },
 
     // Is the current user an adminstrator?
     isAdmin: function() {

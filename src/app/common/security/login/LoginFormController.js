@@ -10,7 +10,7 @@ angular.module('civic.security.login.form', [])
  * @constructor
  * @ngInject
  */
-function LoginFormController($scope, SecurityService) {
+function LoginFormController($scope, Security) {
   // The model for this form
   $scope.user = {};
 
@@ -20,19 +20,19 @@ function LoginFormController($scope, SecurityService) {
   // The reason that we are being asked to login - for instance because we tried to access something to which we are not authorized
   // We could do something different for each reason here but to keep it simple...
   $scope.authReason = null;
-  if ( SecurityService.getLoginReason() ) {
-    $scope.authReason = ( SecurityService.isAuthenticated() ) ?
+  if ( Security.getLoginReason() ) {
+    $scope.authReason = ( Security.isAuthenticated() ) ?
       'NOT AUTHORIZED' :
       'NOT AUTHENTICATED';
   }
 
   // Attempt to authenticate the user specified in the form's model
   $scope.login = function() {
-    // Clear any previous SecurityService errors
+    // Clear any previous Security errors
     $scope.authError = null;
 
     // Try to login
-    SecurityService.login($scope.user.email, $scope.user.password).then(function(loggedIn) {
+    Security.login($scope.user.email, $scope.user.password).then(function(loggedIn) {
       if ( !loggedIn ) {
         // If we get here then the login failed due to bad credentials
         $scope.authError = 'INVALID CREDENTIALS';
@@ -48,6 +48,6 @@ function LoginFormController($scope, SecurityService) {
   };
 
   $scope.cancelLogin = function() {
-    SecurityService.cancelLogin();
+    Security.cancelLogin();
   };
 }

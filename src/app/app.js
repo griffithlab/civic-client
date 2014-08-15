@@ -22,7 +22,7 @@ angular.module('civicClient', [
  */
 function appConfig($stateProvider, $urlRouterProvider) {
   'use strict';
-  console.log('appConfig() called.');
+  console.info('appConfig() called.');
   $stateProvider
     .state('login', {
       url: '/login',

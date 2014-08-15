@@ -5,22 +5,22 @@ angular.module('civic.security.login.toolbar', [])
  * @name loginToolbar
  * @desc The loginToolbar directive is a reusable widget that can show login or logout
  * buttons and information the current authenticated user
- * @param SecurityService
+ * @param Security
  * @returns {{templateUrl: string, restrict: string, replace: boolean, scope: boolean, link: link}}
  * @ngInject
  */
-function loginToolbar(SecurityService) {
+function loginToolbar(Security) {
   var directive = {
     templateUrl: 'common/security/login/loginToolbar.tpl.html',
     restrict: 'E',
     replace: true,
     scope: true,
     link: function($scope, $element, $attrs, $controller) {
-      $scope.isAuthenticated = SecurityService.isAuthenticated;
-      $scope.login = SecurityService.showLogin;
-      $scope.logout = SecurityService.logout;
+      $scope.isAuthenticated = Security.isAuthenticated;
+      $scope.login = Security.showLogin;
+      $scope.logout = Security.logout;
       $scope.$watch(function() {
-        return SecurityService.currentUser;
+        return Security.currentUser;
       }, function(currentUser) {
         $scope.currentUser = currentUser;
       });
