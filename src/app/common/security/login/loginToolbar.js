@@ -10,12 +10,13 @@ angular.module('civic.security.login.toolbar', [])
  * @ngInject
  */
 function loginToolbar(Security) {
+  'use strict';
   var directive = {
     templateUrl: 'common/security/login/loginToolbar.tpl.html',
     restrict: 'E',
     replace: true,
     scope: true,
-    link: function($scope, $element, $attrs, $controller) {
+    link: function($scope) {
       $scope.isAuthenticated = Security.isAuthenticated;
       $scope.login = Security.showLogin;
       $scope.logout = Security.logout;

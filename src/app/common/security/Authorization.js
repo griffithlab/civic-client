@@ -5,21 +5,23 @@ angular.module('civic.security.authorization', ['civic.security.service'])
 // before allowing a route change to complete
   .provider('Authorization', {
     requireAdminUser: function(Authorization) {
+      'use strict';
       return Authorization.requireAdminUser();
     },
 
     requireAuthenticatedUser: function(Authorization) {
+      'use strict';
       return Authorization.requireAuthenticatedUser();
     },
 
     $get: function(Security, RetryQueue) {
-      console.info('Authorization.$get() called.');
+      'use strict';
       var service = {
 
         // Require that there is an authenticated user
         // (use this in a route resolve to prevent non-authenticated users from entering that route)
         requireAuthenticatedUser: function() {
-          var promise = Security.requestCurrentUser().then(function(userInfo) {
+          var promise = Security.requestCurrentUser().then(function() {
             if ( !Security.isAuthenticated() ) {
               return RetryQueue.pushRetryFn('unauthenticated-client', service.requireAuthenticatedUser);
             }
@@ -30,7 +32,7 @@ angular.module('civic.security.authorization', ['civic.security.service'])
         // Require that there is an administrator logged in
         // (use this in a route resolve to prevent non-administrators from entering that route)
         requireAdminUser: function() {
-          var promise = Security.requestCurrentUser().then(function(userInfo) {
+          var promise = Security.requestCurrentUser().then(function() {
             if ( !Security.isAdmin() ) {
               return RetryQueue.pushRetryFn('unauthorized-client', service.requireAdminUser);
             }

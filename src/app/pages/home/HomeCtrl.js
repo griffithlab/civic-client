@@ -5,11 +5,10 @@ angular.module('civic.pages')
  * @ngInject
  */
 function HomeCtrl($rootScope, $scope, $log) {
-  $log.info("HomeCtrl instantiated");
   'use strict';
+  $log.info('HomeCtrl instantiated');
   $rootScope.navMode = 'home';
   $rootScope.viewTitle = 'Home';
-  console.log('HomeController loaded.');
   $scope.loadedMsg = 'Loaded Home!';
 }
 

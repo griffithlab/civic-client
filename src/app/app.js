@@ -23,11 +23,11 @@ angular.module('civicClient', [
  */
 function appConfig($stateProvider, $urlRouterProvider) {
   'use strict';
-  console.info('appConfig() called.');
   $urlRouterProvider.otherwise('home');
 }
 
 function appRun(Security) {
+  'use strict';
   Security.requestCurrentUser();
 }
 
@@ -39,7 +39,7 @@ angular.module('civic.security', [
   ,'civic.security.login'
 ]);
 angular.module('civic.services', []);
-angular.module('civic.pages', ['civic.security.authorization'])
+angular.module('civic.pages', ['civic.security.authorization']);
 angular.module('civic.common', []);
 angular.module('civic.login', []);
 angular.module('civic.browse', []);

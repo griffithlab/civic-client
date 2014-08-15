@@ -138,14 +138,14 @@ gulp.task('statics', function() {
     g.connect.server({
       root: ['./.tmp', './.tmp/src/app', './src/app', './bower_components']
       ,port: 3001
-      ,middleware: function(connect, o) {
+      ,middleware: function() {
         return [ (function() {
           var options = url.parse('http://localhost:3000');
           options.route = '/api';
           return proxy(options);
         })() ];
       }
-    })
+    });
   }
 );
 

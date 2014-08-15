@@ -7,6 +7,6 @@ function AuthTestCtrl ($scope, $rootScope, $log) {
   $log.info('AuthTestCtrl loaded.');
   $rootScope.navMode = 'sub';
   $rootScope.viewTitle = 'AuthTest';
-  console.log('AuthTest loaded.');
+  $log.info('AuthTest loaded.');
   $scope.loadedMsg = 'Loaded AuthTest!';
 }

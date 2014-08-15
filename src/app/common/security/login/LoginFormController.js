@@ -10,7 +10,8 @@ angular.module('civic.security.login.form', [])
  * @constructor
  * @ngInject
  */
-function LoginFormController($scope, Security, $log) {
+function LoginFormController($scope, Security) {
+  'use strict';
   // The model for this form
   $scope.user = {};
 

@@ -9,7 +9,7 @@ function sessionInfo(ConfigService, $log) {
   return {
     restrict: 'EA',
     template: '<h2>CIViC Server URL: {{ conf.serverUrl }}</h2>',
-    link: function(scope, element, attrs) {
+    link: function(scope) {
       $log.info('sessionInfo directive loaded.');
       scope.conf = ConfigService;
     }

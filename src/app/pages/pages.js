@@ -4,7 +4,6 @@ angular.module('civic.pages')
 // @ngInject
 function pagesConfig($stateProvider, AuthorizationProvider) {
   'use strict';
-  console.info('pagesConfig() called.');
   $stateProvider
     .state('home', {
       url: '/home',

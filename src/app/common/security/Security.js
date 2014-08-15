@@ -41,7 +41,7 @@ function Security($http, $q, $location, RetryQueue, dialogs, $log) {
   }
 
   // Register a handler for when an item is added to the retry queue
-  RetryQueue.onItemAddedCallbacks.push(function(retryItem) {
+  RetryQueue.onItemAddedCallbacks.push(function() {
     if ( RetryQueue.hasMore() ) {
       service.showLogin();
     }
@@ -61,7 +61,7 @@ function Security($http, $q, $location, RetryQueue, dialogs, $log) {
     },
 
     // Attempt to authenticate a user by the given email and password
-    login: function(email, password) {
+    login: function() {
       var request = $http.get('/api/current_user.json');
       return request.then(function(response) {
         service.currentUser = response.data.user;
