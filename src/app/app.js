@@ -9,7 +9,8 @@ angular.module('civicClient', [
   ,'civic.login'
   ,'civic-client-templates'
 ])
-  .config(appConfig);
+  .config(appConfig)
+  .run(appRun);
 
 /**
  * @name appConfig
@@ -24,6 +25,10 @@ function appConfig($stateProvider, $urlRouterProvider) {
   'use strict';
   console.info('appConfig() called.');
   $urlRouterProvider.otherwise('home');
+}
+
+function appRun(Security) {
+  Security.requestCurrentUser();
 }
 
 // define app modules
