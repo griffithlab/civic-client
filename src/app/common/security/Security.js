@@ -62,7 +62,7 @@ function Security($http, $q, $location, $log, RetryQueue, dialogs) {
 
     // Attempt to authenticate a user by the given email and password
     login: function(email, password) {
-      var request = $http.post('/login', {email: email, password: password});
+      var request = $http.get('/api/current_user.json');
       return request.then(function(response) {
         service.currentUser = response.data.user;
         if ( service.isAuthenticated() ) {
@@ -92,7 +92,7 @@ function Security($http, $q, $location, $log, RetryQueue, dialogs) {
         return $q.when(service.currentUser);
       } else {
         return $http.get('/api/current_user.json').then(function(response) {
-          service.currentUser = response.data.email;
+          service.currentUser = response.data;
           return service.currentUser;
         });
       }

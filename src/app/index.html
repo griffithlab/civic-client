@@ -12,6 +12,16 @@
     <!-- endinject -->
   </head>
   <body>
+    <div class="nav-main">
+      <ul>
+        <li>
+          <a ui-sref="home">Home</a>
+        </li>
+        <li>
+          <a ui-sref="authTest">Auth Test</a>
+        </li>
+      </ul>
+    </div>
     <ui-view>
 
     </ui-view>
@@ -33,6 +43,8 @@
     <script src="/common/security/login/LoginService.js"></script>
     <script src="/common/security/login/LoginFormController.js"></script>
     <script src="/app.js"></script>
+    <script src="/pages/home/HomeCtrl.js"></script>
+    <script src="/pages/authTest/AuthTestCtrl.js"></script>
     <script src="/common/services/ConfigService.js"></script>
     <script src="/common/security/Security.js"></script>
     <script src="/common/security/RetryQueue.js"></script>
@@ -40,8 +52,6 @@
     <script src="/common/security/Authorization.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
     <script src="/pages/pages.js"></script>
-    <script src="/pages/HomeCtrl.js"></script>
-    <script src="/login/LoginCtrl.js"></script>
     <script src="/civic-client-templates.js"></script>
     <!-- endinject -->
   </body>

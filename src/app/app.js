@@ -23,14 +23,7 @@ angular.module('civicClient', [
 function appConfig($stateProvider, $urlRouterProvider) {
   'use strict';
   console.info('appConfig() called.');
-  $stateProvider
-    .state('login', {
-      url: '/login',
-      templateUrl: '/civic-client/login/login.html',
-      controller: 'LoginCtrl'
-    });
-  // Send to login if the URL was not found
-//  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('home');
 }
 
 // define app modules
