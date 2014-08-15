@@ -20,6 +20,7 @@ function RetryQueue($q, $log) {
       return retryQueue.length > 0;
     },
     push: function(retryItem) {
+      $log.info('retryQueue.push() called with item: ' + retryItem);
       retryQueue.push(retryItem);
       // Call all the onItemAdded callbacks
       angular.forEach(service.onItemAddedCallbacks, function(cb) {

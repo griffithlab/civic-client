@@ -7,7 +7,7 @@ angular.module('civic.security.service', [
   .factory('Security', Security);
 
 // @ngInject
-function Security($http, $q, $location, $log, RetryQueue, dialogs) {
+function Security($http, $q, $location, RetryQueue, dialogs, $log) {
   'use strict';
   // Redirect to the given url (defaults to '/')
   function redirect(url) {
@@ -105,9 +105,6 @@ function Security($http, $q, $location, $log, RetryQueue, dialogs) {
     isAuthenticated: function(){
       return !!service.currentUser;
     },
-//    isAuthenticated: function(){
-//      return false;
-//    },
 
     // Is the current user an adminstrator?
     isAdmin: function() {
