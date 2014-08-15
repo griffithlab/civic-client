@@ -80,7 +80,7 @@ function Security($http, $q, $location, $log, RetryQueue, dialogs) {
 
     // Logout the current user and redirect
     logout: function(redirectTo) {
-      $http.post('/logout').then(function() {
+      $http.get('/api/sign_out').then(function() {
         service.currentUser = null;
         redirect(redirectTo);
       });
