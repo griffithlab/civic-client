@@ -3,15 +3,15 @@ civic-client
 
 ## Development
 
-To start developing in the project run:
+To start developing in the project, fire up the civic-server on port 3000 and run:
 
 ```bash
 gulp serve
 ```
 
-Then head to `http://localhost:3001` in your browser. Currently the client expects the CIViC backend to be proxied through http://localhost:3000/api.
+Then head to `http://localhost:3001` in your browser. 
 
-The `serve` tasks starts a static file server, which serves the AngularJS application, and a watch task which watches all files for changes and lints, builds and injects them into the index.html accordingly.
+The `serve` tasks starts a static file server, and a proxy that routes calls to /api to the civic-server listening on port 3000. It serves the AngularJS application, and a starts a watch task which watches all files for changes and lints, builds and injects them into the index.html accordingly.
 
 ## Tests
 
