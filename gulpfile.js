@@ -92,6 +92,7 @@ gulp.task('vendors', function () {
   return es.merge(
     bowerStream.pipe(g.filter('**/*.css')).pipe(dist('css', 'vendors')),
     bowerStream.pipe(g.filter('**/*.js')).pipe(dist('js', 'vendors'))
+
   );
 });
 
@@ -104,7 +105,7 @@ gulp.task('build-all', ['styles', 'templates'], index);
 function index () {
   var opt = {read: false};
   return gulp.src('./src/app/index.html')
-    .pipe(g.inject(gulp.src(bowerFiles(), opt), {ignorePath: 'bower_components', starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(g.inject(gulp.src(bowerFiles(), opt).pipe(stripBsDeps()), {ignorePath: 'bower_components', starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(g.inject(es.merge(appFiles(), cssFiles(opt)), { ignorePath: ['.tmp', 'src/app'] }))
     .pipe(gulp.dest('./src/app/'))
     .pipe(g.embedlr())
@@ -214,7 +215,7 @@ gulp.task('karma-conf', ['templates'], function () {
  */
 function testFiles() {
   return new queue({objectMode: true})
-    .queue(gulp.src(bowerFiles()).pipe(g.filter('**/*.js')))
+    .queue(gulp.src(bowerFiles()).pipe(g.filter('**/*.js').pipe(stripBsDeps())))
     .queue(gulp.src('./bower_components/angular-mocks/angular-mocks.js'))
     .queue(appFiles())
     .queue(gulp.src(['./src/app/**/*_test.js', './.tmp/src/app/**/*_test.js']))
@@ -301,4 +302,13 @@ function jshint (jshintfile) {
   return lazypipe()
     .pipe(g.jshint, jshintfile)
     .pipe(g.jshint.reporter, stylish)();
+}
+
+/**
+ * FILTERS
+ */
+
+// we only need Bootstrap's styles, none of its JS deps
+function stripBsDeps() {
+  return g.filter(['*', '!**/bootstrap.js', '!**/jquery.js']);
 }
