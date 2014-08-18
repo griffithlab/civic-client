@@ -8,7 +8,7 @@ function HomeCtrl($rootScope, $scope, $log) {
   'use strict';
   $log.info('HomeCtrl instantiated');
   $rootScope.navMode = 'home';
-  $rootScope.viewTitle = 'Home';
+  $rootScope.pageTitle = 'Home';
   $scope.loadedMsg = 'Loaded Home!';
 }
 

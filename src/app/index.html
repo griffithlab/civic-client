@@ -9,18 +9,21 @@
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/common/directives/civicLogo.css">
     <link rel="stylesheet" href="/css/common/directives/loginToolbar.css">
     <link rel="stylesheet" href="/css/common/directives/mainMenu.css">
     <!-- endinject -->
   </head>
   <body>
     <div class="nav-main">
+      <civic-logo class="col-xs-6 col-md-5 col-lg-4"></civic-logo>
       <main-menu class="col-xs-4"></main-menu>
       <login-toolbar class="col-xs-2"></login-toolbar>
     </div>
     <ui-view>
 
     </ui-view>
+
     <!-- inject:vendor:js -->
     <script src="/angular/angular.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
@@ -41,13 +44,14 @@
     <script src="/pages/home/HomeCtrl.js"></script>
     <script src="/pages/authTest/authTestCtrl.js"></script>
     <script src="/common/services/ConfigService.js"></script>
-    <script src="/common/directives/sessionInfo.js"></script>
-    <script src="/common/directives/mainMenu.js"></script>
-    <script src="/common/directives/loginToolbar.js"></script>
     <script src="/common/security/Security.js"></script>
     <script src="/common/security/RetryQueue.js"></script>
     <script src="/common/security/Interceptor.js"></script>
     <script src="/common/security/Authorization.js"></script>
+    <script src="/common/directives/sessionInfo.js"></script>
+    <script src="/common/directives/mainMenu.js"></script>
+    <script src="/common/directives/loginToolbar.js"></script>
+    <script src="/common/directives/civicLogo.js"></script>
     <script src="/pages/pages.js"></script>
     <script src="/civic-client-templates.js"></script>
     <!-- endinject -->

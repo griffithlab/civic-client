@@ -1,5 +1,7 @@
-<ul class="mainMenu">
-  <li ng-repeat="item in menuItems" ui-sref-active="active">
-    <a ui-sref="{{ item.state}}">{{ item.label }}</a>
-  </li>
-</ul>
+<div class="mainMenu">
+  <ul>
+    <li ng-repeat="item in menuItems" ui-sref-active="active">
+      <a ui-sref="{{ item.state}}">{{ item.label }}</a>
+    </li>
+  </ul>
+</div>

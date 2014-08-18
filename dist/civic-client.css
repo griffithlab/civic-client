@@ -9,3 +9,18 @@ textarea,
 button {
   font: inherit;
 }
+
+.civicLogo {
+  background-color: #FCC;
+}
+
+.loginToolbar {
+  background-color: #CCF;
+}
+
+.mainMenu {
+  background-color: #CFC;
+}
+.mainMenu .active {
+  background-color: #CCC;
+}

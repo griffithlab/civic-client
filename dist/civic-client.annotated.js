@@ -1,35 +1,3 @@
-angular.module('civic.security.login.toolbar', [])
-  .directive('loginToolbar', loginToolbar);
-
-/**
- * @name loginToolbar
- * @desc The loginToolbar directive is a reusable widget that can show login or logout
- * buttons and information the current authenticated user
- * @param Security
- * @returns {{templateUrl: string, restrict: string, replace: boolean, scope: boolean, link: link}}
- * @ngInject
- */
-function loginToolbar(Security) {
-  'use strict';
-  var directive = {
-    templateUrl: 'common/security/login/loginToolbar.tpl.html',
-    restrict: 'E',
-    replace: true,
-    scope: true,
-    link: function($scope) {
-      $scope.isAuthenticated = Security.isAuthenticated;
-      $scope.login = Security.showLogin;
-      $scope.logout = Security.logout;
-      $scope.$watch(function() {
-        return Security.currentUser;
-      }, function(currentUser) {
-        $scope.currentUser = currentUser;
-      });
-    }
-  };
-  return directive;
-}
-loginToolbar.$inject = ["Security"];
 angular.module('civic.security.login', ['civic.security.login.form', 'civic.security.login.toolbar']);
 angular.module('civic.security.login.form', [])
   .controller('LoginFormController', LoginFormController);
@@ -148,7 +116,7 @@ function HomeCtrl($rootScope, $scope, $log) {
   'use strict';
   $log.info('HomeCtrl instantiated');
   $rootScope.navMode = 'home';
-  $rootScope.viewTitle = 'Home';
+  $rootScope.pageTitle = 'Home';
   $scope.loadedMsg = 'Loaded Home!';
 }
 HomeCtrl.$inject = ["$rootScope", "$scope", "$log"];
@@ -162,7 +130,7 @@ function AuthTestCtrl ($scope, $rootScope, $log) {
   'use strict';
   $log.info('AuthTestCtrl loaded.');
   $rootScope.navMode = 'sub';
-  $rootScope.viewTitle = 'AuthTest';
+  $rootScope.pageTitle = 'AuthTest';
   $log.info('AuthTest loaded.');
   $scope.loadedMsg = 'Loaded AuthTest!';
 }
@@ -170,7 +138,17 @@ AuthTestCtrl.$inject = ["$scope", "$rootScope", "$log"];
 
 angular.module('civic.services')
   .constant('ConfigService', {
-    serverUrl: 'http://localhost:3000/'
+    serverUrl: 'http://localhost:3000/',
+    mainMenuItems: [
+      {
+        label: 'Home',
+        state: 'home'
+      },
+      {
+        label: 'Auth Test',
+        state: 'authTest'
+      }
+    ]
   }
 );
 
@@ -491,15 +469,78 @@ angular.module('civic.common')
 function mainMenu() {
   'use strict';
 
+  function mainMenuController($scope, ConfigService) {
+    $scope.menuItems = ConfigService.mainMenuItems;
+  }
+
   var directive = {
     restrict: 'E',
     templateUrl: 'common/directives/mainMenu.tpl.html',
     replace: true,
-    scope: true
+    scope: true,
+    controller: mainMenuController
   };
 
   return directive;
 }
+angular.module('civic.security.login.toolbar', [])
+  .directive('loginToolbar', loginToolbar);
+
+/**
+ * @name loginToolbar
+ * @desc The loginToolbar directive is a reusable widget that can show login or logout
+ * buttons and information the current authenticated user
+ * @param Security
+ * @returns {{templateUrl: string, restrict: string, replace: boolean, scope: boolean, link: link}}
+ * @ngInject
+ */
+function loginToolbar(Security) {
+  'use strict';
+  var directive = {
+    templateUrl: 'common/directives/loginToolbar.tpl.html',
+    restrict: 'E',
+    replace: true,
+    scope: true,
+    link: function($scope) {
+      $scope.isAuthenticated = Security.isAuthenticated;
+      $scope.login = Security.showLogin;
+      $scope.logout = Security.logout;
+      $scope.$watch(function() {
+        return Security.currentUser;
+      }, function(currentUser) {
+        $scope.currentUser = currentUser;
+      });
+    }
+  };
+  return directive;
+}
+loginToolbar.$inject = ["Security"];
+angular.module('civic.common')
+  .directive('civicLogo', civicLogo);
+
+/**
+ * @ngInject
+ */
+function civicLogo($scope, $rootScope, $log) {
+  'use strict';
+  var directive = {
+    restrict: 'E',
+    templateUrl: 'common/directives/civicLogo.tpl.html',
+    controller: civicLogoController
+  };
+
+  function civicLogoController($log) {
+    'use strict';
+    $log.info('civicLogoController loaded');
+    $scope.pageState = {
+      navMode: $rootScope.navMode,
+      pageTitle: $rootScope.pageTitle
+    }
+  }
+
+  return directive;
+}
+civicLogo.$inject = ["$scope", "$rootScope", "$log"];
 angular.module('civic.pages')
   .config(pagesConfig);
 
@@ -530,8 +571,32 @@ try {
   module = angular.module('civic-client-templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('/civic-client/common/directives/civicLogo.tpl.html',
+    '<div class="civicLogo"><a ui-sref="home"><div ng-switch on="pageState.navMode"><span ng-switch-when="home"><img src="assets/images/CIViC_logo@2x.png" alt="CIViC: Clinical Interpretations of Variations in Cancer" width="375" height="240"></span> <span ng-switch-when="sub"><img src="assets/images/CIViC_logo_sm@2x.png" alt="CIViC: Clinical Interpretations of Variations in Cancer" width="155" height="76"></span></div></a></div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('civic-client-templates');
+} catch (e) {
+  module = angular.module('civic-client-templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('/civic-client/common/directives/loginToolbar.tpl.html',
+    '<div class="loginToolbar"><ul><li ng-show="isAuthenticated()"><a href="#">{{currentUser.name}} {{currentUser.lastName}}</a></li><li ng-show="isAuthenticated()" class="logout"><form class="navbar-form"><button class="btn logout" ng-click="logout(\'home\')">Log out</button></form></li><li ng-hide="isAuthenticated()" class="login"><form class="navbar-form"><button class="btn login" ng-click="login()">Log in</button></form></li></ul></div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('civic-client-templates');
+} catch (e) {
+  module = angular.module('civic-client-templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('/civic-client/common/directives/mainMenu.tpl.html',
-    '<ul><li><a ui-sref="home">Home</a></li><li><a ui-sref="authTest">Auth Test</a></li></ul>');
+    '<div class="mainMenu"><ul><li ng-repeat="item in menuItems" ui-sref-active="active"><a ui-sref="{{ item.state}}">{{ item.label }}</a></li></ul></div>');
 }]);
 })();
 
@@ -543,7 +608,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('/civic-client/pages/authTest/authTest.tpl.html',
-    '<h1>Requires Auth</h1><session-info></session-info><login-toolbar></login-toolbar>');
+    '<h1>Requires Auth</h1>');
 }]);
 })();
 
@@ -555,7 +620,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('/civic-client/pages/home/home.tpl.html',
-    '<h1>Home</h1><session-info></session-info><login-toolbar></login-toolbar>');
+    '<h1>Home</h1>');
 }]);
 })();
 
@@ -568,17 +633,5 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('/civic-client/common/security/login/LoginForm.tpl.html',
     '<form name="form" novalidate class="login-form"><div class="modal-header"><h4>Sign in</h4></div><div class="modal-body"><div class="alert alert-warning" ng-show="authReason">{{authReason}}</div><div class="alert alert-error" ng-show="authError">{{authError}}</div><div class="alert alert-info">Login by choosing one of the methods below:</div><ul><li><a href="api/auth/github">Login with Github</a></li></ul></div><div class="modal-footer"><button class="btn btn-warning cancel" ng-click="cancelLogin()">Cancel</button></div></form>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('civic-client-templates');
-} catch (e) {
-  module = angular.module('civic-client-templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('/civic-client/common/security/login/loginToolbar.tpl.html',
-    '<ul class="nav pull-right"><li class="divider-vertical"></li><li ng-show="isAuthenticated()"><a href="#">{{currentUser.name}} {{currentUser.lastName}}</a></li><li ng-show="isAuthenticated()" class="logout"><form class="navbar-form"><button class="btn logout" ng-click="logout(\'home\')">Log out</button></form></li><li ng-hide="isAuthenticated()" class="login"><form class="navbar-form"><button class="btn login" ng-click="login()">Log in</button></form></li></ul>');
 }]);
 })();
