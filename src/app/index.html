@@ -14,12 +14,20 @@
     <link rel="stylesheet" href="/css/common/directives/mainMenu.css">
     <!-- endinject -->
   </head>
-  <body>
-    <div class="nav-main">
-      <civic-logo class="col-xs-6 col-md-5 col-lg-4"></civic-logo>
-      <main-menu class="col-xs-4"></main-menu>
-      <login-toolbar class="col-xs-2"></login-toolbar>
-    </div>
+  <body ng-class="{home: $root.navMode === 'home', sub: $root.navMode === 'sub'}">
+    <header>
+      <div class="container">
+        <div class="header-bg">
+          <div class="row">
+            <div class="nav-main">
+              <civic-logo class="col-xs-6 col-md-5 col-lg-4"></civic-logo>
+              <main-menu class="col-xs-4"></main-menu>
+              <login-toolbar class="col-xs-2"></login-toolbar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
     <ui-view>
 
     </ui-view>

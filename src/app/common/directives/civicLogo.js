@@ -14,7 +14,6 @@ function civicLogo($log) {
 
   // @ngInject
   function civicLogoController($scope, $rootScope) {
-    'use strict';
     var pageState = {
       navMode: $rootScope.navMode,
       pageTitle: $rootScope.pageTitle
