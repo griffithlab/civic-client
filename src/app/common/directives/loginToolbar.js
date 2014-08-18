@@ -12,7 +12,7 @@ angular.module('civic.security.login.toolbar', [])
 function loginToolbar(Security) {
   'use strict';
   var directive = {
-    templateUrl: 'common/security/login/loginToolbar.tpl.html',
+    templateUrl: 'common/directives/loginToolbar.tpl.html',
     restrict: 'E',
     replace: true,
     scope: true,

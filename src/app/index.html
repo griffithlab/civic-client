@@ -9,18 +9,13 @@
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/common/directives/mainMenu.css">
     <!-- endinject -->
   </head>
   <body>
     <div class="nav-main">
-      <ul>
-        <li>
-          <a ui-sref="home">Home</a>
-        </li>
-        <li>
-          <a ui-sref="authTest">Auth Test</a>
-        </li>
-      </ul>
+      <main-menu class="col-xs-4"></main-menu>
+      <login-toolbar class="col-xs-2"></login-toolbar>
     </div>
     <ui-view>
 
@@ -39,7 +34,6 @@
     <!-- endinject -->
 
     <!-- inject:js -->
-    <script src="/common/security/login/loginToolbar.js"></script>
     <script src="/common/security/login/LoginService.js"></script>
     <script src="/common/security/login/LoginFormController.js"></script>
     <script src="/app.js"></script>
@@ -51,6 +45,8 @@
     <script src="/common/security/Interceptor.js"></script>
     <script src="/common/security/Authorization.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
+    <script src="/common/directives/mainMenu.js"></script>
+    <script src="/common/directives/loginToolbar.js"></script>
     <script src="/pages/pages.js"></script>
     <script src="/civic-client-templates.js"></script>
     <!-- endinject -->
