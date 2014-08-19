@@ -1,12 +1,21 @@
-body {
-  padding: 50px;
-  font: 20px/150% "Helvetica Neue", "Lucida Grande", Verdana, sans-serif;
-  color: #666;
-  background: #fcfcfc;
-}
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import '_civic-variables.less';
+@import '_responsive.less';
 
-input,
-textarea,
-button {
-  font: inherit;
+
+@import '_index.less';
+
+/* RESETS */
+
+// remove dotted border around anchors
+a:focus, a:active,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+  border: 0;
+  outline : 0;
 }

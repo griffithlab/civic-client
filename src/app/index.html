@@ -10,27 +10,50 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/common/directives/civicLogo.css">
+    <link rel="stylesheet" href="/css/common/directives/headerSearch.css">
     <link rel="stylesheet" href="/css/common/directives/loginToolbar.css">
     <link rel="stylesheet" href="/css/common/directives/mainMenu.css">
+    <link rel="stylesheet" href="/css/common/directives/subheader.css">
     <!-- endinject -->
   </head>
-  <body ng-class="{home: $root.navMode === 'home', sub: $root.navMode === 'sub'}">
+  <body ng-class="{ home: $root.navMode === 'home', sub: $root.navMode === 'sub' }">
     <header>
       <div class="container">
         <div class="header-bg">
           <div class="row">
-            <div class="nav-main">
-              <civic-logo class="col-xs-6 col-md-5 col-lg-4"></civic-logo>
-              <main-menu class="col-xs-4"></main-menu>
-              <login-toolbar class="col-xs-2"></login-toolbar>
+            <div class="logo-main col-xs-12 col-sm-6 col-md-5 col-lg-4">
+              <civic-logo></civic-logo>
             </div>
-          </div>
+            <div class="nav-main col-xs-12 col-sm-6 col-md-7 col-lg-8">
+              <main-menu class="col-xs-8"></main-menu>
+              <login-toolbar class="col-xs-4"></login-toolbar>
+              <header-search>
+
+              </header-search>
+            </div>
+          </div> <!-- /row -->
+        </div> <!-- /header-bg -->
+      </div> <!-- /container -->
+    </header>
+    <main>
+      <subheader></subheader>
+      <div class="page-container">
+        <div class="container-fluid">
+          <div class="page-bg">
+            <ui-view id="contents">
+
+            </ui-view>
+          </div> <!-- /.page-bg-->
+        </div> <!-- /.container-fluid -->
+      </div><!-- /.page-container -->
+    </main>
+    <footer>
+      <div class="page-container">
+        <div class="container-fluid">
+          <p>this is the footer.</p>
         </div>
       </div>
-    </header>
-    <ui-view>
-
-    </ui-view>
+    </footer>
 
     <!-- inject:vendor:js -->
     <script src="/angular/angular.js"></script>
@@ -49,14 +72,16 @@
     <script src="/pages/home/HomeCtrl.js"></script>
     <script src="/pages/authTest/authTestCtrl.js"></script>
     <script src="/common/services/ConfigService.js"></script>
+    <script src="/common/directives/subheader.js"></script>
+    <script src="/common/directives/sessionInfo.js"></script>
+    <script src="/common/directives/mainMenu.js"></script>
+    <script src="/common/directives/loginToolbar.js"></script>
+    <script src="/common/directives/headerSearch.js"></script>
+    <script src="/common/directives/civicLogo.js"></script>
     <script src="/common/security/Security.js"></script>
     <script src="/common/security/RetryQueue.js"></script>
     <script src="/common/security/Interceptor.js"></script>
     <script src="/common/security/Authorization.js"></script>
-    <script src="/common/directives/sessionInfo.js"></script>
-    <script src="/common/directives/mainMenu.js"></script>
-    <script src="/common/directives/loginToolbar.js"></script>
-    <script src="/common/directives/civicLogo.js"></script>
     <script src="/pages/pages.js"></script>
     <script src="/civic-client-templates.js"></script>
     <!-- endinject -->

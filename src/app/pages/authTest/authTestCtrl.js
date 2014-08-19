@@ -6,7 +6,6 @@ function AuthTestCtrl ($scope, $rootScope, $log) {
   'use strict';
   $log.info('AuthTestCtrl loaded.');
   $rootScope.navMode = 'sub';
-  $rootScope.pageTitle = 'AuthTest';
-  $log.info('AuthTest loaded.');
+  $rootScope.viewTitle = 'AuthTest';
   $scope.loadedMsg = 'Loaded AuthTest!';
 }

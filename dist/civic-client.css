@@ -1,13 +1,71 @@
-body {
-  padding: 50px;
-  font: 20px/150% "Helvetica Neue", "Lucida Grande", Verdana, sans-serif;
-  color: #666;
-  background: #fcfcfc;
+/**
+* COLORS
+*/
+/**
+* LAYOUT DIMENSIONS
+*/
+/**
+*  COMPONENT DIMENSIONS
+*/
+/**
+* Make .container-fluid behave like .container so we can have
+* padding on the main page content
+*/
+.page-container > .container-fluid:first-child,
+.subheader > .container-fluid:first-child {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
-input,
-textarea,
-button {
-  font: inherit;
+@media (min-width: 768px) {
+  .page-container > .container-fluid:first-child,
+  .subheader > .container-fluid:first-child {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .page-container > .container-fluid:first-child,
+  .subheader > .container-fluid:first-child {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .page-container > .container-fluid:first-child,
+  .subheader > .container-fluid:first-child {
+    width: 1170px;
+  }
+}
+body {
+  font-family: "Roboto", "Helvetica Neue", "Lucida Grande", Verdana, sans-serif;
+  color: #333;
+  background-color: #14091b;
+}
+main .page-bg {
+  padding: 0 15px 15px 15px;
+  margin-bottom: 15px;
+  background-color: #efefef;
+  border-radius: 0 0 6px 6px;
+}
+main .page-bg:before,
+main .page-bg:after {
+  content: " ";
+  display: table;
+}
+main .page-bg:after {
+  clear: both;
+}
+/* RESETS */
+a:focus,
+a:active,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+  border: 0;
+  outline: 0;
 }
 
 .civicLogo {
@@ -24,3 +82,4 @@ button {
 .mainMenu .active {
   background-color: #CCC;
 }
+

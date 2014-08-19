@@ -1,0 +1,18 @@
+/**
+* Make .container-fluid behave like .container so we can have
+* padding on the main page content
+*/
+.page-container > .container-fluid:first-child,
+.subheader > .container-fluid:first-child {
+  .container-fixed();
+
+  @media (min-width: @screen-sm-min) {
+    width: @container-sm;
+  }
+  @media (min-width: @screen-md-min) {
+    width: @container-md;
+  }
+  @media (min-width: @screen-lg-min) {
+    width: @container-lg;
+  }
+}

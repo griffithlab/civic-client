@@ -432,6 +432,29 @@ angular.module('civic.security.authorization', ['civic.security.service'])
     }
   });
 angular.module('civic.common')
+  .directive('subheader', subheader);
+
+/**
+ * @name subheaderCtrl
+ * @param $scope
+ * @param $log
+ * @ngInject
+ */
+function subheader($scope, $log) {
+  'use strict';
+  var directive = {
+    restrict: 'E',
+    templateUrl: 'common/directives/subheader.tpl.html',
+    controller: subheaderCtrl
+  };
+
+  function subheaderCtrl() {
+    $log.info('subheaderCtrl loaded');
+  }
+
+  return directive;
+}
+angular.module('civic.common')
   .directive('sessionInfo', sessionInfo);
 
 /**
@@ -510,7 +533,7 @@ angular.module('civic.common')
 /**
  * @ngInject
  */
-function civicLogo($scope, $rootScope, $log) {
+function civicLogo($log) {
   'use strict';
   var directive = {
     restrict: 'E',
@@ -518,13 +541,15 @@ function civicLogo($scope, $rootScope, $log) {
     controller: civicLogoController
   };
 
-  function civicLogoController($log) {
-    'use strict';
-    $log.info('civicLogoController loaded');
-    $scope.pageState = {
+  // @ngInject
+  function civicLogoController($scope, $rootScope) {
+    var pageState = {
       navMode: $rootScope.navMode,
       pageTitle: $rootScope.pageTitle
-    }
+    };
+    $log.info('civicLogoController loaded');
+    $scope.navMode = $rootScope.navMode;
+    $scope.pageTitle = $rootScope.pageTitle;
   }
 
   return directive;
@@ -559,7 +584,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('/civic-client/common/directives/civicLogo.tpl.html',
-    '<div class="civicLogo"><a ui-sref="home"><div ng-switch on="pageState.navMode"><span ng-switch-when="home"><img src="assets/images/CIViC_logo@2x.png" alt="CIViC: Clinical Interpretations of Variations in Cancer" width="375" height="240"></span> <span ng-switch-when="sub"><img src="assets/images/CIViC_logo_sm@2x.png" alt="CIViC: Clinical Interpretations of Variations in Cancer" width="155" height="76"></span></div></a></div>');
+    '<div class="civicLogo"><a ui-sref="home"><div ng-switch on="navMode"><span ng-switch-when="home"><img src="assets/images/CIViC_logo@2x.png" alt="CIViC: Clinical Interpretations of Variations in Cancer" width="375" height="240"></span> <span ng-switch-when="sub"><img src="assets/images/CIViC_logo_sm@2x.png" alt="CIViC: Clinical Interpretations of Variations in Cancer" width="155" height="76"></span></div></a></div>');
 }]);
 })();
 
@@ -584,6 +609,18 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('/civic-client/common/directives/mainMenu.tpl.html',
     '<div class="mainMenu"><ul><li ng-repeat="item in menuItems" ui-sref-active="active"><a ui-sref="{{ item.state}}">{{ item.label }}</a></li></ul></div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('civic-client-templates');
+} catch (e) {
+  module = angular.module('civic-client-templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('/civic-client/common/directives/subheader.tpl.html',
+    '<div class="subheader" ng-hide="$root.navMode == \'home\'"><div class="container-fluid"><form role="form"><div class="subheader-bg"><div class="row"><div class="col-xs-6"><h1>{{ $root.viewTitle }}</h1></div><div class="col-xs-4 col-med-4 col-lg-5"><p>subheader search</p></div></div></div></form></div></div>');
 }]);
 })();
 
