@@ -3,9 +3,33 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .mainMenu {
-  background-color: #CFC;
+  .clearfix();
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: right;
+    padding-right: 15px;
 
-  .active {
-    background-color: #CCC;
+    li {
+      list-style: none;
+      display: inline-block;
+      padding-left: 1em;
+      a {
+        color: #FFF;
+        line-height: 76px;
+        font-size: 16px;
+      }
+      a:hover {
+        color: #FFF;
+      }
+    }
+
+    .active {
+      a {
+        color: @civicYellow;
+        text-decoration: underline;
+      }
+    }
   }
 }

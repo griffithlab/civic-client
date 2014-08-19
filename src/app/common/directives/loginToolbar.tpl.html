@@ -1,16 +1,25 @@
 <div class="loginToolbar">
   <ul>
+    <!-- logged in -->
     <li ng-show="isAuthenticated()">
       <a href="#">{{currentUser.name}} {{currentUser.lastName}}</a>
     </li>
     <li ng-show="isAuthenticated()" class="logout">
       <form class="navbar-form">
-        <button class="btn logout" ng-click="logout('home')">Log out</button>
+        <button class="btn btn-xs btn-settings" ng-click="logout('home')">Settings</button>
+        <button class="btn btn-xs btn-logout" ng-click="logout('home')">Log out</button>
+      </form>
+    </li>
+
+    <!-- logged out -->
+    <li ng-hide="isAuthenticated()" class="login">
+      <form class="navbar-form">
+        <button class="btn btn-xs btn-login" ng-click="login()">Log in</button>
       </form>
     </li>
     <li ng-hide="isAuthenticated()" class="login">
       <form class="navbar-form">
-        <button class="btn login" ng-click="login()">Log in</button>
+        <button class="btn btn-xs btn-create-account" ng-click="createAccount()">Create Account</button>
       </form>
     </li>
   </ul>

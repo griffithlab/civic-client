@@ -3,6 +3,15 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .headerSearch {
-  background-color: #FCC;
-  min-height: 25px;
+  .clearfix();
+  margin-top: 2.6em;
+  label {
+    font-weight: 300;
+    color: #DDD;
+  }
+
+  .btn-browse {
+    margin-top: 1.2em;
+    .button-variant(white; @civicGreen; darken(@civicGreen, 15%));
+  }
 }

@@ -1,5 +1,5 @@
 body {
-  font-family: "Roboto", "Helvetica Neue", "Lucida Grande", Verdana, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", "Lucida Grande", Verdana, sans-serif !important;
   color: #333;
   background-color: @civicDarkPurple;
 }
@@ -12,4 +12,9 @@ main {
     background-color: @pageBackground;
     border-radius: 0 0 @border-radius-large @border-radius-large;
   }
+}
+
+.header-bg {
+  .clearfix();
+  background: url("/assets/images/header_bg.png") top left no-repeat;
 }

@@ -6,8 +6,17 @@
           <div class="col-xs-6">
             <h1>{{ viewTitle }}</h1>
           </div>
-          <div class="col-xs-4 col-med-4 col-lg-5">
-            <p>subheader search</p>
+          <div class="col-xs-4 col-med-4 col-lg-5 search-sub-input">
+            <div class="input-group input-group-sm" ng-controller="typeAheadCtrl">
+              <input type="text" class="form-control">
+                <span class="input-group-btn">
+                  <a class="btn btn-default" type="button">Search</a>
+                </span>
+            </div>
+
+          </div>
+          <div class="col-xs-2 col-med-2 col-lg-1 search-sub-browse">
+            <a type="button" class="btn btn-sm btn-browse-sub btn-block">Browse</a>
           </div>
         </div> <!-- /.row -->
       </div> <!-- /.subheader-bg -->

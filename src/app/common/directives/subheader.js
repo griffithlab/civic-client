@@ -1,5 +1,6 @@
 angular.module('civic.common')
-  .directive('subheader', subheader);
+  .directive('subheader', subheader)
+  .controller('typeAheadCtrl', typeAheadCtrl);
 
 /**
  * @name subheaderCtrl
@@ -28,4 +29,21 @@ function subheader($rootScope, $log) {
   };
 
   return directive;
+}
+
+function typeAheadCtrl($scope, $log, $location) {
+  'use strict';
+  $log.info('typeAheadCtrl loaded.');
+//    var gd = GeneData;
+//    $scope.geneList = [];
+//    gd.getGenesAndVariants().then(function(data) {
+//      $scope.geneList = data;
+//    });
+//
+//    $scope.onSelect = function($item) {
+//      // $log.info('onSelect called, location: ' + ['/gene/', $item.gene, '/variant/', $item.variant].join(' '));
+//      var loc = ['/gene/', $item.gene, '/variant/', $item.variant].join("");
+//      $log.info('location.path(' + loc + ')');
+//      $location.path(loc);
+//    };
 }
