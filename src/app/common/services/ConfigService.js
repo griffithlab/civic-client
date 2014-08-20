@@ -17,6 +17,10 @@ angular.module('civic.services')
       {
         label: 'Contact',
         state: 'contact'
+      },
+      {
+        label: 'Account',
+        state: 'account'
       }
     ]
   }
