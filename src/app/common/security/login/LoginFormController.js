@@ -13,8 +13,6 @@ angular.module('civic.security.login.form', [])
 function LoginFormController($scope, $state, Security) {
   'use strict';
 
-  $scope.redirectUrl = $state.current.url;
-
   // The model for this form
   $scope.user = {};
 

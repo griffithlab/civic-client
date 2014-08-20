@@ -22,15 +22,17 @@
       <div class="container">
         <div class="header-bg">
           <div class="row">
-            <div class="logo-main col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <div class="logo-main col-xs-12 col-sm-6 col-md-5 col-lg-4">
               <civic-logo></civic-logo>
             </div>
-            <div class="nav-main col-xs-12 col-sm-6 col-md-8 col-lg-8">
-              <main-menu class="col-xs-9"></main-menu>
-              <login-toolbar class="col-xs-3"></login-toolbar>
-              <header-search>
-
-              </header-search>
+            <div class="nav-main col-xs-12 col-sm-6 col-md-7 col-lg-8">
+              <div class="row">
+                <main-menu class="col-xs-9"></main-menu>
+                <login-toolbar class="col-xs-3"></login-toolbar>
+              </div>
+              <div class="row">
+                <header-search class="col-xs-12"></header-search>
+              </div>
             </div>
           </div> <!-- /row -->
         </div> <!-- /header-bg -->
@@ -71,16 +73,16 @@
     <script src="/common/security/login/LoginFormController.js"></script>
     <script src="/app.js"></script>
     <script src="/common/services/ConfigService.js"></script>
+    <script src="/common/security/Security.js"></script>
+    <script src="/common/security/RetryQueue.js"></script>
+    <script src="/common/security/Interceptor.js"></script>
+    <script src="/common/security/Authorization.js"></script>
     <script src="/common/directives/subheader.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
     <script src="/common/directives/mainMenu.js"></script>
     <script src="/common/directives/loginToolbar.js"></script>
     <script src="/common/directives/headerSearch.js"></script>
     <script src="/common/directives/civicLogo.js"></script>
-    <script src="/common/security/Security.js"></script>
-    <script src="/common/security/RetryQueue.js"></script>
-    <script src="/common/security/Interceptor.js"></script>
-    <script src="/common/security/Authorization.js"></script>
     <script src="/pages/pageRoutes.js"></script>
     <script src="/pages/authTestCtrl.js"></script>
     <script src="/pages/HomeCtrl.js"></script>

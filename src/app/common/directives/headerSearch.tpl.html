@@ -1,12 +1,14 @@
 <div class="headerSearch" ng-show="$root.navMode == 'home'">
-  <form role="form">
-    <label>Search CIViC Genes or Variants:</label>
-    <div class="input-group" ng-controller="typeAheadCtrl">
-      <input type="text" class="form-control" placeholder="e.g. SR1 or Y360I" ng-model="selected" typeahead="gene as gene.both for gene in geneList | filter:$viewValue" typeahead-on-select="onSelect($item, $model, $label)">
+  <div class="content-padding">
+    <form role="form">
+      <label>Search CIViC Genes or Variants:</label>
+      <div class="input-group" ng-controller="typeAheadCtrl">
+        <input type="text" class="form-control" placeholder="e.g. SR1 or Y360I" ng-model="selected" typeahead="gene as gene.both for gene in geneList | filter:$viewValue" typeahead-on-select="onSelect($item, $model, $label)">
                 <span class="input-group-btn">
                   <button class="btn btn-default" type="button">Search</button>
                 </span>
-    </div>
-  </form>
-  <a class="btn btn-browse btn-justified btn-block" ui-sref="browse">Browse CIViC Database</a>
+      </div>
+    </form>
+    <a class="btn btn-browse btn-justified btn-block" ui-sref="browse">Browse CIViC Database</a>
+  </div>
 </div>
