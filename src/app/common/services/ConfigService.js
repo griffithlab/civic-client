@@ -7,8 +7,16 @@ angular.module('civic.services')
         state: 'home'
       },
       {
-        label: 'Auth Test',
-        state: 'authTest'
+        label: 'Collaborate',
+        state: 'collaborate'
+      },
+      {
+        label: 'Help',
+        state: 'help'
+      },
+      {
+        label: 'Contact',
+        state: 'contact'
       }
     ]
   }

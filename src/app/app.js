@@ -2,6 +2,7 @@ angular.module('civicClient', [
   'ui.router'
   ,'ui.bootstrap'
   ,'dialogs.main'
+  ,'civic.account'
   ,'civic.pages'
   ,'civic.security'
   ,'civic.services'
@@ -40,6 +41,7 @@ angular.module('civic.security', [
 ]);
 angular.module('civic.services', []);
 angular.module('civic.pages', ['civic.security.authorization']);
+angular.module('civic.account', ['civic.security.authorization']);
 angular.module('civic.common', []);
 angular.module('civic.login', []);
 angular.module('civic.browse', []);
