@@ -4,31 +4,68 @@
 
 .mainMenu {
   .clearfix();
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    float: right;
-    padding-right: 15px;
-
-    li {
+  .main-menu-lg {
+    ul {
+      margin: 0;
+      padding: 0;
       list-style: none;
-      display: inline-block;
-      padding-left: 1em;
-      a {
-        color: #FFF;
-        line-height: 76px;
-        font-size: 16px;
+      float: right;
+      padding-right: 15px;
+
+      li {
+        list-style: none;
+        display: inline-block;
+        padding-left: 1em;
+        a {
+          display: inline-block;
+          color: #FFF;
+          padding: @mainMenuPaddingLg 0;
+          font-size: 16px;
+        }
+        a:hover {
+          color: #FFF;
+        }
       }
-      a:hover {
-        color: #FFF;
+
+      .active {
+        a {
+          color: @civicYellow;
+          text-decoration: underline;
+        }
       }
     }
+  }
+  .main-menu-sm {
+    background-color: @civicPurple;
+    height: @menubarSmHeight;
+    overflow: hidden;
 
-    .active {
-      a {
-        color: @civicYellow;
-        text-decoration: underline;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      padding-right: 15px;
+
+      li {
+        list-style: none;
+        display: inline-block;
+        padding-left: 1em;
+        a {
+          display: inline-block;
+          color: #FFF;
+          padding: @mainMenuPaddingSm 0;
+          font-size: 16px;
+        }
+        a:hover {
+          color: #FFF;
+        }
+      }
+
+      .active {
+        a {
+          color: @civicYellow;
+          text-decoration: underline;
+        }
       }
     }
   }

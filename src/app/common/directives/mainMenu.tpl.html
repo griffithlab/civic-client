@@ -1,7 +1,19 @@
 <div class="mainMenu">
-  <ul>
-    <li ng-repeat="item in menuItems" ui-sref-active="active">
-      <a ui-sref="{{ item.state}}">{{ item.label }}</a>
-    </li>
-  </ul>
+  <!-- for larger displays -->
+  <div class="main-menu-lg hidden-xs hidden-sm">
+    <ul>
+      <li ng-repeat="item in menuItems" ui-sref-active="active">
+        <a ui-sref="{{ item.state}}">{{ item.label }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- for smaller displays -->
+  <div class="main-menu-sm hidden-md hidden-lg">
+    <ul class="main-menu-sm hidden-md hidden-lg">
+      <li ng-repeat="item in menuItems" ui-sref-active="active">
+        <a ui-sref="{{ item.state}}">{{ item.label }}</a>
+      </li>
+    </ul>
+  </div>
 </div>

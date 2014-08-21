@@ -18,9 +18,9 @@ function accountConfig($stateProvider, AuthorizationProvider) {
     .state('account', {
       url: '/account',
       controller: 'AccountCtrl',
-      templateUrl: '/civic-client/account/account.tpl.html',
+      templateUrl: '/civic-client/views/account/account.tpl.html',
       resolve: {
         authorized: AuthorizationProvider.requireAuthenticatedUser
       }
-    })
+    });
 }

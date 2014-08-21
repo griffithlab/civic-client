@@ -9,7 +9,7 @@ angular.module('civic.security.login.toolbar', [])
  * @returns {{templateUrl: string, restrict: string, replace: boolean, scope: boolean, link: link}}
  * @ngInject
  */
-function loginToolbar(Security) {
+function loginToolbar(Security, $log) {
   'use strict';
   var directive = {
     templateUrl: 'common/directives/loginToolbar.tpl.html',
@@ -25,6 +25,26 @@ function loginToolbar(Security) {
       }, function(currentUser) {
         $scope.currentUser = currentUser;
       });
+
+      $scope.items = [
+        'The first choice!',
+        'And another choice for you.',
+        'but wait! A third!'
+      ];
+
+      $scope.status = {
+        isopen: false
+      };
+
+      $scope.toggled = function(open) {
+        $log.info('Dropdown is now: ', open);
+      };
+
+      $scope.toggleDropdown = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.status.isopen = !$scope.status.isopen;
+      };
     }
   };
   return directive;

@@ -3,14 +3,14 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .loginToolbar {
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .login-toolbar-lg {
+    padding-top: @mainMenuPaddingLg;
   }
 
-  li {
-    list-style: none;
-    display: block;
+  .login-toolbar-sm {
+    height: @menubarSmHeight;
+    overflow: hidden;
+    background-color: @civicPurple;
+    padding-top: @mainMenuPaddingSm;
   }
 }

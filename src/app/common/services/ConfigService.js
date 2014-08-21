@@ -3,10 +3,6 @@ angular.module('civic.services')
     serverUrl: 'http://localhost:3000/',
     mainMenuItems: [
       {
-        label: 'Home',
-        state: 'home'
-      },
-      {
         label: 'Collaborate',
         state: 'collaborate'
       },
@@ -17,10 +13,6 @@ angular.module('civic.services')
       {
         label: 'Contact',
         state: 'contact'
-      },
-      {
-        label: 'Account',
-        state: 'account'
       }
     ]
   }

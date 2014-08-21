@@ -1,13 +1,16 @@
 angular.module('civicClient', [
   'ui.router'
   ,'ui.bootstrap'
+  ,'ngTable'
+  ,'geneDataMock'
   ,'dialogs.main'
-  ,'civic.account'
-  ,'civic.pages'
-  ,'civic.security'
   ,'civic.services'
-  ,'civic.common'
+  ,'civic.security'
   ,'civic.login'
+  ,'civic.common'
+
+  ,'civic.pages'
+  ,'civic.account'
   ,'civic-client-templates'
 ])
   .config(appConfig)
@@ -24,6 +27,7 @@ angular.module('civicClient', [
  */
 function appConfig($stateProvider, $urlRouterProvider) {
   'use strict';
+  // route to home state if no state supplied
   $urlRouterProvider.otherwise('home');
 }
 

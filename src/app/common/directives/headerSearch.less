@@ -5,14 +5,19 @@
 .headerSearch {
   .clearfix();
   margin-top: 2.6em;
-
+  margin-bottom: @contentPadding;
   label {
     font-weight: 300;
     color: #DDD;
   }
 
   .btn-browse {
-    margin-top: 1.2em;
+    margin-top: 0;
+    .button-variant(white; @civicGreen; darken(@civicGreen, 15%));
+  }
+
+  .btn-browse-margin {
+    margin-top: 1.6em;
     .button-variant(white; @civicGreen; darken(@civicGreen, 15%));
   }
 }
