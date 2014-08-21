@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/common/directives/mainMenu.css">
     <link rel="stylesheet" href="/css/common/directives/subheader.css">
     <link rel="stylesheet" href="/css/views/account/account.css">
+    <link rel="stylesheet" href="/css/views/browse/browse.css">
     <!-- endinject -->
   </head>
   <body ng-class="{ home: $root.navMode === 'home', sub: $root.navMode === 'sub' }">
@@ -67,6 +68,7 @@
     <script src="/angular-mocks/angular-mocks.js"></script>
     <script src="/lodash/dist/lodash.compat.js"></script>
     <script src="/ng-table/ng-table.js"></script>
+    <script src="/angular-resource/angular-resource.js"></script>
     <script src="/angular-dialog-service/dialogs.min.js"></script>
     <script src="/angular-dialog-service/dialogs-default-translations.min.js"></script>
     <!-- endinject -->
@@ -76,18 +78,19 @@
     <script src="/common/security/login/LoginFormController.js"></script>
     <script src="/views/browse/geneDataMock.js"></script>
     <script src="/app.js"></script>
+    <script src="/views/browse/BrowseCtrl.js"></script>
     <script src="/views/account/AccountCtrl.js"></script>
     <script src="/common/services/ConfigService.js"></script>
+    <script src="/common/security/Security.js"></script>
+    <script src="/common/security/RetryQueue.js"></script>
+    <script src="/common/security/Interceptor.js"></script>
+    <script src="/common/security/Authorization.js"></script>
     <script src="/common/directives/subheader.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
     <script src="/common/directives/mainMenu.js"></script>
     <script src="/common/directives/loginToolbar.js"></script>
     <script src="/common/directives/headerSearch.js"></script>
     <script src="/common/directives/civicLogo.js"></script>
-    <script src="/common/security/Security.js"></script>
-    <script src="/common/security/RetryQueue.js"></script>
-    <script src="/common/security/Interceptor.js"></script>
-    <script src="/common/security/Authorization.js"></script>
     <script src="/pages/pageRoutes.js"></script>
     <script src="/pages/authTestCtrl.js"></script>
     <script src="/pages/HomeCtrl.js"></script>

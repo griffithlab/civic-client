@@ -1,0 +1,16 @@
+<div class="browseView">
+  <h1>Browse</h1>
+  {{ loadedMsg }}
+
+  <table ng-table="tableParams" show-filter="true" class="table">
+    <tr ng-repeat="user in $data">
+      <td data-title="'Name'" filter="{ 'name': 'text' }" sortable="'name'">
+        {{user.name}}
+        {{$loading}}
+      </td>
+      <td data-title="'Age'" sortable="'age'">
+        {{user.age}}
+      </td>
+    </tr>
+  </table>
+</div>

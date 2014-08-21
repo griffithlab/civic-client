@@ -2,6 +2,7 @@ angular.module('civicClient', [
   'ui.router'
   ,'ui.bootstrap'
   ,'ngTable'
+  ,'ngResource'
   ,'geneDataMock'
   ,'dialogs.main'
   ,'civic.services'
@@ -11,6 +12,7 @@ angular.module('civicClient', [
 
   ,'civic.pages'
   ,'civic.account'
+  ,'civic.browse'
   ,'civic-client-templates'
 ])
   .config(appConfig)

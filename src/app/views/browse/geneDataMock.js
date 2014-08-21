@@ -3,7 +3,7 @@ angular.module('geneDataMock', ['ngTable', 'ngMockE2E'])
     'use strict';
     $log.info('DemoMock loaded.');
     // emulation of api server
-    $httpBackend.whenGET(/mockGeneData.*/).respond(function(method, url) {
+    $httpBackend.whenGET(/geneDataMock.*/).respond(function(method, url) {
       var query = url.split('?')[1],
         requestParams = {};
 
