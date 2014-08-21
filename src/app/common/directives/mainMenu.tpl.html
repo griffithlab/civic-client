@@ -5,6 +5,9 @@
       <li ng-repeat="item in menuItems" ui-sref-active="active">
         <a ui-sref="{{ item.state}}">{{ item.label }}</a>
       </li>
+      <li>
+        <login-toolbar></login-toolbar>
+      </li>
     </ul>
   </div>
 
@@ -13,6 +16,9 @@
     <ul class="main-menu-sm hidden-md hidden-lg">
       <li ng-repeat="item in menuItems" ui-sref-active="active">
         <a ui-sref="{{ item.state}}">{{ item.label }}</a>
+      </li>
+      <li>
+        <login-toolbar></login-toolbar>
       </li>
     </ul>
   </div>
