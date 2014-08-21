@@ -2,10 +2,18 @@
 @import 'bower_components/bootstrap/less/variables.less';
 @import 'src/app/styles/_civic-variables.less';
 
+body.home {
+  .main-menu-sm {
+    margin-bottom: @contentPadding;
+  }
+  .main-menu-lg > ul {
+    margin-bottom: 2.6em;
+  }
+}
+
 .mainMenu {
   .main-menu-sm {
     background-color: rgba(50,50,50, .3);
-    margin-bottom: @contentPadding;
     text-align: center;
     > ul {
       margin: 0;
@@ -34,7 +42,6 @@
     > ul {
       margin: 0;
       padding: 0;
-      margin-bottom: 2.6em;
       padding-right: 15px;
       list-style: none;
       float: right;
