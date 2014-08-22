@@ -13,6 +13,7 @@ angular.module('civicClient', [
   ,'civic.pages'
   ,'civic.account'
   ,'civic.browse'
+  ,'civic.event'
   ,'civic-client-templates'
 ])
   .config(appConfig)
@@ -52,6 +53,4 @@ angular.module('civic.common', []);
 angular.module('civic.login', []);
 angular.module('civic.browse', []);
 angular.module('civic.search', []);
-angular.module('civic.gene', []);
 angular.module('civic.event', []);
-angular.module('civic.evidence', []);

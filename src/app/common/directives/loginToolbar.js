@@ -25,19 +25,8 @@ function loginToolbar(Security, $log) {
       }, function(currentUser) {
         $scope.currentUser = currentUser;
       });
-
-      $scope.items = [
-        'The first choice!',
-        'And another choice for you.',
-        'but wait! A third!'
-      ];
-
       $scope.status = {
         isopen: false
-      };
-
-      $scope.toggled = function(open) {
-        $log.info('Dropdown is now: ', open);
       };
 
       $scope.toggleDropdown = function($event) {
