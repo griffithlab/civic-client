@@ -1,16 +1,42 @@
 <div class="browseView">
   <h1>Browse</h1>
-  {{ loadedMsg }}
-
-  <table ng-table="tableParams" show-filter="true" class="table">
-    <tr ng-repeat="user in $data">
-      <td data-title="'Name'" filter="{ 'name': 'text' }" sortable="'name'">
-        {{user.name}}
-        {{$loading}}
-      </td>
-      <td data-title="'Age'" sortable="'age'">
-        {{user.age}}
-      </td>
-    </tr>
+  <table ng-table="tableParams" template-pagination="custom/pager" show-filter="true" class="browse-genes table table-curved table-condensed table-hover">
+    <tbody>
+      <tr ng-repeat="gene in $data" ng-click="rowClick(gene)">
+        <td data-title="'Entrez Gene'" sortable="'entrez_gene'" filter="{ 'entrez_gene': 'text' }">
+          <strong>{{ gene.entrez_gene }}</strong>
+        </td>
+        <td data-title="'Entrez ID'" filter="{ 'entrez_id': 'text' }">
+          {{ gene.entrez_id }}
+        </td>
+        <td data-title="'Variant'" filter="{ 'variant': 'text' }">
+          {{ gene.variant }}
+        </td>
+        <td data-title="'Category'" filter="{ 'gene_category': 'text' }">
+          {{ gene.gene_category }}
+        </td>
+        <td data-title="'Protein Function'" filter="{ 'protein_function': 'text' }">
+          {{ gene.protein_function }}
+        </td>
+      </tr>
+    </tbody>
   </table>
+  <script type="text/ng-template" id="custom/pager">
+    <ul class="pager ng-cloak">
+      <li ng-repeat="page in pages"
+          ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
+          ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+        <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>
+        <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>
+      </li>
+      <li>
+        <div class="btn-group">
+          <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
+          <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
+          <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
+          <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
+        </div>
+      </li>
+    </ul>
+  </script>
 </div>
