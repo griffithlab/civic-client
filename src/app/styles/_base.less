@@ -26,3 +26,44 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   .clearfix();
   padding: @contentPadding;
 }
+
+/**
+* table-curved: adds nice curved edges to bootstrap tables
+*/
+.table-curved {
+  thead th:first-child {
+    border-radius: @border-radius-base 0 0 0;
+  }
+  thead th:last-child {
+    border-radius: 0 @border-radius-base 0 0;
+  }
+  thead th:only-child {
+    border-radius: @border-radius-base @border-radius-base 0 0;
+  }
+  tfoot td:first-child {
+    border-radius: 0 0 0 @border-radius-base;
+  }
+  tfoot td:last-child {
+    border-radius: 0 0 @border-radius-base 0;
+  }
+  tfoot td:only-child {
+    border-radius: 0 0 @border-radius-base @border-radius-base;
+  }
+}
+
+/**
+*  ngTable components
+*/
+.input-sm { // pulled this from bootstrap's form.less in order to extend filter inputs
+  .input-size(@input-height-small; @padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+}
+
+.pager {
+  margin: .5em;
+}
+
+.ng-table-filters {
+  input {
+    &:extend(.input-sm);
+  }
+}

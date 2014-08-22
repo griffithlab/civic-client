@@ -3,7 +3,17 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .browseView {
-  .browse-genes-table {
+  .browse-genes {
     min-height: 400px;
+    tbody td {
+      cursor: pointer;
+    }
+    td, th {
+      background-color: @tableBgColor;
+    }
+    th {
+      text-align: left;
+    }
   }
+
 }

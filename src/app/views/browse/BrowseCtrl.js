@@ -12,9 +12,16 @@ function BrowseCtrl($scope, $rootScope, $resource, ngTableParams, $timeout, $log
 
   var Api = $resource('/geneDataMock');
 
+  $scope.rowClick = function(gene) {
+    $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/event/', gene.variant].join(""));
+    var loc = ['/gene/', gene.entrez_gene, '/event/', gene.variant].join("");
+    $log.info('location.path(' + loc + ')');
+    $location.path(loc);
+  };
+
   $scope.tableParams = new ngTableParams({
     page: 1,            // show first page
-    count: 10,          // count per page
+    count: 25,          // count per page
     sorting: {
       name: 'asc'     // initial sorting
     }
