@@ -3,7 +3,7 @@ angular.module('civic.browse')
   .config(browseConfig);
 
 // @ngInject
-function BrowseCtrl($scope, $rootScope, $resource, ngTableParams, $timeout, $log) {
+function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $timeout, $log) {
   'use strict';
   $log.info('BrowseCtrl loaded');
   $rootScope.navMode = 'sub';
