@@ -1,7 +1,17 @@
 angular.module('httpMocks')
   .run(function($httpBackend, $filter, $log, ngTableParams) {
     'use strict';
-    $log.info('geneListMock loaded.');
+    $log.info('httpMocks loaded.');
+    function gup( url, name ) {
+      name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+      var regexS = "[\\?&]"+name+"=([^&#]*)";
+      var regex = new RegExp( regexS );
+      var results = regex.exec( url );
+      if( results == null )
+        return "";
+      else
+        return results[1];
+    }
     // emulation of api server
     $httpBackend.whenGET(/geneListMock.*/).respond(function(method, url) {
       var query = url.split('?')[1],
@@ -1947,7 +1957,7 @@ angular.module('httpMocks')
       $log.log('Ajax request: ', url);
 
       var data = {
-        name: "IDH1",
+        name: gup(url, 'id'),
         summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend nec nulla sit amet euismod. Aliquam faucibus tellus neque. Quisque sed dui quis nulla efficitur fermentum sit amet sit amet eros. Pellentesque porttitor dolor lectus, in ullamcorper ante fringilla placerat. Praesent porttitor vestibulum lectus, eget lacinia nibh rhoncus ut. Nulla vel mi sagittis, eleifend tellus ut, placerat eros. Nullam pharetra, ipsum vitae tempus mollis, purus leo consectetur quam, sit amet hendrerit libero sem nec quam. Nulla viverra enim non bibendum mollis.",
         metrics: {
           "metric1": 123,
