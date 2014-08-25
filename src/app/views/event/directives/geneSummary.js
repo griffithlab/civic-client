@@ -6,10 +6,11 @@ function geneSummary() {
   'use strict';
   var directive = {
     restrict: 'E',
-    templateUrl: 'views/event/directives/geneSummary.tpl.html',
     replace: true,
     scope: true,
-    link: function($scope) {
+    controller: 'GeneCtrl',
+    templateUrl: 'views/event/directives/geneSummary.tpl.html',
+    link: function($scope, GeneCtrl) {
       console.log('geneSummary linked.');
     }
   };

@@ -1,15 +1,21 @@
 angular.module('civicClient', [
+  // vendor modules
   'ui.router'
   ,'ui.bootstrap'
   ,'ngTable'
   ,'ngResource'
-  ,'geneDataMock'
   ,'dialogs.main'
+
+  // http backend mocks
+  ,'httpMocks'
+
+  // app services
   ,'civic.services'
   ,'civic.security'
   ,'civic.login'
   ,'civic.common'
 
+  // app views
   ,'civic.pages'
   ,'civic.account'
   ,'civic.browse'
@@ -54,3 +60,5 @@ angular.module('civic.login', []);
 angular.module('civic.browse', []);
 angular.module('civic.search', []);
 angular.module('civic.event', []);
+
+angular.module('httpMocks', ['ngTable', 'ngMockE2E']);

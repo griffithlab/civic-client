@@ -10,7 +10,7 @@ function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $ti
   $rootScope.viewTitle = 'Browse';
   $scope.loadedMsg = 'Loaded Browse!';
 
-  var Api = $resource('/geneDataMock');
+  var Api = $resource('/geneListMock');
 
   $scope.rowClick = function(gene) {
     $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/event/', gene.variant].join(""));
