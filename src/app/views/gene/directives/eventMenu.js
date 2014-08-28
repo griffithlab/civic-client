@@ -1,12 +1,13 @@
 angular.module('civic.event')
-  .directive('variantMenu', variantMenu);
+  .directive('eventMenu', eventMenu);
 
 // @ngInject
-function variantMenu() {
+function eventMenu() {
   'use strict';
   var directive = {
     restrict: 'E',
-    templateUrl: 'views/event/directives/variantMenu.tpl.html',
+    templateUrl: 'views/gene/directives/eventMenu.tpl.html',
+    controller: 'GeneCtrl',
     replace: true,
     scope: true,
     link: function($scope) {

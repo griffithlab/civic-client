@@ -9,7 +9,7 @@ function geneSummary() {
     replace: true,
     scope: true,
     controller: 'GeneCtrl',
-    templateUrl: 'views/event/directives/geneSummary.tpl.html',
+    templateUrl: 'views/gene/directives/geneSummary.tpl.html',
     link: function($scope, GeneCtrl) {
       console.log('geneSummary linked.');
     }

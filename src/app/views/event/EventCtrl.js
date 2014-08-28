@@ -3,9 +3,21 @@ angular.module('civic.event')
   .config(eventConfig);
 
 // @ngInject
-function EventCtrl() {
+function EventCtrl($rootScope, $scope, $stateParams, $resource, $log) {
   'use strict';
+  var geneId = $stateParams.geneId;
+  var eventId = $stateParams.eventId;
 
+  $rootScope.viewTitle = 'Gene ' + geneId + ', Event ' + eventId;
+  $rootScope.navMode = 'sub';
+  $scope.event = {};
+
+  var Api = $resource('/eventDataMock');
+  Api.get({ 'id': eventId }, function(data) {
+    $scope.event.summary = data.summary;
+    $scope.event.details = data.details;
+    $scope.event.evidence = data.evidence;
+  });
 }
 
 // @ngInject

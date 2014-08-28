@@ -7,6 +7,7 @@ function evidenceTable() {
   var directive = {
     restrict: 'E',
     templateUrl: 'views/event/directives/eventSummary.tpl.html',
+    controller: 'EventCtrl',
     replace: true,
     scope: true,
     link: function($scope) {

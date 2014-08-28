@@ -1,3 +1,61 @@
 <div class="evidenceTable">
   <h3>Evidence Table</h3>
+  <div class="table-responsive">
+    <table class="table table-condensed table-bordered table-curved evidence-table">
+      <thead>
+        <th>
+          Explanation
+        </th>
+        <th>
+          Disease
+        </th>
+        <th>
+          Drug
+        </th>
+        <th>
+          Type of Evidence
+        </th>
+        <th>
+          Outcome
+        </th>
+        <th>
+          Clinical Direction
+        </th>
+        <th>
+          Level
+        </th>
+        <th>
+          Source
+        </th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in event.evidence">
+          <td>
+            {{ row.explanation }}
+          </td>
+          <td>
+            {{ row.disease }}
+          </td>
+          <td>
+            {{ row.drug }}
+          </td>
+          <td>
+            {{ row.type_of_evidence }}
+          </td>
+          <td>
+            {{ row.evidence_outcome }}
+          </td>
+          <td>
+            {{ row.direction_for_clinical_actionability }}
+          </td>
+          <td>
+            {{ row.level }}
+          </td>
+          <td>
+            {{ row.source }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

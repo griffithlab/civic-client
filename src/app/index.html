@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="/css/views/account/account.css">
     <link rel="stylesheet" href="/css/views/browse/browse.css">
     <link rel="stylesheet" href="/css/views/event/event.css">
-    <link rel="stylesheet" href="/css/views/event/gene.css">
+    <link rel="stylesheet" href="/css/views/gene/gene.css">
     <link rel="stylesheet" href="/css/views/event/directives/eventSummary.css">
     <link rel="stylesheet" href="/css/views/event/directives/evidenceTable.css">
-    <link rel="stylesheet" href="/css/views/event/directives/geneSummary.css">
-    <link rel="stylesheet" href="/css/views/event/directives/variantMenu.css">
+    <link rel="stylesheet" href="/css/views/gene/directives/eventMenu.css">
+    <link rel="stylesheet" href="/css/views/gene/directives/geneSummary.css">
     <!-- endinject -->
   </head>
   <body ng-class="{ home: $root.navMode === 'home', sub: $root.navMode === 'sub' }">
@@ -60,7 +60,11 @@
     <footer>
       <div class="page-container">
         <div class="container-fluid">
-          <p>this is the footer.</p>
+          <div class="row">
+            <div class="col-xs-12">
+              <p class="pull-right" style="margin-right:15px;">&copy; 2014 The Genome Institute at Washington University School of Medicine</p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -81,13 +85,13 @@
 
     <!-- inject:js -->
     <script src="/app.js"></script>
-    <script src="/views/event/directives/variantMenu.js"></script>
-    <script src="/views/event/directives/geneSummary.js"></script>
+    <script src="/views/gene/directives/geneSummary.js"></script>
+    <script src="/views/gene/directives/eventMenu.js"></script>
     <script src="/views/event/directives/evidenceTable.js"></script>
     <script src="/views/event/directives/eventSummary.js"></script>
     <script src="/common/security/login/LoginService.js"></script>
     <script src="/common/security/login/LoginFormController.js"></script>
-    <script src="/views/event/GeneCtrl.js"></script>
+    <script src="/views/gene/GeneCtrl.js"></script>
     <script src="/views/event/EventCtrl.js"></script>
     <script src="/views/browse/BrowseCtrl.js"></script>
     <script src="/views/account/AccountCtrl.js"></script>

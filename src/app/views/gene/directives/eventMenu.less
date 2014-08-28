@@ -1,0 +1,31 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+@events-title-bg: darken(@pageBackground2, 10%);
+
+.eventMenu {
+  background-color: @pageBackground2;
+  border-bottom-right-radius: @border-radius-base;
+
+  ul {
+    padding-top: @contentPadding;
+    padding-bottom: @contentPadding;
+
+    li.active a {
+      background-color: @pageBackground;
+      color: @civicPurple;
+      margin-right: -@contentPadding;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .title {
+    background-color: @events-title-bg;
+    color: #333;
+    margin: 0 -@contentPadding 0 -@contentPadding;
+    padding: @contentPadding/2 @contentPadding;
+  }
+
+}

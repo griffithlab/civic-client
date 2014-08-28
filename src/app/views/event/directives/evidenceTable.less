@@ -1,3 +1,18 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
 .evidenceTable {
-  border: 1px solid #FF0;
+  .evidence-table {
+    min-height: 400px;
+    tbody td {
+      cursor: pointer;
+    }
+    td, th {
+      background-color: @tableBgColor;
+    }
+    th {
+      text-align: left;
+    }
+  }
 }

@@ -27,6 +27,6 @@ function geneConfig($stateProvider) {
     .state('gene', {
       url: '/gene/:geneId',
       controller: 'GeneCtrl',
-      templateUrl: '/civic-client/views/event/gene.tpl.html'
+      templateUrl: '/civic-client/views/gene/gene.tpl.html'
     });
 }
