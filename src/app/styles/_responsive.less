@@ -3,9 +3,14 @@
 * padding on the main page content
 */
 .page-container > .container-fluid:first-child,
-.subheader > .container-fluid:first-child {
+.subheader > .container-fluid:first-child,
+footer > .container-fluid:first-child {
   .container-fixed();
 
+  @media (max-width: @screen-sm-min) {
+    padding-left: 0;
+    padding-right: 0;
+  }
   @media (min-width: @screen-sm-min) {
     width: @container-sm;
   }
@@ -14,5 +19,12 @@
   }
   @media (min-width: @screen-lg-min) {
     width: @container-lg;
+  }
+}
+
+header > .container:first-child {
+  @media (max-width: @screen-sm-min) {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
