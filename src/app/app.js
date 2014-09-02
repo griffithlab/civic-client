@@ -19,6 +19,7 @@ angular.module('civicClient', [
   ,'civic.pages'
   ,'civic.account'
   ,'civic.browse'
+  ,'civic.gene'
   ,'civic.event'
   ,'civic-client-templates'
 ])
@@ -59,6 +60,7 @@ angular.module('civic.common', []);
 angular.module('civic.login', []);
 angular.module('civic.browse', []);
 angular.module('civic.search', []);
+angular.module('civic.gene', []);
 angular.module('civic.event', []);
 
 angular.module('httpMocks', ['ngTable', 'ngMockE2E']);

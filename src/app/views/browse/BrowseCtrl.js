@@ -8,6 +8,7 @@ function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $ti
   $log.info('BrowseCtrl loaded');
   $rootScope.navMode = 'sub';
   $rootScope.viewTitle = 'Browse';
+  $rootScope.title = 'CIViC - Browse Events'
   $scope.loadedMsg = 'Loaded Browse!';
 
   var Api = $resource('/geneListMock');

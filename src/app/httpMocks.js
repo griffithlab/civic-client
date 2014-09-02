@@ -1968,10 +1968,10 @@ angular.module('httpMocks')
             'Pathway(s)s': 'Mitogen Activated cell growth and proliferation',
             'Protein Motifs': 'Dimerization site, Tyrosine phosphorylation sites, kinase cascade anchor site'
           },
-          events: ["VARIANT1", "VARIANT2", "VARIANT3", "VARIANT4", "VARIANT5"],
-          eventGroups: {
+          variants: ["VARIANT1", "VARIANT2", "VARIANT3", "VARIANT4", "VARIANT5"],
+          variantGroups: {
             "EVTGRP": ["VARIANT6", "VARIANT7"],
-            "EVTGRP2": ["VARIANT8", "VARIANT9"]
+            "EVTGRP2": ["VARIANT8", "VARIANT9", "VARIANT10", "VARIANT11"]
           }
         };
 

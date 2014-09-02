@@ -1,4 +1,4 @@
-angular.module('civic.event')
+angular.module('civic.gene')
   .directive('geneSummary', geneSummary);
 
 // @ngInject

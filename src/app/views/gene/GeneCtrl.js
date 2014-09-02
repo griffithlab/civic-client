@@ -1,4 +1,4 @@
-angular.module('civic.event')
+angular.module('civic.gene')
   .controller('GeneCtrl', GeneCtrl)
   .config(geneConfig);
 
@@ -8,7 +8,9 @@ function GeneCtrl($scope, $rootScope, $stateParams, $resource, $log, $http) {
   $log.info('GeneCtrl loaded.');
   var geneId = $stateParams.geneId;
 
-  $rootScope.viewTitle = 'Gene ' + geneId;
+  $log.info('setting title to View Gene.');
+  $rootScope.viewTitle = 'View Gene';
+  $rootScope.title = 'CIViC - View ' + geneId;
   $rootScope.navMode = 'sub';
   $scope.gene = {};
 

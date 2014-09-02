@@ -2,7 +2,7 @@
 <html ng-app="civicClient">
   <head>
     <meta charset="utf-8"/>
-    <title>civicClient</title>
+    <title ng-bind="$root.title">CIViC - Clinical Interpretations of Variants in Cancer</title>
     <!-- inject:vendor:css -->
     <link rel="stylesheet" href="/ng-table/ng-table.css">
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
@@ -19,10 +19,12 @@
     <link rel="stylesheet" href="/css/views/browse/browse.css">
     <link rel="stylesheet" href="/css/views/event/event.css">
     <link rel="stylesheet" href="/css/views/gene/gene.css">
+    <link rel="stylesheet" href="/css/views/event/directives/eventActionButtons.css">
     <link rel="stylesheet" href="/css/views/event/directives/eventSummary.css">
     <link rel="stylesheet" href="/css/views/event/directives/evidenceTable.css">
-    <link rel="stylesheet" href="/css/views/gene/directives/eventMenu.css">
+    <link rel="stylesheet" href="/css/views/gene/directives/geneActionButtons.css">
     <link rel="stylesheet" href="/css/views/gene/directives/geneSummary.css">
+    <link rel="stylesheet" href="/css/views/gene/directives/variantMenu.css">
     <!-- endinject -->
   </head>
   <body ng-class="{ home: $root.navMode === 'home', sub: $root.navMode === 'sub' }">
@@ -85,10 +87,12 @@
 
     <!-- inject:js -->
     <script src="/app.js"></script>
+    <script src="/views/gene/directives/variantMenu.js"></script>
     <script src="/views/gene/directives/geneSummary.js"></script>
-    <script src="/views/gene/directives/eventMenu.js"></script>
+    <script src="/views/gene/directives/geneActionButtons.js"></script>
     <script src="/views/event/directives/evidenceTable.js"></script>
     <script src="/views/event/directives/eventSummary.js"></script>
+    <script src="/views/event/directives/eventActionButtons.js"></script>
     <script src="/common/security/login/LoginService.js"></script>
     <script src="/common/security/login/LoginFormController.js"></script>
     <script src="/views/gene/GeneCtrl.js"></script>

@@ -1,0 +1,20 @@
+<div class="variantMenu">
+  <div class="title">
+    <span>{{ gene.name }} Variants:</span>
+  </div>
+  <div ng-switch on="gene.variants.length > 0 || typeOf(gene.variantGroups)">
+    <div ng-switch-when="true">
+      <ul class="nav nav-pills nav-stacked">
+        <li ng-repeat="variant in gene.variants" ui-sref-active="active">
+          <a ui-sref="gene.event({geneId: gene.name, eventId: event})">{{ variant }}</a>
+        </li>
+      </ul>
+    </div>
+    <div ng-switch-default>
+      <ul class="nav nav-pills nav-stacked">
+        <li>None found.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>
