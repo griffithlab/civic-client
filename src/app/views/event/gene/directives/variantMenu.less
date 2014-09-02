@@ -12,7 +12,7 @@
     padding-top: @contentPadding;
     padding-bottom: @contentPadding;
 
-    li.active a {
+    .active a {
       background-color: @pageBackground;
       color: @civicPurple;
       margin-right: -@contentPadding;
@@ -25,7 +25,17 @@
     background-color: @events-title-bg;
     color: #333;
     margin: 0 -@contentPadding 0 -@contentPadding;
-    padding: @contentPadding/2 @contentPadding;
+    // padding: @contentPadding/2 @contentPadding;
+    padding: @contentPadding;
+  }
+
+  .groupTitle {
+    background-color: @events-title-bg;
+    color: #333;
+    margin: 0 @contentPadding 0 -@contentPadding;
+    padding: @contentPadding/2;
+    border-top-right-radius: @border-radius-base;
+    border-bottom-right-radius: @border-radius-base;
   }
 
 }

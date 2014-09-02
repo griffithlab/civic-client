@@ -18,6 +18,8 @@ function GeneCtrl($scope, $rootScope, $stateParams, $resource, $log, $http) {
   var Api = $resource('/geneDataMock');
   Api.get({ 'id': geneId }, function(data) {
     $scope.gene = data.result;
+    // TODO: replace with better logic in template, this is kludgy
+    $scope.variantGroupsExist = typeof($scope.gene.variantGroups) === 'object';
   });
 }
 
