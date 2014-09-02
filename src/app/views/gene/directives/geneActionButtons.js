@@ -3,14 +3,15 @@ angular.module('civic.gene')
 
 // @ngInject
 function editGeneBtn() {
+  'use strict';
   var directive = {
     restrict: 'E',
     templateUrl: 'views/gene/directives/geneActionButtons.tpl.html',
     controller: 'GeneCtrl',
     replace: true,
     scope: true,
-    link: function($scope) {
-      console.log('editGene btn linked.')
+    link: function() {
+      console.log('editGene btn linked.');
     }
   };
 

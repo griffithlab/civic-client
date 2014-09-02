@@ -3,6 +3,7 @@ angular.module('civic.event')
 
 // @ngInject
 function eventActionButtons () {
+  'use strict';
   var directive = {
     restrict: 'E',
     templateUrl: 'views/event/directives/eventActionButtons.tpl.html',

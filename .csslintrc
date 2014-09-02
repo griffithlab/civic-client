@@ -1,6 +1,7 @@
 {
   "box-model": false,
   "fallback-colors": false,
+  "unqualified-attributes": false,
   "box-sizing": false,
   "compatible-vendor-prefixes": false,
   "gradients": false,
