@@ -1,4 +1,4 @@
-angular.module('civic.gene')
+angular.module('civic.event')
   .controller('GeneCtrl', GeneCtrl)
   .config(geneConfig);
 
@@ -29,6 +29,6 @@ function geneConfig($stateProvider) {
     .state('gene', {
       url: '/gene/:geneId',
       controller: 'GeneCtrl',
-      templateUrl: '/civic-client/views/gene/gene.tpl.html'
+      templateUrl: '/civic-client/views/event/gene/gene.tpl.html'
     });
 }

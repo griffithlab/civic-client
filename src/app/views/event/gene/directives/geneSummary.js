@@ -1,4 +1,4 @@
-angular.module('civic.gene')
+angular.module('civic.event')
   .directive('geneSummary', geneSummary);
 
 // @ngInject
@@ -9,7 +9,7 @@ function geneSummary() {
     replace: true,
     scope: true,
     controller: 'GeneCtrl',
-    templateUrl: 'views/gene/directives/geneSummary.tpl.html',
+    templateUrl: '/civic-client/views/event/gene/directives/geneSummary.tpl.html',
     link: function($scope, GeneCtrl) {
       console.log('geneSummary linked.');
     }

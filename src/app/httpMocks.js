@@ -1981,7 +1981,7 @@ angular.module('httpMocks')
         /* jshint ignore:end */
       });
 
-    $httpBackend.whenGET(/eventDataMock.*/)
+    $httpBackend.whenGET(/variantDataMock.*/)
       .respond(function(method, url) {
         /* jshint ignore:start */
         var data = {

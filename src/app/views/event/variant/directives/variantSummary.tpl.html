@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-xs-12">
       <h3>
-        Event {{ event.name }}
-        <event-action-buttons></event-action-buttons>
+        Variant {{ variant.name }}
+        <variant-action-buttons></variant-action-buttons>
       </h3>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      {{ event.summary }}
+      {{ variant.summary }}
     </div>
     <div class="col-xs-12 col-md-6">
       <table class="table table-condensed">
@@ -17,7 +17,7 @@
           <col width="30%"/>
           <col width="70%"/>
         </colgroup>
-        <tr ng-repeat="(key, value) in event.details">
+        <tr ng-repeat="(key, value) in variant.details">
           <td class="name">{{ key }}:</td>
           <td class=""value>{{ value }}</td>
         </tr>

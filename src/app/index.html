@@ -17,14 +17,14 @@
     <link rel="stylesheet" href="/css/common/directives/subheader.css">
     <link rel="stylesheet" href="/css/views/account/account.css">
     <link rel="stylesheet" href="/css/views/browse/browse.css">
-    <link rel="stylesheet" href="/css/views/event/event.css">
-    <link rel="stylesheet" href="/css/views/gene/gene.css">
-    <link rel="stylesheet" href="/css/views/event/directives/eventActionButtons.css">
-    <link rel="stylesheet" href="/css/views/event/directives/eventSummary.css">
-    <link rel="stylesheet" href="/css/views/event/directives/evidenceTable.css">
-    <link rel="stylesheet" href="/css/views/gene/directives/geneActionButtons.css">
-    <link rel="stylesheet" href="/css/views/gene/directives/geneSummary.css">
-    <link rel="stylesheet" href="/css/views/gene/directives/variantMenu.css">
+    <link rel="stylesheet" href="/css/views/event/gene/gene.css">
+    <link rel="stylesheet" href="/css/views/event/variant/variant.css">
+    <link rel="stylesheet" href="/css/views/event/gene/directives/geneActionButtons.css">
+    <link rel="stylesheet" href="/css/views/event/gene/directives/geneSummary.css">
+    <link rel="stylesheet" href="/css/views/event/gene/directives/variantMenu.css">
+    <link rel="stylesheet" href="/css/views/event/variant/directives/evidenceTable.css">
+    <link rel="stylesheet" href="/css/views/event/variant/directives/variantActionButtons.css">
+    <link rel="stylesheet" href="/css/views/event/variant/directives/variantSummary.css">
     <!-- endinject -->
   </head>
   <body ng-class="{ home: $root.navMode === 'home', sub: $root.navMode === 'sub' }">
@@ -87,29 +87,30 @@
 
     <!-- inject:js -->
     <script src="/app.js"></script>
-    <script src="/views/gene/directives/variantMenu.js"></script>
-    <script src="/views/gene/directives/geneSummary.js"></script>
-    <script src="/views/gene/directives/geneActionButtons.js"></script>
-    <script src="/views/event/directives/evidenceTable.js"></script>
-    <script src="/views/event/directives/eventSummary.js"></script>
-    <script src="/views/event/directives/eventActionButtons.js"></script>
+    <script src="/views/event/variant/directives/variantSummary.js"></script>
+    <script src="/views/event/variant/directives/variantActionButtons.js"></script>
+    <script src="/views/event/variant/directives/evidenceTable.js"></script>
+    <script src="/views/event/gene/directives/variantMenu.js"></script>
+    <script src="/views/event/gene/directives/geneSummary.js"></script>
+    <script src="/views/event/gene/directives/geneActionButtons.js"></script>
+    <script src="/views/event/variant/VariantCtrl.js"></script>
+    <script src="/views/event/gene/GeneCtrl.js"></script>
     <script src="/common/security/login/LoginService.js"></script>
     <script src="/common/security/login/LoginFormController.js"></script>
-    <script src="/views/gene/GeneCtrl.js"></script>
     <script src="/views/event/EventCtrl.js"></script>
     <script src="/views/browse/BrowseCtrl.js"></script>
     <script src="/views/account/AccountCtrl.js"></script>
     <script src="/common/services/ConfigService.js"></script>
+    <script src="/common/security/Security.js"></script>
+    <script src="/common/security/RetryQueue.js"></script>
+    <script src="/common/security/Interceptor.js"></script>
+    <script src="/common/security/Authorization.js"></script>
     <script src="/common/directives/subheader.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
     <script src="/common/directives/mainMenu.js"></script>
     <script src="/common/directives/loginToolbar.js"></script>
     <script src="/common/directives/headerSearch.js"></script>
     <script src="/common/directives/civicLogo.js"></script>
-    <script src="/common/security/Security.js"></script>
-    <script src="/common/security/RetryQueue.js"></script>
-    <script src="/common/security/Interceptor.js"></script>
-    <script src="/common/security/Authorization.js"></script>
     <script src="/pages/pageRoutes.js"></script>
     <script src="/pages/authTestCtrl.js"></script>
     <script src="/pages/HomeCtrl.js"></script>

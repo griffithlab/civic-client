@@ -14,8 +14,8 @@ function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $ti
   var Api = $resource('/geneListMock');
 
   $scope.rowClick = function(gene) {
-    $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/event/', gene.variant].join(""));
-    var loc = ['/gene/', gene.entrez_gene, '/event/', gene.variant].join("");
+    $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join(""));
+    var loc = ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join("");
     $log.info('location.path(' + loc + ')');
     $location.path(loc);
   };

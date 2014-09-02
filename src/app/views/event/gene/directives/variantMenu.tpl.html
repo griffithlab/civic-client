@@ -6,7 +6,8 @@
     <div ng-switch-when="true">
       <ul class="nav nav-pills nav-stacked">
         <li ng-repeat="variant in gene.variants" ui-sref-active="active">
-          <a ui-sref="gene.event({geneId: gene.name, eventId: event})">{{ variant }}</a>
+          <!--<a ui-sref="gene.event({geneId: gene.name, variantId: event})">{{ variant }}</a>-->
+          <a ui-sref="gene.variant({ geneId: gene.name, variantId: variant })">{{ variant }}</a>
         </li>
       </ul>
     </div>

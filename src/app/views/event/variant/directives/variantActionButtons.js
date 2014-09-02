@@ -1,12 +1,12 @@
 angular.module('civic.event')
-.directive('eventActionButtons', eventActionButtons);
+.directive('variantActionButtons', eventActionButtons);
 
 // @ngInject
 function eventActionButtons () {
   'use strict';
   var directive = {
     restrict: 'E',
-    templateUrl: 'views/event/directives/eventActionButtons.tpl.html',
+    templateUrl: '/civic-client/views/event/variant/directives/variantActionButtons.tpl.html',
     controller: 'EventCtrl',
     replace: true,
     scope: true,

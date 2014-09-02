@@ -19,7 +19,6 @@ angular.module('civicClient', [
   ,'civic.pages'
   ,'civic.account'
   ,'civic.browse'
-  ,'civic.gene'
   ,'civic.event'
   ,'civic-client-templates'
 ])
@@ -41,9 +40,19 @@ function appConfig($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('home');
 }
 
-function appRun(Security) {
+// @ngInject
+function appRun(Security, $rootScope) {
   'use strict';
   Security.requestCurrentUser();
+
+  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+    console.log('$stateChangeStart to '+toState.name +'- fired when the transition begins. toState,toParams : \n',toState, toParams);
+
+    $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
+      console.log('$stateChangeError - fired when an error occurs during transition.');
+      console.log(arguments);
+    });
+  });
 }
 
 // define app modules
@@ -60,7 +69,6 @@ angular.module('civic.common', []);
 angular.module('civic.login', []);
 angular.module('civic.browse', []);
 angular.module('civic.search', []);
-angular.module('civic.gene', []);
 angular.module('civic.event', []);
 
 angular.module('httpMocks', ['ngTable', 'ngMockE2E']);

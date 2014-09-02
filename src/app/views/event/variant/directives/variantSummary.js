@@ -1,17 +1,17 @@
 angular.module('civic.event')
-  .directive('evidenceTable', evidenceTable);
+  .directive('variantSummary', evidenceTable);
 
 // @ngInject
 function evidenceTable() {
   'use strict';
   var directive = {
     restrict: 'E',
-    templateUrl: 'views/event/directives/evidenceTable.tpl.html',
+    templateUrl: '/civic-client/views/event/variant/directives/variantSummary.tpl.html',
     controller: 'EventCtrl',
     replace: true,
     scope: true,
     link: function($scope) {
-      console.log('evidenceTable linked.');
+      console.log('variantSummary linked.');
     }
   };
 
