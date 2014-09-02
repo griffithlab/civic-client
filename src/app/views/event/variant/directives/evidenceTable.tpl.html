@@ -26,17 +26,12 @@
           Type of Evidence
         </th>
         <th>
-          Outcome
-        </th>
-        <th>
-          Clinical Direction
-        </th>
-        <th>
           Level
         </th>
         <th>
           Source
         </th>
+        <th></th>
       </thead>
       <tbody>
         <tr ng-repeat="row in variant.evidence">
@@ -53,16 +48,13 @@
             {{ row.type_of_evidence }}
           </td>
           <td>
-            {{ row.evidence_outcome }}
-          </td>
-          <td>
-            {{ row.direction_for_clinical_actionability }}
-          </td>
-          <td>
             {{ row.level }}
           </td>
           <td>
             {{ row.source }}
+          </td>
+          <td>
+            <evidence-action-buttons></evidence-action-buttons>
           </td>
         </tr>
       </tbody>
