@@ -13,7 +13,7 @@
   function loginToolbar(Security, $log) {
     'use strict';
     var directive = {
-      templateUrl: 'common/directives/loginToolbar.tpl.html',
+      templateUrl: '/civic-client/common/directives/loginToolbar.tpl.html',
       restrict: 'E',
       replace: true,
       scope: true,

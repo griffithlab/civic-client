@@ -15,7 +15,7 @@
 
     var directive = {
       restrict: 'E',
-      templateUrl: 'common/directives/mainMenu.tpl.html',
+      templateUrl: '/civic-client/common/directives/mainMenu.tpl.html',
       replace: true,
       scope: true,
       controller: mainMenuController

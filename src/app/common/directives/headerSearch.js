@@ -10,7 +10,7 @@ function headerSearch() {
 
   return {
     restrict: 'E',
-    templateUrl: 'common/directives/headerSearch.tpl.html',
+    templateUrl: '/civic-client/common/directives/headerSearch.tpl.html',
     controller: headerSearch
   }
 

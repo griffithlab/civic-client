@@ -9,7 +9,7 @@
   function civicLogo($log) {
     var directive = {
       restrict: 'E',
-      templateUrl: 'common/directives/civicLogo.tpl.html',
+      templateUrl: '/civic-client/common/directives/civicLogo.tpl.html',
       controller: civicLogoController
     };
 

@@ -25,7 +25,7 @@
     var directive = {
       restrict: 'E',
       scope: true,
-      templateUrl: 'common/directives/subheader.tpl.html',
+      templateUrl: '/civic-client/common/directives/subheader.tpl.html',
       controller: subheaderCtrl
     };
 
