@@ -1,27 +1,29 @@
-angular.module('civic.common')
-  .directive('civicLogo', civicLogo);
-
-/**
- * @ngInject
- */
-function civicLogo($log) {
+(function() {
   'use strict';
-  var directive = {
-    restrict: 'E',
-    templateUrl: 'common/directives/civicLogo.tpl.html',
-    controller: civicLogoController
-  };
+  angular.module('civic.common')
+    .directive('civicLogo', civicLogo);
 
-  // @ngInject
-  function civicLogoController($scope, $rootScope) {
-    var pageState = {
-      navMode: $rootScope.navMode,
-      pageTitle: $rootScope.pageTitle
+  /**
+   * @ngInject
+   */
+  function civicLogo($log) {
+    var directive = {
+      restrict: 'E',
+      templateUrl: 'common/directives/civicLogo.tpl.html',
+      controller: civicLogoController
     };
-    $log.info('civicLogoController loaded');
-    $scope.navMode = $rootScope.navMode;
-    $scope.pageTitle = $rootScope.pageTitle;
-  }
 
-  return directive;
-}
+    // @ngInject
+    function civicLogoController($scope, $rootScope) {
+      var pageState = {
+        navMode: $rootScope.navMode,
+        pageTitle: $rootScope.pageTitle
+      };
+      $log.info('civicLogoController loaded');
+      $scope.navMode = $rootScope.navMode;
+      $scope.pageTitle = $rootScope.pageTitle;
+    }
+
+    return directive;
+  }
+})();
