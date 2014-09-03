@@ -19,10 +19,8 @@
           <span>{{ gene.name }} Variant Groups:</span>
         </div>
         <ul class="nav nav-pills nav-stacked">
-          <li ng-repeat="(group, variants) in gene.variantGroups" ui-sref-active="active">
-            <div class="groupTitle">
-              <a>{{ group }}</a>
-            </div>
+          <li ng-repeat="(variantGroup, variants) in gene.variantGroups" ui-sref-active="active">
+            <a class="groupTitle" ui-sref="gene.variant-group({ geneId:gene.name, variantGroupId: variantGroup })"ui-sref-active="active">{{ variantGroup }}</a>
             <ul class="nav nav-pills nav-stacked">
               <li ng-repeat="variant in variants" ui-sref-active="active">
                 <a ui-sref="gene.variant({ geneId: gene.name, variantId: variant })">{{ variant }}</a>

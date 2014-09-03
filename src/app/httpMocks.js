@@ -2000,5 +2000,20 @@ angular.module('httpMocks')
         /* jshint ignore:end */
       });
 
+    $httpBackend.whenGET(/variantGroupDataMock.*/)
+      .respond(function(method, url) {
+        $log.log('Ajax request: ', url);
+
+        /* jshint ignore:start */
+        var data = {
+          name: 'VARIANTGROUP',
+          summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend nec nulla sit amet euismod. Aliquam faucibus tellus neque. Quisque sed dui quis nulla efficitur fermentum sit amet sit amet eros. Pellentesque porttitor dolor lectus, in ullamcorper ante fringilla placerat. Praesent porttitor vestibulum lectus, eget lacinia nibh rhoncus ut. Nulla vel mi sagittis, eleifend tellus ut, placerat eros. Nullam pharetra, ipsum vitae tempus mollis, purus leo consectetur quam, sit amet hendrerit libero sem nec quam. Nulla viverra enim non bibendum mollis.",
+          variants: ["VARIANT1", "VARIANT2", "VARIANT3", "VARIANT4", "VARIANT5"],
+        };
+
+        return [200, { result: data }];
+        /* jshint ignore:end */
+      });
+
     $httpBackend.whenGET(/.*/).passThrough();
   });

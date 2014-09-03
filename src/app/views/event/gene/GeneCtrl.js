@@ -26,7 +26,6 @@ function GeneCtrl($scope, $rootScope, $stateParams, $resource, $log, $http) {
 // @ngInject
 function geneConfig($stateProvider) {
   'use strict';
-  console.log('geneConfig called');
   $stateProvider
     .state('gene', {
       url: '/gene/:geneId',

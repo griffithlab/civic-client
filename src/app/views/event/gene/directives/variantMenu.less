@@ -2,7 +2,6 @@
 @import 'bower_components/bootstrap/less/variables.less';
 @import 'src/app/styles/_civic-variables.less';
 
-@events-title-bg: darken(@pageBackground2, 10%);
 
 .variantMenu {
   background-color: @pageBackground2;
@@ -13,8 +12,8 @@
     padding-bottom: @contentPadding;
 
     .active a {
-      background-color: @pageBackground;
-      color: @civicPurple;
+      background-color: @pageBackground !important;
+      color: @civicPurple !important;
       margin-right: -@contentPadding;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
@@ -26,16 +25,30 @@
     color: #333;
     margin: 0 -@contentPadding 0 -@contentPadding;
     // padding: @contentPadding/2 @contentPadding;
-    padding: @contentPadding;
+    padding: @contentPadding/1.5 @contentPadding;
+    font-weight: bold;
   }
 
   .groupTitle {
-    background-color: @events-title-bg;
+    display: block;
+    background-color: @variantGroup-title-bg;
     color: #333;
+    font-weight: bold;
     margin: 0 @contentPadding 0 -@contentPadding;
-    padding: @contentPadding/2;
+    padding: @contentPadding/2 @contentPadding;
     border-top-right-radius: @border-radius-base;
     border-bottom-right-radius: @border-radius-base;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .groupTitle.active {
+    background-color: @pageBackground;
+    border-top-left-radius: @border-radius-base;
+    border-bottom-left-radius: @border-radius-base;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 0 -@contentPadding 0 @contentPadding;
   }
 
 }
