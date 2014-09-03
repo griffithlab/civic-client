@@ -151,6 +151,25 @@ gulp.task('statics', function() {
 );
 
 /**
+ * /dist file server
+ */
+
+gulp.task('serve-dist', function() {
+    g.connect.server({
+      root: ['./dist']
+      ,port: 3002
+      ,middleware: function() {
+        return [ (function() {
+          var options = url.parse('http://localhost:3000');
+          options.route = '/api';
+          return proxy(options);
+        })() ];
+      }
+    });
+  }
+);
+
+/**
  * Watch
  */
 gulp.task('serve', ['watch']);
