@@ -9,4 +9,4 @@
     $rootScope.viewTitle = 'Help';
     $scope.loadedMsg = 'Loaded Help!';
   }
-});
+})();
