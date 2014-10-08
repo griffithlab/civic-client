@@ -15,6 +15,8 @@
     $rootScope.navMode = 'sub';
     $scope.gene = {};
 
+    $scope.tabState = {};
+    $scope.tabState.name = 'summary';
 
     var Api = $resource('/geneDataMock');
     Api.get({ 'id': geneId }, function(data) {
