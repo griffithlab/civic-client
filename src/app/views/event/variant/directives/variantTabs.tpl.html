@@ -1,13 +1,13 @@
 <div class="variantTabs">
   <div class="row">
     <div class="detail-corner"><div class="corner-edge"></div></div>
-    <div class="col-xs-4 name">
+    <div class="col-xs-6 name">
       <h3>
         Variant {{ variant.name }}
-        <a class="btn btn-primary btn-xs btn-edit">Edit Variant</a>
+        <a ng-show="isAuthenticated()" class="btn btn-primary btn-xs btn-edit">Edit Variant</a>
       </h3>
     </div>
-    <div class="col-xs-8 tabs">
+    <div class="col-xs-6 tabs">
       <ul class="nav nav-tabs pull-right">
         <li ng-class="{'active': tabState.name == 'summary'}"><a ng-click="tabState.name = 'summary'">Variant Summary</a></li>
         <li ng-class="{'active': tabState.name == 'activity'}"><a ng-click="tabState.name = 'activity'">Variant Activity</a></li>

@@ -4,7 +4,7 @@
     .directive('variantTabs', variantTabs);
 
 // @ngInject
-  function variantTabs() {
+  function variantTabs(Security) {
     var directive = {
       restrict: 'E',
       replace: true,
@@ -12,6 +12,7 @@
       templateUrl: '/civic-client/views/event/variant/directives/variantTabs.tpl.html',
       link: function($scope, $element, $attrs) {
         console.log('variantTabs linked.');
+        $scope.isAuthenticated = Security.isAuthenticated;
       }
     };
 
