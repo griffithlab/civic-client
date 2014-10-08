@@ -14,6 +14,9 @@ function VariantCtrl($rootScope, $scope, $stateParams, $resource, $log) {
   $rootScope.navMode = 'sub';
   $scope.variant = {};
 
+  $scope.tabState = {};
+  $scope.tabState.name = 'summary';
+
   var Api = $resource('/variantDataMock');
   Api.get({ 'id': variantId }, function(data) {
     $scope.variant.summary = data.summary;

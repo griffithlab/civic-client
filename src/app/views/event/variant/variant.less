@@ -3,22 +3,9 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .variantView {
-  .clearfix();
-  margin: @contentPadding 0;
-
-  .detail-corner {
-    @event-corner-radius: 10px;
-    position: absolute;
-    top:0;
-    left: 0;
-    width: @event-corner-radius;
-    height: @event-corner-radius;
-    background-color: @variants-title-bg;
-    .corner-edge {
-      border-top-left-radius: @event-corner-radius;
-      width: @event-corner-radius;
-      height: @event-corner-radius;
-      background-color: @pageBackground;
-    }
+  > h3 {
+    margin-top: 0;
   }
+  .clearfix();
+  margin: 0;
 }

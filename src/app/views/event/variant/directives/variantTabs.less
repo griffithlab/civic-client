@@ -2,12 +2,12 @@
 @import 'bower_components/bootstrap/less/variables.less';
 @import 'src/app/styles/_civic-variables.less';
 
-.geneTabs {
+.variantTabs {
   @nav-link-padding: 5px;
-  @nav-link-hover-bg: @pageBackground2;
-  @nav-tabs-background-color: @pageBackground3;
-  @nav-tabs-border-color: lighten(@pageBackground2, 5%);
-  @nav-tabs-active-link-hover-bg: @pageBackground2;
+  @nav-link-hover-bg: @pageBackground;
+  @nav-tabs-background-color: @pageBackground2;
+  @nav-tabs-border-color: #DDD;
+  @nav-tabs-active-link-hover-bg: @pageBackground;
 
   // disabled tab styles
   @nav-disabled-link-color: #FFF;
@@ -27,6 +27,24 @@
       margin: 0;
     }
   }
+
+  .detail-corner {
+    @event-corner-radius: 10px;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: @event-corner-radius;
+    height: @event-corner-radius;
+    background-color: @pageBackground2;
+    .corner-edge {
+      border-top-left-radius: @event-corner-radius;
+      width: @event-corner-radius;
+      height: @event-corner-radius;
+      background-color: @pageBackground3;
+      background-image: url('/assets/images/grey_stripes.png');
+    }
+  }
+
   .tabs {
     .clearfix();
     min-height: 3.5em;
@@ -58,7 +76,7 @@
           border-right: 1px solid darken(@nav-tabs-border-color, 5%);
           border-bottom: 1px solid @nav-tabs-border-color;
           background-color: @nav-tabs-background-color;
-//          #gradient > .vertical-three-colors(@nav-tabs-background-color,@nav-tabs-background-color,.75, darken(@nav-tabs-background-color, 25%));
+          //          #gradient > .vertical-three-colors(@nav-tabs-background-color,@nav-tabs-background-color,.75, darken(@nav-tabs-background-color, 25%));
 
           &:hover {
 
@@ -67,7 +85,7 @@
 
         // Active state, and its :hover to override normal :hover
         &.active > a {
-          border-bottom: 1px solid @pageBackground2;
+          border-bottom: 1px solid @pageBackground;
           border-top: 1px solid @nav-tabs-border-color;
           border-left: 1px solid @nav-tabs-border-color;
           border-right: 1px solid @nav-tabs-border-color;
@@ -97,4 +115,6 @@
       }
     }
   }
+
+
 }
