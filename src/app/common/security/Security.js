@@ -93,7 +93,13 @@
           return $q.when(service.currentUser);
         } else {
           return $http.get('/api/current_user.json').then(function(response) {
-            service.currentUser = response.data;
+            // unauthenticated request returns an empty JSON object, so we count the keys
+            // and if there are any we assume an authenticated user
+            if(Object.keys(response.data).length > 0) {
+              service.currentUser = response.data;
+            } else {
+              service.currentUser = null;
+            }
             return service.currentUser;
           });
         }
