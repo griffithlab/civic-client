@@ -1,7 +1,7 @@
 <div class="browseView">
   <h1>Browse</h1>
-  <div class="table-responsive">
-    <table ng-table="tableParams" template-pagination="custom/pager" show-filter="true" class="browse-genes table table-curved table-condensed table-hover">
+
+    <table ng-table="tableParams" template-pagination="custom/pager" show-filter="true" class="browse-genes table table-curved table-condensed table-hover ng-table-responsive">
       <tbody>
         <tr ng-repeat="gene in $data" ng-click="rowClick(gene)">
           <td data-title="'Entrez Gene'" sortable="'entrez_gene'" filter="{ 'entrez_gene': 'text' }">
@@ -22,7 +22,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
+
   <script type="text/ng-template" id="custom/pager">
     <ul class="pager ng-cloak">
       <li ng-repeat="page in pages"
