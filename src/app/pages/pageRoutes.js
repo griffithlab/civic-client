@@ -6,11 +6,6 @@
 // @ngInject
   function pageRoutes($stateProvider) {
     $stateProvider
-      .state('home', {
-        url: '/home',
-        controller: 'HomeCtrl',
-        templateUrl: '/civic-client/pages/home.tpl.html'
-      })
       .state('collaborate', {
         url: '/collaborate',
         controller: 'CollaborateCtrl',
