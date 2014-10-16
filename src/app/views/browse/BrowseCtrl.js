@@ -12,8 +12,7 @@
     $rootScope.title = 'CIViC - Browse Events'
     $scope.loadedMsg = 'Loaded Browse!';
 
-    // var Api = $resource('/geneListMock');
-
+//    var Api = $resource('/geneListMock');
     var Api = $resource('/api/variants');
 
     $scope.tableParams = new ngTableParams({
@@ -32,7 +31,7 @@
             params.total(data.total);
             // set new data
             $defer.resolve(data.result);
-          }, 500);
+          });
         });
       }
     });
