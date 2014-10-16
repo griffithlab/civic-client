@@ -5,7 +5,7 @@
     .config(browseConfig);
 
 // @ngInject
-  function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $timeout, $log) {
+  function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $timeout, _, $log) {
     $log.info('BrowseCtrl loaded');
     $rootScope.navMode = 'sub';
     $rootScope.viewTitle = 'Browse';
@@ -23,12 +23,19 @@
       }
     }, {
       total: 0,           // length of data
+      debugMode: true,
       getData: function($defer, params) {
         // ajax request to api
         Api.get(params.url(), function(data) {
           $timeout(function() {
             // update table params
             params.total(data.total);
+
+            // format categories
+            _.each(data.result, function(event) {
+              event.gene_category = event.gene_category.join();
+            });
+
             // set new data
             $defer.resolve(data.result);
           });
