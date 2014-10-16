@@ -36,6 +36,16 @@ angular.module('civicClient', [
  */
 function appConfig($stateProvider, $urlRouterProvider) {
   'use strict';
+
+  // static frontend pages
+  $stateProvider
+    .state('home', {
+      url: '/home',
+      controller: 'HomeCtrl',
+      templateUrl: '/civic-client/pages/home.tpl.html'
+    });
+}
+
   // route to home state if no state supplied
   $urlRouterProvider.otherwise('home');
 }
@@ -45,14 +55,14 @@ function appRun(Security, $rootScope) {
   'use strict';
   Security.requestCurrentUser();
 
-  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
-    console.log('$stateChangeStart to '+toState.name +'- fired when the transition begins. toState,toParams : \n',toState, toParams);
-
-    $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
-      console.log('$stateChangeError - fired when an error occurs during transition.');
-      console.log(arguments);
-    });
-  });
+//  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+//    console.log('$stateChangeStart to '+toState.name +'- fired when the transition begins. toState,toParams : \n',toState, toParams);
+//
+//    $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
+//      console.log('$stateChangeError - fired when an error occurs during transition.');
+//      console.log(arguments);
+//    });
+//  });
 }
 
 // define app modules
