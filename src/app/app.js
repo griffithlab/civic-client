@@ -44,7 +44,6 @@ function appConfig($stateProvider, $urlRouterProvider) {
       controller: 'HomeCtrl',
       templateUrl: '/civic-client/pages/home.tpl.html'
     });
-}
 
   // route to home state if no state supplied
   $urlRouterProvider.otherwise('home');
