@@ -12,20 +12,15 @@
     $rootScope.title = 'CIViC - Browse Events'
     $scope.loadedMsg = 'Loaded Browse!';
 
-    var Api = $resource('/geneListMock');
+    // var Api = $resource('/geneListMock');
 
-    $scope.rowClick = function(gene) {
-      $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join(""));
-      var loc = ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join("");
-      $log.info('location.path(' + loc + ')');
-      $location.path(loc);
-    };
+    var Api = $resource('/api/variants');
 
     $scope.tableParams = new ngTableParams({
       page: 1,            // show first page
       count: 25,          // count per page
       sorting: {
-        name: 'asc'     // initial sorting
+        entrez_gene: 'asc'     // initial sorting
       }
     }, {
       total: 0,           // length of data
@@ -41,6 +36,13 @@
         });
       }
     });
+
+    $scope.rowClick = function(gene) {
+      $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join(""));
+      var loc = ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join("");
+      $log.info('location.path(' + loc + ')');
+      $location.path(loc);
+    };
   }
 
 // @ngInject
