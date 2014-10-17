@@ -2,7 +2,8 @@
   'use strict';
   angular.module('civic.browse')
     .controller('BrowseCtrl', BrowseCtrl)
-    .config(browseConfig);
+    .config(browseConfig)
+    .filter('ceil', ceilFilter);
 
 // @ngInject
   function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $timeout, _, $log) {
@@ -60,4 +61,11 @@
         templateUrl: '/civic-client/views/browse/browse.tpl.html'
       });
   }
+
+  function ceilFilter() {
+    return function(num) {
+      return Math.ceil(num);
+    }
+  }
+
 })();
