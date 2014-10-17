@@ -32,9 +32,10 @@
             // update table params
             params.total(data.total);
 
-            // format categories
+            // format categories & protein function
             _.each(data.result, function(event) {
               event.gene_category = event.gene_category.join();
+              event.protein_function = event.protein_function.join();
             });
 
             // set new data
