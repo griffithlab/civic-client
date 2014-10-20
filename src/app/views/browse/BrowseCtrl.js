@@ -9,7 +9,7 @@
   function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $timeout, _, $log) {
     $log.info('BrowseCtrl loaded');
     $rootScope.navMode = 'sub';
-    $rootScope.viewTitle = 'Browse';
+    $rootScope.viewTitle = 'Browse Events';
     $rootScope.title = 'CIViC - Browse Events'
     $scope.loadedMsg = 'Loaded Browse!';
 
