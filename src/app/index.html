@@ -2,7 +2,7 @@
 <html ng-app="civicClient">
   <head>
     <meta charset="utf-8"/>
-    <title ng-bind="$root.title">CIViC - Clinical Interpretations of Variants in Cancer</title>
+    <title ng-bind="$root.view.windowTitle">CIViC - Clinical Interpretations of Variants in Cancer</title>
     <!-- inject:vendor:css -->
     <link rel="stylesheet" href="/ng-table/ng-table.css">
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
@@ -21,19 +21,19 @@
     <link rel="stylesheet" href="/css/views/event/gene/gene.css">
     <link rel="stylesheet" href="/css/views/event/variant/variant.css">
     <link rel="stylesheet" href="/css/views/event/variant-group/variantGroup.css">
-    <link rel="stylesheet" href="/css/views/event/variant/directives/evidenceTable.css">
-    <link rel="stylesheet" href="/css/views/event/variant/directives/variantActionButtons.css">
-    <link rel="stylesheet" href="/css/views/event/variant/directives/variantActivity.css">
-    <link rel="stylesheet" href="/css/views/event/variant/directives/variantSummary.css">
-    <link rel="stylesheet" href="/css/views/event/variant/directives/variantTabs.css">
     <link rel="stylesheet" href="/css/views/event/gene/directives/geneActionButtons.css">
     <link rel="stylesheet" href="/css/views/event/gene/directives/geneActivity.css">
     <link rel="stylesheet" href="/css/views/event/gene/directives/geneSummary.css">
     <link rel="stylesheet" href="/css/views/event/gene/directives/geneTabs.css">
     <link rel="stylesheet" href="/css/views/event/gene/directives/variantMenu.css">
+    <link rel="stylesheet" href="/css/views/event/variant/directives/evidenceTable.css">
+    <link rel="stylesheet" href="/css/views/event/variant/directives/variantActionButtons.css">
+    <link rel="stylesheet" href="/css/views/event/variant/directives/variantActivity.css">
+    <link rel="stylesheet" href="/css/views/event/variant/directives/variantSummary.css">
+    <link rel="stylesheet" href="/css/views/event/variant/directives/variantTabs.css">
     <!-- endinject -->
   </head>
-  <body ng-class="{ home: $root.navMode === 'home', sub: $root.navMode === 'sub' }">
+  <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
     <header>
       <div class="container">
         <div class="header-bg">

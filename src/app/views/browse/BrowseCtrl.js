@@ -8,10 +8,8 @@
 // @ngInject
   function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $timeout, _, $log) {
     $log.info('BrowseCtrl loaded');
-    $rootScope.navMode = 'sub';
-    $rootScope.viewTitle = 'Browse Events';
-    $rootScope.title = 'CIViC - Browse Events'
-    $scope.loadedMsg = 'Loaded Browse!';
+    $rootScope.setNavMode('sub');
+    $rootScope.setTitle('Browse Events');
 
 //    var Api = $resource('/geneListMock');
     var Api = $resource('/api/variants');

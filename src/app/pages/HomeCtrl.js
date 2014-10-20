@@ -8,8 +8,7 @@
    */
   function HomeCtrl($rootScope, $scope, $log) {
     $log.info('HomeCtrl instantiated');
-    $rootScope.navMode = 'home';
-    $rootScope.viewTitle = 'Home';
-    $scope.loadedMsg = 'Loaded Home!';
+    $rootScope.setTitle('Home');
+    $rootScope.setNavMode('home');
   }
 })();

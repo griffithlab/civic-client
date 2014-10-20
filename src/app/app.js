@@ -52,16 +52,21 @@ function appConfig($stateProvider, $urlRouterProvider) {
 // @ngInject
 function appRun(Security, $rootScope) {
   'use strict';
-  Security.requestCurrentUser();
+  $rootScope.view = {};
 
-//  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
-//    console.log('$stateChangeStart to '+toState.name +'- fired when the transition begins. toState,toParams : \n',toState, toParams);
-//
-//    $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
-//      console.log('$stateChangeError - fired when an error occurs during transition.');
-//      console.log(arguments);
-//    });
-//  });
+  $rootScope.setTitle = function (title) {
+    $rootScope.view.windowTitle = 'CIViC: ' + title;
+    $rootScope.view.pageTitle = title;
+  };
+
+  $rootScope.setNavMode = function(navMode) {
+    $rootScope.view.navMode = navMode;
+  };
+
+  $rootScope.setTitle('Loading...');
+  $rootScope.setNavMode('home');
+
+  Security.requestCurrentUser();
 }
 
 // define app modules
