@@ -19,19 +19,20 @@
     "src"
   ],
   "dependencies": {
-    "angular": "~1.2.22",
+    "angular": "1.2.16",
     "angular-ui-router": "0.2.11",
     "angular-bootstrap": "~0.11.0",
     "angular-dialog-service": "~5.1.1",
     "angular-mocks": "~1.2.14",
     "lodash": "~2.4.1",
     "angular-resource": "~1.2.22",
-    "ng-table": "https://github.com/esvit/ng-table.git#13eed6435a2e019b064f823e8bc1f01710a7e7b6"
+    "ng-table": "https://github.com/esvit/ng-table.git#13eed6435a2e019b064f823e8bc1f01710a7e7b6",
+    "angularjs": "1.2.16"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.14"
   },
   "resolutions": {
-    "angular": "~1.2.22"
+    "angular": "1.2.16"
   }
 }

@@ -45,6 +45,14 @@ function appConfig($stateProvider, $urlRouterProvider) {
       templateUrl: '/civic-client/pages/home.tpl.html'
     });
 
+  // browse
+  $stateProvider
+    .state('browse', {
+      url: '/browse',
+      controller: 'BrowseCtrl',
+      templateUrl: '/civic-client/views/browse/browse.tpl.html'
+    });
+
   // route to home state if no state supplied
   $urlRouterProvider.otherwise('home');
 }
@@ -68,7 +76,6 @@ function appRun(Security, $rootScope) {
 
   Security.requestCurrentUser();
 }
-
 // define app modules
 angular.module('civic.security', [
   'civic.security.authorization'

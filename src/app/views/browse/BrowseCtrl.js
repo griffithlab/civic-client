@@ -26,19 +26,17 @@
       getData: function($defer, params) {
         // ajax request to api
         Api.get(params.url(), function(data) {
-          $timeout(function() {
-            // update table params
-            params.total(data.total);
+          // update table params
+          params.total(data.total);
 
-            // format categories & protein function
-            _.each(data.result, function(event) {
-              event.gene_category = event.gene_category.join();
-              event.protein_function = event.protein_function.join();
-            });
-
-            // set new data
-            $defer.resolve(data.result);
+          // format categories & protein function
+          _.each(data.result, function(event) {
+            event.gene_category = event.gene_category.join();
+            event.protein_function = event.protein_function.join();
           });
+
+          // set new data
+          $defer.resolve(data.result);
         });
       }
     });
@@ -53,12 +51,7 @@
 
 // @ngInject
   function browseConfig($stateProvider) {
-    $stateProvider
-      .state('browse', {
-        url: '/browse',
-        controller: 'BrowseCtrl',
-        templateUrl: '/civic-client/views/browse/browse.tpl.html'
-      });
+
   }
 
   function ceilFilter() {
