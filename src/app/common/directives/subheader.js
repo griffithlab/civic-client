@@ -50,19 +50,18 @@
 //    };
 
     $scope.getVariants = function(val) {
-      var Api = $resource('/api/variants');
-      var params = {
-        page: "1",
-        count: "25",
-        'filter[entrez_gene]': val,
-        'sorting[entrez_gene]': "asc"
-      };
-      return $http.get('/api/variants', params).then(function(data) {
-        return _.pluck(data.data.result, 'entrez_gene')
+      return $http.get('/api/variants?filter[entrez_gene]=' + val).then(function(data) {
+        return _.map(data.data.result, function(event) {
+          return {
+            gene: event.entrez_gene,
+            variant: event.variant,
+            label: event.entrez_gene + '/' + event.variant
+          }
+        })
       });
     };
 
-    $scope.onSelect = function($item) {
+    $scope.onSelect = function($item, $model, $label) {
       // $log.info('onSelect called, location: ' + ['/gene/', $item.gene, '/variant/', $item.variant].join(' '));
       var loc = ['/gene/', $item.gene, '/variant/', $item.variant].join("");
       $log.info('location.path(' + loc + ')');
