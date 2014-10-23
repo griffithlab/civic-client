@@ -35,20 +35,6 @@
   function TypeAheadCtrl($scope, $log, $location, $resource, $http) {
     $log.info('typeAheadCtrl loaded.');
 
-    // Any function returning a promise object can be used to load values asynchronously
-//    $scope.getLocation = function(val) {
-//      return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
-//        params: {
-//          address: val,
-//          sensor: false
-//        }
-//      }).then(function(response){
-//        return response.data.results.map(function(item){
-//          return item.formatted_address;
-//        });
-//      });
-//    };
-
     $scope.getVariants = function(val) {
       return $http.get('/api/variants?filter[entrez_gene]=' + val).then(function(data) {
         return _.map(data.data.result, function(event) {

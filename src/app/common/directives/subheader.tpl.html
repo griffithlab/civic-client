@@ -1,21 +1,15 @@
 <div class="subheader" ng-hide="$root.view.navMode == 'home'">
   <div class="container-fluid">
-    <form role="form">
-      <div class="subheader-bg">
-        <div class="row">
-          <div class="col-xs-6">
-            <h1>{{ $root.view.pageTitle }}</h1>
-          </div>
-          <div class="col-xs-4 col-med-4 col-lg-5 search-sub-input" ng-controller="TypeAheadCtrl">
-            <input type="text" ng-model="asyncSelected" placeholder="Search for Genes" typeahead="gene as gene.label for gene in getVariants($viewValue)" typeahead-loading="loadingGenes" class="form-control" typeahead-on-select="onSelect($item, $model, $label)">
-            <i ng-show="loadingGenes" class="glyphicon glyphicon-refresh"></i>
-
-          </div>
-          <div class="col-xs-2 col-med-2 col-lg-1 search-sub-browse">
-            <a type="button" class="btn btn-sm btn-browse-sub btn-block" ui-sref="browse">Browse</a>
-          </div>
-        </div> <!-- /.row -->
-      </div> <!-- /.subheader-bg -->
-    </form>
+    <div class="subheader-bg">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1>{{ $root.view.pageTitle }}</h1>
+        </div>
+        <quick-search class="col-xs-4 col-med-4 col-lg-5 search-sub-input"></quick-search>
+        <div class="col-xs-2 col-med-2 col-lg-1 search-sub-browse">
+          <a type="button" class="btn btn-sm btn-browse-sub btn-block" ui-sref="browse">Browse</a>
+        </div>
+      </div> <!-- /.row -->
+    </div> <!-- /.subheader-bg -->
   </div>
 </div>

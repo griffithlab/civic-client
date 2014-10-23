@@ -1,0 +1,4 @@
+<div class="quickSearch">
+  <input type="text" ng-model="asyncSelected" placeholder="Search for Genes" typeahead="gene as gene.label for gene in getVariants($viewValue)" typeahead-loading="loadingGenes" class="form-control" typeahead-on-select="onSelect($item, $model, $label)">
+  <i ng-show="loadingGenes" class="glyphicon glyphicon-refresh"></i>
+</div>
