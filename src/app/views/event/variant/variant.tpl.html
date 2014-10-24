@@ -1,4 +1,19 @@
 <div class="variantView">
   <h1>Variant {{ variant.name }}</h1>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <a ui-sref="event.gene.variant.summary({ geneId: gene.entrez_name, variantId: variant.name})">{{ variant.name}} Summary</a>
+      &nbsp;&nbsp;
+      <a ui-sref="event.gene.variant.talk({ geneId: gene.entrez_name, variantId: variant.name })">{{ variant.name }} Talk</a>
+      <p>Current State : {{ $state.current.name }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div ui-view="variantDetails"></div>
+    </div>
+  </div>
 </div>
 

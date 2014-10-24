@@ -43,8 +43,10 @@
         controller: 'EventCtrl',
         templateUrl: '/civic-client/views/event/event.tpl.html'
       })
+      // GENE
       .state('event.gene', {
         sticky: true,
+        deepStateRedirect: true,
         url:'/gene/:geneId',
         controller: 'GeneCtrl',
         templateUrl: '/civic-client/views/event/gene/gene.tpl.html'
@@ -67,11 +69,31 @@
           }
         }
       })
+      
+      // VARIANT
       .state('event.gene.variant', {
         sticky: true,
         url: '/variant/:variantId',
         controller: 'VariantCtrl',
         templateUrl: '/civic-client/views/event/variant/variant.tpl.html'
+      })
+      .state('event.gene.variant.summary', {
+        sticky: true,
+        views: {
+          'variantDetails@event.gene.variant': {
+            controller: 'VariantCtrl',
+            templateUrl: '/civic-client/views/event/variant/variantSummary.tpl.html'
+          }
+        }
+      })
+      .state('event.gene.variant.talk', {
+        sticky: true,
+        views: {
+          'variantDetails@event.gene.variant': {
+            controller: 'VariantCtrl',
+            templateUrl: '/civic-client/views/event/variant/variantTalk.tpl.html'
+          }
+        }
       });
 
 
