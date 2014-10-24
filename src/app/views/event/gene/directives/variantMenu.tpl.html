@@ -8,7 +8,7 @@
         </div>
         <ul class="nav nav-pills nav-stacked">
           <li ng-repeat="variant in gene.variants" ui-sref-active="active">
-            <a ui-sref="gene.variant({ geneId: gene.name, variantId: variant })">{{ variant }}</a>
+            <a ui-sref="gene.variant({ geneId: gene.entrez_name, variantId: variant })">{{ variant }}</a>
           </li>
         </ul>
       </div>
@@ -23,7 +23,7 @@
             <a class="groupTitle" ui-sref="gene.variant-group({ geneId:gene.name, variantGroupId: variantGroup })"ui-sref-active="active">{{ variantGroup }}</a>
             <ul class="nav nav-pills nav-stacked">
               <li ng-repeat="variant in variants" ui-sref-active="active">
-                <a ui-sref="gene.variant({ geneId: gene.name, variantId: variant })">{{ variant }}</a>
+                <a ui-sref="gene.variant({ geneId: gene.entrez_name, variantId: variant })">{{ variant }}</a>
               </li>
             </ul>
           </li>

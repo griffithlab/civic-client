@@ -1,0 +1,10 @@
+<div class="eventView">
+  <ui-view>
+    <p>Please choose a gene from the list below to view its variants:</p>
+    <ul class="nav nav-pills nav-stacked gene-menu">
+      <li ng-repeat="variant in variants.result | sortBy: 'entrez_gene' | unique:'entrez_gene'">
+        <a ui-sref="event.gene({ geneId: variant.entrez_gene })"> {{ variant.entrez_gene }}</a>
+      </li>
+    </ul>
+  </ui-view>
+</div>

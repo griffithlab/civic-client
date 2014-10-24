@@ -26,8 +26,7 @@
     "angular-mocks": "~1.2.14",
     "lodash": "~2.4.1",
     "angular-resource": "~1.2.22",
-    "ng-table": "https://github.com/esvit/ng-table.git#13eed6435a2e019b064f823e8bc1f01710a7e7b6",
-    "angularjs": "1.2.16"
+    "ng-table": "https://github.com/esvit/ng-table.git#13eed6435a2e019b064f823e8bc1f01710a7e7b6"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.14"
