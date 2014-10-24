@@ -44,28 +44,34 @@
         templateUrl: '/civic-client/views/event/event.tpl.html'
       })
       .state('event.gene', {
+        sticky: true,
         url:'/gene/:geneId',
         controller: 'GeneCtrl',
         templateUrl: '/civic-client/views/event/gene/gene.tpl.html'
       })
       .state('event.gene.summary', {
+        sticky: true,
         views: {
-          'geneDetails': {
+          'geneDetails@event.gene': {
             controller: 'GeneCtrl',
             templateUrl: '/civic-client/views/event/gene/geneSummary.tpl.html'
           }
         }
       })
       .state('event.gene.talk', {
+        sticky: true,
         views: {
-          'geneDetails': {
+          'geneDetails@event.gene': {
             controller: 'GeneCtrl',
             templateUrl: '/civic-client/views/event/gene/geneTalk.tpl.html'
           }
         }
       })
-      .state('event.gene.variant',{
-        controller: 'VariantCtrl'
+      .state('event.gene.variant', {
+        sticky: true,
+        url: '/variant/:variantId',
+        controller: 'VariantCtrl',
+        templateUrl: '/civic-client/views/event/variant/variant.tpl.html'
       });
 
 

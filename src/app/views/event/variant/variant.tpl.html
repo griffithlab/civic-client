@@ -1,21 +1,4 @@
 <div class="variantView">
-  <div class="row">
-    <variant-tabs class="col-xs-12"></variant-tabs>
-  </div>
-  <div class="variant-info">
-    <div class="row">
-      <div ng-switch="tabState.name">
-        <div ng-switch-when="summary">
-          <variant-summary class="col-xs-12"></variant-summary>
-        </div>
-        <div ng-switch-when="activity">
-          <variant-activity class="col-xs-12"></variant-activity>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <evidence-table class="col-xs-12"></evidence-table>
-  </div>
+  <h1>Variant {{ variant.name }}</h1>
 </div>
-</div>
+

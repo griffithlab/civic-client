@@ -8,15 +8,15 @@
   <div class="row">
     <div class="col-xs-12">
       <a ui-sref="event.gene.summary({ geneId: gene.entrez_name })">{{ gene.entrez_name }} Summary</a>
+      &nbsp;&nbsp;
       <a ui-sref="event.gene.talk({ geneId: gene.entrez_name })">{{ gene.entrez_name }} Talk</a>
+      <p>Current State : {{ $state.current.name }}</p>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-12">
-      <div ui-view="geneDetails">
-        <p>Gene Details</p>
-      </div>
+      <div ui-view="geneDetails"></div>
     </div>
   </div>
 
@@ -32,9 +32,9 @@
       </ul>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-      <ui-view>
+      <div ui-view>
         <p>Choose a variant to view its clinical summary and supporting evidence.</p>
-      </ui-view>
+      </div>
     </div>
   </div>
 

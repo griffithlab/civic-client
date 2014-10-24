@@ -1,6 +1,7 @@
 angular.module('civicClient', [
   // vendor modules
   'ui.router'
+  ,'ct.ui.router.extras'
   ,'ui.bootstrap'
   ,'angular-lodash'
   ,'ngTable'
@@ -45,21 +46,20 @@ function appConfig($stateProvider, $urlRouterProvider) {
 }
 
 // @ngInject
-function appRun(Security, $rootScope) {
+function appRun(Security, $rootScope, $state) {
   'use strict';
   $rootScope.view = {};
-
   $rootScope.setTitle = function (title) {
     $rootScope.view.windowTitle = 'CIViC: ' + title;
     $rootScope.view.pageTitle = title;
   };
-
   $rootScope.setNavMode = function(navMode) {
     $rootScope.view.navMode = navMode;
   };
-
   $rootScope.setTitle('Loading...');
   $rootScope.setNavMode('home');
+
+  $rootScope.$state = $state;
 
   Security.requestCurrentUser();
 
