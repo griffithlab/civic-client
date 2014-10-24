@@ -9,6 +9,9 @@ angular.module('civicClient', [
   // http backend mocks
   ,'httpMocks'
 
+  // config
+  ,'civic.routes'
+
   // app services
   ,'civic.services'
   ,'civic.security'
@@ -37,24 +40,7 @@ angular.module('civicClient', [
 function appConfig($stateProvider, $urlRouterProvider) {
   'use strict';
 
-  // static frontend pages
-  $stateProvider
-    .state('home', {
-      url: '/home',
-      controller: 'HomeCtrl',
-      templateUrl: '/civic-client/pages/home.tpl.html'
-    });
 
-  // browse
-  $stateProvider
-    .state('browse', {
-      url: '/browse',
-      controller: 'BrowseCtrl',
-      templateUrl: '/civic-client/views/browse/browse.tpl.html'
-    });
-
-  // route to home state if no state supplied
-  $urlRouterProvider.otherwise('home');
 }
 
 // @ngInject
