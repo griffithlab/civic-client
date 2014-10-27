@@ -1,20 +1,18 @@
 <div class="geneView">
   <div class="row">
-    <div class="col-xs-12">
-      <h2>{{ gene.entrez_name }}</h2>
-    </div>
+    <gene-tabs class="col-xs-12"></gene-tabs>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <a ui-sref="event.gene.summary({ geneId: gene.entrez_name })">{{ gene.entrez_name }} Summary</a>
-      &nbsp;&nbsp;
-      <a ui-sref="event.gene.talk({ geneId: gene.entrez_name })">{{ gene.entrez_name }} Talk</a>
-      <p>Current State : {{ $state.current.name }}</p>
-      <p>VariantID: {{ state.params.variantId }}</p>
-      <p ng-show="$state.includes('**.variant', {'variantId': state.params.variantId })">includes()</p>
-    </div>
-  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+      <!--<a ui-sref="event.gene.summary({ geneId: gene.entrez_name })">{{ gene.entrez_name }} Summary</a>-->
+      <!--&nbsp;&nbsp;-->
+      <!--<a ui-sref="event.gene.talk({ geneId: gene.entrez_name })">{{ gene.entrez_name }} Talk</a>-->
+      <!--<p>Current State : {{ $state.current.name }}</p>-->
+      <!--<p>VariantID: {{ state.params.variantId }}</p>-->
+      <!--<p ng-show="$state.includes('**.variant', {'variantId': state.params.variantId })">includes()</p>-->
+    <!--</div>-->
+  <!--</div>-->
 
   <div class="row">
     <div class="col-xs-12">
@@ -28,7 +26,7 @@
         <span>{{ gene.name }} Variants:</span>
       </div>
       <ul class="nav nav-pills nav-stacked">
-        <li ng-repeat="variant in gene.variants" ng-class="{'active': state.params.variantId == variant }">
+        <li ng-repeat="variant in gene.variants" ng-class="{'active': $state.params.variantId == variant }">
           <a ui-sref="event.gene.variant({ geneId: gene.entrez_name, variantId: variant })">{{ variant }}</a>
         </li>
       </ul>

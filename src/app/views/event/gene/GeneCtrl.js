@@ -14,6 +14,5 @@
 
     $scope.gene = Genes.query({ geneId: $stateParams.geneId });
 
-    $scope.state = $rootScope.$state;;
   }
 })();
