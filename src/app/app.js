@@ -59,7 +59,7 @@ function appRun(Security, $rootScope, $state) {
   $rootScope.setTitle('Loading...');
   $rootScope.setNavMode('home');
 
-  // make $state globally addressable
+  // make $state globally addressable/injectable
   $rootScope.$state = $state;
 
   Security.requestCurrentUser();

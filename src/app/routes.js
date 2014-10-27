@@ -3,7 +3,9 @@
     .config(routesConfig);
 
   // @ngInject
-  function routesConfig($stateProvider, $urlRouterProvider) {
+  function routesConfig($stateProvider, $urlRouterProvider, $stickyStateProvider) {
+    $stickyStateProvider.enableDebug(true);
+
     // static frontend pages
     $stateProvider
       .state('home', {
@@ -57,7 +59,7 @@
         views: {
           'geneDetails@event.gene': {
             controller: 'GeneCtrl',
-            templateUrl: '/civic-client/views/event/gene/geneSummary.tpl.html'
+            template: '<gene-summary class="col-xs-12"></gene-summary>'
           }
         }
       })
@@ -66,7 +68,7 @@
         views: {
           'geneDetails@event.gene': {
             controller: 'GeneCtrl',
-            templateUrl: '/civic-client/views/event/gene/geneTalk.tpl.html'
+            template: '<gene-talk class="col-xs-12"></gene-talk>'
           }
         }
       })
