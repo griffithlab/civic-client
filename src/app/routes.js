@@ -35,7 +35,7 @@
         templateUrl: '/civic-client/views/browse/browse.tpl.html'
       });
 
-    // event views
+    // EVENT VIEWS
     // gene, variant, evidence & associated activity views
     $stateProvider
       .state('event', {
@@ -43,6 +43,7 @@
         controller: 'EventCtrl',
         templateUrl: '/civic-client/views/event/event.tpl.html'
       })
+
       // GENE
       .state('event.gene', {
         sticky: true,
@@ -69,7 +70,7 @@
           }
         }
       })
-      
+
       // VARIANT
       .state('event.gene.variant', {
         sticky: true,
