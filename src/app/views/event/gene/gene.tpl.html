@@ -11,6 +11,8 @@
       &nbsp;&nbsp;
       <a ui-sref="event.gene.talk({ geneId: gene.entrez_name })">{{ gene.entrez_name }} Talk</a>
       <p>Current State : {{ $state.current.name }}</p>
+      <p>VariantID: {{ state.params.variantId }}</p>
+      <p ng-show="$state.includes('**.variant', {'variantId': state.params.variantId })">includes()</p>
     </div>
   </div>
 
@@ -26,7 +28,7 @@
         <span>{{ gene.name }} Variants:</span>
       </div>
       <ul class="nav nav-pills nav-stacked">
-        <li ng-repeat="variant in gene.variants" ui-sref-active="active">
+        <li ng-repeat="variant in gene.variants" ng-class="{'active': state.params.variantId == variant }">
           <a ui-sref="event.gene.variant({ geneId: gene.entrez_name, variantId: variant })">{{ variant }}</a>
         </li>
       </ul>

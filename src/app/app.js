@@ -66,7 +66,7 @@ function appRun(Security, $rootScope, $state) {
 
   // ui-router debug
   $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
-    console.log('$stateChangeStart to '+ toState.name +'- fired when the transition begins. toState,toParams : \n',toState, toParams);
+    console.log('$stateChangeStart to '+ toState.name +'- fired when the transition begins. toState,toParams : \n', toState, toParams);
   });
 
   $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
