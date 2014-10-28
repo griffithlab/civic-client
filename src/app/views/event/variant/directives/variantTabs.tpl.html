@@ -9,8 +9,13 @@
     </div>
     <div class="col-xs-6 tabs">
       <ul class="nav nav-tabs pull-right">
-        <li ng-class="{'active': tabState.name == 'summary'}"><a ng-click="tabState.name = 'summary'">Variant Summary</a></li>
-        <li ng-class="{'active': tabState.name == 'activity'}"><a ng-click="tabState.name = 'activity'">Variant Activity</a></li>
+        <li ng-class="{'active': $state.includes('**.variant.summary')}">
+          <a ui-sref="event.gene.variant.summary({ geneId: gene.entrez_name, variantId: variant.name })">{{ variant.name }} Summary</a>
+        </li>
+
+        <li ng-class="{'active': $state.includes('**.variant.talk')}" ui-sref="event.gene.variant.talk({ geneId: gene.entrez_name, variantId: variant.name })">
+          <a  ui-sref="event.gene.variant.talk({ geneId: gene.entrez_name, variantId: variant.name })">{{ variant.name }} Talk</a>
+        </li>
       </ul>
     </div>
   </div>

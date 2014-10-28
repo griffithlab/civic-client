@@ -1,7 +1,7 @@
 <div class="geneSummary">
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      {{ gene.description }}
+      <span ng-bind-html="gene.description | linky"></span>
     </div>
     <div class="col-xs-12 col-md-6">
       <table class="table table-condensed summary-details">

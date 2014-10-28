@@ -4,7 +4,9 @@
   </div>
 
   <div class="row">
-    <div ui-view="geneDetails"></div>
+    <div ui-view="geneDetails">
+      <gene-summary class="col-xs-12"></gene-summary>
+    </div>
   </div>
 
   <div class="row">
@@ -14,7 +16,7 @@
       </div>
       <ul class="nav nav-pills nav-stacked">
         <li ng-repeat="variant in gene.variants" ng-class="{'active': $state.params.variantId == variant }">
-          <a ui-sref="event.gene.variant({ geneId: gene.entrez_name, variantId: variant })">{{ variant }}</a>
+          <a ui-sref="event.gene.variant.summary({ geneId: gene.entrez_name, variantId: variant })">{{ variant }}</a>
         </li>
       </ul>
     </div>

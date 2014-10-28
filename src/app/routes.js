@@ -56,6 +56,7 @@
       })
       .state('event.gene.summary', {
         sticky: true,
+        deepStateRedirect: true,
         views: {
           'geneDetails@event.gene': {
             controller: 'GeneCtrl',
@@ -65,6 +66,7 @@
       })
       .state('event.gene.talk', {
         sticky: true,
+        deepStateRedirect: true,
         views: {
           'geneDetails@event.gene': {
             controller: 'GeneCtrl',
@@ -75,17 +77,19 @@
 
       // VARIANT
       .state('event.gene.variant', {
+        abstract: true,
         sticky: true,
         url: '/variant/:variantId',
         controller: 'VariantCtrl',
         templateUrl: '/civic-client/views/event/variant/variant.tpl.html'
       })
       .state('event.gene.variant.summary', {
+        url: '',
         sticky: true,
         views: {
           'variantDetails@event.gene.variant': {
             controller: 'VariantCtrl',
-            templateUrl: '/civic-client/views/event/variant/variantSummary.tpl.html'
+            template: '<variant-summary class="col-xs-12"></variant-summary>'
           }
         }
       })
