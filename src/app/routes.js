@@ -45,6 +45,11 @@
         controller: 'EventsViewCtrl',
         templateUrl: '/civic-client/views/events/eventsView.tpl.html'
       })
+      .state('events.genes', {
+        url: '/genes/:geneId',
+        controller: 'GenesViewCtrl',
+        templateUrl: '/civic-client/views/events/genes/genesView.tpl.html'
+      })
 //      .state('events.genes', {
 //        url:'/genes/:geneId',
 //        controller: 'GenesViewCtrl',

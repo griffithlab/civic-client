@@ -5,12 +5,16 @@
 
   // @ngInject
   function VariantsService($resource) {
-    var Variants = $resource('/api/variants',
+    var Variants = $resource('/api/genes/:geneId/variants/:variantId',
       {},
       {
-        query: {
+        get: {
           method: 'GET',
           isArray: false
+        },
+        query: {
+          method: 'GET',
+          isArray: true
         }
       });
 
