@@ -8,7 +8,11 @@
     var Genes = $resource('/api/genes/:geneId',
       {},
       {
-        query: {
+        query: { // query details for a single gene
+          method: 'GET',
+          isArray: true
+        },
+        get: { // get a list of all genes
           method: 'GET',
           isArray: false
         }

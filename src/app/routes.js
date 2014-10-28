@@ -40,68 +40,16 @@
     // EVENT VIEWS
     // gene, variant, evidence & associated activity views
     $stateProvider
-      .state('event', {
-        url: '/event',
-        controller: 'EventCtrl',
-        templateUrl: '/civic-client/views/event/event.tpl.html'
+      .state('events', {
+        url: '/events',
+        controller: 'EventsViewCtrl',
+        templateUrl: '/civic-client/views/events/eventsView.tpl.html'
       })
-
-      // GENE
-      .state('event.gene', {
-        sticky: true,
-        deepStateRedirect: true,
-        url:'/gene/:geneId',
-        controller: 'GeneCtrl',
-        templateUrl: '/civic-client/views/event/gene/gene.tpl.html'
-      })
-      .state('event.gene.summary', {
-        sticky: true,
-        deepStateRedirect: true,
-        views: {
-          'geneDetails@event.gene': {
-            controller: 'GeneCtrl',
-            template: '<gene-summary class="col-xs-12"></gene-summary>'
-          }
-        }
-      })
-      .state('event.gene.talk', {
-        sticky: true,
-        deepStateRedirect: true,
-        views: {
-          'geneDetails@event.gene': {
-            controller: 'GeneCtrl',
-            template: '<gene-talk class="col-xs-12"></gene-talk>'
-          }
-        }
-      })
-
-      // VARIANT
-      .state('event.gene.variant', {
-        abstract: true,
-        sticky: true,
-        url: '/variant/:variantId',
-        controller: 'VariantCtrl',
-        templateUrl: '/civic-client/views/event/variant/variant.tpl.html'
-      })
-      .state('event.gene.variant.summary', {
-        url: '',
-        sticky: true,
-        views: {
-          'variantDetails@event.gene.variant': {
-            controller: 'VariantCtrl',
-            template: '<variant-summary class="col-xs-12"></variant-summary>'
-          }
-        }
-      })
-      .state('event.gene.variant.talk', {
-        sticky: true,
-        views: {
-          'variantDetails@event.gene.variant': {
-            controller: 'VariantCtrl',
-            templateUrl: '/civic-client/views/event/variant/variantTalk.tpl.html'
-          }
-        }
-      });
+//      .state('events.genes', {
+//        url:'/genes/:geneId',
+//        controller: 'GenesViewCtrl',
+//        templateUrl: 'civic-client/views/events/genes/genesView.tpl.html'
+//      });
 
 
     // event edit
