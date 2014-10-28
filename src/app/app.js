@@ -9,7 +9,7 @@ angular.module('civicClient', [
   ,'dialogs.main'
 
   // http backend mocks
-  ,'httpMocks'
+  //,'httpMocks'
 
   // config
   ,'civic.routes'

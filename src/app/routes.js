@@ -46,10 +46,27 @@
         templateUrl: '/civic-client/views/events/eventsView.tpl.html'
       })
       .state('events.genes', {
+        abstract: true,
         url: '/genes/:geneId',
         controller: 'GenesViewCtrl',
         templateUrl: '/civic-client/views/events/genes/genesView.tpl.html'
       })
+      .state('events.genes.summary', {
+        url: '',
+        views: {
+          'genes@events.genes': {
+            template: '<gene-summary></gene-summary>'
+          }
+        }
+      })
+      .state('events.genes.talk', {
+        url: '',
+        views: {
+          'genes@events.genes': {
+            template: '<gene-talk></gene-talk>'
+          }
+        }
+      });
 //      .state('events.genes', {
 //        url:'/genes/:geneId',
 //        controller: 'GenesViewCtrl',

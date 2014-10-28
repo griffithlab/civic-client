@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="/css/views/browse/browse.css">
     <link rel="stylesheet" href="/css/views/events/eventsView.css">
     <link rel="stylesheet" href="/css/views/events/genes/genesView.css">
+    <link rel="stylesheet" href="/css/views/events/genes/directives/geneSummary.css">
+    <link rel="stylesheet" href="/css/views/events/genes/directives/geneTalk.css">
     <!-- endinject -->
   </head>
   <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
@@ -84,6 +86,8 @@
 
     <!-- inject:js -->
     <script src="/app.js"></script>
+    <script src="/views/events/genes/directives/geneTalk.js"></script>
+    <script src="/views/events/genes/directives/geneSummary.js"></script>
     <script src="/views/events/genes/GenesViewCtrl.js"></script>
     <script src="/common/security/login/LoginService.js"></script>
     <script src="/common/security/login/LoginFormController.js"></script>
@@ -96,10 +100,6 @@
     <script src="/common/services/GenesService.js"></script>
     <script src="/common/services/ConfigService.js"></script>
     <script src="/common/services/BrowseService.js"></script>
-    <script src="/common/security/Security.js"></script>
-    <script src="/common/security/RetryQueue.js"></script>
-    <script src="/common/security/Interceptor.js"></script>
-    <script src="/common/security/Authorization.js"></script>
     <script src="/common/directives/subheader.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
     <script src="/common/directives/quickSearch.js"></script>
@@ -107,6 +107,10 @@
     <script src="/common/directives/loginToolbar.js"></script>
     <script src="/common/directives/headerSearch.js"></script>
     <script src="/common/directives/civicLogo.js"></script>
+    <script src="/common/security/Security.js"></script>
+    <script src="/common/security/RetryQueue.js"></script>
+    <script src="/common/security/Interceptor.js"></script>
+    <script src="/common/security/Authorization.js"></script>
     <script src="/pages/authTestCtrl.js"></script>
     <script src="/pages/HomeCtrl.js"></script>
     <script src="/pages/HelpCtrl.js"></script>
@@ -114,7 +118,6 @@
     <script src="/pages/CollaborateCtrl.js"></script>
     <script src="/common/filters.js"></script>
     <script src="/routes.js"></script>
-    <script src="/httpMocks.js"></script>
     <script src="/civic-client-templates.js"></script>
     <!-- endinject -->
   </body>
