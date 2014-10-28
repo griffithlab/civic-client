@@ -6,13 +6,10 @@
     .filter('ceil', ceilFilter);
 
 // @ngInject
-  function BrowseCtrl($scope, $rootScope, $resource, $location, ngTableParams, $timeout, _, $log) {
+  function BrowseCtrl($scope, $rootScope, Browse, $location, ngTableParams, $timeout, _, $log) {
     $log.info('BrowseCtrl loaded');
     $rootScope.setNavMode('sub');
     $rootScope.setTitle('Browse Events');
-
-//    var Api = $resource('/geneListMock');
-    var Api = $resource('/api/variants');
 
     $scope.tableParams = new ngTableParams({
       page: 1,            // show first page
@@ -25,7 +22,7 @@
       debugMode: true,
       getData: function($defer, params) {
         // ajax request to api
-        Api.get(params.url(), function(data) {
+        Browse.get(params.url(), function(data) {
           // update table params
           params.total(data.total);
 
