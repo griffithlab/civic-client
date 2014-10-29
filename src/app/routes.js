@@ -47,21 +47,22 @@
       })
       .state('events.genes', {
         abstract: true,
-        sticky: true,
         url: '/genes/:geneId',
         controller: 'GenesViewCtrl',
-        templateUrl: '/civic-client/views/events/genes/genesView.tpl.html'
+        templateUrl: '/civic-client/views/events/genes/genesView.tpl.html',
+        sticky: true
+
       })
       .state('events.genes.summary', {
-        sticky: true,
         deepStateRedirect: true,
         url: '',
-        template: '<gene-summary></gene-summary>'
+        template: '<gene-summary></gene-summary>',
+        sticky: true
       })
       .state('events.genes.talk', {
-        sticky: true,
         url: '/talk',
-        template: '<gene-talk></gene-talk>'
+        template: '<gene-talk></gene-talk>',
+        sticky: true
       })
       .state('events.genes.summary.variants', {
         abstract: true,
@@ -70,14 +71,18 @@
         templateUrl: '/civic-client/views/events/variants/variantsView.tpl.html'
       })
       .state('events.genes.summary.variants.summary', {
-        sticky: true,
         url: '',
-        template: '<p>variant-summary directive</p>'
+        template: '<variant-summary></variant-summary>',
+        sticky: true
       })
       .state('events.genes.summary.variants.talk', {
-        sticky: true,
         url:'/talk',
-        template: '<p>variant-talk directive</p>'
+        template: '<variant-talk></variant-talk>',
+        sticky: true
+      })
+      .state('events.genes.summary.variants.summary.evidenceItems', {
+        url: '/evidence-items/:evidenceItemId',
+        templateUrl: '/civic-client/views/events/evidenceItems/evidenceItemsView.tpl.html'
       });
 
 
