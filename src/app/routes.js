@@ -60,9 +60,18 @@
         template: '<gene-talk></gene-talk>'
       })
       .state('events.genes.summary.variants', {
+        abstract: true,
         url: '/variants/:variantId',
         controller: 'VariantsViewCtrl',
         templateUrl: '/civic-client/views/events/variants/variantsView.tpl.html'
+      })
+      .state('events.genes.summary.variants.summary', {
+        url: '',
+        template: '<p>variant-summary directive</p>'
+      })
+      .state('events.genes.summary.variants.talk', {
+        url:'/talk',
+        template: '<p>variant-talk directive</p>'
       });
 
 
