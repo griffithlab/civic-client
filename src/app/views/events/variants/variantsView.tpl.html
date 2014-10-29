@@ -1,8 +1,0 @@
-<div class="variantsView">
-  <p class="small"><strong>variantsView: {{ variant.name }}</strong></p>
-  <p class="small">
-    <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_name, variantId: variant.name })">Show Variant Summary</a>
-    <a ui-sref="events.genes.summary.variants.talk({ geneId: gene.entrez_name, variantId: variant.name })">Show Variant Talk</a>
-  </p>
-  <div ui-view="variants"></div>
-</div>
