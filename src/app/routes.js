@@ -55,7 +55,7 @@
         url: '',
         views: {
           'genes@events.genes': {
-            template: '<gene-summary></gene-summary>'
+            templateUrl: '/civic-client/views/events/genes/genesSummaryView.tpl.html'
           }
         }
       })
