@@ -1,9 +1,9 @@
 <div class="genesSummaryView">
   <gene-summary></gene-summary>
-  <div ui-view="variants">
+  <div ui-view>
     <ul class="nav nav-pills nav-stacked gene-menu">
-      <li ng-repeat="variant in gene.variants | sortBy:variant">
-        <a ui-sref="events.genes.summary.variants({ geneId: gene.entrez_gene , variantId: variant })"> {{ variant }}</a>
+      <li ng-repeat="variant in gene.variants | sortBy: variant">
+        <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_name , variantId: variant })"> {{ variant }}</a>
       </li>
     </ul>
   </div>

@@ -10,7 +10,7 @@
       replace: true,
       templateUrl: '/civic-client/views/events/genes/directives/geneSummary.tpl.html',
       link: function($scope) {
-        console.log('geneSummary linked.');
+        console.log('geneSummary directive linked.');
       }
     };
 
