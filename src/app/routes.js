@@ -58,6 +58,11 @@
       .state('events.genes.talk', {
         url: '/talk',
         template: '<gene-talk></gene-talk>'
+      })
+      .state('events.genes.summary.variants', {
+        url: '/variants/:variantId',
+        controller: 'VariantsViewCtrl',
+        templateUrl: '/civic-client/views/events/variants/variantsView.tpl.html'
       });
 
 

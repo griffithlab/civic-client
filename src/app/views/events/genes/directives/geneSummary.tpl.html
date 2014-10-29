@@ -5,7 +5,7 @@
       <div class="col-xs-4">
         <ul class="nav nav-pills nav-stacked gene-menu">
           <li ng-repeat="variant in gene.variants | sortBy: variant">
-            <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_name , variantId: variant })"> {{ variant }}</a>
+            <a ui-sref="events.genes.summary.variants({ geneId: gene.entrez_name , variantId: variant })"> {{ variant }}</a>
           </li>
         </ul>
       </div>
