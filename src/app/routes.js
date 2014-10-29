@@ -60,6 +60,7 @@
         }
       })
       .state('events.genes.talk', {
+        url: '/talk',
         views: {
           'genes@events.genes': {
             template: '<gene-talk></gene-talk>'
@@ -75,14 +76,14 @@
       .state('events.genes.summary.variants.summary', {
         url: '',
         views: {
-          '@events.genes.summary': {
+          'variants@events.genes.summary': {
             templateUrl: '/civic-client/views/events/variants/variantsSummaryView.tpl.html'
           }
         }
       })
       .state('events.genes.summary.variants.talk', {
         views: {
-          '@events.genes.summary': {
+          'variants@events.genes.summary': {
             templateUrl: '<variant-talk></variant-talk>'
           }
         }
