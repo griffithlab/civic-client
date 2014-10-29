@@ -16,6 +16,5 @@
     } else {
       $state.go('events');
     }
-
   }
 })();

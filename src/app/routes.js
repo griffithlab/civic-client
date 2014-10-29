@@ -47,15 +47,19 @@
       })
       .state('events.genes', {
         abstract: true,
+        sticky: true,
         url: '/genes/:geneId',
         controller: 'GenesViewCtrl',
         templateUrl: '/civic-client/views/events/genes/genesView.tpl.html'
       })
       .state('events.genes.summary', {
+        sticky: true,
+        deepStateRedirect: true,
         url: '',
         template: '<gene-summary></gene-summary>'
       })
       .state('events.genes.talk', {
+        sticky: true,
         url: '/talk',
         template: '<gene-talk></gene-talk>'
       })
@@ -66,10 +70,12 @@
         templateUrl: '/civic-client/views/events/variants/variantsView.tpl.html'
       })
       .state('events.genes.summary.variants.summary', {
+        sticky: true,
         url: '',
         template: '<p>variant-summary directive</p>'
       })
       .state('events.genes.summary.variants.talk', {
+        sticky: true,
         url:'/talk',
         template: '<p>variant-talk directive</p>'
       });
