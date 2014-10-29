@@ -1,0 +1,10 @@
+<div class="geneSummary">
+  <p>gene-summary directive</p>
+  <div ui-view>
+    <ul class="nav nav-pills nav-stacked gene-menu">
+      <li ng-repeat="variant in gene.variants | sortBy: variant">
+        <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_name , variantId: variant })"> {{ variant }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

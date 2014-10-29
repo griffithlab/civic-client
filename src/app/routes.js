@@ -52,42 +52,14 @@
         templateUrl: '/civic-client/views/events/genes/genesView.tpl.html'
       })
       .state('events.genes.summary', {
-        url: '', // empty url here causes router to load this view when parent abstract view called
-        views: {
-          'genes@events.genes': {
-            templateUrl: '/civic-client/views/events/genes/genesSummaryView.tpl.html'
-          }
-        }
+        url: '',
+        template: '<gene-summary></gene-summary>'
       })
       .state('events.genes.talk', {
         url: '/talk',
-        views: {
-          'genes@events.genes': {
-            template: '<gene-talk></gene-talk>'
-          }
-        }
-      })
-      .state('events.genes.summary.variants', {
-        abstract: true,
-        url: '/variants/:variantId',
-        controller: 'VariantsViewCtrl',
-        templateUrl: '/civic-client/views/events/variants/variantsView.tpl.html'
-      })
-      .state('events.genes.summary.variants.summary', {
-        url: '',
-        views: {
-          'variants@events.genes.summary': {
-            templateUrl: '/civic-client/views/events/variants/variantsSummaryView.tpl.html'
-          }
-        }
-      })
-      .state('events.genes.summary.variants.talk', {
-        views: {
-          'variants@events.genes.summary': {
-            templateUrl: '<variant-talk></variant-talk>'
-          }
-        }
+        template: '<gene-talk></gene-talk>'
       });
+
 
 
 
