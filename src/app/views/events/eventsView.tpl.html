@@ -4,7 +4,8 @@
     <p>Please choose a gene from the list below to view its variants:</p>
     <ul class="nav nav-pills nav-stacked gene-menu">
       <li ng-repeat="gene in genes | sortBy:entrez_gene">
-        <a ui-sref="events.genes({ geneId: gene.entrez_gene })"> {{ gene.entrez_name }}</a>
+        <!-- TODO: should use ui-sref here but odd things are happening with events.genes state and displaying gene summary by default -->
+        <a href="/#/events/genes/{{gene.entrez_name}}"> {{ gene.entrez_name }}</a>
       </li>
     </ul>
   </div>
