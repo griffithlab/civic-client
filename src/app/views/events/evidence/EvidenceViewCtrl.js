@@ -10,7 +10,11 @@
     $scope.evidence= {};
     // if no evidence ID supplied, reroute to events.genes.summary.variants.summary so that user can choose an evidence item
     if($stateParams.evidenceId) {
-      $scope.evidence= Evidence.get({'evidenceId': $stateParams.evidenceId});
+      $scope.evidence= Evidence.get({
+        'geneId': $stateParams.geneId,
+        'variantId': $stateParams.variantId,
+        'evidenceId': $stateParams.evidenceId
+      });
       $rootScope.setNavMode('sub');
       $rootScope.setTitle('Event ' + $stateParams.geneId + ' / ' + $stateParams.variantId)
     } else {
