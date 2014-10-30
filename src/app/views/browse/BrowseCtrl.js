@@ -40,7 +40,7 @@
 
     $scope.rowClick = function(gene) {
       $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join(""));
-      var loc = ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join("");
+      var loc = ['/events/genes/', gene.entrez_gene, '/variants/', gene.variant].join("");
       $log.info('location.path(' + loc + ')');
       $location.path(loc);
     };

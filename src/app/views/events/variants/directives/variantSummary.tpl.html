@@ -2,7 +2,7 @@
   <p>variant-summary directive</p>
   <ul class="nav nav-pills nav-stacked gene-menu">
     <li ng-repeat="evidence in variant.evidence_items | sortBy: evidence.id ">
-      <a ui-sref="events.genes.summary.variants.summary.evidenceItems({ geneId: gene.entrez_name , variantId: variant.name, evidenceid: evidence.id })"> {{ evidence.id }}</a>
+      <a ui-sref="events.genes.summary.variants.summary.evidence({ geneId: gene.entrez_name , variantId: variant.name, evidenceId: evidence.id })"> {{ evidence.id }}</a>
     </li>
   </ul>
 

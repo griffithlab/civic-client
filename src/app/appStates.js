@@ -1,5 +1,6 @@
 (function(){
-  angular.module('civic.routes', ['ui.router'])
+  'use strict';
+  angular.module('civic.states', ['ui.router'])
     .config(routesConfig);
 
   // @ngInject
@@ -80,9 +81,21 @@
         template: '<variant-talk></variant-talk>',
         sticky: true
       })
-      .state('events.genes.summary.variants.summary.evidenceItems', {
-        url: '/evidence-items/:evidenceItemId',
-        templateUrl: '/civic-client/views/events/evidenceItems/evidenceItemsView.tpl.html'
+      .state('events.genes.summary.variants.summary.evidence', {
+        abstract: true,
+        url: '/evidence/:evidenceId',
+        controller: 'EvidenceViewCtrl',
+        templateUrl: '/civic-client/views/events/evidence/evidenceView.tpl.html'
+      })
+      .state('events.genes.summary.variants.summary.evidence.summary',{
+        url: '',
+        template: '<evidence-summary></evidence-summary>',
+        sticky: true
+      })
+      .state('events.genes.summary.variants.summary.evidence.talk', {
+        url: '/talk',
+        template: '<evidence-talk></evidence-talk>',
+        sticky: true
       });
 
 

@@ -12,7 +12,7 @@ angular.module('civicClient', [
   //,'httpMocks'
 
   // config
-  ,'civic.routes'
+  ,'civic.states'
 
   // app services
   ,'civic.services'

@@ -1,0 +1,7 @@
+<div class="evidenceTabs">
+  <h3>Evidence {{ evidence.id}}</h3>
+  <ul>
+    <li><a ui-sref="events.genes.summary.variants.summary.evidence.summary({ geneId: gene.entrez_name, variantId: variant.name, evidenceId: evidence.id })">Evidence Summary</a></li>
+    <li><a ui-sref="events.genes.summary.variants.summary.evidence.talk({ geneId: gene.entrez_name, variantId: variant.name, evidenceId: evidence.id})">Evidence Talk</a></li>
+  </ul>
+</div>
