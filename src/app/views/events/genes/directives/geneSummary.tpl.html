@@ -1,6 +1,23 @@
 <div class="geneSummary">
-  <p>gene-summary directive</p>
-  <div ui-view class="view">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <p ng-bind-html="gene.description | linky"></p>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <table class="table table-condensed summary-details">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+        <tr ng-repeat="(key, value) in gene.details">
+          <td class="name">{{ key | labelify }}:</td>
+          <td class=""value>{{ value | arrayToList }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div ui-view class="variantsUIView">
     <div class="row">
       <div class="col-xs-4">
         <ul class="nav nav-pills nav-stacked gene-menu">
@@ -8,6 +25,9 @@
             <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_name, variantId: variant })"> {{ variant }}</a>
           </li>
         </ul>
+      </div>
+      <div class="col-xs-8">
+        <p>&#8592; Please select a variant to view its details.</p>
       </div>
     </div>
   </div>

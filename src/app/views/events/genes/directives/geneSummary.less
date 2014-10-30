@@ -3,10 +3,28 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .geneSummary {
-  background-color: #AAF;
-  border: 1px solid #66A;
-  padding: @contentPadding;
-  .view {
-    border: 1px solid #33A;
+  .clearfix();
+  background-color: @pageBackground2;
+  padding-top: @contentPadding;
+
+  h3 {
+    margin-top: 0;
+    padding-top: 0;
   }
+
+  .table {
+    .name {
+      font-weight: bold;
+      text-align: right;
+    }
+    .value {
+
+    }
+  }
+  .variantsUIView { // pull the content of the view out to full width
+    margin-top: @contentPadding;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
 }
