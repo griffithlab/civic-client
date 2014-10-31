@@ -55,9 +55,9 @@
 
       })
       .state('events.genes.summary', {
-        deepStateRedirect: true,
-        url: '',
+        url: '', // blank url defaults to parent abstract state's url
         template: '<gene-summary class="col-xs-12"></gene-summary>',
+        deepStateRedirect: true,
         sticky: true
       })
       .state('events.genes.talk', {

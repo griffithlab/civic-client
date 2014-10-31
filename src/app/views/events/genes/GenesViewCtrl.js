@@ -11,6 +11,7 @@
     // if no geneId supplied, reroute to /events so that user can choose a gene
     if($stateParams.geneId) {
       $scope.gene = Genes.get({'geneId': $stateParams.geneId });
+      $scope.variantGroupsExist = typeof($scope.gene.variant_groups) === 'object';
       $rootScope.setNavMode('sub');
       $rootScope.setTitle('Event ' + $stateParams.geneId + ' / ...')
     } else {

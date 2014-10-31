@@ -5,7 +5,11 @@
 .geneSummary {
   .clearfix();
   background-color: @pageBackground2;
-  padding-top: @contentPadding;
+  padding: @contentPadding 0;
+
+  > .row {
+    padding: 0 15px;
+  }
 
   h3 {
     margin-top: 0;
@@ -22,9 +26,14 @@
     }
   }
   .variantsUIView { // pull the content of the view out to full width
+    background-color: @pageBackground;
     margin-top: @contentPadding;
-    margin-left: -15px;
-    margin-right: -15px;
+//    margin-left: -15px;
+//    margin-right: -15px;
+
+    .selectMsg {
+      padding: 5em;
+    }
   }
 
 }

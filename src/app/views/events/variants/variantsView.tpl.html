@@ -1,17 +1,16 @@
 <div class="variantsView">
   <div class="row">
-    <div class="col-xs-4">
-      <!-- TODO: convert menu to directive -->
-      <ul class="nav nav-pills nav-stacked gene-menu">
-        <li ng-repeat="variant in gene.variants | sortBy: variant">
-          <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_name , variantId: variant })"> {{ variant }}</a>
-        </li>
-      </ul>
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+      <variants-menu></variants-menu>
     </div>
-    <div class="col-xs-8">
-      <variants-tabs></variants-tabs>
-      <div ui-view>
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+      <div class="row">
+        <variant-tabs class="col-xs-12"></variant-tabs>
+      </div>
+      <div class="row">
+        <div ui-view class="col-xs-12">
 
+        </div>
       </div>
     </div>
   </div>
