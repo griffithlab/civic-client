@@ -19,7 +19,18 @@
       margin-left: @contentPadding;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+
+      @media (max-width: @screen-sm-min) {
+        border-radius: 0;
+      }
+
+      @media (max-width: @screen-md-min) {
+        margin-right: @contentPadding;
+        border-radius: @border-radius-base;
+      }
     }
+
+
   }
 
   .title {
