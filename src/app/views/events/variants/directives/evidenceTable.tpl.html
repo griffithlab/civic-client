@@ -1,7 +1,6 @@
 <div class="evidenceTable">
-  <h3>Evidence Table</h3>
-  <div class="table-responsive">
-    <table class="table table-condensed table-bordered table-curved evidence-table">
+  <h3>Evidence</h3>
+    <table class="table table-condensed table-curved evidence-table">
       <colgroup>
         <col width="30%"/>
         <col width="8.5%"/>
@@ -20,18 +19,17 @@
           Disease
         </th>
         <th>
+          Evidence Level
+        </th>
+        <th>
+          Evidence Type
+        </th>
+        <th>
           Drug
-        </th>
-        <th>
-          Type of Evidence
-        </th>
-        <th>
-          Level
         </th>
         <th>
           Source
         </th>
-        <th></th>
       </thead>
       <tbody>
         <tr ng-repeat="row in variant.evidence_items" ng-click="rowClick(row.id)">
@@ -48,16 +46,12 @@
             {{ row.evidence_type }}
           </td>
           <td>
-            {{ row.level }}
+            {{ row.drug}}
           </td>
           <td>
-            {{ row.drug }}
-          </td>
-          <td>
-            <evidence-action-buttons></evidence-action-buttons>
+            {{ row.source }}
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>

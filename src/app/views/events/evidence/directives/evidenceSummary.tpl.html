@@ -1,1 +1,47 @@
-<div class="evidenceSummary"><p>{{ evidence.explanation }}</p></div>
+<div class="evidenceSummary">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 explanation">
+      <p ng-bind-html="evidence.explanation | linky"></p>
+    </div>
+    <div class="col-xs-12 col-md-6 details">
+      <table class="table table-condensed summary-details">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+        <tr>
+          <td class="name">Disease:</td>
+          <td class=""value">{{ evidence.disease }}</td>
+        </tr>
+        <tr>
+          <td class="name">Source:</td>
+          <td class=""value">{{ evidence.source }}</td>
+        </tr>
+        <tr>
+          <td class="name">Drug:</td>
+          <td class=""value">{{ evidence.drug }}</td>
+        </tr>
+        <tr>
+          <td class="name">Evidence Type:</td>
+          <td class=""value">{{ evidence.evidence_type }}</td>
+        </tr>
+        <tr>
+          <td class="name">Evidence Level:</td>
+          <td class=""value">{{ evidence.evidence_level }}</td>
+        </tr>
+        <tr>
+          <td class="name">Outcome:</td>
+          <td class=""value">{{ evidence.outcome }}</td>
+        </tr>
+        <tr>
+          <td class="name">Clinical Direction:</td>
+          <td class=""value">{{ evidence.clinical_direction }}</td>
+        </tr>
+        <tr>
+          <td class="name">Source:</td>
+          <td class=""value">{{ evidence.source }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

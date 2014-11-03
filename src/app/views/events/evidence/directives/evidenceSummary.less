@@ -1,4 +1,16 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
 .evidenceSummary {
-  background-color: #FAA;
-  border: 1px solid #A66;
+  .explanation {
+    padding-top: @contentPadding;
+    p {
+      padding-left: @contentPadding;
+    }
+  }
+
+  .details {
+    padding-top: @contentPadding;
+  }
 }

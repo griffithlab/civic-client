@@ -65,6 +65,11 @@
         template: '<gene-talk></gene-talk>',
         sticky: true
       })
+      .state('events.genes.edit', {
+        url: '/edit',
+        template: '<p>Edit Gene {{ gene.entrez_name }}</p>',
+        sticky: true
+      })
       .state('events.genes.summary.variants', {
         abstract: true,
         url: '/variants/:variantId',
@@ -74,11 +79,17 @@
       .state('events.genes.summary.variants.summary', {
         url: '',
         template: '<variant-summary></variant-summary>',
-        sticky: true
+        sticky: true,
+        deepStateRedirect: true
       })
       .state('events.genes.summary.variants.talk', {
         url:'/talk',
         template: '<variant-talk></variant-talk>',
+        sticky: true
+      })
+      .state('events.genes.summary.variants.edit', {
+        url:'/edit',
+        template: '<p>Edit Variant {{ variant.name }}</p>',
         sticky: true
       })
       .state('events.genes.summary.variants.summary.evidence', {
@@ -90,11 +101,17 @@
       .state('events.genes.summary.variants.summary.evidence.summary',{
         url: '',
         template: '<evidence-summary></evidence-summary>',
-        sticky: true
+        sticky: true,
+        deepStateRedirect: true
       })
       .state('events.genes.summary.variants.summary.evidence.talk', {
         url: '/talk',
         template: '<evidence-talk></evidence-talk>',
+        sticky: true
+      })
+      .state('events.genes.summary.variants.summary.evidence.edit', {
+        url: '/edit',
+        template: '<p>Edit Evidence {{ evidence.id }}</p>',
         sticky: true
       });
 

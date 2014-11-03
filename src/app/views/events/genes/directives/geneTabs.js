@@ -4,13 +4,14 @@
     .directive('geneTabs', geneTabs);
 
   // @ngInject
-  function geneTabs() {
+  function geneTabs(Security) {
     var directive = {
       restrict: 'E',
       replace: true,
       templateUrl: '/civic-client/views/events/genes/directives/geneTabs.tpl.html',
       link: function($scope) {
-        console.log('geneTabs directive linked.');
+        console.log('geneTabs linked.');
+        $scope.isAuthenticated = Security.isAuthenticated;
       }
     };
 

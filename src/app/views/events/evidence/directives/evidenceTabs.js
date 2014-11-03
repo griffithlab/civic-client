@@ -4,13 +4,14 @@
     .directive('evidenceTabs', evidenceTabs);
 
   // @ngInject
-  function evidenceTabs() {
+  function evidenceTabs(Security) {
     var directive = {
       restrict: 'E',
       replace: true,
       templateUrl: '/civic-client/views/events/evidence/directives/evidenceTabs.tpl.html',
       link: function($scope) {
-        console.log('evidenceTabs directive linked.');
+        console.log('geneTabs linked.');
+        $scope.isAuthenticated = Security.isAuthenticated;
       }
     };
 
