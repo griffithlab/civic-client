@@ -34,7 +34,7 @@
         <th></th>
       </thead>
       <tbody>
-        <tr ng-repeat="row in variant.evidence_items">
+        <tr ng-repeat="row in variant.evidence_items" ng-click="rowClick(row.id)">
           <td>
             {{ row.explanation }}
           </td>
