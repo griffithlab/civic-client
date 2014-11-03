@@ -67,7 +67,8 @@
       })
       .state('events.genes.edit', {
         url: '/edit',
-        template: '<p>Edit Gene {{ gene.entrez_name }}</p>',
+        template: '<gene-edit class="col-xs-12"></gene-edit>',
+        controller: 'GeneEditCtrl',
         sticky: true
       })
       .state('events.genes.summary.variants', {
