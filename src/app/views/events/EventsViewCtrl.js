@@ -4,11 +4,13 @@
     .controller('EventsViewCtrl', EventsViewCtrl);
 
   // @ngInject
-  function EventsViewCtrl($log, $rootScope, $scope, Genes) {
+  function EventsViewCtrl($log, $rootScope, $scope, $stateParams, Genes) {
     $log.info("EventsViewCtrl loaded.");
     $rootScope.setNavMode('sub');
     $rootScope.setTitle('Choose Gene')
 
-    $scope.genes = Genes.query();
+    if (!$stateParams.geneId) {
+      $scope.genes = Genes.query();
+    }
   }
 })();

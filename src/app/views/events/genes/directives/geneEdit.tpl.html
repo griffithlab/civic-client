@@ -1,11 +1,11 @@
 <div class="geneEdit">
-  <form role="form">
+  <form role="form" novalidate>
 
     <div class="row form-row">
       <div class="col-xs-12">
         <div class="form-group">
           <label for="gene_description">Gene Description:</label>
-          <textarea class="form-control" id="gene_description" rows="5">{{ gene.description }}</textarea>
+          <textarea class="form-control" id="gene_description" rows="5" ng-model="geneEdit.description"></textarea>
         </div>
       </div>
     </div>
@@ -13,7 +13,7 @@
       <div class="col-xs-12">
         <div class="pull-right">
           <button type="button" class="btn btn-default btn-lg">Discard Edits</button>
-          <button type="button" class="btn btn-primary btn-lg">Submit Edits</button>
+          <button type="button" class="btn btn-primary btn-lg" ng-click="submitEdits()">Submit Edits</button>
         </div>
       </div>
     </div>

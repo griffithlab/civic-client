@@ -46,10 +46,11 @@ function appConfig($stateProvider, $urlRouterProvider) {
 }
 
 // @ngInject
-function appRun(Security, $rootScope, $state) {
+function appRun(Security, $rootScope, $state, $log) {
   'use strict';
   $rootScope.view = {};
   $rootScope.setTitle = function (title) {
+    $log.info("setting title to " + title);
     $rootScope.view.windowTitle = 'CIViC: ' + title;
     $rootScope.view.pageTitle = title;
   };

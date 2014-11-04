@@ -9,6 +9,12 @@
     $rootScope.setNavMode('sub');
     $rootScope.setTitle('Edit Gene ' + $stateParams.geneId);
 
-    $scope.genes = Genes.query();
+    $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId });
+
+    $scope.submitEdits = function() {
+      $scope.geneEdit.$update({
+        description: $scope.geneEdit.description
+      });
+    }
   }
 })();

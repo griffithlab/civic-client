@@ -6,7 +6,7 @@
   // @ngInject
   function GenesService($resource) {
     var Genes = $resource('/api/genes/:geneId',
-      {},
+      { geneId: '@entrez_name' },
       {
         query: { // query details for a single gene
           method: 'GET',
@@ -15,6 +15,9 @@
         get: { // get a list of all genes
           method: 'GET',
           isArray: false
+        },
+        update: {
+          method: 'PUT'
         }
       });
 
