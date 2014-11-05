@@ -22,13 +22,11 @@
       $scope.geneEdit.$update({
           description: $scope.geneEdit.description,
           clinical_description: $scope.geneEdit.clinical_description,
-          details: {
-            gene_category: $scope.geneEdit.details.gene_category.map(function(item) { return item.text; })
-          }
+          "gene_category[]": $scope.geneEdit.details.gene_category.map(function(item) { return item.text; })
         },
         function(data) {
           $log.info("update successful.");
-          $scope.$parent.gene = data;
+          $scope.$parent.gene = Genes.get({'geneId': $stateParams.geneId });
         },
         function(error) {
           $log.info("update unsuccessful.");
