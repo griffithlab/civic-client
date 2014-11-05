@@ -33,7 +33,7 @@
           "gene_category[]": $scope.geneEdit.details.gene_category.map(function(item) { return item.text; }),
           "protein_motif[]": $scope.geneEdit.details.protein_motif.map(function(item) { return item.text; }),
           "gene_pathway[]": $scope.geneEdit.details.gene_pathway.map(function(item) { return item.text; }),
-          "protein_function[]": $scope.geneEdit.details.protein_function.map(function(item) { return item.text; })
+          "protein_function[]": $scope.geneEdit.details.protein_functions.map(function(item) { return item.text; })
         },
         function(data) {
           $log.info("update successful.");
