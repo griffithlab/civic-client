@@ -2,7 +2,7 @@
   <form role="form" novalidate>
 
     <div class="row form-row">
-      <div class="col-xs-12">
+      <div class="col-xs-8">
         <div class="form-group">
           <label for="entrez_name">Name:</label>
           <input type="text" id="entrez_name" ng-model="geneEdit.entrez_name">
@@ -19,33 +19,29 @@
         <div class="form-group">
           <label>Gene Category</label>
           <tags-input ng-model="geneEdit.details.gene_category" replace-spaces-with-dashes="false">
-            <auto-complete source="tags.gene_categories($query)"></auto-complete>
+            <auto-complete source="tags.gene_categories($query)" min-length="1"></auto-complete>
           </tags-input>
-          <p>Selected: {{geneEdit.details.gene_category}}</p>
         </div>
 
         <div class="form-group">
           <label>Gene Pathway</label>
           <tags-input ng-model="geneEdit.details.gene_pathway" replace-spaces-with-dashes="false">
-            <auto-complete source="tags.gene_pathways($query)"></auto-complete>
+            <auto-complete source="tags.gene_pathways($query)" min-length="1"></auto-complete>
           </tags-input>
-          <p>Selected: {{geneEdit.details.gene_pathway}}</p>
         </div>
 
         <div class="form-group">
           <label>Protein Motif</label>
           <tags-input ng-model="geneEdit.details.protein_motif" replace-spaces-with-dashes="false">
-            <auto-complete source="tags.protein_motifs($query)"></auto-complete>
+            <auto-complete source="tags.protein_motifs($query)" min-length="1"></auto-complete>
           </tags-input>
-          <p>Selected: {{geneEdit.details.protein_motif}}</p>
         </div>
 
         <div class="form-group">
           <label>Protein Functions</label>
           <tags-input ng-model="geneEdit.details.protein_functions" replace-spaces-with-dashes="false">
-            <auto-complete source="tags.protein_functions($query)"></auto-complete>
+            <auto-complete source="tags.protein_functions($query)" min-length="1"></auto-complete>
           </tags-input>
-          <p>Selected: {{geneEdit.details.protein_functions}}</p>
         </div>
       </div>
     </div>

@@ -75,11 +75,11 @@
         abtract: true,
         url: '/variants/:variantId',
         controller: 'VariantsViewCtrl',
-        templateUrl: '/civic-client/views/events/variants/variantsView.tpl.html',
+        templateUrl: '/civic-client/views/events/variants/variantsView.tpl.html'
       })
       .state('events.genes.summary.variants.summary', {
         url: '/summary',
-        template: '<variant-summary></variant-summary>',
+        template: '<variant-summary></variant-summary>'
         // deepStateRedirect: true
       })
       .state('events.genes.summary.variants.talk', {
