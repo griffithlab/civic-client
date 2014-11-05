@@ -21,8 +21,7 @@
     };
 
     $scope.onSelect = function($item, $model, $label) {
-      $log.info('onSelect called, location: ' + ['/gene/', $item.gene, '/variant/', $item.variant].join(' '));
-      $state.go('events.genes.summary.variants.summary', {geneID: $item.gene, variantId: $item.variant});
+      $state.go('events.genes.summary.variants.summary', {geneId: $item.gene, variantId: $item.variant});
     };
 
   }

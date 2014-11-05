@@ -15,11 +15,18 @@
     var Genes = $resource('/api/genes/:geneId',
       { geneId: '@entrez_name' },
       {
-        query: { // query details for a single gene
+        query: { // get a list of all genes
           method: 'GET',
           isArray: true
         },
-        get: { // get a list of all genes
+        queryNames: { // get a list of all gene names
+          method: 'GET',
+          isArray: true,
+          transformResponse: function(data) {
+            return _.uniq(_.pluck(JSON.parse(data), 'entrez_name'));
+          }
+        },
+        get: { // get a single gene
           method: 'GET',
           isArray: false
         },
