@@ -3,6 +3,7 @@ angular.module('civicClient', [
   'ui.router'
   ,'ct.ui.router.extras'
   ,'ui.bootstrap'
+  ,'ngTagsInput'
   ,'angular-lodash'
   ,'ngTable'
   ,'ngResource'

@@ -1,11 +1,47 @@
-<div class="geneEdit">
+<div class="geneEdit" xmlns="http://www.w3.org/1999/html">
   <form role="form" novalidate>
 
     <div class="row form-row">
       <div class="col-xs-12">
         <div class="form-group">
-          <label for="gene_description">Gene Description:</label>
-          <textarea class="form-control" id="gene_description" rows="5" ng-model="geneEdit.description"></textarea>
+          <label for="entrez_name">Name:</label>
+          <input type="text" id="entrez_name" ng-model="geneEdit.entrez_name">
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea class="form-control" id="description" rows="5" ng-model="geneEdit.description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="description">Clinical Description:</label>
+          <textarea class="form-control" id="clinical_description" rows="5" ng-model="geneEdit.clinical_description"></textarea>
+        </div>
+        <h3>Details</h3>
+        <div class="form-group">
+          <label>Gene Category</label>
+          <tags-input ng-model="geneEdit.details.gene_category">
+          </tags-input>
+          <p>Selected: {{geneEdit.details.gene_category}}</p>
+        </div>
+
+        <div class="form-group">
+          <label>Gene Pathway</label>
+          <tags-input ng-model="geneEdit.details.gene_pathway">
+          </tags-input>
+          <p>Selected: {{geneEdit.details.gene_pathway}}</p>
+        </div>
+
+        <div class="form-group">
+          <label>Protein Motif</label>
+          <tags-input ng-model="geneEdit.details.protein_motif">
+          </tags-input>
+          <p>Selected: {{geneEdit.details.protein_motif}}</p>
+        </div>
+
+        <div class="form-group">
+          <label>Protein Functions</label>
+          <tags-input ng-model="geneEdit.details.protein_functions">
+          </tags-input>
+          <p>Selected: {{geneEdit.details.protein_functions}}</p>
         </div>
       </div>
     </div>
@@ -15,6 +51,16 @@
           <button type="button" class="btn btn-default btn-lg">Discard Edits</button>
           <button type="button" class="btn btn-primary btn-lg" ng-click="submitEdits()">Submit Edits</button>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <p>geneEdit:</p>
+        <pre>{{ geneEdit | json }}</pre>
+      </div>
+      <div class="col-xs-6">
+        <p>gene:</p>
+        <pre>{{ gene | json }}</pre>
       </div>
     </div>
   </form>

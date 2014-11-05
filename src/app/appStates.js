@@ -7,6 +7,9 @@
   function routesConfig($stateProvider, $urlRouterProvider, $stickyStateProvider) {
     $stickyStateProvider.enableDebug(true);
 
+    // 404
+    $urlRouterProvider.otherwise('home');
+
     // abstract state redirects
     $urlRouterProvider.when("/events/genes/:geneId", "/events/genes/:geneId/summary");
 
@@ -66,8 +69,7 @@
       })
       .state('events.genes.edit', {
         url: '/edit',
-        template: '<gene-edit class="col-xs-12"></gene-edit>',
-        controller: 'GeneEditCtrl'
+        template: '<gene-edit class="col-xs-12"></gene-edit>'
       })
       .state('events.genes.summary.variants', {
         abtract: true,

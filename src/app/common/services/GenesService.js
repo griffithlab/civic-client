@@ -18,7 +18,28 @@
         },
         update: {
           method: 'PUT'
+        },
+        protein_motifs: {
+          method: 'GET',
+          url: '/api/genes/protein_motifs',
+          isArray: true
+        },
+        gene_categories: {
+          method: 'GET',
+          url: '/api/genes/categories',
+          isArray: true
+        },
+        gene_pathways: {
+          method: 'GET',
+          url: '/api/genes/pathways',
+          isArray: true
+        },
+        protein_functions: {
+          method: 'GET',
+          url: '/api/genes/protein_functions',
+          isArray: true
         }
+
       });
 
     return Genes;

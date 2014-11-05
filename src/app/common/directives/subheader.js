@@ -48,8 +48,9 @@
     };
 
     $scope.onSelect = function($item, $model, $label) {
+
       // $log.info('onSelect called, location: ' + ['/gene/', $item.gene, '/variant/', $item.variant].join(' '));
-      var loc = ['/gene/', $item.gene, '/variant/', $item.variant].join("");
+      var loc = ['/events/genes/', $item.gene, '/variants/', $item.variant].join("");
       $log.info('location.path(' + loc + ')');
       $location.path(loc);
     };
