@@ -7,6 +7,9 @@
   function routesConfig($stateProvider, $urlRouterProvider, $stickyStateProvider) {
     $stickyStateProvider.enableDebug(true);
 
+    // abstract state redirects
+    $urlRouterProvider.when("/events/genes/:geneId", "/events/genes/:geneId/summary");
+
     // static frontend pages
     $stateProvider
       .state('home', {
@@ -103,13 +106,5 @@
         url: '/edit',
         template: '<p>Edit Evidence {{ evidence.id }}</p>'
       });
-
-    // event edit
-    // editing genes, variants, evidence
-
-    // account, profile
-    // viewing & editing user options, profile
-    // route to home state if no state supplied
-    $urlRouterProvider.otherwise('home');
   }
 })();
