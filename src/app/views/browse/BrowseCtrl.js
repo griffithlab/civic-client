@@ -6,7 +6,7 @@
     .filter('ceil', ceilFilter);
 
 // @ngInject
-  function BrowseCtrl($scope, $rootScope, Browse, $location, ngTableParams, $timeout, _, $log) {
+  function BrowseCtrl($scope, $rootScope, Browse, $location, ngTableParams, $state, _, $log) {
     $log.info('BrowseCtrl loaded');
     $rootScope.setNavMode('sub');
     $rootScope.setTitle('Browse Events');
@@ -39,10 +39,11 @@
     });
 
     $scope.rowClick = function(gene) {
-      $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join(""));
-      var loc = ['/events/genes/', gene.entrez_gene, '/variants/', gene.variant].join("");
-      $log.info('location.path(' + loc + ')');
-      $location.path(loc);
+      $state.go('events.genes.summary.variants.summary', { geneId: gene.entrez_gene, variantId: gene.variant });
+//      $log.info('Clicked gene ' + ['/gene/', gene.entrez_gene, '/variant/', gene.variant].join(""));
+//      var loc = ['/events/genes/', gene.entrez_gene, '/variants/', gene.variant].join("");
+//      $log.info('location.path(' + loc + ')');
+//      $location.path(loc);
     };
   }
 
