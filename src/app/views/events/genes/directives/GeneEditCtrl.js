@@ -11,12 +11,20 @@
 
     $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId });
 
-//    $scope.tags = {
-//      protein_motifs: Genes.protein_motifs(),
-//      gene_categories: Genes.gene_categories(),
-//      gene_pathways: Genes.gene_pathways(),
-//      protein_functions: Genes.protein_functions()
-//    };
+    $scope.tags = {
+      protein_motifs: function(query) {
+        return Genes.protein_motifs({ filter: query }).$promise
+      },
+      gene_categories: function(query) {
+        return Genes.gene_categories({ filter: query }).$promise
+      },
+      gene_pathways: function(query) {
+        return Genes.gene_pathways({ filter: query }).$promise
+      },
+      protein_functions: function(query) {
+        return Genes.protein_functions({ filter: query }).$promise
+      }
+    };
 
     $scope.submitEdits = function() {
       $scope.geneEdit.$update({

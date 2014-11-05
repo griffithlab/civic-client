@@ -19,6 +19,7 @@
         <div class="form-group">
           <label>Gene Category</label>
           <tags-input ng-model="geneEdit.details.gene_category" replace-spaces-with-dashes="false">
+            <auto-complete source="tags.gene_categories($query)"></auto-complete>
           </tags-input>
           <p>Selected: {{geneEdit.details.gene_category}}</p>
         </div>
@@ -26,6 +27,7 @@
         <div class="form-group">
           <label>Gene Pathway</label>
           <tags-input ng-model="geneEdit.details.gene_pathway" replace-spaces-with-dashes="false">
+            <auto-complete source="tags.gene_pathways($query)"></auto-complete>
           </tags-input>
           <p>Selected: {{geneEdit.details.gene_pathway}}</p>
         </div>
@@ -33,6 +35,7 @@
         <div class="form-group">
           <label>Protein Motif</label>
           <tags-input ng-model="geneEdit.details.protein_motif" replace-spaces-with-dashes="false">
+            <auto-complete source="tags.protein_motifs($query)"></auto-complete>
           </tags-input>
           <p>Selected: {{geneEdit.details.protein_motif}}</p>
         </div>
@@ -40,6 +43,7 @@
         <div class="form-group">
           <label>Protein Functions</label>
           <tags-input ng-model="geneEdit.details.protein_functions" replace-spaces-with-dashes="false">
+            <auto-complete source="tags.protein_functions($query)"></auto-complete>
           </tags-input>
           <p>Selected: {{geneEdit.details.protein_functions}}</p>
         </div>
