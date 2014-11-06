@@ -115,7 +115,6 @@
 
       // Is the current user an adminstrator?
       isAdmin: function() {
-        $log.info('isAdmin() called ===================');
         return !!(service.currentUser && _.contains(service.currentUser.roles, 'admin'));
       }
     };

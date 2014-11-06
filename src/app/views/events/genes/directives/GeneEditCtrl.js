@@ -34,6 +34,10 @@
       $log.info('submitEdits called.');
     };
 
+    $scope.discardEdits = function() {
+      $log.info('discardEdits called.');
+    };
+
     $scope.applyEdits = function() {
       $scope.geneEdit.$update({
           //entrez_name: $scope.geneEdit.entrez_name,

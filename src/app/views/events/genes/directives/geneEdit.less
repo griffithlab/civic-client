@@ -4,7 +4,7 @@
 
 .geneEdit {
   .clearfix();
-  background-color: @pageBackground2;
+  background-color: @pageBackground;
 
   .form-row {
     margin-bottom: 1em;
@@ -17,8 +17,8 @@
   }
 
   .form-instructions {
-    background-color: #DDD;
-    border-bottom: 2px solid #AAA;
+    background-color: #EFEFEF;
+    border-bottom: 2px solid #CCC;
   }
 
   .form-errors {
@@ -44,7 +44,6 @@
   .button-row {
     .clearfix();
     border-top: 2px solid #CCC;
-    border-bottom: 2px solid #CCC;
     padding-top: 1em;
     padding-bottom: 1em;
     margin-bottom: 1em;
@@ -54,13 +53,16 @@
     .tag-item {
       background-color: #EEE;
       color: #333;
-      border-color: #999;
+      border: none;
 
       .remove-button {
-        color: @civicRed;
+        color: #AAA;
       }
     }
-
+    .selected {
+      .remove-button {
+        color: #FFF;
+      }
+    }
   }
-
 }
