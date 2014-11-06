@@ -33,7 +33,7 @@
     $scope.submitEdits = function() {
       $scope.geneEdit.$update({
           //entrez_name: $scope.geneEdit.entrez_name,
-          description: $scope.geneEdit.description,
+          description: $scope.geneEdit.description
           //clinical_description: $scope.geneEdit.clinical_description,
 //          "gene_category[]": $scope.geneEdit.details.gene_category.map(function(item) { return item.text; }),
 //          "protein_motif[]": $scope.geneEdit.details.protein_motif.map(function(item) { return item.text; }),

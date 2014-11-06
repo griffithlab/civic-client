@@ -2,7 +2,7 @@
   <form role="form" novalidate>
     <div class="row form-instructions" ng-show="formStatus.messages.length == 0 && formStatus.errors.length == 0">
       <div class="col-xs-12">
-        <p>Complete your edits using the form below, then press the 'Submit Edits' button.</p>
+        <p>Complete your edits using the form below, then press the 'Submit Edits' button. <span ng-show="isAdmin()" style="color: red;font-weight: bold;">Since you are an admin, your edits will be immediately applied.</span></p>
       </div>
     </div>
     <div class="row form-messages" ng-show="formStatus.messages.length > 0">
@@ -16,7 +16,7 @@
     </div>
     <div class="row form-errors" ng-show="formStatus.errors.length > 0">
       <div class="col-xs-12">
-        <p>The requested updates contain the following errors, please correct and resubmit:</p>
+        <p>The requested edits contain the following errors, please correct and resubmit:</p>
         <div class="row" ng-repeat="error in formStatus.errors">
           <div class="col-xs-2">
             <p class="pull-right"><strong>{{ error.field }}:</strong></p>

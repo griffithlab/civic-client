@@ -4,7 +4,7 @@
     .directive('geneEdit', geneEdit);
 
 // @ngInject
-  function geneEdit() {
+  function geneEdit(Security) {
     var directive = {
       restrict: 'E',
       replace: true,
@@ -12,6 +12,8 @@
       controller: 'GeneEditCtrl',
       link: function($scope) {
         console.log('geneEditdirective linked.');
+        $scope.isAuthenticated = Security.isAuthenticated;
+        $scope.isAdmin = Security.isAdmin;
       }
     };
 
