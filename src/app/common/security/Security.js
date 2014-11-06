@@ -9,7 +9,7 @@
     .factory('Security', Security);
 
 // @ngInject
-  function Security($http, $q, $location, RetryQueue, dialogs, $log) {
+  function Security($http, $q, $location, RetryQueue, dialogs, $log, _) {
     // Redirect to the given url (defaults to '/')
     function redirect(url) {
       url = url || '/';
@@ -115,7 +115,7 @@
 
       // Is the current user an adminstrator?
       isAdmin: function() {
-        return !!(service.currentUser && service.currentUser.admin);
+        return !!(service.currentUser && _.contains(service.currentUser.roles, 'admin'));
       }
     };
 

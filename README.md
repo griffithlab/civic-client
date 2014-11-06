@@ -1,6 +1,19 @@
 civic-client
 ============
 
+## Screenshots
+**Homepage:**
+![Homepage](notes/screenshots/home-view.png)
+
+**Browse Events:**
+![Homepage](notes/screenshots/gene-browse-view.png)
+
+**View Event:**
+![Homepage](notes/screenshots/gene-variant-evidence-view.png)
+
+**Edit Gene:**
+![Homepage](notes/screenshots/gene-edit-view.png)
+
 ## Development
 
 To start developing in the project, fire up the civic-server on port 3000 and run:
@@ -14,6 +27,8 @@ Then head to `http://localhost:3001` in your browser.
 The `serve` tasks starts a static file server, and a proxy that routes calls to /api to the civic-server listening on port 3000. It serves the AngularJS application, and a starts a watch task which watches all files for changes and lints, builds and injects them into the index.html accordingly.
 
 ## Tests
+
+NOTE: There really aren't any tests yet...
 
 To run tests run:
 

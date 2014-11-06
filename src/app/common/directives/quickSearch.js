@@ -5,7 +5,7 @@
     .controller('quickSearchCtrl', quickSearchCtrl);
 
   // @ngInject
-  function quickSearchCtrl($scope, $log, $location, $resource, $http) {
+  function quickSearchCtrl($scope, $log, $location, $resource, $http, $state) {
     $log.info('quickSearchCtrl loaded.');
 
     $scope.getVariants = function (val) {
@@ -21,10 +21,7 @@
     };
 
     $scope.onSelect = function($item, $model, $label) {
-      // $log.info('onSelect called, location: ' + ['/gene/', $item.gene, '/variant/', $item.variant].join(' '));
-      var loc = ['/events/genes/', $item.gene, '/variants/', $item.variant].join("");
-      $log.info('location.path(' + loc + ')');
-      $location.path(loc);
+      $state.go('events.genes.summary.variants.summary', {geneId: $item.gene, variantId: $item.variant});
     };
 
   }

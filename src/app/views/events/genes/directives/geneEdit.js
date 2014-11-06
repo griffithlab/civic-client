@@ -1,16 +1,17 @@
 (function() {
   'use strict';
   angular.module('civic.events')
-    .directive('geneTabs', geneTabs);
+    .directive('geneEdit', geneEdit);
 
-  // @ngInject
-  function geneTabs(Security, $state) {
+// @ngInject
+  function geneEdit(Security) {
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: '/civic-client/views/events/genes/directives/geneTabs.tpl.html',
+      templateUrl: '/civic-client/views/events/genes/directives/geneEdit.tpl.html',
+      controller: 'GeneEditCtrl',
       link: function($scope) {
-        console.log('geneTabs linked.');
+        console.log('geneEditdirective linked.');
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }

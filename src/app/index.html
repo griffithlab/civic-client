@@ -5,9 +5,13 @@
     <title ng-bind="$root.view.windowTitle">CIViC - Clinical Interpretations of Variants in Cancer</title>
     <!-- inject:vendor:css -->
     <link rel="stylesheet" href="/ng-table/ng-table.css">
+    <link rel="stylesheet" href="/angular-ui-select/dist/select.css">
+    <link rel="stylesheet" href="/ng-tags-input/ng-tags-input.min.css">
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/angular-dialog-service/dialogs.min.css">
     <!-- endinject -->
+    <link rel="stylesheet" href="/ng-tags-input/ng-tags-input.bootstrap.min.css">
+    
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/pages/home.css">
@@ -17,8 +21,8 @@
     <link rel="stylesheet" href="/css/common/directives/mainMenu.css">
     <link rel="stylesheet" href="/css/common/directives/quickSearch.css">
     <link rel="stylesheet" href="/css/common/directives/subheader.css">
-    <link rel="stylesheet" href="/css/views/browse/browse.css">
     <link rel="stylesheet" href="/css/views/account/account.css">
+    <link rel="stylesheet" href="/css/views/browse/browse.css">
     <link rel="stylesheet" href="/css/views/events/eventsCommon.css">
     <link rel="stylesheet" href="/css/views/events/eventsView.css">
     <link rel="stylesheet" href="/css/views/events/common/variantsMenu.css">
@@ -27,6 +31,7 @@
     <link rel="stylesheet" href="/css/views/events/evidence/directives/evidenceSummary.css">
     <link rel="stylesheet" href="/css/views/events/evidence/directives/evidenceTabs.css">
     <link rel="stylesheet" href="/css/views/events/evidence/directives/evidenceTalk.css">
+    <link rel="stylesheet" href="/css/views/events/genes/directives/geneEdit.css">
     <link rel="stylesheet" href="/css/views/events/genes/directives/geneSummary.css">
     <link rel="stylesheet" href="/css/views/events/genes/directives/geneTabs.css">
     <link rel="stylesheet" href="/css/views/events/genes/directives/geneTalk.css">
@@ -91,6 +96,8 @@
     <script src="/angular-resource/angular-resource.js"></script>
     <script src="/ng-table/ng-table.js"></script>
     <script src="/ui-router-extras/release/ct-ui-router-extras.js"></script>
+    <script src="/angular-ui-select/dist/select.js"></script>
+    <script src="/ng-tags-input/ng-tags-input.min.js"></script>
     <script src="/angular-dialog-service/dialogs.min.js"></script>
     <script src="/angular-dialog-service/dialogs-default-translations.min.js"></script>
     <!-- endinject -->
@@ -104,18 +111,20 @@
     <script src="/views/events/genes/directives/geneTalk.js"></script>
     <script src="/views/events/genes/directives/geneTabs.js"></script>
     <script src="/views/events/genes/directives/geneSummary.js"></script>
+    <script src="/views/events/genes/directives/geneEdit.js"></script>
+    <script src="/views/events/genes/directives/GeneEditCtrl.js"></script>
     <script src="/views/events/evidence/directives/evidenceTalk.js"></script>
     <script src="/views/events/evidence/directives/evidenceTabs.js"></script>
     <script src="/views/events/evidence/directives/evidenceSummary.js"></script>
     <script src="/views/events/variants/VariantsViewCtrl.js"></script>
-    <script src="/views/events/evidence/EvidenceViewCtrl.js"></script>
     <script src="/views/events/genes/GenesViewCtrl.js"></script>
+    <script src="/views/events/evidence/EvidenceViewCtrl.js"></script>
     <script src="/views/events/common/variantsMenu.js"></script>
     <script src="/common/security/login/LoginService.js"></script>
     <script src="/common/security/login/LoginFormController.js"></script>
     <script src="/views/events/EventsViewCtrl.js"></script>
-    <script src="/views/account/AccountCtrl.js"></script>
     <script src="/views/browse/BrowseCtrl.js"></script>
+    <script src="/views/account/AccountCtrl.js"></script>
     <script src="/common/services/angular-lodash.js"></script>
     <script src="/common/services/VariantsService.js"></script>
     <script src="/common/services/LodashFactory.js"></script>
@@ -123,6 +132,10 @@
     <script src="/common/services/EvidenceService.js"></script>
     <script src="/common/services/ConfigService.js"></script>
     <script src="/common/services/BrowseService.js"></script>
+    <script src="/common/security/Security.js"></script>
+    <script src="/common/security/RetryQueue.js"></script>
+    <script src="/common/security/Interceptor.js"></script>
+    <script src="/common/security/Authorization.js"></script>
     <script src="/common/directives/subheader.js"></script>
     <script src="/common/directives/sessionInfo.js"></script>
     <script src="/common/directives/quickSearch.js"></script>
@@ -130,10 +143,6 @@
     <script src="/common/directives/loginToolbar.js"></script>
     <script src="/common/directives/headerSearch.js"></script>
     <script src="/common/directives/civicLogo.js"></script>
-    <script src="/common/security/Security.js"></script>
-    <script src="/common/security/RetryQueue.js"></script>
-    <script src="/common/security/Interceptor.js"></script>
-    <script src="/common/security/Authorization.js"></script>
     <script src="/pages/authTestCtrl.js"></script>
     <script src="/pages/HomeCtrl.js"></script>
     <script src="/pages/HelpCtrl.js"></script>
