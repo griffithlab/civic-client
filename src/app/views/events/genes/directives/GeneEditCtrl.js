@@ -31,6 +31,10 @@
     };
 
     $scope.submitEdits = function() {
+      $log.info('submitEdits called.');
+    };
+
+    $scope.applyEdits = function() {
       $scope.geneEdit.$update({
           //entrez_name: $scope.geneEdit.entrez_name,
           description: $scope.geneEdit.description
@@ -51,10 +55,29 @@
           $log.info("update unsuccessful.");
           $scope.formStatus.messages = [];
           $scope.formStatus.errors = [];
-          $scope.formStatus.errors.push({
-            field: response.status,
-            errorMsg: response.statusText
-          });
+          var handleError = {
+            '401': function() {
+              $scope.formStatus.errors.push({
+                field: 'Unauthrorized',
+                errorMsg: 'You must be logged in to edit this gene.'
+              });
+            },
+            '403': function() {
+              $scope.formStatus.errors.push({
+                field: 'Insufficient Permissions',
+                errorMsg: 'You must be an Admin user to perform the requested action.'
+              });
+            },
+            '422': function(response) {
+              _.forEach(response.data.errors, function(value, key) {
+                $scope.formStatus.errors.push({
+                  field: key,
+                  errorMsg: value
+                });
+              });
+            }
+          };
+          handleError[response.status](response);
         });
     }
 

@@ -60,7 +60,9 @@
       })
       .state('events.genes.summary', {
         url: '/summary',
-        template: '<gene-summary class="col-xs-12"></gene-summary>'
+        template: '<gene-summary class="col-xs-12"></gene-summary>',
+        deepStateRedirect: true,
+        stickyState: true
       })
       .state('events.genes.talk', {
         url: '/talk',
