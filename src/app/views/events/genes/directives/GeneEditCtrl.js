@@ -43,10 +43,10 @@
           //entrez_name: $scope.geneEdit.entrez_name,
           description: $scope.geneEdit.description
           //clinical_description: $scope.geneEdit.clinical_description,
-//          "gene_category[]": $scope.geneEdit.details.gene_category.map(function(item) { return item.text; }),
-//          "protein_motif[]": $scope.geneEdit.details.protein_motif.map(function(item) { return item.text; }),
-//          "gene_pathway[]": $scope.geneEdit.details.gene_pathway.map(function(item) { return item.text; }),
-//          "protein_function[]": $scope.geneEdit.details.protein_functions.map(function(item) { return item.text; })
+//          "gene_categories[]": $scope.geneEdit.details.gene_categories.map(function(item) { return item.text; }),
+//          "protein_motifs[]": $scope.geneEdit.details.protein_motifs.map(function(item) { return item.text; }),
+//          "gene_pathways[]": $scope.geneEdit.details.gene_pathways.map(function(item) { return item.text; }),
+//          "protein_functions[]": $scope.geneEdit.details.protein_functions.map(function(item) { return item.text; })
         },
         function(response) {
           $log.info("update successful.");
