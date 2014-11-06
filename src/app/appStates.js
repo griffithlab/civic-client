@@ -60,8 +60,7 @@
       })
       .state('events.genes.summary', {
         url: '/summary',
-        template: '<gene-summary class="col-xs-12"></gene-summary>',
-        deepStateRedirect: true
+        template: '<gene-summary class="col-xs-12"></gene-summary>'
       })
       .state('events.genes.talk', {
         url: '/talk',
@@ -69,7 +68,8 @@
       })
       .state('events.genes.edit', {
         url: '/edit',
-        template: '<gene-edit class="col-xs-12"></gene-edit>'
+        template: '<gene-edit class="col-xs-12"></gene-edit>',
+        controller: 'GeneEditCtrl'
       })
       .state('events.genes.summary.variants', {
         abtract: true,

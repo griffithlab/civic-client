@@ -1,10 +1,37 @@
 <div class="geneEdit" xmlns="http://www.w3.org/1999/html">
   <form role="form" novalidate>
+    <div class="row form-instructions" ng-show="formStatus.messages.length == 0 && formStatus.errors.length == 0">
+      <div class="col-xs-12">
+        <p>Complete your edits using the form below, then press the 'Submit Edits' button.</p>
+      </div>
+    </div>
+    <div class="row form-messages" ng-show="formStatus.messages.length > 0">
+      <div class="col-xs-12">
+        <div class="row" ng-repeat="message in formStatus.messages">
+          <div class="col-xs-12">
+            <p>{{ message }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row form-errors" ng-show="formStatus.errors.length > 0">
+      <div class="col-xs-12">
+        <p>The requested updates contain the following errors, please correct and resubmit:</p>
+        <div class="row" ng-repeat="error in formStatus.errors">
+          <div class="col-xs-2">
+            <p class="pull-right"><strong>{{ error.field }}:</strong></p>
+          </div>
+          <div class="col-xs-10">
+            <p>{{ error.errorMsg }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="row form-row">
-      <div class="col-xs-8">
+      <div class="col-xs-12 col-md-6">
         <div class="form-group">
-          <label for="entrez_name">Name:</label>
+          <label for="entrez_name">Gene Name:</label>
           <input type="text" id="entrez_name" ng-model="geneEdit.entrez_name">
         </div>
         <div class="form-group">
@@ -15,7 +42,8 @@
           <label for="description">Clinical Description:</label>
           <textarea class="form-control" id="clinical_description" rows="5" ng-model="geneEdit.clinical_description"></textarea>
         </div>
-        <h3>Details</h3>
+      </div>
+      <div class="col-xs-12 col-md-6">
         <div class="form-group">
           <label>Gene Category</label>
           <tags-input ng-model="geneEdit.details.gene_category" replace-spaces-with-dashes="false">
@@ -45,11 +73,13 @@
         </div>
       </div>
     </div>
-    <div class="row button-row">
+    <div class="row">
       <div class="col-xs-12">
-        <div class="pull-right">
-          <button type="button" class="btn btn-default btn-lg">Discard Edits</button>
-          <button type="button" class="btn btn-primary btn-lg" ng-click="submitEdits()">Submit Edits</button>
+        <div class="button-row">
+          <div class="pull-right">
+            <button type="button" class="btn btn-default btn-lg">Discard Edits</button>
+            <button type="button" class="btn btn-primary btn-lg" ng-click="submitEdits()">Submit Edits</button>
+          </div>
         </div>
       </div>
     </div>
