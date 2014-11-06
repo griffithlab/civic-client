@@ -14,6 +14,9 @@ civic-client
 **Edit Gene:**
 ![Homepage](notes/screenshots/gene-edit-view.png)
 
+**Also looks pretty good on tablet and mobile displays:**
+![Homepage](notes/screenshots/tablet-gene-view.png)
+
 ## Development
 
 To start developing in the project, fire up the civic-server on port 3000 and run:

@@ -5,8 +5,11 @@
 .variantsMenu {
   background-color: @pageBackground2;
   border-bottom-right-radius: @border-radius-base;
-
   margin-left: -@contentPadding;
+
+  @media (min-width: @screen-md-min) {
+    min-height: 500px !important;
+  }
 
   ul {
     padding-top: @contentPadding;
