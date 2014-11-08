@@ -15,11 +15,15 @@
         </tr>
         <tr ng-show="gene.alias">
           <td class="name">Synonyms:</td>
-          <td class="value">{{ gene.alias  }}</td>
+          <td class="value">{{ gene.alias }}</td>
         </tr>
-        <tr ng-show="gene.pathway">
-          <td class="name">Pathway:</td>
-          <td class="value">{{ gene.pathway.join(",") }}</td>
+        <tr ng-show="gene.pathway.pharmgkb">
+          <td class="name">Pathways:</td>
+          <td class="value">
+            <ul ng-repeat="pathway in gene.pathway.pharmgkb">
+              <li><a href="https://www.pharmgkb.org/pathway/{{ pathway.id }}">{{ pathway.name }}</a></li>
+            </ul>
+          </td>
         </tr>
         <tr ng-show="gene.interpro">
           <td class="name">Interpro</td>
