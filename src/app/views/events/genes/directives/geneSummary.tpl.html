@@ -1,7 +1,7 @@
 <div class="geneSummary">
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <p ng-bind-html="gene.description | linky"></p>
+      <p ng-bind-html="gene.summary | linky"></p>
     </div>
     <div class="col-xs-12 col-md-6">
       <table class="table table-condensed summary-details">
@@ -9,9 +9,29 @@
           <col width="30%"/>
           <col width="70%"/>
         </colgroup>
-        <tr ng-repeat="(key, value) in gene.details">
-          <td class="name">{{ key | labelify }}:</td>
-          <td class=""value>{{ value | arrayToList }}</td>
+        <tr ng-show="gene.name">
+          <td class="name">Name:</td>
+          <td class="value">{{ gene.name }}</td>
+        </tr>
+        <tr ng-show="gene.alias">
+          <td class="name">Synonyms:</td>
+          <td class="value">{{ gene.alias  }}</td>
+        </tr>
+        <tr ng-show="gene.pathway">
+          <td class="name">Pathway:</td>
+          <td class="value">{{ gene.pathway.join(",") }}</td>
+        </tr>
+        <tr ng-show="gene.interpro">
+          <td class="name">Interpro</td>
+          <td class="value">
+            <ul ng-repeat="interpro in gene.interpro">
+              <li><a href="http://www.ebi.ac.uk/interpro/entry/{{ interpro.id }}">{{ interpro.id }}</a><br>{{ interpro.desc }}</li>
+            </ul>
+          </td>
+        </tr>
+        <tr ng-show="gene.interpro">
+          <td></td>
+          <td></td>
         </tr>
       </table>
     </div>
