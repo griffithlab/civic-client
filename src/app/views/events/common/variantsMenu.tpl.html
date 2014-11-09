@@ -1,14 +1,14 @@
 <div class="variantsMenu">
-  <div ng-switch on="gene.variants.length > 0 || typeof(gene.variantGroups)">
+  <div ng-switch on="civicGene.variants.length > 0 || typeof(civicGene.variantGroups)">
     <div ng-switch-when="true">
       <!-- show variants list -->
-      <div ng-show="gene.variants.length > 0">
+      <div ng-show="civicGene.variants.length > 0">
         <div class="title">
-          <span>{{ gene.entrez_name }} Variants:</span>
+          <span>{{ civicGene.entrez_name }} Variants:</span>
         </div>
         <ul class="nav nav-pills nav-stacked">
-          <li ng-repeat="variant in gene.variants" ui-sref-active="active">
-            <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_name, variantId: variant })">{{ variant }}</a>
+          <li ng-repeat="variant in civicGene.variants" ui-sref-active="active">
+            <a ui-sref="events.genes.summary.variants.summary({ geneId: civicGene.entrez_id, variantId: variant })">{{ variant }}</a>
           </li>
         </ul>
       </div>
@@ -16,14 +16,14 @@
       <!-- show variant groups -->
       <div ng-show="variantGroupsExist">
         <div class="title">
-          <span>{{ gene.entrez_name }} Variant Groups:</span>
+          <span>{{ civicGene.entrez_name }} Variant Groups:</span>
         </div>
         <ul class="nav nav-pills nav-stacked">
-          <li ng-repeat="(variantGroup, variants) in gene.variant_groups" ui-sref-active="active">
-            <a class="groupTitle" ui-sref="gene.variant-group({ geneId:gene.name, variantGroupId: variantGroup })"ui-sref-active="active">{{ variantGroup }}</a>
+          <li ng-repeat="(variantGroup, variants) in civicGene.variant_groups" ui-sref-active="active">
+            <a class="groupTitle" ui-sref="civicGene.variant-group({ geneId:civicGene.entrez_id, variantGroupId: variantGroup })"ui-sref-active="active">{{ variantGroup }}</a>
             <ul class="nav nav-pills nav-stacked">
               <li ng-repeat="variant in variants" ui-sref-active="active">
-                <a ui-sref="gene.summary.variants.summary({ geneId: gene.name, variantId: variant })">{{ variant }}</a>
+                <a ui-sref="civicGene.summary.variants.summary({ geneId: civicGene.entrez_id, variantId: variant })">{{ variant }}</a>
               </li>
             </ul>
           </li>

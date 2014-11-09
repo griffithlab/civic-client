@@ -104,6 +104,10 @@ angular.module('civic.common', []);
 angular.module('civic.login', []);
 angular.module('civic.browse', []);
 angular.module('civic.search', []);
-angular.module('civic.events', []);
+angular.module('civic.events', []).filter('isArray', function() {
+  return function (input) {
+    return angular.isArray(input);
+  }
+});
 
 angular.module('httpMocks', ['ngTable', 'ngMockE2E']);

@@ -10,7 +10,7 @@
     $rootScope.setTitle('Choose Gene')
 
     if (!$stateParams.geneId) {
-      $scope.genes = Genes.queryNames();
+//      $scope.genes = Genes.queryNames();
     }
   }
 })();
