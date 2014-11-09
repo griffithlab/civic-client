@@ -15,7 +15,7 @@
         </tr>
         <tr ng-show="gene.alias">
           <td class="name">Synonyms:</td>
-          <td class="value">{{ gene.alias }}</td>
+          <td class="value">{{ gene.alias.join(",") }}</td>
         </tr>
         <tr ng-show="gene.pathway.pharmgkb">
           <td class="name">Pathways:</td>

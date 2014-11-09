@@ -21,7 +21,20 @@
         },
         get: { // get a single gene
           method: 'JSONP',
-          isArray: false
+          isArray: false,
+          transformResponse: function(data){
+            console.log(data);
+            if(data.pathway){  
+              if(!angular.isArray(data.pathway.pharmgkb)){
+                data.pathway.pharmgkb = [data.pathway.pharmgkb];
+              }
+            }
+            if(!angular.isArray(data.alias)){
+              console.log(data.alias);
+              data.alias = [data.alias];
+            }
+            return data;
+          }
         }
       });
 
