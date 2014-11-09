@@ -17,7 +17,7 @@
       $scope.pathwayLimit = $scope.numLimit;
       $scope.interproLimit = $scope.numLimit;
       $scope.setPathwayLimit = function (lim) {
-          $scope.pathwayLimit = (lim <= 0) ? $scope.gene.pathway.pharmgkb.length : lim;
+          $scope.pathwayLimit = (lim <= 0) ? $scope.gene.pathway.length : lim;
       };
       $scope.setInterproLimit = function (lim) {
           $scope.interproLimit = (lim <= 0) ? $scope.gene.interpro.length : lim;
