@@ -23,15 +23,16 @@
           method: 'JSONP',
           isArray: false,
           transformResponse: function(data){
-            console.log(data);
             if(data.pathway){  
-              if(!angular.isArray(data.pathway.pharmgkb)){
+              if(!angular.isArray(data.pathway.pharmgkb) && data.pathway.pharmgkb){
                 data.pathway.pharmgkb = [data.pathway.pharmgkb];
               }
             }
-            if(!angular.isArray(data.alias)){
-              console.log(data.alias);
+            if(!angular.isArray(data.alias) && data.alias){
               data.alias = [data.alias];
+            }
+            if(!angular.isArray(data.interpro) && data.interpro){
+              data.interpro = [data.interpro];
             }
             return data;
           }
