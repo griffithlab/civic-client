@@ -6,13 +6,16 @@
   // @ngInject
   function GenesViewCtrl($log, $rootScope, $scope, $state,  $stateParams, Genes, CivicGenes) {
     $log.info("GenesViewCtrl loaded.");
-
+    
     $scope.gene = {};
     $scope.civicGene = {};
     // if no geneId supplied, reroute to /events so that user can choose a gene
     if($stateParams.geneId) {
+      var geneName;
       $scope.gene = Genes.get({'geneId': $stateParams.geneId });
-      $scope.civicGene = CivicGenes.get({'geneId': $stateParams.geneId});
+      $scope.civicGene = CivicGenes.get({'geneId': $stateParams.geneId}, function(data){  
+        $rootScope.setTitle('Gene ' + data.entrez_name + ' / ...')
+      });
       $scope.numLimit = 3;
       $scope.pathwayLimit = $scope.numLimit;
       $scope.interproLimit = $scope.numLimit;
@@ -24,7 +27,6 @@
       };
       $scope.variantGroupsExist = typeof($scope.gene.variant_groups) === 'object';
       $rootScope.setNavMode('sub');
-      $rootScope.setTitle('Event ' + $stateParams.geneId + ' / ...')
     } else {
       $state.go('events');
     }
