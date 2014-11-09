@@ -14,7 +14,7 @@
       var geneName;
       $scope.gene = Genes.get({'geneId': $stateParams.geneId });
       $scope.civicGene = CivicGenes.get({'geneId': $stateParams.geneId}, function(data){  
-        $rootScope.setTitle('Gene ' + data.entrez_name + ' / ...')
+       // $rootScope.setTitle('Gene ' + data.entrez_name + ' / ...')
       });
       $scope.numLimit = 3;
       $scope.pathwayLimit = $scope.numLimit;

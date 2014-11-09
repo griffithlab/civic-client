@@ -11,7 +11,8 @@
     // if no variant ID supplied, reroute to events.genes.summary so that user can choose a variant
     if($stateParams.variantId) {
       $scope.variant = Variants.get({'geneId': $stateParams.geneId, variantId: $stateParams.variantId }, function(data){ 
-        $rootScope.setTitle('Variant ' + data.entrez_gene + ' / ' + data.variant);
+        console.log(data)
+        $rootScope.setTitle('Variant ' +  data.entrez_name + ' / ' + data.name);
       });
       $rootScope.setNavMode('sub');
     } else {
