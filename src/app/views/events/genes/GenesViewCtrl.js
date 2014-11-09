@@ -4,13 +4,15 @@
     .controller('GenesViewCtrl', GenesViewCtrl);
 
   // @ngInject
-  function GenesViewCtrl($log, $rootScope, $scope, $state,  $stateParams, Genes) {
+  function GenesViewCtrl($log, $rootScope, $scope, $state,  $stateParams, Genes, CivicGenes) {
     $log.info("GenesViewCtrl loaded.");
 
     $scope.gene = {};
+    $scope.civicGene = {};
     // if no geneId supplied, reroute to /events so that user can choose a gene
     if($stateParams.geneId) {
       $scope.gene = Genes.get({'geneId': $stateParams.geneId });
+      $scope.civicGene = CivicGenes.get({'geneId': $stateParams.geneId});
       $scope.numLimit = 3;
       $scope.pathwayLimit = $scope.numLimit;
       $scope.interproLimit = $scope.numLimit;
