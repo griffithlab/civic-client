@@ -13,7 +13,7 @@
     }
 
     var Genes = $resource('/api/genes/:geneId',
-      { geneId: '@entrez_name' },
+      { geneId: '@entrez_id' },
       {
         query: { // get a list of all genes
           method: 'GET',
@@ -23,7 +23,9 @@
           method: 'GET',
           isArray: true,
           transformResponse: function(data) {
-            return _.uniq(_.pluck(JSON.parse(data), 'entrez_name'));
+            return _.uniq(_.map(JSON.parse(data), function(gene) {
+              return { entrez_name: gene.entrez_name, entrez_id: gene.entrez_id };
+            }));
           }
         },
         get: { // get a single gene
