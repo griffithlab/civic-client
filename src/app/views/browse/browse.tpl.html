@@ -1,7 +1,7 @@
 <div class="browseView">
   <table ng-table="tableParams" template-pagination="custom/pager" show-filter="true" class="browse-genes table table-curved table-condensed table-hover ng-table-responsive">
     <tbody>
-      <tr ng-repeat="gene in $data" ng-click="rowClick(gene)">
+      <tr ng-repeat="gene in $data" ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_id, variantId: gene.variant })">
         <td data-title="'Entrez Gene'" sortable="'entrez_gene'" filter="{ 'entrez_gene': 'text' }">
           <strong>{{ gene.entrez_gene }}</strong>
         </td>
