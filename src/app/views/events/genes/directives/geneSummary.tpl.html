@@ -4,16 +4,7 @@
       <p ng-bind-html="gene.description | linky"></p>
     </div>
     <div class="col-xs-12 col-md-6">
-      <table class="table table-condensed summary-details">
-        <colgroup>
-          <col width="30%"/>
-          <col width="70%"/>
-        </colgroup>
-        <tr ng-repeat="(key, value) in gene.details">
-          <td class="name">{{ key | labelify }}:</td>
-          <td class=""value>{{ value | arrayToList }}</td>
-        </tr>
-      </table>
+      <my-gene-info></my-gene-info>
     </div>
   </div>
 
@@ -23,8 +14,11 @@
         <variants-menu></variants-menu>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 selectMsg">
-        <p>&#8592; Please select a variant to view its details.</p>
+        <p>&#8592; Select a variant to view its details.</p>
       </div>
+      <pre>
+        {{ geneDetails | json }}
+      </pre>
     </div>
   </div>
 </div>
