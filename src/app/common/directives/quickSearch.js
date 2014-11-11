@@ -12,7 +12,7 @@
       return $http.get('/api/variants?filter[entrez_gene]=' + val).then(function (data) {
         return _.map(data.data.result, function (event) {
           return {
-            gene: event.entrez_gene,
+            gene: event.entrez_id,
             variant: event.variant,
             label: event.entrez_gene + '/' + event.variant
           }
