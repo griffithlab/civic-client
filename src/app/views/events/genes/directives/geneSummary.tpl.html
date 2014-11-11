@@ -1,6 +1,7 @@
 <div class="geneSummary">
   <div class="row">
     <div class="col-xs-12 col-md-6">
+      <p><strong>Clinical Description:</strong></p>
       <p ng-bind-html="gene.description | linky"></p>
     </div>
     <div class="col-xs-12 col-md-6">
@@ -16,9 +17,6 @@
       <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 selectMsg">
         <p>&#8592; Select a variant to view its details.</p>
       </div>
-      <pre>
-        {{ geneDetails | json }}
-      </pre>
     </div>
   </div>
 </div>

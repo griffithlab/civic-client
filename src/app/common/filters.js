@@ -18,7 +18,7 @@
       terminator = terminator ? terminator : "";
       if (_.isArray(input) && parseInt(limitTo, 10)) {
         var output = input.slice(0,limitTo).join(', ').concat(terminator);
-        if(showTotal) {
+        if(showTotal && input.length > limitTo) {
           output = output + '<span class="more"> (' + String(input.length - limitTo) + ' more)</span>';
         }
         return output;

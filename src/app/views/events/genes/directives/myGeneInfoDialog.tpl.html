@@ -1,4 +1,23 @@
 <div class="myGeneInfoDialog">
-  <p>Dialog Box</p>
-  <button type="button" class="btn btn-default" ng-click="done()">Done</button>
+  <div class="row header">
+    <div class="col-xs-12">
+      <h3>Gene {{ geneDetails.symbol }} Details from <a href="http://mygene.info/" target="_new">MyGene.info</a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p>
+        <strong>Gene Summary:</strong><br/>
+        <span ng-bind-html="geneDetails.summary"></span>
+      </p>
+      <pre>
+        {{ geneDetails | json }}
+      </pre>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="btn btn-default" ng-click="done()">Done</button>
+  </div>
+
+
 </div>

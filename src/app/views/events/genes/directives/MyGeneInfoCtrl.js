@@ -18,7 +18,7 @@
 
   // @ngInject
   function MyGeneInfoDialogCtrl($scope, $modalInstance, data) {
-      $scope.data = data;
+      $scope.geneDetails = data;
 
       $scope.done = function(){
         $modalInstance.close($scope.data);
