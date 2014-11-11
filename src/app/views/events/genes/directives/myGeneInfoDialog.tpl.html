@@ -10,14 +10,34 @@
         <strong>Gene Summary:</strong><br/>
         <span ng-bind-html="geneDetails.summary"></span>
       </p>
-      <pre>
-        {{ geneDetails | json }}
-      </pre>
     </div>
   </div>
   <div class="row">
-    <button type="button" class="btn btn-default" ng-click="done()">Done</button>
+    <div class="col-xs-12">
+      <p>
+        <strong>Synonyms:</strong><br/>
+        <span ng-bind-html="geneDetails.alias"></span>
+      </p>
+    </div>
   </div>
-
+  <div class="row grid-row">
+    <div class="col-xs-12">
+      <p><strong>Protein Domains:</strong></p>
+      <div ui-grid="{ data: geneDetails.interpro }" class="dataGrid" ui-grid-auto-resize></div>
+    </div>
+  </div>
+  <div class="row grid-row">
+    <div class="col-xs-12">
+      <p><strong>Pathways:</strong></p>
+      <div ui-grid="{ data: geneDetails.pathway }" class="dataGrid" ui-grid-auto-resize></div>
+    </div>
+  </div>
+  <div class="row button-row">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <button type="button" class="btn btn-default" ng-click="done()">Done</button>
+      </div>
+    </div>
+  </div>
 
 </div>

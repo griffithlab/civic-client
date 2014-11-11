@@ -4,6 +4,7 @@ angular.module('civicClient', [
   ,'ct.ui.router.extras'
   ,'ui.bootstrap'
   ,'ui.grid'
+  ,'ui.grid.autoResize'
   ,'ngTagsInput'
   ,'angular-lodash'
   ,'ngTable'
