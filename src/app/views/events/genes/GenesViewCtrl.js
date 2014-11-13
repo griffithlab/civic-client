@@ -18,10 +18,13 @@
       $scope.gene = Genes.get({'geneId': $stateParams.geneId });
       $scope.geneDetails = MyGene.getDetails({'geneId': $stateParams.geneId });
 
-      $scope.variantGroupsExist = typeof($scope.gene.variant_groups) === 'object';
+      $scope.gene.$promise.then(function(gene) {
+        $scope.variantGroupsExist = typeof(gene.variant_groups) === 'object';
+        $rootScope.setNavMode('sub');
+        $rootScope.setTitle('Event ' + gene.entrez_name + ' / ...')
+      });
 
-      $rootScope.setNavMode('sub');
-      $rootScope.setTitle('Event ' + $stateParams.geneId + ' / ...')
+
     }
   }
 })();
