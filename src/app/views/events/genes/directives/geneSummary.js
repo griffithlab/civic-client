@@ -8,10 +8,7 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: '/civic-client/views/events/genes/directives/geneSummary.tpl.html',
-      link: function($scope) {
-        console.log('geneSummary directive linked.');
-      }
+      templateUrl: '/civic-client/views/events/genes/directives/geneSummary.tpl.html'
     };
 
     return directive;

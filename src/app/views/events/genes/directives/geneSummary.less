@@ -7,8 +7,20 @@
   background-color: @pageBackground2;
   padding-top: @contentPadding;
 
-  > .row {
-//    padding: 0 15px;
+  .detail-corner {
+    @event-corner-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @event-corner-radius;
+    height: @event-corner-radius;
+    background-color: @pageBackground2;
+    .corner-edge {
+      border-top-left-radius: @event-corner-radius;
+      width: @event-corner-radius;
+      height: @event-corner-radius;
+      background-color: @pageBackground;
+    }
   }
 
   h3 {
