@@ -13,11 +13,11 @@
       <td class="value" ng-bind-html="geneDetails.alias | arrayToList "></td>
     </tr>
     <tr>
-      <td class="name">Pathways:</td>
+      <td class="name">Protein Domains:</td>
       <td class="value" ng-bind-html="geneDetails.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true"></td>
     </tr>
     <tr>
-      <td class="name">Protein Domains:</td>
+      <td class="name">Pathways:</td>
       <td class="value" ng-bind-html="geneDetails.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true"></td>
     </tr>
     <tr>
