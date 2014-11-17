@@ -2,19 +2,47 @@
   'use strict';
   angular.module('civic.browse')
     .controller('BrowseCtrl', BrowseCtrl)
-    .config(browseConfig)
     .filter('ceil', ceilFilter);
 
 // @ngInject
-  function BrowseCtrl($scope, $rootScope, Browse, $location, ngTableParams, $state, _, $log) {
+  function BrowseCtrl($scope, $rootScope, uiGridConstants, Browse, $location, _, $log) {
     $log.info('BrowseCtrl loaded');
     $rootScope.setNavMode('sub');
     $rootScope.setTitle('Browse Events');
 
     $scope.events = {};
 
-    Browse.get({}, function(data) {
-      $scope.events = data;
+    $scope.browseGridOptions = {
+      enableFiltering: true,
+      enableColumnMenus: false,
+      enableSorting: true,
+      rowTemplate: "<div ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" ng-click=\"getExternalScopes().rowClick()\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>",
+      columnDefs: [
+        { name: 'entrez_gene',
+          enableFiltering: true,
+          sort: { direction: uiGridConstants.ASC }
+        },
+        { name: 'entrez_id',
+          displayName: 'Entrez ID',
+          enableFiltering: true
+        },
+        { name: 'variant',
+          enableFiltering: true
+        }
+      ],
+      minRowsToShow: 20
+    };
+
+    $scope.gridInteractions = {
+      rowClick: function () {
+        $log.info('row clicked.');
+      }
+    };
+
+    Browse.get({ count: 100 }, function(data) {
+      // categories & protein functions return arrays,
+      $scope.browseGridOptions.data = data.result;
+
     });
 
 //    $scope.tableParams = new ngTableParams({
@@ -53,10 +81,6 @@
 //    };
   }
 
-// @ngInject
-  function browseConfig($stateProvider) {
-
-  }
 
   function ceilFilter() {
     return function(num) {
