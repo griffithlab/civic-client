@@ -104,7 +104,7 @@ angular.module('civic.pages', ['civic.security.authorization']);
 angular.module('civic.account', ['civic.security.authorization']);
 angular.module('civic.common', []);
 angular.module('civic.login', []);
-angular.module('civic.browse', []);
+angular.module('civic.browse', ['ui.grid.selection']);
 angular.module('civic.search', []);
 angular.module('civic.events', []);
 

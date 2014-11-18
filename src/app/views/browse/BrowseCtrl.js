@@ -5,7 +5,7 @@
     .filter('ceil', ceilFilter);
 
 // @ngInject
-  function BrowseCtrl($scope, $rootScope, uiGridConstants, Browse, $state, _, $log) {
+  function BrowseCtrl($scope, $rootScope, uiGridConstants, uiGridSelectionService, Browse, $state, _, $log) {
     $log.info('BrowseCtrl loaded');
     $rootScope.setNavMode('sub');
     $rootScope.setTitle('Browse Events');
@@ -35,11 +35,13 @@
 
     $scope.gridInteractions = {
       rowClick: function (row) {
-        $log.info('row ' + row.uid + ' clicked.');
-        $state.go('events.genes.summary.variants.summary', { geneId: row.entity.entrez_id, variantId: row.entity.variant });
+        $state.go('events.genes.summary.variants.summary', {
+          geneId: row.entity.entrez_id,
+          variantId: row.entity.variant
+        });
       },
-      rowHover: function() {
-        $log.info('row hover');
+      rowHover: function(row) {
+        row.isSelected ? row.isSelected = false : row.isSelected = true;
       }
     };
 
