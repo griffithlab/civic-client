@@ -5,23 +5,17 @@
 
 .browseView {
   padding-top: @contentPadding;
-  .browse-genes {
-    tbody td {
-      cursor: pointer;
-    }
-    td, th {
-      background-color: @tableBgColor;
-    }
-    th {
-      text-align: left;
-    }
+
+  .ui-grid-row {
+    cursor: pointer
   }
 
-  .pager-label, .pager-count {
-    display: inline-block;
+  .rowHover {
+    background-color: @civicPurple !important;
   }
 
-  .pager-count {
-    margin-left: 2em;
+  .dataGrid {
+
   }
+
 }
