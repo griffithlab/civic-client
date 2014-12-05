@@ -12,45 +12,11 @@
    * @constructor
    * @ngInject
    */
-  function LoginFormController($scope, $state, Security) {
-    // The model for this form
-    $scope.user = {};
-
-    // Any error message from failing to login
-    $scope.authError = null;
-
-    // The reason that we are being asked to login - for instance because we tried to access something to which we are not authorized
-    // We could do something different for each reason here but to keep it simple...
-    $scope.authReason = null;
-    if ( Security.getLoginReason() ) {
-      $scope.authReason = ( Security.isAuthenticated() ) ?
-        'NOT AUTHORIZED' :
-        'NOT AUTHENTICATED';
-    }
-
-    // Attempt to authenticate the user specified in the form's model
-    $scope.login = function() {
-      // Clear any previous Security errors
-      $scope.authError = null;
-
-      // Try to login
-      Security.login($scope.user.email, $scope.user.password).then(function(loggedIn) {
-        if ( !loggedIn ) {
-          // If we get here then the login failed due to bad credentials
-          $scope.authError = 'INVALID CREDENTIALS';
-        }
-      }, function() {
-        // If we get here then there was a problem with the login request to the server
-        $scope.authError = 'SERVER ERROR';
-      });
-    };
-
-    $scope.clearForm = function() {
-      $scope.user = {};
-    };
+  function LoginFormController($scope, $state, Security, $location) {
+    $scope.location = $location.absUrl()
 
     $scope.cancelLogin = function() {
       Security.cancelLogin();
-    };
+    }
   }
 })();

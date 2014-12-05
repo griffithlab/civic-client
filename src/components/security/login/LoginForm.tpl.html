@@ -3,15 +3,9 @@
     <h4>Sign in</h4>
   </div>
   <div class="modal-body">
-    <div class="alert alert-warning" ng-show="authReason">
-      {{authReason}}
-    </div>
-    <div class="alert alert-error" ng-show="authError">
-      {{authError}}
-    </div>
     <div class="alert alert-info">Login by choosing one of the methods below:</div>
     <ul>
-      <li><a href="api/auth/github">Login with Github</a></li>
+      <li><a href="api/auth/github?origin={{ location | encodeUri }}">Login with Github</a></li>
     </ul>
   </div>
   <div class="modal-footer">

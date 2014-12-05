@@ -1,7 +1,8 @@
 (function() {
   angular.module('civic.common')
     .filter('labelify', labelifyFilter)
-    .filter('arrayToList', arrayToListFilter);
+    .filter('arrayToList', arrayToListFilter)
+    .filter('encodeUri', encodeUri);
 
   // @ngInject
   function labelifyFilter() {
@@ -27,6 +28,13 @@
       } else {
         return input;
       }
+    }
+  }
+
+  // @ngInject
+  function encodeUri($window) {
+    return function (input) {
+      return $window.encodeURIComponent(input);
     }
   }
 })();
