@@ -1,26 +1,33 @@
 (function() {
   'use strict';
   angular.module('civic.events')
-    .directive('evidenceTable', evidenceTable);
+    .directive('evidenceTable', evidenceTable)
+    .controller('EvidenceTableCtrl', EvidenceTableCtrl);
 
 // @ngInject
   function evidenceTable() {
     var directive = {
       restrict: 'E',
-      templateUrl: '/civic-client/views/events/variants/directives/evidenceTable.tpl.html',
+      templateUrl: 'app/views/events/variants/directives/evidenceTable.tpl.html',
       replace: true,
       scope: false,
-      controller: function($scope, $state, $stateParams, $location, $log) {
-        $scope.rowClick = function(evidenceId) {
-          $state.go('events.genes.summary.variants.summary.evidence.summary', {
-            geneId: $stateParams.geneId,
-            variantId: $stateParams.variantId,
-            evidenceId: evidenceId
-          })
-        };
-      }
+      controller: 'EvidenceTableCtrl'
     };
 
     return directive;
   }
+
+  // ngInject
+  function EvidenceTableCtrl($scope, $state, $stateParams, $location, $log) {
+    $log.info('EvidenceTableCtrl instantiated.');
+
+    $scope.rowClick = function(evidenceId) {
+      $state.go('events.genes.summary.variants.summary.evidence.summary', {
+        geneId: $stateParams.geneId,
+        variantId: $stateParams.variantId,
+        evidenceId: evidenceId
+      })
+    };
+  }
+
 })();

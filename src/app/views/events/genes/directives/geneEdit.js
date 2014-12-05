@@ -8,7 +8,7 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: '/civic-client/views/events/genes/directives/geneEdit.tpl.html',
+      templateUrl: 'app/views/events/genes/directives/geneEdit.tpl.html',
       controller: 'GeneEditCtrl',
       link: function($scope) {
         console.log('geneEditdirective linked.');

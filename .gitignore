@@ -1,8 +1,5 @@
-.DS_Store
-.idea
-
-node_modules/
-bower_components/
-dist/*
-.tmp/
-!.gitkeep
+node_modules
+bower_components
+dist
+.tmp
+.sass-cache

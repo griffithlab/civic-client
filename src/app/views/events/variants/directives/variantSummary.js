@@ -8,8 +8,8 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: '/civic-client/views/events/variants/directives/variantSummary.tpl.html',
-      link: function($scope) {
+      templateUrl: 'app/views/events/variants/directives/variantSummary.tpl.html',
+      link: /* ngInject */ function($scope) {
         console.log('variantSummary directive linked.');
       }
     };

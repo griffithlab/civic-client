@@ -16,7 +16,7 @@
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
-      rowTemplate: '/civic-client/views/browse/browseGridRow.tpl.html',
+      rowTemplate: 'app/views/browse/browseGridRow.tpl.html',
       columnDefs: [
         { name: 'entrez_gene',
           enableFiltering: true,

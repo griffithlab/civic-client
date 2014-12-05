@@ -8,8 +8,8 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: '/civic-client/views/events/evidence/directives/evidenceTabs.tpl.html',
-      link: function($scope) {
+      templateUrl: 'app/views/events/evidence/directives/evidenceTabs.tpl.html',
+      link: /* ngInject */ function($scope) {
         console.log('geneTabs linked.');
         $scope.isAuthenticated = Security.isAuthenticated;
       }

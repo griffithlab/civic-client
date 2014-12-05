@@ -8,8 +8,8 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: '/civic-client/views/events/evidence/directives/evidenceTalk.tpl.html',
-      link: function($scope) {
+      templateUrl: 'app/views/events/evidence/directives/evidenceTalk.tpl.html',
+      link: /* ngInject */ function($scope) {
         console.log('evidenceTalk linked.');
       }
     };

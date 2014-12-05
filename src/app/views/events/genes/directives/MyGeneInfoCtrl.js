@@ -8,7 +8,7 @@
   function MyGeneInfoCtrl($log, $scope, dialogs) {
     $scope.viewGeneDetails = function() {
       $scope.dlg = dialogs.create(
-        '/civic-client/views/events/genes/directives/myGeneInfoDialog.tpl.html',
+        'app/views/events/genes/directives/myGeneInfoDialog.tpl.html',
         'MyGeneInfoDialogCtrl',
         $scope.geneDetails,
         'lg'

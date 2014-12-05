@@ -9,7 +9,7 @@
       restrict: 'E',
       replace: true,
       template: '<div class="variantTalk"><p>variant-talk directive!</p></div>',
-      link: function($scope) {
+      link: /*ngInject*/function($scope) {
         console.log('variantTalk linked.');
       }
     };

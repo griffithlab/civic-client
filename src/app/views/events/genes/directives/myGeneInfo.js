@@ -9,7 +9,7 @@
       restrict: 'E',
       replace: true,
       controller: 'MyGeneInfoCtrl', // controller for the MyGeneInfo dialog box can be found in the same file
-      templateUrl: '/civic-client/views/events/genes/directives/myGeneInfo.tpl.html',
+      templateUrl: 'app/views/events/genes/directives/myGeneInfo.tpl.html',
       link: function($scope) {
         console.log('myGeneInfo directive linked.');
       }

@@ -8,8 +8,8 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: '/civic-client/views/events/variants/directives/variantTabs.tpl.html',
-      link: function($scope) {
+      templateUrl: 'app/views/events/variants/directives/variantTabs.tpl.html',
+      link: /*ngInject*/ function($scope) {
         console.log('variantTabs linked.');
         $scope.isAuthenticated = Security.isAuthenticated;
       }

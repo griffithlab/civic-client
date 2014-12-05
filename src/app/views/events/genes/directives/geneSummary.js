@@ -8,7 +8,7 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: '/civic-client/views/events/genes/directives/geneSummary.tpl.html'
+      templateUrl: 'app/views/events/genes/directives/geneSummary.tpl.html'
     };
 
     return directive;

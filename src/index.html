@@ -1,0 +1,196 @@
+<!doctype html>
+<html class="no-js" ng-app="civicClient">
+  <head>
+    <meta charset="utf-8">
+    <title>CIVIC</title>
+    <!--<title ng-bind="$root.view.windowTitle">CIViC2 - Clinical Interpretations of Variants in Cancer</title>-->
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp,src}) styles/vendor.css -->
+    <link rel="stylesheet" href="app/vendor.css">
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="../bower_components/angular-dialog-service/dialogs.min.css" />
+    <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="../bower_components/ng-tags-input/ng-tags-input.min.css" />
+    <link rel="stylesheet" href="../bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,src}) styles/app.css -->
+    <link rel="stylesheet" href="app/index.css">
+    <link rel="stylesheet" href="app/pages/home.css">
+    <link rel="stylesheet" href="components/directives/civicLogo.css">
+    <link rel="stylesheet" href="components/directives/headerSearch.css">
+    <link rel="stylesheet" href="components/directives/loginToolbar.css">
+    <link rel="stylesheet" href="components/directives/mainMenu.css">
+    <link rel="stylesheet" href="components/directives/quickSearch.css">
+    <link rel="stylesheet" href="components/directives/subheader.css">
+
+    <link rel="stylesheet" href="app/views/browse/browse.css">
+
+    <link rel="stylesheet" href="app/views/events/eventsCommon.css">
+    <link rel="stylesheet" href="app/views/events/eventsView.css">
+    <link rel="stylesheet" href="app/views/events/common/variantsMenu.css">
+
+    <link rel="stylesheet" href="app/views/events/genes/genesView.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/geneEdit.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/geneSummary.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/geneTabs.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/geneTalk.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/myGeneInfo.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/myGeneInfoDialog.css">
+
+    <link rel="stylesheet" href="app/views/events/variants/variantsView.css">
+    <link rel="stylesheet" href="app/views/events/variants/directives/evidenceTable.css">
+    <link rel="stylesheet" href="app/views/events/variants/directives/variantSummary.css">
+    <link rel="stylesheet" href="app/views/events/variants/directives/variantTabs.css">
+    <link rel="stylesheet" href="app/views/events/variants/directives/variantTalk.css">
+
+    <link rel="stylesheet" href="app/views/events/evidence/directives/evidenceSummary.css">
+    <link rel="stylesheet" href="app/views/events/evidence/directives/evidenceTabs.css">
+    <link rel="stylesheet" href="app/views/events/evidence/directives/evidenceTalk.css">
+
+    <!-- endbuild -->
+
+    <!-- build:js scripts/modernizr.js -->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+      <header>
+        <div class="container">
+          <div class="header-bg">
+            <div class="row">
+              <div class="logo-main col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                <civic-logo></civic-logo>
+              </div>
+              <div class="nav-main col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                <div class="row">
+                  <main-menu class="col-xs-12"></main-menu>
+                </div>
+                <div class="row">
+                  <header-search class="col-xs-12 col-sm-12 col-md-10 col-lg-7 pull-right"></header-search>
+                </div>
+              </div>
+            </div> <!-- /row -->
+          </div> <!-- /header-bg -->
+        </div> <!-- /container -->
+      </header>
+      <main>
+        <subheader></subheader>
+        <div class="page-container">
+          <div class="container-fluid">
+            <div class="page-bg">
+              <ui-view id="contents">
+
+              </ui-view>
+            </div> <!-- /.page-bg-->
+          </div> <!-- /.container-fluid -->
+        </div><!-- /.page-container -->
+      </main>
+      <footer>
+        <div class="page-container">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12">
+                <p class="pull-right" style="margin-right:15px;">&copy; 2014 The Genome Institute at Washington University School of Medicine</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/ui-router-extras/release/ct-ui-router-extras.js"></script>
+    <script src="../bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/angular-translate/angular-translate.js"></script>
+    <script src="../bower_components/angular-dialog-service/dialogs.min.js"></script>
+    <script src="../bower_components/angular-dialog-service/dialogs-default-translations.min.js"></script>
+    <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="../bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,src}) scripts/app.js -->
+    <script src="app/index.js"></script>
+    <script src="components/services/LodashFactory.js"></script>
+    <script src="components/services/LodashFilters.js"></script>
+    <script src="components/appStates.js"></script>
+    <script src="components/filters.js"></script>
+
+    <script src="components/security/login/LoginService.js"></script>
+    <script src="components/security/login/LoginFormController.js"></script>
+    <script src="components/security/Security.js"></script>
+    <script src="components/security/RetryQueue.js"></script>
+    <script src="components/security/Interceptor.js"></script>
+    <script src="components/security/Authorization.js"></script>
+
+    <script src="components/services/GenesService.js"></script>
+    <script src="components/services/EvidenceService.js"></script>
+    <script src="components/services/ConfigService.js"></script>
+    <script src="components/services/BrowseService.js"></script>
+    <script src="components/services/MyGeneService.js"></script>
+    <script src="components/services/VariantsService.js"></script>
+
+    <script src="app/pages/authTestCtrl.js"></script>
+    <script src="app/pages/HomeCtrl.js"></script>
+    <script src="app/pages/HelpCtrl.js"></script>
+    <script src="app/pages/ContactCtrl.js"></script>
+    <script src="app/pages/CollaborateCtrl.js"></script>
+
+    <script src="components/directives/subheader.js"></script>
+    <script src="components/directives/sessionInfo.js"></script>
+    <script src="components/directives/quickSearch.js"></script>
+    <script src="components/directives/mainMenu.js"></script>
+    <script src="components/directives/headerSearch.js"></script>
+    <script src="components/directives/civicLogo.js"></script>
+    <script src="components/directives/loginToolbar.js"></script>
+
+    <script src="app/views/browse/BrowseCtrl.js"></script>
+
+    <script src="app/views/events/EventsViewCtrl.js"></script>
+    <script src="app/views/events/common/variantsMenu.js"></script>
+
+    <script src="app/views/events/genes/GenesViewCtrl.js"></script>
+    <script src="app/views/events/genes/directives/geneEdit.js"></script>
+    <script src="app/views/events/genes/directives/GeneEditCtrl.js"></script>
+    <script src="app/views/events/genes/directives/geneSummary.js"></script>
+    <script src="app/views/events/genes/directives/geneTabs.js"></script>
+    <script src="app/views/events/genes/directives/geneTalk.js"></script>
+    <script src="app/views/events/genes/directives/myGeneInfo.js"></script>
+    <script src="app/views/events/genes/directives/MyGeneInfoCtrl.js"></script>
+
+    <script src="app/views/events/variants/VariantsViewCtrl.js"></script>
+    <script src="app/views/events/variants/directives/evidenceTable.js"></script>
+    <script src="app/views/events/variants/directives/variantSummary.js"></script>
+    <script src="app/views/events/variants/directives/variantTabs.js"></script>
+    <script src="app/views/events/variants/directives/variantTalk.js"></script>
+
+    <script src="app/views/events/evidence/EvidenceViewCtrl.js"></script>
+    <script src="app/views/events/evidence/directives/evidenceSummary.js"></script>
+    <script src="app/views/events/evidence/directives/evidenceTabs.js"></script>
+    <script src="app/views/events/evidence/directives/evidenceTalk.js"></script>
+
+    <!-- inject:partials -->
+
+    <!-- endinject -->
+    <!-- endbuild -->
+
+
+  </body>
+</html>

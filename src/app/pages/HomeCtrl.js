@@ -3,9 +3,7 @@
   angular.module('civic.pages')
     .controller('HomeCtrl', HomeCtrl);
 
-  /**
-   * @ngInject
-   */
+  // @ngInject
   function HomeCtrl($rootScope, $scope, $log) {
     $log.info('HomeCtrl instantiated');
     $rootScope.setTitle('Home');
