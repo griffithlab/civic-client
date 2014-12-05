@@ -41,7 +41,7 @@
         });
       },
       rowHover: function(row) {
-        row.isSelected ? row.isSelected = false : row.isSelected = true;
+        // row.isSelected ? row.isSelected = false : row.isSelected = true;
       }
     };
 
