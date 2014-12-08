@@ -8,7 +8,6 @@
   function BrowseCtrl($scope, $rootScope, uiGridConstants, uiGridSelectionService, Browse, $state, _, $log) {
     $log.info('BrowseCtrl loaded');
     $rootScope.setNavMode('sub');
-    $rootScope.setTitle('Browse Events');
 
     $scope.events = {};
 

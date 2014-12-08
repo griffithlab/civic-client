@@ -6,7 +6,6 @@
   // @ngInject
   function HomeCtrl($rootScope, $scope, $log) {
     $log.info('HomeCtrl instantiated');
-    $rootScope.setTitle('Home');
     $rootScope.setNavMode('home');
   }
 })();

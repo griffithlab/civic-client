@@ -21,7 +21,6 @@
       $scope.gene.$promise.then(function(gene) {
         $scope.variantGroupsExist = typeof(gene.variant_groups) === 'object';
         $rootScope.setNavMode('sub');
-        $rootScope.setTitle('Event ' + gene.entrez_name + ' / ...');
       });
 
 

@@ -15,7 +15,6 @@
       /*jshint camelcase: false */
       $scope.variant.$promise.then(function(variant) {
         $rootScope.setNavMode('sub');
-        $rootScope.setTitle('Event ' + $scope.gene.entrez_name + ' / ' + variant.name);
       });
 
     } else {
