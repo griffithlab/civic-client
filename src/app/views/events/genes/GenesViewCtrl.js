@@ -5,7 +5,7 @@
 
   // @ngInject
   function GenesViewCtrl($log, $rootScope, $scope, $state,  $stateParams, Genes, MyGene) {
-    $log.info("GenesViewCtrl loaded.");
+    $log.info('GenesViewCtrl loaded.');
 
     $scope.gene = {};
     $scope.geneDetails = {};
@@ -17,11 +17,11 @@
     } else {
       $scope.gene = Genes.get({'geneId': $stateParams.geneId });
       $scope.geneDetails = MyGene.getDetails({'geneId': $stateParams.geneId });
-
+      /*jshint camelcase: false */
       $scope.gene.$promise.then(function(gene) {
         $scope.variantGroupsExist = typeof(gene.variant_groups) === 'object';
         $rootScope.setNavMode('sub');
-        $rootScope.setTitle('Event ' + gene.entrez_name + ' / ...')
+        $rootScope.setTitle('Event ' + gene.entrez_name + ' / ...');
       });
 
 

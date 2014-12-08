@@ -6,12 +6,6 @@
   // @ngInject
   function GenesService($resource, _) {
 
-    function transformTags (tags) {
-      return _.map(tags, function(tag) {
-        return { text: tag.name };
-      });
-    }
-
     var Genes = $resource('/api/genes/:geneId',
       { geneId: '@entrez_id' },
       {

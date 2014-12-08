@@ -31,14 +31,11 @@ angular.module('civicClient', [
   .run(appRun);
 
 // @ngInject
-function appRun(Security, $rootScope, $state, $log) {
+function appRun(Security, $rootScope, $state) {
   'use strict';
 
   $rootScope.view = {};
 
-  $rootScope.setTitle = function (title) {
-
-  };
   $rootScope.setNavMode = function(navMode) {
     $rootScope.view.navMode = navMode;
   };

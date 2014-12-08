@@ -4,8 +4,8 @@
     .config(routesConfig);
 
   // @ngInject
-  function routesConfig($stateProvider, $urlRouterProvider) {
-    // $stickyStateProvider.enableDebug(true);
+  function routesConfig($stateProvider, $urlRouterProvider, $stickyStateProvider) {
+    $stickyStateProvider.enableDebug(true);
 
     // 404
     $urlRouterProvider.otherwise('home');
@@ -42,8 +42,7 @@
       .state('contact', {
         url: '/contact',
         controller: 'ContactCtrl',
-        templateUrl: 'app/pages/contact.tpl.html'
-        ,
+        templateUrl: 'app/pages/contact.tpl.html',
         data: {
           titleExp: '"Contact"'
         }
@@ -85,7 +84,9 @@
         template: '<gene-summary class="col-xs-12"></gene-summary>',
         data: {
           titleExp: '"Gene " + view.params.geneId + " Summary"'
-        }
+        },
+        sticky: true,
+        deepStateRedirect: true
       })
       .state('events.genes.talk', {
         url: '/talk',
@@ -99,7 +100,7 @@
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
         data: {
-          titleExp: '"Gene" + view.params.geneId + " Edit"'
+          titleExp: '"Gene " + view.params.geneId + " Edit"'
         }
       })
       .state('events.genes.summary.variants', {

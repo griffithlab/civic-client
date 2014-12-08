@@ -20,7 +20,7 @@
   function SubheaderCtrl($scope, $rootScope, $log) {
     $log.info('SubheaderCtrl loaded');
     $scope.view = { };
-    $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+    $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams){
       $scope.view.params = toParams;
       $scope.view.title = $scope.$eval(toState.data.titleExp);
     });
