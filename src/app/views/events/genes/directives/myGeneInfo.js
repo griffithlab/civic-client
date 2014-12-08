@@ -10,7 +10,7 @@
       replace: true,
       controller: 'MyGeneInfoCtrl', // controller for the MyGeneInfo dialog box can be found in the same file
       templateUrl: 'app/views/events/genes/directives/myGeneInfo.tpl.html',
-      link: function($scope) {
+      link: /* ngInject */ function() {
         console.log('myGeneInfo directive linked.');
       }
     };

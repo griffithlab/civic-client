@@ -1,10 +1,11 @@
 (function() {
+  'use strict';
   angular.module('civic.security.login.toolbar', [])
     .directive('loginToolbar', loginToolbar);
 
   // @ngInject
-  function loginToolbar(Security, $log) {
-    'use strict';
+  function loginToolbar(Security) {
+
     var directive = {
       templateUrl: 'components/directives/loginToolbar.tpl.html',
       restrict: 'E',

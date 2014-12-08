@@ -4,14 +4,14 @@
     .config(routesConfig);
 
   // @ngInject
-  function routesConfig($stateProvider, $urlRouterProvider, $stickyStateProvider) {
+  function routesConfig($stateProvider, $urlRouterProvider) {
     // $stickyStateProvider.enableDebug(true);
 
     // 404
     $urlRouterProvider.otherwise('home');
 
     // abstract state redirects
-    $urlRouterProvider.when("/events/genes/:geneId", "/events/genes/:geneId/summary");
+    $urlRouterProvider.when('/events/genes/:geneId', '/events/genes/:geneId/summary');
 
     // static frontend pages
     $stateProvider

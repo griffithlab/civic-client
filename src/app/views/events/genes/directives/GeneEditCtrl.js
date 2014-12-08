@@ -4,8 +4,8 @@
     .controller('GeneEditCtrl', GeneEditCtrl);
 
   // @ngInject
-  function GeneEditCtrl($log, $rootScope, $scope, $stateParams, Genes) {
-    $log.info("GeneEditCtrl loaded.");
+  function GeneEditCtrl($log, $rootScope, $scope, $stateParams, Genes, _) {
+    $log.info('GeneEditCtrl loaded.');
     $rootScope.setNavMode('sub');
     $rootScope.setTitle('Edit Gene ' + $stateParams.geneId);
 
@@ -15,18 +15,19 @@
       errors: [],
       messages: []
     };
+    /*jshint camelcase: false */
     $scope.tags = {
       protein_motifs: function(query) {
-        return Genes.protein_motifs({ filter: query }).$promise
+        return Genes.protein_motifs({ filter: query }).$promise;
       },
       gene_categories: function(query) {
-        return Genes.gene_categories({ filter: query }).$promise
+        return Genes.gene_categories({ filter: query }).$promise;
       },
       gene_pathways: function(query) {
-        return Genes.gene_pathways({ filter: query }).$promise
+        return Genes.gene_pathways({ filter: query }).$promise;
       },
       protein_functions: function(query) {
-        return Genes.protein_functions({ filter: query }).$promise
+        return Genes.protein_functions({ filter: query }).$promise;
       }
     };
 
@@ -43,20 +44,20 @@
           //entrez_name: $scope.geneEdit.entrez_name,
           description: $scope.geneEdit.description
           //clinical_description: $scope.geneEdit.clinical_description,
-//          "gene_categories[]": $scope.geneEdit.details.gene_categories.map(function(item) { return item.text; }),
-//          "protein_motifs[]": $scope.geneEdit.details.protein_motifs.map(function(item) { return item.text; }),
-//          "gene_pathways[]": $scope.geneEdit.details.gene_pathways.map(function(item) { return item.text; }),
-//          "protein_functions[]": $scope.geneEdit.details.protein_functions.map(function(item) { return item.text; })
+//          'gene_categories[]': $scope.geneEdit.details.gene_categories.map(function(item) { return item.text; }),
+//          'protein_motifs[]': $scope.geneEdit.details.protein_motifs.map(function(item) { return item.text; }),
+//          'gene_pathways[]': $scope.geneEdit.details.gene_pathways.map(function(item) { return item.text; }),
+//          'protein_functions[]': $scope.geneEdit.details.protein_functions.map(function(item) { return item.text; })
         },
-        function(response) {
-          $log.info("update successful.");
+        function() {
+          $log.info('update successful.');
           $scope.$parent.gene = Genes.get({'geneId': $stateParams.geneId });
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];
-          $scope.formStatus.messages.push("Gene " + $scope.geneEdit.entrez_name + " updated successfully.");
+          $scope.formStatus.messages.push('Gene ' + $scope.geneEdit.entrez_name + ' updated successfully.');
         },
         function(response) {
-          $log.info("update unsuccessful.");
+          $log.info('update unsuccessful.');
           $scope.formStatus.messages = [];
           $scope.formStatus.errors = [];
           var handleError = {
@@ -83,7 +84,7 @@
           };
           handleError[response.status](response);
         });
-    }
+    };
 
   }
 })();

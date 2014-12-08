@@ -12,11 +12,11 @@
    * @constructor
    * @ngInject
    */
-  function LoginFormController($scope, $state, Security, $location) {
-    $scope.location = $location.absUrl()
+  function LoginFormController($scope, Security, $location) {
+    $scope.location = $location.absUrl();
 
     $scope.cancelLogin = function() {
       Security.cancelLogin();
-    }
+    };
   }
 })();

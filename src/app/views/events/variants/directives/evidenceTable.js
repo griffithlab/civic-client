@@ -18,7 +18,7 @@
   }
 
   // ngInject
-  function EvidenceTableCtrl($scope, $state, $stateParams, $location, $log) {
+  function EvidenceTableCtrl($scope, $state, $stateParams, $log) {
     $log.info('EvidenceTableCtrl instantiated.');
 
     $scope.rowClick = function(evidenceId) {
@@ -26,7 +26,7 @@
         geneId: $stateParams.geneId,
         variantId: $stateParams.variantId,
         evidenceId: evidenceId
-      })
+      });
     };
   }
 

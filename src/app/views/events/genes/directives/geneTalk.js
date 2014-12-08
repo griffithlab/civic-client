@@ -9,7 +9,7 @@
       restrict: 'E',
       replace: true,
       template: '<div class="geneTalk"><p>gene-talk directive</p></div>',
-      link: function($scope) {
+      link: /* ngInject */ function() {
         console.log('geneTalk linked.');
       }
     };

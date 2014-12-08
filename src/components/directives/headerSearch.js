@@ -1,17 +1,14 @@
-angular.module('civic.common')
-  .directive('headerSearch', headerSearch);
-
-function headerSearch() {
+(function() {
   'use strict';
+  angular.module('civic.common')
+    .directive('headerSearch', headerSearch);
 
-  function headerSearchCtrl() {
+  function headerSearch() {
+    return {
+      restrict: 'E',
+      templateUrl: 'components/directives/headerSearch.tpl.html',
+      controller: headerSearch
+    };
 
   }
-
-  return {
-    restrict: 'E',
-    templateUrl: 'components/directives/headerSearch.tpl.html',
-    controller: headerSearch
-  }
-
-}
+})();

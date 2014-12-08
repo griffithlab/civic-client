@@ -5,28 +5,29 @@
     .controller('quickSearchCtrl', quickSearchCtrl);
 
   // @ngInject
-  function quickSearchCtrl($scope, $log, $location, $resource, $http, $state) {
+  function quickSearchCtrl($scope, $log, $http, $state, _) {
     $log.info('quickSearchCtrl loaded.');
 
     $scope.getVariants = function (val) {
       return $http.get('/api/variants?filter[entrez_gene]=' + val).then(function (data) {
         return _.map(data.data.result, function (event) {
           return {
+            /*jshint camelcase: false */
             gene: event.entrez_id,
-            variant: event.variant,
-            label: event.entrez_gene + '/' + event.variant
-          }
-        })
+            label: event.entrez_gene + '/' + event.variant,
+            variant: event.variant
+          };
+        });
       });
     };
 
-    $scope.onSelect = function($item, $model, $label) {
+    $scope.onSelect = function($item) {
       $state.go('events.genes.summary.variants.summary', {geneId: $item.gene, variantId: $item.variant});
     };
 
   }
   // @ngInject
-  function quickSearch($log) {
+  function quickSearch() {
     var directive = {
       templateUrl: 'components/directives/quickSearch.tpl.html',
       restrict: 'E',

@@ -14,12 +14,7 @@
   }
 
   // @ngInject
-  function civicLogoController($scope, $rootScope, $log) {
-    var pageState = {
-      navMode: $rootScope.navMode,
-      pageTitle: $rootScope.pageTitle
-    };
-    $log.info('civicLogoController loaded');
+  function civicLogoController($scope, $rootScope) {
     $scope.navMode = $rootScope.navMode;
     $scope.pageTitle = $rootScope.pageTitle;
   }

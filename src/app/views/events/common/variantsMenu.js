@@ -11,7 +11,7 @@
       controller: 'GenesViewCtrl',
       replace: true,
       scope: true,
-      link: /* ngInject */ function($scope) {
+      link: /* ngInject */ function() {
         console.log('variantsMenu linked.');
       }
     };

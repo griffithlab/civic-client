@@ -2,9 +2,9 @@
 (function() {
   'use strict';
   angular.module('civic.security.service', [
-    'civic.security.retryQueue'
-    ,'civic.security.login'
-    ,'dialogs.main'
+    'civic.security.retryQueue',
+    'civic.security.login',
+    'dialogs.main'
   ])
     .factory('Security', Security);
 

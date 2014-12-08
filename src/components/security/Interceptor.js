@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.security.interceptor', ['civic.security.retryQueue'])
     .factory('Interceptor', Interceptor)
     .config(interceptorServiceConfig);
@@ -12,7 +13,6 @@
    * @ngInject
    */
   function Interceptor($injector, RetryQueue) {
-    'use strict';
     return function(promise) {
       // Intercept failed requests
       return promise.then(null, function(originalResponse) {
@@ -35,7 +35,6 @@
    * @ngInject
    */
   function interceptorServiceConfig($httpProvider) {
-    'use strict';
     $httpProvider.responseInterceptors.push('Interceptor');
   }
 })();

@@ -1,31 +1,31 @@
 angular.module('civicClient', [
   // vendor modules
-  'ui.router'
-  ,'ct.ui.router.extras'
-  ,'ui.bootstrap'
-  ,'ui.grid'
-  ,'ui.grid.autoResize'
-  ,'ngTagsInput'
-  ,'ngResource'
-  ,'dialogs.main'
+  'ui.router',
+  'ct.ui.router.extras',
+  'ui.bootstrap',
+  'ui.grid',
+  'ui.grid.autoResize',
+  'ngTagsInput',
+  'ngResource',
+  'dialogs.main',
 
   // http backend mocks
   //,'httpMocks'
 
   // config
-  ,'civic.states'
+  'civic.states',
 
   // app services
-  ,'civic.services'
-  ,'civic.security'
-  ,'civic.login'
-  ,'civic.common'
-  ,'angular-lodash'
+ 'civic.services',
+ 'civic.security',
+ 'civic.login',
+ 'civic.common',
+ 'angular-lodash',
   // app views
-  ,'civic.pages'
-  ,'civic.account'
-  ,'civic.browse'
-  ,'civic.events'
+  'civic.pages',
+  'civic.account',
+  'civic.browse',
+  'civic.events',
   //,'civic-client-templates'
 ])
   .run(appRun);
@@ -35,7 +35,7 @@ function appRun(Security, $rootScope, $state, $log) {
   'use strict';
   $rootScope.view = {};
   $rootScope.setTitle = function (title) {
-    $log.info("setting title to " + title);
+    $log.info('setting title to ' + title);
     $rootScope.view.windowTitle = 'CIViC: ' + title;
     $rootScope.view.pageTitle = title;
   };
@@ -76,10 +76,10 @@ function appRun(Security, $rootScope, $state, $log) {
 }
 // define app modules
 angular.module('civic.security', [
-  'civic.security.authorization'
-  ,'civic.security.service'
-  ,'civic.security.interceptor'
-  ,'civic.security.login'
+  'civic.security.authorization',
+  'civic.security.service',
+  'civic.security.interceptor',
+  'civic.security.login'
 ]);
 angular.module('civic.services', []);
 angular.module('civic.pages', ['civic.security.authorization']);

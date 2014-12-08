@@ -150,4 +150,4 @@
 
   // end register angular-lodash/filters
 
-}(angular, _));
+}(angular, window._));

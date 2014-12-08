@@ -12,6 +12,7 @@
 
     $scope.events = {};
 
+    /*jshint camelcase: false */
     $scope.browseGridOptions = {
       enableFiltering: true,
       enableColumnMenus: false,
@@ -39,10 +40,10 @@
           geneId: row.entity.entrez_id,
           variantId: row.entity.variant
         });
-      },
-      rowHover: function(row) {
-        // row.isSelected ? row.isSelected = false : row.isSelected = true;
       }
+      //,rowHover: function(row) {
+      //  row.isSelected ? row.isSelected = false : row.isSelected = true;
+      //}
     };
 
     Browse.get({ count: 100 }, function(data) {
@@ -55,7 +56,7 @@
   function ceilFilter() {
     return function(num) {
       return Math.ceil(num);
-    }
+    };
   }
 
 })();

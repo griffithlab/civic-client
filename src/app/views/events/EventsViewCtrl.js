@@ -5,9 +5,9 @@
 
   // @ngInject
   function EventsViewCtrl($log, $rootScope, $scope, $stateParams, Genes) {
-    $log.info("EventsViewCtrl loaded.");
+    $log.info('EventsViewCtrl loaded.');
     $rootScope.setNavMode('sub');
-    $rootScope.setTitle('Choose Gene')
+    $rootScope.setTitle('Choose Gene');
 
     if (!$stateParams.geneId) {
       $scope.genes = Genes.queryNames();

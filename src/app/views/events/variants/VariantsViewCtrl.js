@@ -5,13 +5,14 @@
 
   // @ngInject
   function VariantsViewCtrl($log, $rootScope, $scope, $state, $stateParams, Variants) {
-    $log.info("VariantsViewCtrl loaded.");
+    $log.info('VariantsViewCtrl loaded.');
 
     $scope.variant = {};
     // if no variant ID supplied, reroute to events.genes.summary so that user can choose a variant
     if($stateParams.variantId) {
       $scope.variant = Variants.get({'geneId': $stateParams.geneId, variantId: $stateParams.variantId });
 
+      /*jshint camelcase: false */
       $scope.variant.$promise.then(function(variant) {
         $rootScope.setNavMode('sub');
         $rootScope.setTitle('Event ' + $scope.gene.entrez_name + ' / ' + variant.name);

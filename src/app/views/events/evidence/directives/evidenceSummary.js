@@ -4,13 +4,13 @@
     .directive('evidenceSummary', evidenceSummary);
 
 // @ngInject
-  function evidenceSummary() {
+  function evidenceSummary($log) {
     var directive = {
       restrict: 'E',
       replace: true,
       templateUrl: 'app/views/events/evidence/directives/evidenceSummary.tpl.html',
-      link: /* ngInject */ function($scope) {
-        console.log('evidenceSummary directive linked.');
+      link: /* ngInject */ function() {
+        $log.info('evidenceSummary directive linked.');
       }
     };
 

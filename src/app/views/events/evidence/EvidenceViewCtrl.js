@@ -5,7 +5,7 @@
 
   // @ngInject
   function EvidenceViewCtrl($log, $rootScope, $scope, $state, $stateParams, Evidence) {
-    $log.info("EvidenceViewCtrl loaded.");
+    $log.info('EvidenceViewCtrl loaded.');
 
     $scope.evidence= {};
     // if no evidence ID supplied, reroute to events.genes.summary.variants.summary so that user can choose an evidence item
@@ -16,7 +16,8 @@
         'evidenceId': $stateParams.evidenceId
       });
       $rootScope.setNavMode('sub');
-      $rootScope.setTitle('Event ' + $scope.gene.entrez_name + ' / ' + $stateParams.variantId)
+      /*jshint camelcase: false */
+      $rootScope.setTitle('Event ' + $scope.gene.entrez_name + ' / ' + $stateParams.variantId);
     } else {
       $state.go('events.genes.summary.variants.summary', { geneId: $stateParams.geneId, variantId: $stateParams.variantId });
     }
