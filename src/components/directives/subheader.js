@@ -17,12 +17,11 @@
   }
 
   // @ngInject
-  function SubheaderCtrl($scope, $rootScope, $log, $timeout, $stateParams) {
+  function SubheaderCtrl($scope, $rootScope, $log) {
     $log.info('SubheaderCtrl loaded');
     $scope.view = { };
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
-      $scope.view.geneId = toParams.geneId;
-      $scope.view.variantId = toParams.variantId;
+      $scope.view.params = toParams;
       $scope.view.title = $scope.$eval(toState.data.titleExp);
     });
   }
