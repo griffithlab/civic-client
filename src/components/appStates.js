@@ -79,7 +79,10 @@
       })
       .state('events.genes.summary.variants.summary', {
         url: '/summary',
-        template: '<variant-summary></variant-summary>'
+        template: '<variant-summary></variant-summary>',
+        data: {
+          titleExp: '"Event " + view.geneId + "/" + view.variantId'
+        }
       })
       .state('events.genes.summary.variants.talk', {
         url:'/talk',

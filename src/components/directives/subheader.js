@@ -17,13 +17,14 @@
   }
 
   // @ngInject
-  function SubheaderCtrl($scope, $rootScope, $log) {
+  function SubheaderCtrl($scope, $rootScope, $log, $timeout, $stateParams) {
     $log.info('SubheaderCtrl loaded');
-    // $scope.viewTitle = $rootScope.viewTitle;
-    $scope.$watch(function() { return $rootScope.viewTitle; },
-      function() {
-        $scope.viewTitle = $rootScope.viewTitle;
-      });
+    $scope.view = { };
+    $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+      $scope.view.geneId = toParams.geneId;
+      $scope.view.variantId = toParams.variantId;
+      $scope.view.title = $scope.$eval(toState.data.titleExp);
+    });
   }
 
   // @ngInject
