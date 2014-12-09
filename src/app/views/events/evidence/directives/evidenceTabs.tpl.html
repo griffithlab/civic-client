@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-6 name">
       <h3>
-        Evidence {{ evidence.id}}
+        Evidence ID: {{evidence.id}}
         <a ng-show="isAuthenticated()" ui-sref="events.genes.summary.variants.summary.evidence.edit({geneId: gene.entrez_name, variantId: variant.name, evidenceId: evidence.id })" class="btn btn-primary btn-xs btn-edit">Edit Evidence</a>
       </h3>
     </div>

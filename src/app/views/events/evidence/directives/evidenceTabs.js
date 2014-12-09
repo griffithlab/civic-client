@@ -9,8 +9,7 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'app/views/events/evidence/directives/evidenceTabs.tpl.html',
-      link: /* ngInject */ function($scope) {
-        console.log('geneTabs linked.');
+      controller: /* ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
       }
     };

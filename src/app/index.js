@@ -85,6 +85,6 @@ angular.module('civic.common', []);
 angular.module('civic.login', []);
 angular.module('civic.browse', ['ui.grid.selection']);
 angular.module('civic.search', []);
-angular.module('civic.events', []);
+angular.module('civic.events', ['ui.grid.selection']);
 
 angular.module('httpMocks', ['ngTable', 'ngMockE2E']);

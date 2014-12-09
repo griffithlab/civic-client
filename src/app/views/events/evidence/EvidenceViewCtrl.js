@@ -16,8 +16,6 @@
         'evidenceId': $stateParams.evidenceId
       });
       $rootScope.setNavMode('sub');
-      /*jshint camelcase: false */
-      $rootScope.setTitle('Event ' + $scope.gene.entrez_name + ' / ' + $stateParams.variantId);
     } else {
       $state.go('events.genes.summary.variants.summary', { geneId: $stateParams.geneId, variantId: $stateParams.variantId });
     }

@@ -18,7 +18,7 @@
   }
 
 // @ngInject
-  function EvidenceGridCtrl($scope, uiGridConstants, uiGridSelectionService, _, $log) {
+  function EvidenceGridCtrl($scope, uiGridConstants, uiGridSelectionService, $state, $log) {
     $log.info('EvidenceGridCtrl loaded');
 
     /*jshint camelcase: false */
@@ -26,20 +26,17 @@
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
+      enableRowSelection: true,
+      enableRowHeaderSelection: false,
+      multiSelect: false,
+      modifierKeysToMultiSelect: false,
+      noUnselect: true,
       rowTemplate: 'app/views/events/variants/directives/evidenceGridRow.tpl.html',
       columnDefs: [
-        { name: 'rating',
-          displayName: 'Rating',
-          enableFiltering: false,
-          sort: { direction: uiGridConstants.ASC }
-        },
-        { name: 'evidence_level',
-          displayName: 'level',
-          enableFiltering: true
-        },
         { name: 'explanation',
-          displayName: 'Explanation',
-          enableFiltering: true
+          displayName: 'Supporting Evidence',
+          enableFiltering: true,
+          width: '50%'
         },
         { name: 'disease',
           displayName: 'Disease',
@@ -49,25 +46,50 @@
           displayName: 'Drug',
           enableFiltering: true
         },
-        { name: 'id',
-          displayName: 'ID',
-          enableFiltering: true
+        { name: 'evidence_level',
+          displayName: 'level',
+          enableFiltering: false,
+          width: '10%'
+        },
+        { name: 'rating',
+          displayName: 'Rating',
+          enableFiltering: false,
+          sort: { direction: uiGridConstants.ASC },
+          width: '10%'
         }
       ],
-      minRowsToShow: 10
+      minRowsToShow: 8
+    };
+
+    $scope.evidenceGridOptions.onRegisterApi = function(gridApi){
+      //set gridApi on scope
+      $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope,function(row){
+        var msg = 'row selected ' + row;
+        $log.info(msg);
+        $state.go('events.genes.summary.variants.summary.evidence.summary', {
+          geneId: $scope.gene.entrez_id,
+          variantId: $scope.variant.name,
+          evidenceId: row.entity.id
+        });
+      });
+
+      gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+        var msg = 'rows changed ' + rows.length;
+        $log.info(msg);
+      });
     };
 
     $scope.gridInteractions = {
       rowClick: function (row) {
+        $log.info("Row " + row.entity.id + " clicked.");
+
         $state.go('events.genes.summary.variants.summary.evidence.summary', {
-          geneId: row.entity.entrez_id,
-          variantId: row.entity.variant,
-          evidenceId: row.entity.evidenceId
+          geneId: $scope.gene.entrez_id,
+          variantId: $scope.variant.name,
+          evidenceId: row.entity.id
         });
       }
-      //,rowHover: function(row) {
-      //  row.isSelected ? row.isSelected = false : row.isSelected = true;
-      //}
     };
 
     $scope.variant.$promise.then(function(variant) {
