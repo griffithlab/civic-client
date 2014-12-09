@@ -101,16 +101,16 @@ gulp.task('images', function () {
     .pipe($.size());
 });
 
-gulp.task('fonts', function () {
-  return es.concat(
-    gulp.src($.mainBowerFiles()),
-    gulp.src('src/assets/fonts/**/*')
-  )
-    .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
-    .pipe($.flatten())
-    .pipe(gulp.dest('dist/assets/fonts'))
-    .pipe($.size());
-});
+  gulp.task('fonts', function () {
+    return es.concat(
+      gulp.src($.mainBowerFiles()),
+      gulp.src('src/assets/fonts/**/*')
+    )
+      .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+      .pipe($.flatten())
+      .pipe(gulp.dest('dist/assets/fonts'))
+      .pipe($.size());
+  });
 
 gulp.task('misc', function () {
   return gulp.src('src/**/*.ico')

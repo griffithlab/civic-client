@@ -14,7 +14,7 @@
     $urlRouterProvider.when('/events/genes/:geneId', '/events/genes/:geneId/summary');
 
     // static frontend pages
-    // titles are parsed in SubheaderCtrl on $stateChangeSuccess
+    // titleExp are parsed in subheader directive's SubheaderCtrl on $stateChangeSuccess
     $stateProvider
       .state('home', {
         url: '/home',
