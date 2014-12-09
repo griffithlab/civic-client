@@ -5,7 +5,7 @@
 
   // @ngInject
   function routesConfig($stateProvider, $urlRouterProvider, $stickyStateProvider) {
-    $stickyStateProvider.enableDebug(true);
+    // $stickyStateProvider.enableDebug(true);
 
     // 404
     $urlRouterProvider.otherwise('home');
