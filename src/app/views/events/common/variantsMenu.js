@@ -10,10 +10,7 @@
       templateUrl: 'app/views/events/common/variantsMenu.tpl.html',
       controller: 'GenesViewCtrl',
       replace: true,
-      scope: true,
-      link: /* ngInject */ function() {
-        console.log('variantsMenu linked.');
-      }
+      scope: true
     };
 
     return directive;

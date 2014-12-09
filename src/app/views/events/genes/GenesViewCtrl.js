@@ -19,11 +19,9 @@
       $scope.geneDetails = MyGene.getDetails({'geneId': $stateParams.geneId });
       /*jshint camelcase: false */
       $scope.gene.$promise.then(function(gene) {
-        $scope.variantGroupsExist = typeof(gene.variant_groups) === 'object';
+        $scope.variantGroupsExist = _.has(gene, 'variant_groups') && gene.variant_groups.length() > 0;
         $rootScope.setNavMode('sub');
       });
-
-
     }
   }
 })();

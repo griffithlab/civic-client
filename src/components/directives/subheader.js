@@ -22,6 +22,9 @@
     $scope.view = { };
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams){
       $scope.view.params = toParams;
+      if(_.has(toParams.geneId)) {
+        $scope.view.gene = Genes.get({'geneId': toParams.geneId });
+      }
       $scope.view.title = $scope.$eval(toState.data.titleExp);
     });
   }

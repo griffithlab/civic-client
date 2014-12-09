@@ -14,6 +14,7 @@
     $urlRouterProvider.when('/events/genes/:geneId', '/events/genes/:geneId/summary');
 
     // static frontend pages
+    // titles are parsed in SubheaderCtrl on $stateChangeSuccess
     $stateProvider
       .state('home', {
         url: '/home',
@@ -83,7 +84,7 @@
         url: '/summary',
         template: '<gene-summary class="col-xs-12"></gene-summary>',
         data: {
-          titleExp: '"Gene " + view.params.geneId + " Summary"'
+          titleExp: '"Gene " + view.gene.entrez_name + " Summary"'
         },
         sticky: true,
         deepStateRedirect: true
@@ -113,14 +114,14 @@
         url: '/summary',
         template: '<variant-summary></variant-summary>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " Summary"'
+          titleExp: '"Event " + view.gene.geneId + " / " + view.params.variantId + " Summary"'
         }
       })
       .state('events.genes.summary.variants.talk', {
         url:'/talk',
         template: '<variant-talk></variant-talk>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " Talk"'
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Talk"'
         }
       })
       .state('events.genes.summary.variants.edit', {
