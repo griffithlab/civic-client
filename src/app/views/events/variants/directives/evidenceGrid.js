@@ -17,7 +17,7 @@
     return directive;
   }
 
-// @ngInject
+  // @ngInject
   function EvidenceGridCtrl($scope, uiGridConstants, uiGridSelectionService, $state, $log) {
     $log.info('EvidenceGridCtrl loaded');
 
@@ -64,7 +64,7 @@
     $scope.evidenceGridOptions.onRegisterApi = function(gridApi){
       //set gridApi on scope
       $scope.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope,function(row){
+      gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var msg = 'row selected ' + row;
         $log.info(msg);
         $state.go('events.genes.summary.variants.summary.evidence.summary', {
@@ -73,7 +73,6 @@
           evidenceId: row.entity.id
         });
       });
-
       gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
         var msg = 'rows changed ' + rows.length;
         $log.info(msg);
