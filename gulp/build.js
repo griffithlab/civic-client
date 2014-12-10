@@ -74,7 +74,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
     .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts'))
-    .pipe($.replace('url(\'ui-grid.','url(\'/assets/fonts/ui-grid.'))
+    .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')'))
     .pipe($.csso())
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
