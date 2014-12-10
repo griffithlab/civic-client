@@ -12,7 +12,6 @@
       templateUrl: 'app/views/events/evidence/directives/evidenceTabs.tpl.html',
       controller: EvidenceTabsCtrl
     };
-
     return directive;
   }
 
