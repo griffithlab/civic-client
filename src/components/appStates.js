@@ -114,7 +114,7 @@
         url: '/summary',
         template: '<variant-summary></variant-summary>',
         data: {
-          titleExp: '"Event " + view.gene.geneId + " / " + view.params.variantId + " Summary"'
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Summary"'
         }
       })
       .state('events.genes.summary.variants.talk', {
@@ -128,7 +128,7 @@
         url:'/edit',
         template: '<p>Edit Variant {{ variant.name }}</p>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " Edit'
+          titleExp: '"Event " + view.gene.entrez_name+ " / " + view.params.variantId + " Edit'
         }
       })
       .state('events.genes.summary.variants.summary.evidence', {
@@ -141,7 +141,7 @@
         url: '/summary',
         template: '<evidence-summary></evidence-summary>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " / " + view.params.evidenceId + " Summary"'
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " / " + view.params.evidenceId + " Summary"'
         }
       })
       .state('events.genes.summary.variants.summary.evidence.talk', {

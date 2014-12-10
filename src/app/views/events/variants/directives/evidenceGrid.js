@@ -18,7 +18,7 @@
   }
 
   // @ngInject
-  function EvidenceGridCtrl($scope, uiGridConstants, uiGridSelectionService, $state, $log) {
+  function EvidenceGridCtrl($scope, uiGridConstants, uiGridSelectionService, $stateParams, $state, $timeout, $log) {
     $log.info('EvidenceGridCtrl loaded');
 
     /*jshint camelcase: false */
@@ -58,42 +58,38 @@
           width: '10%'
         }
       ],
-      minRowsToShow: 8
+      maxRowsToShow: 5
     };
 
     $scope.evidenceGridOptions.onRegisterApi = function(gridApi){
+
       //set gridApi on scope
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        var msg = 'row selected ' + row;
-        $log.info(msg);
         $state.go('events.genes.summary.variants.summary.evidence.summary', {
           geneId: $scope.gene.entrez_id,
           variantId: $scope.variant.name,
           evidenceId: row.entity.id
         });
       });
-      gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
-        var msg = 'rows changed ' + rows.length;
-        $log.info(msg);
+
+      // fetch variant data
+      $scope.variant.$promise.then(function(variant) {
+        $scope.evidenceGridOptions.data = variant.evidence_items;
+
+        // if evidenceId specified in state, scroll to evidence item's row and select it
+        if(_.has($stateParams, 'evidenceId')) {
+          var rowEntity = _.find(variant.evidence_items, function(item) { return item.id == $stateParams.evidenceId; });
+          $timeout(function() { // need timeout here until ui-grid adds a 'data rendered' event
+            gridApi.selection.selectRow(rowEntity);
+            gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
+          }, 250);
+        }
+
       });
+
     };
 
-    $scope.gridInteractions = {
-      rowClick: function (row) {
-        $log.info("Row " + row.entity.id + " clicked.");
-
-        $state.go('events.genes.summary.variants.summary.evidence.summary', {
-          geneId: $scope.gene.entrez_id,
-          variantId: $scope.variant.name,
-          evidenceId: row.entity.id
-        });
-      }
-    };
-
-    $scope.variant.$promise.then(function(variant) {
-      $scope.evidenceGridOptions.data = variant.evidence_items;
-    });
 
 
   }

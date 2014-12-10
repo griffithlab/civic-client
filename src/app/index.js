@@ -5,6 +5,7 @@ angular.module('civicClient', [
   'ui.bootstrap',
   'ui.grid',
   'ui.grid.autoResize',
+  'ui.grid.cellNav',
   'ngTagsInput',
   'ngResource',
   'dialogs.main',

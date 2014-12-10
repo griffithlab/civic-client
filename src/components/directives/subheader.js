@@ -17,15 +17,19 @@
   }
 
   // @ngInject
-  function SubheaderCtrl($scope, $rootScope, $log) {
+  function SubheaderCtrl($scope, $rootScope, $log, Genes) {
     $log.info('SubheaderCtrl loaded');
     $scope.view = { };
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams){
       $scope.view.params = toParams;
-      if(_.has(toParams.geneId)) {
-        $scope.view.gene = Genes.get({'geneId': toParams.geneId });
+      if(_.has(toParams, 'geneId')) {
+        Genes.get({'geneId': toParams.geneId }).$promise.then(function(gene) {
+          $scope.view.gene = gene;
+          $scope.view.title = $scope.$eval(toState.data.titleExp);
+        });
+      } else {
+        $scope.view.title = $scope.$eval(toState.data.titleExp);
       }
-      $scope.view.title = $scope.$eval(toState.data.titleExp);
     });
   }
 
