@@ -20,7 +20,7 @@
       /*jshint camelcase: false */
       $scope.gene.$promise.then(function(gene) {
         $scope.variantGroupsExist = _.has(gene, 'variant_groups') && gene.variant_groups.length > 0;
-        $rootScope.setNavMode('sub');
+
       });
     }
   }

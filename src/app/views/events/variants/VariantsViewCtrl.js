@@ -14,7 +14,7 @@
 
       /*jshint camelcase: false */
       $scope.variant.$promise.then(function(variant) {
-        $rootScope.setNavMode('sub');
+
       });
 
     } else {

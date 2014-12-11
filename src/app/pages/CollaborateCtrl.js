@@ -7,8 +7,6 @@
 // @ngInject
   function CollaborateCtrl ($scope, $rootScope, $log) {
     $log.info('CollaborateCtrl loaded.');
-    $rootScope.setNavMode('sub');
-
     $scope.loadedMsg = 'Loaded Collaborate!';
   }
 })();

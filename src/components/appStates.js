@@ -21,7 +21,8 @@
         controller: 'HomeCtrl',
         templateUrl: 'app/pages/home.tpl.html',
         data: {
-          titleExp: '"Home"'
+          titleExp: '"Home"',
+          navMode: 'home'
         }
       })
       .state('collaborate', {
@@ -29,7 +30,8 @@
         controller: 'CollaborateCtrl',
         templateUrl: 'app/pages/collaborate.tpl.html',
         data: {
-          titleExp: '"Collaborate"'
+          titleExp: '"Collaborate"',
+          navMode: 'sub'
         }
       })
       .state('help', {
@@ -37,7 +39,8 @@
         controller: 'HelpCtrl',
         templateUrl: 'app/pages/help.tpl.html',
         data: {
-          titleExp: '"Help"'
+          titleExp: '"Help"',
+          navMode: 'sub'
         }
       })
       .state('contact', {
@@ -45,7 +48,8 @@
         controller: 'ContactCtrl',
         templateUrl: 'app/pages/contact.tpl.html',
         data: {
-          titleExp: '"Contact"'
+          titleExp: '"Contact"',
+          navMode: 'sub'
         }
       });
 
@@ -56,7 +60,8 @@
         controller: 'BrowseCtrl',
         templateUrl: 'app/views/browse/browse.tpl.html',
         data: {
-          titleExp: '"Browse"'
+          titleExp: '"Browse"',
+          navMode: 'sub'
         }
       });
 
@@ -68,7 +73,8 @@
         controller: 'EventsViewCtrl',
         templateUrl: 'app/views/events/eventsView.tpl.html',
         data: {
-          titleExp: '"Choose Gene"'
+          titleExp: '"Choose Gene"',
+          navMode: 'sub'
         }
       })
       .state('events.genes', {
@@ -77,14 +83,16 @@
         controller: 'GenesViewCtrl',
         templateUrl: 'app/views/events/genes/genesView.tpl.html',
         data: {
-          titleExp: '"Event"'
+          titleExp: '"Event"',
+          navMode: 'sub'
         }
       })
       .state('events.genes.summary', {
         url: '/summary',
         template: '<gene-summary class="col-xs-12"></gene-summary>',
         data: {
-          titleExp: '"Gene " + view.gene.entrez_name + " Summary"'
+          titleExp: '"Gene " + view.gene.entrez_name + " Summary"',
+          navMode: 'sub'
         },
         sticky: true,
         deepStateRedirect: true
@@ -93,7 +101,8 @@
         url: '/talk',
         template: '<gene-talk></gene-talk>',
         data: {
-          titleExp: '"Gene " + view.params.geneId + " Talk"'
+          titleExp: '"Gene " + view.gene.entrez_name + " Talk"',
+          navMode: 'sub'
         }
       })
       .state('events.genes.edit', {
@@ -101,7 +110,8 @@
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
         data: {
-          titleExp: '"Gene " + view.params.geneId + " Edit"'
+          titleExp: '"Gene " + view.gene.entrez_name + " Edit"',
+          navMode: 'sub'
         }
       })
       .state('events.genes.summary.variants', {
@@ -114,21 +124,24 @@
         url: '/summary',
         template: '<variant-summary></variant-summary>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Summary"'
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Summary"',
+          navMode: 'sub'
         }
       })
       .state('events.genes.summary.variants.talk', {
         url:'/talk',
         template: '<variant-talk></variant-talk>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Talk"'
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Talk"',
+          navMode: 'sub'
         }
       })
       .state('events.genes.summary.variants.edit', {
         url:'/edit',
         template: '<p>Edit Variant {{ variant.name }}</p>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name+ " / " + view.params.variantId + " Edit'
+          titleExp: '"Event " + view.gene.entrez_name+ " / " + view.params.variantId + " Edit',
+          navMode: 'sub'
         }
       })
       .state('events.genes.summary.variants.summary.evidence', {
@@ -141,21 +154,24 @@
         url: '/summary',
         template: '<evidence-summary></evidence-summary>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " / " + view.params.evidenceId + " Summary"'
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " / " + view.params.evidenceId + " Summary"',
+          navMode: 'sub'
         }
       })
       .state('events.genes.summary.variants.summary.evidence.talk', {
         url: '/talk',
         template: '<evidence-talk></evidence-talk>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " / " + view.params.evidenceId + " Talk"'
+          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " / " + view.params.evidenceId + " Talk"',
+          navMode: 'sub'
         }
       })
       .state('events.genes.summary.variants.summary.evidence.edit', {
         url: '/edit',
         template: '<p>Edit Evidence {{ evidence.id }}</p>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " / " + view.params.evidenceId + " Edit"'
+          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " / " + view.params.evidenceId + " Edit"',
+          navMode: 'sub'
         }
       });
   }

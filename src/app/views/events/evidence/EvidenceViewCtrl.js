@@ -15,7 +15,7 @@
         'variantId': $stateParams.variantId,
         'evidenceId': $stateParams.evidenceId
       });
-      $rootScope.setNavMode('sub');
+
     } else {
       $state.go('events.genes.summary.variants.summary', { geneId: $stateParams.geneId, variantId: $stateParams.variantId });
     }

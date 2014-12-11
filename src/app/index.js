@@ -37,11 +37,9 @@ function appRun(Security, $rootScope, $state) {
 
   $rootScope.view = {};
 
-  $rootScope.setNavMode = function(navMode) {
-    $rootScope.view.navMode = navMode;
-  };
-
-  $rootScope.setNavMode('home');
+  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams){
+    $rootScope.view.navMode = toState.data.navMode;
+  });
 
   // make $state globally addressable/injectable
   $rootScope.$state = $state;
