@@ -36,23 +36,28 @@
         { name: 'explanation',
           displayName: 'Supporting Evidence',
           enableFiltering: true,
+          allowCellFocus: false,
           width: '50%'
         },
         { name: 'disease',
           displayName: 'Disease',
+          allowCellFocus: false,
           enableFiltering: true
         },
         { name: 'drug',
           displayName: 'Drug',
+          allowCellFocus: false,
           enableFiltering: true
         },
         { name: 'evidence_level',
           displayName: 'level',
+          allowCellFocus: false,
           enableFiltering: false,
           width: '10%'
         },
         { name: 'rating',
           displayName: 'Rating',
+          allowCellFocus: false,
           enableFiltering: false,
           sort: { direction: uiGridConstants.ASC },
           width: '10%'
