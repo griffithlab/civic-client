@@ -1,8 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.events')
-    .controller('MyGeneInfoCtrl', MyGeneInfoCtrl)
-    .controller('MyGeneInfoDialogCtrl', MyGeneInfoDialogCtrl);
+    .controller('MyGeneInfoCtrl', MyGeneInfoCtrl);
 
   // @ngInject
   function MyGeneInfoCtrl($scope, dialogs) {
@@ -15,13 +14,4 @@
       );
     };
   }
-
-  // @ngInject
-  function MyGeneInfoDialogCtrl($scope, $modalInstance, data) {
-    $scope.geneDetails = data;
-    $scope.done = function(){
-      $modalInstance.close($scope.data);
-    };
-  }
-
 })();

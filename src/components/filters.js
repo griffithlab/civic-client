@@ -3,7 +3,8 @@
   angular.module('civic.common')
     .filter('labelify', labelifyFilter)
     .filter('arrayToList', arrayToListFilter)
-    .filter('encodeUri', encodeUri);
+    .filter('encodeUri', encodeUri)
+    .filter('decodeUri', decodeUri);
 
   // @ngInject
   function labelifyFilter() {
@@ -36,6 +37,13 @@
   function encodeUri($window) {
     return function (input) {
       return $window.encodeURIComponent(input);
+    };
+  }
+
+// @ngInject
+  function decodeUri($window) {
+    return function (input) {
+      return $window.decodeURIComponent(input);
     };
   }
 })();
