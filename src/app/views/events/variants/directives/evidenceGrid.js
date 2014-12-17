@@ -18,7 +18,7 @@
   }
 
   // @ngInject
-  function EvidenceGridCtrl($scope, uiGridConstants, uiGridSelectionService, $stateParams, $state, $timeout, $log) {
+  function EvidenceGridCtrl($scope, uiGridConstants, uiGridSelectionService, $stateParams, $state, $timeout, $log, _) {
     $log.info('EvidenceGridCtrl loaded');
 
     /*jshint camelcase: false */
@@ -63,7 +63,7 @@
           width: '10%'
         }
       ],
-      maxRowsToShow: 5
+      minRowsToShow: 7
     };
 
     $scope.evidenceGridOptions.onRegisterApi = function(gridApi){
@@ -73,7 +73,7 @@
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         $state.go('events.genes.summary.variants.summary.evidence.summary', {
           geneId: $scope.gene.entrez_id,
-          variantId: $scope.variant.name,
+          variantId: $scope.variant.id,
           evidenceId: row.entity.id
         });
       });

@@ -14,15 +14,16 @@
           return {
             /*jshint camelcase: false */
             gene: event.entrez_id,
-            label: event.entrez_gene + '/' + event.variant,
-            variant: event.variant
+            label: event.entrez_gene + ' / ' + event.variant,
+            variant: event.variant,
+            variant_id: event.variant_id
           };
         });
       });
     };
 
     $scope.onSelect = function($item) {
-      $state.go('events.genes.summary.variants.summary', {geneId: $item.gene, variantId: $item.variant});
+      $state.go('events.genes.summary.variants.summary', {geneId: $item.gene, variantId: $item.variant_id});
     };
 
   }

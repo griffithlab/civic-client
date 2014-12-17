@@ -10,11 +10,13 @@
       {
         get: {
           method: 'GET',
-          isArray: false
+          isArray: false,
+          cache: true
         },
         query: {
           method: 'GET',
-          isArray: true
+          isArray: true,
+          cache: true
         }
       });
 

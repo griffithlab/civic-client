@@ -4,7 +4,7 @@
     .controller('GenesViewCtrl', GenesViewCtrl);
 
   // @ngInject
-  function GenesViewCtrl($log, $rootScope, $scope, $state,  $stateParams, Genes, MyGene) {
+  function GenesViewCtrl($log, $rootScope, $scope, $state,  $stateParams, Genes, MyGene, _) {
     $log.info('GenesViewCtrl loaded.');
 
     $scope.gene = {};

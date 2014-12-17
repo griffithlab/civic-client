@@ -37,7 +37,7 @@
       rowClick: function (row) {
         $state.go('events.genes.summary.variants.summary', {
           geneId: row.entity.entrez_id,
-          variantId: row.entity.variant
+          variantId: row.entity.variant_id
         });
       }
       //,rowHover: function(row) {
@@ -48,7 +48,7 @@
     Browse.get({ count: 100 }, function(data) {
       // categories & protein functions return arrays,
       $scope.browseGridOptions.data = data.result;
-
+      $scope.events = data;
     });
   }
 
