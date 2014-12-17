@@ -140,7 +140,7 @@
         url:'/edit',
         template: '<p>Edit Variant {{ variant.name }}</p>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name+ " / " + view.params.variantId + " Edit',
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Edit"',
           navMode: 'sub'
         }
       })
