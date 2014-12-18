@@ -6,8 +6,6 @@
 
   // @ngInject
   function quickSearchCtrl($scope, $log, $http, $state, _) {
-    $log.info('quickSearchCtrl loaded.');
-
     $scope.getVariants = function (val) {
       return $http.get('/api/variants?filter[entrez_gene]=' + val).then(function (data) {
         return _.map(data.data.result, function (event) {
@@ -22,6 +20,7 @@
       });
     };
 
+    /*jshint camelcase: false */
     $scope.onSelect = function($item) {
       $state.go('events.genes.summary.variants.summary', {geneId: $item.gene, variantId: $item.variant_id});
     };

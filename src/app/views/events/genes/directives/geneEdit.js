@@ -12,7 +12,6 @@
       templateUrl: 'app/views/events/genes/directives/geneEdit.tpl.html',
       controller: 'GeneEditCtrl',
       link: function($scope) {
-        console.log('geneEditdirective linked.');
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }
@@ -23,9 +22,6 @@
 
   // @ngInject
   function GeneEditCtrl($log, $rootScope, $scope, $stateParams, Genes, _) {
-    $log.info('GeneEditCtrl loaded.');
-
-
     $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId});
 
     $scope.formStatus = {

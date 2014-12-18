@@ -37,7 +37,7 @@ function appRun(Security, $rootScope, $state) {
 
   $rootScope.view = {};
 
-  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams){
+  $rootScope.$on('$stateChangeSuccess',function(event, toState){
     $rootScope.view.navMode = toState.data.navMode;
   });
 

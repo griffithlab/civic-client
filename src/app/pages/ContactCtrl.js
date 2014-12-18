@@ -4,8 +4,7 @@
     .controller('ContactCtrl', ContactCtrl);
 
   // @ngInject
-  function ContactCtrl($scope, $rootScope, $log) {
-    $log.info('ContactCtrl loaded.');
+  function ContactCtrl($scope) {
     $scope.loadedMsg = 'Loaded Contact!';
   }
 })();

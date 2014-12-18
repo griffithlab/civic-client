@@ -5,8 +5,7 @@
     .controller('AuthTestCtrl', AuthTestCtrl);
 
   // @ngInject
-  function AuthTestCtrl ($scope, $rootScope, $log) {
-    $log.info('AuthTestCtrl loaded.');
+  function AuthTestCtrl ($scope) {
     $scope.loadedMsg = 'Loaded AuthTest!';
   }
 })();

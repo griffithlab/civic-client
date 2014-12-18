@@ -4,13 +4,12 @@ angular.module('civic.common')
 /**
  * @ngInject
  */
-function sessionInfo(ConfigService, $log) {
+function sessionInfo(ConfigService) {
   'use strict';
   return {
     restrict: 'EA',
     template: '<h2>CIViC Server URL: {{ conf.serverUrl }}</h2>',
     link: function(scope) {
-      $log.info('sessionInfo directive loaded.');
       scope.conf = ConfigService;
     }
   };

@@ -5,8 +5,6 @@
 
   // @ngInject
   function GenesViewCtrl($log, $rootScope, $scope, $state,  $stateParams, Genes, MyGene, _) {
-    $log.info('GenesViewCtrl loaded.');
-
     $scope.gene = {};
     $scope.geneDetails = {};
 

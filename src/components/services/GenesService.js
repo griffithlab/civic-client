@@ -4,7 +4,7 @@
     .factory('Genes', GenesService);
 
   // @ngInject
-  function GenesService($resource, _, $window) {
+  function GenesService($resource, _) {
 
     var Genes = $resource('/api/genes/:geneId',
       { geneId: '@entrez_id' },

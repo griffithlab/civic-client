@@ -4,10 +4,9 @@
     .controller('EventsViewCtrl', EventsViewCtrl);
 
   // @ngInject
-  function EventsViewCtrl($log, $rootScope, $scope, $stateParams, Genes) {
-    $log.info('EventsViewCtrl loaded.');
-
-
+  // jshint unused: false
+  // NOTE: $deepStateRedirect is required for events state's onExit function in appStates.js
+  function EventsViewCtrl($log, $scope, $stateParams, Genes, $deepStateRedirect) {
     if (!$stateParams.geneId) {
       $scope.genes = Genes.queryNames();
     }

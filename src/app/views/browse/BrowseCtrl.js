@@ -6,9 +6,6 @@
 
 // @ngInject
   function BrowseCtrl($scope, $rootScope, uiGridConstants, uiGridSelectionService, Browse, $state, _, $log) {
-    $log.info('BrowseCtrl loaded');
-
-
     $scope.events = {};
 
     /*jshint camelcase: false */
@@ -35,14 +32,12 @@
 
     $scope.gridInteractions = {
       rowClick: function (row) {
+        $log.info(['geneID:', row.entity.entrez_id, 'variantId:', row.entity.variant_id].join(' '));
         $state.go('events.genes.summary.variants.summary', {
           geneId: row.entity.entrez_id,
           variantId: row.entity.variant_id
         });
       }
-      //,rowHover: function(row) {
-      //  row.isSelected ? row.isSelected = false : row.isSelected = true;
-      //}
     };
 
     Browse.get({ count: 100 }, function(data) {

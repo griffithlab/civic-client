@@ -18,9 +18,7 @@
   }
 
   // @ngInject
-  function EvidenceGridCtrl($scope, uiGridConstants, uiGridSelectionService, $stateParams, $state, $timeout, $log, _) {
-    $log.info('EvidenceGridCtrl loaded');
-
+  function EvidenceGridCtrl($scope, uiGridConstants, $stateParams, $state, $timeout, $log, _) {
     /*jshint camelcase: false */
     $scope.evidenceGridOptions = {
       enableFiltering: true,
@@ -81,10 +79,9 @@
       // fetch variant data
       $scope.variant.$promise.then(function(variant) {
         $scope.evidenceGridOptions.data = variant.evidence_items;
-
         // if evidenceId specified in state, scroll to evidence item's row and select it
         if(_.has($stateParams, 'evidenceId')) {
-          var rowEntity = _.find(variant.evidence_items, function(item) { return item.id == $stateParams.evidenceId; });
+          var rowEntity = _.find(variant.evidence_items, function(item) { return item.id === $stateParams.evidenceId; });
           $timeout(function() { // need timeout here until ui-grid adds a 'data rendered' event
             gridApi.selection.selectRow(rowEntity);
             gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);

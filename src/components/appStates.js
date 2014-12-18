@@ -4,8 +4,7 @@
     .config(routesConfig);
 
   // @ngInject
-  function routesConfig($stateProvider, $urlRouterProvider, $stickyStateProvider) {
-    //$stickyStateProvider.enableDebug(true);
+  function routesConfig($stateProvider, $urlRouterProvider) {
 
     // 404
     $urlRouterProvider.otherwise('home');
@@ -75,6 +74,10 @@
         data: {
           titleExp: '"Choose Gene"',
           navMode: 'sub'
+        },
+        onExit: /* ngInject */ function($deepStateRedirect) {
+          console.log('resetting deep state ============');
+          $deepStateRedirect.reset();
         }
       })
       .state('events.genes', {
@@ -94,7 +97,6 @@
           titleExp: '"Gene " + view.gene.entrez_name + " Summary"',
           navMode: 'sub'
         },
-        sticky: true,
         deepStateRedirect: true
       })
       .state('events.genes.talk', {

@@ -2,7 +2,6 @@
   'use strict';
   angular.module('civic.common')
     .directive('subheader', subheader)
-    .controller('TypeAheadCtrl', TypeAheadCtrl)
     .controller('SubheaderCtrl', SubheaderCtrl);
 
   // @ngInject
@@ -17,7 +16,7 @@
   }
 
   // @ngInject
-  function SubheaderCtrl($scope, $rootScope, $log, Genes) {
+  function SubheaderCtrl($scope, $rootScope, Genes, _) {
     $scope.view = { };
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams) {
       $scope.view.params = toParams;

@@ -5,8 +5,7 @@
     .controller('CollaborateCtrl', CollaborateCtrl);
 
 // @ngInject
-  function CollaborateCtrl ($scope, $rootScope, $log) {
-    $log.info('CollaborateCtrl loaded.');
+  function CollaborateCtrl ($scope) {
     $scope.loadedMsg = 'Loaded Collaborate!';
   }
 })();
