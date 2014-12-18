@@ -58,7 +58,9 @@
           allowCellFocus: false,
           enableFiltering: false,
           sort: { direction: uiGridConstants.ASC },
-          width: '10%'
+          width: '10%',
+          cellTemplate: '<div style="text-align:center;padding-top:5px;color: #666;"><rating ng-model="row.entity[col.field]" max="5" readonly="true"></rating></div>'
+          //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
         }
       ],
       minRowsToShow: 7
