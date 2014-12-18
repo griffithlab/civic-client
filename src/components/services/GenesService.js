@@ -27,8 +27,7 @@
         },
         get: { // get a single gene
           method: 'GET',
-          isArray: false,
-          cache: true
+          isArray: false
         },
         update: {
           method: 'PUT'
