@@ -56,9 +56,9 @@ function appRun(Security, $rootScope, $state) {
   //  console.log(arguments);
   //});
   //
-  //$rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
-  //  console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
-  //});
+  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+    console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
+  });
   //
   //$rootScope.$on('$viewContentLoaded',function(event){
   //  console.log('$viewContentLoaded - fired after dom rendered',event);

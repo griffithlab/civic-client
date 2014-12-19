@@ -126,7 +126,7 @@
         url: '/summary',
         template: '<variant-summary></variant-summary>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Summary"',
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.variant.name  + " Summary"',
           navMode: 'sub'
         }
       })
@@ -134,7 +134,7 @@
         url:'/talk',
         template: '<variant-talk></variant-talk>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Talk"',
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.variant.name + " Talk"',
           navMode: 'sub'
         }
       })
@@ -142,7 +142,7 @@
         url:'/edit',
         template: '<p>Edit Variant {{ variant.name }}</p>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " Edit"',
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.variant.name + " Edit"',
           navMode: 'sub'
         }
       })
@@ -156,7 +156,7 @@
         url: '/summary',
         template: '<evidence-summary></evidence-summary>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.params.variantId + " / " + view.params.evidenceId + " Summary"',
+          titleExp: '"Event " + view.gene.entrez_name + " / " + view.variant.name+ " / " + view.params.evidenceId + " Summary"',
           navMode: 'sub'
         }
       })
@@ -164,7 +164,7 @@
         url: '/talk',
         template: '<evidence-talk></evidence-talk>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " / " + view.params.evidenceId + " Talk"',
+          titleExp: '"Event " + view.params.geneId + " / " + view.variant.name + " / " + view.params.evidenceId + " Talk"',
           navMode: 'sub'
         }
       })
@@ -172,7 +172,7 @@
         url: '/edit',
         template: '<p>Edit Evidence {{ evidence.id }}</p>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.params.variantId + " / " + view.params.evidenceId + " Edit"',
+          titleExp: '"Event " + view.params.geneId + " / " + view.variant.name + " / " + view.params.evidenceId + " Edit"',
           navMode: 'sub'
         }
       });

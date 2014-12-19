@@ -16,15 +16,24 @@
       rowTemplate: 'app/views/browse/browseGridRow.tpl.html',
       columnDefs: [
         { name: 'entrez_gene',
+          sort: { direction: uiGridConstants.ASC },
           enableFiltering: true,
-          sort: { direction: uiGridConstants.ASC }
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         },
         { name: 'entrez_id',
           displayName: 'Entrez ID',
-          enableFiltering: true
+          enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         },
         { name: 'variant',
-          enableFiltering: true
+          enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         }
       ],
       minRowsToShow: 20
