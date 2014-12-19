@@ -38,7 +38,8 @@
           width: '50%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/events/variants/directives/evidenceGridEvidenceCell.tpl.html'
         },
         { name: 'disease',
           displayName: 'Disease',
