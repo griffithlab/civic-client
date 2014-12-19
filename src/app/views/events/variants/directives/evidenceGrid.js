@@ -48,18 +48,19 @@
           enableFiltering: true
         },
         { name: 'evidence_level',
-          displayName: 'level',
+          displayName: 'Level',
           allowCellFocus: false,
           enableFiltering: false,
-          width: '10%'
+          width: '8%',
+          cellTemplate: 'app/views/events/variants/directives/evidenceGridLevelCell.tpl.html'
         },
         { name: 'rating',
           displayName: 'Rating',
           allowCellFocus: false,
           enableFiltering: false,
           sort: { direction: uiGridConstants.ASC },
-          width: '10%',
-          cellTemplate: '<div style="text-align:center;padding-top:5px;color: #666;"><rating ng-model="row.entity[col.field]" max="5" readonly="true"></rating></div>'
+          width: '15%',
+          cellTemplate: 'app/views/events/variants/directives/evidenceGridRatingCell.tpl.html'
           //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
         }
       ],
@@ -83,11 +84,15 @@
         $scope.evidenceGridOptions.data = variant.evidence_items;
         // if evidenceId specified in state, scroll to evidence item's row and select it
         if(_.has($stateParams, 'evidenceId')) {
-          var rowEntity = _.find(variant.evidence_items, function(item) { return item.id === $stateParams.evidenceId; });
+          var rowEntity = _.find(variant.evidence_items, function(item) {
+            return item.id === $stateParams.evidenceId;
+          });
+
           $timeout(function() { // need timeout here until ui-grid adds a 'data rendered' event
             gridApi.selection.selectRow(rowEntity);
             gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
           }, 250);
+
         }
 
       });
