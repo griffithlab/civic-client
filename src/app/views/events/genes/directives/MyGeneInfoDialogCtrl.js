@@ -4,26 +4,35 @@
     .controller('MyGeneInfoDialogCtrl', MyGeneInfoDialogCtrl);
 
   // @ngInject
-  function MyGeneInfoDialogCtrl($scope, $modalInstance, data) {
+  function MyGeneInfoDialogCtrl($scope, uiGridConstants, $modalInstance, data) {
 
     $scope.proteinDomainsGridOptions = {
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
-      maxVisibleRowCount: 5,
+      minRowsToShow: 7,
       columnDefs: [
         { name: 'desc',
           displayName: 'Protein Domains',
           enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
           width: '50%'
         },
         { name: 'id',
           displayName: 'ID',
           enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
           width: '15%'
         },
         { name: 'short_desc',
           displayName: 'Identifier',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
           enableFiltering: true
         }
       ]
@@ -35,20 +44,32 @@
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
-      maxVisibleRowCount: 5,
+      minRowsToShow: 7,
+      filter: {
+        condition: uiGridConstants.filter.CONTAINS
+      },
       columnDefs: [
         { name: 'name',
           displayName: 'Pathways',
           enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
           width: '50%'
         },
         { name: 'src',
           displayName: 'Source',
           enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
           width: '15%'
         },
         { name: 'link',
           displayName: 'Link',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
           enableFiltering: true
         }
       ]
