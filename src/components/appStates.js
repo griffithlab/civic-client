@@ -94,7 +94,7 @@
         url: '/summary',
         template: '<gene-summary class="col-xs-12"></gene-summary>',
         data: {
-          titleExp: '"Gene " + view.gene.entrez_name + " Summary"',
+          titleExp: '"Gene " + gene.entrez_name + " Summary"',
           navMode: 'sub'
         },
         deepStateRedirect: true
@@ -103,7 +103,7 @@
         url: '/talk',
         template: '<gene-talk></gene-talk>',
         data: {
-          titleExp: '"Gene " + view.gene.entrez_name + " Talk"',
+          titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
         }
       })
@@ -112,7 +112,7 @@
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
         data: {
-          titleExp: '"Gene " + view.gene.entrez_name + " Edit"',
+          titleExp: '"Gene " + gene.entrez_name + " Edit"',
           navMode: 'sub'
         }
       })
@@ -126,7 +126,7 @@
         url: '/summary',
         template: '<variant-summary></variant-summary>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.variant.name  + " Summary"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name  + " Summary"',
           navMode: 'sub'
         }
       })
@@ -134,7 +134,7 @@
         url:'/talk',
         template: '<variant-talk></variant-talk>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.variant.name + " Talk"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Talk"',
           navMode: 'sub'
         }
       })
@@ -142,7 +142,7 @@
         url:'/edit',
         template: '<p>Edit Variant {{ variant.name }}</p>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.variant.name + " Edit"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Edit"',
           navMode: 'sub'
         }
       })
@@ -156,7 +156,7 @@
         url: '/summary',
         template: '<evidence-summary></evidence-summary>',
         data: {
-          titleExp: '"Event " + view.gene.entrez_name + " / " + view.variant.name+ " / " + view.params.evidenceId + " Summary"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " / " + params.evidenceId + " Summary"',
           navMode: 'sub'
         }
       })
@@ -164,7 +164,7 @@
         url: '/talk',
         template: '<evidence-talk></evidence-talk>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.variant.name + " / " + view.params.evidenceId + " Talk"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " / " + params.evidenceId + " Talk"',
           navMode: 'sub'
         }
       })
@@ -172,7 +172,7 @@
         url: '/edit',
         template: '<p>Edit Evidence {{ evidence.id }}</p>',
         data: {
-          titleExp: '"Event " + view.params.geneId + " / " + view.variant.name + " / " + view.params.evidenceId + " Edit"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " / " + evidenceItem.id+ " Edit"',
           navMode: 'sub'
         }
       });
