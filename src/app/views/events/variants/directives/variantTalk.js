@@ -8,7 +8,7 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      template: '<div class="variantTalk"><p>variant-talk directive!</p></div>',
+      templateUrl: 'app/views/events/variants/directives/variantTalk.tpl.html',
       link: /*ngInject*/ function() {
         console.log('variantTalk linked.');
       }

@@ -32,7 +32,7 @@ angular.module('civicClient', [
   .run(appRun);
 
 // @ngInject
-function appRun(Security, $rootScope, $state) {
+function appRun(Security, $rootScope, $state, TitleService) {
   'use strict';
 
   $rootScope.view = {};

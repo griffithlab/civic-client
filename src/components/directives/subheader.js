@@ -16,7 +16,7 @@
   }
 
   // @ngInject
-  function SubheaderCtrl($scope, $rootScope, TitleService) {
+  function SubheaderCtrl($scope, $rootScope) {
     $rootScope.$on('title:update', function(event, data) {
       $scope.view.stateTitle = data.newTitle;
     })

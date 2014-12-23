@@ -15,7 +15,7 @@
       };
 
       if(_.has(toParams, 'geneId') && titleScope['gene'].entrez_id != toParams.geneId) {
-        var genePromise = Genes.get({'geneId': toParams.geneId });
+        var genePromise = Genes.get({'geneId': toParams.geneId }).$promise;
       }
 
       if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId')) && titleScope['variant'].id != toParams.variantId) {

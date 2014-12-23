@@ -8,7 +8,7 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      template: '<div class="geneTalk"><p>gene-talk directive</p></div>',
+      templateUrl: 'app/views/events/genes/directives/geneTalk.tpl.html',
       link: /* ngInject */ function() {
         console.log('geneTalk linked.');
       }
