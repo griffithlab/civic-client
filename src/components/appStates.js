@@ -170,7 +170,7 @@
       })
       .state('events.genes.summary.variants.summary.evidence.edit', {
         url: '/edit',
-        template: '<p>Edit Evidence {{ evidence.id }}</p>',
+        template: '<evidence-edit></evidence-edit>',
         data: {
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " / " + evidenceItem.id + " Edit"',
           navMode: 'sub'

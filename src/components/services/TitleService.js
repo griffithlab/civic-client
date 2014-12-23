@@ -14,15 +14,15 @@
         evidenceItem: {}
       };
 
-      if(_.has(toParams, 'geneId') && titleScope['gene'].entrez_id != toParams.geneId) {
+      if(_.has(toParams, 'geneId') && titleScope.gene.entrez_id !== toParams.geneId) {
         var genePromise = Genes.get({'geneId': toParams.geneId }).$promise;
       }
 
-      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId')) && titleScope['variant'].id != toParams.variantId) {
+      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId')) && titleScope.variant.id !== toParams.variantId) {
         var variantPromise = Variants.get({'geneId': toParams.geneId, 'variantId': toParams.variantId }).$promise;
       }
 
-      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId') && _.has(toParams, 'evidenceId')) && titleScope['evidenceItem'].id != toParams.evidenceId) {
+      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId') && _.has(toParams, 'evidenceId')) && titleScope.evidenceItem.id !== toParams.evidenceId) {
         var evidenceItemPromise = Evidence.get({'geneId': toParams.geneId, 'variantId': toParams.variantId, 'evidenceId': toParams.evidenceId }).$promise;
       }
 
