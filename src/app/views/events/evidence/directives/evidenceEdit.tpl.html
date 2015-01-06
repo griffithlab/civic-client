@@ -1,83 +1,125 @@
 <div class="evidenceEdit">
-  <div class="row">
-    <div class="col-xs-12 explanation">
-      <p ng-bind-html="evidence.explanation | linky"></p>
+  <form role="form" novalidate>
+    <div class="row form-instructions" ng-show="formStatus.messages.length == 0 && formStatus.errors.length == 0">
+      <div class="col-xs-12">
+        <p>Complete your edits using the form below, then press the 'Submit Edits for Review' button. <span ng-show="isAdmin()">As you are an admin, you may also choose to immediately apply your edits without review by clicking 'Apply Edits'.</span></p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-md-6 details">
-      <table class="table table-condensed summary-details">
-        <colgroup>
-          <col width="30%"/>
-          <col width="70%"/>
-        </colgroup>
-        <tr>
-          <td class="name">Rating:</td>
-          <td class="value"><rating ng-model="evidence.rating" max="5" readonly="true"></rating></td>
-        </tr>
-        <tr>
-          <td class="name">Evidence Level:</td>
-          <td class="value">
+    <div class="row form-messages" ng-show="formStatus.messages.length > 0">
+      <div class="col-xs-12">
+        <div class="row" ng-repeat="message in formStatus.messages">
+          <div class="col-xs-12">
+            <p>{{ message }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row form-errors" ng-show="formStatus.errors.length > 0">
+      <div class="col-xs-12">
+        <p>The requested edits contain the following errors, please correct and resubmit:</p>
+        <div class="row" ng-repeat="error in formStatus.errors">
+          <div class="col-xs-2">
+            <p class="pull-right"><strong>{{ error.field | labelify }}:</strong></p>
+          </div>
+          <div class="col-xs-10">
+            <p>{{ error.errorMsg | arrayToList }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-row">
+      <div class="col-xs-12 col-md-6">
+        <!--<div class="form-group">-->
+          <!--<label for="id">Evidence ID:</label>-->
+          <!--<input type="text" id="id" ng-model="evidenceEdit.id" readonly>-->
+        <!--</div>-->
+        <div class="form-group">
+          <label for="explanation">Explanation:</label>
+          <textarea class="form-control" id="explanation" rows="5" ng-model="evidenceEdit.explanation"></textarea>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6">
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-6 details">
+        <table class="table table-condensed summary-details">
+          <colgroup>
+            <col width="30%"/>
+            <col width="70%"/>
+          </colgroup>
+          <tr>
+            <td class="name">Rating:</td>
+            <td class="value"><rating ng-model="evidence.rating" max="5" readonly="true"></rating></td>
+          </tr>
+          <tr>
+            <td class="name">Evidence Level:</td>
+            <td class="value">
             <span class="levelBadge"
                   ng-class="{'levelA': evidence.evidence_level === 'A', 'levelB': evidence.evidence_level === 'B','levelC': evidence.evidence_level === 'C', 'levelD': evidence.evidence_level === 'D', 'levelE': evidence.evidence_level === 'E' }">
               {{ evidence.evidence_level }}
             </span>
-          </td>
-        </tr>
-        <tr>
-          <td class="name">Evidence Type:</td>
-          <td class="value">{{ evidence.evidence_type }}</td>
-        </tr>
-        <tr>
-          <td class="name">Source:</td>
-          <td class="value">{{ evidence.source }}</td>
-        </tr>
-      </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="name">Evidence Type:</td>
+            <td class="value">{{ evidence.evidence_type }}</td>
+          </tr>
+          <tr>
+            <td class="name">Source:</td>
+            <td class="value">{{ evidence.source }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-xs-12 col-md-6 details">
+        <table class="table table-condensed summary-details">
+          <colgroup>
+            <col width="30%"/>
+            <col width="70%"/>
+          </colgroup>
+          <tr>
+            <td class="name">Disease:</td>
+            <td class="value">{{ evidence.disease }}</td>
+          </tr>
+          <tr>
+            <td class="name">Drug:</td>
+            <td class="value">{{ evidence.drug }}</td>
+          </tr>
+          <tr>
+            <td class="name">Outcome:</td>
+            <td class="value">{{ evidence.outcome }}</td>
+          </tr>
+          <tr>
+            <td class="name">Clinical Direction:</td>
+            <td class="value">{{ evidence.clinical_direction }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
-    <div class="col-xs-12 col-md-6 details">
-      <table class="table table-condensed summary-details">
-        <colgroup>
-          <col width="30%"/>
-          <col width="70%"/>
-        </colgroup>
-        <tr>
-          <td class="name">Disease:</td>
-          <td class="value">{{ evidence.disease }}</td>
-        </tr>
-        <tr>
-          <td class="name">Drug:</td>
-          <td class="value">{{ evidence.drug }}</td>
-        </tr>
-        <tr>
-          <td class="name">Outcome:</td>
-          <td class="value">{{ evidence.outcome }}</td>
-        </tr>
-        <tr>
-          <td class="name">Clinical Direction:</td>
-          <td class="value">{{ evidence.clinical_direction }}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="button-row">
-        <div class="pull-right">
-          <button type="button" class="btn btn-default btn-md" ng-click="discardEdits()">Discard Edits</button>
-          <button type="button" class="btn btn-primary btn-md" ng-click="submitEdits()">Submit Edits for Review</button>
-          <button type="button" class="btn btn-warning btn-md" ng-click="applyEdits()" ng-show="isAdmin()">Apply Edits</button>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="button-row">
+          <div class="pull-right">
+            <button type="button" class="btn btn-default btn-md" ng-click="discardEdits()">Discard Edits</button>
+            <button type="button" class="btn btn-primary btn-md" ng-click="submitEdits()">Submit Edits for Review</button>
+            <button type="button" class="btn btn-warning btn-md" ng-click="applyEdits()" ng-show="isAdmin()">Apply Edits</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6">
-      <p>gene:</p>
-      <pre>{{ evidence | json }}</pre>
+    <div class="row" style="padding: 15px">
+      <div class="col-xs-6">
+        <p>evidence:</p>
+        <pre>{{ evidence | json }}</pre>
+      </div>
+      <div class="col-xs-6">
+        <p>evidenceEdit:</p>
+        <pre>{{ evidenceEdit | json }}</pre>
+      </div>
     </div>
-    <div class="col-xs-6">
-      <p>geneEdit:</p>
-      <pre>{{ evidenceEdit | json }}</pre>
-    </div>
-  </div>
+  </form>
 </div>
+

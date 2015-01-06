@@ -11,7 +11,7 @@
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneEdit.tpl.html',
       controller: 'GeneEditCtrl',
-      link: function($scope) {
+      link: /* ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }

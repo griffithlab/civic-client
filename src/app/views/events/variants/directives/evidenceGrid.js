@@ -60,7 +60,7 @@
         { name: 'evidence_level',
           displayName: 'Level',
           allowCellFocus: false,
-          enableFiltering: false,
+          enableFiltering: true,
           width: '8%',
           cellTemplate: 'app/views/events/variants/directives/evidenceGridLevelCell.tpl.html'
         },

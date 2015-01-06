@@ -156,7 +156,7 @@
         url: '/summary',
         template: '<evidence-summary></evidence-summary>',
         data: {
-          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " / " + evidenceItem.id + " Summary"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Summary"',
           navMode: 'sub'
         }
       })
@@ -164,7 +164,7 @@
         url: '/talk',
         template: '<evidence-talk></evidence-talk>',
         data: {
-          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " / " + evidenceItem.id + " Talk"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Talk"',
           navMode: 'sub'
         }
       })
@@ -172,7 +172,7 @@
         url: '/edit',
         template: '<evidence-edit></evidence-edit>',
         data: {
-          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " / " + evidenceItem.id + " Edit"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Edit"',
           navMode: 'sub'
         }
       });

@@ -26,7 +26,7 @@
         var evidenceItemPromise = Evidence.get({'geneId': toParams.geneId, 'variantId': toParams.variantId, 'evidenceId': toParams.evidenceId }).$promise;
       }
 
-      $q.all({ gene:genePromise, variant: variantPromise, evidenceItem: evidenceItemPromise }).then(function(resolutions) {
+      $q.all({ gene:genePromise, variant:variantPromise, evidenceItem:evidenceItemPromise }).then(function(resolutions) {
         titleScope.gene = resolutions.gene;
         titleScope.variant = resolutions.variant;
         titleScope.evidenceItem = resolutions.evidenceItem;
