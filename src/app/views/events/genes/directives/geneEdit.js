@@ -21,8 +21,10 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($log, $rootScope, $scope, $stateParams, Genes, _) {
+  function GeneEditCtrl($log, $rootScope, $scope, $stateParams, _, Genes, GenesSuggestedChanges) {
     $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId});
+    $scope.genesSuggestedChanges = GenesSuggestedChanges.query({'geneId': $stateParams.geneId });
+    $scope.newChange = '';
 
     $scope.formStatus = {
       errors: [],
@@ -31,6 +33,47 @@
 
     $scope.submitEdits = function () {
       $log.info('submitEdits called.');
+      var newChange = GenesSuggestedChanges.add({
+          entrez_id: $stateParams.geneId,
+          description: $scope.geneEdit.description
+        },
+        function() { // request succeeded
+          $log.info('Gene SubmitEdits update successful.');
+          // refresh gene data
+          $scope.formStatus.errors = [];
+          $scope.formStatus.messages = [];
+          $scope.formStatus.messages.push('Your edit suggestions for Gene ' + $scope.geneEdit.entrez_name + ' were received and added to the review queue.');
+          $scope.newChange = newChange;
+        },
+        function (response) {
+          $log.info('update unsuccessful.');
+          $scope.formStatus.messages = [];
+          $scope.formStatus.errors = [];
+          var handleError = {
+            '401': function () {
+              $scope.formStatus.errors.push({
+                field: 'Unauthrorized',
+                errorMsg: 'You must be logged in to edit this gene.'
+              });
+            },
+            '403': function () {
+              $scope.formStatus.errors.push({
+                field: 'Insufficient Permissions',
+                errorMsg: 'You must be an Admin user to perform the requested action.'
+              });
+            },
+            '422': function (response) {
+              _.forEach(response.data.errors, function (value, key) {
+                $scope.formStatus.errors.push({
+                  field: key,
+                  errorMsg: value
+                });
+              });
+            }
+          };
+          handleError[response.status](response);
+        }
+      );
     };
 
     $scope.discardEdits = function () {
@@ -76,7 +119,8 @@
             }
           };
           handleError[response.status](response);
-        });
+        }
+      );
     };
   }
 })();

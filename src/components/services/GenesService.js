@@ -7,10 +7,9 @@
   function GenesService($resource, $cacheFactory, _, $log) {
     var cache = $cacheFactory('genesCache');
 
-    var interceptor = {
+    var cacheInterceptor = {
       response: function(response) {
         cache.remove(response.config.url);
-        $log.info('cache removed', response.config.url);
         return response;
       }
     };
@@ -41,7 +40,7 @@
         },
         update: {
           method: 'PUT',
-          interceptor: interceptor
+          interceptor: cacheInterceptor
         }
       });
 
