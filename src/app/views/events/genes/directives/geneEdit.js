@@ -21,10 +21,10 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($log, $rootScope, $scope, $stateParams, _, Genes, GenesSuggestedChanges) {
+  function GeneEditCtrl($log, $rootScope, $scope, $stateParams, _, Genes, GenesSuggestedChanges, GenesSuggestedChangesComments) {
     $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId});
     $scope.genesSuggestedChanges = GenesSuggestedChanges.query({'geneId': $stateParams.geneId });
-    $scope.newChange = '';
+    $scope.newChange = {};
 
     $scope.formStatus = {
       errors: [],
@@ -35,15 +35,19 @@
       $log.info('submitEdits called.');
       var newChange = GenesSuggestedChanges.add({
           entrez_id: $stateParams.geneId,
-          description: $scope.geneEdit.description
+          description: $scope.geneEdit.description,
+          comment: {
+            title: 'Reasons for Edit',
+            text: $scope.geneEdit.reason
+          }
         },
-        function() { // request succeeded
+        function(response) { // request succeeded
           $log.info('Gene SubmitEdits update successful.');
           // refresh gene data
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];
           $scope.formStatus.messages.push('Your edit suggestions for Gene ' + $scope.geneEdit.entrez_name + ' were received and added to the review queue.');
-          $scope.newChange = newChange;
+          $scope.newChange = response.data;
         },
         function (response) {
           $log.info('update unsuccessful.');
@@ -53,7 +57,7 @@
             '401': function () {
               $scope.formStatus.errors.push({
                 field: 'Unauthrorized',
-                errorMsg: 'You must be logged in to edit this gene.'
+                errorMsg: 'You must be logged in to perform this action.'
               });
             },
             '403': function () {
@@ -69,11 +73,17 @@
                   errorMsg: value
                 });
               });
+            },
+            '500': function(response) {
+              $scope.formStatus.errors.push({
+                field: 'SERVER ERROR',
+                errorMsg: response.statusText
+              });
+              $log.info(response);
             }
           };
           handleError[response.status](response);
-        }
-      );
+        });
     };
 
     $scope.discardEdits = function () {
@@ -116,6 +126,13 @@
                   errorMsg: value
                 });
               });
+            },
+            '500': function(response) {
+              $scope.formStatus.errors.push({
+                field: 'SERVER ERROR',
+                errorMsg: 'There was a server error.'
+              });
+              $log.info(response);
             }
           };
           handleError[response.status](response);

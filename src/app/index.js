@@ -9,6 +9,7 @@ angular.module('civicClient', [
   'ngTagsInput',
   'ngResource',
   'dialogs.main',
+  'readableTime',
 
   // http backend mocks
   //,'httpMocks'

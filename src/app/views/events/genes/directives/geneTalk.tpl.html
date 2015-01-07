@@ -1,3 +1,20 @@
-<div class="geneTalk">
-  <p>gene-talk directive</p>
+<div class="col-xs-12 geneTalk">
+  <div class="row">
+    <div class="col-sm-2 changesList">
+      <ul>
+        <li ng-repeat="change in suggestedChanges" ui-sref-active="active">
+          <a ui-sref="events.genes.talk.comments({ geneId: gene.entrez_id, suggestedChangeId: change.id })">
+            <span ng-bind="change.status" ng-class="{'new': change.status === 'new', 'active': change.status === 'active', 'applied': change.status === 'applied', 'closed': change.status === 'closed'}">[status]</span>
+            <span ng-bind="change.user" class="user">[user]</span><br/>
+            <span ng-bind="change.created_at | readableTime" class="time">[time]</span> ago
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-10">
+      <ui-view>
+        <p>Click a suggested change to view details and conversation</p>
+      </ui-view>
+    </div>
+  </div>
 </div>

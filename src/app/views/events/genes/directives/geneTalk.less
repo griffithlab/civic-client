@@ -3,9 +3,20 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .geneTalk {
+  .clearfix();
+  padding-top: @contentPadding;
   min-height: 500px;
   background-color: @pageBackground2;
-  padding-top: 150px;
-  text-align: center;
-  font-weight: bold;
+
+  .changesList {
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+        text-align: left;
+
+      }
+    }
+  }
 }

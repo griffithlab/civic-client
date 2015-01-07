@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.services')
-    .factory('GenesSuggestedChanges', GenesSuggestedChangesService);
+    .factory('GenesSuggestedChangesComments', GenesSuggestedChangesCommentsService);
 
   // @ngInject
-  function GenesSuggestedChangesService($resource, $cacheFactory, _, $log) {
-    var cache = $cacheFactory('genesSuggestedChangesCache');
+  function GenesSuggestedChangesCommentsService($resource, $cacheFactory, _, $log) {
+    var cache = $cacheFactory('genesSuggestedChangesCommentsCache');
 
     var cacheInterceptor = {
       response: function(response) {
@@ -14,9 +14,10 @@
       }
     };
 
-    var Genes = $resource('/api/genes/:geneId/suggested_changes/:suggestedChangeId',
+    var Genes = $resource('/api/genes/:geneId/suggested_changes/:suggestedChangeId/comments/:commentId',
       { geneId: '@entrez_id',
-        suggestedChangeId: '@id'
+        suggestedChangeId: '@suggestedChangeId',
+        commentId: '@id'
       },
       {
         query: { // get a list of all suggested changes

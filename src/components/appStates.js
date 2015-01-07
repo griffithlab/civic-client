@@ -76,7 +76,6 @@
           navMode: 'sub'
         },
         onExit: /* ngInject */ function($deepStateRedirect) {
-          console.log('resetting deep state ============');
           $deepStateRedirect.reset();
         }
       })
@@ -99,6 +98,15 @@
         },
         deepStateRedirect: true
       })
+      .state('events.genes.edit', {
+        url: '/edit',
+        template: '<gene-edit class="col-xs-12"></gene-edit>',
+        controller: 'GeneEditCtrl',
+        data: {
+          titleExp: '"Gene " + gene.entrez_name + " Edit"',
+          navMode: 'sub'
+        }
+      })
       .state('events.genes.talk', {
         url: '/talk',
         template: '<gene-talk></gene-talk>',
@@ -107,12 +115,11 @@
           navMode: 'sub'
         }
       })
-      .state('events.genes.edit', {
-        url: '/edit',
-        template: '<gene-edit class="col-xs-12"></gene-edit>',
-        controller: 'GeneEditCtrl',
+      .state('events.genes.talk.comments', {
+        url: '/comments/:suggestedChangeId',
+        template: '<change-comments></change-comments>',
         data: {
-          titleExp: '"Gene " + gene.entrez_name + " Edit"',
+          titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
         }
       })

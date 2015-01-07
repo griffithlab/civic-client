@@ -2,8 +2,7 @@
 <html class="no-js" ng-app="civicClient">
   <head>
     <meta charset="utf-8">
-    <title>{{ title }}</title>
-    <!--<title ng-bind="$root.view.windowTitle">CIViC2 - Clinical Interpretations of Variants in Cancer</title>-->
+    <title ng-bind="title">CIViC - Clinical Interpretations of Variants in Cancer</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -40,9 +39,10 @@
     <link rel="stylesheet" href="app/views/events/genes/directives/geneEdit.css">
     <link rel="stylesheet" href="app/views/events/genes/directives/geneSummary.css">
     <link rel="stylesheet" href="app/views/events/genes/directives/geneTabs.css">
-    <link rel="stylesheet" href="app/views/events/genes/directives/geneTalk.css">
     <link rel="stylesheet" href="app/views/events/genes/directives/myGeneInfo.css">
     <link rel="stylesheet" href="app/views/events/genes/directives/myGeneInfoDialog.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/geneTalk.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/changeComments.css">
 
     <link rel="stylesheet" href="app/views/events/variants/variantsView.css">
     <link rel="stylesheet" href="app/views/events/variants/directives/evidenceGrid.css">
@@ -126,6 +126,7 @@
     <script src="../bower_components/angular-resource/angular-resource.js"></script>
     <script src="../bower_components/angular-ui-select/dist/select.js"></script>
     <script src="../bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="../bower_components/angular-readable-time/angular-readable-time.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -145,6 +146,7 @@
 
     <script src="components/services/GenesService.js"></script>
     <script src="components/services/GenesSuggestedChangesService.js"></script>
+    <script src="components/services/GenesSuggestedChangesCommentsService.js"></script>
 
     <script src="components/services/EvidenceService.js"></script>
     <script src="components/services/ConfigService.js"></script>
@@ -174,13 +176,14 @@
     <script src="app/views/events/common/variantsMenu.js"></script>
 
     <script src="app/views/events/genes/GenesViewCtrl.js"></script>
+    <script src="app/views/events/genes/directives/geneTabs.js"></script>
     <script src="app/views/events/genes/directives/geneEdit.js"></script>
     <script src="app/views/events/genes/directives/geneSummary.js"></script>
-    <script src="app/views/events/genes/directives/geneTabs.js"></script>
-    <script src="app/views/events/genes/directives/geneTalk.js"></script>
     <script src="app/views/events/genes/directives/myGeneInfo.js"></script>
     <script src="app/views/events/genes/directives/MyGeneInfoCtrl.js"></script>
     <script src="app/views/events/genes/directives/MyGeneInfoDialogCtrl.js"></script>
+    <script src="app/views/events/genes/directives/geneTalk.js"></script>
+    <script src="app/views/events/genes/directives/changeComments.js"></script>
 
     <script src="app/views/events/variants/VariantsViewCtrl.js"></script>
     <script src="app/views/events/variants/directives/evidenceGrid.js"></script>
