@@ -30,7 +30,7 @@
         $scope.suggestedChange = response;
       });
 
-    GenesSuggestedChangesComments.get({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId })
+    GenesSuggestedChangesComments.query({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId })
       .$promise.then(function(response) {
         $scope.changeComments = response;
       });
