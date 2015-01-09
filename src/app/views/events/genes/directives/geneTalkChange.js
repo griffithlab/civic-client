@@ -1,16 +1,16 @@
 (function() {
   'use strict';
   angular.module('civic.events')
-    .directive('changeComments', changeComments)
-    .controller('ChangeCommentsController', ChangeCommentsController);
+    .directive('geneTalkChange', geneTalkChange)
+    .controller('GeneTalkChangeController', GeneTalkChangeController);
 
   // @ngInject
-  function changeComments() {
+  function geneTalkChange() {
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: 'app/views/events/genes/directives/changeComments.tpl.html',
-      controller: 'ChangeCommentsController',
+      templateUrl: 'app/views/events/genes/directives/geneTalkChange.tpl.html',
+      controller: 'GeneTalkChangeController',
       link: /* ngInject */ function($scope, Security) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
@@ -21,8 +21,8 @@
   }
 
   // @ngInject
-  function ChangeCommentsController($scope, $stateParams, GenesSuggestedChanges, GenesSuggestedChangesComments, $log) {
-    $log.info('GeneTalkController instantiated.');
+  function GeneTalkChangeController($scope, $stateParams, GenesSuggestedChanges, GenesSuggestedChangesComments, $log) {
+    $log.info('GeneTalkChangeController instantiated.');
     $log.info('Requesting change:' + $stateParams.geneId + 'suggestedChangeId: ' + $stateParams.suggestedChangeId);
 
     GenesSuggestedChanges.get({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId })
@@ -32,7 +32,7 @@
 
     GenesSuggestedChangesComments.query({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId })
       .$promise.then(function(response) {
-        $scope.changeComments = response;
+        $scope.geneTalkComments = response;
       });
   }
 })();

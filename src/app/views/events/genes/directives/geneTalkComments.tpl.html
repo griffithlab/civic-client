@@ -1,0 +1,18 @@
+<div class="geneTalkComments">
+  <p>gene-talk-comments directive</p>
+  <div ng-switch="comments.length > 0">
+    <div ng-switch-when="false">
+      <p>no comments</p>
+    </div>
+    <div ng-switch-when="true">
+      <ul>
+        <li ng-repeat="comment in comments">
+          <p><strong>Title: {{ comment.title }}</strong></p>
+          <p>Text: {{ comment.text }}</p>
+          <p class="small">Added: {{ comment.created_at | timeAgo }}</p>
+        </li>
+      </ul>
+    </div>
+    <gene-talk-add-comment></gene-talk-add-comment>
+  </div>
+</div>

@@ -21,9 +21,7 @@
   }
 
   // @ngInject
-  function GeneTalkController ($scope, $stateParams, GenesSuggestedChanges, GenesSuggestedChangesComments, $log) {
-    $log.info('GeneTalkController instantiated.');
-    $log.info('Requesting changes for gene ' + $stateParams.geneId);
+  function GeneTalkController ($scope, $stateParams, GenesSuggestedChanges, $log) {
 
     GenesSuggestedChanges.query({'geneId': $stateParams.geneId })
       .$promise.then(function(response) {

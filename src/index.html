@@ -13,7 +13,6 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/angular-ui-grid/ui-grid.css" />
     <link rel="stylesheet" href="../bower_components/angular-dialog-service/dialogs.min.css" />
-    <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="../bower_components/ng-tags-input/ng-tags-input.min.css" />
     <link rel="stylesheet" href="../bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css" />
     <!-- endbower -->
@@ -42,7 +41,9 @@
     <link rel="stylesheet" href="app/views/events/genes/directives/myGeneInfo.css">
     <link rel="stylesheet" href="app/views/events/genes/directives/myGeneInfoDialog.css">
     <link rel="stylesheet" href="app/views/events/genes/directives/geneTalk.css">
-    <link rel="stylesheet" href="app/views/events/genes/directives/changeComments.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/geneTalkChange.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/geneTalkComments.css">
+    <link rel="stylesheet" href="app/views/events/genes/directives/geneTalkAddComment.css">
 
     <link rel="stylesheet" href="app/views/events/variants/variantsView.css">
     <link rel="stylesheet" href="app/views/events/variants/directives/evidenceGrid.css">
@@ -124,9 +125,8 @@
     <script src="../bower_components/angular-dialog-service/dialogs-default-translations.min.js"></script>
     <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.js"></script>
-    <script src="../bower_components/angular-ui-select/dist/select.js"></script>
     <script src="../bower_components/ng-tags-input/ng-tags-input.min.js"></script>
-    <script src="../bower_components/angular-readable-time/angular-readable-time.js"></script>
+    <script src="../bower_components/angular-timeago/src/timeAgo.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -147,6 +147,7 @@
     <script src="components/services/GenesService.js"></script>
     <script src="components/services/GenesSuggestedChangesService.js"></script>
     <script src="components/services/GenesSuggestedChangesCommentsService.js"></script>
+    <script src="components/services/GeneCommentsService.js"></script>
 
     <script src="components/services/EvidenceService.js"></script>
     <script src="components/services/ConfigService.js"></script>
@@ -183,7 +184,9 @@
     <script src="app/views/events/genes/directives/MyGeneInfoCtrl.js"></script>
     <script src="app/views/events/genes/directives/MyGeneInfoDialogCtrl.js"></script>
     <script src="app/views/events/genes/directives/geneTalk.js"></script>
-    <script src="app/views/events/genes/directives/changeComments.js"></script>
+    <script src="app/views/events/genes/directives/geneTalkChange.js"></script>
+    <script src="app/views/events/genes/directives/geneTalkComments.js"></script>
+    <script src="app/views/events/genes/directives/geneTalkAddComment.js"></script>
 
     <script src="app/views/events/variants/VariantsViewCtrl.js"></script>
     <script src="app/views/events/variants/directives/evidenceGrid.js"></script>

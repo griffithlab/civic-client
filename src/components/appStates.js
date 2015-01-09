@@ -109,17 +109,25 @@
       })
       .state('events.genes.talk', {
         url: '/talk',
-        template: '<gene-talk></gene-talk>',
+        template: '<gene-talk class="col-xs-12"></gene-talk>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
         }
       })
       .state('events.genes.talk.comments', {
-        url: '/comments/:suggestedChangeId',
-        template: '<change-comments></change-comments>',
+        url: '/comments',
+        template: '<gene-talk-comments></gene-talk-comments>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
+          navMode: 'sub'
+        }
+      }).
+      state('events.genes.talk.changes', {
+        url: '/changes/:suggestedChangeId',
+        template: '<gene-talk-change></gene-talk-change>',
+        data: {
+          titleExp: '"Gene " + gene.entrez_name + " Changes"',
           navMode: 'sub'
         }
       })

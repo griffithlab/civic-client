@@ -9,7 +9,7 @@ angular.module('civicClient', [
   'ngTagsInput',
   'ngResource',
   'dialogs.main',
-  'readableTime',
+  'yaru22.angular-timeago',
 
   // http backend mocks
   //,'httpMocks'

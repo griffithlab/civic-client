@@ -33,7 +33,7 @@
 
     $scope.submitEdits = function () {
       $log.info('submitEdits called.');
-      var newChange = GenesSuggestedChanges.add({
+      GenesSuggestedChanges.add({
           entrez_id: $stateParams.geneId,
           description: $scope.geneEdit.description,
           comment: {
