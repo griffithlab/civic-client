@@ -32,7 +32,7 @@
 
     GenesSuggestedChangesComments.query({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId })
       .$promise.then(function(response) {
-        $scope.geneTalkComments = response;
+        $scope.changeComments = response;
       });
   }
 })();

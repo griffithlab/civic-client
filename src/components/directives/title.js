@@ -14,7 +14,7 @@
             $rootScope.title = (typeof data.newTitle !== 'undefined') ? 'CIViC: ' + data.newTitle : 'CIViC - Clinincal Interpretation of Variants in Cancer';
           });
         };
-        $rootScope.$on('title:update', listener);
+        $rootScope.$on('title:update', listener); // updates titles app-wide (e.g. 'subheader' directive)
       }
     };
 

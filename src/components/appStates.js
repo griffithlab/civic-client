@@ -13,7 +13,7 @@
     $urlRouterProvider.when('/events/genes/:geneId', '/events/genes/:geneId/summary');
 
     // static frontend pages
-    // titleExp are parsed in subheader directive's SubheaderCtrl on $stateChangeSuccess
+    // NOTE: titleExp are angular expressions parsed by the TitleService (/app/components/services/TitleService.js)
     $stateProvider
       .state('home', {
         url: '/home',

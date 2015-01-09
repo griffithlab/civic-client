@@ -1,4 +1,29 @@
 <div class="geneTalkChange">
-  <p ng-bind-html="suggestedChange.diffs.description"></p>
-  <pre ng-bind="changeComments | json"></pre>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>DIFF:</h4>
+      <p ng-bind-html="suggestedChange.diffs.description"></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div ng-switch="changeComments.length > 0">
+      <div ng-switch-when="false">
+        <p>no comments</p>
+      </div>
+      <div ng-switch-when="true">
+        <ul>
+          <li ng-repeat="comment in changeComments">
+            <p><strong>Title: {{ comment.title }}</strong></p>
+            <p>Text: {{ comment.text }}</p>
+            <p class="small">Added: {{ comment.created_at | timeAgo }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <gene-talk-change-add-comment class="col-xs-12"></gene-talk-change-add-comment>
+    </div>
+  </div>
 </div>
