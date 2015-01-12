@@ -4,4 +4,16 @@
 
 .geneTalkComments {
   background-color: #FFF;
+  border-radius: @border-radius-large;
+  margin-left: -@contentPadding;
+  margin-right: -@contentPadding;
+  padding: @contentPadding;
+
+  .comment-body {
+    .clearfix();
+    border-radius: @border-radius-base;
+    background-color: @pageBackground4;
+    padding: @contentPadding @contentPadding 0 @contentPadding;
+    margin-bottom: @contentPadding;
+  }
 }

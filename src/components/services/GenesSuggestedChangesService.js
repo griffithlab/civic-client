@@ -7,7 +7,7 @@
   function GenesSuggestedChangesService($resource, $cacheFactory, _, $log) {
     var cache = $cacheFactory('genesSuggestedChangesCache');
 
-    var cacheInterceptor = {
+    var cacheInterceptor = { // custom $resource actions require manually managing cache
       response: function(response) {
         cache.remove(response.config.url);
         return response;
@@ -29,7 +29,16 @@
           isArray: false,
           cache: cache
         },
-        add: {
+        add: { // add a suggested change
+          method: 'POST',
+          interceptor: cacheInterceptor
+        },
+        accept: { // accept & commit a change
+          url: '/api/genes/:geneId/suggested_changes/:suggestedChangeId/accept',
+          params: {
+            geneId: '@geneId',
+            suggestedChangeId: '@suggestedChangeId'
+          },
           method: 'POST',
           interceptor: cacheInterceptor
         }

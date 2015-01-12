@@ -5,7 +5,27 @@
 .geneTalkChange{
   min-height: 450px;
   background-color: #FFF;
-  border: 1px solid #F00;
+  border-radius: @border-radius-large;
+  margin-left: -@contentPadding;
+  margin-right: -@contentPadding;
+  padding-left: @contentPadding;
+  padding-right: @contentPadding;
+
+  .comment-body {
+    .clearfix();
+    border-radius: @border-radius-base;
+    background-color: @pageBackground4;
+    padding: @contentPadding @contentPadding 0 @contentPadding;
+    margin-bottom: @contentPadding;
+  }
+
+  .admin-controls {
+    .clearfix();
+    border-radius: @border-radius-base;
+    background-color: @pageBackground4;
+    padding: @contentPadding;
+    margin-bottom: @contentPadding;
+  }
 
   .diff {
     overflow: auto;

@@ -1,29 +1,41 @@
 <div class="geneTalkChange">
+
   <div class="row">
     <div class="col-xs-12">
-      <h4>DIFF:</h4>
+      <h4>DIFF</h4>
       <p ng-bind-html="suggestedChange.diffs.description"></p>
     </div>
   </div>
-
+  <div class="row" ng-show="auth.isAuthenticated()">
+    <div class="col-xs-12">
+      <div class="admin-controls">
+        <div class="pull-right">
+          <button type="button" class="btn btn-warning btn-md" ng-click="rejectChange()">Reject Change</button>
+          <button type="button" class="btn btn-warning btn-md" ng-click="commitChange()">Commit Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-switch="changeComments.length > 0">
+    <div ng-switch-when="false">
+      <div class="row">
+        <div class="col-xs-12">
+          <p>No comments found for [SUGGESTED CHANGE].</p>
+        </div>
+      </div>
+    </div>
+    <div ng-switch-when="true">
+      <div class="row" ng-repeat="comment in changeComments">
+        <div class="col-xs-12">
+          <div class="comment-body">
+            <p><strong>Posted by  </strong> <span ng-bind="comment.user.nickname">user.nickname</span> <span ng-bind="comment.created_at | timeAgo">comment.created_at</span></p>
+            <p ng-bind="comment.text">comment.text</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
-    <div ng-switch="changeComments.length > 0">
-      <div ng-switch-when="false">
-        <p>no comments</p>
-      </div>
-      <div ng-switch-when="true">
-        <ul>
-          <li ng-repeat="comment in changeComments">
-            <p><strong>Title: {{ comment.title }}</strong></p>
-            <p>Text: {{ comment.text }}</p>
-            <p class="small">Added: {{ comment.created_at | timeAgo }}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="row">
-      <gene-talk-change-add-comment class="col-xs-12"></gene-talk-change-add-comment>
-    </div>
+    <gene-talk-change-add-comment class="col-xs-12"></gene-talk-change-add-comment>
   </div>
 </div>

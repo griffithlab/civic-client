@@ -9,16 +9,36 @@
   background-color: @pageBackground2;
 
   .commentsMenu {
+    margin-right: -@contentPadding;
+    margin-top: @contentPadding;
+
+    .gene-name {
+      font-size: 120%;
+      font-weight: bold;
+      color: @civicDarkPurple;
+    }
+
     .subTitle {
       font-weight: bold;
     }
     ul {
       margin: 0;
       padding: 0;
+      .active a {
+        background-color: #FFF !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        color: @civicDarkPurple;
+      }
+
       li {
+        background-color: @pageBackground3;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-radius: @border-radius-base;
         list-style: none;
         text-align: left;
-
+        margin-bottom: @contentPadding;
       }
     }
   }
