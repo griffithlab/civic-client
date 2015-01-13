@@ -25,8 +25,17 @@
 
     GenesSuggestedChanges.query({'geneId': $stateParams.geneId })
       .$promise.then(function(response) {
-
-        $scope.suggestedChanges = response;
+        var suggestedChanges = [];
+        var statusOrder = ['active', 'new', 'applied', 'closed'];
+        var statusGroups = _.groupBy(response, 'status');
+        _.each(statusOrder, function(stat) {
+          if (_.has(statusGroups, stat)) {
+            _.each(_.sortBy(statusGroups[stat], 'created_at'), function(change) {
+              suggestedChanges.push(change);
+            });
+          }
+        });
+        $scope.suggestedChanges = suggestedChanges;
     });
   }
 })();
