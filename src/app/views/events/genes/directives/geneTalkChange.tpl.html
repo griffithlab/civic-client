@@ -27,9 +27,13 @@
     <div ng-switch-when="true">
       <div class="row" ng-repeat="comment in changeComments">
         <div class="col-xs-12">
-          <div class="comment-body">
-            <p><strong>Posted by  </strong> <span ng-bind="comment.user.nickname">user.nickname</span> <span ng-bind="comment.created_at | timeAgo">comment.created_at</span></p>
-            <p ng-bind="comment.text">comment.text</p>
+          <div class="comment-block">
+            <div class="title">
+              <p><strong>Posted by  </strong> <span ng-bind="comment.user.nickname">user.nickname</span> <span ng-bind="comment.created_at | timeAgo">comment.created_at</span></p>
+            </div>
+            <div class="body">
+              <p ng-bind="comment.text">comment.text</p>
+            </div>
           </div>
         </div>
       </div>

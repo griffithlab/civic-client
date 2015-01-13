@@ -10,17 +10,16 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneTalkComments.tpl.html',
-      controller: 'GeneTalkCommentsController',
-      link: /* ngInject */ function($scope, Security) {
-        $scope.isAuthenticated = Security.isAuthenticated;
-        $scope.isAdmin = Security.isAdmin;
-      }
+      controller: 'GeneTalkCommentsController'
     };
     return directive;
   }
 
   // @ngInject
-  function GeneTalkCommentsController($scope, $stateParams, GeneComments, GenesSuggestedChangesComments, $log) {
+  function GeneTalkCommentsController(Security, $scope, $stateParams, GeneComments, GenesSuggestedChangesComments, $log) {
+    $scope.isAuthenticated = Security.isAuthenticated;
+    $scope.isAdmin = Security.isAdmin;
+
     $log.info('GeneTalkCommentsController instantiated.');
     GeneComments.query({geneId: $scope.gene.entrez_id})
       .$promise.then(function(response) {

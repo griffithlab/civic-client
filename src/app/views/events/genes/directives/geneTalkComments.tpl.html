@@ -11,15 +11,29 @@
     <div ng-switch-when="true">
       <div class="row" ng-repeat="comment in comments">
         <div class="col-xs-12">
-          <div class="comment-body">
-            <p><strong>Posted by  </strong> <span ng-bind="comment.user.nickname">user.nickname</span> <span ng-bind="comment.created_at | timeAgo">comment.created_at</span></p>
-            <p ng-bind="comment.text">comment.text</p>
+          <div class="comment-block">
+            <div class="title">
+              <strong>Posted by  </strong> <span ng-bind="comment.user.nickname">user.nickname</span> <span ng-bind="comment.created_at | timeAgo">comment.created_at</span>
+            </div>
+            <div class="body">
+              <p ng-bind="comment.text">comment.text</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class="row">
-    <gene-talk-add-comment class="col-xs-12"></gene-talk-add-comment>
+    <div ng-switch="isAuthenticated()">
+      <div ng-switch-when="true">
+        <gene-talk-add-comment class="col-xs-12"></gene-talk-add-comment>
+      </div>
+      <div ng-switch-when="false">
+        <div class="col-xs-12">
+          <p>Login to post comments.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
