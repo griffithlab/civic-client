@@ -25,6 +25,7 @@
 
     GenesSuggestedChanges.query({'geneId': $stateParams.geneId })
       .$promise.then(function(response) {
+
         $scope.suggestedChanges = response;
     });
   }
