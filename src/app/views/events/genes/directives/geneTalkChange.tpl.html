@@ -1,8 +1,13 @@
 <div class="geneTalkChange">
-
   <div class="row">
     <div class="col-xs-12">
-      <h4>DIFF</h4>
+      <h4>Current Record:</h4>
+      <p ng-bind-html="gene.description | linky">LOADING GENE DESCRIPTION</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Suggested Change Diff:</h4>
       <p ng-bind-html="suggestedChange.diffs.description"></p>
     </div>
   </div>
@@ -14,6 +19,11 @@
           <button type="button" class="btn btn-warning btn-md" ng-click="commitChange()">Commit Change</button>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>COMMENTS:</h4>
     </div>
   </div>
   <div ng-switch="changeComments.length > 0">
@@ -39,7 +49,24 @@
       </div>
     </div>
   </div>
+
   <div class="row">
-    <gene-talk-change-add-comment class="col-xs-12"></gene-talk-change-add-comment>
+    <div class="col-xs-12">
+      <h4>ADD A COMMENT:</h4>
+    </div>
   </div>
+
+  <div class="row">
+    <div ng-switch="auth.isAuthenticated()">
+      <div ng-switch-when="true">
+        <gene-talk-change-add-comment class="col-xs-12"></gene-talk-change-add-comment>
+      </div>
+      <div ng-switch-when="false">
+        <div class="col-xs-12">
+          <p>Login to post comments.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

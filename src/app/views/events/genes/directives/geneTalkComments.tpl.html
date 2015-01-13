@@ -1,5 +1,18 @@
 <div class="geneTalkComments">
 
+  <div class="row">
+    <div class="col-xs-12">
+      <h4><span ng-bind="gene.entrez_name">GENE</span> Description:</h4>
+      <p ng-bind-html="gene.description | linky">LOADING GENE DESCRIPTION</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>COMMENTS:</h4>
+    </div>
+  </div>
+
   <div ng-switch="comments.length > 0">
     <div ng-switch-when="false">
       <div class="row">
@@ -23,6 +36,13 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>ADD A COMMENT:</h4>
+    </div>
+  </div>
+
 
   <div class="row">
     <div ng-switch="isAuthenticated()">

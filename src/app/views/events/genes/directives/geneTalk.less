@@ -33,7 +33,15 @@
         background-color: #FFF !important;
         border-top-right-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
-        color: @civicDarkPurple;
+        color: @civicDarkPurple !important;
+      }
+
+      a {
+        color: @civicPurple;
+      }
+
+      a:hover {
+        background-color: #FFF !important;
       }
 
       li {
@@ -45,6 +53,35 @@
         text-align: left;
         margin-bottom: @contentPadding;
       }
+
+      .new {
+        border-left: 2px solid @changeStatusNew;
+        @changeStatusNewLight: lighten(@changeStatusNew, 30%);
+        background-image: svg-gradient(to right, @changeStatusNewLight 0%, @changeStatusNewLight 95%, darken(@changeStatusNewLight, 10%) 100%);
+        background-size: 100% 100%;
+      }
+
+      .applied {
+        border-left: 2px solid @changeStatusApplied;
+        @changeStatusAppliedLight: lighten(@changeStatusApplied, 30%);
+        background-image: svg-gradient(to right, @changeStatusAppliedLight 0%, @changeStatusAppliedLight 95%, darken(@changeStatusAppliedLight, 10%) 100%);
+        background-size: 100% 100%;
+      }
+
+      .closed {
+        border-left: 2px solid @changeStatusClosed;
+        @changeStatusClosedLight: lighten(@changeStatusClosed, 30%);
+        background-image: svg-gradient(to right, @changeStatusClosedLight 0%, @changeStatusClosedLight 95%, darken(@changeStatusClosedLight, 10%) 100%);
+        background-size: 100% 100%;
+      }
+
+      .act {
+        border-left: 2px solid @changeStatusActive;
+        @changeStatusActiveLight: lighten(@changeStatusActive, 30%);
+        background-image: svg-gradient(to right, @changeStatusActiveLight 0%, @changeStatusActiveLight 95%, darken(@changeStatusActiveLight, 10%) 100%);
+        background-size: 100% 100%;
+      }
+
     }
   }
 }

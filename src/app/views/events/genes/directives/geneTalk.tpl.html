@@ -9,9 +9,10 @@
       </ul>
       <p class="sub-title"><span ng-bind="gene.entrez_name"></span> Changes</p>
       <ul class="nav nav-pills nav-stacked">
-        <li ng-repeat="change in suggestedChanges" ui-sref-active="active">
+        <li ng-repeat="change in suggestedChanges" ui-sref-active="active"
+            ng-class="{'new': change.status === 'new', 'act': change.status === 'active', 'applied': change.status === 'applied', 'closed': change.status === 'closed'}">
           <a ui-sref="events.genes.talk.changes({ geneId: gene.entrez_id, suggestedChangeId: change.id })">
-            [<span ng-bind="change.status" ng-class="{'new': change.status === 'new', 'active': change.status === 'active', 'applied': change.status === 'applied', 'closed': change.status === 'closed'}">[status]</span>]
+            [<span ng-bind="change.status" class="status">[status]</span>]
             <span ng-bind="change.user" class="user">[user]</span><br/>
             <span ng-bind="change.created_at | timeAgo" class="time">[time]</span>
           </a>
