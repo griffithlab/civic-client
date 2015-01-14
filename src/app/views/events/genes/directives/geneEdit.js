@@ -21,7 +21,7 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($log, $rootScope, $scope, $stateParams, _, Genes, GenesSuggestedChanges, GenesSuggestedChangesComments) {
+  function GeneEditCtrl($log, $parse, $scope, $stateParams, _, Genes, GenesSuggestedChanges, GenesSuggestedChangesComments) {
     $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId});
     $scope.genesSuggestedChanges = GenesSuggestedChanges.query({'geneId': $stateParams.geneId });
     $scope.newChange = {};
@@ -46,7 +46,8 @@
           // refresh gene data
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];
-          $scope.formStatus.messages.push('Your edit suggestions for Gene ' + $scope.geneEdit.entrez_name + ' were received and added to the review queue.');
+          var messageExp = '"Your edit suggestions for Gene " + gene.entrez_name + " have been added to the review queue."';
+          $scope.formStatus.messages.push($parse(messageExp)($scope));
           $scope.newChange = response.data;
         },
         function (response) {

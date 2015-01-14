@@ -17,7 +17,7 @@
   }
 
   // @ngInject
-  function GeneTalkChangeController($scope, Security, $stateParams, GenesSuggestedChanges, GenesSuggestedChangesComments, $log) {
+  function GeneTalkChangeController($scope, Security, $stateParams, GenesSuggestedChanges, GenesSuggestedChangesComments, Genes, $log) {
     $scope.auth = {
       isAuthenticated: Security.isAuthenticated,
       isAdmin: Security.isAdmin
@@ -39,6 +39,10 @@
       GenesSuggestedChanges.accept({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId, force: true })
         .$promise.then(function(response) { // success
           $log.info("suggested change updated!!");
+          $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId})
+            .$promise.then(function(gene) {
+              $scope.$parent.gene = gene;
+            });
         },
         function(response) { // failure
           $log.info("suggested change failed!!");
