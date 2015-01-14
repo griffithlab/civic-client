@@ -41,7 +41,7 @@
           $log.info("suggested change updated!!");
           $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId})
             .$promise.then(function(gene) {
-              $scope.$parent.gene = gene;
+              $scope.$parent.$parent.gene = gene;
             });
         },
         function(response) { // failure

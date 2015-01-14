@@ -14,6 +14,15 @@
       }
     };
 
+    var genesCache = $cacheFactory.get('genesCache');
+
+    var acceptCacheInterceptor = { // deletes cache for updated gene after 'accept'
+      response: function(response) {
+        genesCache.remove('/api/genes/' + response.data.entrez_id);
+        return response;
+      }
+    };
+
     var Genes = $resource('/api/genes/:geneId/suggested_changes/:suggestedChangeId',
       { geneId: '@entrez_id',
         suggestedChangeId: '@id'
@@ -40,7 +49,7 @@
             suggestedChangeId: '@suggestedChangeId'
           },
           method: 'POST',
-          interceptor: cacheInterceptor
+          interceptor: acceptCacheInterceptor
         }
       });
 
