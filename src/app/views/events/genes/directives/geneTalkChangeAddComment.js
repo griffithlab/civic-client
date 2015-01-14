@@ -42,13 +42,14 @@
           $log.info('add comment succeeded.');
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];
+          $scope.comment = '';
           $scope.formStatus.messages.push('Your comment was added.');
           GenesSuggestedChangesComments.query({
             geneId: $scope.gene.entrez_id,
             suggestedChangeId: $scope.suggestedChange.id
           })
             .$promise.then(function(response) {
-              $scope.changeComments = response;
+              $scope.$parent.changeComments = response;
             });
         },
         function(response) { // add comment failed

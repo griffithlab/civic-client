@@ -25,17 +25,23 @@
 
     GenesSuggestedChanges.query({'geneId': $stateParams.geneId })
       .$promise.then(function(response) {
-        var suggestedChanges = [];
+        var statusGroupsOrdered = {};
         var statusOrder = ['active', 'new', 'applied', 'closed'];
-        var statusGroups = _.groupBy(response, 'status');
-        _.each(statusOrder, function(stat) {
-          if (_.has(statusGroups, stat)) {
-            _.each(_.sortBy(statusGroups[stat], 'created_at'), function(change) {
-              suggestedChanges.push(change);
-            });
+        var statusGroups = _.groupBy(_.sortBy(response, 'created_at'), 'status');
+        _.each(statusOrder, function(status) {
+          if (_.has(statusGroups, status)) {
+            statusGroupsOrdered[status] = statusGroups[status];
           }
         });
-        $scope.suggestedChanges = suggestedChanges;
+        //_.each(statusOrder, function(stat) {
+        //  if (_.has(statusGroups, stat)) {
+        //    _.each(_.sortBy(statusGroups[stat], 'created_at'), function(change) {
+        //      suggestedChanges.push(change);
+        //    });
+        //  }
+        //});
+        $scope.statusOrder = statusOrder;
+        $scope.statusGroups = statusGroupsOrdered;
     });
   }
 })();

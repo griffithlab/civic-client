@@ -7,22 +7,33 @@
           <a ui-sref="events.genes.talk.comments({ geneId: gene.entrez_id })" class="gene-name"><span ng-bind="gene.entrez_name"></span> Comments</a>
         </li>
       </ul>
-      <p class="sub-title"><span ng-bind="gene.entrez_name"></span> Changes</p>
-      <ul class="nav nav-pills nav-stacked">
-        <li ng-repeat="change in suggestedChanges" ui-sref-active="active"
-            ng-class="{'new': change.status === 'new', 'act': change.status === 'active', 'applied': change.status === 'applied', 'closed': change.status === 'closed'}">
-          <a ui-sref="events.genes.talk.changes({ geneId: gene.entrez_id, suggestedChangeId: change.id })">
-            [<span ng-bind="change.status" class="status">[status]</span>]
-            <span ng-bind="change.user" class="user">[user]</span><br/>
-            <span ng-bind="change.created_at | timeAgo" class="time">[time]</span>
-          </a>
-        </li>
-      </ul>
+      <div ng-repeat="status in statusOrder">
+        <!--<pre ng-bind="statusGroups[status] | json"></pre>-->
+        <div ng-if="statusGroups[status].length > 0">
+          <h5>{{ status | capitalize }} Changes:</h5>
+          <ul class="nav nav-pills nav-stacked">
+            <li ng-repeat="change in statusGroups[status]" ui-sref-active="active"
+                ng-class="{'new': change.status === 'new', 'act': change.status === 'active', 'applied': change.status === 'applied', 'closed': change.status === 'closed'}">
+              <a ui-sref="events.genes.talk.changes({ geneId: gene.entrez_id, suggestedChangeId: change.id })">
+                #<span ng-bind="change.id"></span>
+                <span ng-bind="change.user" class="user">[user]</span><br/>
+                <span ng-bind="change.created_at | timeAgo" class="time">[time]</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </div>
     <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9">
       <ui-view>
         <p>Click a suggested change to view details and conversation</p>
       </ui-view>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="statusGroups | json"></pre>
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@
     .filter('labelify', labelifyFilter)
     .filter('arrayToList', arrayToListFilter)
     .filter('encodeUri', encodeUri)
+    .filter('capitalize', capitalizeFilter)
     .filter('decodeUri', decodeUri);
 
   // @ngInject
@@ -40,10 +41,20 @@
     };
   }
 
-// @ngInject
+  // @ngInject
   function decodeUri($window) {
     return function (input) {
       return $window.decodeURIComponent(input);
     };
   }
+
+  // @ngInject
+  function capitalizeFilter() {
+    return function (input, scope) {
+      if (input != null)
+        input = input.toLowerCase();
+      return input.substring(0, 1).toUpperCase() + input.substring(1);
+    };
+  }
+
 })();

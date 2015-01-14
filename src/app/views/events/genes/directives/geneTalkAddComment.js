@@ -44,7 +44,7 @@
           $scope.formStatus.messages.push('Your comment was added.');
           GeneComments.query({geneId: $scope.gene.entrez_id})
             .$promise.then(function(response) {
-              $scope.comments = response;
+              $scope.$parent.comments = response;
             });
         },
         function(response) { // add comment failed
