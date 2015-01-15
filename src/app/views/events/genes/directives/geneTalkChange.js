@@ -39,7 +39,7 @@
       GenesSuggestedChanges.accept({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId, force: true })
         .$promise.then(function(response) { // success
           $log.info("suggested change updated!!");
-          $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId})
+          Genes.get({'geneId': $stateParams.geneId})
             .$promise.then(function(gene) {
               $scope.$parent.$parent.gene = gene;
             });
