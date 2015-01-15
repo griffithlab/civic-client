@@ -71,7 +71,7 @@ function appRun(Security, $rootScope, $state) {
   //});
 
 }
-// define app modules
+// define app modules & dependencies
 angular.module('civic.security', [
   'civic.security.authorization',
   'civic.security.service',

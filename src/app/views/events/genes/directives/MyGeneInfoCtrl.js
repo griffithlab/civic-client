@@ -9,7 +9,7 @@
       $scope.dlg = dialogs.create(
         'app/views/events/genes/directives/myGeneInfoDialog.tpl.html',
         'MyGeneInfoDialogCtrl',
-        $scope.geneDetails,
+        $scope.GeneView.geneDetails,
         'lg'
       );
     };

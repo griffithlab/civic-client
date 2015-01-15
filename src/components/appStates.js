@@ -106,11 +106,7 @@
             return MyGene.getDetails({'geneId': $stateParams.geneId }).$promise;
           }
         },
-        controller: function($scope, gene, geneDetails, _) {
-          $scope.gene = gene;
-          $scope.geneDetails = geneDetails;
-          $scope.variantGroupsExist = _.has(gene, 'variant_groups') && gene.variant_groups.length > 0;
-        },
+        controller: 'GenesViewCtrl as GeneView',
         onExit: /* ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }

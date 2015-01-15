@@ -1,14 +1,14 @@
 <div class="variantsMenu">
-  <div ng-switch on="gene.variants.length > 0 || typeof(gene.variantGroups)">
+  <div ng-switch on="GeneView.gene.variants.length > 0 || typeof(GeneView.gene.variantGroups)">
     <div ng-switch-when="true">
       <!-- show variants list -->
-      <div ng-show="gene.variants.length > 0">
+      <div ng-show="GeneView.gene.variants.length > 0">
         <div class="title">
-          <span>{{ gene.entrez_name }} Variants:</span>
+          <span>{{ GeneView.gene.entrez_name }} Variants:</span>
         </div>
         <ul class="nav nav-pills nav-stacked">
-          <li ng-repeat="variant in gene.variants" ui-sref-active="active">
-            <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_id, variantId: variant.id })">{{ variant.name }}</a>
+          <li ng-repeat="variant in GeneView.gene.variants" ui-sref-active="active">
+            <a ui-sref="events.genes.summary.variants.summary({ geneId: GeneView.gene.entrez_id, variantId: variant.id })">{{ variant.name }}</a>
           </li>
         </ul>
       </div>
@@ -16,10 +16,10 @@
       <!-- show variant groups -->
       <div ng-show="variantGroupsExist">
         <div class="title">
-          <span>{{ gene.entrez_name }} Variant Groups:</span>
+          <span>{{ GeneView.gene.entrez_name }} Variant Groups:</span>
         </div>
         <ul class="nav nav-pills nav-stacked">
-          <li ng-repeat="(variantGroup, variants) in gene.variant_groups" ui-sref-active="active">
+          <li ng-repeat="(variantGroup, variants) in GeneView.gene.variant_groups" ui-sref-active="active">
             <a class="groupTitle" ui-sref="gene.variant-group({ geneId:gene.entrez_id, variantGroupId: variantGroup })"ui-sref-active="active">{{ variantGroup }}</a>
             <ul class="nav nav-pills nav-stacked">
               <li ng-repeat="variant in variants" ui-sref-active="active">
