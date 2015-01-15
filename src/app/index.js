@@ -78,6 +78,7 @@ angular.module('civic.security', [
   'civic.security.interceptor',
   'civic.security.login'
 ]);
+angular.module('civic.states', ['ui.router']);
 angular.module('civic.services', []);
 angular.module('civic.pages', ['civic.security.authorization']);
 angular.module('civic.account', ['civic.security.authorization']);

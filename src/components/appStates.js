@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  angular.module('civic.states', ['ui.router'])
+  angular.module('civic.states')
     .config(routesConfig);
 
   // @ngInject
@@ -69,11 +69,19 @@
     $stateProvider
       .state('events', {
         url: '/events',
-        controller: 'EventsViewCtrl',
         templateUrl: 'app/views/events/eventsView.tpl.html',
         data: {
           titleExp: '"Choose Gene"',
           navMode: 'sub'
+        },
+        resolve:  /* ngInject */ {
+          Genes: 'Genes',
+          geneList: function(Genes) {
+            return Genes.queryNames().$promise;
+          }
+        },
+        controller:  /* ngInject */ function(geneList, $scope) {
+          $scope.genes = geneList;
         },
         onExit: /* ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
@@ -81,8 +89,8 @@
       })
       .state('events.genes', {
         abstract: true,
-        url: '/genes/:geneId',
         controller: 'GenesViewCtrl',
+        url: '/genes/:geneId',
         templateUrl: 'app/views/events/genes/genesView.tpl.html',
         data: {
           titleExp: '"Event"',
@@ -122,8 +130,8 @@
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
         }
-      }).
-      state('events.genes.talk.changes', {
+      })
+      .state('events.genes.talk.changes', {
         url: '/changes/:suggestedChangeId',
         template: '<gene-talk-change></gene-talk-change>',
         data: {
