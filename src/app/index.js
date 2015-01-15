@@ -80,12 +80,12 @@ angular.module('civic.security', [
 ]);
 angular.module('civic.states', ['ui.router']);
 angular.module('civic.services', []);
-angular.module('civic.pages', ['civic.security.authorization']);
-angular.module('civic.account', ['civic.security.authorization']);
-angular.module('civic.common', []);
-angular.module('civic.login', []);
-angular.module('civic.browse', ['ui.grid.selection']);
-angular.module('civic.search', []);
-angular.module('civic.events', ['ui.grid.selection']);
+angular.module('civic.pages', ['civic.security.authorization', 'ui.router']);
+angular.module('civic.account', ['civic.security.authorization', 'ui.router']);
+angular.module('civic.common', ['ui.router']);
+angular.module('civic.login', ['ui.router']);
+angular.module('civic.browse', ['ui.grid.selection', 'ui.router']);
+angular.module('civic.search', ['ui.router']);
+angular.module('civic.events', ['ui.grid.selection', 'ui.router']);
 
 angular.module('httpMocks', ['ngTable', 'ngMockE2E']);

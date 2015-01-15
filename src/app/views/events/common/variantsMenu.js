@@ -8,7 +8,6 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'app/views/events/common/variantsMenu.tpl.html',
-      controller: 'GenesViewCtrl',
       replace: true,
       scope: true
     };

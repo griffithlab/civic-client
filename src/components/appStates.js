@@ -11,6 +11,7 @@
 
     // abstract state redirects
     $urlRouterProvider.when('/events/genes/:geneId', '/events/genes/:geneId/summary');
+    $urlRouterProvider.when('/events/genes', '/events'); // if no geneId provided, redirect to /events
 
     // static frontend pages
     // NOTE: titleExp are angular expressions parsed by the TitleService (/app/components/services/TitleService.js)
@@ -74,13 +75,13 @@
           titleExp: '"Choose Gene"',
           navMode: 'sub'
         },
-        resolve:  /* ngInject */ {
+        resolve: /* ngInject */ {
           Genes: 'Genes',
           geneList: function(Genes) {
             return Genes.queryNames().$promise;
           }
         },
-        controller:  /* ngInject */ function(geneList, $scope) {
+        controller: /* ngInject */ function(geneList, $scope) {
           $scope.genes = geneList;
         },
         onExit: /* ngInject */ function($deepStateRedirect) {
@@ -89,12 +90,29 @@
       })
       .state('events.genes', {
         abstract: true,
-        controller: 'GenesViewCtrl',
         url: '/genes/:geneId',
         templateUrl: 'app/views/events/genes/genesView.tpl.html',
         data: {
           titleExp: '"Event"',
           navMode: 'sub'
+        },
+        resolve: /* ngInject */ {
+          Genes: 'Genes',
+          MyGene: 'MyGene',
+          gene: function(Genes, $stateParams) {
+            return Genes.get({'geneId': $stateParams.geneId }).$promise;
+          },
+          geneDetails: function(MyGene, $stateParams) {
+            return MyGene.getDetails({'geneId': $stateParams.geneId }).$promise;
+          }
+        },
+        controller: function($scope, gene, geneDetails, _) {
+          $scope.gene = gene;
+          $scope.geneDetails = geneDetails;
+          $scope.variantGroupsExist = _.has(gene, 'variant_groups') && gene.variant_groups.length > 0;
+        },
+        onExit: /* ngInject */ function($deepStateRedirect) {
+          $deepStateRedirect.reset();
         }
       })
       .state('events.genes.summary', {
@@ -110,6 +128,12 @@
         url: '/edit',
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
+        resolve: {
+          geneEdit: function(Genes, $stateParams, $log) {
+            $log.info('appStates: resolving geneEdit.');
+            return Genes.get({'geneId': $stateParams.geneId}).$promise;
+          }
+        },
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Edit"',
           navMode: 'sub'

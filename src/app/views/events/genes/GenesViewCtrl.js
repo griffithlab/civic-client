@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.events')
-    .controller('GenesViewCtrl', GenesViewCtrl);
+    .controller('GenesdfasdsViewCtrl', GenesViewCtrl);
 
   // @ngInject
   function GenesViewCtrl($log, $rootScope, $scope, $state,  $stateParams, Genes, MyGene, _) {

@@ -21,7 +21,7 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($log, $parse, $scope, $stateParams, _, Genes, GenesSuggestedChanges, GenesSuggestedChangesComments) {
+  function GeneEditCtrl($log, $parse, $scope, $stateParams, _, Genes, GenesSuggestedChanges) {
     $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId});
     $scope.genesSuggestedChanges = GenesSuggestedChanges.query({'geneId': $stateParams.geneId });
     $scope.newChange = {};
