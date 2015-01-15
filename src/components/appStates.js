@@ -99,10 +99,12 @@
         resolve: /* ngInject */ {
           Genes: 'Genes',
           MyGene: 'MyGene',
-          gene: function(Genes, $stateParams) {
+          gene: function(Genes, $stateParams, $log) {
+            $log.info('events.genes - resolving gene');
             return Genes.get({'geneId': $stateParams.geneId }).$promise;
           },
-          geneDetails: function(MyGene, $stateParams) {
+          geneDetails: function(MyGene, $stateParams, $log) {
+            $log.info('events.genes - resolving geneDetails');
             return MyGene.getDetails({'geneId': $stateParams.geneId }).$promise;
           }
         },
@@ -125,9 +127,9 @@
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
         resolve: {
-          geneEdit: function(Genes, $stateParams, $log) {
-            $log.info('appStates: resolving geneEdit.');
-            return Genes.get({'geneId': $stateParams.geneId}).$promise;
+            geneEdit: function(Genes, $stateParams, $log) {
+              $log.info('appStates: resolving geneEdit.');
+              return Genes.get({'geneId': $stateParams.geneId}).$promise;
           }
         },
         data: {

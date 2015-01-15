@@ -4,7 +4,7 @@
       <h3>
         Gene {{ GeneView.gene.entrez_name }}
         <a ng-show="isAuthenticated()"
-           ui-sref="events.genes.edit({geneId: gene.entrez_id})"
+           ui-sref="events.genes.edit({geneId: GeneView.gene.entrez_id})"
            class="btn btn-primary btn-xs btn-edit"
            ng-disabled="$state.includes('**.genes.edit')">
           Edit Gene</a>

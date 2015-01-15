@@ -30,7 +30,6 @@
 
   // @ngInject
   function MyGeneInfoDialogCtrl($scope, uiGridConstants, $modalInstance, data) {
-
     $scope.proteinDomainsGridOptions = {
       enableFiltering: true,
       enableColumnMenus: false,

@@ -18,6 +18,7 @@
             fields: 'name,symbol,alias,interpro,pathway,summary,'
           },
           isArray: false,
+          cache: true,
           transformResponse: function(data) {
             var srcMap = {
               kegg: 'http://www.genome.jp/kegg-bin/show_pathway?',
