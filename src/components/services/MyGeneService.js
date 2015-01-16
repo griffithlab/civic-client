@@ -4,7 +4,9 @@
     .factory('MyGene', MyGeneService);
 
   // @ngInject
-  function MyGeneService($resource, _) {
+  function MyGeneService($resource, $cacheFactory, _) {
+
+    var cache = $cacheFactory('MyGeneInfo');
 
     var MyGene = $resource('http://mygene.info/v2/gene/:geneId',
       {
@@ -18,7 +20,7 @@
             fields: 'name,symbol,alias,interpro,pathway,summary,'
           },
           isArray: false,
-          cache: true,
+          cache: cache,
           transformResponse: function(data) {
             var srcMap = {
               kegg: 'http://www.genome.jp/kegg-bin/show_pathway?',
