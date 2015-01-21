@@ -16,7 +16,7 @@
   }
 
   // @ngInject
-  function GeneTalkCommentsController(Security, $scope, $stateParams, GeneComments, GenesSuggestedChangesComments, $log) {
+  function GeneTalkCommentsController(Security, $scope, $stateParams, GeneComments, $log) {
     $scope.isAuthenticated = Security.isAuthenticated;
     $scope.isAdmin = Security.isAdmin;
 

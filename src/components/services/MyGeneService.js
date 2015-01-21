@@ -6,7 +6,7 @@
   // @ngInject
   function MyGeneService($resource, $cacheFactory, _) {
 
-    var cache = $cacheFactory('MyGeneInfo');
+    var cache = $cacheFactory('MyGeneInfo'); // default cache doesn't work for some reason
 
     var MyGene = $resource('http://mygene.info/v2/gene/:geneId',
       {

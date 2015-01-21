@@ -42,7 +42,7 @@
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];
           $scope.formStatus.messages.push('Your comment was added.');
-          GeneComments.query({geneId: $scope.gene.entrez_id})
+          GeneComments.query({geneId: $scope.GeneView.entrez_id})
             .$promise.then(function(response) {
               // TODO: banish all these kludgy $scope.$parent calls!
               $scope.$parent.comments = response;

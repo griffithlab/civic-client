@@ -10,7 +10,7 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneEdit.tpl.html',
-      controller: 'GeneEditCtrl',
+      controller: 'GeneEditCtrl as GeneEdit',
       link: /* ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
@@ -98,6 +98,7 @@
         },
         function () {
           $log.info('update successful.');
+
           $scope.$parent.gene = Genes.get({'geneId': $stateParams.geneId});
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];

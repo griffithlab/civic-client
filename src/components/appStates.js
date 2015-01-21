@@ -151,6 +151,9 @@
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
+        },
+        controller: function(gene, $scope) {
+          $scope.gene = gene; // place resolved gene from events.genes in scope
         }
       })
       .state('events.genes.talk.changes', {
