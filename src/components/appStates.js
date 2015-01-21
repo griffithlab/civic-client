@@ -143,6 +143,9 @@
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
+        },
+        controller: function(gene, $scope) {
+          $scope.gene = gene;
         }
       })
       .state('events.genes.talk.comments', {
