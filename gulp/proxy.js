@@ -48,7 +48,7 @@ function proxyMiddleware(req, res, next) {
    * for your needs. If you can, you could also check on a context in the url which
    * may be more reliable but can't be generic.
    */
-  var urlRegexp = /^\/api\/(.*)/;
+  var urlRegexp = /^\/api\/.*/;
   var containsAPI = urlRegexp.test(req.url);
 
   if (!containsAPI) {

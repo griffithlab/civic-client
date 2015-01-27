@@ -16,29 +16,42 @@
     padding-top: @contentPadding;
     padding-bottom: @contentPadding;
 
-    a {
-      padding-left: 2*@contentPadding;
-    }
+    li {
+      margin-bottom: @contentPadding/2;
 
-    .active a {
-      background-color: @pageBackground !important;
-      color: @civicPurple !important;
-      margin-right: -@contentPadding;
-      margin-left: @contentPadding;
-      padding-left: @contentPadding;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-
-      @media (max-width: @screen-sm-min) {
-        border-radius: 0;
+      a {
+        padding-left: 2*@contentPadding;
+        margin-right: @contentPadding !important;
+        background-color: @pageBackground3;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
       }
 
-      @media (max-width: @screen-md-min) {
-        margin-right: @contentPadding;
-        border-radius: @border-radius-base;
+      a:hover {
+        background-color: @pageBackground !important;
+      }
+
+      &.active a {
+        background-color: @pageBackground !important;
+        color: @civicPurple !important;
+        margin-right: -@contentPadding !important;
+        margin-left: @contentPadding !important;
+        padding-left: @contentPadding !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-top-left-radius: @border-radius-base !important;
+        border-bottom-left-radius: @border-radius-base !important;
+
+        @media (max-width: @screen-sm-min) {
+          border-radius: 0 !important;
+        }
+
+        @media (max-width: @screen-md-min) {
+          margin-right: @contentPadding !important;
+          border-radius: @border-radius-base !important;
+        }
       }
     }
-
 
   }
 
@@ -55,28 +68,6 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 
-  }
-
-  .groupTitle {
-    display: block;
-    background-color: @variantGroup-title-bg;
-    color: #333;
-    font-weight: bold;
-    margin: 0 @contentPadding 0 -@contentPadding;
-    padding: @contentPadding/2 @contentPadding;
-    border-top-right-radius: @border-radius-base;
-    border-bottom-right-radius: @border-radius-base;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .groupTitle.active {
-    background-color: @pageBackground;
-    border-top-left-radius: @border-radius-base;
-    border-bottom-left-radius: @border-radius-base;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    margin: 0 -@contentPadding 0 0;
   }
 
 }

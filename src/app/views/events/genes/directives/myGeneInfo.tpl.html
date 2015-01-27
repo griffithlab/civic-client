@@ -6,19 +6,19 @@
     </colgroup>
     <tr>
       <td class="name">Name:</td>
-      <td class="value" ng-bind-html="GeneView.geneDetails.name"></td>
+      <td class="value" ng-bind-html="geneDetails.name"></td>
     </tr>
     <tr>
       <td class="name">Synonyms:</td>
-      <td class="value" ng-bind-html="GeneView.geneDetails.alias | arrayToList "></td>
+      <td class="value" ng-bind-html="geneDetails.alias | arrayToList "></td>
     </tr>
     <tr>
       <td class="name">Protein Domains:</td>
-      <td class="value" ng-bind-html="GeneView.geneDetails.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true"></td>
+      <td class="value" ng-bind-html="geneDetails.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true"></td>
     </tr>
     <tr>
       <td class="name">Pathways:</td>
-      <td class="value" ng-bind-html="GeneView.geneDetails.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true"></td>
+      <td class="value" ng-bind-html="geneDetails.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true"></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
