@@ -187,7 +187,8 @@
         data: {
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name  + " Summary"',
           navMode: 'sub'
-        }
+        },
+        deepStateRedirect: { params: ['variantId'] }
       })
       .state('events.genes.summary.variants.talk', {
         url:'/talk',
