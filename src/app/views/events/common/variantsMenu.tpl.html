@@ -4,7 +4,7 @@
       <!-- show variants list -->
       <div ng-show="gene.variants.length > 0">
         <div class="title">
-          <span>{{ gene.entrez_name }} Variants:</span>
+          <span ng-bind="gene.entrez_name"></span> Variants:
         </div>
         <ul class="nav nav-pills nav-stacked">
           <li ng-repeat="variant in gene.variants" ui-sref-active="active">
@@ -18,17 +18,19 @@
         <div class="title">
           <span>{{ gene.entrez_name }} Variant Groups:</span>
         </div>
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills nav-stacked variant-group">
           <li ng-repeat="variant_group in gene.variant_groups" ui-sref-active="active">
             <a ng-bind="variant_group.name"
                ui-sref="gene.variant-group({ geneId:gene.entrez_id, variantGroupId: variant_group.id })"
-               ui-sref-active="active">
+               ui-sref-active="active"
+               class="group-title">
             </a>
-            <!--<ul class="nav nav-pills nav-stacked">-->
-              <!--<li ng-repeat="variant in variants" ui-sref-active="active">-->
-                <!--<a ui-sref="gene.summary.variants.summary({ geneId: gene.entrez_id, variantId: variant.id })">{{ variant.name }}</a>-->
-              <!--</li>-->
-            <!--</ul>-->
+            <ul class="nav nav-pills nav-stacked">
+              <li ng-repeat="variant in variant_group.variants" ui-sref-active="active">
+                <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_id, variantId: variant.id })"
+                  class="variant">{{ variant.name }}</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
