@@ -93,8 +93,12 @@
 
     $scope.applyEdits = function () {
       $scope.geneEdit.$update({
-          //entrez_name: $scope.geneEdit.entrez_name,
-          description: $scope.geneEdit.description
+          // entrez_id: $stateParams.geneID,
+          description: $scope.geneEdit.description,
+          comment: {
+            title: 'Reasons for Edit',
+            text: "Admin applied edit reason: " + $scope.geneEdit.reason
+          }
         },
         function () {
           $log.info('update successful.');
