@@ -21,7 +21,7 @@
         <ul class="nav nav-pills nav-stacked variant-group">
           <li ng-repeat="variant_group in gene.variant_groups" ui-sref-active="active">
             <a ng-bind="variant_group.name"
-               ui-sref="gene.variant-group({ geneId:gene.entrez_id, variantGroupId: variant_group.id })"
+               ui-sref="events.genes.summary.variantGroups.summary({ geneId:gene.entrez_id, variantGroupId: variant_group.id })"
                ui-sref-active="active"
                class="group-title">
             </a>

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="detail-corner"><div class="corner-edge"></div></div>
     <div class="col-xs-6 name">
-      <h3>
+      <h3 fittext fittext-max="24px" fittext-min="12px">
         Variant {{ variant.name}}
         <a ng-show="isAuthenticated()"  ui-sref="events.genes.summary.variants.edit({geneId: gene.entrez_id, variantId: variant.id})" class="btn btn-primary btn-xs btn-edit">Edit Variant</a>
       </h3>

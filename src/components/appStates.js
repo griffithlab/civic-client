@@ -175,6 +175,32 @@
           navMode: 'sub'
         }
       })
+      .state('events.genes.summary.variantGroups', {
+        abstract: true,
+        url: '/variant-groups/:variantGroupId',
+        templateUrl: 'app/views/events/variantGroups/variantGroupsView.tpl.html',
+        data: {
+          titleExp: '"Variant Group"',
+          navMode: 'sub'
+        },
+        resolve: /* ngInject */ {
+          VariantGroups: 'VariantGroups',
+          variantGroup: function(VariantGroups, $stateParams, $log) {
+            $log.info('appStates.js - resolving VariantGroup');
+            return VariantGroups.get({ variantGroupId: $stateParams.variantGroupId }).$promise;
+          }
+        },
+        controller: 'VariantGroupsCtrl'
+      })
+      .state('events.genes.summary.variantGroups.summary', {
+        url: '/variant-groups/:variantGroupId/summary',
+        template: '<variant-group-summary class="col-xs-12"></variant-group-summary>',
+        data: {
+          titleExp: '"Variant Group " + variantGroup.name + " Summary"',
+          navMode: 'sub'
+        },
+        deepStateRedirect: true
+      })
       .state('events.genes.summary.variants', {
         abtract: true,
         url: '/variants/:variantId',
