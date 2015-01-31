@@ -134,12 +134,12 @@
         url: '/edit',
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
-        resolve: {
-            geneEdit: function(Genes, $stateParams, $log) {
-              $log.info('appStates: resolving geneEdit.');
-              return Genes.get({'geneId': $stateParams.geneId}).$promise;
-          }
-        },
+        //resolve: {
+        //    geneEdit: function(Genes, $stateParams, $log) {
+        //      $log.info('appStates: resolving geneEdit.');
+        //      return Genes.get({'geneId': $stateParams.geneId}).$promise;
+        //  }
+        //},
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Edit"',
           navMode: 'sub'
@@ -193,13 +193,22 @@
         controller: 'VariantGroupsCtrl'
       })
       .state('events.genes.summary.variantGroups.summary', {
-        url: '/variant-groups/:variantGroupId/summary',
+        url: '/summary',
         template: '<variant-group-summary></variant-group-summary>',
         data: {
           titleExp: '"Variant Group " + variantGroup.name + " Summary"',
           navMode: 'sub'
         },
         deepStateRedirect: true
+      })
+      .state('events.genes.symmary.variantGroups.edit',{
+        url: '/edit',
+        template: '<variant-group-edit class="col-xs-12"></variant-group-edit>',
+        controller: 'VariantEditCtrl',
+        data: {
+          titleExp: '"Variant Group " + variantGroup.name + " Edit"',
+          navMode: 'sub'
+        }
       })
       .state('events.genes.summary.variants', {
         abtract: true,
@@ -213,7 +222,8 @@
         data: {
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name  + " Summary"',
           navMode: 'sub'
-        }
+        },
+        deepStateRedirect: true
       })
       .state('events.genes.summary.variants.talk', {
         url:'/talk',
@@ -243,7 +253,8 @@
         data: {
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Summary"',
           navMode: 'sub'
-        }
+        },
+        deepStateRedirect: true
       })
       .state('events.genes.summary.variants.summary.evidence.talk', {
         url: '/talk',
