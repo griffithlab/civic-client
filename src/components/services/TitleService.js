@@ -4,16 +4,20 @@
     .service('TitleService', TitleService);
 
   // @ngInject
-  function TitleService($rootScope, Genes, Variants, Evidence, _, $q, $parse) {
+  // Titles are constructed by parsing the state's data.titleExp string within a scope constructed
+  // of the relevant CIViC entities (gene, variant, evidenceItem, variantGroup)
+  function TitleService($rootScope, Genes, Variants, Evidence, VariantGroups, _, $q, $parse) {
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams) {
       var title = '';
 
       var titleScope = {
         gene: {},
         variant: {},
-        evidenceItem: {}
+        evidenceItem: {},
+        variantGroup: {}
       };
 
+      // construct promises for relevant entities
       if(_.has(toParams, 'geneId') && titleScope.gene.entrez_id !== toParams.geneId) {
         var genePromise = Genes.get({'geneId': toParams.geneId }).$promise;
       }
@@ -22,14 +26,20 @@
         var variantPromise = Variants.get({'geneId': toParams.geneId, 'variantId': toParams.variantId }).$promise;
       }
 
+      if((_.has(toParams, 'variantGroupId')) && titleScope.variantGroup.id !== toParams.variantGroupId) {
+        var variantGroupsPromise = VariantGroups.get({'variantGroupId': toParams.variantGroupId }).$promise;
+      }
+
       if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId') && _.has(toParams, 'evidenceId')) && titleScope.evidenceItem.id !== toParams.evidenceId) {
         var evidenceItemPromise = Evidence.get({'geneId': toParams.geneId, 'variantId': toParams.variantId, 'evidenceId': toParams.evidenceId }).$promise;
       }
 
-      $q.all({ gene:genePromise, variant:variantPromise, evidenceItem:evidenceItemPromise }).then(function(resolutions) {
+      // resolve promises, apply $parse with constructed title scope
+      $q.all({ gene: genePromise, variant: variantPromise, evidenceItem: evidenceItemPromise, variantGroup: variantGroupsPromise }).then(function(resolutions) {
         titleScope.gene = resolutions.gene;
         titleScope.variant = resolutions.variant;
         titleScope.evidenceItem = resolutions.evidenceItem;
+        titleScope.variantGroup = resolutions.variantGroup;
         title = $parse(toState.data.titleExp)(titleScope);
         $rootScope.$broadcast('title:update', { newTitle: title });
       });

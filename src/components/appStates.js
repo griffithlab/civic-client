@@ -199,7 +199,7 @@
           titleExp: '"Variant Group " + variantGroup.name + " Summary"',
           navMode: 'sub'
         },
-        deepStateRedirect: true
+        deepStateRedirect: { params: ['variantGroupId'] }
       })
       .state('events.genes.symmary.variantGroups.edit',{
         url: '/edit',
