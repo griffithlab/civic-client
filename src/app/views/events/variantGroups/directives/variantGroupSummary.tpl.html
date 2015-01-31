@@ -1,4 +1,14 @@
 <div class="variantGroupSummary">
-  <h4>Description:</h4>
-  <p ng-bind="variant_group.description"
+  <div class="row">
+    <div class="col-xs-12">
+      <div ng-switch="variantGroup.description">
+        <div ng-switch-when="null">
+          <p>No description exists for this Variant Group. Would you like to create one?</p>
+        </div>
+        <div ng-switch-default>
+          <p ng-bind="variantGroup.description"></p>
+          <pre>{{ variantGroup.description | json }}</pre>
+        </div>
+    </div>
+  </div>
 </div>

@@ -9,7 +9,7 @@
       restrict: 'E',
       link: function() {
         var listener = function(event, data) {
-          console.log('title title:update listener called. ****************');
+          // console.log('title title:update listener called. ****************');
           $timeout(function() {
             $rootScope.title = (typeof data.newTitle !== 'undefined') ? 'CIViC: ' + data.newTitle : 'CIViC - Clinincal Interpretation of Variants in Cancer';
           });

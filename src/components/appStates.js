@@ -186,7 +186,7 @@
         resolve: /* ngInject */ {
           VariantGroups: 'VariantGroups',
           variantGroup: function(VariantGroups, $stateParams, $log) {
-            $log.info('appStates.js - resolving VariantGroup');
+            $log.info('appStates: - resolving VariantGroup');
             return VariantGroups.get({ variantGroupId: $stateParams.variantGroupId }).$promise;
           }
         },
@@ -194,7 +194,7 @@
       })
       .state('events.genes.summary.variantGroups.summary', {
         url: '/variant-groups/:variantGroupId/summary',
-        template: '<variant-group-summary class="col-xs-12"></variant-group-summary>',
+        template: '<variant-group-summary></variant-group-summary>',
         data: {
           titleExp: '"Variant Group " + variantGroup.name + " Summary"',
           navMode: 'sub'
