@@ -134,12 +134,12 @@
         url: '/edit',
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
-        //resolve: {
-        //    geneEdit: function(Genes, $stateParams, $log) {
-        //      $log.info('appStates: resolving geneEdit.');
-        //      return Genes.get({'geneId': $stateParams.geneId}).$promise;
-        //  }
-        //},
+        resolve: {
+            geneEdit: function(Genes, $stateParams, $log) {
+              $log.info('appStates: resolving geneEdit.');
+              return Genes.get({'geneId': $stateParams.geneId}).$promise;
+          }
+        },
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Edit"',
           navMode: 'sub'
@@ -223,7 +223,7 @@
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name  + " Summary"',
           navMode: 'sub'
         },
-        deepStateRedirect: true
+        deepStateRedirect: { params: ['variantId'] }
       })
       .state('events.genes.summary.variants.talk', {
         url:'/talk',
@@ -253,8 +253,7 @@
         data: {
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Summary"',
           navMode: 'sub'
-        },
-        deepStateRedirect: true
+        }
       })
       .state('events.genes.summary.variants.summary.evidence.talk', {
         url: '/talk',
