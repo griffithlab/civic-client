@@ -1,4 +1,6 @@
-<div class="levelCell ngCellText" ng-class="{'levelA': row.entity[col.field] === 'A', 'levelB': row.entity[col.field] === 'B','levelC': row.entity[col.field] === 'C', 'levelD': row.entity[col.field] === 'D', 'levelE': row.entity[col.field] === 'E' }" style="{{ 'height:' + row.height + 'px;'}}">
+<div class="levelCell ngCellText"
+     ng-class="{'levelA': row.entity[col.field] === 'A', 'levelB': row.entity[col.field] === 'B','levelC': row.entity[col.field] === 'C', 'levelD': row.entity[col.field] === 'D', 'levelE': row.entity[col.field] === 'E' }"
+     style="{{ 'height:' + row.height + 'px;'}}">
   <span ng-cell-text>
     {{ row.entity[col.field] }}
   </span>

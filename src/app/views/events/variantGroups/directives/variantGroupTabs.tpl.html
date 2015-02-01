@@ -3,8 +3,12 @@
     <div class="detail-corner"><div class="corner-edge"></div></div>
     <div class="col-xs-6 name">
       <h3 fittext fittext-max="24px" fittext-min="12px">
-        Variant Group {{ variantGroup.name}}
-        <a ng-show="isAuthenticated()"  ui-sref="events.genes.summary.variantGroups.edit({geneId: gene.entrez_id, variantGroupId: variant.id})" class="btn btn-primary btn-xs btn-edit">Edit Variant Group</a>
+        Variant Group <span ng-bind="variantGroup.name">GROUP NAME</span>
+        <a ng-show="isAuthenticated()"
+           ui-sref="events.genes.summary.variantGroups.edit({geneId: gene.entrez_id, variantGroupId: variantGroup.id})"
+           class="btn btn-primary btn-xs btn-edit">
+          Edit Variant Group
+        </a>
       </h3>
     </div>
     <div class="col-xs-6 tabs">

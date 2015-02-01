@@ -185,8 +185,7 @@
         },
         resolve: /* ngInject */ {
           VariantGroups: 'VariantGroups',
-          variantGroup: function(VariantGroups, $stateParams, $log) {
-            $log.info('appStates: - resolving VariantGroup');
+          variantGroup: function(VariantGroups, $stateParams) {
             return VariantGroups.get({ variantGroupId: $stateParams.variantGroupId }).$promise;
           }
         },
@@ -201,13 +200,23 @@
         },
         deepStateRedirect: { params: ['variantGroupId'] }
       })
-      .state('events.genes.symmary.variantGroups.edit',{
+      .state('events.genes.summary.variantGroups.edit',{
         url: '/edit',
-        template: '<variant-group-edit class="col-xs-12"></variant-group-edit>',
-        controller: 'VariantEditCtrl',
+        template: '<variant-group-edit></variant-group-edit>',
         data: {
           titleExp: '"Variant Group " + variantGroup.name + " Edit"',
           navMode: 'sub'
+        }
+      })
+      .state('events.genes.summary.variantGroups.talk',{
+        url: '/talk',
+        template: '<variant-group-talk></variant-group-talk>',
+        data: {
+          titleExp: '"Variant Group " + variantGroup.name + " Talk"',
+          navMode: 'sub'
+        },
+        controller: function(variantGroup, $scope) {
+          $scope.variantGroup = variantGroup;
         }
       })
       .state('events.genes.summary.variants', {
