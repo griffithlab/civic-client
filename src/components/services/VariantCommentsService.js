@@ -14,7 +14,7 @@
       }
     };
 
-    var Genes = $resource('/api/genes/:geneId/variants/:variantId/comments/:commentId',
+    var VariantComments = $resource('/api/genes/:geneId/variants/:variantId/comments/:commentId',
       { geneId: '@geneId',
         variantId: '@variantId',
         commentId: '@id'
@@ -36,7 +36,7 @@
         }
       });
 
-    return Genes;
+    return VariantComments;
   }
 
 })();

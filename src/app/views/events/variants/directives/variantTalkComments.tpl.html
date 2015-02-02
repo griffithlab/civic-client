@@ -25,7 +25,8 @@
     <div ng-switch-when="true">
       <div class="row" ng-repeat="comment in comments">
         <div class="col-xs-12">
-          <div class="comment-block">
+          <!-- TODO: figure out why white bg color for comment isn't working in variantTalkCommts.less -->
+          <div class="comment-block" style="background-color: white !important;">
             <div class="title">
               <strong>Posted by  </strong> <span ng-bind="comment.user.nickname">user.nickname</span> <span ng-bind="comment.created_at | timeAgo">comment.created_at</span>
             </div>

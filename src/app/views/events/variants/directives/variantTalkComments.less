@@ -3,11 +3,13 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .variantTalkComments {
-  background-color: #FFF;
-  border-radius: @border-radius-large;
   margin-left: -@contentPadding;
   margin-right: -@contentPadding;
   padding: @contentPadding;
 
+  .comment-block {
+    background-color: #FFF !important;
+    border: 1px solid #FFF;
+  }
   // .comment-block defined in /app/views/events/common/comment-block.less
 }

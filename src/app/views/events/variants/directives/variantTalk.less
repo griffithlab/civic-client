@@ -13,6 +13,11 @@
   border-bottom-right-radius: @border-radius-base;
   border-bottom-left-radius: @border-radius-base;
 
+  .variantUIView {
+    background-color: @pageBackground2;
+    border-radius: @border-radius-base;
+  }
+
   .comments-menu {
     margin-right: -@contentPadding;
     margin-top: @contentPadding;
@@ -29,7 +34,7 @@
       margin: 0;
       padding: 0;
       .active a {
-        background-color: #FFF !important;
+        background-color: @pageBackground2 !important;
         border-top-right-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
         color: @civicDarkPurple !important;
