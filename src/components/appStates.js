@@ -234,7 +234,14 @@
         abtract: true,
         url: '/variants/:variantId',
         controller: 'VariantsViewCtrl',
-        templateUrl: 'app/views/events/variants/variantsView.tpl.html'
+        templateUrl: 'app/views/events/variants/variantsView.tpl.html',
+        resolve: /* ngInject */ {
+          Variants: 'Variants',
+          variant: function(Variants, $stateParams, $log) {
+            $log.info('events.variants - resolving variant');
+            return Variants.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId }).$promise;
+          }
+        }
       })
       .state('events.genes.summary.variants.summary', {
         url: '/summary',
@@ -250,6 +257,25 @@
         template: '<variant-talk></variant-talk>',
         data: {
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Talk"',
+          navMode: 'sub'
+        }
+      })
+      .state('events.genes.summary.variants.talk.comments', {
+        url: '/comments',
+        template: '<variant-talk-comments></variant-talk-comments>',
+        data: {
+          titleExp: '"Variant " + variant.name + " Talk"',
+          navMode: 'sub'
+        },
+        controller: function(variant, $scope) {
+          $scope.variant = variant;
+        }
+      })
+      .state('events.genes.summary.variants.talk.changes', {
+        url: '/changes/:suggestedChangeId',
+        template: '<variant-talk-change></variant-talk-change>',
+        data: {
+          titleExp: '"Variant " + variant.name + " Changes"',
           navMode: 'sub'
         }
       })
