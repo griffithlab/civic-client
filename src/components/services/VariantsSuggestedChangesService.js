@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.services')
-    .factory('GenesSuggestedChanges', GenesSuggestedChangesService);
+    .factory('VariantsSuggestedChanges', VariantsSuggestedChangesService);
 
   // @ngInject
-  function GenesSuggestedChangesService($resource, $cacheFactory, _, $log) {
-    var cache = $cacheFactory('genesSuggestedChangesCache');
+  function VariantsSuggestedChangesService($resource, $cacheFactory, _, $log) {
+    var cache = $cacheFactory('variantsSuggestedChangesCache');
 
     var cacheInterceptor = { // custom $resource actions require manually managing cache
       response: function(response) {
@@ -14,18 +14,19 @@
       }
     };
 
-    var genesCache = $cacheFactory.get('genesCache');
+    var variantsCache = $cacheFactory.get('variantsChangesCache');
 
     var acceptCacheInterceptor = { // deletes cache for updated gene after 'accept'
       response: function(response) {
-        genesCache.remove('/api/genes/' + response.data.entrez_id);
+        variantsCache.remove('/api/variants/' + response.data.id);
         return response;
       }
     };
 
-    var GenesSuggestedChanges = $resource('/api/genes/:geneId/suggested_changes/:suggestedChangeId',
-      { geneId: '@entrez_id',
-        suggestedChangeId: '@id'
+    var VariantsSuggestedChanges = $resource('/api/genes/:geneId/variants/:variantId/suggested_changes/:suggestedChangeId',
+      { geneId: '@geneID',
+        variantId: '@variantId',
+        suggestedChangeId: '@suggestedChangeId'
       },
       {
         query: { // get a list of all suggested changes
@@ -43,9 +44,9 @@
           interceptor: cacheInterceptor
         },
         accept: { // accept & commit a change
-          url: '/api/genes/:geneId/suggested_changes/:suggestedChangeId/accept',
+          url: '/api/genes/:geneId/variants/:variantId/suggested_changes/:suggestedChangeId/accept',
           params: {
-            geneId: '@geneId',
+            variantId: '@variantId',
             suggestedChangeId: '@suggestedChangeId'
           },
           method: 'POST',
@@ -53,7 +54,7 @@
         }
       });
 
-    return GenesSuggestedChanges;
+    return VariantsSuggestedChanges;
   }
 
 })();

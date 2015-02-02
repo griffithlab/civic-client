@@ -255,10 +255,16 @@
       })
       .state('events.genes.summary.variants.edit', {
         url:'/edit',
-        template: '<p>Edit Variant {{ variant.name }}</p>',
+        template: '<variant-edit></variant-edit>',
         data: {
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Edit"',
           navMode: 'sub'
+        },
+        resolve: {
+          variantEdit: function(Variants, $stateParams, $log) {
+            $log.info('appStates: resolving variantEdit.');
+            return Variants.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId}).$promise;
+          }
         }
       })
       .state('events.genes.summary.variants.summary.evidence', {
