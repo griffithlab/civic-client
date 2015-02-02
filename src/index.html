@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="app/views/events/variantGroups/directives/variantGroupTabs.css">
     <link rel="stylesheet" href="app/views/events/variantGroups/directives/variantGroupEdit.css">
     <link rel="stylesheet" href="app/views/events/variantGroups/directives/variantGroupTalk.css">
+    <link rel="stylesheet" href="app/views/events/variantGroups/directives/variantGroupTalkComments.css">
 
     <link rel="stylesheet" href="app/views/events/variants/variantsView.css">
     <link rel="stylesheet" href="app/views/events/variants/directives/evidenceGrid.css">
@@ -140,12 +141,11 @@
 
     <!-- build:js({.tmp,src}) scripts/app.js -->
     <script src="app/index.js"></script>
-    <script src="components/services/LodashFactory.js"></script>
-    <script src="components/services/LodashFilters.js"></script>
     <script src="components/appStates.js"></script>
     <script src="components/filters.js"></script>
     <script src="components/services/ng-FitText.js"></script>
 
+    <!--Login & Auth Components-->
     <script src="components/security/login/LoginService.js"></script>
     <script src="components/security/login/LoginFormController.js"></script>
     <script src="components/security/Security.js"></script>
@@ -153,31 +153,45 @@
     <script src="components/security/Interceptor.js"></script>
     <script src="components/security/Authorization.js"></script>
 
+    <!--Genes services-->
     <script src="components/services/GenesService.js"></script>
+    <script src="components/services/GeneCommentsService.js"></script>
     <script src="components/services/GenesSuggestedChangesService.js"></script>
     <script src="components/services/GenesSuggestedChangesCommentsService.js"></script>
-    <script src="components/services/GeneCommentsService.js"></script>
 
+    <!--Variant Groups services-->
     <script src="components/services/VariantGroupsService.js"></script>
+    <script src="components/services/VariantGroupsCommentsService.js"></script>
     <script src="components/services/VariantGroupsSuggestedChangesService.js"></script>
     <script src="components/services/VariantGroupsSuggestedChangesCommentsService.js"></script>
 
+    <!--Variants Services-->
     <script src="components/services/VariantsService.js"></script>
+    <!--<script src="components/services/VariantsCommentsService.js"></script>-->
+    <!--<script src="components/services/VariantsSuggestedChangesService.js"></script>-->
+    <!--<script src="components/services/VariantsSuggestedChangesCommentsService.js"></script>-->
 
+    <!--Evidence Services-->
     <script src="components/services/EvidenceService.js"></script>
+    <!--TODO: <script src="components/services/EvidenceCommentsService.js"></script>-->
+    <!--TODO: <script src="components/services/EvidenceSuggestedChangesService.js"></script>-->
+    <!--TODO: <script src="components/services/EvidenceSuggestedChangesCommentsService.js"></script>-->
 
+    <!--Misc Services-->
     <script src="components/services/ConfigService.js"></script>
     <script src="components/services/BrowseService.js"></script>
     <script src="components/services/MyGeneService.js"></script>
-
     <script src="components/services/TitleService.js"></script>
+    <script src="components/services/LodashFactory.js"></script>
+    <script src="components/services/LodashFilters.js"></script>
 
-    <script src="app/pages/authTestCtrl.js"></script>
+    <!--Pages Controls-->
     <script src="app/pages/HomeCtrl.js"></script>
     <script src="app/pages/HelpCtrl.js"></script>
     <script src="app/pages/ContactCtrl.js"></script>
     <script src="app/pages/CollaborateCtrl.js"></script>
 
+    <!--Component Directives-->
     <script src="components/directives/title.js"></script>
     <script src="components/directives/subheader.js"></script>
     <script src="components/directives/sessionInfo.js"></script>
@@ -191,6 +205,7 @@
 
     <script src="app/views/events/common/variantsMenu.js"></script>
 
+    <!--Genes Controllers and Directives-->
     <script src="app/views/events/genes/GenesViewCtrl.js"></script>
     <script src="app/views/events/genes/directives/geneTabs.js"></script>
     <script src="app/views/events/genes/directives/geneEdit.js"></script>
@@ -202,26 +217,35 @@
     <script src="app/views/events/genes/directives/geneTalkAddComment.js"></script>
     <script src="app/views/events/genes/directives/geneTalkChangeAddComment.js"></script>
 
+    <!--Variant Groups Controllers and Directives-->
     <script src="app/views/events/variantGroups/VariantGroupsCtrl.js"></script>
     <script src="app/views/events/variantGroups/directives/variantGroupTabs.js"></script>
     <script src="app/views/events/variantGroups/directives/variantGroupSummary.js"></script>
     <script src="app/views/events/variantGroups/directives/variantGroupEdit.js"></script>
     <script src="app/views/events/variantGroups/directives/variantGroupTalk.js"></script>
-    <!--<script src="app/views/events/variantGroups/directives/variantGroupTalkComments.js"></script>-->
-    <!--<script src="app/views/events/variantGroups/directives/variantGroupTalkAddComment.js"></script>-->
-    <!--<script src="app/views/events/variantGroups/directives/variantGroupTalkChangeAddComment.js"></script>-->
+    <script src="app/views/events/variantGroups/directives/variantGroupTalkComments.js"></script>
+    <script src="app/views/events/variantGroups/directives/variantGroupTalkAddComment.js"></script>
+    <!--TODO: <script src="app/views/events/variantGroups/directives/variantGroupTalkChangeAddComment.js"></script>-->
 
+    <!--Variants Controllers and Directives-->
     <script src="app/views/events/variants/VariantsViewCtrl.js"></script>
     <script src="app/views/events/variants/directives/evidenceGrid.js"></script>
     <script src="app/views/events/variants/directives/variantSummary.js"></script>
     <script src="app/views/events/variants/directives/variantTabs.js"></script>
     <script src="app/views/events/variants/directives/variantTalk.js"></script>
+    <!--TODO: <script src="app/views/events/variants/directives/variantsTalkComments.js"></script>-->
+    <!--TODO: <script src="app/views/events/variants/directives/variantsTalkAddComment.js"></script>-->
+    <!--TODO: <script src="app/views/events/variants/directives/variantsTalkChangeAddComment.js"></script>-->
 
+    <!-- Evidence Controllers and Directives-->
     <script src="app/views/events/evidence/EvidenceViewCtrl.js"></script>
     <script src="app/views/events/evidence/directives/evidenceSummary.js"></script>
     <script src="app/views/events/evidence/directives/evidenceTabs.js"></script>
     <script src="app/views/events/evidence/directives/evidenceTalk.js"></script>
     <script src="app/views/events/evidence/directives/evidenceEdit.js"></script>
+    <!--TODO: <script src="app/views/events/evidence/directives/evidenceTalkComments.js"></script>-->
+    <!--TODO: <script src="app/views/events/evidence/directives/evidenceTalkAddComment.js"></script>-->
+    <!--TODO: <script src="app/views/events/evidence/directives/evidenceTalkChangeAddComment.js"></script>-->
 
     <!-- inject:partials -->
 

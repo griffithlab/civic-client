@@ -219,6 +219,17 @@
           $scope.variantGroup = variantGroup;
         }
       })
+      .state('events.genes.summary.variantGroups.talk.comments',{
+        url: '/comments',
+        template: '<variant-group-talk-comments></variant-group-talk-comments>',
+        data: {
+          titleExp: '"Variant Group " + variantGroup.name + " Comments"',
+          navMode: 'sub'
+        },
+        controller: function(variantGroup, $scope) {
+          $scope.variantGroup = variantGroup;
+        }
+      })
       .state('events.genes.summary.variants', {
         abtract: true,
         url: '/variants/:variantId',

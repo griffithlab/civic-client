@@ -1,0 +1,46 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.variantGroupTalkAddComment {
+  .form-row {
+    margin-bottom: 1em;
+    padding-top: 1em;
+  }
+
+  .form-instructions, .form-errors, .form-messages {
+    padding-top: @contentPadding;
+    padding-bottom: @contentPadding/3;
+  }
+
+  .form-instructions {
+    background-color: #EFEFEF;
+    border-bottom: 2px solid #CCC;
+  }
+
+  .form-errors {
+    background-color: #FCC;
+    border-bottom: 2px solid darken(#FCC, 10%);
+    p {
+      color: #933;
+    }
+  }
+
+  .form-messages {
+    border-bottom: 2px solid darken(@civicGreen, 10%);
+    background-color: @civicGreen;
+    p {
+      color: #FFF;
+    }
+  }
+
+  .form-errors {
+    background-color: lightred;
+  }
+
+  .button-row {
+    .clearfix();
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+  }
+}
