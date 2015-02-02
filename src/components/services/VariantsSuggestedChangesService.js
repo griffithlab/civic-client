@@ -24,7 +24,8 @@
     };
 
     var VariantsSuggestedChanges = $resource('/api/genes/:geneId/variants/:variantId/suggested_changes/:suggestedChangeId',
-      { geneId: '@geneID',
+      {
+        geneId: '@geneID',
         variantId: '@variantId',
         suggestedChangeId: '@suggestedChangeId'
       },

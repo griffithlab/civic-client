@@ -71,7 +71,7 @@
             '404': function () {
               $scope.formStatus.errors.push({
                 field: 'Route not found',
-                errorMsg: 'VariantsSuggestedChanges service requested invalid URL.'
+                errorMsg: 'Service requested invalid URL.'
               });
             },
             '422': function (response) {
@@ -100,7 +100,8 @@
 
     $scope.applyEdits = function () {
       $scope.variantEdit.$update({
-          // entrez_id: $stateParams.geneID,
+          geneId: $stateParams.geneId,
+          variantId: $stateParams.variantId,
           description: $scope.variantEdit.description,
           comment: {
             title: 'Reasons for Edit',
@@ -110,10 +111,10 @@
         function () {
           $log.info('update successful.');
 
-          $scope.$parent.gene = Genes.get({'geneId': $stateParams.geneId});
+          $scope.$parent.variant = Variants.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId });
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];
-          $scope.formStatus.messages.push('Gene ' + $scope.variantEdit.entrez_name + ' updated successfully.');
+          $scope.formStatus.messages.push('Variant ' + $scope.variantEdit.name + ' updated successfully.');
         },
         function (response) {
           $log.info('update unsuccessful.');
@@ -130,6 +131,12 @@
               $scope.formStatus.errors.push({
                 field: 'Insufficient Permissions',
                 errorMsg: 'You must be an Admin user to perform the requested action.'
+              });
+            },
+            '404': function () {
+              $scope.formStatus.errors.push({
+                field: 'Route not found',
+                errorMsg: 'Service requested invalid URL.'
               });
             },
             '422': function (response) {

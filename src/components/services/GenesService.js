@@ -4,7 +4,7 @@
     .factory('Genes', GenesService);
 
   // @ngInject
-  function GenesService($resource, $cacheFactory, _, $log) {
+  function GenesService($resource, $cacheFactory, _) {
     var cache = $cacheFactory('genesCache');
 
     var cacheInterceptor = {

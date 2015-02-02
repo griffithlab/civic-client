@@ -4,9 +4,21 @@
     .factory('Variants', VariantsService);
 
   // @ngInject
-  function VariantsService($resource) {
+  function VariantsService($resource, $cacheFactory) {
+    var cache = $cacheFactory('variantsCache');
+
+    var cacheInterceptor = {
+      response: function(response) {
+        cache.remove(response.config.url);
+        return response;
+      }
+    };
+
     var Variants = $resource('/api/genes/:geneId/variants/:variantId',
-      {},
+      {
+        geneId: '@geneID',
+        variantId: '@variantId'
+      },
       {
         get: {
           method: 'GET',
@@ -17,6 +29,10 @@
           method: 'GET',
           isArray: true,
           cache: true
+        },
+        update: {
+          method: 'PUT',
+          interceptor: cacheInterceptor
         }
       });
 
