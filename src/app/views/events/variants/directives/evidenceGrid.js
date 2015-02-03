@@ -31,7 +31,7 @@
       noUnselect: true,
       rowTemplate: 'app/views/events/variants/directives/evidenceGridRow.tpl.html',
       columnDefs: [
-        { name: 'explanation',
+        { name: 'text',
           displayName: 'Supporting Evidence',
           enableFiltering: true,
           allowCellFocus: false,
