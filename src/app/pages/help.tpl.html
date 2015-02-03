@@ -4,7 +4,7 @@
 
 <h3>Minimum Requirements for Clinical Evidence Statements</h3>
 
- <table style="width:100%">
+ <table border="1" style="width:100%">
   <tr>
     <th>Data type</th>
     <th>Description</th>
@@ -15,7 +15,161 @@
     <td>Gene implicated (Entrez gene ID)</td>
     <td>ESR1 (2099)</td>
   </tr>
+  <tr>
+    <td>Variant</td>
+    <td>Event (SNV, Indel, Fusion, CNV) implicated</td>
+    <td>Y537S</td>
+  </tr>
+  <tr>
+    <td>Disease</td>
+    <td>Specific disease or disease subtype that is associated with this event and its clinical implication (Disease Ontology ID)</td>
+    <td>Estrogen-receptor positive breast cancer (DOID:0060075)</td>
+  </tr>
+  <tr>
+    <td>Evidence type</td>
+    <td>Category of clinical action implicated by event</td>
+    <td>Predictive</td>
+  </tr>
+  <tr>
+    <td>Evidence level</td>
+    <td>Levels of evidence for clinical actionability</td>
+    <td>Level B - clinical evidence</td>
+  </tr>
+  <tr>
+    <td>Evidence direction</td>
+    <td>A positive or negative value indicating whether the evidence statement supports or refutes a clinical association with the event</td>
+    <td>Positive - the evidence supports the association</td>
+  </tr>
+  <tr>
+    <td>Treatment (FDA status)</td>
+    <td>For predictive evidence, indicates the therapy for which sensitivity or resistance is indicated (With PubChem ID if applicable)</td>
+    <td>Hormone therapy (PCID: N/A)</td>
+  </tr>
+  <tr>
+    <td>Clinical Significance</td>
+    <td>Positive or negative association with treatment or diagnostic/prognostic end point</td>
+    <td>Negative - mutation is associated with resistance to therapy</td>
+  </tr>
+  <tr>
+    <td>Text summary (wiki-like)</td>
+    <td>Human readable interpretation. Free-form text summary of this event’s effect on cancer and potential clinical interpretations. This interpretation is the synthesis of all other information about an event and its relevance to clinical action and should be the living product of active discussion</td>
+    <td>Studies suggest ligand-binding-domain ESR1 mutants mediate clinical resistance to hormonal therapy and suggest that more potent estrogen receptor antagonists may be of substantial therapeutic benefit</td>
+  </tr>
+  <tr>
+    <td>Source</td>
+    <td>Literature where the event is described/explored (PubMed id)</td>
+    <td>PMID: 24185512</td>
+  </tr>
 </table> 
+
+<h3>Breaking down the Evidence Statement</h3>
+ <table border="1" style="width:100%">
+  <tr>
+    <th>Interaction Type</th>
+    <th>Evidence Direction</th>
+    <th>Clinical Significance</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td rowspan=5>Predictive - Evidence pertaining to a variant’s effect on therapeutic response</td>
+    <td rowspan=2>Supports: The experiment or study supports this variant’s response to a drug</td>
+    <td>Positive: Variant is associated with positive response to treatment (e.g. sensitivity to drug)</td>
+    <td>Breast cancer cell lines with H1047R mutation showed increased sensitivity to CH5132799 than cells with wild-type PIK3CA gene</td>
+  </tr>
+  <tr>
+    <td>Negative: Variant is associated with negative treatment response (e.g. resistance to drug)</td>
+    <td>MAP2K1 P124S confers increased resistance to inhibition by AZD6244 inhibition by about 5 folds</td>
+  </tr>
+  <tr>
+    <td rowspan=3>Does not support: The experiment or study does not support, or was inconclusive of, an interaction between the variant and a drug</td>
+    <td>Positive: Variant is associated with positive response to treatment (e.g. sensitivity to drug)</td>
+    <td>BRAF V600E mutation does not predict response in patients treated with dacarbazine or temozolomide</td>
+  </tr>
+  <tr>
+    <td>N/A: Variant does not inform clinical action</td>
+    <td>This drug is not shown to have an impact on cell lines with mutation X</td>
+  </tr>
+  <tr>
+    <td>Negative: Variant is associated with negative treatment response (e.g. resistance to drug)</td>
+    <td>In a cohort of 100 patients, mutation X is not shown to confer resistance to drug Y</td>
+  </tr>
+
+  <tr>
+    <td rowspan=4>Diagnostic - Evidence pertaining to a variant’s impact on patient diagnosis</td>
+    <td rowspan=2>Supports: The experiment or study supports variant’s impact on the diagnosis of disease or subtype</td>
+    <td>Positive: Variant is associated with diagnosis of disease or subtype</td>
+    <td>BRAF V600E is shown to be associated with the tall-cell variant of PTC</td>
+  </tr>
+  <tr>
+    <td>Negative: Variant is associated with the lack of diagnosis of disease or subtype</td>
+    <td>Patients with mutation X are found not to have disease subtype A</td>
+  </tr>
+  <tr>
+    <td rowspan=2>Does not support: The experiment or study does not support the variant’s impact on diagnosis of disease or subtype</td>
+    <td>Positive: Variant is associated with diagnosis of disease or subtype</td>
+    <td>Study 1 found that, contrary to what was previously believed, mutation X does in fact show a correlation with disease subtype A</td>
+  </tr>
+  <tr>
+    <td>Negative: Variant is associated with the lack of diagnosis of disease or subtype</td>
+    <td>Study 1 found that, contrary to what was previously believed, mutation X does in fact show a correlation with disease subtype A</td>
+  </tr>
+
+  <tr>
+    <td rowspan=5>Prognostic - Evidence pertaining to a variant’s impact on disease progression, severity, or patient survival</td>
+    <td rowspan=2>Supports: The experiment or study supports a variant’s impact on prognostic outcome</td>
+    <td>Good Outcome: Variant is associated with a better overall patient outcome</td>
+    <td>In AML, patients with IDH2 R140K mutation has improved overall survival compared to those with wild-type IDH2</td>
+  </tr>
+  <tr>
+    <td>Poor Outcome: Variant is associated with a worse overall patient outcome</td>
+    <td>Meta-analysis of studies involving cytogentically normal younger (<60) patients showed increased overall and relapse-free survival for patients with NPM1 mutations</td>
+  </tr>
+  <tr>
+    <td rowspan=3>Does not support: The experiment or study does not support a prognostic association between variant and outcome</td>
+    <td>Good Outcome: Variant is associated with a better overall patient outcome</td>
+    <td>Mutation X was not shown to be associated with improved overall survival</td>
+  </tr>
+  <tr>
+    <td>N/A: Variant does not inform clinical action</td>
+    <td>Size of the FLT3-ITD mutant duplication had no impact on overall survival or relapse rate</td>
+  </tr>
+  <tr>
+    <td>Poor Outcome: Variant is associated with a worse overall patient outcome</td>
+    <td>Mutation X was not shown to be associated with decreased overall survival</td>
+  </tr>
+</table>
+
+
+<h3>Evidence Levels: Overview</h3>
+
+ <table border="1" style="width:100%">
+  <tr>
+    <th>Level of Evidence</th>
+    <th>Definition</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>A - validated association</td>
+    <td>Proven/consensus association in human medicine</td>
+    <td>A meta-analysis of clinical studies showed that harboring a BRAF V600E mutation predicts worse prognosis in patients with colorectal cancer</td>
+  </tr>
+  <tr>
+    <td>B - clinical evidence</td>
+    <td>Clinical trial or other primary patient data supports association</td>
+    <td>In non-small-cell lung cancer patients with EGFR T790M and other activating mutations, their progression-free survival is shorter than those who do not have T790M mutations</td>
+  </tr>
+  <tr>
+    <td>C - preclinical evidence</td>
+    <td>In vivo or in vitro models support association</td>
+    <td>Experiments showed that AG1296 is effective in triggering apoptosis in cells with the FLT3 internal tandem repeat</td>
+  </tr>
+  <tr>
+    <td>D - inferential association</td>
+    <td>Indirect evidence</td>
+    <td>Glioma cells harboring IDH1 mutation may be more susceptible to chemotherapy or radiotherapy due to their reduced ability to respond to oxidative stress</td>
+  </tr>
+</table>
+
 
 <!--
 {{ loadedMsg }}
