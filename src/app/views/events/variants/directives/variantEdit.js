@@ -32,9 +32,11 @@
     };
 
     $scope.submitEdits = function () {
-      $log.info('submitEdits called.');
+      $log.info('submitEdits called.' +
+      'geneId: ' + $stateParams.geneId +
+      'variantId: ' + $stateParams.variantId);
       VariantsSuggestedChanges.add({
-          geneID: $stateParams.geneId,
+          geneId: $stateParams.geneId,
           variantId: $stateParams.variantId,
           description: $scope.variantEdit.description,
           comment: {

@@ -14,18 +14,18 @@
       }
     };
 
-    var variantsCache = $cacheFactory.get('variantsChangesCache');
+    var variantsCache = $cacheFactory.get('variantsCache');
 
-    var acceptCacheInterceptor = { // deletes cache for updated gene after 'accept'
+    var acceptCacheInterceptor = { // deletes cache for updated variants after 'accept'
       response: function(response) {
-        variantsCache.remove('/api/variants/' + response.data.id);
+        variantsCache.remove('/api/genes/' + response.data.id);
         return response;
       }
     };
 
     var VariantsSuggestedChanges = $resource('/api/genes/:geneId/variants/:variantId/suggested_changes/:suggestedChangeId',
       {
-        geneId: '@geneID',
+        geneId: '@geneId',
         variantId: '@variantId',
         suggestedChangeId: '@suggestedChangeId'
       },
