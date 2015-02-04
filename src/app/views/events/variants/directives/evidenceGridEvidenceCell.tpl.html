@@ -1,8 +1,8 @@
-<div class="ngCellText ui-grid-cell-contents" ng-class="col.colIndex()"
+<div class="ngCellText" ng-class="col.colIndex()"
      tooltip="{{row.entity[col.field]}}"
      tooltip-append-to-body="true">
   <div ng-switch on="row.entity[col.field].length > 0">
-    <div ng-switch-when="true">
+    <div ng-switch-when="true" class="ui-grid-cell-contents">
       {{ row.entity[col.field] }}
     </div>
     <div ng-switch-when="false">
