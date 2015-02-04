@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.services')
-    .factory('VariantsSuggestedChanges', VariantsSuggestedChangesService);
+    .factory('EvidenceSuggestedChanges', EvidenceSuggestedChangesService);
 
   // @ngInject
-  function VariantsSuggestedChangesService($resource, $cacheFactory, _, $log) {
-    var cache = $cacheFactory('variantsSuggestedChangesCache');
+  function EvidenceSuggestedChangesService($resource, $cacheFactory, _, $log) {
+    var cache = $cacheFactory('evidenceSuggestedChangesCache');
 
     var cacheInterceptor = { // custom $resource actions require manually managing cache
       response: function(response) {
@@ -14,21 +14,22 @@
       }
     };
 
-    var variantsCache = $cacheFactory.get('variantsCache');
+    var evidenceCache = $cacheFactory.get('evidenceCache');
 
-    // TODO: this cache interceptor cannot re-assemble the full request from response.data as it does not contain the geneId perhaps a curried function? or use response.config.url?!
-
-    var acceptCacheInterceptor = { // deletes cache for updated variants after 'accept'
+    // TODO: this cache interceptor cannot re-assemble the full request from response.data as it does not contain the geneId or variantId, perhaps a curried function would work?
+    var acceptCacheInterceptor = { // deletes cache for updated evidence after 'accept'
       response: function(response) {
-        variantsCache.remove('/api/genes/' + response.data.id);
+        evidenceCache.remove('/api/genes/' + response.data.id);
         return response;
       }
     };
 
-    var VariantsSuggestedChanges = $resource('/api/genes/:geneId/variants/:variantId/suggested_changes/:suggestedChangeId',
+    var EvidenceSuggestedChanges = $resource(
+      '/api/genes/:geneId/variants/:variantId/evidence_items/:evidenceItemId/suggested_changes/:suggestedChangeId',
       {
         geneId: '@geneId',
         variantId: '@variantId',
+        evidenceItemId: '@evidenceItemId',
         suggestedChangeId: '@suggestedChangeId'
       },
       {
@@ -47,7 +48,7 @@
           interceptor: cacheInterceptor
         },
         accept: { // accept & commit a change
-          url: '/api/genes/:geneId/variants/:variantId/suggested_changes/:suggestedChangeId/accept',
+          url: '/api/genes/:geneId/variants/:variantId/evidence_items/:evidenceItemId/suggested_changes/:suggestedChangeId/accept',
           params: {
             variantId: '@variantId',
             suggestedChangeId: '@suggestedChangeId'
@@ -57,7 +58,7 @@
         }
       });
 
-    return VariantsSuggestedChanges;
+    return EvidenceSuggestedChanges;
   }
 
 })();

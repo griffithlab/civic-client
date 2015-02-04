@@ -21,11 +21,11 @@
   }
 
   // @ngInject
-  function EvidenceEditCtrl($scope, $stateParams, Evidence, _, $log) {
+  function EvidenceEditCtrl($scope, $stateParams, Evidence, EvidenceSuggestedChanges, _, $log) {
     $scope.evidenceEdit = Evidence.get({
       geneId: $stateParams.geneId,
       variantId: $stateParams.variantId,
-      evidenceId: $stateParams.evidenceId
+      evidenceItemId: $stateParams.evidenceItemId
     });
 
     $scope.formStatus = {
@@ -34,7 +34,71 @@
     };
 
     $scope.submitEdits = function() {
-      $log.info('submitEdits() called.');
+      $log.info('evidenceEdit.submitEdits called.' +
+      'geneId: ' + $stateParams.geneId +
+      'variantId: ' + $stateParams.variantId +
+      'evidenceItemId: ' + $stateParams.evidenceItemId);
+
+      EvidenceSuggestedChanges.add({
+          geneId: $stateParams.geneId,
+          variantId: $stateParams.variantId,
+          evidenceItemId: $stateParams.evidenceItemId,
+          description: $scope.evidenceEdit.text,
+          comment: {
+            title: 'Reasons for Edit',
+            text: $scope.evidenceEdit.reason
+          }
+        },
+        function(response) { // request succeeded
+          $log.info('Evidence SubmitEdits update successful.');
+          // refresh evidence  data
+          $scope.formStatus.errors = [];
+          $scope.formStatus.messages = [];
+          var messageExp = '"Your edit suggestions for Evidence" + evidence.name + " have been added to the review queue."';
+          $scope.formStatus.messages.push($parse(messageExp)($scope));
+          $scope.newChange = response.data;
+        },
+        function (response) {
+          $log.info('update unsuccessful.');
+          $scope.formStatus.messages = [];
+          $scope.formStatus.errors = [];
+          var handleError = {
+            '401': function () {
+              $scope.formStatus.errors.push({
+                field: 'Unauthorized',
+                errorMsg: 'You must be logged in to perform this action.'
+              });
+            },
+            '403': function () {
+              $scope.formStatus.errors.push({
+                field: 'Insufficient Permissions',
+                errorMsg: 'You must be an Admin user to perform the requested action.'
+              });
+            },
+            '404': function () {
+              $scope.formStatus.errors.push({
+                field: 'Route not found',
+                errorMsg: 'Service requested invalid route URL.'
+              });
+            },
+            '422': function (response) {
+              _.forEach(response.data.errors, function (value, key) {
+                $scope.formStatus.errors.push({
+                  field: key,
+                  errorMsg: value
+                });
+              });
+            },
+            '500': function(response) {
+              $scope.formStatus.errors.push({
+                field: 'SERVER ERROR',
+                errorMsg: response.statusText
+              });
+              $log.info(response);
+            }
+          };
+          handleError[response.status](response);
+        });
     };
 
     $scope.discardEdits = function () {
@@ -42,16 +106,23 @@
     };
 
     $scope.applyEdits = function () {
-      $log.info('applyEdits() called.')
+      $log.info('applyEdits() called. ' +
+        ' geneId: ' + $stateParams.geneId +
+        ' variantId: ' + $stateParams.variantId +
+        ' evidenceItemId: ' + $stateParams.evidenceItemId
+      );
       $scope.evidenceEdit.$update({
-          explanation: $scope.evidenceEdit.explanation
+          geneId: $stateParams.geneId,
+          variantId: $stateParams.variantId,
+          evidenceItemId: $stateParams.evidenceItemId,
+          text: $scope.evidenceEdit.text
         },
         function () {
           $log.info('update successful.');
           $scope.$parent.evidence = Evidence.get({
             geneId: $stateParams.geneId,
             variantId: $stateParams.variantId,
-            evidenceId: $stateParams.evidenceId
+            evidenceItemId: $stateParams.evidenceItemId
           });
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];
@@ -81,6 +152,14 @@
               });
             },
             '422': function (response) {
+              _.forEach(response.data.errors, function (value, key) {
+                $scope.formStatus.errors.push({
+                  field: key,
+                  errorMsg: value
+                });
+              });
+            },
+            '500': function (response) {
               _.forEach(response.data.errors, function (value, key) {
                 $scope.formStatus.errors.push({
                   field: key,

@@ -1,0 +1,15 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.evidenceTalkComments {
+  margin-left: -@contentPadding;
+  margin-right: -@contentPadding;
+  padding: @contentPadding;
+
+  .comment-block {
+    background-color: #FFF !important;
+    border: 1px solid #FFF;
+  }
+  // .comment-block defined in /app/views/events/common/comment-block.less
+}

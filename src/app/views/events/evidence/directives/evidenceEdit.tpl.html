@@ -30,73 +30,26 @@
 
     <div class="row form-row">
       <div class="col-xs-12 col-md-6">
-        <!--<div class="form-group">-->
-          <!--<label for="id">Evidence ID:</label>-->
-          <!--<input type="text" id="id" ng-model="evidenceEdit.id" readonly>-->
-        <!--</div>-->
         <div class="form-group">
-          <label for="explanation">Explanation:</label>
-          <textarea class="form-control" id="explanation" rows="5" ng-model="evidenceEdit.explanation"></textarea>
+          <label for="description">Text:</label>
+          <textarea class="form-control" id="description" rows="10" ng-model="evidenceEdit.text"></textarea>
         </div>
+        <h4>evidenceEdit:</h4>
+        <pre>{{ evidenceEdit | json }}</pre>
+
+        <h4>All Suggested Changes:</h4>
+        <pre>{{ evidencesSuggestedChanges | json }}</pre>
       </div>
       <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+          <label for="description">Please provide a reason for your updates:</label>
+          <textarea class="form-control" id="reason" rows="10" ng-model="evidenceEdit.reason"></textarea>
+        </div>
+        <h4>Submitted Suggested Change:</h4>
+        <pre>{{ newChange | json }}</pre>
+        <h4>Reason:</h4>
+        <pre>{{ evidenceEdit.reason | json }}</pre>
 
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-md-6 details">
-        <table class="table table-condensed summary-details">
-          <colgroup>
-            <col width="30%"/>
-            <col width="70%"/>
-          </colgroup>
-          <tr>
-            <td class="name">Rating:</td>
-            <td class="value"><rating ng-model="evidence.rating" max="5" readonly="true"></rating></td>
-          </tr>
-          <tr>
-            <td class="name">Evidence Level:</td>
-            <td class="value">
-            <span class="levelBadge"
-                  ng-class="{'levelA': evidence.evidence_level === 'A', 'levelB': evidence.evidence_level === 'B','levelC': evidence.evidence_level === 'C', 'levelD': evidence.evidence_level === 'D', 'levelE': evidence.evidence_level === 'E' }">
-              {{ evidence.evidence_level }}
-            </span>
-            </td>
-          </tr>
-          <tr>
-            <td class="name">Evidence Type:</td>
-            <td class="value">{{ evidence.evidence_type }}</td>
-          </tr>
-          <tr>
-            <td class="name">Source:</td>
-            <td class="value">{{ evidence.source }}</td>
-          </tr>
-        </table>
-      </div>
-      <div class="col-xs-12 col-md-6 details">
-        <table class="table table-condensed summary-details">
-          <colgroup>
-            <col width="30%"/>
-            <col width="70%"/>
-          </colgroup>
-          <tr>
-            <td class="name">Disease:</td>
-            <td class="value">{{ evidence.disease }}</td>
-          </tr>
-          <tr>
-            <td class="name">Drug:</td>
-            <td class="value">{{ evidence.drug }}</td>
-          </tr>
-          <tr>
-            <td class="name">Outcome:</td>
-            <td class="value">{{ evidence.outcome }}</td>
-          </tr>
-          <tr>
-            <td class="name">Clinical Direction:</td>
-            <td class="value">{{ evidence.clinical_direction }}</td>
-          </tr>
-        </table>
       </div>
     </div>
     <div class="row">
@@ -110,16 +63,5 @@
         </div>
       </div>
     </div>
-    <div class="row" style="padding: 15px">
-      <div class="col-xs-6">
-        <p>evidence:</p>
-        <pre>{{ evidence | json }}</pre>
-      </div>
-      <div class="col-xs-6">
-        <p>evidenceEdit:</p>
-        <pre>{{ evidenceEdit | json }}</pre>
-      </div>
-    </div>
   </form>
 </div>
-

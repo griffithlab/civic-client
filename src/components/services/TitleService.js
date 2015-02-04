@@ -30,8 +30,8 @@
         var variantGroupsPromise = VariantGroups.get({'variantGroupId': toParams.variantGroupId }).$promise;
       }
 
-      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId') && _.has(toParams, 'evidenceId')) && titleScope.evidenceItem.id !== toParams.evidenceId) {
-        var evidenceItemPromise = Evidence.get({'geneId': toParams.geneId, 'variantId': toParams.variantId, 'evidenceId': toParams.evidenceId }).$promise;
+      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId') && _.has(toParams, 'evidenceItemId')) && titleScope.evidenceItem.id !== toParams.evidenceItemId) {
+        var evidenceItemPromise = Evidence.get({'geneId': toParams.geneId, 'variantId': toParams.variantId, 'evidenceItemId': toParams.evidenceItemId }).$promise;
       }
 
       // resolve promises, apply $parse with constructed title scope

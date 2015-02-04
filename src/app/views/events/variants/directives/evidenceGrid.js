@@ -85,17 +85,17 @@
         $state.go('events.genes.summary.variants.summary.evidence.summary', {
           geneId: $scope.gene.entrez_id,
           variantId: $scope.variant.id,
-          evidenceId: row.entity.id
+          evidenceItemId: row.entity.id
         });
       });
 
       // fetch variant data
       $scope.variant.$promise.then(function(variant) {
         $scope.evidenceGridOptions.data = variant.evidence_items;
-        // if evidenceId specified in state, scroll to evidence item's row and select it
-        if(_.has($stateParams, 'evidenceId')) {
+        // if evidenceItemId specified in state, scroll to evidence item's row and select it
+        if(_.has($stateParams, 'evidenceItemId')) {
           var rowEntity = _.find(variant.evidence_items, function(item) {
-            return item.id == $stateParams.evidenceId;
+            return item.id == $stateParams.evidenceItemId;
           });
 
           $timeout(function() { // need timeout here until ui-grid adds a 'data rendered' event

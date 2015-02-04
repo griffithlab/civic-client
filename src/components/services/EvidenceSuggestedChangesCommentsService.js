@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.services')
-    .factory('VariantsSuggestedChangesComments', VariantsSuggestedChangesCommentsService);
+    .factory('EvidenceSuggestedChangesComments', EvidenceSuggestedChangesCommentsService);
 
   // @ngInject
-  function VariantsSuggestedChangesCommentsService($resource, $cacheFactory) {
-    var cache = $cacheFactory('variantsSuggestedChangesCommentsCache');
+  function EvidenceSuggestedChangesCommentsService($resource, $cacheFactory) {
+    var cache = $cacheFactory('evidenceSuggestedChangesCommentsCache');
 
     var cacheInterceptor = {
       response: function(response) {
@@ -14,10 +14,11 @@
       }
     };
 
-    var VariantsSuggestedChangesComments = $resource(
-      '/api/genes/:geneId/variants/:variantId/suggested_changes/:suggestedChangeId/comments/:commentId',
+    var EvidenceSuggestedChangesComments = $resource(
+      '/api/genes/:geneId/variants/:variantId/evidence_items/:evidenceItemId/suggested_changes/:suggestedChangeId/comments/:commentId',
       { geneId: '@geneId',
         variantId: '@variantId',
+        evidenceItemId: '@evidenceItemId',
         suggestedChangeId: '@suggestedChangeId',
         commentId: '@id'
       },
@@ -38,7 +39,7 @@
         }
       });
 
-    return VariantsSuggestedChangesComments;
+    return EvidenceSuggestedChangesComments;
   }
 
 })();

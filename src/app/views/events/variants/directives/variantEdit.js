@@ -35,6 +35,7 @@
       $log.info('submitEdits called.' +
       'geneId: ' + $stateParams.geneId +
       'variantId: ' + $stateParams.variantId);
+
       VariantsSuggestedChanges.add({
           geneId: $stateParams.geneId,
           variantId: $stateParams.variantId,

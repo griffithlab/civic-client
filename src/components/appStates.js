@@ -135,9 +135,9 @@
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
         resolve: {
-            geneEdit: function(Genes, $stateParams, $log) {
-              $log.info('appStates: resolving geneEdit.');
-              return Genes.get({'geneId': $stateParams.geneId}).$promise;
+          geneEdit: function(Genes, $stateParams, $log) {
+            $log.info('appStates: resolving geneEdit.');
+            return Genes.get({'geneId': $stateParams.geneId}).$promise;
           }
         },
         data: {
@@ -252,6 +252,20 @@
         },
         deepStateRedirect: { params: ['variantId'] }
       })
+      .state('events.genes.summary.variants.edit', {
+        url:'/edit',
+        template: '<variant-edit></variant-edit>',
+        data: {
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Edit"',
+          navMode: 'sub'
+        },
+        resolve: {
+          variantEdit: function(Variants, $stateParams, $log) {
+            $log.info('appStates: resolving variantEdit.');
+            return Variants.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId}).$promise;
+          }
+        }
+      })
       .state('events.genes.summary.variants.talk', {
         url:'/talk',
         template: '<variant-talk></variant-talk>',
@@ -279,31 +293,38 @@
           navMode: 'sub'
         }
       })
-      .state('events.genes.summary.variants.edit', {
-        url:'/edit',
-        template: '<variant-edit></variant-edit>',
-        data: {
-          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Edit"',
-          navMode: 'sub'
-        },
-        resolve: {
-          variantEdit: function(Variants, $stateParams, $log) {
-            $log.info('appStates: resolving variantEdit.');
-            return Variants.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId}).$promise;
-          }
-        }
-      })
       .state('events.genes.summary.variants.summary.evidence', {
         abstract: true,
-        url: '/evidence/:evidenceId',
+        url: '/evidence/:evidenceItemId',
         controller: 'EvidenceViewCtrl',
-        templateUrl: 'app/views/events/evidence/evidenceView.tpl.html'
+        templateUrl: 'app/views/events/evidence/evidenceView.tpl.html',
+        resolve: /* ngInject */ {
+          Evidence: 'Evidence',
+          evidence: function(Evidence, $stateParams, $log) {
+            $log.info('events.evidence- resolving evidence');
+            return Evidence.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId, 'evidenceItemId': $stateParams.evidenceItemId }).$promise;
+          }
+        }
       })
       .state('events.genes.summary.variants.summary.evidence.summary',{
         url: '/summary',
         template: '<evidence-summary></evidence-summary>',
         data: {
           titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Summary"',
+          navMode: 'sub'
+        }
+      })
+      .state('events.genes.summary.variants.summary.evidence.edit', {
+        url: '/edit',
+        template: '<evidence-edit></evidence-edit>',
+        resolve: {
+          evidenceEdit: function(Evidence, $stateParams, $log) {
+            $log.info('appStates: resolving evidenceEdit.');
+            return Evidence.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId, 'evidenceItemId': $stateParams.evidenceItemId }).$promise;
+          }
+        },
+        data: {
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " / " + evidence.id + " Edit"',
           navMode: 'sub'
         }
       })
@@ -315,12 +336,15 @@
           navMode: 'sub'
         }
       })
-      .state('events.genes.summary.variants.summary.evidence.edit', {
-        url: '/edit',
-        template: '<evidence-edit></evidence-edit>',
+      .state('events.genes.summary.variants.summary.evidence.talk.comments', {
+        url: '/comments',
+        template: '<evidence-talk-comments></evidence-talk-comments>',
         data: {
-          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Edit"',
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Talk"',
           navMode: 'sub'
+        },
+        controller: function(evidence, $scope) {
+          $scope.evidence = evidence;
         }
       });
   }

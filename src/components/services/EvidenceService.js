@@ -15,8 +15,11 @@
       }
     };
 
-    var Evidence = $resource('/api/genes/:geneId/variants/:variantId/evidence_items/:evidenceId',
-      { geneId: '@entrez_id', variantId: '@variant_id', evidenceId: '@id' },
+    var Evidence = $resource('/api/genes/:geneId/variants/:variantId/evidence_items/:evidenceItemId',
+      {
+        geneId: '@geneId',
+        variantId: '@variantId',
+        evidenceItemId: '@evidenceItemId' },
       {
         query: { // query details for a single item of evidence
           method: 'GET',

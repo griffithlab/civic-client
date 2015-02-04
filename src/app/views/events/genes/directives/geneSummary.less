@@ -5,7 +5,11 @@
 .geneSummary {
   .clearfix();
   background-color: @pageBackground2;
-  padding-top: @contentPadding;
+  .summary-content {
+    .clearfix();
+    padding-top: @contentPadding;
+    padding-bottom: @contentPadding;
+  }
 
   .detail-corner {
     @event-corner-radius: 10px;
