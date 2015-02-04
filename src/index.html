@@ -21,6 +21,7 @@
     <!-- build:css({.tmp,src}) styles/app.css -->
     <link rel="stylesheet" href="app/index.css">
     <link rel="stylesheet" href="app/pages/home.css">
+    <link rel="stylesheet" href="app/pages/pages.css">
     <link rel="stylesheet" href="components/directives/civicLogo.css">
     <link rel="stylesheet" href="components/directives/headerSearch.css">
     <link rel="stylesheet" href="components/directives/loginToolbar.css">
@@ -120,6 +121,11 @@
                 <p class="pull-right" style="margin-right:15px;">&copy; 2014 The Genome Institute at Washington University School of Medicine</p>
               </div>
             </div>
+            <div class="row">
+              <div class="col-xs-12 footer-disclaimer">
+                <strong>Disclaimer:</strong> This resource is intended for purely research purposes. It should not be used for emergencies or medical or professional advice.
+              </div>
+            </div>
           </div>
         </div>
       </footer>
@@ -143,6 +149,8 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,src}) scripts/app.js -->
+
+    <!-- Core Config/Startup Components -->
     <script src="app/index.js"></script>
     <script src="components/appStates.js"></script>
     <script src="components/filters.js"></script>
@@ -156,13 +164,13 @@
     <script src="components/security/Interceptor.js"></script>
     <script src="components/security/Authorization.js"></script>
 
-    <!--Genes services-->
+    <!--Genes Services-->
     <script src="components/services/GenesService.js"></script>
     <script src="components/services/GeneCommentsService.js"></script>
     <script src="components/services/GenesSuggestedChangesService.js"></script>
     <script src="components/services/GenesSuggestedChangesCommentsService.js"></script>
 
-    <!--Variant Groups services-->
+    <!--Variant Groups Services-->
     <script src="components/services/VariantGroupsService.js"></script>
     <script src="components/services/VariantGroupsCommentsService.js"></script>
     <script src="components/services/VariantGroupsSuggestedChangesService.js"></script>
@@ -194,7 +202,7 @@
     <script src="app/pages/ContactCtrl.js"></script>
     <script src="app/pages/CollaborateCtrl.js"></script>
 
-    <!--Component Directives-->
+    <!--Layout Directives-->
     <script src="components/directives/title.js"></script>
     <script src="components/directives/subheader.js"></script>
     <script src="components/directives/sessionInfo.js"></script>
@@ -204,8 +212,10 @@
     <script src="components/directives/civicLogo.js"></script>
     <script src="components/directives/loginToolbar.js"></script>
 
+    <!--Browse Controllers and Directives-->
     <script src="app/views/browse/BrowseCtrl.js"></script>
 
+    <!--Common Event Controllers and Directives-->
     <script src="app/views/events/common/variantsMenu.js"></script>
 
     <!--Genes Controllers and Directives-->

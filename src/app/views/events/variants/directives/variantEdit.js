@@ -23,7 +23,10 @@
   // @ngInject
   function VariantEditCtrl($log, $parse, $scope, $stateParams, _, Variants, VariantsSuggestedChanges) {
     $scope.variantEdit = Variants.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId});
-    $scope.variantsSuggestedChanges = VariantsSuggestedChanges.query({'variantId': $stateParams.variantId });
+    $scope.variantsSuggestedChanges = VariantsSuggestedChanges.query({
+      'geneId': $stateParams.geneId,
+      'variantId': $stateParams.variantId
+    });
     $scope.newChange = {};
 
     $scope.formStatus = {

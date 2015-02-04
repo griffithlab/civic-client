@@ -12,9 +12,9 @@
 }
 
 @media (max-width: @screen-md-min) {
- .home .page-bg {
-   background-position: 0 -355px;
- }
+  .home .page-bg {
+    background-position: 0 -355px;
+  }
 }
 
 .home-view {
@@ -25,6 +25,17 @@
     .center-block();
   }
 
+  .disclaimer-block {
+    margin-bottom: @contentPadding;
+    margin-top: @contentPadding*2;
+
+    .disclaimer {
+      padding: @contentPadding;
+      border-radius: @border-radius-large;
+      background-color: #795e89;
+      color: #FFF;
+    }
+  }
   .discover, .collaborate {
     p {
       color: #FFF;
