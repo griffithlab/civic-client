@@ -90,3 +90,6 @@ angular.module('civic.search', ['ui.router']);
 angular.module('civic.events', ['ui.grid.selection', 'ui.router']);
 
 angular.module('httpMocks', ['ngTable', 'ngMockE2E']);
+
+// disable anchor-scrolling
+angular.module('civicClient').value('$anchorScroll', angular.noop);
