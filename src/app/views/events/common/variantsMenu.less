@@ -81,6 +81,25 @@
       font-weight: bold;
     }
 
+    .group-title:hover {
+      color: @civicDarkPurple;
+      background-color: #FFF !important;
+      margin-left: 0 !important;
+      padding-left: 2*@contentPadding !important;
+    }
+
+    .active.group-title {
+      background-color: #FFF !important;
+      color: @civicDarkPurple;
+      margin-right: 0;
+      margin-left: @contentPadding !important;
+      padding-left: @contentPadding !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-top-left-radius: @border-radius-base !important;
+      border-bottom-left-radius: @border-radius-base !important;
+    }
+
     padding-bottom: 0;
   }
 
