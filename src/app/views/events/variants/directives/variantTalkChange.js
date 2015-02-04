@@ -34,17 +34,17 @@
         $scope.suggestedChange = response;
       });
 
-    //VariantsSuggestedChangesComments
-    //  .query({
-    //    'geneId': $stateParams.geneId,
-    //    'variantId': $stateParams.variantId,
-    //    'suggestedChangeId': $stateParams.suggestedChangeId
-    //  })
-    //  .$promise.then(function(response) {
-    //    $scope.changeComments = response;
-    //  }, function(response) {
-    //    $log.error("FAILED TO LOAD VARIANT CHANGE COMMENTS");
-    //  });
+    VariantsSuggestedChangesComments
+      .query({
+        'geneId': $stateParams.geneId,
+        'variantId': $stateParams.variantId,
+        'suggestedChangeId': $stateParams.suggestedChangeId
+      })
+      .$promise.then(function(response) {
+        $scope.changeComments = response;
+      }, function(response) {
+        $log.error("FAILED TO LOAD VARIANT CHANGE COMMENTS");
+      });
 
     $scope.commitChange = function() {
       VariantsSuggestedChanges.accept({
