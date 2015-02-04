@@ -4,4 +4,18 @@
 
 .variantSummary {
   padding-top: @contentPadding;
+
+  .variantsUIView {
+    background-color: @pageBackground2;
+    border-bottom-right-radius: @border-radius-base;
+    border-bottom-left-radius: @border-radius-base;
+    min-height: 250px;
+
+    > p {
+      margin-top: 50px;
+      text-align: center;
+      font-weight: bold;
+      color: lighten(@civicPurple, 0.2);
+    }
+  }
 }
