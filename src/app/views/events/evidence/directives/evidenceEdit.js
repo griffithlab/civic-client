@@ -21,7 +21,7 @@
   }
 
   // @ngInject
-  function EvidenceEditCtrl($scope, $stateParams, Evidence, EvidenceSuggestedChanges, _, $log) {
+  function EvidenceEditCtrl($scope, $stateParams, Evidence, EvidenceSuggestedChanges, _, $parse, $log) {
     $scope.evidenceEdit = Evidence.get({
       geneId: $stateParams.geneId,
       variantId: $stateParams.variantId,
@@ -43,7 +43,7 @@
           geneId: $stateParams.geneId,
           variantId: $stateParams.variantId,
           evidenceItemId: $stateParams.evidenceItemId,
-          description: $scope.evidenceEdit.text,
+          text: $scope.evidenceEdit.text,
           comment: {
             title: 'Reasons for Edit',
             text: $scope.evidenceEdit.reason
@@ -58,7 +58,7 @@
           $scope.formStatus.messages.push($parse(messageExp)($scope));
           $scope.newChange = response.data;
         },
-        function (response) {
+        function (response) { // request failed
           $log.info('update unsuccessful.');
           $scope.formStatus.messages = [];
           $scope.formStatus.errors = [];

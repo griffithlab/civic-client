@@ -60,7 +60,7 @@
             'variantId': $stateParams.variantId
           }).$promise
             .then(function(variant) {
-              $scope.variant = variant;
+              $scope.$parent.$parent.variant = variant;
             });
         },
         function(response) { // failure
