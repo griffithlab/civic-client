@@ -29,6 +29,9 @@
           $event.stopPropagation();
           $scope.status.isopen = !$scope.status.isopen;
         };
+      },
+      controller: /* ngInject */ function($scope, $location) {
+        $scope.currentUrl = $location.url();
       }
     };
     return directive;

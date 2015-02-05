@@ -5,15 +5,9 @@
         <button type="button" class="btn btn-xs btn-info">{{ currentUser.name }}</button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle">
           <span class="caret"></span>
-          <span class="sr-only">Split button!</span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li><a ui-sref="messages">Messages</a></li>
-          <li><a ui-sref="notifications">Notifications</a></li>
-          <li class="divider"></li>
-          <li><a ui-sref="settings">Settings</a></li>
-          <li class="divider"></li>
-          <li><a ng-click="logout('home')">Logout</a></li>
+          <li><a ng-click="logout(currentUrl)">Logout</a></li>
         </ul>
       </div>
     </div>
@@ -30,15 +24,9 @@
         <button type="button" class="btn btn-xs btn-info">{{ currentUser.name }}</button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle">
           <span class="caret"></span>
-          <span class="sr-only">Split button!</span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li><a ui-sref="messages">Messages</a></li>
-          <li><a ui-sref="notifications">Notifications</a></li>
-          <li class="divider"></li>
-          <li><a ui-sref="settings">Settings</a></li>
-          <li class="divider"></li>
-          <li><a ng-click="logout('home')">Logout</a></li>
+          <li><a ng-click="logout(currentUrl)">Logout</a></li>
         </ul>
       </div>
     </div>
