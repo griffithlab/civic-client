@@ -70,7 +70,15 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
-    .pipe($.uglify({preserveComments: $.uglifySaveLicense, mangle: false}))
+    .pipe($.uglify({
+        preserveComments: $.uglifySaveLicense,
+        mangle: false,
+        compress: {
+          drop_debugger: true,
+          unused: true
+        }
+      }
+    ))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
     .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts'))
@@ -102,16 +110,16 @@ gulp.task('images', function () {
     .pipe($.size());
 });
 
-  gulp.task('fonts', function () {
-    return es.concat(
-      gulp.src($.mainBowerFiles()),
-      gulp.src('src/assets/fonts/**/*')
-    )
-      .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
-      .pipe($.flatten())
-      .pipe(gulp.dest('dist/assets/fonts'))
-      .pipe($.size());
-  });
+gulp.task('fonts', function () {
+  return es.concat(
+    gulp.src($.mainBowerFiles()),
+    gulp.src('src/assets/fonts/**/*')
+  )
+    .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+    .pipe($.flatten())
+    .pipe(gulp.dest('dist/assets/fonts'))
+    .pipe($.size());
+});
 
 gulp.task('misc', function () {
   return gulp.src('src/**/*.ico')

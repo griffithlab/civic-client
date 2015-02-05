@@ -105,15 +105,9 @@
           },
           geneDetails: function(MyGene, $stateParams, $log) {
             $log.info('events.genes - resolving geneDetails');
-            return MyGene.getDetails({'geneId': $stateParams.geneId }).$promise;
-          },
-          Gene: function(Genes, MyGene, $stateParams, $log) {
-            return {
-              civic: Genes.get({'geneId': $stateParams.geneId }).$promise
-              // not returning a promise on the MyGeneInfo query as it can take several seconds
-              // and the UI can render fine w/o it.
-              // myGene: MyGene.getDetails({'geneId': $stateParams.geneId })
-            }
+            // not returning a promise here b/c resolving myGeneInfo can take several seconts, and
+            // isn't strictly necessary to start rendering the interface
+            return MyGene.getDetails({'geneId': $stateParams.geneId });
           }
         },
         controller: 'GenesViewCtrl',
