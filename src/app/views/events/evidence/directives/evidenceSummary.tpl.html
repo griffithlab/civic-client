@@ -29,8 +29,12 @@
           <td class="value">{{ evidence.evidence_type }}</td>
         </tr>
         <tr>
-          <td class="name">PubMed ID:</td>
-          <td class="value">{{ evidence.source }}</td>
+          <td class="name">Citation:</td>
+          <td class="value">
+            <a href="{{ evidence.source_url }}" _target="blank">
+              {{ evidence.citation }}
+            </a>
+          </td>
         </tr>
       </table>
     </div>
