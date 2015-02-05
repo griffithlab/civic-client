@@ -14,7 +14,7 @@
           transformResponse: function(data) {
             var events = JSON.parse(data);
             events.result = _.map(events.result, function (event) {
-              event.diseases = event.diseases.toString();
+              event.diseases = event.diseases.join(', ');
               return event;
             });
             return events;
