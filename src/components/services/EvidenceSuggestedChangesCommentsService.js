@@ -23,12 +23,12 @@
         commentId: '@id'
       },
       {
-        query: { // get a list of all suggested changes
+        query: { // get a list of all suggested change comments
           method: 'GET',
           isArray: true,
           cache: cache
         },
-        get: { // get a single suggested change
+        get: { // get a single suggested change comment
           method: 'GET',
           isArray: false,
           cache: cache

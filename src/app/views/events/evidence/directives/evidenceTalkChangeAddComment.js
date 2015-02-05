@@ -49,16 +49,19 @@
           $scope.formStatus.messages = [];
           $scope.comment = '';
           $scope.formStatus.messages.push('Your comment was added.');
+
           EvidenceSuggestedChangesComments.query({
             geneId: $scope.gene.entrez_id,
             variantId: $scope.variant.id,
             evidenceItemId: $stateParams.evidenceItemId,
-            suggestedChangeId: $scope.suggestedChange.id
-          })
-            .$promise.then(function(response) {
+            suggestedChangeId: $stateParams.suggestedChangeId
+          }).$promise
+            .then(function(response) { // success!
               // TODO: refactor this icky $parent call
               $scope.$parent.changeComments = response;
-            });
+            }, function(response) { // FAIL!
+              $scope.formStatus.messages.push('Failed to load new updated comments');
+          });
         },
         function(response) { // add comment failed
           $log.info('add comment failed.');

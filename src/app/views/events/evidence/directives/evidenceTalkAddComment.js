@@ -44,13 +44,13 @@
           $log.info('add comment succeeded.');
           $scope.formStatus.errors = [];
           $scope.formStatus.messages = [];
-          $scope.formStatus.messages.push('Your comment was added.');
-          VariantComments.query({
+          $scope.formStatus.messages.push('Your evidence comment was added.');
+          EvidenceComments.query({
             geneId: $scope.gene.entrez_id,
             variantId: $scope.variant.id,
             evidenceItemId: $scope.evidence.id
-          })
-            .$promise.then(function(response) {
+          }).$promise
+            .then(function(response) {
               // TODO: banish all these kludgy $scope.$parent calls!
               $scope.$parent.comments = response;
             });

@@ -346,6 +346,17 @@
         controller: function(evidence, $scope) {
           $scope.evidence = evidence;
         }
+      })
+      .state('events.genes.summary.variants.summary.evidence.talk.changes', {
+        url: '/changes/:suggestedChangeId',
+        template: '<evidence-talk-change></evidence-talk-change>',
+        data: {
+          titleExp: '"Event " + gene.entrez_name + " / " + variant.name + " Changes"',
+          navMode: 'sub'
+        },
+        controller: function(evidence, $scope) {
+          $scope.evidence = evidence;
+        }
       });
   }
 })();

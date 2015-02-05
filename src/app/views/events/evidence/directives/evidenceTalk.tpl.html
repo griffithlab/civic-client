@@ -4,7 +4,10 @@
     <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 comments-menu">
       <ul class="nav nav-pills nav-stacked">
         <li ui-sref-active="active" class="gene-comment-tab">
-          <a ui-sref="events.genes.summary.variants.summary.evidence.talk.comments({ geneId: gene.entrez_id, variantId: variant.id, evidenceItemId: evidence.id })" class="gene-name"><span ng-bind="'EID' + evidence.id"></span> Comments</a>
+          <a ui-sref="events.genes.summary.variants.summary.evidence.talk.comments({ geneId: gene.entrez_id, variantId: variant.id, evidenceItemId: evidence.id })"
+             class="gene-name">
+            <span ng-bind="'EID' + evidence.id"></span> Comments
+          </a>
         </li>
       </ul>
       <div ng-repeat="status in statusOrder">
@@ -25,7 +28,7 @@
       </div>
 
     </div>
-    <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 variantUIView">
+    <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 evidenceUIView">
       <ui-view>
         <p>Click a suggested change to view details and conversation</p>
       </ui-view>

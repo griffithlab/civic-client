@@ -1,16 +1,16 @@
 (function() {
   'use strict';
   angular.module('civic.events')
-    .directive('variantTalkChange', variantTalkChange)
-    .controller('VariantTalkChangeController', VariantTalkChangeController);
+    .directive('evidenceTalkChange', evidenceTalkChange)
+    .controller('EvidenceTalkChangeController', EvidenceTalkChangeController);
 
   // @ngInject
-  function variantTalkChange(Security) {
+  function evidenceTalkChange(Security) {
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: 'app/views/events/variants/directives/variantTalkChange.tpl.html',
-      controller: 'VariantTalkChangeController',
+      templateUrl: 'app/views/events/evidence/directives/evidenceTalkChange.tpl.html',
+      controller: 'EvidenceTalkChangeController',
       link: /* ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
@@ -21,46 +21,57 @@
   }
 
   // @ngInject
-  function VariantTalkChangeController($scope, $stateParams, VariantsSuggestedChanges, VariantsSuggestedChangesComments, Variants, $log) {
+  function EvidenceTalkChangeController($scope, $stateParams, EvidenceSuggestedChanges, EvidenceSuggestedChangesComments, Evidence, $log) {
     $log.info('Requesting change:' + $stateParams.geneId + 'suggestedChangeId: ' + $stateParams.suggestedChangeId);
 
-    VariantsSuggestedChanges
+    EvidenceSuggestedChanges
       .get({
         'geneId': $stateParams.geneId,
         'variantId': $stateParams.variantId,
+        'evidenceItemId': $stateParams.evidenceItemId,
         'suggestedChangeId': $stateParams.suggestedChangeId
       }).$promise
-      .then(function(response) {
+      .then(function(response) { // success!
+        $log.info("Fetched evidence suggested change");
         $scope.suggestedChange = response;
-      });
+      },
+      function(response) {
+        $log.info("Failed to fetch evience suggested change: " + response.data);
+    });
 
-    VariantsSuggestedChangesComments
+    EvidenceSuggestedChangesComments
       .query({
         'geneId': $stateParams.geneId,
         'variantId': $stateParams.variantId,
+        'evidenceItemId': $stateParams.evidenceItemId,
         'suggestedChangeId': $stateParams.suggestedChangeId
       })
       .$promise.then(function(response) {
+        $log.info("Loaded evidence talk change comments.");
         $scope.changeComments = response;
       }, function(response) {
-        $log.error("FAILED TO LOAD VARIANT CHANGE COMMENTS");
+        $log.error("FAILED TO LOAD EVIDENCE CHANGE COMMENTS");
       });
 
     $scope.commitChange = function() {
-      VariantsSuggestedChanges.accept({
+      EvidenceSuggestedChanges.accept({
         'geneId': $stateParams.geneId,
         'variantId': $stateParams.variantId,
+        'evidenceItemId': $stateParams.evidenceItemId,
         'suggestedChangeId': $stateParams.suggestedChangeId,
         force: true
       }).$promise
         .then(function(response) { // success
           $log.info("suggested change updated!!");
-          Variants.get({
+          Evidence.get({
             'geneId': $stateParams.geneId,
-            'variantId': $stateParams.variantId
+            'variantId': $stateParams.variantId,
+            'evidenceItemId': $stateParams.evidenceItemId,
+            'suggestedChangeId': $stateParams.suggestedChangeId
           }).$promise
-            .then(function(variant) {
-              $scope.$parent.variant = variant;
+            .then(function(evidenceItem) {
+              // TODO: refactor the $parent call to something less kludgy
+              $scope.$parent.evidence = evidenceItem;
             });
         },
         function(response) { // failure

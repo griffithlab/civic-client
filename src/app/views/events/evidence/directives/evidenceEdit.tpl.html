@@ -34,23 +34,15 @@
           <label for="description">Text:</label>
           <textarea class="form-control" id="description" rows="10" ng-model="evidenceEdit.text"></textarea>
         </div>
-        <h4>evidenceEdit:</h4>
-        <pre>{{ evidenceEdit | json }}</pre>
-
-        <h4>All Suggested Changes:</h4>
-        <pre>{{ evidencesSuggestedChanges | json }}</pre>
       </div>
+
       <div class="col-xs-12 col-md-6">
         <div class="form-group">
           <label for="description">Please provide a reason for your updates:</label>
           <textarea class="form-control" id="reason" rows="10" ng-model="evidenceEdit.reason"></textarea>
         </div>
-        <h4>Submitted Suggested Change:</h4>
-        <pre>{{ newChange | json }}</pre>
-        <h4>Reason:</h4>
-        <pre>{{ evidenceEdit.reason | json }}</pre>
-
       </div>
+
     </div>
     <div class="row">
       <div class="col-xs-12">

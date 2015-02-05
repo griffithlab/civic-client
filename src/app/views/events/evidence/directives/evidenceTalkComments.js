@@ -20,10 +20,20 @@
     $scope.isAuthenticated = Security.isAuthenticated;
     $scope.isAdmin = Security.isAdmin;
 
+    $scope.comments = [];
+
     $log.info('EvidenceTalkCommentsController instantiated.');
-    EvidenceComments.query({geneId: $stateParams.geneId, variantId: $stateParams.variantId, evidenceItemId: $stateParams.evidenceItemId })
-      .$promise.then(function(response) {
+    EvidenceComments.query({
+      geneId: $stateParams.geneId,
+      variantId: $stateParams.variantId,
+      evidenceItemId: $stateParams.evidenceItemId
+    }).$promise
+      .then(function(response) {
+        $log.info("loaded evidence talk comments.");
         $scope.comments = response;
+      },
+      function(response) {
+        $log.info("failed to load evidence talk comments.");
       });
   }
 })();

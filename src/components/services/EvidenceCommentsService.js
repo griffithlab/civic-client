@@ -18,7 +18,7 @@
       { geneId: '@geneId',
         variantId: '@variantId',
         evidenceItemId: '@evidenceItemId',
-        commentId: '@id'
+        commentId: '@commentId'
       },
       {
         query: { // get a list of all evidence_item comments
