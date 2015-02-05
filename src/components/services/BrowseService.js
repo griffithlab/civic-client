@@ -10,7 +10,15 @@
       {
         get: {
           method: 'GET',
-          isArray: false
+          isArray: false,
+          transformResponse: function(data) {
+            var events = JSON.parse(data);
+            events.result = _.map(events.result, function (event) {
+              event.diseases = event.diseases.toString();
+              return event;
+            });
+            return events;
+          }
         },
         query: {
           method: 'GET',

@@ -22,14 +22,21 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         },
-        { name: 'entrez_id',
-          displayName: 'Entrez ID',
+        { name: 'variant',
           enableFiltering: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
-        { name: 'variant',
+        { name: 'diseases',
+          displayName: 'Diseases',
+          enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        { name: 'evidence_item_count',
+          displayName: 'Evidence Item Count',
           enableFiltering: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -49,7 +56,7 @@
       }
     };
 
-    Browse.get({ count: 100 }, function(data) {
+    Browse.get({ count: 200 }, function(data) {
       // categories & protein functions return arrays,
       $scope.browseGridOptions.data = data.result;
       $scope.events = data;
