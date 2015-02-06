@@ -296,7 +296,11 @@
           Evidence: 'Evidence',
           evidence: function(Evidence, $stateParams, $log) {
             $log.info('events.evidence- resolving evidence');
-            return Evidence.get({'geneId': $stateParams.geneId, 'variantId': $stateParams.variantId, 'evidenceItemId': $stateParams.evidenceItemId }).$promise;
+            return Evidence.get({
+              'geneId': $stateParams.geneId,
+              'variantId': $stateParams.variantId,
+              'evidenceItemId': $stateParams.evidenceItemId
+            }).$promise;
           }
         }
       })
