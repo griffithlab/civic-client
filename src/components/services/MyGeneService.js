@@ -10,7 +10,7 @@
 
     var MyGene = $resource('http://mygene.info/v2/gene/:geneId',
       {
-        geneId: '@entrez_id',
+        geneId: '@geneId',
         callback: 'JSON_CALLBACK'
       },
       {
