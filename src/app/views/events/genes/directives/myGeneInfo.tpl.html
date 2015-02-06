@@ -9,6 +9,14 @@
       <td class="value" ng-bind-html="geneDetails.name"></td>
     </tr>
     <tr>
+      <td class="name">Entrez ID:</td>
+      <td class="value">
+        <a href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + gene.entrez_id }}" ng-bind="gene.entrez_id">
+
+        </a>
+      </td>
+    </tr>
+    <tr>
       <td class="name">Synonyms:</td>
       <td class="value" ng-bind-html="geneDetails.alias | arrayToList "></td>
     </tr>
