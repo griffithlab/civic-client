@@ -107,7 +107,7 @@
             $log.info('events.genes - resolving geneDetails');
             // not returning a promise here b/c resolving myGeneInfo can take several seconts, and
             // isn't strictly necessary to start rendering the interface
-            return MyGene.getDetails({'geneId': $stateParams.geneId }).$promise;
+            return MyGene.getDetails({'geneId': $stateParams.geneId });
           }
         },
         controller: 'GenesViewCtrl',

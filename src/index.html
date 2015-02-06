@@ -75,10 +75,6 @@
     <link rel="stylesheet" href="app/views/events/evidence/directives/evidenceTalkComments.css">
 
     <!-- endbuild -->
-
-    <!-- build:js scripts/modernizr.js -->
-    <script src="../bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
   </head>
   <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
     <!--[if lt IE 10]>
@@ -135,6 +131,7 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="../bower_components/ui-router-extras/release/ct-ui-router-extras.js"></script>
