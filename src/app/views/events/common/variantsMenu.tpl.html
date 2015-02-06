@@ -22,15 +22,15 @@
         </div>
         <ul class="nav nav-pills nav-stacked variant-group">
           <li ng-repeat="variant_group in gene.variant_groups" ui-sref-active="active">
-            <a ng-bind="variant_group.name"
-               ui-sref="events.genes.summary.variantGroups.summary({ geneId:gene.entrez_id, variantGroupId: variant_group.id })"
+            <a ui-sref="events.genes.summary.variantGroups.summary({ geneId:gene.entrez_id, variantGroupId: variant_group.id })"
                ui-sref-active="active"
-               class="group-title">
+               class="group-title"
+               ng-bind="variant_group.name">
             </a>
             <ul class="nav nav-pills nav-stacked">
               <li ng-repeat="variant in variant_group.variants" ui-sref-active="active">
                 <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.entrez_id, variantId: variant.id })"
-                  class="variant">{{ variant.name }}</a>
+                  class="variant">{{ gene.entrez_id !== variant.entrez_id ? variant.name + " (" + variant.entrez_name + ")" : variant.name }}</a>
               </li>
             </ul>
           </li>
