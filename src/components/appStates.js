@@ -11,10 +11,12 @@
 
     // abstract state redirects
     $urlRouterProvider.when('/events/genes/:geneId', '/events/genes/:geneId/summary');
-    $urlRouterProvider.when('/events/genes', '/events'); // if no geneId provided, redirect to /events
+    $urlRouterProvider.when('/events/genes', '/browse');
+    $urlRouterProvider.when('/events', '/browse');
+
+    // NOTE: data.titleExp in state configs are ng expressions parsed by the TitleService
 
     // static frontend pages
-    // NOTE: titleExp are angular expressions parsed by the TitleService (/app/components/services/TitleService.js)
     $stateProvider
       .state('home', {
         url: '/home',
@@ -76,9 +78,9 @@
           navMode: 'sub'
         },
         resolve: /* ngInject */ {
-          Genes: 'Genes',
           geneList: function(Genes) {
-            return Genes.queryNames().$promise;
+            // TODO: nuke these resolves, controller, etc. and turn this into an abstract state.
+            return ["TEMPORARLY PLACEHOLDER TO SPEED THINGS UP, IGNORE"];
           }
         },
         controller: /* ngInject */ function(geneList, $scope) {
@@ -100,11 +102,11 @@
           Genes: 'Genes',
           MyGene: 'MyGene',
           gene: function(Genes, $stateParams, $log) {
-            $log.info('events.genes - resolving gene');
-            return Genes.get({'geneId': $stateParams.geneId }).$promise;
+            return Genes.get({
+              'geneId': $stateParams.geneId
+            }).$promise;
           },
           geneDetails: function(MyGene, $stateParams, $log) {
-            $log.info('events.genes - resolving geneDetails');
             // not returning a promise here b/c resolving myGeneInfo can take several seconts, and
             // isn't strictly necessary to start rendering the interface
             return MyGene.getDetails({'geneId': $stateParams.geneId });
