@@ -29,7 +29,7 @@
             </a>
             <ul class="nav nav-pills nav-stacked">
               <li ng-repeat="variant in variant_group.variants" ui-sref-active="active">
-                <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_id, variantId: variant.id })"
+                <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.entrez_id, variantId: variant.id })"
                   class="variant">{{ variant.name }}</a>
               </li>
             </ul>
