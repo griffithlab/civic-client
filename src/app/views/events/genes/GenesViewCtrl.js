@@ -9,7 +9,9 @@
     $scope.geneDetails = geneDetails;
     $scope.variantGroupsExist = _.has(gene, 'variant_groups') && gene.variant_groups.length > 0;
     $scope.refreshGene = function() {
-      $scope.gene = Genes.get({ geneId: $stateParams.geneId });
+      $scope.gene = Genes.get({
+        geneId: $stateParams.geneId
+      });
     }
   }
 })();

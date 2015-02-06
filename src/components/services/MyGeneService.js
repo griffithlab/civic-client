@@ -8,20 +8,16 @@
 
     var cache = $cacheFactory('MyGeneInfo'); // default cache doesn't work for some reason
 
-    var MyGene = $resource('http://mygene.info/v2/gene/:geneId',
+    var MyGene = $resource('/api/genes/mygene_info_proxy/:geneId',
       {
-        geneId: '@geneId',
-        callback: 'JSON_CALLBACK'
+        geneId: '@geneId'
       },
       {
-        getDetails: {
-          method: 'JSONP',
-          params: {
-            fields: 'name,symbol,alias,interpro,pathway,summary,'
-          },
+          getDetails: {
           isArray: false,
           cache: cache,
           transformResponse: function(data) {
+            data = JSON.parse(data);
             var srcMap = {
               kegg: 'http://www.genome.jp/kegg-bin/show_pathway?',
               reactome: 'http://www.reactome.org/cgi-bin/control_panel_st_id?ST_ID=',
