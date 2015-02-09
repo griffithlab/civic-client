@@ -2,7 +2,7 @@
 <p>
 At the heart of CIViC is the clinical evidence statement. The clinical evidence statement is a piece of information that has been manually curated from trustable medical literature about a variant or genomic 'event' that has implications in cancer diagnosis, prognosis, or predictive response to therapy. For example, “Patients with BRAF V600 mutations respond well to the drug dabrafenib”. A variant may be a single nucleotide substitution, a small insertion or deletion, a chromosomal rearrangment, an RNA gene fusion, an RNA expression pattern (e.g. over-expression), and so on. Each clinical evidence statement corresponds to a single citable publication.<br><br>
 
-The following tables define the minimal components and definitions required for a CIViC evidence statement. Once enough clinical evidence statements have been curated, a variant summary is generated describing the variants' significance in cancer, along with current treatment methods. A gene level summary then synthesizes the variant summaries. Each variant can belong to one or more groups.  For example 'FGFR fusions' is a group that contains several gene fusions where FGFR2 (or FGFR3) is involved in a fusion with various 3' partner genes. 
+The following tables define the minimal components and definitions required for a CIViC evidence statement. Once enough clinical evidence statements have been curated, a variant summary is generated describing the variant's significance in cancer, along with current treatment methods. A gene level summary then synthesizes the variant summaries. Each variant can belong to one or more groups.  For example 'FGFR fusions' is a group that contains several gene fusions where FGFR2 (or FGFR3) is involved in a fusion with various 3' partner genes. 
 
 <h3>Minimum requirements for clinical evidence statements</h3>
 
@@ -40,7 +40,7 @@ The following tables define the minimal components and definitions required for 
   <tr>
     <td>Evidence direction</td>
     <td>A positive or negative value indicating whether the evidence statement supports or refutes a clinical association with the event</td>
-    <td>Positive - the evidence supports the association</td>
+    <td>Supports (positive) - the evidence supports the association</td>
   </tr>
   <tr>
     <td>Treatment (FDA status)</td>
@@ -59,7 +59,7 @@ The following tables define the minimal components and definitions required for 
   </tr>
   <tr>
     <td>Source</td>
-    <td>Literature where the event is described/explored (PubMed id)</td>
+    <td>Literature where the event was described/explored (PubMed id)</td>
     <td>PMID: 24185512</td>
   </tr>
 </table>
@@ -67,29 +67,29 @@ The following tables define the minimal components and definitions required for 
 <h3>Breaking down the evidence statement</h3>
  <table class="table table-striped table-condensed table-responsive table-bordered">
   <tr>
-    <th>Interaction Type</th>
-    <th>Evidence Direction</th>
-    <th>Clinical Significance</th>
+    <th>Interaction type</th>
+    <th>Evidence direction</th>
+    <th>Clinical significance</th>
     <th>Example</th>
   </tr>
   <tr>
     <td rowspan=5>Predictive - Evidence pertaining to a variant’s effect on therapeutic response</td>
     <td rowspan=2>Supports: The experiment or study supports this variant’s response to a drug</td>
     <td>Positive: Variant is associated with positive response to treatment (e.g. sensitivity to drug)</td>
-    <td>Breast cancer cell lines with H1047R mutation showed increased sensitivity to CH5132799 than cells with wild-type PIK3CA gene</td>
+    <td>Breast cancer cell lines with a PIK3CA H1047R mutation showed increased sensitivity to CH5132799 compared to cells with wild-type PIK3CA gene</td>
   </tr>
   <tr>
     <td>Negative: Variant is associated with negative treatment response (e.g. resistance to drug)</td>
-    <td>MAP2K1 P124S confers increased resistance to inhibition by AZD6244 inhibition by about 5 folds</td>
+    <td>MAP2K1 P124S confers increased resistance to inhibition by AZD6244 inhibition by about 5-fold</td>
   </tr>
   <tr>
-    <td rowspan=3>Does not support: The experiment or study does not support, or was inconclusive of, an interaction between the variant and a drug</td>
+    <td rowspan=3>Does not support: The experiment or study does not support, or was inconclusive of an interaction between the variant and a drug</td>
     <td>Positive: Variant is associated with positive response to treatment (e.g. sensitivity to drug)</td>
     <td>BRAF V600E mutation does not predict response in patients treated with dacarbazine or temozolomide</td>
   </tr>
   <tr>
     <td>N/A: Variant does not inform clinical action</td>
-    <td>This drug is not shown to have an impact on cell lines with mutation X</td>
+    <td>This drug is not shown to have an impact (sensitivity or resistance) on cell lines with mutation X</td>
   </tr>
   <tr>
     <td>Negative: Variant is associated with negative treatment response (e.g. resistance to drug)</td>
@@ -100,11 +100,11 @@ The following tables define the minimal components and definitions required for 
     <td rowspan=4>Diagnostic - Evidence pertaining to a variant’s impact on patient diagnosis</td>
     <td rowspan=2>Supports: The experiment or study supports variant’s impact on the diagnosis of disease or subtype</td>
     <td>Positive: Variant is associated with diagnosis of disease or subtype</td>
-    <td>BRAF V600E is shown to be associated with the tall-cell variant of PTC</td>
+    <td>BRAF V600E is shown to be associated with the tall-cell variant of papillary thyroid carcinoma (PTC)</td>
   </tr>
   <tr>
     <td>Negative: Variant is associated with the lack of diagnosis of disease or subtype</td>
-    <td>Patients with mutation X are found not to have disease subtype A</td>
+    <td>Patients with mutation X are found not to have disease subtype A (i.e. mutation X rules out a diagnosis of subtype A)</td>
   </tr>
   <tr>
     <td rowspan=2>Does not support: The experiment or study does not support the variant’s impact on diagnosis of disease or subtype</td>
@@ -113,18 +113,18 @@ The following tables define the minimal components and definitions required for 
   </tr>
   <tr>
     <td>Negative: Variant is associated with the lack of diagnosis of disease or subtype</td>
-    <td>Study 1 found that, contrary to what was previously believed, mutation X does in fact show a correlation with disease subtype A</td>
+    <td>Study 1 found that, contrary to what was previously believed, mutation X does NOT in fact show a correlation with disease subtype A</td>
   </tr>
 
   <tr>
     <td rowspan=5>Prognostic - Evidence pertaining to a variant’s impact on disease progression, severity, or patient survival</td>
     <td rowspan=2>Supports: The experiment or study supports a variant’s impact on prognostic outcome</td>
     <td>Good Outcome: Variant is associated with a better overall patient outcome</td>
-    <td>In AML, patients with IDH2 R140K mutation has improved overall survival compared to those with wild-type IDH2</td>
+    <td>In AML, patients with IDH2 R140K mutation have improved overall survival compared to those with wild-type IDH2</td>
   </tr>
   <tr>
     <td>Poor Outcome: Variant is associated with a worse overall patient outcome</td>
-    <td>Meta-analysis of studies involving cytogentically normal younger (<60) patients showed increased overall and relapse-free survival for patients with NPM1 mutations</td>
+    <td>Meta-analysis of studies involving cytogentically normal, younger (<60) patients showed increased overall and relapse-free survival for patients with NPM1 mutations</td>
   </tr>
   <tr>
     <td rowspan=3>Does not support: The experiment or study does not support a prognostic association between variant and outcome</td>
