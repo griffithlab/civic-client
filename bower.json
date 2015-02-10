@@ -2,22 +2,22 @@
   "name": "civicClient",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "1.2.16",
+    "angular": "~1.2.0",
+    "angular-sanitize": "1.2.x",
     "angular-ui-router": "0.2.13",
     "ui-router-extras": "~0.0.11",
-    "angular-ui-grid": "~3.0.0-rc.14",
-    "angular-bootstrap": "~0.11.0",
-    "angular-dialog-service": "~5.1.1",
+    "angular-ui-grid": "~3.0.0-rc.16",
+    "angular-bootstrap": "~0.12.0",
+    "angular-dialog-service": "~5.2.0",
     "lodash": "~2.4.1",
-    "angular-resource": "~1.2.22",
+    "angular-resource": "~1.2.0",
     "ng-tags-input": "~2.1.1",
-    "modernizr": "2.8.x",
     "angular-timeago": "~0.1.6"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.x"
+    "angular-mocks": "~1.2.0"
   },
   "resolutions": {
-    "angular": "1.2.x"
+    "angular-bootstrap": "~0.12.0"
   }
 }
