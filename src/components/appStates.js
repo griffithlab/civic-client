@@ -71,20 +71,12 @@
     // gene, variant, evidence & associated activity views
     $stateProvider
       .state('events', {
+        abstract: true,
         url: '/events',
         templateUrl: 'app/views/events/eventsView.tpl.html',
         data: {
           titleExp: '"Choose Gene"',
           navMode: 'sub'
-        },
-        resolve: /* ngInject */ {
-          geneList: function(Genes) {
-            // TODO: nuke these resolves, controller, etc. and turn this into an abstract state.
-            return ["TEMPORARLY PLACEHOLDER TO SPEED THINGS UP, IGNORE"];
-          }
-        },
-        controller: /* ngInject */ function(geneList, $scope) {
-          $scope.genes = geneList;
         },
         onExit: /* ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();

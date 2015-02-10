@@ -2,14 +2,14 @@
   <div ui-view>
     <div class="row">
       <div class="col-xs-12">
-        <div class="geneList">
-          <p><strong>Please choose a gene from the list below to view its variants:</strong></p>
-          <ul class="nav nav-pills nav-stacked gene-menu">
-            <li ng-repeat="gene in genes | sortBy: gene.entrez_name">
-              <a ui-sref="events.genes.summary({ geneId: gene.entrez_id })"> {{ gene.entrez_name }}</a>
-            </li>
-          </ul>
-        </div>
+        <!--<div class="geneList">-->
+          <!--<p><strong>Please choose a gene from the list below to view its variants:</strong></p>-->
+          <!--<ul class="nav nav-pills nav-stacked gene-menu">-->
+            <!--<li ng-repeat="gene in genes | sortBy: gene.entrez_name">-->
+              <!--<a ui-sref="events.genes.summary({ geneId: gene.entrez_id })"> {{ gene.entrez_name }}</a>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
       </div>
     </div>
   </div>
