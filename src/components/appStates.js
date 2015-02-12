@@ -98,10 +98,8 @@
               'geneId': $stateParams.geneId
             }).$promise;
           },
-          geneDetails: function(MyGene, $stateParams, $log) {
-            // not returning a promise here b/c resolving myGeneInfo can take several seconts, and
-            // isn't strictly necessary to start rendering the interface
-            return MyGene.getDetails({'geneId': $stateParams.geneId });
+          geneDetails: function(MyGene, gene) {
+            return MyGene.getDetails({'geneId': gene.entrez_id }).$promise;
           }
         },
         controller: 'GenesViewCtrl',
@@ -111,7 +109,11 @@
       })
       .state('events.genes.summary', {
         url: '/summary',
-        template: '<gene-summary class="col-xs-12"></gene-summary>',
+        controller: function($scope, gene, geneDetails) {
+          $scope.geneView.gene = gene;
+          $scope.geneView.geneDetails = geneDetails;
+        },
+        template: '<gene-summary gene="geneView.gene" gene-details="geneView.geneDetails"></gene-summary>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Summary"',
           navMode: 'sub'
@@ -123,9 +125,9 @@
         template: '<gene-edit class="col-xs-12"></gene-edit>',
         controller: 'GeneEditCtrl',
         resolve: {
-          geneEdit: function(Genes, $stateParams, $log) {
+          geneEdit: function(Genes, gene, $stateParams, $log) {
             $log.info('appStates: resolving geneEdit.');
-            return Genes.get({'geneId': $stateParams.geneId}).$promise;
+            return Genes.get({'geneId': gene.entrez_id }).$promise;
           }
         },
         data: {
