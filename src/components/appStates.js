@@ -109,10 +109,6 @@
       })
       .state('events.genes.summary', {
         url: '/summary',
-        controller: function($scope, gene, geneDetails) {
-          $scope.geneView.gene = gene;
-          $scope.geneView.geneDetails = geneDetails;
-        },
         template: '<gene-summary gene="geneView.gene" gene-details="geneView.geneDetails"></gene-summary>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Summary"',
