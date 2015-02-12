@@ -99,6 +99,7 @@
             }).$promise;
           },
           geneDetails: function(MyGene, gene) {
+
             return MyGene.getDetails({'geneId': gene.entrez_id }).$promise;
           }
         },
