@@ -119,7 +119,7 @@
       })
       .state('events.genes.edit', {
         url: '/edit',
-        template: '<gene-edit entity="geneView.gene" submit-change="geneView.submitChange" apply-change="geneView.applyChange"></gene-edit>',
+        template: '<gene-edit entity="geneView.gene" submit-change="geneView.submitChange(message)" apply-change="geneView.applyChange"></gene-edit>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Edit"',
           navMode: 'sub'
