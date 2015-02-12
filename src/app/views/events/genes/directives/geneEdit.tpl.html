@@ -32,13 +32,13 @@
       <div class="col-xs-12 col-md-6">
         <div class="form-group">
           <label for="description">Description:</label>
-          <textarea class="form-control" id="description" rows="10" ng-model="geneEdit.description"></textarea>
+          <textarea class="form-control" id="description" rows="10" ng-model="entityEdit.description"></textarea>
         </div>
       </div>
       <div class="col-xs-12 col-md-6">
         <div class="form-group">
           <label for="description">Please provide a reason for your updates:</label>
-          <textarea class="form-control" id="reason" rows="10" ng-model="geneEdit.reason"></textarea>
+          <textarea class="form-control" id="reason" rows="10" ng-model="entityEdit.reason"></textarea>
         </div>
       </div>
     </div>
@@ -46,9 +46,9 @@
       <div class="col-xs-12">
         <div class="button-row">
           <div class="pull-right">
-            <!--<button type="button" class="btn btn-default btn-md" ng-click="discardEdits()">Discard Edits</button>-->
-            <button type="button" class="btn btn-primary btn-md" ng-click="submitEdits()">Submit Edits for Review</button>
-            <button type="button" class="btn btn-warning btn-md" ng-click="applyEdits()" ng-show="isAdmin()">Apply Edits</button>
+            <button type="button" class="btn btn-default btn-md" ng-click="discardEdits()">Discard Edits</button>
+            <button type="button" class="btn btn-primary btn-md" ng-click="submitChange()">Submit Changes for Review</button>
+            <button type="button" class="btn btn-warning btn-md" ng-click="applyChange()" ng-show="isAdmin()">Apply Change Immediately</button>
           </div>
         </div>
       </div>

@@ -4,40 +4,35 @@
     .controller('GenesViewCtrl', GenesViewCtrl);
 
   // @ngInject
-  function GenesViewCtrl($scope, gene, geneDetails, Genes, $stateParams) {
+  function GenesViewCtrl($scope, gene, geneDetails, Genes, GenesSuggestedChanges, $log) {
     var geneView = $scope.geneView = {};
     geneView.gene = gene;
     geneView.geneDetails = geneDetails;
-    geneView.variantGroupsExist = _.has(gene, 'variant_groups') && gene.variant_groups.length > 0;
+    geneView.variantGroupsExist = _.has(geneView.gene, 'variant_groups') && geneView.gene.variant_groups.length > 0;
 
     // get latest gene & refresh
-    geneView.refreshGene = function() {
+    geneView.refresh = function() {
       geneView.gene = Genes.get({ geneId: gene.entrez_id } );
     };
 
     // submit changes for comment/review
-    geneView.submitGeneChange = function() {
-
-    };
-
-    // directly update a gene (admin only)
-    geneView.applyEdit = function() {
-
+    geneView.submitChange = function() {
+      $log.info('geneView.submitEdit called.');
     };
 
     // apply a gene update request (admin only)
-    geneView.applyGeneChange = function() {
-
+    geneView.applyChange = function() {
+      $log.info('geneView.applyEdit called.');
     };
 
     // reject a gene update request (admin only)
-    geneView.rejectGeneChange = function() {
-
+    geneView.rejectChange = function() {
+      $log.info('geneView.rejectChange called.');
     };
 
     // add a comment to current gene
-    geneView.submitGeneComment = function() {
-
+    geneView.submitComment = function() {
+      $log.info('geneView.submitComment called.');
     };
   }
 })();

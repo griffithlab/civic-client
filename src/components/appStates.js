@@ -119,14 +119,7 @@
       })
       .state('events.genes.edit', {
         url: '/edit',
-        template: '<gene-edit class="col-xs-12"></gene-edit>',
-        controller: 'GeneEditCtrl',
-        resolve: {
-          geneEdit: function(Genes, gene, $stateParams, $log) {
-            $log.info('appStates: resolving geneEdit.');
-            return Genes.get({'geneId': gene.entrez_id }).$promise;
-          }
-        },
+        template: '<gene-edit entity="geneView.gene" submit-change="geneView.submitChange" apply-change="geneView.applyChange"></gene-edit>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Edit"',
           navMode: 'sub'
