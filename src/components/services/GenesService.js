@@ -30,9 +30,6 @@
         },
         update: {
           method: 'PUT',
-          params: {
-            geneId: '@entrez_id'
-          },
           interceptor: {
             response: cacheInterceptor,
             responseError: function(response) {

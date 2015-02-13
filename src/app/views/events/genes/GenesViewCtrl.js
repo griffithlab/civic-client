@@ -4,7 +4,7 @@
     .controller('GenesViewCtrl', GenesViewCtrl);
 
   // @ngInject
-  function GenesViewCtrl($scope, gene, geneDetails, Genes, GenesSuggestedChanges, $log) {
+  function GenesViewCtrl($scope, gene, geneDetails, Genes, GenesSuggestedChanges, _, $log) {
     var geneView = $scope.geneView = {};
     geneView.gene = gene;
     geneView.geneDetails = geneDetails;
@@ -25,7 +25,10 @@
     // apply a gene update request (admin only)
     geneView.applyChange = function(geneEdit) {
       $log.info('geneView.applyEdit called.');
-      gene.$update({ entrez_id: geneEdit.entrez_id }, geneEdit);
+      gene.$update({
+        entrez_id: geneEdit.entrez_id,
+        comment: geneEdit.comment
+      },_.merge(gene, geneEdit));
     };
 
     // reject a gene update request (admin only)
