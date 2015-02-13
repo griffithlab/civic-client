@@ -46,11 +46,17 @@
       <div class="col-xs-12">
         <div class="button-row">
           <div class="pull-right">
-            <button type="button" class="btn btn-default btn-md" ng-click="discardEdits()">Discard Edits</button>
-            <button type="button" class="btn btn-primary btn-md" ng-click="submitChange({message:'hello there!'})">Submit Changes for Review</button>
-            <button type="button" class="btn btn-warning btn-md" ng-click="applyChange()" ng-show="isAdmin()">Apply Change Immediately</button>
+            <button type="button" class="btn btn-default btn-md" ng-click="discard()">Discard Edits</button>
+            <button type="button" class="btn btn-primary btn-md" ng-click="submit()">Submit Changes for Review</button>
+            <button type="button" class="btn btn-warning btn-md" ng-show="isAdmin()" ng-click="apply()">Apply Change Immediately</button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>entityEdit:</p>
+        <pre ng-bind="entityEdit | json"></pre>
       </div>
     </div>
   </form>

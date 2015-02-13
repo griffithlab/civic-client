@@ -16,8 +16,9 @@
     };
 
     // submit changes for comment/review
-    geneView.submitChange = function(message) {
-      $log.info('geneView.submitEdit called with message: ' + message);
+    geneView.submitChange = function(geneEdit) {
+      $log.info('geneView.submitEdit called with geneEdit: ');
+      $log.info(geneEdit);
     };
 
     // apply a gene update request (admin only)
@@ -29,6 +30,12 @@
     geneView.rejectChange = function() {
       $log.info('geneView.rejectChange called.');
     };
+
+    // discard gene changes and return to gene summary
+    geneView.discardChange = function() {
+      $log.info('geneView.discardChange called.');
+    };
+
 
     // add a comment to current gene
     geneView.submitComment = function() {

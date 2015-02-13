@@ -11,7 +11,8 @@
       scope: {
         entity: '=entity',
         submitChange: '&submitChange',
-        applyChange: '&applyChange'
+        applyChange: '&applyChange',
+        discardChange: '&discardChange'
       },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneEdit.tpl.html',
@@ -29,6 +30,25 @@
   function GeneEditCtrl($parse, $scope, $log){
     var entityEdit = $scope.entityEdit = angular.copy($scope.entity);
     entityEdit.reason = "";
+    entityEdit.formStatus = {};
+    entityEdit.formStatus.errors = [];
+    entityEdit.formStatus.messages = [];
+
+    $scope.submit = function() {
+      $scope.submitChange({
+        entity: entityEdit
+      });
+    };
+
+    $scope.apply = function() {
+      $scope.applyChange({
+        entity: entityEdit
+      });
+    };
+
+    $scope.discard = function() {
+      $scope.discardChange();
+    };
 
     //$scope.geneEdit = Genes.get({'geneId': $stateParams.geneId});
     //$scope.genesSuggestedChanges = GenesSuggestedChanges.query({'geneId': $stateParams.geneId });
