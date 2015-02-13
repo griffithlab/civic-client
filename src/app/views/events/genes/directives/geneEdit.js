@@ -27,12 +27,17 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($parse, $scope, $log){
-    var entityEdit = $scope.entityEdit = angular.copy($scope.entity);
-    entityEdit.reason = "";
-    entityEdit.formStatus = {};
-    entityEdit.formStatus.errors = [];
-    entityEdit.formStatus.messages = [];
+  function GeneEditCtrl($scope, _, $log){
+    var entityEdit = $scope.entityEdit = _.pick($scope.entity, ['description']);
+
+    entityEdit.comment = {
+      title: "Gene Change Request Comment:",
+      text: ""
+    };
+
+    var formStatus = $scope.formStatus = {};
+    formStatus.errors = [];
+    formStatus.messages = [];
 
     $scope.submit = function() {
       $scope.submitChange({

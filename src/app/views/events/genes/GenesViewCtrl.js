@@ -23,8 +23,9 @@
     };
 
     // apply a gene update request (admin only)
-    geneView.applyChange = function() {
+    geneView.applyChange = function(geneEdit) {
       $log.info('geneView.applyEdit called.');
+      gene.$update({ entrez_id: geneEdit.entrez_id }, geneEdit);
     };
 
     // reject a gene update request (admin only)
