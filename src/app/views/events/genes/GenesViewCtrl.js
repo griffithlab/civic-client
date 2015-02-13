@@ -19,6 +19,7 @@
     geneView.submitChange = function(geneEdit) {
       $log.info('geneView.submitEdit called with geneEdit: ');
       $log.info(geneEdit);
+      geneEdit.formStatus.messages.push('submitChange called.');
     };
 
     // apply a gene update request (admin only)
