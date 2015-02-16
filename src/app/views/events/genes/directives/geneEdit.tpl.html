@@ -12,9 +12,9 @@
         <div class="col-sm-5 form-input">
           <input type="text"
                  class="form-control"
-                 ng-minlength="2"
+                 aa-val-notify
                  aa-field="geneEdit.entrez_name"
-                 aa-label="Entrez Name" />
+                 aa-label="Entrez Name"/>
         </div>
         <div class="col-sm-5 form-help">
           <span class="help-block">You probably shouldn't edit this.</span>
@@ -25,6 +25,7 @@
         <div class="col-sm-5">
           <textarea
             class="form-control"
+            aa-val-notify
             rows="10"
             aa-field="geneEdit.description"
             aa-label="Description"></textarea>
@@ -46,6 +47,7 @@
           <textarea
             class="form-control"
             rows="5"
+            aa-val-notify
             aa-field="geneEdit.clinical_description"
             aa-label="Clinical Description"></textarea>
         </div>
@@ -65,6 +67,7 @@
         <div class="col-sm-5">
           <input type="text"
                  class="form-control"
+                 aa-val-notify
                  aa-field="geneEdit.comment.title"
                  aa-label="Comment Title"/>
         </div>
@@ -79,6 +82,7 @@
           <textarea
             class="form-control"
             rows="4"
+            aa-val-notify
             aa-field="geneEdit.comment.text"
             aa-label="Change Comments"></textarea>
         </div>
