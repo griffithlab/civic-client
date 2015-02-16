@@ -30,7 +30,7 @@
   function GeneEditCtrl($scope, _, aaNotify, $log){
     var formAttributes = ['entrez_name', 'description', 'clinical_description'];
     var geneEdit = $scope.geneEdit = _.pick($scope.gene, formAttributes);
-    geneEdit.comment = {
+    var comment = $scope.comment = {
       title: "Gene Change Request",
       text: ""
     };
@@ -49,16 +49,16 @@
           clinical_description: {
             'ng-minlength': 32,
             required: false
+          }
+        },
+        comment: {
+          title: {
+            'ng-minlength': 16,
+            required: true
           },
-          comment: {
-            title: {
-              'ng-minlength': 5,
-              required: true
-            },
-            text: {
-              'ng-minlength': 5,
-              required: true
-            }
+          text: {
+            'ng-minlength': 32,
+            required: true
           }
         }
       }
