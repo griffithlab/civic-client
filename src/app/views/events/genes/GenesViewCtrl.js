@@ -25,7 +25,14 @@
     // apply a gene update request (admin only)
     geneView.applyChange = function(geneEdit) {
       $log.info('geneView.applyEdit called.');
-      gene.$update({ }, _.merge(gene, geneEdit));
+      gene = _.merge(gene, geneEdit);
+      gene.$update({},
+        function(value, responseHeaders) { // success
+          $log.info('Gene updated successfully.');
+        },
+        function(response) { // failure
+          $log.warn('Gene update failed.');
+      });
     };
 
     // reject a gene update request (admin only)

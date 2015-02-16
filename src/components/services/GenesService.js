@@ -7,10 +7,11 @@
   function GenesService($resource, $cacheFactory, _, $log) {
     var cache = $cacheFactory('genesCache');
 
-    var cacheInterceptor = function(response) {
-      $log.info('GeneService cache interceptor called.');
-      cache.remove(response.config.url);
-      return response;
+    var cacheInterceptor = {
+      response: function(response) {
+        cache.remove(response.config.url);
+        return response;
+      }
     };
 
     var Genes = $resource('/api/genes/:geneId',
@@ -30,13 +31,7 @@
         },
         update: {
           method: 'PUT',
-          interceptor: {
-            response: cacheInterceptor,
-            responseError: function(response) {
-              $log.error('GeneService response error.');
-              $log.info(JSON.stringify(response));
-            }
-          }
+          interceptor: cacheInterceptor
         }
       });
 
