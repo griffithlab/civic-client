@@ -31,7 +31,7 @@
     var formAttributes = ['entrez_name', 'description', 'clinical_description'];
     var geneEdit = $scope.geneEdit = _.pick($scope.gene, formAttributes);
     geneEdit.comment = {
-      title: "Gene Change Request Comment:",
+      title: "Gene Change Request",
       text: ""
     };
 
@@ -63,10 +63,6 @@
         }
       }
     };
-
-    var formStatus = $scope.formStatus = {};
-    formStatus.errors = [];
-    formStatus.messages = [];
 
     $scope.submit = function() {
       aaNotify.success('Submit Changes Clicked.');

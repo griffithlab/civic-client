@@ -6,39 +6,100 @@
     </div>
   </div>
 
-  <div class="row">
-    <div aa-configured-form validation-config="formConfig" ng-form="geneEditForm" class="form-horizontal">
+  <div aa-configured-form validation-config="formConfig" ng-form="geneEditForm" class="form-horizontal">
+    <div class="row">
+      <div class="form-group">
+        <div class="col-sm-5 form-input">
+          <input type="text"
+                 class="form-control"
+                 ng-minlength="2"
+                 aa-field="geneEdit.entrez_name"
+                 aa-label="Entrez Name" />
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">You probably shouldn't edit this.</span>
+        </div>
+      </div>
 
-      <input type="text"
-             aa-field-group="geneEdit.entrez_name"
-             aa-label="Entrez Name" />
+      <div class="form-group">
+        <div class="col-sm-5">
+          <textarea
+            class="form-control"
+            rows="10"
+            aa-field="geneEdit.description"
+            aa-label="Description"></textarea>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">The gene description should include:
+            <ul>
+              <li>A critical aspect of the description</li>
+              <li>Another critical aspect of the description</li>
+              <li>And yet another critical aspect of the description</li>
+            </ul>
+          </span>
+        </div>
+      </div>
 
-    <textarea
-      aa-field-group="geneEdit.description"
-      aa-label="Description"></textarea>
 
-    <textarea
-      aa-field-group="geneEdit.clinical_description"
-      aa-label="Clinical Description"></textarea>
-      <hr/>
+      <div class="form-group">
+        <div class="col-sm-5">
+          <textarea
+            class="form-control"
+            rows="5"
+            aa-field="geneEdit.clinical_description"
+            aa-label="Clinical Description"></textarea>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">The gene's clinical description should include:
+            <ul>
+              <li>A critical aspect of the description</li>
+              <li>Another critical aspect of the description</li>
+              <li>And yet another critical aspect of the description</li>
+            </ul>
+          </span>
+        </div>
+      </div>
 
-      <input type="text"
-             aa-field-group="geneEdit.comment.title"
-             aa-label="Comment Title"
-             readonly/>
-    <textarea
-      aa-field-group="geneEdit.comment.text"
-      aa-label="Change Comments"></textarea>
+
+      <div class="form-group">
+        <div class="col-sm-5">
+          <input type="text"
+                 class="form-control"
+                 aa-field="geneEdit.comment.title"
+                 aa-label="Comment Title"/>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Optional comment title
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5">
+          <textarea
+            class="form-control"
+            rows="4"
+            aa-field="geneEdit.comment.text"
+            aa-label="Change Comments"></textarea>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Include descriptive comment discussing the rational for your change request. Your comment should include:
+            <ul>
+              <li>A critical aspect of the comment</li>
+              <li>Another critical aspect of the comment</li>
+            </ul>
+          </span>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="button-row">
-        <div class="pull-right">
-          <button type="button" class="btn btn-default btn-md" ng-click="discard()">Discard Edits</button>
-          <button type="button" class="btn btn-primary btn-md" ng-click="submit()">Submit Change for Review</button>
-          <button type="button" class="btn btn-warning btn-md" ng-show="isAdmin()" ng-click="apply()">Apply Change Immediately</button>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="button-row">
+          <div class="pull-right">
+            <button type="button" class="btn btn-default btn-md" aa-submit-form="discard()">Discard Edits</button>
+            <button type="button" class="btn btn-primary btn-md" aa-submit-form="submit()">Submit Change for Review</button>
+            <button ng-show="isAdmin()" type="button" class="btn btn-warning btn-md" aa-submit-form="apply()">Apply Change Immediately</button>
+          </div>
         </div>
       </div>
     </div>
