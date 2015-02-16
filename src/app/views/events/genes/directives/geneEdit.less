@@ -6,14 +6,10 @@
   .clearfix();
   background-color: @pageBackground;
 
-  .form-row {
-    margin-bottom: 1em;
-    padding-top: 1em;
-  }
-
   .form-instructions, .form-errors, .form-messages {
     padding-top: @contentPadding;
     padding-bottom: @contentPadding/3;
+    margin-bottom: @contentPadding;
   }
 
   .form-instructions {
@@ -47,22 +43,5 @@
     padding-top: 1em;
     padding-bottom: 1em;
     margin-bottom: 1em;
-  }
-
-  .tags {
-    .tag-item {
-      background-color: #EEE;
-      color: #333;
-      border: none;
-
-      .remove-button {
-        color: #AAA;
-      }
-    }
-    .selected {
-      .remove-button {
-        color: #FFF;
-      }
-    }
   }
 }

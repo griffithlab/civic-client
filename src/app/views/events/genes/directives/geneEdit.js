@@ -9,7 +9,7 @@
     var directive = {
       restrict: 'E',
       scope: {
-        entity: '=entity',
+        gene: '=gene',
         submitChange: '&submitChange',
         applyChange: '&applyChange',
         discardChange: '&discardChange'
@@ -27,12 +27,41 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($scope, _, $log){
-    var entityEdit = $scope.entityEdit = _.pick($scope.entity, ['description']);
-
-    entityEdit.comment = {
+  function GeneEditCtrl($scope, _, aaNotify, $log){
+    var formAttributes = ['entrez_name', 'description', 'clinical_description'];
+    var geneEdit = $scope.geneEdit = _.pick($scope.gene, formAttributes);
+    geneEdit.comment = {
       title: "Gene Change Request Comment:",
       text: ""
+    };
+
+    $scope.formConfig = {
+      validations: {
+        geneEdit: {
+          entrez_name: {
+            'ng-minlength': 2,
+            required: true
+          },
+          description: {
+            'ng-minlength': 32,
+            required: true
+          },
+          clinical_description: {
+            'ng-minlength': 32,
+            required: false
+          },
+          comment: {
+            title: {
+              'ng-minlength': 5,
+              required: true
+            },
+            text: {
+              'ng-minlength': 5,
+              required: true
+            }
+          }
+        }
+      }
     };
 
     var formStatus = $scope.formStatus = {};
@@ -40,143 +69,23 @@
     formStatus.messages = [];
 
     $scope.submit = function() {
+      aaNotify.success('Submit Changes Clicked.');
       $scope.submitChange({
-        entity: entityEdit
+        gene: geneEdit
       });
     };
 
     $scope.apply = function() {
+      aaNotify.success('Apply Changes Clicked.');
       $scope.applyChange({
-        entity: entityEdit
+        gene: geneEdit
       });
     };
 
     $scope.discard = function() {
-      $scope.discardChange();
+      $scope.geneEditForm.$aaFormExtensions.$reset(function() {
+        aaNotify.success('Form Reset.');
+      });
     };
-
-    //$scope.geneEdit = Genes.get({'geneId': $stateParams.geneId});
-    //$scope.genesSuggestedChanges = GenesSuggestedChanges.query({'geneId': $stateParams.geneId });
-    //$scope.newChange = {};
-    //
-    //$scope.formStatus = {
-    //  errors: [],
-    //  messages: []
-    //};
-    //
-    //$scope.submitEdits = function () {
-    //  $log.info('submitEdits called.');
-    //  GenesSuggestedChanges.add({
-    //      entrez_id: $stateParams.geneId,
-    //      description: $scope.geneEdit.description,
-    //      comment: {
-    //        title: 'Reasons for Edit',
-    //        text: $scope.geneEdit.reason
-    //      }
-    //    },
-    //    function(response) { // request succeeded
-    //      $log.info('Gene SubmitEdits update successful.');
-    //      // refresh gene data
-    //      $scope.formStatus.errors = [];
-    //      $scope.formStatus.messages = [];
-    //      var messageExp = '"Your edit suggestions for Gene " + gene.entrez_name + " have been added to the review queue."';
-    //      $scope.formStatus.messages.push($parse(messageExp)($scope));
-    //      $scope.newChange = response.data;
-    //    },
-    //    function (response) {
-    //      $log.info('update unsuccessful.');
-    //      $scope.formStatus.messages = [];
-    //      $scope.formStatus.errors = [];
-    //      var handleError = {
-    //        '401': function () {
-    //          $scope.formStatus.errors.push({
-    //            field: 'Unauthrorized',
-    //            errorMsg: 'You must be logged in to perform this action.'
-    //          });
-    //        },
-    //        '403': function () {
-    //          $scope.formStatus.errors.push({
-    //            field: 'Insufficient Permissions',
-    //            errorMsg: 'You must be an Admin user to perform the requested action.'
-    //          });
-    //        },
-    //        '422': function (response) {
-    //          _.forEach(response.data.errors, function (value, key) {
-    //            $scope.formStatus.errors.push({
-    //              field: key,
-    //              errorMsg: value
-    //            });
-    //          });
-    //        },
-    //        '500': function(response) {
-    //          $scope.formStatus.errors.push({
-    //            field: 'SERVER ERROR',
-    //            errorMsg: response.statusText
-    //          });
-    //          $log.info(response);
-    //        }
-    //      };
-    //      handleError[response.status](response);
-    //    });
-    //};
-    //
-    //$scope.discardEdits = function () {
-    //  $log.info('discardEdits called.');
-    //};
-    //
-    //$scope.applyEdits = function () {
-    //  $scope.geneEdit.$update({
-    //      // entrez_id: $stateParams.geneID,
-    //      description: $scope.geneEdit.description,
-    //      comment: {
-    //        title: 'Reasons for Edit',
-    //        text: "Admin applied edit reason: " + $scope.geneEdit.reason
-    //      }
-    //    },
-    //    function () {
-    //      $log.info('update successful.');
-    //
-    //      $scope.$parent.gene = Genes.get({'geneId': $stateParams.geneId});
-    //      $scope.formStatus.errors = [];
-    //      $scope.formStatus.messages = [];
-    //      $scope.formStatus.messages.push('Gene ' + $scope.geneEdit.entrez_name + ' updated successfully.');
-    //    },
-    //    function (response) {
-    //      $log.info('update unsuccessful.');
-    //      $scope.formStatus.messages = [];
-    //      $scope.formStatus.errors = [];
-    //      var handleError = {
-    //        '401': function () {
-    //          $scope.formStatus.errors.push({
-    //            field: 'Unauthrorized',
-    //            errorMsg: 'You must be logged in to edit this gene.'
-    //          });
-    //        },
-    //        '403': function () {
-    //          $scope.formStatus.errors.push({
-    //            field: 'Insufficient Permissions',
-    //            errorMsg: 'You must be an Admin user to perform the requested action.'
-    //          });
-    //        },
-    //        '422': function (response) {
-    //          _.forEach(response.data.errors, function (value, key) {
-    //            $scope.formStatus.errors.push({
-    //              field: key,
-    //              errorMsg: value
-    //            });
-    //          });
-    //        },
-    //        '500': function(response) {
-    //          $scope.formStatus.errors.push({
-    //            field: 'SERVER ERROR',
-    //            errorMsg: 'There was a server error.'
-    //          });
-    //          $log.info(response);
-    //        }
-    //      };
-    //      handleError[response.status](response);
-    //    }
-    //  );
-    //};
   }
 })();
