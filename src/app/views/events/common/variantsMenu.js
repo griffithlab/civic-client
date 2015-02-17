@@ -1,7 +1,8 @@
 (function() {
   'use strict';
   angular.module('civic.events')
-    .directive('variantsMenu', variantsMenu);
+    .directive('variantsMenu', variantsMenu)
+    .controller('VariantsMenuController', VariantsMenuController);
 
   // @ngInject
   function variantsMenu() {
@@ -9,9 +10,15 @@
       restrict: 'E',
       templateUrl: 'app/views/events/common/variantsMenu.tpl.html',
       replace: true,
-      scope: true
+      controller: 'VariantsMenuController'
+
     };
 
     return directive;
+  }
+
+  // @ngInject
+  function VariantsMenuController($state, $scope) {
+    $scope.$state = $state;
   }
 })();
