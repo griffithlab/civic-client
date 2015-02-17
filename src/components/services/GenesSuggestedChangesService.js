@@ -24,8 +24,8 @@
     };
 
     var GenesSuggestedChanges = $resource('/api/genes/:geneId/suggested_changes/:suggestedChangeId',
-      { geneId: '@entrez_id',
-        suggestedChangeId: '@id'
+      {
+        geneId: '@entrez_id'
       },
       {
         query: { // get a list of all suggested changes
@@ -45,7 +45,6 @@
         accept: { // accept & commit a change
           url: '/api/genes/:geneId/suggested_changes/:suggestedChangeId/accept',
           params: {
-            geneId: '@geneId',
             suggestedChangeId: '@suggestedChangeId'
           },
           method: 'POST',

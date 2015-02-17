@@ -68,21 +68,26 @@
     };
 
     $scope.submit = function() {
-      aaNotify.success('Submit Changes Clicked.');
+      aaNotify.success('Submit Changes Clicked.', {ttl: 0});
       formStatus.submitBtn = 'submit';
       $scope.submitChange({
-        gene: geneEdit
-      });
+        geneEdit: geneEdit,
+        comment: comment
+      })
+        .then(function() {
+          aaNotify.success('Your updates were successfully submitted. You may your change request by clicking on the Gene Talk tab and navigating to your change.', {ttl:0, allowHtml: true});
+          $scope.geneEditForm.$aaFormExtensions.$resetChanged();
+        });
     };
 
     $scope.apply = function() {
-      aaNotify.success('Apply Changes Clicked.');
       formStatus.submitBtn = 'apply';
       $scope.applyChange({
         geneEdit: geneEdit,
         comment: comment
       })
         .then(function() {
+          aaNotify.success('Your updates were successfully applied.', {ttl:0, allowHtml: true});
           $scope.geneEditForm.$aaFormExtensions.$resetChanged();
         });
     };
@@ -90,7 +95,7 @@
     $scope.reset = function() {
       formStatus.submitBtn = 'reset';
       $scope.geneEditForm.$aaFormExtensions.$reset(function() {
-        aaNotify.success('Form Reset.');
+        aaNotify.success('Form Reset.', {ttl: 5000});
       });
     };
   }
