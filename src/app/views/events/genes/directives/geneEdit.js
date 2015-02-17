@@ -87,8 +87,8 @@
         });
     };
 
-    $scope.discard = function() {
-      formStatus.submitBtn = 'discard';
+    $scope.reset = function() {
+      formStatus.submitBtn = 'reset';
       $scope.geneEditForm.$aaFormExtensions.$reset(function() {
         aaNotify.success('Form Reset.');
       });

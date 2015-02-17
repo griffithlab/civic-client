@@ -103,14 +103,14 @@
           <div class="pull-right">
             <button type="button"
                     class="btn btn-default btn-md"
-                    aa-submit-form="discard($event)"
+                    ng-click="reset()"
                     ng-class="{'disabled': $root.aaIsLoading }">
-              <i ng-show="$root.aaIsLoading && formStatus.submitBtn === 'discard'" class="fa fa-spinner fa-spin"></i>
+              <i ng-show="$root.aaIsLoading && formStatus.submitBtn === 'reset'" class="fa fa-spinner fa-spin"></i>
               Reset Form</button>
 
             <button type="button"
                     class="btn btn-primary btn-md"
-                    aa-submit-form="submit($event)"
+                    aa-submit-form="submit()"
                     ng-class="{'disabled': $root.aaIsLoading }">
               <i ng-show="$root.aaIsLoading && formStatus.submitBtn === 'submit'" class="fa fa-spinner fa-spin"></i>
               Submit Change for Review</button>
@@ -119,7 +119,7 @@
                     ng-show="isAdmin()"
                     class="btn btn-warning btn-md"
                     ng-class="{'disabled': $root.aaIsLoading }"
-                    aa-submit-form="apply($event)">
+                    aa-submit-form="apply()">
               <i ng-show="$root.aaIsLoading && formStatus.submitBtn === 'apply'" class="fa fa-spinner fa-spin"></i>
               Apply Change Immediately
             </button>

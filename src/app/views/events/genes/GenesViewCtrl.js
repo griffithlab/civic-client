@@ -82,7 +82,6 @@
       return gene.$update({},
         function(value, responseHeaders) { // success
           $log.info('Gene updated successfully.');
-          $aaFormExtensions.$resetChanged();
         },
         function(response) { // failure
           $log.warn('Gene update failed.');
