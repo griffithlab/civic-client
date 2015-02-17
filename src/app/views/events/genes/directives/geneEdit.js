@@ -75,14 +75,16 @@
       });
     };
 
-    $scope.apply = function(clickEvent) {
+    $scope.apply = function() {
       aaNotify.success('Apply Changes Clicked.');
       formStatus.submitBtn = 'apply';
-      $scope.clickEvent = clickEvent;
       $scope.applyChange({
         geneEdit: geneEdit,
         comment: comment
-      });
+      })
+        .then(function() {
+          $scope.geneEditForm.$aaFormExtensions.$resetChanged();
+        });
     };
 
     $scope.discard = function() {

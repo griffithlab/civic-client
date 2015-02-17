@@ -79,7 +79,7 @@
       gene = _.merge(gene, geneEdit);
       gene.comment = comment;
 
-      gene.$update({},
+      return gene.$update({},
         function(value, responseHeaders) { // success
           $log.info('Gene updated successfully.');
           $aaFormExtensions.$resetChanged();
