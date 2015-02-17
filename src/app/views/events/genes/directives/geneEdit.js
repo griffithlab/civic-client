@@ -30,36 +30,37 @@
   function GeneEditCtrl($scope, _, aaNotify, $log){
     var formAttributes = ['entrez_name', 'description', 'clinical_description'];
     var geneEdit = $scope.geneEdit = _.pick($scope.gene, formAttributes);
+
+    var formConfig = $scope.formConfig = {};
+
     var comment = $scope.comment = {
       title: "Gene Change Request",
       text: ""
     };
 
-    $scope.formConfig = {
-      validations: {
-        geneEdit: {
-          entrez_name: {
-            'ng-minlength': 2,
+    formConfig.validations = {
+      geneEdit: {
+        entrez_name: {
+          'ng-minlength': 2,
             required: true
-          },
-          description: {
-            'ng-minlength': 32,
-            required: true
-          },
-          clinical_description: {
-            'ng-minlength': 32,
-            required: false
-          }
         },
-        comment: {
-          title: {
-            'ng-minlength': 16,
+        description: {
+          'ng-minlength': 32,
             required: true
-          },
-          text: {
-            'ng-minlength': 32,
+        },
+        clinical_description: {
+          'ng-minlength': 32,
+            required: false
+        }
+      },
+      comment: {
+        title: {
+          'ng-minlength': 16,
             required: true
-          }
+        },
+        text: {
+          'ng-minlength': 32,
+            required: true
         }
       }
     };
@@ -74,7 +75,8 @@
     $scope.apply = function() {
       aaNotify.success('Apply Changes Clicked.');
       $scope.applyChange({
-        gene: geneEdit
+        geneEdit: geneEdit,
+        comment: comment
       });
     };
 

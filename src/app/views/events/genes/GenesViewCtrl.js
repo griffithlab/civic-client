@@ -4,7 +4,7 @@
     .controller('GenesViewCtrl', GenesViewCtrl);
 
   // @ngInject
-  function GenesViewCtrl($scope, gene, geneDetails, Genes, GenesSuggestedChanges, _, $log) {
+  function GenesViewCtrl($scope, $aaFormExtensions, aaLoadingWatcher, gene, geneDetails, Genes, GenesSuggestedChanges, _, $log) {
     var geneView = $scope.geneView = {};
     geneView.gene = gene;
     geneView.geneDetails = geneDetails;
@@ -74,12 +74,15 @@
     };
 
     // apply a gene update request (admin only)
-    geneView.applyChange = function(geneEdit) {
+    geneView.applyChange = function(geneEdit, comment) {
       $log.info('geneView.applyEdit called.');
       gene = _.merge(gene, geneEdit);
+      gene.comment = comment;
+
       gene.$update({},
         function(value, responseHeaders) { // success
           $log.info('Gene updated successfully.');
+          $aaFormExtensions.$resetChanged();
         },
         function(response) { // failure
           $log.warn('Gene update failed.');

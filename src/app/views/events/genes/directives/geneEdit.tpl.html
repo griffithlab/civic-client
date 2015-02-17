@@ -68,7 +68,7 @@
           <input type="text"
                  class="form-control"
                  aa-val-notify
-                 aa-field="geneEdit.comment.title"
+                 aa-field="comment.title"
                  aa-label="Comment Title"/>
         </div>
         <div class="col-sm-5 form-help">
@@ -83,7 +83,7 @@
             class="form-control"
             rows="4"
             aa-val-notify
-            aa-field="geneEdit.comment.text"
+            aa-field="comment.text"
             aa-label="Change Comments"></textarea>
         </div>
         <div class="col-sm-5 form-help">
@@ -101,11 +101,29 @@
       <div class="col-xs-12">
         <div class="button-row">
           <div class="pull-right">
-            <button type="button" class="btn btn-default btn-md" aa-submit-form="discard()">Discard Edits</button>
-            <button type="button" class="btn btn-primary btn-md" aa-submit-form="submit()">Submit Change for Review</button>
-            <button ng-show="isAdmin()" type="button" class="btn btn-warning btn-md" aa-submit-form="apply()">Apply Change Immediately</button>
+            <button type="button"
+                    class="btn btn-default btn-md"
+                    aa-submit-form="discard()"
+                    ng-class="{'disabled': $root.aaIsLoading }">Discard Edits</button>
+
+            <button type="button"
+                    class="btn btn-primary btn-md"
+                    aa-submit-form="submit()"
+                    ng-class="{'disabled': $root.aaIsLoading }">Submit Change for Review</button>
+
+            <button type="button"
+                    ng-show="isAdmin()"
+                    class="btn btn-warning btn-md"
+                    ng-class="{'disabled': $root.aaIsLoading }"
+                    aa-submit-form="apply()">Apply Change Immediately</button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>$root.aaIsLoading:</p>
+        <pre ng-bind="$root.aaIsLoading | json"></pre>
       </div>
     </div>
   </div>
