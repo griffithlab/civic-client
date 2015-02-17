@@ -15,6 +15,9 @@
       link: /* ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
+      },
+      controller: /* @ngInject */ function($scope, $state){
+        $scope.$state = $state;
       }
     };
 
