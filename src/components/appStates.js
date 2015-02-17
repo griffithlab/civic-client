@@ -100,7 +100,7 @@
           },
           geneDetails: function(MyGene, gene) {
 
-            return MyGene.getDetails({'geneId': gene.entrez_id }).$promise;
+            return MyGene.getDetails({'geneId': gene.entrez_id });
           }
         },
         controller: 'GenesViewCtrl',
