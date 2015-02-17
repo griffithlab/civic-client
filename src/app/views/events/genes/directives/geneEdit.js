@@ -27,8 +27,8 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($scope, _, aaNotify, $log){
-    var formAttributes = ['entrez_name', 'description', 'clinical_description'];
+  function GeneEditCtrl($scope, $state, $parse, _, aaNotify, $log){
+    var formAttributes = ['entrez_name', 'entrez_id', 'description', 'clinical_description'];
     var geneEdit = $scope.geneEdit = _.pick($scope.gene, formAttributes);
 
     var formConfig = $scope.formConfig = {};
@@ -68,15 +68,21 @@
     };
 
     $scope.submit = function() {
-      aaNotify.success('Submit Changes Clicked.', {ttl: 0});
       formStatus.submitBtn = 'submit';
       $scope.submitChange({
         geneEdit: geneEdit,
         comment: comment
       })
-        .then(function() {
-          aaNotify.success('Your updates were successfully submitted. You may your change request by clicking on the Gene Talk tab and navigating to your change.', {ttl:0, allowHtml: true});
+        .then(function(response) { // success
+          // TODO: changeUrl should be generated using a ui-router method like $state.go() or by $compiling a template with a ui-sref anchor
+          // TODO: required ids for the route (entrez_id) should be included in the response
+          // TODO: civic-server will be refactored so that this endpoint doesn't require a geneId
+          var changeUrl = '<a href="/#/events/genes/' + geneEdit.entrez_id + '/talk/changes/' + response.data.id  + '">here</a>';
+          aaNotify.success('Your updates were successfully submitted. View your change request ' + changeUrl + '.', {ttl:0, allowHtml: true});
           $scope.geneEditForm.$aaFormExtensions.$resetChanged();
+        },
+        function(response) { // failure
+          aaNotify.error('Your update failed to to be submitted.<br/><strong>Status: </strong>' + response.status + ' ' + response.statusText, {ttl:0, allowHtml: true });
         });
     };
 
@@ -86,9 +92,12 @@
         geneEdit: geneEdit,
         comment: comment
       })
-        .then(function() {
+        .then(function() { // success
           aaNotify.success('Your updates were successfully applied.', {ttl:0, allowHtml: true});
           $scope.geneEditForm.$aaFormExtensions.$resetChanged();
+        },
+        function(response) { // failure
+          aaNotify.error('Your update failed to to be applied.<br/><strong>Status: </strong>' + response.status + ' ' + response.statusText, {ttl:0, allowHtml: true });
         });
     };
 

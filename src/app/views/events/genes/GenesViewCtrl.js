@@ -21,14 +21,7 @@
       gene = _.merge(gene, geneEdit);
       gene.comment = comment;
 
-      return GenesSuggestedChanges.add(gene,
-        function(value, responseHeaders) { // success
-          $log.info('Suggested gene change added successfully.');
-        },
-        function(response) { // failure
-          $log.warn('Suggested gene change failed to be added.');
-        }).$promise;
-
+      return GenesSuggestedChanges.add(gene).$promise;
     };
 
     // apply a gene update request (admin only)
@@ -37,13 +30,7 @@
       gene = _.merge(gene, geneEdit);
       gene.comment = comment;
 
-      return gene.$update({},
-        function(value, responseHeaders) { // success
-          $log.info('Gene updated successfully.');
-        },
-        function(response) { // failure
-          $log.warn('Gene update failed.');
-      });
+      return gene.$update().$promise;
     };
 
     // reject a gene update request (admin only)
