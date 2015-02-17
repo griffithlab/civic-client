@@ -103,28 +103,30 @@
           <div class="pull-right">
             <button type="button"
                     class="btn btn-default btn-md"
-                    aa-submit-form="discard()"
-                    ng-class="{'disabled': $root.aaIsLoading }">Discard Edits</button>
+                    aa-submit-form="discard($event)"
+                    ng-class="{'disabled': $root.aaIsLoading }">
+              <i ng-show="$root.aaIsLoading && formStatus.submitBtn === 'discard'" class="fa fa-spinner fa-spin"></i>
+              Reset Form</button>
 
             <button type="button"
                     class="btn btn-primary btn-md"
-                    aa-submit-form="submit()"
-                    ng-class="{'disabled': $root.aaIsLoading }">Submit Change for Review</button>
+                    aa-submit-form="submit($event)"
+                    ng-class="{'disabled': $root.aaIsLoading }">
+              <i ng-show="$root.aaIsLoading && formStatus.submitBtn === 'submit'" class="fa fa-spinner fa-spin"></i>
+              Submit Change for Review</button>
 
             <button type="button"
                     ng-show="isAdmin()"
                     class="btn btn-warning btn-md"
                     ng-class="{'disabled': $root.aaIsLoading }"
-                    aa-submit-form="apply()">Apply Change Immediately</button>
+                    aa-submit-form="apply($event)">
+              <i ng-show="$root.aaIsLoading && formStatus.submitBtn === 'apply'" class="fa fa-spinner fa-spin"></i>
+              Apply Change Immediately
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <p>$root.aaIsLoading:</p>
-        <pre ng-bind="$root.aaIsLoading | json"></pre>
-      </div>
-    </div>
+
   </div>
 </div>

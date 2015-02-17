@@ -38,6 +38,8 @@
       text: ""
     };
 
+    var formStatus = $scope.formStatus = {};
+
     formConfig.validations = {
       geneEdit: {
         entrez_name: {
@@ -67,13 +69,16 @@
 
     $scope.submit = function() {
       aaNotify.success('Submit Changes Clicked.');
+      formStatus.submitBtn = 'submit';
       $scope.submitChange({
         gene: geneEdit
       });
     };
 
-    $scope.apply = function() {
+    $scope.apply = function(clickEvent) {
       aaNotify.success('Apply Changes Clicked.');
+      formStatus.submitBtn = 'apply';
+      $scope.clickEvent = clickEvent;
       $scope.applyChange({
         geneEdit: geneEdit,
         comment: comment
@@ -81,6 +86,7 @@
     };
 
     $scope.discard = function() {
+      formStatus.submitBtn = 'discard';
       $scope.geneEditForm.$aaFormExtensions.$reset(function() {
         aaNotify.success('Form Reset.');
       });
