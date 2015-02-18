@@ -103,7 +103,7 @@
 
                     <button type="button"
                             class="btn btn-primary btn-md"
-                            aa-submit-form="submit()"
+                            aa-submit-form="submit(geneCommentForm)"
                             ng-class="{'disabled': $root.aaIsLoading }">
                       <i ng-show="$root.aaIsLoading" class="fa fa-spinner fa-spin"></i>
                       Submit Comment</button>
@@ -115,7 +115,6 @@
           </div>
         </div>
 
-        <!--<gene-talk-add-comment add-comment="addComment(comment)" refresh-comments="refreshComments()"></gene-talk-add-comment>-->
       </div>
       <div ng-switch-when="false">
         <div class="col-xs-12">

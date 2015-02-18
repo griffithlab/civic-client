@@ -56,12 +56,13 @@
       }
     };
 
-    $scope.submit = function() {
+    $scope.submit = function(geneCommentForm) {
       $log.info('geneTalkComments submit() called.');
       $scope.addComment({
         comment: comment
       }).then(function() { // success
           aaNotify.success('Your comment was added.', {ttl:0, allowHtml: true});
+          geneCommentForm.$aaFormExtensions.$resetChanged();
           $scope.refreshComments();
         },
         function() { // failure
