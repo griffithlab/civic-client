@@ -18,7 +18,8 @@
   }
 
   // @ngInject
-  function VariantsMenuController($state, $scope) {
+  function VariantsMenuController($state, $scope, _) {
     $scope.$state = $state;
+    $scope.variantGroupsExist = _.has($scope.gene, 'variant_groups') && $scope.gene.variant_groups.length > 0;
   }
 })();

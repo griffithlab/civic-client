@@ -5,10 +5,10 @@
 
   // @ngInject
   function GenesViewCtrl($scope, $aaFormExtensions, aaLoadingWatcher, gene, geneDetails, Genes, GenesSuggestedChanges, _, $log) {
-    var geneView = $scope.geneView = {};
+    var geneView = {};
+    $scope.geneView = geneView;
     geneView.gene = gene;
     geneView.geneDetails = geneDetails;
-    geneView.variantGroupsExist = _.has(geneView.gene, 'variant_groups') && geneView.gene.variant_groups.length > 0;
 
     // get latest gene & refresh
     geneView.refresh = function() {
@@ -18,10 +18,10 @@
     // submit changes for comment/review
     geneView.submitChange = function(geneEdit, comment) {
       $log.info('geneView.submitChange called with geneEdit: ');
-      gene = _.merge(gene, geneEdit);
-      gene.comment = comment;
+      geneEdit = _.merge(gene, geneEdit);
+      geneEdit.comment = comment;
 
-      return GenesSuggestedChanges.add(gene).$promise;
+      return GenesSuggestedChanges.add(geneEdit).$promise;
     };
 
     // apply a gene update request (admin only)
@@ -30,6 +30,7 @@
       gene = _.merge(gene, geneEdit);
       gene.comment = comment;
 
+      // TODO: figure out why GeneSuggestedChanges.add() works by returning .$promise, but gene.$update() fails (but works fine if $promise is not returned)
       return gene.$update({});
     };
 
