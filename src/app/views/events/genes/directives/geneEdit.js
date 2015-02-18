@@ -27,7 +27,7 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($scope, $state, $parse, _, aaNotify, $log){
+  function GeneEditCtrl($scope, _, aaNotify){
     var formAttributes = ['entrez_name', 'entrez_id', 'description', 'clinical_description'];
     var geneEdit = $scope.geneEdit = _.pick($scope.gene, formAttributes);
 

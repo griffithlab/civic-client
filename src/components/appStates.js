@@ -127,7 +127,7 @@
       })
       .state('events.genes.talk', {
         url: '/talk',
-        template: '<gene-talk gene="geneView.gene"></gene-talk>',
+        template: '<gene-talk gene="geneView.gene" add-comment="geneView.addComment(comment)" accept-change="geneView.acceptChange(changeId, comment)" reject-change="rejectChange(changeId, comment)"></gene-talk>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
@@ -135,7 +135,7 @@
       })
       .state('events.genes.talk.comments', {
         url: '/comments',
-        template: '<gene-talk-comments gene="gene"></gene-talk-comments>',
+        template: '<gene-talk-comments gene="gene" add-comment="addComment(comment)"></gene-talk-comments>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'

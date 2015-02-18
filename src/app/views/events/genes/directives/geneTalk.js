@@ -9,7 +9,10 @@
     var directive = {
       restrict: 'E',
       scope: {
-        gene: '=gene'
+        gene: '=gene',
+        addComment: '&addComment',
+        acceptChange: '&acceptChange',
+        rejectChange: '&rejectChange'
       },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneTalk.tpl.html',
