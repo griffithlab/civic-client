@@ -109,7 +109,7 @@
     };
 
     $scope.cancel = function() {
-      
+
     }
   }
 })();

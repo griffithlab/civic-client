@@ -47,7 +47,8 @@
           enableFiltering: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/events/variants/directives/evidenceGridDiseaseCell.tpl.html'
         },
         { name: 'drug',
           displayName: 'Drug',
@@ -55,7 +56,8 @@
           enableFiltering: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/events/variants/directives/evidenceGridDrugCell.tpl.html'
         },
         { name: 'evidence_level',
           displayName: 'Level',
