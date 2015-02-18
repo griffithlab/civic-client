@@ -27,7 +27,8 @@
         <div class="col-xs-12">
           <div class="comment-block">
             <div class="title">
-              <strong>Posted by  </strong> <span ng-bind="comment.user.nickname">user.nickname</span> <span ng-bind="comment.created_at | timeAgo">comment.created_at</span>
+              <strong><span ng-bind="comment.title"></span></strong><br/>
+              <span class="small">Posted by  <strong><span ng-bind="comment.user.nickname">user.nickname</span></strong> <span ng-bind="comment.created_at | timeAgo">comment.created_at</span></span>
             </div>
             <div class="body">
               <p ng-bind="comment.text">comment.text</p>
