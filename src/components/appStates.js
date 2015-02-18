@@ -127,24 +127,18 @@
       })
       .state('events.genes.talk', {
         url: '/talk',
-        template: '<gene-talk class="col-xs-12"></gene-talk>',
+        template: '<gene-talk gene="geneView.gene"></gene-talk>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
-        },
-        controller: function(gene, $scope) {
-          $scope.gene = gene;
         }
       })
       .state('events.genes.talk.comments', {
         url: '/comments',
-        template: '<gene-talk-comments></gene-talk-comments>',
+        template: '<gene-talk-comments gene="gene"></gene-talk-comments>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
-        },
-        controller: function(gene, $scope) {
-          $scope.gene = gene; // place resolved gene from events.genes in scope
         }
       })
       .state('events.genes.talk.changes', {

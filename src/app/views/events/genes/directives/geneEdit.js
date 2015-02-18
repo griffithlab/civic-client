@@ -92,7 +92,7 @@
         geneEdit: geneEdit,
         comment: comment
       })
-        .then(function() { // success
+        .then(function(response) { // success
           aaNotify.success('Your updates were successfully applied.', {ttl:0, allowHtml: true});
           $scope.geneEditForm.$aaFormExtensions.$resetChanged();
         },
@@ -104,7 +104,7 @@
     $scope.reset = function() {
       formStatus.submitBtn = 'reset';
       $scope.geneEditForm.$aaFormExtensions.$reset(function() {
-        aaNotify.success('Form Reset.', {ttl: 5000});
+        aaNotify.success('Gene form has been reset.', {ttl: 5000});
       });
     };
   }

@@ -30,7 +30,7 @@
       gene = _.merge(gene, geneEdit);
       gene.comment = comment;
 
-      return gene.$update().$promise;
+      return gene.$update({});
     };
 
     // reject a gene update request (admin only)

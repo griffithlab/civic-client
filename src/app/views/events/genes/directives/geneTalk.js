@@ -8,6 +8,9 @@
   function geneTalk() {
     var directive = {
       restrict: 'E',
+      scope: {
+        gene: '=gene'
+      },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneTalk.tpl.html',
       controller: 'GeneTalkController',
@@ -21,9 +24,9 @@
   }
 
   // @ngInject
-  function GeneTalkController ($scope, $stateParams, GenesSuggestedChanges, $log) {
-
-    GenesSuggestedChanges.query({'geneId': $stateParams.geneId })
+  function GeneTalkController ($scope, GenesSuggestedChanges) {
+    var gene = $scope.gene;
+    GenesSuggestedChanges.query({'geneId': gene.entrez_id })
       .$promise.then(function(response) {
         var statusGroupsOrdered = {};
         var statusOrder = ['active', 'new', 'applied', 'closed'];
