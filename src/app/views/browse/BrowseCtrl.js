@@ -20,15 +20,15 @@
       noUnselect: true,
       rowTemplate: 'app/views/browse/browseGridRow.tpl.html',
       columnDefs: [
-        { name: 'entrez_gene',
-          sort: { direction: uiGridConstants.ASC },
+        { name: 'variant',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
-        { name: 'variant',
+        { name: 'entrez_gene',
+          sort: { direction: uiGridConstants.ASC },
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -41,7 +41,8 @@
           allowCellFocus: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/browse/browseGridDiseaseCell.tpl.html'
         },
         { name: 'evidence_item_count',
           displayName: 'Evidence Item Count',
