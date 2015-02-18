@@ -8,9 +8,15 @@
   function geneEdit(Security) {
     var directive = {
       restrict: 'E',
+      scope: {
+        gene: '=gene',
+        submitChange: '&submitChange',
+        applyChange: '&applyChange',
+        discardChange: '&discardChange'
+      },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneEdit.tpl.html',
-      controller: 'GeneEditCtrl as GeneEdit',
+      controller: 'GeneEditCtrl',
       link: /* ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
@@ -21,129 +27,85 @@
   }
 
   // @ngInject
-  function GeneEditCtrl($log, $parse, $scope, $stateParams, _, Genes, GenesSuggestedChanges) {
-    $scope.geneEdit = Genes.get({'geneId': $stateParams.geneId});
-    $scope.genesSuggestedChanges = GenesSuggestedChanges.query({'geneId': $stateParams.geneId });
-    $scope.newChange = {};
+  function GeneEditCtrl($scope, _, aaNotify){
+    var formAttributes = ['entrez_name', 'entrez_id', 'description', 'clinical_description'];
+    var geneEdit = $scope.geneEdit = _.pick($scope.gene, formAttributes);
 
-    $scope.formStatus = {
-      errors: [],
-      messages: []
+    var formConfig = $scope.formConfig = {};
+
+    var comment = $scope.comment = {
+      title: "Gene Change Request",
+      text: ""
     };
 
-    $scope.submitEdits = function () {
-      $log.info('submitEdits called.');
-      GenesSuggestedChanges.add({
-          entrez_id: $stateParams.geneId,
-          description: $scope.geneEdit.description,
-          comment: {
-            title: 'Reasons for Edit',
-            text: $scope.geneEdit.reason
-          }
+    var formStatus = $scope.formStatus = {};
+
+    formConfig.validations = {
+      geneEdit: {
+        entrez_name: {
+          'ng-minlength': 2,
+            required: true
         },
-        function(response) { // request succeeded
-          $log.info('Gene SubmitEdits update successful.');
-          // refresh gene data
-          $scope.formStatus.errors = [];
-          $scope.formStatus.messages = [];
-          var messageExp = '"Your edit suggestions for Gene " + gene.entrez_name + " have been added to the review queue."';
-          $scope.formStatus.messages.push($parse(messageExp)($scope));
-          $scope.newChange = response.data;
+        description: {
+          'ng-minlength': 32,
+            required: true
         },
-        function (response) {
-          $log.info('update unsuccessful.');
-          $scope.formStatus.messages = [];
-          $scope.formStatus.errors = [];
-          var handleError = {
-            '401': function () {
-              $scope.formStatus.errors.push({
-                field: 'Unauthrorized',
-                errorMsg: 'You must be logged in to perform this action.'
-              });
-            },
-            '403': function () {
-              $scope.formStatus.errors.push({
-                field: 'Insufficient Permissions',
-                errorMsg: 'You must be an Admin user to perform the requested action.'
-              });
-            },
-            '422': function (response) {
-              _.forEach(response.data.errors, function (value, key) {
-                $scope.formStatus.errors.push({
-                  field: key,
-                  errorMsg: value
-                });
-              });
-            },
-            '500': function(response) {
-              $scope.formStatus.errors.push({
-                field: 'SERVER ERROR',
-                errorMsg: response.statusText
-              });
-              $log.info(response);
-            }
-          };
-          handleError[response.status](response);
+        clinical_description: {
+          'ng-minlength': 32,
+            required: false
+        }
+      },
+      comment: {
+        title: {
+          'ng-minlength': 16,
+            required: true
+        },
+        text: {
+          'ng-minlength': 32,
+            required: true
+        }
+      }
+    };
+
+    $scope.submit = function() {
+      formStatus.submitBtn = 'submit';
+      $scope.submitChange({
+        geneEdit: geneEdit,
+        comment: comment
+      })
+        .then(function(response) { // success
+          // TODO: changeUrl should be generated using a ui-router method like $state.go() or by $compiling a template with a ui-sref anchor
+          // TODO: required ids for the route (entrez_id) should be included in the response
+          // TODO: civic-server will be refactored so that this endpoint doesn't require a geneId
+          var changeUrl = '<a href="/#/events/genes/' + geneEdit.entrez_id + '/talk/changes/' + response.data.id  + '">here</a>';
+          aaNotify.success('Your updates were successfully submitted. View your change request ' + changeUrl + '.', {ttl:0, allowHtml: true});
+          $scope.geneEditForm.$aaFormExtensions.$resetChanged();
+        },
+        function(response) { // failure
+          aaNotify.error('Your update failed to to be submitted.<br/><strong>Status: </strong>' + response.status + ' ' + response.statusText, {ttl:0, allowHtml: true });
         });
     };
 
-    $scope.discardEdits = function () {
-      $log.info('discardEdits called.');
+    $scope.apply = function() {
+      formStatus.submitBtn = 'apply';
+      $scope.applyChange({
+        geneEdit: geneEdit,
+        comment: comment
+      })
+        .then(function(response) { // success
+          aaNotify.success('Your updates were successfully applied.', {ttl:0, allowHtml: true});
+          $scope.geneEditForm.$aaFormExtensions.$resetChanged();
+        },
+        function(response) { // failure
+          aaNotify.error('Your update failed to to be applied.<br/><strong>Status: </strong>' + response.status + ' ' + response.statusText, {ttl:0, allowHtml: true });
+        });
     };
 
-    $scope.applyEdits = function () {
-      $scope.geneEdit.$update({
-          // entrez_id: $stateParams.geneID,
-          description: $scope.geneEdit.description,
-          comment: {
-            title: 'Reasons for Edit',
-            text: "Admin applied edit reason: " + $scope.geneEdit.reason
-          }
-        },
-        function () {
-          $log.info('update successful.');
-
-          $scope.$parent.gene = Genes.get({'geneId': $stateParams.geneId});
-          $scope.formStatus.errors = [];
-          $scope.formStatus.messages = [];
-          $scope.formStatus.messages.push('Gene ' + $scope.geneEdit.entrez_name + ' updated successfully.');
-        },
-        function (response) {
-          $log.info('update unsuccessful.');
-          $scope.formStatus.messages = [];
-          $scope.formStatus.errors = [];
-          var handleError = {
-            '401': function () {
-              $scope.formStatus.errors.push({
-                field: 'Unauthrorized',
-                errorMsg: 'You must be logged in to edit this gene.'
-              });
-            },
-            '403': function () {
-              $scope.formStatus.errors.push({
-                field: 'Insufficient Permissions',
-                errorMsg: 'You must be an Admin user to perform the requested action.'
-              });
-            },
-            '422': function (response) {
-              _.forEach(response.data.errors, function (value, key) {
-                $scope.formStatus.errors.push({
-                  field: key,
-                  errorMsg: value
-                });
-              });
-            },
-            '500': function(response) {
-              $scope.formStatus.errors.push({
-                field: 'SERVER ERROR',
-                errorMsg: 'There was a server error.'
-              });
-              $log.info(response);
-            }
-          };
-          handleError[response.status](response);
-        }
-      );
+    $scope.reset = function() {
+      formStatus.submitBtn = 'reset';
+      $scope.geneEditForm.$aaFormExtensions.$reset(function() {
+        aaNotify.success('Gene form has been reset.', {ttl: 5000});
+      });
     };
   }
 })();

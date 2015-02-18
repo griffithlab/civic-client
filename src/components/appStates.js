@@ -98,10 +98,9 @@
               'geneId': $stateParams.geneId
             }).$promise;
           },
-          geneDetails: function(MyGene, $stateParams, $log) {
-            // not returning a promise here b/c resolving myGeneInfo can take several seconts, and
-            // isn't strictly necessary to start rendering the interface
-            return MyGene.getDetails({'geneId': $stateParams.geneId });
+          geneDetails: function(MyGene, gene) {
+
+            return MyGene.getDetails({'geneId': gene.entrez_id });
           }
         },
         controller: 'GenesViewCtrl',
@@ -111,7 +110,7 @@
       })
       .state('events.genes.summary', {
         url: '/summary',
-        template: '<gene-summary class="col-xs-12"></gene-summary>',
+        template: '<gene-summary gene="geneView.gene" gene-details="geneView.geneDetails"></gene-summary>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Summary"',
           navMode: 'sub'
@@ -120,14 +119,7 @@
       })
       .state('events.genes.edit', {
         url: '/edit',
-        template: '<gene-edit class="col-xs-12"></gene-edit>',
-        controller: 'GeneEditCtrl',
-        resolve: {
-          geneEdit: function(Genes, $stateParams, $log) {
-            $log.info('appStates: resolving geneEdit.');
-            return Genes.get({'geneId': $stateParams.geneId}).$promise;
-          }
-        },
+        template: '<gene-edit gene="geneView.gene" submit-change="geneView.submitChange(geneEdit, comment)" apply-change="geneView.applyChange(geneEdit, comment)"></gene-edit>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Edit"',
           navMode: 'sub'
@@ -135,24 +127,18 @@
       })
       .state('events.genes.talk', {
         url: '/talk',
-        template: '<gene-talk class="col-xs-12"></gene-talk>',
+        template: '<gene-talk gene="geneView.gene" add-comment="geneView.addComment(comment)" accept-change="geneView.acceptChange(changeId, comment)" reject-change="rejectChange(changeId, comment)"></gene-talk>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
-        },
-        controller: function(gene, $scope) {
-          $scope.gene = gene;
         }
       })
       .state('events.genes.talk.comments', {
         url: '/comments',
-        template: '<gene-talk-comments></gene-talk-comments>',
+        template: '<gene-talk-comments gene="gene" add-comment="addComment(comment)"></gene-talk-comments>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
-        },
-        controller: function(gene, $scope) {
-          $scope.gene = gene; // place resolved gene from events.genes in scope
         }
       })
       .state('events.genes.talk.changes', {
