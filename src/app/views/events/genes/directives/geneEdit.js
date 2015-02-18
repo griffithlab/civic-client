@@ -107,5 +107,9 @@
         aaNotify.success('Gene form has been reset.', {ttl: 5000});
       });
     };
+
+    $scope.cancel = function() {
+      
+    }
   }
 })();
