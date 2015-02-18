@@ -12,10 +12,6 @@
           <col width="60%"/>
         </colgroup>
         <tr>
-          <td class="name">Rating:</td>
-          <td class="value"><rating ng-model="evidence.rating" max="5" readonly="true"></rating></td>
-        </tr>
-        <tr>
           <td class="name">Evidence Level:</td>
           <td class="value">
             <span class="levelBadge"
@@ -25,14 +21,22 @@
             ({{ evidence.evidenceLevelLabel }})
           </td>
         </tr>
-        <tr>
-          <td class="name">Evidence Type:</td>
-          <td class="value">{{ evidence.evidence_type }}</td>
-        </tr>
+
         <tr>
           <td class="name">Evidence Direction:</td>
           <td class="value">{{ evidence.evidence_direction }}</td>
         </tr>
+
+        <tr>
+          <td class="name">Evidence Type:</td>
+          <td class="value">{{ evidence.evidence_type }}</td>
+        </tr>
+
+        <tr>
+          <td class="name">Clinical Significance:</td>
+          <td class="value">{{ evidence.clinical_significance }}</td>
+        </tr>
+
       </table>
     </div>
     <div class="col-xs-12 col-md-6 details">
@@ -42,18 +46,6 @@
           <col width="60%"/>
         </colgroup>
         <tr>
-          <td class="name">Disease:</td>
-          <td class="value">{{ evidence.disease }}</td>
-        </tr>
-        <tr>
-          <td class="name">Drug:</td>
-          <td class="value">{{ evidence.drug }}</td>
-        </tr>
-        <tr>
-          <td class="name">Clinical Significance:</td>
-          <td class="value">{{ evidence.clinical_significance }}</td>
-        </tr>
-        <tr>
           <td class="name">Citation:</td>
           <td class="value">
             <a target="_blank" href="{{ evidence.source_url }}" _target="blank">
@@ -61,6 +53,21 @@
             </a>
           </td>
         </tr>
+
+        <tr>
+          <td class="name">Rating:</td>
+          <td class="value"><rating ng-model="evidence.rating" max="5" readonly="true"></rating></td>
+        </tr>
+
+        <tr>
+          <td class="name">Disease:</td>
+          <td class="value">{{ evidence.disease }}</td>
+        </tr>
+        <tr>
+          <td class="name">Drug:</td>
+          <td class="value">{{ evidence.drug }}</td>
+        </tr>
+
       </table>
     </div>
   </div>
