@@ -104,15 +104,9 @@
             gridApi.selection.selectRow(rowEntity);
             gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
           }, 500);
-
         }
-
       });
-
     };
-
-
-
   }
 
   function ceilFilter() {
