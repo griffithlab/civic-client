@@ -100,13 +100,21 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="button-row">
+          <div class="pull-left">
+            <a ui-sref="events.genes.summary({ geneId: gene.entrez_id})">
+            <button type="button"
+                    class="btn btn-default btn-md"
+                >
+              Cancel</button>
+            </a>
+          </div>
           <div class="pull-right">
             <button type="button"
                     class="btn btn-default btn-md"
                     ng-click="reset()"
                     ng-class="{'disabled': $root.aaIsLoading }">
               <i ng-show="$root.aaIsLoading && formStatus.submitBtn === 'reset'" class="fa fa-spinner fa-spin"></i>
-              Reset Form</button>
+              Revert Form</button>
 
             <button type="button"
                     class="btn btn-primary btn-md"

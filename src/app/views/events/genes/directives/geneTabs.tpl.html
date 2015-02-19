@@ -3,10 +3,9 @@
     <div class="col-xs-6 name">
       <h3>
         Gene {{ gene.entrez_name }}
-        <a ng-show="isAuthenticated()"
-           ui-sref="events.genes.edit({geneId: gene.entrez_id})"
+        <a ui-sref="events.genes.edit({geneId: gene.entrez_id})"
            class="btn btn-primary btn-xs btn-edit"
-           ng-disabled="$state.includes('**.genes.edit')">
+           ng-disabled="$state.includes('**.genes.edit') || !isAuthenticated()">
           Edit Gene</a>
       </h3>
     </div>
