@@ -1,7 +1,13 @@
 <div class="geneTalkChange">
   <div class="row">
     <div class="col-xs-12">
-      <h4>Current Record:</h4>
+      <div class="change-status" ng-class="{'new': suggestedChange.status === 'new', 'active': suggestedChange.status === 'active', 'applied': suggestedChange.status === 'applied', 'closed': suggestedChange.status === 'closed'}">
+        <h4 ng-bind="suggestedChange.status | uppercase">SUGGESTED CHANGE</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
       <p ng-bind-html="gene.description | linky">LOADING GENE DESCRIPTION</p>
     </div>
   </div>

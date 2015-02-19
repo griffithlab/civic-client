@@ -12,7 +12,12 @@
 
     // get latest gene & refresh
     geneView.refresh = function() {
-      geneView.gene = Genes.get({ geneId: gene.entrez_id } );
+      geneView.gene = Genes.get({ geneId: gene.entrez_id }).$promise
+        .then(function(response) { // success
+          gene = response;
+        }, function(response) { // fail
+          $log.error("Could not refresh gene.");
+        });
     };
 
     // submit changes for comment/review

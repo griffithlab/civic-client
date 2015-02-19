@@ -15,7 +15,8 @@
         getChangeComments: '&',
         addChangeComment: '&',
         acceptChange: '&',
-        rejectChange: '&'
+        rejectChange: '&',
+        refreshEntity: '&'
       },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneTalk.tpl.html',

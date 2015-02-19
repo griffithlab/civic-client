@@ -56,14 +56,17 @@
 
     $scope.refreshComments();
 
-    $scope.getChanges({ suggestedChangeId: suggestedChangeId })
-      .then(function(response) { // success
-        $scope.suggestedChange = response;
-      }, function(response) { // fail
-        $log.error("Could not fetch changes for suggested change #" + suggestedChangeId);
-      }
-    );
+    $scope.refreshChanges = function() {
+      $scope.getChanges({suggestedChangeId: suggestedChangeId})
+        .then(function (response) { // success
+          $scope.suggestedChange = response;
+        }, function (response) { // fail
+          $log.error("Could not fetch changes for suggested change #" + suggestedChangeId);
+        }
+      );
+    };
 
+    $scope.refreshChanges();
 
     $scope.addComment = function(geneChangeCommentForm) {
       $scope.addChangeComment({
@@ -85,6 +88,11 @@
         .then(function(response) { // success
           $log.info("suggested change updated.");
           // TODO: cache should automatically handle refreshing current gene data
+          // but it doesn't, so we do so manually
+          $scope.refreshEntity();
+          $scope.refreshChanges();
+          // also refresh changes
+
           //Genes.get({'geneId': $stateParams.geneId})
           //  .$promise.then(function(gene) {
           //    $scope.$parent.$parent.gene = gene;
