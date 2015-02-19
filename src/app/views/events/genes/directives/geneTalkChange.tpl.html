@@ -61,7 +61,79 @@
     <div class="row">
       <div ng-switch="isAuthenticated()">
         <div ng-switch-when="true">
-          <gene-talk-change-add-comment class="col-xs-12"></gene-talk-change-add-comment>
+          <div class="geneTalkChangeAddComment col-xs-12">
+            <hr/>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="formInstructions">
+                  <p>Enter a comment and hit 'Submit Comment':</p>
+                  <div aa-notify></div>
+                </div>
+              </div>
+            </div>
+
+            <div aa-configured-form validation-config="formConfig" ng-form="geneChangeCommentForm">
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <div class="col-sm-6">
+                      <input type="text"
+                             class="form-control"
+                             aa-val-notify
+                             aa-field="comment.title"
+                             aa-label="Title"/>
+                    </div>
+                    <div class="col-sm-4 form-help">
+          <span class="help-block">Optional comment title
+          </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                  <textarea
+                    class="form-control"
+                    rows="4"
+                    aa-val-notify
+                    aa-field="comment.text"
+                    aa-label="Comment:">
+
+                  </textarea>
+                    </div>
+                    <div class="col-xs-4 form-help">
+                  <span claass="help-block">
+                    Please respect the Community Guidelines in your post.
+                  </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <hr/>
+                  <div class="button-row">
+                    <div class="pull-right">
+
+                      <button type="button"
+                              class="btn btn-primary btn-md"
+                              aa-submit-form="addComment(geneChangeCommentForm)"
+                              ng-class="{'disabled': $root.aaIsLoading }">
+                        <i ng-show="$root.aaIsLoading" class="fa fa-spinner fa-spin"></i>
+                        Submit Comment</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
         <div ng-switch-when="false">
           <div class="col-xs-12">

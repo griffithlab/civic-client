@@ -21,8 +21,41 @@
   }
 
   // @ngInject
-  function GeneTalkChangeController($scope, $stateParams, $log) {
+  function GeneTalkChangeController($scope, $stateParams, aaNotify, $log) {
     var suggestedChangeId = $stateParams.suggestedChangeId;
+
+    var comment = $scope.comment = {
+      title: "",
+      text: ""
+    };
+
+    var formConfig = $scope.formConfig = {};
+
+    formConfig.validations = {
+      comment: {
+        title: {
+          'ng-minlength': 5,
+          required: false
+        },
+        text: {
+          'ng-minlength': 32,
+          required: true
+        }
+      }
+    };
+
+    $scope.refreshComments = function() {
+      $scope.getChangeComments({suggestedChangeId: suggestedChangeId})
+        .then(function (response) { // success
+          $scope.changeComments = response;
+        }, function (response) { // fail
+          $log.error("Could not fetch change comments for suggested change #" + suggestedChangeId);
+        }
+      );
+    };
+
+    $scope.refreshComments();
+
     $scope.getChanges({ suggestedChangeId: suggestedChangeId })
       .then(function(response) { // success
         $scope.suggestedChange = response;
@@ -31,13 +64,21 @@
       }
     );
 
-    $scope.getChangeComments({ suggestedChangeId: suggestedChangeId })
-      .then(function(response) { // success
-        $scope.changeGeneComments = response;
-      }, function(response) { // fail
-        $log.error("Could not fetch change comments for suggested change #" + suggestedChangeId);
-      }
-    );
+
+    $scope.addComment = function(geneChangeCommentForm) {
+      $scope.addChangeComment({
+        suggestedChangeId: suggestedChangeId,
+        comment: comment
+      })
+        .then(function() { // success
+          aaNotify.success('Your comment was added.', {ttl:0, allowHtml: true});
+          geneChangeCommentForm.$aaFormExtensions.$resetChanged();
+          $scope.refreshComments();
+        },
+        function() { // failure
+          aaNotify.error('Oops! Your comment failed to be added.<br/><strong>Status: </strong>' + response.status + ' ' + response.statusText, {ttl:0, allowHtml: true });
+        });
+    };
 
     $scope.accept = function() {
       $scope.acceptChange({ suggestedChangeId: suggestedChangeId })

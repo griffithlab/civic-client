@@ -67,6 +67,14 @@
       }).$promise;
     };
 
+    // add a change comment
+    geneView.addChangeComment = function(suggestedChangeId, comment) {
+      return GenesSuggestedChangesComments.add({
+        'geneId': gene.entrez_id,
+        'suggestedChangeId': suggestedChangeId
+      }, comment).$promise;
+    };
+
     // accept a gene update request to current gene
     geneView.acceptChange = function(suggestedChangeId) {
       $log.info('geneView.acceptChange called.');

@@ -16,8 +16,7 @@
 
     var Genes = $resource('/api/genes/:geneId/suggested_changes/:suggestedChangeId/comments/:commentId',
       { geneId: '@entrez_id',
-        suggestedChangeId: '@suggestedChangeId',
-        commentId: '@id'
+        suggestedChangeId: '@suggestedChangeId'
       },
       {
         query: { // get a list of all suggested changes
