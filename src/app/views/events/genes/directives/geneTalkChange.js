@@ -5,48 +5,62 @@
     .controller('GeneTalkChangeController', GeneTalkChangeController);
 
   // @ngInject
-  function geneTalkChange() {
+  function geneTalkChange(Security) {
     var directive = {
       restrict: 'E',
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneTalkChange.tpl.html',
-      controller: 'GeneTalkChangeController'
+      controller: 'GeneTalkChangeController',
+      link: /* @ngInject */ function($scope) {
+        $scope.isAuthenticated = Security.isAuthenticated;
+        $scope.isAdmin = Security.isAdmin
+      }
     };
 
     return directive;
   }
 
   // @ngInject
-  function GeneTalkChangeController($scope, Security, $stateParams, GenesSuggestedChanges, GenesSuggestedChangesComments, Genes, $log) {
-    $scope.auth = {
-      isAuthenticated: Security.isAuthenticated,
-      isAdmin: Security.isAdmin
-    };
-
-    $log.info('Requesting change:' + $stateParams.geneId + 'suggestedChangeId: ' + $stateParams.suggestedChangeId);
-
-    GenesSuggestedChanges.get({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId })
-      .$promise.then(function(response) {
+  function GeneTalkChangeController($scope, $stateParams, $log) {
+    var suggestedChangeId = $stateParams.suggestedChangeId;
+    $scope.getChanges({ suggestedChangeId: suggestedChangeId })
+      .then(function(response) { // success
         $scope.suggestedChange = response;
-      });
+      }, function(response) { // fail
+        $log.error("Could not fetch changes for suggested change #" + suggestedChangeId);
+      }
+    );
 
-    GenesSuggestedChangesComments.query({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId })
-      .$promise.then(function(response) {
-        $scope.changeComments = response;
-      });
+    $scope.getChangeComments({ suggestedChangeId: suggestedChangeId })
+      .then(function(response) { // success
+        $scope.changeGeneComments = response;
+      }, function(response) { // fail
+        $log.error("Could not fetch change comments for suggested change #" + suggestedChangeId);
+      }
+    );
 
-    $scope.commitChange = function() {
-      GenesSuggestedChanges.accept({'geneId': $stateParams.geneId, 'suggestedChangeId': $stateParams.suggestedChangeId, force: true })
-        .$promise.then(function(response) { // success
-          $log.info("suggested change updated!!");
-          Genes.get({'geneId': $stateParams.geneId})
-            .$promise.then(function(gene) {
-              $scope.$parent.$parent.gene = gene;
-            });
-        },
-        function(response) { // failure
-          $log.info("suggested change failed!!");
-        })
+    $scope.accept = function() {
+      $scope.acceptChange({ suggestedChangeId: suggestedChangeId })
+        .then(function(response) { // success
+          $log.info("suggested change updated.");
+          // TODO: cache should automatically handle refreshing current gene data
+          //Genes.get({'geneId': $stateParams.geneId})
+          //  .$promise.then(function(gene) {
+          //    $scope.$parent.$parent.gene = gene;
+          //  });
+        }, function(response) { // fail
+          $log.info("suggested change failed.");
+        }
+      );
     };
+
+    $scope.reject = function() {
+      $scope.rejectChange({ suggestedChangeId: suggestedChangeId })
+        .then(function(response) { // success
+          $log.info("Successfully rejected change #" + suggestedChangeId);
+        }, function(response) { // fail
+          $log.error("Could not reject change #" + suggestedChangeId);
+        });
+    }
   }
 })();

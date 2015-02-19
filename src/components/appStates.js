@@ -127,7 +127,7 @@
       })
       .state('events.genes.talk', {
         url: '/talk',
-        template: '<gene-talk gene="geneView.gene" add-comment="geneView.addComment(comment)" accept-change="geneView.acceptChange(changeId, comment)" reject-change="rejectChange(changeId, comment)"></gene-talk>',
+        templateUrl: 'app/views/events/genes/EventsGenesTalk.tpl.html',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
