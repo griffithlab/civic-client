@@ -57,6 +57,10 @@
         reject: { // reject a change
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:suggestedChangeId/reject',
+          params: {
+            geneId: '@entrez_id',
+            suggestedChangeId: '@suggestedChangeId'
+          },
           interceptor: cacheInterceptor
         }
       });

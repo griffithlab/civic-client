@@ -83,8 +83,8 @@
     geneView.rejectChange = function(suggestedChangeId) {
       $log.info('geneView.rejectChange called.');
       $log.info('suggestedChangeId: ' + suggestedChangeId);
-      return GenesSuggestedChanges.accept({
-        'geneId': gene.entrez_id,
+      return GenesSuggestedChanges.reject({
+        'entrez_id': gene.entrez_id,
         'suggestedChangeId': suggestedChangeId,
         force: true
       }).$promise;
