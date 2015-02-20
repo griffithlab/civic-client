@@ -93,7 +93,7 @@ angular.module('civic.login', ['ui.router']);
 angular.module('civic.browse', ['ui.grid.selection', 'ui.router']);
 angular.module('civic.search', ['ui.router']);
 angular.module('civic.events', ['ui.grid.selection', 'ui.router']);
-angular.module('civic.add', ['ui.router']);
+angular.module('civic.add', ['ui.router', 'aa.select2']);
 
 angular.module('httpMocks', ['ngTable', 'ngMockE2E']);
 
