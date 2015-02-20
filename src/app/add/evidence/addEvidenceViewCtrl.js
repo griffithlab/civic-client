@@ -10,10 +10,10 @@
     var addEvidenceView = $scope.addEvidenceView = {};
 
     // add evidence item
-    addEvidenceView.add = function(evidenceItem) {
+    addEvidenceView.addEvidence = function(evidenceItem, comment) {
       $log.info('addEvidenceView.add() called.');
-      // TODO switch to using entrez_id instead of geneId like the other gene related services
-      Evidence.add({}, evidenceItem);
+      evidenceItem.comment = comment;
+      return Evidence.add({}, evidenceItem).$promise;
     };
   }
 })();

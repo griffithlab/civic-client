@@ -116,7 +116,7 @@
 
     $scope.submit = function() {
       $log.info('addEvidenceForm.submit() called.');
-      $scope.addEvidence({ evidenceItem: evidenceItem })
+      $scope.addEvidence({ evidenceItem: evidenceItem, comment:comment })
         .then(function(response) { // success
           $log.info('Evidence item successfully added.');
           aaNotify.error('Evidence item successfully submitted.', {ttl:0, allowHtml: true });
