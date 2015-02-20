@@ -74,10 +74,6 @@
         abstract: true,
         url: '/events',
         templateUrl: 'app/views/events/eventsView.tpl.html',
-        data: {
-          titleExp: '"Choose Gene"',
-          navMode: 'sub'
-        },
         onExit: /* ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
@@ -339,10 +335,18 @@
       .state('add', {
         url: '/add',
         abstract: true,
-        templateUrl: 'app/add/',
+        template: '<div class="addView"><div ui-view></div></div>'
+      })
+      .state('add.evidence', {
+        url: '/evidence',
+        templateUrl: 'app/add/evidence/addEvidenceView.tpl.html',
+        controller: 'AddEvidenceViewCtrl',
         data: {
-          titleExp: '"Add Evidence"',
+          titleExp: "'Add Evidence'",
           navMode: 'sub'
+        },
+        resolve: {
+          Evidence: 'Evidence'
         }
       });
 

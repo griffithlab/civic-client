@@ -29,6 +29,11 @@
           method: 'GET',
           isArray: false
         },
+        add: {
+          url: '/api/evidence_items',
+          method: 'POST',
+          interceptor: cache
+        },
         update: {
           method: 'PUT',
           interceptor: interceptor

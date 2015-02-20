@@ -1,0 +1,49 @@
+<div class="addEvidenceForm col-xs-12">
+  <div class="row form-instructions">
+    <div class="col-xs-12">
+      <p>Please complete the following form and hit 'Submit Evidence Item'. Fields marked with an asterisk (*) are required.</p>
+      <div aa-notify></div>
+    </div>
+  </div>
+
+  <div aa-configured-form validation-config="formConfig" ng-form="geneEditForm" class="form-horizontal">
+    <div class="row">
+      <div class="form-group">
+        <div class="col-sm-5 form-input">
+          <input type="text"
+                 class="form-control"
+                 aa-val-notify
+                 aa-field="geneEdit.entrez_name"
+                 aa-label="Entrez Name"/>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">You probably shouldn't edit this.</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="button-row">
+          <div class="pull-left">
+            <a ui-sref="events.genes.summary({ geneId: gene.entrez_id})">
+              <button type="button"
+                      class="btn btn-default btn-md">
+                Cancel</button>
+            </a>
+          </div>
+          <div class="pull-right">
+
+            <button type="button"
+                    class="btn btn-primary btn-md"
+                    aa-submit-form="submit()"
+                    ng-class="{'disabled': $root.aaIsLoading }">
+              <i ng-show="$root.aaIsLoading" class="fa fa-spinner fa-spin"></i>
+              Submit Evidence Item</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

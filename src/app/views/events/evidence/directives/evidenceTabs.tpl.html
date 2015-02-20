@@ -19,6 +19,12 @@
                ng-disabled="$state.includes('**.evidence.edit') || !isAuthenticated()">
               Edit Evidence
             </a>
+            &nbsp;
+            <a ui-sref="add.evidence()"
+               class="btn btn-primary btn-xs btn-edit"
+               ng-disabled="$state.includes('add.evidence') || !isAuthenticated()">
+              Add Evidence
+            </a>
           </span>
         </span>
 
