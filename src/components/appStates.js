@@ -74,10 +74,6 @@
         abstract: true,
         url: '/events',
         templateUrl: 'app/views/events/eventsView.tpl.html',
-        data: {
-          titleExp: '"Choose Gene"',
-          navMode: 'sub'
-        },
         onExit: /* ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
@@ -127,7 +123,7 @@
       })
       .state('events.genes.talk', {
         url: '/talk',
-        template: '<gene-talk gene="geneView.gene" add-comment="geneView.addComment(comment)" accept-change="geneView.acceptChange(changeId, comment)" reject-change="rejectChange(changeId, comment)"></gene-talk>',
+        templateUrl: 'app/views/events/genes/EventsGenesTalk.tpl.html',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
@@ -335,6 +331,26 @@
         controller: function(evidence, $scope) {
           $scope.evidence = evidence;
         }
+      })
+      .state('add', {
+        url: '/add',
+        abstract: true,
+        template: '<div class="addView"><div ui-view></div></div>'
+      })
+      .state('add.evidence', {
+        url: '/evidence',
+        templateUrl: 'app/add/evidence/addEvidenceView.tpl.html',
+        controller: 'AddEvidenceViewCtrl',
+        data: {
+          titleExp: "'Add Evidence'",
+          navMode: 'sub'
+        },
+        resolve: {
+          Evidence: 'Evidence'
+        }
       });
+
+
+
   }
 })();

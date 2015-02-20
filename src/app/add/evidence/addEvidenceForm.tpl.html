@@ -1,0 +1,284 @@
+<div class="addEvidenceForm col-xs-12">
+  <div class="row form-instructions">
+    <div class="col-xs-12">
+      <p>Please complete the following form and hit 'Submit Evidence Item'. Fields marked with an asterisk (*) are required.</p>
+      <div aa-notify></div>
+    </div>
+  </div>
+
+  <div aa-configured-form validation-config="formConfig" ng-form="addEvidenceForm" class="form-horizontal">
+    <div class="row">
+      <div class="form-group">
+        <div class="col-sm-5 form-input">
+          <input type="text"
+                 class="form-control"
+                 aa-val-notify
+                 aa-field="evidenceItem.entrez_id"
+                 aa-label="Gene Entrez ID"/>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">The Entrez ID for the relevant gene.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5 form-input">
+          <input type="text"
+                 class="form-control"
+                 aa-val-notify
+                 aa-field="evidenceItem.variant_name"
+                 aa-label="Variant Name"/>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">The Variant Name for relevant variant.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="variant_origin">
+          Variant Origin*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+                  ng-model="evidenceItem.variant_origin"
+                  id="variant_origin"
+                  name="variant_origin"
+                  required="true"
+                  ng-required="true"
+                  ng-options="item.name as item.name for item in formSelects.variant_origins">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Variant origin help text.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5 form-input">
+          <input type="text"
+                 class="form-control"
+                 aa-val-notify
+                 aa-field="evidenceItem.doid"
+                 aa-label="Disease Ontology ID"/>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">The DOID for the relevant disease.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5 form-input">
+          <input type="text"
+                 class="form-control"
+                 aa-val-notify
+                 aa-field="evidenceItem.pubchem_id"
+                 aa-label="PubChem ID"/>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">The PubChem ID for relevant drug.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5 form-input">
+          <input type="text"
+                 class="form-control"
+                 aa-val-notify
+                 aa-field="evidenceItem.pubmed_id"
+                 aa-label="Pubmed ID"/>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">The Pubmed ID for relevant citation.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5 form-input">
+          <textarea
+            class="form-control"
+            rows="5"
+            aa-val-notify
+            aa-field="evidenceItem.text"
+            aa-label="Evidence Summary"></textarea>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Please summarize the details and relevance of this item of evidence. Be sure to include:
+            <ul>
+              <li>an important thing</li>
+              <li>another important thing</li>
+              <li>a really important thing</li>
+            </ul>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="clinical_significance">
+          Clinical Significance*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+            ng-model="evidenceItem.clinical_significance"
+            id="clinical_significance"
+            name="clinical_significance"
+            required="true"
+            ng-required="true"
+            ng-options="item.name as item.name for item in formSelects.clinical_significance">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Clinical Significance help text.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="evidence_direction">
+          Evidence Direction*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+            ng-model="evidenceItem.evidence_direction"
+            id="evidence_direction"
+            name="evidence_direction"
+            required="true"
+            ng-required="true"
+            ng-options="item.name as item.name for item in formSelects.evidence_direction">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Evidence Direction help text.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="evidence_type">
+          Evidence Type*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+                  ng-model="evidenceItem.evidence_type"
+                  id="evidence_type"
+                  name="evidence_type"
+                  required="true"
+                  ng-required="true"
+                  ng-options="item.name as item.name for item in formSelects.evidence_types">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Evidence Type help text.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="evidence_level">
+          Evidence Level*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+                  ng-model="evidenceItem.evidence_level"
+                  id="evidence_level"
+                  name="evidence_level"
+                  required="true"
+                  ng-required="true"
+                  ng-options="item.name as item.name for item in formSelects.evidence_levels">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Evidence Level help text.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="evidence_rating">
+          Evidence Rating*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+                  ng-model="evidenceItem.rating"
+                  id="evidence_rating"
+                  name="evidence_rating"
+                  required="true"
+                  ng-required="true"
+                  ng-options="item.id as item.name for item in formSelects.evidence_ratings">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block">Evidence Rating help text.</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <hr/>
+        <div class="form-group">
+          <div class="col-sm-5">
+            <input type="text"
+                   class="form-control"
+                   aa-val-notify
+                   aa-field="comment.title"
+                   aa-label="Comment Title"/>
+          </div>
+          <div class="col-sm-5 form-help">
+          <span class="help-block">Optional comment title
+          </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-5">
+          <textarea
+            class="form-control"
+            rows="4"
+            aa-val-notify
+            aa-field="comment.text"
+            aa-label="Change Comments"></textarea>
+          </div>
+          <div class="col-sm-5 form-help">
+          <span class="help-block">Include descriptive comment discussing the rational for your change request. Your comment should include:
+            <ul>
+              <li>A critical aspect of the comment</li>
+              <li>Another critical aspect of the comment</li>
+            </ul>
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <hr/>
+        <div class="button-row">
+          <div class="pull-left">
+            <a ui-sref="events.genes.summary({ geneId: gene.entrez_id})">
+              <button type="button"
+                      class="btn btn-default btn-md">
+                Cancel</button>
+            </a>
+          </div>
+          <div class="pull-right">
+
+            <button type="button"
+                    class="btn btn-primary btn-md"
+                    aa-submit-form="submit()"
+                    ng-class="{'disabled': $root.aaIsLoading }">
+              <i ng-show="$root.aaIsLoading" class="fa fa-spinner fa-spin"></i>
+              Submit Evidence Item</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="row">-->
+      <!--<div class="col-xs-12">-->
+        <!--<hr/>-->
+        <!--<br/>-->
+        <!--<br/>-->
+        <!--<pre ng-bind="evidenceItem | json"></pre>-->
+        <!--<br/>-->
+        <!--<pre ng-bind="comment | json"></pre>-->
+      <!--</div>-->
+    <!--</div>-->
+
+  </div>
+</div>

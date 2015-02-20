@@ -16,9 +16,12 @@
 
     var genesCache = $cacheFactory.get('genesCache');
 
-    var acceptCacheInterceptor = { // deletes cache for updated gene after 'accept'
+    var acceptCacheInterceptor = {
       response: function(response) {
+        // remove cache for updated gene
         genesCache.remove('/api/genes/' + response.data.entrez_id);
+        // also remove cache for the change request
+        cache.remove(response.config.url);
         return response;
       }
     };
@@ -42,13 +45,23 @@
           method: 'POST',
           interceptor: cacheInterceptor
         },
-        accept: { // accept & commit a change
+        accept: { // accept a change
+          method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:suggestedChangeId/accept',
           params: {
+            geneId: '@entrez_id',
             suggestedChangeId: '@suggestedChangeId'
           },
-          method: 'POST',
           interceptor: acceptCacheInterceptor
+        },
+        reject: { // reject a change
+          method: 'POST',
+          url: '/api/genes/:geneId/suggested_changes/:suggestedChangeId/reject',
+          params: {
+            geneId: '@entrez_id',
+            suggestedChangeId: '@suggestedChangeId'
+          },
+          interceptor: cacheInterceptor
         }
       });
 

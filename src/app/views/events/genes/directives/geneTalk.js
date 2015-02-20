@@ -5,32 +5,33 @@
     .controller('GeneTalkController', GeneTalkController);
 
   // @ngInject
-  function geneTalk() {
+  function geneTalk(Security) {
     var directive = {
       restrict: 'E',
       scope: {
-        gene: '=gene',
-        addComment: '&addComment',
-        acceptChange: '&acceptChange',
-        rejectChange: '&rejectChange'
+        gene: '=',
+        addComment: '&',
+        getChanges: '&',
+        getChangeComments: '&',
+        addChangeComment: '&',
+        acceptChange: '&',
+        rejectChange: '&',
+        refreshEntity: '&'
       },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneTalk.tpl.html',
       controller: 'GeneTalkController',
-      link: /* ngInject */ function($scope, Security) {
+      link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }
     };
-
     return directive;
   }
 
   // @ngInject
-  function GeneTalkController ($scope, GenesSuggestedChanges) {
-    var gene = $scope.gene;
-    GenesSuggestedChanges.query({'geneId': gene.entrez_id })
-      .$promise.then(function(response) {
+  function GeneTalkController ($scope) {
+    $scope.getChanges().then(function(response) {
         var statusGroupsOrdered = {};
         var statusOrder = ['active', 'new', 'applied', 'closed'];
         var statusGroups = _.groupBy(_.sortBy(response, 'created_at'), 'status');
@@ -39,13 +40,6 @@
             statusGroupsOrdered[status] = statusGroups[status];
           }
         });
-        //_.each(statusOrder, function(stat) {
-        //  if (_.has(statusGroups, stat)) {
-        //    _.each(_.sortBy(statusGroups[stat], 'created_at'), function(change) {
-        //      suggestedChanges.push(change);
-        //    });
-        //  }
-        //});
         $scope.statusOrder = statusOrder;
         $scope.statusGroups = statusGroupsOrdered;
     });

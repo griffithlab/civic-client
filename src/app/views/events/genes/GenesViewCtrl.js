@@ -4,7 +4,7 @@
     .controller('GenesViewCtrl', GenesViewCtrl);
 
   // @ngInject
-  function GenesViewCtrl($scope, gene, geneDetails, Genes, GenesSuggestedChanges, GeneComments, _, $log) {
+  function GenesViewCtrl($scope, gene, geneDetails, Genes, GenesSuggestedChanges, GeneComments, GenesSuggestedChangesComments, _, $log) {
     var geneView = {};
     $scope.geneView = geneView;
     geneView.gene = gene;
@@ -12,7 +12,12 @@
 
     // get latest gene & refresh
     geneView.refresh = function() {
-      geneView.gene = Genes.get({ geneId: gene.entrez_id } );
+      geneView.gene = Genes.get({ geneId: gene.entrez_id }).$promise
+        .then(function(response) { // success
+          gene = response;
+        }, function(response) { // fail
+          $log.error("Could not refresh gene.");
+        });
     };
 
     // submit changes for comment/review
@@ -45,18 +50,57 @@
       }).$promise;
     };
 
+    // fetch gene changes
+    geneView.getChanges = function(suggestedChangeId) {
+      if(!suggestedChangeId) { // no change ID supplied, so we're fetching all changes
+        return GenesSuggestedChanges.query({
+          'geneId': gene.entrez_id
+        }).$promise;
+      } else {
+        return GenesSuggestedChanges.get({
+          geneId: gene.entrez_id,
+          suggestedChangeId: suggestedChangeId
+        }).$promise;
+      }
+    };
+
+    // fetch gene change comments
+    geneView.getChangeComments = function(suggestedChangeId) {
+      return GenesSuggestedChangesComments.query({
+        'geneId': gene.entrez_id,
+        'suggestedChangeId': suggestedChangeId
+      }).$promise;
+    };
+
+    // add a change comment
+    geneView.addChangeComment = function(suggestedChangeId, comment) {
+      return GenesSuggestedChangesComments.add({
+        'geneId': gene.entrez_id,
+        'suggestedChangeId': suggestedChangeId
+      }, comment).$promise;
+    };
+
     // accept a gene update request to current gene
-    geneView.acceptChange = function(changeId, comment) {
+    geneView.acceptChange = function(suggestedChangeId) {
       $log.info('geneView.acceptChange called.');
-      $log.info('changeId: ' + changeId);
-      $log.info('comment: ' + comment);
+      $log.info('changeId: ' + suggestedChangeId);
+
+      return GenesSuggestedChanges.accept({
+        'entrez_id': gene.entrez_id,
+        'suggestedChangeId': suggestedChangeId,
+        force: true
+      }).$promise;
     };
 
     // reject a gene update request to current gene
-    geneView.rejectChange = function(changeId, comment) {
+    geneView.rejectChange = function(suggestedChangeId) {
       $log.info('geneView.rejectChange called.');
-      $log.info('changeId: ' + changeId);
-      $log.info('comment: ' + comment);
+      $log.info('suggestedChangeId: ' + suggestedChangeId);
+      return GenesSuggestedChanges.reject({
+        'entrez_id': gene.entrez_id,
+        'suggestedChangeId': suggestedChangeId,
+        force: true
+      }).$promise;
     };
 
   }

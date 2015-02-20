@@ -77,8 +77,10 @@
           // TODO: changeUrl should be generated using a ui-router method like $state.go() or by $compiling a template with a ui-sref anchor
           // TODO: required ids for the route (entrez_id) should be included in the response
           // TODO: civic-server will be refactored so that this endpoint doesn't require a geneId
-          var changeUrl = '<a href="/#/events/genes/' + geneEdit.entrez_id + '/talk/changes/' + response.data.id  + '">here</a>';
-          aaNotify.success('Your updates were successfully submitted. View your change request ' + changeUrl + '.', {ttl:0, allowHtml: true});
+          var changeBtn = '<a class="btn btn-primary btn-xs" href="/#/events/genes/' + geneEdit.entrez_id + '/talk/changes/' + response.data.id  + '">View Change Request</a>';
+          aaNotify.success(
+            'Your updates were successfully submitted. ' + changeBtn,
+            {ttl:0, allowHtml: true});
           $scope.geneEditForm.$aaFormExtensions.$resetChanged();
         },
         function(response) { // failure

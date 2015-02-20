@@ -3,12 +3,27 @@
     <div class="col-xs-6 name">
       <h3>
         Gene {{ gene.entrez_name }}
-        <a ui-sref="events.genes.edit({geneId: gene.entrez_id})"
-           class="btn btn-primary btn-xs btn-edit"
-           ng-disabled="$state.includes('**.genes.edit') || !isAuthenticated()">
-          Edit Gene</a>
+        <span ng-switch="isAuthenticated()">
+          <span ng-switch-when="false"> <!-- show tooltip if not authenticated -->
+            <span tooltip="Please sign in to edit Genes"
+                  tooltip-append-to-body="true">
+              <a class="btn btn-primary btn-xs btn-edit"
+                 ng-disabled="$state.includes('**.genes.edit') || !isAuthenticated()">
+                Edit Gene
+              </a>
+            </span>
+          </span>
+          <span ng-switch-when="true">
+            <a ui-sref="events.genes.edit({geneId: gene.entrez_id})"
+               class="btn btn-primary btn-xs btn-edit"
+               ng-disabled="$state.includes('**.genes.edit') || !isAuthenticated()">
+              Edit Gene
+            </a>
+          </span>
+        </span>
       </h3>
     </div>
+
     <div class="col-xs-6 tabs">
       <ul class="nav nav-tabs pull-right">
         <li ui-sref-active="active">

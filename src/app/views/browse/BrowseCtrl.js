@@ -5,7 +5,7 @@
     .filter('ceil', ceilFilter);
 
 // @ngInject
-  function BrowseCtrl($scope, $rootScope, uiGridConstants, uiGridSelectionService, Browse, $state, _, $log) {
+  function BrowseCtrl($scope, uiGridConstants, Browse, $state, _, $log) {
     $scope.events = {};
 
     /*jshint camelcase: false */
