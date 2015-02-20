@@ -56,7 +56,8 @@
 
     $scope.refreshComments();
 
-    $scope.refreshChanges = function() {
+    $scope.refreshChange = function() {
+      // update current change
       $scope.getChanges({suggestedChangeId: suggestedChangeId})
         .then(function (response) { // success
           $scope.suggestedChange = response;
@@ -66,7 +67,7 @@
       );
     };
 
-    $scope.refreshChanges();
+    $scope.refreshChange();
 
     $scope.addComment = function(geneChangeCommentForm) {
       $scope.addChangeComment({
@@ -90,7 +91,7 @@
           // TODO: cache should automatically handle refreshing current gene data
           // but it doesn't, so we do so manually
           $scope.refreshEntity();
-          $scope.refreshChanges();
+          $scope.refreshChange();
           // also refresh changes
 
           //Genes.get({'geneId': $stateParams.geneId})
