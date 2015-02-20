@@ -4,4 +4,16 @@
 
 .addEvidenceForm {
   .clearfix();
+
+  .form-instructions, .form-errors, .form-messages {
+    padding-top: @contentPadding;
+    padding-bottom: @contentPadding/3;
+  }
+
+  .form-instructions {
+    background-color: #EFEFEF;
+    border-bottom: 2px solid #CCC;
+    margin-top: -@contentPadding;
+    margin-bottom: @contentPadding;
+  }
 }

@@ -35,7 +35,7 @@
         { name: 'C', label: 'Preclinical'},
         { name: 'D', label: 'Inferential'}
       ],
-      ratings: [
+      evidence_ratings: [
         { id: 1, name: 'One Star', label: 'Really Crappy'},
         { id: 2, name: 'Two Stars', label: 'Pretty Crappy'},
         { id: 3, name: 'Three Stars', label: 'Just OK'},
@@ -59,6 +59,10 @@
       evidence_direction: [
         { name: 'Supports' },
         { name: 'Does Not Support' }
+      ],
+      variant_origins: [
+        { name: 'somatic'},
+        { name: 'germline' }
       ]
     };
 
@@ -118,8 +122,8 @@
       $log.info('addEvidenceForm.submit() called.');
       $scope.addEvidence({ evidenceItem: evidenceItem, comment:comment })
         .then(function(response) { // success
-          $log.info('Evidence item successfully added.');
-          aaNotify.error('Evidence item successfully submitted.', {ttl:0, allowHtml: true });
+          $log.success('Evidence item successfully added.')('Evidence item successfully submitted.', {ttl:0, allowHtml: true });
+          $scope.addEvidenceForm.$aaFormExtensions.$resetChanged();
         }, function(response) { // fail
           $log.error('Evidence item failed to be added!');
           aaNotify.error('Your update failed to to be submitted.', {ttl:0, allowHtml: true });
