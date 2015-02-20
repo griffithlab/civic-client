@@ -335,6 +335,18 @@
         controller: function(evidence, $scope) {
           $scope.evidence = evidence;
         }
+      })
+      .state('add', {
+        url: '/add',
+        abstract: true,
+        templateUrl: 'app/add/',
+        data: {
+          titleExp: '"Add Evidence"',
+          navMode: 'sub'
+        }
       });
+
+
+
   }
 })();
