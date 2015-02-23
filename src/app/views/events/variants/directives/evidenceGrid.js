@@ -63,6 +63,7 @@
           displayName: 'Level',
           allowCellFocus: false,
           enableFiltering: true,
+          sort: { direction: uiGridConstants.ASC },
           width: '8%',
           cellTemplate: 'app/views/events/variants/directives/evidenceGridLevelCell.tpl.html'
         },
@@ -70,7 +71,7 @@
           displayName: 'Rating',
           allowCellFocus: false,
           enableFiltering: false,
-          sort: { direction: uiGridConstants.ASC },
+          sort: { direction: uiGridConstants.DESC },
           width: '15%',
           cellTemplate: 'app/views/events/variants/directives/evidenceGridRatingCell.tpl.html'
           //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
