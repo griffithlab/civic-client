@@ -36,7 +36,24 @@ angular.module('civicClient', [
   'civic.add'
   //,'civic-client-templates'
 ])
-  .run(appRun);
+  .run(appRun)
+  .config(appConfig);
+
+// @ngInject
+function appConfig($provide) {
+  // log all rootScope events to the console for debugging
+  // (this code should be commented out before building for production!!)
+  //$provide.decorator('$rootScope', function ($delegate) {
+  //  var _emit = $delegate.$emit;
+  //
+  //  $delegate.$emit = function () {
+  //    console.log.apply(console, arguments);
+  //    _emit.apply(this, arguments);
+  //  };
+  //
+  //  return $delegate;
+  //});
+}
 
 // @ngInject
 function appRun(Security, $rootScope, $state) {
