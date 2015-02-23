@@ -38,7 +38,6 @@
       })
       .state('faq', {
         url: '/faq',
-        controller: 'FaqCtrl',
         templateUrl: 'app/pages/faq.tpl.html',
         data: {
           titleExp: '"FAQ"',

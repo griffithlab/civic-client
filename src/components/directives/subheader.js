@@ -5,12 +5,16 @@
     .controller('SubheaderCtrl', SubheaderCtrl);
 
   // @ngInject
-  function subheader() {
+  function subheader(Security) {
     var directive = {
       restrict: 'E',
       scope: true,
       templateUrl: 'components/directives/subheader.tpl.html',
-      controller: SubheaderCtrl
+      controller: SubheaderCtrl,
+      link: /* @ngInject */ function($scope) {
+        $scope.isAuthenticated = Security.isAuthenticated;
+        $scope.isAdmin = Security.isAuthenticated;
+      }
     };
     return directive;
   }
