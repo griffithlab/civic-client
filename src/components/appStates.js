@@ -36,6 +36,15 @@
           navMode: 'sub'
         }
       })
+      .state('faq', {
+        url: '/faq',
+        controller: 'FaqCtrl',
+        templateUrl: 'app/pages/faq.tpl.html',
+        data: {
+          titleExp: '"FAQ"',
+          navMode: 'sub'
+        }
+      })
       .state('help', {
         url: '/help',
         controller: 'HelpCtrl',
