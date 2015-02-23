@@ -3,11 +3,10 @@
     <div class="col-xs-12">
       <div ng-switch="variantGroup.description">
         <div ng-switch-when="null">
-          <p>No description exists for this Variant Group. Would you like to create one?</p>
+          <p>No description exists for this Variant Group.</p>
         </div>
         <div ng-switch-default>
           <p ng-bind="variantGroup.description"></p>
-          <pre>{{ variantGroup.description | json }}</pre>
         </div>
     </div>
   </div>
