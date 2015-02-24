@@ -21,6 +21,13 @@
   function EvidenceGridCtrl($scope, uiGridConstants, $stateParams, $state, $timeout, $log, _) {
     /*jshint camelcase: false */
     $scope.evidenceGridOptions = {
+      enablePaginationControls: true,
+      paginationPageSizes: [8],
+      paginationPageSize: 8,
+      minRowsToShow: 9,
+
+      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
@@ -76,8 +83,7 @@
           cellTemplate: 'app/views/events/variants/directives/evidenceGridRatingCell.tpl.html'
           //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
         }
-      ],
-      minRowsToShow: 7
+      ]
     };
 
     $scope.evidenceGridOptions.onRegisterApi = function(gridApi){
