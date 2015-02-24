@@ -20,7 +20,10 @@
   }
 
   // @ngInject
-  function SubheaderCtrl($scope, $rootScope) {
+  function SubheaderCtrl($scope, $rootScope, Security) {
+    $scope.isAuthenticated = Security.isAuthenticated;
+    $scope.isAdmin = Security.isAuthenticated;
+    
     $rootScope.$on('title:update', function(event, data) {
       $scope.view.stateTitle = data.newTitle;
     });
