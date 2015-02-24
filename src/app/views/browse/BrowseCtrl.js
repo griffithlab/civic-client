@@ -11,9 +11,12 @@
     /*jshint camelcase: false */
     $scope.browseGridOptions = {
       enablePaginationControls: true,
-      paginationPageSizes: [10, 25, 50],
-      paginationPageSize: 30,
-      minRowsToShow: 25,
+      paginationPageSizes: [25],
+      paginationPageSize: 25,
+      minRowsToShow: 26,
+
+      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
 
       enableFiltering: true,
       enableColumnMenus: false,
