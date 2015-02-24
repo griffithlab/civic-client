@@ -1,7 +1,38 @@
 <div class="browseView">
   <div ui-grid="browseGridOptions"
-       external-scopes="gridInteractions"
        ui-grid-cellnav
        ui-grid-selection
+       ui-grid-pagination
        ui-grid-auto-resize></div>
+  <!--<nav ng-show="gridApi.pagination.getTotalPages() > 1">-->
+    <!--<ul class="pagination">-->
+      <!--<li ng-class="{ disabled: gridApi.pagination.getPage() == 1 }">-->
+        <!--<a ng-click="gridApi.pagination.seek(1)">-->
+          <!--&laquo;-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li ng-repeat="page in range(gridApi.pagination.getTotalPages()) track by $index"-->
+          <!--ng-class="{ active: gridApi.pagination.getPage() == $index+1 }">-->
+        <!--<a ng-click="gridApi.pagination.seek($index+1)" aria-label="Previous">{{ $index + 1 }}-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li ng-class="{ disabled: gridApi.pagination.getPage() == gridApi.pagination.getTotalPages()}">-->
+        <!--<a ng-click="gridApi.pagination.seek(gridApi.pagination.getTotalPages())">-->
+          <!--&raquo;-->
+        <!--</a>-->
+      <!--</li>-->
+    <!--</ul>-->
+    <!--<span ng-show="gridApi.pagination.getTotalPages() > 0">-->
+      <!--{{showingLow}} - {{showingHigh}} of {{grid.options.totalItems}} {{totalItemsLabel}}-->
+    <!--</span>-->
+  <!--</nav>-->
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+      <!--<p>-->
+        <!--showingLow: {{ showingLow }}<br/>-->
+        <!--showingHigh: {{ showingHigh }}-->
+      <!--</p>-->
+      <!--<pre ng-bind="browseGridOptions | json"></pre>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

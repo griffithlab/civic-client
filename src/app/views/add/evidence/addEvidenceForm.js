@@ -11,7 +11,7 @@
       scope: {
         addEvidence: '&addEvidence'
       },
-      templateUrl: 'app/add/evidence/addEvidenceForm.tpl.html',
+      templateUrl: 'app/views/add/evidence/addEvidenceForm.tpl.html',
       controller: 'AddEvidenceFormCtrl',
       link: /* ngInject */ function ($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
@@ -23,10 +23,26 @@
   }
 
   // @ngInject
-  function AddEvidenceFormCtrl($scope, _, aaNotify, $log) {
+  function AddEvidenceFormCtrl($scope, $previousState, Variants, aaNotify, $log) {
     $log.info('EvidenceEditFormCtrl loaded.');
 
-    var evidenceItem = $scope.evidenceItem = {};
+
+    var evidenceItem = $scope.evidenceItem = {
+      entrez_id: null,
+      variant_name: null
+    };
+
+    // auto-fill gene and variant fields if possible
+    if ($previousState.get()) {
+      evidenceItem.entrez_id = $previousState.get().params.geneId || null;
+      var previousVariantId = $previousState.get().params.variantId || null;
+      if(evidenceItem.entrez_id && previousVariantId) {
+        Variants.get({'geneId': evidenceItem.entrez_id, 'variantId': previousVariantId }).$promise
+          .then(function(response) {
+            evidenceItem.variant_name = response.name;
+          });
+      }
+    }
 
     var formSelects = $scope.formSelects = {
       evidence_levels: [

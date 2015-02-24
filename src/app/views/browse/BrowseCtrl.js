@@ -10,6 +10,14 @@
 
     /*jshint camelcase: false */
     $scope.browseGridOptions = {
+      enablePaginationControls: true,
+      paginationPageSizes: [25],
+      paginationPageSize: 25,
+      minRowsToShow: 26,
+
+      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
+
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
@@ -52,8 +60,8 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         }
-      ],
-      minRowsToShow: 20
+      ]
+
     };
 
     $scope.browseGridOptions.onRegisterApi = function(gridApi) {
