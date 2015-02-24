@@ -10,11 +10,11 @@
 
 <p><strong><i>What is a <b>Variant</b>?</i></strong><br/>
 
-	A variant in CIViC is any genomic alteration. This includes single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's), structural variants (SVs), and other events that differ from the "normal" genome.</p>
+	A variant in CIViC is any genomic alteration associated with cancer. This includes single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's), structural variants (SVs), and other events with cancer associations, including germline variants.</p>
 
 <p><strong><i>What is an <b>Evidence Statement</b>?</i></strong><br/>
 
-	An evidence statement is an idea from a published source. It captures a variant's impact on clinical action, which can either be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis.</p>
+	An evidence statement is the result of an experiment, trial or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis.</p>
 
 <p><strong><i>How is this information organized?</i></strong><br/>
 
@@ -26,30 +26,40 @@
 
 <p><strong><i>How do I contribute information?</i></strong><br/>
 
-	The <a href=http://localhost:3001/#/collaborate> <i>Collaborate</i></a> tab details the curation process, with links for adding and editing information. We also have screencasts and walk-throughs to help guide you in your curating efforts!</p>
+	The <a href=http://localhost:3001/#/collaborate> <i>Collaborate</i></a> tab details the curation process, with links for adding and editing information.</p>
 
 <p><strong><i>My favorite Gene/Variant is not in CIViC?!?!?</i></strong><br/>
 
-	Unfortunately, because all of this information is manually curated, we have not been able to populate every published evidence item from every variant and every gene. Fortunately, there are people like you that are interested in helping us add this information! In order for a gene or variant to appear in CIViC, it must have an evidence statement (or many!) associated with it. To add evidence statements, go <a href="https://civic.genome.wustl.edu/#/collaborate"> here</a>!</p>
+	The manual curation involved in adding evidence statements means we have not been able to populate a published evidence statement from every variant or gene of interest. This is precisely why we need community-driven efforts to grow this database. In order for a gene or variant to appear in CIViC, it must have an evidence statement (or many!) associated with it. To add evidence statements, go <a href="https://civic.genome.wustl.edu/#/collaborate"> here</a>!</p>
 
 <p><strong><i>Why must my changes be approved by a moderator before I can see them?</i></strong><br/>
 
-	In an effort to reduce spam, we require that edits be commit to the review queue before they are shown on the live server. But don't worry! The review process is quick. You will see your hardwork and determination pay off in no time!</p>
+	In an effort to reduce spam, we require that edits be submitted to the review queue before they are shown on the live server. Moderators are used to protect the CIViC resource and will approve your changes as soon as possible.</p>
 
 <p><strong><i>What is a Disease Ontology ID (DOID)?</i></strong><br/>
 
-	In order to provide a structured representation of the diseases associated with evidence statements, we ask that you provide a disease ontology ID from <a href="http://disease-ontology.org/"> http://disease-ontology.org/ </a>. This allows for consistent representation, and minimizes ambiguity when referring to diseases.</p>
+	In order to provide a structured representation of the diseases associated with evidence statements, we ask that you provide a Disease Ontology ID from <a href="http://disease-ontology.org/"> http://disease-ontology.org/ </a>. This allows for consistent representation, minimizing ambiguity when referring to diseases. Such hierarchical representation allows for further database queries that allow for appropriate grouping and analysis by disease or subtype.</p>
 
 <p><strong><i>What is a PubChem ID (PCID)?</i></strong><br/>
 
-	Much like the reasoning behind the DOID, providing a PubChem ID with your evidence item allows us to easily avoid ambiguity within drug naming. As a default, drug compound names are used instead of branded trade names in an effort to be as consistent as possible. PubChem ID's can be found by searching the compound <a href="https://pubchem.ncbi.nlm.nih.gov/"> here</a>.</p>
-
-<p><strong><i>How can I trust this information?</i></strong><br/>
-
-	Cite Andrew Su's Citizen Science Initiative?</p>
+	Much like the reasoning behind the DOID, providing a PubChem ID with your evidence statement allows us to easily avoid ambiguity within drug naming. As a default, drug compound names are used instead of branded trade names in an effort to be as consistent across experiment types as possible. PubChem ID's can be found by searching the compound <a href="https://pubchem.ncbi.nlm.nih.gov/"> here</a>. However, when a PCID is not available, "N/A" is accepted.</p>
 	
 <p><strong><i>Where does this information come from? Can I submit my abstract?</i></strong><br/>
 
-	Peer-reviewed, published literature. Every evidence item currently requires a citation from a PubMed ID. This means that conference abstracts are not supported until they are published and peer-reviewed with a PubMed ID.
+	The information in CIViC is derived from peer-reviewed, published literature. Every evidence item currently requires a citation from a PubMed ID. This means that conference abstracts are not supported until they are published and peer-reviewed with a PubMed ID.
 
+<p><strong><i>What does the "Alpha" label on CIViC mean?</i></strong><br/>
 
+        This is in reference to the current software release state of CIViC. The "Alpha" state indicates we are currently in the software testing phase with additional features actively being added.</p>
+
+<p><strong><i>What if a drug is shown to have a negative effect on patients with a variant??</i></strong><br/>
+
+        The data model, specifically the Evidence Direction, is used to indicate whether the study supports or refutes (including inconclusive determinations) any interaction between the variant and the clinical result. Clinical Significance indicates the type of effect, positive, negative or neutral/no impact, the variant is determined to have on clinical results as described in the evidence statement. These descriptions provide human readible interpretations of evidence statements that either support or refute sensitivity or resistance predictions to therapeutics (or other clinical outcomes).</p>
+
+<p><strong><i>My evidence statement disagrees with evidence from another source, should I still add it?</i></strong><br/>
+
+        Absolutely. CIViC provides a forum for discussion of disagreements in the field or literature. Simply log in, go to the "Variant Talk" or "Evidence Talk" pages, and discuss this disagreement with the community.</p>
+
+<p><strong><i>I don't want to add evidence statements, can I still contribute?</i></strong><br/>
+
+        Yes. Evaluation of the literature is a collaborative effort. If you don't want to add new evidence you can rate, edit or discuss existing evidence.</p>
