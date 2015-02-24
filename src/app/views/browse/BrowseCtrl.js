@@ -10,6 +10,11 @@
 
     /*jshint camelcase: false */
     $scope.browseGridOptions = {
+      enablePaginationControls: true,
+      paginationPageSizes: [10, 25, 50],
+      paginationPageSize: 30,
+      minRowsToShow: 25,
+
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
@@ -52,8 +57,8 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         }
-      ],
-      minRowsToShow: 20
+      ]
+
     };
 
     $scope.browseGridOptions.onRegisterApi = function(gridApi) {

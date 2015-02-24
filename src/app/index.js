@@ -108,7 +108,7 @@ angular.module('civic.pages', ['civic.security.authorization', 'ui.router']);
 angular.module('civic.account', ['civic.security.authorization', 'ui.router']);
 angular.module('civic.common', ['ui.router']);
 angular.module('civic.login', ['ui.router']);
-angular.module('civic.browse', ['ui.grid.selection', 'ui.router']);
+angular.module('civic.browse', ['ui.grid.selection', 'ui.grid.pagination', 'ui.router']);
 angular.module('civic.search', ['ui.router']);
 angular.module('civic.events', ['ui.grid.selection', 'ui.router']);
 angular.module('civic.add', ['ui.router', 'aa.select2']);
