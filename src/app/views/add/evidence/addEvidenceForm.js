@@ -23,10 +23,18 @@
   }
 
   // @ngInject
-  function AddEvidenceFormCtrl($scope, _, aaNotify, $log) {
+  function AddEvidenceFormCtrl($scope, $previousState, aaNotify, $log) {
     $log.info('EvidenceEditFormCtrl loaded.');
 
-    var evidenceItem = $scope.evidenceItem = {};
+    var previousGeneId;
+
+    if ($previousState.get()) {
+      previousGeneId = $previousState.get().params.geneId || null;
+    }
+
+    var evidenceItem = $scope.evidenceItem = {
+      entrez_id: previousGeneId
+    };
 
     var formSelects = $scope.formSelects = {
       evidence_levels: [
