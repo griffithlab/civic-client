@@ -347,7 +347,7 @@
       })
       .state('add.evidence', {
         url: '/evidence',
-        templateUrl: 'app/add/evidence/addEvidenceView.tpl.html',
+        templateUrl: 'app/views/add/evidence/addEvidenceView.tpl.html',
         controller: 'AddEvidenceViewCtrl',
         data: {
           titleExp: "'Add Evidence'",

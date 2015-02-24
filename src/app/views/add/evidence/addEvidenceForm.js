@@ -11,7 +11,7 @@
       scope: {
         addEvidence: '&addEvidence'
       },
-      templateUrl: 'app/add/evidence/addEvidenceForm.tpl.html',
+      templateUrl: 'app/views/add/evidence/addEvidenceForm.tpl.html',
       controller: 'AddEvidenceFormCtrl',
       link: /* ngInject */ function ($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
