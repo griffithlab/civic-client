@@ -13,10 +13,10 @@
    * @ngInject
    */
   function LoginFormController($scope, Security, $location) {
-    $scope.location = $location.absUrl();
-
+    var location = $scope.location = $location.absUrl();
+    var url = $location.url();
     $scope.cancelLogin = function() {
-      Security.cancelLogin();
+      Security.cancelLogin(url);
     };
   }
 })();

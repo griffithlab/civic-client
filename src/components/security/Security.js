@@ -13,7 +13,7 @@
     // Redirect to the given url (defaults to '/')
     function redirect(url) {
       url = url || '/';
-      $location.path(url);
+      $location.url(url);
     }
 
     // Login form dialog stuff
@@ -37,7 +37,7 @@
         RetryQueue.retryAll();
       } else {
         RetryQueue.cancelAll();
-        redirect();
+        // redirect();
       }
     }
 
@@ -74,9 +74,9 @@
       },
 
       // Give up trying to login and clear the retry queue
-      cancelLogin: function() {
+      cancelLogin: function(url) {
         closeLoginDialog(false);
-        redirect();
+        redirect(url);
       },
 
       // Logout the current user and redirect
