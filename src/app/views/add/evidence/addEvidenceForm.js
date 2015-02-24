@@ -130,7 +130,7 @@
     };
 
     var comment = $scope.comment = {
-      title: '',
+      title: 'Add Evidence Submission Comment',
       text: ''
     };
 
