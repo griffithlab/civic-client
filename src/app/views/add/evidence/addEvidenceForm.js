@@ -33,7 +33,6 @@
     };
 
     // auto-fill gene and variant fields if possible
-    // TODO: figure out why previous variant name isn't being filled in
     if ($previousState.get()) {
       evidenceItem.entrez_id = $previousState.get().params.geneId || null;
       var previousVariantId = $previousState.get().params.variantId || null;

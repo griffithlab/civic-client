@@ -5,6 +5,7 @@ angular.module('civicClient', [
   'ui.bootstrap',
   'ui.grid',
   'ui.grid.autoResize',
+  'ui.grid.pagination',
   'ui.grid.cellNav',
   'aa.formExtensions',
   'aa.formExternalConfiguration',
@@ -16,8 +17,8 @@ angular.module('civicClient', [
   'yaru22.angular-timeago',
   'ngFitText',
 
-  // http backend mocks
-  //,'httpMocks'
+  // http backend mocks (uncomment for mock testing backend services)
+  //'httpMocks',
 
   // config
   'civic.states',
@@ -28,13 +29,13 @@ angular.module('civicClient', [
  'civic.login',
  'civic.common',
  'angular-lodash',
+
   // app views
   'civic.pages',
   'civic.account',
   'civic.browse',
   'civic.events',
   'civic.add'
-  //,'civic-client-templates'
 ])
   .run(appRun)
   .config(appConfig);

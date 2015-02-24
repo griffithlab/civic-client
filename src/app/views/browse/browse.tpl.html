@@ -3,5 +3,16 @@
        external-scopes="gridInteractions"
        ui-grid-cellnav
        ui-grid-selection
+       ui-grid-pagination
        ui-grid-auto-resize></div>
+  <p>Current page: {{ gridApi.pagination.getPage() }} of {{ gridApi.pagination.getTotalPages() }}</p>
+  <button type="button" class="btn btn-success" ng-click="gridApi.pagination.previousPage()">
+    previous page
+  </button>
+  <button type="button" class="btn btn-success" ng-click="gridApi.pagination.nextPage()">
+    next page
+  </button>
+  <button type="button" class="btn btn-success" ng-click="gridApi.pagination.seek(3)">
+    go to page 3
+  </button>
 </div>
