@@ -1,21 +1,24 @@
-<h2>Understanding the CIViC data model</h2>
+<h2>Understanding the CIViC Data Model</h2>
 <p>
-At the heart of CIViC is the clinical evidence statement. The clinical evidence statement is a piece of information that has been manually curated from trustable medical literature about a variant or genomic 'event' that has implications in cancer diagnosis, prognosis, or predictive response to therapy. For example, “Patients with BRAF V600 mutations respond well to the drug dabrafenib”. A variant may be a single nucleotide substitution, a small insertion or deletion, a chromosomal rearrangment, an RNA gene fusion, an RNA expression pattern (e.g. over-expression), and so on. Each clinical evidence statement corresponds to a single citable publication.<br><br>
+At the heart of CIViC is the clinical evidence statement. The clinical evidence statement is a piece of information that has been manually curated from trustable medical literature about a variant or genomic 'event' that has implications in cancer diagnosis, prognosis, or predictive response to therapy. For example, “Patients with BRAF V600 mutations respond well to the drug dabrafenib”. A variant may be a single nucleotide substitution, a small insertion or deletion, a chromosomal rearrangement, an RNA gene fusion, an RNA expression pattern (e.g. over-expression), and others. Each clinical evidence statement corresponds to a single citable publication.<br><br>
 
-The following tables define the minimal components and definitions required for a CIViC evidence statement. Once enough clinical evidence statements have been curated, a variant summary is generated describing the variant's significance in cancer, along with current treatment methods. A gene level summary then synthesizes the variant summaries. Each variant can belong to one or more groups.  For example 'FGFR fusions' is a group that contains several gene fusions where FGFR2 (or FGFR3) is involved in a fusion with various 3' partner genes. 
+The following tables define the minimal components and definitions required for a CIViC evidence statement. Once clinical evidence statements for a variant have been curated, a summary is manually generated describing the variant's significance in cancer, along with current treatment methods. A gene level summary then synthesizes the variant summaries, and adds important gene-level information. Each variant can belong to one or more variant groups, these act to combine functionally similar variants into a single entity.  For example, 'FGFR Fusions' is a group that contains several gene fusions where FGFR2 (or FGFR3) is involved in a fusion with various 3' partner genes, and 'Imatinib Resistance Mutations' is a group of variants that confer resistance to imatinib treatment. 
 
-<h3>Minimum requirements for clinical evidence statements</h3>
+<h3>Minimum Requirements for Clinical Evidence Statements</h3>
 
  <table class="table table-striped table-condensed table-responsive table-bordered">
+  <col width="167.5">
+ <col width="800">
+ <col width="500">
   <tr>
-    <th>Data type</th>
+    <th>Data Type</th>
     <th>Description</th>
     <th>Example</th>
   </tr>
   <tr>
     <td>Gene</td>
     <td>Gene implicated (Entrez gene ID)</td>
-    <td>ESR1 (2099)</td>
+    <td>ESR1 (Entrez ID: 2099)</td>
   </tr>
   <tr>
     <td>Variant</td>
@@ -34,8 +37,8 @@ The following tables define the minimal components and definitions required for 
   </tr>
   <tr>
     <td>Evidence level</td>
-    <td>Type of experiment from which the evidence is curated. From inferential association, to proven association in clinical medicine.</td>
-    <td>Level B - Clinical evidence</td>
+    <td>The type of experiment from which the evidence is curated. From inferential association, to proven association in clinical medicine.</td>
+    <td>Level B - Clinical Evidence</td>
   </tr>
   <tr>
     <td>Evidence direction</td>
@@ -65,7 +68,7 @@ The following tables define the minimal components and definitions required for 
    <tr>
     <td>Trust Rating</td>
     <td>A rating on a 5-star scale, portraying the curators trust in the experiments from which the evidence is curated.</td>
-    <td>5-star evidence: Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</td>
+    <td>5-stars - Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates.</td>
   </tr>
 </table>
 
@@ -189,15 +192,15 @@ Each evidence statement is the result of an experiment, trial or study in publis
   </tr>
 </table>
 
-<h3>Star Ratings Explained</h3>
+<h3>Trust Ratings Explained</h3>
 <p>
-In order to quickly discern how much trust curators and users have in a single evidence statement, a five star trust ratings system is used. Each evidence item is given a rating, from 1 star to 5, based on the quality of the source from which the evidence is curated. These ratings depend on a number of factors, including journal impact, control quality, orthogonal validation, and reproducibility. 
+In order to quickly discern how much trust curators and users have in a single evidence statement, a five star trust ratings system is used. Each evidence item is given a rating, from 1 to 5 stars, based on the quality of the source from which the evidence is curated. These ratings depend on a number of factors, including journal impact, control quality, orthogonal validation, and reproducibility. 
 
  <table class="table table-striped table-responsive table-bordered">
  <col width="45">
  <col width="600">
   <tr>
-    <th>Star Rating</th>
+    <th>Trust Rating</th>
     <th>Definition</th>
   </tr>
   <tr>
