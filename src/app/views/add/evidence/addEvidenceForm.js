@@ -130,7 +130,7 @@
     };
 
     var comment = $scope.comment = {
-      title: 'Add Evidence Submission Comment',
+      title: 'Add Evidence Item Comment',
       text: ''
     };
 
@@ -138,7 +138,8 @@
       $log.info('addEvidenceForm.submit() called.');
       $scope.addEvidence({ evidenceItem: evidenceItem, comment:comment })
         .then(function(response) { // success
-          $log.success('Evidence item successfully added.')('Evidence item successfully submitted.', {ttl:0, allowHtml: true });
+          $log.info('Evidence item successfully submitted.');
+          aaNotify.success('Your evidence item was successfully submitted.', {ttl:0, allowHtml: true });
           $scope.addEvidenceForm.$aaFormExtensions.$resetChanged();
         }, function(response) { // fail
           $log.error('Evidence item failed to be added!');
