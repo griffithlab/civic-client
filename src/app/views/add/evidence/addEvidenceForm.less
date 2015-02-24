@@ -13,7 +13,8 @@
   .form-instructions {
     background-color: #EFEFEF;
     border-bottom: 2px solid #CCC;
-    margin-top: -@contentPadding;
-    margin-bottom: @contentPadding;
+    // TODO: these padding attributes are ridiculous, debug boostrap layout
+    padding: @contentPadding !important;
+    margin: -@contentPadding -(2*@contentPadding) @contentPadding -(2*@contentPadding);
   }
 }

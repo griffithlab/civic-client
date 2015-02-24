@@ -100,6 +100,7 @@
 
       // fetch variant data
       $scope.variant.$promise.then(function(variant) {
+        $scope.evidenceGridOptions.minRowsToShow = variant.evidence_items.length + 1;
         $scope.evidenceGridOptions.data = variant.evidence_items;
         // if evidenceItemId specified in state, scroll to evidence item's row and select it
         if(_.has($stateParams, 'evidenceItemId')) {

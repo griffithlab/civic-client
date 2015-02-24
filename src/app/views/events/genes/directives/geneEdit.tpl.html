@@ -7,105 +7,85 @@
   </div>
 
   <div aa-configured-form validation-config="formConfig" ng-form="geneEditForm" class="form-horizontal">
-    <div class="row">
-      <div class="form-group">
-        <div class="col-sm-5 form-input">
-          <input type="text"
-                 class="form-control"
-                 aa-val-notify
-                 aa-field="geneEdit.entrez_name"
-                 aa-label="Entrez Name"/>
-        </div>
-        <div class="col-sm-5 form-help">
-          <span class="help-block">You probably shouldn't edit this.</span>
-        </div>
-      </div>
 
-      <div class="form-group">
-        <div class="col-sm-5">
+    <div class="form-group">
+      <div class="col-sm-5 form-input">
+        <input type="text"
+               class="form-control"
+               aa-val-notify
+               aa-field="geneEdit.entrez_name"
+               aa-label="Entrez Name"/>
+      </div>
+      <div class="col-sm-5 form-help">
+          <span class="help-block small">
+            HUGO gene symbol
+          </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-5">
           <textarea
             class="form-control"
             aa-val-notify
             rows="10"
             aa-field="geneEdit.description"
-            aa-label="Description"></textarea>
-        </div>
-        <div class="col-sm-5 form-help">
-          <span class="help-block">The gene description should include:
-            <ul>
-              <li>A critical aspect of the description</li>
-              <li>Another critical aspect of the description</li>
-              <li>And yet another critical aspect of the description</li>
-            </ul>
-          </span>
-        </div>
-      </div>
-
-
-      <div class="form-group">
-        <div class="col-sm-5">
-          <textarea
-            class="form-control"
-            rows="5"
-            aa-val-notify
-            aa-field="geneEdit.clinical_description"
             aa-label="Clinical Description"></textarea>
-        </div>
-        <div class="col-sm-5 form-help">
-          <span class="help-block">The gene's clinical description should include:
+      </div>
+      <div class="col-sm-5 form-help">
+          <span class="help-block small">
+            User-defined summary of the clinical relevance of this Gene.<br/><br/>
+            Should include:
             <ul>
-              <li>A critical aspect of the description</li>
-              <li>Another critical aspect of the description</li>
-              <li>And yet another critical aspect of the description</li>
+              <li>relevance to appropriate cancer(s)</li>
+              <li>treatment(s) related specifically to variants affecting this Gene</li>
+            </ul>
+            May include relevant mechanistic information such as:
+            <ul>
+              <li>pathway interactions</li>
+              <li>alterations caused by common variants associated with this Gene (i.e., activating, loss-of-function, etc)
+              <li>normal functions key to its oncogenic properties.</li>
             </ul>
           </span>
-        </div>
       </div>
+    </div>
 
-
-      <div class="form-group">
-        <div class="col-sm-5">
-          <input type="text"
-                 class="form-control"
-                 aa-val-notify
-                 aa-field="comment.title"
-                 aa-label="Comment Title"/>
-        </div>
-        <div class="col-sm-5 form-help">
-          <span class="help-block">Optional comment title
+    <div class="form-group">
+      <div class="col-sm-5">
+        <input type="text"
+               class="form-control"
+               aa-val-notify
+               aa-field="comment.title"
+               aa-label="Comment Title"/>
+      </div>
+      <div class="col-sm-5 form-help">
+          <span class="help-block small">Short title describing the changes you made to the Clinical Description.
           </span>
-        </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <div class="col-sm-5">
+    <div class="form-group">
+      <div class="col-sm-5">
           <textarea
             class="form-control"
             rows="4"
             aa-val-notify
             aa-field="comment.text"
             aa-label="Change Comments"></textarea>
-        </div>
-        <div class="col-sm-5 form-help">
-          <span class="help-block">Include descriptive comment discussing the rational for your change request. Your comment should include:
-            <ul>
-              <li>A critical aspect of the comment</li>
-              <li>Another critical aspect of the comment</li>
-            </ul>
-          </span>
-        </div>
       </div>
-
+      <div class="col-sm-5 form-help">
+          <span class="help-block small">Description of the changes you made to the Clinical Summary. If necessary, provide additional rationale for your change to the community.</span>
+      </div>
     </div>
     <div class="row">
       <div class="col-xs-12">
         <div class="button-row">
           <div class="pull-left">
             <a ui-sref="events.genes.summary({ geneId: gene.entrez_id})">
-            <button type="button"
-                    class="btn btn-default btn-md"
+              <button type="button"
+                      class="btn btn-default btn-md"
                 >
-              Cancel</button>
+                Cancel</button>
             </a>
           </div>
           <div class="pull-right">
