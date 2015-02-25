@@ -49,6 +49,16 @@
           <col width="40%"/>
           <col width="60%"/>
         </colgroup>
+        
+         <tr>
+          <td class="name">Disease:</td>
+          <td class="value">{{ evidence.disease }}</td>
+        </tr>
+        <tr>
+          <td class="name">Drug:</td>
+          <td class="value">{{ evidence.drug }}</td>
+        </tr>
+        
         <tr>
           <td class="name">Citation:</td>
           <td class="value">
@@ -59,18 +69,10 @@
         </tr>
 
         <tr>
-          <td class="name">Rating:</td>
+          <td class="name">Trust Rating:</td>
           <td class="value"><rating ng-model="evidence.rating" max="5" readonly="true"></rating></td>
         </tr>
 
-        <tr>
-          <td class="name">Disease:</td>
-          <td class="value">{{ evidence.disease }}</td>
-        </tr>
-        <tr>
-          <td class="name">Drug:</td>
-          <td class="value">{{ evidence.drug }}</td>
-        </tr>
         <tr>
           <td class="name">Coordinate:</td>
           <td class="value">{{ evidence.variant_hgvs}}</td>
