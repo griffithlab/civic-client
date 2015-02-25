@@ -13,8 +13,8 @@
           state: 'help'
         },
         {
-          label: 'Contact',
-          state: 'contact'
+          label: 'FAQ',
+          state: 'faq'
         }
       ]
     }
