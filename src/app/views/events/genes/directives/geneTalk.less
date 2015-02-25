@@ -23,8 +23,6 @@
       color: @civicDarkPurple;
     }
 
-
-
     ul {
       margin: 0;
       padding: 0;
@@ -52,9 +50,9 @@
 
       li {
         background-color: @pageBackground3;
+        border-radius: @border-radius-base;
         border-top-right-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
-        border-radius: @border-radius-base;
         list-style: none;
         text-align: left;
         margin-bottom: @contentPadding;
@@ -78,7 +76,7 @@
         background-size: 100% 100%;
       }
 
-      .active {
+      .activeChange {
         border-left: 2px solid @changeStatusActive;
         background-image: svg-gradient(to right, @changeStatusActiveLight 0%, @changeStatusActiveLight 95%, darken(@changeStatusActiveLight, 10%) 100%);
         background-size: 100% 100%;

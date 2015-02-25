@@ -90,7 +90,7 @@
           $log.info("suggested change updated.");
           // TODO: cache should automatically handle refreshing current gene data
           // but it doesn't, so we do so manually
-          $scope.refreshEntity();
+          $scope.refreshEntity({});
           $scope.refreshChange();
           // also refresh changes
 
