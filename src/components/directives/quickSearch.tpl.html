@@ -1,7 +1,14 @@
 <div class="quickSearch">
   <form class="form-horizontal">
     <div class="form-group form-group-sm has-feedback">
-      <input type="text" class="form-control input-sm" ng-model="asyncSelected" placeholder="Quick Event Search" typeahead="gene as gene.label for gene in getVariants($viewValue)" typeahead-loading="loadingGenes" typeahead-on-select="onSelect($item, $model, $label)">
+      <input
+        type="text"
+        class="form-control input-sm"
+        ng-model="asyncSelected"
+        placeholder="Quick Event Search"
+        typeahead="gene as gene.label for gene in getVariants($viewValue)"
+        typeahead-loading="loadingGenes"
+        typeahead-on-select="onSelect($item, $model, $label)">
       <span ng-show="loadingGenes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
     </div>
   </form>
