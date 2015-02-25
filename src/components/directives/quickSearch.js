@@ -9,13 +9,21 @@
     $scope.getVariants = function (val) {
       return TypeAheadResults.query({ query: val }).$promise
         .then(function (response) {
-          return _.map(response.data.result, function (event) {
+          var labelLimit = 75;
+          return _.map(response.result, function (event) {
             var label = event.entrez_gene + ' / ' + event.variant;
+            if (_.includes(event.terms, 'drug_names')) {
+              label = label + '; Drug(s): ' + event.drug_names.join(' ,');
+            }
+            if (_.includes(event.terms, 'disease_names')) {
+              label = label + '; Disease(s): ' + event.disease_names.join(' ,');
+            }
+            if (label.length > labelLimit) { label = _.trunc(label, labelLimit); }
 
             return {
               /*jshint camelcase: false */
               gene: event.entrez_id,
-              label: event.entrez_gene + ' / ' + event.variant,
+              label: label,
               variant: event.variant,
               variant_id: event.variant_id
             };

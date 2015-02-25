@@ -7,7 +7,8 @@
   function TypeAheadResultsService($resource, $cacheFactory) {
     var TypeAheadResults = $resource('/api/variants/typeahead_results',
       {
-        query: '@query'
+        query: '@query',
+        limit: 12
       },
       {
         query: { // get matching variants

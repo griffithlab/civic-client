@@ -5,10 +5,11 @@
         type="text"
         class="form-control input-sm"
         ng-model="asyncSelected"
-        placeholder="Quick Event Search"
+        placeholder="Quick Search CIViC"
         typeahead="gene as gene.label for gene in getVariants($viewValue)"
         typeahead-loading="loadingGenes"
-        typeahead-on-select="onSelect($item, $model, $label)">
+        typeahead-on-select="onSelect($item, $model, $label)"
+        typeahead-append-to-body="true">
       <span ng-show="loadingGenes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
     </div>
   </form>
