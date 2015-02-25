@@ -16,6 +16,20 @@
           label: 'FAQ',
           state: 'faq'
         }
+      ],
+      footerMenuItems: [
+        {
+          label: 'Glossary of Terms',
+          state: 'glossary'
+        },
+        {
+          label: 'API Documentation',
+          state: 'api'
+        },
+        {
+          label: 'Contact',
+          state: 'contact'
+        }
       ]
     }
   );

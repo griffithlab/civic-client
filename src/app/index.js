@@ -11,7 +11,7 @@ angular.module('civicClient', [
   'aa.formExternalConfiguration',
   'aa.notify',
   'aa.select2',
-  'ngTagsInput',
+//  'ngTagsInput',
   'ngResource',
   'dialogs.main',
   'yaru22.angular-timeago',

@@ -1,0 +1,10 @@
+<div class="glossary">
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+      <dl>
+        <dt ng-repeat-start="(key, value) in glossary.terms">{{ key }}</dt>
+        <dd ng-repeat-end>{{ value }}</dd>
+      </dl>
+    </div>
+  </div>
+</div>

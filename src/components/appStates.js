@@ -44,6 +44,23 @@
           navMode: 'sub'
         }
       })
+      .state('glossary', {
+        url: '/glossary',
+        templateUrl: 'app/pages/glossary.tpl.html',
+        controller: 'GlossaryCtrl',
+        data: {
+          titleExp: '"Glossary"',
+          navMode: 'sub'
+        }
+      })
+      .state('api', {
+        url: '/api-documentation',
+        templateUrl: 'app/pages/apiDocumentation.tpl.html',
+        data: {
+          titleExp: '"API Documentation"',
+          navMode: 'sub'
+        }
+      })
       .state('help', {
         url: '/help',
         controller: 'HelpCtrl',

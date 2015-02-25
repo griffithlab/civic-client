@@ -1,0 +1,11 @@
+<div class="footerMenu">
+  <div class="pull-right">
+    <div class="footer-menu">
+      <ul>
+        <li ng-repeat="item in menuItems" ui-sref-active="active">
+          <a ui-sref="{{ item.state}}">{{ item.label }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+
+.footerMenu {
+  .clearfix();
+  border-radius: 0 0 @border-radius-large @border-radius-large;
+  background-color: #CFCFCF;
+  border-top: 1px solid #AAA;
+  margin-bottom: @contentPadding;
+
+  .footer-menu {
+    ul {
+      margin: 0;
+      padding: 0;
+      padding-right: 15px;
+      list-style: none;
+      float: right;
+      li {
+        display: inline-block;
+        a {
+          display: inline-block;
+          color: @civicPurple;
+          padding: .5em;
+          font-weight: bold;
+        }
+        a:hover {
+          color: @civicLightPurple;
+        }
+      }
+    }
+  }
+}
+

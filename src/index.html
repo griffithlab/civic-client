@@ -13,7 +13,6 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/angular-ui-grid/ui-grid.css" />
     <link rel="stylesheet" href="../bower_components/angular-dialog-service/dist/dialogs.min.css" />
-    <link rel="stylesheet" href="../bower_components/ng-tags-input/ng-tags-input.min.css" />
     <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -26,6 +25,7 @@
     <link rel="stylesheet" href="components/directives/headerSearch.css">
     <link rel="stylesheet" href="components/directives/loginToolbar.css">
     <link rel="stylesheet" href="components/directives/mainMenu.css">
+    <link rel="stylesheet" href="components/directives/footerMenu.css">
     <link rel="stylesheet" href="components/directives/quickSearch.css">
     <link rel="stylesheet" href="components/directives/subheader.css">
 
@@ -82,66 +82,71 @@
   </head>
   <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
     <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-      <header>
-        <div class="container">
-          <div class="header-bg">
-            <div class="row">
-              <div class="logo-main col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                <civic-logo></civic-logo>
+    <header>
+      <div class="container">
+        <div class="header-bg">
+          <div class="row">
+            <div class="logo-main col-xs-12 col-sm-12 col-md-5 col-lg-4">
+              <civic-logo></civic-logo>
+            </div>
+            <div class="nav-main col-xs-12 col-sm-12 col-md-7 col-lg-8">
+              <div class="row">
+                <main-menu class="col-xs-12"></main-menu>
               </div>
-              <div class="nav-main col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                <div class="row">
-                  <main-menu class="col-xs-12"></main-menu>
-                </div>
-                <div class="row">
-                  <header-search class="col-xs-12 col-sm-12 col-md-10 col-lg-7 pull-right"></header-search>
-                </div>
-              </div>
-            </div> <!-- /row -->
-          </div> <!-- /header-bg -->
-        </div> <!-- /container -->
-      </header>
-      <main>
-        <subheader></subheader>
-        <div class="page-container">
-          <div class="container-fluid">
-            <div class="page-bg">
-              <ui-view id="contents">
-
-              </ui-view>
-            </div> <!-- /.page-bg-->
-          </div> <!-- /.container-fluid -->
-        </div><!-- /.page-container -->
-      </main>
-      <footer>
-        <div class="page-container">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-xs-12 footer-disclaimer">
-                <strong>Disclaimer:</strong> This resource is intended for purely research purposes. It should not be used for emergencies or medical or professional advice.
+              <div class="row">
+                <header-search class="col-xs-12 col-sm-12 col-md-10 col-lg-7 pull-right"></header-search>
               </div>
             </div>
+          </div> <!-- /row -->
+        </div> <!-- /header-bg -->
+      </div> <!-- /container -->
+    </header>
+    <main>
+      <subheader></subheader>
+      <div class="page-container">
+        <div class="container-fluid">
+          <div class="page-bg">
+            <ui-view id="contents">
 
-            <div class="row">
-              <div class="col-xs-12 footer-license">
+            </ui-view>
+          </div> <!-- /.page-bg-->
+        </div> <!-- /.container-fluid -->
+      </div><!-- /.page-container -->
+    </main>
+    <footer>
+      <div class="page-container">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12">
+              <footer-menu></footer-menu>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 footer-disclaimer">
+              <strong>Disclaimer:</strong> This resource is intended for purely research purposes. It should not be used for emergencies or medical or professional advice.
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 footer-license">
                 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">
                   <strong>CIViC</strong>
                 </span>
-                by
-                <a xmlns:cc="http://creativecommons.org/ns#" href="http://genome.wustl.edu/" property="cc:attributionName" rel="cc:attributionURL">
-                  The Genome Institute at Washington University School of Medicine
-                </a>
-                is licensed under a
-                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-                  Creative Commons Attribution 4.0 International License
-                </a>.
-              </div>
+              by
+              <a xmlns:cc="http://creativecommons.org/ns#" href="http://genome.wustl.edu/" property="cc:attributionName" rel="cc:attributionURL">
+                The Genome Institute at Washington University School of Medicine
+              </a>
+              is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                Creative Commons Attribution 4.0 International License
+              </a>.
             </div>
           </div>
         </div>
-      </footer>
+      </div>
+    </footer>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -156,7 +161,6 @@
     <script src="../bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js"></script>
     <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.js"></script>
-    <script src="../bower_components/ng-tags-input/ng-tags-input.min.js"></script>
     <script src="../bower_components/angular-timeago/src/timeAgo.js"></script>
     <script src="../bower_components/angular-agility/dist/angular-agility.min.js"></script>
     <!-- endbower -->
@@ -205,6 +209,7 @@
     <!--Misc Services-->
     <script src="components/services/ConfigService.js"></script>
     <script src="components/services/BrowseService.js"></script>
+    <script src="components/services/GlossaryService.js"></script>
     <script src="components/services/MyGeneService.js"></script>
     <script src="components/services/TitleService.js"></script>
     <script src="components/services/LodashFactory.js"></script>
@@ -214,6 +219,7 @@
     <script src="app/pages/HomeCtrl.js"></script>
     <script src="app/pages/HelpCtrl.js"></script>
     <script src="app/pages/ContactCtrl.js"></script>
+    <script src="app/pages/GlossaryCtrl.js"></script>
     <script src="app/pages/CollaborateCtrl.js"></script>
 
     <!--Layout Directives-->
@@ -222,6 +228,7 @@
     <script src="components/directives/sessionInfo.js"></script>
     <script src="components/directives/quickSearch.js"></script>
     <script src="components/directives/mainMenu.js"></script>
+    <script src="components/directives/footerMenu.js"></script>
     <script src="components/directives/headerSearch.js"></script>
     <script src="components/directives/civicLogo.js"></script>
     <script src="components/directives/loginToolbar.js"></script>
