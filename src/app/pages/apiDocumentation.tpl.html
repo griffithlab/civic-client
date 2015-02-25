@@ -1,14 +1,74 @@
 <div class="row">
   <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
     <h3>CIViC API Documentation</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus eleifend diam, ac mollis augue aliquet a. Vivamus porta lectus tortor, vitae ultrices justo porttitor quis. Nam at est ac lorem iaculis consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-
-    <p>Praesent lacinia, lorem in placerat sollicitudin, ex tellus tincidunt sem, vitae suscipit purus sem vitae neque. Sed non tempor erat. Pellentesque lobortis sem risus, ac fringilla ex efficitur eget. Donec at turpis id nibh iaculis ultricies.</p>
-
-    <p>Duis pretium, nibh non scelerisque congue, erat ipsum consequat metus, vitae hendrerit tellus ante luctus lorem. Curabitur vehicula fringilla nisi ut sagittis. Sed tortor tortor, tincidunt et pharetra at, vulputate eget est. Nullam non urna facilisis, ornare ex id, congue metus.</p>
-
-    <p>Sed bibendum egestas erat in volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In semper, libero id vehicula auctor, eros ipsum sodales urna, eget luctus sem felis nec arcu. Integer vitae efficitur velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-
-    <p>Mauris luctus purus scelerisque nulla lacinia, non facilisis mi porta. Sed pellentesque eros ex, a consequat augue sollicitudin vitae. Curabitur et ipsum diam.</p>
+    <p>CIViC provides a simple API that can be utilized over HTTP in the programming language of your choice or even at the command line.</p>
+    <p>
+      The CIViC API attempts to be RESTful whenever appropriate which hopefully makes it intuitive to use. There are three main entities in the system that a user may interact with: Genes, Variants, and Evidence Items.
+      These entities form a hierarchy that is reflected in the API endpoints. A Gene has one or more Variants, each of which may have one or more Evidence Items.
+    </p>
+    <br/>
+    <h4>Genes</h4>
+    <hr/>
+    <pre>
+<strong>GET</strong> /api/genes
+<strong>GET</strong> /api/genes/:entrez_id
+    </pre>
+    <p>
+      The genes endpoint can be used to get either a list of all genes in the system, or more detailed information for a single gene using an Entrez id in the url string.
+      As an example, here is (clickable) sample request for the gene "ALK" (Entrez id: 238)
+    </p>
+    <pre>
+<strong>GET</strong> <a href="/api/genes/238" target="_blank">/api/genes/238</a>
+    </pre>
+    <p>
+      The next two entities, Variants and Evidence Items, do not have unambiguous identifiers outside of CIViC (such as Entrez IDs) so API calls will use their internally assigned CIViC IDs.
+      You can always use the API call one level up the hierarchy to retrieve a list of IDs for the entity you are interested in. For instance, the genes endpoint will return a list of Variant IDs for that Gene.
+    </p>
+    <br/>
+    <h4>Variants</h4>
+    <hr/>
+    <pre>
+<strong>GET</strong> /api/genes/:entrez_id/variants
+<strong>GET</strong> /api/genes/:entrez_id/variants/:variant_id
+    </pre>
+    <p>
+        The variants endpoint can be used to retrieve a list of all variants for a single gene (using an Entrez ID), or a more detailed view of a specific variant (using the Entrez ID and variant ID).
+    </p>
+    <pre>
+<strong>GET</strong> <a href="/api/genes/238/variants/5" target="_blank">/api/genes/238/variants/5</a>
+    </pre>
+    <br/>
+    <h4>Evidence Items</h4>
+    <hr/>
+    <pre>
+<strong>GET</strong> /api/genes/:entrez_id/variants/:variant_id/evidence_items
+<strong>GET</strong> /api/genes/:entrez_id/variants/:variant_id/evidence_items/:evidence_item_id
+    </pre>
+    <p>
+        The evidence items endpoint can be used to retrieve a list of all evidence items for a single variant (using an Entrez ID and variant ID), or a more detailed view of a specific evidence_item (using the Entrez ID, variant ID, and evidence item ID).
+    </p>
+    <pre>
+<strong>GET</strong> <a href="/api/genes/238/variants/5/evidence_items/19" target="_blank">/api/genes/238/variants/5/evidence_items/19</a>
+    </pre>
+    <br/>
+    <h4>Other Features</h4>
+    <hr/>
+    <pre>
+<strong>GET</strong> /api/genes/:entrez_id/comments
+<strong>GET</strong> /api/genes/:entrez_id/revisions
+<strong>GET</strong> /api/genes/:entrez_id/suggested_changes
+<strong>GET</strong> /api/genes/:entrez_id/suggested_changes/:change_id/comments
+    </pre>
+    <p>
+      Each of the three main entities in the system (Genes, Variants, and Evidence Items) also support additional endpoints for comments, version history, and suggested changes.
+      Suggested changes can also have comments themselves. These endpoints can be accessed by adding the appropriate resource name (comments, revisions, suggested_changes) to the end of the route for the entity that you are interested in.
+      For example, to get a list of revisions for the gene "ALK":
+    </p>
+    <pre>
+<strong>GET</strong> <a href="/api/genes/238/revisions" target="_blank">/api/genes/238/revisions</a>
+    </pre>
+    <p>
+      We are working on additional API support and documentation. Soon, you will be able to do anything you do from the site (add comments, suggest new evidence items, etc) directly from the API.
+    </p>
   </div>
 </div>
