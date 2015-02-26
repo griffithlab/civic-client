@@ -12,7 +12,7 @@
                  class="form-control"
                  aa-val-notify
                  aa-field="evidenceItem.entrez_id"
-                 aa-label="Gene Entrez ID"/>
+                 aa-label="Entrez Gene ID"/>
         </div>
         <div class="col-sm-5 form-help">
           <span class="help-block small">Entrez Gene ID (e.g., '673' for BRAF)</span>
@@ -47,7 +47,7 @@
           </select>
         </div>
         <div class="col-sm-5 form-help">
-          <span class="help-block small">Somatic or Germline variant origin</span>
+          <span class="help-block small">Origin of variant (germline or somatic)</span>
         </div>
       </div>
 
@@ -60,7 +60,7 @@
                  aa-label="Disease Ontology ID"/>
         </div>
         <div class="col-sm-5 form-help">
-          <span class="help-block small">Specific disease or disease subtype associated with the Evidence Statement (e.g., '1909' for Melanoma)</span>
+          <span class="help-block small">Disease Ontology ID (DOID) of the specific disease or disease subtype associated with the Evidence Statement (e.g., '1909' for Melanoma)</span>
         </div>
       </div>
 
@@ -73,7 +73,7 @@
                  aa-label="PubChem ID"/>
         </div>
         <div class="col-sm-5 form-help">
-          <span class="help-block small">The PubChem ID for relevant drug (e.g., '44462760' for Dabrafenib).</span>
+          <span class="help-block small">N/A for Prognostic or Diagnostic evidence. For Predictive evidence, the PubChem ID for relevant drug (e.g., '44462760' for Dabrafenib).</span>
         </div>
       </div>
 
@@ -83,10 +83,10 @@
                  class="form-control"
                  aa-val-notify
                  aa-field="evidenceItem.pubmed_id"
-                 aa-label="Pubmed ID"/>
+                 aa-label="PubMed ID"/>
         </div>
         <div class="col-sm-5 form-help">
-          <span class="help-block small">Pubmed ID for the publication associated with the Evidence Statement (e.g., 23463675)</span>
+          <span class="help-block small">PubMed ID for the publication associated with the Evidence Statement (e.g., 23463675)</span>
         </div>
       </div>
 
@@ -120,7 +120,7 @@
           </select>
         </div>
         <div class="col-sm-5 form-help">
-          <span class="help-block small">Positive or negative association of the Variant with treatment or diagnostic/prognostic end point</span>
+          <span class="help-block small">Positive or negative association of the Variant with Predictive (Sensitivity/Resistance or NonResponse to drug), Prognostic (Better/Poor Outcome for patient) or Diagnostic (Positive/Negative association with disease) evidence types. If the Variant was not associated with a positive or negative outcome, N/A can be selected (i.e., the presence or absence of mutation had no impact on response to treatment).</span>
         </div>
       </div>
 
@@ -177,13 +177,13 @@
           </select>
         </div>
         <div class="col-sm-5 form-help">
-          <span class="help-block small">Description of the study performed to produce the Evidence Statement (Levels A-D)</span>
+          <span class="help-block small">Description of the study performed to produce the Evidence Statement (Levels - A:Validated Association, B:Clinical Evidence, C:Preclinical evidence, D:Inferential association)</span>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="evidence_rating">
-          Evidence Rating*
+          Trust Rating*
         </label>
         <div class="col-sm-5 form-input">
           <select class="form-control"
