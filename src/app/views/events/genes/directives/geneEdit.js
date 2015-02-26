@@ -47,11 +47,11 @@
             required: true
         },
         description: {
-          'ng-minlength': 32,
+          'ng-minlength': 5,
             required: true
         },
         clinical_description: {
-          'ng-minlength': 32,
+          'ng-minlength': 5,
             required: false
         }
       },
@@ -61,7 +61,7 @@
             required: true
         },
         text: {
-          'ng-minlength': 32,
+          'ng-minlength': 5,
             required: true
         }
       }

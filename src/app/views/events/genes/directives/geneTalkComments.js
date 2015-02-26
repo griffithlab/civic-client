@@ -50,7 +50,7 @@
           required: false
         },
         text: {
-          'ng-minlength': 32,
+          'ng-minlength': 5,
           required: true
         }
       }
