@@ -11,7 +11,7 @@
       replace: true,
       controller: 'EvidenceEditCtrl',
       templateUrl: 'app/views/events/evidence/directives/evidenceEdit.tpl.html',
-      link: /* ngInject */ function($scope) {
+      link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }

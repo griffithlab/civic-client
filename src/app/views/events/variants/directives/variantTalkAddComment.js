@@ -11,7 +11,7 @@
       replace: true,
       templateUrl: 'app/views/events/variants/directives/variantTalkAddComment.tpl.html',
       controller: 'VariantTalkAddCommentController',
-      link: /* ngInject */ function($scope, Security) {
+      link: /* @ngInject */ function($scope, Security) {
         console.log("======== variantTalkAddComment linked.");
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;

@@ -11,7 +11,7 @@
       replace: true,
       templateUrl: 'app/views/events/variants/directives/variantTalk.tpl.html',
       controller: 'VariantTalkController',
-      link: /* ngInject */ function($scope, Security) {
+      link: /* @ngInject */ function($scope, Security) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }

@@ -11,7 +11,7 @@
       replace: true,
       templateUrl: 'app/views/events/variants/directives/variantEdit.tpl.html',
       controller: 'VariantEditCtrl as VariantEdit',
-      link: /* ngInject */ function($scope) {
+      link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }

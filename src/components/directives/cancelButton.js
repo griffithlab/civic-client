@@ -7,6 +7,7 @@
   function cancelButton() {
     return {
       restrict: 'E',
+      scope: {},
       templateUrl: 'components/directives/cancelButton.tpl.html',
       controller: cancelButtonController
     }

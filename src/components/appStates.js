@@ -99,7 +99,7 @@
         abstract: true,
         url: '/events',
         templateUrl: 'app/views/events/eventsView.tpl.html',
-        onExit: /* ngInject */ function($deepStateRedirect) {
+        onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
       })
@@ -111,7 +111,7 @@
           titleExp: '"Event"',
           navMode: 'sub'
         },
-        resolve: /* ngInject */ {
+        resolve: /* @ngInject */ {
           Genes: 'Genes',
           MyGene: 'MyGene',
           gene: function(Genes, $stateParams, $log) {
@@ -125,7 +125,7 @@
           }
         },
         controller: 'GenesViewCtrl',
-        onExit: /* ngInject */ function($deepStateRedirect) {
+        onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
       })
@@ -178,7 +178,7 @@
           titleExp: '"Variant Group"',
           navMode: 'sub'
         },
-        resolve: /* ngInject */ {
+        resolve: /* @ngInject */ {
           VariantGroups: 'VariantGroups',
           variantGroup: function(VariantGroups, $stateParams) {
             return VariantGroups.get({ variantGroupId: $stateParams.variantGroupId }).$promise;
@@ -230,7 +230,7 @@
         url: '/variants/:variantId',
         controller: 'VariantsViewCtrl',
         templateUrl: 'app/views/events/variants/variantsView.tpl.html',
-        resolve: /* ngInject */ {
+        resolve: /* @ngInject */ {
           Variants: 'Variants',
           variant: function(Variants, $stateParams, $log) {
             $log.info('events.variants - resolving variant');
@@ -293,7 +293,7 @@
         url: '/evidence/:evidenceItemId',
         controller: 'EvidenceViewCtrl',
         templateUrl: 'app/views/events/evidence/evidenceView.tpl.html',
-        resolve: /* ngInject */ {
+        resolve: /* @ngInject */ {
           Evidence: 'Evidence',
           evidence: function(Evidence, $stateParams, $log) {
             $log.info('events.evidence- resolving evidence');

@@ -11,7 +11,7 @@
       restrict: 'E',
       replace: true,
       scope: true,
-      link: /* ngInject */ function($scope) {
+      link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.login = Security.showLogin;
         $scope.logout = Security.logout;
@@ -30,7 +30,7 @@
           $scope.status.isopen = !$scope.status.isopen;
         };
       },
-      controller: /* ngInject */ function($scope, $location) {
+      controller: /* @ngInject */ function($scope, $location) {
         $scope.currentUrl = $location.url();
       }
     };
