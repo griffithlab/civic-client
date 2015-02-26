@@ -9,6 +9,8 @@
 
     var addEvidenceView = $scope.addEvidenceView = {};
 
+
+
     // add evidence item
     addEvidenceView.addEvidence = function(evidenceItem, comment) {
       $log.info('addEvidenceView.add() called.');
