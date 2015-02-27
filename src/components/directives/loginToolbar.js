@@ -31,7 +31,10 @@
         };
       },
       controller: /* @ngInject */ function($scope, $location) {
-        $scope.currentUrl = $location.url();
+        $scope.$on('$routeChangeSuccess', function() {
+          $log.info('CurrentUrl: ' + $location.url());
+          $scope.currentUrl = $location.url();
+        });
       }
     };
     return directive;

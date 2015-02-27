@@ -6,9 +6,8 @@
         <span ng-switch="isAuthenticated()">
           <span ng-switch-when="false"> <!-- show tooltip if not authenticated -->
             <span tooltip="Please sign in to edit Evidence Items"
-                  tooltip-append-to-body="true">
-              <a class="btn btn-primary btn-xs btn-edit"
-                 ng-disabled="$state.includes('**.evidence.edit') || !isAuthenticated()">
+                  tooltip-append-to-body="true" class="tooltip-clearfix">
+              <a class="btn btn-primary btn-xs btn-edit disabled">
                 Edit Evidence
               </a>
             </span>
