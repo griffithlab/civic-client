@@ -216,6 +216,7 @@
     <script src="components/services/TitleService.js"></script>
     <script src="components/services/LodashFactory.js"></script>
     <script src="components/services/LodashFilters.js"></script>
+    <script src="components/services/GoogleAnalyticsService.js"></script>
 
     <!--Pages Controls-->
     <script src="app/pages/HomeCtrl.js"></script>
@@ -304,7 +305,7 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-60119642-1', 'auto');
-      ga('send', 'pageview');
+      // ga('send', 'pageview'); (pageviews handled by angular-ga)
 
     </script>
   </body>
