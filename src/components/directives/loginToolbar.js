@@ -15,11 +15,13 @@
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.login = Security.showLogin;
         $scope.logout = Security.logout;
+
         $scope.$watch(function() {
           return Security.currentUser;
         }, function(currentUser) {
           $scope.currentUser = currentUser;
         });
+
         $scope.status = {
           isopen: false
         };
@@ -31,6 +33,7 @@
         };
       },
       controller: /* @ngInject */ function($scope, $rootScope, $location) {
+        if(!$scope.currentUrl) { $scope.currentUrl = $location.url() }
         $rootScope.$on('$stateChangeSuccess', function() {
           $scope.currentUrl = $location.url();
         });

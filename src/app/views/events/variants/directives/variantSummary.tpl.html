@@ -2,7 +2,23 @@
   <div class="row">
     <div class="col-xs-12">
       <p><strong>Variant Summary:</strong></p>
-      <p ng-bind-html="variant.description"></p>
+      <div ng-switch="variant.description || null">
+        <div ng-switch-when="null">
+          <p>No description exists for this Variant.</p>
+          <p class="small">Would you like to submit a description?
+          <span ng-if="isAuthenticated()">
+            Just click the Edit Variant button.
+          </span>
+          <span ng-if="!isAuthenticated()">
+            Just <button class="btn btn-xs btn-login" ng-click="login()">Sign In/Sign Up</button> and click the Edit Variant button.
+          </span>
+          </p>
+        </div>
+        <div ng-switch-default>
+          <p ng-bind-html="variant.description | linky"></p>
+        </div>
+      </div>
+
     </div>
   </div>
   <div class="row">

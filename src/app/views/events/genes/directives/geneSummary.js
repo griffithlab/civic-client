@@ -1,11 +1,10 @@
 (function() {
   'use strict';
   angular.module('civic.events')
-    .directive('geneSummary', geneSummary)
-    .controller('GeneSummaryController', GeneSummaryController);
+    .directive('geneSummary', geneSummary);
 
 // @ngInject
-  function geneSummary() {
+  function geneSummary(Security) {
     var directive = {
       restrict: 'E',
       scope: {
@@ -14,16 +13,13 @@
       },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneSummary.tpl.html',
-      controller: 'GeneSummaryController'
+      link: /* ngInject */ function($scope) {
+        $scope.isAuthenticated = Security.isAuthenticated;
+        $scope.isAdmin = Security.isAdmin;
+        $scope.login = Security.showLogin;
+      }
     };
 
     return directive;
   }
-
-  // @ngInject
-  function GeneSummaryController($scope, $log) {
-    $log.info('GeneSummaryController instantiated. ========');
-    var ctrl = $scope.ctrl = {};
-  }
-
 })();

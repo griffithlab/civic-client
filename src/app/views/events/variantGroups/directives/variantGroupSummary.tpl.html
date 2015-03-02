@@ -1,7 +1,7 @@
 <div class="variantGroupSummary">
   <div class="row">
     <div class="col-xs-12">
-      <div ng-switch="variantGroup.description">
+      <div ng-switch="variantGroup.description || null">
         <div ng-switch-when="null">
           <p><strong>No description exists for this Variant Group.</strong></p>
           <p class="small">Would you like to submit a description?
@@ -9,7 +9,7 @@
             Just click the Edit Variant Group button to add a description.
           </span>
           <span ng-if="!isAuthenticated()">
-            Just <button class="btn btn-xs btn-login" ng-click="login()">Sign In/Sign Up</button> and click Edit Variant Group button to add a description.
+            Just <button class="btn btn-xs btn-login" ng-click="login()">Sign In/Sign Up</button> and click the Edit Variant Group button to add a description.
           </span>
           </p>
         </div>

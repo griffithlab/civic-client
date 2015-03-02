@@ -2,7 +2,23 @@
   <div class="row summary-content">
     <div class="col-xs-12 col-md-6">
       <p><strong>Gene Clinical Description:</strong></p>
-      <p ng-bind-html="gene.description | linky"></p>
+      <div ng-switch="gene.description || null">
+        <div ng-switch-when="null">
+          <p>No Clinical Description exists for this Gene.</p>
+          <p class="small">Would you like to submit a description?
+          <span ng-if="isAuthenticated()">
+            Just click the Edit Gene button to add a Clinical Description.
+          </span>
+          <span ng-if="!isAuthenticated()">
+            Just <button class="btn btn-xs btn-login" ng-click="login()">Sign In/Sign Up</button> and click the Edit Gene button to add a Clinical Description.
+          </span>
+          </p>
+        </div>
+        <div ng-switch-default>
+          <p ng-bind-html="gene.description | linky"></p>
+        </div>
+      </div>
+
       <p><strong>Gene Biological Summary:</strong></p>
       <p ng-bind-html="geneDetails.summary | linky"></p>
     </div>
