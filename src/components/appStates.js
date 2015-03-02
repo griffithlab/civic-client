@@ -87,7 +87,7 @@
         controller: 'BrowseCtrl',
         templateUrl: 'app/views/browse/browse.tpl.html',
         data: {
-          titleExp: '"Browse"',
+          titleExp: '"Browse CIViC"',
           navMode: 'sub'
         }
       });
