@@ -30,9 +30,8 @@
           $scope.status.isopen = !$scope.status.isopen;
         };
       },
-      controller: /* @ngInject */ function($scope, $location) {
-        $scope.$on('$routeChangeSuccess', function() {
-          $log.info('CurrentUrl: ' + $location.url());
+      controller: /* @ngInject */ function($scope, $rootScope, $location) {
+        $rootScope.$on('$stateChangeSuccess', function() {
           $scope.currentUrl = $location.url();
         });
       }
