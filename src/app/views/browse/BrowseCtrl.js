@@ -29,88 +29,96 @@
       rowTemplate: 'app/views/browse/browseGridRow.tpl.html'
     };
 
-    ctrl.byVariantColDefs = [
-      {
-        name: 'variant',
-        enableFiltering: true,
-        allowCellFocus: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
-      },
-      {
-        name: 'entrez_gene',
-        sort: {direction: uiGridConstants.ASC},
-        enableFiltering: true,
-        allowCellFocus: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
-      },
-      {
-        name: 'diseases',
-        displayName: 'Diseases',
-        enableFiltering: true,
-        allowCellFocus: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
-        cellTemplate: 'app/views/browse/browseGridDiseaseCell.tpl.html'
-      },
-      {
-        name: 'evidence_item_count',
-        displayName: 'Evidence Item Count',
-        enableFiltering: true,
-        allowCellFocus: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
-      }
-    ];
-
-    ctrl.byGeneColDefs  = [
-      {
-        name: 'entrez_gene',
-        sort: {direction: uiGridConstants.ASC},
-        enableFiltering: true,
-        allowCellFocus: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
-      },
-      {
-        name: 'variant',
-        enableFiltering: true,
-        allowCellFocus: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
-      },
-      {
-        name: 'diseases',
-        displayName: 'Diseases',
-        enableFiltering: true,
-        allowCellFocus: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
-        cellTemplate: 'app/views/browse/browseGridDiseaseCell.tpl.html'
-      },
-      {
-        name: 'evidence_item_count',
-        displayName: 'Evidence Item Count',
-        enableFiltering: true,
-        allowCellFocus: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
-      }
-    ];
-
     var modeColumnDefs = {
-      'variant': ctrl.byVariantColDefs,
-      'gene': ctrl.byGeneColDefs
-    }; // note: ui-grid watches columnDefs objs passed in as string, which we set up here and utilize in switchMode()
+      'variant': [
+        {
+          name: 'variant',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'entrez_gene',
+          sort: {direction: uiGridConstants.ASC},
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'diseases',
+          displayName: 'Diseases',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: 'app/views/browse/browseGridDiseaseCell.tpl.html'
+        },
+        {
+          name: 'evidence_item_count',
+          displayName: 'Evidence Item Count',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        }
+      ],
+      'gene': [
+        {
+          name: 'entrez_gene',
+          sort: {direction: uiGridConstants.ASC},
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'variant',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'diseases',
+          displayName: 'Diseases',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: 'app/views/browse/browseGridDiseaseCell.tpl.html'
+        },
+        {
+          name: 'evidence_item_count',
+          displayName: 'Evidence Item Count',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        }
+      ]
+    };
+
+    var modeDataTransforms = {
+      'variant': function(data) {
+        // variant grid works with the raw data
+        return data;
+      },
+      'gene': function(data) {
+        // gene grid requires some munging
+        return data;
+      }
+    };
+
 
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
@@ -128,15 +136,17 @@
       });
     };
 
+    ctrl.rawData = [];
     Browse.get({ count: 200 }).$promise
       .then(function(data) {
+        ctrl.rawData = data.result;
         ctrl.switchMode(defaultBrowseMode);
-        ctrl.gridOptions.data = data.result;
       });
 
     ctrl.switchMode = function(mode) {
       ctrl.browseMode = mode;
       ctrl.gridOptions.columnDefs = modeColumnDefs[mode];
+      ctrl.gridOptions.data = modeDataTransforms[mode](ctrl.rawData);
     };
   }
 })();
