@@ -11,7 +11,7 @@
       replace: true,
       templateUrl: 'app/views/events/evidence/directives/evidenceTalk.tpl.html',
       controller: 'EvidenceTalkController',
-      link: /* ngInject */ function($scope, Security) {
+      link: /* @ngInject */ function($scope, Security) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }

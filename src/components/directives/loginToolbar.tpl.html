@@ -2,7 +2,7 @@
   <div class="login-toolbar-lg hidden-xs hidden-sm">
     <div ng-show="isAuthenticated()" class="user-controls">
       <div class="btn-group" dropdown>
-        <button type="button" class="btn btn-xs btn-info">{{ currentUser.name }}</button>
+        <button type="button" class="btn btn-xs btn-info">{{ currentUser.name ? currentUser.name : currentUser.nickname }}</button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
           <span class="caret"></span>
         </button>
@@ -14,14 +14,13 @@
 
     <div ng-hide="isAuthenticated()" class="viewer-controls">
       <button class="btn btn-xs btn-login" ng-click="login()">Sign In/Sign Up</button>
-      <!--<button class="btn btn-xs btn-create-account" ng-click="createAccount()">Create Account</button>-->
     </div>
   </div>
 
   <div class="login-toolbar-sm hidden-md hidden-lg">
     <div ng-show="isAuthenticated()" class="user-controls">
       <div class="btn-group" dropdown>
-        <button type="button" class="btn btn-xs btn-info">{{ currentUser.name }}</button>
+        <button type="button" class="btn btn-xs btn-info">{{ currentUser.name ?  currentUser.name : currentUser.nickname }}</button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
           <span class="caret"></span>
         </button>

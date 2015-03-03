@@ -9,7 +9,7 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'app/views/events/variantGroups/directives/variantGroupTabs.tpl.html',
-      link: /* ngInject */ function($scope) {
+      link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }

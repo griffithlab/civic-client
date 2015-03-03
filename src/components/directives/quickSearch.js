@@ -32,8 +32,9 @@
     };
 
     /*jshint camelcase: false */
-    $scope.onSelect = function($item) {
+    $scope.onSelect = function($item, $model) {
       $state.go('events.genes.summary.variants.summary', {geneId: $item.gene, variantId: $item.variant_id});
+      $scope.asyncSelected.model = ''; // clear typeahead
     };
 
   }

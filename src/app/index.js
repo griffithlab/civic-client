@@ -15,7 +15,7 @@ angular.module('civicClient', [
   'ngResource',
   'dialogs.main',
   'yaru22.angular-timeago',
-  'ngFitText',
+//  'ngFitText',
 
   // http backend mocks (uncomment for mock testing backend services)
   //'httpMocks',

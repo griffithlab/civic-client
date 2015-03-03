@@ -11,7 +11,7 @@
       replace: true,
       templateUrl: 'app/views/events/variants/directives/variantTalkChangeAddComment.tpl.html',
       controller: 'VariantTalkChangeAddCommentController',
-      link: /* ngInject */ function($scope, Security) {
+      link: /* @ngInject */ function($scope, Security) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       }

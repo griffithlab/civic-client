@@ -5,6 +5,7 @@ var es = require("event-stream")
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
+// TODO require gulp plugins normally instead of using gulp-load-plugins - makes the code easier to understand
 
 var connect = require('gulp-connect');
 

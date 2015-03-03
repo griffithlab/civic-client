@@ -2,8 +2,7 @@
   'use strict';
   angular.module('civic.events')
     .directive('evidenceGrid', evidenceGrid)
-    .controller('EvidenceGridCtrl', EvidenceGridCtrl)
-    .filter('ceil', ceilFilter);
+    .controller('EvidenceGridCtrl', EvidenceGridCtrl);
 
   // @ngInject
   function evidenceGrid() {
@@ -114,12 +113,6 @@
           }, 500);
         }
       });
-    };
-  }
-
-  function ceilFilter() {
-    return function(num) {
-      return Math.ceil(num);
     };
   }
 

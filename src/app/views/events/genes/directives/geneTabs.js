@@ -12,7 +12,7 @@
       },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneTabs.tpl.html',
-      link: /* ngInject */ function($scope) {
+      link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
       },

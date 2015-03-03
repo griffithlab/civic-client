@@ -6,6 +6,7 @@
 
   <div aa-configured-form validation-config="formConfig" ng-form="addEvidenceForm" class="form-horizontal">
     <div class="row">
+      <!-- Entrez Gene -->
       <div class="form-group">
         <div class="col-sm-5 form-input">
           <input type="text"
@@ -19,6 +20,7 @@
         </div>
       </div>
 
+      <!-- Variant Name -->
       <div class="form-group">
         <div class="col-sm-5 form-input">
           <input type="text"
@@ -32,9 +34,10 @@
         </div>
       </div>
 
+      <!-- Variant Origin -->
       <div class="form-group">
         <label class="col-sm-2 control-label" for="variant_origin">
-          Variant Origin *
+          Variant Origin*
         </label>
         <div class="col-sm-5 form-input">
           <select class="form-control"
@@ -51,6 +54,7 @@
         </div>
       </div>
 
+      <!-- DOID -->
       <div class="form-group">
         <div class="col-sm-5 form-input">
           <input type="text"
@@ -64,32 +68,7 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <div class="col-sm-5 form-input">
-          <input type="text"
-                 class="form-control"
-                 aa-val-notify
-                 aa-field="evidenceItem.pubchem_id"
-                 aa-label="PubChem ID"/>
-        </div>
-        <div class="col-sm-5 form-help">
-          <span class="help-block small">N/A for Prognostic or Diagnostic evidence. For Predictive evidence, the PubChem ID for relevant drug (e.g., '44462760' for Dabrafenib).</span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-5 form-input">
-          <input type="text"
-                 class="form-control"
-                 aa-val-notify
-                 aa-field="evidenceItem.pubmed_id"
-                 aa-label="PubMed ID"/>
-        </div>
-        <div class="col-sm-5 form-help">
-          <span class="help-block small">PubMed ID for the publication associated with the Evidence Statement (e.g., 23463675)</span>
-        </div>
-      </div>
-
+      <!-- Evidence Summary -->
       <div class="form-group">
         <div class="col-sm-5 form-input">
           <textarea
@@ -105,66 +84,38 @@
         </div>
       </div>
 
+      <!-- Pubmed ID-->
       <div class="form-group">
-        <label class="col-sm-2 control-label" for="clinical_significance">
-          Clinical Significance *
-        </label>
         <div class="col-sm-5 form-input">
-          <select class="form-control"
-            ng-model="evidenceItem.clinical_significance"
-            id="clinical_significance"
-            name="clinical_significance"
-            required="true"
-            ng-required="true"
-            ng-options="item.name as item.name for item in formSelects.clinical_significance">
-          </select>
+          <input type="text"
+                 class="form-control"
+                 aa-val-notify
+                 aa-field="evidenceItem.pubmed_id"
+                 aa-label="PubMed ID"/>
         </div>
         <div class="col-sm-5 form-help">
-          <span class="help-block small">Positive or negative association of the Variant with Predictive (Sensitivity/Resistance or NonResponse to drug), Prognostic (Better/Poor Outcome for patient) or Diagnostic (Positive/Negative association with disease) evidence types. If the Variant was not associated with a positive or negative outcome, N/A can be selected (i.e., the presence or absence of mutation had no impact on response to treatment).</span>
+          <span class="help-block small">PubMed ID for the publication associated with the Evidence Statement (e.g., 23463675)</span>
         </div>
       </div>
 
+      <!-- Pubchem ID-->
       <div class="form-group">
-        <label class="col-sm-2 control-label" for="evidence_direction">
-          Evidence Direction *
-        </label>
         <div class="col-sm-5 form-input">
-          <select class="form-control"
-            ng-model="evidenceItem.evidence_direction"
-            id="evidence_direction"
-            name="evidence_direction"
-            required="true"
-            ng-required="true"
-            ng-options="item.name as item.name for item in formSelects.evidence_direction">
-          </select>
+          <input type="text"
+                 class="form-control"
+                 aa-val-notify
+                 aa-field="evidenceItem.pubchem_id"
+                 aa-label="PubChem ID"/>
         </div>
         <div class="col-sm-5 form-help">
-          <span class="help-block small">A indicator of whether the Evidence Statement supports or refutes the clinical significance of an event</span>
+          <span class="help-block small">N/A for Prognostic or Diagnostic evidence. For Predictive evidence, the PubChem ID for relevant drug (e.g., '44462760' for Dabrafenib).</span>
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="col-sm-2 control-label" for="evidence_type">
-          Evidence Type *
-        </label>
-        <div class="col-sm-5 form-input">
-          <select class="form-control"
-                  ng-model="evidenceItem.evidence_type"
-                  id="evidence_type"
-                  name="evidence_type"
-                  required="true"
-                  ng-required="true"
-                  ng-options="item.name as item.name for item in formSelects.evidence_types">
-          </select>
-        </div>
-        <div class="col-sm-5 form-help">
-          <span class="help-block small">Type of clinical outcome associated with the Evidence Statement (Diagnostic, Prognostic, or Predictive)</span>
-        </div>
-      </div>
-
+      <!-- Evidence Level -->
       <div class="form-group">
         <label class="col-sm-2 control-label" for="evidence_level">
-          Evidence Level *
+          Evidence Level*
         </label>
         <div class="col-sm-5 form-input">
           <select class="form-control"
@@ -181,9 +132,70 @@
         </div>
       </div>
 
+      <!-- Evidence Type -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="evidence_type">
+          Evidence Type*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+                  ng-model="evidenceItem.evidence_type"
+                  id="evidence_type"
+                  name="evidence_type"
+                  required="true"
+                  ng-required="true"
+                  ng-options="item.name as item.name for item in formSelects.evidence_types">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block small">Type of clinical outcome associated with the Evidence Statement (Diagnostic, Prognostic, or Predictive)</span>
+        </div>
+      </div>
+
+      <!-- Evidence Direction -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="evidence_direction">
+          Evidence Direction*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+                  ng-model="evidenceItem.evidence_direction"
+                  id="evidence_direction"
+                  name="evidence_direction"
+                  required="true"
+                  ng-required="true"
+                  ng-options="item.name as item.name for item in formSelects.evidence_direction">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block small">A indicator of whether the Evidence Statement supports or refutes the clinical significance of an event</span>
+        </div>
+      </div>
+
+      <!-- Clinical Significance -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="clinical_significance">
+          Clinical Significance*
+        </label>
+        <div class="col-sm-5 form-input">
+          <select class="form-control"
+                  ng-model="evidenceItem.clinical_significance"
+                  id="clinical_significance"
+                  name="clinical_significance"
+                  required="true"
+                  ng-required="true"
+                  ng-options="item.name as item.name for item in formSelects.clinical_significance">
+          </select>
+        </div>
+        <div class="col-sm-5 form-help">
+          <span class="help-block small">Positive or negative association of the Variant with Predictive (Sensitivity/Resistance or NonResponse to drug), Prognostic (Better/Poor Outcome for patient) or Diagnostic (Positive/Negative association with disease) evidence types. If the Variant was not associated with a positive or negative outcome, N/A can be selected (i.e., the presence or absence of mutation had no impact on response to treatment).</span>
+        </div>
+      </div>
+
+      <!-- Evidence Rating -->
       <div class="form-group">
         <label class="col-sm-2 control-label" for="evidence_rating">
-          Trust Rating *
+          Trust Rating*
         </label>
         <div class="col-sm-5 form-input">
           <select class="form-control"
@@ -239,11 +251,7 @@
         <hr/>
         <div class="button-row">
           <div class="pull-left">
-            <a ui-sref="events.genes.summary({ geneId: gene.entrez_id})">
-              <button type="button"
-                      class="btn btn-default btn-md">
-                Cancel</button>
-            </a>
+            <cancel-button></cancel-button>
           </div>
           <div class="pull-right">
 

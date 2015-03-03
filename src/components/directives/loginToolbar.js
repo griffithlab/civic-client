@@ -11,15 +11,17 @@
       restrict: 'E',
       replace: true,
       scope: true,
-      link: /* ngInject */ function($scope) {
+      link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.login = Security.showLogin;
         $scope.logout = Security.logout;
+
         $scope.$watch(function() {
           return Security.currentUser;
         }, function(currentUser) {
           $scope.currentUser = currentUser;
         });
+
         $scope.status = {
           isopen: false
         };
@@ -30,8 +32,11 @@
           $scope.status.isopen = !$scope.status.isopen;
         };
       },
-      controller: /* ngInject */ function($scope, $location) {
-        $scope.currentUrl = $location.url();
+      controller: /* @ngInject */ function($scope, $rootScope, $location) {
+        if(!$scope.currentUrl) { $scope.currentUrl = $location.url() }
+        $rootScope.$on('$stateChangeSuccess', function() {
+          $scope.currentUrl = $location.url();
+        });
       }
     };
     return directive;

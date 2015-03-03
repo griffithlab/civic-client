@@ -4,7 +4,7 @@
       <input
         type="text"
         class="form-control input-sm"
-        ng-model="asyncSelected"
+        ng-model="asyncSelected.model"
         placeholder="Quick Search CIViC"
         typeahead="gene as gene.label for gene in getVariants($viewValue)"
         typeahead-loading="loadingGenes"

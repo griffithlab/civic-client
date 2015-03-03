@@ -108,7 +108,7 @@
       <div class="page-container">
         <div class="container-fluid">
           <div class="page-bg">
-            <ui-view id="contents">
+            <ui-view id="contents" autoscroll="true">
 
             </ui-view>
           </div> <!-- /.page-bg-->
@@ -161,7 +161,7 @@
     <script src="../bower_components/angular-translate/angular-translate.js"></script>
     <script src="../bower_components/angular-dialog-service/dist/dialogs.min.js"></script>
     <script src="../bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js"></script>
-    <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="../bower_components/lodash/lodash.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.js"></script>
     <script src="../bower_components/angular-timeago/src/timeAgo.js"></script>
     <script src="../bower_components/angular-agility/dist/angular-agility.min.js"></script>
@@ -174,7 +174,6 @@
     <script src="app/index.js"></script>
     <script src="components/appStates.js"></script>
     <script src="components/filters.js"></script>
-    <script src="components/services/ng-FitText.js"></script>
 
     <!--Login & Auth Components-->
     <script src="components/security/login/LoginService.js"></script>
@@ -217,6 +216,7 @@
     <script src="components/services/TitleService.js"></script>
     <script src="components/services/LodashFactory.js"></script>
     <script src="components/services/LodashFilters.js"></script>
+    <script src="components/services/GoogleAnalyticsService.js"></script>
 
     <!--Pages Controls-->
     <script src="app/pages/HomeCtrl.js"></script>
@@ -234,6 +234,7 @@
     <script src="components/directives/footerMenu.js"></script>
     <script src="components/directives/headerSearch.js"></script>
     <script src="components/directives/civicLogo.js"></script>
+    <script src="components/directives/cancelButton.js"></script>
     <script src="components/directives/loginToolbar.js"></script>
 
     <!--Browse Controllers and Directives-->
@@ -304,7 +305,7 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-60119642-1', 'auto');
-      ga('send', 'pageview');
+      // ga('send', 'pageview'); (pageviews handled by angular-ga)
 
     </script>
   </body>
