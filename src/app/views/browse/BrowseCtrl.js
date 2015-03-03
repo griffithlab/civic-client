@@ -13,7 +13,7 @@
       enablePaginationControls: true,
       paginationPageSizes: [25],
       paginationPageSize: 25,
-      minRowsToShow: 26,
+      minRowsToShow: 27,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
