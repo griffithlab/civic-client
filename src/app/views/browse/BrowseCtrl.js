@@ -79,14 +79,6 @@
           }
         },
         {
-          name: 'variant',
-          enableFiltering: true,
-          allowCellFocus: false,
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
-        },
-        {
           name: 'diseases',
           displayName: 'Diseases',
           enableFiltering: true,
@@ -95,6 +87,14 @@
             condition: uiGridConstants.filter.CONTAINS
           },
           cellTemplate: 'app/views/browse/browseGridDiseaseCell.tpl.html'
+        },
+        {
+          name: 'variant_count',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         },
         {
           name: 'evidence_item_count',
@@ -115,10 +115,28 @@
       },
       'gene': function(data) {
         // gene grid requires some munging
-        return data;
+        return _.map(_.groupBy(data, 'entrez_gene'), function(variants, gene, collection) {
+          return {
+            entrez_id: variants[0].entrez_id,
+            entrez_gene: gene,
+            variant_count: variants.length,
+            diseases: _.chain(variants) // combine diseases from all variants
+              .pluck('diseases')
+              .tap(function(array) {
+                return array.toString()
+              })
+              .words(/[^,]+/g)
+              .map(function(disease) { return _.trim(disease)})
+              .uniq()
+              .value()
+              .join(', '),
+            evidence_item_count: _.reduce(variants, function(total, current) {
+              return total + current.evidence_item_count;
+            }, 0)
+          }
+        });
       }
     };
-
 
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
