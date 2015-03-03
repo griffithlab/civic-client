@@ -33,6 +33,7 @@
       'variant': [
         {
           name: 'variant',
+          width: '30%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -41,6 +42,7 @@
         },
         {
           name: 'entrez_gene',
+          width: '15%',
           sort: {direction: uiGridConstants.ASC},
           enableFiltering: true,
           allowCellFocus: false,
@@ -51,16 +53,18 @@
         {
           name: 'diseases',
           displayName: 'Diseases',
+          width: '45%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: 'app/views/browse/browseGridDiseaseCell.tpl.html'
+          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
         },
         {
           name: 'evidence_item_count',
-          displayName: 'Evidence Item Count',
+          width: '10%',
+          displayName: 'Evidence',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -71,6 +75,7 @@
       'gene': [
         {
           name: 'entrez_gene',
+          width: '15%',
           sort: {direction: uiGridConstants.ASC},
           enableFiltering: true,
           allowCellFocus: false,
@@ -79,17 +84,31 @@
           }
         },
         {
+          name: 'aliases',
+          width: '30%',
+          displayName: 'Gene Aliases',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
           name: 'diseases',
+          width: '30%',
           displayName: 'Diseases',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: 'app/views/browse/browseGridDiseaseCell.tpl.html'
+          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
         },
         {
           name: 'variant_count',
+          displayName: 'Variants',
+          width: '10%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -98,7 +117,8 @@
         },
         {
           name: 'evidence_item_count',
-          displayName: 'Evidence Item Count',
+          width: '10%',
+          displayName: 'Evidence',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -118,6 +138,7 @@
         return _.map(_.groupBy(data, 'entrez_gene'), function(variants, gene, collection) {
           return {
             entrez_id: variants[0].entrez_id,
+            aliases: variants[0].aliases.join(', '),
             entrez_gene: gene,
             variant_count: variants.length,
             diseases: _.chain(variants) // combine diseases from all variants
