@@ -33,8 +33,8 @@
     $scope.submitComment = function() {
       $log.info('submitComment called. variantGroupId: '+ $stateParams.variantGroupId);
       VariantGroupsComments.add({
-          entrez_id: $stateParams.geneId,
-          title: "TESTING",
+          variantGroupId: $stateParams.variantGroupId,
+          title: "Variant Group Comment",
           text: $scope.comment.text
         },
         function(response) { // add comment succeeded
