@@ -4,7 +4,7 @@
     .directive('geneTabs', geneTabs);
 
   // @ngInject
-  function geneTabs(Security) {
+  function geneTabs() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -12,11 +12,9 @@
       },
       replace: true,
       templateUrl: 'app/views/events/genes/directives/geneTabs.tpl.html',
-      link: /* @ngInject */ function($scope) {
+      controller: /* @ngInject */ function($scope, $state, Security){
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.isAdmin = Security.isAdmin;
-      },
-      controller: /* @ngInject */ function($scope, $state){
         $scope.$state = $state;
       }
     };
