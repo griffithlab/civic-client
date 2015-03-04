@@ -83,7 +83,6 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
     // rewrite font URLs from bower_components directories to dist/assets/fonts
-    // yes these are ugly regexes but I'm not sure where else to do this more cleanly
     .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts'))
     .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')'))
     .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')'))
@@ -119,7 +118,7 @@ gulp.task('fonts', function () {
     gulp.src($.mainBowerFiles()),
     gulp.src('src/assets/fonts/**/*')
   )
-    .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+    .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
     .pipe($.flatten())
     .pipe(gulp.dest('dist/assets/fonts'))
     .pipe($.size());
