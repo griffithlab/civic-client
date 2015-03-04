@@ -15,7 +15,7 @@
           <span ng-switch-when="true">
             <a ui-sref="events.genes.summary.variants.summary.evidence.edit({geneId: gene.entrez_id, variantId: variant.id, evidenceItemId: evidence.id })"
                class="btn btn-primary btn-xs btn-edit"
-               ng-disabled="$state.includes('**.evidence.edit') || !isAuthenticated()">
+               ng-disabled="$state.includes('**.evidence.edit')">
               Edit Evidence
             </a>
           </span>
