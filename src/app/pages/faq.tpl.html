@@ -8,11 +8,11 @@
 
     <p><strong><i>What is precision medicine?</i></strong><br/>
 
-      Precision medicine refers to the use of prevention and treatment strategies that are tailored to the unique features of each individual and their disease. In the context of cancer this might involve the identification of specific mutations known to predict response to a targeted therapy. You can read more about this topic in summaries from the <a href="http://www.whitehouse.gov/the-press-office/2015/01/30/fact-sheet-president-obama-s-precision-medicine-initiative">White House</a> and <a href="http://www.nejm.org/doi/full/10.1056/NEJMp1500523#t=article">New England Journal of Medicine</a>.</p>
+      Precision medicine refers to the use of prevention and treatment strategies that are tailored to the unique features of each individual and their disease. In the context of cancer this might involve the identification of specific mutations known to predict response to a targeted therapy. You can read more about this topic in summaries from the <a href="http://www.whitehouse.gov/the-press-office/2015/01/30/fact-sheet-president-obama-s-precision-medicine-initiative">White House</a> and the <a href="http://www.nejm.org/doi/full/10.1056/NEJMp1500523#t=article">New England Journal of Medicine</a>.</p>
 
     <p><strong><i>Why crowdsourcing?</i></strong><br/>
 
-      The rapid expansion of the biomedical literature presents an intractable challenge for investigators and clinicians to interpret and synthesize, in real time, the complete array of knowledge available for each cancer-associated genomic variant into a clinically-relevant interpretation. Efforts to curate the importance of variants in a clinically meaningful way have been undertaken by a diverse, but fragmented, community of individuals. Crowdsourcing leverages the resources of individuals to produce a centralized platform for this diverse community to discuss and share findings in their specialties as well as learn from advances across an array of fields and subspecialties.</p>
+      The rapid expansion of the biomedical literature presents an intractable challenge for investigators and clinicians to interpret and synthesize, in real time, the complete array of knowledge available for each cancer-associated genomic variant into a clinically-relevant interpretation. Efforts to curate the clinical importance of variants have been undertaken by a diverse, but fragmented, community of individuals. Crowdsourcing leverages the resources of individuals to produce a centralized platform for this diverse community to discuss and share findings in their specialities. CIViC also serves as a platform for these contributors keep up to date on recent advances.</p>
 
     <p><strong><i>Who should be using CIViC?</i></strong><br/>
 
@@ -24,7 +24,7 @@
 
     <p><strong><i>What is an <b>Evidence Statement</b>?</i></strong><br/>
 
-      An evidence statement is the result of an experiment, trial or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis. A single citation can provide multiple evidence statments.</p>
+      An evidence statement is the result of an experiment, trial or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis. A single citation can be the source of multiple evidence statments.</p>
 
     <p><strong><i>How is this information organized?</i></strong><br/>
 
@@ -32,7 +32,7 @@
 
     <p><strong><i>What information is currently in CIViC?</i></strong><br/>
 
-      CIViC currently houses over 450 evidence statements about 125 variants in 50 genes across 40 cancers, and these numbers are growing rapidly with your help!</p>
+      CIViC currently houses over 450 evidence statements about 125 variants in 50 genes across 40 cancer types, and these numbers are growing rapidly with your help!</p>
 
     <p><strong><i>How do I contribute information?</i></strong><br/>
 
@@ -44,11 +44,11 @@
 
     <p><strong><i>Why must my changes be approved by a moderator before I can see them?</i></strong><br/>
 
-      In an effort to reduce spam, we require that edits be submitted to the review queue before they are shown on the live server. Moderators are used for this review step to protect the CIViC resource and will approve your changes as soon as possible.</p>
+      In an effort to ensure quality (and prevent automated spam), we require that edits be submitted to the review queue before they are shown on the live server. Moderators are used for this review step to protect the CIViC resource and will approve your changes as soon as possible.</p>
 
     <p><strong><i>What is a Disease Ontology ID (DOID)?</i></strong><br/>
 
-      In order to provide a structured representation of the diseases associated with evidence statements, we ask that you provide a Disease Ontology ID from <a href="http://disease-ontology.org/"> disease-ontology.org</a>. This allows for consistent representation, minimizing ambiguity when referring to diseases. Such ontologies also support more flexible data queries that allow disease groupings ranging from generic terms to highly specific subtypes.</p>
+      In order to provide a structured representation of the diseases associated with evidence statements, we ask that you provide a Disease Ontology ID from <a href="http://disease-ontology.org/"> disease-ontology.org</a>. This allows for consistent representation and  minimized ambiguity when referring to diseases. Such ontologies also support more flexible data queries that allow disease groupings ranging from generic terms to highly specific subtypes.</p>
 
     <p><strong><i>What is a PubChem ID (PCID)?</i></strong><br/>
 
@@ -62,9 +62,9 @@
 
       This is in reference to the current software release state of CIViC. The "Alpha" state indicates we are currently in the software testing phase with additional features actively being added.</p>
 
-    <p><strong><i>What if a drug is shown to have a negative effect on patients with a variant?</i></strong><br/>
+    <p><strong><i>What if a drug is shown to have a negative effect on patients with a variant? Or the study was inconclusive?</i></strong><br/>
 
-      The data model, specifically the Evidence Direction, is used to indicate whether the study supports or refutes (including inconclusive determinations) any interaction between the variant and the clinical result. Clinical Significance indicates the type of effect the variant is determined to have on clinical results within the evidence statement as having a positive, negative or neutral/no impact. These descriptions provide human readible interpretations of evidence statements that either support or refute sensitivity or resistance predictions to therapeutics (or other clinical outcomes).</p>
+    The data model, specifically the Evidence Direction field, is used to indicate whether the study supports or refutes (including inconclusive determinations) any interaction between the variant and a clinical action or result. The Clinical Significance field indicates the type of effect the variant is determined to have on clinical results within the evidence statement as having a positive, negative or neutral/no impact. These descriptions provide human readible interpretations of evidence statements that either support or refute sensitivity or resistance predictions to therapeutics (or other clinical outcomes). For more detailed definitions and specific examples, please review the data model <a ui-sref="help"> here</a>.</p>
 
     <p><strong><i>My evidence statement disagrees with evidence from another source, should I still add it?</i></strong><br/>
 
@@ -72,11 +72,11 @@
 
     <p><strong><i>I don't want to add evidence statements, can I still contribute?</i></strong><br/>
 
-      Yes. Evaluation of the literature is a collaborative effort. If you don't want to add new evidence you can rate, edit or discuss existing evidence.</p>
+      Yes. Evaluation of the literature is a collaborative effort. If you don't want to add new evidence you can rate, edit or discuss existing evidence. You can also help to make sure the Variant Summary is an effective, consise, and accurate summary of the current set of evidence statements for each variant.</p>
       
     <p><strong><i>What is MyGene.info?</i></strong><br/>
     
-    <a href=http://mygene.info/> MyGene.info</a> is a web service that allows simple query and retrieval of gene annotation data. We use it in CIViC to automatically import gene details from Entrez Gene (<a href=http://www.ncbi.nlm.nih.gov/gene>http://www.ncbi.nlm.nih.gov/gene</a>) such as gene name, synonyms, protein domains and pathways. MyGene.info was created and is maintained by the Su Lab (<a href=http://sulab.org/</a>) at The Scripps Research Institute.
+    <a href=http://mygene.info/> MyGene.info</a> is a web service that allows simple query and retrieval of gene annotation data. We use it in CIViC to automatically import gene details from Entrez Gene (<a href=http://www.ncbi.nlm.nih.gov/gene>http://www.ncbi.nlm.nih.gov/gene</a>) such as gene name, synonyms, protein domains and pathways. MyGene.info was created and is maintained by the <a href=http://sulab.org/>Su Lab</a> (at The Scripps Research Institute).
 	
 	<p><strong><i>Is there an API I can access?</i></strong><br/>
 	
@@ -84,7 +84,7 @@
 	
 	<p><strong><i>What is the difference between "Supports a Negative association" and "Does not support a Positive association"?</i></strong><br/>
     
-    This can be confusing. We have reserved "Does not support - Positive" for statements that contradict previous statements that are supporting positive associations. They would read "Contrary to the previous study which found this mutation sensitive to drug X, this study reported no effect.". The information that this study "Does not support" the prior study's conclusion is what we are trying to capture with these classifications. 
+    This can be confusing. We have reserved "Does not support - Positive" for statements that contradict previous statements that are supporting positive associations. For example, they would read "Contrary to the previous study which found this mutation sensitive to drug X, this study reported no effect.". The information that this study "Does not support" the prior study's conclusion is what we are trying to capture with these classifications. 
     
   </div>
 </div>
