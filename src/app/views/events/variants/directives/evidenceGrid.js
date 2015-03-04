@@ -104,13 +104,12 @@
         // if evidenceItemId specified in state, scroll to evidence item's row and select it
         if(_.has($stateParams, 'evidenceItemId')) {
           var rowEntity = _.find(variant.evidence_items, function(item) {
-            return item.id == $stateParams.evidenceItemId;
+            return item.id === +$stateParams.evidenceItemId;
           });
-
-          $timeout(function() { // need timeout here until ui-grid adds a 'data rendered' event
+          gridApi.core.on.rowsRendered($scope, function() {
             gridApi.selection.selectRow(rowEntity);
             gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
-          }, 500);
+          });
         }
       });
     };
