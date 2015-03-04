@@ -16,7 +16,9 @@
   }
 
   // @ngInject
-  function EvidenceTabsCtrl($scope, Security) {
+  function EvidenceTabsCtrl($scope, $state, Security) {
     $scope.isAuthenticated = Security.isAuthenticated;
+    $scope.isAdmin = Security.isAdmin;
+    $scope.$state = $state;
   }
 })();

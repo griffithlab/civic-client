@@ -4,13 +4,15 @@
     .directive('variantTabs', variantTabs);
 
   // @ngInject
-  function variantTabs(Security) {
+  function variantTabs() {
     var directive = {
       restrict: 'E',
       replace: true,
       templateUrl: 'app/views/events/variants/directives/variantTabs.tpl.html',
-      link: /*ngInject*/ function($scope) {
+      controller: /* @ngInject */ function($scope, $state, Security) {
         $scope.isAuthenticated = Security.isAuthenticated;
+        $scope.isAdmin = Security.isAdmin;
+        $scope.$state = $state;
       }
     };
 
