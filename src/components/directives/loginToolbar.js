@@ -4,17 +4,19 @@
     .directive('loginToolbar', loginToolbar);
 
   // @ngInject
-  function loginToolbar(Security) {
+  function loginToolbar() {
 
     var directive = {
       templateUrl: 'components/directives/loginToolbar.tpl.html',
       restrict: 'E',
       replace: true,
       scope: true,
-      link: /* @ngInject */ function($scope) {
+      controller: /* @ngInject */ function($scope, $rootScope, $location, Security) {
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.login = Security.showLogin;
         $scope.logout = Security.logout;
+
+        // $scope.alert = alert('clicked');
 
         $scope.$watch(function() {
           return Security.currentUser;
@@ -31,8 +33,7 @@
           $event.stopPropagation();
           $scope.status.isopen = !$scope.status.isopen;
         };
-      },
-      controller: /* @ngInject */ function($scope, $rootScope, $location) {
+
         if(!$scope.currentUrl) { $scope.currentUrl = $location.url() }
         $rootScope.$on('$stateChangeSuccess', function() {
           $scope.currentUrl = $location.url();

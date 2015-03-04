@@ -73,9 +73,9 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.ngAnnotate())
     .pipe($.uglify({
         preserveComments: $.uglifySaveLicense,
-        mangle: false,
+        mangle: false, // this should be set to 'true' for final production - non-mangled code is much easier to debug but adds an extra ~300K to app/vendor build js
         compress: {
-          drop_debugger: true,
+          drop_debugger: false,
           unused: true
         }
       }
