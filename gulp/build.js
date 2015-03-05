@@ -67,32 +67,33 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
         addRootSlash: false,
         addPrefix: '../'
       }))
-    .pipe(assets = $.useref.assets())
-    .pipe($.rev())
-    .pipe(jsFilter)
-    .pipe($.ngAnnotate())
-    .pipe($.uglify({
+    .pipe(assets = $.useref.assets()) // remove links to individual dev files from index.html
+    .pipe($.rev()) // append revision hash to static files
+    .pipe(jsFilter) // handle scripts
+    .pipe($.sourcemaps.init()) // initialize sourcemap generation
+    .pipe($.ngAnnotate()) // add angular dependency injection to protect from minification
+    .pipe($.uglify({ // minify js
         preserveComments: $.uglifySaveLicense,
-        mangle: false, // this should be set to 'true' for final production - non-mangled code is much easier to debug but adds an extra ~300K to app/vendor build js
+        mangle: true,
         compress: {
-          drop_debugger: false,
+          drop_console: true,
           unused: true
         }
       }
     ))
+    .pipe($.sourcemaps.write('.')) // write sourcemaps
     .pipe(jsFilter.restore())
-    .pipe(cssFilter)
-    // rewrite font URLs from bower_components directories to dist/assets/fonts
-    .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts'))
-    .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')'))
-    .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')'))
-    .pipe($.csso())
+    .pipe(cssFilter) // handle CSS
+    .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts')) // rewrite bootstrap font urls
+    .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')')) // rewrite ui-grid font urls
+    .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')')) // rewrite font-awesome fonts
+    .pipe($.csso()) // minify CSS
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.revReplace())
-    .pipe(htmlFilter)
-    .pipe($.minifyHtml({
+    .pipe($.revReplace()) // substitute new filenames in index.html
+    .pipe(htmlFilter) // handle HTML
+    .pipe($.minifyHtml({ // minify HTML
       empty: true,
       spare: true,
       quotes: true
