@@ -133,9 +133,9 @@
         // variant grid works with the raw data
         return data;
       },
-      'gene': function(data) {
+      'gene': _.memoize(function(data) {
         // gene grid requires some munging
-        return _.map(_.groupBy(data, 'entrez_gene'), function(variants, gene, collection) {
+        return _.map(_.groupBy(data, 'entrez_gene'), function(variants, gene) {
           return {
             entrez_id: variants[0].entrez_id,
             aliases: variants[0].aliases.join(', '),
@@ -156,7 +156,7 @@
             }, 0)
           }
         });
-      }
+      })
     };
 
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
