@@ -1,0 +1,51 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.loginForm {
+  .providers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      .clearfix();
+      margin-top: @contentPadding;
+    }
+
+    a {
+      display: block;
+      border: 1px solid #CCC;
+      border-radius: 5px;
+      height: 54px;
+      padding-left: 55px;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 54px;
+    }
+
+    a:hover {
+      background-color: #eef;
+      border-color: @civicPurple;
+      text-decoration: none;
+    }
+
+    .google a {
+      background-image: url('/assets/images/oauth-google.png');
+      background-repeat: no-repeat;
+      background-position: 5px 5px;
+    }
+
+    .orcid a {
+      background-image: url('/assets/images/oauth-orcid.png');
+      background-repeat: no-repeat;
+      background-position: 5px 5px;
+    }
+
+    .github a {
+      background-image: url('/assets/images/oauth-github.png');
+      background-repeat: no-repeat;
+      background-position: 5px 5px;
+    }
+  }
+}
