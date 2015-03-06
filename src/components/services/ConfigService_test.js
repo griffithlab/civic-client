@@ -13,6 +13,6 @@ describe('ConfigService', function () {
   }));
 
   it('should provide the CIViC server URL', function () {
-    expect(configService.serverUrl).to.equal('http://localhost:3000/');
+    expect(configService.serverUrl).to.equal('http://127.0.0.1:3000/');
   });
 });

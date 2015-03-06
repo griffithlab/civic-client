@@ -21,7 +21,7 @@ function connectInit(baseDir, livereload) {
     livereload: livereload,
     middleware: function() {
       return [ (function() {
-        var options = url.parse('http://localhost:3000/api');
+        var options = url.parse('http://127.0.0.1:3000/api');
         options.route = '/api';
         return proxy(options);
       })() ];
