@@ -10,7 +10,7 @@
     var defaultBrowseMode = 'variant';
 
     ctrl.gridOptions = {
-      enablePaginationControls: true,
+      enablePaginationControls: false,
       paginationPageSizes: [25],
       paginationPageSize: 25,
       minRowsToShow: 27,
@@ -29,6 +29,7 @@
       rowTemplate: 'app/views/browse/browseGridRow.tpl.html'
     };
 
+    // set up column defs and data transforms for each mode
     var modeColumnDefs = {
       'variant': [
         {
@@ -127,7 +128,6 @@
         }
       ]
     };
-
     var modeDataTransforms = {
       'variant': function(data) {
         // variant grid works with the raw data
@@ -159,7 +159,28 @@
       })
     };
 
+    ctrl.previousPage = function() {
+      ctrl.gridApi.pagination.previousPage();
+    };
+
+    ctrl.nextPage = function() {
+      ctrl.gridApi.pagination.nextPage();
+    };
+
+    ctrl.gotoPage = function(page) {
+      ctrl.gridApi.pagination.seek(page);
+    };
+
+    ctrl.getPage = function() {
+      return ctrl.gridApi.pagination.getPage();
+    };
+
+    ctrl.getTotalPages = function() {
+      return ctrl.gridApi.pagination.getTotalPages();
+    };
+
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
+      ctrl.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         $log.info(['geneID:', row.entity.entrez_id, 'variantId:', row.entity.variant_id].join(' '));
         if(ctrl.browseMode == 'variant') {
@@ -174,6 +195,22 @@
         }
       });
     };
+
+    //ctrl.gridOptions.onRegisterApi = function(gridApi) {
+    //  gridApi.selection.on.rowSelectionChanged($scope, function(row){
+    //    $log.info(['geneID:', row.entity.entrez_id, 'variantId:', row.entity.variant_id].join(' '));
+    //    if(ctrl.browseMode == 'variant') {
+    //      $state.go('events.genes.summary.variants.summary', {
+    //        geneId: row.entity.entrez_id,
+    //        variantId: row.entity.variant_id
+    //      });
+    //    } else {
+    //      $state.go('events.genes.summary', {
+    //        geneId: row.entity.entrez_id
+    //      });
+    //    }
+    //  });
+    //};
 
     ctrl.rawData = [];
     Browse.get({ count: 200 }).$promise

@@ -34,6 +34,20 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12 pagination">
+      <button type="button" class="btn btn-success" ng-click="ctrl.previousPage()">
+        previous page
+      </button>
+      <button type="button" class="btn btn-success" ng-click="ctrl.nextPage()">
+        next page
+      </button>
+      <button type="button" class="btn btn-success" ng-click="ctrl.seek(3)">
+        go to page 3
+      </button>
+      <p>Current page: {{ ctrl.getPage() }} of {{ ctrl.getTotalPages() }}</p>
+    </div>
+  </div>
   <!--<div class="row">-->
     <!--<div class="col-xs-12">-->
       <!--<pre ng-bind="ctrl.gridOptions | json"></pre>-->
