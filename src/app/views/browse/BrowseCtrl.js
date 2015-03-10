@@ -13,6 +13,7 @@
 
     ctrl.gridOptions = {
       enablePaginationControls: false,
+
       paginationPageSizes: [maxRows],
       paginationPageSize: maxRows,
       minRowsToShow: maxRows + 1,
@@ -166,21 +167,24 @@
       ctrl.gridApi = gridApi;
 
       // set ui paging vars (totalItems and currentPage), and page pointer
-      ctrl.totalItems = ctrl.gridOptions.data.length || 0;
+      ctrl.totalItems = ctrl.gridOptions.totalItems;
       ctrl.gridApi.pagination.seek(1);
       ctrl.currentPage = 1;
 
-      // set up links between pagination controls and ui-grid api
+      // set up links between ui-bootstrap pagination controls and ui-grid api
       ctrl.previousPage = gridApi.pagination.previousPage;
       ctrl.nextPage = gridApi.pagination.nextPage;
       ctrl.seek = gridApi.pagination.seek;
       ctrl.getPage = gridApi.pagination.getPage;
-
       ctrl.getTotalPages = gridApi.pagination.getTotalPages;
-      ctrl.pageChanged = function() {
-        $log.info("page changed, current page: " + ctrl.currentPage);
-        ctrl.seek(ctrl.currentPage);
-      };
+
+      // pagination controls call this function on a page change command
+      ctrl.pageChanged = function() { ctrl.seek(ctrl.currentPage) };
+
+      // reset paging controls when filter changes
+      gridApi.core.on.filterChanged($scope, function() {
+        resetPaging();
+      });
 
       // called when user clicks on a row
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
@@ -198,21 +202,15 @@
       });
     };
 
-    //ctrl.gridOptions.onRegisterApi = function(gridApi) {
-    //  gridApi.selection.on.rowSelectionChanged($scope, function(row){
-    //    $log.info(['geneID:', row.entity.entrez_id, 'variantId:', row.entity.variant_id].join(' '));
-    //    if(ctrl.browseMode == 'variant') {
-    //      $state.go('events.genes.summary.variants.summary', {
-    //        geneId: row.entity.entrez_id,
-    //        variantId: row.entity.variant_id
-    //      });
-    //    } else {
-    //      $state.go('events.genes.summary', {
-    //        geneId: row.entity.entrez_id
-    //      });
-    //    }
-    //  });
-    //};
+    function resetPaging() {
+      // reset scope vars and ui-grid pagination
+      ctrl.gridApi.pagination.seek(1);
+      ctrl.currentPage = 1;
+    }
+
+    $scope.$watch('ctrl.gridOptions.totalItems', function() {
+      ctrl.totalItems = ctrl.gridOptions.totalItems;
+    });
 
     ctrl.rawData = [];
     Browse.get({ count: 200 }).$promise
@@ -225,11 +223,7 @@
       ctrl.browseMode = mode;
       ctrl.gridOptions.columnDefs = modeColumnDefs[mode];
       ctrl.gridOptions.data = modeDataTransforms[mode](ctrl.rawData);
-
-      // reset scope vars and ui-grid pagination
-      ctrl.totalItems = ctrl.gridOptions.data.length;
-      ctrl.gridApi.pagination.seek(1)
-      ctrl.currentPage = 1;
+      resetPaging();
     };
   }
 })();
