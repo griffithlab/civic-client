@@ -163,8 +163,14 @@
 
 
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
+      ctrl.gridApi = gridApi;
 
-      ctrl.currentPage = $stateParams.currentPage || 1;
+      // set ui paging vars (totalItems and currentPage), and page pointer
+      ctrl.totalItems = ctrl.gridOptions.data.length || 0;
+      ctrl.gridApi.pagination.seek(1);
+      ctrl.currentPage = 1;
+
+      // set up links between pagination controls and ui-grid api
       ctrl.previousPage = gridApi.pagination.previousPage;
       ctrl.nextPage = gridApi.pagination.nextPage;
       ctrl.seek = gridApi.pagination.seek;
@@ -176,13 +182,7 @@
         ctrl.seek(ctrl.currentPage);
       };
 
-
-      ctrl.gridApi = gridApi;
-
-      ctrl.paginationConfig = {
-
-      };
-
+      // called when user clicks on a row
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         $log.info(['geneID:', row.entity.entrez_id, 'variantId:', row.entity.variant_id].join(' '));
         if(ctrl.browseMode == 'variant') {
@@ -225,6 +225,10 @@
       ctrl.browseMode = mode;
       ctrl.gridOptions.columnDefs = modeColumnDefs[mode];
       ctrl.gridOptions.data = modeDataTransforms[mode](ctrl.rawData);
+
+      // reset scope vars and ui-grid pagination
+      ctrl.totalItems = ctrl.gridOptions.data.length;
+      ctrl.gridApi.pagination.seek(1)
       ctrl.currentPage = 1;
     };
   }
