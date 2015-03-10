@@ -143,7 +143,7 @@
             aliases: variants[0].aliases.join(', '),
             entrez_gene: gene,
             variant_count: variants.length,
-            diseases: _.chain(variants) // combine diseases from all variants
+            diseases: _.chain(variants)// combine disease, drop dups, stringify
               .pluck('diseases')
               .tap(function(array) {
                 return array.toString()

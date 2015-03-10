@@ -49,7 +49,7 @@
         direction-links="true">
 
       </pagination>
-      <p class="page-info small">Current page: {{ ctrl.currentPage }} of {{ ctrl.getTotalPages() }}</p>
+      <p class="page-info small">Page {{ ctrl.currentPage }} of {{ ctrl.getTotalPages() }}, {{ ctrl.gridOptions.data.length }} total items</p>
 
     </div>
   </div>
