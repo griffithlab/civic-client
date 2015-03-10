@@ -47,12 +47,14 @@
         align="true"
         total-items="ctrl.totalItems"
         direction-links="true">
-
       </pagination>
       <p class="page-info small">
-        Page {{ ctrl.currentPage }} of {{ ctrl.getTotalPages() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        {{ ctrl.totalItems }} total {{ ctrl.browseMode }}s
+        {{ ctrl.totalItems }} {{ ctrl.isFiltered ? "filtered" : "total" }} {{ ctrl.browseMode }}s &nbsp;&nbsp;&nbsp;&nbsp;
+        Page {{ ctrl.currentPage }} of {{ ctrl.getTotalPages() }}
       </p>
+      <pre>
+        isFiltered: {{ ctrl.isFiltered }}
+      </pre>
 
     </div>
   </div>

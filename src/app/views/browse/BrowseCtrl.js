@@ -166,10 +166,11 @@
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
       ctrl.gridApi = gridApi;
 
-      // set ui paging vars (totalItems and currentPage), and page pointer
-      ctrl.totalItems = ctrl.gridOptions.totalItems;
-      ctrl.gridApi.pagination.seek(1);
+      // set ui paging vars (totalItems and currentPage), initial grid page
+      ctrl.totalItems = Number();
       ctrl.currentPage = 1;
+      ctrl.isFiltered = false;
+      ctrl.gridApi.pagination.seek(1);
 
       // set up links between ui-bootstrap pagination controls and ui-grid api
       ctrl.previousPage = gridApi.pagination.previousPage;
@@ -181,8 +182,9 @@
       // pagination controls call this function on a page change command
       ctrl.pageChanged = function() { ctrl.seek(ctrl.currentPage) };
 
-      // reset paging controls when filter changes
+      // reset paging and do some other stuff on filter changes
       gridApi.core.on.filterChanged($scope, function() {
+        ctrl.isFiltered = ctrl.gridOptions.totalItems !== ctrl.gridOptions.data.length;
         resetPaging();
       });
 
