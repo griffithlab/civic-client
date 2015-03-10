@@ -5,15 +5,17 @@
 
 // @ngInject
   function BrowseCtrl($scope, $stateParams, uiGridConstants, Browse, $state, _, $log) {
+
     var ctrl = $scope.ctrl = {};
+    var maxRows = ctrl.maxRows = 20;
 
     var defaultBrowseMode = 'variant';
 
     ctrl.gridOptions = {
       enablePaginationControls: false,
-      paginationPageSizes: [25],
-      paginationPageSize: 25,
-      minRowsToShow: 27,
+      paginationPageSizes: [maxRows],
+      paginationPageSize: maxRows,
+      minRowsToShow: maxRows + 1,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
