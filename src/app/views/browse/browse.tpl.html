@@ -35,7 +35,18 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 pagination">
+    <div class="col-xs-12 grid-pagination">
+      <pagination 
+        ng-change="ctrl.pageChanged()"
+        ng-model="ctrl.currentPage"
+        total-items="ctrl.gridOptions.data.length"
+        direction-links="true">
+
+      </pagination>
+      <pre>Current page: {{ ctrl.currentPage }} of {{ ctrl.getTotalPages() }}</pre>
+
+
+      <hr/>
       <button type="button" class="btn btn-success" ng-click="ctrl.previousPage()">
         previous page
       </button>
@@ -48,9 +59,9 @@
       <p>Current page: {{ ctrl.getPage() }} of {{ ctrl.getTotalPages() }}</p>
     </div>
   </div>
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="ctrl.gridOptions | json"></pre>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="ctrl.gridOptions.data | json"></pre>
+    </div>
+  </div>
 </div>

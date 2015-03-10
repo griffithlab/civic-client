@@ -4,7 +4,7 @@
     .controller('BrowseCtrl', BrowseCtrl);
 
 // @ngInject
-  function BrowseCtrl($scope, uiGridConstants, Browse, $state, _, $log) {
+  function BrowseCtrl($scope, $stateParams, uiGridConstants, Browse, $state, _, $log) {
     var ctrl = $scope.ctrl = {};
 
     var defaultBrowseMode = 'variant';
@@ -159,28 +159,28 @@
       })
     };
 
-    ctrl.previousPage = function() {
-      ctrl.gridApi.pagination.previousPage();
-    };
-
-    ctrl.nextPage = function() {
-      ctrl.gridApi.pagination.nextPage();
-    };
-
-    ctrl.gotoPage = function(page) {
-      ctrl.gridApi.pagination.seek(page);
-    };
-
-    ctrl.getPage = function() {
-      return ctrl.gridApi.pagination.getPage();
-    };
-
-    ctrl.getTotalPages = function() {
-      return ctrl.gridApi.pagination.getTotalPages();
-    };
 
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
+
+      ctrl.currentPage = $stateParams.currentPage || 1;
+      ctrl.previousPage = gridApi.pagination.previousPage;
+      ctrl.nextPage = gridApi.pagination.nextPage;
+      ctrl.seek = gridApi.pagination.seek;
+      ctrl.getPage = gridApi.pagination.getPage;
+
+      ctrl.getTotalPages = gridApi.pagination.getTotalPages;
+      ctrl.pageChanged = function() {
+        $log.info("page changed, current page: " + ctrl.currentPage);
+        ctrl.seek(ctrl.currentPage);
+      };
+
+
       ctrl.gridApi = gridApi;
+
+      ctrl.paginationConfig = {
+
+      };
+
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         $log.info(['geneID:', row.entity.entrez_id, 'variantId:', row.entity.variant_id].join(' '));
         if(ctrl.browseMode == 'variant') {
@@ -223,6 +223,7 @@
       ctrl.browseMode = mode;
       ctrl.gridOptions.columnDefs = modeColumnDefs[mode];
       ctrl.gridOptions.data = modeDataTransforms[mode](ctrl.rawData);
+      ctrl.currentPage = 1;
     };
   }
 })();
