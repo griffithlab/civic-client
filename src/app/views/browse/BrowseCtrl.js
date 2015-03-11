@@ -4,12 +4,12 @@
     .controller('BrowseCtrl', BrowseCtrl);
 
 // @ngInject
-  function BrowseCtrl($scope, $stateParams, uiGridConstants, Browse, $state, _, $log) {
+  function BrowseCtrl($scope, uiGridConstants, Datatables, $state, _, $log) {
 
     var ctrl = $scope.ctrl = {};
     var maxRows = ctrl.maxRows = 20;
 
-    var defaultBrowseMode = 'variant';
+    var defaultBrowseMode = 'variants';
 
     ctrl.gridOptions = {
       enablePaginationControls: false,
@@ -34,7 +34,7 @@
 
     // set up column defs and data transforms for each mode
     var modeColumnDefs = {
-      'variant': [
+      'variants': [
         {
           name: 'variant',
           width: '30%',
@@ -76,7 +76,7 @@
           }
         }
       ],
-      'gene': [
+      'genes': [
         {
           name: 'entrez_gene',
           width: '15%',
@@ -131,36 +131,7 @@
         }
       ]
     };
-    var modeDataTransforms = {
-      'variant': function(data) {
-        // variant grid works with the raw data
-        return data;
-      },
-      'gene': _.memoize(function(data) {
-        // gene grid requires some munging
-        return _.map(_.groupBy(data, 'entrez_gene'), function(variants, gene) {
-          return {
-            entrez_id: variants[0].entrez_id,
-            aliases: variants[0].aliases.join(', '),
-            entrez_gene: gene,
-            variant_count: variants.length,
-            diseases: _.chain(variants)// combine disease, drop dups, stringify
-              .pluck('diseases')
-              .tap(function(array) {
-                return array.toString()
-              })
-              .words(/[^,]+/g)
-              .map(function(disease) { return _.trim(disease)})
-              .uniq()
-              .value()
-              .join(', '),
-            evidence_item_count: _.reduce(variants, function(total, current) {
-              return total + current.evidence_item_count;
-            }, 0)
-          }
-        });
-      })
-    };
+
 
 
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
@@ -169,18 +140,17 @@
       // set ui paging vars (totalItems and currentPage), initial grid page
       ctrl.totalItems = Number();
       ctrl.currentPage = 1;
-      ctrl.isFiltered = false;
       ctrl.gridApi.pagination.seek(1);
+
+      ctrl.isFiltered = false; // drives elements in the paging display
 
       // set up links between ui-bootstrap pagination controls and ui-grid api
       ctrl.previousPage = gridApi.pagination.previousPage;
       ctrl.nextPage = gridApi.pagination.nextPage;
-      ctrl.seek = gridApi.pagination.seek;
       ctrl.getPage = gridApi.pagination.getPage;
       ctrl.getTotalPages = gridApi.pagination.getTotalPages;
+      ctrl.pageChanged = function() { ctrl.gridApi.pagination.seek(ctrl.currentPage) };
 
-      // pagination controls call this function on a page change command
-      ctrl.pageChanged = function() { ctrl.seek(ctrl.currentPage) };
 
       // reset paging and do some other stuff on filter changes
       gridApi.core.on.filterChanged($scope, function() {
@@ -214,18 +184,16 @@
       ctrl.totalItems = ctrl.gridOptions.totalItems;
     });
 
-    ctrl.rawData = [];
-    Browse.get({ count: 200 }).$promise
-      .then(function(data) {
-        ctrl.rawData = data.result;
-        ctrl.switchMode(defaultBrowseMode);
-      });
-
     ctrl.switchMode = function(mode) {
-      ctrl.browseMode = mode;
-      ctrl.gridOptions.columnDefs = modeColumnDefs[mode];
-      ctrl.gridOptions.data = modeDataTransforms[mode](ctrl.rawData);
-      resetPaging();
+      Datatables.get({perspective: mode, count: 200}).$promise
+        .then(function (data) {
+          ctrl.gridOptions.data = data.result;
+          ctrl.browseMode = mode;
+          ctrl.gridOptions.columnDefs = modeColumnDefs[mode];
+          resetPaging();
+        });
     };
+
+    ctrl.switchMode(defaultBrowseMode);
   }
 })();
