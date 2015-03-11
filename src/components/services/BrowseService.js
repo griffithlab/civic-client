@@ -5,7 +5,7 @@
 
   // @ngInject
   function BrowseService($resource) {
-    var Browse = $resource('/api/variants',
+    var Browse = $resource('/api/datatables/variants',
       {},
       {
         get: {
