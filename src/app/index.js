@@ -15,7 +15,8 @@ angular.module('civicClient', [
   'ngResource',
   'dialogs.main',
   'yaru22.angular-timeago',
-//  'ngFitText',
+  'angulartics',
+  'angulartics.google.analytics',
 
   // http backend mocks (uncomment for mock testing backend services)
   //'httpMocks',
@@ -57,13 +58,15 @@ function appConfig($provide) {
 }
 
 // @ngInject
-function appRun(Security, $rootScope, $state) {
+function appRun(Security, $rootScope, $state, $analytics, $location) {
   'use strict';
 
   $rootScope.view = {};
 
   $rootScope.$on('$stateChangeSuccess',function(event, toState){
     $rootScope.view.navMode = toState.data.navMode;
+    $analytics.eventTrack(toState.name);
+    $analytics.pageTrack(window.location.hash);
   });
 
   // make $state globally addressable/injectable
