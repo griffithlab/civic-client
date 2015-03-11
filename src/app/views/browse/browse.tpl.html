@@ -10,11 +10,11 @@
 
         <div class="col-xs-6 tabs">
           <ul class="nav nav-tabs pull-right">
-            <li ng-class="{'active': ctrl.browseMode == 'variants'}">
+            <li ng-class="{'active': ctrl.mode == 'variants'}">
               <a ng-click="ctrl.switchMode('variants')">Browse by Variant</a>
             </li>
 
-            <li ng-class="{'active': ctrl.browseMode == 'genes'}">
+            <li ng-class="{'active': ctrl.mode == 'genes'}">
               <a ng-click="ctrl.switchMode('genes')">Browse by Gene</a>
             </li>
 
@@ -50,8 +50,22 @@
       </pagination>
       <p class="page-info small">
         {{ ctrl.totalItems }} {{ ctrl.isFiltered ? "filtered" : "total" }} {{ ctrl.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
-        Page {{ ctrl.currentPage }} of {{ ctrl.getTotalPages() }}
+        Page {{ ctrl.page }} of {{ ctrl.totalPages }}
       </p>
     </div>
   </div>
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+      <!--<pre>-->
+        <!--sorting:-->
+        <!--{{ ctrl.sorting }}-->
+
+        <!--filters:-->
+        <!--{{ ctrl.filters }}-->
+
+        <!--fetchUrl:-->
+        <!--{{ ctrl.fetchUrl }}-->
+      <!--</pre>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
