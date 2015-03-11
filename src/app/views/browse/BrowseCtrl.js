@@ -4,16 +4,25 @@
     .controller('BrowseCtrl', BrowseCtrl);
 
 // @ngInject
-  function BrowseCtrl($scope, uiGridConstants, Datatables, $state, _, $log) {
+  function BrowseCtrl($scope, uiGridConstants, Datatables, $http, $state, _, $log) {
     var defaults = {
       mode: 'variants',
       count: 25
     };
 
-
     var ctrl = $scope.ctrl = {};
     var maxRows = ctrl.maxRows = defaults.count;
 
+    // declare ui paging/sorting/filtering vars
+    ctrl.mode = '';
+    ctrl.totalItems = Number();
+    ctrl.page = 1;
+    ctrl.count= Number();
+
+    ctrl.filters = [];
+    ctrl.sorting = [];
+
+    ctrl.isFiltered = ctrl.filters.length > 0;
 
     ctrl.gridOptions = {
       enablePaginationControls: false,
@@ -142,31 +151,37 @@
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
       ctrl.gridApi = gridApi;
 
-      // set ui paging vars (totalItems and currentPage), initial grid page
-      ctrl.totalItems = Number();
-      ctrl.currentPage = 1;
-      ctrl.gridApi.pagination.seek(1);
+      // called from pagination directive when page changes
+      ctrl.pageChanged = function() {
+        $log.info('page changed: ' + ctrl.page);
+      };
 
-      ctrl.isFiltered = false; // drives elements in the paging display
-
-      // set up links between ui-bootstrap pagination controls and ui-grid api
-      ctrl.previousPage = gridApi.pagination.previousPage;
-      ctrl.nextPage = gridApi.pagination.nextPage;
-      ctrl.getPage = gridApi.pagination.getPage;
       ctrl.getTotalPages = function() {
         return ctrl.totalItems % defaults.count;
       };
-      ctrl.pageChanged = function() { ctrl.gridApi.pagination.seek(ctrl.currentPage) };
-
 
       // reset paging and do some other stuff on filter changes
       gridApi.core.on.filterChanged($scope, function() {
-        ctrl.isFiltered = ctrl.gridOptions.totalItems !== ctrl.gridOptions.data.length;
-        resetPaging();
+        $log.info('filter changed.');
+        // updateData with new filters
+        var filteredCols = _.filter(this.grid.columns, function(col) {
+          return _.has(col.filter, 'term');
+        });
+        if (filteredCols.length > 0) {
+          ctrl.filters = _.map(filteredCols, function(col) {
+            return {
+              'field': col.field,
+              'term': col.filter.term
+            };
+          });
+        } else {
+          ctrl.filters = [];
+        }
+        updateData();
       });
 
       gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
-        ctrl.isFiltered = ctrl.gridOptions.totalItems !== ctrl.gridOptions.data.length;
+        $log.info('sort changed.');
         resetPaging();
       });
 
@@ -192,29 +207,34 @@
       ctrl.currentPage = 1;
     }
 
-    $scope.$watch('ctrl.gridOptions.totalItems', function() {
-      ctrl.totalItems = ctrl.gridOptions.totalItems;
-    });
+    function fetchData(mode, count, page, sorting, filters) {
+      var url = '/api/datatables/' + mode + '?count=' + count + '&page=' + page;
 
-    function updateData(mode, count, page, sorting, filters) {
-      return Datatables.get({
-        perspective: mode,
-        count: count,
-        page: page,
-        sorting: sorting,
-        filter: filters
-      }).$promise
+      if (filters.length > 0) {
+        var filterStrings = _.map(filters, function(filter) {
+          return 'filter[' + filter.field + ']=' + filter.term;
+        });
+        url = url + '&' + filterStrings.join('&');
+      }
+
+      return $http.get(url);
+    }
+
+    function updateData() {
+      fetchData(ctrl.mode, ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
+        .then(function(data){
+          ctrl.gridOptions.data = data.data.result;
+          ctrl.gridOptions.columnDefs = modeColumnDefs[ctrl.mode];
+          ctrl.totalItems = data.data.total;
+          resetPaging();
+        });
     }
 
     ctrl.switchMode = function(mode) {
-      updateData(mode, defaults.count, 1, [], [])
-        .then(function (data) {
-          ctrl.gridOptions.data = data.result;
-          ctrl.totalItems = data.total;
-          ctrl.browseMode = mode;
-          ctrl.gridOptions.columnDefs = modeColumnDefs[mode];
-          resetPaging();
-        });
+      ctrl.mode = mode;
+      ctrl.filters = [];
+      ctrl.sorting = [];
+      updateData(mode, defaults.count, 1, [], {'filter[entrez_gene]': 'FL'});
     };
 
     ctrl.switchMode(defaults.mode);
