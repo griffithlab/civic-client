@@ -5,14 +5,21 @@
 
 // @ngInject
   function BrowseCtrl($scope, uiGridConstants, Datatables, $state, _, $log) {
+    var defaults = {
+      mode: 'variants',
+      count: 25
+    };
+
 
     var ctrl = $scope.ctrl = {};
-    var maxRows = ctrl.maxRows = 20;
+    var maxRows = ctrl.maxRows = defaults.count;
 
-    var defaultBrowseMode = 'variants';
 
     ctrl.gridOptions = {
       enablePaginationControls: false,
+
+      useExternalFiltering: true,
+      useExternalSorting: true,
 
       paginationPageSizes: [maxRows],
       paginationPageSize: maxRows,
@@ -132,8 +139,6 @@
       ]
     };
 
-
-
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
       ctrl.gridApi = gridApi;
 
@@ -148,12 +153,19 @@
       ctrl.previousPage = gridApi.pagination.previousPage;
       ctrl.nextPage = gridApi.pagination.nextPage;
       ctrl.getPage = gridApi.pagination.getPage;
-      ctrl.getTotalPages = gridApi.pagination.getTotalPages;
+      ctrl.getTotalPages = function() {
+        return ctrl.totalItems % defaults.count;
+      };
       ctrl.pageChanged = function() { ctrl.gridApi.pagination.seek(ctrl.currentPage) };
 
 
       // reset paging and do some other stuff on filter changes
       gridApi.core.on.filterChanged($scope, function() {
+        ctrl.isFiltered = ctrl.gridOptions.totalItems !== ctrl.gridOptions.data.length;
+        resetPaging();
+      });
+
+      gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
         ctrl.isFiltered = ctrl.gridOptions.totalItems !== ctrl.gridOptions.data.length;
         resetPaging();
       });
@@ -184,16 +196,27 @@
       ctrl.totalItems = ctrl.gridOptions.totalItems;
     });
 
+    function updateData(mode, count, page, sorting, filters) {
+      return Datatables.get({
+        perspective: mode,
+        count: count,
+        page: page,
+        sorting: sorting,
+        filter: filters
+      }).$promise
+    }
+
     ctrl.switchMode = function(mode) {
-      Datatables.get({perspective: mode, count: 200}).$promise
+      updateData(mode, defaults.count, 1, [], [])
         .then(function (data) {
           ctrl.gridOptions.data = data.result;
+          ctrl.totalItems = data.total;
           ctrl.browseMode = mode;
           ctrl.gridOptions.columnDefs = modeColumnDefs[mode];
           resetPaging();
         });
     };
 
-    ctrl.switchMode(defaultBrowseMode);
+    ctrl.switchMode(defaults.mode);
   }
 })();
