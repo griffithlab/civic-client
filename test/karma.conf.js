@@ -19,7 +19,6 @@ module.exports = function(config) {
       "bower_components/angular-resource/angular-resource.js",
       "bower_components/angular-timeago/src/timeAgo.js",
       "bower_components/angular-agility/dist/angular-agility.min.js",
-      "bower_components/waypoints/waypoints.js",
       "bower_components/SHA-1/sha1.js",
       "bower_components/angulartics/src/angulartics.js",
       "bower_components/angulartics/src/angulartics-ga.js",

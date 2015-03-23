@@ -24,7 +24,14 @@ gulp.task('test:wiredep', function () {
   return gulp.src('test/karma.conf.js')
     .pipe(wiredep({
       directory: 'bower_components',
-      exclude: [/bootstrap-sass-official/, /\/bootstrap.js/, /bootstrap.css/, /jquery.js/],
+      exclude: [
+        /bootstrap-sass-official/,
+        /\/bootstrap.js/,
+        /bootstrap.css/,
+        /jquery.js/,
+        /waypoints.js/,
+        /SHA-1.js/
+      ],
       devDependencies: true,
       ignorePath: '../',
       fileTypes: {
