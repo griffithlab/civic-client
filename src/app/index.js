@@ -74,6 +74,8 @@ function appRun(Security, $rootScope, $state, $analytics, $location) {
 
   Security.requestCurrentUser();
 
+  // console.table($state.get());
+
 //  ui-router debug
 //  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
 //    console.log('$stateChangeStart to '+ toState.name +'- fired when the transition begins. toState,toParams : \n', toState, toParams);
