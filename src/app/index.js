@@ -74,7 +74,7 @@ function appRun(Security, $rootScope, $state, $analytics, $location) {
 
   Security.requestCurrentUser();
 
-  // console.table($state.get());
+  console.table($state.get());
 
 //  ui-router debug
 //  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){

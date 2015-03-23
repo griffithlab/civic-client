@@ -1,10 +1,10 @@
 (function() {
   'use strict';
   angular.module('civic.browse')
-    .controller('BrowseCtrl', BrowseCtrl);
+    .controller('BrowseController', BrowseController);
 
 // @ngInject
-  function BrowseCtrl($scope, uiGridConstants, Datatables, $http, $state, _, $log) {
+  function BrowseController($scope, uiGridConstants, $http, $state, _, $log) {
     var defaults = {
       mode: 'variants',
       count: 25
@@ -184,7 +184,6 @@
 
       gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
         $log.info('sort changed.');
-
         if (sortColumns.length > 0) {
           ctrl.sorting = _.map(sortColumns, function(col) {
             return {
@@ -195,7 +194,6 @@
         } else {
           ctrl.sorting = [];
         }
-
         updateData();
       });
 
