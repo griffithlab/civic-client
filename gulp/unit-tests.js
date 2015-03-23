@@ -1,31 +1,43 @@
 'use strict';
 
 var gulp = require('gulp');
+var wiredep = require('wiredep').stream;
+var karma = require('karma').server;
 
-var $ = require('gulp-load-plugins')();
+//Run test once and exit
+gulp.task('test', ['test:wiredep'], function (done) {
+  karma.start({
+    configFile: __dirname + '/../test/karma.conf.js',
+    singleRun: true
+  }, done);
+});
 
-var wiredep = require('wiredep');
+// Watch for file changes and re-run tests on each change
+gulp.task('test:tdd', ['test:wiredep'], function (done) {
+  karma.start({
+    configFile: __dirname + '/../test/karma.conf.js'
+  }, done);
+});
 
-gulp.task('test', function() {
-  var bowerDeps = wiredep({
-    directory: 'bower_components',
-    exclude: ['bootstrap-sass-official'],
-    dependencies: true,
-    devDependencies: true
-  });
-
-  var testFiles = bowerDeps.js.concat([
-    'src/{app,components}/**/*.js',
-    'test/unit/**/*.js'
-  ]);
-
-  return gulp.src(testFiles)
-    .pipe($.karma({
-      configFile: 'test/karma.conf.js',
-      action: 'run'
+// inject bower components into karma.conf
+gulp.task('test:wiredep', function () {
+  return gulp.src('test/karma.conf.js')
+    .pipe(wiredep({
+      directory: 'bower_components',
+      exclude: [/bootstrap-sass-official/, /\/bootstrap.js/, /bootstrap.css/, /jquery.js/],
+      devDependencies: true,
+      ignorePath: '../',
+      fileTypes: {
+        js: {
+          block: /(([ \t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+          detect: {
+            js: /".*\.js"/gi
+          },
+          replace: {
+            js: '"{{filePath}}",'
+          }
+        }
+      }
     }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    });
+    .pipe(gulp.dest('test'));
 });

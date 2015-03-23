@@ -58,7 +58,7 @@ function appConfig($provide) {
 }
 
 // @ngInject
-function appRun(Security, $rootScope, $state, $analytics, $location) {
+function appRun(Security, $rootScope, $state, $analytics) {
   'use strict';
 
   $rootScope.view = {};
@@ -74,7 +74,7 @@ function appRun(Security, $rootScope, $state, $analytics, $location) {
 
   Security.requestCurrentUser();
 
-  console.table($state.get());
+  // console.table($state.get());
 
 //  ui-router debug
 //  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
