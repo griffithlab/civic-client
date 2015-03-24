@@ -28,8 +28,8 @@ describe('protractor library', function() {
   it('should wrap webdriver', function() {
     // Mocha will report the spec as slow if it goes over this time in ms.
     this.slow(6000);
-    browser.get('#/home');
-    expect(browser.getTitle()).to.eventually.contain.text('CIVIC');
+    browser.get('http://127.0.0.1:3001/');
+    expect(browser.getTitle()).to.eventually.contain('CIViC');
   });
 });
 
