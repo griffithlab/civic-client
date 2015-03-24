@@ -60,44 +60,47 @@ function appConfig($provide) {
 // @ngInject
 function appRun(Security, $rootScope, $state, $analytics) {
   'use strict';
-
+  console.log('appRun called.');
   $rootScope.view = {};
 
-  $rootScope.$on('$stateChangeSuccess',function(event, toState){
+  // ensure $state is globally addressable/injectable
+  $rootScope.$state = $state;
+
+  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState){
+    console.log('toState.data.navMode: ' + toState.data.navMode);
     $rootScope.view.navMode = toState.data.navMode;
     $analytics.eventTrack(toState.name);
     $analytics.pageTrack(window.location.hash);
   });
 
-  // make $state globally addressable/injectable
-  $rootScope.$state = $state;
 
   Security.requestCurrentUser();
 
   // console.table($state.get());
 
+
 //  ui-router debug
-//  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
-//    console.log('$stateChangeStart to '+ toState.name +'- fired when the transition begins. toState,toParams : \n', toState, toParams);
-//  });
-//
-//  $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
-//    console.log('$stateChangeError - fired when an error occurs during transition.');
-//    console.log(arguments);
-//  });
-//
-//  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
-//    console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
-//  });
-//
-//  $rootScope.$on('$viewContentLoaded',function(event){
-//    console.log('$viewContentLoaded - fired after dom rendered',event);
-//  });
-//
-//  $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
-//    console.log('$stateNotFound '+unfoundState.name+'  - fired when a state cannot be found by its name.');
-//    console.log(unfoundState, fromState, fromParams);
-//  });
+  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+    console.log('$stateChangeStart to '+ toState.name +'- fired when the transition begins. toState,toParams : \n', toState, toParams);
+  });
+
+  $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
+    console.log('$stateChangeError - fired when an error occurs during transition.');
+    console.log(arguments);
+  });
+
+  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+    console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
+  });
+
+  $rootScope.$on('$viewContentLoaded',function(event){
+    console.log('$viewContentLoaded - fired after dom rendered',event);
+  });
+
+  $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
+    console.log('$stateNotFound '+unfoundState.name+'  - fired when a state cannot be found by its name.');
+    console.log(unfoundState, fromState, fromParams);
+  });
 
 }
 // define app modules & dependencies
@@ -118,7 +121,7 @@ angular.module('civic.search', ['ui.router']);
 angular.module('civic.events', ['ui.grid.selection', 'ui.router']);
 angular.module('civic.add', ['ui.router', 'aa.select2']);
 
-angular.module('httpMocks', ['ngTable', 'ngMockE2E']);
+// angular.module('httpMocks', ['ngTable', 'ngMockE2E']);
 
 // disable anchor-scrolling
 angular.module('civicClient').value('$anchorScroll', angular.noop);

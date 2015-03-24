@@ -8,6 +8,7 @@ var karma = require('karma').server;
 gulp.task('test', ['test:wiredep'], function (done) {
   karma.start({
     configFile: __dirname + '/../test/karma.conf.js',
+    logLevel: 'info',
     singleRun: true
   }, done);
 });

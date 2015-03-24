@@ -13,12 +13,12 @@ gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
 
 gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function (done) {
   var testFiles = [
-    'test/e2e/**/*.js'
+    'test/e2e/**/*.spec.js'
   ];
 
   gulp.src(testFiles)
     .pipe($.protractor.protractor({
-      configFile: 'test/protractor.conf.js',
+      configFile: 'test/protractor.conf.js'
     }))
     .on('error', function (err) {
       // Make sure failed tests cause gulp to exit non-zero

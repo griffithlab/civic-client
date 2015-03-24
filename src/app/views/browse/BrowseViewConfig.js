@@ -5,7 +5,6 @@
 
   // @ngInject
   function BrowseViewConfig($stateProvider) {
-    console.info('BrowseViewConfig called.');
     $stateProvider
       .state('browse', {
         url: '/browse',

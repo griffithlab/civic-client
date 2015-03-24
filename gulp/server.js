@@ -38,13 +38,13 @@ gulp.task('serve', ['images', 'fonts', 'watch'], function () {
 });
 
 gulp.task('serve:dist', ['build'], function () {
-  connectInit('dist', false);
+  connectInit(['dist', path.resolve('./')], false);
 });
 
-gulp.task('serve:e2e', function () {
-  connectInit(['src', '.tmp'], false);
+gulp.task('serve:e2e', ['build'], function () {
+  connectInit(['src', '.tmp', path.resolve('./')], false);
 });
 
-gulp.task('serve:e2e-dist', ['watch'], function () {
-  connectInit('dist', true);
+gulp.task('serve:e2e-dist', ['build', 'watch'], function () {
+  connectInit(['dist', path.resolve('./')], true);
 });

@@ -34,11 +34,14 @@ module.exports = function(config) {
 
     browsers : ['PhantomJS'],
 
+    //reporters: ['spec'],
+
     plugins : [
       'karma-phantomjs-launcher',
       'karma-mocha',
       'karma-chai',
-      'karma-sinon'
+      'karma-sinon',
+      'karma-spec-reporter'
     ]
   });
 
