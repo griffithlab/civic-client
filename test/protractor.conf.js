@@ -22,7 +22,8 @@ exports.config = {
 
   mochaOpts: {
     reporter: 'spec',
-    slow: 3000
+    slow: 3000,
+    timeout: 6000
   }
 
   // Options to be passed to Jasmine-node.

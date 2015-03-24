@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var angularProtractor = require('gulp-angular-protractor');
 
-gulp.task('test:protractor', ['serve'], function(done) {
+gulp.task('test:e2e', ['serve'], function() {
   gulp.src(['test/e2e/**/*.spec.js'])
     .pipe(angularProtractor({
       'configFile': 'test/protractor.conf.js',
@@ -15,34 +15,18 @@ gulp.task('test:protractor', ['serve'], function(done) {
     .once('end', function() { process.exit(); });
 });
 
-//
-//var browserSync = require('browser-sync');
-//
-//// Downloads the selenium webdriver
-//gulp.task('webdriver-update', $.protractor.webdriver_update);
-//
-//gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
-//
-//gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function (done) {
-//  var testFiles = [
-//    'test/e2e/**/*.spec.js'
-//  ];
-//
-//  gulp.src(testFiles)
-//    .pipe($.protractor.protractor({
-//      configFile: 'test/protractor.conf.js'
-//    }))
-//    .on('error', function (err) {
-//      // Make sure failed tests cause gulp to exit non-zero
-//      throw err;
-//    })
-//    .on('end', function () {
-//      // Close browser sync server
-//      browserSync.exit();
-//      done();
-//    });
-//});
-//
-//gulp.task('protractor', ['serve:e2e', 'protractor-only']);
-//gulp.task('protractor:src', ['serve:e2e', 'protractor-only']);
-//gulp.task('protractor:dist', ['serve:e2e-dist', 'protractor-only']);
+gulp.task('test:e2e:dist', ['serve:dist'], function() {
+  gulp.src(['test/e2e/**/*.spec.js'])
+    .pipe(angularProtractor({
+      'configFile': 'test/protractor.conf.js',
+      //'args': ['--baseUrl', 'http://127.0.0.1:3001'],
+      'autoStartStopServer': true,
+      'debug': true
+    }))
+    .once('error', function(e) { throw e })
+    .once('end', function() { process.exit(); });
+});
+
+// Downloads the selenium webdriver
+gulp.task('webdriver-update', $.protractor.webdriver_update);
+gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);

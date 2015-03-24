@@ -11,15 +11,11 @@ angular.module('civicClient', [
   'aa.formExternalConfiguration',
   'aa.notify',
   'aa.select2',
-//  'ngTagsInput',
   'ngResource',
   'dialogs.main',
   'yaru22.angular-timeago',
   'angulartics',
   'angulartics.google.analytics',
-
-  // http backend mocks (uncomment for mock testing backend services)
-  //'httpMocks',
 
   // config
   'civic.states',

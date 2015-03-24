@@ -5,7 +5,7 @@ var wiredep = require('wiredep').stream;
 var karma = require('karma').server;
 
 //Run test once and exit
-gulp.task('test', ['test:wiredep'], function (done) {
+gulp.task('test:unit', ['test:unit:wiredep'], function (done) {
   karma.start({
     configFile: __dirname + '/../test/karma.conf.js',
     logLevel: 'info',
@@ -14,14 +14,14 @@ gulp.task('test', ['test:wiredep'], function (done) {
 });
 
 // Watch for file changes and re-run tests on each change
-gulp.task('test:tdd', ['test:wiredep'], function (done) {
+gulp.task('test:unit:watch', ['test:unit:wiredep'], function (done) {
   karma.start({
     configFile: __dirname + '/../test/karma.conf.js'
   }, done);
 });
 
 // inject bower components into karma.conf
-gulp.task('test:wiredep', function () {
+gulp.task('test:unit:wiredep', function () {
   return gulp.src('test/karma.conf.js')
     .pipe(wiredep({
       directory: 'bower_components',
