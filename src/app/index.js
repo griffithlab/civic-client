@@ -60,7 +60,6 @@ function appConfig($provide) {
 // @ngInject
 function appRun(Security, $rootScope, $state, $analytics) {
   'use strict';
-  console.log('appRun called.');
   $rootScope.view = {};
 
   // ensure $state is globally addressable/injectable
@@ -73,34 +72,32 @@ function appRun(Security, $rootScope, $state, $analytics) {
     $analytics.pageTrack(window.location.hash);
   });
 
-
   Security.requestCurrentUser();
 
   // console.table($state.get());
 
-
-//  ui-router debug
-  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
-    console.log('$stateChangeStart to '+ toState.name +'- fired when the transition begins. toState,toParams : \n', toState, toParams);
-  });
-
-  $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
-    console.log('$stateChangeError - fired when an error occurs during transition.');
-    console.log(arguments);
-  });
-
-  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
-    console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
-  });
-
-  $rootScope.$on('$viewContentLoaded',function(event){
-    console.log('$viewContentLoaded - fired after dom rendered',event);
-  });
-
-  $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
-    console.log('$stateNotFound '+unfoundState.name+'  - fired when a state cannot be found by its name.');
-    console.log(unfoundState, fromState, fromParams);
-  });
+  //  ui-router debug
+  //$rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+  //  console.log('$stateChangeStart to '+ toState.name +'- fired when the transition begins. toState,toParams : \n', toState, toParams);
+  //});
+  //
+  //$rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
+  //  console.log('$stateChangeError - fired when an error occurs during transition.');
+  //  console.log(arguments);
+  //});
+  //
+  //$rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+  //  console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
+  //});
+  //
+  //$rootScope.$on('$viewContentLoaded',function(event){
+  //  console.log('$viewContentLoaded - fired after dom rendered',event);
+  //});
+  //
+  //$rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
+  //  console.log('$stateNotFound '+unfoundState.name+'  - fired when a state cannot be found by its name.');
+  //  console.log(unfoundState, fromState, fromParams);
+  //});
 
 }
 // define app modules & dependencies
