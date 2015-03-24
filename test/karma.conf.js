@@ -4,6 +4,12 @@ module.exports = function(config) {
 
   config.set({
     basePath : '..',
+    preprocessors: {
+      'src/{app,components}/**/*.tpl.html': ['ng-html2js']
+    },
+    ngHtml2JsPreprocessor: {
+      moduleName: 'civicClient'
+    },
     files : [
       // bower:js
       "bower_components/angular/angular.js",
@@ -25,23 +31,20 @@ module.exports = function(config) {
       "bower_components/angular-mocks/angular-mocks.js",
       // endbower
       'src/{app,components}/**/*.js',
+      'src/{app,components}/**/*.tpl.html',
       'test/unit/**/*.spec.js'
     ],
-
     autoWatch : false,
-
     frameworks: ['mocha', 'chai', 'sinon'],
-
     browsers : ['PhantomJS'],
-
-    //reporters: ['spec'],
-
+    reporters: ['spec'],
     plugins : [
       'karma-phantomjs-launcher',
       'karma-mocha',
       'karma-chai',
       'karma-sinon',
-      'karma-spec-reporter'
+      'karma-spec-reporter',
+      'karma-ng-html2js-preprocessor'
     ]
   });
 

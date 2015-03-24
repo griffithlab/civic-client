@@ -27,6 +27,8 @@ gulp.task('test:e2e:dist', ['serve:dist'], function() {
     .once('end', function() { process.exit(); });
 });
 
+var protractor = require('protractor');
+
 // Downloads the selenium webdriver
-gulp.task('webdriver-update', $.protractor.webdriver_update);
-gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
+gulp.task('webdriver-update', protractor.webdriver_update);
+gulp.task('webdriver-standalone', protractor.webdriver_standalone);
