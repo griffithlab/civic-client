@@ -5,15 +5,15 @@ describe('events.genes state', function() {
   var $rootScope,
     $state,
     $injector,
-    GenesMock,
-    MyGeneInfoMock,
+    GenesService,
+    MyGeneInfoService,
     state = 'events.genes';
 
   beforeEach(function() {
 
     module('civic.events', function($provide) {
-      $provide.value('GenesService', GenesMock = {});
-      $provide.value('MyGeneInfoService', MyGeneInfoMock = {});
+      $provide.value('Genes', GenesService = {});
+      $provide.value('MyGeneInfo', MyGeneInfoService = {});
     });
 
     inject(function(_$rootScope_, _$state_, _$injector_, $templateCache) {
@@ -27,9 +27,34 @@ describe('events.genes state', function() {
     })
   });
 
-  it('should respond to URL', function() {
+  it('should be abstract', function() {
+    expect($state.get(state).abstract).to.be.true;
+  });
+
+  it('should specify the url "/genes/:geneId"', function() {
+    expect($state.get(state).url).to.equal('/genes/:geneId');
+  });
+
+  it('should respond to the url "#/events/genes/1"', function() {
     expect($state.href(state, { geneId: 1 })).to.equal('#/events/genes/1');
   });
+
+  it('should resolve Genes service', function() {
+
+  });
+
+  it('should resolve MyGeneInfo service', function() {
+
+  });
+
+  it('should resolve gene data', function() {
+
+  });
+
+  it('should resolve gene myGene data', function() {
+
+  });
+
 
   //it('should resolve data', function() {
   //  myServiceMock.findAll = jasmine.createSpy('findAll').andReturn('findAll');

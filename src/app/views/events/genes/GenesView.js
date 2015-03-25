@@ -37,21 +37,21 @@
     var ctrl = $scope;
     var geneView = ctrl.geneView = {};
 
-    geneView.data = {
-      gene: gene,
-      myGene: myGeneInfo
-    };
-
-    geneView.services = {
-      Genes: Genes,
-      MyGeneInfo: MyGeneInfo
-    };
-
-    ctrl.geneViewOptions = {
+    geneView.config = {
       name: 'gene',
       state: 'events.genes',
-      data: geneView.data,
-      services: geneView.services
+      data: {
+        gene: gene,
+        myGene: myGeneInfo
+      },
+      services: {
+        Genes: Genes,
+        MyGeneInfo: MyGeneInfo
+      }
+    };
+
+    geneView.actions = {
+
     };
   }
 
