@@ -43,8 +43,6 @@ module.exports = function(config) {
     plugins : [
       'karma-phantomjs-launcher',
       'karma-mocha',
-      'karma-chai',
-      'karma-sinon',
       'karma-spec-reporter',
       'karma-ng-html2js-preprocessor',
       'karma-browserify'
