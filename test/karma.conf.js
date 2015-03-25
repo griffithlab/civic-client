@@ -5,7 +5,8 @@ module.exports = function(config) {
   config.set({
     basePath : '..',
     preprocessors: {
-      'src/{app,components}/**/*.tpl.html': ['ng-html2js']
+      'src/{app,components}/**/*.tpl.html': ['ng-html2js'],
+      'test/karma.setup.js': ['browserify']
     },
     ngHtml2JsPreprocessor: {
       moduleName: 'civicClient'
@@ -32,10 +33,11 @@ module.exports = function(config) {
       // endbower
       'src/{app,components}/**/*.js',
       'src/{app,components}/**/*.tpl.html',
+      'test/karma.setup.js',
       'test/unit/**/*.spec.js'
     ],
     autoWatch : false,
-    frameworks: ['mocha', 'chai', 'sinon'],
+    frameworks: ['mocha', 'browserify'],
     browsers : ['PhantomJS'],
     reporters: ['spec'],
     plugins : [
@@ -44,8 +46,15 @@ module.exports = function(config) {
       'karma-chai',
       'karma-sinon',
       'karma-spec-reporter',
-      'karma-ng-html2js-preprocessor'
-    ]
+      'karma-ng-html2js-preprocessor',
+      'karma-browserify'
+    ],
+    browserify: {
+      debug: true,
+      files: [
+        'test/karma.setup.js'
+      ]
+    }
   });
 
 };
