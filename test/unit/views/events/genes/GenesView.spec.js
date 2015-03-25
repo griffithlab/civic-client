@@ -28,7 +28,7 @@ describe('events.genes state', function() {
   });
 
   it('should respond to URL', function() {
-    expect($state.href(state, { geneId: 1 })).toEqual('#/events/genes/1');
+    expect($state.href(state, { geneId: 1 })).to.equal('#/events/genes/1');
   });
 
   //it('should resolve data', function() {

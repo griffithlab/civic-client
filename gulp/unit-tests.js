@@ -6,6 +6,7 @@ var karma = require('karma').server;
 
 //Run test once and exit
 gulp.task('test:unit', ['test:unit:wiredep'], function (done) {
+  debugger;
   karma.start({
     configFile: __dirname + '/../test/karma.conf.js',
     logLevel: 'info',
