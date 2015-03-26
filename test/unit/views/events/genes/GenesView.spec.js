@@ -5,6 +5,7 @@ describe('events.genes state', function() {
   var $rootScope,
     $state,
     $injector,
+    $q,
     GenesService,
     MyGeneInfoService,
     state = 'events.genes';
@@ -16,10 +17,14 @@ describe('events.genes state', function() {
       $provide.value('MyGeneInfo', MyGeneInfoService = {});
     });
 
-    inject(function(_$rootScope_, _$state_, _$injector_, $templateCache) {
+    inject(function(_$rootScope_, _$state_, _$injector_, _$q_, $templateCache) {
       $rootScope = _$rootScope_;
       $state = _$state_;
       $injector = _$injector_;
+      $q = _$q_;
+
+      // set up sinon-as-promised, otherwise it won't work!
+      sinonAsPromised($q.defer);
 
       // We need add the template entry into the templateCache if we ever
       // specify a templateUrl
