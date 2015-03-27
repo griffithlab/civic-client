@@ -15,13 +15,10 @@
           Genes: 'Genes',
           MyGeneInfo: 'MyGeneInfo',
           gene: function(Genes, $stateParams) {
-            console.log('$stateProvider.resolve.gene called.');
-            return Genes.get({
-              'geneId': $stateParams.geneId
-            });
+            return Genes.get({ 'geneId': $stateParams.geneId });
           },
-          myGene: function(MyGeneInfo, gene) {
-            return MyGeneInfo.getDetails({'geneId': gene.entrez_id });
+          myGeneInfo: function(MyGeneInfo, gene) {
+            return MyGeneInfo.getDetails({ 'geneId': gene.entrez_id });
           }
         },
         controller: 'GenesViewController',

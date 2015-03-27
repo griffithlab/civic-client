@@ -1,19 +1,22 @@
 'use strict';
 
-describe('events.genes state', function () {
+describe('events.genes', function () {
   var $rootScope,
+    $compile,
     $state,
     $timeout,
+    $controller,
     $q,
     $templateCache,
     GenesService,
     Genes,
     MyGeneInfoService,
     MyGeneInfo,
+    GenesViewController,
     state = 'events.genes';
 
   beforeEach(function () {
-    module('civic.events', function ($provide) {
+    module('civic.events', function ($provide, $stateProvider) {
       // set up mock service providers
       $provide.value('Genes', GenesService = {
         get: sinon.stub().resolves({
@@ -176,10 +179,20 @@ describe('events.genes state', function () {
           "symbol": "ALK"
         })
       });
+
+      // create a navigable events.genes.test state for to force events.genes loading
+      $stateProvider.state('events.genes.test', {
+        abstract: false,
+        url: '/test',
+        template: '<div ui-view>genes.test template</div>'
+      })
     });
+
     // inject services
-    inject(function(_$rootScope_, _$state_, _$timeout_, _$q_, _$templateCache_, _Genes_, _MyGeneInfo_) {
+    inject(function(_$rootScope_, _$compile_, _$controller_, _$state_, _$timeout_, _$q_, _$templateCache_, _Genes_, _MyGeneInfo_) {
       $rootScope = _$rootScope_;
+      $compile = _$compile_;
+      $controller = _$controller_;
       $state = _$state_;
       $timeout = _$timeout_;
       $q = _$q_;
@@ -202,70 +215,75 @@ describe('events.genes state', function () {
 
       // mock templates
       $templateCache.put('app/views/events/genes/GenesView.tpl.html', '<div ui-view></div>');
+
+      // ui-view compile to force ui-router's controller instantiation
+      $compile("<html><body><div ui-view></div></body></html>")($rootScope);
+      $rootScope.$digest();
     });
   });
 
-  it('should be abstract', function () {
-    expect($state.get(state).abstract).to.be.true;
-  });
-
-  it('should specify the url "/genes/:geneId"', function () {
-    expect($state.get(state).url).to.equal('/genes/:geneId');
-  });
-
-  it('should respond to the url "#/events/genes/1"', function () {
-    expect($state.href(state, {geneId: 1})).to.equal('#/events/genes/1');
-  });
-
-  it('requests Genes service to be resolved', function () {
-    var egState = $state.get(state);
-    expect(egState.resolve.Genes).to.exist;
-    expect(egState.resolve.Genes).to.equal('Genes');
-  });
-
-  it('requests MyGeneInfo service to be resolved', function () {
-    var egState = $state.get(state);
-    expect(egState.resolve.MyGeneInfo).to.exist;
-    expect(egState.resolve.MyGeneInfo).to.equal('MyGeneInfo');
-  });
-
-  it('resolves specific gene from Genes service', function () {
-    var egState = $state.get(state);
-    var geneData;
-
-    expect(egState.resolve.gene).to.exist;
-    expect(egState.resolve.gene).to.be.a('function');
-    //console.log('-----');
-    //console.log(Genes.get());
-    egState.resolve.gene(Genes, {geneId: 238 }).then(function(result) {
-      geneData = result;
+  describe('events.genes state configuration', function() {
+    it('should be abstract', function () {
+      expect($state.get(state).abstract).to.be.true;
     });
-    $timeout.flush();
-    expect(geneData.entrez_id).to.equal(238);
+
+    it('should specify the url "/genes/:geneId"', function () {
+      expect($state.get(state).url).to.equal('/genes/:geneId');
+    });
+
+    it('should respond to the url "#/events/genes/1"', function () {
+      expect($state.href(state, {geneId: 1})).to.equal('#/events/genes/1');
+    });
+
+    it('requests Genes service to be resolved', function () {
+      var egState = $state.get(state);
+      expect(egState.resolve.Genes).to.exist;
+      expect(egState.resolve.Genes).to.equal('Genes');
+    });
+
+    it('requests MyGeneInfo service to be resolved', function () {
+      var egState = $state.get(state);
+      expect(egState.resolve.MyGeneInfo).to.exist;
+      expect(egState.resolve.MyGeneInfo).to.equal('MyGeneInfo');
+    });
+
+    it('resolves specific gene from Genes service', function () {
+      var egState = $state.get(state);
+      var gene;
+      expect(egState.resolve.gene).to.exist;
+      expect(egState.resolve.gene).to.be.a('function');
+      egState.resolve.gene(Genes, {geneId: 238 }).then(function(result) {
+        gene = result;
+      });
+      $timeout.flush();
+      expect(gene.entrez_id).to.equal(238);
+    });
+
+    it('retrieves specific gene info from MyGeneInfo service', function () {
+      var egState = $state.get(state);
+      var gene;
+      var myGeneInfo;
+      expect(egState.resolve.myGeneInfo).to.exist;
+      expect(egState.resolve.myGeneInfo).to.be.a('function');
+      egState.resolve.gene(Genes, {geneId: 238 }).then(function(result) {
+        gene = result;
+      });
+      $timeout.flush();
+      egState.resolve.gene(MyGeneInfo, gene).then(function(result) {
+        myGeneInfo = result;
+      });
+      $timeout.flush();
+      expect(myGeneInfo._id).to.equal('238');
+    });
   });
 
-  //
-  //it('should resolve MyGeneInfo service', function () {
-  //
-  //});
-  //
-  //it('should resolve gene data', function () {
-  //
-  //});
-  //
-  //it('should resolve gene myGene data', function () {
-  //
-  //});
-
-
-  //it('should resolve data', function() {
-  //  myServiceMock.findAll = jasmine.createSpy('findAll').andReturn('findAll');
-  //
-  //  $state.go(state);
-  //  $rootScope.$digest();
-  //  expect($state.current.name).toBe(state);
-  //
-  //  // Call invoke to inject dependencies and run function
-  //  expect($injector.invoke($state.current.resolve.data)).toBe('findAll');
-  //});
+  describe('events.genes controller', function() {
+    it('should exist', function() {
+      $state.go('events.genes.test');
+      $timeout.flush();
+      var ctrl = $controller('GenesViewController', { $scope: $rootScope.$new() });
+      expect(ctrl).to.exist;
+      expect(ctrl).to.be.a('function');
+    });
+  });
 });
