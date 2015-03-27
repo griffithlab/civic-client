@@ -11,6 +11,7 @@ module.exports = function(config) {
     ngHtml2JsPreprocessor: {
       moduleName: 'civicClient'
     },
+    logLevel: config.LOG_DEBUG,
     files : [
       // bower:js
       "bower_components/angular/angular.js",
@@ -38,10 +39,18 @@ module.exports = function(config) {
     ],
     autoWatch : false,
     frameworks: ['mocha', 'browserify'],
+    //client: {
+    //  mocha: {
+    //    reporter: 'html', // change Karma's debug.html to the mocha web reporter
+    //    ui: 'tdd'
+    //  }
+    //},
     browsers : ['PhantomJS'],
+    //browsers : ['Chrome'],
     reporters: ['spec'],
     plugins : [
       'karma-phantomjs-launcher',
+      'karma-chrome-launcher',
       'karma-mocha',
       'karma-spec-reporter',
       'karma-ng-html2js-preprocessor',

@@ -38,6 +38,7 @@
     "jshint-stylish": "^0.4.0",
     "karma-browserify": "^4.0.0",
     "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.7",
     "karma-mocha": "^0.1.10",
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-phantomjs-launcher": "^0.1.4",

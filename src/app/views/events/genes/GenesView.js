@@ -13,11 +13,12 @@
         templateUrl: 'app/views/events/genes/GenesView.tpl.html',
         resolve: /* @ngInject */ {
           Genes: 'Genes',
-          MyGeneInfo: 'MyGene',
+          MyGeneInfo: 'MyGeneInfo',
           gene: function(Genes, $stateParams) {
+            console.log('$stateProvider.resolve.gene called.');
             return Genes.get({
               'geneId': $stateParams.geneId
-            }).$promise;
+            });
           },
           myGene: function(MyGeneInfo, gene) {
             return MyGeneInfo.getDetails({'geneId': gene.entrez_id });
