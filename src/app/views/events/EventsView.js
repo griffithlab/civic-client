@@ -20,7 +20,7 @@
 
   // @ngInject
   function EventsViewController($log) {
-    $log.info('EventsViewController instantiated.');
+    console.log('EventsViewController instantiated.');
   }
 
 })();

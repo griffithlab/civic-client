@@ -1,6 +1,6 @@
 'use strict';
 
-describe('events.genes', function () {
+describe('events.genes view', function () {
   var $rootScope,
     $compile,
     $state,

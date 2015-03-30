@@ -96,7 +96,7 @@ function appRun(Security, $rootScope, $state, $analytics) {
   //});
 
 }
-// define app modules & dependencies
+// define top-level app modules & dependencies
 angular.module('civic.security', [
   'civic.security.authorization',
   'civic.security.service',
@@ -111,10 +111,13 @@ angular.module('civic.common', ['ui.router']);
 angular.module('civic.login', ['ui.router']);
 angular.module('civic.browse', ['ui.grid.selection', 'ui.grid.pagination', 'ui.router']);
 angular.module('civic.search', ['ui.router']);
-angular.module('civic.events', ['ui.grid.selection', 'ui.router']);
-angular.module('civic.add', ['ui.router', 'aa.select2']);
 
-// angular.module('httpMocks', ['ngTable', 'ngMockE2E']);
+angular.module('civic.events', [
+  'ui.router',
+  'civic.events.genes'
+]);
+
+angular.module('civic.add', ['ui.router', 'aa.select2']);
 
 // disable anchor-scrolling
 angular.module('civicClient').value('$anchorScroll', angular.noop);
