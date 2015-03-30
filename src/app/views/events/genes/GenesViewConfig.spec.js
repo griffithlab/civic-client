@@ -1,6 +1,6 @@
 'use strict';
 
-describe('events.genes view', function () {
+describe('GenesViewConfig', function () {
   var $rootScope,
     $compile,
     $state,
@@ -274,16 +274,6 @@ describe('events.genes view', function () {
       });
       $timeout.flush();
       expect(myGeneInfo._id).to.equal('238');
-    });
-  });
-
-  describe('events.genes controller', function() {
-    it('should exist', function() {
-      $state.go('events.genes.test');
-      $timeout.flush();
-      var ctrl = $controller('GenesViewController', { $scope: $rootScope.$new() });
-      expect(ctrl).to.exist;
-      expect(ctrl).to.be.a('function');
     });
   });
 });

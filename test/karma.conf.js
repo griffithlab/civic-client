@@ -9,7 +9,8 @@ module.exports = function(config) {
       'test/karma.setup.js': ['browserify']
     },
     ngHtml2JsPreprocessor: {
-      moduleName: 'civicClient'
+      moduleName: 'civic.templates',
+      stripPrefix: 'src/'
     },
     logLevel: config.LOG_DEBUG,
     files : [
@@ -35,7 +36,7 @@ module.exports = function(config) {
       'src/{app,components}/**/*.js',
       'src/{app,components}/**/*.tpl.html',
       'test/karma.setup.js',
-      'test/unit/**/*.spec.js'
+      'src/{app,components}/**/*.spec.js'
     ],
     autoWatch : false,
     frameworks: ['mocha', 'browserify'],
