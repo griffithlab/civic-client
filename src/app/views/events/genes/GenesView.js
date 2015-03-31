@@ -50,7 +50,12 @@
     };
 
     geneView.actions = {
-
+      addGene: function() {},
+      refreshGene: function () {},
+      addComment: function() {},
+      submitChange: function() {},
+      acceptChange: function() {},
+      rejectChange: function() {}
     };
   }
 

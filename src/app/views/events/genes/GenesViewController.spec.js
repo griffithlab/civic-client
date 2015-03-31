@@ -2,13 +2,8 @@
 
 describe('GenesViewController', function () {
   var $rootScope,
-    $compile,
     $state,
-    $timeout,
     $controller,
-    $q,
-    $location,
-    $injector,
     GenesService,
     Genes,
     MyGeneInfoService,
@@ -209,39 +204,25 @@ describe('GenesViewController', function () {
     });
 
     module('q-constructor'); // switch to v1.3 $q constructor for sinon-as-promised
-    // module('civic.states'); // load core state config
     module('civic.templates'); // load ng-html2js templates
 
     // inject services
     inject(function(_$rootScope_,
-                    _$compile_,
                     _$controller_,
                     _$state_,
-                    _$timeout_,
-                    _$q_,
-                    _$location_,
-                    _$injector_,
+                    $q,
                     _Genes_,
                     _MyGeneInfo_) {
 
       $rootScope = _$rootScope_;
-      $compile = _$compile_;
       $controller = _$controller_;
       $state = _$state_;
-      $timeout = _$timeout_;
-      $q = _$q_;
-      $location = _$location_;
-      $injector = _$injector_;
       Genes = _Genes_;
       MyGeneInfo = _MyGeneInfo_;
 
       _ = window._;
 
       sinonAsPromised($q);
-
-      // ui-view compile to force ui-router's controller instantiation
-      $compile("<html><body><ui-view/></body></html>")($rootScope);
-      $rootScope.$digest();
 
       // instantiate GenesViewController using resolved deps from event.genes state
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
@@ -262,15 +243,18 @@ describe('GenesViewController', function () {
   it('is successfully instantiated using resolved state dependencies', function() {
     expect(GenesViewController).to.exist;
   });
+
   it('creates a geneView object on $scope to hold state info, data, servies, and actions', function() {
     expect(scope.geneView).to.exist;
     expect(scope.geneView).to.be.an('object');
   });
+
   it('specifies entity name and state name on config object', function() {
     expect(scope.geneView.config).to.exist;
     expect(scope.geneView.config.name).to.equal('gene');
     expect(scope.geneView.config.state).to.equal('events.genes');
   });
+
   it('attaches Genes service to services object', function() {
     expect(scope.geneView.services.Genes).to.exist;
     expect(scope.geneView.services.Genes.get).to.be.a('function');
@@ -280,6 +264,7 @@ describe('GenesViewController', function () {
     expect(scope.geneView.services.MyGeneInfo).to.exist;
     expect(scope.geneView.services.MyGeneInfo.getDetails).to.be.a('function');
   });
+
   it('attaches gene data to data object', function() {
     expect(scope.geneView.data).to.exist;
     expect(scope.geneView.data.gene).to.exist;
