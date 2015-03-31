@@ -13,6 +13,8 @@ describe('GenesViewController', function () {
     Genes,
     MyGeneInfoService,
     MyGeneInfo,
+    GenesViewController,
+    scope,
     state = 'events.genes';
 
   function goFromState(state1, params1) {
@@ -240,19 +242,30 @@ describe('GenesViewController', function () {
       // ui-view compile to force ui-router's controller instantiation
       $compile("<html><body><ui-view/></body></html>")($rootScope);
       $rootScope.$digest();
+
+      // instantiate GenesViewController using resolved deps from event.genes state
+      goFromState('initial').toState('events.genes.child', { geneId: 238 });
+      expect($state.$current.name).to.equal('events.genes.child');
+      var deps  = $state.$current.parent.locals.globals;
+      scope = $rootScope.$new();
+      GenesViewController = $controller('GenesViewController', {
+        $scope: scope,
+        Genes: deps.Genes,
+        MyGeneInfo: deps.MyGeneInfo,
+        gene: deps.gene,
+        myGeneInfo: deps.myGeneInfo
+      });
     });
 
   });
 
-  describe('GenesViewController should be instantiated by state transition to child state', function() {
+  describe('GenesViewController should be successfully instantiated using ui-router resolved deps', function() {
     it('is successfully instantiated using resolved state dependencies', function() {
-      goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      expect($state.$current.name).to.equal('events.genes.child');
-      var genesState = $state.$current.parent;
-      var conf = _.omit(genesState.locals.globals, '$stateParams');
-      conf.$scope = $rootScope.$new();
-      var GenesViewController = $controller(genesState.controller, conf);
       expect(GenesViewController).to.exist;
+    });
+    it('creates a geneView object on $scope', function() {
+      expect(scope.geneView).to.exist;
+      expect(scope.geneView).to.be.an('object');
     });
   });
 });

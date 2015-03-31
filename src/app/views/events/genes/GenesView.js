@@ -2,7 +2,7 @@
   'use strict';
   angular.module('civic.events.genes', ['ui.router'])
     .config(GenesViewConfig)
-    .controller(GenesViewController);
+    .controller('GenesViewController', GenesViewController);
 
   // @ngInject
   function GenesViewConfig($stateProvider) {
@@ -33,7 +33,7 @@
   }
 
   // @ngInject
-  function GenesViewController(Genes, MyGeneInfo, gene, myGeneInfo, $log) {
+  function GenesViewController($scope, Genes, MyGeneInfo, gene, myGeneInfo) {
     console.log('GenesViewController instantiated.');
     var ctrl = $scope;
     var geneView = ctrl.geneView = {};
