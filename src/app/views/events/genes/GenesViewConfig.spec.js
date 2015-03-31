@@ -302,10 +302,11 @@ describe('GenesViewConfig', function () {
       expect(myGeneInfo._id).to.equal('238');
     });
 
-    it('instantiates a controller function', function () {
+    it('requests GenesViewController to be instantiated', function () {
+      // TODO: figure out how to test if the controller is actually created
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
       expect($state.$current.name).to.equal('events.genes.child');
-      expect($state.$current.parent.controller).to.be.a('function');
+      expect($state.$current.parent.controller).to.equal('GenesViewController');
     });
   });
 });

@@ -205,7 +205,7 @@ describe('GenesViewController', function () {
           abstract: false,
           url: '/child',
           template: '<ui-view/>'
-      })
+        })
     });
 
     module('q-constructor'); // switch to v1.3 $q constructor for sinon-as-promised
@@ -259,13 +259,32 @@ describe('GenesViewController', function () {
 
   });
 
-  describe('GenesViewController should be successfully instantiated using ui-router resolved deps', function() {
-    it('is successfully instantiated using resolved state dependencies', function() {
-      expect(GenesViewController).to.exist;
-    });
-    it('creates a geneView object on $scope', function() {
-      expect(scope.geneView).to.exist;
-      expect(scope.geneView).to.be.an('object');
-    });
+  it('is successfully instantiated using resolved state dependencies', function() {
+    expect(GenesViewController).to.exist;
+  });
+  it('creates a geneView object on $scope to hold state info, data, servies, and actions', function() {
+    expect(scope.geneView).to.exist;
+    expect(scope.geneView).to.be.an('object');
+  });
+  it('specifies entity name and state name on config object', function() {
+    expect(scope.geneView.config).to.exist;
+    expect(scope.geneView.config.name).to.equal('gene');
+    expect(scope.geneView.config.state).to.equal('events.genes');
+  });
+  it('attaches Genes service to services object', function() {
+    expect(scope.geneView.services.Genes).to.exist;
+    expect(scope.geneView.services.Genes.get).to.be.a('function');
+  });
+
+  it('attaches MyGeneInfo service to services object', function() {
+    expect(scope.geneView.services.MyGeneInfo).to.exist;
+    expect(scope.geneView.services.MyGeneInfo.getDetails).to.be.a('function');
+  });
+  it('attaches gene data to data object', function() {
+    expect(scope.geneView.data).to.exist;
+    expect(scope.geneView.data.gene).to.exist;
+    expect(Number(scope.geneView.data.gene.entrez_id)).to.equal(238);
+    expect(scope.geneView.data.myGeneInfo).to.exist;
+    expect(Number(scope.geneView.data.myGeneInfo._id)).to.equal(238);
   });
 });
