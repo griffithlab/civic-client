@@ -2,7 +2,7 @@
   'use strict';
   angular.module('civic.events')
     .config(EventsViewConfig)
-    .controller(EventsViewController);
+    .controller('EventsViewController', EventsViewController);
 
   // @ngInject
   function EventsViewConfig($stateProvider) {

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('GenesViewConfig', function () {
+describe('GenesViewController', function () {
   var $rootScope,
     $compile,
     $state,
@@ -8,51 +8,21 @@ describe('GenesViewConfig', function () {
     $controller,
     $q,
     $templateCache,
+    $location,
+    $injector,
     GenesService,
     Genes,
     MyGeneInfoService,
     MyGeneInfo,
+    GenesViewController,
     state = 'events.genes';
-
-  // helpful utilities for testing ui.router state transitions
-  function goTo(url) {
-    $location.url(url);
-    $rootScope.$digest();
-  }
-
-  function goFromUrl(url) {
-    return {
-      toState: function (state, params) {
-        $location.replace().url(url); //Don't actually trigger a reload
-        $state.go(state, params);
-        $rootScope.$digest();
-      }};
-  }
-
-  function goFromState(state1, params1) {
-    return {
-      toState: function (state2, params2) {
-        $state.go(state1, params1);
-        $rootScope.$digest();
-        $state.go(state2, params2);
-        $rootScope.$digest();
-      }};
-  }
-
-  function resolve(value) {
-    return {
-      forStateAndView: function (state, view) {
-        var viewDefinition = view ? $state.get(state).views[view] : $state.get(state);
-        return $injector.invoke(viewDefinition.resolve[value]);
-      }};
-  }
 
   beforeEach(function () {
     module('civic.events');
     module('civic.events.genes', function ($provide, $stateProvider) {
       // set up mock service providers
       $provide.value('Genes', GenesService = {
-        get: sinon.stub().withArgs({ geneId: 238 }).resolves({
+        get: sinon.stub().resolves({
           "id": 1,
           "entrez_name": "ALK",
           "entrez_id": 238,
@@ -158,7 +128,7 @@ describe('GenesViewConfig', function () {
         })
       });
       $provide.value('MyGeneInfo', MyGeneInfoService = {
-        getDetails: sinon.stub().withArgs(238).resolves({
+        getDetails: sinon.stub().resolves({
           "_id": "238",
           "alias": ["CD246", "NBLST3"],
           "interpro": [{
@@ -225,14 +195,26 @@ describe('GenesViewConfig', function () {
           abstract: false,
           url: '/test2',
           template: '<ui-view/>'
-        })
+      })
     });
 
     module('q-constructor'); // switch to v1.3 $q constructor for sinon-as-promised
+    // module('civic.states'); // load core state config
     module('civic.templates'); // load ng-html2js templates
 
     // inject services
-    inject(function(_$rootScope_, _$compile_, _$controller_, _$state_, _$timeout_, _$q_, _$templateCache_, _Genes_, _MyGeneInfo_) {
+    inject(function(_$rootScope_,
+                    _$compile_,
+                    _$controller_,
+                    _$state_,
+                    _$timeout_,
+                    _$q_,
+                    _$templateCache_,
+                    _$location_,
+                    _$injector_,
+                    _Genes_,
+                    _MyGeneInfo_) {
+
       $rootScope = _$rootScope_;
       $compile = _$compile_;
       $controller = _$controller_;
@@ -240,82 +222,38 @@ describe('GenesViewConfig', function () {
       $timeout = _$timeout_;
       $q = _$q_;
       $templateCache = _$templateCache_;
+      $location = _$location_;
+      $injector = _$injector_;
       Genes = _Genes_;
       MyGeneInfo = _MyGeneInfo_;
 
       sinonAsPromised($q);
 
+      // ui-view compile to force ui-router's controller instantiation
+      $compile("<html><body><ui-view/></body></html>")($rootScope);
+      $rootScope.$digest();
+
+
+      //  ui-router debug logging
+      function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
+      $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
+      $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
+      $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
     });
+
   });
 
-  describe('events.genes state configuration', function() {
-    it('should be abstract', function () {
-      expect($state.get(state).abstract).to.be.true;
-    });
-
-    it('should specify the url "/genes/:geneId"', function () {
-      expect($state.get(state).url).to.equal('/genes/:geneId');
-    });
-
-    it('should respond to the url "#/events/genes/238"', function () {
-      expect($state.href(state, { geneId: 238 })).to.equal('#/events/genes/238');
-    });
-
-    it('requests Genes service to be resolved', function () {
-      var egState = $state.get(state);
-      expect(egState.resolve.Genes).to.exist;
-      expect(egState.resolve.Genes).to.equal('Genes');
-    });
-
-    it('requests MyGeneInfo service to be resolved', function () {
-      var egState = $state.get(state);
-      expect(egState.resolve.MyGeneInfo).to.exist;
-      expect(egState.resolve.MyGeneInfo).to.equal('MyGeneInfo');
-    });
-
-    it('successfully resolves the Genes service', function () {
-      $state.go('test');
-      $rootScope.$digest();
-      expect($state.$current.name).to.equal('test');
-      $state.go('events.genes.test', { geneId: 238 });
-      $rootScope.$digest();
-      expect($state.$current.parent.locals.globals.Genes).to.exist;
-      expect($state.$current.parent.locals.globals.Genes).to.be.an('object');
-      expect($state.$current.parent.locals.globals.Genes.get).to.be.a('function');
-    });
-
-    it('successfully resolves the MyGeneInfo service', function () {
-      $state.go('test');
-      $rootScope.$digest();
-      expect($state.$current.name).to.equal('test');
-      $state.go('events.genes.test', { geneId: 238 });
-      $rootScope.$digest();
-      expect($state.$current.parent.locals.globals.MyGeneInfo).to.exist;
-      expect($state.$current.parent.locals.globals.MyGeneInfo).to.be.an('object');
-      expect($state.$current.parent.locals.globals.MyGeneInfo.getDetails).to.be.a('function');
-    });
-
-    it('retrieves specific gene info from MyGeneInfo service', function () {
-      var egState = $state.get(state);
-      var gene;
-      var myGeneInfo;
-      expect(egState.resolve.myGeneInfo).to.exist;
-      expect(egState.resolve.myGeneInfo).to.be.a('function');
-      egState.resolve.gene(Genes, {geneId: 238 }).then(function(result) {
-        gene = result;
-      });
-      $timeout.flush();
-      egState.resolve.myGeneInfo(MyGeneInfo, gene).then(function(result) {
-        myGeneInfo = result;
-      });
-      $timeout.flush();
-      expect(myGeneInfo._id).to.equal('238');
-    });
-
-    it('instantiates a controller function', function () {
-      goFromState('test').toState('events.genes.test', { geneId: 238 });
-      expect($state.$current.name).to.equal('events.genes.test');
-      expect($state.$current.parent.controller).to.be.a('function');
-    });
+  describe('GenesViewController should be instantiated by state transition to child state', function() {
+    //it('should exist', function() {
+    //  // goFromState('test').toState('events.genes.test', { geneId: 238 });
+    //  $state.go('test');
+    //  $rootScope.$digest();
+    //  expect($state.$current.name).to.equal('test');
+    //  $state.go('events.genes.test', { geneId: 238 });
+    //  $rootScope.$digest();
+    //  expect($state.$current.name).to.equal('events.genes.test');
+    //  expect($injector.has('GenesViewController')).to.be.true;
+    //  // expect(ctrl).to.be.a('function');
+    //});
   });
 });

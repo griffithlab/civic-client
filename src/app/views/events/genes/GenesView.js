@@ -21,7 +21,10 @@
             return MyGeneInfo.getDetails({ 'geneId': gene.entrez_id });
           }
         },
-        controller: 'GenesViewController',
+        //controller: 'GenesViewController',
+        controller: function() {
+          console.log('GenesViewController instantiated.');
+        },
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
@@ -31,7 +34,7 @@
 
   // @ngInject
   function GenesViewController(Genes, MyGeneInfo, gene, myGeneInfo, $log) {
-    $log.info('GenesViewController instantiated.');
+    console.log('GenesViewController instantiated.');
     var ctrl = $scope;
     var geneView = ctrl.geneView = {};
 
