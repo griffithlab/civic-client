@@ -188,6 +188,8 @@ describe('GenesViewConfig', function () {
       })
     });
 
+    module('q-constructor');
+
     // inject services
     inject(function(_$rootScope_, _$compile_, _$controller_, _$state_, _$timeout_, _$q_, _$templateCache_, _Genes_, _MyGeneInfo_) {
       $rootScope = _$rootScope_;
@@ -201,17 +203,17 @@ describe('GenesViewConfig', function () {
       MyGeneInfo = _MyGeneInfo_;
 
       // init sinon-as-promised with v1.2 $q shim
-      function $qShim(resolver) {
-        var deferred = _$q_.defer();
-        var resolve = angular.bind(deferred, deferred.resolve);
-        var reject = angular.bind(deferred, deferred.reject);
-        var promise = deferred.promise;
-
-        resolver(resolve, reject);
-
-        return promise;
-      }
-      sinonAsPromised($qShim);
+      //function $qShim(resolver) {
+      //  var deferred = _$q_.defer();
+      //  var resolve = angular.bind(deferred, deferred.resolve);
+      //  var reject = angular.bind(deferred, deferred.reject);
+      //  var promise = deferred.promise;
+      //
+      //  resolver(resolve, reject);
+      //
+      //  return promise;
+      //}
+      sinonAsPromised($q);
 
       // mock templates
       $templateCache.put('app/views/events/genes/GenesView.tpl.html', '<div ui-view></div>');

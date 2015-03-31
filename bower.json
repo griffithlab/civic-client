@@ -17,7 +17,8 @@
     "angulartics": "~0.17.2"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.0"
+    "angular-mocks": "~1.2.0",
+    "angular-q-constructor": "~1.0.0"
   },
   "overrides": {
     "angulartics": {

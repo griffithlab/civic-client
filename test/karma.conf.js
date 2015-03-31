@@ -32,6 +32,7 @@ module.exports = function(config) {
       "bower_components/angulartics/src/angulartics.js",
       "bower_components/angulartics/src/angulartics-ga.js",
       "bower_components/angular-mocks/angular-mocks.js",
+      "bower_components/angular-q-constructor/release/angular-q-constructor.js",
       // endbower
       'src/{app,components}/**/*.js',
       'src/{app,components}/**/*.tpl.html',
