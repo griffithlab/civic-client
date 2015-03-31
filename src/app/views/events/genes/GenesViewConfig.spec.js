@@ -7,7 +7,6 @@ describe('GenesViewConfig', function () {
     $timeout,
     $controller,
     $q,
-    $templateCache,
     GenesService,
     Genes,
     MyGeneInfoService,
@@ -42,7 +41,7 @@ describe('GenesViewConfig', function () {
   function resolve(value) {
     return {
       forStateAndView: function (state, view) {
-        var viewDefinition = view ? $state.get(state).views[view] : $state.get(state);
+        var viewDefinition = view ? $state.get('events.genes').views[view] : $state.get('events.genes');
         return $injector.invoke(viewDefinition.resolve[value]);
       }};
   }
@@ -215,13 +214,13 @@ describe('GenesViewConfig', function () {
 
       // create a navigable events.genes.test state for to force events.genes loading
       $stateProvider
-        .state('test', {
+        .state('initial', {
           abstract: false,
           url: '/test1',
           template: '<ui-view/>'
         });
       $stateProvider
-        .state('events.genes.test', {
+        .state('events.genes.child', {
           abstract: false,
           url: '/test2',
           template: '<ui-view/>'
@@ -239,7 +238,6 @@ describe('GenesViewConfig', function () {
       $state = _$state_;
       $timeout = _$timeout_;
       $q = _$q_;
-      $templateCache = _$templateCache_;
       Genes = _Genes_;
       MyGeneInfo = _MyGeneInfo_;
 
@@ -250,11 +248,11 @@ describe('GenesViewConfig', function () {
 
   describe('events.genes state configuration', function() {
     it('should be abstract', function () {
-      expect($state.get(state).abstract).to.be.true;
+      expect($state.get('events.genes').abstract).to.be.true;
     });
 
     it('should specify the url "/genes/:geneId"', function () {
-      expect($state.get(state).url).to.equal('/genes/:geneId');
+      expect($state.get('events.genes').url).to.equal('/genes/:geneId');
     });
 
     it('should respond to the url "#/events/genes/238"', function () {
@@ -262,41 +260,33 @@ describe('GenesViewConfig', function () {
     });
 
     it('requests Genes service to be resolved', function () {
-      var egState = $state.get(state);
+      var egState = $state.get('events.genes');
       expect(egState.resolve.Genes).to.exist;
       expect(egState.resolve.Genes).to.equal('Genes');
     });
 
     it('requests MyGeneInfo service to be resolved', function () {
-      var egState = $state.get(state);
+      var egState = $state.get('events.genes');
       expect(egState.resolve.MyGeneInfo).to.exist;
       expect(egState.resolve.MyGeneInfo).to.equal('MyGeneInfo');
     });
 
     it('successfully resolves the Genes service', function () {
-      $state.go('test');
-      $rootScope.$digest();
-      expect($state.$current.name).to.equal('test');
-      $state.go('events.genes.test', { geneId: 238 });
-      $rootScope.$digest();
+      goFromState('initial').toState('events.genes.child', { geneId: 238 });
       expect($state.$current.parent.locals.globals.Genes).to.exist;
       expect($state.$current.parent.locals.globals.Genes).to.be.an('object');
       expect($state.$current.parent.locals.globals.Genes.get).to.be.a('function');
     });
 
     it('successfully resolves the MyGeneInfo service', function () {
-      $state.go('test');
-      $rootScope.$digest();
-      expect($state.$current.name).to.equal('test');
-      $state.go('events.genes.test', { geneId: 238 });
-      $rootScope.$digest();
+      goFromState('initial').toState('events.genes.child', { geneId: 238 });
       expect($state.$current.parent.locals.globals.MyGeneInfo).to.exist;
       expect($state.$current.parent.locals.globals.MyGeneInfo).to.be.an('object');
       expect($state.$current.parent.locals.globals.MyGeneInfo.getDetails).to.be.a('function');
     });
 
     it('retrieves specific gene info from MyGeneInfo service', function () {
-      var egState = $state.get(state);
+      var egState = $state.get('events.genes');
       var gene;
       var myGeneInfo;
       expect(egState.resolve.myGeneInfo).to.exist;
@@ -304,17 +294,17 @@ describe('GenesViewConfig', function () {
       egState.resolve.gene(Genes, {geneId: 238 }).then(function(result) {
         gene = result;
       });
-      $timeout.flush();
+      $rootScope.$digest();
       egState.resolve.myGeneInfo(MyGeneInfo, gene).then(function(result) {
         myGeneInfo = result;
       });
-      $timeout.flush();
+      $rootScope.$digest();
       expect(myGeneInfo._id).to.equal('238');
     });
 
     it('instantiates a controller function', function () {
-      goFromState('test').toState('events.genes.test', { geneId: 238 });
-      expect($state.$current.name).to.equal('events.genes.test');
+      goFromState('initial').toState('events.genes.child', { geneId: 238 });
+      expect($state.$current.name).to.equal('events.genes.child');
       expect($state.$current.parent.controller).to.be.a('function');
     });
   });

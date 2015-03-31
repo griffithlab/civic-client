@@ -7,15 +7,23 @@ describe('GenesViewController', function () {
     $timeout,
     $controller,
     $q,
-    $templateCache,
     $location,
     $injector,
     GenesService,
     Genes,
     MyGeneInfoService,
     MyGeneInfo,
-    GenesViewController,
     state = 'events.genes';
+
+  function goFromState(state1, params1) {
+    return {
+      toState: function (state2, params2) {
+        $state.go(state1, params1);
+        $rootScope.$digest();
+        $state.go(state2, params2);
+        $rootScope.$digest();
+      }};
+  }
 
   beforeEach(function () {
     module('civic.events');
@@ -185,15 +193,15 @@ describe('GenesViewController', function () {
 
       // create a navigable events.genes.test state for to force events.genes loading
       $stateProvider
-        .state('test', {
+        .state('initial', {
           abstract: false,
-          url: '/test1',
+          url: '/initial',
           template: '<ui-view/>'
         });
       $stateProvider
-        .state('events.genes.test', {
+        .state('events.genes.child', {
           abstract: false,
-          url: '/test2',
+          url: '/child',
           template: '<ui-view/>'
       })
     });
@@ -209,7 +217,6 @@ describe('GenesViewController', function () {
                     _$state_,
                     _$timeout_,
                     _$q_,
-                    _$templateCache_,
                     _$location_,
                     _$injector_,
                     _Genes_,
@@ -221,39 +228,31 @@ describe('GenesViewController', function () {
       $state = _$state_;
       $timeout = _$timeout_;
       $q = _$q_;
-      $templateCache = _$templateCache_;
       $location = _$location_;
       $injector = _$injector_;
       Genes = _Genes_;
       MyGeneInfo = _MyGeneInfo_;
+
+      _ = window._;
 
       sinonAsPromised($q);
 
       // ui-view compile to force ui-router's controller instantiation
       $compile("<html><body><ui-view/></body></html>")($rootScope);
       $rootScope.$digest();
-
-
-      //  ui-router debug logging
-      function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-      $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
-      $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
-      $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
     });
 
   });
 
   describe('GenesViewController should be instantiated by state transition to child state', function() {
-    //it('should exist', function() {
-    //  // goFromState('test').toState('events.genes.test', { geneId: 238 });
-    //  $state.go('test');
-    //  $rootScope.$digest();
-    //  expect($state.$current.name).to.equal('test');
-    //  $state.go('events.genes.test', { geneId: 238 });
-    //  $rootScope.$digest();
-    //  expect($state.$current.name).to.equal('events.genes.test');
-    //  expect($injector.has('GenesViewController')).to.be.true;
-    //  // expect(ctrl).to.be.a('function');
-    //});
+    it('is successfully instantiated using resolved state dependencies', function() {
+      goFromState('initial').toState('events.genes.child', { geneId: 238 });
+      expect($state.$current.name).to.equal('events.genes.child');
+      var genesState = $state.$current.parent;
+      var conf = _.omit(genesState.locals.globals, '$stateParams');
+      conf.$scope = $rootScope.$new();
+      var GenesViewController = $controller(genesState.controller, conf);
+      expect(GenesViewController).to.exist;
+    });
   });
 });
