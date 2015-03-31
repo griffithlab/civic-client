@@ -188,7 +188,7 @@ describe('GenesViewController', function () {
         })
       });
 
-      // create a navigable events.genes.test state for to force events.genes loading
+      // create a navigable initial and child states to force events.genes abstract state to resolve
       $stateProvider
         .state('initial', {
           abstract: false,
