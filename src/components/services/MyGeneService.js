@@ -1,19 +1,20 @@
 (function() {
   'use strict';
   angular.module('civic.services')
-    .factory('MyGene', MyGeneService);
+    .factory('MyGeneInfoResource', MyGeneInfoResource)
+    .factory('MyGeneInfo', MyGeneInfoService);
 
   // @ngInject
-  function MyGeneService($resource, $cacheFactory, _) {
+  function MyGeneInfoResource($resource, $cacheFactory, _) {
 
     var cache = $cacheFactory('MyGeneInfo'); // default cache doesn't work for some reason
 
-    var MyGene = $resource('/api/genes/mygene_info_proxy/:geneId',
+    return $resource('/api/genes/mygene_info_proxy/:geneId',
       {
         geneId: '@geneId'
       },
       {
-          getDetails: {
+        get: {
           isArray: false,
           cache: cache,
           transformResponse: function(data) {
@@ -63,8 +64,14 @@
         }
 
       });
-
-    return MyGene;
   }
 
+  // @ngInject
+  function MyGeneInfoService(MyGeneInfoResource) {
+    return {
+      get: function(entrez_id) {
+        return MyGeneInfoResource.get({ geneId: entrez_id }).$promise;
+      }
+    }
+  }
 })();

@@ -60,7 +60,9 @@ describe('GenesViewConfig', function () {
         getDetails: sinon.stub().withArgs(238).resolves(servedMyGeneInfo238)
       });
 
-      // create a navigable events.genes.test state for to force events.genes loading
+      // as events.genes is an abstract state and cannot be navigated to,
+      // we need to create a navigable events.genes.child state for to
+      // force events.genes state to instantiate its controller and inject deps
       $stateProvider
         .state('initial', {
           abstract: false,

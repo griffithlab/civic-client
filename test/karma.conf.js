@@ -71,7 +71,7 @@ module.exports = function(config) {
     //browsers : ['Chrome'],
     reporters: ['spec'],
     autoWatch : false,
-    logLevel: config.LOG_WARN
+    logLevel: config.LOG_INFO
   });
 };
 

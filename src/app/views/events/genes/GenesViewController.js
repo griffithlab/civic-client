@@ -15,15 +15,27 @@
           Genes: 'Genes',
           MyGeneInfo: 'MyGeneInfo',
           gene: function(Genes, $stateParams) {
-            return Genes.get({ 'geneId': $stateParams.geneId });
+            return Genes.get($stateParams.geneId);
           },
           myGeneInfo: function(MyGeneInfo, gene) {
-            return MyGeneInfo.getDetails({ 'geneId': gene.entrez_id });
+            return MyGeneInfo.get(gene.entrez_id);
           }
         },
         controller: 'GenesViewController',
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
+        }
+      })
+      .state('events.genes.summary', {
+        url: '/summary',
+        template: '<div><h1>Gene Summary</h1><pre>{{ geneModel.data | json}}</pre><ui-view/></div>',
+        controller: function($scope) {
+          console.log('events.gene.summary controller instantiated.');
+          var ctrl = $scope;
+        },
+        data: {
+          navMode: 'sub',
+          titleExp: '"GENE SUMMARY TEST"'
         }
       });
     // additional events.genes states here
@@ -35,6 +47,7 @@
                                MyGeneInfo,
                                gene,
                                myGeneInfo) {
+    console.log('GenesViewController instantiated');
 
     var ctrl = $scope;
     var geneModel = ctrl.geneModel = {};

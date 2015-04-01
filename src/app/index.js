@@ -11,7 +11,6 @@ angular.module('civicClient', [
   'aa.formExternalConfiguration',
   'aa.notify',
   'aa.select2',
-  'ngResource',
   'dialogs.main',
   'yaru22.angular-timeago',
   'angulartics',
@@ -73,10 +72,10 @@ function appRun(Security, $rootScope, $state, $analytics) {
   // console.table($state.get());
 
   //  ui-router debug logging
-  //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-  //$rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
-  //$rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
-  //$rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
+  function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
+  $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
+  $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
+  $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
 
 }
 // define top-level app modules & dependencies
@@ -87,7 +86,7 @@ angular.module('civic.security', [
   'civic.security.login'
 ]);
 angular.module('civic.states', ['ui.router']);
-angular.module('civic.services', []);
+angular.module('civic.services', ['ui.router', 'ngResource']);
 angular.module('civic.pages', ['civic.security.authorization', 'ui.router']);
 angular.module('civic.account', ['civic.security.authorization', 'ui.router']);
 angular.module('civic.common', ['ui.router']);

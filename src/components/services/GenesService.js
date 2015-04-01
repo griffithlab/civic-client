@@ -1,10 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.services')
+    .factory('GenesResource', GenesResource)
     .factory('Genes', GenesService);
 
   // @ngInject
-  function GenesService($resource, $cacheFactory, _, $log) {
+  function GenesResource($resource, $cacheFactory, _, $log) {
     var cache = $cacheFactory('genesCache');
 
     var cacheInterceptor =function(response) {
@@ -12,7 +13,7 @@
       return response;
     };
 
-    var Genes = $resource('/api/genes/:geneId',
+    return $resource('/api/genes/:geneId',
       {
         geneId: '@entrez_id'
       },
@@ -25,7 +26,11 @@
         get: { // get a single gene
           method: 'GET',
           isArray: false,
-          cache: cache
+          cache: cache,
+          transformRequest: function(request) {
+            console.log('GenesService.get transformRequest called.');
+            return request;
+          }
         },
         update: {
           method: 'PUT',
@@ -34,8 +39,18 @@
           }
         }
       });
+  }
 
-    return Genes;
+  //ngInject
+  function GenesService(GenesResource) {
+    return {
+      get: function(entrez_id) {
+        return GenesResource.get({geneId: entrez_id}).$promise;
+      },
+      query: function() {
+        return GenesResource.query().$promise;
+      }
+    }
   }
 
 })();
