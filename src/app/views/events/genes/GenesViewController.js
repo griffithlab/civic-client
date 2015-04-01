@@ -30,7 +30,12 @@
   }
 
   // @ngInject
-  function GenesViewController($scope, Genes, MyGeneInfo, gene, myGeneInfo, $log) {
+  function GenesViewController($scope,
+                               Genes,
+                               MyGeneInfo,
+                               gene,
+                               myGeneInfo) {
+
     var ctrl = $scope;
     var geneModel = ctrl.geneModel = {};
 
@@ -52,10 +57,16 @@
     geneModel.actions = {
       addGene: function() {},
       refreshGene: function () {},
-      addComment: function() {},
+
+      getChanges: function() {},
       submitChange: function() {},
       acceptChange: function() {},
-      rejectChange: function() {}
+      rejectChange: function() {},
+
+      getComments: function() {},
+      addComment: function() {},
+      updateComment: function() {},
+      deleteComment: function() {}
     };
   }
 

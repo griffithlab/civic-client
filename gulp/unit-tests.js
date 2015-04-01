@@ -14,9 +14,16 @@ gulp.task('test:unit', ['test:unit:wiredep'], function (done) {
   }, done);
 });
 
+
+// Watch for file changes and re-run tests on each change
+gulp.task('test:unit:watch', ['test:unit:wiredep'], function (done) {
+  karma.start({
+    configFile: __dirname + '/../test/karma.conf.js'
+  }, done);
+});
+
 // Run all unit tests in debug mode
 gulp.task('test:unit:debug', function () {
-
   // helper function for debugging node child_process
   (function() {
     var childProcess = require("child_process");
@@ -36,13 +43,6 @@ gulp.task('test:unit:debug', function () {
     path.join(__dirname, '../node_modules/gulp/bin/gulp.js'),
     'test:unit'
   ], { stdio: 'inherit'});
-});
-
-// Watch for file changes and re-run tests on each change
-gulp.task('test:unit:watch', ['test:unit:wiredep'], function (done) {
-  karma.start({
-    configFile: __dirname + '/../test/karma.conf.js'
-  }, done);
 });
 
 // inject bower components into karma.conf

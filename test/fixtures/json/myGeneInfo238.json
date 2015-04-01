@@ -1,0 +1,53 @@
+{
+  "_id": "238",
+  "alias": ["CD246", "NBLST3"],
+  "interpro": [{
+    "short_desc": "ConA-like_lec_gl_sf",
+    "id": "IPR008985",
+    "desc": "Concanavalin A-like lectin/glucanases superfamily"
+  }, {
+    "short_desc": "LDrepeatLR_classA_rpt",
+    "id": "IPR002172",
+    "desc": "Low-density lipoprotein (LDL) receptor class A repeat"
+  }, {"short_desc": "MAM_dom", "id": "IPR000998", "desc": "MAM domain"}, {
+    "short_desc": "Prot_kinase_dom",
+    "id": "IPR000719",
+    "desc": "Protein kinase domain"
+  }, {
+    "short_desc": "Kinase-like_dom",
+    "id": "IPR011009",
+    "desc": "Protein kinase-like domain"
+  }, {
+    "short_desc": "Ser-Thr/Tyr_kinase_cat_dom",
+    "id": "IPR001245",
+    "desc": "Serine-threonine/tyrosine-protein kinase catalytic domain"
+  }, {
+    "short_desc": "Ser/Thr_dual-sp_kinase",
+    "id": "IPR002290",
+    "desc": "Serine/threonine/dual specificity protein kinase, catalytic  domain"
+  }, {
+    "short_desc": "Tyr_kinase_cat_dom",
+    "id": "IPR020635",
+    "desc": "Tyrosine-protein kinase, catalytic domain"
+  }],
+  "name": "anaplastic lymphoma receptor tyrosine kinase",
+  "pathway": {
+    "reactome": [{"id": "REACT_115566", "name": "Cell Cycle"}, {
+      "id": "REACT_116125",
+      "name": "Disease"
+    }, {"id": "REACT_22172", "name": "Chromosome Maintenance"}, {
+      "id": "REACT_22186",
+      "name": "Deposition of new CENPA-containing nucleosomes at the centromere"
+    }, {"id": "REACT_22344", "name": "Nucleosome assembly"}, {
+      "id": "REACT_6185",
+      "name": "HIV Infection"
+    }, {"id": "REACT_6288", "name": "Host Interactions of HIV factors"}, {
+      "id": "REACT_6916",
+      "name": "Interactions of Rev with host cellular proteins"
+    }, {"id": "REACT_9395", "name": "Nuclear import of Rev protein"}],
+    "kegg": {"id": "hsa05223", "name": "Non-small cell lung cancer - Homo sapiens (human)"},
+    "wikipathways": {"id": "WP2848", "name": "Differentiation Pathway"}
+  },
+  "summary": "This gene encodes a receptor tyrosine kinase, which belongs to the insulin receptor superfamily. This protein comprises an extracellular domain, an hydrophobic stretch corresponding to a single pass transmembrane region, and an intracellular kinase domain. It plays an important role in the development of the brain and exerts its effects on specific neurons in the nervous system. This gene has been found to be rearranged, mutated, or amplified in a series of tumours including anaplastic large cell lymphomas, neuroblastoma, and non-small cell lung cancer. The chromosomal rearrangements are the most common genetic alterations in this gene, which result in creation of multiple fusion genes in tumourigenesis, including ALK (chromosome 2)/EML4 (chromosome 2), ALK/RANBP2 (chromosome 2), ALK/ATIC (chromosome 2), ALK/TFG (chromosome 3), ALK/NPM1 (chromosome 5), ALK/SQSTM1 (chromosome 5), ALK/KIF5B (chromosome 10), ALK/CLTC (chromosome 17), ALK/TPM4 (chromosome 19), and ALK/MSN (chromosome X).",
+  "symbol": "ALK"
+}

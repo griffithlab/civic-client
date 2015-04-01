@@ -240,36 +240,128 @@ describe('GenesViewController', function () {
 
   });
 
-  it('is successfully instantiated using resolved state dependencies', function() {
-    expect(GenesViewController).to.exist;
+  describe('controller instantiation', function(){
+    it('is successfully instantiated using resolved state dependencies', function() {
+      expect(GenesViewController).to.exist;
+    });
   });
 
-  it('creates a geneModel object on $scope to hold state info, data, servies, and actions', function() {
-    expect(scope.geneModel).to.exist;
-    expect(scope.geneModel).to.be.an('object');
+  describe('geneModel object definition', function() {
+    it('creates a geneModel object on $scope to hold state info, data, servies, and actions', function () {
+      expect(scope.geneModel).to.exist;
+      expect(scope.geneModel).to.be.an('object');
+    });
   });
 
-  it('specifies entity name and state name on config object', function() {
-    expect(scope.geneModel.config).to.exist;
-    expect(scope.geneModel.config.name).to.equal('gene');
-    expect(scope.geneModel.config.state).to.equal('events.genes');
+  describe('geneModel config', function() {
+    it('specifies entity name and state name on config object', function() {
+      expect(scope.geneModel.config).to.exist;
+      expect(scope.geneModel.config.name).to.equal('gene');
+      expect(scope.geneModel.config.state).to.equal('events.genes');
+    });
+
   });
 
-  it('attaches Genes service to services object', function() {
-    expect(scope.geneModel.services.Genes).to.exist;
-    expect(scope.geneModel.services.Genes.get).to.be.a('function');
+  describe('geneModel services', function() {
+    it('provides Genes service on geneModel', function() {
+      expect(scope.geneModel.services.Genes).to.exist;
+      expect(scope.geneModel.services.Genes.get).to.be.a('function');
+    });
+
+    it('provides MyGeneInfo service on geneModel', function() {
+      expect(scope.geneModel.services.MyGeneInfo).to.exist;
+      expect(scope.geneModel.services.MyGeneInfo.getDetails).to.be.a('function');
+    });
   });
 
-  it('attaches MyGeneInfo service to services object', function() {
-    expect(scope.geneModel.services.MyGeneInfo).to.exist;
-    expect(scope.geneModel.services.MyGeneInfo.getDetails).to.be.a('function');
+  describe('geneModel data', function() {
+    it('provides data object on geneModel', function() {
+      expect(scope.geneModel.data).to.exist;
+      expect(scope.geneModel.data).to.be.an('object');
+    });
+
+    it('attaches gene data to geneModel data object', function() {
+      expect(scope.geneModel.data.gene).to.exist;
+      expect(scope.geneModel.data.gene).to.be.an('object');
+      expect(Number(scope.geneModel.data.gene.entrez_id)).to.equal(238);
+    });
+
+    it('attaches myGeneInfo data to geneModel data object', function() {
+      expect(scope.geneModel.data.myGeneInfo).to.exist;
+      expect(scope.geneModel.data.myGeneInfo).to.be.an('object');
+      expect(Number(scope.geneModel.data.myGeneInfo._id)).to.equal(238);
+    });
   });
 
-  it('attaches gene data to data object', function() {
-    expect(scope.geneModel.data).to.exist;
-    expect(scope.geneModel.data.gene).to.exist;
-    expect(Number(scope.geneModel.data.gene.entrez_id)).to.equal(238);
-    expect(scope.geneModel.data.myGeneInfo).to.exist;
-    expect(Number(scope.geneModel.data.myGeneInfo._id)).to.equal(238);
+  describe('geneModel actions definitions', function() {
+    it('provides actions object on geneModel', function() {
+      expect(scope.geneModel.actions).to.exist;
+      expect(scope.geneModel.actions).to.be.an('object');
+    });
+
+    it('attaches addGene function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.addGene).to.exist;
+      expect(scope.geneModel.actions.addGene).to.be.a('function');
+    });
+
+    it('attaches refreshGene function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.refreshGene).to.exist;
+      expect(scope.geneModel.actions.refreshGene).to.be.a('function');
+    });
+
+    it('attaches submitChange function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.submitChange).to.exist;
+      expect(scope.geneModel.actions.submitChange).to.be.a('function');
+    });
+
+    it('attaches updateComment function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.updateComment).to.exist;
+      expect(scope.geneModel.actions.updateComment).to.be.a('function');
+    });
+
+    it('attaches getChanges function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getChanges).to.exist;
+      expect(scope.geneModel.actions.getChanges).to.be.a('function');
+    });
+
+    it('attaches acceptChange function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.acceptChange).to.exist;
+      expect(scope.geneModel.actions.acceptChange).to.be.a('function');
+    });
+
+    it('attaches rejectChange function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.rejectChange).to.exist;
+      expect(scope.geneModel.actions.rejectChange).to.be.a('function');
+    });
+
+    it('attaches addComment function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.addComment).to.exist;
+      expect(scope.geneModel.actions.addComment).to.be.a('function');
+    });
+
+    it('attaches getComments function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getComments).to.exist;
+      expect(scope.geneModel.actions.getComments).to.be.a('function');
+    });
+
+    it('attaches deleteComment function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.deleteComment).to.exist;
+      expect(scope.geneModel.actions.deleteComment).to.be.a('function');
+    });
+  });
+
+  describe('geneModel gene actions', function() {
+
+
+  });
+
+  describe('geneModel gene changes actions', function() {
+
+
+  });
+
+  describe('geneModel gene comment actions', function() {
+
+
   });
 });

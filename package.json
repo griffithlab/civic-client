@@ -43,6 +43,7 @@
     "karma-chrome-launcher": "^0.1.7",
     "karma-mocha": "^0.1.10",
     "karma-ng-html2js-preprocessor": "^0.1.2",
+    "karma-ng-json2js-preprocessor": "^1.0.0",
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-sinon": "^1.0.4",
     "karma-spec-reporter": "0.0.16",
