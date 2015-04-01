@@ -244,32 +244,32 @@ describe('GenesViewController', function () {
     expect(GenesViewController).to.exist;
   });
 
-  it('creates a geneView object on $scope to hold state info, data, servies, and actions', function() {
-    expect(scope.geneView).to.exist;
-    expect(scope.geneView).to.be.an('object');
+  it('creates a geneModel object on $scope to hold state info, data, servies, and actions', function() {
+    expect(scope.geneModel).to.exist;
+    expect(scope.geneModel).to.be.an('object');
   });
 
   it('specifies entity name and state name on config object', function() {
-    expect(scope.geneView.config).to.exist;
-    expect(scope.geneView.config.name).to.equal('gene');
-    expect(scope.geneView.config.state).to.equal('events.genes');
+    expect(scope.geneModel.config).to.exist;
+    expect(scope.geneModel.config.name).to.equal('gene');
+    expect(scope.geneModel.config.state).to.equal('events.genes');
   });
 
   it('attaches Genes service to services object', function() {
-    expect(scope.geneView.services.Genes).to.exist;
-    expect(scope.geneView.services.Genes.get).to.be.a('function');
+    expect(scope.geneModel.services.Genes).to.exist;
+    expect(scope.geneModel.services.Genes.get).to.be.a('function');
   });
 
   it('attaches MyGeneInfo service to services object', function() {
-    expect(scope.geneView.services.MyGeneInfo).to.exist;
-    expect(scope.geneView.services.MyGeneInfo.getDetails).to.be.a('function');
+    expect(scope.geneModel.services.MyGeneInfo).to.exist;
+    expect(scope.geneModel.services.MyGeneInfo.getDetails).to.be.a('function');
   });
 
   it('attaches gene data to data object', function() {
-    expect(scope.geneView.data).to.exist;
-    expect(scope.geneView.data.gene).to.exist;
-    expect(Number(scope.geneView.data.gene.entrez_id)).to.equal(238);
-    expect(scope.geneView.data.myGeneInfo).to.exist;
-    expect(Number(scope.geneView.data.myGeneInfo._id)).to.equal(238);
+    expect(scope.geneModel.data).to.exist;
+    expect(scope.geneModel.data.gene).to.exist;
+    expect(Number(scope.geneModel.data.gene.entrez_id)).to.equal(238);
+    expect(scope.geneModel.data.myGeneInfo).to.exist;
+    expect(Number(scope.geneModel.data.myGeneInfo._id)).to.equal(238);
   });
 });

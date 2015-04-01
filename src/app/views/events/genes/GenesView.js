@@ -32,24 +32,24 @@
   // @ngInject
   function GenesViewController($scope, Genes, MyGeneInfo, gene, myGeneInfo, $log) {
     var ctrl = $scope;
-    var geneView = ctrl.geneView = {};
+    var geneModel = ctrl.geneModel = {};
 
-    geneView.config = {
+    geneModel.config = {
       name: 'gene',
       state: 'events.genes'
     };
 
-    geneView.data = {
+    geneModel.data = {
       gene: gene,
       myGeneInfo: myGeneInfo
     };
 
-    geneView.services = {
+    geneModel.services = {
       Genes: Genes,
       MyGeneInfo: MyGeneInfo
     };
 
-    geneView.actions = {
+    geneModel.actions = {
       addGene: function() {},
       refreshGene: function () {},
       addComment: function() {},
