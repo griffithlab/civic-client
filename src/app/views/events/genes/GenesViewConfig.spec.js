@@ -57,7 +57,7 @@ describe('GenesViewConfig', function () {
         get: sinon.stub().withArgs({ geneId: 238 }).resolves(servedGene238)
       });
       $provide.value('MyGeneInfo', MyGeneInfoService = {
-        getDetails: sinon.stub().withArgs(238).resolves(servedMyGeneInfo238)
+        get: sinon.stub().withArgs(238).resolves(servedMyGeneInfo238)
       });
 
       // as events.genes is an abstract state and cannot be navigated to,
@@ -92,6 +92,12 @@ describe('GenesViewConfig', function () {
       MyGeneInfo = _MyGeneInfo_;
 
       sinonAsPromised($q);
+
+      //  ui-router debug logging
+      //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
+      //$rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
+      //$rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
+      //$rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
 
     });
   });
@@ -132,7 +138,7 @@ describe('GenesViewConfig', function () {
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
       expect($state.$current.parent.locals.globals.MyGeneInfo).to.exist;
       expect($state.$current.parent.locals.globals.MyGeneInfo).to.be.an('object');
-      expect($state.$current.parent.locals.globals.MyGeneInfo.getDetails).to.be.a('function');
+      expect($state.$current.parent.locals.globals.MyGeneInfo.get).to.be.a('function');
     });
 
     it('retrieves specific gene info from MyGeneInfo service', function () {
