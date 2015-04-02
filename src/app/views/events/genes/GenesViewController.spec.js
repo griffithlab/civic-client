@@ -178,6 +178,11 @@ describe('GenesViewController', function () {
       expect(scope.geneModel.actions.getChanges).to.be.a('function');
     });
 
+    it('attaches applyChange function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.applyChange).to.exist;
+      expect(scope.geneModel.actions.applyChange).to.be.a('function');
+    });
+
     it('attaches acceptChange function to geneModel actions object', function() {
       expect(scope.geneModel.actions.acceptChange).to.exist;
       expect(scope.geneModel.actions.acceptChange).to.be.a('function');

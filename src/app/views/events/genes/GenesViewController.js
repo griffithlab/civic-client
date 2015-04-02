@@ -47,7 +47,6 @@
                                MyGeneInfo,
                                gene,
                                myGeneInfo) {
-    console.log('GenesViewController instantiated');
 
     var ctrl = $scope;
     var geneModel = ctrl.geneModel = {};
@@ -73,6 +72,7 @@
 
       getChanges: function() {},
       submitChange: function() {},
+      applyChange: function() {},
       acceptChange: function() {},
       rejectChange: function() {},
 
