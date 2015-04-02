@@ -20,8 +20,11 @@
       {
         query: { // get a list of all genes
           method: 'GET',
-          isArray: true,
-          cache: cache
+          cache: cache,
+          transformResponse: function(request) {
+            console.log('GenesService.get transformRequest called.');
+            return request;
+          }
         },
         get: { // get a single gene
           method: 'GET',
@@ -45,10 +48,16 @@
   function GenesService(GenesResource) {
     return {
       get: function(entrez_id) {
-        return GenesResource.get({geneId: entrez_id}).$promise;
+        return GenesResource.get({geneId: entrez_id}).$promise
+          .then(function(response) {
+            return response;
+          });
       },
       query: function() {
-        return GenesResource.query().$promise;
+        return GenesResource.query().$promise
+          .then(function(response) {
+            return response;
+          });
       }
     }
   }

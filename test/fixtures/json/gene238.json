@@ -41,7 +41,7 @@
         },
         {
           "id": 6,
-          "entrez_name": "ALK",
+          "entrez_name": "ALK2",
           "entrez_id": 238,
           "name": "EML4-ALK C1156Y",
           "description": "In patients with non-small cell lung cancer exhibiting EML4-ALK fusion, this variant has been shown to confer resistance to crizotinib."
