@@ -8,7 +8,7 @@
   function GenesResource($resource, $cacheFactory) {
     var cache = $cacheFactory('genesCache');
 
-    var cacheInterceptor =function(response) {
+    var cacheInterceptor = function(response) {
       cache.remove(response.config.url);
       return response;
     };
@@ -18,6 +18,10 @@
         geneId: '@entrez_id'
       },
       {
+        add: {
+          method: 'POST',
+          cache: cache
+        },
         query: { // get a list of all genes
           method: 'GET',
           cache: cache
@@ -25,6 +29,10 @@
         get: { // get a single gene
           method: 'GET',
           isArray: false,
+          cache: cache
+        },
+        delete: { // get a single gene
+          method: 'DELETE',
           cache: cache
         },
         update: {
@@ -35,6 +43,10 @@
         },
         getVariants: {
           url: '/api/genes/:geneId/variants',
+          method: 'GET'
+        },
+        getVariantGroups: {
+          url: '/api/genes/:geneId/variant_groups',
           method: 'GET'
         },
         getComments: {
@@ -166,7 +178,7 @@
             commentId: '@commentId'
           },
           method: 'DELETE'
-        },
+        }
       });
   }
 
@@ -174,6 +186,18 @@
   function GenesService(GenesResource) {
     return {
       // Gene actions
+      add: function(reqObj) {
+        return GenesResource.add(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      delete: function(entrez_id) {
+        return GenesResource.delete({geneId: entrez_id}).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
       get: function(entrez_id) {
         return GenesResource.get({geneId: entrez_id}).$promise
           .then(function(response) {
@@ -194,6 +218,12 @@
       },
       getVariants: function(entrez_id) {
         return GenesResource.getVariants({geneId: entrez_id}).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getVariantGroups: function(entrez_id) {
+        return GenesResource.getVariantGroups({geneId: entrez_id}).$promise
           .then(function(response) {
             return response;
           });
