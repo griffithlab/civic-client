@@ -53,7 +53,7 @@ describe('VariantsService', function() {
     });
 
     it('Variants.update({ variantId: 7, description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/variants', function() {
-      $httpBackend.expect('PUT', '/api/variants').respond('200', {});
+      $httpBackend.expect('PATCH', '/api/variants').respond('200', {});
       Variants.update({ variantId: 7, description: 'UPDATED DESCRIPTION'});
       $httpBackend.flush();
     });

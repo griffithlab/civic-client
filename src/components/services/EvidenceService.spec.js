@@ -22,9 +22,9 @@ describe('EvidenceService', function() {
   });
 
   describe('/api/evidence_items path', function() {
-    it('Evidence.add({entrez_name: \'GENE\', description: \'GENE description\'}) should send a POST request to /api/evidence_items', function() {
-      $httpBackend.expect('POST', '/api/evidence_items', {entrez_name: 'GENE', description: 'GENE description'}).respond('200', {});
-      Evidence.add({entrez_name: 'GENE', description: 'GENE description'});
+    it('Evidence.add({pubmed_id: \'20979473\', text: \'Evidence description\'}) should send a POST request to /api/evidence_items', function() {
+      $httpBackend.expect('POST', '/api/evidence_items', {pubmed_id: '20979473', text: 'Evidence description'}).respond('200', {});
+      Evidence.add({pubmed_id: '20979473', text: 'Evidence description'});
       $httpBackend.flush();
     });
 
@@ -47,8 +47,8 @@ describe('EvidenceService', function() {
     });
 
     it('Evidence.update({ evidenceId: 11, description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/evidence_items', function() {
-      $httpBackend.expect('PUT', '/api/evidence_items/11').respond('200', {});
-      Evidence.update({ evidenceId: 11, description: 'UPDATED DESCRIPTION'});
+      $httpBackend.expect('PATCH', '/api/evidence_items/11').respond('200', {});
+      Evidence.update({ evidenceId: 11, text: 'UPDATED TEXT'});
       $httpBackend.flush();
     });
   });

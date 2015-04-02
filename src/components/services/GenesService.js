@@ -36,7 +36,7 @@
           cache: cache
         },
         update: {
-          method: 'PUT',
+          method: 'PATCH',
           interceptor: {
             response: cacheInterceptor
           }

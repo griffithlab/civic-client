@@ -53,7 +53,7 @@ describe('GenesService', function() {
     });
 
     it('Genes.update({ geneId: 238, description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes', function() {
-      $httpBackend.expect('PUT', '/api/genes').respond('200', {});
+      $httpBackend.expect('PATCH', '/api/genes').respond('200', {});
       Genes.update({ geneId: 238, description: 'UPDATED DESCRIPTION'});
       $httpBackend.flush();
     });
