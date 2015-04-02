@@ -5,7 +5,7 @@
     .factory('Genes', GenesService);
 
   // @ngInject
-  function GenesResource($resource, $cacheFactory, _, $log) {
+  function GenesResource($resource, $cacheFactory) {
     var cache = $cacheFactory('genesCache');
 
     var cacheInterceptor =function(response) {
@@ -33,6 +33,10 @@
             response: cacheInterceptor
           }
         },
+        getVariants: {
+          url: '/api/genes/:geneId/variants',
+          method: 'GET'
+        },
         getComments: {
           url: '/api/genes/:geneId/comments',
           method: 'GET'
@@ -53,6 +57,22 @@
           },
           method: 'POST'
         },
+        updateComment: {
+          url: '/api/genes/:geneId/comments/:commentId',
+          params: {
+            geneId: '@geneId',
+            commentId: '@commentId'
+          },
+          method: 'PATCH'
+        },
+        deleteComment: {
+          url: '/api/genes/:geneId/comments/:commentId',
+          params: {
+            geneId: '@geneId',
+            commentId: '@commentId'
+          },
+          method: 'DELETE'
+        },
         getRevisions: {
           url: '/api/genes/:geneId/revisions',
           method: 'GET'
@@ -66,11 +86,19 @@
           method: 'GET',
           isArray: false
         },
-        getSuggestedChanges: {
+        getLastRevision: {
+          url: '/api/genes/:geneId/revisions/last',
+          params: {
+            geneId: '@geneId'
+          },
+          method: 'GET',
+          isArray: false
+        },
+        getChanges: {
           url: '/api/genes/:geneId/suggested_changes',
           method: 'GET'
         },
-        getSuggestedChange: {
+        getChange: {
           url: '/api/genes/:geneId/suggested_changes/:changeId',
           params: {
             geneId: '@geneId',
@@ -78,14 +106,74 @@
           },
           method: 'GET',
           isArray: false
-        }
-
+        },
+        acceptChange: {
+          url: '/api/genes/:geneId/suggested_changes/:changeId/accept',
+          params: {
+            geneId: '@geneId',
+            changeId: '@changeId'
+          },
+          method: 'POST'
+        },
+        rejectChange: {
+          url: '/api/genes/:geneId/suggested_changes/:changeId/reject',
+          params: {
+            geneId: '@geneId',
+            changeId: '@changeId'
+          },
+          method: 'POST'
+        },
+        addChangeComment: {
+          url: '/api/genes/:geneId/suggested_changes/:changeId/comments',
+          params: {
+            geneId: '@geneId',
+            changeId: '@changeId'
+          },
+          method: 'POST'
+        },
+        updateChangeComment: {
+          url: '/api/genes/:geneId/suggested_changes/:changeId/comments/:commentId',
+          params: {
+            geneId: '@geneId',
+            changeId: '@changeId',
+            commentId: '@commentId'
+          },
+          method: 'PATCH'
+        },
+        getChangeComments: {
+          url: '/api/genes/:geneId/suggested_changes/:changeId/comments',
+          params: {
+            geneId: '@geneId',
+            changeId: '@changeId'
+          },
+          method: 'GET'
+        },
+        getChangeComment: {
+          url: '/api/genes/:geneId/suggested_changes/:changeId/comments/:commentId',
+          params: {
+            geneId: '@geneId',
+            changeId: '@changeId',
+            commentId: '@commentId'
+          },
+          method: 'GET',
+          isArray: false
+        },
+        deleteChangeComment: {
+          url: '/api/genes/:geneId/suggested_changes/:changeId/comments/:commentId',
+          params: {
+            geneId: '@geneId',
+            changeId: '@changeId',
+            commentId: '@commentId'
+          },
+          method: 'DELETE'
+        },
       });
   }
 
   //ngInject
   function GenesService(GenesResource) {
     return {
+      // Gene actions
       get: function(entrez_id) {
         return GenesResource.get({geneId: entrez_id}).$promise
           .then(function(response) {
@@ -104,8 +192,22 @@
             return response;
           });
       },
+      getVariants: function(entrez_id) {
+        return GenesResource.getVariants({geneId: entrez_id}).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+
+      // Gene comments
       addComment: function(reqObj) {
         return GenesResource.addComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      updateComment: function(reqObj) {
+        return GenesResource.updateComment(reqObj).$promise
           .then(function(response) {
             return response;
           });
@@ -122,6 +224,14 @@
             return response;
           });
       },
+      deleteComment: function(reqObj) {
+        return GenesResource.deleteComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+
+      // Gene revisions
       getRevisions: function(entrez_id) {
         return GenesResource.getRevisions({geneId: entrez_id}).$promise
           .then(function(response) {
@@ -134,14 +244,66 @@
             return response;
           });
       },
-      getSuggestedChanges: function(entrez_id) {
-        return GenesResource.getSuggestedChanges({geneId: entrez_id}).$promise
+      getLastRevision: function(reqObj) {
+        return GenesResource.getLastRevision(reqObj).$promise
           .then(function(response) {
             return response;
           });
       },
-      getSuggestedChange: function(reqObj) {
-        return GenesResource.getSuggestedChange(reqObj).$promise
+
+      // Gene suggested changes
+      getChanges: function(entrez_id) {
+        return GenesResource.getChanges({geneId: entrez_id}).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getChange: function(reqObj) {
+        return GenesResource.getChange(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      acceptChange: function(reqObj) {
+        return GenesResource.acceptChange(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      rejectChange: function(reqObj) {
+        return GenesResource.rejectChange(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+
+      // Gene suggested changes comments
+      addChangeComment: function(reqObj) {
+        return GenesResource.addChangeComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      updateChangeComment: function(reqObj) {
+        return GenesResource.updateChangeComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getChangeComments: function(reqObj) {
+        return GenesResource.getChangeComments(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getChangeComment: function(reqObj) {
+        return GenesResource.getChangeComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      deleteChangeComment: function(reqObj) {
+        return GenesResource.deleteChangeComment(reqObj).$promise
           .then(function(response) {
             return response;
           });
