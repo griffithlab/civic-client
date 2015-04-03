@@ -17,6 +17,12 @@
           gene: function(Genes, $stateParams) {
             return Genes.get($stateParams.geneId);
           },
+          variants: function(Genes, gene) {
+            return Genes.getVariants(gene.entrez_id);
+          },
+          variantGroups: function(Genes, gene) {
+            return Genes.getVariantGroups(gene.entrez_id)
+          },
           myGeneInfo: function(MyGeneInfo, gene) {
             return MyGeneInfo.get(gene.entrez_id);
           }
@@ -46,8 +52,9 @@
                                Genes,
                                MyGeneInfo,
                                gene,
-                               myGeneInfo,
-                               _) {
+                               variants,
+                               variantGroups,
+                               myGeneInfo) {
 
     var ctrl = $scope;
     var geneModel = ctrl.geneModel = {};
@@ -59,6 +66,8 @@
 
     geneModel.data = {
       gene: gene,
+      variants: variants,
+      variantGroups: variantGroups,
       myGeneInfo: myGeneInfo
     };
 

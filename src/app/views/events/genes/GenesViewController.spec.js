@@ -86,6 +86,8 @@ describe('GenesViewController', function () {
 
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
       $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
+      $httpBackend.when('GET', '/api/genes/238/variants').respond(servedGene238Variants);
+      $httpBackend.when('GET', '/api/genes/238/variants_groups').respond(servedGene238VariantGroups);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -104,6 +106,8 @@ describe('GenesViewController', function () {
         Genes: deps.Genes,
         MyGeneInfo: deps.MyGeneInfo,
         gene: deps.gene,
+        variants: deps.variants,
+        variantGroups: deps.variantGroups,
         myGeneInfo: deps.myGeneInfo
       });
 
