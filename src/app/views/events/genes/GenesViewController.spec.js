@@ -153,24 +153,63 @@ describe('GenesViewController', function () {
       expect(scope.geneModel.actions).to.be.an('object');
     });
 
+    // gene
     it('attaches addGene function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.addGene).to.exist;
-      expect(scope.geneModel.actions.addGene).to.be.a('function');
+      expect(scope.geneModel.actions.add).to.exist;
+      expect(scope.geneModel.actions.add).to.be.a('function');
+    });
+
+    it('attaches updateGene function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.update).to.exist;
+      expect(scope.geneModel.actions.update).to.be.a('function');
     });
 
     it('attaches refreshGene function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.refreshGene).to.exist;
-      expect(scope.geneModel.actions.refreshGene).to.be.a('function');
+      expect(scope.geneModel.actions.refresh).to.exist;
+      expect(scope.geneModel.actions.refresh).to.be.a('function');
     });
 
-    it('attaches submitChange function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.submitChange).to.exist;
-      expect(scope.geneModel.actions.submitChange).to.be.a('function');
+    // variants, groups
+    it('attaches getVariants function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getVariants).to.exist;
+      expect(scope.geneModel.actions.getVariants).to.be.a('function');
+    });
+
+    it('attaches getVariantGroups function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getVariantGroups).to.exist;
+      expect(scope.geneModel.actions.getVariantGroups).to.be.a('function');
+    });
+
+    // comments
+    it('attaches addComment function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.addComment).to.exist;
+      expect(scope.geneModel.actions.addComment).to.be.a('function');
+    });
+
+    it('attaches getComments function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getComments).to.exist;
+      expect(scope.geneModel.actions.getComments).to.be.a('function');
+    });
+
+    it('attaches getComment function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getComment).to.exist;
+      expect(scope.geneModel.actions.getComment).to.be.a('function');
+    });
+
+    it('attaches deleteComment function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.deleteComment).to.exist;
+      expect(scope.geneModel.actions.deleteComment).to.be.a('function');
     });
 
     it('attaches updateComment function to geneModel actions object', function() {
       expect(scope.geneModel.actions.updateComment).to.exist;
       expect(scope.geneModel.actions.updateComment).to.be.a('function');
+    });
+
+    // changes
+    it('attaches submitChange function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.submitChange).to.exist;
+      expect(scope.geneModel.actions.submitChange).to.be.a('function');
     });
 
     it('attaches getChanges function to geneModel actions object', function() {
@@ -193,24 +232,30 @@ describe('GenesViewController', function () {
       expect(scope.geneModel.actions.rejectChange).to.be.a('function');
     });
 
-    it('attaches addComment function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.addComment).to.exist;
-      expect(scope.geneModel.actions.addComment).to.be.a('function');
+    // revisions
+    it('attaches getRevisions function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getRevisions).to.exist;
+      expect(scope.geneModel.actions.getRevisions).to.be.a('function');
     });
 
-    it('attaches getComments function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.getComments).to.exist;
-      expect(scope.geneModel.actions.getComments).to.be.a('function');
+    it('attaches getRevision function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getRevision).to.exist;
+      expect(scope.geneModel.actions.getRevision).to.be.a('function');
     });
 
-    it('attaches deleteComment function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.deleteComment).to.exist;
-      expect(scope.geneModel.actions.deleteComment).to.be.a('function');
+    it('attaches getLastRevision function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.getLastRevision).to.exist;
+      expect(scope.geneModel.actions.getLastRevision).to.be.a('function');
     });
+
   });
 
   describe('geneModel gene actions', function() {
-
+    it('actions.update({ geneId: 238, description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes', function() {
+      $httpBackend.expect('PATCH', '/api/genes').respond('200', {});
+      Genes.update({ geneId: 238, description: 'UPDATED DESCRIPTION'});
+      $httpBackend.flush();
+    });
 
   });
 

@@ -67,8 +67,18 @@
     };
 
     geneModel.actions = {
-      addGene: function() {},
-      refreshGene: function () {},
+      add: function() {},
+      update: function() {},
+      refresh: function () {},
+
+      getVariants: function() {},
+      getVariantGroups: function() {},
+
+      getComments: function() {},
+      getComment: function() {},
+      addComment: function() {},
+      updateComment: function() {},
+      deleteComment: function() {},
 
       getChanges: function() {},
       submitChange: function() {},
@@ -76,10 +86,15 @@
       acceptChange: function() {},
       rejectChange: function() {},
 
-      getComments: function() {},
-      addComment: function() {},
-      updateComment: function() {},
-      deleteComment: function() {}
+      addChangeComment: function() {},
+      updateChangeComment: function() {},
+      getChangeComments: function() {},
+      getChangeComment: function() {},
+      deleteChangeComment: function() {},
+
+      getRevisions: function() {},
+      getRevision: function() {},
+      getLastRevision: function() {}
     };
   }
 
