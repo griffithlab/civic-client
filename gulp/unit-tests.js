@@ -74,3 +74,4 @@ gulp.task('test:unit:wiredep', function () {
     }))
     .pipe(gulp.dest('test'));
 });
+
