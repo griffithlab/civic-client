@@ -31,6 +31,11 @@
           isArray: false,
           cache: cache
         },
+        refresh: { // get gene, force cache
+          method: 'GET',
+          isArray: false,
+          cache: false
+        },
         delete: { // get a single gene
           method: 'DELETE',
           cache: cache
@@ -200,6 +205,12 @@
       },
       get: function(entrez_id) {
         return GenesResource.get({geneId: entrez_id}).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      refresh: function(entrez_id) {
+        return GenesResource.refresh({geneId: entrez_id}).$promise
           .then(function(response) {
             return response;
           });

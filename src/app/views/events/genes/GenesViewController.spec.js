@@ -4,13 +4,20 @@ describe('GenesViewController', function () {
   var $rootScope,
     $state,
     $controller,
-    GenesService,
+    $httpBackend,
+
     Genes,
-    MyGeneInfoService,
     MyGeneInfo,
     GenesViewController,
+
     scope,
-    state = 'events.genes';
+    state = 'events.genes',
+
+    servedGene238,
+    servedGene238Variants,
+    servedGene238VariantGroups,
+    servedMyGeneInfo238;
+
 
   function goFromState(state1, params1) {
     return {
@@ -26,15 +33,16 @@ describe('GenesViewController', function () {
     module('civic.services');
     module('civic.events');
     module('served/gene238.json');
+    module('served/gene238Variants.json');
     module('served/myGeneInfo238.json');
-    module('civic.events.genes', function ($provide, $stateProvider, servedGene238, servedMyGeneInfo238) {
+    module('civic.events.genes', function ($provide, $stateProvider) {
       // set up mock service providers
-      $provide.value('Genes', GenesService = {
-        get: sinon.stub().withArgs({ geneId: 238 }).resolves(servedGene238)
-      });
-      $provide.value('MyGeneInfo', MyGeneInfoService = {
-        get: sinon.stub().withArgs(238).resolves(servedMyGeneInfo238)
-      });
+      //$provide.value('Genes', {
+      //  get: sinon.stub().withArgs({ geneId: 238 }).resolves(servedGene238)
+      //});
+      //$provide.value('MyGeneInfo', {
+      //  get: sinon.stub().withArgs(238).resolves(servedMyGeneInfo238)
+      //});
 
       // create a navigable initial and child states to force events.genes abstract state to resolve
       $stateProvider
@@ -59,18 +67,25 @@ describe('GenesViewController', function () {
                     _$controller_,
                     _$state_,
                     $q,
+                    _$httpBackend_,
                     _Genes_,
-                    _MyGeneInfo_) {
+                    _MyGeneInfo_,
+                    servedGene238,
+                    servedMyGeneInfo238) {
 
       $rootScope = _$rootScope_;
       $controller = _$controller_;
       $state = _$state_;
+      $httpBackend = _$httpBackend_;
       Genes = _Genes_;
       MyGeneInfo = _MyGeneInfo_;
 
       _ = window._;
 
       sinonAsPromised($q);
+
+      $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
+      $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -80,7 +95,8 @@ describe('GenesViewController', function () {
 
       // instantiate GenesViewController using resolved deps from event.genes state
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      // expect($state.$current.name).to.equal('events.genes.child');
+      $httpBackend.flush();
+      expect($state.$current.name).to.equal('events.genes.child');
       var deps  = $state.$current.parent.locals.globals;
       scope = $rootScope.$new();
       GenesViewController = $controller('GenesViewController', {
@@ -90,6 +106,7 @@ describe('GenesViewController', function () {
         gene: deps.gene,
         myGeneInfo: deps.myGeneInfo
       });
+
     });
 
   });
@@ -129,15 +146,29 @@ describe('GenesViewController', function () {
   });
 
   describe('geneModel data', function() {
+    var data;
+    beforeEach(function() {
+      data = scope.geneModel.data;
+    });
     it('provides data object on geneModel', function() {
-      expect(scope.geneModel.data).to.exist;
-      expect(scope.geneModel.data).to.be.an('object');
+      expect(data).to.exist;
+      expect(data).to.be.an('object');
     });
 
-    it('attaches gene data to geneModel data object', function() {
-      expect(scope.geneModel.data.gene).to.exist;
-      expect(scope.geneModel.data.gene).to.be.an('object');
-      expect(Number(scope.geneModel.data.gene.entrez_id)).to.equal(238);
+    it('provides gene data object', function() {
+      expect(data.gene).to.exist;
+      expect(data.gene).to.be.an('object');
+      expect(Number(data.gene.entrez_id)).to.equal(238);
+    });
+
+    it('provides variants data object', function() {
+      expect(data.variants).to.exist;
+      expect(data.variants).to.be.an('array');
+    });
+
+    it('provides variant groups data object', function() {
+      expect(data.variants).to.exist;
+      expect(data.variants).to.be.an('array');
     });
 
     it('attaches myGeneInfo data to geneModel data object', function() {
@@ -154,30 +185,14 @@ describe('GenesViewController', function () {
     });
 
     // gene
-    it('attaches addGene function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.add).to.exist;
-      expect(scope.geneModel.actions.add).to.be.a('function');
-    });
-
-    it('attaches updateGene function to geneModel actions object', function() {
+    it('attaches update function to geneModel actions object', function() {
       expect(scope.geneModel.actions.update).to.exist;
       expect(scope.geneModel.actions.update).to.be.a('function');
     });
 
-    it('attaches refreshGene function to geneModel actions object', function() {
+    it('attaches refresh function to geneModel actions object', function() {
       expect(scope.geneModel.actions.refresh).to.exist;
       expect(scope.geneModel.actions.refresh).to.be.a('function');
-    });
-
-    // variants, groups
-    it('attaches getVariants function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.getVariants).to.exist;
-      expect(scope.geneModel.actions.getVariants).to.be.a('function');
-    });
-
-    it('attaches getVariantGroups function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.getVariantGroups).to.exist;
-      expect(scope.geneModel.actions.getVariantGroups).to.be.a('function');
     });
 
     // comments
@@ -251,10 +266,35 @@ describe('GenesViewController', function () {
   });
 
   describe('geneModel gene actions', function() {
-    it('actions.update({ geneId: 238, description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes', function() {
+    var actions;
+    var geneModel;
+    beforeEach(function() {
+      geneModel = scope.geneModel;
+      actions = geneModel.actions;
+    });
+
+    it('actions.get() should return the gene data object', function() {
+      expect(actions.get()).to.equal(geneModel.data.gene);
+    });
+
+    it('actions.update({ description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes followed by a GET', function() {
       $httpBackend.expect('PATCH', '/api/genes').respond('200', {});
-      Genes.update({ geneId: 238, description: 'UPDATED DESCRIPTION'});
+      $httpBackend.expect('GET', '/api/genes/238').respond('200', {});
+      actions.update({ description: 'UPDATED DESCRIPTION' });
       $httpBackend.flush();
+    });
+
+    it('actions.delete() should send a DELETE request to /api/genes/238', function() {
+      $httpBackend.expect('DELETE', '/api/genes/238').respond('200', {});
+      actions.delete(238);
+      $httpBackend.flush();
+    });
+
+    it('actions.refresh() should send a GET request to /api/genes/238', function() {
+      $httpBackend.expect('GET', '/api/genes/238').respond('200', {});
+      actions.refresh();
+      $httpBackend.flush();
+      // TODO mock 1st and 2nd calls returning gene238updated.json and test if the updated gene is returned and not the cached version
     });
 
   });

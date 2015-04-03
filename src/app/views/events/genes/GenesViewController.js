@@ -46,7 +46,8 @@
                                Genes,
                                MyGeneInfo,
                                gene,
-                               myGeneInfo) {
+                               myGeneInfo,
+                               _) {
 
     var ctrl = $scope;
     var geneModel = ctrl.geneModel = {};
@@ -67,12 +68,20 @@
     };
 
     geneModel.actions = {
-      add: function() {},
-      update: function() {},
-      refresh: function () {},
-
-      getVariants: function() {},
-      getVariantGroups: function() {},
+      get: function() {
+        return geneModel.data.gene;
+      },
+      update: function(reqObj) {
+        reqObj.geneId = gene.entrez_id;
+        Genes.update(reqObj);
+        this.refresh();
+      },
+      delete: function() {
+        Genes.delete(gene.entrez_id);
+      },
+      refresh: function () {
+        gene = Genes.refresh(gene.entrez_id)
+      },
 
       getComments: function() {},
       getComment: function() {},

@@ -46,6 +46,15 @@ describe('GenesService', function() {
       $httpBackend.flush();
     });
 
+    it('Genes.refresh(238) should send a GET request to /api/genes/238 (and not hit the genes cache)', function() {
+      Genes.get(238);
+      $httpBackend.expect('GET', '/api/genes/238').respond('200', servedGene238);
+      $httpBackend.flush();
+      $httpBackend.expect('GET', '/api/genes/238').respond('200', servedGene238);
+      Genes.refresh(238);
+      $httpBackend.flush();
+    });
+
     it('Genes.query() should send a GET request to /api/genes', function() {
       $httpBackend.expect('GET', '/api/genes').respond('200', servedGenes);
       Genes.query();

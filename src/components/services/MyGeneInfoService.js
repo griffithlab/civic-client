@@ -18,7 +18,9 @@
           isArray: false,
           cache: cache,
           transformResponse: function(data) {
-            data = JSON.parse(data);
+            if(typeof data == 'string') {
+              data = JSON.parse(data);
+            }
             var srcMap = {
               kegg: 'http://www.genome.jp/kegg-bin/show_pathway?',
               reactome: 'http://www.reactome.org/cgi-bin/control_panel_st_id?ST_ID=',
