@@ -93,15 +93,27 @@
       },
 
       refresh: function () {
-        gene = Genes.refresh(gene.entrez_id)
+        Genes.refresh(gene.entrez_id)
+          .then(function(response) {
+            gene = response;
+            return response;
+          })
       },
 
       getComments: function() {
-        data.comments = Genes.getComments(gene.entrez_id);
-        console.log('comments fetched');
+        return Genes.getComments(gene.entrez_id)
+          .then(function(response) {
+            geneModel.data.comments = response;
+            return response;
+          });
       },
 
-      getComment: function() { return Genes.getComment(gene.entrez_id)},
+      getComment: function() {
+        return Genes.getComment(gene.entrez_id)
+          .then(function(response) {
+            return response;
+          })
+      },
       addComment: function() {},
       updateComment: function() {},
       deleteComment: function() {},

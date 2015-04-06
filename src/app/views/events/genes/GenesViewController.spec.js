@@ -28,9 +28,10 @@ describe('GenesViewController', function () {
     module('served/gene238VariantGroups.json');
     module('served/myGeneInfo238.json');
     module('served/gene238Comments.json');
+    module('civic.templates'); // load ng-html2js templates
     module('civic.events.genes', function ($provide, $stateProvider) {
-
-      // create a navigable initial and child states to force events.genes abstract state to resolve
+      // GenesViewController is attached to an abstract state so we need to create parent and
+      // child states of events.genes, then transition between then in order to force ui-router to instantiate it
       $stateProvider
         .state('initial', {
           abstract: false,
@@ -45,13 +46,10 @@ describe('GenesViewController', function () {
         })
     });
 
-    module('civic.templates'); // load ng-html2js templates
-
     // inject services
     inject(function(_$rootScope_,
                     _$controller_,
                     _$state_,
-                    $q,
                     _$httpBackend_,
                     servedGene238,
                     servedMyGeneInfo238,
@@ -83,7 +81,7 @@ describe('GenesViewController', function () {
       $httpBackend.flush();
       expect($state.$current.name).to.equal('events.genes.child');
       var deps  = $state.$current.parent.locals.globals;
-      scope = $rootScope.$new();
+      scope = $rootScope.$new(); // assign the controller's scope for easy access in tests
       GenesViewController = $controller('GenesViewController', {
         $scope: scope,
         Genes: deps.Genes,
@@ -279,14 +277,19 @@ describe('GenesViewController', function () {
       actions.getComments();
       $httpBackend.flush();
     });
-    //
-    //it('actions.getComments() should attach new comment array to geneModel.data.comments', function() {
-    //  actions.getComments();
-    //  $httpBackend.flush();
-    //  expect(GenesViewController.geneModel.data.comments).to.exist;
-    //  expect(GenesViewController.geneModel.data.comments).to.be.an('array');
-    //  expect(GenesViewController.geneModel.data.comments).to.not.be.empty;
-    //});
+
+    it('actions.getComments() should attach new comment array to geneModel.data.comments', function() {
+      var data = scope.geneModel.data;
+      $httpBackend.expect('GET', '/api/genes/238/comments');
+
+      expect(data.comments).to.exist;
+      expect(data.comments).to.be.an('array');
+      expect(data.comments).to.be.empty;
+      actions.getComments();
+      $httpBackend.flush();
+      expect(data.comments).to.not.be.empty;
+      expect(data.comments[0].title).to.equal('Gene 238 Title 1');
+    });
 
   });
 

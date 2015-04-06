@@ -76,7 +76,8 @@
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          isArray: false
+          isArray: false,
+          cache: cache
         },
         addComment: {
           method: 'POST',
