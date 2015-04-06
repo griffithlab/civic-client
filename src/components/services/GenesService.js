@@ -272,12 +272,6 @@
             return response;
           });
       },
-      updateComment: function(reqObj) {
-        return GenesResource.updateComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
       getComments: function(entrez_id) {
         return GenesResource.getComments({geneId: entrez_id}).$promise
           .then(function(response) {
@@ -286,6 +280,12 @@
       },
       getComment: function(geneId, commentId) {
         return GenesResource.getComment({geneId: geneId, commentId: commentId}).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      updateComment: function(reqObj) {
+        return GenesResource.updateComment(reqObj).$promise
           .then(function(response) {
             return response;
           });
