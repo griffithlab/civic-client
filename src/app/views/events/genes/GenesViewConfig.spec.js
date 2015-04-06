@@ -125,82 +125,61 @@ describe('GenesViewConfig', function () {
       expect(egState.resolve.MyGeneInfo).to.equal('MyGeneInfo');
     });
 
-    it('successfully resolves the Genes service', function () {
+    it('requests GenesViewController to be instantiated', function () {
+      // TODO: figure out how to test if the controller is actually created
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
       $httpBackend.flush();
-      var Genes = $state.$current.parent.locals.globals.Genes;
-      expect(Genes).to.exist;
-      expect(Genes).to.be.an('object');
-      expect(Genes.get).to.be.a('function');
+      expect($state.$current.name).to.equal('events.genes.child');
+      expect($state.$current.parent.controller).to.equal('GenesViewController');
     });
 
-    it('successfully resolves the MyGeneInfo service', function () {
-      goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      $httpBackend.flush();
-      var MyGeneInfo = $state.$current.parent.locals.globals.MyGeneInfo;
-      expect(MyGeneInfo).to.exist;
-      expect(MyGeneInfo).to.be.an('object');
-      expect(MyGeneInfo.get).to.be.a('function');
-    });
+    describe('events.genes state resolves', function() {
+      beforeEach(function() {
+        goFromState('initial').toState('events.genes.child', { geneId: 238 });
+        $httpBackend.flush();
+      });
+      it('successfully resolves the Genes service', function () {
+        var Genes = $state.$current.parent.locals.globals.Genes;
+        expect(Genes).to.exist;
+        expect(Genes).to.be.an('object');
+        expect(Genes.get).to.be.a('function');
+      });
 
-    it('successfully resolves gene 238', function() {
-      goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      $httpBackend.flush();
-      var gene = $state.$current.parent.locals.globals.gene;
-      expect(gene).to.exist;
-      expect(gene).to.be.an('object');
-      expect(gene.entrez_id).to.equal(238);
-    });
+      it('successfully resolves the MyGeneInfo service', function () {
+        var MyGeneInfo = $state.$current.parent.locals.globals.MyGeneInfo;
+        expect(MyGeneInfo).to.exist;
+        expect(MyGeneInfo).to.be.an('object');
+        expect(MyGeneInfo.get).to.be.a('function');
+      });
 
-    it('successfully resolves myGeneInfo for gene 238', function() {
-      goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      $httpBackend.flush();
-      var myGeneInfo = $state.$current.parent.locals.globals.myGeneInfo;
-      expect(myGeneInfo).to.exist;
-      expect(myGeneInfo).to.be.an('object');
-      expect(Number(myGeneInfo._id)).to.equal(238);
-    });
+      it('successfully resolves gene 238', function() {
+        var gene = $state.$current.parent.locals.globals.gene;
+        expect(gene).to.exist;
+        expect(gene).to.be.an('object');
+        expect(gene.entrez_id).to.equal(238);
+      });
 
-    it('successfully resolves variants for gene 238', function() {
-      goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      $httpBackend.flush();
-      var variants = $state.$current.parent.locals.globals.variants;
-      expect(variants).to.exist;
-      expect(variants).to.be.an('array');
-      expect(variants[0].entrez_name).to.equal('ALK');
-    });
+      it('successfully resolves myGeneInfo for gene 238', function() {
+        var myGeneInfo = $state.$current.parent.locals.globals.myGeneInfo;
+        expect(myGeneInfo).to.exist;
+        expect(myGeneInfo).to.be.an('object');
+        expect(Number(myGeneInfo._id)).to.equal(238);
+      });
 
+      it('successfully resolves variants for gene 238', function() {
+        var variants = $state.$current.parent.locals.globals.variants;
+        expect(variants).to.exist;
+        expect(variants).to.be.an('array');
+        expect(variants[0].entrez_name).to.equal('ALK');
+      });
 
-    it('successfully resolves variant groups for gene 238', function() {
-      goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      $httpBackend.flush();
-      var variantGroups = $state.$current.parent.locals.globals.variantGroups;
-      expect(variantGroups).to.exist;
-      expect(variantGroups).to.be.an('array');
-      expect(variantGroups[0].name).to.equal('Crizotinib Resistance');
+      it('successfully resolves variant groups for gene 238', function() {
+        var variantGroups = $state.$current.parent.locals.globals.variantGroups;
+        expect(variantGroups).to.exist;
+        expect(variantGroups).to.be.an('array');
+        expect(variantGroups[0].name).to.equal('Crizotinib Resistance');
+      });
+
     });
-    //it('retrieves specific gene info from MyGeneInfo service', function () {
-    //  var egState = $state.get('events.genes');
-    //  var gene;
-    //  var myGeneInfo;
-    //  expect(egState.resolve.myGeneInfo).to.exist;
-    //  expect(egState.resolve.myGeneInfo).to.be.a('function');
-    //  egState.resolve.gene(Genes, {geneId: 238 }).then(function(result) {
-    //    gene = result;
-    //  });
-    //  $rootScope.$digest();
-    //  egState.resolve.myGeneInfo(MyGeneInfo, gene).then(function(result) {
-    //    myGeneInfo = result;
-    //  });
-    //  $rootScope.$digest();
-    //  expect(myGeneInfo._id).to.equal('238');
-    //});
-    //
-    //it('requests GenesViewController to be instantiated', function () {
-    //  // TODO: figure out how to test if the controller is actually created
-    //  goFromState('initial').toState('events.genes.child', { geneId: 238 });
-    //  expect($state.$current.name).to.equal('events.genes.child');
-    //  expect($state.$current.parent.controller).to.equal('GenesViewController');
-    //});
   });
 });
