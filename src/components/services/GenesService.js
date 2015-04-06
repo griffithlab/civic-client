@@ -48,9 +48,9 @@
             response: genesCacheInterceptor
           }
         },
-        getVariants: {
+        queryVariants: {
           isArray: true,
-          method: 'GET',
+          method: 'QUERY',
           url: '/api/genes/:geneId/variants'
         },
         getVariantGroups: {
@@ -237,7 +237,7 @@
           });
       },
       getVariants: function(entrez_id) {
-        return GenesResource.getVariants({geneId: entrez_id}).$promise
+        return GenesResource.queryVariants({geneId: entrez_id}).$promise
           .then(function(response) {
             return response;
           });
