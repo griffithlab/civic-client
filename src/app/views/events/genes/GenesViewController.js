@@ -58,6 +58,10 @@
 
     var ctrl = $scope;
     var geneModel = ctrl.geneModel = {};
+    var config = geneModel.config = {};
+    var data = geneModel.data = {};
+    var services = geneModel.service = {};
+    var actions = geneModel.actions = {}
 
     geneModel.config = {
       name: 'gene',
@@ -66,6 +70,7 @@
 
     geneModel.data = {
       gene: gene,
+      comments: [],
       variants: variants,
       variantGroups: variantGroups,
       myGeneInfo: myGeneInfo
@@ -78,22 +83,25 @@
 
     geneModel.actions = {
       get: function() {
-        return geneModel.data.gene;
+        return gene;
       },
+
       update: function(reqObj) {
         reqObj.geneId = gene.entrez_id;
         Genes.update(reqObj);
         this.refresh();
       },
+
       refresh: function () {
         gene = Genes.refresh(gene.entrez_id)
       },
-      delete: function() {
-        Genes.delete(gene.entrez_id);
+
+      getComments: function() {
+        data.comments = Genes.getComments(gene.entrez_id);
+        console.log('comments fetched');
       },
 
-      getComments: function() {},
-      getComment: function() {},
+      getComment: function() { return Genes.getComment(gene.entrez_id)},
       addComment: function() {},
       updateComment: function() {},
       deleteComment: function() {},

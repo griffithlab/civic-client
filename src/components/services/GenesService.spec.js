@@ -1,25 +1,38 @@
 'use strict';
 describe('GenesService', function() {
   var $httpBackend,
-    servedGene238,
-    servedGenes,
-    servedGene238Variants,
-    servedGene238VariantGroups,
     Genes;
 
-  beforeEach(module('civic.services'));
-  beforeEach(module('served/gene238.json'));
-  beforeEach(module('served/genes.json'));
-  beforeEach(module('served/gene238Variants.json'));
-  beforeEach(module('served/gene238VariantGroups.json'));
+  beforeEach(function() {
+    module('civic.services');
+    module('served/genes.json');
+    module('served/gene238.json');
+    module('served/gene238Variants.json');
+    module('served/gene238VariantGroups.json');
+    module('served/myGeneInfo238.json');
+    module('served/gene238Comments.json');
+  });
 
   beforeEach(inject(function($injector) {
     $httpBackend = $injector.get('$httpBackend');
     Genes = $injector.get('Genes');
-    servedGene238 = $injector.get('servedGene238');
-    servedGenes = $injector.get('servedGenes');
-    servedGene238Variants = $injector.get('servedGene238Variants');
-    servedGene238VariantGroups = $injector.get('servedGene238VariantGroups');
+
+    inject(function($httpBackend,
+                    servedGenes,
+                    servedGene238,
+                    servedMyGeneInfo238,
+                    servedGene238Variants,
+                    servedGene238VariantGroups,
+                    servedGene238Comments) {
+
+      $httpBackend.when('GET', '/api/genes').respond(servedGenes);
+      $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
+      $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
+      $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
+      $httpBackend.when('GET', '/api/genes/238/variants').respond(servedGene238Variants);
+      $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
+      $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
+    });
   }));
 
   afterEach(function() {
@@ -41,22 +54,22 @@ describe('GenesService', function() {
     });
 
     it('Genes.get(238) should send a GET request to /api/genes/238', function() {
-      $httpBackend.expect('GET', '/api/genes/238').respond('200', servedGene238);
+      $httpBackend.expect('GET', '/api/genes/238');
       Genes.get(238);
       $httpBackend.flush();
     });
 
     it('Genes.refresh(238) should send a GET request to /api/genes/238 (and not hit the genes cache)', function() {
       Genes.get(238);
-      $httpBackend.expect('GET', '/api/genes/238').respond('200', servedGene238);
+      $httpBackend.expect('GET', '/api/genes/238');
       $httpBackend.flush();
-      $httpBackend.expect('GET', '/api/genes/238').respond('200', servedGene238);
+      $httpBackend.expect('GET', '/api/genes/238');
       Genes.refresh(238);
       $httpBackend.flush();
     });
 
     it('Genes.query() should send a GET request to /api/genes', function() {
-      $httpBackend.expect('GET', '/api/genes').respond('200', servedGenes);
+      $httpBackend.expect('GET', '/api/genes');
       Genes.query();
       $httpBackend.flush();
     });
@@ -70,7 +83,7 @@ describe('GenesService', function() {
 
   describe('/api/genes/:geneId/variants path', function() {
     it('Genes.getVariants(238) should send a GET request to /api/genes/238/variants', function() {
-      $httpBackend.expect('GET', '/api/genes/238/variants').respond('200', servedGene238Variants);
+      $httpBackend.expect('GET', '/api/genes/238/variants');
       Genes.getVariants(238);
       $httpBackend.flush();
     });
@@ -78,7 +91,7 @@ describe('GenesService', function() {
 
   describe('/api/genes/:geneId/variant_groups path', function() {
     it('Genes.getVariantGroups(238) should send a GET request to /api/genes/238/variant_groups', function() {
-      $httpBackend.expect('GET', '/api/genes/238/variant_groups').respond('200', servedGene238VariantGroups);
+      $httpBackend.expect('GET', '/api/genes/238/variant_groups');
       Genes.getVariantGroups(238);
       $httpBackend.flush();
     });
@@ -124,7 +137,7 @@ describe('GenesService', function() {
     });
 
     it('Genes.getComments(238) should send a GET request to /api/genes/238/comments', function() {
-      $httpBackend.expect('GET', '/api/genes/238/comments').respond('200', []);
+      $httpBackend.expect('GET', '/api/genes/238/comments');
       Genes.getComments(238);
       $httpBackend.flush();
     });

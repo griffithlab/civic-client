@@ -24,8 +24,9 @@
           method: 'POST',
           cache: cache
         },
-        query: { // get a list of all genes
+        query: { // get list of genes
           method: 'GET',
+          isArray: true,
           cache: cache
         },
         get: { // get a single gene
@@ -50,21 +51,22 @@
             response: cacheInterceptor
           }
         },
-        queryVariants: {
+        getVariants: {
           isArray: true,
-          method: 'QUERY',
+          method: 'GET',
           url: '/api/genes/:geneId/variants',
           cache: cache
         },
         queryVariantGroups: {
-          isArray: true,
-          method: 'QUERY',
+          method: 'GET',
           url: '/api/genes/:geneId/variant_groups',
+          isArray: true,
           cache: cache
         },
         getComments: {
           method: 'GET',
           url: '/api/genes/:geneId/comments',
+          isArray: true,
           cache: cache
         },
         getComment: {
@@ -131,7 +133,7 @@
         },
         getChanges: {
           method: 'GET',
-          url: '/api/genes/:geneId/suggested_changes',
+          url: '/api/genes/:geneId/suggested_changes'
         },
         getChange: {
           method: 'GET',
@@ -250,7 +252,7 @@
           });
       },
       getVariants: function(entrez_id) {
-        return GenesResource.queryVariants({geneId: entrez_id}).$promise
+        return GenesResource.getVariants({geneId: entrez_id}).$promise
           .then(function(response) {
             return response;
           });
