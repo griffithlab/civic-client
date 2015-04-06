@@ -92,10 +92,10 @@ describe('GenesViewConfig', function () {
       $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
 
       //  ui-router debug logging
-      function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-      $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
-      $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
-      $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
+      //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
+      //$rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
+      //$rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
+      //$rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
 
     });
   });
@@ -161,7 +161,7 @@ describe('GenesViewConfig', function () {
       expect(Number(myGeneInfo._id)).to.equal(238);
     });
 
-    it.only('successfully resolves variants for gene 238', function() {
+    it('successfully resolves variants for gene 238', function() {
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
       $httpBackend.flush();
       var variants = $state.$current.parent.locals.globals.variants;
