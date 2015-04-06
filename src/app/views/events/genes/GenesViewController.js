@@ -22,10 +22,10 @@
           },
           variants: function(Genes, gene) {
             return Genes.getVariants(gene.entrez_id);
+          },
+          variantGroups: function(Genes, gene) {
+            return Genes.getVariantGroups(gene.entrez_id)
           }
-          //variantGroups: function(Genes, gene) {
-          //  return Genes.getVariantGroups(gene.entrez_id)
-          //}
         },
         controller: 'GenesViewController',
         onExit: /* @ngInject */ function($deepStateRedirect) {

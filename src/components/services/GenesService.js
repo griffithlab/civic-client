@@ -53,8 +53,9 @@
           method: 'QUERY',
           url: '/api/genes/:geneId/variants'
         },
-        getVariantGroups: {
-          method: 'GET',
+        queryVariantGroups: {
+          isArray: true,
+          method: 'QUERY',
           url: '/api/genes/:geneId/variant_groups'
         },
         getComments: {
@@ -243,7 +244,7 @@
           });
       },
       getVariantGroups: function(entrez_id) {
-        return GenesResource.getVariantGroups({geneId: entrez_id}).$promise
+        return GenesResource.queryVariantGroups({geneId: entrez_id}).$promise
           .then(function(response) {
             return response;
           });

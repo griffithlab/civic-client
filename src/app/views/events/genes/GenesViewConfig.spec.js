@@ -89,7 +89,7 @@ describe('GenesViewConfig', function () {
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
       $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
       $httpBackend.when('QUERY', '/api/genes/238/variants').respond(servedGene238Variants);
-      $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
+      $httpBackend.when('QUERY', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
 
       //  ui-router debug logging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -170,6 +170,15 @@ describe('GenesViewConfig', function () {
       expect(variants[0].entrez_name).to.equal('ALK');
     });
 
+
+    it('successfully resolves variant groups for gene 238', function() {
+      goFromState('initial').toState('events.genes.child', { geneId: 238 });
+      $httpBackend.flush();
+      var variantGroups = $state.$current.parent.locals.globals.variantGroups;
+      expect(variantGroups).to.exist;
+      expect(variantGroups).to.be.an('array');
+      expect(variantGroups[0].name).to.equal('Crizotinib Resistance');
+    });
     //it('retrieves specific gene info from MyGeneInfo service', function () {
     //  var egState = $state.get('events.genes');
     //  var gene;
