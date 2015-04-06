@@ -108,8 +108,8 @@
           });
       },
 
-      getComment: function(comment_id) {
-        return Genes.getComment(gene.entrez_id, comment_id);
+      getComment: function(commentId) {
+        return Genes.getComment(gene.entrez_id, commentId);
       },
       addComment: function() {},
       updateComment: function(reqObj) {
@@ -119,7 +119,12 @@
             return response;
           });
       },
-      deleteComment: function() {},
+      deleteComment: function(commentId) {
+        return Genes.deleteComment({ geneId: gene.entrez_id, commentId: commentId })
+          .then(function(response) {
+            return response;
+          });
+      },
 
       getChanges: function() {},
       submitChange: function() {},

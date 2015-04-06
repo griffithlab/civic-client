@@ -75,6 +75,7 @@ describe('GenesViewController', function () {
       $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
       $httpBackend.when('GET', '/api/genes/238/comments/1').respond(servedGene238Comment1);
       $httpBackend.when('PATCH', '/api/genes/238/comments/1').respond(servedGene238Comment1Updated);
+      $httpBackend.when('DELETE', '/api/genes/238/comments/1').respond(204, null);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -349,6 +350,20 @@ describe('GenesViewController', function () {
         text: 'Gene 238 Comment 1 UPDATED'
       }).then(function(response) {
         expect(response.data.text).to.equal('Gene 238 Comment 1 UPDATED');
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.deleteComment(1) should send a DELETE request to /api/genes/238/1', function() {
+      $httpBackend.expect('DELETE', '/api/genes/238/comments/1');
+      actions.deleteComment(1);
+      $httpBackend.flush();
+    });
+
+    it('actions.deleteComment(1) should eventually return a HTTP 204 response', function() {
+      $httpBackend.expect('DELETE', '/api/genes/238/comments/1');
+      actions.deleteComment(1).then(function(response) {
+        expect(response.status).to.equal(204);
       });
       $httpBackend.flush();
     });
