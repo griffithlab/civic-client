@@ -76,8 +76,6 @@ describe('GenesViewConfig', function () {
                     _$httpBackend_,
                     _$controller_,
                     _$state_,
-                    _Genes_,
-                    _MyGeneInfo_,
                     servedGene238,
                     servedMyGeneInfo238,
                     servedGene238Variants,
@@ -86,8 +84,6 @@ describe('GenesViewConfig', function () {
       $httpBackend = _$httpBackend_;
       $controller = _$controller_;
       $state = _$state_;
-      Genes = _Genes_;
-      MyGeneInfo = _MyGeneInfo_;
 
       // set up mock service providers
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
@@ -131,16 +127,18 @@ describe('GenesViewConfig', function () {
 
     it('successfully resolves the Genes service', function () {
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      expect($state.$current.parent.locals.globals.Genes).to.exist;
-      expect($state.$current.parent.locals.globals.Genes).to.be.an('object');
-      expect($state.$current.parent.locals.globals.Genes.get).to.be.a('function');
+      var Genes = $state.$current.parent.locals.globals.Genes;
+      expect(Genes).to.exist;
+      expect(Genes).to.be.an('object');
+      expect(Genes.get).to.be.a('function');
     });
 
     it('successfully resolves the MyGeneInfo service', function () {
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
-      expect($state.$current.parent.locals.globals.MyGeneInfo).to.exist;
-      expect($state.$current.parent.locals.globals.MyGeneInfo).to.be.an('object');
-      expect($state.$current.parent.locals.globals.MyGeneInfo.get).to.be.a('function');
+      var MyGeneInfo = $state.$current.parent.locals.globals.MyGeneInfo;
+      expect(MyGeneInfo).to.exist;
+      expect(MyGeneInfo).to.be.an('object');
+      expect(MyGeneInfo.get).to.be.a('function');
     });
 
     //it('retrieves specific gene info from MyGeneInfo service', function () {
