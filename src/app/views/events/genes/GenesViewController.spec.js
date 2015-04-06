@@ -29,6 +29,7 @@ describe('GenesViewController', function () {
     module('served/myGeneInfo238.json');
     module('served/gene238Comments.json');
     module('served/gene238Comment1.json');
+    module('served/gene238Comment1Updated.json');
     module('civic.templates'); // load ng-html2js templates
     module('civic.events.genes', function ($provide, $stateProvider) {
       // GenesViewController is attached to an abstract state so we need to create parent and
@@ -57,7 +58,8 @@ describe('GenesViewController', function () {
                     servedGene238Variants,
                     servedGene238VariantGroups,
                     servedGene238Comments,
-                    servedGene238Comment1) {
+                    servedGene238Comment1,
+                    servedGene238Comment1Updated) {
       $state = _$state_;
       $rootScope = _$rootScope_;
       $controller = _$controller_;
@@ -72,6 +74,7 @@ describe('GenesViewController', function () {
       $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
       $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
       $httpBackend.when('GET', '/api/genes/238/comments/1').respond(servedGene238Comment1);
+      $httpBackend.when('PATCH', '/api/genes/238/comments/1').respond(servedGene238Comment1Updated);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -306,19 +309,46 @@ describe('GenesViewController', function () {
       expect(data.comments[0].title).to.equal('Gene 238 Title 1');
     });
 
+    it('actions.getComments() should eventually return an array of gene 238\'s comments', function() {
+      $httpBackend.expect('GET', '/api/genes/238/comments');
+      actions.getComments().then(function(comments) {
+        expect(comments).to.be.an('array');
+        expect(comments).to.not.be.empty;
+        expect(comments[0].title).to.equal('Gene 238 Title 1');
+      });
+      $httpBackend.flush();
+    });
+
     it('actions.getComment(1) should sent a GET request to \'/api/genes/238/comments/1\'.', function() {
       $httpBackend.expect('GET', '/api/genes/238/comments/1');
       actions.getComment(1);
       $httpBackend.flush();
     });
 
-    it('actions.getComment(1) should respond with gene 238\'s first comment', function() {
+    it('actions.getComment(1) should eventually return gene 238\'s first comment', function() {
       $httpBackend.expect('GET', '/api/genes/238/comments/1');
       var firstComment = actions.getComment(1);
       firstComment.then(function(comment) {
         expect(comment.title).to.exist;
         expect(comment.title).to.be.a('string');
         expect(comment.title).to.equal('Gene 238 Title 1');
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.updateComment({commentId: 1, text:\'Gene 238 Comment 1 UPDATED\'}) should send a PATCH request to /api/genes/238/comments/1', function() {
+      $httpBackend.expect('PATCH', '/api/genes/238/comments/1');
+      actions.updateComment({ commentId: 1, text: 'Gene 238 Comment 1 UPDATED' });
+      $httpBackend.flush();
+    });
+
+    it('actions.updateComment({commentId: 1, text:\'Gene 238 Comment 1 UPDATED\'}) should eventually return an updated comment record', function() {
+      $httpBackend.expect('PATCH', '/api/genes/238/comments/1');
+      actions.updateComment({
+        commentId: 1,
+        text: 'Gene 238 Comment 1 UPDATED'
+      }).then(function(response) {
+        expect(response.data.text).to.equal('Gene 238 Comment 1 UPDATED');
       });
       $httpBackend.flush();
     });

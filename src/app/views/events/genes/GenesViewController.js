@@ -112,7 +112,13 @@
         return Genes.getComment(gene.entrez_id, comment_id);
       },
       addComment: function() {},
-      updateComment: function() {},
+      updateComment: function(reqObj) {
+        reqObj.geneId = gene.entrez_id;
+        return Genes.updateComment(reqObj)
+          .then(function(response){
+            return response;
+          });
+      },
       deleteComment: function() {},
 
       getChanges: function() {},
