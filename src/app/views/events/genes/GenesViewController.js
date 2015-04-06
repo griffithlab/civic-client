@@ -108,11 +108,8 @@
           });
       },
 
-      getComment: function() {
-        return Genes.getComment(gene.entrez_id)
-          .then(function(response) {
-            return response;
-          })
+      getComment: function(comment_id) {
+        return Genes.getComment(gene.entrez_id, comment_id);
       },
       addComment: function() {},
       updateComment: function() {},

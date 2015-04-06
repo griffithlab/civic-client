@@ -28,6 +28,7 @@ describe('GenesViewController', function () {
     module('served/gene238VariantGroups.json');
     module('served/myGeneInfo238.json');
     module('served/gene238Comments.json');
+    module('served/gene238Comment1.json');
     module('civic.templates'); // load ng-html2js templates
     module('civic.events.genes', function ($provide, $stateProvider) {
       // GenesViewController is attached to an abstract state so we need to create parent and
@@ -55,7 +56,8 @@ describe('GenesViewController', function () {
                     servedMyGeneInfo238,
                     servedGene238Variants,
                     servedGene238VariantGroups,
-                    servedGene238Comments) {
+                    servedGene238Comments,
+                    servedGene238Comment1) {
       $state = _$state_;
       $rootScope = _$rootScope_;
       $controller = _$controller_;
@@ -63,12 +65,13 @@ describe('GenesViewController', function () {
 
       _ = window._;
 
-      // setup backend response mocks
+      // setup mocked backend responses
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
       $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
       $httpBackend.when('GET', '/api/genes/238/variants').respond(servedGene238Variants);
       $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
       $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
+      $httpBackend.when('GET', '/api/genes/238/comments/1').respond(servedGene238Comment1);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -272,6 +275,16 @@ describe('GenesViewController', function () {
       $httpBackend.flush();
     });
 
+  });
+
+  describe('geneModel gene comment actions', function() {
+    var actions;
+    var geneModel;
+    beforeEach(function() {
+      geneModel = scope.geneModel;
+      actions = geneModel.actions;
+    });
+
     it('actions.getComments() should send a GET request to /api/genes/238/comments', function() {
       $httpBackend.expect('GET', '/api/genes/238/comments');
       actions.getComments();
@@ -279,27 +292,47 @@ describe('GenesViewController', function () {
     });
 
     it('actions.getComments() should attach new comment array to geneModel.data.comments', function() {
-      var data = scope.geneModel.data;
+      var data = geneModel.data;
       $httpBackend.expect('GET', '/api/genes/238/comments');
 
       expect(data.comments).to.exist;
       expect(data.comments).to.be.an('array');
       expect(data.comments).to.be.empty;
       actions.getComments();
+
       $httpBackend.flush();
+
       expect(data.comments).to.not.be.empty;
       expect(data.comments[0].title).to.equal('Gene 238 Title 1');
     });
 
+    it('actions.getComment(1) should sent a GET request to \'/api/genes/238/comments/1\'.', function() {
+      $httpBackend.expect('GET', '/api/genes/238/comments/1');
+      actions.getComment(1);
+      $httpBackend.flush();
+    });
+
+    it('actions.getComment(1) should respond with gene 238\'s first comment', function() {
+      $httpBackend.expect('GET', '/api/genes/238/comments/1');
+      var firstComment = actions.getComment(1);
+      firstComment.then(function(comment) {
+        expect(comment.title).to.exist;
+        expect(comment.title).to.be.a('string');
+        expect(comment.title).to.equal('Gene 238 Title 1');
+      });
+      $httpBackend.flush();
+    });
   });
 
   describe('geneModel gene changes actions', function() {
-
+    var actions;
+    var geneModel;
+    beforeEach(function() {
+      geneModel = scope.geneModel;
+      actions = geneModel.actions;
+    });
 
   });
 
-  describe('geneModel gene comment actions', function() {
 
-
-  });
 });

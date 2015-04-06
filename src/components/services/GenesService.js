@@ -284,8 +284,8 @@
             return response;
           });
       },
-      getComment: function(reqObj) {
-        return GenesResource.getComment(reqObj).$promise
+      getComment: function(geneId, commentId) {
+        return GenesResource.getComment({geneId: geneId, commentId: commentId}).$promise
           .then(function(response) {
             return response;
           });

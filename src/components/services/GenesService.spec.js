@@ -142,9 +142,9 @@ describe('GenesService', function() {
       $httpBackend.flush();
     });
 
-    it('Genes.getComment({geneId: 238, commentId: 1 }) should send a GET request to /api/genes/238/comments/1', function() {
+    it('Genes.getComment(238, 1) should send a GET request to /api/genes/238/comments/1', function() {
       $httpBackend.expect('GET', '/api/genes/238/comments/1').respond('200', {});
-      Genes.getComment({geneId: 238, commentId: 1});
+      Genes.getComment(238, 1);
       $httpBackend.flush();
     });
   });
