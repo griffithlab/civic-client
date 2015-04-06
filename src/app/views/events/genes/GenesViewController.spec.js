@@ -72,6 +72,7 @@ describe('GenesViewController', function () {
       $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
       $httpBackend.when('GET', '/api/genes/238/variants').respond(servedGene238Variants);
       $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
+      $httpBackend.when('POST', '/api/genes/238/comments').respond(201, servedGene238Comment1);
       $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
       $httpBackend.when('GET', '/api/genes/238/comments/1').respond(servedGene238Comment1);
       $httpBackend.when('PATCH', '/api/genes/238/comments/1').respond(servedGene238Comment1Updated);
@@ -287,6 +288,29 @@ describe('GenesViewController', function () {
     beforeEach(function() {
       geneModel = scope.geneModel;
       actions = geneModel.actions;
+    });
+
+    it('actions.addComment({title: \'Gene 238 comment 1\', text:\'Gene 238 Title 1\'}) should send a PUT request to /api/genes/238/comments', function() {
+      $httpBackend.expect('POST', '/api/genes/238/comments',{
+          geneId: 238,
+          title: 'Gene 238 Title 1',
+          text: 'Gene 238 comment 1' }
+      );
+      actions.addComment({ title: 'Gene 238 Title 1', text: 'Gene 238 comment 1' });
+      $httpBackend.flush();
+    });
+
+    it('actions.addComment({title: \'Gene 238 Title 1\', text:\'Gene 238 comment 1\'}) should eventually return the new comment object', function() {
+      $httpBackend.expect('POST', '/api/genes/238/comments', {
+          geneId: 238,
+          title: 'Gene 238 Title 1',
+          text: 'Gene 238 comment 1' }
+      );
+      actions.addComment({ title: 'Gene 238 Title 1', text: 'Gene 238 comment 1' })
+        .then(function(response) {
+          expect(response.title).to.equal('Gene 238 Title 1');
+        });
+      $httpBackend.flush();
     });
 
     it('actions.getComments() should send a GET request to /api/genes/238/comments', function() {

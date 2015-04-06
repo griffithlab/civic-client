@@ -111,7 +111,15 @@
       getComment: function(commentId) {
         return Genes.getComment(gene.entrez_id, commentId);
       },
-      addComment: function() {},
+
+      addComment: function(reqObj) {
+        reqObj.geneId = gene.entrez_id;
+        return Genes.addComment(reqObj)
+          .then(function(response) {
+            return response;
+          });
+      },
+
       updateComment: function(reqObj) {
         reqObj.geneId = gene.entrez_id;
         return Genes.updateComment(reqObj)
@@ -119,6 +127,7 @@
             return response;
           });
       },
+
       deleteComment: function(commentId) {
         return Genes.deleteComment({ geneId: gene.entrez_id, commentId: commentId })
           .then(function(response) {
