@@ -37,6 +37,7 @@ module.exports = function(config) {
       'karma-phantomjs-launcher',
       'karma-chrome-launcher',
       'karma-mocha',
+      'karma-mocha-reporter',
       'karma-spec-reporter',
       'karma-ng-html2js-preprocessor',
       'karma-ng-json2js-preprocessor',
@@ -69,7 +70,7 @@ module.exports = function(config) {
 
     browsers : ['PhantomJS'],
     //browsers : ['Chrome'],
-    reporters: ['spec'],
+    reporters: ['mocha'],
     autoWatch : false,
     logLevel: config.LOG_INFO
   });
