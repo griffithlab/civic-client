@@ -14,18 +14,18 @@
         resolve: /* @ngInject */ {
           Genes: 'Genes',
           MyGeneInfo: 'MyGeneInfo',
-          gene: function(Genes, $stateParams) {
-            return Genes.get($stateParams.geneId);
-          },
-          variants: function(Genes, gene) {
-            return Genes.getVariants(gene.entrez_id);
-          },
-          variantGroups: function(Genes, gene) {
-            return Genes.getVariantGroups(gene.entrez_id)
-          },
-          myGeneInfo: function(MyGeneInfo, gene) {
-            return MyGeneInfo.get(gene.entrez_id);
-          }
+          //gene: function(Genes, $stateParams) {
+          //  return Genes.get($stateParams.geneId);
+          //},
+          //myGeneInfo: function(MyGeneInfo, gene) {
+          //  return MyGeneInfo.get(gene.entrez_id);
+          //},
+          //variants: function(Genes, gene) {
+          //  return Genes.getVariants(gene.entrez_id);
+          //},
+          //variantGroups: function(Genes, gene) {
+          //  return Genes.getVariantGroups(gene.entrez_id)
+          //}
         },
         controller: 'GenesViewController',
         onExit: /* @ngInject */ function($deepStateRedirect) {

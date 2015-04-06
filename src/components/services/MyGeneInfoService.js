@@ -15,7 +15,7 @@
       },
       {
         get: {
-          isArray: false,
+          // isArray: false,
           cache: cache,
           transformResponse: function(data) {
             if(typeof data == 'string') {
@@ -72,7 +72,10 @@
   function MyGeneInfoService(MyGeneInfoResource) {
     return {
       get: function(entrez_id) {
-        return MyGeneInfoResource.get({ geneId: entrez_id }).$promise;
+        return MyGeneInfoResource.get({geneId: entrez_id}).$promise
+          .then(function(response) {
+            return response;
+        });
       }
     }
   }

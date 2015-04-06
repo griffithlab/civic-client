@@ -34,6 +34,7 @@ describe('GenesViewController', function () {
     module('civic.events');
     module('served/gene238.json');
     module('served/gene238Variants.json');
+    module('served/gene238VariantGroups.json');
     module('served/myGeneInfo238.json');
     module('civic.events.genes', function ($provide, $stateProvider) {
       // set up mock service providers
@@ -90,10 +91,10 @@ describe('GenesViewController', function () {
       $httpBackend.when('GET', '/api/genes/238/variants_groups').respond(servedGene238VariantGroups);
 
       // ui-router state transition debugging
-      //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-      //$rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
-      //$rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
-      //$rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
+      function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
+      $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
+      $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
+      $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
 
       // instantiate GenesViewController using resolved deps from event.genes state
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
@@ -282,7 +283,9 @@ describe('GenesViewController', function () {
     });
 
     it('actions.update({ description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes followed by a GET', function() {
-      $httpBackend.expect('PATCH', '/api/genes').respond('200', {});
+      $httpBackend.expect('PATCH', '/api/genes', {
+        description: 'UPDATED DESCRIPTION'
+      }).respond('200', {});
       $httpBackend.expect('GET', '/api/genes/238').respond('200', {});
       actions.update({ description: 'UPDATED DESCRIPTION' });
       $httpBackend.flush();

@@ -6,9 +6,11 @@
 
   // @ngInject
   function GenesResource($resource, $cacheFactory) {
+    // ngResource normally automatically handles caches but we need
+    // to manually remove records in the update/delete
+    // custom functions on this resource
     var cache = $cacheFactory('genesCache');
-
-    var cacheInterceptor = function(response) {
+    var genesCacheInterceptor = function(response) {
       cache.remove(response.config.url);
       return response;
     };
@@ -43,146 +45,158 @@
         update: {
           method: 'PATCH',
           interceptor: {
-            response: cacheInterceptor
+            response: genesCacheInterceptor
           }
         },
         getVariants: {
-          url: '/api/genes/:geneId/variants',
-          method: 'GET'
+          transformRequest: function(request) {
+            return request;
+          },
+          transformResponse: function(response) {
+            return response;
+          },
+          method: 'GET',
+          url: '/api/genes/:geneId/variants'
         },
         getVariantGroups: {
-          url: '/api/genes/:geneId/variant_groups',
-          method: 'GET'
+          method: 'GET',
+          url: '/api/genes/:geneId/variant_groups'
         },
         getComments: {
+          method: 'GET',
           url: '/api/genes/:geneId/comments',
-          method: 'GET'
+          cache: cache
         },
         getComment: {
+          method: 'GET',
           url: '/api/genes/:geneId/comments/:commentId',
           params: {
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          method: 'GET',
           isArray: false
         },
         addComment: {
+          method: 'POST',
           url: '/api/genes/:geneId/comments',
           params: {
             geneId: '@geneId'
           },
-          method: 'POST'
+          cache: cache
         },
         updateComment: {
+          method: 'PATCH',
           url: '/api/genes/:geneId/comments/:commentId',
           params: {
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          method: 'PATCH'
+          cache: cache
         },
         deleteComment: {
+          method: 'DELETE',
           url: '/api/genes/:geneId/comments/:commentId',
           params: {
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          method: 'DELETE'
+          cacheInterceptor: cache
         },
         getRevisions: {
-          url: '/api/genes/:geneId/revisions',
-          method: 'GET'
+          method: 'GET',
+          url: '/api/genes/:geneId/revisions'
         },
         getRevision: {
+          method: 'GET',
           url: '/api/genes/:geneId/revisions/:revisionId',
           params: {
             geneId: '@geneId',
             revisionId: '@revisionId'
           },
-          method: 'GET',
           isArray: false
         },
         getLastRevision: {
+          method: 'GET',
           url: '/api/genes/:geneId/revisions/last',
           params: {
             geneId: '@geneId'
           },
-          method: 'GET',
           isArray: false
         },
         getChanges: {
+          method: 'GET',
           url: '/api/genes/:geneId/suggested_changes',
-          method: 'GET'
         },
         getChange: {
+          method: 'GET',
           url: '/api/genes/:geneId/suggested_changes/:changeId',
           params: {
             geneId: '@geneId',
             changeId: '@changeId'
           },
-          method: 'GET',
           isArray: false
         },
         acceptChange: {
+          method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:changeId/accept',
           params: {
             geneId: '@geneId',
             changeId: '@changeId'
-          },
-          method: 'POST'
+          }
         },
         rejectChange: {
+          method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:changeId/reject',
           params: {
             geneId: '@geneId',
             changeId: '@changeId'
-          },
-          method: 'POST'
+          }
         },
         addChangeComment: {
+          method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:changeId/comments',
           params: {
             geneId: '@geneId',
             changeId: '@changeId'
-          },
-          method: 'POST'
+          }
         },
         updateChangeComment: {
+          method: 'PATCH',
           url: '/api/genes/:geneId/suggested_changes/:changeId/comments/:commentId',
           params: {
             geneId: '@geneId',
             changeId: '@changeId',
             commentId: '@commentId'
           },
-          method: 'PATCH'
+          cache: cache
         },
         getChangeComments: {
+          method: 'GET',
           url: '/api/genes/:geneId/suggested_changes/:changeId/comments',
           params: {
             geneId: '@geneId',
             changeId: '@changeId'
           },
-          method: 'GET'
+          cacheInterceptor: cache
         },
         getChangeComment: {
+          method: 'GET',
           url: '/api/genes/:geneId/suggested_changes/:changeId/comments/:commentId',
           params: {
             geneId: '@geneId',
             changeId: '@changeId',
             commentId: '@commentId'
           },
-          method: 'GET',
-          isArray: false
+          cache: cache
         },
         deleteChangeComment: {
+          method: 'DELETE',
           url: '/api/genes/:geneId/suggested_changes/:changeId/comments/:commentId',
           params: {
             geneId: '@geneId',
             changeId: '@changeId',
             commentId: '@commentId'
-          },
-          method: 'DELETE'
+          }
         }
       });
   }
