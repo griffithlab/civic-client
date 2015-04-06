@@ -11,13 +11,7 @@ describe('GenesViewController', function () {
     GenesViewController,
 
     scope,
-    state = 'events.genes',
-
-    servedGene238,
-    servedGene238Variants,
-    servedGene238VariantGroups,
-    servedMyGeneInfo238;
-
+    state = 'events.genes';
 
   function goFromState(state1, params1) {
     return {
@@ -37,13 +31,6 @@ describe('GenesViewController', function () {
     module('served/gene238VariantGroups.json');
     module('served/myGeneInfo238.json');
     module('civic.events.genes', function ($provide, $stateProvider) {
-      // set up mock service providers
-      //$provide.value('Genes', {
-      //  get: sinon.stub().withArgs({ geneId: 238 }).resolves(servedGene238)
-      //});
-      //$provide.value('MyGeneInfo', {
-      //  get: sinon.stub().withArgs(238).resolves(servedMyGeneInfo238)
-      //});
 
       // create a navigable initial and child states to force events.genes abstract state to resolve
       $stateProvider
@@ -60,7 +47,6 @@ describe('GenesViewController', function () {
         })
     });
 
-    module('q-constructor'); // switch to v1.3 $q constructor for sinon-as-promised
     module('civic.templates'); // load ng-html2js templates
 
     // inject services
@@ -69,32 +55,27 @@ describe('GenesViewController', function () {
                     _$state_,
                     $q,
                     _$httpBackend_,
-                    _Genes_,
-                    _MyGeneInfo_,
                     servedGene238,
-                    servedMyGeneInfo238) {
-
+                    servedMyGeneInfo238,
+                    servedGene238Variants,
+                    servedGene238VariantGroups) {
+      $state = _$state_;
       $rootScope = _$rootScope_;
       $controller = _$controller_;
-      $state = _$state_;
       $httpBackend = _$httpBackend_;
-      Genes = _Genes_;
-      MyGeneInfo = _MyGeneInfo_;
 
       _ = window._;
 
-      sinonAsPromised($q);
-
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
       $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
-      $httpBackend.when('GET', '/api/genes/238/variants').respond(servedGene238Variants);
-      $httpBackend.when('GET', '/api/genes/238/variants_groups').respond(servedGene238VariantGroups);
+      $httpBackend.when('QUERY', '/api/genes/238/variants').respond(servedGene238Variants);
+      $httpBackend.when('QUERY', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
 
       // ui-router state transition debugging
-      function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-      $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
-      $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
-      $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
+      //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
+      //$rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
+      //$rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
+      //$rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
 
       // instantiate GenesViewController using resolved deps from event.genes state
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
@@ -111,9 +92,7 @@ describe('GenesViewController', function () {
         variantGroups: deps.variantGroups,
         myGeneInfo: deps.myGeneInfo
       });
-
     });
-
   });
 
   describe('controller instantiation', function(){
@@ -284,6 +263,7 @@ describe('GenesViewController', function () {
 
     it('actions.update({ description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes followed by a GET', function() {
       $httpBackend.expect('PATCH', '/api/genes', {
+        geneId: 238,
         description: 'UPDATED DESCRIPTION'
       }).respond('200', {});
       $httpBackend.expect('GET', '/api/genes/238').respond('200', {});
