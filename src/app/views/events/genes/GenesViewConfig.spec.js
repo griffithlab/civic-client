@@ -127,6 +127,7 @@ describe('GenesViewConfig', function () {
 
     it('successfully resolves the Genes service', function () {
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
+      $httpBackend.flush();
       var Genes = $state.$current.parent.locals.globals.Genes;
       expect(Genes).to.exist;
       expect(Genes).to.be.an('object');
@@ -135,10 +136,20 @@ describe('GenesViewConfig', function () {
 
     it('successfully resolves the MyGeneInfo service', function () {
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
+      $httpBackend.flush();
       var MyGeneInfo = $state.$current.parent.locals.globals.MyGeneInfo;
       expect(MyGeneInfo).to.exist;
       expect(MyGeneInfo).to.be.an('object');
       expect(MyGeneInfo.get).to.be.a('function');
+    });
+
+    it('successfully resolves gene 238', function() {
+      goFromState('initial').toState('events.genes.child', { geneId: 238 });
+      $httpBackend.flush();
+      var gene = $state.$current.parent.locals.globals.gene;
+      expect(gene).to.exist;
+      expect(gene).to.be.an('object');
+      expect(gene.entrez_id).to.equal(238);
     });
 
     //it('retrieves specific gene info from MyGeneInfo service', function () {

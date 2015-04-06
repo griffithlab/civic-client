@@ -14,9 +14,9 @@
         resolve: /* @ngInject */ {
           Genes: 'Genes',
           MyGeneInfo: 'MyGeneInfo',
-          //gene: function(Genes, $stateParams) {
-          //  return Genes.get($stateParams.geneId);
-          //},
+          gene: function(Genes, $stateParams) {
+            return Genes.get($stateParams.geneId);
+          }
           //myGeneInfo: function(MyGeneInfo, gene) {
           //  return MyGeneInfo.get(gene.entrez_id);
           //},

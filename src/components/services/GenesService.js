@@ -49,12 +49,6 @@
           }
         },
         getVariants: {
-          transformRequest: function(request) {
-            return request;
-          },
-          transformResponse: function(response) {
-            return response;
-          },
           method: 'GET',
           url: '/api/genes/:geneId/variants'
         },
