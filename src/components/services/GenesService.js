@@ -49,6 +49,7 @@
           }
         },
         getVariants: {
+          isArray: true,
           method: 'GET',
           url: '/api/genes/:geneId/variants'
         },
