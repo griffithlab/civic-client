@@ -5,9 +5,6 @@ describe('GenesViewController', function () {
     $state,
     $controller,
     $httpBackend,
-
-    Genes,
-    MyGeneInfo,
     GenesViewController,
 
     scope,
@@ -30,6 +27,7 @@ describe('GenesViewController', function () {
     module('served/gene238Variants.json');
     module('served/gene238VariantGroups.json');
     module('served/myGeneInfo238.json');
+    module('served/gene238Comments.json');
     module('civic.events.genes', function ($provide, $stateProvider) {
 
       // create a navigable initial and child states to force events.genes abstract state to resolve
@@ -58,7 +56,8 @@ describe('GenesViewController', function () {
                     servedGene238,
                     servedMyGeneInfo238,
                     servedGene238Variants,
-                    servedGene238VariantGroups) {
+                    servedGene238VariantGroups,
+                    servedGene238Comments) {
       $state = _$state_;
       $rootScope = _$rootScope_;
       $controller = _$controller_;
@@ -66,10 +65,12 @@ describe('GenesViewController', function () {
 
       _ = window._;
 
+      // setup backend response mocks
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
       $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
       $httpBackend.when('QUERY', '/api/genes/238/variants').respond(servedGene238Variants);
       $httpBackend.when('QUERY', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
+      $httpBackend.when('QUERY', '/api/genes/238/comments').respond(servedGene238Comments);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -261,6 +262,19 @@ describe('GenesViewController', function () {
       expect(actions.get()).to.equal(geneModel.data.gene);
     });
 
+    it('actions.refresh() should send a GET request to /api/genes/238', function() {
+      $httpBackend.expect('GET', '/api/genes/238').respond('200', {});
+      actions.refresh();
+      $httpBackend.flush();
+      // TODO mock 1st and 2nd calls returning gene238updated.json and test if the updated gene is returned and not the cached version
+    });
+
+    it('actions.delete() should send a DELETE request to /api/genes/238', function() {
+      $httpBackend.expect('DELETE', '/api/genes/238').respond('200', {});
+      actions.delete(238);
+      $httpBackend.flush();
+    });
+
     it('actions.update({ description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes followed by a GET', function() {
       $httpBackend.expect('PATCH', '/api/genes', {
         geneId: 238,
@@ -271,17 +285,8 @@ describe('GenesViewController', function () {
       $httpBackend.flush();
     });
 
-    it('actions.delete() should send a DELETE request to /api/genes/238', function() {
-      $httpBackend.expect('DELETE', '/api/genes/238').respond('200', {});
-      actions.delete(238);
-      $httpBackend.flush();
-    });
+    it('actions.getComments() should send a QUERY request to /api/genes/238/comments', function() {
 
-    it('actions.refresh() should send a GET request to /api/genes/238', function() {
-      $httpBackend.expect('GET', '/api/genes/238').respond('200', {});
-      actions.refresh();
-      $httpBackend.flush();
-      // TODO mock 1st and 2nd calls returning gene238updated.json and test if the updated gene is returned and not the cached version
     });
 
   });

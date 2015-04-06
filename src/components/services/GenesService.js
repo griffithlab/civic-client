@@ -10,7 +10,7 @@
     // to manually remove records in the update/delete
     // custom functions on this resource
     var cache = $cacheFactory('genesCache');
-    var genesCacheInterceptor = function(response) {
+    var cacheInterceptor = function(response) {
       cache.remove(response.config.url);
       return response;
     };
@@ -33,30 +33,34 @@
           isArray: false,
           cache: cache
         },
+        update: {
+          method: 'PATCH',
+          interceptor: {
+            response: cacheInterceptor
+          }
+        },
         refresh: { // get gene, force cache
           method: 'GET',
           isArray: false,
           cache: false
         },
-        delete: { // get a single gene
+        delete: { // delete a single gene
           method: 'DELETE',
-          cache: cache
-        },
-        update: {
-          method: 'PATCH',
           interceptor: {
-            response: genesCacheInterceptor
+            response: cacheInterceptor
           }
         },
         queryVariants: {
           isArray: true,
           method: 'QUERY',
-          url: '/api/genes/:geneId/variants'
+          url: '/api/genes/:geneId/variants',
+          cache: cache
         },
         queryVariantGroups: {
           isArray: true,
           method: 'QUERY',
-          url: '/api/genes/:geneId/variant_groups'
+          url: '/api/genes/:geneId/variant_groups',
+          cache: cache
         },
         getComments: {
           method: 'GET',
@@ -87,7 +91,9 @@
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          cache: cache
+          interceptor: {
+            response: cacheInterceptor
+          }
         },
         deleteComment: {
           method: 'DELETE',
@@ -96,11 +102,14 @@
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          cacheInterceptor: cache
+          interceptor: {
+            response: cacheInterceptor
+          }
         },
         getRevisions: {
           method: 'GET',
-          url: '/api/genes/:geneId/revisions'
+          url: '/api/genes/:geneId/revisions',
+          cache: cache
         },
         getRevision: {
           method: 'GET',
@@ -109,7 +118,8 @@
             geneId: '@geneId',
             revisionId: '@revisionId'
           },
-          isArray: false
+          isArray: false,
+          cache: cache
         },
         getLastRevision: {
           method: 'GET',
@@ -164,7 +174,9 @@
             changeId: '@changeId',
             commentId: '@commentId'
           },
-          cache: cache
+          interceptor: {
+            response: cacheInterceptor
+          }
         },
         getChangeComments: {
           method: 'GET',
@@ -173,7 +185,7 @@
             geneId: '@geneId',
             changeId: '@changeId'
           },
-          cacheInterceptor: cache
+          cache: cache
         },
         getChangeComment: {
           method: 'GET',

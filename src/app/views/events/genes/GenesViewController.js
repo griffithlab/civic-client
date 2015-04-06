@@ -85,11 +85,11 @@
         Genes.update(reqObj);
         this.refresh();
       },
-      delete: function() {
-        Genes.delete(gene.entrez_id);
-      },
       refresh: function () {
         gene = Genes.refresh(gene.entrez_id)
+      },
+      delete: function() {
+        Genes.delete(gene.entrez_id);
       },
 
       getComments: function() {},
