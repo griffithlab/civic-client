@@ -153,14 +153,16 @@
           params: {
             geneId: '@geneId',
             changeId: '@changeId'
-          }
+          },
+          isArray: false
         },
 
         // Gene Revisions routes
         getRevisions: {
           method: 'GET',
           url: '/api/genes/:geneId/revisions',
-          cache: cache
+          cache: cache,
+          isArray: true
         },
         getRevision: {
           method: 'GET',
@@ -209,6 +211,7 @@
             geneId: '@geneId',
             changeId: '@changeId'
           },
+          isArray: true, 
           cache: cache
         },
         getChangeComment: {

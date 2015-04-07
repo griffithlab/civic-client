@@ -163,7 +163,12 @@
             return response;
           })
       },
-      rejectChange: function() {},
+      rejectChange: function(changeId) {
+        return Genes.rejectChange({ geneId: gene.entrez_id, changeId: changeId })
+          .then(function(response) {
+            return response;
+          })
+      },
 
       addChangeComment: function() {},
       updateChangeComment: function() {},

@@ -90,6 +90,7 @@ describe('GenesViewController', function () {
       $httpBackend.when('DELETE', '/api/genes/238/comments/1').respond(204, null);
       $httpBackend.when('POST', '/api/genes/238/suggested_changes').respond(200, servedGene238SuggestedChangeSubmitted);
       $httpBackend.when('POST', '/api/genes/238/suggested_changes/1/accept').respond(200, servedGene238SuggestedChangeAccepted);
+      $httpBackend.when('POST', '/api/genes/238/suggested_changes/2/reject').respond(200, servedGene238SuggestedChangeAccepted);
       $httpBackend.when('GET', '/api/genes/238/suggested_changes').respond(200, servedGene238SuggestedChanges);
       $httpBackend.when('GET', '/api/genes/238/suggested_changes/1').respond(200, servedGene238SuggestedChange1);
 
@@ -452,14 +453,21 @@ describe('GenesViewController', function () {
       $httpBackend.flush();
     });
 
-    //it('actions.getChange(1) should send a GET request to "/api/genes/238/suggested_changes/1"', function() {
-    //  $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1');
-    //  actions.getChanges().then(function(response) {
-    //    expect(response).to.be.an('array');
-    //    expect(response).to.not.be.empty;
-    //  });
-    //  $httpBackend.flush();
-    //});
+    it('actions.getChange(1) should update return an object"', function() {
+      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1');
+      actions.getChange(1).then(function(response) {
+        expect(response).to.be.an('object');
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.rejectChange(2) should send a POST request to /api/genes/238/suggested_changes/2/reject"', function() {
+      $httpBackend.expect('POST', '/api/genes/238/suggested_changes/2/reject');
+      actions.rejectChange(2).then(function(response) {
+        expect(response).to.be.an('object');
+      });
+      $httpBackend.flush();
+    });
 
   });
 

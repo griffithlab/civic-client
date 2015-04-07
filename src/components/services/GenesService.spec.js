@@ -25,13 +25,13 @@ describe('GenesService', function() {
                     servedGene238VariantGroups,
                     servedGene238Comments) {
 
-      $httpBackend.when('GET', '/api/genes').respond(servedGenes);
-      $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
-      $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
-      $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
-      $httpBackend.when('GET', '/api/genes/238/variants').respond(servedGene238Variants);
-      $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
-      $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
+      $httpBackend.when('GET', '/api/genes').respond(200, servedGenes);
+      $httpBackend.when('GET', '/api/genes/238').respond(200, servedGene238);
+      $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(200, servedMyGeneInfo238);
+      $httpBackend.when('GET', '/api/genes/238/comments').respond(200, servedGene238Comments);
+      $httpBackend.when('GET', '/api/genes/238/variants').respond(200, servedGene238Variants);
+      $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(200, servedGene238VariantGroups);
+      $httpBackend.when('GET', '/api/genes/238/comments').respond(200, servedGene238Comments);
     });
   }));
 
@@ -42,13 +42,13 @@ describe('GenesService', function() {
 
   describe('/api/genes path', function() {
     it('Genes.add({entrez_name: \'GENE\', description: \'GENE description\'}) should send a POST request to /api/genes', function() {
-      $httpBackend.expect('POST', '/api/genes', {entrez_name: 'GENE', description: 'GENE description'}).respond('200', {});
+      $httpBackend.expect('POST', '/api/genes', {entrez_name: 'GENE', description: 'GENE description'}).respond(200, {});
       Genes.add({entrez_name: 'GENE', description: 'GENE description'});
       $httpBackend.flush();
     });
 
     it('Genes.delete(238) should send a DELETE request to /api/genes/238', function() {
-      $httpBackend.expect('DELETE', '/api/genes/238').respond('200', {});
+      $httpBackend.expect('DELETE', '/api/genes/238').respond(200, {});
       Genes.delete(238);
       $httpBackend.flush();
     });
@@ -75,7 +75,7 @@ describe('GenesService', function() {
     });
 
     it('Genes.update({ geneId: 238, description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes', function() {
-      $httpBackend.expect('PATCH', '/api/genes/238').respond('200', {});
+      $httpBackend.expect('PATCH', '/api/genes/238').respond(200, {});
       Genes.update({ geneId: 238, description: 'UPDATED DESCRIPTION'});
       $httpBackend.flush();
     });
@@ -106,7 +106,7 @@ describe('GenesService', function() {
           geneId: 238,
           title: 'comment title',
           text: 'comment text'
-        }).respond('200', {});
+        }).respond(200, {});
       Genes.submitComment({geneId: 238, title: 'comment title', text: 'comment text'});
       $httpBackend.flush();
     });
@@ -120,7 +120,7 @@ describe('GenesService', function() {
           commentId: 1,
           title: 'updated comment title',
           text: 'updated comment text'
-        }).respond('200', {});
+        }).respond(200, {});
       Genes.updateComment({
         geneId: 238,
         commentId: 1,
@@ -131,7 +131,7 @@ describe('GenesService', function() {
     });
 
     it('Genes.deleteComment({geneId: 238, commentId: 1}) should send a DELETE request to /api/genes/238/comments/1', function() {
-      $httpBackend.expect('DELETE', '/api/genes/238/comments/1').respond('200', {});
+      $httpBackend.expect('DELETE', '/api/genes/238/comments/1').respond(200, {});
       Genes.deleteComment({ geneId: 238, commentId: 1 });
       $httpBackend.flush();
     });
@@ -143,7 +143,7 @@ describe('GenesService', function() {
     });
 
     it('Genes.getComment(238, 1) should send a GET request to /api/genes/238/comments/1', function() {
-      $httpBackend.expect('GET', '/api/genes/238/comments/1').respond('200', {});
+      $httpBackend.expect('GET', '/api/genes/238/comments/1').respond(200, {});
       Genes.getComment(238, 1);
       $httpBackend.flush();
     });
@@ -151,19 +151,19 @@ describe('GenesService', function() {
 
   describe('/api/genes/:geneId/revisions path', function() {
     it('Genes.getRevisions(238) should send a GET request to /api/genes/238/revisions', function() {
-      $httpBackend.expect('GET', '/api/genes/238/revisions').respond('200', []);
+      $httpBackend.expect('GET', '/api/genes/238/revisions').respond(200, []);
       Genes.getRevisions(238);
       $httpBackend.flush();
     });
 
     it('Genes.getRevision({geneId: 238, revisionId: 1}) should send a GET request to /api/genes/238/revisions/1', function() {
-      $httpBackend.expect('GET', '/api/genes/238/revisions/1').respond('200', {});
+      $httpBackend.expect('GET', '/api/genes/238/revisions/1').respond(200, {});
       Genes.getRevision({geneId: 238, revisionId: 1});
       $httpBackend.flush();
     });
 
     it('Genes.getLastRevision({geneId: 238}) should send a GET request to /api/genes/238/revisions/last', function() {
-      $httpBackend.expect('GET', '/api/genes/238/revisions/last').respond('200', {});
+      $httpBackend.expect('GET', '/api/genes/238/revisions/last').respond(200, {});
       Genes.getLastRevision({geneId: 238});
       $httpBackend.flush();
     });
@@ -171,25 +171,25 @@ describe('GenesService', function() {
 
   describe('/api/genes/:geneId/suggested_changes path', function() {
     it('Genes.getSuggestedChanges(238) should send a GET request to /api/genes/238/suggested_changes', function() {
-      $httpBackend.expect('GET', '/api/genes/238/suggested_changes').respond('200', []);
+      $httpBackend.expect('GET', '/api/genes/238/suggested_changes').respond(200, []);
       Genes.getChanges(238);
       $httpBackend.flush();
     });
 
     it('Genes.getSuggestedChange({geneId: 238, changeId: 1}) should send a GET request to /api/genes/238/suggested_changes/1', function() {
-      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1').respond('200', {});
+      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1').respond(200, {});
       Genes.getChange({geneId: 238, changeId: 1});
       $httpBackend.flush();
     });
 
     it('Genes.acceptChange({geneId: 238, changeId: 1}) should send a POST request to /api/genes/238/suggested_changes/1/accept', function() {
-      $httpBackend.expect('POST', '/api/genes/238/suggested_changes/1/accept').respond('200', {});
+      $httpBackend.expect('POST', '/api/genes/238/suggested_changes/1/accept').respond(200, {});
       Genes.acceptChange({geneId: 238, changeId: 1});
       $httpBackend.flush();
     });
 
     it('Genes.rejectChange({geneId: 238, changeId: 1}) should send a POST request to /api/genes/238/suggested_changes/1/reject', function() {
-      $httpBackend.expect('POST', '/api/genes/238/suggested_changes/1/reject').respond('200', {});
+      $httpBackend.expect('POST', '/api/genes/238/suggested_changes/1/reject').respond(200, {});
       Genes.rejectChange({geneId: 238, changeId: 1});
       $httpBackend.flush();
     });
@@ -205,7 +205,7 @@ describe('GenesService', function() {
           changeId: 1,
           title: 'comment title',
           text: 'comment text'
-        }).respond('200', {});
+        }).respond(200, {});
       Genes.addChangeComment({
         geneId: 238,
         changeId: 1,
@@ -225,7 +225,7 @@ describe('GenesService', function() {
           commentId: 1,
           title: 'updated comment title',
           text: 'updated comment text'
-        }).respond('200', {});
+        }).respond(200, {});
       Genes.updateChangeComment({
         geneId: 238,
         changeId: 1,
@@ -237,19 +237,19 @@ describe('GenesService', function() {
     });
 
     it('Genes.deleteChangeComment({geneId: 238, changeId: 1, commentId: 1}) should send a DELETE request to /api/genes/238/suggested_changes/1/comments/1', function() {
-      $httpBackend.expect('DELETE', '/api/genes/238/suggested_changes/1/comments/1').respond('200', {});
+      $httpBackend.expect('DELETE', '/api/genes/238/suggested_changes/1/comments/1').respond(200, {});
       Genes.deleteChangeComment({ geneId: 238, changeId:1, commentId: 1 });
       $httpBackend.flush();
     });
 
     it('Genes.getChangeComments({geneId: 238, changeId: 1}) should send a GET request to /api/genes/238/suggested_changes/1/comments', function() {
-      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1/comments').respond('200', []);
+      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1/comments').respond(200, []);
       Genes.getChangeComments({geneId: 238, changeId: 1});
       $httpBackend.flush();
     });
 
     it('Genes.getChangeComment({geneId: 238, changeId: 1, commentId: 1 }) should send a GET request to /api/genes/238/suggested_changes/1/comments/1', function() {
-      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1/comments/1').respond('200', {});
+      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1/comments/1').respond(200, {});
       Genes.getChangeComment({geneId: 238, changeId: 1, commentId: 1});
       $httpBackend.flush();
     });
