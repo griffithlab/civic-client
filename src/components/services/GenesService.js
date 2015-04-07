@@ -17,9 +17,10 @@
 
     return $resource('/api/genes/:geneId',
       {
-        geneId: '@entrez_id'
+        geneId: '@geneId'
       },
       {
+        // base Gene routes
         add: {
           method: 'POST',
           cache: cache
@@ -63,6 +64,8 @@
           isArray: true,
           cache: cache
         },
+
+        // Gene Comments routes
         getComments: {
           method: 'GET',
           url: '/api/genes/:geneId/comments',
@@ -109,29 +112,8 @@
             response: cacheInterceptor
           }
         },
-        getRevisions: {
-          method: 'GET',
-          url: '/api/genes/:geneId/revisions',
-          cache: cache
-        },
-        getRevision: {
-          method: 'GET',
-          url: '/api/genes/:geneId/revisions/:revisionId',
-          params: {
-            geneId: '@geneId',
-            revisionId: '@revisionId'
-          },
-          isArray: false,
-          cache: cache
-        },
-        getLastRevision: {
-          method: 'GET',
-          url: '/api/genes/:geneId/revisions/last',
-          params: {
-            geneId: '@geneId'
-          },
-          isArray: false
-        },
+
+        // Gene Changes routes
         submitChange: {
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes',
@@ -142,7 +124,11 @@
         },
         getChanges: {
           method: 'GET',
-          url: '/api/genes/:geneId/suggested_changes'
+          url: '/api/genes/:geneId/suggested_changes',
+          params: {
+            geneId: '@geneId'
+          },
+          isArray: true
         },
         getChange: {
           method: 'GET',
@@ -169,6 +155,33 @@
             changeId: '@changeId'
           }
         },
+
+        // Gene Revisions routes
+        getRevisions: {
+          method: 'GET',
+          url: '/api/genes/:geneId/revisions',
+          cache: cache
+        },
+        getRevision: {
+          method: 'GET',
+          url: '/api/genes/:geneId/revisions/:revisionId',
+          params: {
+            geneId: '@geneId',
+            revisionId: '@revisionId'
+          },
+          isArray: false,
+          cache: cache
+        },
+        getLastRevision: {
+          method: 'GET',
+          url: '/api/genes/:geneId/revisions/last',
+          params: {
+            geneId: '@geneId'
+          },
+          isArray: false
+        },
+
+        // Gene Change Comments routes
         addChangeComment: {
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:changeId/comments',
@@ -230,20 +243,20 @@
             return response;
           });
       },
-      delete: function(entrez_id) {
-        return GenesResource.delete({geneId: entrez_id}).$promise
+      delete: function(geneId) {
+        return GenesResource.delete({geneId: geneId}).$promise
           .then(function(response) {
             return response;
           });
       },
-      get: function(entrez_id) {
-        return GenesResource.get({geneId: entrez_id}).$promise
+      get: function(geneId) {
+        return GenesResource.get({geneId: geneId}).$promise
           .then(function(response) {
             return response;
           });
       },
-      refresh: function(entrez_id) {
-        return GenesResource.refresh({geneId: entrez_id}).$promise
+      refresh: function(geneId) {
+        return GenesResource.refresh({geneId: geneId}).$promise
           .then(function(response) {
             return response;
           });
@@ -260,14 +273,14 @@
             return response;
           });
       },
-      getVariants: function(entrez_id) {
-        return GenesResource.getVariants({geneId: entrez_id}).$promise
+      getVariants: function(geneId) {
+        return GenesResource.getVariants({geneId: geneId}).$promise
           .then(function(response) {
             return response;
           });
       },
-      getVariantGroups: function(entrez_id) {
-        return GenesResource.queryVariantGroups({geneId: entrez_id}).$promise
+      getVariantGroups: function(geneId) {
+        return GenesResource.queryVariantGroups({geneId: geneId}).$promise
           .then(function(response) {
             return response;
           });
@@ -280,8 +293,8 @@
             return response;
           });
       },
-      getComments: function(entrez_id) {
-        return GenesResource.getComments({geneId: entrez_id}).$promise
+      getComments: function(geneId) {
+        return GenesResource.getComments({geneId: geneId}).$promise
           .then(function(response) {
             return response;
           });
@@ -305,26 +318,6 @@
           });
       },
 
-      // Gene revisions
-      getRevisions: function(entrez_id) {
-        return GenesResource.getRevisions({geneId: entrez_id}).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getRevision: function(reqObj) {
-        return GenesResource.getRevision(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getLastRevision: function(reqObj) {
-        return GenesResource.getLastRevision(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-
       // Gene suggested changes
       submitChange: function(reqObj) {
         return GenesResource.submitChange(reqObj).$promise
@@ -332,8 +325,8 @@
             return response;
           });
       },
-      getChanges: function(entrez_id) {
-        return GenesResource.getChanges({geneId: entrez_id}).$promise
+      getChanges: function(geneId) {
+        return GenesResource.getChanges({ geneId: geneId }).$promise
           .then(function(response) {
             return response;
           });
@@ -352,6 +345,26 @@
       },
       rejectChange: function(reqObj) {
         return GenesResource.rejectChange(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+
+      // Gene revisions
+      getRevisions: function(geneId) {
+        return GenesResource.getRevisions({geneId: geneId}).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getRevision: function(reqObj) {
+        return GenesResource.getRevision(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getLastRevision: function(reqObj) {
+        return GenesResource.getLastRevision(reqObj).$promise
           .then(function(response) {
             return response;
           });

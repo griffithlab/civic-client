@@ -34,6 +34,9 @@ describe('GenesViewController', function () {
     module('served/gene238Comment1.json');
     module('served/gene238Comment1Updated.json');
     module('served/gene238SuggestedChangeSubmitted.json');
+    module('served/gene238SuggestedChangeAccepted.json');
+    module('served/gene238SuggestedChanges.json');
+    module('served/gene238SuggestedChange1.json');
 
     module('civic.events.genes', function ($provide, $stateProvider) {
       // GenesViewController is attached to an abstract state so we need to create parent and
@@ -64,7 +67,10 @@ describe('GenesViewController', function () {
                     servedGene238Comments,
                     servedGene238Comment1,
                     servedGene238Comment1Updated,
-                    servedGene238SuggestedChangeSubmitted) {
+                    servedGene238SuggestedChangeSubmitted,
+                    servedGene238SuggestedChangeAccepted,
+                    servedGene238SuggestedChanges,
+                    servedGene238SuggestedChange1) {
       $state = _$state_;
       $rootScope = _$rootScope_;
       $controller = _$controller_;
@@ -82,7 +88,10 @@ describe('GenesViewController', function () {
       $httpBackend.when('GET', '/api/genes/238/comments/1').respond(servedGene238Comment1);
       $httpBackend.when('PATCH', '/api/genes/238/comments/1').respond(servedGene238Comment1Updated);
       $httpBackend.when('DELETE', '/api/genes/238/comments/1').respond(204, null);
-      $httpBackend.when('POST', '/api/genes/238/suggested_changes').respond('200', servedGene238SuggestedChangeSubmitted);
+      $httpBackend.when('POST', '/api/genes/238/suggested_changes').respond(200, servedGene238SuggestedChangeSubmitted);
+      $httpBackend.when('POST', '/api/genes/238/suggested_changes/1/accept').respond(200, servedGene238SuggestedChangeAccepted);
+      $httpBackend.when('GET', '/api/genes/238/suggested_changes').respond(200, servedGene238SuggestedChanges);
+      $httpBackend.when('GET', '/api/genes/238/suggested_changes/1').respond(200, servedGene238SuggestedChange1);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -106,6 +115,11 @@ describe('GenesViewController', function () {
         myGeneInfo: deps.myGeneInfo
       });
     });
+  });
+
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
   });
 
   describe('controller instantiation', function(){
@@ -224,9 +238,9 @@ describe('GenesViewController', function () {
       expect(scope.geneModel.actions.getChanges).to.be.a('function');
     });
 
-    it('attaches applyChange function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.applyChange).to.exist;
-      expect(scope.geneModel.actions.applyChange).to.be.a('function');
+    it('attaches acceptChange function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.acceptChange).to.exist;
+      expect(scope.geneModel.actions.acceptChange).to.be.a('function');
     });
 
     it('attaches acceptChange function to geneModel actions object', function() {
@@ -277,7 +291,7 @@ describe('GenesViewController', function () {
     });
 
     it('actions.update({ description: "UPDATED DESCRIPTION"}) should send a PUT request to /api/genes followed by a GET', function() {
-      $httpBackend.expect('PATCH', '/api/genes', {
+      $httpBackend.expect('PATCH', '/api/genes/238', {
         geneId: 238,
         description: 'UPDATED DESCRIPTION'
       }).respond('200', {});
@@ -340,7 +354,7 @@ describe('GenesViewController', function () {
       expect(data.comments[0].title).to.equal('Gene 238 Title 1');
     });
 
-    it('actions.getComments() should eventually return an array of gene 238"s comments', function() {
+    it('actions.getComments() should eventually return an array of gene 238\'s comments', function() {
       $httpBackend.expect('GET', '/api/genes/238/comments');
       actions.getComments().then(function(comments) {
         expect(comments).to.be.an('array');
@@ -407,16 +421,46 @@ describe('GenesViewController', function () {
       actions = geneModel.actions;
     });
 
-    it('actions.submitChange({ description: "UPDATED DESCRIPTION..."}) should send a POST request to "/api/genes/238/changes"', function() {
-      $httpBackend.expect('POST', '/api/genes/238/changes');
+    it('actions.submitChange({ description: "UPDATED DESCRIPTION..."}) should send a POST request to "/api/genes/238/suggested_changes"', function() {
+      $httpBackend.expect('POST', '/api/genes/238/suggested_changes');
       actions.submitChange({ description: "UPDATED DESCRIPTION..." }).then(function(response) {
-        expect(response.status).to.equal(200);
+        expect(response).to.be.an('object');
       });
+      $httpBackend.flush();
     });
 
-    //it('actions.getChanges() should send a GET request to "/api/genes/238/changes"', function() {
-    //
+    it('actions.acceptChange(1) should send a POST request to "/api/238/suggested_changes/1/accept', function() {
+      $httpBackend.expect('POST', '/api/genes/238/suggested_changes/1/accept');
+      actions.acceptChange(1).then(function(response) {
+        expect(response).to.be.an('object');
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.getChanges() should send a GET request to "/api/genes/238/suggested_changes"', function() {
+      $httpBackend.expect('GET', '/api/genes/238/suggested_changes');
+      actions.getChanges().then(function(response) {
+        expect(response).to.be.an('array');
+        expect(response).to.not.be.empty;
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.getChange(1) should send a GET request to "/api/genes/238/suggested_changes/1"', function() {
+      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1');
+      actions.getChange(1);
+      $httpBackend.flush();
+    });
+
+    //it('actions.getChange(1) should send a GET request to "/api/genes/238/suggested_changes/1"', function() {
+    //  $httpBackend.expect('GET', '/api/genes/238/suggested_changes/1');
+    //  actions.getChanges().then(function(response) {
+    //    expect(response).to.be.an('array');
+    //    expect(response).to.not.be.empty;
+    //  });
+    //  $httpBackend.flush();
     //});
+
   });
 
 

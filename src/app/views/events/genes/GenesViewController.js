@@ -137,9 +137,16 @@
       },
 
       getChanges: function() {
-        return Genes.getChanges({ geneId: gene.entrez_id })
+        return Genes.getChanges(gene.entrez_id)
           .then(function(response) {
-            data.changes = response;
+            geneModel.data.changes = response;
+            return response;
+          });
+      },
+
+      getChange: function(changeId) {
+        return Genes.getChange({ geneId: gene.entrez_id, changeId: changeId })
+          .then(function(response) {
             return response;
           })
       },
@@ -150,8 +157,12 @@
             return response;
           });
       },
-      applyChange: function() {},
-      acceptChange: function() {},
+      acceptChange: function(changeId) {
+        return Genes.acceptChange({ geneId: gene.entrez_id, changeId: changeId })
+          .then(function(response) {
+            return response;
+          })
+      },
       rejectChange: function() {},
 
       addChangeComment: function() {},
