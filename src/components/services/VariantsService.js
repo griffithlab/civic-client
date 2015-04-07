@@ -62,7 +62,7 @@
           method: 'GET',
           isArray: false
         },
-        addComment: {
+        submitComment: {
           url: '/api/variants/:variantId/comments',
           params: {
             variantId: '@variantId'
@@ -230,8 +230,8 @@
       },
 
       // Variant comments
-      addComment: function(reqObj) {
-        return VariantsResource.addComment(reqObj).$promise
+      submitComment: function(reqObj) {
+        return VariantsResource.submitComment(reqObj).$promise
           .then(function(response) {
             return response;
           });

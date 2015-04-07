@@ -23,6 +23,9 @@ describe('GenesViewController', function () {
   beforeEach(function () {
     module('civic.services');
     module('civic.events');
+    module('civic.templates'); // load ng-html2js templates
+
+    // json fixtures for httpBackend mocked responses
     module('served/gene238.json');
     module('served/gene238Variants.json');
     module('served/gene238VariantGroups.json');
@@ -30,7 +33,8 @@ describe('GenesViewController', function () {
     module('served/gene238Comments.json');
     module('served/gene238Comment1.json');
     module('served/gene238Comment1Updated.json');
-    module('civic.templates'); // load ng-html2js templates
+    module('served/gene238SuggestedChangeSubmitted.json');
+
     module('civic.events.genes', function ($provide, $stateProvider) {
       // GenesViewController is attached to an abstract state so we need to create parent and
       // child states of events.genes, then transition between then in order to force ui-router to instantiate it
@@ -59,7 +63,8 @@ describe('GenesViewController', function () {
                     servedGene238VariantGroups,
                     servedGene238Comments,
                     servedGene238Comment1,
-                    servedGene238Comment1Updated) {
+                    servedGene238Comment1Updated,
+                    servedGene238SuggestedChangeSubmitted) {
       $state = _$state_;
       $rootScope = _$rootScope_;
       $controller = _$controller_;
@@ -77,6 +82,7 @@ describe('GenesViewController', function () {
       $httpBackend.when('GET', '/api/genes/238/comments/1').respond(servedGene238Comment1);
       $httpBackend.when('PATCH', '/api/genes/238/comments/1').respond(servedGene238Comment1Updated);
       $httpBackend.when('DELETE', '/api/genes/238/comments/1').respond(204, null);
+      $httpBackend.when('POST', '/api/genes/238/suggested_changes').respond('200', servedGene238SuggestedChangeSubmitted);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -187,9 +193,9 @@ describe('GenesViewController', function () {
     });
 
     // comments
-    it('attaches addComment function to geneModel actions object', function() {
-      expect(scope.geneModel.actions.addComment).to.exist;
-      expect(scope.geneModel.actions.addComment).to.be.a('function');
+    it('attaches submitComment function to geneModel actions object', function() {
+      expect(scope.geneModel.actions.submitComment).to.exist;
+      expect(scope.geneModel.actions.submitComment).to.be.a('function');
     });
 
     it('attaches getComments function to geneModel actions object', function() {
@@ -270,7 +276,7 @@ describe('GenesViewController', function () {
       // TODO mock 1st and 2nd calls returning gene238updated.json and test if the updated gene is returned and not the cached version
     });
 
-    it('actions.update({ description: \'UPDATED DESCRIPTION\'}) should send a PUT request to /api/genes followed by a GET', function() {
+    it('actions.update({ description: "UPDATED DESCRIPTION"}) should send a PUT request to /api/genes followed by a GET', function() {
       $httpBackend.expect('PATCH', '/api/genes', {
         geneId: 238,
         description: 'UPDATED DESCRIPTION'
@@ -290,23 +296,23 @@ describe('GenesViewController', function () {
       actions = geneModel.actions;
     });
 
-    it('actions.addComment({title: \'Gene 238 comment 1\', text:\'Gene 238 Title 1\'}) should send a PUT request to /api/genes/238/comments', function() {
+    it('actions.submitComment({title: "Gene 238 comment 1", text:"Gene 238 Title 1"}) should send a PUT request to /api/genes/238/comments', function() {
       $httpBackend.expect('POST', '/api/genes/238/comments',{
           geneId: 238,
           title: 'Gene 238 Title 1',
           text: 'Gene 238 comment 1' }
       );
-      actions.addComment({ title: 'Gene 238 Title 1', text: 'Gene 238 comment 1' });
+      actions.submitComment({ title: 'Gene 238 Title 1', text: 'Gene 238 comment 1' });
       $httpBackend.flush();
     });
 
-    it('actions.addComment({title: \'Gene 238 Title 1\', text:\'Gene 238 comment 1\'}) should eventually return the new comment object', function() {
+    it('actions.submitComment({title: "Gene 238 Title 1", text:"Gene 238 comment 1"}) should eventually return the new comment object', function() {
       $httpBackend.expect('POST', '/api/genes/238/comments', {
           geneId: 238,
           title: 'Gene 238 Title 1',
           text: 'Gene 238 comment 1' }
       );
-      actions.addComment({ title: 'Gene 238 Title 1', text: 'Gene 238 comment 1' })
+      actions.submitComment({ title: 'Gene 238 Title 1', text: 'Gene 238 comment 1' })
         .then(function(response) {
           expect(response.title).to.equal('Gene 238 Title 1');
         });
@@ -334,7 +340,7 @@ describe('GenesViewController', function () {
       expect(data.comments[0].title).to.equal('Gene 238 Title 1');
     });
 
-    it('actions.getComments() should eventually return an array of gene 238\'s comments', function() {
+    it('actions.getComments() should eventually return an array of gene 238"s comments', function() {
       $httpBackend.expect('GET', '/api/genes/238/comments');
       actions.getComments().then(function(comments) {
         expect(comments).to.be.an('array');
@@ -344,13 +350,13 @@ describe('GenesViewController', function () {
       $httpBackend.flush();
     });
 
-    it('actions.getComment(1) should sent a GET request to \'/api/genes/238/comments/1\'.', function() {
+    it('actions.getComment(1) should sent a GET request to "/api/genes/238/comments/1".', function() {
       $httpBackend.expect('GET', '/api/genes/238/comments/1');
       actions.getComment(1);
       $httpBackend.flush();
     });
 
-    it('actions.getComment(1) should eventually return gene 238\'s first comment', function() {
+    it('actions.getComment(1) should eventually return gene 238"s first comment', function() {
       $httpBackend.expect('GET', '/api/genes/238/comments/1');
       var firstComment = actions.getComment(1);
       firstComment.then(function(comment) {
@@ -361,13 +367,13 @@ describe('GenesViewController', function () {
       $httpBackend.flush();
     });
 
-    it('actions.updateComment({commentId: 1, text:\'Gene 238 Comment 1 UPDATED\'}) should send a PATCH request to /api/genes/238/comments/1', function() {
+    it('actions.updateComment({commentId: 1, text:"Gene 238 Comment 1 UPDATED"}) should send a PATCH request to /api/genes/238/comments/1', function() {
       $httpBackend.expect('PATCH', '/api/genes/238/comments/1');
       actions.updateComment({ commentId: 1, text: 'Gene 238 Comment 1 UPDATED' });
       $httpBackend.flush();
     });
 
-    it('actions.updateComment({commentId: 1, text:\'Gene 238 Comment 1 UPDATED\'}) should eventually return an updated comment record', function() {
+    it('actions.updateComment({commentId: 1, text:"Gene 238 Comment 1 UPDATED"}) should eventually return an updated comment record', function() {
       $httpBackend.expect('PATCH', '/api/genes/238/comments/1');
       actions.updateComment({
         commentId: 1,
@@ -401,6 +407,16 @@ describe('GenesViewController', function () {
       actions = geneModel.actions;
     });
 
+    it('actions.submitChange({ description: "UPDATED DESCRIPTION..."}) should send a POST request to "/api/genes/238/changes"', function() {
+      $httpBackend.expect('POST', '/api/genes/238/changes');
+      actions.submitChange({ description: "UPDATED DESCRIPTION..." }).then(function(response) {
+        expect(response.status).to.equal(200);
+      });
+    });
+
+    //it('actions.getChanges() should send a GET request to "/api/genes/238/changes"', function() {
+    //
+    //});
   });
 
 

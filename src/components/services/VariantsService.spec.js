@@ -76,7 +76,7 @@ describe('VariantsService', function() {
   });
 
   describe('/api/variants/:variantId/comments path', function() {
-    it('Variants.addComment({variantId: 7, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/variants/7/comments', function() {
+    it('Variants.submitComment({variantId: 7, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/variants/7/comments', function() {
       $httpBackend.expect(
         'POST',
         '/api/variants/7/comments',
@@ -85,7 +85,7 @@ describe('VariantsService', function() {
           title: 'comment title',
           text: 'comment text'
         }).respond('200', {});
-      Variants.addComment({variantId: 7, title: 'comment title', text: 'comment text'});
+      Variants.submitComment({variantId: 7, title: 'comment title', text: 'comment text'});
       $httpBackend.flush();
     });
 

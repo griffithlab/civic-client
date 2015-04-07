@@ -54,7 +54,7 @@
           method: 'GET',
           isArray: false
         },
-        addComment: {
+        submitComment: {
           url: '/api/evidence_items/:evidenceId/comments',
           params: {
             evidenceId: '@evidenceId'
@@ -97,6 +97,11 @@
           },
           method: 'GET',
           isArray: false
+        },
+        submitChange: {
+          url: '/api/evidence_items/:evidenceId/suggested_changes',
+          method: 'POST',
+          cache: cache
         },
         getChanges: {
           url: '/api/evidence_items/:evidenceId/suggested_changes',
@@ -216,8 +221,8 @@
       },
 
       // Evidence comments
-      addComment: function(reqObj) {
-        return EvidenceResource.addComment(reqObj).$promise
+      submitComment: function(reqObj) {
+        return EvidenceResource.submitComment(reqObj).$promise
           .then(function(response) {
             return response;
           });
@@ -268,6 +273,12 @@
       },
 
       // Evidence suggested changes
+      submitChange: function(reqObj) {
+        return EvidenceResource.submitChange(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
       getChanges: function(evidenceId) {
         return EvidenceResource.getChanges({evidenceId: evidenceId}).$promise
           .then(function(response) {

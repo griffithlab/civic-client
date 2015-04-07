@@ -71,6 +71,7 @@
     geneModel.data = {
       gene: gene,
       comments: [],
+      changes: [],
       variants: variants,
       variantGroups: variantGroups,
       myGeneInfo: myGeneInfo
@@ -112,9 +113,9 @@
         return Genes.getComment(gene.entrez_id, commentId);
       },
 
-      addComment: function(reqObj) {
+      submitComment: function(reqObj) {
         reqObj.geneId = gene.entrez_id;
-        return Genes.addComment(reqObj)
+        return Genes.submitComment(reqObj)
           .then(function(response) {
             return response;
           });
@@ -135,8 +136,20 @@
           });
       },
 
-      getChanges: function() {},
-      submitChange: function() {},
+      getChanges: function() {
+        return Genes.getChanges({ geneId: gene.entrez_id })
+          .then(function(response) {
+            data.changes = response;
+            return response;
+          })
+      },
+      submitChange: function(reqObj) {
+        reqObj.geneId = gene.entrez_id;
+        return Genes.submitChange(reqObj)
+          .then(function(response) {
+            return response;
+          });
+      },
       applyChange: function() {},
       acceptChange: function() {},
       rejectChange: function() {},

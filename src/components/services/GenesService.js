@@ -79,7 +79,7 @@
           isArray: false,
           cache: cache
         },
-        addComment: {
+        submitComment: {
           method: 'POST',
           url: '/api/genes/:geneId/comments',
           params: {
@@ -131,6 +131,14 @@
             geneId: '@geneId'
           },
           isArray: false
+        },
+        submitChange: {
+          method: 'POST',
+          url: '/api/genes/:geneId/suggested_changes',
+          params: {
+            geneId: '@geneId'
+          },
+          cache: cache
         },
         getChanges: {
           method: 'GET',
@@ -266,8 +274,8 @@
       },
 
       // Gene comments
-      addComment: function(reqObj) {
-        return GenesResource.addComment(reqObj).$promise
+      submitComment: function(reqObj) {
+        return GenesResource.submitComment(reqObj).$promise
           .then(function(response) {
             return response;
           });
@@ -318,6 +326,12 @@
       },
 
       // Gene suggested changes
+      submitChange: function(reqObj) {
+        return GenesResource.submitChange(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
       getChanges: function(entrez_id) {
         return GenesResource.getChanges({geneId: entrez_id}).$promise
           .then(function(response) {

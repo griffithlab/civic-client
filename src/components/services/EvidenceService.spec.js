@@ -54,7 +54,7 @@ describe('EvidenceService', function() {
   });
 
   describe('/api/evidence_items/:evidenceId/comments path', function() {
-    it('Evidence.addComment({evidenceId: 11, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/evidence_items/11/comments', function() {
+    it('Evidence.submitComment({evidenceId: 11, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/evidence_items/11/comments', function() {
       $httpBackend.expect(
         'POST',
         '/api/evidence_items/11/comments',
@@ -63,7 +63,7 @@ describe('EvidenceService', function() {
           title: 'comment title',
           text: 'comment text'
         }).respond('200', {});
-      Evidence.addComment({evidenceId: 11, title: 'comment title', text: 'comment text'});
+      Evidence.submitComment({evidenceId: 11, title: 'comment title', text: 'comment text'});
       $httpBackend.flush();
     });
 

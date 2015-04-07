@@ -98,7 +98,7 @@ describe('GenesService', function() {
   });
 
   describe('/api/genes/:geneId/comments path', function() {
-    it('Genes.addComment({geneId: 238, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/genes/238/comments', function() {
+    it('Genes.submitComment({geneId: 238, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/genes/238/comments', function() {
       $httpBackend.expect(
         'POST',
         '/api/genes/238/comments',
@@ -107,7 +107,7 @@ describe('GenesService', function() {
           title: 'comment title',
           text: 'comment text'
         }).respond('200', {});
-      Genes.addComment({geneId: 238, title: 'comment title', text: 'comment text'});
+      Genes.submitComment({geneId: 238, title: 'comment title', text: 'comment text'});
       $httpBackend.flush();
     });
 
