@@ -1,5 +1,5 @@
 'use strict';
-
+/*jshint expr:true */
 describe('GenesViewController', function () {
   var $rootScope,
     $state,
@@ -37,6 +37,9 @@ describe('GenesViewController', function () {
     module('served/gene238SuggestedChangeAccepted.json');
     module('served/gene238SuggestedChanges.json');
     module('served/gene238SuggestedChange1.json');
+    module('served/gene238Revisions.json');
+    module('served/gene238Revisions1.json');
+    module('served/gene238RevisionsLast.json');
 
     module('civic.events.genes', function ($provide, $stateProvider) {
       // GenesViewController is attached to an abstract state so we need to create parent and
@@ -70,7 +73,10 @@ describe('GenesViewController', function () {
                     servedGene238SuggestedChangeSubmitted,
                     servedGene238SuggestedChangeAccepted,
                     servedGene238SuggestedChanges,
-                    servedGene238SuggestedChange1) {
+                    servedGene238SuggestedChange1,
+                    servedGene238Revisions,
+                    servedGene238Revisions1,
+                    servedGene238RevisionsLast) {
       $state = _$state_;
       $rootScope = _$rootScope_;
       $controller = _$controller_;
@@ -93,6 +99,9 @@ describe('GenesViewController', function () {
       $httpBackend.when('POST', '/api/genes/238/suggested_changes/2/reject').respond(200, servedGene238SuggestedChangeAccepted);
       $httpBackend.when('GET', '/api/genes/238/suggested_changes').respond(200, servedGene238SuggestedChanges);
       $httpBackend.when('GET', '/api/genes/238/suggested_changes/1').respond(200, servedGene238SuggestedChange1);
+      $httpBackend.when('GET', '/api/genes/238/revisions').respond(200, servedGene238Revisions);
+      $httpBackend.when('GET', '/api/genes/238/revisions/1').respond(200, servedGene238Revisions1);
+      $httpBackend.when('GET', '/api/genes/238/revisions/last').respond(200, servedGene238RevisionsLast);
 
       // ui-router state transition debugging
       //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
@@ -468,8 +477,114 @@ describe('GenesViewController', function () {
       });
       $httpBackend.flush();
     });
-
   });
 
+  describe('geneModel change comments actions', function() {
+    var actions;
+    var geneModel;
+    beforeEach(function() {
+      geneModel = scope.geneModel;
+      actions = geneModel.actions;
+    });
+
+    it('actions.submitChangeComment({changeId: 3, ... }) should send a POST request to /api/genes/238/suggested_changes/3/comments', function(){
+      $httpBackend.expect('POST', '/api/genes/238/suggested_changes/3/comments').respond(201, {});
+      actions.submitChangeComment({
+        changeId: 3,
+        title: 'Gene 238 Suggested Change Comment Title',
+        text: 'Gene 238 Suggested Change Comment Text'
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.updateChangeComment({changeId: 3, ...}) should send a PATCH request to /api/gene/238/suggested_changes/3/comments', function() {
+      $httpBackend.expect('PATCH', '/api/genes/238/suggested_changes/3/comments').respond(201, {});
+      actions.updateChangeComment({
+        changeId: 3,
+        title: 'Gene 238 Suggested Change Comment Title UPDATED',
+        text: 'Gene 238 Suggested Change Comment Text UPDATED'
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.getChangeComments(3) should send a GET request to /api/gene/238/suggested_changes/3/comments', function() {
+      $httpBackend.expect('GET', '/api/genes/238/suggested_changes/3/comments').respond(200, []);
+      actions.getChangeComments(3);
+      $httpBackend.flush();
+    });
+
+    it('actions.deleteChangeComment(3) should send a DELETE request to /api/gene/238/suggested_changes/3/comments', function() {
+      $httpBackend.expect('DELETE', '/api/genes/238/suggested_changes/3/comments').respond(204, {});
+      actions.deleteChangeComment(3);
+      $httpBackend.flush();
+    });
+  });
+
+  describe('geneModel revisions actions', function() {
+    var actions;
+    var geneModel;
+    beforeEach(function () {
+      geneModel = scope.geneModel;
+      actions = geneModel.actions;
+    });
+
+    it('actions.getRevisions() should send a GET request to /api/genes/238/revisions', function(){
+      $httpBackend.expect('GET', '/api/genes/238/revisions');
+      actions.getRevisions();
+      $httpBackend.flush();
+    });
+
+    it('actions.getRevisions() should update the data.revisions array', function(){
+      var data = scope.geneModel.data;
+      $httpBackend.expect('GET', '/api/genes/238/revisions');
+      expect(data.revisions).to.be.empty;
+      actions.getRevisions().then(function() {
+        expect(data.revisions).to.not.be.empty;
+        expect(data.revisions[0].action).to.equal('create');
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.getRevisions() should return gene 238 revisions array', function(){
+      $httpBackend.expect('GET', '/api/genes/238/revisions');
+      actions.getRevisions().then(function(response) {
+        expect(response).to.be.an('array');
+        expect(response).to.not.be.empty;
+        expect(response[0].action).to.equal('create');
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.getRevision(1) should send a GET request to /api/genes/238/revisions/1', function(){
+      $httpBackend.expect('GET', '/api/genes/238/revisions/1');
+      actions.getRevision(1);
+      $httpBackend.flush();
+    });
+
+    it('actions.getRevision(1) should return a single revision', function(){
+      $httpBackend.expect('GET', '/api/genes/238/revisions/1');
+      actions.getRevision(1).then(function(response) {
+        expect(response).to.be.an('object');
+        expect(response.action).to.equal('create');
+      });
+      $httpBackend.flush();
+    });
+
+    it('actions.getLastRevision() should send a GET request to /api/genes/238/revisions/last', function() {
+      $httpBackend.expect('GET', '/api/genes/238/revisions/last');
+      actions.getLastRevision();
+      $httpBackend.flush();
+    });
+
+    it('actions.getLastRevision() shuold send a GET request to /api/genes/238/revisions/last', function() {
+      $httpBackend.expect('GET', '/api/genes/238/revisions/last');
+      actions.getLastRevision().then(function(response) {
+        expect(response).to.be.an('object');
+        expect(response.action).to.equal('update');
+      });
+      $httpBackend.flush();
+    });
+
+  });
 
 });

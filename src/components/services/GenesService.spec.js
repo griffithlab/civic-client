@@ -196,7 +196,7 @@ describe('GenesService', function() {
   });
 
   describe('/api/genes/:geneId/suggested_changes/:changeId/comments path', function() {
-    it('Genes.addChangeComment({geneId: 238, changeId: 1, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/genes/238/comments', function() {
+    it('Genes.submitChangeComment({geneId: 238, changeId: 1, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/genes/238/comments', function() {
       $httpBackend.expect(
         'POST',
         '/api/genes/238/suggested_changes/1/comments',
@@ -206,7 +206,7 @@ describe('GenesService', function() {
           title: 'comment title',
           text: 'comment text'
         }).respond(200, {});
-      Genes.addChangeComment({
+      Genes.submitChangeComment({
         geneId: 238,
         changeId: 1,
         title: 'comment title',

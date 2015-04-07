@@ -184,7 +184,7 @@
         },
 
         // Gene Change Comments routes
-        addChangeComment: {
+        submitChangeComment: {
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:changeId/comments',
           params: {
@@ -211,7 +211,7 @@
             geneId: '@geneId',
             changeId: '@changeId'
           },
-          isArray: true, 
+          isArray: true,
           cache: cache
         },
         getChangeComment: {
@@ -357,6 +357,7 @@
       getRevisions: function(geneId) {
         return GenesResource.getRevisions({geneId: geneId}).$promise
           .then(function(response) {
+
             return response;
           });
       },
@@ -374,8 +375,8 @@
       },
 
       // Gene suggested changes comments
-      addChangeComment: function(reqObj) {
-        return GenesResource.addChangeComment(reqObj).$promise
+      submitChangeComment: function(reqObj) {
+        return GenesResource.submitChangeComment(reqObj).$promise
           .then(function(response) {
             return response;
           });

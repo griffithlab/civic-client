@@ -1,5 +1,5 @@
 'use strict';
-
+/*jshint expr:true */
 describe('GenesViewConfig', function () {
   var $rootScope,
     $httpBackend,

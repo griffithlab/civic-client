@@ -58,10 +58,6 @@
 
     var ctrl = $scope;
     var geneModel = ctrl.geneModel = {};
-    var config = geneModel.config = {};
-    var data = geneModel.data = {};
-    var services = geneModel.service = {};
-    var actions = geneModel.actions = {}
 
     geneModel.config = {
       name: 'gene',
@@ -72,6 +68,7 @@
       gene: gene,
       comments: [],
       changes: [],
+      revisions: [],
       variants: variants,
       variantGroups: variantGroups,
       myGeneInfo: myGeneInfo
@@ -170,15 +167,64 @@
           })
       },
 
-      addChangeComment: function() {},
-      updateChangeComment: function() {},
-      getChangeComments: function() {},
-      getChangeComment: function() {},
-      deleteChangeComment: function() {},
+      submitChangeComment: function(reqObj) {
+        reqObj.geneId = gene.entrez_id;
+        return Genes.submitChangeComment(reqObj)
+          .then(function(response) {
+            return response;
+          });
+      },
+      updateChangeComment: function(reqObj) {
+        reqObj.geneId = gene.entrez_id;
+        return Genes.updateChangeComment(reqObj)
+          .then(function(response) {
+            return response;
+          });
+      },
+      getChangeComments: function(changeId) {
+        return Genes.getChangeComments({geneId: gene.entrez_id, changeId: changeId})
+          .then(function(response) {
+            return response;
+          })
+      },
+      getChangeComment: function(changeId, commentId) {
+        return Genes.getChangeComment({
+          geneId: gene.entrez_id,
+          changeId: changeId,
+          commentId: commentId
+        }).then(function(response){
+          return response;
+        });
+      },
+      deleteChangeComment: function(changeId, commentId) {
+        return Genes.deleteChangeComment({
+          geneId: gene.entrez_id,
+          changeId: changeId,
+          commentId: commentId
+        }).then(function(response){
+          return response;
+        });
+      },
 
-      getRevisions: function() {},
-      getRevision: function() {},
-      getLastRevision: function() {}
+      getRevisions: function() {
+        return Genes.getRevisions(gene.entrez_id)
+          .then(function(response) {
+            geneModel.data.revisions = response;
+            return response;
+          });
+      },
+      getRevision: function(revisionId) {
+        return Genes.getRevision({ geneId: gene.entrez_id, revisionId: revisionId })
+          .then(function(response) {
+            return response;
+          });
+      },
+      getLastRevision: function() {
+        return Genes.getLastRevision({ geneId: gene.entrez_id })
+          .then(function(response) {
+            return response;
+          });
+      }
     };
   }
 
