@@ -1,6 +1,6 @@
 'use strict';
 /*jshint expr:true */
-describe('entityView', function () {
+describe('entityTabs', function () {
   var $rootScope,
     $compile,
     $state,
@@ -151,12 +151,12 @@ describe('entityView', function () {
   });
 
   describe('entityTabs directive', function(){
-    it('is successfully instantiated within the context of GeneViewController', function() {
+    it('is successfully instantiated within the context of GeneViewController and entityTabs', function() {
       expect(dirElem).to.exist;
       expect(dirScope).to.exist;
     });
 
-    it('attaches valid entityModel object to its scope', function() {
+    it('attaches valid entityModel object to its scope, shared from entityView', function() {
       expect(dirScope.entityModel).to.exist;
       expect(dirScope.entityModel).to.be.an('object');
       expect(dirScope.entityModel).to.not.be.empty;
