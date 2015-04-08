@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('civic.events.genes', ['ui.router'])
+  angular.module('civic.events.genes')
     .config(GenesViewConfig)
     .controller('GenesViewController', GenesViewController);
 
