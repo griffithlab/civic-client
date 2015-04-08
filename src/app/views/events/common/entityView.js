@@ -15,6 +15,6 @@
 
   //@ngInject
   function EntityViewController($scope, $element) {
-    console.log('EntityViewController instantiated.');
+
   }
 })();
