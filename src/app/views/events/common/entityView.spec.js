@@ -116,6 +116,7 @@ describe('entityView', function () {
       expect($state.$current.name).to.equal('events.genes.child');
       var deps  = $state.$current.parent.locals.globals;
       var geneViewScope = $rootScope.$new();
+
       GenesViewController = $controller('GenesViewController', {
         $scope: geneViewScope,
         Genes: deps.Genes,
@@ -125,6 +126,7 @@ describe('entityView', function () {
         variantGroups: deps.variantGroups,
         myGeneInfo: deps.myGeneInfo
       });
+
       expect(GenesViewController).to.exist;
       expect(GenesViewController).to.be.an('object');
 
@@ -137,18 +139,7 @@ describe('entityView', function () {
       expect(mockViewScope.geneModel).to.be.an('object');
 
       dirElem = $(mockViewElem).find('entity-view');
-      expect(dirElem).to.exist;
-      expect($(dirElem).attr('entity-model')).to.equal('geneModel');
-
-      dirScope = dirElem.scope();
-      expect(dirScope).to.exist;
-      expect(dirScope.testData).to.exist;
-      expect(dirScope.testData).to.be.a('string');
-      expect(dirScope.test).to.be.a('function');
-
-      //expect(dirScope.marco).to.exist;
-      //expect(dirScope.marco).to.be.a('function');
-
+      dirScope = $(dirElem).children(':first').scope();
     });
 
   });
@@ -160,7 +151,14 @@ describe('entityView', function () {
 
   describe('entityView directive', function(){
     it('is successfully instantiated within the context of GeneViewController', function() {
-      // expect(GenesViewController).to.exist;
+      expect(dirElem).to.exist;
+      expect(dirScope).to.exist;
+    });
+
+    it('attaches valid entityModel object to its scope', function() {
+      expect(dirScope.entityModel).to.exist;
+      expect(dirScope.entityModel).to.be.an('object');
+      expect(dirScope.entityModel).to.not.be.empty;
     });
   });
 });
