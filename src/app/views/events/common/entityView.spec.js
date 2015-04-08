@@ -6,10 +6,11 @@ describe('entityView', function () {
     $state,
     $controller,
     $httpBackend,
-    GenesViewController,
 
-    scope,
-    state = 'events.genes';
+    GenesViewController,
+    elem, // DOM element of mocked events.genes ui-view
+    fakeScope, // scope of mocked events.genes ui-view
+    scope; // scope of entity-view directive
 
   function goFromState(state1, params1) {
     return {
@@ -40,7 +41,7 @@ describe('entityView', function () {
         .state('events.genes.child', {
           abstract: false,
           url: '/child',
-          template: '<ui-view/>'
+          template: '<entity-view entity-model="ctrl.geneModel"></entity-view>'
         })
     });
 
@@ -121,7 +122,21 @@ describe('entityView', function () {
         myGeneInfo: deps.myGeneInfo
       });
 
+      expect(GenesViewController).to.exist;
+      expect(GenesViewController).to.be.an('object');
+      expect(scope.geneModel).to.exist;
+      expect(scope.geneModel).to.be.an('object');
+
+      // compile test child template
+      elem = $compile($state.current.template)($rootScope.$new());
+      elem = elem.find('entity-view');
+
+      expect(elem).to.exist;
+      scope = elem.scope();
+
+      //elem.data('$GenesViewController', GenesViewController); // assign GenesViewController as controller for fake-ui-view
     });
+
   });
 
   afterEach(function() {

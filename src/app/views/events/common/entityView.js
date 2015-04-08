@@ -5,8 +5,9 @@
       return {
         restrict: 'E',
         transclude: true,
-        scope: {},
-        controller: 'EntityViewController',
+        controller: function() {
+          console.log('EntityViewController instantiated.');
+        },
         templateUrl: 'app/views/events/common/entityView.tpl.html'
       }
     });
