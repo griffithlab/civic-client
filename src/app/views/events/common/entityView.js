@@ -5,8 +5,11 @@
       return {
         restrict: 'E',
         transclude: true,
-        controller: function() {
+        controller: function($scope) {
           console.log('EntityViewController instantiated.');
+          $scope.marco = function() {
+            return 'polo';
+          };
         },
         templateUrl: 'app/views/events/common/entityView.tpl.html'
       }

@@ -8,9 +8,10 @@ describe('entityView', function () {
     $httpBackend,
 
     GenesViewController,
-    elem, // DOM element of mocked events.genes ui-view
-    viewScope, // scope of mocked events.genes ui-view
-    scope; // scope of entity-view directive
+    mockViewElem, // DOM element of mocked events.genes ui-view
+    mockViewScope, // scope of mocked events.genes ui-view
+    dirElem, // element of entity-view directive
+    dirScope; // scope of entity-view directive
 
   function goFromState(state1, params1) {
     return {
@@ -43,7 +44,7 @@ describe('entityView', function () {
         .state('events.genes.child', {
           abstract: false,
           url: '/child',
-          template: '<entity-view entity-model="ctrl.geneModel"></entity-view>'
+          template: '<mock-ui-view><entity-view entity-model="geneModel"></entity-view></mock-ui-view>'
         })
     });
 
@@ -113,9 +114,9 @@ describe('entityView', function () {
       $httpBackend.flush();
       expect($state.$current.name).to.equal('events.genes.child');
       var deps  = $state.$current.parent.locals.globals;
-      scope = $rootScope.$new(); // assign the controller's scope for easy access in tests
+      var geneViewScope = $rootScope.$new();
       GenesViewController = $controller('GenesViewController', {
-        $scope: scope,
+        $scope: geneViewScope,
         Genes: deps.Genes,
         MyGeneInfo: deps.MyGeneInfo,
         gene: deps.gene,
@@ -123,23 +124,23 @@ describe('entityView', function () {
         variantGroups: deps.variantGroups,
         myGeneInfo: deps.myGeneInfo
       });
-
       expect(GenesViewController).to.exist;
       expect(GenesViewController).to.be.an('object');
-      expect(scope.geneModel).to.exist;
-      expect(scope.geneModel).to.be.an('object');
 
       // compile test child template
-      elem = $compile($state.current.template)(scope);
-      // elem = $(elem).find('entity-view');
+      mockViewElem = $compile($state.current.template)(geneViewScope);
 
-      //expect($(elem)).to.have.attr('entity-model');
 
-      viewScope  = elem.scope();
-      expect(viewScope.geneModel).to.exist;
-      expect(viewScope.geneModel).to.be.an('object');
+      mockViewScope  = mockViewElem.scope();
+      expect(mockViewScope.geneModel).to.exist;
+      expect(mockViewScope.geneModel).to.be.an('object');
 
-      //elem.data('$GenesViewController', GenesViewController); // assign GenesViewController as controller for fake-ui-view
+      dirElem = $(mockViewElem).find('entity-view');
+      expect(dirElem).to.exist;
+
+      dirScope = dirElem.scope();
+      expect(dirScope).to.exist;
+
     });
 
   });
