@@ -1,5 +1,5 @@
 (function() {
-  angular.module('civic.events.common', [])
+  angular.module('civic.events.common')
     .controller('EntityViewController', EntityViewController)
     .directive('entityView', function() {
       return {
@@ -15,6 +15,6 @@
 
   //@ngInject
   function EntityViewController($scope, $element) {
-
+    this.entityModel = $scope.entityModel;
   }
 })();
