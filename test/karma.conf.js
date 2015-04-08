@@ -36,6 +36,7 @@ module.exports = function(config) {
     plugins : [
       'karma-phantomjs-launcher',
       'karma-chrome-launcher',
+      'karma-firefox-launcher',
       'karma-mocha',
       'karma-mocha-reporter',
       'karma-spec-reporter',
@@ -71,7 +72,8 @@ module.exports = function(config) {
 
     browsers : [
       'PhantomJS'
-//      ,'Chrome'
+      ,'Chrome'
+      ,'Firefox'
     ],
     reporters: ['mocha'],
     autoWatch : false,

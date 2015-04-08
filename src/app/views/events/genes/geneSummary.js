@@ -1,7 +1,7 @@
 (function() {
-  angular.module('civic.events.common')
-    .controller('EntityTabsController', EntityTabsController)
-    .directive('entityTabs', function() {
+  angular.module('civic.events.genes')
+    .controller('GeneSummaryController', GeneSummaryController)
+    .directive('geneSummary', function() {
       return {
         restrict: 'E',
         require: '^^entityView',
@@ -9,13 +9,13 @@
         link: function(scope, element, attributes, entityView) {
           scope.entityModel = entityView.entityModel;
         },
-        controller: 'EntityTabsController',
-        templateUrl: 'app/views/events/common/entityTabs.tpl.html'
+        controller: 'GeneSummaryController',
+        templateUrl: 'app/views/events/genes/geneSummary.tpl.html'
       }
     });
 
   //@ngInject
-  function EntityTabsController($scope) {
+  function GeneSummaryController($scope) {
     console.log('EntityTabsController instantiated.');
   }
 })();

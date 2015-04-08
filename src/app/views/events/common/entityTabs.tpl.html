@@ -1,4 +1,7 @@
 <div class="entityTabs">
-  <p>Entity Tabs</p>
-  <p>Entity: {{ entityModel.config.name }}</p>
+  <div class="row">
+    <div class="col-xs-6 name">
+      <h3><span ng-bind="entityModel.config.type | capitalize"></span><span ng-bind="entityModel.config.name"></span></h3>
+    </div>
+  </div>
 </div>

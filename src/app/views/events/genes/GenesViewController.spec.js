@@ -146,9 +146,19 @@ describe('GenesViewController', function () {
   });
 
   describe('geneModel config', function() {
-    it('specifies entity name and state name on config object', function() {
+    it('specifies entity type on config object', function() {
       expect(scope.geneModel.config).to.exist;
-      expect(scope.geneModel.config.name).to.equal('gene');
+      expect(scope.geneModel.config.type).to.equal('gene');
+      expect(scope.geneModel.config.state).to.equal('events.genes');
+    });
+
+    it('specifies entity name on config object', function() {
+      expect(scope.geneModel.config).to.exist;
+      expect(scope.geneModel.config.name).to.equal(scope.geneModel.data.gene.entrez_name);
+    });
+
+    it('specifies view state name on config object', function() {
+      expect(scope.geneModel.config).to.exist;
       expect(scope.geneModel.config.state).to.equal('events.genes');
     });
 

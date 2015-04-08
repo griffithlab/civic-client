@@ -34,7 +34,7 @@
       })
       .state('events.genes.summary', {
         url: '/summary',
-        template: '<div><h1>Gene Summary</h1><pre>{{ geneModel.data | json}}</pre><ui-view/></div>',
+        template: '<gene-summary></gene-summary>',
         controller: function($scope) {
           console.log('events.gene.summary controller instantiated.');
           var ctrl = $scope;
@@ -60,7 +60,8 @@
     var geneModel = ctrl.geneModel = {};
 
     geneModel.config = {
-      name: 'gene',
+      type: 'gene',
+      name: gene.entrez_name,
       state: 'events.genes'
     };
 

@@ -151,7 +151,7 @@ describe('entityTabs', function () {
   });
 
   describe('entityTabs directive', function(){
-    it('is successfully instantiated within the context of GeneViewController and entityTabs', function() {
+    it('is successfully instantiated within the context of GeneViewController and entityView directive', function() {
       expect(dirElem).to.exist;
       expect(dirScope).to.exist;
     });
