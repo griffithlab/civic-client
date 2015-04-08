@@ -39,6 +39,7 @@ module.exports = function(config) {
       'karma-mocha',
       'karma-mocha-reporter',
       'karma-spec-reporter',
+      'karma-jquery-chai',
       'karma-ng-html2js-preprocessor',
       'karma-ng-json2js-preprocessor',
       'karma-browserify'
@@ -60,7 +61,7 @@ module.exports = function(config) {
     },
 
     // setup frameworks
-    frameworks: ['mocha', 'browserify'],
+    frameworks: ['mocha', 'browserify', 'jquery-chai'],
     browserify: {
       debug: true,
       files: [

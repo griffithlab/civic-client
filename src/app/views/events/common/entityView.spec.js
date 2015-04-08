@@ -9,7 +9,7 @@ describe('entityView', function () {
 
     GenesViewController,
     elem, // DOM element of mocked events.genes ui-view
-    fakeScope, // scope of mocked events.genes ui-view
+    viewScope, // scope of mocked events.genes ui-view
     scope; // scope of entity-view directive
 
   function goFromState(state1, params1) {
@@ -31,6 +31,8 @@ describe('entityView', function () {
     module('civic.events.genes', function ($provide, $stateProvider) {
       // GenesViewController is attached to an abstract state so we need to create parent and
       // child states of events.genes, then transition between then in order to force ui-router to instantiate it
+      // events.gene.child loads the entity-view directive for testing, and we get a reference to it
+      // below after transitioning to the state and building GeneViewController
       $stateProvider
         .state('initial', {
           abstract: false,
@@ -128,11 +130,14 @@ describe('entityView', function () {
       expect(scope.geneModel).to.be.an('object');
 
       // compile test child template
-      elem = $compile($state.current.template)($rootScope.$new());
-      elem = elem.find('entity-view');
+      elem = $compile($state.current.template)(scope);
+      // elem = $(elem).find('entity-view');
 
-      expect(elem).to.exist;
-      scope = elem.scope();
+      //expect($(elem)).to.have.attr('entity-model');
+
+      viewScope  = elem.scope();
+      expect(viewScope.geneModel).to.exist;
+      expect(viewScope.geneModel).to.be.an('object');
 
       //elem.data('$GenesViewController', GenesViewController); // assign GenesViewController as controller for fake-ui-view
     });
