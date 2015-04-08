@@ -1,7 +1,21 @@
 <div class="entityTabs">
   <div class="row">
     <div class="col-xs-6 name">
-      <h3><span ng-bind="entityModel.config.type | capitalize"></span><span ng-bind="entityModel.config.name"></span></h3>
+      <h3>
+        <span ng-bind="entityModel.config.type | capitalize"></span>&nbsp;
+        <span ng-bind="entityModel.config.name"></span></h3>
+    </div>
+    <div class="col-xs-6 tabs">
+      <ul class="nav nav-tabs pull-right">
+        <li ui-sref-active="active">
+          <a ng-click="">Gene Summary</a>
+        </li>
+
+        <li ng-class="{'active': $state.includes('**.genes.talk.**')}">
+          <a ui-sref="events.genes.talk.comments({ geneId: gene.entrez_id })">Gene Talk</a>
+        </li>
+
+      </ul>
     </div>
   </div>
 </div>

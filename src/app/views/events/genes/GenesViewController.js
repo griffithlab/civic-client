@@ -66,7 +66,7 @@
     };
 
     geneModel.data = {
-      gene: gene,
+      entity: gene,
       comments: [],
       changes: [],
       revisions: [],

@@ -154,7 +154,7 @@ describe('GenesViewController', function () {
 
     it('specifies entity name on config object', function() {
       expect(scope.geneModel.config).to.exist;
-      expect(scope.geneModel.config.name).to.equal(scope.geneModel.data.gene.entrez_name);
+      expect(scope.geneModel.config.name).to.equal(scope.geneModel.data.entity.entrez_name);
     });
 
     it('specifies view state name on config object', function() {
@@ -186,10 +186,10 @@ describe('GenesViewController', function () {
       expect(data).to.be.an('object');
     });
 
-    it('provides gene data object', function() {
-      expect(data.gene).to.exist;
-      expect(data.gene).to.be.an('object');
-      expect(Number(data.gene.entrez_id)).to.equal(238);
+    it('provides entity data object', function() {
+      expect(data.entity).to.exist;
+      expect(data.entity).to.be.an('object');
+      expect(Number(data.entity.entrez_id)).to.equal(238);
     });
 
     it('provides variants data object', function() {
@@ -300,7 +300,7 @@ describe('GenesViewController', function () {
     });
 
     it('actions.get() should return the gene data object', function() {
-      expect(actions.get()).to.equal(geneModel.data.gene);
+      expect(actions.get()).to.equal(geneModel.data.entity);
     });
 
     it('actions.refresh() should send a GET request to /api/genes/238', function() {

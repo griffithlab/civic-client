@@ -15,7 +15,13 @@
     });
 
   //@ngInject
-  function EntityTabsController($scope) {
+  function EntityTabsController($scope, $state) {
     console.log('EntityTabsController instantiated.');
+    //var entityModel = $scope.entityModel;
+    //var type = entityModel.config.type;
+    //
+    //var ctrl = $scope.ctrl;
+    //ctrl.summarySref = '';
+
   }
 })();
