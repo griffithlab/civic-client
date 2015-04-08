@@ -26,6 +26,7 @@ describe('entityView', function () {
   beforeEach(function () {
     // load civic modules
     module('civic.services');
+    module('civic.common');
     module('civic.events');
     module('civic.templates'); // load ng-html2js templates
     module('civic.events.common'); // load common events directives
@@ -44,7 +45,7 @@ describe('entityView', function () {
         .state('events.genes.child', {
           abstract: false,
           url: '/child',
-          template: '<mock-ui-view><entity-view entity-model="geneModel"></entity-view></mock-ui-view>'
+          template: '<mock-ui-view><entity-view entity-model="geneModel"><p>Entity: <span ng-bind="entityModel.config.name | capitalize"></span></p></p></entity-view></mock-ui-view>'
         })
     });
 
