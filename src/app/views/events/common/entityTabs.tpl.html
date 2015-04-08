@@ -8,11 +8,11 @@
     <div class="col-xs-6 tabs">
       <ul class="nav nav-tabs pull-right">
         <li ui-sref-active="active">
-          <a ng-click="">Gene Summary</a>
+          <a ng-click="ctrl.tabClick('summary')">Gene Summary</a>
         </li>
 
         <li ng-class="{'active': $state.includes('**.genes.talk.**')}">
-          <a ui-sref="events.genes.talk.comments({ geneId: gene.entrez_id })">Gene Talk</a>
+          <a ng-click="ctrl.tabClick('talk')">Gene Talk</a>
         </li>
 
       </ul>
