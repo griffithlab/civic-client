@@ -128,19 +128,19 @@ describe('entityView', function () {
         myGeneInfo: deps.myGeneInfo
       });
 
-      //expect(GenesViewController).to.exist;
-      //expect(GenesViewController).to.be.an('object');
-      //
-      //// compile test child template
-      //mockViewElem = $compile($state.current.template)(geneViewScope);
-      //mockViewScope  = mockViewElem.scope();
-      //mockViewScope.$digest();
-      //
-      //expect(mockViewScope.geneModel).to.exist;
-      //expect(mockViewScope.geneModel).to.be.an('object');
-      //
-      //dirElem = $(mockViewElem).find('entity-tabs');
-      //dirScope = $(dirElem).children(':first').scope();
+      expect(GenesViewController).to.exist;
+      expect(GenesViewController).to.be.an('object');
+
+      // compile test child template
+      mockViewElem = $compile($state.current.template)(geneViewScope);
+      mockViewScope  = mockViewElem.scope();
+      mockViewScope.$digest();
+
+      expect(mockViewScope.geneModel).to.exist;
+      expect(mockViewScope.geneModel).to.be.an('object');
+
+      dirElem = $(mockViewElem).find('entity-tabs');
+      dirScope = $(dirElem).children(':first').scope();
     });
 
   });
@@ -151,15 +151,15 @@ describe('entityView', function () {
   });
 
   describe('entityTabs directive', function(){
-    //it('is successfully instantiated within the context of GeneViewController', function() {
-    //  expect(dirElem).to.exist;
-    //  expect(dirScope).to.exist;
-    //});
+    it('is successfully instantiated within the context of GeneViewController', function() {
+      expect(dirElem).to.exist;
+      expect(dirScope).to.exist;
+    });
 
-    //it('attaches valid entityModel object to its scope', function() {
-    //  expect(dirScope.entityModel).to.exist;
-    //  expect(dirScope.entityModel).to.be.an('object');
-    //  expect(dirScope.entityModel).to.not.be.empty;
-    //});
+    it('attaches valid entityModel object to its scope', function() {
+      expect(dirScope.entityModel).to.exist;
+      expect(dirScope.entityModel).to.be.an('object');
+      expect(dirScope.entityModel).to.not.be.empty;
+    });
   });
 });
