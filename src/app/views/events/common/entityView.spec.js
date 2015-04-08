@@ -109,6 +109,7 @@ describe('entityView', function () {
       $httpBackend.when('GET', '/api/genes/238/revisions/1').respond(200, servedGene238Revisions1);
       $httpBackend.when('GET', '/api/genes/238/revisions/last').respond(200, servedGene238RevisionsLast);
 
+
       // instantiate GenesViewController using resolved deps from event.genes state
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
       $httpBackend.flush();
@@ -129,17 +130,24 @@ describe('entityView', function () {
 
       // compile test child template
       mockViewElem = $compile($state.current.template)(geneViewScope);
-
-
       mockViewScope  = mockViewElem.scope();
+      mockViewScope.$digest();
+
       expect(mockViewScope.geneModel).to.exist;
       expect(mockViewScope.geneModel).to.be.an('object');
 
       dirElem = $(mockViewElem).find('entity-view');
       expect(dirElem).to.exist;
+      expect($(dirElem).attr('entity-model')).to.equal('geneModel');
 
       dirScope = dirElem.scope();
       expect(dirScope).to.exist;
+      expect(dirScope.testData).to.exist;
+      expect(dirScope.testData).to.be.a('string');
+      expect(dirScope.test).to.be.a('function');
+
+      //expect(dirScope.marco).to.exist;
+      //expect(dirScope.marco).to.be.a('function');
 
     });
 

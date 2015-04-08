@@ -5,12 +5,7 @@
       return {
         restrict: 'E',
         transclude: true,
-        controller: function($scope) {
-          console.log('EntityViewController instantiated.');
-          $scope.marco = function() {
-            return 'polo';
-          };
-        },
+        controller: 'EntityViewController',
         templateUrl: 'app/views/events/common/entityView.tpl.html'
       }
     });
@@ -18,5 +13,9 @@
   //@ngInject
   function EntityViewController($scope, $element) {
     console.log('EntityViewController instantiated.');
+    $scope.testData = 'data';
+    $scope.test = function () {
+      return 'OK';
+    }
   }
 })();
