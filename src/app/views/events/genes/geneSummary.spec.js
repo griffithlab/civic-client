@@ -123,7 +123,7 @@ describe('geneSummary', function () {
   });
 
   describe('directive', function(){
-    it('is successfully instantiated within the context of GeneViewController', function() {
+    it('is successfully instantiated within the context of event.genes controller and event-view directive', function() {
       expect(dirElem).to.exist;
       expect(dirScope).to.exist;
     });
@@ -138,6 +138,31 @@ describe('geneSummary', function () {
       expect(dirScope.ctrl.gene).to.exist;
       expect(dirScope.ctrl.gene).to.be.an('object');
       expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK');
+    });
+
+    it('provides myGeneInfo data object on scope', function(){
+      expect(dirScope.ctrl.myGeneInfo).to.exist;
+      expect(dirScope.ctrl.myGeneInfo).to.be.an('object');
+      expect(dirScope.ctrl.myGeneInfo.symbol).to.equal('ALK');
+    });
+
+    it('provides variants array on scope', function(){
+      expect(dirScope.ctrl.variants).to.exist;
+      expect(dirScope.ctrl.variants).to.be.an('array');
+      expect(dirScope.ctrl.variants[0].name).to.equal('EML4-ALK');
+    });
+
+    it('provides variantGroup array on scope', function(){
+      expect(dirScope.ctrl.variantGroups).to.exist;
+      expect(dirScope.ctrl.variantGroups).to.be.an('array');
+      expect(dirScope.ctrl.variantGroups[0].name).to.equal('Crizotinib Resistance');
+    });
+
+    it('unbinds the ctrl.entityModel watch expression after one execution', function() {
+      var modelWatcher = _.find(dirScope.$$watchers, function(watch) {
+        return watch.exp === 'ctrl.entityModel';
+      });
+      expect(modelWatcher).to.be.empty;
     });
   });
 });

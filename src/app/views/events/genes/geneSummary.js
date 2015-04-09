@@ -22,6 +22,9 @@
     var unbindModelWatch = $scope.$watch('ctrl.entityModel', function(entityModel){
       var ctrl = $scope.ctrl;
       ctrl.gene = ctrl.entityModel.data.entity;
+      ctrl.myGeneInfo = ctrl.entityModel.data.myGeneInfo;
+      ctrl.variants = ctrl.entityModel.data.variants;
+      ctrl.variantGroups = ctrl.entityModel.data.variantGroups;
 
       unbindModelWatch();
     }, true);
