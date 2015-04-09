@@ -56,16 +56,6 @@ describe('entityTabs', function () {
     module('served/gene238Variants.json');
     module('served/gene238VariantGroups.json');
     module('served/myGeneInfo238.json');
-    module('served/gene238Comments.json');
-    module('served/gene238Comment1.json');
-    module('served/gene238Comment1Updated.json');
-    module('served/gene238SuggestedChangeSubmitted.json');
-    module('served/gene238SuggestedChangeAccepted.json');
-    module('served/gene238SuggestedChanges.json');
-    module('served/gene238SuggestedChange1.json');
-    module('served/gene238Revisions.json');
-    module('served/gene238Revisions1.json');
-    module('served/gene238RevisionsLast.json');
 
     // inject services
     inject(function(_$rootScope_,
