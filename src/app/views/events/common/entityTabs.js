@@ -31,10 +31,7 @@
 
       ctrl.type = config.type;
       ctrl.name = config.name;
-      ctrl.state = state;
-
-      ctrl.summaryUrl = state.baseUrl + '/summary';
-      ctrl.talkUrl = state.baseUrl + '/talk';
+      ctrl.baseUrl = state.baseUrl;
 
       // we only want this watch to execute once
        unbindModelWatch();
