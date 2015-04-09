@@ -150,35 +150,16 @@ describe('entityTabs', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  //describe('entityTabs directive', function(){
-  //  it('is successfully instantiated within the context of GeneViewController and entityView directive', function() {
-  //    expect(dirElem).to.exist;
-  //    expect(dirScope).to.exist;
-  //  });
-  //
-  //  it('attaches valid ctrl.model object to its scope, shared from entityView', function() {
-  //    expect(model).to.exist;
-  //    expect(model).to.not.be.empty;
-  //    expect(model).to.be.an('object');
-  //  });
-  //});
-  //
-  //describe('ctrl.model.config', function() {
-  //  it('provides current entity\'s name', function() {
-  //    expect(config.name).to.equal('gene');
-  //  });
-  //
-  //  it('provides current entity\'s id', function() {
-  //    expect(config.id).to.equal('238');
-  //  });
-  //
-  //  it('provides base state name', function() {
-  //    expect(config.state.baseState).to.equal('events.genes');
-  //  });
-  //
-  //  it('provides base state URL', function() {
-  //    expect(config.state.baseState).to.equal('');
-  //  });
-  //
-  //});
+  describe('entityView directive', function(){
+    it('is successfully instantiated within the context of GeneViewController', function() {
+      expect(dirElem).to.exist;
+      expect(dirScope).to.exist;
+    });
+
+    it('attaches valid entityModel object to its scope', function() {
+      expect(dirScope.ctrl.model).to.exist;
+      expect(dirScope.ctrl.model).to.be.an('object');
+      expect(dirScope.ctrl.model).to.not.be.empty;
+    });
+  });
 });
