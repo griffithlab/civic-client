@@ -35,10 +35,6 @@
       .state('events.genes.summary', {
         url: '/summary',
         template: '<gene-summary></gene-summary>',
-        controller: function($scope) {
-          console.log('events.gene.summary controller instantiated.');
-          var ctrl = $scope;
-        },
         data: {
           navMode: 'sub',
           titleExp: '"GENE SUMMARY TEST"'
