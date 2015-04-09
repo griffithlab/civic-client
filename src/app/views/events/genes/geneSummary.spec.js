@@ -1,6 +1,6 @@
 'use strict';
 /*jshint expr:true */
-describe('entityTabs', function () {
+describe('geneSummary', function () {
   var $rootScope,
     $compile,
     $state,
@@ -39,6 +39,11 @@ describe('entityTabs', function () {
           abstract: false,
           url: '/initial',
           template: '<ui-view/>'
+        })
+        .state('events.genes.child', {
+          abstract: false,
+          url: '/child',
+          template: '<mock-ui-view><entity-view entity-model="geneModel"><entity-tabs></entity-tabs><gene-summary></gene-summary></entity-view></mock-ui-view>'
         });
     });
 
@@ -73,9 +78,9 @@ describe('entityTabs', function () {
       $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
 
       // instantiate GenesViewController using resolved deps from event.genes state
-      goFromState('initial').toState('events.genes.summary', { geneId: 238 });
+      goFromState('initial').toState('events.genes.child', { geneId: 238 });
       $httpBackend.flush();
-      expect($state.$current.name).to.equal('events.genes.summary');
+      expect($state.$current.name).to.equal('events.genes.child');
       var deps  = $state.$current.parent.locals.globals;
       var geneViewScope = $rootScope.$new();
 
@@ -100,7 +105,7 @@ describe('entityTabs', function () {
       expect(mockViewScope.geneModel).to.exist;
       expect(mockViewScope.geneModel).to.be.an('object');
 
-      dirElem = $(mockViewElem).find('entity-tabs');
+      dirElem = $(mockViewElem).find('gene-summary');
       dirScope = $(dirElem).children(':first').scope();
     });
 
