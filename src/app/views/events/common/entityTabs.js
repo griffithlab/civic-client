@@ -33,6 +33,9 @@
       ctrl.name = config.name;
       ctrl.state = state;
 
+      ctrl.summaryUrl = state.baseUrl + '/summary';
+      ctrl.talkUrl = state.baseUrl + '/talk';
+
       // we only want this watch to execute once
        unbindModelWatch();
     }, true); // use objectEquality

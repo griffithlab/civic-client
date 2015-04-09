@@ -72,8 +72,8 @@ module.exports = function(config) {
 
     browsers : [
       'PhantomJS'
-      ,'Chrome'
-      ,'Firefox'
+      //,'Chrome'
+      //,'Firefox'
     ],
     reporters: ['mocha'],
     autoWatch : false,
