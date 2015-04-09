@@ -1,0 +1,38 @@
+<div class="myGeneInfo">
+  <table class="table table-condensed summary-details">
+    <colgroup>
+      <col width="30%"/>
+      <col width="70%"/>
+    </colgroup>
+    <tr>
+      <td class="name">Name:</td>
+      <td class="value" ng-bind-html="ctrl.geneInfo.name"></td>
+    </tr>
+    <tr>
+      <td class="name">Entrez ID:</td>
+      <td class="value">
+        <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + gene.entrez_id }}" ng-bind="gene.entrez_id">
+
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="name">Synonyms:</td>
+      <td class="value" ng-bind-html="ctrl.geneInfo.alias | arrayToList "></td>
+    </tr>
+    <tr>
+      <td class="name">Protein Domains:</td>
+      <td class="value" ng-bind-html="ctrl.geneInfo.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true"></td>
+    </tr>
+    <tr>
+      <td class="name">Pathways:</td>
+      <td class="value" ng-bind-html="ctrl.geneInfo.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true"></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+        <button class="btn btn-block btn-default" ng-click="viewGeneDetails()">View Full Details from MyGene.info</button>
+      </td>
+    </tr>
+  </table>
+</div>

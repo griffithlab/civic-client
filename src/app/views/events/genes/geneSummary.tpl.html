@@ -1,12 +1,10 @@
 <div class="geneSummary">
   <div class="row">
-    <div class="col-xs-6 gene-description">
+    <div class="col-xs-6">
       <gene-description gene="ctrl.gene"></gene-description>
     </div>
-    <div class="col-xs-6 my-gene-info">
-      <pre ng-bind="ctrl.myGeneInfo | json">
-        No MyGeneInfo record found for {{ ctrl.gene.entrez_name }}.
-      </pre>
+    <div class="col-xs-6">
+      <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
     </div>
   </div>
 </div>

@@ -1,5 +1,12 @@
 <div class="geneDescription">
-  <p ng-bind="ctrl.gene.description | linky">
+  <p ng-bind="ctrl.gene.description | linky" class="description">
     Gene description.
   </p>
+
+  <h5>Sources:</h5>
+  <ul class="sources">
+    <li ng-repeat="source in ctrl.gene.sources">
+      <span class="small" ng-bind="source.citation"></span>
+    </li>
+  </ul>
 </div>
