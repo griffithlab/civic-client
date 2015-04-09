@@ -76,17 +76,7 @@ describe('entityTabs', function () {
                     servedGene238,
                     servedMyGeneInfo238,
                     servedGene238Variants,
-                    servedGene238VariantGroups,
-                    servedGene238Comments,
-                    servedGene238Comment1,
-                    servedGene238Comment1Updated,
-                    servedGene238SuggestedChangeSubmitted,
-                    servedGene238SuggestedChangeAccepted,
-                    servedGene238SuggestedChanges,
-                    servedGene238SuggestedChange1,
-                    servedGene238Revisions,
-                    servedGene238Revisions1,
-                    servedGene238RevisionsLast) {
+                    servedGene238VariantGroups) {
       $state = _$state_;
       $rootScope = _$rootScope_;
       $compile = _$compile_;
@@ -100,20 +90,6 @@ describe('entityTabs', function () {
       $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
       $httpBackend.when('GET', '/api/genes/238/variants').respond(servedGene238Variants);
       $httpBackend.when('GET', '/api/genes/238/variant_groups').respond(servedGene238VariantGroups);
-      $httpBackend.when('POST', '/api/genes/238/comments').respond(201, servedGene238Comment1);
-      $httpBackend.when('GET', '/api/genes/238/comments').respond(servedGene238Comments);
-      $httpBackend.when('GET', '/api/genes/238/comments/1').respond(servedGene238Comment1);
-      $httpBackend.when('PATCH', '/api/genes/238/comments/1').respond(servedGene238Comment1Updated);
-      $httpBackend.when('DELETE', '/api/genes/238/comments/1').respond(204, null);
-      $httpBackend.when('POST', '/api/genes/238/suggested_changes').respond(200, servedGene238SuggestedChangeSubmitted);
-      $httpBackend.when('POST', '/api/genes/238/suggested_changes/1/accept').respond(200, servedGene238SuggestedChangeAccepted);
-      $httpBackend.when('POST', '/api/genes/238/suggested_changes/2/reject').respond(200, servedGene238SuggestedChangeAccepted);
-      $httpBackend.when('GET', '/api/genes/238/suggested_changes').respond(200, servedGene238SuggestedChanges);
-      $httpBackend.when('GET', '/api/genes/238/suggested_changes/1').respond(200, servedGene238SuggestedChange1);
-      $httpBackend.when('GET', '/api/genes/238/revisions').respond(200, servedGene238Revisions);
-      $httpBackend.when('GET', '/api/genes/238/revisions/1').respond(200, servedGene238Revisions1);
-      $httpBackend.when('GET', '/api/genes/238/revisions/last').respond(200, servedGene238RevisionsLast);
-
 
       // instantiate GenesViewController using resolved deps from event.genes state
       goFromState('initial').toState('events.genes.child', { geneId: 238 });
@@ -220,9 +196,21 @@ describe('entityTabs', function () {
       expect($(tabLabels[1]).text()).to.equal('Gene');
     });
   });
-  
-  describe('tab links', function() {
 
+  describe('tabs', function() {
+    it('provide link to entity summary state', function() {
+      var anchor = _.find($(dirElem).find('.tabs a'), function(anchor) {
+        return _.endsWith($(anchor).attr('href'), 'summary');
+      });
+      expect(anchor).to.not.be.empty;
+    });
+
+    it('provide link to entity talk state', function() {
+      var anchor = _.find($(dirElem).find('.tabs a'), function(anchor) {
+        return _.endsWith($(anchor).attr('href'), 'talk');
+      });
+      expect(anchor).to.not.be.empty;
+    });
   });
 
 });
