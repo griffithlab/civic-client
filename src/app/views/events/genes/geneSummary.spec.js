@@ -165,4 +165,8 @@ describe('geneSummary', function () {
       expect(modelWatcher).to.be.empty;
     });
   });
+
+  describe('template', function() {
+
+  });
 });

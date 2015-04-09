@@ -1,5 +1,12 @@
 <div class="geneSummary">
-  <p>Description:</p>
-  <p ng-bind="ctrl.gene.description">ctrl.gene.description</p>
-  <pre ng-bind="ctrl.gene | json">entityModel.data.gene</pre>
+  <div class="row">
+    <div class="col-xs-6 gene-description">
+      <gene-description gene="ctrl.gene"></gene-description>
+    </div>
+    <div class="col-xs-6 my-gene-info">
+      <pre ng-bind="ctrl.myGeneInfo | json">
+        No MyGeneInfo record found for {{ ctrl.gene.entrez_name }}.
+      </pre>
+    </div>
+  </div>
 </div>

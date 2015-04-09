@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.events.genes')
     .controller('GeneSummaryController', GeneSummaryController)
     .directive('geneSummary', function() {
