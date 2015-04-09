@@ -49,6 +49,7 @@
 
   // @ngInject
   function GenesViewController($scope,
+                               $state,
                                Genes,
                                MyGeneInfo,
                                gene,
@@ -62,7 +63,10 @@
     geneModel.config = {
       type: 'gene',
       name: gene.entrez_name,
-      state: 'events.genes'
+      state: {
+        baseState: 'events.genes',
+        baseUrl: $state.href('events.genes', { geneId: gene.entrez_id })
+      }
     };
 
     geneModel.data = {

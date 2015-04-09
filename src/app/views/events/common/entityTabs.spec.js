@@ -162,4 +162,24 @@ describe('entityTabs', function () {
       expect(dirScope.entityModel).to.not.be.empty;
     });
   });
+
+  describe('entityModel.config', function() {
+    var config = entityModel.config;
+    it('provides current entity\'s name', function() {
+      expect(config.name).to.equal('gene');
+    });
+
+    it('provides current entity\'s id', function() {
+      expect(config.id).to.equal('238');
+    });
+
+    it('provides base state name', function() {
+      expect(config.state.baseState).to.equal('events.genes');
+    });
+
+    it('provides base state URL', function() {
+      expect(config.state.baseState).to.equal('');
+    });
+
+  });
 });

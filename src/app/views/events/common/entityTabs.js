@@ -13,25 +13,28 @@
     });
 
   function EntityTabsLink(scope, element, attributes, entityView) {
-    scope.entityModel = entityView.entityModel;
+    scope.ctrl = {};
+    scope.ctrl.model = entityView.entityModel;
   }
 
   //@ngInject
   function EntityTabsController($scope, $state) {
     console.log('EntityTabsController instantiated.');
-    var ctrl,
-      model;
 
-    ctrl = $scope.ctrl = {};
-    model = $scope.entityModel;
+    // we don't have access to $scope.ctrl.model until after the linking
+    // function runs, so we need to watch for its initialization then
+    // generate various template resources
+    var unbindModelWatch = $scope.$watch('ctrl.model', function(model) {
+      var ctrl = $scope.ctrl;
+      var config = model.config;
+      var state = model.config.state;
 
-    ctrl.tabClick = function(dest) {
-      var state,
-        params;
-      state = $state.current.name + '.' + dest;
-      params = { geneId: 238 };
+      ctrl.type = config.type;
+      ctrl.name = config.name;
+      ctrl.state = state;
 
-      $state.go(state, params);
-    };
+      // we only want this watch to execute once
+       unbindModelWatch();
+    }, true); // use objectEquality
   }
 })();
