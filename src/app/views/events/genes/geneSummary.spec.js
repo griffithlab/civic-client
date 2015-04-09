@@ -10,6 +10,7 @@ describe('geneSummary', function () {
     _,
 
     GenesViewController,
+    genesViewScope,
     mockViewElem, // DOM element of mocked events.genes ui-view
     mockViewScope, // scope of mocked events.genes ui-view
     dirElem, // element of entity-view directive
@@ -88,10 +89,10 @@ describe('geneSummary', function () {
       $httpBackend.flush();
       expect($state.$current.name).to.equal('events.genes.child');
       var deps  = $state.$current.parent.locals.globals;
-      var geneViewScope = $rootScope.$new();
+      genesViewScope = $rootScope.$new();
 
       GenesViewController = $controller('GenesViewController', {
-        $scope: geneViewScope,
+        $scope: genesViewScope,
         Genes: deps.Genes,
         MyGeneInfo: deps.MyGeneInfo,
         gene: deps.gene,
@@ -104,7 +105,7 @@ describe('geneSummary', function () {
       expect(GenesViewController).to.be.an('object');
 
       // compile test child template
-      mockViewElem = $compile($state.current.template)(geneViewScope);
+      mockViewElem = $compile($state.current.template)(genesViewScope);
       mockViewScope  = mockViewElem.scope();
       mockViewScope.$digest();
 
@@ -167,6 +168,11 @@ describe('geneSummary', function () {
   });
 
   describe('template', function() {
-
+    it('updates attribute on local gene object if geneModel entit on GenesViewController is updated', function() {
+      expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK');
+      genesViewScope.geneModel.data.entity.entrez_name = 'ALK2';
+      $rootScope.$digest();
+      expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK2');
+    });
   });
 });
