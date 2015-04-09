@@ -14,20 +14,18 @@
 
   function EntityTabsLink(scope, element, attributes, entityView) {
     scope.ctrl = {};
-    scope.ctrl.model = entityView.entityModel;
+    scope.ctrl.entityModel = entityView.entityModel;
   }
 
   //@ngInject
   function EntityTabsController($scope, $state) {
-    console.log('EntityTabsController instantiated.');
-
     // we don't have access to $scope.ctrl.model until after the linking
     // function runs, so we need to watch for its initialization then
     // generate various template resources
-    var unbindModelWatch = $scope.$watch('ctrl.model', function(model) {
+    var unbindModelWatch = $scope.$watch('ctrl.entityModel', function(entityModel) {
       var ctrl = $scope.ctrl;
-      var config = model.config;
-      var state = model.config.state;
+      var config = entityModel.config;
+      var state = entityModel.config.state;
 
       ctrl.type = config.type;
       ctrl.name = config.name;

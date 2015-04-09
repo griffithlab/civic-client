@@ -7,6 +7,8 @@ describe('entityTabs', function () {
     $controller,
     $httpBackend,
 
+    _,
+
     GenesViewController,
     mockViewElem, // DOM element of mocked events.genes ui-view
     mockViewScope, // scope of mocked events.genes ui-view
@@ -91,6 +93,8 @@ describe('entityTabs', function () {
       $controller = _$controller_;
       $httpBackend = _$httpBackend_;
 
+      _ = window._;
+
       // setup mocked backend responses
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
       $httpBackend.when('GET', '/api/genes/mygene_info_proxy/238').respond(servedMyGeneInfo238);
@@ -150,16 +154,75 @@ describe('entityTabs', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('entityView directive', function(){
+  describe('directive', function(){
     it('is successfully instantiated within the context of GeneViewController', function() {
       expect(dirElem).to.exist;
       expect(dirScope).to.exist;
     });
 
-    it('attaches valid entityModel object to its scope', function() {
-      expect(dirScope.ctrl.model).to.exist;
-      expect(dirScope.ctrl.model).to.be.an('object');
-      expect(dirScope.ctrl.model).to.not.be.empty;
+    it('uses an isolate scope', function() {
+      expect(dirScope.geneModel).to.not.exist; // would inherit from GeneViewController if not isolate scope
     });
   });
+
+  describe('linking function', function() {
+    it('creates ctrl object to hold template resources', function() {
+      expect(dirScope.ctrl).to.exist;
+      expect(dirScope.ctrl).to.be.an('object');
+    });
+
+    it('attaches entityModel from required entityView controller object to scope.ctrl', function() {
+      expect(dirScope.ctrl.entityModel).to.exist;
+      expect(dirScope.ctrl.entityModel).to.be.an('object');
+      expect(dirScope.ctrl.entityModel).to.not.be.empty;
+    });
+
+  });
+
+  describe('controller function', function() {
+    it('provides entity type', function() {
+      expect(dirScope.ctrl.type).to.exist;
+      expect(dirScope.ctrl.type).to.equal('gene');
+    });
+
+    it('provides entity type', function() {
+      expect(dirScope.ctrl.type).to.exist;
+      expect(dirScope.ctrl.type).to.equal('gene');
+    });
+    it('provides entity name', function() {
+      expect(dirScope.ctrl.type).to.exist;
+      expect(dirScope.ctrl.type).to.equal('gene');
+    });
+
+    it('provides base state URL', function() {
+      expect(dirScope.ctrl.baseUrl).to.exist;
+      expect(dirScope.ctrl.baseUrl).to.equal('#/events/genes/238');
+    });
+
+    it('unbinds the ctrl.entityModel watch expression after one execution', function() {
+      var modelWatcher = _.find(dirScope.$$watchers, function(watch) {
+        return watch.exp === 'ctrl.entityModel';
+      });
+      expect(modelWatcher).to.be.empty;
+    });
+  });
+
+  describe('template', function() {
+    it('displays a header with the proper entity type and name', function() {
+      var headerTxt = $(dirElem).find('.name h3').text();
+      expect(headerTxt).to.contain('Gene');
+      expect(headerTxt).to.contain('ALK');
+    });
+
+    it('displays Summary and Talk tabs labelled with the proper entity type', function() {
+      var tabLabels = $(dirElem).find('.tabs a span');
+      expect($(tabLabels[0]).text()).to.equal('Gene');
+      expect($(tabLabels[1]).text()).to.equal('Gene');
+    });
+  });
+  
+  describe('tab links', function() {
+
+  });
+
 });

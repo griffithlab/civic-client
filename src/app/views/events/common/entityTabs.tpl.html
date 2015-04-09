@@ -8,11 +8,11 @@
     <div class="col-xs-6 tabs">
       <ul class="nav nav-tabs pull-right">
         <li ui-sref-active="active">
-          <a ng-href="{{ctrl.baseUrl}}/summary"><span ng-bind="ctrl.name | capitalize"></span> Summary</a>
+          <a ng-href="{{ctrl.baseUrl}}/summary"><span ng-bind="ctrl.type | capitalize"></span> Summary</a>
         </li>
 
         <li ng-class="{'active': $state.includes('**.genes.talk.**')}">
-          <a ng-href="{{ctrl.baseUrl}}/talk"><span ng-bind="ctrl.name | capitalize"></span> Talk</a>
+          <a ng-href="{{ctrl.baseUrl}}/talk"><span ng-bind="ctrl.type | capitalize"></span> Talk</a>
         </li>
 
       </ul>

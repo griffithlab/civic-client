@@ -5,7 +5,7 @@
       return {
         restrict: 'E',
         scope: {
-          entityModel: '=entityModel'
+          entityModel: '='
         },
         transclude: true,
         controller: 'EntityViewController',
@@ -14,7 +14,7 @@
     });
 
   //@ngInject
-  function EntityViewController($scope, $element) {
-    this.entityModel = $scope.entityModel;
+  function EntityViewController($scope) {
+    this.entityModel = $scope.entityModel; // attach entityModel to controller for child directives
   }
 })();
