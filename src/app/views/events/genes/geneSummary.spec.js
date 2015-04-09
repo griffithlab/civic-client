@@ -43,7 +43,13 @@ describe('geneSummary', function () {
         .state('events.genes.child', {
           abstract: false,
           url: '/child',
-          template: '<mock-ui-view><entity-view entity-model="geneModel"><entity-tabs></entity-tabs><gene-summary></gene-summary></entity-view></mock-ui-view>'
+          template:
+          '<mock-ui-view>' +
+          '<entity-view entity-model="geneModel">' +
+          '<entity-tabs></entity-tabs>' +
+          '<gene-summary></gene-summary>' +
+          '</entity-view>' +
+          '</mock-ui-view>'
         });
     });
 
@@ -124,6 +130,14 @@ describe('geneSummary', function () {
 
     it('uses an isolate scope', function() {
       expect(dirScope.geneModel).to.not.exist; // would inherit from GeneViewController if not isolate scope
+    });
+  });
+
+  describe('controller', function() {
+    it('provides the gene data object on scope', function(){
+      expect(dirScope.ctrl.gene).to.exist;
+      expect(dirScope.ctrl.gene).to.be.an('object');
+      expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK');
     });
   });
 });
