@@ -86,7 +86,7 @@ angular.module('civic.security', [
   'civic.security.login'
 ]);
 angular.module('civic.states', ['ui.router']);
-angular.module('civic.services', ['ui.router', 'ngResource']);
+angular.module('civic.services', ['ui.router', 'ngResource', 'angular-lodash/filters']);
 angular.module('civic.pages', ['civic.security.authorization', 'ui.router']);
 angular.module('civic.account', ['civic.security.authorization', 'ui.router']);
 angular.module('civic.common', ['ui.router']);
