@@ -97,7 +97,8 @@ angular.module('civic.search', ['ui.router']);
 angular.module('civic.events', [
   'ui.router',
   'civic.events.genes',
-  'civic.events.common'
+  'civic.events.common',
+  'angular-lodash/filters'
 ]);
 
 angular.module('civic.add', ['ui.router', 'aa.select2']);
