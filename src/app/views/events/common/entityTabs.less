@@ -1,11 +1,9 @@
 @import 'bower_components/bootstrap/less/mixins.less';
 @import 'bower_components/bootstrap/less/variables.less';
 @import 'src/app/styles/_civic-variables.less';
-
+@import 'src/app/styles/_mixins.less';
 
 .entityTabs {
   background-color: #EFE;
-  // switch left/right margins with padding so tabs bg extends past row margins to content edge
-  margin: 0 -(@contentPadding);
-  padding: 0 @contentPadding;
+  .full-width();
 }

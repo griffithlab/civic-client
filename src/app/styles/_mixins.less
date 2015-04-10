@@ -1,0 +1,10 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.full-width() {
+  // swap horizontal margins with padding,
+  // intended for use on first child of bootstrap 3 row
+  margin: 0 -(@contentPadding);
+  padding: 0 @contentPadding;
+}
