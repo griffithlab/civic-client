@@ -4,5 +4,8 @@
 
 
 .entityTabs {
-  border: 1px solid #F00;
+  background-color: #EFE;
+  // switch left/right margins with padding so tabs bg extends past row margins to content edge
+  margin: 0 -(@contentPadding);
+  padding: 0 @contentPadding;
 }
