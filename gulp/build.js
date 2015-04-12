@@ -90,7 +90,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     ))
     .pipe($.sourcemaps.write('.')) // write sourcemaps
     .pipe(jsFilter.restore())
-    // restore non-js files to stream
+    // restore non-js blocks to stream
 
     // pluck CSS, store non-css files
     .pipe(cssFilter)
@@ -99,7 +99,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')')) // rewrite font-awesome fonts
     .pipe($.csso()) // minify CSS
     .pipe(cssFilter.restore())
-    // restore non-css files to stream
+    // restore non-css blocks to stream
 
     // strip asset links from index.html, insert links to concatenated, minified assets
     .pipe(assets.restore())
