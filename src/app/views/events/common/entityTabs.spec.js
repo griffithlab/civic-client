@@ -41,7 +41,7 @@ describe('entityTabs', function () {
         .state('initial', {
           abstract: false,
           url: '/initial',
-          template: '<ui-view/>'
+          template: '<ui-view></ui-view>'
         });
       $stateProvider
         .state('events.genes.child', {

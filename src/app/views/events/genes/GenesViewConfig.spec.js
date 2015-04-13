@@ -58,13 +58,13 @@ describe('GenesViewConfig', function () {
         .state('initial', {
           abstract: false,
           url: '/test1',
-          template: '<ui-view/>'
+          template: '<ui-view></ui-view>'
         });
       $stateProvider
         .state('events.genes.child', {
           abstract: false,
           url: '/test2',
-          template: '<ui-view/>'
+          template: '<ui-view></ui-view>'
         })
     });
 

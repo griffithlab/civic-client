@@ -15,7 +15,7 @@
     });
 
   // @ngInject
-  function MyGeneInfoController($scope, ngDialog) {
+  function MyGeneInfoController($scope, ngDialog, _) {
     var ctrl = $scope.ctrl = {};
     ctrl.geneInfo = $scope.geneInfo;
 
@@ -25,25 +25,24 @@
       scope: $scope
     };
 
-    ctrl.viewGeneDetails = function() {
-      if(ctrl.dialog != undefined) {
-        ctrl.dialog.closePromise.then(function(dlg) {
-          console.warn('myGeneInfoDialog exists, closing ID#' + dlg.id + 'before opening new dialog.');
-          openDialog();
+    ctrl.openDialog = function() {
+      if(_.has(ctrl.dialog, 'id')) {
+        console.log('myGeneInfoDialog exists, closing ID#' + ctrl.dialog.id + 'before opening new dialog.');
+        ctrl.closeDialog().then(function(dlg) {
+          ctrl.dialog = ngDialog.open(ctrl.popupOptions);
         });
       } else {
-        openDialog();
-      }
-
-      function openDialog() {
         ctrl.dialog = ngDialog.open(ctrl.popupOptions);
       }
+      console.log('Opened dialog ID#' + ctrl.dialog.id);
+      return ctrl.dialog;
     };
 
     ctrl.closeDialog = function() {
-      console.log('Attempting to close dialog ID#' + dlg.id);
-      ctrl.dialog.closePromise.then(function(dlg) {
-        console.log('Closed dialog ID#' + dlg.id);
+      console.log('Attempting to close dialog ID#' + ctrl.dialog.id);
+      ctrl.dialog.close();
+      return ctrl.dialog.closePromise.then(function(dlg) {
+        console.log('Closed dialog ID#' + dlg.id + '; remaining: ' + dlg.remainingDialogs);
       });
     };
   }
