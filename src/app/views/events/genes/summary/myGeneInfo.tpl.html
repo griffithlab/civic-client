@@ -22,11 +22,11 @@
     </tr>
     <tr>
       <td class="name">Protein Domains:</td>
-      <td class="value" ng-bind="ctrl.geneInfo.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true"></td>
+      <td class="value" ng-bind-html="ctrl.geneInfo.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true | unsafe"></td>
     </tr>
     <tr>
       <td class="name">Pathways:</td>
-      <td class="value" ng-bind="ctrl.geneInfo.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true"></td>
+      <td class="value" ng-bind-html="ctrl.geneInfo.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true | unsafe"></td>
     </tr>
     <tr>
       <td>&nbsp;</td>

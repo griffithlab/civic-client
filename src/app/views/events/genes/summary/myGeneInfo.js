@@ -19,6 +19,12 @@
     var ctrl = $scope.ctrl = {};
     ctrl.geneInfo = $scope.geneInfo;
 
+    ctrl.popupOptions = {
+      template: 'app/views/events/genes/summary/myGeneInfoDialog.tpl.html',
+      controller: 'MyGeneInfoDialogController',
+      scope: $scope
+    };
+
     ctrl.viewGeneDetails = function() {
       if(ctrl.dialog != undefined) {
         console.warn('myGeneInfoDialog exists, closing');
@@ -30,11 +36,7 @@
       }
 
       function openDialog() {
-        ctrl.dialog = ngDialog.open({
-          template: 'app/views/events/genes/summary/myGeneInfoDialog.tpl.html',
-          controller: 'MyGeneInfoDialogController',
-          scope: $scope
-        });
+        ctrl.dialog = ngDialog.open(ctrl.popupOptions);
       }
     };
 
@@ -45,8 +47,6 @@
 
   // @ngInject
   function MyGeneInfoDialogController($scope, uiGridConstants) {
-    console.log('-=-=-=-=-=-=-=-=-=- MyGeneInfoDialogController called. -=-=-=-=-=-==-=-=-=-=');
-
     // MyGeneInfoController's $scope is attached to dialog parent via openDialog() options obj
     var ctrl = $scope.$parent.ctrl;
 

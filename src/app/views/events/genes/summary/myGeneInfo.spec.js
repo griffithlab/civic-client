@@ -6,6 +6,8 @@ describe('myGeneInfo', function () {
     $state,
     $controller,
     $httpBackend,
+    $document,
+    $timeout,
 
     _,
 
@@ -14,7 +16,8 @@ describe('myGeneInfo', function () {
     mockViewElem, // DOM element of mocked events.genes ui-view
     mockViewScope, // scope of mocked events.genes ui-view
     dirElem, // element of entity-view directive
-    dirScope; // scope of entity-view directive
+    dirScope, // scope of entity-view directive
+    modalElem; // element to which modal popup will be appended
 
   function goFromState(state1, params1) {
     return {
@@ -67,6 +70,8 @@ describe('myGeneInfo', function () {
                     _$controller_,
                     _$state_,
                     _$httpBackend_,
+                    _$document_,
+                    _$timeout_,
                     servedGene238,
                     servedMyGeneInfo238,
                     servedGene238Variants,
@@ -76,6 +81,8 @@ describe('myGeneInfo', function () {
       $compile = _$compile_;
       $controller = _$controller_;
       $httpBackend = _$httpBackend_;
+      $document = _$document_;
+      $timeout = _$timeout_;
 
       _ = window._;
 
@@ -90,7 +97,7 @@ describe('myGeneInfo', function () {
       $httpBackend.flush();
       expect($state.$current.name).to.equal('events.genes.child');
       var deps  = $state.$current.parent.locals.globals;
-      genesViewScope = $rootScope.$new();
+      genesViewScope = $rootScope;
 
       GenesViewController = $controller('GenesViewController', {
         $scope: genesViewScope,
@@ -107,8 +114,6 @@ describe('myGeneInfo', function () {
 
       // compile test child template
       mockViewElem = $compile($state.current.template)(genesViewScope);
-      // wrap body element around fragment for model dialog to attach
-      $(mockViewElem).wrap('body');
       mockViewScope  = mockViewElem.scope();
       mockViewScope.$digest();
 
@@ -151,13 +156,22 @@ describe('myGeneInfo', function () {
 
     describe('viewGeneDetails function', function() {
       it('is called by View Full Details button', function() {
-        var button;
         sinon.spy(dirScope.ctrl, 'viewGeneDetails');
-        button = $(dirElem).find('button.view-gene-details');
-        button.trigger('click');
+        $(dirElem).find('button.view-gene-details').trigger('click');
         $rootScope.$digest();
         expect(dirScope.ctrl.viewGeneDetails).to.have.been.calledOnce;
       });
+      it('opens a modal dialog window', inject(function($document) {
+        var $body,
+          bodyLength;
+        $body = $document.find('body');
+        bodyLength = $body.children().length;
+
+        $(dirElem).find('button.view-gene-details').trigger('click');
+        $rootScope.$digest();
+        $timeout.flush();
+        expect($body.find('.myGeneInfoDialog')).to.exist;
+      }));
     });
   });
 

@@ -8,7 +8,7 @@
     <div class="col-xs-12">
       <p>
         <strong>Gene Summary:</strong><br/>
-        <span ng-bind-html="geneInfo.summary"></span>
+        <span ng-bind-html="geneInfo.summary | unsafe"></span>
       </p>
     </div>
   </div>
@@ -16,7 +16,7 @@
     <div class="col-xs-12">
       <p>
         <strong>Synonyms:</strong><br/>
-        <span ng-bind-html="geneInfo.alias"></span>
+        <span ng-bind="geneInfo.alias"></span>
       </p>
     </div>
   </div>
