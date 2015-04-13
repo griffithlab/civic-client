@@ -2,6 +2,7 @@ angular.module('civicClient', [
   // vendor modules
   'ui.router',
   'ct.ui.router.extras',
+  'ngDialog',
   'ui.bootstrap',
   'ui.grid',
   'ui.grid.autoResize',
@@ -96,6 +97,7 @@ angular.module('civic.search', ['ui.router']);
 
 angular.module('civic.events', [
   'ui.router',
+  'ngDialog',
   'civic.events.genes',
   'civic.events.common',
   'angular-lodash/filters'

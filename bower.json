@@ -5,6 +5,7 @@
     "angular": "~1.2.0",
     "angular-sanitize": "1.2.x",
     "angular-ui-router": "0.2.13",
+    "angular-ui-router-tabs": "~1.4.2",
     "ui-router-extras": "~0.0.11",
     "angular-ui-grid": "~3.0.0-rc.16",
     "angular-bootstrap": "~0.12.1",

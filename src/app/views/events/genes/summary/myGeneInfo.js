@@ -2,7 +2,7 @@
   'use strict';
   angular.module('civic.events.genes')
     .controller('MyGeneInfoController', MyGeneInfoController)
-    .controller('MyGeneInfoDialogCtrl', MyGeneInfoDialogCtrl)
+    .controller('MyGeneInfoDialogController', MyGeneInfoDialogController)
     .directive('myGeneInfo', function() {
       return {
         restrict: 'E',
@@ -15,23 +15,45 @@
     });
 
   // @ngInject
-  function MyGeneInfoController($scope, dialogs) {
+  function MyGeneInfoController($scope, ngDialog) {
     var ctrl = $scope.ctrl = {};
     ctrl.geneInfo = $scope.geneInfo;
 
     ctrl.viewGeneDetails = function() {
-      $scope.dlg = dialogs.create(
-        'app/views/events/genes/summary/myGeneInfoDialog.tpl.html',
-        'MyGeneInfoDialogCtrl',
-        $scope.geneDetails,
-        'lg'
-      );
+      if(ctrl.dialog != undefined) {
+        console.warn('myGeneInfoDialog exists, closing');
+        ctrl.dialog.closePromise.then(function(dlg) {
+          openDialog();
+        });
+      } else {
+        openDialog();
+      }
+
+      function openDialog() {
+        ctrl.dialog = ngDialog.open({
+          template: 'app/views/events/genes/summary/myGeneInfoDialog.tpl.html',
+          controller: 'MyGeneInfoDialogController',
+          scope: $scope
+        });
+      }
+    };
+
+    ctrl.closeDialog = function() {
+      ctrl.dialog.close();
     };
   }
 
   // @ngInject
-  function MyGeneInfoDialogCtrl($scope, uiGridConstants, $modalInstance, data) {
-    $scope.proteinDomainsGridOptions = {
+  function MyGeneInfoDialogController($scope, uiGridConstants) {
+    console.log('-=-=-=-=-=-=-=-=-=- MyGeneInfoDialogController called. -=-=-=-=-=-==-=-=-=-=');
+
+    // MyGeneInfoController's $scope is attached to dialog parent via openDialog() options obj
+    var ctrl = $scope.$parent.ctrl;
+
+    var gridOptions = ctrl.gridOptions = {};
+
+    gridOptions.proteinDomains = {
+      data: ctrl.geneInfo.interpro,
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
@@ -63,9 +85,8 @@
       ]
     };
 
-    $scope.proteinDomainsGridOptions.data = data.interpro;
-
-    $scope.pathwaysGridOptions= {
+    gridOptions.pathways = {
+      data: ctrl.geneInfo.pathway,
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
@@ -100,11 +121,6 @@
       ]
     };
 
-    $scope.pathwaysGridOptions.data = data.pathway;
 
-    $scope.geneDetails = data;
-    $scope.done = function(){
-      $modalInstance.close($scope.data);
-    };
   }
 })();
