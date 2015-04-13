@@ -15,6 +15,12 @@
 
   // @ngInject
   function MyGeneInfoController($scope) {
+    var ctrl = $scope.ctrl = {};
+    ctrl.geneInfo = $scope.geneInfo;
+
+    ctrl.viewGeneDetails = function() {
+
+    };
 
   }
 })();

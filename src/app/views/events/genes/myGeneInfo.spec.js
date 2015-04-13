@@ -28,6 +28,7 @@ describe('myGeneInfo', function () {
 
   beforeEach(function () {
     // load civic modules
+    // module('ngSanatize');
     module('civic.services');
     module('civic.common');
     module('civic.events');
@@ -141,6 +142,11 @@ describe('myGeneInfo', function () {
       expect(dirScope.geneInfo).to.be.an('object');
       expect(dirScope.geneInfo.symbol).to.equal('ALK');
     });
+
+    it('provides a viewGeneDetails function', function() {
+      expect(dirScope.ctrl.viewGeneDetails).to.exist;
+      expect(dirScope.ctrl.viewGeneDetails).to.be.a('function');
+    })
   });
 
   describe('template', function() {
