@@ -53,7 +53,7 @@
     var gridOptions = ctrl.gridOptions = {};
 
     gridOptions.proteinDomains = {
-      data: ctrl.geneInfo.interpro,
+      data: $scope.geneInfo.interpro,
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
@@ -86,9 +86,9 @@
     };
 
     gridOptions.pathways = {
-      data: ctrl.geneInfo.pathway,
+      data: $scope.geneInfo.pathway,
       enableFiltering: true,
-      enableColumnMenus: false,
+      enableColumnxsMenus: false,
       enableSorting: true,
       minRowsToShow: 7,
       filter: {

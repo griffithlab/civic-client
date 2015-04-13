@@ -97,6 +97,7 @@ angular.module('civic.search', ['ui.router']);
 
 angular.module('civic.events', [
   'ui.router',
+  'ui.grid',
   'ngDialog',
   'civic.events.genes',
   'civic.events.common',

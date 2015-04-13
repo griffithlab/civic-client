@@ -28,7 +28,6 @@ describe('myGeneInfo', function () {
 
   beforeEach(function () {
     // load civic modules
-    // module('ngSanatize');
     module('civic.services');
     module('civic.common');
     module('civic.events');
@@ -46,15 +45,13 @@ describe('myGeneInfo', function () {
           abstract: false,
           url: '/child',
           template:
-          '<body>' +
           '<mock-ui-view>' +
           '<entity-view entity-model="geneModel">' +
           '<entity-tabs></entity-tabs>' +
           '<gene-summary>' +
           '</gene-summary>' +
           '</entity-view>' +
-          '</mock-ui-view>' +
-          '</body>'
+          '</mock-ui-view>'
         });
     });
 
@@ -110,6 +107,8 @@ describe('myGeneInfo', function () {
 
       // compile test child template
       mockViewElem = $compile($state.current.template)(genesViewScope);
+      // wrap body element around fragment for model dialog to attach
+      $(mockViewElem).wrap('body');
       mockViewScope  = mockViewElem.scope();
       mockViewScope.$digest();
 
@@ -149,7 +148,19 @@ describe('myGeneInfo', function () {
       expect(dirScope.ctrl.viewGeneDetails).to.exist;
       expect(dirScope.ctrl.viewGeneDetails).to.be.a('function');
     });
+
+    describe('viewGeneDetails function', function() {
+      it('is called by View Full Details button', function() {
+        var button;
+        sinon.spy(dirScope.ctrl, 'viewGeneDetails');
+        button = $(dirElem).find('button.view-gene-details');
+        button.trigger('click');
+        $rootScope.$digest();
+        expect(dirScope.ctrl.viewGeneDetails).to.have.been.calledOnce;
+      });
+    });
   });
+
 
   describe('template', function() {
     //it('updates attribute on local gene object if geneModel entit on GenesViewController is updated', function() {
