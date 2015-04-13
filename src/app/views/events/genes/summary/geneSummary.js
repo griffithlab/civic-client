@@ -9,7 +9,7 @@
         scope: {},
         link: GeneSummaryLink,
         controller: 'GeneSummaryController',
-        templateUrl: 'app/views/events/genes/geneSummary.tpl.html'
+        templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
       }
     });
 

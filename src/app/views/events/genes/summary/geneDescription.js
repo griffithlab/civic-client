@@ -9,7 +9,7 @@
           gene: '='
         },
         controller: 'GeneDescriptionController',
-        templateUrl: 'app/views/events/genes/geneDescription.tpl.html'
+        templateUrl: 'app/views/events/genes/summary/geneDescription.tpl.html'
       }
     });
 

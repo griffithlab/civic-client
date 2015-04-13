@@ -62,6 +62,20 @@
       state: {
         baseState: 'events.genes',
         baseUrl: $state.href('events.genes', { geneId: gene.entrez_id })
+      },
+      styles: {
+        tabs: {
+          tabsBg: '#AAA',
+          activeBg: 'pageBackground3',
+          inactiveBg: '#CCC'
+        },
+        summary: {
+          summaryBg: 'pageBackground3'
+        },
+        variantMenu: {
+          variantMenuBg: 'pageBackground3',
+          variantMenuActiveItemBg: 'pageBackground2'
+        }
       }
     };
 
