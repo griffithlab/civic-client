@@ -27,8 +27,8 @@
 
     ctrl.viewGeneDetails = function() {
       if(ctrl.dialog != undefined) {
-        console.warn('myGeneInfoDialog exists, closing');
         ctrl.dialog.closePromise.then(function(dlg) {
+          console.warn('myGeneInfoDialog exists, closing ID#' + dlg.id + 'before opening new dialog.');
           openDialog();
         });
       } else {
@@ -41,7 +41,10 @@
     };
 
     ctrl.closeDialog = function() {
-      ctrl.dialog.close();
+      console.log('Attempting to close dialog ID#' + dlg.id);
+      ctrl.dialog.closePromise.then(function(dlg) {
+        console.log('Closed dialog ID#' + dlg.id);
+      });
     };
   }
 

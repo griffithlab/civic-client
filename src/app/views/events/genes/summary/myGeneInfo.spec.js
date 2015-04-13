@@ -159,8 +159,10 @@ describe('myGeneInfo', function () {
         sinon.spy(dirScope.ctrl, 'viewGeneDetails');
         $(dirElem).find('button.view-gene-details').trigger('click');
         $rootScope.$digest();
+        $timeout.flush();
         expect(dirScope.ctrl.viewGeneDetails).to.have.been.calledOnce;
       });
+
       it('opens a modal dialog window', inject(function($document) {
         var $body,
           bodyLength;
@@ -172,6 +174,33 @@ describe('myGeneInfo', function () {
         $timeout.flush();
         expect($body.find('.myGeneInfoDialog')).to.exist;
       }));
+    });
+
+    describe('myGeneInfoDialog', function() {
+      var dialogElem;
+      before(function() {
+        var $body = $document.find('body');
+        $(dirElem).find('button.view-gene-details').trigger('click');
+        $rootScope.$digest();
+        $timeout.flush();
+        dialogElem = $body.find('.myGeneInfoDialog');
+      });
+
+      it('displays the correct title', function() {
+        expect($(dialogElem).find('.header .h3').text()).to.contain('Gene ALK');
+      });
+      it('displays correct gene summary', function() {
+
+      });
+      it('displays gene aliases', function() {
+
+      });
+      it('displays protein domain datagrid', function() {
+
+      });
+      it('displays pathways datagrid', function() {
+
+      });
     });
   });
 
