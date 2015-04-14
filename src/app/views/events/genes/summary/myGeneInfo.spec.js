@@ -190,7 +190,7 @@ describe('myGeneInfo', function () {
       expect($body.find('.myGeneInfoDialog')).to.exist;
     });
 
-    it('closes existing dialog before opening a new one', function() {
+    it('closes an existing dialog before opening a new one', function() {
       var spy = sinon.spy(dirScope.ctrl, 'closeDialog');
       dirScope.ctrl.openDialog();
       $rootScope.$digest();
@@ -224,32 +224,36 @@ describe('myGeneInfo', function () {
     });
   });
 
-  //describe.skip('myGeneInfoDialog', function() {
-  //  var dialogElem;
-  //  before(function() {
-  //    var $body = $document.find('body');
-  //    $(dirElem).find('button.view-gene-details').trigger('click');
-  //    $rootScope.$digest();
-  //    $timeout.flush();
-  //    dialogElem = $body.find('.myGeneInfoDialog');
-  //  });
-  //
-  //  it('displays the correct title', function() {
-  //    expect($(dialogElem).find('.header .h3').text()).to.contain('Gene ALK');
-  //  });
-  //  it('displays correct gene summary', function() {
-  //
-  //  });
-  //  it('displays gene aliases', function() {
-  //
-  //  });
-  //  it('displays protein domain datagrid', function() {
-  //
-  //  });
-  //  it('displays pathways datagrid', function() {
-  //
-  //  });
-  //});
+  describe('myGeneInfoDialog', function() {
+    var dialogElem;
+    before(function() {
+      var $body = $document.find('body');
+      dirScope.ctrl.openDialog();
+      $rootScope.$digest();
+      $timeout.flush();
+      dialogElem = $body.find('.myGeneInfoDialog');
+    });
+
+    it('displays the correct title', function() {
+      expect($(dialogElem).find('.header h3').text()).to.contain('Gene ALK');
+    });
+
+    it('displays correct gene summary', function() {
+
+    });
+
+    it('displays gene aliases', function() {
+
+    });
+
+    it('displays protein domain datagrid', function() {
+
+    });
+
+    it('displays pathways datagrid', function() {
+
+    });
+  });
 
   describe('template', function() {
     //it('updates attribute on local gene object if geneModel entit on GenesViewController is updated', function() {
