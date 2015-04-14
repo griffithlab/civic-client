@@ -174,5 +174,9 @@ describe('geneSummary', function () {
       $rootScope.$digest();
       expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK2');
     });
+
+    it('provides a ui-view directive for events.genes.summary.variants state', function() {
+      expect(dirElem.find('ui-view').length).to.be.above(0);
+    });
   });
 });

@@ -4,4 +4,12 @@
       <a ng-href=""></a><span ng-bind="variant.name">Name</span>
     </li>
   </ul>
+  <div ng-if="variantGroups.length > 0">
+    <ul>
+      <li ng-repeat="variantGroup in ctrl.variantGroups">
+        <a ng-href=""></a><span ng-bind="variantGroup.name">Name</span>
+      </li>
+    </ul>
+  </div>
+
 </div>

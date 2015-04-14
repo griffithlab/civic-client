@@ -21,9 +21,6 @@
 
     ctrl.variants = $scope.variants;
     ctrl.variantGroups = $scope.variantGroups;
-    ctrl.options = {
-      backgroundColor: '#CDCDCD',
-      variantHeaderColor: '#4b2065'
-    };
+    ctrl.options = $scope.options;
   }
 })();

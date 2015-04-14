@@ -15,6 +15,6 @@
 
   // @ngInject
   function GeneDescriptionController($scope) {
-    // note that 'gene' exists on scope from DDO.scope
+    // $scope.gene exists from isolate scope attribute
   }
 })();
