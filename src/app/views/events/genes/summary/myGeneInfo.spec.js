@@ -223,7 +223,7 @@ describe('myGeneInfo', function () {
     });
   });
 
-  describe('myGeneInfoDialog', function() {
+  describe('myGeneInfoDialog template', function() {
     var dialogElem;
     before(function() {
       var $body = $document.find('body');
@@ -238,28 +238,33 @@ describe('myGeneInfo', function () {
     });
 
     it('displays correct gene summary', function() {
-
+      expect($(dialogElem).find('.summary').text()).to.contain('This gene encodes a receptor tyrosine kinase');
     });
 
-    it('displays gene aliases', function() {
-
+    it('displays gene synonyms', function() {
+      expect($(dialogElem).find('.synonyms').text()).to.contain('CD246,NBLST3');
     });
 
     it('displays protein domain datagrid', function() {
-
+      expect($('.myGeneInfoDialog').find('.protein-domains .ui-grid-render-container').length).to.be.above(0);
     });
 
     it('displays pathways datagrid', function() {
+     expect($('.myGeneInfoDialog').find('.pathways .ui-grid-render-container').length).to.be.above(0);
+    });
 
+    it('displays close dialog button', function() {
+      var button = $('.myGeneInfoDialog').find('.buttons button.close');
+      expect(button.length).to.be.above(0);
+    });
+
+    it('displays close dialog button that closes the dialog when clicked', function() {
+      var button = $('.myGeneInfoDialog').find('.buttons button.close');
+      button.triggerHandler('click');
+      $rootScope.$digest();
+      expect($document.find('.myGeneInfoDialog').length).to.equal(0);
     });
   });
 
-  describe('template', function() {
-    //it('updates attribute on local gene object if geneModel entit on GenesViewController is updated', function() {
-    //  expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK');
-    //  genesViewScope.geneModel.data.entity.entrez_name = 'ALK2';
-    //  $rootScope.$digest();
-    //  expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK2');
-    //});
-  });
+
 });
