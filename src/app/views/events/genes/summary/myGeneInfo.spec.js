@@ -183,13 +183,11 @@ describe('myGeneInfo', function () {
       var spy = sinon.spy(dirScope.ctrl, 'openDialog');
       button.triggerHandler('click');
       expect(spy).to.have.been.calledOnce;
-      dirScope.ctrl.closeDialog();
     });
 
     it('opens a My Gene Info dialog window', function() {
       button.triggerHandler('click');
       expect($body.find('.myGeneInfoDialog')).to.exist;
-      dirScope.ctrl.closeDialog();
     });
 
     it('closes existing dialog before opening a new one', function() {
@@ -203,7 +201,7 @@ describe('myGeneInfo', function () {
       $rootScope.$digest();
       $timeout.flush();
       expect(spy).to.have.been.calledOnce;
-      expect($body.find('.myGeneInfoDialog').length).to.be.above(0);
+      expect($body.find('.myGeneInfoDialog').length).to.equal(1);
     });
   });
 
