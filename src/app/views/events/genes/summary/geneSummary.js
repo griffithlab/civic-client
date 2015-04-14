@@ -20,17 +20,24 @@
 
   //@ngInject
   function GeneSummaryController($scope) {
-    var unbindModelWatch = $scope.$watch('ctrl.entityModel', function(entityModel){
+    var unwatch = $scope.$watch('ctrl.entityModel', function(entityModel){
+      var config = entityModel.config;
       var ctrl = $scope.ctrl;
-      ctrl.gene = ctrl.entityModel.data.entity;
-      ctrl.myGeneInfo = ctrl.entityModel.data.myGeneInfo;
-      ctrl.variants = ctrl.entityModel.data.variants;
-      ctrl.variantGroups = ctrl.entityModel.data.variantGroups;
+      ctrl.gene = entityModel.data.entity;
+      ctrl.myGeneInfo = entityModel.data.myGeneInfo;
+      ctrl.variants = entityModel.data.variants;
+      ctrl.variantGroups = entityModel.data.variantGroups;
       ctrl.variantMenuOptions = {
-        backgroundColor: '#CDCDCD',
-        variantHeaderColor: '#4b2065'
+        styles: config.styles.variantMenu,
+        state: config.state
       };
-      unbindModelWatch();
+      // unbind watcher after first digest
+      unwatch();
     }, true);
   }
 })();
+
+//backgroundColor: '#CDCDCD',
+//  variantHeaderColor: '#4b2065',
+//  baseState: ctrl.entityModel.config.baseState,
+//  baseUrl: ctrl.entityModel.config.baseUrl

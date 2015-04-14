@@ -158,18 +158,34 @@ describe('variantMenu', function () {
       expect(dirScope.options).to.exist;
       expect(dirScope.options).to.be.an('object');
       expect(dirScope.options).to.not.be.empty;
+      expect(dirScope.options.state).to.be.an('object');
+      expect(dirScope.options.state.baseUrl).to.equal('#/events/genes/238');
     });
   });
 
-  describe.skip('template', function() {
-    it('displays the correct title', function() {
-      expect(dirElem.find('.description').text()).to.contain('mutations in ALK have been shown to confer resistance to current tyrosine kinase inhibitors');
+  describe('template', function() {
+    it('displays variants in list', function() {
+      expect(dirElem.find('.variants li').length).to.be.above(0);
     });
 
-    it('displays sources', function() {
-      expect(dirElem.find('.sources li').length).to.be.above(0);
-      expect($(dirElem.find('.sources li')[0]).text()).to.contain('Shaw et al., 2013, J. Clin. Oncol.');
+    it('main variant list items tabs to proper variant state', function() {
+      expect($(dirElem).find('.variants li:first-child a').first().attr('href')).to.equal('#/events/genes/238/variants/5/summary');
+    });
+
+    it('displays variant groups in header list', function() {
+      expect(dirElem.find('.variant-groups li').length).to.be.above(0);
+    });
+
+    it('main variant-group header items link to proper variant state', function() {
+      expect($(dirElem).find('.variant-groups li:first-child a').first().attr('href')).to.equal('#/events/genes/238/variant_groups/3/summary');
+    });
+
+    it('displays variant group variants groups in tab list', function() {
+      expect(dirElem.find('.variant-groups li').length).to.be.above(0);
+    });
+
+    it('main variant-groups\' variant tabs link to proper variant state', function() {
+      expect($(dirElem).find('.variant-group-variants li:first-child a').first().attr('href')).to.equal('#/events/genes/238/variants/6/summary');
     });
   });
-
 });

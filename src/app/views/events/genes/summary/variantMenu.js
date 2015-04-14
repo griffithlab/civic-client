@@ -16,11 +16,7 @@
     });
 
   //@ngInject
-  function VariantMenuController($scope, $state) {
-    var ctrl = $scope.ctrl = {};
-
-    ctrl.variants = $scope.variants;
-    ctrl.variantGroups = $scope.variantGroups;
-    ctrl.options = $scope.options;
+  function VariantMenuController($scope) {
+    // variants, variantGroups, options attached to $scope
   }
 })();
