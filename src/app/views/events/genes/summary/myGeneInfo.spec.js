@@ -224,42 +224,41 @@ describe('myGeneInfo', function () {
   });
 
   describe('myGeneInfoDialog template', function() {
-    var dialogElem;
     before(function() {
       var $body = $document.find('body');
       dirScope.ctrl.openDialog();
       $rootScope.$digest();
       $timeout.flush();
-      dialogElem = $body.find('.myGeneInfoDialog');
+      modalElem = $body.find('.myGeneInfoDialog');
     });
 
     it('displays the correct title', function() {
-      expect($(dialogElem).find('.header h3').text()).to.contain('Gene ALK');
+      expect(modalElem.find('.header h3').text()).to.contain('Gene ALK');
     });
 
     it('displays correct gene summary', function() {
-      expect($(dialogElem).find('.summary').text()).to.contain('This gene encodes a receptor tyrosine kinase');
+      expect(modalElem.find('.summary').text()).to.contain('This gene encodes a receptor tyrosine kinase');
     });
 
     it('displays gene synonyms', function() {
-      expect($(dialogElem).find('.synonyms').text()).to.contain('CD246,NBLST3');
+      expect(modalElem.find('.synonyms').text()).to.contain('CD246,NBLST3');
     });
 
     it('displays protein domain datagrid', function() {
-      expect($('.myGeneInfoDialog').find('.protein-domains .ui-grid-render-container').length).to.be.above(0);
+      expect(modalElem.find('.protein-domains .ui-grid-render-container').length).to.be.above(0);
     });
 
     it('displays pathways datagrid', function() {
-     expect($('.myGeneInfoDialog').find('.pathways .ui-grid-render-container').length).to.be.above(0);
+     expect(modalElem.find('.pathways .ui-grid-render-container').length).to.be.above(0);
     });
 
     it('displays close dialog button', function() {
-      var button = $('.myGeneInfoDialog').find('.buttons button.close');
+      var button = modalElem.find('.buttons button.close');
       expect(button.length).to.be.above(0);
     });
 
     it('displays close dialog button that closes the dialog when clicked', function() {
-      var button = $('.myGeneInfoDialog').find('.buttons button.close');
+      var button = modalElem.find('.buttons button.close');
       button.triggerHandler('click');
       $rootScope.$digest();
       expect($document.find('.myGeneInfoDialog').length).to.equal(0);

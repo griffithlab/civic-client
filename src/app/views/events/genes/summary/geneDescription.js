@@ -15,7 +15,6 @@
 
   // @ngInject
   function GeneDescriptionController($scope) {
-    var ctrl = $scope.ctrl = {};
-    ctrl.gene = $scope.gene;
+    // note that 'gene' exists on scope from DDO.scope
   }
 })();
