@@ -1,16 +1,16 @@
 <div class="variantMenu">
   <ul class="variants">
     <li ng-repeat="variant in variants">
-      <a ng-href="{{options.state.baseUrl}}/variants/{{ variant.id }}/summary"><span ng-bind="variant.name">Variant Name</span></a>
+      <a ng-href="{{options.state.baseUrl}}/summary/variants/{{ variant.id }}/summary"><span ng-bind="variant.name">Variant Name</span></a>
     </li>
   </ul>
   <div ng-if="variantGroups.length > 0">
     <ul class="variant-groups">
       <li ng-repeat="variantGroup in variantGroups">
-        <a ng-href="{{options.state.baseUrl}}/variant_groups/{{variantGroup.id }}/summary"><span ng-bind="variantGroup.name">Variant Group Name</span></a>
+        <a ng-href="{{options.state.baseUrl}}/summary/variant_groups/{{variantGroup.id }}/summary"><span ng-bind="variantGroup.name">Variant Group Name</span></a>
         <ul class="variant-group-variants">
           <li ng-repeat="variant in variantGroup.variants">
-            <a ng-href="{{options.state.baseUrl}}/variants/{{variant.id }}/summary"><span ng-bind="variant.name">Variant Name</span></a>
+            <a ng-href="{{options.state.baseUrl}}/summary/variants/{{variant.id }}/summary"><span ng-bind="variant.name">Variant Name</span></a>
           </li>
         </ul>
       </li>
