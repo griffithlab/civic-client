@@ -1,0 +1,66 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.tooltip-inner {
+  text-align: left !important;
+}
+
+.evidenceGrid {
+  .clearfix();
+  min-height: 210px;
+
+  .ui-grid-pager-row-count-picker {
+    display: none;
+  }
+
+  .ui-grid-row {
+    cursor: pointer
+  }
+
+  .ratingCell {
+    text-align:center;
+    padding-top:5px;
+    color: #666;
+  }
+
+  .levelCell {
+    text-align: center;
+    font-weight: bold;
+    color: #FFF;
+    padding: 5px 4px;
+
+    span {
+      display: inline-block;
+      padding: 4px 5px;
+      line-height: 12px;
+      border-radius: @border-radius-small;
+    }
+  }
+
+  .levelA {
+    background-color: #33b358;
+  }
+
+  .levelB {
+    background-color: #08b1e6;
+  }
+
+  .levelC {
+    background-color: #616eb2;
+  }
+
+  .levelD {
+    background-color: #f68f37;
+  }
+
+  .levelE {
+    background-color: #e24759;
+    color: #057abe;
+  }
+
+  .levelF {
+    background-color: #fce452;
+    color: #057abe;
+  }
+}

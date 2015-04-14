@@ -36,8 +36,3 @@
     }, true);
   }
 })();
-
-//backgroundColor: '#CDCDCD',
-//  variantHeaderColor: '#4b2065',
-//  baseState: ctrl.entityModel.config.baseState,
-//  baseUrl: ctrl.entityModel.config.baseUrl

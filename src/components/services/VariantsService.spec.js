@@ -46,6 +46,15 @@ describe('VariantsService', function() {
       $httpBackend.flush();
     });
 
+    it('Variants.refresh(7) should send a GET request to /api/variants/7 (and not hit the variant cache)', function() {
+      Variants.get(7);
+      $httpBackend.expect('GET', '/api/variants/7').respond('200', servedVariant7);
+      $httpBackend.flush();
+      $httpBackend.expect('GET', '/api/variants/7').respond('200', servedVariant7);
+      Variants.refresh(7);
+      $httpBackend.flush();
+    });
+
     it('Variants.query() should send a GET request to /api/variants', function() {
       $httpBackend.expect('GET', '/api/variants').respond('200', servedVariants);
       Variants.query();

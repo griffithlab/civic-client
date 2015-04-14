@@ -99,9 +99,10 @@ angular.module('civic.events', [
   'ui.router',
   'ui.grid',
   'ngDialog',
+  'angular-lodash/filters',
   'civic.events.genes',
+  'civic.events.variants',
   'civic.events.common',
-  'angular-lodash/filters'
 ]);
 
 angular.module('civic.add', ['ui.router', 'aa.select2']);

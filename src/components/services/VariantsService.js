@@ -15,7 +15,7 @@
 
     return $resource('/api/variants/:variantId',
       {
-        variantId: '@entrez_id'
+        variantId: '@variant_id'
       },
       {
         add: {
@@ -40,6 +40,11 @@
           interceptor: {
             response: cacheInterceptor
           }
+        },
+        refresh: { // get variant, force cache refresh
+          method: 'GET',
+          isArray: false,
+          cache: false
         },
         getEvidence: {
           url: '/api/variants/:variantId/evidence_items',
@@ -192,14 +197,14 @@
             return response;
           });
       },
-      delete: function(entrez_id) {
-        return VariantsResource.delete({variantId: entrez_id}).$promise
+      delete: function(variant_id) {
+        return VariantsResource.delete({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });
       },
-      get: function(entrez_id) {
-        return VariantsResource.get({variantId: entrez_id}).$promise
+      get: function(variant_id) {
+        return VariantsResource.get({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });
@@ -216,14 +221,20 @@
             return response;
           });
       },
-      getEvidence: function(entrez_id) {
-        return VariantsResource.getEvidence({variantId: entrez_id}).$promise
+      refresh: function(variant_id) {
+        return VariantsResource.refresh({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });
       },
-      getVariantGroups: function(entrez_id) {
-        return VariantsResource.getVariantGroups({variantId: entrez_id}).$promise
+      getEvidence: function(variant_id) {
+        return VariantsResource.getEvidence({variantId: variant_id}).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getVariantGroups: function(variant_id) {
+        return VariantsResource.getVariantGroups({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });
@@ -242,8 +253,8 @@
             return response;
           });
       },
-      getComments: function(entrez_id) {
-        return VariantsResource.getComments({variantId: entrez_id}).$promise
+      getComments: function(variant_id) {
+        return VariantsResource.getComments({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });
@@ -262,8 +273,8 @@
       },
 
       // Variant revisions
-      getRevisions: function(entrez_id) {
-        return VariantsResource.getRevisions({variantId: entrez_id}).$promise
+      getRevisions: function(variant_id) {
+        return VariantsResource.getRevisions({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });
@@ -282,8 +293,8 @@
       },
 
       // Variant suggested changes
-      getChanges: function(entrez_id) {
-        return VariantsResource.getChanges({variantId: entrez_id}).$promise
+      getChanges: function(variant_id) {
+        return VariantsResource.getChanges({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });

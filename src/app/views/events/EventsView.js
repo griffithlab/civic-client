@@ -1,6 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes', ['ui.router']);
+  angular.module('civic.events.variants', ['ui.router']);
   angular.module('civic.events.common', []);
   angular.module('civic.events')
     .config(EventsViewConfig)
@@ -12,7 +13,7 @@
       .state('events', {
         abstract: true,
         url: '/events',
-        template: '<div ui-view class="EventsView"></div>',
+        template: '<ui-view id="events-view"></ui-view>',
         controller: 'EventsViewController',
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
