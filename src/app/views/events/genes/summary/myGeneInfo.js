@@ -27,29 +27,24 @@
 
     ctrl.openDialog = function() {
       if(_.has(ctrl.dialog, 'id')) {
-        console.log('myGeneInfoDialog exists, closing ID#' + ctrl.dialog.id + 'before opening new dialog.');
         ctrl.closeDialog().then(function(dlg) {
           ctrl.dialog = ngDialog.open(ctrl.popupOptions);
         });
       } else {
         ctrl.dialog = ngDialog.open(ctrl.popupOptions);
       }
-      console.log('Opened dialog ID#' + ctrl.dialog.id);
       return ctrl.dialog;
     };
 
     ctrl.closeDialog = function() {
-      console.log('Attempting to close dialog ID#' + ctrl.dialog.id);
       ctrl.dialog.close();
-      return ctrl.dialog.closePromise.then(function(dlg) {
-        console.log('Closed dialog ID#' + dlg.id + '; remaining: ' + dlg.remainingDialogs);
-      });
+      return ctrl.dialog.closePromise.then(function(dlg) { _.omit(ctrl, 'dialog'); } );
     };
   }
 
   // @ngInject
   function MyGeneInfoDialogController($scope, uiGridConstants) {
-    // MyGeneInfoController's $scope is attached to dialog parent via openDialog() options obj
+    // MyGeneInfoController's $scope is attached to dialog parent, as specified in popupOptions.scope
     var ctrl = $scope.$parent.ctrl;
 
     var gridOptions = ctrl.gridOptions = {};

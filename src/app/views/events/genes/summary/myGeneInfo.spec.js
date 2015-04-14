@@ -219,7 +219,6 @@ describe('myGeneInfo', function () {
       expect($body.find('.myGeneInfoDialog').length).to.be.above(0);
       dirScope.ctrl.closeDialog();
       $rootScope.$digest();
-      $timeout.flush();
       expect($body.find('.myGeneInfoDialog').length).to.equal(0);
     });
   });
