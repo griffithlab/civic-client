@@ -80,7 +80,10 @@
       revisions: [],
 
       // parent ids
-      geneId: gene.entrez_id
+      geneId: gene.entrez_id,
+
+      // additional entity data
+      variants: variantGroup.variants
     };
 
     variantGroupModel.services = {

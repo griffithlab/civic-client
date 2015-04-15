@@ -29,6 +29,7 @@
 
       ctrl.variantGroup = data.entity;
       ctrl.geneId = data.geneId;
+      ctrl.variants = data.variants;
 
       // unbind watcher after first digest
       unwatch();
