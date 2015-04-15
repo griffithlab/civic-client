@@ -17,20 +17,23 @@
         variantGroup: {}
       };
 
+      // TODO: get needed entity resources by querying $state.$current.globals
+      // note: requires that all resources necessary for parsing a state's titleExp must be resolved by ui-router state config
+
       // construct promises for relevant entities
       if(_.has(toParams, 'geneId') && titleScope.gene.entrez_id !== toParams.geneId) {
         var genePromise = Genes.get(toParams.geneId);
       }
 
-      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId')) && titleScope.variant.id !== toParams.variantId) {
+      if(_.has(toParams, 'variantId') && titleScope.variant.id !== toParams.variantId) {
         var variantPromise = Variants.get(toParams.variantId);
       }
 
-      if((_.has(toParams, 'variantGroupId')) && titleScope.variantGroup.id !== toParams.variantGroupId) {
+      if(_.has(toParams, 'variantGroupId') && titleScope.variantGroup.id !== toParams.variantGroupId) {
         var variantGroupsPromise = VariantGroups.get(toParams.variantGroupId);
       }
 
-      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId') && _.has(toParams, 'evidenceId')) && titleScope.evidence.id !== toParams.evidenceId) {
+      if(_.has(toParams, 'evidenceId') && titleScope.evidence.id !== toParams.evidenceId) {
         var evidencePromise = Evidence.get(toParams.evidenceId);
       }
 

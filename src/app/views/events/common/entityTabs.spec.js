@@ -176,14 +176,14 @@ describe('entityTabs', function () {
   describe('template', function() {
     it('displays a header with the proper entity type and name', function() {
       var headerTxt = $(dirElem).find('.name h3').text();
-      expect(headerTxt).to.contain('Gene');
+      expect(headerTxt).to.contain('gene');
       expect(headerTxt).to.contain('ALK');
     });
 
     it('displays Summary and Talk tabs labelled with the proper entity type', function() {
       var tabLabels = $(dirElem).find('.tabs a span');
-      expect($(tabLabels[0]).text()).to.equal('Gene');
-      expect($(tabLabels[1]).text()).to.equal('Gene');
+      expect($(tabLabels[0]).text()).to.equal('gene');
+      expect($(tabLabels[1]).text()).to.equal('gene');
     });
   });
 
