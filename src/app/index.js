@@ -62,7 +62,6 @@ function appRun(Security, $rootScope, $state, $analytics) {
   $rootScope.$state = $state;
 
   $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState){
-    console.log('toState.data.navMode: ' + toState.data.navMode);
     $rootScope.view.navMode = toState.data.navMode;
     $analytics.eventTrack(toState.name);
     $analytics.pageTrack(window.location.hash);
@@ -73,16 +72,16 @@ function appRun(Security, $rootScope, $state, $analytics) {
   // console.table($state.get());
 
   //  ui-router debug logging
-  function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-  $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) {
-    console.log("Start:   " + message(to, toP, from, fromP));
-  });
-  $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) {
-    console.log("Success: " + message(to, toP, from, fromP));
-  });
-  $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) {
-    console.error("Error:   " + message(to, toP, from, fromP), err);
-  });
+  //function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
+  //$rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) {
+  //  console.log("Start:   " + message(to, toP, from, fromP));
+  //});
+  //$rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) {
+  //  console.log("Success: " + message(to, toP, from, fromP));
+  //});
+  //$rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) {
+  //  console.error("Error:   " + message(to, toP, from, fromP), err);
+  //});
 
 }
 // define top-level app modules & dependencies

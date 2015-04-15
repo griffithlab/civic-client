@@ -38,7 +38,6 @@
                                   variantGroup,
                                   // inherited resolved assets
                                   gene) {
-    console.log('-=-=-=-=-=-=- VariantGroupsViewController instantiated. -=-=-=-=-=-=-=-=-=-');
     var ctrl,
       variantGroupModel,
       baseState,
