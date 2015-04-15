@@ -16,10 +16,15 @@ describe('VariantGroupsService', function() {
     servedVariantGroups = $injector.get('servedVariantGroups');
 
     // setup mocked backend responses
+    // core
     $httpBackend.when('GET', '/api/variant_groups/1').respond(200, servedVariantGroup1);
     $httpBackend.when('DELETE', '/api/variant_groups/1').respond(200, servedVariantGroup1);
     $httpBackend.when('POST', '/api/variant_groups').respond(201, 'Location: /api/variant_groups/500');
     $httpBackend.when('GET', '/api/variant_groups').respond(200, servedVariantGroups);
+
+    // comments
+    $httpBackend.when('GET', '/api/variant_groups/1/comments').respond(200, servedVariantGroup1Comments);
+
 
   }));
 
@@ -69,73 +74,57 @@ describe('VariantGroupsService', function() {
     });
   });
 
-  //describe('/api/variants/:variantId/evidence_items path', function() {
-  //  it('VariantGroups.getEvidenceItems(7) should send a GET request to /api/variants/7/evidence_items', function() {
-  //    $httpBackend.expect('GET', '/api/variants/7/evidence_items').respond(200, servedVariant7EvidenceItems);
-  //    VariantGroups.getEvidenceItems(7);
-  //    $httpBackend.flush();
-  //  });
-  //});
-  //
-  //describe('/api/variants/:variantId/variant_groups path', function() {
-  //  it('VariantGroups.getVariantGroups(7) should send a GET request to /api/variants/7/variant_groups', function() {
-  //    $httpBackend.expect('GET', '/api/variants/7/variant_groups').respond(200, servedVariant7VariantGroups);
-  //    VariantGroups.getVariantGroups(7);
-  //    $httpBackend.flush();
-  //  });
-  //});
-  //
-  //describe('/api/variants/:variantId/comments path', function() {
-  //  it('VariantGroups.submitComment({variantId: 7, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/variants/7/comments', function() {
-  //    $httpBackend.expect(
-  //      'POST',
-  //      '/api/variants/7/comments',
-  //      {
-  //        variantId: 7,
-  //        title: 'comment title',
-  //        text: 'comment text'
-  //      }).respond(200, {});
-  //    VariantGroups.submitComment({variantId: 7, title: 'comment title', text: 'comment text'});
-  //    $httpBackend.flush();
-  //  });
-  //
-  //  it('VariantGroups.updateComment({variantId: 7, commentId: 1, title: \'updated title\', text: \'updated comment text\'}) should send a PATCH request to /api/variants/7/comments/1', function() {
-  //    $httpBackend.expect(
-  //      'PATCH',
-  //      '/api/variants/7/comments/1',
-  //      {
-  //        variantId: 7,
-  //        commentId: 1,
-  //        title: 'updated comment title',
-  //        text: 'updated comment text'
-  //      }).respond(200, {});
-  //    VariantGroups.updateComment({
-  //      variantId: 7,
-  //      commentId: 1,
-  //      title: 'updated comment title',
-  //      text: 'updated comment text'
-  //    });
-  //    $httpBackend.flush();
-  //  });
-  //
-  //  it('VariantGroups.deleteComment({variantId: 7, commentId: 1}) should send a DELETE request to /api/variants/7/comments/1', function() {
-  //    $httpBackend.expect('DELETE', '/api/variants/7/comments/1').respond(200, {});
-  //    VariantGroups.deleteComment({ variantId: 7, commentId: 1 });
-  //    $httpBackend.flush();
-  //  });
-  //
-  //  it('VariantGroups.getComments(7) should send a GET request to /api/variants/7/comments', function() {
-  //    $httpBackend.expect('GET', '/api/variants/7/comments').respond(200, []);
-  //    VariantGroups.getComments(7);
-  //    $httpBackend.flush();
-  //  });
-  //
-  //  it('VariantGroups.getComment({variantId: 7, commentId: 1 }) should send a GET request to /api/variants/7/comments/1', function() {
-  //    $httpBackend.expect('GET', '/api/variants/7/comments/1').respond(200, {});
-  //    VariantGroups.getComment({variantId: 7, commentId: 1});
-  //    $httpBackend.flush();
-  //  });
-  //});
+  describe('/api/variants/:variantId/comments path', function() {
+    it('VariantGroups.submitComment({ [reqObj] }) should send a POST request to /api/variant_groups/1/comments', function() {
+      $httpBackend.expect(
+        'POST',
+        '/api/variants/1/comments',
+        {
+          variantGroupId: 1,
+          title: 'comment title',
+          text: 'comment text'
+        }).respond(200, {});
+      VariantGroups.submitComment({variantId: 7, title: 'comment title', text: 'comment text'});
+      $httpBackend.flush();
+    });
+    //
+    //it('VariantGroups.updateComment({variantId: 7, commentId: 1, title: \'updated title\', text: \'updated comment text\'}) should send a PATCH request to /api/variants/7/comments/1', function() {
+    //  $httpBackend.expect(
+    //    'PATCH',
+    //    '/api/variants/7/comments/1',
+    //    {
+    //      variantId: 7,
+    //      commentId: 1,
+    //      title: 'updated comment title',
+    //      text: 'updated comment text'
+    //    }).respond(200, {});
+    //  VariantGroups.updateComment({
+    //    variantId: 7,
+    //    commentId: 1,
+    //    title: 'updated comment title',
+    //    text: 'updated comment text'
+    //  });
+    //  $httpBackend.flush();
+    //});
+    //
+    //it('VariantGroups.deleteComment({variantId: 7, commentId: 1}) should send a DELETE request to /api/variants/7/comments/1', function() {
+    //  $httpBackend.expect('DELETE', '/api/variants/7/comments/1').respond(200, {});
+    //  VariantGroups.deleteComment({ variantId: 7, commentId: 1 });
+    //  $httpBackend.flush();
+    //});
+    //
+    //it('VariantGroups.getComments(7) should send a GET request to /api/variants/7/comments', function() {
+    //  $httpBackend.expect('GET', '/api/variants/7/comments').respond(200, []);
+    //  VariantGroups.getComments(7);
+    //  $httpBackend.flush();
+    //});
+    //
+    //it('VariantGroups.getComment({variantId: 7, commentId: 1 }) should send a GET request to /api/variants/7/comments/1', function() {
+    //  $httpBackend.expect('GET', '/api/variants/7/comments/1').respond(200, {});
+    //  VariantGroups.getComment({variantId: 7, commentId: 1});
+    //  $httpBackend.flush();
+    //});
+  });
   //
   //describe('/api/variants/:variantId/revisions path', function() {
   //  it('VariantGroups.getRevisions(7) should send a GET request to /api/variants/7/revisions', function() {
