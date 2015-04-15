@@ -1,10 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.services')
+    .factory('VariantGroupsResource', VariantGroupsResource)
     .factory('VariantGroups', VariantGroupsService);
 
   // @ngInject
-  function VariantGroupsService($resource) {
+  function VariantGroupsResource($resource) {
     var cacheInterceptor = {
       response: function(response) {
         cache.remove(response.config.url);
@@ -32,6 +33,30 @@
       });
 
     return VariantGroups;
+  }
+
+  // @ngInject
+  function VariantGroupsService(VariantGroupsResource) {
+    return {
+      get: function (variantGroupId) {
+        return VariantGroupsResource.get({variantGroupId: variantGroupId}).$promise
+          .then(function (response) {
+            return response;
+          });
+      },
+      query: function () {
+        return VariantGroupsResource.query().$promise
+          .then(function (response) {
+            return response;
+          });
+      },
+      update: function (reqObj) {
+        return VariantGroupsResource.update(reqObj).$promise
+          .then(function (response) {
+            return response;
+          });
+      }
+    }
   }
 
 })();
