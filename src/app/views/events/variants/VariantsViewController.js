@@ -20,7 +20,8 @@
             return Variants.getEvidenceItems(variant.id);
           }
         },
-        controller: 'VariantsViewController'
+        controller: 'VariantsViewController',
+        deepStateRedirect: { params: ['variantId'] }
       })
       .state('events.genes.summary.variants.summary', {
         url: '/summary',

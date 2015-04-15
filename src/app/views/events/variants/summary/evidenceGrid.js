@@ -20,7 +20,7 @@
   }
 
   // @ngInject
-  function EvidenceGridController($scope, uiGridConstants, $stateParams, $state, _) {
+  function EvidenceGridController($scope, $location, $stateParams, $state, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
 
@@ -93,28 +93,34 @@
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        $state.go('events.genes.summary.variants.summary.evidence.summary', {
-          geneId: $scope.gene.entrez_id,
-          variantId: $scope.variant.id,
-          evidenceItemId: row.entity.id
+        var newLoc = $location.url() + '/evidence/summary/' + row.entity.id;
+        $location.url(newLoc);
+        //$state.go('events.genes.summary.variants.summary.evidence.summary', {
+        //  geneId: $scope.gene.entrez_id,
+        //  variantId: $scope.variant.id,
+        //  evidenceItemId: row.entity.id
+        //});
+      });
+
+      // TODO: refactor this, do we really need a watcher here?
+      var unwatch = $scope.$watch('variant', function() {
+        $scope.variant.$promise.then(function(variant) {
+          ctrl.evidenceGridOptions.minRowsToShow = $scope.evidenceItems.length + 1;
+          ctrl.evidenceGridOptions.data = $scope.evidenceItems;
+          // if evidenceItemId specified in state, scroll to evidence item's row and select it
+          if(_.has($stateParams, 'evidenceItemId')) {
+            var rowEntity = _.find($scope.evidenceItems, function(item) {
+              return item.id === +$stateParams.evidenceItemId;
+            });
+            gridApi.core.on.rowsRendered($scope, function() {
+              gridApi.selection.selectRow(rowEntity);
+              gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
+            });
+          }
+          unwatch();
         });
       });
 
-      // fetch variant data
-      $scope.variant.$promise.then(function(variant) {
-        ctrl.evidenceGridOptions.minRowsToShow = $scope.evidenceItems.length + 1;
-        ctrl.evidenceGridOptions.data = $scope.evidenceItems;
-        // if evidenceItemId specified in state, scroll to evidence item's row and select it
-        if(_.has($stateParams, 'evidenceItemId')) {
-          var rowEntity = _.find($scope.evidenceItems, function(item) {
-            return item.id === +$stateParams.evidenceItemId;
-          });
-          gridApi.core.on.rowsRendered($scope, function() {
-            gridApi.selection.selectRow(rowEntity);
-            gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
-          });
-        }
-      });
     };
   }
 
