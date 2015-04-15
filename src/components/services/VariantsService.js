@@ -31,7 +31,7 @@
           isArray: false,
           cache: cache
         },
-        delete: { // get a single variant
+        delete: {
           method: 'DELETE',
           cache: cache
         },
