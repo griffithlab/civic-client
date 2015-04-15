@@ -69,9 +69,9 @@ describe('VariantsService', function() {
   });
 
   describe('/api/variants/:variantId/evidence_items path', function() {
-    it('Variants.getEvidence(7) should send a GET request to /api/variants/7/evidence_items', function() {
-      $httpBackend.expect('GET', '/api/variants/7/evidence_items').respond('200', servedVariant7EvidenceItems);
-      Variants.getEvidence(7);
+    it('Variants.getEvidenceItems(7) should send a GET request to /api/variants/7/evidence_items', function() {
+      $httpBackend.expect('GET', '/api/variants/7/evidence_items').respond(200, servedVariant7EvidenceItems);
+      Variants.getEvidenceItems(7);
       $httpBackend.flush();
     });
   });
