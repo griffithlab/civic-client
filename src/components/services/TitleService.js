@@ -23,7 +23,7 @@
       }
 
       if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId')) && titleScope.variant.id !== toParams.variantId) {
-        var variantPromise = Variants.get({'geneId': toParams.geneId, 'variantId': toParams.variantId }).$promise;
+        var variantPromise = Variants.get(toParams.variantId).$promise;
       }
 
       if((_.has(toParams, 'variantGroupId')) && titleScope.variantGroup.id !== toParams.variantGroupId) {
