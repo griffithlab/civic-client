@@ -27,7 +27,7 @@
       }
 
       if((_.has(toParams, 'variantGroupId')) && titleScope.variantGroup.id !== toParams.variantGroupId) {
-        var variantGroupsPromise = VariantGroups.get({'variantGroupId': toParams.variantGroupId }).$promise;
+        var variantGroupsPromise = VariantGroups.get(toParams.variantGroupId).$promise;
       }
 
       if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId') && _.has(toParams, 'evidenceItemId')) && titleScope.evidenceItem.id !== toParams.evidenceItemId) {
