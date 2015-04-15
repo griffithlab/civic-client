@@ -34,21 +34,18 @@
   function VariantsViewController($scope,
                                $state,
                                Variants,
-                               MyGeneInfo,
                                variant,
-                               variants,
-                               variantGroups,
-                               myGeneInfo) {
+                                  gene) {
 
     var ctrl = $scope;
     var variantModel = ctrl.variantModel = {};
 
     variantModel.config = {
       type: 'variant',
-      name: variant.entrez_name,
+      name: variant.name,
       state: {
-        baseState: 'events.variants',
-        baseUrl: $state.href('events.variants', { variantId: variant.entrez_id })
+        baseState: 'events.genes.summary.variants',
+        baseUrl: $state.href('events.genes.summary.variants', { geneId: gene.entrez_id, variantId: variant.id })
       },
       styles: {
         tabs: {
@@ -72,14 +69,11 @@
       comments: [],
       changes: [],
       revisions: [],
-      variants: variants,
-      variantGroups: variantGroups,
-      myGeneInfo: myGeneInfo
+      evidenceItems: []
     };
 
     variantModel.services = {
-      Variants: Variants,
-      MyGeneInfo: MyGeneInfo
+      Variants: Variants
     };
 
     variantModel.actions = {
