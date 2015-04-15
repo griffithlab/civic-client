@@ -1,25 +1,25 @@
 (function() {
   'use strict';
-  angular.module('civic.events.variants')
-    .controller('VariantSummaryController', VariantSummaryController)
-    .directive('variantSummary', function() {
+  angular.module('civic.events.variantGroups')
+    .controller('VariantGroupSummaryController', VariantGroupSummaryController)
+    .directive('variantGroupSummary', function() {
       return {
         restrict: 'E',
         require: '^^entityView',
         scope: {},
-        link: VariantSummaryLink,
-        controller: 'VariantSummaryController',
-        templateUrl: 'app/views/events/variants/summary/variantSummary.tpl.html'
+        link: VariantGroupSummaryLink,
+        controller: 'VariantGroupSummaryController',
+        templateUrl: 'app/views/events/variantGroups/summary/variantGroupSummary.tpl.html'
       }
     });
 
-  function VariantSummaryLink(scope, element, attributes, entityView) {
+  function VariantGroupSummaryLink(scope, element, attributes, entityView) {
     scope.ctrl = {};
     scope.ctrl.entityModel = entityView.entityModel;
   }
 
   //@ngInject
-  function VariantSummaryController($scope) {
+  function VariantGroupSummaryController($scope) {
     var unwatch = $scope.$watch('ctrl.entityModel', function(entityModel){
       var config, data, ctrl;
 
@@ -27,9 +27,8 @@
       data = entityModel.data;
       ctrl = $scope.ctrl;
 
-      ctrl.variant = data.entity;
+      ctrl.variantGroup = data.entity;
       ctrl.geneId = data.geneId;
-      ctrl.evidenceItems = entityModel.data.evidenceItems;
 
       // unbind watcher after first digest
       unwatch();

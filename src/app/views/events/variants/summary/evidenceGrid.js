@@ -94,10 +94,6 @@
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        //var path, newPath;
-        //path  = $location.path();
-        //newPath = path + '/evidence/' + String(row.entity.id) + '/summary';
-        //$location.path(newPath);
         $state.go('events.genes.summary.variants.summary.evidence.summary', {
           geneId: $scope.geneId,
           variantId: $scope.variant.id,

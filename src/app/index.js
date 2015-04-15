@@ -109,6 +109,7 @@ angular.module('civic.events', [
   'civic.events.common',
   'civic.events.genes',
   'civic.events.variants',
+  'civic.events.variantGroups',
   'civic.events.evidence'
 ]);
 
