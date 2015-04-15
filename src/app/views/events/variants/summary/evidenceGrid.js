@@ -10,7 +10,8 @@
       restrict: 'E',
       replace: true,
       scope: {
-        options: '=gridOptions'
+        evidenceItems: '=',
+        variant: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
@@ -39,7 +40,7 @@
       multiSelect: false,
       modifierKeysToMultiSelect: false,
       noUnselect: true,
-      rowTemplate: 'app/views/events/variants/variants/evidenceGridRow.tpl.html',
+      rowTemplate: 'app/views/events/variants/summary/evidenceGridRow.tpl.html',
       columnDefs: [
         { name: 'text',
           displayName: 'Supporting Evidence',
@@ -100,12 +101,12 @@
       });
 
       // fetch variant data
-      ctrl.variant.$promise.then(function(variant) {
-        $scope.evidenceGridOptions.minRowsToShow = variant.evidence_items.length + 1;
-        $scope.evidenceGridOptions.data = variant.evidence_items;
+      $scope.variant.$promise.then(function(variant) {
+        ctrl.evidenceGridOptions.minRowsToShow = $scope.evidenceItems.length + 1;
+        ctrl.evidenceGridOptions.data = $scope.evidenceItems;
         // if evidenceItemId specified in state, scroll to evidence item's row and select it
         if(_.has($stateParams, 'evidenceItemId')) {
-          var rowEntity = _.find(variant.evidence_items, function(item) {
+          var rowEntity = _.find($scope.evidenceItems, function(item) {
             return item.id === +$stateParams.evidenceItemId;
           });
           gridApi.core.on.rowsRendered($scope, function() {

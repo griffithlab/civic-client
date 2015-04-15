@@ -35,9 +35,10 @@
 
   // @ngInject
   function VariantsViewController($scope,
-                               $state,
-                               Variants,
-                               variant,
+                                  $state,
+                                  Variants,
+                                  variant,
+                                  evidenceItems,
                                   gene) {
 
     var ctrl = $scope;
@@ -67,12 +68,15 @@
     };
 
     variantModel.data = {
+      // required entity data fields
       entity: variant,
       id: variant.entrez_id,
       comments: [],
       changes: [],
       revisions: [],
-      evidenceItems: []
+
+      // additional entity data fields
+      evidenceItems: evidenceItems
     };
 
     variantModel.services = {
