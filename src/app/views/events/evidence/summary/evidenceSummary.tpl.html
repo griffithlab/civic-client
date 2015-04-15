@@ -1,0 +1,83 @@
+<div class="evidenceSummary">
+  <div class="row">
+    <div class="col-xs-12 explanation">
+      <p ng-bind-html="ctrl.evidence.text | linky"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-6 details">
+      <table class="table table-condensed summary-details">
+        <colgroup>
+          <col width="40%"/>
+          <col width="60%"/>
+        </colgroup>
+        <tr>
+          <td class="name">Evidence Level:</td>
+          <td class="value">
+            <span class="levelBadge"
+                  ng-class="{'levelA': ctrl.evidence.evidence_level === 'A', 'levelB': ctrl.evidence.evidence_level === 'B','levelC': ctrl.evidence.evidence_level === 'C', 'levelD': ctrl.evidence.evidence_level === 'D', 'levelE': ctrl.evidence.evidence_level === 'E' }">
+              {{ ctrl.evidence.evidence_level }} - {{ ctrl.evidence.evidenceLevelLabel }}
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="name">Evidence Type:</td>
+          <td class="value">{{ ctrl.evidence.evidence_type }}</td>
+
+        </tr>
+        <tr>
+          <td class="name">Evidence Direction:</td>
+          <td class="value">{{ ctrl.evidence.evidence_direction }}</td>
+        </tr>
+
+        <tr>
+          <td class="name">Clinical Significance:</td>
+          <td class="value">{{ ctrl.evidence.clinical_significance }}</td>
+        </tr>
+
+        <tr>
+          <td class="name">Variant Origin:</td>
+          <td class="value">{{ ctrl.evidence.variant_origin | capitalize }}</td>
+        </tr>
+
+      </table>
+    </div>
+    <div class="col-xs-12 col-md-6 details">
+      <table class="table table-condensed summary-details">
+        <colgroup>
+          <col width="40%"/>
+          <col width="60%"/>
+        </colgroup>
+
+        <tr>
+          <td class="name">Disease:</td>
+          <td class="value">{{ ctrl.evidence.disease }}</td>
+        </tr>
+        <tr>
+          <td class="name">Drug:</td>
+          <td class="value">{{ ctrl.evidence.drug }}</td>
+        </tr>
+
+        <tr>
+          <td class="name">Citation:</td>
+          <td class="value">
+            <a target="_blank" href="{{ ctrl.evidence.source_url }}" _target="blank">
+              {{ ctrl.evidence.citation }}
+            </a>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="name">Trust Rating:</td>
+          <td class="value"><rating ng-model="ctrl.evidence.rating" max="5" readonly="true"></rating></td>
+        </tr>
+
+        <tr>
+          <td class="name">Coordinate:</td>
+          <td class="value">{{ ctrl.evidence.variant_hgvs}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

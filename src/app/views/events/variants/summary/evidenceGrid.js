@@ -11,7 +11,8 @@
       replace: true,
       scope: {
         evidenceItems: '=',
-        variant: '='
+        variant: '=',
+        geneId: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
@@ -20,7 +21,7 @@
   }
 
   // @ngInject
-  function EvidenceGridController($scope, $location, $stateParams, $state, uiGridConstants, _) {
+  function EvidenceGridController($scope, $stateParams, $state, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
 
@@ -93,13 +94,15 @@
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        var newLoc = $location.url() + '/evidence/summary/' + row.entity.id;
-        $location.url(newLoc);
-        //$state.go('events.genes.summary.variants.summary.evidence.summary', {
-        //  geneId: $scope.gene.entrez_id,
-        //  variantId: $scope.variant.id,
-        //  evidenceItemId: row.entity.id
-        //});
+        //var path, newPath;
+        //path  = $location.path();
+        //newPath = path + '/evidence/' + String(row.entity.id) + '/summary';
+        //$location.path(newPath);
+        $state.go('events.genes.summary.variants.summary.evidence.summary', {
+          geneId: $scope.geneId,
+          variantId: $scope.variant.id,
+          evidenceId: row.entity.id
+        });
       });
 
       // TODO: refactor this, do we really need a watcher here?

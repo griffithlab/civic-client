@@ -21,9 +21,14 @@
   //@ngInject
   function VariantSummaryController($scope) {
     var unwatch = $scope.$watch('ctrl.entityModel', function(entityModel){
-      var config = entityModel.config;
-      var ctrl = $scope.ctrl;
-      ctrl.variant = entityModel.data.entity;
+      var config, data, ctrl;
+
+      config = entityModel.config;
+      data = entityModel.data;
+      ctrl = $scope.ctrl;
+
+      ctrl.variant = data.entity;
+      ctrl.geneId = data.geneId;
       ctrl.evidenceItems = entityModel.data.evidenceItems;
       ctrl.variantMenuOptions = {
         styles: config.styles.variantMenu,

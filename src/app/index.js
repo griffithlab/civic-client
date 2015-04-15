@@ -74,9 +74,15 @@ function appRun(Security, $rootScope, $state, $analytics) {
 
   //  ui-router debug logging
   function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-  $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) { console.log("Start:   " + message(to, toP, from, fromP)); });
-  $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) { console.log("Success: " + message(to, toP, from, fromP)); });
-  $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) { console.log("Error:   " + message(to, toP, from, fromP), err); });
+  $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) {
+    console.log("Start:   " + message(to, toP, from, fromP));
+  });
+  $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) {
+    console.log("Success: " + message(to, toP, from, fromP));
+  });
+  $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) {
+    console.error("Error:   " + message(to, toP, from, fromP), err);
+  });
 
 }
 // define top-level app modules & dependencies
@@ -100,9 +106,10 @@ angular.module('civic.events', [
   'ui.grid',
   'ngDialog',
   'angular-lodash/filters',
+  'civic.events.common',
   'civic.events.genes',
   'civic.events.variants',
-  'civic.events.common',
+  'civic.events.evidence'
 ]);
 
 angular.module('civic.add', ['ui.router', 'aa.select2']);

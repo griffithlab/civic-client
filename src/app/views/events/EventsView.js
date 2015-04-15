@@ -2,6 +2,7 @@
   'use strict';
   angular.module('civic.events.genes', ['ui.router']);
   angular.module('civic.events.variants', ['ui.router']);
+  angular.module('civic.events.evidence', ['ui.router']);
   angular.module('civic.events.common', []);
   angular.module('civic.events')
     .config(EventsViewConfig)

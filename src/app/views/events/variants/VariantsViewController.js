@@ -71,10 +71,13 @@
     variantModel.data = {
       // required entity data fields
       entity: variant,
-      id: variant.entrez_id,
+      id: variant.id,
       comments: [],
       changes: [],
       revisions: [],
+
+      // parent ids
+      geneId: gene.entrez_id,
 
       // additional entity data fields
       evidenceItems: evidenceItems
