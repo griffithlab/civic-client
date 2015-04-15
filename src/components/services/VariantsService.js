@@ -46,9 +46,10 @@
           isArray: false,
           cache: false
         },
-        getEvidence: {
+        getEvidenceItems: {
           url: '/api/variants/:variantId/evidence_items',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getVariantGroups: {
           url: '/api/variants/:variantId/variant_groups',
@@ -227,8 +228,8 @@
             return response;
           });
       },
-      getEvidence: function(variant_id) {
-        return VariantsResource.getEvidence({variantId: variant_id}).$promise
+      getEvidenceItems: function(variant_id) {
+        return VariantsResource.getEvidenceItems({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });

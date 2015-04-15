@@ -15,6 +15,9 @@
           Variants: 'Variants',
           variant: function(Variants, $stateParams) {
             return Variants.get($stateParams.variantId);
+          },
+          evidenceItems: function(Variants, variant) {
+            return Variants.getEvidenceItems(variant.id);
           }
         },
         controller: 'VariantsViewController'

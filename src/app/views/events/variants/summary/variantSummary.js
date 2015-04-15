@@ -24,7 +24,7 @@
       var config = entityModel.config;
       var ctrl = $scope.ctrl;
       ctrl.variant = entityModel.data.entity;
-      // ctrl.evidenceItems = entityModel.data.
+      ctrl.evidenceItems = entityModel.data.evidenceItems;
       ctrl.variantMenuOptions = {
         styles: config.styles.variantMenu,
         state: config.state
