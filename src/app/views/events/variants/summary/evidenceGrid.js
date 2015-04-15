@@ -2,7 +2,7 @@
   'use strict';
   angular.module('civic.events')
     .directive('evidenceGrid', evidenceGrid)
-    .controller('EvidenceGridCtrl', EvidenceGridController);
+    .controller('EvidenceGridController', EvidenceGridController);
 
   // @ngInject
   function evidenceGrid() {

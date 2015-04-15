@@ -167,6 +167,32 @@ describe('myGeneInfo', function () {
 
   });
 
+  describe('myGeneInfo template', function() {
+    it('displays name', function() {
+      expect($(dirElem).find('td[ng-bind*="name"]').text()).to.contain('anaplastic lymphoma receptor tyrosine kinase');
+    });
+
+    it('displays Entrez id', function() {
+      expect($(dirElem).find('a[ng-bind*="symbol"]').text()).to.contain('ALK');
+    });
+
+    it('displays Entrez id in link to Entrez DB', function() {
+      expect($(dirElem).find('a[ng-bind*="symbol"]').attr('href')).to.contain('http://www.ncbi.nlm.nih.gov/gene/');
+    });
+
+    it('displays synonyms', function() {
+      expect($(dirElem).find('td[ng-bind*="alias"]').text()).to.contain('CD246, NBLST3');
+    });
+
+    it('displays protein domains', function() {
+      expect($(dirElem).find('td[ng-bind-html*="interpro"]').text()).to.contain('Concanavalin A-like lectin/glucanases superfamily');
+    });
+
+    it('displays pathways', function() {
+      expect($(dirElem).find('td[ng-bind-html*="pathway"]').text()).to.contain('Cell Cycle, Disease, Chromosome Maintenance');
+    });
+  });
+
   describe('openDialog function', function() {
     var $body, button;
 

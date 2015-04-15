@@ -17,7 +17,6 @@
   // @ngInject
   function MyGeneInfoController($scope, ngDialog, _) {
     var ctrl = $scope.ctrl = {};
-    ctrl.geneInfo = $scope.geneInfo;
 
     ctrl.popupOptions = {
       template: 'app/views/events/genes/summary/myGeneInfoDialog.tpl.html',
@@ -38,7 +37,7 @@
 
     ctrl.closeDialog = function() {
       ctrl.dialog.close();
-      return ctrl.dialog.closePromise.then(function(dlg) { _.omit(ctrl, 'dialog'); } );
+      return ctrl.dialog.closePromise.then(function() { _.omit(ctrl, 'dialog'); } );
     };
   }
 

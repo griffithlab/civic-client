@@ -169,7 +169,7 @@ describe('variantMenu', function () {
     });
 
     it('main variant list items tabs to proper variant state', function() {
-      expect($(dirElem).find('.variants li:first-child a').first().attr('href')).to.equal('#/events/genes/238/variants/5/summary');
+      expect($(dirElem).find('.variants li:first-child a').first().attr('href')).to.equal('#/events/genes/238/summary/variants/5/summary');
     });
 
     it('displays variant groups in header list', function() {
@@ -177,7 +177,7 @@ describe('variantMenu', function () {
     });
 
     it('main variant-group header items link to proper variant state', function() {
-      expect($(dirElem).find('.variant-groups li:first-child a').first().attr('href')).to.equal('#/events/genes/238/variant_groups/3/summary');
+      expect($(dirElem).find('.variant-groups li:first-child a').first().attr('href')).to.equal('#/events/genes/238/summary/variant_groups/3/summary');
     });
 
     it('displays variant group variants groups in tab list', function() {
@@ -185,7 +185,7 @@ describe('variantMenu', function () {
     });
 
     it('main variant-groups\' variant tabs link to proper variant state', function() {
-      expect($(dirElem).find('.variant-group-variants li:first-child a').first().attr('href')).to.equal('#/events/genes/238/variants/6/summary');
+      expect($(dirElem).find('.variant-group-variants li:first-child a').first().attr('href')).to.equal('#/events/genes/238/summary/variants/6/summary');
     });
   });
 });

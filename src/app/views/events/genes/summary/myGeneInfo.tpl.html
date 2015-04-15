@@ -6,27 +6,27 @@
     </colgroup>
     <tr>
       <td class="name">Name:</td>
-      <td class="value" ng-bind="ctrl.geneInfo.name"></td>
+      <td class="value" ng-bind="geneInfo.name"></td>
     </tr>
     <tr>
       <td class="name">Entrez ID:</td>
       <td class="value">
-        <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + ctrl.geneInfo.symbol}}" ng-bind="ctrl.geneInfo.symbol">
+        <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + geneInfo.symbol}}" ng-bind="geneInfo.symbol">
 
         </a>
       </td>
     </tr>
     <tr>
       <td class="name">Synonyms:</td>
-      <td class="value" ng-bind="ctrl.geneInfo.alias | arrayToList "></tbd>
+      <td class="value" ng-bind="geneInfo.alias | arrayToList "></td>
     </tr>
     <tr>
       <td class="name">Protein Domains:</td>
-      <td class="value" ng-bind-html="ctrl.geneInfo.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true | unsafe"></td>
+      <td class="value" ng-bind-html="geneInfo.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true | unsafe"></td>
     </tr>
     <tr>
       <td class="name">Pathways:</td>
-      <td class="value" ng-bind-html="ctrl.geneInfo.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true | unsafe"></td>
+      <td class="value" ng-bind-html="geneInfo.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true | unsafe"></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
