@@ -25,7 +25,7 @@
         template: '<evidence-summary></evidence-summary>',
         data: {
           navMode: 'sub',
-          titleExp: '"GENE SUMMARY TEST"'
+          titleExp: '"Evidence EID" + evidence.id'
         }
       });
   }
@@ -55,7 +55,7 @@
 
     evidenceModel.config = {
       type: 'evidence',
-      name: evidence.name,
+      name: 'EID' + evidence.id,
       state: {
         baseState: baseState,
         baseUrl: baseUrl

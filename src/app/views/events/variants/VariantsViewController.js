@@ -28,7 +28,7 @@
         template: '<variant-summary></variant-summary>',
         data: {
           navMode: 'sub',
-          titleExp: '"GENE SUMMARY TEST"'
+          titleExp: '"Variant " + variant.name'
         }
       });
     // additional events.variants states here

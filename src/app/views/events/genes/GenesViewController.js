@@ -36,8 +36,8 @@
         url: '/summary',
         template: '<gene-summary></gene-summary>',
         data: {
-          navMode: 'sub',
-          titleExp: '"GENE SUMMARY TEST"'
+          titleExp: '"Gene " + gene.entrez_name + " Summary"',
+          navMode: 'sub'
         }
       });
     // additional events.genes states here

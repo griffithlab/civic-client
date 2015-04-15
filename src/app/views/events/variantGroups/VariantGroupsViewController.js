@@ -24,9 +24,9 @@
         url: '/summary',
         template: '<variant-group-summary></variant-group-summary>',
         data: {
-          navMode: 'sub',
-          titleExp: '"GENE SUMMARY TEST"'
-        }
+          titleExp: '"Variant Group " + variantGroup.name',
+          navMode: 'sub'
+        },
       });
   }
 
