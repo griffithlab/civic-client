@@ -236,7 +236,7 @@
           });
       },
       getLastRevision: function() {
-        return Genes.getLastRevision({ geneId: gene.entrez_id })
+        return Genes.getLastRevision(gene.entrez_id)
           .then(function(response) {
             return response;
           });

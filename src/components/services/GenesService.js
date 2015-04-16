@@ -367,8 +367,8 @@
             return response;
           });
       },
-      getLastRevision: function(reqObj) {
-        return GenesResource.getLastRevision(reqObj).$promise
+      getLastRevision: function(geneId) {
+        return GenesResource.getLastRevision({geneId: geneId}).$promise
           .then(function(response) {
             return response;
           });
