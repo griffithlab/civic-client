@@ -16,7 +16,8 @@
     "angular-agility": "~0.8.21",
     "font-awesome": "~4.3.0",
     "angulartics": "~0.17.2",
-    "ngDialog": "https://github.com/jmcmichael/ngDialog.git#0.3.12a"
+    "ngDialog": "https://github.com/jmcmichael/ngDialog.git#0.3.12a",
+    "angular-loading-bar": "~0.7.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

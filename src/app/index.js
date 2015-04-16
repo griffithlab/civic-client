@@ -2,6 +2,7 @@ angular.module('civicClient', [
   // vendor modules
   'ui.router',
   'ct.ui.router.extras',
+  'angular-loading-bar',
   'ngDialog',
   'ui.bootstrap',
   'ui.grid',
