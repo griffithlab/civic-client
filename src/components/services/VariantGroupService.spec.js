@@ -16,8 +16,14 @@ describe('VariantGroupsService', function() {
   beforeEach(module('served/variantGroup1Revisions.json'));
   beforeEach(module('served/variantGroup1RevisionsLast.json'));
   beforeEach(module('served/variantGroup1SuggestedChanges.json'));
-  beforeEach(module('served/variantGroup1SuggestedChangeSubmitResponse.json'));
+  beforeEach(module('served/variantGroup1SuggestedChangeAdded.json'));
+  beforeEach(module('served/variantGroup1SuggestedChange5Comments.json'));
+  beforeEach(module('served/variantGroup1SuggestedChange5Comment11.json'));
+  beforeEach(module('served/variantGroup1SuggestedChange5CommentAdded.json'));
   beforeEach(module('served/variantGroup1SuggestedChange7.json'));
+  beforeEach(module('served/variantGroup1SuggestedChange5Accept.json'));
+  beforeEach(module('served/variantGroup1SuggestedChange6Reject.json'));
+  beforeEach(module('served/variantGroup1SuggestedChange5Comment10Update.json'));
 
   beforeEach(inject(function($injector,
                              servedVariantGroup1,
@@ -30,8 +36,14 @@ describe('VariantGroupsService', function() {
                              servedVariantGroup1Revisions,
                              servedVariantGroup1RevisionsLast,
                              servedVariantGroup1SuggestedChanges,
-                             servedVariantGroup1SuggestedChangeSubmitResponse,
-                             servedVariantGroup1SuggestedChange7) {
+                             servedVariantGroup1SuggestedChangeAdded,
+                             servedVariantGroup1SuggestedChange7,
+                             servedVariantGroup1SuggestedChange5Accept,
+                             servedVariantGroup1SuggestedChange6Reject,
+                             servedVariantGroup1SuggestedChange5CommentAdded,
+                             servedVariantGroup1SuggestedChange5Comments,
+                             servedVariantGroup1SuggestedChange5Comment10Update,
+                             servedVariantGroup1SuggestedChange5Comment11) {
     $httpBackend = $injector.get('$httpBackend');
     VariantGroups = $injector.get('VariantGroups');
 
@@ -55,12 +67,18 @@ describe('VariantGroupsService', function() {
     $httpBackend.when('GET', '/api/variant_groups/1/revisions/last').respond(200, servedVariantGroup1RevisionsLast);
 
     // suggested changes
-    $httpBackend.when('POST', '/api/variant_groups/1/suggested_changes').respond(200, servedVariantGroup1SuggestedChangeSubmitResponse);
+    $httpBackend.when('POST', '/api/variant_groups/1/suggested_changes').respond(200, servedVariantGroup1SuggestedChangeAdded);
     $httpBackend.when('GET', '/api/variant_groups/1/suggested_changes').respond(200, servedVariantGroup1SuggestedChanges);
     $httpBackend.when('GET', '/api/variant_groups/1/suggested_changes/7').respond(200, servedVariantGroup1SuggestedChange7);
-    $httpBackend.when('POST', '/api/variant_groups/1/suggested_changes/6/accept').respond(200);
-    $httpBackend.when('POST', '/api/variant_groups/1/suggested_changes/7/reject').respond(200);
+    $httpBackend.when('POST', '/api/variant_groups/1/suggested_changes/5/accept').respond(204, servedVariantGroup1SuggestedChange5Accept);
+    $httpBackend.when('POST', '/api/variant_groups/1/suggested_changes/6/reject').respond(200, servedVariantGroup1SuggestedChange6Reject);
 
+    // suggested change comments
+    $httpBackend.when('POST', '/api/variant_groups/1/suggested_changes/5/comments').respond(201, servedVariantGroup1SuggestedChange5CommentAdded);
+    $httpBackend.when('GET', '/api/variant_groups/1/suggested_changes/5/comments').respond(201, servedVariantGroup1SuggestedChange5Comments);
+    $httpBackend.when('GET', '/api/variant_groups/1/suggested_changes/5/comments/11').respond(204, servedVariantGroup1SuggestedChange5Comment11);
+    $httpBackend.when('PATCH', '/api/variant_groups/1/suggested_changes/5/comments/10').respond(201, servedVariantGroup1SuggestedChange5Comment10Update);
+    $httpBackend.when('DELETE', '/api/variant_groups/1/suggested_changes/5/comments/10').respond(204);
   }));
 
   afterEach(function() {
@@ -201,76 +219,65 @@ describe('VariantGroupsService', function() {
       $httpBackend.flush();
     });
 
-    it('VariantGroups.acceptChange(1,6) should send a POST request to /api/variant_groups/1/suggested_changes/7/accept', function() {
-      $httpBackend.expect('POST', '/api/variant_groups/1/suggested_changes/6/accept');
-      VariantGroups.acceptChange(1,6);
+    it('VariantGroups.acceptChange(1,5) should send a POST request to /api/variant_groups/1/suggested_changes/5/accept', function() {
+      $httpBackend.expect('POST', '/api/variant_groups/1/suggested_changes/5/accept');
+      VariantGroups.acceptChange(1,5);
       $httpBackend.flush();
     });
 
-    it('VariantGroups.rejectChange(1,7) should send a POST request to /api/variant_groups/1/suggested_changes/6/reject', function() {
-      $httpBackend.expect('POST', '/api/variant_groups/1/suggested_changes/7/reject');
-      VariantGroups.rejectChange(1,7);
+    it('VariantGroups.rejectChange(1,6) should send a POST request to /api/variant_groups/1/suggested_changes/6/reject', function() {
+      $httpBackend.expect('POST', '/api/variant_groups/1/suggested_changes/6/reject');
+      VariantGroups.rejectChange(1,6);
       $httpBackend.flush();
     });
   });
 
-  //describe('/api/variants/:variantId/suggested_changes/:changeId/comments path', function() {
-  //  it('VariantGroups.addChangeComment({variantGroupId: 1, changeId: 1, title: \'comment title\', text: \'comment text\'}) should send a POST request to /api/variant_groups/1/comments', function() {
-  //    $httpBackend.expect(
-  //      'POST',
-  //      '/api/variant_groups/1/suggested_changes/1/comments',
-  //      {
-  //        variantGroupId: 1,
-  //        changeId: 1,
-  //        title: 'comment title',
-  //        text: 'comment text'
-  //      }).respond(200, {});
-  //    VariantGroups.addChangeComment({
-  //      variantGroupId: 1,
-  //      changeId: 1,
-  //      title: 'comment title',
-  //      text: 'comment text'
-  //    });
-  //    $httpBackend.flush();
-  //  });
-  //
-  //  it('VariantGroups.updateChangeComment({variantGroupId: 1, changeId: 1, commentId: 1, title: \'updated title\', text: \'updated comment text\'}) should send a PATCH request to /api/variant_groups/1/suggested_changes/1/comments/1', function() {
-  //    $httpBackend.expect(
-  //      'PATCH',
-  //      '/api/variant_groups/1/suggested_changes/1/comments/1',
-  //      {
-  //        variantGroupId: 1,
-  //        changeId: 1,
-  //        commentId: 1,
-  //        title: 'updated comment title',
-  //        text: 'updated comment text'
-  //      }).respond(200, {});
-  //    VariantGroups.updateChangeComment({
-  //      variantGroupId: 1,
-  //      changeId: 1,
-  //      commentId: 1,
-  //      title: 'updated comment title',
-  //      text: 'updated comment text'
-  //    });
-  //    $httpBackend.flush();
-  //  });
-  //
-  //  it('VariantGroups.deleteChangeComment({variantGroupId: 1, changeId: 1, commentId: 1}) should send a DELETE request to /api/variant_groups/1/suggested_changes/1/comments/1', function() {
-  //    $httpBackend.expect('DELETE', '/api/variant_groups/1/suggested_changes/1/comments/1').respond(200, {});
-  //    VariantGroups.deleteChangeComment({ variantGroupId: 1, changeId:1, commentId: 1 });
-  //    $httpBackend.flush();
-  //  });
-  //
-  //  it('VariantGroups.getChangeComments({variantGroupId: 1, changeId: 1}) should send a GET request to /api/variant_groups/1/suggested_changes/1/comments', function() {
-  //    $httpBackend.expect('GET', '/api/variant_groups/1/suggested_changes/1/comments').respond(200, []);
-  //    VariantGroups.getChangeComments({variantGroupId: 1, changeId: 1});
-  //    $httpBackend.flush();
-  //  });
-  //
-  //  it('VariantGroups.getChangeComment({variantGroupId: 1, changeId: 1, commentId: 1 }) should send a GET request to /api/variant_groups/1/suggested_changes/1/comments/1', function() {
-  //    $httpBackend.expect('GET', '/api/variant_groups/1/suggested_changes/1/comments/1').respond(200, {});
-  //    VariantGroups.getChangeComment({variantGroupId: 1, changeId: 1, commentId: 1});
-  //    $httpBackend.flush();
-  //  });
-  //});
+  describe('/api/variants/:variantId/suggested_changes/:changeId/comments path', function() {
+    it('VariantGroups.addChangeComment({ [ reqObj ]}) should send a POST request to /api/variant_groups/1/suggestedChanges/5/comments', function() {
+      $httpBackend.expect(
+        'POST',
+        '/api/variant_groups/1/suggested_changes/5/comments');
+
+      VariantGroups.addChangeComment({
+        variantGroupId: 1,
+        changeId: 5,
+        title: 'comment title',
+        text: 'comment text'
+      });
+      $httpBackend.flush();
+    });
+
+    it('VariantGroups.updateChangeComment({ [reqObj }) should send a PATCH request to /api/variant_groups/1/suggested_changes/5/comments/10', function() {
+      $httpBackend.expect(
+        'PATCH',
+        '/api/variant_groups/1/suggested_changes/5/comments/10');
+
+      VariantGroups.updateChangeComment({
+        variantGroupId: 1,
+        changeId: 5,
+        commentId: 10,
+        title: 'updated comment title',
+        text: 'updated comment text'
+      });
+      $httpBackend.flush();
+    });
+
+    it('VariantGroups.deleteChangeComment({ [reqObj] }) should send a DELETE request to /api/variant_groups/1/suggested_changes/1/comments/1', function() {
+      $httpBackend.expect('DELETE', '/api/variant_groups/1/suggested_changes/5/comments/10');
+      VariantGroups.deleteChangeComment({ variantGroupId: 1, changeId:5, commentId: 10 });
+      $httpBackend.flush();
+    });
+
+    it('VariantGroups.getChangeComments({ [reqObj] }) should send a GET request to /api/variant_groups/1/suggested_changes/5/comments', function() {
+      $httpBackend.expect('GET', '/api/variant_groups/1/suggested_changes/5/comments');
+      VariantGroups.getChangeComments({variantGroupId: 1, changeId: 5});
+      $httpBackend.flush();
+    });
+
+    it('VariantGroups.getChangeComment({ [reqObj] }) should send a GET request to /api/variant_groups/1/suggested_changes/5/comments/11', function() {
+      $httpBackend.expect('GET', '/api/variant_groups/1/suggested_changes/5/comments/11');
+      VariantGroups.getChangeComment({variantGroupId: 1, changeId: 5, commentId: 11});
+      $httpBackend.flush();
+    });
+  });
 });

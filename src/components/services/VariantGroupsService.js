@@ -165,8 +165,8 @@
           isArray: false
         },
 
-        // Gene Change Comments routes
-        submitChangeComment: {
+        // variant group change comments routes
+        addChangeComment: {
           method: 'POST',
           url: '/api/variant_groups/:variantGroupId/suggested_changes/:changeId/comments',
           params: {
@@ -215,7 +215,6 @@
             commentId: '@commentId'
           }
         }
-
       });
 
     return VariantGroups;
@@ -345,6 +344,38 @@
             return response;
           });
       },
+
+      // variant group suggested changes comments
+      addChangeComment: function(reqObj) {
+        return VariantGroupsResource.addChangeComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      updateChangeComment: function(reqObj) {
+        return VariantGroupsResource.updateChangeComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getChangeComments: function(reqObj) {
+        return VariantGroupsResource.getChangeComments(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      getChangeComment: function(reqObj) {
+        return VariantGroupsResource.getChangeComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
+      deleteChangeComment: function(reqObj) {
+        return VariantGroupsResource.deleteChangeComment(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      }
     }
   }
 
