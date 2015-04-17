@@ -1,0 +1,40 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.entityTabs {
+  .fullBleed();
+  background-color: @pageBackground2;
+  .name h3 {
+    padding: 0;
+    padding-top: .5em;
+    margin: 0;
+  }
+  > .row {
+    border-bottom: 1px solid #CCC;
+    background-image: url('/assets/images/grey_stripes.png');
+  }
+
+
+
+  .entity-type {
+    text-transform: capitalize;
+  }
+
+  .tabs {
+    min-height: 3.5em;
+    position: relative;
+
+    .tab-container {
+      padding-right: @contentPadding;
+      position: absolute;
+      right: 0;
+      bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
+      .tab a span {
+        text-transform: capitalize;
+      }
+    }
+
+  }
+}

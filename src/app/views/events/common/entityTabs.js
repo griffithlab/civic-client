@@ -27,7 +27,7 @@ function entityTabsDirective($rootScope) {
   return /* @ngInject */ {
     restrict: 'E',
     scope: {
-      tabs: '=data',
+      entityModel: '=',
       type: '@',
       justified: '@',
       vertical: '@'
@@ -48,60 +48,66 @@ function entityTabsDirective($rootScope) {
 
 // @ngInject
 function EntityTabsController($scope, $state) {
-  $scope.$watch('$scope.tabs', function(){
-    if (!$scope.tabs) {
-      throw new Error('entityTabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
-    }
+  var ctrl = $scope.ctrl = {};
 
-    if (!angular.isArray($scope.tabs)) {
-      throw new Error('entityTabs: \'data\' attribute must be an array of tab data with at least one tab defined.');
-    }
+  var config = $scope.entityModel.config;
 
-    var currentStateEqualTo = function(tab) {
+  ctrl.type = config.type;
+  ctrl.name = config.name;
 
-      var isEqual = $state.is(tab.route, tab.params, tab.options);
-      return isEqual;
-    };
+  $scope.tabs = $scope.entityModel.config.tabData;
+  if (!$scope.tabs) {
+    throw new Error('entityTabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
+  }
 
-    $scope.go = function(tab) {
+  if (!angular.isArray($scope.tabs)) {
+    throw new Error('entityTabs: \'data\' attribute must be an array of tab data with at least one tab defined.');
+  }
 
-      if (!currentStateEqualTo(tab) && !tab.disabled) {
-        var promise = $state.go(tab.route, tab.params, tab.options);
+  var currentStateEqualTo = function(tab) {
 
-        /* until the $stateChangeCancel event is released in ui-router, will use this to update
-         tabs if the $stateChangeEvent is cancelled before it finishes loading the state, see
-         https://github.com/rpocklin/ui-router-tabs/issues/19 and
-         https://github.com/angular-ui/ui-router/pull/1090 for further information and
-         https://github.com/angular-ui/ui-router/pull/1844
+    var isEqual = $state.is(tab.route, tab.params, tab.options);
+    return isEqual;
+  };
 
-         $stateChangeCancel is better since it will handle ui-sref and external $state.go(..) calls */
-        promise.catch(function() {
-          $scope.update_tabs();
-        });
-      }
-    };
+  $scope.go = function(tab) {
 
-    /* whether to highlight given route as part of the current state */
-    $scope.active = function(tab) {
+    if (!currentStateEqualTo(tab) && !tab.disabled) {
+      var promise = $state.go(tab.route, tab.params, tab.options);
 
-      var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
-      return isAncestorOfCurrentRoute;
-    };
+      /* until the $stateChangeCancel event is released in ui-router, will use this to update
+       tabs if the $stateChangeEvent is cancelled before it finishes loading the state, see
+       https://github.com/rpocklin/ui-router-tabs/issues/19 and
+       https://github.com/angular-ui/ui-router/pull/1090 for further information and
+       https://github.com/angular-ui/ui-router/pull/1844
 
-    $scope.update_tabs = function() {
-
-      // sets which tab is active (used for highlighting)
-      angular.forEach($scope.tabs, function(tab) {
-        tab.params = tab.params || {};
-        tab.options = tab.options || {};
-        tab.active = $scope.active(tab);
+       $stateChangeCancel is better since it will handle ui-sref and external $state.go(..) calls */
+      promise.catch(function() {
+        $scope.update_tabs();
       });
-    };
+    }
+  };
 
-    // this always selects the first tab currently - fixed in ui-bootstrap master but not yet released
-    // see https://github.com/angular-ui/bootstrap/commit/91b5fb62eedbb600d6a6abe32376846f327a903d
-    $scope.update_tabs();
-  });
+  /* whether to highlight given route as part of the current state */
+  $scope.active = function(tab) {
+
+    var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
+    return isAncestorOfCurrentRoute;
+  };
+
+  $scope.update_tabs = function() {
+
+    // sets which tab is active (used for highlighting)
+    angular.forEach($scope.tabs, function(tab) {
+      tab.params = tab.params || {};
+      tab.options = tab.options || {};
+      tab.active = $scope.active(tab);
+    });
+  };
+
+  // this always selects the first tab currently - fixed in ui-bootstrap master but not yet released
+  // see https://github.com/angular-ui/bootstrap/commit/91b5fb62eedbb600d6a6abe32376846f327a903d
+  $scope.update_tabs();
 
 }
 
