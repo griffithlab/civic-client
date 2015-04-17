@@ -19,8 +19,7 @@
 
 angular.module('civic.events.common')
   .directive('entityTabs', entityTabsDirective)
-  .controller('EntityTabsController', EntityTabsController)
-  .run(entityTabsRun);
+  .controller('EntityTabsController', EntityTabsController);
 
 // @ngInject
 function entityTabsDirective($rootScope) {
@@ -54,6 +53,8 @@ function EntityTabsController($scope, $state) {
 
   ctrl.type = config.type;
   ctrl.name = config.name;
+
+  ctrl.viewBackground = 'view-' + config.styles.view.backgroundColor;
 
   $scope.tabs = $scope.entityModel.config.tabData;
   if (!$scope.tabs) {
@@ -109,14 +110,4 @@ function EntityTabsController($scope, $state) {
   // see https://github.com/angular-ui/bootstrap/commit/91b5fb62eedbb600d6a6abe32376846f327a903d
   $scope.update_tabs();
 
-}
-
-// @ngInject
-function entityTabsRun($templateCache) {
-  var DEFAULT_TEMPLATE = '<div><tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" ' +
-    'justified="{{justified}}">' + '<tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
-    'active="tab.active" disabled="tab.disabled" ng-click="go(tab)">' +
-    '</tab></tabset></div>';
-
-  $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);
 }

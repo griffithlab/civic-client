@@ -6,8 +6,7 @@
 .entityTabs {
   .fullBleed();
   .name h3 {
-    padding: 0;
-    padding-top: .5em;
+    padding: .5em 0 0;
     margin: 0;
   }
   > .row {
@@ -28,10 +27,21 @@
       position: absolute;
       right: 0;
       bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
+
       .tab a span {
         text-transform: capitalize;
       }
     }
-
+  }
+  // override default bootstrap active tab color depending on view background
+  .view-pageBackground2 {
+    li.active a {
+      background-color: @pageBackground2 !important;
+    }
+  }
+  .view-pageBackground {
+    li.active a {
+      background-color: @pageBackground !important;
+    }
   }
 }
