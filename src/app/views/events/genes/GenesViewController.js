@@ -39,6 +39,14 @@
           titleExp: '"Gene " + gene.entrez_name + " Summary"',
           navMode: 'sub'
         }
+      })
+      .state('events.genes.talk', {
+        url: '/talk',
+        template: '<gene-talk></gene-talk>',
+        data: {
+          titleExp: '"Gene " + gene.entrez_name + " Talk"',
+          navMode: 'sub'
+        }
       });
     // additional events.genes states here
   }
@@ -46,8 +54,10 @@
   // @ngInject
   function GenesViewController($scope,
                                $state,
+                               // resolved services
                                Genes,
                                MyGeneInfo,
+                               // resolved resources
                                gene,
                                variants,
                                variantGroups,
@@ -63,18 +73,30 @@
         baseState: 'events.genes',
         baseUrl: $state.href('events.genes', { geneId: gene.entrez_id })
       },
+      tabData: [
+        {
+          heading: 'Gene Summary',
+          route: 'events.genes.summary',
+          params: { geneId: gene.entrez_id }
+        },
+        {
+          heading: 'Gene Talk',
+          route: 'events.genes.talk',
+          params: { geneId: gene.entrez_id }
+        }
+      ],
       styles: {
-        tabs: {
-          tabsBg: '#AAA',
-          activeBg: 'pageBackground3',
-          inactiveBg: '#CCC'
+        view: {
+          backgroundColor: 'pageBackground2'
         },
         summary: {
-          summaryBg: 'pageBackground3'
+          backgroundColor: 'pageBackground2'
+        },
+        myGeneInfo: {
+          backgroundColor: 'pageBackground2'
         },
         variantMenu: {
-          variantMenuBg: 'pageBackground3',
-          variantMenuActiveItemBg: 'pageBackground2'
+          backgroundColor: 'pageBackground2'
         }
       }
     };

@@ -60,18 +60,22 @@
         baseState: baseState,
         baseUrl: baseUrl
       },
+      tabData: [
+        {
+          heading: 'Evidence Summary',
+          route: 'events.genes.summary.variants.summary.evidence.summary',
+          params: { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id }
+        },
+        {
+          heading: 'Evidence Talk',
+          route: 'events.genes.summary.variants.summary.evidence.talk',
+          params: { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id }
+        }
+      ],
       styles: {
-        tabs: {
-          tabsBg: '#AAA',
-          activeBg: 'pageBackground3',
-          inactiveBg: '#CCC'
-        },
-        summary: {
-          summaryBg: 'pageBackground3'
-        },
-        evidenceMenu: {
-          evidenceMenuBg: 'pageBackground3',
-          evidenceMenuActiveItemBg: 'pageBackground2'
+        view: {
+          backgroundColor: 'pageBackground2',
+          foregroundColor: 'pageBackground'
         }
       }
     };
@@ -88,6 +92,7 @@
       geneId: gene.entrez_id,
       variantId: variant.id
 
+      // additional entity data fields
     };
 
     evidenceModel.services = {

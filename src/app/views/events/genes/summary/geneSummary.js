@@ -27,10 +27,15 @@
       ctrl.myGeneInfo = entityModel.data.myGeneInfo;
       ctrl.variants = entityModel.data.variants;
       ctrl.variantGroups = entityModel.data.variantGroups;
+
+      ctrl.styles = config.styles;
+
       ctrl.variantMenuOptions = {
         styles: config.styles.variantMenu,
         state: config.state
       };
+
+
       // unbind watcher after first digest
       unwatch();
     }, true);

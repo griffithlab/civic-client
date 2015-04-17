@@ -37,9 +37,11 @@
   // @ngInject
   function VariantsViewController($scope,
                                   $state,
+                                  // resolved services
                                   Variants,
                                   variant,
                                   evidenceItems,
+                                  // inherited resources
                                   gene) {
 
     var ctrl = $scope;
@@ -52,18 +54,22 @@
         baseState: 'events.genes.summary.variants',
         baseUrl: $state.href('events.genes.summary.variants', { geneId: gene.entrez_id, variantId: variant.id })
       },
+      tabData: [
+        {
+          heading: 'Variant Summary',
+          route: 'events.genes.summary.variants.summary',
+          params: { geneId: gene.entrez_id, variantId: variant.id }
+        },
+        {
+          heading: 'Variant Talk',
+          route: 'events.genes.talk.summary.variants.talk',
+          params: { geneId: gene.entrez_id, variantId: variant.id }
+        }
+      ],
       styles: {
-        tabs: {
-          tabsBg: '#AAA',
-          activeBg: 'pageBackground3',
-          inactiveBg: '#CCC'
-        },
-        summary: {
-          summaryBg: 'pageBackground3'
-        },
-        variantMenu: {
-          variantMenuBg: 'pageBackground3',
-          variantMenuActiveItemBg: 'pageBackground2'
+        view: {
+          background: 'pageBackground',
+          foreground: 'pageBackground2'
         }
       }
     };

@@ -24,11 +24,8 @@
       var config = entityModel.config;
       var ctrl = $scope.ctrl;
       ctrl.evidence = entityModel.data.entity;
-      ctrl.evidenceItems = entityModel.data.evidenceItems;
-      ctrl.evidenceMenuOptions = {
-        styles: config.styles.evidenceMenu,
-        state: config.state
-      };
+
+      ctrl.styles = config.styles;
 
       ctrl.evidenceLevelLabels = {
         'A': 'Validated',
@@ -36,6 +33,8 @@
         'C': 'Preclinical',
         'D': 'Inferential'
       };
+
+
 
       //$scope.evidence.$promise.then(function() {
       //  $scope.evidence.evidenceLevelLabel = evidenceLevelLabels[$scope.evidence.evidence_level];
