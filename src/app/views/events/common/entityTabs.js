@@ -54,6 +54,8 @@ function EntityTabsController($scope, $state) {
   ctrl.type = config.type;
   ctrl.name = config.name;
 
+  ctrl.showCorner = config.type === 'variant';
+
   ctrl.viewBackground = 'view-' + config.styles.view.backgroundColor;
 
   $scope.tabs = $scope.entityModel.config.tabData;

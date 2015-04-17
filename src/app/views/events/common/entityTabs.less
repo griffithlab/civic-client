@@ -9,9 +9,29 @@
     padding: .5em 0 0;
     margin: 0;
   }
+
+  #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
+
   > .row {
     border-bottom: 1px solid #CCC;
     background-image: url('/assets/images/grey_stripes.png');
+  }
+
+  .detail-corner {
+    @event-corner-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @event-corner-radius;
+    height: @event-corner-radius;
+    background-color: @pageBackground2;
+    .corner-edge {
+      border-top-left-radius: @event-corner-radius;
+      width: @event-corner-radius;
+      height: @event-corner-radius;
+      background-color: @pageBackground3;
+      background-image: url('/assets/images/grey_stripes.png');
+    }
   }
 
   .entity-type {
@@ -28,8 +48,12 @@
       right: 0;
       bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
 
-      .tab a span {
-        text-transform: capitalize;
+      .tab {
+        a {
+          line-height: 2.5em;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
       }
     }
   }
