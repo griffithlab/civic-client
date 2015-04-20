@@ -35,6 +35,7 @@
       .state('events.genes.summary', {
         url: '/summary',
         template: '<gene-summary></gene-summary>',
+        deepStateRedirect: true,
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Summary"',
           navMode: 'sub'
