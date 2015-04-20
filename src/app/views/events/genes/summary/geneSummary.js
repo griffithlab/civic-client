@@ -31,6 +31,7 @@
       ctrl.styles = config.styles;
 
       ctrl.variantMenuOptions = {
+        gene: ctrl.gene,
         styles: config.styles.variantMenu,
         state: config.state
       };

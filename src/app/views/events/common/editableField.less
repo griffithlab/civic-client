@@ -1,0 +1,56 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.editableField {
+  border-radius: @border-radius-base;
+  display: inline-block;
+  padding: 3px 5px;
+  margin: -3px -5px;
+  background-color: rgba(100,100,100, 0.1);
+  position: relative;
+}
+
+.editableField.hover {
+  background-color: rgba(100,100,100, 0.9);
+  &:after {
+    position: absolute;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    font-size: .5em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #FFF !important;
+    content: "\270f";
+  }
+
+
+}
+
+// lg/small sizes necessary for different sized fields, e.g. entity titles vs.
+// entity fields. These styles specify the size and location of the edit icon
+.edit-icon-lg {
+  .editableField.hover {
+    margin-right: -25px;
+    padding-right: 25px;
+  }
+  .editableField.hover:after {
+    top: 7px;
+    right: 7px;
+    font-size: .5em;
+  }
+}
+
+.edit-icon-sm {
+  .editableField.hover {
+    margin-right: -20px;
+    padding-right: 20px;
+  }
+  .editableField.hover:after {
+    top: 5px;
+    right: 5px;
+    font-size: .7em;
+  }
+}

@@ -2,9 +2,9 @@
   <div class="row">
     <div class="detail-corner" ng-show="ctrl.showCorner"><div class="corner-edge"></div></div>
     <div class="col-xs-6 name">
-      <h3>
-        <span ng-bind="ctrl.type" class="entity-type">Entity</span>
-        <span ng-bind="ctrl.name" class="entity-name">Name</span>
+      <h3 editable-field class="edit-icon-lg">
+         <span ng-bind="ctrl.type" class="entity-type">Entity</span>
+         <span ng-bind="ctrl.name" class="entity-name">Name</span>
       </h3>
     </div>
     <div class="col-xs-6 tabs {{ ctrl.viewBackground }}">
@@ -12,7 +12,6 @@
               type="{{type}}"
               vertical="{{vertical}}"
               justified="{{justified}}">
-
         <tab class="tab"
              ng-repeat="tab in tabs"
              heading="{{tab.heading}}"

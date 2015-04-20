@@ -48,16 +48,11 @@
       right: 0;
       bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
 
-      .tab {
-        a {
-          line-height: 2.5em;
-          padding-top: 0;
-          padding-bottom: 0;
-        }
-      }
     }
   }
-  // override default bootstrap active tab color depending on view background
+  // override default bootstrap with view background,
+  // assigned to ctrl.viewBackground in entityTabs.js
+  // applied with ng-class in entityTabs.tpl.html
   .view-pageBackground2 {
     li.active a {
       background-color: @pageBackground2 !important;
