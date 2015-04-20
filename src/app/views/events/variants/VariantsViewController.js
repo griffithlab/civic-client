@@ -30,6 +30,14 @@
           navMode: 'sub',
           titleExp: '"Variant " + variant.name'
         }
+      })
+      .state('events.genes.summary.variants.talk', {
+        url: '/talk',
+        template: '<variant-talk></variant-talk>',
+        data: {
+          titleExp: '"Variant " + variant.name + " Talk"',
+          navMode: 'sub'
+        }
       });
     // additional events.variants states here
   }
@@ -62,7 +70,7 @@
         },
         {
           heading: 'Variant Talk',
-          route: 'events.genes.talk.summary.variants.talk',
+          route: 'events.genes.summary.variants.talk',
           params: { geneId: gene.entrez_id, variantId: variant.id }
         }
       ],
