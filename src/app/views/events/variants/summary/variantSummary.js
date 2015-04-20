@@ -28,7 +28,7 @@
       ctrl = $scope.ctrl;
 
       ctrl.variant = data.entity;
-      ctrl.geneId = data.geneId;
+      ctrl.gene = data.parent;
       ctrl.evidenceItems = entityModel.data.evidenceItems;
 
       // unbind watcher after first digest

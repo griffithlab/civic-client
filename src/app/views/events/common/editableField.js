@@ -10,7 +10,9 @@
     return {
       restrict: 'A',
       transclude: true,
-      scope: false,
+      scope: {
+        entityModel: '='
+      },
       controller: 'EditableFieldController',
       link: editableFieldLink,
       templateUrl: 'app/views/events/common/editableField.tpl.html'
@@ -24,14 +26,13 @@
 
   // @ngInject
   function EditableFieldController($scope, $log, _) {
-    console.log('EditableFieldController fn called.');
+    var ctrl = $scope.ctrl = {};
+    var unwatch = $scope.$watch('entityModel', function(entityModel){
+      ctrl.editState = entityModel.config.state.baseUrl + '.edit';
+      ctrl.entityModel = entityModel;
+      unwatch();
+    });
 
-    // check for entityModel on scope
-    if(!_.has($scope, 'entityModel')) {
-      $log.warn('editable-field directive requires an entityModel to construct ui-sref.');
-    }
-
-    var ctrl = $scope.ctrl;
     ctrl.mouseOver = function() {
       ctrl.hover = true;
     };

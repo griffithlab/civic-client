@@ -104,6 +104,8 @@
     geneModel.data = {
       entity: gene,
       id: gene.entrez_id,
+      parent: null,
+      parentId: null,
       comments: [],
       changes: [],
       revisions: [],

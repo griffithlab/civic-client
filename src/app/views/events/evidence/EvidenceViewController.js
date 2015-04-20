@@ -40,25 +40,21 @@
                                   gene,
                                   variant) {
     var ctrl,
-      evidenceModel,
-      baseState,
-      baseUrl;
+      evidenceModel;
 
     ctrl = $scope;
     evidenceModel = ctrl.evidenceModel = {};
-    baseState = 'events.genes.summary.evidences.summary.evidence';
-    baseUrl = $state.href('events.genes.summary.evidences.summary.evidence', {
-      geneId: gene.entrez_id,
-      variantId: variant.id,
-      evidenceId: evidence.id
-    });
 
     evidenceModel.config = {
       type: 'evidence',
       name: 'EID' + evidence.id,
       state: {
-        baseState: baseState,
-        baseUrl: baseUrl
+        baseState: 'events.genes.summary.evidences.summary.evidence',
+        baseUrl: $state.href('events.genes.summary.evidences.summary.evidence', {
+          geneId: gene.entrez_id,
+          variantId: variant.id,
+          evidenceId: evidence.id
+        })
       },
       tabData: [
         {
@@ -84,13 +80,16 @@
       // required entity data fields
       entity: evidence,
       id: evidence.entrez_id,
+      parent: variant,
+      parentId: variant.id,
       comments: [],
       changes: [],
       revisions: [],
 
-      // parent ids
-      geneId: gene.entrez_id,
-      variantId: variant.id
+      parentEntities: {
+        gene: gene,
+        variant: variant
+      }
 
       // additional entity data fields
     };

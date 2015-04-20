@@ -12,7 +12,7 @@
       scope: {
         evidenceItems: '=',
         variant: '=',
-        geneId: '='
+        gene: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
@@ -95,7 +95,7 @@
       ctrl.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         $state.go('events.genes.summary.variants.summary.evidence.summary', {
-          geneId: $scope.geneId,
+          geneId: $scope.gene.entrez_id,
           variantId: $scope.variant.id,
           evidenceId: row.entity.id
         });

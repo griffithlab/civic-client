@@ -78,13 +78,11 @@
       // required entity data fields
       entity: variant,
       id: variant.id,
+      parent: gene,
+      parentId: gene.entrez_id,
       comments: [],
       changes: [],
       revisions: [],
-
-      // parent ids
-      geneId: gene.entrez_id,
-
       // additional entity data fields
       evidenceItems: evidenceItems
     };
