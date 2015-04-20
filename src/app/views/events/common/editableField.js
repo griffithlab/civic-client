@@ -23,12 +23,12 @@
   }
 
   // @ngInject
-  function EditableFieldController($scope) {
+  function EditableFieldController($scope, $log, _) {
     console.log('EditableFieldController fn called.');
 
     // check for entityModel on scope
-    if(!$scope.entityModel) {
-      console.warn('editable-field directive requires an entityModel to work!');
+    if(!_.has($scope, 'entityModel')) {
+      $log.warn('editable-field directive requires an entityModel to construct ui-sref.');
     }
 
     var ctrl = $scope.ctrl;

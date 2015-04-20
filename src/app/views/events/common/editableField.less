@@ -8,13 +8,14 @@
   display: inline-block;
   padding: 3px 5px;
   margin: -3px -5px;
-  background-color: rgba(100,100,100, 0.1);
+  border: 1px solid rgba(100,100,100, 0.1);
   position: relative;
 }
 
 .editableField.hover {
-  background-color: rgba(100,100,100, 0.9);
-  &:after {
+  background-color: rgba(0,0,0, 0.1);
+  border-color: @civicLightPurple;
+  &::after {
     position: absolute;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
@@ -22,7 +23,7 @@
     font-size: .5em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #FFF !important;
+    color: @civicPurple;
     content: "\270f";
   }
 
@@ -36,7 +37,7 @@
     margin-right: -25px;
     padding-right: 25px;
   }
-  .editableField.hover:after {
+  .editableField.hover::after {
     top: 7px;
     right: 7px;
     font-size: .5em;
@@ -48,7 +49,7 @@
     margin-right: -20px;
     padding-right: 20px;
   }
-  .editableField.hover:after {
+  .editableField.hover::after {
     top: 5px;
     right: 5px;
     font-size: .7em;
