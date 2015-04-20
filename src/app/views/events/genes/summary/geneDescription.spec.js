@@ -49,7 +49,7 @@ describe('geneDescription', function () {
           template:
           '<mock-ui-view>' +
           '<entity-view entity-model="geneModel">' +
-          '<entity-tabs></entity-tabs>' +
+          '<entity-tabs entity-model="geneModel"></entity-tabs>' +
           '<gene-summary>' +
           '</gene-summary>' +
           '</entity-view>' +
@@ -142,10 +142,10 @@ describe('geneDescription', function () {
   });
 
   describe('controller', function() {
-    it('provides the geneInfo object on scope', function(){
-      expect(dirScope.gene).to.exist;
-      expect(dirScope.gene).to.be.an('object');
-      expect(dirScope.gene.entrez_name).to.equal('ALK');
+    it('provides the gene object on scope', function(){
+      expect(dirScope.ctrl.gene).to.exist;
+      expect(dirScope.ctrl.gene).to.be.an('object');
+      expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK');
     });
   });
 

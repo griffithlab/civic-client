@@ -49,7 +49,7 @@ describe('variantMenu', function () {
           template:
           '<mock-ui-view>' +
           '<entity-view entity-model="geneModel">' +
-          '<entity-tabs></entity-tabs>' +
+          '<entity-tabs entity-model="geneModel"></entity-tabs>' +
           '<gene-summary>' +
           '</gene-summary>' +
           '</entity-view>' +
@@ -185,7 +185,7 @@ describe('variantMenu', function () {
     });
 
     it('main variant-groups\' variant tabs link to proper variant state', function() {
-      expect($(dirElem).find('.variant-group-variants li:first-child a').first().attr('href')).to.equal('#/events/genes/238/summary/variants/6/summary');
+      expect($(dirElem).find('.variant-groups .variants a').first().attr('href')).to.equal('#/events/genes/238/summary/variants/6/summary');
     });
   });
 });

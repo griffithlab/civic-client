@@ -21,7 +21,7 @@
 
   // @ngInject
   function editableFieldLink(scope, element, attrs) {
-    console.log('editableFieldLink fn called.');
+//    console.log('editableFieldLink fn called.');
   }
 
   // @ngInject

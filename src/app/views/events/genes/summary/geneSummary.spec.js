@@ -47,7 +47,7 @@ describe('geneSummary', function () {
           template:
           '<mock-ui-view>' +
           '<entity-view entity-model="geneModel">' +
-          '<entity-tabs></entity-tabs>' +
+          '<entity-tabs entity-model="geneModel"></entity-tabs>' +
           '<gene-summary></gene-summary>' +
           '</entity-view>' +
           '</mock-ui-view>'
