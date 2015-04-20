@@ -4,7 +4,7 @@
 @import 'src/app/styles/_mixins.less';
 
 .editableField {
-  .clearix();
+  .clearfix();
   border-radius: @border-radius-base;
   display: inline-block;
   padding: 3px 5px;
@@ -14,6 +14,7 @@
 }
 
 .editableField.hover {
+  cursor: pointer;
   background-color: rgba(0,0,0, 0.1);
   border-color: @civicLightPurple;
   &::after {
