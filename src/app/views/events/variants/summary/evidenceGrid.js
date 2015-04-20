@@ -43,11 +43,17 @@
       noUnselect: true,
       rowTemplate: 'app/views/events/variants/summary/evidenceGridRow.tpl.html',
       columnDefs: [
+        { name: 'id',
+          displayName: 'EID',
+          enableFiltering: false,
+          allowCellFocus: false,
+          width: '5%'
+        },
         { name: 'text',
           displayName: 'Supporting Evidence',
           enableFiltering: true,
           allowCellFocus: false,
-          width: '50%',
+          width: '45%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
