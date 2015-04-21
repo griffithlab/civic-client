@@ -1,15 +1,12 @@
-<div class="GeneTalkView">
+<div class="VariantTalkView">
   <div class="row entity-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
-    <div class="col-xs-6">
-      <gene-description></gene-description>
-    </div>
-    <div class="col-xs-6">
-      <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
+    <div class="col-xs-12">
+      <p ng-bind="ctrl.variantTalkModel.data.entity.description"></p>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <entity-talk-tabs entity-talk-model="ctrl.geneTalkModel"></entity-talk-tabs>
+      <entity-talk-tabs entity-talk-model="ctrl.variantTalkModel"></entity-talk-tabs>
     </div>
   </div>
   <div class="row entity-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
