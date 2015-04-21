@@ -45,12 +45,17 @@
 
   // @ngInject
   function GeneTalkViewController($scope,
-                               $state,
-                               // inherited resources
-                               Genes,
-                               gene) {
+                                  $state,
+                                  // inherited resources
+                                  Genes,
+                                  gene,
+                                  myGeneInfo) {
     console.log('GenesTalkController called.');
     var ctrl = $scope.ctrl = {};
+
+    // gene-description and my-gene-info directives expect these on scope
+    ctrl.gene = gene;
+    ctrl.myGeneInfo = myGeneInfo;
 
     var geneTalk = ctrl.geneTalk = {};
 
@@ -61,26 +66,29 @@
         baseState: 'events.genes.talk',
         baseUrl: $state.href('events.genes.talk', { geneId: gene.entrez_id })
       },
+      styles: {
+        view: {
+          summaryBackgroundColor: 'pageBackground2',
+          talkBackgroundColor: 'pageBackground'
+        }
+      },
       tabData: [
         {
-          heading: 'Log',
+          heading: gene.entrez_name + ' Log',
           route: 'events.genes.talk.log',
           params: { geneId: gene.entrez_id }
         },
         {
-          heading: 'Comments',
+          heading: gene.entrez_name + ' Comments',
           route: 'events.genes.talk.comments',
           params: { geneId: gene.entrez_id }
         },
         {
-          heading: 'Revisions',
+          heading: gene.entrez_name + ' Revisions',
           route: 'events.genes.talk.revisions',
           params: { geneId: gene.entrez_id }
         }
-      ],
-      styles: {
-        backgroundColor: 'pageBackground2'
-      }
+      ]
     }
   }
 

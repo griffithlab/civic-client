@@ -1,0 +1,65 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.entityTalkTabs {
+  .fullBleed();
+  border-bottom: 1px solid #CCC;
+  background-image: url('/assets/images/grey_stripes.png');
+
+  .pageBackground2Gradient {
+    > .row {
+      margin-bottom: -1px;
+      border-bottom: 1px solid #CCC;
+      #gradient > .vertical-three-colors(@pageBackground2, @pageBackground2, 60%, darken(@pageBackground2, 8%));
+    }
+  }
+
+  .detail-corner {
+    @event-corner-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @event-corner-radius;
+    height: @event-corner-radius;
+    background-color: @pageBackground2;
+    .corner-edge {
+      border-top-left-radius: @event-corner-radius;
+      width: @event-corner-radius;
+      height: @event-corner-radius;
+      background-color: @pageBackground3;
+      background-image: url('/assets/images/grey_stripes.png');
+    }
+  }
+
+  .entity-type {
+    text-transform: capitalize;
+  }
+
+  .tabs {
+    min-height: 3.5em;
+    position: relative;
+
+    .tab-container {
+      padding-right: @contentPadding;
+      position: absolute;
+      left: @contentPadding*2;
+      bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
+
+    }
+  }
+  // override default bootstrap with view background,
+  // assigned to ctrl.viewBackground in entityTabs.js
+  // applied with ng-class in entityTabs.tpl.html
+  .view-pageBackground2 {
+    li.active a {
+      background-color: @pageBackground2 !important;
+    }
+  }
+  .view-pageBackground {
+    li.active a {
+      background-color: @pageBackground !important;
+    }
+  }
+}
