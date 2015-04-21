@@ -40,16 +40,7 @@
           titleExp: '"Gene " + gene.entrez_name + " Summary"',
           navMode: 'sub'
         }
-      })
-      .state('events.genes.talk', {
-        url: '/talk',
-        template: '<gene-talk></gene-talk>',
-        data: {
-          titleExp: '"Gene " + gene.entrez_name + " Talk"',
-          navMode: 'sub'
-        }
       });
-    // additional events.genes states here
   }
 
   // @ngInject
@@ -64,7 +55,7 @@
                                variantGroups,
                                myGeneInfo) {
 
-    var ctrl = $scope;
+    var ctrl = $scope.ctrl = {};
     var geneModel = ctrl.geneModel = {};
 
     geneModel.config = {
@@ -82,7 +73,7 @@
         },
         {
           heading: 'Gene Talk',
-          route: 'events.genes.talk',
+          route: 'events.genes.talk.log',
           params: { geneId: gene.entrez_id }
         }
       ],
