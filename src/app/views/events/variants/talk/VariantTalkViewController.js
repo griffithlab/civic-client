@@ -1,28 +1,27 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes')
-    .config(geneTalkViewConfig)
+    .config(variantTalkViewConfig)
     .controller('VariantTalkViewController', VariantTalkViewController);
 
   // @ngInject
-  function geneTalkViewConfig($stateProvider) {
+  function variantTalkViewConfig($stateProvider) {
     $stateProvider
       .state('events.genes.summary.variants.talk', {
-        abstract: true,
         url: '/talk',
         templateUrl: 'app/views/events/variants/talk/VariantTalkView.tpl.html',
         controller: 'VariantTalkViewController',
         resolve: {
-          comments: function(Variants, gene) {
+          comments: function(Variants, variant) {
             return Variants.getComments(variant.id);
           },
-          changes: function(Variants, gene) {
+          changes: function(Variants, variant) {
             return Variants.getChanges(variant.id);
           },
-          revisions: function(Variants, gene) {
+          revisions: function(Variants, variant) {
             return Variants.getRevisions(variant.id);
           },
-          lastRevision: function(Variants, gene) {
+          lastRevision: function(Variants, variant) {
             return Variants.getLastRevision(variant.id);
           }
         },
@@ -32,7 +31,7 @@
         }
       })
       .state('events.genes.summary.variants.talk.log', {
-        url: '', // transition to events.genes.talk abstract state defaults to this state
+        url: '/log', // transition to events.genes.talk abstract state defaults to this state
         template: '<entity-talk-log entity-talk-model="ctrl.variantTalkModel"></entity-talk-log>',
         data: {
           titleExp: '"Variant " + variant.name + " Log"',
@@ -60,14 +59,17 @@
   // @ngInject
   function VariantTalkViewController($scope,
                                      $state,
+
                                      // resolved resources
                                      comments,
                                      changes,
                                      revisions,
                                      lastRevision,
+
                                      // inherited resolved resources
-                                     evidenceItems,
-                                     gene) {
+                                     gene,
+                                     variant,
+                                     evidenceItems) {
     console.log('VariantsTalkController called.');
     var ctrl = $scope.ctrl = {};
     var variantTalkModel = ctrl.variantTalkModel = {};

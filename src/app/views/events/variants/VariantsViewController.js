@@ -31,16 +31,7 @@
           navMode: 'sub',
           titleExp: '"Variant " + variant.name'
         }
-      })
-      .state('events.genes.summary.variants.talk', {
-        url: '/talk',
-        template: '<variant-talk></variant-talk>',
-        data: {
-          titleExp: '"Variant " + variant.name + " Talk"',
-          navMode: 'sub'
-        }
       });
-    // additional events.variants states here
   }
 
   // @ngInject

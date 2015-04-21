@@ -53,11 +53,13 @@
         },
         getVariantGroups: {
           url: '/api/variants/:variantId/variant_groups',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getComments: {
           url: '/api/variants/:variantId/comments',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getComment: {
           url: '/api/variants/:variantId/comments/:commentId',
@@ -93,7 +95,8 @@
         },
         getRevisions: {
           url: '/api/variants/:variantId/revisions',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getRevision: {
           url: '/api/variants/:variantId/revisions/:revisionId',
@@ -114,7 +117,8 @@
         },
         getChanges: {
           url: '/api/variants/:variantId/suggested_changes',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getChange: {
           url: '/api/variants/:variantId/suggested_changes/:changeId',
@@ -286,8 +290,8 @@
             return response;
           });
       },
-      getLastRevision: function(reqObj) {
-        return VariantsResource.getLastRevision(reqObj).$promise
+      getLastRevision: function(variant_id) {
+        return VariantsResource.getLastRevision({variantId: variant_id}).$promise
           .then(function(response) {
             return response;
           });
