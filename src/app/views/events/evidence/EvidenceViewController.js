@@ -27,14 +27,6 @@
           navMode: 'sub',
           titleExp: '"Evidence EID" + evidence.id'
         }
-      })
-      .state('events.genes.summary.variants.summary.evidence.talk', {
-        url: '/talk',
-        template: '<gene-talk></gene-talk>',
-        data: {
-          titleExp: '"Evidence EID" + evidence.id + " Talk"',
-          navMode: 'sub'
-        }
       });
   }
 

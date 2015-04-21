@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('civic.events.genes')
+  angular.module('civic.events.variants')
     .config(variantTalkViewConfig)
     .controller('VariantTalkViewController', VariantTalkViewController);
 
@@ -109,8 +109,8 @@
     variantTalkModel.data = {
       entity: variant,
       id: variant.id,
-      parent: null,
-      parentId: null,
+      parent: gene,
+      parentId: gene.entrez_id,
       evidenceItems: evidenceItems,
       comments: comments,
       changes: changes,

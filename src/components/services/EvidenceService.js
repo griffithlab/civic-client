@@ -43,7 +43,8 @@
         },
         getComments: {
           url: '/api/evidence_items/:evidenceId/comments',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getComment: {
           url: '/api/evidence_items/:evidenceId/comments/:commentId',
@@ -79,7 +80,8 @@
         },
         getRevisions: {
           url: '/api/evidence_items/:evidenceId/revisions',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getRevision: {
           url: '/api/evidence_items/:evidenceId/revisions/:revisionId',
@@ -105,7 +107,8 @@
         },
         getChanges: {
           url: '/api/evidence_items/:evidenceId/suggested_changes',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getChange: {
           url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId',
@@ -155,7 +158,8 @@
             evidenceId: '@evidenceId',
             changeId: '@changeId'
           },
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getChangeComment: {
           url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId/comments/:commentId',
@@ -265,8 +269,8 @@
             return response;
           });
       },
-      getLastRevision: function(reqObj) {
-        return EvidenceResource.getLastRevision(reqObj).$promise
+      getLastRevision: function(evidence_id) {
+        return EvidenceResource.getLastRevision({evidenceId: evidence_id}).$promise
           .then(function(response) {
             return response;
           });

@@ -1,0 +1,19 @@
+<div class="EvidenceTalkView">
+  <div class="row entity-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
+    <div class="col-xs-12">
+      <evidence-summary></evidence-summary>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <entity-talk-tabs entity-talk-model="ctrl.evidenceTalkModel"></entity-talk-tabs>
+    </div>
+  </div>
+  <div class="row entity-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
+    <div class="col-xs-12">
+      <ui-view>
+
+      </ui-view>
+    </div>
+  </div>
+</div>
