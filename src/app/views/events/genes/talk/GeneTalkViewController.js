@@ -12,13 +12,27 @@
         url: '/talk',
         templateUrl: 'app/views/events/genes/talk/GeneTalkView.tpl.html',
         controller: 'GeneTalkViewController',
+        resolve: {
+          comments: function(Genes, gene) {
+            return Genes.getComments(gene.entrez_id);
+          },
+          changes: function(Genes, gene) {
+            return Genes.getChanges(gene.entrez_id);
+          },
+          revisions: function(Genes, gene) {
+            return Genes.getRevisions(gene.entrez_id);
+          },
+          lastRevision: function(Genes, gene) {
+            return Genes.getLastRevision(gene.entrez_id);
+          }
+        },
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
         }
       })
       .state('events.genes.talk.log', {
-        url: '/log',
+        url: '', // transition to events.genes.talk abstract state defaults to this state
         template: '<entity-talk-log entity-talk-model="ctrl.geneTalkModel"></entity-talk-log>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Log"',
@@ -46,8 +60,12 @@
   // @ngInject
   function GeneTalkViewController($scope,
                                   $state,
-                                  // inherited resources
-                                  Genes,
+                                  // resolved resources
+                                  comments,
+                                  changes,
+                                  revisions,
+                                  lastRevision,
+                                  // inherited resolved resources
                                   gene,
                                   variants,
                                   variantGroups,
@@ -98,9 +116,10 @@
       id: gene.entrez_id,
       parent: null,
       parentId: null,
-      comments: [],
-      changes: [],
-      revisions: [],
+      comments: comments,
+      changes: changes,
+      revisions: revisions,
+      lastRevision: lastRevision,
       variants: variants,
       variantGroups: variantGroups,
       myGeneInfo: myGeneInfo

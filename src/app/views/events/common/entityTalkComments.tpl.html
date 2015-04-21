@@ -1,4 +1,8 @@
 <div class="entityTalkComments">
-  <p>Entity Talk Comments</p>
-  <pre ng-bind="entityTalkModel|json"></pre>
+  <ul>
+    <li ng-repeat="comment in entityTalkModel.data.comments">
+      <p ng-bind="comment.title">comment title</p>
+      <p ng-bind="comment.text">comment text</p>
+    </li>
+  </ul>
 </div>
