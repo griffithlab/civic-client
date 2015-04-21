@@ -5,9 +5,18 @@
 
 .GeneTalkView {
   .fullBleed();
-  background-color: @pageBackground2;
   margin-bottom: -@contentPadding;
-  padding-bottom: @contentPadding;
-  padding-top: @contentPadding;
+
+  .entity-talk-summary {
+    padding-bottom: @contentPadding;
+    padding-top: @contentPadding;
+    background-color: @pageBackground2;
+    border-bottom: 1px solid darken(@pageBackground2, 5%);
+  }
+
+  .entity-talk-content {
+    background-color: @pageBackground;
+    min-height: 300px;
+  }
 }
 

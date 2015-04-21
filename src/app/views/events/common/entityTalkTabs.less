@@ -8,6 +8,14 @@
   border-bottom: 1px solid #CCC;
   background-image: url('/assets/images/grey_stripes.png');
 
+  .pageBackgroundGradient {
+    > .row {
+      margin-bottom: -1px;
+      border-bottom: 1px solid #CCC;
+      #gradient > .vertical-three-colors(@pageBackground, @pageBackground, 60%, darken(@pageBackground, 8%));
+    }
+  }
+
   .pageBackground2Gradient {
     > .row {
       margin-bottom: -1px;
@@ -42,9 +50,8 @@
     position: relative;
 
     .tab-container {
-      padding-right: @contentPadding;
       position: absolute;
-      left: @contentPadding*2;
+      left: @contentPadding;
       bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
 
     }

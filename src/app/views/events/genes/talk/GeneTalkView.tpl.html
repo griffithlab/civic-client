@@ -1,6 +1,6 @@
 <div class="GeneTalkView">
   <entity-talk entity-model="geneModel">
-    <div class="row {{ ctrl.styles.view.summaryBackgroundColor }}">
+    <div class="row entity-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
       <div class="col-xs-6">
         <gene-description></gene-description>
       </div>
@@ -10,10 +10,10 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <entity-talk-tabs entity-talk-model="ctrl.geneTalk"></entity-talk-tabs>
+        <entity-talk-tabs entity-talk-model="ctrl.geneTalkModel"></entity-talk-tabs>
       </div>
     </div>
-    <div class="row {{ ctrl.styles.view.talkBackgroundColor }}">
+    <div class="row entity-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
       <div class="col-xs-12">
         <ui-view>
 

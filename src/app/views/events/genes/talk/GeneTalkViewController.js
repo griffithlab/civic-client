@@ -19,7 +19,7 @@
       })
       .state('events.genes.talk.log', {
         url: '/log',
-        template: '<entity-talk-log></entity-talk-log>',
+        template: '<entity-talk-log entity-talk-model="ctrl.geneTalkModel"></entity-talk-log>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Log"',
           navMode: 'sub'
@@ -27,7 +27,7 @@
       })
       .state('events.genes.talk.comments', {
         url: '/comments',
-        template: '<entity-talk-comments></entity-talk-comments>',
+        template: '<entity-talk-comments entity-talk-model="ctrl.geneTalkModel"></entity-talk-comments>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Comments"',
           navMode: 'sub'
@@ -35,7 +35,7 @@
       })
       .state('events.genes.talk.revisions', {
         url: '/revisions',
-        template: '<entity-talk-revisions></entity-talk-revisions>',
+        template: '<entity-talk-revisions entity-talk-model="ctrl.geneTalkModel"></entity-talk-revisions>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Revisions"',
           navMode: 'sub'
@@ -49,6 +49,8 @@
                                   // inherited resources
                                   Genes,
                                   gene,
+                                  variants,
+                                  variantGroups,
                                   myGeneInfo) {
     console.log('GenesTalkController called.');
     var ctrl = $scope.ctrl = {};
@@ -57,9 +59,9 @@
     ctrl.gene = gene;
     ctrl.myGeneInfo = myGeneInfo;
 
-    var geneTalk = ctrl.geneTalk = {};
+    var geneTalkModel = ctrl.geneTalkModel = {};
 
-    geneTalk.config = {
+    geneTalkModel.config = {
       type: 'gene',
       name: gene.entrez_name,
       state: {
@@ -89,7 +91,20 @@
           params: { geneId: gene.entrez_id }
         }
       ]
-    }
+    };
+
+    geneTalkModel.data = {
+      entity: gene,
+      id: gene.entrez_id,
+      parent: null,
+      parentId: null,
+      comments: [],
+      changes: [],
+      revisions: [],
+      variants: variants,
+      variantGroups: variantGroups,
+      myGeneInfo: myGeneInfo
+    };
   }
 
 })();
