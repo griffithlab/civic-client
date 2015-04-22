@@ -47,7 +47,7 @@
           navMode: 'sub'
         }
       })
-      .state('epvents.genes.summary.variants.summary.evidence.talk.revisions', {
+      .state('events.genes.summary.variants.summary.evidence.talk.revisions', {
         url: '/revisions',
         template: '<entity-talk-revisions entity-talk-model="ctrl.evidenceTalkModel"></entity-talk-revisions>',
         data: {
