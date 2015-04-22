@@ -49,11 +49,13 @@
       change.type = 'change';
     });
 
-    // concatenate event arrays, sort by date, descending
+    // concatenate event arrays, sort by date descending
     ctrl.logItems = comments.concat(revisions, changes);
     ctrl.logItems = _.chain(ctrl.logItems)
       .map(function(item) {
+        // revisions can have an .user attribute that's just a string
         item.username = typeof item.user === 'object' ? item.user.username : item.user;
+        // some items have both created_at and updated_at, we'll favor updated_at
         item.timestamp = _.has(item, 'updated_at') ? item.updated_at : item.created_at;
         return item;
       })

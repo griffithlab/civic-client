@@ -4,16 +4,16 @@
     <li ng-repeat="item in ctrl.logItems">
       <div ng-switch="item.type">
         <div ng-switch-when="revision">
-          <p><strong>Revision</strong></p>
-          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo"</p>
+          <p><strong>Revision: </strong> <span ng-bind="item.action">revision action</span></p>
+          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo">timestamp</span></p>
         </div>
         <div ng-switch-when="comment">
           <p><strong>Comment</strong></p>
-          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo"</p>
+          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo">timestamp</span></p>
         </div>
         <div ng-switch-when="change">
           <p><strong>Comment</strong></p>
-          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo"</p>
+          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo">timestamp</span></p>
         </div>
 
       </div>

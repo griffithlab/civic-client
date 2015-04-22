@@ -32,7 +32,7 @@
         }
       })
       .state('events.genes.summary.variants.summary.evidence.talk.log', {
-        url: '', // transition to events.genes.talk abstract state defaults to this state
+        url: '/log', // transition to events.genes.talk abstract state defaults to this state
         template: '<entity-talk-log entity-talk-model="ctrl.evidenceTalkModel"></entity-talk-log>',
         data: {
           titleExp: '"Evidence EID" + evidence.id + " Log"',
