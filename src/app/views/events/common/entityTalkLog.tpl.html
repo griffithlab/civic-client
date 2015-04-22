@@ -1,4 +1,23 @@
 <div class="entityTalkLog">
-  <p>Entity Talk Log</p>
-  <pre ng-bind="entityTalkModel|json"></pre>
+
+  <ul class="log-list">
+    <li ng-repeat="item in ctrl.logItems">
+      <div ng-switch="item.type">
+        <div ng-switch-when="revision">
+          <p><strong>Revision</strong></p>
+          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo"</p>
+        </div>
+        <div ng-switch-when="comment">
+          <p><strong>Comment</strong></p>
+          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo"</p>
+        </div>
+        <div ng-switch-when="change">
+          <p><strong>Comment</strong></p>
+          <p>by <strong ng-bind="item.username">username</strong> <span ng-bind="item.timestamp | timeAgo"</p>
+        </div>
+
+      </div>
+    </li>
+
+  </ul>
 </div>
