@@ -27,7 +27,9 @@
     var unwatch = $scope.$watch('ctrl.geneModel', function(geneModel){
       var config = geneModel.config;
       var ctrl = $scope.ctrl;
-      var gene = ctrl.gene = geneModel.data.entity;
+
+      ctrl.gene = geneModel.data.entity;
+      ctrl.geneModel = geneModel;
       ctrl.myGeneInfo = geneModel.data.myGeneInfo;
       ctrl.variants = geneModel.data.variants;
       ctrl.variantGroups = geneModel.data.variantGroups;
@@ -42,7 +44,7 @@
           type: 'input',
           templateOptions: {
             label: 'Name',
-            value: gene.entrez_name
+            value: ctrl.gene.entrez_name
           }
         },
         {
@@ -50,19 +52,25 @@
           type: 'textarea',
           templateOptions: {
             rows: 8,
-            label: 'Description'
+            label: 'Description',
+            value: 'ctrl.gene.description'
           }
+        },
+        {
+          template: '<hr/>'
         }
       ];
 
-      ctrl.submit = function() {
+      ctrl.submit = function(gene) {
         console.log('submitRevision clicked.');
-        var gene = $scope.ctrl.gene;
-        $scope.ctrl.gene.$update({ geneId: gene.entrez_id});
+        gene.geneId = gene.entrez_id; // add geneId param for Genes service
+        $scope.ctrl.geneModel.services.Genes.submitChange(gene);
       };
 
-      ctrl.apply = function() {
+      ctrl.apply = function(gene) {
         console.log('applyRevision clicked.');
+        gene.geneId = gene.entrez_id;
+        gene.$update();
       };
 
       ctrl.isAdmin = Security.isAdmin;

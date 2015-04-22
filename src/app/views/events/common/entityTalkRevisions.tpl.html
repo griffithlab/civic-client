@@ -1,4 +1,23 @@
 <div class="entityTalkRevisions">
-  <p>Entity Talk Revisions</p>
+  <p>Entity Talk Suggested Revisions:</p>
+  <ul>
+    <li ng-repeat="change in entityTalkModel.data.changes">
+      <p>User: {{ change.user }}</p>
+      <p>Created at: {{ change.created_at }}</p>
+      <p>Diffs:
+        <p ng-bind-html="change.diffs.description|unsafe"></p>
+      </p>
+    </li>
+  </ul>
+  <p>Entity Talk Applied Revisions:</p>
+  <ul>
+    <li ng-repeat="revision in entityTalkModel.data.revisions">
+      <p>User: {{ revision.user }}</p>
+      <p>Created at: {{ revision.created_at }}</p>
+      <p>Diffs:
+      <p ng-bind-html="revision.diffs.description|unsafe"></p>
+      </p>
+    </li>
+  </ul>
   <pre ng-bind="entityTalkModel|json"></pre>
 </div>

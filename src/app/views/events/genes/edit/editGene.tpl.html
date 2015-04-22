@@ -18,8 +18,8 @@
       <formly-form model="ctrl.gene" fields="ctrl.geneFields">
         <div class="pull-right">
           <cancel-button></cancel-button>
-          <button type="submit" class="btn btn-default" ng-click="ctrl.apply(ctrl.user)">Apply Revision</button>
-          <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.user)">Submit Revision for Review</button>
+          <button type="submit" class="btn btn-default" ng-click="ctrl.apply(ctrl.gene)" ng-show="ctrl.isAdmin()">Apply Revision</button>
+          <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.gene)">Submit Revision for Review</button>
         </div>
       </formly-form>
     </div>
