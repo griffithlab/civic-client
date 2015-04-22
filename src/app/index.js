@@ -9,6 +9,7 @@ angular.module('civicClient', [
   'ui.grid.autoResize',
   'ui.grid.pagination',
   'ui.grid.cellNav',
+  'ui.gravatar',
   'formly',
   'aa.notify',
   'aa.select2',

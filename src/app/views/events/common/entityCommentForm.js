@@ -54,10 +54,7 @@
     ctrl.submit = function(comment) {
       ctrl.entityTalkModel.actions.submitComment(comment).then(function() {
         console.log('comment submitted.');
-        ctrl.entityTalkModel.actions.getComments().then(function(comments){
-          ctrl.entityTalkModel.data.comments = comments;
-          console.log('comments updated.');
-        });
+        ctrl.entityTalkModel.actions.getComments();
       });
     };
   }

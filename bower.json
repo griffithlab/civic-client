@@ -19,7 +19,8 @@
     "ngDialog": "https://github.com/jmcmichael/ngDialog.git#0.3.12a",
     "angular-loading-bar": "~0.7.1",
     "api-check": "~7.0.0",
-    "angular-formly-templates-bootstrap": "~4.0.6"
+    "angular-formly-templates-bootstrap": "~4.0.6",
+    "angular-gravatar": "~0.3.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

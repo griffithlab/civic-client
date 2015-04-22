@@ -1,9 +1,14 @@
 <div class="entityComment">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-11">
       <div class="title-block">
-        <h4 class="title" ng-bind="ctrl.comment.title">Comment Title</h4>
-        <span class="small">Posted by  <strong><span ng-bind="ctrl.comment.user.username">user.username</span></strong> <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span></span>
+        <div class="user-image">
+          <user-image height="32" width="32"></user-image>
+        </div>
+        <div class="comment-title">
+          <h4 class="title" ng-bind="ctrl.comment.title">Comment Title</h4>
+          <span class="small">Posted by  <strong><span ng-bind="ctrl.comment.user.username">user.username</span></strong> <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span></span>
+        </div>
       </div>
     </div>
   </div>
