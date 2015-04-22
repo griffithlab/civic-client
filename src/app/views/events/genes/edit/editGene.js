@@ -36,13 +36,13 @@
 
       ctrl.user = {};
 
-      ctrl.userFields = [
+      ctrl.geneFields = [
         {
           key: 'entrez_name',
           type: 'input',
           templateOptions: {
             label: 'Name',
-            placeholder: gene.entrez_name
+            value: gene.entrez_name
           }
         },
         {
@@ -50,11 +50,20 @@
           type: 'textarea',
           templateOptions: {
             rows: 8,
-            label: 'Description',
-            placeholder: gene.description
+            label: 'Description'
           }
         }
       ];
+
+      ctrl.submit = function() {
+        console.log('submitRevision clicked.');
+        var gene = $scope.ctrl.gene;
+        $scope.ctrl.gene.$update({ geneId: gene.entrez_id});
+      };
+
+      ctrl.apply = function() {
+        console.log('applyRevision clicked.');
+      };
 
       ctrl.isAdmin = Security.isAdmin;
       // unbind watcher after first digest
