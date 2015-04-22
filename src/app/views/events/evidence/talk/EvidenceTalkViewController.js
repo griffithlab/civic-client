@@ -68,6 +68,7 @@
                                       lastRevision,
 
                                       // inherited resolved resources
+                                      Evidence,
                                       gene,
                                       variant,
                                       evidence) {
@@ -78,6 +79,7 @@
     evidenceTalkModel.config = {
       type: 'evidence',
       name: evidence.id,
+      service: Evidence,
       state: {
         baseState: 'events.genes.summary.variants.summary.evidence.talk',
         baseUrl: $state.href('events.genes.summary.variants.summary.evidence.talk', { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id })
@@ -120,6 +122,124 @@
       revisions: revisions,
       lastRevision: lastRevision
     };
+
+    evidenceTalkModel.actions = {
+      getComments: function() {
+        return Evidence.getComments(evidence.id)
+          .then(function(response) {
+            evidenceTalkModel.data.comments = response;
+            return response;
+          });
+      },
+
+      getComment: function(commentId) {
+        return Evidence.getComment(evidence.id, commentId);
+      },
+
+      submitComment: function(reqObj) {
+        reqObj.evidenceId = evidence.id;
+        return Evidence.submitComment(reqObj)
+          .then(function(response) {
+            return response;
+          });
+      },
+
+      updateComment: function(reqObj) {
+        reqObj.evidenceId = evidence.id;
+        return Evidence.updateComment(reqObj)
+          .then(function(response){
+            return response;
+          });
+      },
+
+      deleteComment: function(commentId) {
+        return Evidence.deleteComment({ evidenceId: evidence.id, commentId: commentId })
+          .then(function(response) {
+            return response;
+          });
+      },
+
+      getChanges: function() {
+        return Evidence.getChanges(evidence.id)
+          .then(function(response) {
+            evidenceTalkModel.data.changes = response;
+            return response;
+          });
+      },
+
+      getChange: function(changeId) {
+        return Evidence.getChange({ evidenceId: evidence.id, changeId: changeId })
+          .then(function(response) {
+            return response;
+          })
+      },
+
+      rejectChange: function(changeId) {
+        return Evidence.rejectChange({ evidenceId: evidence.id, changeId: changeId })
+          .then(function(response) {
+            return response;
+          })
+      },
+
+      submitChangeComment: function(reqObj) {
+        reqObj.evidenceId = evidence.id;
+        return Evidence.submitChangeComment(reqObj)
+          .then(function(response) {
+            return response;
+          });
+      },
+      updateChangeComment: function(reqObj) {
+        reqObj.evidenceId = evidence.id;
+        return Evidence.updateChangeComment(reqObj)
+          .then(function(response) {
+            return response;
+          });
+      },
+      getChangeComments: function(changeId) {
+        return Evidence.getChangeComments({evidenceId: evidence.id, changeId: changeId})
+          .then(function(response) {
+            return response;
+          })
+      },
+      getChangeComment: function(changeId, commentId) {
+        return Evidence.getChangeComment({
+          evidenceId: evidence.id,
+          changeId: changeId,
+          commentId: commentId
+        }).then(function(response){
+          return response;
+        });
+      },
+      deleteChangeComment: function(changeId, commentId) {
+        return Evidence.deleteChangeComment({
+          evidenceId: evidence.id,
+          changeId: changeId,
+          commentId: commentId
+        }).then(function(response){
+          return response;
+        });
+      },
+
+      getRevisions: function() {
+        return Evidence.getRevisions(evidence.id)
+          .then(function(response) {
+            evidenceTalkModel.data.revisions = response;
+            return response;
+          });
+      },
+      getRevision: function(revisionId) {
+        return Evidence.getRevision({ evidenceId: evidence.id, revisionId: revisionId })
+          .then(function(response) {
+            return response;
+          });
+      },
+      getLastRevision: function() {
+        return Evidence.getLastRevision({ evidenceId: evidence.id })
+          .then(function(response) {
+            return response;
+          });
+      }
+    }
   }
 
 })();

@@ -84,6 +84,7 @@
     geneTalkModel.config = {
       type: 'gene',
       name: gene.entrez_name,
+      service: Genes,
       state: {
         baseState: 'events.genes.talk',
         baseUrl: $state.href('events.genes.talk', { geneId: gene.entrez_id })
@@ -114,10 +115,6 @@
           params: { geneId: gene.entrez_id }
         }
       ]
-    };
-
-    geneTalkModel.services = {
-      Genes: Genes
     };
 
     geneTalkModel.data = {

@@ -79,6 +79,7 @@
     variantTalkModel.config = {
       type: 'variant',
       name: variant.name,
+      service: Variants,
       state: {
         baseState: 'events.genes.summary.variants.talk',
         baseUrl: $state.href('events.genes.summary.variants.talk', { geneId: gene.entrez_id, variantId: variant.id })
@@ -109,10 +110,6 @@
           params: { geneId: gene.entrez_id, variantId: variant.id }
         }
       ]
-    };
-
-    variantTalkModel.services = {
-      Variants: Variants
     };
 
     variantTalkModel.data = {
