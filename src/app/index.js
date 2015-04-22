@@ -119,3 +119,19 @@ angular.module('civic.add', ['ui.router', 'aa.select2']);
 
 // disable anchor-scrolling
 angular.module('civicClient').value('$anchorScroll', angular.noop);
+
+// configure gravatar service
+angular.module('ui.gravatar').config([
+  'gravatarServiceProvider', function(gravatarServiceProvider) {
+    gravatarServiceProvider.defaults = {
+      size     : 32,
+      "default": 'retro'  // Mystery man as default for missing avatars
+    };
+
+    // Use https endpoint
+    // gravatarServiceProvider.secure = true;
+
+    // Force protocol
+    // gravatarServiceProvider.protocol = 'my-protocol';
+  }
+]);
