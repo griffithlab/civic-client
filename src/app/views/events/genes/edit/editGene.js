@@ -29,6 +29,8 @@
       var ctrl = $scope.ctrl;
 
       ctrl.gene = geneModel.data.entity;
+      ctrl.geneEdit = angular.extend({}, ctrl.gene);
+      ctrl.geneEdit.comment = {title: 'Comment Title', text:'Comment text.'};
       ctrl.geneModel = geneModel;
       ctrl.myGeneInfo = geneModel.data.myGeneInfo;
       ctrl.variants = geneModel.data.variants;
@@ -58,6 +60,25 @@
         },
         {
           template: '<hr/>'
+        },
+        {
+          model: ctrl.geneEdit.comment,
+          key: 'title',
+          type: 'input',
+          templateOptions: {
+            label: 'Comment Title',
+            value: 'title'
+          }
+        },
+        {
+          model: ctrl.geneEdit.comment,
+          key: 'text',
+          type: 'textarea',
+          templateOptions: {
+            rows: 5,
+            label: 'Comment',
+            value: 'text'
+          }
         }
       ];
 
@@ -70,7 +91,7 @@
       ctrl.apply = function(gene) {
         console.log('applyRevision clicked.');
         gene.geneId = gene.entrez_id;
-        gene.$update();
+        $scope.ctrl.geneModel.services.Genes.applyChange(gene);
       };
 
       ctrl.isAdmin = Security.isAdmin;

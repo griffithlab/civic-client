@@ -1,7 +1,12 @@
 <div class="editGene {{ ctrl.styles.edit.summaryBackgroundColor }}">
+  <div class="row">
+    <div class="col-xs-12">
+      <p><strong>Preview: </strong></p>
+    </div>
+  </div>
   <div class="row edit-summary">
     <div class="col-xs-6">
-      <gene-description></gene-description>
+      <gene-description gene-data="ctrl.geneEdit"></gene-description>
     </div>
     <div class="col-xs-6">
       <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
@@ -15,19 +20,19 @@
 
   <div class="row edit-form">
     <div class="col-xs-12">
-      <formly-form model="ctrl.gene" fields="ctrl.geneFields">
+      <formly-form model="ctrl.geneEdit" fields="ctrl.geneFields">
         <div class="pull-right">
           <cancel-button></cancel-button>
-          <button type="submit" class="btn btn-default" ng-click="ctrl.apply(ctrl.gene)" ng-show="ctrl.isAdmin()">Apply Revision</button>
-          <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.gene)">Submit Revision for Review</button>
+          <button type="submit" class="btn btn-default" ng-click="ctrl.apply(ctrl.geneEdit)" ng-show="ctrl.isAdmin()">Apply Revision</button>
+          <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.geneEdit)">Submit Revision for Review</button>
         </div>
       </formly-form>
     </div>
   </div>
   <div class="row" style="border-top: 2px solid #CCC; padding-top: 1em;">
     <div class="col-xs-12">
-      <p><strong>ctrl.gene:</strong></p>
-      <pre ng-bind="ctrl.gene|json"></pre>
+      <p><strong>ctrl.geneEdit:</strong></p>
+      <pre ng-bind="ctrl.geneEdit|json"></pre>
     </div>
   </div>
 </div>

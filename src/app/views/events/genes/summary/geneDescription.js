@@ -5,6 +5,9 @@
     .directive('geneDescription', function() {
       return {
         restrict: 'E',
+        scope: {
+          geneData: '='
+        },
         controller: 'GeneDescriptionController',
         link: geneDescriptionLink,
         templateUrl: 'app/views/events/genes/summary/geneDescription.tpl.html'
