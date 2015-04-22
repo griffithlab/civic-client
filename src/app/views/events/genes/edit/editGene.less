@@ -4,6 +4,23 @@
 @import 'src/app/styles/_mixins.less';
 
 .editGene {
-  min-height: 300px;
-  background-color: #CCC;
+  .fullBleed();
+  padding-top: @contentPadding;
+
+  .edit-summary {
+    padding-bottom: @contentPadding;
+    border-bottom: 1px solid darken(@pageBackground2, 10%);
+  }
+
+  .edit-messages {
+    padding-top: @contentPadding;
+    background-color: @pageBackground;
+    border-bottom: 1px solid darken(@pageBackground2, 10%);
+  }
+
+  .edit-form {
+    background-color: @pageBackground;
+    padding-top: @contentPadding;
+    padding-bottom: @contentPadding;
+  }
 }

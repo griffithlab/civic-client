@@ -8,16 +8,58 @@
   function editGeneDirective() {
     return {
       restrict: 'E',
+      require: '^^entityView',
       scope: false,
       templateUrl: 'app/views/events/genes/edit/editGene.tpl.html',
+      link: editGeneLink,
       controller: 'EditGeneController'
     }
   }
 
   // @ngInject
-  function EditGeneController ($scope) {
-    var ctrl = $scope.ctrl = {};
+  function editGeneLink(scope, element, attributes, entityView) {
+    scope.ctrl = {};
+    scope.ctrl.geneModel= entityView.entityModel
+  }
 
-    ctrl.message = "hello";
+  // @ngInject
+  function EditGeneController ($scope, Security) {
+    var unwatch = $scope.$watch('ctrl.geneModel', function(geneModel){
+      var config = geneModel.config;
+      var ctrl = $scope.ctrl;
+      var gene = ctrl.gene = geneModel.data.entity;
+      ctrl.myGeneInfo = geneModel.data.myGeneInfo;
+      ctrl.variants = geneModel.data.variants;
+      ctrl.variantGroups = geneModel.data.variantGroups;
+
+      ctrl.styles = config.styles;
+
+      ctrl.user = {};
+
+      ctrl.userFields = [
+        {
+          key: 'entrez_name',
+          type: 'input',
+          templateOptions: {
+            label: 'Name',
+            placeholder: gene.entrez_name
+          }
+        },
+        {
+          key: 'description',
+          type: 'textarea',
+          templateOptions: {
+            rows: 8,
+            label: 'Description',
+            placeholder: gene.description
+          }
+        }
+      ];
+
+      ctrl.isAdmin = Security.isAdmin;
+      // unbind watcher after first digest
+      unwatch();
+    }, true);
+
   }
 })();

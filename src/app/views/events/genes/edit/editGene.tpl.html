@@ -1,8 +1,33 @@
-<div class="editGene">
-  <div class="row">
+<div class="editGene {{ ctrl.styles.edit.summaryBackgroundColor }}">
+  <div class="row edit-summary">
+    <div class="col-xs-6">
+      <gene-description></gene-description>
+    </div>
+    <div class="col-xs-6">
+      <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
+    </div>
+  </div>
+  <div class="row edit-messages">
     <div class="col-xs-12">
-      <p>message:</p>
-      <p>{{ ctrl.message }}</p>
+      <p>Complete your edits using the form below, then press the 'Submit Revision for Review' button. <span ng-show="ctrl.isAdmin()">As you are an admin, you may also choose to immediately apply your edits without review by clicking 'Apply Edits'.</span></p>
+    </div>
+  </div>
+
+  <div class="row edit-form">
+    <div class="col-xs-12">
+      <formly-form model="ctrl.user" fields="ctrl.userFields">
+        <div class="pull-right">
+          <cancel-button></cancel-button>
+          <button type="submit" class="btn btn-default" ng-click="ctrl.apply(ctrl.user)">Apply Revision</button>
+          <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.user)">Submit Revision for Review</button>
+        </div>
+      </formly-form>
+    </div>
+  </div>
+  <div class="row" style="border-top: 2px solid #CCC; padding-top: 1em;">
+    <div class="col-xs-12">
+      <p><strong>ctrl.gene:</strong></p>
+      <pre ng-bind="ctrl.gene|json"></pre>
     </div>
   </div>
 </div>

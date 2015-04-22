@@ -99,6 +99,9 @@
         },
         variantMenu: {
           backgroundColor: 'pageBackground2'
+        },
+        edit: {
+          summaryBackgroundColor: 'pageBackground2'
         }
       }
     };
