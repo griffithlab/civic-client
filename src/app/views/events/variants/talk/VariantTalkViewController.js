@@ -25,6 +25,7 @@
             return Variants.getLastRevision(variant.id);
           }
         },
+        deepStateRedirect: true,
         data: {
           titleExp: '"Variant " + variant.name + " Talk"',
           navMode: 'sub'

@@ -11,26 +11,25 @@
   margin: -3px -5px;
   border: 1px solid rgba(100,100,100, 0.1);
   position: relative;
-}
 
-.editableField.hover {
-  cursor: pointer;
-  background-color: rgba(0,0,0, 0.1);
-  border-color: @civicLightPurple;
-  &::after {
-    position: absolute;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    font-size: .5em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: @civicPurple;
-    content: "\270f";
+  &.hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0, 0.1);
+    border-color: @civicLightPurple;
+    &::after {
+      position: absolute;
+      font-family: 'Glyphicons Halflings';
+      font-style: normal;
+      font-weight: normal;
+      font-size: .5em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: @civicPurple;
+      content: "\270f";
+    }
   }
-
-
 }
+
 
 // lg/small sizes necessary for different sized fields, e.g. entity titles vs.
 // entity fields. These styles specify the size and location of the edit icon

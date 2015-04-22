@@ -25,6 +25,7 @@
             return Evidence.getLastRevision(evidence.id);
           }
         },
+        deepStateRedirect: true,
         data: {
           titleExp: '"Evidence EID" + evidence.id + " Talk"',
           navMode: 'sub'

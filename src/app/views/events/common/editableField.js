@@ -25,13 +25,24 @@
   }
 
   // @ngInject
-  function EditableFieldController($scope, $log, _) {
+  function EditableFieldController($scope, $state, $log, _) {
     var ctrl = $scope.ctrl = {};
+    var baseState = '';
+    var stateParams = {};
+
     var unwatch = $scope.$watch('entityModel', function(entityModel){
+      baseState  = entityModel.config.state.baseState;
+      stateParams = entityModel.config.state.params;
       ctrl.editState = entityModel.config.state.baseUrl + '.edit';
       ctrl.entityModel = entityModel;
       unwatch();
     });
+
+    //$scope.$watch('baseState', function() {
+    //  if (state === ctrl.baseState + '.edit') {
+    //    ctrl.active = true;
+    //  }
+    //});
 
     ctrl.mouseOver = function() {
       ctrl.hover = true;
@@ -39,7 +50,12 @@
 
     ctrl.mouseLeave = function() {
       ctrl.hover = false;
+    };
+
+    ctrl.click = function() {
+      $state.go(baseState + '.edit', stateParams);
     }
+
   }
 
 

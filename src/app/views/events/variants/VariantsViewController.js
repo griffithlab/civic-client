@@ -21,12 +21,12 @@
           }
         },
         controller: 'VariantsViewController',
-        //deepStateRedirect: { params: ['variantId'] }
+        deepStateRedirect: { params: ['variantId'] }
       })
       .state('events.genes.summary.variants.summary', {
         url: '/summary',
         template: '<variant-summary></variant-summary>',
-        //deepStateRedirect: { params: ['variantId'] },
+        deepStateRedirect: { params: ['variantId'] },
         data: {
           navMode: 'sub',
           titleExp: '"Variant " + variant.name'

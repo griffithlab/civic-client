@@ -41,6 +41,14 @@
           titleExp: '"Gene " + gene.entrez_name + " Summary"',
           navMode: 'sub'
         }
+      })
+      .state('events.genes.edit', {
+        url: '/edit',
+        template: '<edit-gene></edit-gene>',
+        data: {
+          titleExp: '"Gene " + gene.entrez_name + " Edit"',
+          navMode: 'sub'
+        }
       });
   }
 
@@ -64,7 +72,8 @@
       name: gene.entrez_name,
       state: {
         baseState: 'events.genes',
-        baseUrl: $state.href('events.genes', { geneId: gene.entrez_id })
+        baseUrl: $state.href('events.genes', { geneId: gene.entrez_id }),
+        params: { geneId: gene.entrez_id }
       },
       tabData: [
         {
