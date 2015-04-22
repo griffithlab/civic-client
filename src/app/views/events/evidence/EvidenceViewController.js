@@ -18,7 +18,7 @@
           }
         },
         controller: 'EvidenceViewController',
-        deepStateRedirect: { params: ['evidenceId'] }
+        //deepStateRedirect: { params: ['evidenceId'] }
       })
       .state('events.genes.summary.variants.summary.evidence.summary', {
         url: '/summary',
@@ -64,7 +64,7 @@
         },
         {
           heading: 'Evidence Talk',
-          route: 'events.genes.summary.variants.summary.evidence.talk',
+          route: 'events.genes.summary.variants.summary.evidence.talk.log',
           params: { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id }
         }
       ],

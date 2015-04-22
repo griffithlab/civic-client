@@ -31,7 +31,7 @@
         }
       })
       .state('events.genes.summary.variants.talk.log', {
-        url: '/log', // transition to events.genes.talk abstract state defaults to this state
+        url: '', // transition to events.genes.talk abstract state defaults to this state
         template: '<entity-talk-log entity-talk-model="ctrl.variantTalkModel"></entity-talk-log>',
         data: {
           titleExp: '"Variant " + variant.name + " Log"',
