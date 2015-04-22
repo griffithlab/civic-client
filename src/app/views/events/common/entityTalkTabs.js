@@ -56,6 +56,7 @@ function EntityTalkTabsController($scope, $state) {
 
   ctrl.showCorner = config.type === 'variant';
 
+  ctrl.tabRowBackground = config.styles.tabs.tabRowBackground;
   ctrl.viewBackground = 'view-' + config.styles.view.backgroundColor;
 
   $scope.tabs = $scope.entityTalkModel.config.tabData;

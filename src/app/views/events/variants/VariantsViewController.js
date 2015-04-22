@@ -68,8 +68,8 @@
       ],
       styles: {
         view: {
-          background: 'pageBackground',
-          foreground: 'pageBackground2'
+          backgroundColor: 'pageBackground',
+          foregroundColor: 'pageBackground2'
         }
       }
     };

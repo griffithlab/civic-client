@@ -36,7 +36,6 @@
         state: config.state
       };
 
-
       // unbind watcher after first digest
       unwatch();
     }, true);

@@ -23,10 +23,10 @@
     var unwatch = $scope.$watch('ctrl.entityModel', function(entityModel){
       var config, data, ctrl;
 
-      config = entityModel.config;
-      data = entityModel.data;
       ctrl = $scope.ctrl;
+      data = entityModel.data;
 
+      ctrl.styles = entityModel.config.styles;
       ctrl.variant = data.entity;
       ctrl.gene = data.parent;
       ctrl.evidenceItems = entityModel.data.evidenceItems;

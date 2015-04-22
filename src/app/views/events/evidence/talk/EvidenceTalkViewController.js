@@ -85,6 +85,9 @@
         view: {
           summaryBackgroundColor: 'pageBackground2',
           talkBackgroundColor: 'pageBackground'
+        },
+        tabs: {
+          tabRowBackground: 'pageBackground2Gradient'
         }
       },
       tabData: [
