@@ -1,11 +1,18 @@
 <div class="entityTalkComments">
   <div class="row">
     <div class="col-xs-12 comment-list">
-      <ul class="comments">
-        <li ng-repeat="comment in entityTalkModel.data.comments">
-          <entity-comment comment-data="comment"
-        </li>
-      </ul>
+      <div ng-switch="entityTalkModel.data.comments.length">
+        <div ng-switch-when="0">
+          <p>No comments found.</p>
+        </div>
+        <div ng-switch-default>
+          <ul class="comments">
+            <li ng-repeat="comment in entityTalkModel.data.comments">
+              <entity-comment comment-data="comment"
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">

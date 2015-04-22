@@ -23,7 +23,7 @@
   }
 
   // @ngInject
-  function EntityCommentFormController($scope, Genes, $cacheFactory) {
+  function EntityCommentFormController($scope) {
     var ctrl = $scope.ctrl = {};
     ctrl.entityTalkModel = $scope.entityTalkModel;
     ctrl.newComment = {
@@ -51,14 +51,10 @@
       }
     ];
 
-    ctrl.cf = $cacheFactory;
-
     ctrl.submit = function(comment) {
-      var geneId = $scope.entityTalkModel.data.entity.entrez_id;
-      comment.geneId = geneId;
-      ctrl.entityTalkModel.services.Genes.submitComment(comment).then(function() {
+      ctrl.entityTalkModel.actions.submitComment(comment).then(function() {
         console.log('comment submitted.');
-        Genes.getComments(geneId).then(function(comments){
+        ctrl.entityTalkModel.actions.getComments().then(function(comments){
           ctrl.entityTalkModel.data.comments = comments;
           console.log('comments updated.');
         });

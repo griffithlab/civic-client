@@ -4,7 +4,7 @@
       <p>Add Comment:</p>
     </div>
   </div>
-  <div class="row">
+  <div class="row comment-form">
     <div class="col-xs-12">
       <formly-form model="ctrl.newComment" fields="ctrl.newCommentFields">
         <div class="pull-right">
@@ -13,8 +13,10 @@
       </formly-form>
     </div>
   </div>
-  <!--<hr/>-->
-  <!--<pre ng-bind="ctrl.newComment|json"></pre>-->
-  <!--<hr/>-->
-  <!--<pre ng-bind="ctrl.newCommentFields|json"></pre>-->
+  <hr/>
+  <pre ng-bind="ctrl.newComment|json"></pre>
+  <hr/>
+  <pre ng-bind="ctrl.newCommentFields|json"></pre>
+  <hr/>
+  <pre ng-bind="ctrl.entityTalkModel|json"></pre>
 </div>

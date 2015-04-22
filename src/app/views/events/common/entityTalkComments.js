@@ -26,7 +26,6 @@
   function EntityTalkCommentsController($scope) {
     var ctrl = $scope.ctrl = {};
     ctrl.entityTalkModel = $scope.entityTalkModel;
-
   }
 
 })();
