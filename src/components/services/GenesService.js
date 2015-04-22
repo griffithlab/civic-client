@@ -69,8 +69,7 @@
         getComments: {
           method: 'GET',
           url: '/api/genes/:geneId/comments',
-          isArray: true,
-          cache: cache
+          isArray: true
         },
         getComment: {
           method: 'GET',

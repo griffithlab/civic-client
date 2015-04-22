@@ -67,6 +67,7 @@
                                   revisions,
                                   lastRevision,
                                   // inherited resolved resources
+                                  Genes,
                                   gene,
                                   variants,
                                   variantGroups,
@@ -113,6 +114,10 @@
           params: { geneId: gene.entrez_id }
         }
       ]
+    };
+
+    geneTalkModel.services = {
+      Genes: Genes
     };
 
     geneTalkModel.data = {

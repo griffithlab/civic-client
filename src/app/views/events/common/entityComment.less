@@ -1,0 +1,27 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.entityComment {
+  .clearfix();
+  border-radius: @border-radius-base;
+  background-color: @pageBackground2;
+  margin-bottom: @contentPadding;
+
+  @pad: @contentPadding/2;
+
+  .title {
+    margin: 0;
+    padding: 0;
+  }
+
+  .title-block {
+    border-bottom: 1px solid @pageBackground4;
+    padding: @pad;
+  }
+
+  .text-block {
+    padding: @pad @pad 0 @pad;
+  }
+}

@@ -1,8 +1,18 @@
 <div class="entityTalkComments">
-  <ul>
-    <li ng-repeat="comment in entityTalkModel.data.comments">
-      <p ng-bind="comment.title">comment title</p>
-      <p ng-bind="comment.text">comment text</p>
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col-xs-12 comment-list">
+      <ul class="comments">
+        <li ng-repeat="comment in entityTalkModel.data.comments">
+          <entity-comment comment-data="comment"
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 comment-form">
+      <entity-comment-form entity-talk-model="ctrl.entityTalkModel"></entity-comment-form>
+    </div>
+  </div>
+
+
 </div>
