@@ -1,4 +1,14 @@
 <div class="userImage">
-  <img gravatar-src="{{ currentUser.email }}" gravatar-size="{{ ctrl.width }}">
+  <!-- determine if user object or system user string -->
+  <div ng-switch="ctrl.hasEmail">
+    <div ng-switch-when="true">
+      <img gravatar-src="{{currentUser.email}}"
+           gravatar-size="{{ctrl.width}}"
+           width="{{ctrl.width}}" height="{{ctrl.height}}">
+    </div>
+    <div ng-switch-default>
+      <img src="assets/images/default-user-img.jpg" width="{{ ctrl.width }}" height="{{ ctrl.height }}"/>
+    </div>
+  </div>
 </div>
 

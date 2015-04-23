@@ -1,17 +1,26 @@
 <div class="entityCommentForm">
-  <div class="row">
-    <div class="col-xs-12">
-      <p>Add Comment:</p>
-    </div>
-  </div>
-  <div class="row comment-form">
-    <div class="col-xs-12">
-      <formly-form model="ctrl.newComment" fields="ctrl.newCommentFields">
-        <div class="pull-right">
-          <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.newComment)">Submit Comment</button>
+  <div ng-switch="ctrl.isAuthenticated">
+
+    <div ng-switch-when="true">
+      <div class="row comment-form">
+        <div class="col-xs-12">
+          <formly-form model="ctrl.newComment" fields="ctrl.newCommentFields">
+            <div class="pull-right">
+              <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.newComment)">Submit Comment</button>
+            </div>
+          </formly-form>
         </div>
-      </formly-form>
+      </div>
     </div>
+
+    <div ng-switch-default>
+      <div class="row">
+        <div class="col-xs-12">
+          <p><strong>Please Sign In to post comments.</strong></p>
+        </div>
+      </div>
+    </div>
+
   </div>
   <!--<hr/>-->
   <!--<pre ng-bind="ctrl.newComment|json"></pre>-->

@@ -10,7 +10,8 @@
       restrict: 'E',
       scope: {
         height: '@',
-        width: '@'
+        width: '@',
+        user: '='
       },
       templateUrl: 'components/directives/userImage.tpl.html',
       controller: 'UserImageController'
@@ -18,11 +19,15 @@
   }
 
   // @ngInject
-  function UserImageController($scope, Security) {
+  function UserImageController($scope) {
     var ctrl = $scope.ctrl = {};
+
     ctrl.height = $scope.height;
     ctrl.width = $scope.width;
-    ctrl.currentUser = Security.currentUser;
+    ctrl.user = $scope.user;
+
+    ctrl.hasEmail = typeof ctrl.user === 'object' && _.has(ctrl.user, 'email') && ctrl.user.email.length != 0;
+    console.log('has email: ' + ctrl.hasEmail);
   }
 
 })();

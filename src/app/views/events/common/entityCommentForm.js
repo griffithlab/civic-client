@@ -12,19 +12,18 @@
         entityTalkModel: '='
       },
       controller: 'EntityCommentFormController',
-      link: entityCommentFormLink,
       templateUrl: 'app/views/events/common/entityCommentForm.tpl.html'
     }
   }
 
-  // @ngInject
-  function entityCommentFormLink(scope, element, attributes) {
 
-  }
 
   // @ngInject
-  function EntityCommentFormController($scope) {
+  function EntityCommentFormController($scope, Security) {
     var ctrl = $scope.ctrl = {};
+    ctrl.isAuthenticated = Security.isAuthenticated();
+    ctrl.isAdmin = Security.isAdmin();
+    ctrl.currentUser = Security.currentUser;
     ctrl.entityTalkModel = $scope.entityTalkModel;
     ctrl.newComment = {
       title: '',
