@@ -1,27 +1,25 @@
 <div class="entityTalkRevisions">
-  <p>Entity Talk Suggested Revisions:</p>
-  <ul>
-    <li ng-repeat="change in entityTalkModel.data.changes">
-      <p>ID: {{ change.id }}</p>
-      <p>User: {{ change.user }}</p>
-      <p>Created at: {{ change.created_at }}</p>
-      <p>Diffs:
-        <p ng-bind-html="change.diffs.description|unsafe"></p>
-      </p>
-    </li>
-  </ul>
-  <p>Entity Talk Applied Revisions:</p>
-  <ul>
-    <li ng-repeat="revision in entityTalkModel.data.revisions">
-      <p>ID: {{ revision.id }}</p>
-      <p>User: {{ revision.user }}</p>
-      <p>Created at: {{ revision.created_at }}</p>
-      <p>Diffs:
-      <p ng-bind-html="revision.diffs.description|unsafe"></p>
-      <p>Comment:</p>
-      <p>Title: <span ng-bind="revision.comment."
-      </p>
-    </li>
-  </ul>
-  <pre ng-bind="entityTalkModel|json"></pre>
+  <div class="row {{ ctrl.styles.view.backgroundColor }}">
+    <div class="col-xs-12">
+      <p>Click on a revision in the table below to view, comment, and manage.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 evidence-item-grid">
+      <revisions-grid revision-items="ctrl.revisionItems"></revisions-grid>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="revisions-view">
+        <ui-view></ui-view>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="ctrl.revisionItems|json"></pre>
+    </div>
+  </div>
 </div>
