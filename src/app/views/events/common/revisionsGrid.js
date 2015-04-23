@@ -9,6 +9,10 @@
     var directive = {
       restrict: 'E',
       replace: true,
+      // require: '^^entityTalkRevisions',
+      //link: function(scope, element, attributes) {
+      //  scope.entityTalkRevisions = entityTalkRevisions;
+      //},
       scope: {
         revisionItems: '='
       },
@@ -19,7 +23,7 @@
   }
 
   // @ngInject
-  function RevisionsGridController($scope, $stateParams, $state, uiGridConstants, _) {
+  function RevisionsGridController($scope, $location, uiGridConstants) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
 
@@ -81,10 +85,14 @@
         }
       ]
     };
-
     ctrl.revisionsGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
       ctrl.revisionsGridOptions.data = $scope.revisionItems;
+
+      gridApi.selection.on.rowSelectionChanged($scope, function(row){
+        var newUrl = [row.entity.baseUrl, row.entity.id, 'summary'].join('/');
+        $location.url(newUrl);
+      });
     };
   }
 

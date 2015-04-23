@@ -49,7 +49,7 @@
         }
       })
       .state('events.genes.talk.revisions', {
-        url: '/revisions/:revisionId',
+        url: '/revisions',
         resolve: {
           // merge changes and revisions
           // TODO: probably need to rethink revisions/suggested changes so they share similar attributes
@@ -67,7 +67,10 @@
             })
           }
         },
-        controller: function($scope, revisionItems) {
+        controller: function($scope, revisionItems, $state, $stateParams) {
+          _.each(revisionItems, function(item) { // TODO: refactor this monstrosity - revisionsGrid should be able to generate its own URLs but needs access to entityTalkRevisions controller and ^^ require isn't working
+            item.baseUrl = [window.location.origin, $state.href('events.genes.talk.revisions', { geneId: $stateParams.geneId }, { inherit: false })].join('/');
+          });
           $scope.ctrl.revisionItems = revisionItems;
         },
         template: '<entity-talk-revisions entity-talk-model="ctrl.geneTalkModel" revision-items="ctrl.revisionItems"></entity-talk-revisions>',
@@ -81,9 +84,9 @@
         controller: function(revisionItems, $scope, $stateParams, _) {
           $scope.ctrl = {};
           $scope.ctrl.revisionItems = revisionItems;
-          $scope.ctrl.revision = _.find(revisionItems, { id: $stateParams.revisionId });
+          $scope.ctrl.revision = _.find(revisionItems, { id: Number($stateParams.revisionId) });
         },
-        template: '<entity-talk-revision-detail revision="ctrl.revision"></entity-talk-revision-detail>',
+        template: '<entity-talk-revision-summary revision-data="ctrl.revision"></entity-talk-revision-summary>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Revisions"',
           navMode: 'sub'
