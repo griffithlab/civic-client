@@ -49,8 +49,41 @@
         }
       })
       .state('events.genes.talk.revisions', {
-        url: '/revisions',
-        template: '<entity-talk-revisions entity-talk-model="ctrl.geneTalkModel"></entity-talk-revisions>',
+        url: '/revisions/:revisionId',
+        resolve: {
+          // merge changes and revisions
+          // TODO: probably need to rethink revisions/suggested changes so they share similar attributes
+          revisionItems: function(changes, revisions) {
+            var revisionItems = changes.concat(revisions);
+            return _.map(revisionItems, function(item) {
+              if(_.has(item, 'suggested_changes')) {
+                item.changes = item.suggested_changes;
+                item.type = 'suggested';
+              } else {
+                item.type = 'applied';
+                item.status = item.action;
+              }
+              return item;
+            })
+          }
+        },
+        controller: function($scope, revisionItems) {
+          $scope.ctrl.revisionItems = revisionItems;
+        },
+        template: '<entity-talk-revisions entity-talk-model="ctrl.geneTalkModel" revision-items="ctrl.revisionItems"></entity-talk-revisions>',
+        data: {
+          titleExp: '"Gene " + gene.entrez_name + " Revisions"',
+          navMode: 'sub'
+        }
+      })
+      .state('events.genes.talk.revisions.summary', {
+        url: '/summary',
+        controller: function(revisionItems, $scope, $stateParams, _) {
+          $scope.ctrl = {};
+          $scope.ctrl.revisionItems = revisionItems;
+          $scope.ctrl.revision = _.find(revisionItems, { id: $stateParams.revisionId });
+        },
+        template: '<entity-talk-revision-detail revision="ctrl.revision"></entity-talk-revision-detail>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Revisions"',
           navMode: 'sub'

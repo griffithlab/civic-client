@@ -9,7 +9,8 @@
     return {
       restrict: 'E',
       scope: {
-        entityTalkModel: '='
+        entityTalkModel: '=',
+        revisionItems: '='
       },
       link: entityTalkRevisionsLink,
       controller: 'EntityTalkRevisionsController',
@@ -28,19 +29,7 @@
     var entityTalkModel = ctrl.entityTalkModel = $scope.entityTalkModel;
 
     // merge revisions and suggested changes
-    ctrl.revisionItems = entityTalkModel.data.changes.concat(entityTalkModel.data.revisions);
-
-    // normalize revisions and suggested_changes
-    ctrl.revisionItems = _.map(ctrl.revisionItems, function(item) {
-      if(_.has(item, 'suggested_changes')) {
-        item.changes = item.suggested_changes;
-        item.type = 'suggested';
-      } else {
-        item.type = 'applied';
-        item.status = item.action;
-      }
-      return item;
-    })
+    ctrl.revisionItems = $scope.revisionItems;
 
   }
 
