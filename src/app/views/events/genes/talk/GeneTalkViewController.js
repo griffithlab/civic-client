@@ -26,7 +26,7 @@
             return Genes.getLastRevision(gene.entrez_id);
           }
         },
-        deepStateRedirect: true,
+        deepStateRedirect: [ 'geneId' ],
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Talk"',
           navMode: 'sub'
