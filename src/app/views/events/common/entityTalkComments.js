@@ -8,9 +8,8 @@
   function entityTalkCommentsDirective() {
     return {
       restrict: 'E',
-      scope: {
-        entityTalkModel: '='
-      },
+      scope: {},
+      require: '^^entityTalkView',
       link: entityTalkCommentsLink,
       controller: 'EntityTalkCommentsController',
       templateUrl: 'app/views/events/common/entityTalkComments.tpl.html'
@@ -18,14 +17,13 @@
   }
 
   // @ngInject
-  function entityTalkCommentsLink(scope, element, attrs) {
-
+  function entityTalkCommentsLink(scope, element, attrs, entityTalkView) {
+    scope.ctrl.entityTalkModel = entityTalkView.entityTalkModel;
   }
 
   // @ngInject
   function EntityTalkCommentsController($scope) {
     var ctrl = $scope.ctrl = {};
-    ctrl.entityTalkModel = $scope.entityTalkModel;
   }
 
 })();
