@@ -1,0 +1,20 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.GeneTalkRevisionsView {
+  .fullBleed();
+  margin-bottom: -@contentPadding;
+
+  .entity-talk-summary {
+    padding-bottom: @contentPadding;
+    padding-top: @contentPadding;
+    background-color: @pageBackground2;
+  }
+
+  .entity-talk-content {
+    background-color: @pageBackground;
+    min-height: 300px;
+  }
+}

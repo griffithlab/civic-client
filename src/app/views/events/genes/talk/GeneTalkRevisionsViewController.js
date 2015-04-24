@@ -27,7 +27,7 @@
             return Genes.getChangeComments({ geneId: $stateParams.geneId, changeId: $stateParams.changeId })
           }
         },
-        template: '<entity-talk-revisions-summary><p>ENTITY TALK REVISIONS SUMMARY</p></entity-talk-revisions-summary>',
+        template: '<entity-talk-revision-summary><p>ENTITY TALK REVISIONS SUMMARY</p></entity-talk-revision-summary>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Comments"',
           navMode: 'sub'
