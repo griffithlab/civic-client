@@ -23,11 +23,20 @@
       .state('events.genes.talk.revisions.summary', {
         url: '/summary',
         resolve: /* @ngInject */ {
-          revisionComments: function(Genes, $stateParams) {
+          change: function(Genes, $stateParams) {
+            return Genes.getChange({ geneId: $stateParams.geneId, changeId: $stateParams.changeId });
+          },
+          changeComments: function(Genes, $stateParams) {
             return Genes.getChangeComments({ geneId: $stateParams.geneId, changeId: $stateParams.changeId })
+          },
+          revisionData: function(change, changeComments) {
+            return { change: change, changeComments: changeComments}
           }
         },
-        template: '<entity-talk-revision-summary><p>ENTITY TALK REVISIONS SUMMARY</p></entity-talk-revision-summary>',
+        controller: function($scope, revisionData, change, changeComments) {
+          $scope.revisionData = revisionData;
+        },
+        template: '<entity-talk-revision-summary revision-data="revisionData"><p>ENTITY TALK REVISIONS SUMMARY</p></entity-talk-revision-summary>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Comments"',
           navMode: 'sub'
