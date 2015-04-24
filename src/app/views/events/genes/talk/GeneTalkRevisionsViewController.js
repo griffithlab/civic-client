@@ -21,7 +21,7 @@
         }
       })
       .state('events.genes.talk.revisions.summary', {
-        url: '/comments',
+        url: '/summary',
         resolve: /* @ngInject */ {
           revisionComments: function(Genes, $stateParams) {
             return Genes.getChangeComments({ geneId: $stateParams.geneId, changeId: $stateParams.changeId })
@@ -75,7 +75,7 @@
       parentId: null,
       changes: changes,
       revisions: revisions,
-      lastRevision: lastRevision,
+      lastRevision: lastRevision
     };
 
     geneTalkRevisionsModel.actions = {
