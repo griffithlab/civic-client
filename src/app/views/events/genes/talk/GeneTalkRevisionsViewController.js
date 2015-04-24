@@ -47,6 +47,7 @@
   // @ngInject
   function GeneTalkRevisionsViewController($scope,
                                            $state,
+                                           $stateParams,
                                            // resolved resources
                                            lastRevision,
                                            // inherited resolved resources
@@ -84,7 +85,11 @@
       parentId: null,
       changes: changes,
       revisions: revisions,
-      lastRevision: lastRevision
+      lastRevision: lastRevision,
+      currentRevision: { // placeholder for /summary revision data
+        comments: [],
+        change: {}
+      }
     };
 
     geneTalkRevisionsModel.actions = {
@@ -122,15 +127,16 @@
           })
       },
 
-      submitChangeComment: function(reqObj) {
+      submitComment: function(reqObj) {
         reqObj.geneId = gene.entrez_id;
+        reqObj.changeId = $stateParams.changeId;
         return Genes.submitChangeComment(reqObj)
           .then(function(response) {
             return response;
           });
       },
 
-      updateChangeComment: function(reqObj) {
+      updateComment: function(reqObj) {
         reqObj.geneId = gene.entrez_id;
         return Genes.updateChangeComment(reqObj)
           .then(function(response) {
@@ -138,14 +144,17 @@
           });
       },
 
-      getChangeComments: function(changeId) {
-        return Genes.getChangeComments({geneId: gene.entrez_id, changeId: changeId})
+      getComments: function() {
+        return Genes.getChangeComments({geneId: gene.entrez_id, changeId: $stateParams.changeId })
           .then(function(response) {
+            console.log('getting change comments.');
+            console.table(response);
+            geneTalkRevisionsModel.data.currentRevision.comments = response;
             return response;
           })
       },
 
-      getChangeComment: function(changeId, commentId) {
+      getComment: function(changeId, commentId) {
         return Genes.getChangeComment({
           geneId: gene.entrez_id,
           changeId: changeId,
@@ -155,7 +164,7 @@
         });
       },
 
-      deleteChangeComment: function(changeId, commentId) {
+      deleteComment: function(changeId, commentId) {
         return Genes.deleteChangeComment({
           geneId: gene.entrez_id,
           changeId: changeId,

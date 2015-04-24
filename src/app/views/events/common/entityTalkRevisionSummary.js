@@ -28,9 +28,11 @@
   // @ngInject
   function EntityTalkRevisionSummaryController($scope) {
     var ctrl = $scope.ctrl = {};
-    ctrl.revision = $scope.revisionData;
+    ctrl.change= {};
     $scope.$watch('ctrl.entityTalkRevisionsModel', function(entityTalkRevisionsModel) {
       console.log('ctrl.entityTalkRevisionsModel watch triggered.');
-    })
+      entityTalkRevisionsModel.data.currentRevision.change = $scope.revisionData.change;
+      entityTalkRevisionsModel.data.currentRevision.comments = $scope.revisionData.changeComments;
+    });
   }
 })();

@@ -210,8 +210,7 @@
             geneId: '@geneId',
             changeId: '@changeId'
           },
-          isArray: true,
-          cache: cache
+          isArray: true
         },
         getChangeComment: {
           method: 'GET',

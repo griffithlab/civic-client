@@ -16,8 +16,6 @@
     }
   }
 
-
-
   // @ngInject
   function EntityCommentFormController($scope, Security) {
     var ctrl = $scope.ctrl = {};

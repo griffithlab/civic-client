@@ -1,4 +1,34 @@
 <div class="entityTalkRevisionSummary">
-  <p>Revision Summary</p>
-  <pre ng-bind="ctrl.revision|json"></pre>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Suggested Change #<span ng-bind="ctrl.change.id">ID</span> Diff:</h4>
+      <p ng-bind-html="ctrl.entityTalkRevisionsModel.data.currentRevision.change.diffs.description"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 comment-list">
+      <div ng-switch="ctrl.entityTalkRevisionsModel.data.currentRevision.comments.length">
+        <div ng-switch-when="0">
+          <p>No comments found.</p>
+        </div>
+        <div ng-switch-default>
+          <ul class="comments">
+            <li ng-repeat="comment in ctrl.entityTalkRevisionsModel.data.currentRevision.comments">
+              <entity-comment comment-data="comment"></entity-comment>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 comment-form">
+      <entity-comment-form entity-talk-model="ctrl.entityTalkRevisionsModel"></entity-comment-form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="ctrl.entityTalkRevisionsModel.data.currentRevision.comments|json"></pre>
+    </div>
+  </div>
 </div>
