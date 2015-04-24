@@ -33,8 +33,8 @@
         }
       })
       .state('events.genes.talk.log', {
-        url: '/log', // transition to events.genes.talk abstract state defaults to this state
-        template: '<entity-talk-log entity-talk-model="ctrl.geneTalkModel"></entity-talk-log>',
+        url: '/log',
+        template: '<entity-talk-log></entity-talk-log>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Log"',
           navMode: 'sub'
