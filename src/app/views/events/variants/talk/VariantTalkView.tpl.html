@@ -1,19 +1,21 @@
 <div class="VariantTalkView">
-  <div class="row entity-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
-    <div class="col-xs-12">
-      <p ng-bind="ctrl.variantTalkModel.data.entity.description"></p>
+  <entity-talk-view entity-talk-model="ctrl.variantTalkModel">
+    <div class="row entity-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
+      <div class="col-xs-12">
+        <p ng-bind="ctrl.variantTalkModel.data.entity.description"></p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <entity-talk-tabs entity-talk-model="ctrl.variantTalkModel"></entity-talk-tabs>
+    <div class="row">
+      <div class="col-xs-12">
+        <entity-talk-tabs entity-talk-model="ctrl.variantTalkModel"></entity-talk-tabs>
+      </div>
     </div>
-  </div>
-  <div class="row entity-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
-    <div class="col-xs-12">
-      <ui-view>
+    <div class="row entity-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
 
-      </ui-view>
+        </ui-view>
+      </div>
     </div>
-  </div>
+  </entity-talk-view>
 </div>

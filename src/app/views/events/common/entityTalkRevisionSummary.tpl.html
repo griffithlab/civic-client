@@ -32,4 +32,9 @@
       <entity-comment-form entity-talk-model="ctrl.entityTalkRevisionsModel"></entity-comment-form>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="ctrl.entityTalkRevisionsModel.data.currentRevision.comments|json"></pre>
+    </div>
+  </div>
 </div>

@@ -46,15 +46,7 @@
           titleExp: '"Variant " + variant.name + " Comments"',
           navMode: 'sub'
         }
-      })
-      .state('events.genes.summary.variants.talk.revisions', {
-        url: '/revisions',
-        template: '<entity-talk-revisions entity-talk-model="ctrl.variantTalkModel"></entity-talk-revisions>',
-        data: {
-          titleExp: '"Variant " + variant.name + " Revisions"',
-          navMode: 'sub'
-        }
-      })
+      });
   }
 
   // @ngInject

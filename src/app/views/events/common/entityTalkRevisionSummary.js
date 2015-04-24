@@ -29,10 +29,11 @@
   function EntityTalkRevisionSummaryController($scope) {
     var ctrl = $scope.ctrl = {};
     ctrl.change= {};
-    $scope.$watch('ctrl.entityTalkRevisionsModel', function(entityTalkRevisionsModel) {
+    var unbind = $scope.$watch('ctrl.entityTalkRevisionsModel', function(entityTalkRevisionsModel) {
       console.log('ctrl.entityTalkRevisionsModel watch triggered.');
       ctrl.change = entityTalkRevisionsModel.data.currentRevision.change = $scope.revisionData.change;
       ctrl.comments = entityTalkRevisionsModel.data.currentRevision.comments = $scope.revisionData.changeComments;
+      unbind();
     });
   }
 })();
