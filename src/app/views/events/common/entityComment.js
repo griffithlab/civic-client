@@ -11,19 +11,18 @@
         commentData: '='
       },
       controller: 'EntityCommentController',
-      link: entityCommentLink,
       templateUrl: 'app/views/events/common/entityComment.tpl.html'
     }
   }
 
   // @ngInject
-  function entityCommentLink(scope, element, attributes) {
-
-  }
-
-  // @ngInject
-  function EntityCommentController($scope) {
+  function EntityCommentController($scope, Security) {
     var ctrl = $scope.ctrl = {};
+    ctrl.security = {
+      isAuthenticated: Security.isAuthenticated(),
+      isAdmin: Security.isAdmin()
+    };
+
     ctrl.comment = $scope.commentData;
   }
 })();

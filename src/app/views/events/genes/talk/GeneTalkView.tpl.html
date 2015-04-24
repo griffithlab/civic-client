@@ -1,22 +1,24 @@
 <div class="GeneTalkView">
-  <div class="row entity-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
-    <div class="col-xs-6">
-      <gene-description gene-data="ctrl.gene"></gene-description>
+  <entity-talk-view entity-talk-model="ctrl.geneTalkModel">
+    <div class="row entity-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
+      <div class="col-xs-6">
+        <gene-description gene-data="ctrl.gene"></gene-description>
+      </div>
+      <div class="col-xs-6">
+        <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
+      </div>
     </div>
-    <div class="col-xs-6">
-      <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
+    <div class="row">
+      <div class="col-xs-12">
+        <entity-talk-tabs entity-talk-model="ctrl.geneTalkModel"></entity-talk-tabs>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <entity-talk-tabs entity-talk-model="ctrl.geneTalkModel"></entity-talk-tabs>
-    </div>
-  </div>
-  <div class="row entity-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
-    <div class="col-xs-12">
-      <ui-view>
+    <div class="row entity-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
 
-      </ui-view>
+        </ui-view>
+      </div>
     </div>
-  </div>
+  </entity-talk-view>
 </div>
