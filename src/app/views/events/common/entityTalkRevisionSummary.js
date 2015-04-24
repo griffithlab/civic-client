@@ -31,8 +31,8 @@
     ctrl.change= {};
     $scope.$watch('ctrl.entityTalkRevisionsModel', function(entityTalkRevisionsModel) {
       console.log('ctrl.entityTalkRevisionsModel watch triggered.');
-      entityTalkRevisionsModel.data.currentRevision.change = $scope.revisionData.change;
-      entityTalkRevisionsModel.data.currentRevision.comments = $scope.revisionData.changeComments;
+      ctrl.change = entityTalkRevisionsModel.data.currentRevision.change = $scope.revisionData.change;
+      ctrl.comments = entityTalkRevisionsModel.data.currentRevision.comments = $scope.revisionData.changeComments;
     });
   }
 })();
