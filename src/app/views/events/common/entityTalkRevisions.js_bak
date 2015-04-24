@@ -8,10 +8,8 @@
   function entityTalkRevisionsDirective() {
     return {
       restrict: 'E',
-      scope: {
-        entityTalkModel: '=',
-        revisionItems: '='
-      },
+      scope: {},
+      require: '^^entityTalkView',
       link: entityTalkRevisionsLink,
       controller: 'EntityTalkRevisionsController',
       templateUrl: 'app/views/events/common/entityTalkRevisions.tpl.html'
@@ -19,18 +17,13 @@
   }
 
   // @ngInject
-  function entityTalkRevisionsLink(scope, element, attrs) {
-
+  function entityTalkRevisionsLink(scope, element, attrs, entityTalkView) {
+    scope.ctrl.entityTalkModel = entityTalkView.entityTalkModel;
   }
 
   // @ngInject
   function EntityTalkRevisionsController($scope) {
     var ctrl = $scope.ctrl = {};
-    var entityTalkModel = ctrl.entityTalkModel = $scope.entityTalkModel;
-
-    // merge revisions and suggested changes
-    ctrl.revisionItems = $scope.revisionItems;
-
   }
 
 })();

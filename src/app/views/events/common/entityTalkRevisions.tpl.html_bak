@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 evidence-item-grid">
-      <revisions-grid revision-items="ctrl.revisionItems"></revisions-grid>
+      <revisions-grid entity-talk-model="ctrl.entityTalkModel"></revisions-grid>
     </div>
   </div>
   <div class="row">

@@ -9,12 +9,9 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      // require: '^^entityTalkRevisions',
-      //link: function(scope, element, attributes) {
-      //  scope.entityTalkRevisions = entityTalkRevisions;
-      //},
       scope: {
-        revisionItems: '='
+        revisionsList: '=',
+        stateInfo: '='
       },
       templateUrl: 'app/views/events/common/revisionsGrid.tpl.html',
       controller: 'RevisionsGridController'
@@ -23,9 +20,15 @@
   }
 
   // @ngInject
-  function RevisionsGridController($scope, $location, uiGridConstants) {
+  function RevisionsGridController($scope, $state, $stateParams, $location, uiGridConstants) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
+
+    ctrl.revisionsList = $scope.revisionsList;
+    ctrl.stateInfo = $scope.stateInfo;
+    // these should be available in onRowChanged function but aren't for some reason, placing them on ctrl
+    ctrl.$state = $state;
+    ctrl.$stateParams = $stateParams;
 
     ctrl.revisionsGridOptions = {
       enablePaginationControls: true,
@@ -49,14 +52,6 @@
           enableFiltering: false,
           allowCellFocus: false,
           width: '5%'
-        },
-        { name: 'type',
-          displayName: 'Type',
-          enableFiltering: true,
-          allowCellFocus: false,
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
         },
         { name: 'user',
           displayName: 'Submitted by',
@@ -85,13 +80,19 @@
         }
       ]
     };
+
+    // wait until grid instantiated, then assign data and row-click listener
     ctrl.revisionsGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
-      ctrl.revisionsGridOptions.data = $scope.revisionItems;
+      ctrl.revisionsGridOptions.data = ctrl.revisionsList;
+
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        var newUrl = [row.entity.baseUrl, row.entity.id, 'summary'].join('/');
-        $location.url(newUrl);
+        // var newUrl = [origin, url, 'revisions', row.entity.id, 'summary'].join('/');
+        var params = ctrl.$stateParams;
+        params.changeId = row.entity.id;
+        var newState = ctrl.stateInfo.baseState + '.summary';
+        ctrl.$state.go(newState, params);
       });
     };
   }

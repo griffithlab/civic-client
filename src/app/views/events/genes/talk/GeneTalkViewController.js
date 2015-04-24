@@ -42,56 +42,13 @@
       })
       .state('events.genes.talk.comments', {
         url: '/comments',
-        template: '<entity-talk-comments entity-talk-model="ctrl.geneTalkModel"></entity-talk-comments>',
+        template: '<entity-talk-comments></entity-talk-comments>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Comments"',
           navMode: 'sub'
         }
-      })
-      .state('events.genes.talk.revisions', {
-        url: '/revisions',
-        resolve: {
-          // merge changes and revisions
-          // TODO: probably need to rethink revisions/suggested changes so they share similar attributes
-          revisionItems: function(changes, revisions) {
-            var revisionItems = changes.concat(revisions);
-            return _.map(revisionItems, function(item) {
-              if(_.has(item, 'suggested_changes')) {
-                item.changes = item.suggested_changes;
-                item.type = 'suggested';
-              } else {
-                item.type = 'applied';
-                item.status = item.action;
-              }
-              return item;
-            })
-          }
-        },
-        controller: function($scope, revisionItems, $state, $stateParams) {
-          _.each(revisionItems, function(item) { // TODO: refactor this monstrosity - revisionsGrid should be able to generate its own URLs but needs access to entityTalkRevisions controller and ^^ require isn't working
-            item.baseUrl = [window.location.origin, $state.href('events.genes.talk.revisions', { geneId: $stateParams.geneId }, { inherit: false })].join('/');
-          });
-          $scope.ctrl.revisionItems = revisionItems;
-        },
-        template: '<entity-talk-revisions entity-talk-model="ctrl.geneTalkModel" revision-items="ctrl.revisionItems"></entity-talk-revisions>',
-        data: {
-          titleExp: '"Gene " + gene.entrez_name + " Revisions"',
-          navMode: 'sub'
-        }
-      })
-      .state('events.genes.talk.revisions.summary', {
-        url: '/summary',
-        controller: function(revisionItems, $scope, $stateParams, _) {
-          $scope.ctrl = {};
-          $scope.ctrl.revisionItems = revisionItems;
-          $scope.ctrl.revision = _.find(revisionItems, { id: Number($stateParams.revisionId) });
-        },
-        template: '<entity-talk-revision-summary revision-data="ctrl.revision"></entity-talk-revision-summary>',
-        data: {
-          titleExp: '"Gene " + gene.entrez_name + " Revisions"',
-          navMode: 'sub'
-        }
-      })
+      });
+    // events.genes.talk.revisions defines its states in its own controller: GeneTalkRevisionsViewController.js
   }
 
   // @ngInject
