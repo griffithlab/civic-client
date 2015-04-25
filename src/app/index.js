@@ -41,7 +41,7 @@ angular.module('civicClient', [
 // @ngInject
 function appConfig($provide) {
   // log all rootScope events to the console for debugging
-  // (this code should be commented out before building for production!!)
+  // (this code should be commented out before building for production)
   //$provide.decorator('$rootScope', function ($delegate) {
   //  var _emit = $delegate.$emit;
   //
@@ -127,11 +127,5 @@ angular.module('ui.gravatar').config([
       size     : 32,
       'default': 'retro'  // retro 8-bit style as default for missing avatars
     };
-
-    // Use https endpoint
-    // gravatarServiceProvider.secure = true;
-
-    // Force protocol
-    // gravatarServiceProvider.protocol = 'my-protocol';
   }
 ]);
