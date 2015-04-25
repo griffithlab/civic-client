@@ -33,6 +33,7 @@ gulp.task('serve', ['images', 'fonts', 'watch'], function () {
   connectInit([
     './src',
     './.tmp',
+    './docs',
     path.resolve('./') // include root (kludge necessary to make bower_components available where index.html expects them)
   ], true);
 });
