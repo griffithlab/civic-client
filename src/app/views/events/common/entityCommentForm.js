@@ -48,10 +48,17 @@
       }
     ];
 
-    ctrl.submit = function(comment) {
+    ctrl.clear = function() {
+
+    };
+
+    ctrl.submit = function(comment, resetModel) {
       ctrl.entityTalkModel.actions.submitComment(comment).then(function() {
         console.log('comment submitted.');
-        ctrl.entityTalkModel.actions.getComments();
+        ctrl.entityTalkModel.actions.getComments().then(function(response) {
+          console.log(response);
+          resetModel();
+        });
       });
     };
   }
