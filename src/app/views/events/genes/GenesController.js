@@ -35,7 +35,7 @@
       })
       .state('events.genes.summary', {
         url: '/summary',
-        template: '<gene-summary></gene-summary>',
+        template: '<gene-summary show-menu="true"></gene-summary>',
         deepStateRedirect: true,
         sticky: true,
         data: {
@@ -113,9 +113,6 @@
     geneModel.data = {
       entity: gene,
       id: gene.entrez_id,
-      comments: [],
-      changes: [],
-      revisions: [],
       variants: variants,
       variantGroups: variantGroups,
       myGeneInfo: myGeneInfo

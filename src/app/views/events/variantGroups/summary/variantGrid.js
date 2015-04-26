@@ -75,7 +75,8 @@
 
     ctrl.variantGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
-
+      // TODO: this watch seems unnecessary, but if it's not present then the grid only loads on a fresh page, fails when loaded by a state change
+      // Something to do with directive priorities, maybe?
       $scope.$watch('variants', function(variants){
         ctrl.variants = variants;
         ctrl.variantGridOptions.minRowsToShow = variants.length + 1;

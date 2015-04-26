@@ -7,19 +7,20 @@
       <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-2">
-      <variant-menu
-        gene="ctrl.gene"
-        variants="ctrl.variants"
-        variant-groups="ctrl.variantGroups"
-        options="ctrl.variantMenuOptions"></variant-menu>
-    </div>
-    <div class="col-xs-10 variant-view">
-      <ui-view>
-        <div class="view-corner"><div class="corner-edge"></div></div>
-      </ui-view>
+  <div ng-if="ctrl.showMenu === true">
+    <div class="row">
+      <div class="col-xs-2">
+        <variant-menu
+          gene="ctrl.gene"
+          variants="ctrl.variants"
+          variant-groups="ctrl.variantGroups"
+          options="ctrl.variantMenuOptions"></variant-menu>
+      </div>
+      <div class="col-xs-10 variant-view">
+        <ui-view>
+          <div class="view-corner"><div class="corner-edge"></div></div>
+        </ui-view>
+      </div>
     </div>
   </div>
-
 </div>

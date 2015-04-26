@@ -1,17 +1,17 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes')
-    .config(geneTalkViewConfig)
-    .controller('GeneTalkViewController', GeneTalkViewController);
+    .config(geneTalkConfig)
+    .controller('GeneTalkController', GeneTalkController);
 
   // @ngInject
-  function geneTalkViewConfig($stateProvider) {
+  function geneTalkConfig($stateProvider) {
     $stateProvider
       .state('events.genes.talk', {
         abstract: true,
         url: '/talk',
         templateUrl: 'app/views/events/genes/talk/GeneTalkView.tpl.html',
-        controller: 'GeneTalkViewController',
+        controller: 'GeneTalkController',
         resolve: {
           comments: function(Genes, gene) {
             return Genes.getComments(gene.entrez_id);
@@ -34,25 +34,25 @@
       })
       .state('events.genes.talk.log', {
         url: '/log',
-        template: '<entity-talk-log></entity-talk-log>',
+        template: '<gene-talk-log></gene-talk-log>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Log"',
           navMode: 'sub'
         }
-      })
-      .state('events.genes.talk.comments', {
-        url: '/comments',
-        template: '<entity-talk-comments></entity-talk-comments>',
-        data: {
-          titleExp: '"Gene " + gene.entrez_name + " Comments"',
-          navMode: 'sub'
-        }
       });
+      //.state('events.genes.talk.comments', {
+      //  url: '/comments',
+      //  template: '<entity-talk-comments></entity-talk-comments>',
+      //  data: {
+      //    titleExp: '"Gene " + gene.entrez_name + " Comments"',
+      //    navMode: 'sub'
+      //  }
+      //});
     // events.genes.talk.revisions defines its states in its own controller: GeneTalkRevisionsViewController.js
   }
 
   // @ngInject
-  function GeneTalkViewController($scope,
+  function GeneTalkController($scope,
                                   $state,
                                   // resolved resources
                                   comments,

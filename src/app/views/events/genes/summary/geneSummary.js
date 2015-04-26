@@ -6,7 +6,9 @@
       return {
         restrict: 'E',
         require: '^^entityView',
-        scope: {},
+        scope: {
+          showMenu: '='
+        },
         controller: 'GeneSummaryController',
         link: geneSummaryLink,
         templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
@@ -28,11 +30,12 @@
       ctrl.variants = geneModel.data.variants;
       ctrl.variantGroups = geneModel.data.variantGroups;
       ctrl.backgroundColor = geneModel.config.styles.view.backgroundColor;
+      ctrl.showMenu = $scope.showMenu;
 
       ctrl.variantMenuOptions = {
         gene: ctrl.gene,
         styles: geneModel.config.styles.variantMenu,
-        state: geneModel.config.state
+        state: geneModel.config.state,
       };
       unwatch();
     });
