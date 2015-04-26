@@ -1,15 +1,12 @@
 <div class="variantSummary">
   <div class="row {{ ctrl.styles.view.backgroundColor }}">
     <div class="col-xs-12">
-      <p ng-bind-html="ctrl.variant.description|unsafe"></p>
+      <p ng-bind-html="ctrl.variantDescription|unsafe"></p>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 evidence-item-grid">
-      <evidence-grid
-        evidence-items="ctrl.evidenceItems"
-        variant="ctrl.variant"
-        gene="ctrl.gene"></evidence-grid>
+      <evidence-grid variant-model="ctrl.variantModel"></evidence-grid>
     </div>
   </div>
   <div class="row">

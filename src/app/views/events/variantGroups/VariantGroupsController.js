@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.events.variantGroups')
-    .config(VariantGroupsViewConfig)
-    .controller('VariantGroupsViewController', VariantGroupsViewController);
+    .config(VariantGroupsConfig)
+    .controller('VariantGroupsController', VariantGroupsController);
 
   // @ngInject
-  function VariantGroupsViewConfig($stateProvider) {
+  function VariantGroupsConfig($stateProvider) {
     $stateProvider
       .state('events.genes.summary.variantGroups', {
         abstract: true,
@@ -17,7 +17,7 @@
             return VariantGroups.get($stateParams.variantGroupId);
           }
         },
-        controller: 'VariantGroupsViewController',
+        controller: 'VariantGroupsController',
         deepStateRedirect: { params: ['variantGroupId'] }
       })
       .state('events.genes.summary.variantGroups.summary', {
@@ -26,12 +26,20 @@
         data: {
           titleExp: '"Variant Group " + variantGroup.name',
           navMode: 'sub'
-        },
+        }
+      })
+      .state('events.genes.summary.variantGroups.edit', {
+        url: '/edit',
+        template: '<variant-group-edit></variant-group-edit>',
+        data: {
+          titleExp: '"Variant Group " + variantGroup.name',
+          navMode: 'sub'
+        }
       });
   }
 
   // @ngInject
-  function VariantGroupsViewController($scope,
+  function VariantGroupsController($scope,
                                   $state,
                                   // resolved assets
                                   VariantGroups,
@@ -43,7 +51,7 @@
       baseState,
       baseUrl;
 
-    ctrl = $scope;
+    ctrl = $scope.ctrl;
     variantGroupModel = ctrl.variantGroupModel = {};
     baseState = 'events.genes.summary.variantGroups';
     baseUrl = $state.href('events.genes.summary.variantGroups', {
@@ -77,9 +85,6 @@
       comments: [],
       changes: [],
       revisions: [],
-
-      // parent ids
-      geneId: gene.entrez_id,
 
       // additional entity data
       variants: variantGroup.variants

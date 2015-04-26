@@ -15,12 +15,12 @@
 
   function VariantGroupSummaryLink(scope, element, attributes, entityView) {
     scope.ctrl = {};
-    scope.ctrl.entityModel = entityView.entityModel;
+    scope.ctrl.variantGroupModel = entityView.entityModel;
   }
 
   //@ngInject
   function VariantGroupSummaryController($scope) {
-    var unwatch = $scope.$watch('ctrl.entityModel', function(entityModel){
+    var unwatch = $scope.$watchCollection('ctrl.variantGroupModel', function(entityModel){
       var config, data, ctrl;
 
       config = entityModel.config;

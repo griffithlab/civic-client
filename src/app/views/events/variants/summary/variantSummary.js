@@ -14,22 +14,17 @@
     });
 
   function VariantSummaryLink(scope, element, attributes, entityView) {
-    scope.ctrl = {};
-    scope.ctrl.entityModel = entityView.entityModel;
+    scope.variantModel = entityView.entityModel;
   }
 
   //@ngInject
   function VariantSummaryController($scope) {
-    var unwatch = $scope.$watch('ctrl.entityModel', function(entityModel){
-      var config, data, ctrl;
+    var ctrl = $scope.ctrl = {};
+    $scope.variantModel = {};
 
-      ctrl = $scope.ctrl;
-      data = entityModel.data;
-
-      ctrl.styles = entityModel.config.styles;
-      ctrl.variant = data.entity;
-      ctrl.gene = data.parent;
-      ctrl.evidenceItems = entityModel.data.evidenceItems;
+    var unwatch = $scope.$watchCollection('variantModel', function(variantModel){
+      ctrl.variantModel = variantModel;
+      ctrl.variantDescription = variantModel.data.entity.description;
 
       // unbind watcher after first digest
       unwatch();

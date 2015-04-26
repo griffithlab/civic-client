@@ -10,9 +10,7 @@
       restrict: 'E',
       replace: true,
       scope: {
-        evidenceItems: '=',
-        variant: '=',
-        gene: '='
+        variantModel: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
@@ -24,6 +22,7 @@
   function EvidenceGridController($scope, $stateParams, $state, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
+    ctrl.variant = $scope.variantModel.data.entity;
 
     ctrl.evidenceGridOptions = {
       enablePaginationControls: true,
@@ -104,24 +103,18 @@
         $state.go('events.genes.summary.variants.summary.evidence.summary', params);
       });
 
-      // TODO: refactor this, do we really need a watcher here?
-      var unwatch = $scope.$watch('variant', function() {
-        $scope.variant.$promise.then(function(variant) {
-          ctrl.evidenceGridOptions.minRowsToShow = $scope.evidenceItems.length + 1;
-          ctrl.evidenceGridOptions.data = $scope.evidenceItems;
-          // if evidenceItemId specified in state, scroll to evidence item's row and select it
-          if(_.has($stateParams, 'evidenceItemId')) {
-            var rowEntity = _.find($scope.evidenceItems, function(item) {
-              return item.id === +$stateParams.evidenceItemId;
-            });
-            gridApi.core.on.rowsRendered($scope, function() {
-              gridApi.selection.selectRow(rowEntity);
-              gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
-            });
-          }
-          unwatch();
+      ctrl.evidenceGridOptions.minRowsToShow = ctrl.variant.evidence_items.length + 1;
+      ctrl.evidenceGridOptions.data = ctrl.variant.evidence_items;
+      // if evidenceItemId specified in state, scroll to evidence item's row and select it
+      if(_.has($stateParams, 'evidenceItemId')) {
+        var rowEntity = _.find($scope.evidenceItems, function(item) {
+          return item.id === +$stateParams.evidenceItemId;
         });
-      });
+        gridApi.core.on.rowsRendered($scope, function() {
+          gridApi.selection.selectRow(rowEntity);
+          gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
+        });
+      }
 
     };
   }
