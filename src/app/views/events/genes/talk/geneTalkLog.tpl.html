@@ -1,25 +1,7 @@
-<div class="geneSummary">
-  <div class="row {{ ctrl.backgroundColor }}">
-    <div class="col-xs-6">
-      <gene-description gene-data="ctrl.gene"></gene-description>
-    </div>
-    <div class="col-xs-6">
-      <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-2">
-      <variant-menu
-        gene="ctrl.gene"
-        variants="ctrl.variants"
-        variant-groups="ctrl.variantGroups"
-        options="ctrl.variantMenuOptions"></variant-menu>
-    </div>
-    <div class="col-xs-10 variant-view">
-      <ui-view>
-        <div class="view-corner"><div class="corner-edge"></div></div>
-      </ui-view>
-    </div>
-  </div>
-
+<div class="geneTalkLog">
+  <ul class="log-list">
+    <li ng-repeat="entry in ctrl.logItems">
+      <entity-log-entry entry-data="entry"></entity-log-entry>
+    </li>
+  </ul>
 </div>

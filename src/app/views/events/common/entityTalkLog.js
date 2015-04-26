@@ -32,9 +32,9 @@
     ctrl = $scope.ctrl = {}; // create ctrl here, link function will attach entityTalkView after DOM rendered.
 
     var unwatch = $scope.$watch('ctrl.entityTalkModel', function(entityTalkModel) {
-      comments = entityTalkModel.data.comments;
-      revisions = entityTalkModel.data.revisions;
-      changes = entityTalkModel.data.changes;
+      comments = _.merge({},entityTalkModel.data.comments);
+      revisions = _.merge({},entityTalkModel.data.revisions);
+      changes = _.merge({},entityTalkModel.data.changes);
 
       _.each(comments, function(comment) {
         comment.type = 'comment';
