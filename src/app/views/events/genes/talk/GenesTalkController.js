@@ -39,15 +39,15 @@
           titleExp: '"Gene " + gene.entrez_name + " Log"',
           navMode: 'sub'
         }
+      })
+      .state('events.genes.talk.comments', {
+        url: '/comments',
+        template: '<gene-talk-comments></gene-talk-comments>',
+        data: {
+          titleExp: '"Gene " + gene.entrez_name + " Comments"',
+          navMode: 'sub'
+        }
       });
-      //.state('events.genes.talk.comments', {
-      //  url: '/comments',
-      //  template: '<entity-talk-comments></entity-talk-comments>',
-      //  data: {
-      //    titleExp: '"Gene " + gene.entrez_name + " Comments"',
-      //    navMode: 'sub'
-      //  }
-      //});
     // events.genes.talk.revisions defines its states in its own controller: GeneTalkRevisionsViewController.js
   }
 
