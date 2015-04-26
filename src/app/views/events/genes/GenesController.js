@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes')
-    .config(GenesViewConfig)
-    .controller('GenesViewController', GenesViewController);
+    .config(GenesConfig)
+    .controller('GenesController', GenesController);
 
   // @ngInject
-  function GenesViewConfig($stateProvider) {
+  function GenesConfig($stateProvider) {
     $stateProvider
       .state('events.genes', {
         abstract: true,
@@ -27,7 +27,7 @@
             return Genes.getVariantGroups(gene.entrez_id)
           }
         },
-        controller: 'GenesViewController',
+        controller: 'GenesController',
         deepStateRedirect: [ 'geneId' ],
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
@@ -45,7 +45,7 @@
       })
       .state('events.genes.edit', {
         url: '/edit',
-        template: '<edit-gene></edit-gene>',
+        template: '<gene-edit></gene-edit>',
         data: {
           titleExp: '"Gene " + gene.entrez_name + " Edit"',
           navMode: 'sub'
@@ -54,16 +54,19 @@
   }
 
   // @ngInject
-  function GenesViewController($scope,
-                               $state,
-                               // resolved services
-                               Genes,
-                               MyGeneInfo,
-                               // resolved resources
-                               gene,
-                               variants,
-                               variantGroups,
-                               myGeneInfo) {
+  function GenesController($scope,
+                           $state,
+                           $stateParams,
+                           // resolved services
+                           Genes,
+                           MyGeneInfo,
+                           // resolved resources
+                           gene,
+                           variants,
+                           variantGroups,
+                           myGeneInfo) {
+
+
 
     var ctrl = $scope.ctrl = {};
     var geneModel = ctrl.geneModel = {};
@@ -73,8 +76,8 @@
       name: gene.entrez_name,
       state: {
         baseState: 'events.genes',
-        baseUrl: $state.href('events.genes', { geneId: gene.entrez_id }),
-        params: { geneId: gene.entrez_id }
+        stateParams: $stateParams,
+        baseUrl: $state.href('events.genes', $stateParams)
       },
       tabData: [
         {
@@ -110,8 +113,6 @@
     geneModel.data = {
       entity: gene,
       id: gene.entrez_id,
-      parent: null,
-      parentId: null,
       comments: [],
       changes: [],
       revisions: [],

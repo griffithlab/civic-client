@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.events.variants')
-    .config(VariantsViewConfig)
-    .controller('VariantsViewController', VariantsViewController);
+    .config(VariantsConfig)
+    .controller('VariantsController', VariantsController);
 
   // @ngInject
-  function VariantsViewConfig($stateProvider) {
+  function VariantsConfig($stateProvider) {
     $stateProvider
       .state('events.genes.summary.variants', {
         abstract: true,
@@ -20,7 +20,7 @@
             return Variants.getEvidenceItems(variant.id);
           }
         },
-        controller: 'VariantsViewController',
+        controller: 'VariantsController',
         deepStateRedirect: { params: ['variantId'] }
       })
       .state('events.genes.summary.variants.summary', {
@@ -31,11 +31,19 @@
           navMode: 'sub',
           titleExp: '"Variant " + variant.name'
         }
+      })
+      .state('events.variants.edit', {
+        url: '/edit',
+        template: '<variant-edit></variant-edit>',
+        data: {
+          titleExp: '"Variant " + gene.entrez_name + " Edit"',
+          navMode: 'sub'
+        }
       });
   }
 
   // @ngInject
-  function VariantsViewController($scope,
+  function VariantsController($scope,
                                   $state,
                                   // resolved services
                                   Variants,
@@ -44,7 +52,7 @@
                                   // inherited resources
                                   gene) {
 
-    var ctrl = $scope;
+    var ctrl = $scope.ctrl;
     var variantModel = ctrl.variantModel = {};
 
     variantModel.config = {
@@ -78,8 +86,6 @@
       // required entity data fields
       entity: variant,
       id: variant.id,
-      parent: gene,
-      parentId: gene.entrez_id,
       comments: [],
       changes: [],
       revisions: [],

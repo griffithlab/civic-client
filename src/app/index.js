@@ -117,9 +117,6 @@ angular.module('civic.events', [
 
 angular.module('civic.add', ['ui.router', 'aa.select2']);
 
-// toggle HTML5 mode - uses browser's history API for nav instead of URL updates, falls back for old browsers
-$locationProvider.html5Mode(true);
-
 // disable anchor-scrolling
 angular.module('civicClient').value('$anchorScroll', angular.noop);
 

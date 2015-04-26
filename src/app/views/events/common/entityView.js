@@ -15,6 +15,7 @@
 
   //@ngInject
   function EntityViewController($scope) {
-    this.entityModel = $scope.entityModel; // attach entityModel to controller for child directives
+    this.entityModel = $scope.entityModel;
   }
+
 })();

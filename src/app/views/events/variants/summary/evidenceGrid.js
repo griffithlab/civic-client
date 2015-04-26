@@ -100,11 +100,8 @@
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        $state.go('events.genes.summary.variants.summary.evidence.summary', {
-          geneId: $scope.gene.entrez_id,
-          variantId: $scope.variant.id,
-          evidenceId: row.entity.id
-        });
+        var params = _.merge($stateParams, { evidenceId: row.entity.id })
+        $state.go('events.genes.summary.variants.summary.evidence.summary', params);
       });
 
       // TODO: refactor this, do we really need a watcher here?

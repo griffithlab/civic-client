@@ -10,7 +10,7 @@
       restrict: 'E',
       require: '^^entityView',
       scope: false,
-      templateUrl: 'app/views/events/genes/edit/editGene.tpl.html',
+      templateUrl: 'app/views/events/genes/edit/geneEdit.tpl.html',
       link: editGeneLink,
       controller: 'EditGeneController'
     }

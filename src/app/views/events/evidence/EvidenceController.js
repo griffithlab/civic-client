@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.events.evidence')
-    .config(EvidenceViewConfig)
-    .controller('EvidenceViewController', EvidenceViewController);
+    .config(EvidenceConfig)
+    .controller('EvidenceController', EvidenceController);
 
   // @ngInject
-  function EvidenceViewConfig($stateProvider) {
+  function EvidenceConfig($stateProvider) {
     $stateProvider
       .state('events.genes.summary.variants.summary.evidence', {
         abstract: true,
@@ -17,7 +17,7 @@
             return Evidence.get($stateParams.evidenceId);
           }
         },
-        controller: 'EvidenceViewController',
+        controller: 'EvidenceController',
         deepStateRedirect: { params: ['evidenceId'] }
       })
       .state('events.genes.summary.variants.summary.evidence.summary', {
@@ -31,18 +31,19 @@
   }
 
   // @ngInject
-  function EvidenceViewController($scope,
-                                  $state,
-                                  // resolved assets
-                                  Evidence,
-                                  evidence,
-                                  // inherited resolved assets
-                                  gene,
-                                  variant) {
+  function EvidenceController($scope,
+                              $state,
+                              $stateParams,
+                              // resolved assets
+                              Evidence,
+                              evidence,
+                              // inherited resolved assets
+                              gene,
+                              variant) {
     var ctrl,
-      evidenceModel;
+        evidenceModel;
 
-    ctrl = $scope;
+    ctrl = $scope.ctrl = {};
     evidenceModel = ctrl.evidenceModel = {};
 
     evidenceModel.config = {
@@ -50,17 +51,13 @@
       name: 'EID' + evidence.id,
       state: {
         baseState: 'events.genes.summary.evidences.summary.evidence',
-        baseUrl: $state.href('events.genes.summary.evidences.summary.evidence', {
-          geneId: gene.entrez_id,
-          variantId: variant.id,
-          evidenceId: evidence.id
-        })
+        baseUrl: $state.href('events.genes.summary.evidences.summary.evidence', $stateParams)
       },
       tabData: [
         {
           heading: 'Evidence Summary',
           route: 'events.genes.summary.variants.summary.evidence.summary',
-          params: { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id }
+          params: $stateParams
         },
         {
           heading: 'Evidence Talk',
@@ -80,8 +77,6 @@
       // required entity data fields
       entity: evidence,
       id: evidence.id,
-      parent: variant,
-      parentId: variant.id,
       comments: [],
       changes: [],
       revisions: [],

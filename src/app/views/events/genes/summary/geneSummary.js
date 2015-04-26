@@ -7,37 +7,33 @@
         restrict: 'E',
         require: '^^entityView',
         scope: {},
-        link: GeneSummaryLink,
         controller: 'GeneSummaryController',
+        link: geneSummaryLink,
         templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
       }
     });
 
-  function GeneSummaryLink(scope, element, attributes, entityView) {
-    scope.ctrl = {};
-    scope.ctrl.entityModel = entityView.entityModel;
+  function geneSummaryLink(scope, element, attributes, entityView) {
+    scope.geneModel = entityView.entityModel;
   }
 
   //@ngInject
   function GeneSummaryController($scope) {
-    var unwatch = $scope.$watch('ctrl.entityModel', function(entityModel){
-      var config = entityModel.config;
-      var ctrl = $scope.ctrl;
-      ctrl.gene = entityModel.data.entity;
-      ctrl.myGeneInfo = entityModel.data.myGeneInfo;
-      ctrl.variants = entityModel.data.variants;
-      ctrl.variantGroups = entityModel.data.variantGroups;
+    var ctrl = $scope.ctrl = {};
+    $scope.geneModel = {};
 
-      ctrl.styles = config.styles;
+    $scope.$watchCollection('geneModel', function(geneModel) {
+      ctrl.gene = geneModel.data.entity;
+      ctrl.myGeneInfo = geneModel.data.myGeneInfo;
+      ctrl.variants = geneModel.data.variants;
+      ctrl.variantGroups = geneModel.data.variantGroups;
+      ctrl.backgroundColor = geneModel.config.styles.view.backgroundColor;
 
       ctrl.variantMenuOptions = {
         gene: ctrl.gene,
-        styles: config.styles.variantMenu,
-        state: config.state
+        styles: geneModel.config.styles.variantMenu,
+        state: geneModel.config.state
       };
-
-      // unbind watcher after first digest
-      unwatch();
-    }, true);
+    });
   }
 })();
