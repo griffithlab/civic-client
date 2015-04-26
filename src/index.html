@@ -96,6 +96,11 @@
     <link rel="stylesheet" href="app/views/events/variantGroups/summary/variantGroupSummary.css">
     <link rel="stylesheet" href="app/views/events/variantGroups/summary/variantGrid.css">
 
+    <!-- ** Variant Group Talk Styles ** -->
+    <link rel="stylesheet" href="app/views/events/variantGroups/talk/VariantGroupTalkView.css">
+    <link rel="stylesheet" href="app/views/events/variantGroups/talk/variantGroupTalkLog.css">
+    <link rel="stylesheet" href="app/views/events/variantGroups/talk/variantGroupTalkComments.css">
+
     <!-- endbuild -->
   </head>
   <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
@@ -316,7 +321,7 @@
     <script src="app/views/events/variants/summary/evidenceGrid.js"></script>
 
     <!-- ** Variant Talk Controllers and Directives ** -->
-    <script src="app/views/events/variants/talk/VariantTalkController.js"></script>
+    <script src="app/views/events/variants/talk/VariantsTalkController.js"></script>
     <script src="app/views/events/variants/talk/variantTalkLog.js"></script>
     <script src="app/views/events/variants/talk/variantTalkComments.js"></script>
 
@@ -336,6 +341,11 @@
     <script src="app/views/events/variantGroups/VariantGroupsController.js"></script>
     <script src="app/views/events/variantGroups/summary/variantGroupSummary.js"></script>
     <script src="app/views/events/variantGroups/summary/variantGrid.js"></script>
+
+    <!-- ** Variant Group Talk Controllers and Directives ** -->
+    <script src="app/views/events/variantGroups/talk/VariantGroupsTalkController.js"></script>
+    <script src="app/views/events/variantGroups/talk/variantGroupTalkLog.js"></script>
+    <script src="app/views/events/variantGroups/talk/variantGroupTalkComments.js"></script>
 
     <!-- inject:partials -->
 

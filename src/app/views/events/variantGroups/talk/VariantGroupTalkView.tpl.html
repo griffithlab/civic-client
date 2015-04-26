@@ -1,0 +1,21 @@
+<div class="VariantGroupView">
+  <entity-talk-view entity-talk-model="ctrl.variantGroupTalkModel">
+    <div class="row variant-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
+      <div class="col-xs-12">
+        <variant-group-summary show-variant-grid="false"></variant-group-summary>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <entity-talk-tabs entity-talk-model="ctrl.variantGroupTalkModel"></entity-talk-tabs>
+      </div>
+    </div>
+    <div class="row variant-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
+
+        </ui-view>
+      </div>
+    </div>
+  </entity-talk-view>
+</div>

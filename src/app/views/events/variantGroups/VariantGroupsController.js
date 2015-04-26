@@ -71,7 +71,7 @@
       tabData: [
         {
           heading: 'Variant Group Summary',
-          route: 'events.genes.summary',
+          route: 'events.genes.summary.variantGroups.summary',
           params: { geneId: gene.entrez_id }
         },
         {
