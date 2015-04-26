@@ -56,7 +56,7 @@
     ctrl.type = config.type;
     ctrl.name = config.name;
 
-    ctrl.showCorner = config.type === 'variant';
+    ctrl.showCorner = (config.type === 'variant' || config.type === 'variant group');
 
     ctrl.viewBackground = 'view-' + config.styles.view.backgroundColor;
 

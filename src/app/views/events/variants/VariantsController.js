@@ -93,10 +93,6 @@
       evidenceItems: evidenceItems
     };
 
-    variantModel.services = {
-      Variants: Variants
-    };
-
     variantModel.actions = {
       get: function() {
         return variant;

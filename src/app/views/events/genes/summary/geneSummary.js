@@ -22,7 +22,7 @@
     var ctrl = $scope.ctrl = {};
     $scope.geneModel = {};
 
-    $scope.$watchCollection('geneModel', function(geneModel) {
+    var unwatch = $scope.$watchCollection('geneModel', function(geneModel) {
       ctrl.gene = geneModel.data.entity;
       ctrl.myGeneInfo = geneModel.data.myGeneInfo;
       ctrl.variants = geneModel.data.variants;
@@ -34,6 +34,7 @@
         styles: geneModel.config.styles.variantMenu,
         state: geneModel.config.state
       };
+      unwatch();
     });
   }
 })();

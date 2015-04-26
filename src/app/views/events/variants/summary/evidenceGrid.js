@@ -22,7 +22,6 @@
   function EvidenceGridController($scope, $stateParams, $state, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
-    ctrl.variant = $scope.variantModel.data.entity;
 
     ctrl.evidenceGridOptions = {
       enablePaginationControls: true,
@@ -97,25 +96,20 @@
     };
 
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
-      ctrl.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        var params = _.merge($stateParams, { evidenceId: row.entity.id })
-        $state.go('events.genes.summary.variants.summary.evidence.summary', params);
+      // TODO: this watch seems unnecessary, but if it's not present then the grid only loads on a fresh page, fails when loaded by a state change
+      // Something to do with directive priorities, maybe?
+      $scope.$watch('variantModel', function(variantModel) {
+        ctrl.variant = variantModel.data.entity;
+        ctrl.gridApi = gridApi;
+        ctrl.evidenceGridOptions.minRowsToShow = ctrl.variant.evidence_items.length + 1;
+        ctrl.evidenceGridOptions.data = ctrl.variant.evidence_items;
+
+        gridApi.selection.on.rowSelectionChanged($scope, function(row){
+          var params = _.merge($stateParams, { evidenceId: row.entity.id })
+          $state.go('events.genes.summary.variants.summary.evidence.summary', params);
+        });
+
       });
-
-      ctrl.evidenceGridOptions.minRowsToShow = ctrl.variant.evidence_items.length + 1;
-      ctrl.evidenceGridOptions.data = ctrl.variant.evidence_items;
-      // if evidenceItemId specified in state, scroll to evidence item's row and select it
-      if(_.has($stateParams, 'evidenceItemId')) {
-        var rowEntity = _.find($scope.evidenceItems, function(item) {
-          return item.id === +$stateParams.evidenceItemId;
-        });
-        gridApi.core.on.rowsRendered($scope, function() {
-          gridApi.selection.selectRow(rowEntity);
-          gridApi.cellNav.scrollTo( gridApi.grid, $scope, rowEntity, $scope.evidenceGridOptions.columnDefs[0]);
-        });
-      }
-
     };
   }
 

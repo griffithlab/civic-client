@@ -40,18 +40,19 @@
 
   // @ngInject
   function VariantGroupsController($scope,
-                                  $state,
-                                  // resolved assets
-                                  VariantGroups,
-                                  variantGroup,
-                                  // inherited resolved assets
-                                  gene) {
+                                   $state,
+                                   $stateParams,
+                                   // resolved assets
+                                   VariantGroups,
+                                   variantGroup,
+                                   // inherited resolved assets
+                                   gene) {
     var ctrl,
-      variantGroupModel,
-      baseState,
-      baseUrl;
+        variantGroupModel,
+        baseState,
+        baseUrl;
 
-    ctrl = $scope.ctrl;
+    ctrl = $scope.ctrl = {};
     variantGroupModel = ctrl.variantGroupModel = {};
     baseState = 'events.genes.summary.variantGroups';
     baseUrl = $state.href('events.genes.summary.variantGroups', {
@@ -63,17 +64,31 @@
       type: 'variant group',
       name: variantGroup.name,
       state: {
-        baseState: baseState,
-        baseUrl: baseUrl
+        baseState: 'events.genes.summary.variantGroups',
+        stateParams: $stateParams,
+        baseUrl: $state.href('events.genes.summary.variantGroups', $stateParams)
       },
+      tabData: [
+        {
+          heading: 'Variant Group Summary',
+          route: 'events.genes.summary',
+          params: { geneId: gene.entrez_id }
+        },
+        {
+          heading: 'Variant Group Talk',
+          route: 'events.genes.summary.variantGroups.talk.log',
+          params: { geneId: gene.entrez_id }
+        }
+      ],
       styles: {
-        tabs: {
-          tabsBg: '#AAA',
-          activeBg: 'pageBackground3',
-          inactiveBg: '#CCC'
+        view: {
+          backgroundColor: 'pageBackground'
         },
         summary: {
-          summaryBg: 'pageBackground3'
+          backgroundColor: 'pageBackground'
+        },
+        edit: {
+          summaryBackgroundColor: 'pageBackground2'
         }
       }
     };
@@ -88,10 +103,6 @@
 
       // additional entity data
       variants: variantGroup.variants
-    };
-
-    variantGroupModel.services = {
-      VariantGroups: VariantGroups
     };
 
     variantGroupModel.actions = {

@@ -14,23 +14,17 @@
     });
 
   function VariantGroupSummaryLink(scope, element, attributes, entityView) {
-    scope.ctrl = {};
-    scope.ctrl.variantGroupModel = entityView.entityModel;
+    scope.variantGroupModel = entityView.entityModel;
   }
 
   //@ngInject
   function VariantGroupSummaryController($scope) {
-    var unwatch = $scope.$watchCollection('ctrl.variantGroupModel', function(entityModel){
-      var config, data, ctrl;
+    var ctrl = $scope.ctrl = {};
+    $scope.variantGroupModel = {};
 
-      config = entityModel.config;
-      data = entityModel.data;
-      ctrl = $scope.ctrl;
-
-      ctrl.variantGroup = data.entity;
-      ctrl.geneId = data.geneId;
-      ctrl.variants = data.variants;
-
+    var unwatch = $scope.$watchCollection('variantGroupModel', function(variantGroupModel){
+      ctrl.variantGroupModel = variantGroupModel;
+      ctrl.variantGroup = variantGroupModel.data.entity;
       // unbind watcher after first digest
       unwatch();
     }, true);

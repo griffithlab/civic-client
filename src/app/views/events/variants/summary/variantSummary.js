@@ -27,7 +27,7 @@
       ctrl.variantDescription = variantModel.data.entity.description;
 
       // unbind watcher after first digest
-      unwatch();
+      //unwatch();
     }, true);
   }
 })();

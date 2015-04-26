@@ -4,14 +4,9 @@
       <p ng-bind-html="ctrl.variantGroup.description|unsafe"></p>
     </div>
   </div>
-  <div class="row">
+  <div class="row variant-grid">
     <div class="col-xs-12">
-      <h3>Variants:</h3>
-      <ul>
-        <li ng-repeat="variant in ctrl.variants">
-          <a ui-sref="events.genes.summary.variants.summary({geneId: ctrl.geneId, variantId: variant.id})" ng-bind="variant.name">variant name</a>
-        </li>
-      </ul>
+      <variant-grid variants="ctrl.variantGroup.variants"></variant-grid>
     </div>
   </div>
 </div>
