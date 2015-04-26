@@ -32,8 +32,8 @@
         }
       })
       .state('events.genes.summary.variants.talk.log', {
-        url: '', // transition to events.genes.talk abstract state defaults to this state
-        template: '<entity-talk-log entity-talk-model="ctrl.variantTalkModel"></entity-talk-log>',
+        url: '/log',
+        template: '<variant-talk-log><p>VARIANT TALK LOG</p></variant-talk-log>',
         data: {
           titleExp: '"Variant " + variant.name + " Log"',
           navMode: 'sub'
@@ -41,7 +41,7 @@
       })
       .state('events.genes.summary.variants.talk.comments', {
         url: '/comments',
-        template: '<entity-talk-comments entity-talk-model="ctrl.variantTalkModel"></entity-talk-comments>',
+        template: '<variant-talk-comments></variant-talk-comments>',
         data: {
           titleExp: '"Variant " + variant.name + " Comments"',
           navMode: 'sub'

@@ -3,19 +3,21 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
-.VariantTalkView {
-  .fullBleed();
-  margin-bottom: -@contentPadding;
+.variantTalkLog {
+  min-height: 300px;
+  margin-top: @contentPadding;
 
-  .variant-talk-summary {
-    padding-bottom: @contentPadding;
-    padding-top: @contentPadding;
-
+  ul {
+    list-style: none;
   }
 
-  .variant-talk-content {
-    background-color: @pageBackground;
-    min-height: 300px;
+  li {
+    padding-bottom: @contentPadding;
+  }
+
+  .log-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 }
-

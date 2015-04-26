@@ -1,8 +1,8 @@
 <div class="VariantTalkView">
   <entity-talk-view entity-talk-model="ctrl.variantTalkModel">
-    <div class="row entity-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
+    <div class="row variant-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
       <div class="col-xs-12">
-        <p ng-bind="ctrl.variantTalkModel.data.entity.description"></p>
+        <variant-summary show-evidence-grid="false"></variant-summary>
       </div>
     </div>
     <div class="row">
@@ -10,7 +10,7 @@
         <entity-talk-tabs entity-talk-model="ctrl.variantTalkModel"></entity-talk-tabs>
       </div>
     </div>
-    <div class="row entity-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
+    <div class="row variant-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
       <div class="col-xs-12">
         <ui-view>
 

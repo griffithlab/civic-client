@@ -6,7 +6,9 @@
       return {
         restrict: 'E',
         require: '^^entityView',
-        scope: {},
+        scope: {
+          showEvidenceGrid: '='
+        },
         link: VariantSummaryLink,
         controller: 'VariantSummaryController',
         templateUrl: 'app/views/events/variants/summary/variantSummary.tpl.html'
@@ -25,6 +27,7 @@
     var unwatch = $scope.$watchCollection('variantModel', function(variantModel){
       ctrl.variantModel = variantModel;
       ctrl.variantDescription = variantModel.data.entity.description;
+      ctrl.showEvidenceGrid = $scope.showEvidenceGrid;
 
       // unbind watcher after first digest
       //unwatch();

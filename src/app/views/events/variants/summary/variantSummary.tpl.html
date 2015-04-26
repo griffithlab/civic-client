@@ -4,15 +4,17 @@
       <p ng-bind-html="ctrl.variantDescription|unsafe"></p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12 evidence-item-grid">
-      <evidence-grid variant-model="ctrl.variantModel"></evidence-grid>
+  <div ng-if="ctrl.showEvidenceGrid === true">
+    <div class="row">
+      <div class="col-xs-12 evidence-item-grid">
+        <evidence-grid variant-model="ctrl.variantModel"></evidence-grid>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="evidence-view">
-        <ui-view></ui-view>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="evidence-view">
+          <ui-view></ui-view>
+        </div>
       </div>
     </div>
   </div>

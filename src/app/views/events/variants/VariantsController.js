@@ -25,7 +25,7 @@
       })
       .state('events.genes.summary.variants.summary', {
         url: '/summary',
-        template: '<variant-summary></variant-summary>',
+        template: '<variant-summary show-evidence-grid="true"></variant-summary>',
         deepStateRedirect: { params: ['variantId'] },
         data: {
           navMode: 'sub',
