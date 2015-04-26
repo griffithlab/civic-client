@@ -33,7 +33,7 @@
       })
       .state('events.genes.summary.variants.summary.evidence.talk.log', {
         url: '/log', // transition to events.genes.talk abstract state defaults to this state
-        template: '<entity-talk-log entity-talk-model="ctrl.evidenceTalkModel"></entity-talk-log>',
+        template: '<evidence-talk-log></evidence-talk-log>',
         data: {
           titleExp: '"Evidence EID" + evidence.id + " Log"',
           navMode: 'sub'
@@ -41,7 +41,7 @@
       })
       .state('events.genes.summary.variants.summary.evidence.talk.comments', {
         url: '/comments',
-        template: '<entity-talk-comments entity-talk-model="ctrl.evidenceTalkModel"></entity-talk-comments>',
+        template: '<evidence-talk-comments></evidence-talk-comments>',
         data: {
           titleExp: '"Evidence EID" + evidence.id + " Comments"',
           navMode: 'sub'
