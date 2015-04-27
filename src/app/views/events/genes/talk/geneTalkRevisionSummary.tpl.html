@@ -1,9 +1,9 @@
-<div class="entityTalkRevisionSummary">
+<div class="geneTalkRevisionSummary">
   <div class="row">
     <div class="col-xs-12">
       <h4>Suggested Change #<span ng-bind="ctrl.change.id">ID</span> Diff:</h4>
       <ul class="diffs">
-        <li ng-repeat="(field, diff) in ctrl.change.diffs">
+        <li ng-repeat="(field, diff) in geneTalkModel.data.change.diffs">
           <p><strong>{{field|capitalize}}</strong></p>
           <p ng-bind-html="diff"></p>
         </li>
@@ -19,7 +19,7 @@
         </div>
         <div ng-switch-default>
           <ul class="comments">
-            <li ng-repeat="comment in ctrl.comments">
+            <li ng-repeat="comment in geneTalkModel.data.changeComments">
               <entity-comment comment-data="comment"></entity-comment>
             </li>
           </ul>
@@ -29,12 +29,19 @@
   </div>
   <div class="row">
     <div class="col-xs-12 comment-form">
-      <entity-comment-form entity-talk-model="ctrl.entityTalkRevisionsModel"></entity-comment-form>
+      <entity-comment-form type="changeComment"></entity-comment-form>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <pre ng-bind="ctrl.entityTalkRevisionsModel.data.currentRevision.comments|json"></pre>
+      <h2>Change:</h2>
+      <pre ng-bind="geneTalkModel.data.change|json"></pre>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Comments:</h2>
+      <pre ng-bind="geneTalkModel.data.changeComments|json"></pre>
     </div>
   </div>
 </div>

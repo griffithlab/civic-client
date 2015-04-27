@@ -4,20 +4,19 @@
     .directive('entityTalkRevisionsView', function() {
       return {
         restrict: 'E',
-        scope: {
-          entityTalkRevisionsModel: '='
-        },
-        // link: entityTalkRevisionsViewLink,
+        scope: {},
+        require: '^^entityTalkView',
+         link: entityTalkRevisionsViewLink,
         transclude: true,
         controller: 'EntityTalkRevisionsViewController',
         templateUrl: 'app/views/events/common/entityTalkRevisionsView.tpl.html'
       }
     });
 
-  // @ngInject
-  //function entityTalkRevisionsViewLink(scope, element, attributes, entityTalkView) {
-  //  scope.ctrl.entityTalkModel = entityTalkView.entityTalkModel;
-  //}
+  //  @ngInject
+  function entityTalkRevisionsViewLink(scope, element, attributes, entityTalkView) {
+    scope.ctrl.entityTalkModel = entityTalkView.entityTalkModel;
+  }
 
   //@ngInject
   function EntityTalkRevisionsViewController($scope) {

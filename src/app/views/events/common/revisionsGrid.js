@@ -10,8 +10,8 @@
       restrict: 'E',
       replace: true,
       scope: {
-        revisionsList: '=',
-        stateInfo: '='
+        changes: '=',
+        baseState: '@'
       },
       templateUrl: 'app/views/events/common/revisionsGrid.tpl.html',
       controller: 'RevisionsGridController'
@@ -23,12 +23,8 @@
   function RevisionsGridController($scope, $state, $stateParams, $location, uiGridConstants) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
-
-    ctrl.revisionsList = $scope.revisionsList;
-    ctrl.stateInfo = $scope.stateInfo;
-    // these should be available in onRowChanged function but aren't for some reason, placing them on ctrl
-    ctrl.$state = $state;
-    ctrl.$stateParams = $stateParams;
+    $scope.$state = $state;
+    $scope.$stateParams = $stateParams;
 
     ctrl.revisionsGridOptions = {
       enablePaginationControls: true,
@@ -84,15 +80,16 @@
     // wait until grid instantiated, then assign data and row-click listener
     ctrl.revisionsGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
-      ctrl.revisionsGridOptions.data = ctrl.revisionsList;
 
+      $scope.$watch('changes', function(changes){
+        ctrl.revisionsGridOptions.data = changes;
+      });
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        // var newUrl = [origin, url, 'revisions', row.entity.id, 'summary'].join('/');
-        var params = ctrl.$stateParams;
+        var params = $scope.$stateParams;
         params.changeId = row.entity.id;
-        var newState = ctrl.stateInfo.baseState + '.summary';
-        ctrl.$state.go(newState, params);
+        var newState = $scope.baseState + '.summary';
+        $scope.$state.go(newState, params);
       });
     };
   }

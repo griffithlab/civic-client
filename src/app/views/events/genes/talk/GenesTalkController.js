@@ -47,8 +47,23 @@
           titleExp: '"Gene " + gene.entrez_name + " Comments"',
           navMode: 'sub'
         }
+      })
+      .state('events.genes.talk.revisions', {
+        url: '/revisions/:changeId',
+        template: '<gene-talk-revisions></gene-talk-revisions>',
+        data: {
+          titleExp: '"Gene " + gene.entrez_name + " Revisions"',
+          navMode: 'sub'
+        }
+      })
+      .state('events.genes.talk.revisions.summary', {
+        url: '/summary',
+        template: '<gene-talk-revision-summary></gene-talk-revision-summary>',
+        data: {
+          titleExp: '"Gene " + gene.entrez_name + " Revision Summary"',
+          navMode: 'sub'
+        }
       });
-    // events.genes.talk.revisions defines its states in its own controller: GeneTalkRevisionsViewController.js
   }
 
   // @ngInject
@@ -117,6 +132,8 @@
       parentId: null,
       comments: comments,
       changes: changes,
+      change: {},
+      changeComments: [],
       revisions: revisions,
       lastRevision: lastRevision,
       variants: variants,
@@ -171,6 +188,7 @@
       getChange: function(changeId) {
         return Genes.getChange({ geneId: gene.entrez_id, changeId: changeId })
           .then(function(response) {
+            geneTalkModel.data.change = response;
             return response;
           })
       },
@@ -194,8 +212,10 @@
           })
       },
 
-      submitChangeComment: function(reqObj) {
+      submitChangeComment: function(changeId, comment) {
+        var reqObj = comment;
         reqObj.geneId = gene.entrez_id;
+        reqObj.changeId = changeId;
         return Genes.submitChangeComment(reqObj)
           .then(function(response) {
             return response;
@@ -213,6 +233,7 @@
       getChangeComments: function(changeId) {
         return Genes.getChangeComments({geneId: gene.entrez_id, changeId: changeId})
           .then(function(response) {
+            geneTalkModel.data.changeComments = response;
             return response;
           })
       },

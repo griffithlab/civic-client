@@ -8,7 +8,9 @@
   function entityCommenntFormDirective() {
     return {
       restrict: 'E',
-      scope: {},
+      scope: {
+        type: '@'
+      },
       require: '^^entityTalkView',
       link: entityCommentFormLink,
       controller: 'EntityCommentFormController',
@@ -22,7 +24,7 @@
   }
 
   // @ngInject
-  function EntityCommentFormController($scope, Security) {
+  function EntityCommentFormController($scope, $stateParams, Security) {
     var ctrl = $scope.ctrl = {};
 
     $scope.$watch('entityTalkModel', function(entityTalkModel) {
@@ -57,18 +59,25 @@
         }
       ];
 
-      ctrl.clear = function() {
-
-      };
-
       ctrl.submit = function(comment, resetModel) {
-        ctrl.entityTalkModel.actions.submitComment(comment).then(function() {
-          console.log('comment submitted.');
-          ctrl.entityTalkModel.actions.getComments().then(function(response) {
-            console.log(response);
-            resetModel();
+        // TODO: comment form shouldn't have to figure out what type of comment it is submitting
+        if($scope.type === 'comment') {
+          ctrl.entityTalkModel.actions.submitComment(comment).then(function () {
+            console.log('comment submitted.');
+            ctrl.entityTalkModel.actions.getComments().then(function (response) {
+              console.log(response);
+              resetModel();
+            });
           });
-        });
+        }
+        if($scope.type === 'changeComment') {
+          ctrl.entityTalkModel.actions.submitChangeComment($stateParams.changeId, comment)
+            .then(function () {
+              console.log('comment submitted.');
+              entityTalkModel.actions.getChangeComments($stateParams.changeId);
+              resetModel();
+          });
+        }
       };
     });
 
