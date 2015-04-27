@@ -118,8 +118,7 @@
           url: '/api/genes/:geneId/suggested_changes',
           params: {
             geneId: '@geneId'
-          },
-          cache: cache
+          }
         },
         getChanges: {
           method: 'GET',

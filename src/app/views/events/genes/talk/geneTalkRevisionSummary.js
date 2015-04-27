@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('civic.events')
+  angular.module('civic.events.genes')
     .directive('geneTalkRevisionSummary', geneTalkRevisionSummary)
     .controller('GeneTalkRevisionSummaryController', GeneTalkRevisionSummaryController);
 
@@ -25,15 +25,27 @@
   // @ngInject
   function GeneTalkRevisionSummaryController($scope, $stateParams) {
     var ctrl = $scope.ctrl = {};
+
     var unwatch = $scope.$watch('geneTalkModel', function(geneTalkModel) {
       console.log('ctrl.geneTalkRevisionsModel watch triggered.');
       geneTalkModel.actions.getChange($stateParams.changeId);
       geneTalkModel.actions.getChangeComments($stateParams.changeId);
-      unwatch();
-    });
 
-    $scope.$watchCollection('geneTalkModel.data.changeComments', function(comments) {
-      console.log('change comments updated.');
+      ctrl.acceptChange = function() {
+        geneTalkModel.actions.acceptChange($stateParams.changeId)
+          .then(function(response) {
+            geneTalkModel.actions.getChanges($stateParams.geneId);
+          });
+      };
+
+      ctrl.rejectChange = function() {
+        geneTalkModel.actions.rejectChange($stateParams.changeId)
+          .then(function(response) {
+            geneTalkModel.actions.getChanges($stateParams.geneId);
+          });
+      };
+
+      unwatch();
     });
   }
 })();

@@ -1,7 +1,7 @@
-<div class="geneTalkRevisionSummary">
+<div class="variantTalkRevisionSummary">
   <div class="row revision-header">
     <div class="col-xs-12 name">
-      <h3>Suggested Change #<span ng-bind="geneTalkModel.data.change.id">ID</span></h3>
+      <h3>Suggested Change #<span ng-bind="variantTalkModel.data.change.id">ID</span></h3>
     </div>
   </div>
   <div class="row">
@@ -12,19 +12,12 @@
   <div class="row">
     <div class="col-xs-12 diffs">
       <ul>
-        <li ng-repeat="(field, diff) in geneTalkModel.data.change.diffs">
+        <li ng-repeat="(field, diff) in variantTalkModel.data.change.diffs">
           <p><strong>{{field|capitalize}}</strong></p>
           <p ng-bind-html="diff"></p>
         </li>
       </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 admin-buttons">
-      <div class="pull-right">
-        <button type="submit" class="btn btn-default" ng-click="ctrl.acceptChange()">Accept Change</button>
-        <button type="submit" class="btn btn-default" ng-click="ctrl.rejectChange()">Reject Change</button>
-      </div>
+
     </div>
   </div>
   <div class="row">
@@ -40,7 +33,7 @@
         </div>
         <div ng-switch-default>
           <ul class="comments">
-            <li ng-repeat="comment in geneTalkModel.data.changeComments">
+            <li ng-repeat="comment in variantTalkModel.data.changeComments">
               <entity-comment comment-data="comment"></entity-comment>
             </li>
           </ul>

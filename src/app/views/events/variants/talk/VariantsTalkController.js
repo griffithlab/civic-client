@@ -46,6 +46,22 @@
           titleExp: '"Variant " + variant.name + " Comments"',
           navMode: 'sub'
         }
+      })
+      .state('events.genes.summary.variants.talk.revisions', {
+        url: '/revisions/:changeId',
+        template: '<variant-talk-revisions></variant-talk-revisions>',
+        data: {
+          titleExp: '"Variant " + gene.entrez_name + " Revisions"',
+          navMode: 'sub'
+        }
+      })
+      .state('events.genes.summary.variants.talk.revisions.summary', {
+        url: '/summary',
+        template: '<variant-talk-revision-summary></variant-talk-revision-summary>',
+        data: {
+          titleExp: '"Variant " + gene.entrez_name + " Revision Summary"',
+          navMode: 'sub'
+        }
       });
   }
 
@@ -112,6 +128,8 @@
       evidenceItems: evidenceItems,
       comments: comments,
       changes: changes,
+      change: {},
+      changeComments: [],
       revisions: revisions,
       lastRevision: lastRevision
     };
@@ -163,6 +181,7 @@
       getChange: function(changeId) {
         return Variants.getChange({ variantId: variant.id, changeId: changeId })
           .then(function(response) {
+            variantTalkModel.data.change = response;
             return response;
           })
       },
@@ -174,8 +193,10 @@
           })
       },
 
-      submitChangeComment: function(reqObj) {
+      submitChangeComment: function(changeId, comment) {
+        var reqObj = comment;
         reqObj.variantId = variant.id;
+        reqObj.changeId = changeId;
         return Variants.submitChangeComment(reqObj)
           .then(function(response) {
             return response;
@@ -191,6 +212,7 @@
       getChangeComments: function(changeId) {
         return Variants.getChangeComments({variantId: variant.id, changeId: changeId})
           .then(function(response) {
+            variantTalkModel.data.changeComments = response;
             return response;
           })
       },

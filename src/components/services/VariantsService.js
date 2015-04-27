@@ -115,6 +115,13 @@
           method: 'GET',
           isArray: false
         },
+        submitChange: {
+          method: 'POST',
+          url: '/api/variantId/:variantId/suggested_changes',
+          params: {
+            geneId: '@variantId'
+          }
+        },
         getChanges: {
           url: '/api/variants/:variantId/suggested_changes',
           method: 'GET',
@@ -145,7 +152,7 @@
           },
           method: 'POST'
         },
-        addChangeComment: {
+        submitChangeComment: {
           url: '/api/variants/:variantId/suggested_changes/:changeId/comments',
           params: {
             variantId: '@variantId',
@@ -168,7 +175,8 @@
             variantId: '@variantId',
             changeId: '@changeId'
           },
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         getChangeComment: {
           url: '/api/variants/:variantId/suggested_changes/:changeId/comments/:commentId',
@@ -298,6 +306,12 @@
       },
 
       // Variant suggested changes
+      submitChange: function(reqObj) {
+        return VariantsResource.submitChange(reqObj).$promise
+          .then(function(response) {
+            return response;
+          });
+      },
       getChanges: function(variant_id) {
         return VariantsResource.getChanges({variantId: variant_id}).$promise
           .then(function(response) {
@@ -324,8 +338,8 @@
       },
 
       // Variant suggested changes comments
-      addChangeComment: function(reqObj) {
-        return VariantsResource.addChangeComment(reqObj).$promise
+      submitChangeComment: function(reqObj) {
+        return VariantsResource.submitChangeComment(reqObj).$promise
           .then(function(response) {
             return response;
           });
