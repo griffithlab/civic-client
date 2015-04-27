@@ -102,8 +102,7 @@
         },
         submitChange: {
           url: '/api/evidence_items/:evidenceId/suggested_changes',
-          method: 'POST',
-          cache: cache
+          method: 'POST'
         },
         getChanges: {
           url: '/api/evidence_items/:evidenceId/suggested_changes',

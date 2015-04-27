@@ -48,18 +48,27 @@
         }
       })
       .state('events.genes.summary.variants.summary.evidence.talk.revisions', {
-        url: '/revisions',
-        template: '<entity-talk-revisions entity-talk-model="ctrl.evidenceTalkModel"></entity-talk-revisions>',
+        url: '/revisions/:changeId',
+        template: '<evidence-talk-revisions></evidence-talk-revisions>',
         data: {
-          titleExp: '"Evidence EID" + evidence.id + " Revisions"',
+          titleExp: '"Evidence " + gene.entrez_name + " Revisions"',
           navMode: 'sub'
         }
       })
+      .state('events.genes.summary.variants.summary.evidence.talk.revisions.summary', {
+        url: '/summary',
+        template: '<evidence-talk-revision-summary></evidence-talk-revision-summary>',
+        data: {
+          titleExp: '"Evidence " + gene.entrez_name + " Revision Summary"',
+          navMode: 'sub'
+        }
+      });
   }
 
   // @ngInject
   function EvidenceTalkViewController($scope,
                                       $state,
+                                      $stateParams,
 
                                       // resolved resources
                                       comments,
@@ -82,7 +91,7 @@
       service: Evidence,
       state: {
         baseState: 'events.genes.summary.variants.summary.evidence.talk',
-        baseUrl: $state.href('events.genes.summary.variants.summary.evidence.talk', { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id })
+        baseUrl: $state.href('events.genes.summary.variants.summary.evidence.talk', $stateParams)
       },
       styles: {
         view: {
@@ -119,6 +128,8 @@
       parentId: variant.id,
       comments: comments,
       changes: changes,
+      change: {},
+      changeComments: [],
       revisions: revisions,
       lastRevision: lastRevision
     };
@@ -170,6 +181,7 @@
       getChange: function(changeId) {
         return Evidence.getChange({ evidenceId: evidence.id, changeId: changeId })
           .then(function(response) {
+            evidenceTalkModel.data.change = response;
             return response;
           })
       },
@@ -181,8 +193,10 @@
           })
       },
 
-      submitChangeComment: function(reqObj) {
+      submitChangeComment: function(changeId, comment) {
+        var reqObj = comment;
         reqObj.evidenceId = evidence.id;
+        reqObj.changeId = changeId;
         return Evidence.submitChangeComment(reqObj)
           .then(function(response) {
             return response;
@@ -198,6 +212,7 @@
       getChangeComments: function(changeId) {
         return Evidence.getChangeComments({evidenceId: evidence.id, changeId: changeId})
           .then(function(response) {
+            evidenceTalkModel.data.changeComments = response;
             return response;
           })
       },

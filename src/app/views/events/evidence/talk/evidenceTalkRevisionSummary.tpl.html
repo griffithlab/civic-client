@@ -1,0 +1,57 @@
+<div class="evidenceTalkRevisionSummary">
+  <div class="row revision-header">
+    <div class="col-xs-12 name">
+      <h3>Suggested Change #<span ng-bind="evidenceTalkModel.data.change.id">ID</span></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 diffs-header">
+      <h4>Field Differences</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 diffs">
+      <ul>
+        <li ng-repeat="(field, diff) in evidenceTalkModel.data.change.diffs">
+          <p><strong>{{field|capitalize}}</strong></p>
+          <p ng-bind-html="diff"></p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 admin-buttons">
+      <div class="pull-right">
+        <button type="submit" class="btn btn-default" ng-click="ctrl.acceptChange()">Accept Change</button>
+        <button type="submit" class="btn btn-default" ng-click="ctrl.rejectChange()">Reject Change</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 comments-header">
+      <h4>Comments</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 comment-list">
+      <div ng-switch="ctrl.comments.length">
+        <div ng-switch-when="0">
+          <p>No comments found.</p>
+        </div>
+        <div ng-switch-default>
+          <ul class="comments">
+            <li ng-repeat="comment in evidenceTalkModel.data.changeComments">
+              <entity-comment comment-data="comment"></entity-comment>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 comment-form">
+      <entity-comment-form type="changeComment"></entity-comment-form>
+    </div>
+  </div>
+</div>

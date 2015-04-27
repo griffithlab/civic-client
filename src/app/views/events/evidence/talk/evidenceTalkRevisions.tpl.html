@@ -1,0 +1,14 @@
+<div class="evidenceTalkRevisions">
+  <div class="row revisions-list {{ ctrl.styles.view.summaryBackgroundColor }}">
+    <div class="col-xs-12">
+      <revisions-grid changes="ctrl.evidenceTalkModel.data.changes" base-state="events.genes.summary.variants.summary.evidence.talk.revisions"></revisions-grid>
+    </div>
+  </div>
+  <div class="row revisions-view {{ ctrl.styles.view.talkBackgroundColor }}">
+    <div class="col-xs-12">
+      <ui-view>
+
+      </ui-view>
+    </div>
+  </div>
+</div>
