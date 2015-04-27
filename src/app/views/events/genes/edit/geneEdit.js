@@ -1,36 +1,35 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes')
-    .controller('EditGeneController', EditGeneController)
-    .directive('editGene', editGeneDirective);
+    .controller('GeneEditController', GeneEditController)
+    .directive('geneEdit', geneEditDirective);
 
   // @ngInject
-  function editGeneDirective() {
+  function geneEditDirective() {
     return {
       restrict: 'E',
       require: '^^entityView',
       scope: false,
       templateUrl: 'app/views/events/genes/edit/geneEdit.tpl.html',
-      link: editGeneLink,
-      controller: 'EditGeneController'
+      link: geneEditLink,
+      controller: 'GeneEditController'
     }
   }
 
   // @ngInject
-  function editGeneLink(scope, element, attributes, entityView) {
-    scope.ctrl = {};
-    scope.ctrl.geneModel= entityView.entityModel
+  function geneEditLink(scope, element, attributes, entityView) {
+    scope.geneModel= entityView.entityModel
   }
 
   // @ngInject
-  function EditGeneController ($scope, Security) {
-    var unwatch = $scope.$watch('ctrl.geneModel', function(geneModel){
+  function GeneEditController ($scope, Security) {
+    var unwatch = $scope.$watch('geneModel', function(geneModel){
       var config = geneModel.config;
       var ctrl = $scope.ctrl;
 
       ctrl.gene = geneModel.data.entity;
       ctrl.geneEdit = angular.extend({}, ctrl.gene);
-      ctrl.geneEdit.comment = {title: 'Comment Title', text:'Comment text.'};
+      ctrl.geneEdit.comment = { title: 'Comment Title', text:'Comment text.' };
       ctrl.geneModel = geneModel;
       ctrl.myGeneInfo = geneModel.data.myGeneInfo;
       ctrl.variants = geneModel.data.variants;
