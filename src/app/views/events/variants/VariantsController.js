@@ -32,11 +32,11 @@
           titleExp: '"Variant " + variant.name'
         }
       })
-      .state('events.variants.edit', {
+      .state('events.genes.summary.variants.edit', {
         url: '/edit',
         template: '<variant-edit></variant-edit>',
         data: {
-          titleExp: '"Variant " + gene.entrez_name + " Edit"',
+          titleExp: '"Variant " + variant.name + " Edit"',
           navMode: 'sub'
         }
       });
@@ -44,13 +44,14 @@
 
   // @ngInject
   function VariantsController($scope,
-                                  $state,
-                                  // resolved services
-                                  Variants,
-                                  variant,
-                                  evidenceItems,
-                                  // inherited resources
-                                  gene) {
+                              $state,
+                              // resolved services
+                              Variants,
+                              variant,
+                              evidenceItems,
+                              // inherited resources
+                              Genes,
+                              gene) {
 
     var ctrl = $scope.ctrl;
     var variantModel = ctrl.variantModel = {};
@@ -91,6 +92,11 @@
       revisions: [],
       // additional entity data fields
       evidenceItems: evidenceItems
+    };
+
+    variantModel.services = {
+      Variants: Variants,
+      Genes: Genes
     };
 
     variantModel.actions = {

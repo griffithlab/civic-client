@@ -42,7 +42,7 @@
       });
 
       changes = _.map(changes, function(change) {
-        change.tyep='change'
+        change.type='change'
         return change;
       });
 

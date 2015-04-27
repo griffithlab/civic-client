@@ -151,6 +151,7 @@
       acceptChange: function(changeId) {
         return Genes.acceptChange({ geneId: gene.entrez_id, changeId: changeId })
           .then(function(response) {
+
             return response;
           })
       }

@@ -117,9 +117,9 @@
         },
         submitChange: {
           method: 'POST',
-          url: '/api/variantId/:variantId/suggested_changes',
+          url: '/api/variants/:variantId/suggested_changes',
           params: {
-            geneId: '@variantId'
+            variantId: '@variantId'
           }
         },
         getChanges: {

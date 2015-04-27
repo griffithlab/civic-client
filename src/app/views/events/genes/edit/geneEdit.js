@@ -29,7 +29,7 @@
 
       ctrl.gene = geneModel.data.entity;
       ctrl.geneEdit = angular.extend({}, ctrl.gene);
-      ctrl.geneEdit.comment = { title: 'Comment Title', text:'Comment text.' };
+      ctrl.geneEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
       ctrl.geneModel = geneModel;
       ctrl.myGeneInfo = geneModel.data.myGeneInfo;
       ctrl.variants = geneModel.data.variants;
