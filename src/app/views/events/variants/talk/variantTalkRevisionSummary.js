@@ -29,6 +29,21 @@
       console.log('ctrl.variantTalkRevisionsModel watch triggered.');
       variantTalkModel.actions.getChange($stateParams.changeId);
       variantTalkModel.actions.getChangeComments($stateParams.changeId);
+
+      ctrl.acceptChange = function() {
+        variantTalkModel.actions.acceptChange($stateParams.changeId)
+          .then(function(response) {
+            variantTalkModel.actions.getChanges($stateParams.variantId);
+          });
+      };
+
+      ctrl.rejectChange = function() {
+        variantTalkModel.actions.rejectChange($stateParams.changeId)
+          .then(function(response) {
+            variantTalkModel.actions.getChanges($stateParams.variantId);
+          });
+      };
+
       unwatch();
     });
   }

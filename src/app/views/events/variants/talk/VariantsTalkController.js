@@ -186,6 +186,13 @@
           })
       },
 
+      acceptChange: function(changeId) {
+        return Variants.acceptChange({ variantId: variant.id, changeId: changeId })
+          .then(function(response) {
+            return response;
+          })
+      },
+
       rejectChange: function(changeId) {
         return Variants.rejectChange({ variantId: variant.id, changeId: changeId })
           .then(function(response) {
