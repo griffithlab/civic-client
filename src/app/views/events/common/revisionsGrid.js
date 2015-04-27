@@ -72,7 +72,8 @@
           sort: { direction: uiGridConstants.DESC },
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/events/common/revisionsGridCreatedCell.tpl.html'
         }
       ]
     };
