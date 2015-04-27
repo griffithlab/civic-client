@@ -46,6 +46,22 @@
           titleExp: '"Variant " + variantGroup.name + " Comments"',
           navMode: 'sub'
         }
+      })
+      .state('events.genes.summary.variantGroups.talk.revisions', {
+        url: '/revisions/:changeId',
+        template: '<variant-talk-revisions></variant-talk-revisions>',
+        data: {
+          titleExp: '"Variant Group " + variantGroup.name + " Revisions"',
+          navMode: 'sub'
+        }
+      })
+      .state('events.genes.summary.variantGroups.talk.revisions.summary', {
+        url: '/summary',
+        template: '<variant-talk-revision-summary></variant-talk-revision-summary>',
+        data: {
+          titleExp: '"Variant Group " + variantGroup.name + " Revision Summary"',
+          navMode: 'sub'
+        }
       });
   }
 

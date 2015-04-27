@@ -1,0 +1,109 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.variantGroupTalkRevisionSummary {
+  min-height: 300px;
+  padding: 0 @contentPadding @contentPadding @contentPadding;
+  border-bottom-right-radius: @border-radius-large;
+  border-bottom-left-radius: @border-radius-large;
+  border-bottom: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+
+  .revision-header {
+    #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
+    .name {
+      background-image: url('/assets/images/grey_stripes.png');
+
+      h3 {
+        padding: .5em 0;
+        margin: 0;
+      }
+    }
+  }
+
+  .diffs-header, .comments-header {
+    background-color: @pageBackground2;
+    border-bottom: #CCC;
+    margin-bottom: @contentPadding;
+  }
+
+  .diffs > ul {
+    list-style: none;
+    margin: 0;
+    margin-bottom: @contentPadding;
+    padding: 0;
+  }
+
+  .admin-buttons {
+    padding-bottom: @contentPadding;
+    padding-top: @contentPadding;
+    margin-top: @contentPadding;
+    border-top: 1px solid #CCC
+  }
+
+  .comment-list {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .diff {
+    overflow: auto;
+    ul {
+      background:#fff;
+      overflow:auto;
+      font-size:13px;
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:table;
+      width:100%;
+    }
+
+    del, ins{
+      display:block;
+      text-decoration:none;
+    }
+
+    li {
+      padding: 0;
+      display: table-row;
+      margin: 0;
+      height: 1em;
+    }
+    li.ins {
+      background:#dfd;
+      color:#080
+    }
+    li.del {
+      background:#fee;
+      color:#b00
+    }
+    li:hover {
+      background:#ffc
+    }
+    del, ins, span{
+      white-space:pre-wrap;
+      // font-family: courier;
+    }
+    del strong {
+      font-weight:normal;background:#fcc;
+    }
+    ins strong {
+      font-weight:normal;background:#9f9;
+    }
+    li.diff-comment {
+      display: none;
+    }
+    li.diff-block-info {
+      background: none repeat scroll 0 0 gray;
+    }
+  }
+
+
+}

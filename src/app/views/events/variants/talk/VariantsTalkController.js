@@ -51,7 +51,7 @@
         url: '/revisions/:changeId',
         template: '<variant-talk-revisions></variant-talk-revisions>',
         data: {
-          titleExp: '"Variant " + gene.entrez_name + " Revisions"',
+          titleExp: '"Variant " + variant.name + " Revisions"',
           navMode: 'sub'
         }
       })
@@ -59,7 +59,7 @@
         url: '/summary',
         template: '<variant-talk-revision-summary></variant-talk-revision-summary>',
         data: {
-          titleExp: '"Variant " + gene.entrez_name + " Revision Summary"',
+          titleExp: '"Variant " + variant.name + " Revision Summary"',
           navMode: 'sub'
         }
       });
