@@ -137,7 +137,7 @@
       refresh: function () {
         Genes.refresh(gene.entrez_id)
           .then(function(response) {
-            gene = response;
+            geneModel.data.entity = response;
             return response;
           })
       },

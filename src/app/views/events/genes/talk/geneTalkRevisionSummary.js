@@ -27,28 +27,28 @@
   function GeneTalkRevisionSummaryController($scope, $stateParams) {
     var ctrl = $scope.ctrl = {};
     // wait until models linked
-    var unwatch = $scope.$watchCollection('[geneTalkModel.actions, geneModel.actions]', function(controllers) {
+    var unwatch = $scope.$watch('[geneTalkModel, geneModel]', function(controllers) {
+      console.log('*** geneTalkRevisionsSummary watchCollection triggered. ***');
       var geneTalkModel = controllers[0];
       var geneModel = controllers[1];
 
-      geneTalkModel.getChange($stateParams.changeId);
-      geneTalkModel.getChangeComments($stateParams.changeId);
+      geneTalkModel.actions.getChange($stateParams.changeId);
+      geneTalkModel.actions.getChangeComments($stateParams.changeId);
 
       ctrl.acceptChange = function() {
         geneTalkModel.actions.acceptChange($stateParams.changeId)
-          .then(function(response) {
-            geneTalkModel.getChanges($stateParams.geneId); // will eventually refresh revisions data grid
-            geneModel.refresh(); // will eventually refresh parent gene
+          .then(function() {
+            geneTalkModel.actions.getChanges($stateParams.geneId); // will eventually refresh revisions data grid
+            geneModel.actions.refresh(); // will eventually refresh parent gene
           });
       };
 
       ctrl.rejectChange = function() {
-        geneTalkModel.rejectChange($stateParams.changeId)
-          .then(function(response) {
-            geneTalkModel.getChanges($stateParams.geneId);
+        geneTalkModel.actions.rejectChange($stateParams.changeId)
+          .then(function() {
+            geneTalkModel.actions.getChanges($stateParams.geneId);
           });
       };
-      unwatch(); // watcher will only be executed once
-    });
+    }, true);
   }
 })();

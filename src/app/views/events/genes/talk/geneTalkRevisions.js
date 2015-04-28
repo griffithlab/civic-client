@@ -25,8 +25,9 @@
   function GeneTalkRevisionsController($scope) {
     var ctrl = $scope.ctrl = {};
     $scope.$watch('geneTalkModel', function(geneTalkModel) {
+      console.log('*** geneTalkRevisions watcher triggered. ***');
       ctrl.geneTalkModel = geneTalkModel;
-    });
+    }, true);
   }
 
 })();
