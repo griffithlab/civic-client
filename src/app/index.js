@@ -11,8 +11,6 @@ angular.module('civicClient', [
   'ui.grid.cellNav',
   'ui.gravatar',
   'formly',
-  'aa.notify',
-  'aa.select2',
   'dialogs.main',
   'yaru22.angular-timeago',
   'angulartics',
@@ -33,7 +31,6 @@ angular.module('civicClient', [
   'civic.account',
   'civic.browse',
   'civic.events',
-  'civic.add'
 ])
   .run(appRun)
   .config(appConfig);
@@ -114,8 +111,6 @@ angular.module('civic.events', [
   'civic.events.variantGroups',
   'civic.events.evidence'
 ]);
-
-angular.module('civic.add', ['ui.router', 'aa.select2']);
 
 // disable anchor-scrolling
 angular.module('civicClient').value('$anchorScroll', angular.noop);

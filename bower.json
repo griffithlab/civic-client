@@ -13,7 +13,6 @@
     "lodash": "~3.3.1",
     "angular-resource": "~1.2.0",
     "angular-timeago": "~0.1.6",
-    "angular-agility": "~0.8.21",
     "font-awesome": "~4.3.0",
     "angulartics": "~0.17.2",
     "ngDialog": "https://github.com/jmcmichael/ngDialog.git#0.3.12a",
