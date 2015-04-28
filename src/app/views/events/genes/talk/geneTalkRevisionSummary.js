@@ -26,31 +26,29 @@
   // @ngInject
   function GeneTalkRevisionSummaryController($scope, $stateParams) {
     var ctrl = $scope.ctrl = {};
-
-    var unwatch = $scope.$watchCollection('[geneTalkModel, geneModel]', function(controllers) {
-      console.log('ctrl.geneTalkRevisionsModel watch triggered.');
+    // wait until models linked
+    var unwatch = $scope.$watchCollection('[geneTalkModel.actions, geneModel.actions]', function(controllers) {
       var geneTalkModel = controllers[0];
       var geneModel = controllers[1];
 
-      geneTalkModel.actions.getChange($stateParams.changeId);
-      geneTalkModel.actions.getChangeComments($stateParams.changeId);
+      geneTalkModel.getChange($stateParams.changeId);
+      geneTalkModel.getChangeComments($stateParams.changeId);
 
       ctrl.acceptChange = function() {
         geneTalkModel.actions.acceptChange($stateParams.changeId)
           .then(function(response) {
-            geneTalkModel.actions.getChanges($stateParams.geneId); // will eventually refresh revisions data grid
-            geneModel.actions.refresh(); // will eventually refresh parent gene
+            geneTalkModel.getChanges($stateParams.geneId); // will eventually refresh revisions data grid
+            geneModel.refresh(); // will eventually refresh parent gene
           });
       };
 
       ctrl.rejectChange = function() {
-        geneTalkModel.actions.rejectChange($stateParams.changeId)
+        geneTalkModel.rejectChange($stateParams.changeId)
           .then(function(response) {
-            geneTalkModel.actions.getChanges($stateParams.geneId);
+            geneTalkModel.getChanges($stateParams.geneId);
           });
       };
-
       unwatch(); // watcher will only be executed once
-    }, true); // use object equality
+    });
   }
 })();
