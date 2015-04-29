@@ -4,7 +4,7 @@
     .controller('BrowseController', BrowseController);
 
 // @ngInject
-  function BrowseController($scope, uiGridConstants, $http, $state, _, $log) {
+  function BrowseController($scope, uiGridConstants, $http, $state, Datatables, _, $log) {
     var defaults = {
       mode: 'variants',
       count: 25
@@ -217,9 +217,9 @@
     function updateData() {
       fetchData(ctrl.mode, ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
         .then(function(data){
-          ctrl.gridOptions.data = data.data.result;
+          ctrl.gridOptions.data = data.result;
           ctrl.gridOptions.columnDefs = modeColumnDefs[ctrl.mode];
-          ctrl.totalItems = data.data.total;
+          ctrl.totalItems = data.total;
         });
     }
 
@@ -232,40 +232,26 @@
     };
 
     function fetchData(mode, count, page, sorting, filters) {
-      var url = '/api/datatables/' + mode + '?count=' + count + '&page=' + page;
+      var request;
+
+      request= {
+        mode: mode,
+        count: count,
+        page: page
+      };
 
       if (filters.length > 0) {
-        var filterStrings = _.map(filters, function(filter) {
-          return 'filter[' + filter.field + ']=' + filter.term;
+        _.each(filters, function(filter) {
+          request['filter[' + filter.field + ']'] = filter.term;
         });
-        url = url + '&' + filterStrings.join('&');
       }
 
       if (sorting.length > 0) {
-        var sortingStrings = _.map(sorting, function(sort) {
-          return 'sorting[' + sort.field + ']=' + sort.direction;
+        _.each(sorting, function(sort) {
+          request['sorting[' + sort.field + ']'] = sort.direction;
         });
-        url = url + '&' + sortingStrings.join('&');
       }
-
-      ctrl.fetchUrl = url;
-      return $http({
-        method: 'GET',
-        url: url,
-        transformResponse: function(data) {
-          var events = JSON.parse(data);
-          // convert arrays to comma-fied strings
-          events.result = _.map(events.result, function (event) {
-            _.forEach(_.keys(event), function(key) {
-              if(_.isArray(event[key])) {
-                event[key] = event[key].join(', ');
-              }
-            });
-            return event;
-          });
-          return events;
-        }
-      });
+      return Datatables.query(request);
     }
 
     ctrl.switchMode(defaults.mode);
