@@ -32,8 +32,6 @@
     geneTalkModel.actions.getChange(changeId);
     geneTalkModel.actions.getChangeComments(changeId);
 
-    scope.geneName = controllers[1].entityModel.data.entity.entrez_name;
-    scope.geneDescription = controllers[1].entityModel.data.entity.description;
   }
 
   // @ngInject
