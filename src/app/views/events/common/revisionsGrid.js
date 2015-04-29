@@ -83,6 +83,10 @@
       ctrl.gridApi = gridApi;
       ctrl.revisionsGridOptions.data = $scope.changes;
 
+      $scope.$watchCollection('changes', function(changes) {
+        ctrl.revisionsGridOptions.data = $scope.changes;
+      });
+
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = $scope.$stateParams;
         params.changeId = row.entity.id;

@@ -18,10 +18,7 @@
 
   // @ngInject
   function geneTalkRevisionsLink(scope, element, attrs, geneTalkView) {
-    var geneModel,
-      ctrl;
-    ctrl = scope.ctrl = {};
-    ctrl.geneTalkModel = geneTalkView.entityTalkModel;
+    scope.geneTalkModel = geneTalkView.entityTalkModel;
   }
 
   // @ngInject
