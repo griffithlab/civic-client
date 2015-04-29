@@ -166,7 +166,7 @@ describe('VariantsViewController', function () {
   //  });
   //
   //  it('specifies entity name on config object', function() {
-  //    expect(scope.variantModel.config.name).to.equal(scope.variantModel.data.entity.entrez_name);
+  //    expect(scope.variantModel.config.name).to.equal(scope.variantModel.data.entity.name);
   //  });
   //
   //  it('specifies view state name on config object', function() {

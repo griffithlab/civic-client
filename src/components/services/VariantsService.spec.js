@@ -28,9 +28,9 @@ describe('VariantsService', function() {
   });
 
   describe('/api/variants path', function() {
-    it('Variants.add({entrez_name: \'GENE\', description: \'GENE description\'}) should send a POST request to /api/variants', function() {
-      $httpBackend.expect('POST', '/api/variants', {entrez_name: 'GENE', description: 'GENE description'}).respond('200', {});
-      Variants.add({entrez_name: 'GENE', description: 'GENE description'});
+    it('Variants.add({name: \'GENE\', description: \'GENE description\'}) should send a POST request to /api/variants', function() {
+      $httpBackend.expect('POST', '/api/variants', {name: 'GENE', description: 'GENE description'}).respond('200', {});
+      Variants.add({name: 'GENE', description: 'GENE description'});
       $httpBackend.flush();
     });
 

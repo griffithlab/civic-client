@@ -51,7 +51,7 @@
         url: '/revisions/:changeId',
         template: '<evidence-talk-revisions></evidence-talk-revisions>',
         data: {
-          titleExp: '"Evidence " + gene.entrez_name + " Revisions"',
+          titleExp: '"Evidence " + gene.name + " Revisions"',
           navMode: 'sub'
         }
       })
@@ -59,7 +59,7 @@
         url: '/summary',
         template: '<evidence-talk-revision-summary></evidence-talk-revision-summary>',
         data: {
-          titleExp: '"Evidence " + gene.entrez_name + " Revision Summary"',
+          titleExp: '"Evidence " + gene.name + " Revision Summary"',
           navMode: 'sub'
         }
       });

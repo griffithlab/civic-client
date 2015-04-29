@@ -28,7 +28,7 @@
         },
         deepStateRedirect: [ 'geneId' ],
         data: {
-          titleExp: '"Gene " + gene.entrez_name + " Talk"',
+          titleExp: '"Gene " + gene.name + " Talk"',
           navMode: 'sub'
         }
       })
@@ -36,7 +36,7 @@
         url: '/log',
         template: '<gene-talk-log></gene-talk-log>',
         data: {
-          titleExp: '"Gene " + gene.entrez_name + " Log"',
+          titleExp: '"Gene " + gene.name + " Log"',
           navMode: 'sub'
         }
       })
@@ -44,7 +44,7 @@
         url: '/comments',
         template: '<gene-talk-comments></gene-talk-comments>',
         data: {
-          titleExp: '"Gene " + gene.entrez_name + " Comments"',
+          titleExp: '"Gene " + gene.name + " Comments"',
           navMode: 'sub'
         }
       })
@@ -52,7 +52,7 @@
         url: '/revisions/:changeId',
         template: '<gene-talk-revisions></gene-talk-revisions>',
         data: {
-          titleExp: '"Gene " + gene.entrez_name + " Revisions"',
+          titleExp: '"Gene " + gene.name + " Revisions"',
           navMode: 'sub'
         }
       })
@@ -60,7 +60,7 @@
         url: '/summary',
         template: '<gene-talk-revision-summary></gene-talk-revision-summary>',
         data: {
-          titleExp: '"Gene " + gene.entrez_name + " Revision Summary"',
+          titleExp: '"Gene " + gene.name + " Revision Summary"',
           navMode: 'sub'
         }
       });
@@ -91,7 +91,7 @@
 
     geneTalkModel.config = {
       type: 'gene',
-      name: gene.entrez_name,
+      name: gene.name,
       service: Genes,
       state: {
         baseState: 'events.genes.talk',
@@ -108,17 +108,17 @@
       },
       tabData: [
         {
-          heading: gene.entrez_name + ' Log',
+          heading: gene.name + ' Log',
           route: 'events.genes.talk.log',
           params: { geneId: gene.entrez_id }
         },
         {
-          heading: gene.entrez_name + ' Comments',
+          heading: gene.name + ' Comments',
           route: 'events.genes.talk.comments',
           params: { geneId: gene.entrez_id }
         },
         {
-          heading: gene.entrez_name + ' Revisions',
+          heading: gene.name + ' Revisions',
           route: 'events.genes.talk.revisions',
           params: { geneId: gene.entrez_id }
         }

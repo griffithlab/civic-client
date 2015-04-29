@@ -170,7 +170,7 @@ describe('GenesViewConfig', function () {
         var variants = $state.$current.parent.locals.globals.variants;
         expect(variants).to.exist;
         expect(variants).to.be.an('array');
-        expect(variants[0].entrez_name).to.equal('ALK');
+        expect(variants[0].name).to.equal('ALK');
       });
 
       it('successfully resolves variant groups for gene 238', function() {

@@ -156,7 +156,7 @@ describe('GenesViewController', function () {
     });
 
     it('specifies entity name on config object', function() {
-      expect(scope.geneModel.config.name).to.equal(scope.geneModel.data.entity.entrez_name);
+      expect(scope.geneModel.config.name).to.equal(scope.geneModel.data.entity.name);
     });
 
     it('specifies view state name on config object', function() {

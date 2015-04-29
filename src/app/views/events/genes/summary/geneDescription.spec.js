@@ -145,7 +145,7 @@ describe('geneDescription', function () {
     it('provides the gene object on scope', function(){
       expect(dirScope.ctrl.gene).to.exist;
       expect(dirScope.ctrl.gene).to.be.an('object');
-      expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK');
+      expect(dirScope.ctrl.gene.name).to.equal('ALK');
     });
   });
 

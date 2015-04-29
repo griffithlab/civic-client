@@ -41,9 +41,9 @@ describe('GenesService', function() {
   });
 
   describe('/api/genes path', function() {
-    it('Genes.add({entrez_name: \'GENE\', description: \'GENE description\'}) should send a POST request to /api/genes', function() {
-      $httpBackend.expect('POST', '/api/genes', {entrez_name: 'GENE', description: 'GENE description'}).respond(200, {});
-      Genes.add({entrez_name: 'GENE', description: 'GENE description'});
+    it('Genes.add({name: \'GENE\', description: \'GENE description\'}) should send a POST request to /api/genes', function() {
+      $httpBackend.expect('POST', '/api/genes', {name: 'GENE', description: 'GENE description'}).respond(200, {});
+      Genes.add({name: 'GENE', description: 'GENE description'});
       $httpBackend.flush();
     });
 

@@ -138,7 +138,7 @@ describe('geneSummary', function () {
     it('provides the gene data object on scope', function(){
       expect(dirScope.ctrl.gene).to.exist;
       expect(dirScope.ctrl.gene).to.be.an('object');
-      expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK');
+      expect(dirScope.ctrl.gene.name).to.equal('ALK');
     });
 
     it('provides myGeneInfo data object on scope', function(){
@@ -169,10 +169,10 @@ describe('geneSummary', function () {
 
   describe('template', function() {
     it('updates attribute on local gene object if geneModel entit on GenesViewController is updated', function() {
-      expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK');
-      genesViewScope.geneModel.data.entity.entrez_name = 'ALK2';
+      expect(dirScope.ctrl.gene.name).to.equal('ALK');
+      genesViewScope.geneModel.data.entity.name = 'ALK2';
       $rootScope.$digest();
-      expect(dirScope.ctrl.gene.entrez_name).to.equal('ALK2');
+      expect(dirScope.ctrl.gene.name).to.equal('ALK2');
     });
 
     it('provides a ui-view directive for events.genes.summary.variants state', function() {

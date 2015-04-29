@@ -41,11 +41,11 @@
 
       ctrl.geneFields = [
         {
-          key: 'entrez_name',
+          key: 'name',
           type: 'input',
           templateOptions: {
             label: 'Name',
-            value: ctrl.gene.entrez_name
+            value: ctrl.gene.name
           }
         },
         {

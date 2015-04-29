@@ -21,7 +21,7 @@
 
     scope.geneModel = entityView.entityModel;
 
-    scope.geneName = scope.geneModel.data.entity.entrez_name;
+    scope.geneName = scope.geneModel.data.entity.name;
     scope.geneDescription= scope.geneModel.data.entity.description;
 
     scope.$watch('geneModel', function(geneModel){

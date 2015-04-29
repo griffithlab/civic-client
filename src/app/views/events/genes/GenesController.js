@@ -39,7 +39,7 @@
         deepStateRedirect: true,
         sticky: true,
         data: {
-          titleExp: '"Gene " + gene.entrez_name + " Summary"',
+          titleExp: '"Gene " + gene.name + " Summary"',
           navMode: 'sub'
         }
       })
@@ -47,7 +47,7 @@
         url: '/edit',
         template: '<gene-edit></gene-edit>',
         data: {
-          titleExp: '"Gene " + gene.entrez_name + " Edit"',
+          titleExp: '"Gene " + gene.name + " Edit"',
           navMode: 'sub'
         }
       });
@@ -73,7 +73,7 @@
 
     geneModel.config = {
       type: 'gene',
-      name: gene.entrez_name,
+      name: gene.name,
       state: {
         baseState: 'events.genes',
         stateParams: $stateParams,
