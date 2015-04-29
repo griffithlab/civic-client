@@ -49,7 +49,7 @@
           allowCellFocus: false,
           width: '5%'
         },
-        { name: 'user',
+        { name: 'user.username',
           displayName: 'Submitted by',
           enableFiltering: true,
           allowCellFocus: false,
