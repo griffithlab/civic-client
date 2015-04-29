@@ -1,7 +1,7 @@
 <div class="geneSummary">
   <div class="row {{ ctrl.backgroundColor }}">
     <div class="col-xs-6">
-      <gene-description gene-data="ctrl.gene"></gene-description>
+      <gene-description gene-data="geneModel.data.entity"></gene-description>
       <div class="row">
         <div class="col-xs-12">
           <form>
@@ -24,16 +24,16 @@
       </div>
     </div>
     <div class="col-xs-6">
-      <my-gene-info gene-info="ctrl.myGeneInfo"></my-gene-info>
+      <my-gene-info gene-info="geneModel.data.myGeneInfo"></my-gene-info>
     </div>
   </div>
   <div ng-if="ctrl.showMenu === true">
     <div class="row">
       <div class="col-xs-2">
         <variant-menu
-          gene="ctrl.gene"
-          variants="ctrl.variants"
-          variant-groups="ctrl.variantGroups"
+          gene="geneModel.data.entity"
+          variants="geneModel.data.variants"
+          variant-groups="geneModel.data.variantGroups"
           options="ctrl.variantMenuOptions"></variant-menu>
       </div>
       <div class="col-xs-10 variant-view">
