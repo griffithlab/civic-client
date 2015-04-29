@@ -12,20 +12,27 @@
    * @returns {Function}
    * @ngInject
    */
-  function Interceptor($injector, RetryQueue) {
-    return function(promise) {
-      // Intercept failed requests
-      return promise.then(null, function(originalResponse) {
-        if(originalResponse.status === 401) {
-          // The request bounced because it was not authorized - add a new request to the retry RetryQueue
-          promise = RetryQueue.pushRetryFn('unauthorized-server', function retryRequest() {
-            // We must use $injector to get the $http service to prevent circular dependency
-            return $injector.get('$http')(originalResponse.config);
-          });
+  function Interceptor($q, $injector, RetryQueue) {
+    return {
+      response: function(response) {
+        return response;
+      },
+      responseError: function(response) {
+        // The request bounced because it was not authorized - add a new request to the retry RetryQueue
+        var $q = RetryQueue.pushRetryFn('unauthorized-server', function retryRequest() {
+          // We must use $injector to get the $http service to prevent circular dependency
+          return $injector.get('$http')(originalResponse.config);
+        });
+      return $q.reject(response);
+
+        // do something on error
+        if (canRecover(response)) {
+          return responseOrNewPromise
         }
-        return promise;
-      });
+        return $q.reject(response);
+      }
     };
+
   }
 
   /**
@@ -35,6 +42,6 @@
    * @ngInject
    */
   function interceptorServiceConfig($httpProvider) {
-    $httpProvider.responseInterceptors.push('Interceptor');
+    $httpProvider.interceptors.push('Interceptor');
   }
 })();
