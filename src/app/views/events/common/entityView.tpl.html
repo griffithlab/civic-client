@@ -1,6 +1,7 @@
 <div class="entityView">
   <div class="row">
     <div class="col-xs-12">
+      <pre ng-bind="entityModel.data.entity.entrez_name|json"></pre>
       <pre ng-bind="entityModel.data.entity.description|json"></pre>
     </div>
   </div>
@@ -11,7 +12,7 @@
           entityView GENE NAME:
         </p>
         <p>
-          <input type="text" ng-model="entityModel.data.entity.description"/>
+          <input type="text" ng-model="entityModel.data.entity.entrez_name"/>
         </p>
         <p>
           GENE DESCRIPTION:
