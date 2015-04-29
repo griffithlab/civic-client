@@ -81,10 +81,7 @@
     // wait until grid instantiated, then assign data and row-click listener
     ctrl.revisionsGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
-
-      $scope.$watch('changes', function(changes){
-        ctrl.revisionsGridOptions.data = changes;
-      });
+      ctrl.revisionsGridOptions.data = $scope.changes;
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = $scope.$stateParams;

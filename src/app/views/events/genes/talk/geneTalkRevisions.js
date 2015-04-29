@@ -21,7 +21,7 @@
     var geneModel,
       ctrl;
     ctrl = scope.ctrl = {};
-    scope.geneTalkModel = entityTalkView.entityTalkModel;
+    ctrl.geneTalkModel = geneTalkView.entityTalkModel;
   }
 
   // @ngInject
