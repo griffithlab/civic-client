@@ -18,16 +18,19 @@
 
   // @ngInject
   function geneTalkRevisionsLink(scope, element, attrs, geneTalkView) {
-    scope.geneTalkModel = geneTalkView.entityTalkModel;
+    var geneModel,
+      ctrl;
+    ctrl = scope.ctrl = {};
+    scope.geneTalkModel = entityTalkView.entityTalkModel;
   }
 
   // @ngInject
   function GeneTalkRevisionsController($scope) {
-    var ctrl = $scope.ctrl = {};
-    $scope.$watch('geneTalkModel', function(geneTalkModel) {
-      console.log('*** geneTalkRevisions watcher triggered. ***');
-      ctrl.geneTalkModel = geneTalkModel;
-    }, true);
+    //var ctrl = $scope.ctrl = {};
+    //$scope.$watch('geneTalkModel', function(geneTalkModel) {
+    //  console.log('*** geneTalkRevisions watcher triggered. ***');
+    //  ctrl.geneTalkModel = geneTalkModel;
+    //}, true);
   }
 
 })();

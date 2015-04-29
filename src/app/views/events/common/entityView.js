@@ -16,6 +16,9 @@
   //@ngInject
   function EntityViewController($scope) {
     this.entityModel = $scope.entityModel;
+    $scope.$watch('entityModel.data.entity.description', function(entityModel){
+      console.log('entityModel.data.description $watch triggered.');
+    }, true);
   }
 
 })();

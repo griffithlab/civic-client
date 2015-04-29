@@ -1,7 +1,6 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes')
-    .controller('GeneSummaryController', GeneSummaryController)
     .directive('geneSummary', function() {
       return {
         restrict: 'E',
@@ -9,36 +8,37 @@
         scope: {
           showMenu: '='
         },
-        controller: 'GeneSummaryController',
         link: geneSummaryLink,
         templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
       }
     });
 
   function geneSummaryLink(scope, element, attributes, entityView) {
+    var geneModel,
+      ctrl;
+
+    ctrl = scope.ctrl = {};
+
     scope.geneModel = entityView.entityModel;
-  }
 
-  //@ngInject
-  function GeneSummaryController($scope) {
-    var ctrl = $scope.ctrl = {};
-    $scope.geneModel = {};
+    scope.geneName = scope.geneModel.data.entity.entrez_name;
+    scope.geneDescription= scope.geneModel.data.entity.description;
 
-    var unwatch = $scope.$watch('geneModel', function(geneModel) {
-      console.log('*** geneSummary watchCollection triggered. ***');
+    scope.$watch('geneModel', function(geneModel){
+      console.log('********* geneModel $watch triggered.');
+      ctrl.showMenu = scope.showMenu;
+
       ctrl.gene = geneModel.data.entity;
       ctrl.myGeneInfo = geneModel.data.myGeneInfo;
       ctrl.variants = geneModel.data.variants;
       ctrl.variantGroups = geneModel.data.variantGroups;
       ctrl.backgroundColor = geneModel.config.styles.view.backgroundColor;
-      ctrl.showMenu = $scope.showMenu;
 
       ctrl.variantMenuOptions = {
         gene: ctrl.gene,
         styles: geneModel.config.styles.variantMenu,
-        state: geneModel.config.state,
+        state: geneModel.config.state
       };
-      // unwatch();
     }, true);
   }
 })();

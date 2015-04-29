@@ -19,36 +19,42 @@
 
   // @ngInject
   function geneTalkRevisionsSummaryLink(scope, element, attributes, controllers) {
-    scope.geneTalkModel= controllers[0].entityTalkModel;
-    scope.geneModel = controllers[1].entityModel;
+    var ctrl,
+      geneTalkModel,
+      geneModel,
+      changeId;
+
+    ctrl = scope.ctrl = {};
+    geneTalkModel = scope.geneTalkModel= controllers[0].entityTalkModel;
+    geneModel = scope.geneModel = controllers[1].entityModel;
+    changeId = scope.changeId;
+
+    geneTalkModel.actions.getChange(changeId);
+    geneTalkModel.actions.getChangeComments(changeId);
+
+    scope.geneName = controllers[1].entityModel.data.entity.entrez_name;
+    scope.geneDescription = controllers[1].entityModel.data.entity.description;
   }
 
   // @ngInject
   function GeneTalkRevisionSummaryController($scope, $stateParams) {
-    var ctrl = $scope.ctrl = {};
     // wait until models linked
-    var unwatch = $scope.$watch('[geneTalkModel, geneModel]', function(controllers) {
-      console.log('*** geneTalkRevisionsSummary watchCollection triggered. ***');
-      var geneTalkModel = controllers[0];
-      var geneModel = controllers[1];
 
-      geneTalkModel.actions.getChange($stateParams.changeId);
-      geneTalkModel.actions.getChangeComments($stateParams.changeId);
+    $scope.changeId = $stateParams.changeId;
 
-      ctrl.acceptChange = function() {
-        geneTalkModel.actions.acceptChange($stateParams.changeId)
-          .then(function() {
-            geneTalkModel.actions.getChanges($stateParams.geneId); // will eventually refresh revisions data grid
-            geneModel.actions.refresh(); // will eventually refresh parent gene
-          });
-      };
+    $scope.acceptChange = function() {
+      $scope.geneTalkModel.actions.acceptChange($stateParams.changeId)
+        .then(function() {
+          $scope.geneTalkModel.actions.getChanges($stateParams.geneId); // will eventually refresh revisions data grid
+          $scope.geneModel.actions.refresh(); // will eventually refresh parent gene
+        });
+    };
 
-      ctrl.rejectChange = function() {
-        geneTalkModel.actions.rejectChange($stateParams.changeId)
-          .then(function() {
-            geneTalkModel.actions.getChanges($stateParams.geneId);
-          });
-      };
-    }, true);
+    $scope.rejectChange = function() {
+      $scope.geneTalkModel.actions.rejectChange($stateParams.changeId)
+        .then(function() {
+          $scope.geneTalkModel.actions.getChanges($stateParams.geneId);
+        });
+    };
   }
 })();

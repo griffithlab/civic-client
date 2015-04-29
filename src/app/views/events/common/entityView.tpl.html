@@ -1,4 +1,29 @@
 <div class="entityView">
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="entityModel.data.entity.description|json"></pre>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <form>
+        <p>
+          entityView GENE NAME:
+        </p>
+        <p>
+          <input type="text" ng-model="entityModel.data.entity.description"/>
+        </p>
+        <p>
+          GENE DESCRIPTION:
+        </p>
+        <p>
+          <textarea ng-model="entityModel.data.entity.description">
+
+          </textarea>
+        </p>
+      </form>
+    </div>
+  </div>
 <!-- entityView -->
   <div ng-transclude></div>
 </div>

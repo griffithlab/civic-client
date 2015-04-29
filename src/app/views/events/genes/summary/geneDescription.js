@@ -21,6 +21,6 @@
 
   // @ngInject
   function GeneDescriptionController($scope) {
-    // geneDescription template uses ctrl from geneSummary
+
   }
 })();
