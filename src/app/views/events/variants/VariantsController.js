@@ -61,18 +61,18 @@
       name: variant.name,
       state: {
         baseState: 'events.genes.summary.variants',
-        baseUrl: $state.href('events.genes.summary.variants', { geneId: gene.entrez_id, variantId: variant.id })
+        baseUrl: $state.href('events.genes.summary.variants', { geneId: gene.id, variantId: variant.id })
       },
       tabData: [
         {
           heading: 'Variant Summary',
           route: 'events.genes.summary.variants.summary',
-          params: { geneId: gene.entrez_id, variantId: variant.id }
+          params: { geneId: gene.id, variantId: variant.id }
         },
         {
           heading: 'Variant Talk',
           route: 'events.genes.summary.variants.talk.log',
-          params: { geneId: gene.entrez_id, variantId: variant.id }
+          params: { geneId: gene.id, variantId: variant.id }
         }
       ],
       styles: {

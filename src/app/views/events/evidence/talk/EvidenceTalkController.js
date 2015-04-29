@@ -106,17 +106,17 @@
         {
           heading: 'EID'+ evidence.id + ' Log',
           route: 'events.genes.summary.variants.summary.evidence.talk.log',
-          params: { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id }
+          params: { geneId: gene.id, variantId: variant.id, evidenceId: evidence.id }
         },
         {
           heading: 'EID'+ evidence.id + ' Comments',
           route: 'events.genes.summary.variants.summary.evidence.talk.comments',
-          params: { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id }
+          params: { geneId: gene.id, variantId: variant.id, evidenceId: evidence.id }
         },
         {
           heading: 'EID'+ evidence.id + ' Revisions',
           route: 'events.genes.summary.variants.summary.evidence.talk.revisions',
-          params: { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id }
+          params: { geneId: gene.id, variantId: variant.id, evidenceId: evidence.id }
         }
       ]
     };

@@ -156,7 +156,7 @@ describe('GenesViewConfig', function () {
         var gene = $state.$current.parent.locals.globals.gene;
         expect(gene).to.exist;
         expect(gene).to.be.an('object');
-        expect(gene.entrez_id).to.equal(238);
+        expect(gene.id).to.equal(238);
       });
 
       it('successfully resolves myGeneInfo for gene 238', function() {

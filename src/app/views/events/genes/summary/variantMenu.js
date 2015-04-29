@@ -18,6 +18,6 @@
 
   //@ngInject
   function VariantMenuController($scope, _) {
-    // variants, variantGroups, options attached to $scope
+
   }
 })();

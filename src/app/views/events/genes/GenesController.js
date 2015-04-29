@@ -18,16 +18,17 @@
             return Genes.get($stateParams.geneId);
           },
           myGeneInfo: function(MyGeneInfo, gene) {
-            return MyGeneInfo.get(gene.entrez_id);
+            return MyGeneInfo.get(gene.id);
           },
           variants: function(Genes, gene) {
-            return Genes.getVariants(gene.entrez_id);
+            return Genes.getVariants(gene.id);
           },
           variantGroups: function(Genes, gene) {
-            return Genes.getVariantGroups(gene.entrez_id)
+            return Genes.getVariantGroups(gene.id)
           }
         },
         controller: 'GenesController',
+        controllerAs: 'ctrl',
         deepStateRedirect: [ 'geneId' ],
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
@@ -65,11 +66,7 @@
                            variants,
                            variantGroups,
                            myGeneInfo) {
-
-
-
-    var ctrl = $scope.ctrl = {};
-    var geneModel = ctrl.geneModel = {};
+    var geneModel = this.geneModel = {};
 
     geneModel.config = {
       type: 'gene',
@@ -83,12 +80,12 @@
         {
           heading: 'Gene Summary',
           route: 'events.genes.summary',
-          params: { geneId: gene.entrez_id }
+          params: { geneId: gene.id }
         },
         {
           heading: 'Gene Talk',
           route: 'events.genes.talk.log',
-          params: { geneId: gene.entrez_id }
+          params: { geneId: gene.id }
         }
       ],
       styles: {
@@ -112,7 +109,7 @@
 
     geneModel.data = {
       entity: gene,
-      id: gene.entrez_id,
+      id: gene.id,
       variants: variants,
       variantGroups: variantGroups,
       myGeneInfo: myGeneInfo
@@ -129,27 +126,27 @@
       },
 
       update: function(reqObj) {
-        reqObj.geneId = gene.entrez_id;
+        reqObj.geneId = gene.id;
         Genes.update(reqObj);
         this.refresh();
       },
 
       refresh: function () {
-        Genes.refresh(gene.entrez_id)
+        Genes.refresh(gene.id)
           .then(function(response) {
             geneModel.data.entity = response;
             return response;
           })
       },
       submitChange: function(reqObj) {
-        reqObj.geneId = gene.entrez_id;
+        reqObj.geneId = gene.id;
         return Genes.submitChange(reqObj)
           .then(function(response) {
             return response;
           });
       },
       acceptChange: function(changeId) {
-        return Genes.acceptChange({ geneId: gene.entrez_id, changeId: changeId })
+        return Genes.acceptChange({ geneId: gene.id, changeId: changeId })
           .then(function(response) {
 
             return response;

@@ -83,13 +83,13 @@
 
       ctrl.submit = function(gene) {
         console.log('submitRevision clicked.');
-        gene.geneId = gene.entrez_id; // add geneId param for Genes service
+        gene.geneId = gene.id; // add geneId param for Genes service
         $scope.ctrl.geneModel.services.Genes.submitChange(gene);
       };
 
       ctrl.apply = function(gene) {
         console.log('applyRevision clicked.');
-        gene.geneId = gene.entrez_id;
+        gene.geneId = gene.id;
         $scope.ctrl.geneModel.services.Genes.applyChange(gene);
       };
 

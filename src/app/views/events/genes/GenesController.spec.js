@@ -190,7 +190,7 @@ describe('GenesViewController', function () {
     it('provides entity data object', function() {
       expect(data.entity).to.exist;
       expect(data.entity).to.be.an('object');
-      expect(Number(data.entity.entrez_id)).to.equal(238);
+      expect(Number(data.entity.id)).to.equal(238);
     });
 
     it('provides variants data object', function() {

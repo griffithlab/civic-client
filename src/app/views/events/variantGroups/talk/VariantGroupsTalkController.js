@@ -105,17 +105,17 @@
         {
           heading: variantGroup.name + ' Log',
           route: 'events.genes.summary.variantGroups.talk.log',
-          params: { geneId: gene.entrez_id, variantGroupId: variantGroup.id }
+          params: { geneId: gene.id, variantGroupId: variantGroup.id }
         },
         {
           heading: variantGroup.name + ' Comments',
           route: 'events.genes.summary.variantGroups.talk.comments',
-          params: { geneId: gene.entrez_id, variantGroupId: variantGroup.id }
+          params: { geneId: gene.id, variantGroupId: variantGroup.id }
         },
         {
           heading: variantGroup.name + ' Revisions',
           route: 'events.genes.summary.variantGroups.talk.revisions',
-          params: { geneId: gene.entrez_id, variantGroupId: variantGroup.id }
+          params: { geneId: gene.id, variantGroupId: variantGroup.id }
         }
       ]
     };
@@ -124,7 +124,7 @@
       entity: variantGroup,
       id: variantGroup.id,
       parent: gene,
-      parentId: gene.entrez_id,
+      parentId: gene.id,
       comments: comments,
       changes: changes,
       revisions: revisions,

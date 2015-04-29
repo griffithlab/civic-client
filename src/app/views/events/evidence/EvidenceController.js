@@ -62,7 +62,7 @@
         {
           heading: 'Evidence Talk',
           route: 'events.genes.summary.variants.summary.evidence.talk.log',
-          params: { geneId: gene.entrez_id, variantId: variant.id, evidenceId: evidence.id }
+          params: { geneId: gene.id, variantId: variant.id, evidenceId: evidence.id }
         }
       ],
       styles: {

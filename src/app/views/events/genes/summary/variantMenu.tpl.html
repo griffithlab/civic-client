@@ -2,17 +2,17 @@
   <h4 class="title"><span ng-bind="gene.name"></span> Variants</h4>
   <ul class="variants">
     <li ng-repeat="variant in variants" ui-sref-active="active">
-      <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_id, variantId: variant.id})"><span ng-bind="variant.name">Variant Name</span></a>
+      <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id})"><span ng-bind="variant.name">Variant Name</span></a>
     </li>
   </ul>
   <div ng-if="variantGroups.length > 0">
     <h4 class="title">Variant Groups</h4>
     <ul class="variant-groups">
       <li ng-repeat="variantGroup in variantGroups"  ui-sref-active="active">
-        <a class="sub-title" ui-sref="events.genes.summary.variantGroups.summary({geneId: gene.entrez_id, variantGroupId: variantGroup.id})"><span ng-bind="variantGroup.name">Variant Group Name</span></a>
+        <a class="sub-title" ui-sref="events.genes.summary.variantGroups.summary({geneId: options.gene.id, variantGroupId: variantGroup.id})"><span ng-bind="variantGroup.name">Variant Group Name</span></a>
         <ul class="variants">
           <li ng-repeat="variant in variantGroup.variants"  ui-sref-active="active">
-            <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.entrez_id, variantId: variant.id})"><span ng-bind="variant.name">Variant Name</span></a>
+            <a ui-sref="events.genes.summary.variants.summary({ geneId: options.gene.id, variantId: variant.id})"><span ng-bind="variant.name">Variant Name</span></a>
           </li>
         </ul>
       </li>

@@ -56,7 +56,7 @@
     variantGroupModel = ctrl.variantGroupModel = {};
     baseState = 'events.genes.summary.variantGroups';
     baseUrl = $state.href('events.genes.summary.variantGroups', {
-      geneId: gene.entrez_id,
+      geneId: gene.id,
       variantGroupId: variantGroup.id
     });
 
@@ -72,12 +72,12 @@
         {
           heading: 'Variant Group Summary',
           route: 'events.genes.summary.variantGroups.summary',
-          params: { geneId: gene.entrez_id }
+          params: { geneId: gene.id }
         },
         {
           heading: 'Variant Group Talk',
           route: 'events.genes.summary.variantGroups.talk.log',
-          params: { geneId: gene.entrez_id }
+          params: { geneId: gene.id }
         }
       ],
       styles: {
