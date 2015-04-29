@@ -18,7 +18,7 @@
             return Genes.get($stateParams.geneId);
           },
           myGeneInfo: function(MyGeneInfo, gene) {
-            return MyGeneInfo.get(gene.id);
+            return MyGeneInfo.get(gene.entrez_id);
           },
           variants: function(Genes, gene) {
             return Genes.getVariants(gene.id);

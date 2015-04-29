@@ -98,7 +98,7 @@
       ],
       'genes': [
         {
-          name: 'entrez_gene',
+          name: 'name',
           width: '15%',
           sort: {direction: uiGridConstants.ASC},
           enableFiltering: true,
@@ -200,15 +200,15 @@
       // called when user clicks on a row
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         // $log.info(['geneID:', row.entity.id, 'variantId:', row.entity.variant_id].join(' '));
-        $log.info(['ctrl.mode:', ctrl.mode, 'geneID:', row.entity.id, 'variantId:', row.entity.variant_id].join(' '));
+        $log.info(['ctrl.mode:', ctrl.mode, 'geneId:', row.entity.gene_id, 'variantId:', row.entity.variant_id].join(' '));
         if(ctrl.mode == 'variants') {
           $state.go('events.genes.summary.variants.summary', {
-            geneId: row.entity.id,
+            geneId: row.entity.gene_id,
             variantId: row.entity.variant_id
           });
         } else {
           $state.go('events.genes.summary', {
-            geneId: row.entity.id
+            geneId: row.entity.gene_id
           });
         }
       });
