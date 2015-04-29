@@ -24,7 +24,7 @@
     scope.geneName = scope.geneModel.data.entity.entrez_name;
     scope.geneDescription= scope.geneModel.data.entity.description;
 
-    var unwatch = scope.$watchCollection('geneModel', function(geneModel){
+    scope.$watchCollection('geneModel', function(geneModel){
       console.log('********* geneModel $watch triggered.');
       ctrl.showMenu = scope.showMenu;
 
@@ -38,7 +38,6 @@
         styles: geneModel.config.styles.variantMenu,
         state: geneModel.config.state
       };
-      unwatch();
     });
   }
 })();

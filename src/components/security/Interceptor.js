@@ -23,7 +23,7 @@
           // We must use $injector to get the $http service to prevent circular dependency
           return $injector.get('$http')(response.config);
         });
-        return $q;
+        return response || $q.when(response);
       }
     };
 
