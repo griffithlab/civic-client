@@ -2,26 +2,26 @@
   <div class="row {{ ctrl.backgroundColor }}">
     <div class="col-xs-6">
       <gene-description gene-data="geneModel.data.entity"></gene-description>
-      <div class="row">
-        <div class="col-xs-12">
-          <form>
-            <p>
-              (geneSummary.tpl.html) GENE NAME:
-            </p>
-            <p>
-              <input type="text" ng-model="ctrl.gene.name"/>
-            </p>
-            <p>
-              GENE DESCRIPTION:
-            </p>
-            <p>
-              <textarea ng-model="ctrl.gene.description">
+      <!--<div class="row">-->
+        <!--<div class="col-xs-12">-->
+          <!--<form>-->
+            <!--<p>-->
+              <!--(geneSummary.tpl.html) GENE NAME:-->
+            <!--</p>-->
+            <!--<p>-->
+              <!--<input type="text" ng-model="ctrl.gene.name"/>-->
+            <!--</p>-->
+            <!--<p>-->
+              <!--GENE DESCRIPTION:-->
+            <!--</p>-->
+            <!--<p>-->
+              <!--<textarea ng-model="ctrl.gene.description">-->
 
-              </textarea>
-            </p>
-          </form>
-        </div>
-      </div>
+              <!--</textarea>-->
+            <!--</p>-->
+          <!--</form>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
     <div class="col-xs-6">
       <my-gene-info gene-info="geneModel.data.myGeneInfo"></my-gene-info>

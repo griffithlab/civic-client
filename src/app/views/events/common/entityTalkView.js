@@ -15,6 +15,6 @@
 
   //@ngInject
   function EntityTalkViewController($scope) {
-    this.entityTalkModel = $scope.entityTalkModel; // attach entityTalkModel to controller for child directives
+    this.entityTalkModel = $scope.entityTalkModel;
   }
 })();
