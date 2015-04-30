@@ -12,6 +12,7 @@
         url: '/talk',
         templateUrl: 'app/views/events/genes/talk/GeneTalkView.tpl.html',
         controller: 'GeneTalkController',
+        controllerAs: 'ctrl',
         resolve: {
           comments: function(Genes, gene) {
             return Genes.getComments(gene.id);
@@ -81,13 +82,12 @@
                                   variantGroups,
                                   myGeneInfo) {
     console.log('GenesTalkController called.');
-    var ctrl = $scope.ctrl = {};
 
     // gene-description and my-gene-info directives expect these on scope
-    ctrl.gene = gene;
-    ctrl.myGeneInfo = myGeneInfo;
+    this.gene = gene;
+    this.myGeneInfo = myGeneInfo;
 
-    var geneTalkModel = ctrl.geneTalkModel = {};
+    var geneTalkModel = this.geneTalkModel = {};
 
     geneTalkModel.config = {
       type: 'gene',
