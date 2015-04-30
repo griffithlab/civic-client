@@ -47,7 +47,7 @@
           allowCellFocus: false,
           width: '5%'
         },
-        { name: 'text',
+        { name: 'description',
           displayName: 'Supporting Evidence',
           enableFiltering: true,
           allowCellFocus: false,
