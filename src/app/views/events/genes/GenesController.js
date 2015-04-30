@@ -28,7 +28,7 @@
           }
         },
         controller: 'GenesController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         deepStateRedirect: [ 'geneId' ],
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
