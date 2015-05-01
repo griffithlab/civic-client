@@ -61,7 +61,7 @@
         openLoginDialog();
       },
 
-      // Attempt to authenticate a user by the given email and password
+      // check for current_user
       login: function() {
         var request = $http.get('/api/current_user.json');
         return request.then(function(response) {

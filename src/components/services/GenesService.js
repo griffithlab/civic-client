@@ -3,6 +3,7 @@
     .factory('GenesResource', GenesResource)
     .factory('Genes', GenesService);
 
+  // @ngInject
   function GenesResource($resource, $cacheFactory) {
     var cache = $cacheFactory('genesCache');
 
@@ -209,6 +210,7 @@
     )
   }
 
+  // @ngInject
   function GenesService(GenesResource, $q) {
     // Base Gene and Gene Collection
     var item = {};
