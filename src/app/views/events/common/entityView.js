@@ -5,7 +5,8 @@
       return {
         restrict: 'E',
         scope: {
-          entityModel: '='
+          entityModel: '=',
+          entityConfig: '='
         },
         transclude: true,
         controller: 'EntityViewController',
@@ -16,6 +17,7 @@
   //@ngInject
   function EntityViewController($scope) {
     this.entityModel = $scope.entityModel;
+    this.entityConfig = $scope.entityConfig;
   }
 
 })();

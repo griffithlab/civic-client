@@ -14,15 +14,14 @@
     });
 
   function geneSummaryLink(scope, element, attributes, entityView) {
-    var geneModel,
-      ctrl;
+    var geneModel;
 
-    ctrl = scope.ctrl = {};
-
+    var ctrl = scope.ctrl = {};
     scope.geneModel = entityView.entityModel;
+    scope.geneConfig = entityView.entityConfig;
 
-    scope.geneName = scope.geneModel.data.entity.entrez_name;
-    scope.geneDescription= scope.geneModel.data.entity.description;
+    scope.geneName = scope.geneModel.data.item.entrez_name;
+    scope.geneDescription= scope.geneModel.data.item.description;
 
     //scope.$watchCollection('geneModel', function(geneModel){
     //  console.log('********* geneSummaryLink: geneModel $watch triggered.');

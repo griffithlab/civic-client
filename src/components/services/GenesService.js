@@ -269,14 +269,12 @@
     };
 
     function init(geneId) {
-      return $q.all(
-        // would be cool if myGeneInfo could take a geneId, then this then wouldn't be required to get the entrez_id
-        get(geneId).then(function(response) {
-          getMyGeneInfo(response.data.entrez_id);
-        }),
+      return $q.all([
+        get(geneId),
+        getMyGeneInfo(geneId),
         queryVariants(geneId),
         queryVariantGroups(geneId)
-      )
+      ])
     }
 
     // Gene Base
@@ -297,11 +295,11 @@
     function update(reqObj) {
       return GenesResource.update(reqObj).$promise
         .then(function(response) {
-          angular.copy(response.data, item);
+          angular.copy(response, item);
           return response.$promise;
         });
     }
-    function deleteItem(geneEntrezId) {
+    function deleteItem(geneId) {
       return GenesResource.delete({geneId: geneId}).$promise
         .then(function(response) {
           item = null;
@@ -313,7 +311,7 @@
     function getMyGeneInfo(geneId) {
       return GenesResource.getMyGeneInfo({geneId: geneId}).$promise
         .then(function(response) {
-          angular.copy(response.data, myGeneInfo);
+          angular.copy(response, myGeneInfo);
           return response.$promise;
         });
     }
@@ -337,14 +335,14 @@
     function queryFresh() {
       return GenesResource.queryFresh({geneId: geneId}).$promise
         .then(function(response) {
-          angular.copy(response.data, collection);
+          angular.copy(response, collection);
           return response.$promise;
         });
     }
     function getFresh() {
       return GenesResource.getFresh({geneId: geneId}).$promise
         .then(function(response) {
-          angular.copy(response.data, item);
+          angular.copy(response, item);
           return response.$promise;
         });
     }
@@ -353,14 +351,14 @@
     function queryVariantsFresh(geneId) {
       return GenesResource.queryVariantsFresh({geneId: geneId}).$promise
         .then(function(response) {
-          angular.copy(response.data, variants);
+          angular.copy(response, variants);
           return response.$promise;
         });
     }
     function queryVariantGroupsFresh(geneId) {
       return GenesResource.queryVariantGroupsFresh({geneId: geneId}).$promise
         .then(function(response) {
-          angular.copy(response.data, variantGroups);
+          angular.copy(response, variantGroups);
           return response.$promise;
         });
     }
@@ -369,14 +367,14 @@
     function queryComments(geneId) {
       return GenesResource.queryComments({geneId: geneId}).$promise
         .then(function(response) {
-          angular.copy(response.data, comments);
+          angular.copy(response, comments);
           return response.$promise;
         });
     }
     function getComment(geneId, commentId) {
       return GenesResource.getComment({geneId: geneId, commentId: commentId}).$promise
         .then(function(response) {
-          angular.copy(response.data, comment);
+          angular.copy(response, comment);
           return response.$promise;
         });
     }
@@ -390,7 +388,7 @@
     function updateComment(reqObj) {
       return GenesResource.updateComment(reqObj).$promise
         .then(function(response) {
-          angular.copy(response.data, comment);
+          angular.copy(response, comment);
           getCommentFresh(reqObj);
           return response.$promise;
         });
@@ -407,14 +405,14 @@
     function queryCommentsFresh(geneId) {
       return GenesResource.queryCommentsFresh({geneId: geneID}).$promise
         .then(function(response) {
-          angular.copy(response.data, comments);
+          angular.copy(response, comments);
           return response.$promise;
         });
     }
     function getCommentFresh(geneId, commentId) {
       return GenesResource.getCommentFresh({geneId: geneId, commentId: commentId}).$promise
         .then(function(response) {
-          angular.copy(response.data, comment);
+          angular.copy(response   , comment);
           return response.$promise;
         });
     }
