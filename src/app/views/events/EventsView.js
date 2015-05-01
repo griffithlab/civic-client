@@ -21,6 +21,7 @@
           $deepStateRedirect.reset();
         }
       });
+
   }
 
   // @ngInject

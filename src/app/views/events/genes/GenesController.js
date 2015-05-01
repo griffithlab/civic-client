@@ -13,18 +13,17 @@
         templateUrl: 'app/views/events/genes/GenesView.tpl.html',
         resolve: /* @ngInject */ {
           Genes: 'Genes',
-          MyGeneInfo: 'MyGeneInfo',
           gene: function(Genes, $stateParams) {
             return Genes.get($stateParams.geneId);
           },
-          myGeneInfo: function(MyGeneInfo, gene) {
-            return MyGeneInfo.get(gene.entrez_id);
+          myGeneInfo: function(Genes, gene) {
+            return Genes.getMyGeneInfo(gene.id);
           },
           variants: function(Genes, gene) {
-            return Genes.getVariants(gene.id);
+            return Genes.queryVariants(gene.id);
           },
           variantGroups: function(Genes, gene) {
-            return Genes.getVariantGroups(gene.id)
+            return Genes.queryVariantGroups(gene.id);
           }
         },
         controller: 'GenesController',
@@ -59,18 +58,12 @@
                            $state,
                            $stateParams,
                            // resolved services
-                           Genes,
-                           MyGeneInfo,
-                           // resolved resources
-                           gene,
-                           variants,
-                           variantGroups,
-                           myGeneInfo) {
+                           Genes) {
     var geneModel = this.geneModel = {};
 
     geneModel.config = {
       type: 'gene',
-      name: gene.name,
+      name: Genes.data.item.name,
       state: {
         baseState: 'events.genes',
         stateParams: $stateParams,

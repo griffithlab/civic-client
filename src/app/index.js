@@ -30,7 +30,7 @@ angular.module('civicClient', [
   'civic.pages',
   'civic.account',
   'civic.browse',
-  'civic.events',
+  'civic.events'
 ])
   .run(appRun)
   .config(appConfig);
