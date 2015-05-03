@@ -1,7 +1,6 @@
 (function() {
   'use strict';
 
-
   /**
    * Permits declarative (and dynamic) definitions of tab links with full routes.
    *
@@ -24,57 +23,59 @@
     .controller('EntityTalkTabsController', EntityTalkTabsController);
 
 // @ngInject
-  function entityTalkTabsDirective() {
+  function entityTalkTabsDirective($rootScope) {
     return /* @ngInject */ {
       restrict: 'E',
       scope: {
-        justified: '=',
-        vertical: '='
+        entityTalkModel: '=',
+        type: '@',
+        justified: '@',
+        vertical: '@'
       },
-      require: '^^entityTalkView',
-      link: entityTalkTabsLink,
+      link: function entityTalkTabsLink(scope, element, attributes) {
+        var unbindStateChangeSuccess = $rootScope.$on(
+          '$stateChangeSuccess',
+          function() {
+            scope.update_tabs();
+          }
+        );
+        scope.$on('$destroy', unbindStateChangeSuccess);
+      },
       controller: 'EntityTalkTabsController',
       templateUrl: 'app/views/events/common/entityTalkTabs.tpl.html'
     }
   }
 
-  // @ngInject
-  function entityTalkTabsLink(scope, element, attributes, entityTalkView) {
-    var viewModel = scope.viewModel = entityTalkView.viewModel;
-    var viewOptions = scope.viewOptions = entityTalkView.viewOptions;
+// @ngInject
+  function EntityTalkTabsController($scope, $state) {
+    var ctrl = $scope.ctrl = {};
 
-    scope.type = viewModel.data.item.type;
-    scope.name = viewModel.data.item.name;
-    scope.showCorner = (scope.type === 'variant' || scope.type === 'variant group');
-    scope.viewBackground = 'view-' + viewOptions.styles.view.backgroundColor;
-    scope.tabs = viewOptions.tabData;
+    var config = $scope.entityTalkModel.config;
 
-    if (!scope.tabs) {
+    ctrl.type = config.type;
+    ctrl.name = config.name;
+
+    ctrl.showCorner = config.type === 'variant';
+
+    ctrl.tabRowBackground = config.styles.tabs.tabRowBackground;
+    ctrl.viewBackground = 'view-' + config.styles.view.backgroundColor;
+
+    $scope.tabs = $scope.entityTalkModel.config.tabData;
+    if (!$scope.tabs) {
       throw new Error('entityTalkTabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
     }
 
-    if (!angular.isArray(scope.tabs)) {
+    if (!angular.isArray($scope.tabs)) {
       throw new Error('entityTalkTabs: \'data\' attribute must be an array of tab data with at least one tab defined.');
     }
 
-    var unbindStateChangeSuccess = scope.$on(
-      '$stateChangeSuccess',
-      function () {
-        scope.update_tabs();
-      }
-    );
-    scope.$on('$destroy', unbindStateChangeSuccess);
-  }
-
-// @ngInject
-  function EntityTalkTabsController($scope, $state) {
-    var currentStateEqualTo = function (tab) {
+    var currentStateEqualTo = function(tab) {
 
       var isEqual = $state.is(tab.route, tab.params, tab.options);
       return isEqual;
     };
 
-    $scope.go = function (tab) {
+    $scope.go = function(tab) {
 
       if (!currentStateEqualTo(tab) && !tab.disabled) {
         var promise = $state.go(tab.route, tab.params, tab.options);
@@ -86,30 +87,23 @@
          https://github.com/angular-ui/ui-router/pull/1844
 
          $stateChangeCancel is better since it will handle ui-sref and external $state.go(..) calls */
-        promise.catch(function () {
+        promise.catch(function() {
           $scope.update_tabs();
         });
       }
     };
 
     /* whether to highlight given route as part of the current state */
-    $scope.active = function (tab) {
-      //var route = tab.route;
-      //// TODO: this is a kludge to fix misbehaving sub-tabs that we have in talk views, almost certainly not the most elegant solution.
-      //if (_.contains(tab.route, 'talk')) {
-      //  // drop the last route element so all talk ancestor $state.includes() evaluates to true
-      //  route = _.chain(tab.route.split('.')).dropRight().value().join('.');
-      //}
-      //var isAncestorOfCurrentRoute = $state.includes(route, tab.params, tab.options);
-      //return isAncestorOfCurrentRoute;
+    $scope.active = function(tab) {
+
       var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
       return isAncestorOfCurrentRoute;
     };
 
-    $scope.update_tabs = function () {
+    $scope.update_tabs = function() {
 
       // sets which tab is active (used for highlighting)
-      angular.forEach($scope.tabs, function (tab) {
+      angular.forEach($scope.tabs, function(tab) {
         tab.params = tab.params || {};
         tab.options = tab.options || {};
         tab.active = $scope.active(tab);
