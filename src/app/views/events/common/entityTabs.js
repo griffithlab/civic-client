@@ -40,8 +40,8 @@
 
   // @ngInject
   function entityTabsLink(scope, element, attributes, entityView) {
-    var entityViewModel = entityView.entityViewModel;
-    var entityViewOptions = entityView.entityViewOptions;
+    var entityViewModel = scope.entityViewModel = entityView.entityViewModel;
+    var entityViewOptions = scope.entityViewOptions = entityView.entityViewOptions;
 
     scope.type = entityViewModel.data.item.type;
     scope.name = entityViewModel.data.item.name;

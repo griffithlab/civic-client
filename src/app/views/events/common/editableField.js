@@ -11,7 +11,7 @@
       restrict: 'A',
       transclude: true,
       scope: {
-        entityModel: '=',
+        entityViewModel: '=',
         entityViewOptions: '='
       },
       controller: 'EditableFieldController',
