@@ -46,6 +46,7 @@
     scope.type = viewModel.data.item.type;
     scope.name = viewModel.data.item.name;
     scope.showCorner = (scope.type === 'variant' || scope.type === 'variant group');
+    scope.tabRowBackground = viewOptions.styles.tabs.tabRowBackground;
     scope.viewBackground = 'view-' + viewOptions.styles.view.backgroundColor;
     scope.tabs = viewOptions.tabData;
 
