@@ -16,7 +16,7 @@
         controllerAs: 'vm',
         resolve: {
           GeneRevisions: 'GeneRevisions',
-          initGeneTalk: function(Genes, GeneRevisions, $stateParams) {
+          initGeneTalk: function(Genes, GeneRevisions, $stateParams, $q) {
             return $q.all([
               Genes.initComments($stateParams.geneId),
               GeneRevisions.initRevisions($stateParams.geneId)
@@ -65,16 +65,14 @@
 
   // @ngInject
   function GenesTalkViewOptions($state, $stateParams, Genes) {
-    var baseParams = {};
     var baseUrl = '';
     var baseState = '';
     var tabData = [];
     var styles = {};
 
-    var gene = Genes.data.entity;
+    var gene = Genes.data.item;
 
     function init() {
-      angular.copy($stateParams, baseParams);
       baseState = 'events.genes.talk';
       baseUrl = $state.href(baseUrl, $stateParams);
 
@@ -110,7 +108,7 @@
     return {
       init: init,
       state: {
-        baseParams: baseParams,
+        baseParams: $stateParams,
         baseState: baseState,
         baseUrl: baseUrl
       },
@@ -120,132 +118,12 @@
   }
 
   // @ngInject
-  function GeneTalkController($state, $stateParams, Genes) {
+  function GeneTalkController(Genes, GeneRevisions, GenesTalkViewOptions) {
     console.log('GenesTalkController called.');
-
-
-
-    geneTalkModel.data = {
-      entity: gene,
-      id: gene.id,
-      parent: null,
-      parentId: null,
-      comments: comments,
-      changes: changes,
-      change: {},
-      changeComments: [],
-      revisions: revisions,
-      lastRevision: lastRevision,
-      variants: variants,
-      variantGroups: variantGroups,
-      myGeneInfo: myGeneInfo
-    };
-
-    geneTalkModel.actions = {
-
-      getChanges: function() {
-        return Genes.getChanges(gene.id)
-          .then(function(response) {
-            geneTalkModel.data.changes = response;
-            return response;
-          });
-      },
-
-      getChange: function(changeId) {
-        return Genes.getChange({ geneId: gene.id, changeId: changeId })
-          .then(function(response) {
-            geneTalkModel.data.change = response;
-            return response;
-          })
-      },
-      submitChange: function(reqObj) {
-        reqObj.geneId = gene.id;
-        return Genes.submitChange(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-      acceptChange: function(changeId) {
-        return Genes.acceptChange({ geneId: gene.id, changeId: changeId })
-          .then(function(response) {
-            return response;
-          })
-      },
-      rejectChange: function(changeId) {
-        return Genes.rejectChange({ geneId: gene.id, changeId: changeId })
-          .then(function(response) {
-            return response;
-          })
-      },
-
-      submitChangeComment: function(changeId, comment) {
-        var reqObj = comment;
-        reqObj.geneId = gene.id;
-        reqObj.changeId = changeId;
-        return Genes.submitChangeComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-
-      updateChangeComment: function(reqObj) {
-        reqObj.geneId = gene.id;
-        return Genes.updateChangeComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-
-      getChangeComments: function(changeId) {
-        return Genes.getChangeComments({geneId: gene.id, changeId: changeId})
-          .then(function(response) {
-            geneTalkModel.data.changeComments = response;
-            return response;
-          })
-      },
-
-      getChangeComment: function(changeId, commentId) {
-        return Genes.getChangeComment({
-          geneId: gene.id,
-          changeId: changeId,
-          commentId: commentId
-        }).then(function(response){
-          return response;
-        });
-      },
-
-      deleteChangeComment: function(changeId, commentId) {
-        return Genes.deleteChangeComment({
-          geneId: gene.id,
-          changeId: changeId,
-          commentId: commentId
-        }).then(function(response){
-          return response;
-        });
-      },
-
-      getRevisions: function() {
-        return Genes.getRevisions(gene.id)
-          .then(function(response) {
-            geneTalkModel.data.revisions = response;
-            return response;
-          });
-      },
-
-      getRevision: function(revisionId) {
-        return Genes.getRevision({ geneId: gene.id, revisionId: revisionId })
-          .then(function(response) {
-            return response;
-          });
-      },
-
-      getLastRevision: function() {
-        return Genes.getLastRevision(gene.id)
-          .then(function(response) {
-            return response;
-          });
-      }
-    }
+    GenesTalkViewOptions.init();
+    this.GenesTalkViewModel = Genes; // we're re-using the Genes model here but could in the future have a GenesTalk model if warranted
+    this.GeneRevisionsModel = GeneRevisions;
+    this.GenesTalkViewOptions = GenesTalkViewOptions;
   }
 
 })();

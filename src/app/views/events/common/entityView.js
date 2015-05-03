@@ -5,8 +5,8 @@
       return {
         restrict: 'E',
         scope: {
-          entityViewModel: '=',
-          entityViewOptions: '='
+          viewModel: '=',
+          viewOptions: '='
         },
         transclude: true,
         controller: 'EntityViewController',
@@ -19,8 +19,8 @@
     // entityViewModel and entityViewOptions are defined in [entity]ViewControllers, and passed to
     // this directive in [entity]View templates. This controller can then be required by child common components
     // to obtain references to view models and view options.
-    this.entityViewModel = $scope.entityViewModel;
-    this.entityViewOptions= $scope.entityViewOptions;
+    this.entityViewModel = $scope.viewModel;
+    this.entityViewOptions= $scope.viewOptions;
   }
 
 })();

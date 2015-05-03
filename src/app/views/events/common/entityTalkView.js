@@ -5,7 +5,9 @@
       return {
         restrict: 'E',
         scope: {
-          entityTalkModel: '='
+          viewModel: '=',
+          revisionsModel: '=',
+          viewOptions: '='
         },
         transclude: true,
         controller: 'EntityTalkViewController',
@@ -15,6 +17,11 @@
 
   //@ngInject
   function EntityTalkViewController($scope) {
-    this.entityTalkModel = $scope.entityTalkModel;
+    // entityViewModel and entityViewOptions are defined in [entity]ViewControllers, and passed to
+    // this directive in [entity]View templates. This controller can then be required by child common components
+    // to obtain references to view models and view options.
+    this.entityTalkViewModel = $scope.entityTalkViewModel;
+    this.entityRevisionsModel = $scope.entityRevisionsModel;
+    this.entityTalkViewOptions = $scope.entityTalkViewOptions;
   }
 })();

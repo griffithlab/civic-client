@@ -249,7 +249,7 @@
       queryFresh: queryFresh,
       getFresh: getFresh,
 
-      // Gene Colletions
+      // Gene Collections
       queryVariants: queryVariants,
       queryVariantGroups: queryVariantGroups,
 

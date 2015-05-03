@@ -203,28 +203,28 @@
 
     // Gene Revisions Base
     function query(geneId) {
-      return GeneRevisionsResource.query({ geneId: geneId })
+      return GeneRevisionsResource.query({ geneId: geneId }).$promise
         .then(function(response) {
           angular.copy(response, collection);
           return response.$promise;
         });
     }
     function get(geneId, revisionId) {
-      return GeneRevisionsResource.getRevision({ geneId: geneId, revisionId: revisionId })
+      return GeneRevisionsResource.getRevision({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
         })
     }
     function submitRevision(reqObj) {
-      return GeneRevisionsResource.submitRevision(reqObj)
+      return GeneRevisionsResource.submitRevision(reqObj).$promise
         .then(function(response) {
           queryFresh();
           return response.$promise;
         });
     }
     function acceptRevision(geneId, revisionId) {
-      return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId })
+      return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
           queryFresh(geneId);
           getFresh(geneId, revisionId);
@@ -232,7 +232,7 @@
         })
     }
     function rejectRevision(geneId, revisionId) {
-      return GeneRevisionsResource.rejectRevision({ geneId: geneId, revisionId: revisionId })
+      return GeneRevisionsResource.rejectRevision({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
           queryFresh();
           getFresh(geneId, revisionId);
