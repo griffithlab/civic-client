@@ -5,45 +5,17 @@
     .directive('geneSummary', function() {
       return {
         restrict: 'E',
-        require: '^^entityView',
         scope: {
-          showMenu: '=',
-          genesViewOptions: '='
+          showMenu: '='
         },
         controller: 'GeneSummaryController',
-        link: geneSummaryLink,
         templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
       }
     });
 
-  function GeneSummaryController(Genes, GenesViewOptions) {
-    console.log('GEneSUmmaryController called.');
-  }
-
-  function geneSummaryLink(scope, element, attributes, entityView) {
-    var geneModel;
-
-    var ctrl = scope.ctrl = {};
-    scope.geneModel = entityView.entityModel;
-    scope.genesViewOptions = entityView.entityViewConfig;
-
-    scope.geneName = scope.geneModel.data.item.entrez_name;
-    scope.geneDescription= scope.geneModel.data.item.description;
-
-    //scope.$watchCollection('geneModel', function(geneModel){
-    //  console.log('********* geneSummaryLink: geneModel $watch triggered.');
-    //  ctrl.showMenu = scope.showMenu;
-    //
-    //  ctrl.gene = geneModel.data.entity;
-    //  ctrl.myGeneInfo = geneModel.data.myGeneInfo;
-    //  ctrl.variants = geneModel.data.variants;
-    //  ctrl.variantGroups = geneModel.data.variantGroups;
-    //  ctrl.backgroundColor = geneModel.config.styles.view.backgroundColor;
-    //
-    //  ctrl.variantMenuOptions = {
-    //    styles: geneModel.config.styles.variantMenu,
-    //    state: geneModel.config.state
-    //  };
-    //});
+  function GeneSummaryController($scope, Genes, GenesViewOptions) {
+    $scope.gene = Genes.data.item;
+    $scope.myGeneInfo = Genes.data.myGeneInfo;
+    $scope.GenesViewOptions = GenesViewOptions;
   }
 })();
