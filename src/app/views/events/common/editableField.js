@@ -12,7 +12,7 @@
       transclude: true,
       scope: {
         entityModel: '=',
-        entityConfig: '='
+        entityViewOptions: '='
       },
       controller: 'EditableFieldController',
       link: editableFieldLink,
@@ -31,9 +31,9 @@
     var baseState = '';
     var stateParams = {};
 
-    baseState  = $scope.entityConfig.state.baseState;
-    stateParams = $scope.entityConfig.state.params;
-    ctrl.editState = $scope.entityConfig.state.baseUrl + '.edit';
+    baseState  = $scope.entityViewOptions.state.baseState;
+    stateParams = $scope.entityViewOptions.state.params;
+    ctrl.editState = $scope.entityViewOptions.state.baseUrl + '.edit';
     ctrl.entityModel = $scope.entityModel;
 
     ctrl.mouseOver = function() {

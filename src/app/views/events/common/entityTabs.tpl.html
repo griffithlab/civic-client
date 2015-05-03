@@ -2,8 +2,8 @@
   <div class="row">
     <div class="detail-corner" ng-show="ctrl.showCorner"><div class="corner-edge"></div></div>
     <div class="col-xs-6 name">
-      <h3 editable-field class="edit-icon-lg" entity-model="entityModel" entity-config="entityConfig">
-         <span ng-bind="entityConfig.type" class="entity-type">Entity</span>
+      <h3 editable-field class="edit-icon-lg" entity-model="entityModel" entity-view-options="entityViewOptions">
+         <span ng-bind="entityViewOptions.type" class="entity-type">Entity</span>
          <span ng-bind="entityModel.data.item.name" class="entity-name">Name</span>
       </h3>
     </div>

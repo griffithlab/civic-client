@@ -52,7 +52,7 @@
                            Genes) {
 
     this.geneModel = Genes;
-    this.geneConfig =  {
+    this.genesViewOptions =  {
       state: {
         baseState: 'events.genes',
         stateParams: $stateParams,

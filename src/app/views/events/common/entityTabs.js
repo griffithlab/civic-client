@@ -29,7 +29,7 @@
       restrict: 'E',
       scope: {
         entityModel: '=',
-        entityConfig: '=',
+        entityViewOptions: '=',
         type: '@',
         justified: '@',
         vertical: '@'
@@ -52,16 +52,16 @@
   function EntityTabsController($scope, $state) {
     var ctrl = $scope.ctrl = {};
 
-    var config = $scope.entityConfig;
+    var options = $scope.entityViewOptions;
 
     ctrl.type = $scope.entityModel.data.item.type;
     ctrl.name = $scope.entityModel.data.item.name;
 
     ctrl.showCorner = (ctrl.type === 'variant' || ctrl.type === 'variant group');
 
-    ctrl.viewBackground = 'view-' + config.styles.view.backgroundColor;
+    ctrl.viewBackground = 'view-' + options.styles.view.backgroundColor;
 
-    $scope.tabs = config.tabData;
+    $scope.tabs = options.tabData;
     if (!$scope.tabs) {
       throw new Error('entityTabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
     }

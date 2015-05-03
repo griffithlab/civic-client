@@ -6,9 +6,6 @@
       return {
         restrict: 'E',
         scope: {
-          gene: '=',
-          variants: '=',
-          variantGroups: '=',
           options: '='
         },
         controller: 'VariantMenuController',
@@ -17,7 +14,9 @@
     });
 
   //@ngInject
-  function VariantMenuController($scope, _) {
-
+  function VariantMenuController($scope, Genes) {
+    $scope.gene = Genes.data.item;
+    $scope.variants = Genes.data.variants;
+    $scope.variantGroups = Genes.data.variantGroups;
   }
 })();

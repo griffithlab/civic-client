@@ -1,5 +1,5 @@
 <div class="geneSummary">
-  <div class="row {{ geneConfig.styles.view.backgroundColor }}">
+  <div class="row {{ genesViewOptions.styles.view.backgroundColor }}">
     <div class="col-xs-6">
       <gene-description gene-data="geneModel.data.item"></gene-description>
       <!--<div class="row">-->
@@ -27,13 +27,10 @@
       <my-gene-info gene-info="geneModel.data.myGeneInfo"></my-gene-info>
     </div>
   </div>
-  <div ng-if="ctrl.showMenu === true">
+  <div ng-if="showMenu === true">
     <div class="row">
       <div class="col-xs-2">
         <variant-menu
-          gene="geneModel.data.entity"
-          variants="geneModel.data.variants"
-          variant-groups="geneModel.data.variantGroups"
           options="ctrl.variantMenuOptions"></variant-menu>
       </div>
       <div class="col-xs-10 variant-view">

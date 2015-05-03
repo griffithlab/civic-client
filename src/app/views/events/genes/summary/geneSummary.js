@@ -6,7 +6,8 @@
         restrict: 'E',
         require: '^^entityView',
         scope: {
-          showMenu: '='
+          showMenu: '=',
+          genesViewOptions: '='
         },
         link: geneSummaryLink,
         templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
@@ -18,7 +19,7 @@
 
     var ctrl = scope.ctrl = {};
     scope.geneModel = entityView.entityModel;
-    scope.geneConfig = entityView.entityConfig;
+    scope.genesViewOptions = entityView.entityViewConfig;
 
     scope.geneName = scope.geneModel.data.item.entrez_name;
     scope.geneDescription= scope.geneModel.data.item.description;
