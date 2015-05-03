@@ -13,11 +13,15 @@
         url: '/talk',
         templateUrl: 'app/views/events/genes/talk/GeneTalkView.tpl.html',
         controller: 'GeneTalkController',
-        controllerAs: 'ctrl',
-        // for now we use the main Genes service, but if the Log and Comments states require more features,
-        // it could warrant a separate GenesLog and GenesComments services. GenesRevisions *does* have its own service.
+        controllerAs: 'vm',
         resolve: {
-          Genes: 'Genes'
+          GeneRevisions: 'GeneRevisions',
+          initGeneTalk: function(Genes, GeneRevisions, $stateParams) {
+            return $q.all([
+              Genes.initComments($stateParams.geneId),
+              GeneRevisions.initRevisions($stateParams.geneId)
+            ]);
+          }
         },
         deepStateRedirect: [ 'geneId' ],
         data: {

@@ -9,7 +9,6 @@
     return {
       restrict: 'E',
       scope: {},
-      require: '^^entityTalkView',
       link: geneTalkLogLink,
       controller: 'GeneTalkLogController',
       templateUrl: 'app/views/events/genes/talk/geneTalkLog.tpl.html'
@@ -22,7 +21,7 @@
   }
 
   // @ngInject
-  function GeneTalkLogController($scope, _) {
+  function GeneTalkLogController($scope, _, Genes, GenesViewOptions) {
     var ctrl = $scope.ctrl = {}; // create ctrl here, link function will attach entityTalkView after DOM rendered.
     var comments, revisions, changes;
 

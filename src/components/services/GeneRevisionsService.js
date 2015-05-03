@@ -152,12 +152,13 @@
     var item = {};
     var collection = [];
 
-    // Gene Revisions Collections
+    // Gene Revisions Comments
     var comment = {};
     var comments = [];
 
     return {
-      init: init,
+      initBase: initBase,
+      initRevisions: initRevisions,
       data: {
         item: item,
         collection: collection,
@@ -188,9 +189,15 @@
       getCommentFresh: getCommentFresh
     };
 
-    function init(geneId, revisionId) {
+    function initBase(geneId, revisionId) {
       return $q.all([
         get(geneId, revisionId)
+      ])
+    }
+
+    function initRevisions(geneId) {
+      return $q.all([
+        query(geneId)
       ])
     }
 

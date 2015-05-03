@@ -14,8 +14,8 @@
         templateUrl: 'app/views/events/genes/GenesView.tpl.html',
         resolve: /* @ngInject */ {
           Genes: 'Genes',
-          init: function(Genes, $stateParams) {
-            return Genes.init($stateParams.geneId);
+          initGene: function(Genes, $stateParams) {
+            return Genes.initBase($stateParams.geneId);
           }
         },
         controller: 'GenesController',

@@ -224,7 +224,8 @@
     var comments = [];
 
     return {
-      init: init,
+      initBase: initBase,
+      initComments: initComments,
       data: {
         item: item,
         collection: collection,
@@ -268,7 +269,7 @@
       getCommentFresh: getCommentFresh
     };
 
-    function init(geneId) {
+    function initBase(geneId) {
       return $q.all([
         get(geneId),
         getMyGeneInfo(geneId),
@@ -277,6 +278,11 @@
       ])
     }
 
+    function initComments(geneId) {
+      return $q.all([
+        queryComments(geneId)
+      ])
+    }
     // Gene Base
     function query() {
       return GenesResource.query().$promise
