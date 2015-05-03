@@ -161,7 +161,7 @@
           params: {
             geneId: '@geneId'
           },
-          cache: cache
+          cache: false
         },
         updateComment: {
           method: 'PATCH',
@@ -403,7 +403,7 @@
 
     // Gene Comments Refresh
     function queryCommentsFresh(geneId) {
-      return GenesResource.queryCommentsFresh({geneId: geneID}).$promise
+      return GenesResource.queryCommentsFresh({geneId: geneId}).$promise
         .then(function(response) {
           angular.copy(response, comments);
           return response.$promise;

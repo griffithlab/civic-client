@@ -2,6 +2,7 @@
   'use strict';
   angular.module('civic.events.genes')
     .config(geneTalkConfig)
+    .factory('GenesTalkViewOptions', GenesTalkViewOptions)
     .controller('GeneTalkController', GeneTalkController);
 
   // @ngInject
@@ -13,19 +14,10 @@
         templateUrl: 'app/views/events/genes/talk/GeneTalkView.tpl.html',
         controller: 'GeneTalkController',
         controllerAs: 'ctrl',
+        // for now we use the main Genes service, but if the Log and Comments states require more features,
+        // it could warrant a separate GenesLog and GenesComments services. GenesRevisions *does* have its own service.
         resolve: {
-          comments: function(Genes, gene) {
-            return Genes.getComments(gene.id);
-          },
-          changes: function(Genes, gene) {
-            return Genes.getChanges(gene.id);
-          },
-          revisions: function(Genes, gene) {
-            return Genes.getRevisions(gene.id);
-          },
-          lastRevision: function(Genes, gene) {
-            return Genes.getLastRevision(gene.id);
-          }
+          Genes: 'Genes'
         },
         deepStateRedirect: [ 'geneId' ],
         data: {
@@ -68,36 +60,39 @@
   }
 
   // @ngInject
-  function GeneTalkController($scope,
-                                  $state,
-                                  // resolved resources
-                                  comments,
-                                  changes,
-                                  revisions,
-                                  lastRevision,
-                                  // inherited resolved resources
-                                  Genes,
-                                  gene,
-                                  variants,
-                                  variantGroups,
-                                  myGeneInfo) {
-    console.log('GenesTalkController called.');
+  function GenesTalkViewOptions($state, $stateParams, Genes) {
+    var baseParams = {};
+    var baseUrl = '';
+    var baseState = '';
+    var tabData = [];
+    var styles = {};
 
-    // gene-description and my-gene-info directives expect these on scope
-    this.gene = gene;
-    this.myGeneInfo = myGeneInfo;
+    var gene = Genes.data.entity;
 
-    var geneTalkModel = this.geneTalkModel = {};
+    function init() {
+      angular.copy($stateParams, baseParams);
+      baseState = 'events.genes.talk';
+      baseUrl = $state.href(baseUrl, $stateParams);
 
-    geneTalkModel.config = {
-      type: 'gene',
-      name: gene.name,
-      service: Genes,
-      state: {
-        baseState: 'events.genes.talk',
-        baseUrl: $state.href('events.genes.talk', { geneId: gene.id })
-      },
-      styles: {
+      angular.copy([
+        {
+          heading: gene.name + ' Log',
+          route: baseState + '.log',
+          params: { geneId: gene.id }
+        },
+        {
+          heading: gene.name  + ' Comments',
+          route: baseState + '.comments',
+          params: { geneId: gene.id }
+        },
+        {
+          heading: gene.name + ' Revisions',
+          route: baseState + '.revisions',
+          params: { geneId: gene.id }
+        }
+      ], tabData);
+
+      angular.copy({
         view: {
           summaryBackgroundColor: 'pageBackground2',
           talkBackgroundColor: 'pageBackground'
@@ -105,25 +100,26 @@
         tabs: {
           tabRowBackground: 'pageBackground2Gradient'
         }
+      }, styles);
+    }
+
+    return {
+      init: init,
+      state: {
+        baseParams: baseParams,
+        baseState: baseState,
+        baseUrl: baseUrl
       },
-      tabData: [
-        {
-          heading: gene.name + ' Log',
-          route: 'events.genes.talk.log',
-          params: { geneId: gene.id }
-        },
-        {
-          heading: gene.name + ' Comments',
-          route: 'events.genes.talk.comments',
-          params: { geneId: gene.id }
-        },
-        {
-          heading: gene.name + ' Revisions',
-          route: 'events.genes.talk.revisions',
-          params: { geneId: gene.id }
-        }
-      ]
+      tabData: tabData,
+      styles: styles
     };
+  }
+
+  // @ngInject
+  function GeneTalkController($state, $stateParams, Genes) {
+    console.log('GenesTalkController called.');
+
+
 
     geneTalkModel.data = {
       entity: gene,
@@ -142,40 +138,6 @@
     };
 
     geneTalkModel.actions = {
-      getComments: function() {
-        return Genes.getComments(gene.id)
-          .then(function(response) {
-            geneTalkModel.data.comments = response;
-            return response;
-          });
-      },
-
-      getComment: function(commentId) {
-        return Genes.getComment(gene.id, commentId);
-      },
-
-      submitComment: function(reqObj) {
-        reqObj.geneId = gene.id;
-        return Genes.submitComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-
-      updateComment: function(reqObj) {
-        reqObj.geneId = gene.id;
-        return Genes.updateComment(reqObj)
-          .then(function(response){
-            return response;
-          });
-      },
-
-      deleteComment: function(commentId) {
-        return Genes.deleteComment({ geneId: gene.id, commentId: commentId })
-          .then(function(response) {
-            return response;
-          });
-      },
 
       getChanges: function() {
         return Genes.getChanges(gene.id)
