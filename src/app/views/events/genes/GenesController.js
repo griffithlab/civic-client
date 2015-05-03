@@ -2,6 +2,7 @@
   'use strict';
   angular.module('civic.events.genes')
     .config(GenesConfig)
+    .factory('GenesViewOptions', GenesViewOptions)
     .controller('GenesController', GenesController);
 
   // @ngInject
@@ -45,20 +46,19 @@
   }
 
   // @ngInject
-  function GenesController($scope,
-                           $state,
-                           $stateParams,
-                           // resolved services
-                           Genes) {
+  function GenesViewOptions($state, $stateParams, Genes) {
+    var baseParams = {};
+    var baseUrl = '';
+    var baseState = '';
+    var tabData = [];
+    var styles = {};
 
-    this.geneModel = Genes;
-    this.genesViewOptions =  {
-      state: {
-        baseState: 'events.genes',
-        stateParams: $stateParams,
-        baseUrl: $state.href('events.genes', $stateParams)
-      },
-      tabData: [
+    function init() {
+      angular.copy($stateParams, baseParams);
+      baseState = 'events.genes';
+      baseUrl = $state.href(baseUrl, $stateParams);
+
+      angular.copy([
         {
           heading: 'Gene Summary',
           route: 'events.genes.summary',
@@ -69,8 +69,9 @@
           route: 'events.genes.talk.log',
           params: { geneId: Genes.data.item.id }
         }
-      ],
-      styles: {
+      ], tabData);
+
+      angular.copy({
         view: {
           backgroundColor: 'pageBackground2'
         },
@@ -86,8 +87,28 @@
         edit: {
           summaryBackgroundColor: 'pageBackground2'
         }
-      }
+      }, styles);
+    }
+
+    return {
+      init: init,
+      state: {
+        baseParams: baseParams,
+        baseState: baseState,
+        baseUrl: baseUrl
+      },
+      tabData: tabData,
+      styles: styles
     };
+  }
+
+  // @ngInject
+  function GenesController(Genes, GenesViewOptions) {
+    GenesViewOptions.init();
+    // these will be passed to the entity-view directive controller, to be required by child entity component so that they
+    // can get references to the view model and view options
+    this.genesViewModel = Genes;
+    this.genesViewOptions = GenesViewOptions;
   }
 
 })();

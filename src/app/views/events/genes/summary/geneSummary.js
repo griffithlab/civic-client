@@ -1,6 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes')
+    .controller('GeneSummaryController', GeneSummaryController)
     .directive('geneSummary', function() {
       return {
         restrict: 'E',
@@ -9,10 +10,15 @@
           showMenu: '=',
           genesViewOptions: '='
         },
+        controller: 'GeneSummaryController',
         link: geneSummaryLink,
         templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
       }
     });
+
+  function GeneSummaryController(Genes, GenesViewOptions) {
+    console.log('GEneSUmmaryController called.');
+  }
 
   function geneSummaryLink(scope, element, attributes, entityView) {
     var geneModel;

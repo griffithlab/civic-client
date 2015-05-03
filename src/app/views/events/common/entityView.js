@@ -5,7 +5,7 @@
       return {
         restrict: 'E',
         scope: {
-          entityModel: '=',
+          entityViewModel: '=',
           entityViewOptions: '='
         },
         transclude: true,
@@ -16,7 +16,10 @@
 
   //@ngInject
   function EntityViewController($scope) {
-    this.entityModel = $scope.entityModel;
+    // entityViewModel and entityViewOptions are defined in [entity]ViewControllers, and passed to
+    // this directive in [entity]View templates. This controller can then be required by child common components
+    // to obtain references to view models and view options.
+    this.entityViewModel = $scope.entityViewModel;
     this.entityViewOptions= $scope.entityViewOptions;
   }
 

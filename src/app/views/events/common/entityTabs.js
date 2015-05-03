@@ -24,52 +24,50 @@
     .controller('EntityTabsController', EntityTabsController);
 
 // @ngInject
-  function entityTabsDirective($rootScope) {
+  function entityTabsDirective() {
     return /* @ngInject */ {
       restrict: 'E',
       scope: {
-        entityModel: '=',
-        entityViewOptions: '=',
-        type: '@',
-        justified: '@',
-        vertical: '@'
+        justified: '=',
+        vertical: '='
       },
-      link: function entityTabsLink(scope, element, attributes) {
-        var unbindStateChangeSuccess = $rootScope.$on(
-          '$stateChangeSuccess',
-          function () {
-            scope.update_tabs();
-          }
-        );
-        scope.$on('$destroy', unbindStateChangeSuccess);
-      },
+      require: '^^entityView',
+      link: entityTabsLink,
       controller: 'EntityTabsController',
       templateUrl: 'app/views/events/common/entityTabs.tpl.html'
     }
   }
 
-// @ngInject
-  function EntityTabsController($scope, $state) {
-    var ctrl = $scope.ctrl = {};
+  // @ngInject
+  function entityTabsLink(scope, element, attributes, entityView) {
+    var entityViewModel = entityView.entityViewModel;
+    var entityViewOptions = entityView.entityViewOptions;
 
-    var options = $scope.entityViewOptions;
+    scope.type = entityViewModel.data.item.type;
+    scope.name = entityViewModel.data.item.name;
+    scope.showCorner = (scope.type === 'variant' || scope.type === 'variant group');
+    scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
+    scope.tabs = entityViewOptions.tabData;
 
-    ctrl.type = $scope.entityModel.data.item.type;
-    ctrl.name = $scope.entityModel.data.item.name;
-
-    ctrl.showCorner = (ctrl.type === 'variant' || ctrl.type === 'variant group');
-
-    ctrl.viewBackground = 'view-' + options.styles.view.backgroundColor;
-
-    $scope.tabs = options.tabData;
-    if (!$scope.tabs) {
+    if (!scope.tabs) {
       throw new Error('entityTabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
     }
 
-    if (!angular.isArray($scope.tabs)) {
+    if (!angular.isArray(scope.tabs)) {
       throw new Error('entityTabs: \'data\' attribute must be an array of tab data with at least one tab defined.');
     }
 
+    var unbindStateChangeSuccess = scope.$on(
+      '$stateChangeSuccess',
+      function () {
+        scope.update_tabs();
+      }
+    );
+    scope.$on('$destroy', unbindStateChangeSuccess);
+  }
+
+// @ngInject
+  function EntityTabsController($scope, $state) {
     var currentStateEqualTo = function (tab) {
 
       var isEqual = $state.is(tab.route, tab.params, tab.options);
