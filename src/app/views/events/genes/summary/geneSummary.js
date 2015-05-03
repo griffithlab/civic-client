@@ -4,17 +4,24 @@
     .directive('geneSummary', function() {
       return {
         restrict: 'E',
+        require: '^^entityView',
         scope: {
           showMenu: '='
         },
         link: geneSummaryLink,
-        controller: GeneSummaryController,
         templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
       }
     });
 
   function geneSummaryLink(scope, element, attributes, entityView) {
+    var geneModel;
 
+    var ctrl = scope.ctrl = {};
+    scope.geneModel = entityView.entityModel;
+    scope.geneConfig = entityView.entityConfig;
+
+    scope.geneName = scope.geneModel.data.item.entrez_name;
+    scope.geneDescription= scope.geneModel.data.item.description;
 
     //scope.$watchCollection('geneModel', function(geneModel){
     //  console.log('********* geneSummaryLink: geneModel $watch triggered.');
@@ -31,14 +38,5 @@
     //    state: geneModel.config.state
     //  };
     //});
-  }
-
-  function GeneSummaryController($scope, Genes, genesViewOptions) {
-    $scope.geneModel = Genes;
-
-    $scope.geneConfig = genesViewOptions;
-
-    $scope.geneName = scope.geneModel.data.item.entrez_name;
-    $scope.geneDescription= scope.geneModel.data.item.description;
   }
 })();
