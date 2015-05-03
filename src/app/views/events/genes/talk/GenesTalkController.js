@@ -16,10 +16,13 @@
         controllerAs: 'vm',
         resolve: {
           GeneRevisions: 'GeneRevisions',
-          initGeneTalk: function(Genes, GeneRevisions, $stateParams, $q) {
+          GeneHistory: 'GeneHistory',
+          initGeneTalk: function(Genes, GeneRevisions, GeneHistory, $stateParams, $q) {
+            var geneId = $stateParams.geneId;
             return $q.all([
-              Genes.initComments($stateParams.geneId),
-              GeneRevisions.initRevisions($stateParams.geneId)
+              Genes.initComments(geneId),
+              GeneRevisions.initRevisions(geneId),
+              GeneHistory.initBase(geneId)
             ]);
           }
         },

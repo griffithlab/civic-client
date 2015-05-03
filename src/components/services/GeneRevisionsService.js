@@ -191,7 +191,7 @@
 
     function initBase(geneId, revisionId) {
       return $q.all([
-        get(geneId, revisionId)
+        query(geneId, revisionId)
       ])
     }
 
