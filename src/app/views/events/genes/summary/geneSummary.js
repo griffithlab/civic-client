@@ -17,5 +17,6 @@
     $scope.gene = Genes.data.item;
     $scope.myGeneInfo = Genes.data.myGeneInfo;
     $scope.GenesViewOptions = GenesViewOptions;
+    $scope.backgroundColor = GenesViewOptions.styles.view.backgroundColor;
   }
 })();
