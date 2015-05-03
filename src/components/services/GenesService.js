@@ -3,14 +3,14 @@
     .factory('GenesResource', GenesResource)
     .factory('Genes', GenesService);
 
+  // @ngInject
   function GenesResource($resource, $cacheFactory) {
     var cache = $cacheFactory('genesCache');
-
-    // adding this interceptor to a route will delete
     var cacheInterceptor = function(response) {
       cache.remove(response.config.url);
       return response.$promise;
     };
+
     return $resource('/api/genes/:geneId',
       {
         geneId: '@geneId'
@@ -209,7 +209,8 @@
     )
   }
 
-  function GenesService(GenesResource, $q) {
+  // @ngInject
+  function GenesService(GenesResource, $q, $exceptionHandler) {
     // Base Gene and Gene Collection
     var item = {};
     var collection = [];
@@ -385,9 +386,21 @@
         });
     }
     function submitComment(reqObj) {
+      try {
+        if(!_.has(reqObj, 'geneId')) {
+          if(_.has(item, 'id')) { // check to see if we have a gene with an id
+            _.merge(reqObj, { geneId: item.id });
+          } else {
+            throw new Error("No geneId supplied or found.");
+          }
+        }
+      } catch(e) {
+        $exceptionHandler(e.message, "GeneService:submitComment");
+      }
+
       return GenesResource.submitComment(reqObj).$promise
         .then(function(response) {
-          queryCommentsFresh(reqObj);
+          queryCommentsFresh(reqObj.geneId);
           return response.$promise;
         });
     }

@@ -1,12 +1,12 @@
 <div class="entityCommentForm">
-  <div ng-switch="ctrl.isAuthenticated">
+  <div ng-switch="vm.isAuthenticated">
 
     <div ng-switch-when="true">
       <div class="row comment-form">
         <div class="col-xs-12">
-          <formly-form options="options" model="ctrl.newComment" fields="ctrl.newCommentFields">
+          <formly-form options="vm.options" model="vm.newComment" fields="vm.newCommentFields">
             <div class="pull-right">
-              <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.newComment, options.resetModel)">Submit Comment</button>
+              <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.newComment, vm.options.resetModel)">Submit Comment</button>
             </div>
 
           </formly-form>
@@ -24,9 +24,9 @@
 
   </div>
   <!--<hr/>-->
-  <!--<pre ng-bind="ctrl.newComment|json"></pre>-->
+  <!--<pre ng-bind="vm.newComment|json"></pre>-->
   <!--<hr/>-->
-  <!--<pre ng-bind="ctrl.newCommentFields|json"></pre>-->
+  <!--<pre ng-bind="vm.newCommentFields|json"></pre>-->
   <!--<hr/>-->
-  <!--<pre ng-bind="ctrl.entityTalkModel|json"></pre>-->
+  <!--<pre ng-bind="entityTalkModel|json"></pre>-->
 </div>

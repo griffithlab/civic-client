@@ -1,11 +1,18 @@
 <div class="geneTalkComments">
   <div class="row">
     <div class="col-xs-12 comment-list">
-      <ul class="comments">
-        <li ng-repeat="comment in ctrl.geneTalkModel.data.comments">
-          <entity-comment comment-data="comment"></entity-comment>
-        </li>
-      </ul>
+      <div ng-switch="ctrl.geneTalkModel.data.comments.length > 0">
+        <div ng-switch-when="true">
+          <ul class="comments">
+            <li ng-repeat="comment in ctrl.geneTalkModel.data.comments">
+              <entity-comment comment-data="comment"></entity-comment>
+            </li>
+          </ul>
+        </div>
+        <div ng-switch-default>
+          <p>No Comments for Gene {{ ctrl.geneTalkModel.data.item.name }}. You may add one below.</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
