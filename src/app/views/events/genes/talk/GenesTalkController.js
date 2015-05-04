@@ -49,7 +49,7 @@
         }
       })
       .state('events.genes.talk.revisions', {
-        url: '/revisions/:changeId',
+        url: '/revisions/:revisionId',
         template: '<gene-talk-revisions></gene-talk-revisions>',
         data: {
           titleExp: '"Gene " + gene.name + " Revisions"',
@@ -59,6 +59,14 @@
       .state('events.genes.talk.revisions.summary', {
         url: '/summary',
         template: '<gene-talk-revision-summary></gene-talk-revision-summary>',
+        resolve: {
+          initRevision: function(GeneRevisions, $stateParams, $q) {
+            return $q.all([
+              GeneRevisions.get($stateParams.geneId, $stateParams.revisionId),
+              GeneRevisions.initComments($stateParams.geneId, $stateParams.revisionId)
+            ]);
+          }
+        },
         data: {
           titleExp: '"Gene " + gene.name + " Revision Summary"',
           navMode: 'sub'

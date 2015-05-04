@@ -159,6 +159,7 @@
     return {
       initBase: initBase,
       initRevisions: initRevisions,
+      initComments: initComments,
       data: {
         item: item,
         collection: collection,
@@ -201,6 +202,12 @@
       ])
     }
 
+    function initComments(geneId, revisionId) {
+      return $q.all([
+        queryComments(geneId, revisionId)
+      ])
+    }
+
     // Gene Revisions Base
     function query(geneId) {
       return GeneRevisionsResource.query({ geneId: geneId }).$promise
@@ -210,7 +217,7 @@
         });
     }
     function get(geneId, revisionId) {
-      return GeneRevisionsResource.getRevision({ geneId: geneId, revisionId: revisionId }).$promise
+      return GeneRevisionsResource.get({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
