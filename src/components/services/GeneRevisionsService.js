@@ -241,7 +241,7 @@
     function rejectRevision(geneId, revisionId) {
       return GeneRevisionsResource.rejectRevision({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
-          queryFresh();
+          queryFresh(geneId);
           getFresh(geneId, revisionId);
           return response;
         })
