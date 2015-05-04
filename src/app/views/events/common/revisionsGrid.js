@@ -28,9 +28,9 @@
 
     ctrl.revisionsGridOptions = {
       enablePaginationControls: true,
-      paginationPageSizes: [8],
-      paginationPageSize: 8,
-      minRowsToShow: 9,
+      paginationPageSizes: [5],
+      paginationPageSize: 5,
+      minRowsToShow: 6,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,

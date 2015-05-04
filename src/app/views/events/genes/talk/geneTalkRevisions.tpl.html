@@ -1,10 +1,10 @@
 <div class="geneTalkRevisions">
-  <div class="row revisions-list {{ ctrl.styles.view.summaryBackgroundColor }}">
+  <div class="row revisions-list {{ viewOptions.styles.view.summaryBackgroundColor }}">
     <div class="col-xs-12">
-      <revisions-grid changes="geneTalkModel.data.changes" base-state="events.genes.talk.revisions"></revisions-grid>
+      <revisions-grid changes="geneRevisions.data.collection" base-state="events.genes.talk.revisions"></revisions-grid>
     </div>
   </div>
-  <div class="row revisions-view {{ ctrl.styles.view.talkBackgroundColor }}">
+  <div class="row revisions-view {{ viewOptions.styles.view.talkBackgroundColor }}">
     <div class="col-xs-12">
       <ui-view>
 

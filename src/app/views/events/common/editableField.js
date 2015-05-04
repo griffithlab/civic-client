@@ -33,7 +33,6 @@
 
     baseState  = $scope.entityViewOptions.state.baseState;
     stateParams = $scope.entityViewOptions.state.params;
-    ctrl.editState = $scope.entityViewOptions.state.baseUrl + '.edit';
     ctrl.entityModel = $scope.entityModel;
 
     ctrl.mouseOver = function() {
@@ -45,7 +44,7 @@
     };
 
     ctrl.click = function() {
-      $state.go(baseState + '.edit', stateParams);
+      $state.go(baseState + '.edit.basic', stateParams);
     }
 
   }

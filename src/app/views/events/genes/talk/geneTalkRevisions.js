@@ -9,25 +9,15 @@
     return {
       restrict: 'E',
       scope: {},
-      require: '^^entityTalkView',
-      link: geneTalkRevisionsLink,
       controller: 'GeneTalkRevisionsController',
       templateUrl: 'app/views/events/genes/talk/geneTalkRevisions.tpl.html'
     }
   }
 
   // @ngInject
-  function geneTalkRevisionsLink(scope, element, attrs, geneTalkView) {
-    scope.geneTalkModel = geneTalkView.entityTalkModel;
-  }
-
-  // @ngInject
-  function GeneTalkRevisionsController($scope) {
-    //var ctrl = $scope.ctrl = {};
-    //$scope.$watch('geneTalkModel', function(geneTalkModel) {
-    //  console.log('*** geneTalkRevisions watcher triggered. ***');
-    //  ctrl.geneTalkModel = geneTalkModel;
-    //}, true);
+  function GeneTalkRevisionsController($scope, GeneRevisions, GenesTalkViewOptions) {
+    $scope.geneRevisions = GeneRevisions;
+    $scope.viewOptions = GenesTalkViewOptions;
   }
 
 })();

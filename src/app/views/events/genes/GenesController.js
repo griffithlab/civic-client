@@ -34,14 +34,6 @@
           titleExp: '"Gene " + gene.name + " Summary"',
           navMode: 'sub'
         }
-      })
-      .state('events.genes.edit', {
-        url: '/edit',
-        template: '<gene-edit></gene-edit>',
-        data: {
-          titleExp: '"Gene " + gene.name + " Edit"',
-          navMode: 'sub'
-        }
       });
   }
 
@@ -54,9 +46,9 @@
     var styles = {};
 
     function init() {
-      angular.copy($stateParams, baseParams);
-      baseState = 'events.genes';
-      baseUrl = $state.href(baseUrl, $stateParams);
+      angular.copy($stateParams, this.state.baseParams);
+      this.state.baseState = 'events.genes';
+      this.state.baseUrl = $state.href(baseUrl, $stateParams);
 
       angular.copy([
         {
@@ -69,7 +61,7 @@
           route: 'events.genes.talk.log',
           params: { geneId: Genes.data.item.id }
         }
-      ], tabData);
+      ], this.tabData);
 
       angular.copy({
         view: {
@@ -87,7 +79,7 @@
         edit: {
           summaryBackgroundColor: 'pageBackground2'
         }
-      }, styles);
+      }, this.styles);
     }
 
     return {

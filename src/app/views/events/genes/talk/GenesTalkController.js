@@ -99,7 +99,7 @@
 
       angular.copy({
         view: {
-          summaryBackgroundColor: 'pageBackground2',
+          summaryBackgroundColor: 'pageBackground',
           talkBackgroundColor: 'pageBackground'
         },
         tabs: {
