@@ -52,10 +52,19 @@
     }
   }
 
+  @insBase: @civicGreen;
+  @delBase: @civicRed;
+  @insBg: lighten(@insBase, 60%);
+  @delBg: lighten(@delBase, 60%);
+  @insLabelBg: lighten(@insBase, 40%);
+  @delLabelBg: lighten(@delBase, 40%);
+  @insLabelFg: lighten(desaturate(@insBase, 30%), 10%);
+  @delLabelFg: lighten(desaturate(@delBase, 50%), 10%);
+
   .diff {
     overflow: auto;
     ul {
-      background: @pageBackground2;
+      // background: @pageBackground2;
       border-radius: @border-radius-small;
       overflow:auto;
       font-size:13px;
@@ -83,17 +92,19 @@
     }
     li.ins:before, li.del:before {
       display: block;
-      padding: @contentPadding/3;
+      padding: @contentPadding/3 @contentPadding/2;
       font-weight: bold;
       font-size: @font-size-small;
     }
     li.ins:before {
-      content: 'Insertions';
-      background-color: #81c153;
+      content: 'INSERTIONS';
+      background-color: @insLabelBg;
+      color: @insLabelFg;
       border-top-right-radius: @border-radius-large;
+      border-bottom: 1px solid lighten(@insBase, 20%);
     }
     li.ins {
-      background:#dfd;
+      background: @insBg;
       color:#080;
       width: 49%;
       float: right;
@@ -101,12 +112,14 @@
       border-bottom-left-radius: @border-radius-small;
     }
     li.del:before {
-      content: 'Deletions';
-      background-color: #dca7a7;
+      content: 'DELETIONS';
+      background-color: @delLabelBg;
+      color: @delLabelFg;
       border-top-left-radius: @border-radius-large;
+      border-bottom: 1px solid lighten(@delBase, 20%);
     }
     li.del {
-      background:#fee;
+      background: @delBg;
       color:#b00;
       width: 49%;
       float: left;
