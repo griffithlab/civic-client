@@ -208,7 +208,7 @@
           });
         } else {
           $state.go('events.genes.summary', {
-            geneId: row.entity.gene_id
+            geneId: row.entity.id
           });
         }
       });
