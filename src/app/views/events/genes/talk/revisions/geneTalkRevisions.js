@@ -10,7 +10,7 @@
       restrict: 'E',
       scope: {},
       controller: 'GeneTalkRevisionsController',
-      templateUrl: 'app/views/events/genes/talk/geneTalkRevisions.tpl.html'
+      templateUrl: 'app/views/events/genes/talk/revisions/geneTalkRevisions.tpl.html'
     }
   }
 

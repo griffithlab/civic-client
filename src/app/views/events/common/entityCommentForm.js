@@ -11,7 +11,7 @@
       scope: {
         type: '@'
       },
-      require: '^^entityTalkView',
+      require: ['^^entityTalkView', '^^entityTalkRevisionsView'],
       link: entityCommentFormLink,
       controller: 'EntityCommentFormController',
       templateUrl: 'app/views/events/common/entityCommentForm.tpl.html'
@@ -19,7 +19,7 @@
   }
 
   // @ngInject
-  function entityCommentFormLink(scope, element, attrs, entityTalkView) {
+  function entityCommentFormLink(scope, element, attrs, controllers) {
     scope.entityTalkModel = entityTalkView.viewModel;
 
 

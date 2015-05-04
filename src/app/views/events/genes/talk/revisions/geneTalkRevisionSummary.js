@@ -9,7 +9,7 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      templateUrl: 'app/views/events/genes/talk/geneTalkRevisionSummary.tpl.html',
+      templateUrl: 'app/views/events/genes/talk/revisions/geneTalkRevisionSummary.tpl.html',
       controller: 'GeneTalkRevisionSummaryController'
     };
     return directive;

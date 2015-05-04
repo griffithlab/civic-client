@@ -47,30 +47,6 @@
           titleExp: '"Gene " + gene.name + " Comments"',
           navMode: 'sub'
         }
-      })
-      .state('events.genes.talk.revisions', {
-        url: '/revisions/:revisionId',
-        template: '<gene-talk-revisions></gene-talk-revisions>',
-        data: {
-          titleExp: '"Gene " + gene.name + " Revisions"',
-          navMode: 'sub'
-        }
-      })
-      .state('events.genes.talk.revisions.summary', {
-        url: '/summary',
-        template: '<gene-talk-revision-summary></gene-talk-revision-summary>',
-        resolve: {
-          initRevision: function(GeneRevisions, $stateParams, $q) {
-            return $q.all([
-              GeneRevisions.get($stateParams.geneId, $stateParams.revisionId),
-              GeneRevisions.initComments($stateParams.geneId, $stateParams.revisionId)
-            ]);
-          }
-        },
-        data: {
-          titleExp: '"Gene " + gene.name + " Revision Summary"',
-          navMode: 'sub'
-        }
       });
   }
 
@@ -100,7 +76,7 @@
         },
         {
           heading: gene.name + ' Revisions',
-          route: baseState + '.revisions',
+          route: baseState + '.revisions.list',
           params: { geneId: gene.id }
         }
       ], tabData);

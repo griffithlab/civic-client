@@ -20,7 +20,7 @@
   }
 
   // @ngInject
-  function RevisionsGridController($scope, $state, $stateParams, $location, uiGridConstants) {
+  function RevisionsGridController($scope, $state, $stateParams, $location, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
     $scope.$state = $state;
@@ -88,9 +88,8 @@
       });
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        var params = $scope.$stateParams;
-        params.changeId = row.entity.id;
-        var newState = $scope.baseState + '.summary';
+        var params = _.merge($scope.$stateParams, { revisionId: row.entity.id });
+        var newState = $scope.baseState + '.list.summary';
         $scope.$state.go(newState, params);
       });
     };
