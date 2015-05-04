@@ -55,7 +55,8 @@
   .diff {
     overflow: auto;
     ul {
-      background:#fff;
+      background: @pageBackground2;
+      border-radius: @border-radius-small;
       overflow:auto;
       font-size:13px;
       list-style:none;
@@ -68,21 +69,49 @@
     del, ins{
       display:block;
       text-decoration:none;
+      padding: @contentPadding/2;
+//      min-height: 250px;
     }
 
+    .label {
+
+    }
     li {
       padding: 0;
       display: table-row;
       margin: 0;
-      height: 1em;
+    }
+    li.ins:before, li.del:before {
+      display: block;
+      padding: @contentPadding/3;
+      font-weight: bold;
+      font-size: @font-size-small;
+    }
+    li.ins:before {
+      content: 'Insertions';
+      background-color: #81c153;
+      border-top-right-radius: @border-radius-large;
     }
     li.ins {
       background:#dfd;
-      color:#080
+      color:#080;
+      width: 49%;
+      float: right;
+      border-top-left-radius: @border-radius-small;
+      border-bottom-left-radius: @border-radius-small;
+    }
+    li.del:before {
+      content: 'Deletions';
+      background-color: #dca7a7;
+      border-top-left-radius: @border-radius-large;
     }
     li.del {
       background:#fee;
-      color:#b00
+      color:#b00;
+      width: 49%;
+      float: left;
+      border-top-right-radius: @border-radius-small;
+      border-bottom-right-radius: @border-radius-small;
     }
     li:hover {
       background:#ffc
@@ -104,6 +133,5 @@
       background: none repeat scroll 0 0 gray;
     }
   }
-
-
 }
+
