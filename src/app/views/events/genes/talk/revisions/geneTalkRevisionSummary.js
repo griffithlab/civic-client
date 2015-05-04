@@ -16,27 +16,20 @@
   }
 
   // @ngInject
-  function GeneTalkRevisionSummaryController($scope, $stateParams, Genes, GeneRevisions, GenesTalkViewOptions) {
-    // wait until models linked
-
-    var ctrl,
-      geneTalkModel,
-      geneModel,
-      changeId;
-
-    ctrl = $scope.ctrl = {};
+  function GeneTalkRevisionSummaryController($scope, $stateParams, Genes, GeneRevisions) {
+    $scope.ctrl = {};
     $scope.geneTalkModel = GeneRevisions;
     $scope.changeId = $stateParams.changeId;
 
     $scope.acceptRevision = function() {
-      $scope.geneTalkModel.acceptRevision($stateParams.changeId)
+      GeneRevisions.acceptRevision($stateParams.geneId, $stateParams.revisionId)
         .then(function() {
           Genes.queryFresh($stateParams.geneId);
         });
     };
 
     $scope.rejectRevision = function() {
-      $scope.geneTalkModel.rejectRevision($stateParams.changeId);
+      GeneRevisions.rejectRevision($stateParams.geneId, $stateParams.revisionId);
     };
   }
 })();

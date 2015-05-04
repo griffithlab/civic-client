@@ -339,7 +339,7 @@
         });
     }
     // Gene Base Refresh
-    function queryFresh() {
+    function queryFresh(geneId) {
       return GenesResource.queryFresh({geneId: geneId}).$promise
         .then(function(response) {
           angular.copy(response, collection);
