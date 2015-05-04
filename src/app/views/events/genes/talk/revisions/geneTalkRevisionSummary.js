@@ -26,8 +26,6 @@
 
     ctrl = $scope.ctrl = {};
     $scope.geneTalkModel = GeneRevisions;
-    geneModel = $scope.geneModel = Genes;
-    changeId = $scope.changeId;
     $scope.changeId = $stateParams.changeId;
 
     $scope.acceptRevision = function() {

@@ -281,7 +281,7 @@
     function submitComment(reqObj) {
       return GeneRevisionsResource.submitComment(reqObj).$promise
         .then(function(response) {
-          queryCommentsFresh(reqObj);
+          queryCommentsFresh(reqObj.geneId, reqObj.revisionId);
           return response.$promise;
         });
     }

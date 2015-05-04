@@ -9,21 +9,12 @@
     return {
       restrict: 'E',
       scope: {
-        type: '@'
+        type: '@',
+        entityModel: '='
       },
-      require: ['^^entityTalkView', '^^entityTalkRevisionsView'],
-      link: entityCommentFormLink,
       controller: 'EntityCommentFormController',
       templateUrl: 'app/views/events/common/entityCommentForm.tpl.html'
     }
-  }
-
-  // @ngInject
-  function entityCommentFormLink(scope, element, attrs, controllers) {
-    scope.entityTalkModel = entityTalkView.viewModel;
-
-
-
   }
 
   // @ngInject
@@ -59,7 +50,8 @@
     ];
 
     vm.submit = function(comment, resetModel) {
-      $scope.entityTalkModel.submitComment(comment).then(function () {
+      comment = _.merge(comment, $stateParams);
+      $scope.entityModel.submitComment(comment).then(function () {
         console.log('comment submitted.');
         resetModel();
       });
