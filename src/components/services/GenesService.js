@@ -6,9 +6,15 @@
   // @ngInject
   function GenesResource($resource, $cacheFactory) {
     var cache = $cacheFactory('genesCache');
-    var cacheInterceptor = function(response) {
+    var cacheResponseInterceptor = function(response) {
+      console.log('cache removed within ResponseInterceptor', response.config.url);
       cache.remove(response.config.url);
       return response.$promise;
+    };
+    var cacheRequestInterceptor = function(config) {
+      console.log('cache removed within RequestInterceptor', config.url);
+      cache.remove(config.url);
+      return config.$promise;
     };
 
     return $resource('/api/genes/:geneId',
@@ -30,14 +36,14 @@
         update: {
           method: 'PATCH',
           interceptor: {
-            response: cacheInterceptor
+            response: cacheResponseInterceptor
           },
           cache: false
         },
         delete: {
           method: 'DELETE',
           interceptor: {
-            response: cacheInterceptor
+            response: cacheResponseInterceptor
           },
           cache: false
         },
@@ -115,7 +121,9 @@
         queryFresh: { // get list of genes
           method: 'GET',
           isArray: true,
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         },
         getFresh: { // get gene, force cache
           method: 'GET',
@@ -172,7 +180,7 @@
           },
           cache: false,
           interceptor: {
-            response: cacheInterceptor
+            response: cacheResponseInterceptor
           }
         },
         deleteComment: {
@@ -184,7 +192,7 @@
           },
           cache: false,
           interceptor: {
-            response: cacheInterceptor
+            response: cacheResponseInterceptor
           }
         },
 
@@ -346,7 +354,7 @@
           return response.$promise;
         });
     }
-    function getFresh() {
+    function getFresh(geneId) {
       return GenesResource.getFresh({geneId: geneId}).$promise
         .then(function(response) {
           angular.copy(response, item);
