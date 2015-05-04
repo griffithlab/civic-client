@@ -15,7 +15,7 @@
   }
 
   // @ngInject
-  function GeneEditBasicController($scope, GeneRevisions, Genes, GenesViewOptions) {
+  function GeneEditBasicController($scope, GeneRevisions, Genes, GeneHistory, GenesViewOptions) {
     var geneModel, ctrl;
 
     ctrl = $scope.ctrl = {};
@@ -23,6 +23,8 @@
 
 
     ctrl.gene = Genes.data.item;
+    ctrl.geneRevisions = GeneRevisions;
+    ctrl.geneHistory = GeneHistory;
     ctrl.geneEdit = angular.copy(ctrl.gene);
     ctrl.geneEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
     ctrl.myGeneInfo = geneModel.data.myGeneInfo;

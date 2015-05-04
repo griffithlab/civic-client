@@ -7,7 +7,12 @@
     var cache = $cacheFactory('genesRevisionsCache');
 
     // adding this interceptor to a route will remove cached record
-    var cacheInterceptor = function(response) {
+    var cacheResponseInterceptor = function(response) {
+      cache.remove(response.config.url);
+      return response.$promise;
+    };
+    // delete from cache before request, response will then refreshen cache (I THINK)
+    var cacheRequestInterceptor= function(response) {
       cache.remove(response.config.url);
       return response.$promise;
     };
@@ -55,12 +60,18 @@
         queryFresh: {
           method: 'GET',
           isArray: true,
-          cache: false
+          cache: false,
+          interceptor: {
+            request: cacheRequestInterceptor
+          }
         },
         getFresh: {
           method: 'GET',
           isArray: false,
-          cache: false
+          cache: false,
+          interceptor: {
+            request: cacheRequestInterceptor
+          }
         },
 
         // Gene Revisions Comments Resources
@@ -82,7 +93,7 @@
             commentId: '@commentId'
           },
           interceptor: {
-            response: cacheInterceptor
+            response: cacheResponseInterceptor
           },
           cache: false
         },
@@ -116,7 +127,7 @@
             commentId: '@commentId'
           },
           interceptor: {
-            response: cacheInterceptor
+            response: cacheResponseInterceptor
           },
           cache: false
         },

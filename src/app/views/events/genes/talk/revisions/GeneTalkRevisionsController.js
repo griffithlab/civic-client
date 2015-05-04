@@ -35,6 +35,14 @@
       .state('events.genes.talk.revisions.list', {
         url: '/list/:revisionId',
         template: '<gene-talk-revisions></gene-talk-revisions>',
+        resolve: {
+          initGeneTalkRevisions: function(Genes, GeneRevisions, GeneHistory, $stateParams, $q) {
+            var geneId = $stateParams.geneId;
+            return $q.all([
+              GeneRevisions.queryFresh(geneId)
+            ]);
+          }
+        },
         data: {
           titleExp: '"Gene " + gene.name + " Revisions"',
           navMode: 'sub'
