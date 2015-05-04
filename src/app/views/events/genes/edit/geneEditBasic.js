@@ -1,37 +1,35 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes')
-    .directive('geneEdit', geneEditDirective);
+    .directive('geneEditBasic', geneEditBasicDirective)
+    .controller('GeneEditBasicController', GeneEditBasicController);
 
   // @ngInject
-  function geneEditDirective() {
+  function geneEditBasicDirective() {
     return {
       restrict: 'E',
-      require: '^^entityView',
       scope: {},
-      templateUrl: 'app/views/events/genes/edit/geneEdit.tpl.html',
-      link: geneEditLink
+      controller: 'GeneEditBasicController',
+      templateUrl: 'app/views/events/genes/edit/geneEditBasic.tpl.html',
     }
   }
 
   // @ngInject
-  function geneEditLink(scope, element, attributes, entityView) {
+  function GeneEditBasicController($scope, GeneRevisions, Genes, GenesViewOptions) {
     var geneModel, ctrl;
 
-    ctrl = scope.ctrl = {};
-    geneModel= entityView.entityModel
+    ctrl = $scope.ctrl = {};
+    geneModel = ctrl.geneModel = Genes;
 
-    var config = geneModel.config;
 
-    ctrl.gene = geneModel.data.entity;
+    ctrl.gene = Genes.data.item;
     ctrl.geneEdit = angular.copy(ctrl.gene);
     ctrl.geneEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
-    ctrl.geneModel = geneModel;
     ctrl.myGeneInfo = geneModel.data.myGeneInfo;
     ctrl.variants = geneModel.data.variants;
     ctrl.variantGroups = geneModel.data.variantGroups;
 
-    ctrl.styles = config.styles;
+    ctrl.styles = GenesViewOptions.styles;
 
     ctrl.user = {};
 
@@ -76,16 +74,15 @@
         }
       }
     ];
-    ctrl.submit = function(gene) {
-      console.log('submitRevision clicked.');
-      gene.geneId = gene.id; // add geneId param for Genes service
-      scope.ctrl.geneModel.services.Genes.submitChange(gene);
+
+    ctrl.submit = function(geneEdit) {
+      geneEdit.geneId = geneEdit.id;
+      GeneRevisions.submitRevision(geneEdit);
     };
 
-    ctrl.apply = function(gene) {
-      console.log('applyRevision clicked.');
-      gene.geneId = gene.id;
-      scope.ctrl.geneModel.services.Genes.applyChange(gene);
+    ctrl.accept = function(geneEdit) {
+      geneEdit.geneId = geneEdit.id;
+      GeneRevisions.acceptRevision(geneEdit);
     };
   }
 })();

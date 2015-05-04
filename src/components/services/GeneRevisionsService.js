@@ -219,7 +219,7 @@
     function submitRevision(reqObj) {
       return GeneRevisionsResource.submitRevision(reqObj).$promise
         .then(function(response) {
-          queryFresh();
+          queryFresh(reqObj.id);
           return response.$promise;
         });
     }
