@@ -15,7 +15,7 @@
   }
 
   // @ngInject
-  function GeneEditBasicController($scope, GeneRevisions, Genes, GeneHistory, GenesViewOptions) {
+  function GeneEditBasicController($scope, GeneRevisions, Genes, GeneHistory, GenesViewOptions, formConfig) {
     var geneModel, vm;
 
     vm = $scope.vm = {};
@@ -34,6 +34,9 @@
     vm.styles = GenesViewOptions.styles;
 
     vm.user = {};
+
+    vm.formErrors = {};
+    vm.formErrorMessages = formConfig.errorMessages;
 
     vm.geneFields = [
       {
@@ -87,6 +90,7 @@
         })
         .catch(function(response) {
           console.error('revision submit error!');
+          vm.formErrors[response.status] = true;
         })
         .finally(function(){
           console.log('revision submit done!');

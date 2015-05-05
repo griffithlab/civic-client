@@ -8,7 +8,7 @@
   <div class="row form-messages">
     <div class="col-xs-12">
       <div ng-messages="vm.formErrors">
-
+        <div ng-message="500">500 {{ vm.formErrorMessages['500'] }}</div>
       </div>
     </div>
   </div>

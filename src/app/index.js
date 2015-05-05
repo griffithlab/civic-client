@@ -21,11 +21,12 @@ angular.module('civicClient', [
   'civic.states',
 
   // app services
- 'civic.services',
- 'civic.security',
- 'civic.login',
- 'civic.common',
- 'angular-lodash',
+  'civic.config',
+  'civic.services',
+  'civic.security',
+  'civic.login',
+  'civic.common',
+  'angular-lodash',
 
   // app views
   'civic.pages',
@@ -71,16 +72,16 @@ function appRun(Security, $rootScope, $state, $analytics) {
   // console.table($state.get());
 
   /*  ui-router debug logging */
-    function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-    $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) {
-      console.log("Start:   " + message(to, toP, from, fromP));
-    });
-    $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) {
-      console.log("Success: " + message(to, toP, from, fromP));
-    });
-    $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) {
-      console.error("Error:   " + message(to, toP, from, fromP), err);
-    });
+  function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
+  $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) {
+    console.log("Start:   " + message(to, toP, from, fromP));
+  });
+  $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) {
+    console.log("Success: " + message(to, toP, from, fromP));
+  });
+  $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) {
+    console.error("Error:   " + message(to, toP, from, fromP), err);
+  });
 
 }
 // define top-level app modules & dependencies
@@ -90,6 +91,7 @@ angular.module('civic.security', [
   'civic.security.interceptor',
   'civic.security.login'
 ]);
+angular.module('civic.config', []);
 angular.module('civic.states', ['ui.router']);
 angular.module('civic.services', ['ui.router', 'ngResource', 'angular-lodash/filters']);
 angular.module('civic.pages', ['civic.security.authorization', 'ui.router']);
