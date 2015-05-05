@@ -28,7 +28,13 @@
       .state('events.genes.summary', {
         url: '/summary',
         template: '<gene-summary show-menu="true"></gene-summary>',
-        deepStateRedirect: true,
+        resolve: {
+          Genes: 'Genes',
+          refreshGene: function(Genes, $stateParams) {
+            return Genes.getFresh($stateParams.geneId);
+          }
+        },
+        deepStateRedirect: false,
         data: {
           titleExp: '"Gene " + gene.name + " Summary"',
           navMode: 'sub'

@@ -11,11 +11,7 @@
       cache.remove(response.config.url);
       return response.$promise;
     };
-    // delete from cache before request, response will then refreshen cache (I THINK)
-    var cacheRequestInterceptor= function(response) {
-      cache.remove(response.config.url);
-      return response.$promise;
-    };
+
     return $resource('/api/genes/:geneId/suggested_changes/:revisionId',
       {
         geneId: '@geneId',
@@ -150,7 +146,10 @@
     )
   }
 
-  function GeneRevisionsService(GeneRevisionsResource, $q) {
+  function GeneRevisionsService(GeneRevisionsResource, $cacheFactory, $q) {
+    // fetch genes cache, need to delete gene record when revision is submitted
+    var genesCache = $cacheFactory.get('genesCache');
+
     // Base Gene Revision and Gene Revisions Collection
     var item = {};
     var collection = [];
@@ -237,11 +236,12 @@
     function acceptRevision(geneId, revisionId) {
       return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
-          var q =  $q.all([
+          // remove gene's cache record
+          genesCache.remove('/api/genes/' + response.id);
+          return $q.all([
             queryFresh(geneId),
             getFresh(geneId, revisionId)
           ]).$promise;
-          return q;
         })
     }
     function rejectRevision(geneId, revisionId) {
