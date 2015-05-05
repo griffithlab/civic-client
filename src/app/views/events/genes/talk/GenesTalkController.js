@@ -17,7 +17,7 @@
         resolve: {
           GeneRevisions: 'GeneRevisions',
           GeneHistory: 'GeneHistory',
-          initGeneTalk: function(Genes, GeneRevisions, GeneHistory, $stateParams, $q) {
+          initGeneTalk: function(Genes, GeneRevisions, GeneHistory, $stateParams, $cacheFactory, $q) {
             var geneId = $stateParams.geneId;
             return $q.all([
               Genes.initComments(geneId),

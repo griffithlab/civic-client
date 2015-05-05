@@ -4,7 +4,7 @@
     .factory('GeneRevisions', GeneRevisionsService);
 
   function GeneRevisionsResource($resource, $cacheFactory) {
-    var cache = $cacheFactory('genesRevisionsCache');
+    var cache = $cacheFactory('geneRevisionsCache');
 
     // adding this interceptor to a route will remove cached record
     var cacheResponseInterceptor = function(response) {
@@ -149,6 +149,7 @@
   function GeneRevisionsService(GeneRevisionsResource, $cacheFactory, $q) {
     // fetch genes cache, need to delete gene record when revision is submitted
     var genesCache = $cacheFactory.get('genesCache');
+    var geneRevisionsCache = $cacheFactory.get('geneRevisionsCache');
 
     // Base Gene Revision and Gene Revisions Collection
     var item = {};
@@ -200,13 +201,13 @@
 
     function initRevisions(geneId) {
       return $q.all([
-        queryFresh(geneId)
+        query(geneId)
       ])
     }
 
     function initComments(geneId, revisionId) {
       return $q.all([
-        queryComments(geneId, revisionId)
+        query(geneId, revisionId)
       ])
     }
 
@@ -228,8 +229,7 @@
     function submitRevision(reqObj) {
       return GeneRevisionsResource.submitRevision(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, item);
-          queryFresh(reqObj.id);
+          geneRevisionsCache.remove('/api/genes/' + reqObj.id + '/suggested_changes');
           return response.$promise;
         });
     }
