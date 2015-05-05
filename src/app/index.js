@@ -4,6 +4,7 @@ angular.module('civicClient', [
   'ct.ui.router.extras',
   'angular-loading-bar',
   'ngDialog',
+  'ngMessages',
   'ui.bootstrap',
   'ui.grid',
   'ui.grid.autoResize',

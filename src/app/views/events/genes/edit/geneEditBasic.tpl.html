@@ -1,27 +1,33 @@
-<div class="editGene {{ ctrl.styles.edit.summaryBackgroundColor }}">
+<div class="editGene {{ vm.styles.edit.summaryBackgroundColor }}">
   <div class="row edit-messages">
     <div class="col-xs-12">
 
-      <p><strong>Gene Edit:</strong> Complete your edits using the form below, then press the 'Submit Revision for Review' button. <span ng-show="ctrl.isAdmin()">As you are an admin, you may also choose to immediately apply your edits without review by clicking 'Apply Edits'.</span></p>
+      <p><strong>Gene Edit:</strong> Complete your edits using the form below, then press the 'Submit Revision for Review' button. <span ng-show="vm.isAdmin()">As you are an admin, you may also choose to immediately apply your edits without review by clicking 'Apply Edits'.</span></p>
     </div>
   </div>
+  <div class="row form-messages">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formErrors">
 
+      </div>
+    </div>
+  </div>
   <div class="row edit-form">
     <div class="col-xs-12">
-      <formly-form model="ctrl.geneEdit" fields="ctrl.geneFields">
+      <formly-form options="vm.options" model="vm.geneEdit" fields="vm.geneFields">
         <div class="pull-right">
           <cancel-button></cancel-button>
-          <button type="submit" class="btn btn-default" ng-click="ctrl.apply(ctrl.geneEdit)" ng-show="ctrl.isAdmin()">Apply Revision</button>
-          <button type="submit" class="btn btn-default" ng-click="ctrl.submit(ctrl.geneEdit)">Submit Revision for Review</button>
+          <button type="submit" class="btn btn-default" ng-click="vm.apply(vm.geneEdit, vm.options)" ng-show="vm.isAdmin()">Apply Revision</button>
+          <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.geneEdit, vm.options)">Submit Revision for Review</button>
         </div>
       </formly-form>
     </div>
   </div>
 
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="ctrl.geneFields|json"></pre>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="vm.geneFields|json"></pre>
+    </div>
+  </div>
 
 </div>

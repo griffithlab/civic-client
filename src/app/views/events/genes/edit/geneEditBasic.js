@@ -16,32 +16,32 @@
 
   // @ngInject
   function GeneEditBasicController($scope, GeneRevisions, Genes, GeneHistory, GenesViewOptions) {
-    var geneModel, ctrl;
+    var geneModel, vm;
 
-    ctrl = $scope.ctrl = {};
-    geneModel = ctrl.geneModel = Genes;
+    vm = $scope.vm = {};
+    geneModel = vm.geneModel = Genes;
 
 
-    ctrl.gene = Genes.data.item;
-    ctrl.geneRevisions = GeneRevisions;
-    ctrl.geneHistory = GeneHistory;
-    ctrl.geneEdit = angular.copy(ctrl.gene);
-    ctrl.geneEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
-    ctrl.myGeneInfo = geneModel.data.myGeneInfo;
-    ctrl.variants = geneModel.data.variants;
-    ctrl.variantGroups = geneModel.data.variantGroups;
+    vm.gene = Genes.data.item;
+    vm.geneRevisions = GeneRevisions;
+    vm.geneHistory = GeneHistory;
+    vm.geneEdit = angular.copy(vm.gene);
+    vm.geneEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
+    vm.myGeneInfo = geneModel.data.myGeneInfo;
+    vm.variants = geneModel.data.variants;
+    vm.variantGroups = geneModel.data.variantGroups;
 
-    ctrl.styles = GenesViewOptions.styles;
+    vm.styles = GenesViewOptions.styles;
 
-    ctrl.user = {};
+    vm.user = {};
 
-    ctrl.geneFields = [
+    vm.geneFields = [
       {
         key: 'name',
         type: 'input',
         templateOptions: {
           label: 'Name',
-          value: ctrl.gene.name
+          value: vm.gene.name
         }
       },
       {
@@ -50,14 +50,14 @@
         templateOptions: {
           rows: 8,
           label: 'Description',
-          value: 'ctrl.gene.description'
+          value: 'vm.gene.description'
         }
       },
       {
         template: '<hr/>'
       },
       {
-        model: ctrl.geneEdit.comment,
+        model: vm.geneEdit.comment,
         key: 'title',
         type: 'input',
         templateOptions: {
@@ -66,7 +66,7 @@
         }
       },
       {
-        model: ctrl.geneEdit.comment,
+        model: vm.geneEdit.comment,
         key: 'text',
         type: 'textarea',
         templateOptions: {
@@ -77,12 +77,22 @@
       }
     ];
 
-    ctrl.submit = function(geneEdit) {
+    vm.submit = function(geneEdit, options) {
       geneEdit.geneId = geneEdit.id;
-      GeneRevisions.submitRevision(geneEdit);
+      GeneRevisions.submitRevision(geneEdit)
+        .then(function(response) {
+          console.log('revision submit success!');
+          options.resetModel();
+        })
+        .catch(function(response) {
+          console.error('revision submit error!');
+        })
+        .finally(function(){
+          console.log('revision submit done!');
+        });
     };
 
-    ctrl.accept = function(geneEdit) {
+    vm.accept = function(geneEdit, options) {
       geneEdit.geneId = geneEdit.id;
       GeneRevisions.acceptRevision(geneEdit);
     };
