@@ -33,8 +33,7 @@
           method: 'PATCH',
           interceptor: {
             response: cacheResponseInterceptor
-          },
-          cache: false
+          }
         },
         delete: {
           method: 'DELETE',
@@ -42,6 +41,9 @@
             response: cacheResponseInterceptor
           },
           cache: false
+        },
+        apply: {
+          method: 'PUT'
         },
 
         // Gene Additional Info
@@ -210,7 +212,8 @@
   }
 
   // @ngInject
-  function GenesService(GenesResource, $q, $exceptionHandler) {
+  function GenesService(GenesResource, $q, $exceptionHandler, $cacheFactory) {
+    var genesCache = $cacheFactory.get('genesCache');
     // Base Gene and Gene Collection
     var item = {};
     var collection = [];
@@ -242,6 +245,7 @@
       get: get,
       update: update,
       delete: deleteItem,
+      apply: apply,
 
       // Gene Additional Info
       getMyGeneInfo: getMyGeneInfo,
@@ -312,6 +316,16 @@
           item = null;
           return response.$promise;
         });
+    }
+    function apply(reqObj) {
+      return GenesResource.apply(reqObj).$promise
+        .then(function(response) {
+          // remove gene's cache record
+          genesCache.remove('/api/genes/' + response.id);
+          return $q.all([
+            get(reqObj.geneId),
+          ]).$promise;
+        })
     }
 
     // Gene Additional Data

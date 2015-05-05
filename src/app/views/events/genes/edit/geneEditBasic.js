@@ -50,7 +50,8 @@
         templateOptions: {
           rows: 8,
           label: 'Description',
-          value: 'vm.gene.description'
+          value: 'vm.gene.description',
+          focus: true
         }
       },
       {
@@ -92,9 +93,9 @@
         });
     };
 
-    vm.accept = function(geneEdit, options) {
+    vm.apply = function(geneEdit, options) {
       geneEdit.geneId = geneEdit.id;
-      GeneRevisions.acceptRevision(geneEdit);
+      Genes.apply(geneEdit);
     };
   }
 })();

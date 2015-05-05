@@ -226,13 +226,24 @@
           return response.$promise;
         })
     }
+
+
+
     function submitRevision(reqObj) {
-      return GeneRevisionsResource.submitRevision(reqObj).$promise
-        .then(function(response) {
+      r = GeneRevisionsResource.submitRevision(reqObj).$promise.then(
+        function(response) { // success
           geneRevisionsCache.remove('/api/genes/' + reqObj.id + '/suggested_changes');
           return response.$promise;
+        },
+        function(response) { //fail
+          console.error('something has gone horribly wrong.');
         });
+
+      return r;
     }
+
+
+
     function acceptRevision(geneId, revisionId) {
       return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
