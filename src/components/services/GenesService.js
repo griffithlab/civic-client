@@ -43,7 +43,7 @@
           cache: false
         },
         apply: {
-          method: 'PUT'
+          method: 'PATCH'
         },
 
         // Gene Additional Info

@@ -233,12 +233,12 @@
       r = GeneRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
           geneRevisionsCache.remove('/api/genes/' + reqObj.id + '/suggested_changes');
-          return response.$promise;
+          return $q.resolve(response)
         },
-        function(response) { //fail
-          console.error('something has gone horribly wrong.');
+        function(error) { //fail
+          console.error('GeneRevisionsService.submitRevision fail: something has gone horribly wrong.');
+          return $q.reject(error)
         });
-
       return r;
     }
 
