@@ -6,15 +6,11 @@
   // @ngInject
   function GenesResource($resource, $cacheFactory) {
     var cache = $cacheFactory('genesCache');
+
     var cacheResponseInterceptor = function(response) {
       console.log('cache removed within ResponseInterceptor', response.config.url);
       cache.remove(response.config.url);
       return response.$promise;
-    };
-    var cacheRequestInterceptor = function(config) {
-      console.log('cache removed within RequestInterceptor', config.url);
-      cache.remove(config.url);
-      return config.$promise;
     };
 
     return $resource('/api/genes/:geneId',
@@ -121,16 +117,12 @@
         queryFresh: { // get list of genes
           method: 'GET',
           isArray: true,
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         },
         getFresh: { // get gene, force cache
           method: 'GET',
           isArray: false,
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         },
 
         // Base Collections Refresh
@@ -138,17 +130,13 @@
           method: 'GET',
           url: '/api/genes/:geneId/variants',
           isArray: true,
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         },
         queryVariantGroupsFresh: {
           method: 'GET',
           url: '/api/genes/:geneId/variant_groups',
           isArray: true,
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         },
 
         // Gene Comments Resources
@@ -175,9 +163,7 @@
           params: {
             geneId: '@geneId'
           },
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: cache
         },
         updateComment: {
           method: 'PATCH',
@@ -207,9 +193,7 @@
           method: 'GET',
           url: 'api/genes/:geneId/comments',
           isArray: true,
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         },
         getCommentFresh: {
           method: 'GET',
@@ -219,9 +203,7 @@
             commentId: '@commentId'
           },
           isArray: false,
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         }
       }
     )
