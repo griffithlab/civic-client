@@ -60,16 +60,12 @@
         queryFresh: {
           method: 'GET',
           isArray: true,
-          interceptor: {
-            request: cacheRequestInterceptor
-          }
+          cache: false
         },
         getFresh: {
           method: 'GET',
           isArray: false,
-          interceptor: {
-            request: cacheRequestInterceptor
-          }
+          cache: false
         },
 
         // Gene Revisions Comments Resources
@@ -137,9 +133,7 @@
             revisionId: '@revisionId'
           },
           isArray: true,
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         },
         getCommentFresh: {
           method: 'GET',
@@ -150,9 +144,7 @@
             commentId: '@commentId'
           },
           isArray: false,
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         }
       }
     )

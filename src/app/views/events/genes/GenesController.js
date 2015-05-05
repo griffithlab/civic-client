@@ -29,7 +29,6 @@
         url: '/summary',
         template: '<gene-summary show-menu="true"></gene-summary>',
         deepStateRedirect: true,
-        sticky: true,
         data: {
           titleExp: '"Gene " + gene.name + " Summary"',
           navMode: 'sub'
