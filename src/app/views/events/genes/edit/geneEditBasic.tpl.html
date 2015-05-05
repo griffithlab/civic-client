@@ -5,10 +5,10 @@
       <p><strong>Gene Edit:</strong> Complete your edits using the form below, then press the 'Submit Revision for Review' button. <span ng-show="vm.isAdmin()">As you are an admin, you may also choose to immediately apply your edits without review by clicking 'Apply Edits'.</span></p>
     </div>
   </div>
-  <div class="row form-messages">
+  <div class="row edit-messages">
     <div class="col-xs-12">
       <div ng-messages="vm.formErrors">
-        <div ng-message="500">500 {{ vm.formErrorMessages['500'] }}</div>
+        <div ng-message="500" class="alert alert-danger">500 <span ng-bind="vm.errorMessages['500']">error msg</span> - <span ng-bind="vm.errorPrompts['500']">error prompt</span></div>
       </div>
     </div>
   </div>

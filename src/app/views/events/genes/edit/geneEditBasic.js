@@ -36,7 +36,8 @@
     vm.user = {};
 
     vm.formErrors = {};
-    vm.formErrorMessages = formConfig.errorMessages;
+    vm.errorMessages = formConfig.errorMessages;
+    vm.errorPrompts = formConfig.errorPrompts;
 
     vm.geneFields = [
       {
