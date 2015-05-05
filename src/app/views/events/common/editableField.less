@@ -28,17 +28,33 @@
       content: "\270f";
     }
   }
+
+  &.active {
+    background-color: #FFF;
+    border-color: @civicPurple;
+    &::after {
+      position: absolute;
+      font-family: 'Glyphicons Halflings';
+      font-style: normal;
+      font-weight: normal;
+      font-size: .5em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: @civicPurple;
+      content: "\270f";
+    }
+  }
 }
 
 
 // lg/small sizes necessary for different sized fields, e.g. entity titles vs.
 // entity fields. These styles specify the size and location of the edit icon
 .edit-icon-lg {
-  .editableField.hover {
+  .editableField.hover, .editableField.active {
     margin-right: -25px;
     padding-right: 25px;
   }
-  .editableField.hover::after {
+  .editableField.hover::after, .editableField.active::after {
     top: 7px;
     right: 7px;
     font-size: .5em;
