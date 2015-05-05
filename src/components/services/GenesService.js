@@ -128,7 +128,9 @@
         getFresh: { // get gene, force cache
           method: 'GET',
           isArray: false,
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         },
 
         // Base Collections Refresh
@@ -136,13 +138,17 @@
           method: 'GET',
           url: '/api/genes/:geneId/variants',
           isArray: true,
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         },
         queryVariantGroupsFresh: {
           method: 'GET',
           url: '/api/genes/:geneId/variant_groups',
           isArray: true,
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         },
 
         // Gene Comments Resources
@@ -169,7 +175,9 @@
           params: {
             geneId: '@geneId'
           },
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         },
         updateComment: {
           method: 'PATCH',
@@ -178,7 +186,6 @@
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          cache: false,
           interceptor: {
             response: cacheResponseInterceptor
           }
@@ -190,7 +197,6 @@
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          cache: false,
           interceptor: {
             response: cacheResponseInterceptor
           }
@@ -201,7 +207,9 @@
           method: 'GET',
           url: 'api/genes/:geneId/comments',
           isArray: true,
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         },
         getCommentFresh: {
           method: 'GET',
@@ -211,7 +219,9 @@
             commentId: '@commentId'
           },
           isArray: false,
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         }
       }
     )

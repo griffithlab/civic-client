@@ -26,7 +26,7 @@
             ]);
           }
         },
-        deepStateRedirect: [ 'geneId' ],
+        deepStateRedirect: [ 'geneId', 'revisionId' ],
         data: {
           titleExp: '"Gene " + gene.name + " Talk"',
           navMode: 'sub'
@@ -36,11 +36,8 @@
         url: '/list/:revisionId',
         template: '<gene-talk-revisions></gene-talk-revisions>',
         resolve: {
-          initGeneTalkRevisions: function(Genes, GeneRevisions, GeneHistory, $stateParams, $q) {
-            var geneId = $stateParams.geneId;
-            return $q.all([
-              GeneRevisions.queryFresh(geneId)
-            ]);
+          initRevisionList: function(Genes, GeneRevisions, GeneHistory, $stateParams) {
+            return GeneRevisions.queryFresh($stateParams.geneId);
           }
         },
         data: {
@@ -54,7 +51,7 @@
         resolve: {
           initRevision: function(GeneRevisions, $stateParams, $q) {
             return $q.all([
-              GeneRevisions.get($stateParams.geneId, $stateParams.revisionId),
+              GeneRevisions.getFresh($stateParams.geneId, $stateParams.revisionId),
               GeneRevisions.initComments($stateParams.geneId, $stateParams.revisionId)
             ]);
           }

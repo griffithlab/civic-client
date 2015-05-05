@@ -53,14 +53,13 @@
             geneId: '@geneId',
             revisionId: '@revisionId'
           },
-          cache: false
+          cache: cache
         },
 
         // Base Gene Revisions Refresh
         queryFresh: {
           method: 'GET',
           isArray: true,
-          cache: false,
           interceptor: {
             request: cacheRequestInterceptor
           }
@@ -68,7 +67,6 @@
         getFresh: {
           method: 'GET',
           isArray: false,
-          cache: false,
           interceptor: {
             request: cacheRequestInterceptor
           }
@@ -94,8 +92,7 @@
           },
           interceptor: {
             response: cacheResponseInterceptor
-          },
-          cache: false
+          }
         },
         queryComments: {
           method: 'GET',
@@ -128,8 +125,7 @@
           },
           interceptor: {
             response: cacheResponseInterceptor
-          },
-          cache: false
+          }
         },
 
         // Gene Revisions Comments Resources Refresh
@@ -141,7 +137,9 @@
             revisionId: '@revisionId'
           },
           isArray: true,
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         },
         getCommentFresh: {
           method: 'GET',
@@ -152,7 +150,9 @@
             commentId: '@commentId'
           },
           isArray: false,
-          cache: false
+          interceptor: {
+            response: cacheResponseInterceptor
+          }
         }
       }
     )
@@ -209,7 +209,7 @@
 
     function initRevisions(geneId) {
       return $q.all([
-        query(geneId)
+        queryFresh(geneId)
       ])
     }
 
@@ -237,6 +237,7 @@
     function submitRevision(reqObj) {
       return GeneRevisionsResource.submitRevision(reqObj).$promise
         .then(function(response) {
+          angular.copy(response, item);
           queryFresh(reqObj.id);
           return response.$promise;
         });
@@ -244,9 +245,11 @@
     function acceptRevision(geneId, revisionId) {
       return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
-          queryFresh(geneId);
-          getFresh(geneId, revisionId);
-          return response.$promise;
+          var q =  $q.all([
+            queryFresh(geneId),
+            getFresh(geneId, revisionId)
+          ]).$promise;
+          return q;
         })
     }
     function rejectRevision(geneId, revisionId) {
@@ -259,7 +262,7 @@
     }
 
     // Gene Revisions Base Refresh
-    function queryFresh(geneId) {
+    function queryFresh(geneId) { // works
       return GeneRevisionsResource.queryFresh({ geneId: geneId }).$promise
         .then(function(response) {
           angular.copy(response, collection);

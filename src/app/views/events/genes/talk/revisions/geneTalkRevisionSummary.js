@@ -23,7 +23,7 @@
 
     $scope.acceptRevision = function() {
       GeneRevisions.acceptRevision($stateParams.geneId, $stateParams.revisionId)
-        .then(function() {
+        .then(function(response) {
           Genes.getFresh($stateParams.geneId);
         });
     };
