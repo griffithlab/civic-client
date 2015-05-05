@@ -24,6 +24,7 @@
           return $injector.get('$http')(response.config);
         });
         return response || $q.when(response);
+        //return response;
       }
     };
 
@@ -36,6 +37,6 @@
    * @ngInject
    */
   function interceptorServiceConfig($httpProvider) {
-    $httpProvider.interceptors.push('Interceptor');
+    // $httpProvider.interceptors.push('Interceptor');
   }
 })();
