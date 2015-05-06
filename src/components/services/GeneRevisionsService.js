@@ -245,8 +245,8 @@
           queryFresh(geneId);
           geneRevisionsCache.remove('/api/genes/' + geneId + '/suggested_changes/' + revisionId);
           getFresh(geneId);
-          geneRevisionsCache.remove('/api/genes/' + geneId );
-          Genes.getFresh(geneId);
+          genesCache.remove('/api/genes/' + geneId );
+          Genes.get(geneId);
           return $q.when(response)
         },
         function(error) {
