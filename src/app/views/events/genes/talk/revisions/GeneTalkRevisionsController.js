@@ -52,7 +52,7 @@
           initRevision: function(GeneRevisions, $stateParams, $q) {
             return $q.all([
               GeneRevisions.getFresh($stateParams.geneId, $stateParams.revisionId),
-              GeneRevisions.initComments($stateParams.geneId, $stateParams.revisionId)
+              GeneRevisions.queryCommentsFresh($stateParams.geneId, $stateParams.revisionId)
             ]);
           }
         },
