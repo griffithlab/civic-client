@@ -6,8 +6,11 @@
   </div>
   <div class="row" ng-if="vm.isAdmin">
     <div class="col-xs-12">
-      <div class="revision-instructions">
-        <p>As you are an Admin, you may accept or reject this revision by pressing either of the two buttons beneath the diffs.</p>
+      <div class="revision-instructions" ng-if="vm.geneTalkModel.data.item.status != 'applied'">
+        <p>Accept or reject this revision by pressing either of the two buttons beneath the diffs.</p>
+      </div>
+      <div class="revision-instructions" ng-if="vm.geneTalkModel.data.item.status === 'applied'">
+        <p>This revision has been applied.</p>
       </div>
     </div>
   </div>
