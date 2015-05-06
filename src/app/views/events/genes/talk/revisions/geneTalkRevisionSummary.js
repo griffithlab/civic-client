@@ -16,20 +16,47 @@
   }
 
   // @ngInject
-  function GeneTalkRevisionSummaryController($scope, $stateParams, Genes, GeneRevisions) {
-    $scope.ctrl = {};
-    $scope.geneTalkModel = GeneRevisions;
-    $scope.changeId = $stateParams.changeId;
+  function GeneTalkRevisionSummaryController($scope, $stateParams, Genes, GeneRevisions, Security, formConfig) {
+    var vm = $scope.vm = {};
+    vm.isAdmin = Security.isAdmin();
+    vm.isAuthenticated = Security.isAuthenticated();
+    vm.geneTalkModel = GeneRevisions;
+
+    vm.formErrors = {};
+    vm.formMessages = {};
+    vm.errorMessages = formConfig.errorMessages;
+    vm.errorPrompts = formConfig.errorPrompts;
 
     $scope.acceptRevision = function() {
+      vm.formErrors = {};
+      vm.formMessages = {};
       GeneRevisions.acceptRevision($stateParams.geneId, $stateParams.revisionId)
         .then(function(response) {
-          Genes.getFresh($stateParams.geneId);
+          vm.formMessages['acceptSuccess'] = true;
+        })
+        .catch(function(error) {
+          console.error('revision accept error!');
+          vm.formErrors[error.status] = true;
+        })
+        .finally(function (){
+          console.log('accept revision successful.');
         });
     };
 
     $scope.rejectRevision = function() {
-      GeneRevisions.rejectRevision($stateParams.geneId, $stateParams.revisionId);
+      vm.formErrors = {};
+      vm.formMessages = {};
+      GeneRevisions.rejectRevision($stateParams.geneId, $stateParams.revisionId)
+        .then(function(response) {
+          vm.formMessages['rejectSuccess'] = true;
+        })
+        .catch(function(error) {
+          console.error('revision reject error!');
+          vm.formErrors[error.status] = true;
+        })
+        .finally(function (){
+          console.log('reject revision successful.');
+        });
     };
   }
 })();

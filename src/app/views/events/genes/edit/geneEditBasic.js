@@ -15,12 +15,20 @@
   }
 
   // @ngInject
-  function GeneEditBasicController($scope, GeneRevisions, Genes, GeneHistory, GenesViewOptions, formConfig) {
+  function GeneEditBasicController($scope,
+                                   Security,
+                                   GeneRevisions,
+                                   Genes,
+                                   GeneHistory,
+                                   GenesViewOptions,
+                                   formConfig) {
     var geneModel, vm;
 
     vm = $scope.vm = {};
     geneModel = vm.geneModel = Genes;
 
+    vm.isAdmin = Security.isAdmin();
+    vm.isAuthenticated = Security.isAuthenticated();
 
     vm.gene = Genes.data.item;
     vm.geneRevisions = GeneRevisions;
@@ -36,6 +44,7 @@
     vm.user = {};
 
     vm.formErrors = {};
+    vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
@@ -45,6 +54,7 @@
         type: 'input',
         templateOptions: {
           label: 'Name',
+          disabled: true,
           value: vm.gene.name
         }
       },
@@ -55,7 +65,8 @@
           rows: 8,
           label: 'Description',
           value: 'vm.gene.description',
-          focus: true
+          focus: true,
+          minLength: 32
         }
       },
       {
@@ -84,14 +95,17 @@
 
     vm.submit = function(geneEdit, options) {
       geneEdit.geneId = geneEdit.id;
+      vm.formErrors = {};
+      vm.formMessages = {};
       GeneRevisions.submitRevision(geneEdit)
         .then(function(response) {
           console.log('revision submit success!');
-          options.resetModel();
+          vm.formMessages['submitSuccess'] = true;
+          // options.resetModel();
         })
-        .catch(function(response) {
+        .catch(function(error) {
           console.error('revision submit error!');
-          vm.formErrors[response.status] = true;
+          vm.formErrors[error.status] = true;
         })
         .finally(function(){
           console.log('revision submit done!');
@@ -100,7 +114,21 @@
 
     vm.apply = function(geneEdit, options) {
       geneEdit.geneId = geneEdit.id;
-      Genes.apply(geneEdit);
+      vm.formErrors = {};
+      vm.formMessages = {};
+      Genes.apply(geneEdit)
+        .then(function(response) {
+          console.log('revision appy success!');
+          vm.formMessages['applySuccess'] = true;
+          // options.resetModel();
+        })
+        .catch(function(response) {
+          console.error('revision application error!');
+          vm.formErrors[response.status] = true;
+        })
+        .finally(function(){
+          console.log('revision apply done!');
+        });
     };
   }
 })();

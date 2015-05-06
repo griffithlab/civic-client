@@ -318,13 +318,15 @@
         });
     }
     function apply(reqObj) {
-      return GenesResource.apply(reqObj).$promise
-        .then(function(response) {
+      return GenesResource.apply(reqObj).$promise.then(
+        function(response) { // success
           // remove gene's cache record
           genesCache.remove('/api/genes/' + response.id);
-          return $q.all([
-            get(reqObj.geneId),
-          ]).$promise;
+          get(reqObj.geneId);
+          return $q.when(response);
+        },
+        function(error) { // fail
+          return $q.reject(error);
         })
     }
 

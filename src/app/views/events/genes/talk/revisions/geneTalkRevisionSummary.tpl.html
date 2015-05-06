@@ -1,18 +1,56 @@
 <div class="geneTalkRevisionSummary">
   <div class="row revision-header">
     <div class="col-xs-12 name">
-      <h3>Suggested Change #<span ng-bind="geneTalkModel.data.item.id">ID</span></h3>
+      <h3>Suggested Change #<span ng-bind="vm.geneTalkModel.data.item.id">ID</span></h3>
+    </div>
+  </div>
+  <div class="row" ng-if="vm.isAdmin">
+    <div class="col-xs-12">
+      <div class="revision-instructions">
+        <p>As you are an Admin, you may accept or reject this revision by pressing either of the two buttons beneath the diffs.</p>
+      </div>
     </div>
   </div>
   <div class="row">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formErrors" class="revision-errors">
+        <div ng-message="500" class="alert alert-danger">
+          <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
+        </div>
+        <div ng-message="401" class="alert alert-danger">
+          <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
+        </div>
+        <div ng-message="403" class="alert alert-danger">
+          <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
+        </div>
+        <div ng-message="409" class="alert alert-danger">
+          <strong class="status">403 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formMessages" class="edit-messages">
+        <div ng-message="acceptSuccess" class="alert alert-success">
+          <strong class="status">Success</strong> - <span class="message">The revision was successfully accepted.</span>
+        </div>
+        <div ng-message="rejectSuccess" class="alert alert-success">
+          <strong class="status">Success</strong> - <span class="message">The revision was successfully rejected.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-xs-12 diffs-header">
-      <h4>Field Differences | Status: <span ng-bind="geneTalkModel.data.item.status">status</span></h4>
+      <h4>Field Differences | Status: <span ng-bind="vm.geneTalkModel.data.item.status">status</span></h4>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 diffs">
       <ul>
-        <li ng-repeat="(field, diff) in geneTalkModel.data.item.diffs">
+        <li ng-repeat="(field, diff) in vm.geneTalkModel.data.item.diffs">
           <h4><strong>{{field|capitalize}}</strong></h4>
           <p ng-bind-html="diff"></p>
         </li>
@@ -20,7 +58,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 admin-buttons">
+    <div class="col-xs-12 admin-buttons" ng-if="vm.isAdmin === true && vm.geneTalkModel.data.item.status != 'applied'">
       <div class="pull-right">
         <button type="submit" class="btn btn-default" ng-click="acceptRevision()">Accept Revision</button>
         <button type="submit" class="btn btn-default" ng-click="rejectRevision()">Reject Revision</button>
@@ -40,7 +78,7 @@
         </div>
         <div ng-switch-default>
           <ul class="comments">
-            <li ng-repeat="comment in geneTalkModel.data.comments">
+            <li ng-repeat="comment in vm.geneTalkModel.data.comments">
               <entity-comment comment-data="comment"></entity-comment>
             </li>
           </ul>
@@ -50,7 +88,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 comment-form">
-      <entity-comment-form type="revision" entity-model="geneTalkModel"></entity-comment-form>
+      <entity-comment-form type="revision" entity-model="vm.geneTalkModel"></entity-comment-form>
     </div>
   </div>
   <!--<div class="row">-->

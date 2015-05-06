@@ -14,8 +14,6 @@
     });
 
   function GeneSummaryController($scope, Genes, GenesViewOptions) {
-    console.log('---------- GeneSummaryController loaded.');
-    console.log(Genes.data.item.description);
     $scope.gene = Genes.data.item;
     $scope.myGeneInfo = Genes.data.myGeneInfo;
     $scope.GenesViewOptions = GenesViewOptions;

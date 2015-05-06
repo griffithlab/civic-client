@@ -3,24 +3,38 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
-.editGene {
+.geneEditBasic {
   .fullBleed();
   padding-top: @contentPadding;
 
-  .edit-summary {
-    padding-bottom: @contentPadding;
-    border-bottom: 1px solid darken(@pageBackground2, 10%);
-  }
 
-  .edit-messages {
-    padding-top: @contentPadding;
-    background-color: @pageBackground;
-    border-bottom: 1px solid darken(@pageBackground2, 10%);
+  .edit-instructions  {
+    background-color: @pageBackground2;
+    border-radius: @border-radius-small;
+    padding: @contentPadding;
+    p {
+      margin-bottom: 0;
+    }
   }
 
   .edit-form {
-    background-color: @pageBackground;
+    .clearfix();
     padding-top: @contentPadding;
-    padding-bottom: @contentPadding;
   }
+
+  .edit-errors, .edit-messages {
+    .alert {
+      margin-top: @contentPadding;
+      margin-bottom: @contentPadding;
+    }
+  }
+
+  .edit-errors {
+
+  }
+
+  .edit-messages {
+  }
+
+
 }

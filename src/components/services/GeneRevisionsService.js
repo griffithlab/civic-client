@@ -146,7 +146,7 @@
     )
   }
 
-  function GeneRevisionsService(GeneRevisionsResource, $cacheFactory, $q) {
+  function GeneRevisionsService(GeneRevisionsResource, Genes, $cacheFactory, $q) {
     // fetch genes cache, need to delete gene record when revision is submitted
     var genesCache = $cacheFactory.get('genesCache');
     var geneRevisionsCache = $cacheFactory.get('geneRevisionsCache');
@@ -227,41 +227,44 @@
         })
     }
 
-
-
     function submitRevision(reqObj) {
-      r = GeneRevisionsResource.submitRevision(reqObj).$promise.then(
+      return GeneRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
           geneRevisionsCache.remove('/api/genes/' + reqObj.id + '/suggested_changes');
-          return $q.resolve(response)
+          return $q.when(response);
         },
         function(error) { //fail
-          console.error('GeneRevisionsService.submitRevision fail: something has gone horribly wrong.');
-          return $q.reject(error)
+          return $q.reject(error);
         });
-      return r;
     }
-
-
 
     function acceptRevision(geneId, revisionId) {
-      return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise
-        .then(function(response) {
-          // remove gene's cache record
-          genesCache.remove('/api/genes/' + response.id);
-          return $q.all([
-            queryFresh(geneId),
-            getFresh(geneId, revisionId)
-          ]).$promise;
-        })
+      return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise.then(
+        function(response) {
+          geneRevisionsCache.remove('/api/genes/' + geneId + '/suggested_changes');
+          queryFresh(geneId);
+          geneRevisionsCache.remove('/api/genes/' + geneId + '/suggested_changes/' + revisionId);
+          getFresh(geneId);
+          geneRevisionsCache.remove('/api/genes/' + geneId );
+          Genes.getFresh(geneId);
+          return $q.when(response)
+        },
+        function(error) {
+          return $q.reject(error);
+        });
     }
     function rejectRevision(geneId, revisionId) {
-      return GeneRevisionsResource.rejectRevision({ geneId: geneId, revisionId: revisionId }).$promise
-        .then(function(response) {
+      return GeneRevisionsResource.rejectRevision({ geneId: geneId, revisionId: revisionId }).$promise.then(
+        function(response) {
+          geneRevisionsCache.remove('/api/genes/' + response.id + '/suggested_changes');
           queryFresh(geneId);
+          geneRevisionsCache.remove('/api/genes/' + response.id + '/suggested_changes/' + revisionId);
           getFresh(geneId, revisionId);
-          return response;
-        })
+          return $q.when(response);
+        },
+        function(error) {
+          return $q.reject(error);
+        });
     }
 
     // Gene Revisions Base Refresh
