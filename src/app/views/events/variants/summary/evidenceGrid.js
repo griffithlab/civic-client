@@ -66,7 +66,7 @@
           },
           cellTemplate: 'app/views/events/variants/summary/evidenceGridDiseaseCell.tpl.html'
         },
-        { name: 'drug',
+        { name: 'drugs',
           displayName: 'Drug',
           allowCellFocus: false,
           enableFiltering: true,
@@ -101,6 +101,7 @@
       $scope.$watch('evidence', function(evidence) {
         ctrl.gridApi = gridApi;
         ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
+        evidence = _.map(evidence, function(item) { item.drugs = _.chain(item.drugs).pluck('name').value().join(", "); return item; })
         ctrl.evidenceGridOptions.data = evidence;
 
         gridApi.selection.on.rowSelectionChanged($scope, function(row){
