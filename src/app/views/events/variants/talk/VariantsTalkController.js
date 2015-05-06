@@ -1,267 +1,116 @@
 (function() {
   'use strict';
   angular.module('civic.events.variants')
-    .config(variantTalkViewConfig)
-    .controller('VariantTalkViewController', VariantTalkViewController);
+    .config(variantTalkConfig)
+    .factory('VariantsTalkViewOptions', VariantsTalkViewOptions)
+    .controller('VariantTalkController', VariantTalkController);
 
   // @ngInject
-  function variantTalkViewConfig($stateProvider) {
+  function variantTalkConfig($stateProvider) {
     $stateProvider
-      .state('events.genes.summary.variants.talk', {
+      .state('events.variants.talk', {
+        abstract: true,
         url: '/talk',
         templateUrl: 'app/views/events/variants/talk/VariantTalkView.tpl.html',
-        controller: 'VariantTalkViewController',
+        controller: 'VariantTalkController',
+        controllerAs: 'vm',
         resolve: {
-          comments: function(Variants, variant) {
-            return Variants.getComments(variant.id);
-          },
-          changes: function(Variants, variant) {
-            return Variants.getChanges(variant.id);
-          },
-          revisions: function(Variants, variant) {
-            return Variants.getRevisions(variant.id);
-          },
-          lastRevision: function(Variants, variant) {
-            return Variants.getLastRevision(variant.id);
+          VariantRevisions: 'VariantRevisions',
+          VariantHistory: 'VariantHistory',
+          initVariantTalk: function(Variants, VariantRevisions, VariantHistory, $stateParams, $cacheFactory, $q) {
+            var variantId = $stateParams.variantId;
+            return $q.all([
+              Variants.initComments(variantId),
+              VariantRevisions.initRevisions(variantId),
+              VariantHistory.initBase(variantId)
+            ]);
           }
         },
-        deepStateRedirect: true,
+        deepStateRedirect: [ 'variantId' ],
         data: {
           titleExp: '"Variant " + variant.name + " Talk"',
           navMode: 'sub'
         }
       })
-      .state('events.genes.summary.variants.talk.log', {
+      .state('events.variants.talk.log', {
         url: '/log',
-        template: '<variant-talk-log><p>VARIANT TALK LOG</p></variant-talk-log>',
+        template: '<variant-talk-log></variant-talk-log>',
         data: {
           titleExp: '"Variant " + variant.name + " Log"',
           navMode: 'sub'
         }
       })
-      .state('events.genes.summary.variants.talk.comments', {
+      .state('events.variants.talk.comments', {
         url: '/comments',
         template: '<variant-talk-comments></variant-talk-comments>',
         data: {
           titleExp: '"Variant " + variant.name + " Comments"',
           navMode: 'sub'
         }
-      })
-      .state('events.genes.summary.variants.talk.revisions', {
-        url: '/revisions/:changeId',
-        template: '<variant-talk-revisions></variant-talk-revisions>',
-        data: {
-          titleExp: '"Variant " + variant.name + " Revisions"',
-          navMode: 'sub'
-        }
-      })
-      .state('events.genes.summary.variants.talk.revisions.summary', {
-        url: '/summary',
-        template: '<variant-talk-revision-summary></variant-talk-revision-summary>',
-        data: {
-          titleExp: '"Variant " + variant.name + " Revision Summary"',
-          navMode: 'sub'
-        }
       });
   }
 
   // @ngInject
-  function VariantTalkViewController($scope,
-                                     $state,
+  function VariantsTalkViewOptions($state, $stateParams, Variants) {
+    var baseUrl = '';
+    var baseState = '';
+    var tabData = [];
+    var styles = {};
 
-                                     // resolved resources
-                                     comments,
-                                     changes,
-                                     revisions,
-                                     lastRevision,
+    var variant = Variants.data.item;
 
-                                     // inherited resolved resources
-                                     Variants,
-                                     gene,
-                                     variant,
-                                     evidenceItems) {
-    console.log('VariantsTalkController called.');
-    var ctrl = $scope.ctrl = {};
-    var variantTalkModel = ctrl.variantTalkModel = {};
+    function init() {
+      baseState = 'events.variants.talk';
+      baseUrl = $state.href(baseUrl, $stateParams);
 
-    variantTalkModel.config = {
-      type: 'variant',
-      name: variant.name,
-      service: Variants,
-      state: {
-        baseState: 'events.genes.summary.variants.talk',
-        baseUrl: $state.href('events.genes.summary.variants.talk', { geneId: gene.entrez_id, variantId: variant.id })
-      },
-      styles: {
-        view: {
-          summaryBackgroundColor: 'pageBackground',
-          talkBackgroundColor: 'pageBackground2'
-        },
-        tabs: {
-          tabRowBackground: 'pageBackgroundGradient'
-        }
-      },
-      tabData: [
+      angular.copy([
         {
           heading: variant.name + ' Log',
-          route: 'events.genes.summary.variants.talk.log',
-          params: { geneId: gene.entrez_id, variantId: variant.id }
+          route: baseState + '.log',
+          params: { variantId: variant.id }
         },
         {
-          heading: variant.name + ' Comments',
-          route: 'events.genes.summary.variants.talk.comments',
-          params: { geneId: gene.entrez_id, variantId: variant.id }
+          heading: variant.name  + ' Comments',
+          route: baseState + '.comments',
+          params: { variantId: variant.id }
         },
         {
           heading: variant.name + ' Revisions',
-          route: 'events.genes.summary.variants.talk.revisions',
-          params: { geneId: gene.entrez_id, variantId: variant.id }
+          route: baseState + '.revisions.list',
+          params: { variantId: variant.id }
         }
-      ]
-    };
+      ], tabData);
 
-    variantTalkModel.data = {
-      entity: variant,
-      id: variant.id,
-      parent: gene,
-      parentId: gene.entrez_id,
-      evidenceItems: evidenceItems,
-      comments: comments,
-      changes: changes,
-      change: {},
-      changeComments: [],
-      revisions: revisions,
-      lastRevision: lastRevision
-    };
-
-    variantTalkModel.actions = {
-      getComments: function() {
-        return Variants.getComments(variant.id)
-          .then(function(response) {
-            variantTalkModel.data.comments = response;
-            return response;
-          });
-      },
-
-      getComment: function(commentId) {
-        return Variants.getComment(variant.id, commentId);
-      },
-
-      submitComment: function(reqObj) {
-        reqObj.variantId = variant.id;
-        return Variants.submitComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-
-      updateComment: function(reqObj) {
-        reqObj.variantId = variant.id;
-        return Variants.updateComment(reqObj)
-          .then(function(response){
-            return response;
-          });
-      },
-
-      deleteComment: function(commentId) {
-        return Variants.deleteComment({ variantId: variant.id, commentId: commentId })
-          .then(function(response) {
-            return response;
-          });
-      },
-
-      getChanges: function() {
-        return Variants.getChanges(variant.id)
-          .then(function(response) {
-            variantTalkModel.data.changes = response;
-            return response;
-          });
-      },
-
-      getChange: function(changeId) {
-        return Variants.getChange({ variantId: variant.id, changeId: changeId })
-          .then(function(response) {
-            variantTalkModel.data.change = response;
-            return response;
-          })
-      },
-
-      acceptChange: function(changeId) {
-        return Variants.acceptChange({ variantId: variant.id, changeId: changeId })
-          .then(function(response) {
-            return response;
-          })
-      },
-
-      rejectChange: function(changeId) {
-        return Variants.rejectChange({ variantId: variant.id, changeId: changeId })
-          .then(function(response) {
-            return response;
-          })
-      },
-
-      submitChangeComment: function(changeId, comment) {
-        var reqObj = comment;
-        reqObj.variantId = variant.id;
-        reqObj.changeId = changeId;
-        return Variants.submitChangeComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-      updateChangeComment: function(reqObj) {
-        reqObj.variantId = variant.id;
-        return Variants.updateChangeComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-      getChangeComments: function(changeId) {
-        return Variants.getChangeComments({variantId: variant.id, changeId: changeId})
-          .then(function(response) {
-            variantTalkModel.data.changeComments = response;
-            return response;
-          })
-      },
-      getChangeComment: function(changeId, commentId) {
-        return Variants.getChangeComment({
-          variantId: variant.id,
-          changeId: changeId,
-          commentId: commentId
-        }).then(function(response){
-          return response;
-        });
-      },
-      deleteChangeComment: function(changeId, commentId) {
-        return Variants.deleteChangeComment({
-          variantId: variant.id,
-          changeId: changeId,
-          commentId: commentId
-        }).then(function(response){
-          return response;
-        });
-      },
-
-      getRevisions: function() {
-        return Variants.getRevisions(variant.id)
-          .then(function(response) {
-            variantTalkModel.data.revisions = response;
-            return response;
-          });
-      },
-      getRevision: function(revisionId) {
-        return Variants.getRevision({ variantId: variant.id, revisionId: revisionId })
-          .then(function(response) {
-            return response;
-          });
-      },
-      getLastRevision: function() {
-        return Variants.getLastRevision({ variantId: variant.id })
-          .then(function(response) {
-            return response;
-          });
-      }
+      angular.copy({
+        view: {
+          summaryBackgroundColor: 'pageBackground',
+          talkBackgroundColor: 'pageBackground'
+        },
+        tabs: {
+          tabRowBackground: 'pageBackground2Gradient'
+        }
+      }, styles);
     }
+
+    return {
+      init: init,
+      state: {
+        baseParams: $stateParams,
+        baseState: baseState,
+        baseUrl: baseUrl
+      },
+      tabData: tabData,
+      styles: styles
+    };
+  }
+
+  // @ngInject
+  function VariantTalkController(Variants, VariantRevisions, VariantsTalkViewOptions) {
+    console.log('VariantsTalkController called.');
+    VariantsTalkViewOptions.init();
+    this.VariantsTalkViewModel = Variants; // we're re-using the Variants model here but could in the future have a VariantsTalk model if warranted
+    this.VariantRevisionsModel = VariantRevisions;
+    this.VariantsTalkViewOptions = VariantsTalkViewOptions;
   }
 
 })();

@@ -48,7 +48,7 @@
     var styles = {};
 
     function init() {
-      baseState = 'events.genes.talk';
+      baseState = 'events.genes.edit';
       baseUrl = $state.href(baseUrl, $stateParams);
 
       angular.copy({

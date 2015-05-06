@@ -49,18 +49,18 @@
 
     function init() {
       angular.copy($stateParams, this.state.baseParams);
-      this.state.baseState = 'events.variants';
+      this.state.baseState = 'events.genes.summary.variants';
       this.state.baseUrl = $state.href(baseUrl, $stateParams);
 
       angular.copy([
         {
           heading: 'Variant Summary',
-          route: 'events.variants.summary',
+          route: 'events.genes.summary.variants.summary',
           params: { variantId: Variants.data.item.id }
         },
         {
           heading: 'Variant Talk',
-          route: 'events.variants.talk.log',
+          route: 'events.genes.summary.variants.talk.log',
           params: { variantId: Variants.data.item.id }
         }
       ], this.tabData);

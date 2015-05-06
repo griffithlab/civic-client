@@ -10,7 +10,7 @@
       restrict: 'E',
       require: '^^entityView',
       scope: false,
-      templateUrl: 'app/views/events/variants/edit/variantEdit.tpl.html',
+      templateUrl: 'app/views/events/variants/edit/variantEditBasic.tpl.html',
       link: variantEditLink,
       controller: 'VariantEditController'
     }

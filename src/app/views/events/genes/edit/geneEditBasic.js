@@ -10,7 +10,7 @@
       restrict: 'E',
       scope: {},
       controller: 'GeneEditBasicController',
-      templateUrl: 'app/views/events/genes/edit/geneEditBasic.tpl.html',
+      templateUrl: 'app/views/events/genes/edit/geneEditBasic.tpl.html'
     }
   }
 

@@ -1,9 +1,9 @@
 (function() {
   angular.module('civic.services')
-    .factory('GeneHistoryResource', GeneHistoryResource)
-    .factory('GeneHistory', GeneHistoryService);
+    .factory('VariantHistoryResource', VariantHistoryResource)
+    .factory('VariantHistory', VariantHistoryService);
 
-  function GeneHistoryResource($resource, $cacheFactory) {
+  function VariantHistoryResource($resource, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
     // adding this interceptor to a route will remove cached record
@@ -11,12 +11,12 @@
       cache.remove(response.config.url);
       return response.$promise;
     };
-    return $resource('/api/genes/:geneId/revisions',
+    return $resource('/api/variants/:variantId/revisions',
       {
-        geneId: '@geneId'
+        variantId: '@variantId'
       },
       {
-        // Base Gene Revisions Resources
+        // Base Variant History Resources
         query: {
           method: 'GET',
           isArray: true,
@@ -28,7 +28,7 @@
           cache: cache
         },
 
-        // Base Gene History Refresh
+        // Base Variant History Refresh
         queryFresh: {
           method: 'GET',
           isArray: true,
@@ -43,8 +43,8 @@
     )
   }
 
-  function GeneHistoryService(GeneHistoryResource, $q) {
-    // Gene History Base
+  function VariantHistoryService(VariantHistoryResource, $q) {
+    // Variant History Base
     var item = {};
     var collection = [];
 
@@ -55,47 +55,47 @@
         collection: collection,
       },
 
-      // Gene History Base
+      // Variant History Base
       query: query,
       last: last,
 
-      // Gene History Base Refresh
+      // Variant History Base Refresh
       queryFresh: queryFresh,
       lastFresh: lastFresh
     };
 
-    function initBase(geneId) {
+    function initBase(variantId) {
       return $q.all([
-        query(geneId)
+        query(variantId)
       ])
     }
 
-    // Gene History Base
-    function query(geneId) {
-      return GeneHistoryResource.query({ geneId: geneId }).$promise
+    // Variant History Base
+    function query(variantId) {
+      return VariantHistoryResource.query({ variantId: variantId }).$promise
         .then(function(response) {
           angular.copy(response, collection);
           return response.$promise;
         });
     }
-    function last(geneId) {
-      return GeneHistoryResource.last({ geneId: geneId }).$promise
+    function last(variantId) {
+      return VariantHistoryResource.last({ variantId: variantId }).$promise
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
         })
     }
 
-    // Gene History Base Refresh
-    function queryFresh(geneId) {
-      return GeneHistoryResource.queryFresh({ geneId: geneId }).$promise
+    // Variant History Base Refresh
+    function queryFresh(variantId) {
+      return VariantHistoryResource.queryFresh({ variantId: variantId }).$promise
         .then(function(response) {
           angular.copy(response, collection);
           return response.$promise;
         });
     }
-    function lastFresh(geneId) {
-      return GeneHistoryResource.lastFresh({ geneId: geneId }).$promise
+    function lastFresh(variantId) {
+      return VariantHistoryResource.lastFresh({ variantId: variantId }).$promise
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
