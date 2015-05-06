@@ -35,9 +35,9 @@
     stateParams = $scope.entityViewOptions.state.params;
     ctrl.entityModel = $scope.entityModel;
 
-    ctrl.active = $state.includes('**.edit.*');
+    ctrl.active = $state.includes(baseState + '.edit.*');
     $scope.$on('$stateChangeSuccess', function() {
-      ctrl.active = $state.includes('**.edit.*');
+      ctrl.active = $state.includes(baseState + '.edit.*');
     });
 
     ctrl.mouseOver = function() {

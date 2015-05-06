@@ -34,7 +34,7 @@
             return Genes.getFresh($stateParams.geneId);
           }
         },
-        deepStateRedirect: false,
+        deepStateRedirect: [ 'geneId' ],
         data: {
           titleExp: '"Gene " + gene.name + " Summary"',
           navMode: 'sub'
