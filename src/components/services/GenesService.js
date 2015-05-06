@@ -7,8 +7,8 @@
   function GenesResource($resource, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
-    var cacheResponseInterceptor = function(response) {
-      console.log('cache removed within ResponseInterceptor', response.config.url);
+    var cacheInterceptor = function(response) {
+      console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(" "));
       cache.remove(response.config.url);
       return response.$promise;
     };
@@ -32,15 +32,14 @@
         update: {
           method: 'PATCH',
           interceptor: {
-            response: cacheResponseInterceptor
+            response: cacheInterceptor
           }
         },
         delete: {
           method: 'DELETE',
           interceptor: {
-            response: cacheResponseInterceptor
-          },
-          cache: false
+            response: cacheInterceptor
+          }
         },
         apply: {
           method: 'PATCH'
@@ -175,7 +174,7 @@
             commentId: '@commentId'
           },
           interceptor: {
-            response: cacheResponseInterceptor
+            response: cacheInterceptor
           }
         },
         deleteComment: {
@@ -186,7 +185,7 @@
             commentId: '@commentId'
           },
           interceptor: {
-            response: cacheResponseInterceptor
+            response: cacheInterceptor
           }
         },
 
