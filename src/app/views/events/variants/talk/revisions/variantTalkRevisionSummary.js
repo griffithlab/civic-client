@@ -9,42 +9,54 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      require: '^^entityTalkView',
-      templateUrl: 'app/views/events/variants/talk/variantTalkRevisionSummary.tpl.html',
-      link: variantTalkRevisionsSummaryLink,
+      templateUrl: 'app/views/events/variants/talk/revisions/variantTalkRevisionSummary.tpl.html',
       controller: 'VariantTalkRevisionSummaryController'
     };
     return directive;
   }
 
   // @ngInject
-  function variantTalkRevisionsSummaryLink(scope, element, attributes, entityTalkView) {
-    scope.variantTalkModel= entityTalkView.entityTalkModel;
-  }
+  function VariantTalkRevisionSummaryController($scope, $stateParams, VariantRevisions, Security, formConfig) {
+    var vm = $scope.vm = {};
+    vm.isAdmin = Security.isAdmin();
+    vm.isAuthenticated = Security.isAuthenticated();
+    vm.variantTalkModel = VariantRevisions;
 
-  // @ngInject
-  function VariantTalkRevisionSummaryController($scope, $stateParams) {
-    var ctrl = $scope.ctrl = {};
-    var unwatch = $scope.$watch('variantTalkModel', function(variantTalkModel) {
-      console.log('ctrl.variantTalkRevisionsModel watch triggered.');
-      variantTalkModel.actions.getChange($stateParams.changeId);
-      variantTalkModel.actions.getChangeComments($stateParams.changeId);
+    vm.formErrors = {};
+    vm.formMessages = {};
+    vm.errorMessages = formConfig.errorMessages;
+    vm.errorPrompts = formConfig.errorPrompts;
 
-      ctrl.acceptChange = function() {
-        variantTalkModel.actions.acceptChange($stateParams.changeId)
-          .then(function(response) {
-            variantTalkModel.actions.getChanges($stateParams.variantId);
-          });
-      };
+    $scope.acceptRevision = function() {
+      vm.formErrors = {};
+      vm.formMessages = {};
+      VariantRevisions.acceptRevision($stateParams.variantId, $stateParams.revisionId)
+        .then(function(response) {
+          vm.formMessages['acceptSuccess'] = true;
+        })
+        .catch(function(error) {
+          console.error('revision accept error!');
+          vm.formErrors[error.status] = true;
+        })
+        .finally(function (){
+          console.log('accept revision successful.');
+        });
+    };
 
-      ctrl.rejectChange = function() {
-        variantTalkModel.actions.rejectChange($stateParams.changeId)
-          .then(function(response) {
-            variantTalkModel.actions.getChanges($stateParams.variantId);
-          });
-      };
-
-      unwatch();
-    });
+    $scope.rejectRevision = function() {
+      vm.formErrors = {};
+      vm.formMessages = {};
+      VariantRevisions.rejectRevision($stateParams.variantId, $stateParams.revisionId)
+        .then(function(response) {
+          vm.formMessages['rejectSuccess'] = true;
+        })
+        .catch(function(error) {
+          console.error('revision reject error!');
+          vm.formErrors[error.status] = true;
+        })
+        .finally(function (){
+          console.log('reject revision successful.');
+        });
+    };
   }
 })();

@@ -73,8 +73,8 @@
     var variant = Variants.data.item;
 
     function init() {
-      baseState = 'events.variants.talk.revisions';
-      baseUrl = $state.href(baseUrl, $stateParams);
+      baseState = 'events.genes.summary.variants.talk.revisions';
+      baseUrl = $state.href(baseState, $stateParams);
 
       angular.copy({
         view: {
