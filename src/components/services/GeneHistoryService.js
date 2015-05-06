@@ -4,7 +4,7 @@
     .factory('GeneHistory', GeneHistoryService);
 
   function GeneHistoryResource($resource, $cacheFactory) {
-    var cache = $cacheFactory('genesHistoryCache');
+    var cache = $cacheFactory.get('$http');
 
     // adding this interceptor to a route will remove cached record
     var cacheInterceptor = function(response) {

@@ -5,7 +5,7 @@
 
   // @ngInject
   function GenesResource($resource, $cacheFactory) {
-    var cache = $cacheFactory('genesCache');
+    var cache = $cacheFactory.get('$http');
 
     var cacheResponseInterceptor = function(response) {
       console.log('cache removed within ResponseInterceptor', response.config.url);
@@ -213,7 +213,7 @@
 
   // @ngInject
   function GenesService(GenesResource, $q, $exceptionHandler, $cacheFactory) {
-    var genesCache = $cacheFactory.get('genesCache');
+    var cache = $cacheFactory.get('$http');
     // Base Gene and Gene Collection
     var item = {};
     var collection = [];
@@ -321,7 +321,7 @@
       return GenesResource.apply(reqObj).$promise.then(
         function(response) { // success
           // remove gene's cache record
-          genesCache.remove('/api/genes/' + response.id);
+          cache.remove('/api/genes/' + response.id);
           get(reqObj.geneId);
           return $q.when(response);
         },

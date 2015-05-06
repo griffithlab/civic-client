@@ -4,7 +4,7 @@
     .factory('GeneRevisions', GeneRevisionsService);
 
   function GeneRevisionsResource($resource, $cacheFactory) {
-    var cache = $cacheFactory('geneRevisionsCache');
+    var cache = $cacheFactory.get('$http');
 
     // adding this interceptor to a route will remove cached record
     var cacheResponseInterceptor = function(response) {
@@ -148,8 +148,7 @@
 
   function GeneRevisionsService(GeneRevisionsResource, Genes, $cacheFactory, $q) {
     // fetch genes cache, need to delete gene record when revision is submitted
-    var genesCache = $cacheFactory.get('genesCache');
-    var geneRevisionsCache = $cacheFactory.get('geneRevisionsCache');
+    var cache = $cacheFactory.get('$http');
 
     // Base Gene Revision and Gene Revisions Collection
     var item = {};
@@ -230,7 +229,7 @@
     function submitRevision(reqObj) {
       return GeneRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
-          geneRevisionsCache.remove('/api/genes/' + reqObj.id + '/suggested_changes');
+          cache.remove('/api/genes/' + reqObj.id + '/suggested_changes');
           return $q.when(response);
         },
         function(error) { //fail
@@ -241,11 +240,11 @@
     function acceptRevision(geneId, revisionId) {
       return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise.then(
         function(response) {
-          geneRevisionsCache.remove('/api/genes/' + geneId + '/suggested_changes');
-          queryFresh(geneId);
-          geneRevisionsCache.remove('/api/genes/' + geneId + '/suggested_changes/' + revisionId);
-          getFresh(geneId);
-          genesCache.remove('/api/genes/' + geneId );
+          cache.remove('/api/genes/' + geneId + '/suggested_changes');
+          query(geneId);
+          cache.remove('/api/genes/' + geneId + '/suggested_changes/' + revisionId);
+          get(geneId, revisionId);
+          cache.remove('/api/genes/' + geneId );
           Genes.get(geneId);
           return $q.when(response)
         },
@@ -256,9 +255,9 @@
     function rejectRevision(geneId, revisionId) {
       return GeneRevisionsResource.rejectRevision({ geneId: geneId, revisionId: revisionId }).$promise.then(
         function(response) {
-          geneRevisionsCache.remove('/api/genes/' + response.id + '/suggested_changes');
+          cache.remove('/api/genes/' + response.id + '/suggested_changes');
           queryFresh(geneId);
-          geneRevisionsCache.remove('/api/genes/' + response.id + '/suggested_changes/' + revisionId);
+          cache.remove('/api/genes/' + response.id + '/suggested_changes/' + revisionId);
           getFresh(geneId, revisionId);
           return $q.when(response);
         },
