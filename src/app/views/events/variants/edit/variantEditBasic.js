@@ -1,99 +1,134 @@
 (function() {
   'use strict';
   angular.module('civic.events.variants')
-    .controller('VariantEditController', VariantEditController)
-    .directive('variantEdit', variantEditDirective);
+    .directive('variantEditBasic', variantEditBasicDirective)
+    .controller('VariantEditBasicController', VariantEditBasicController);
 
   // @ngInject
-  function variantEditDirective() {
+  function variantEditBasicDirective() {
     return {
       restrict: 'E',
-      require: '^^entityView',
-      scope: false,
-      templateUrl: 'app/views/events/variants/edit/variantEditBasic.tpl.html',
-      link: variantEditLink,
-      controller: 'VariantEditController'
+      scope: {},
+      controller: 'VariantEditBasicController',
+      templateUrl: 'app/views/events/variants/edit/variantEditBasic.tpl.html'
     }
   }
 
   // @ngInject
-  function variantEditLink(scope, element, attributes, entityView) {
-    scope.variantModel= entityView.entityModel
-  }
+  function VariantEditBasicController($scope,
+                                   Security,
+                                   VariantRevisions,
+                                   Variants,
+                                   VariantHistory,
+                                   VariantsViewOptions,
+                                   formConfig) {
+    var variantModel, vm;
 
-  // @ngInject
-  function VariantEditController ($scope, Security) {
-    var unwatch = $scope.$watch('variantModel', function(variantModel){
-      var config = variantModel.config;
-      var ctrl = $scope.ctrl;
+    vm = $scope.vm = {};
+    variantModel = vm.variantModel = Variants;
 
-      ctrl.variant = variantModel.data.entity;
-      ctrl.variantEdit = angular.extend({}, ctrl.variant);
-      ctrl.variantEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
-      ctrl.variantModel = variantModel;
+    vm.isAdmin = Security.isAdmin();
+    vm.isAuthenticated = Security.isAuthenticated();
 
-      ctrl.styles = config.styles;
+    vm.variant = Variants.data.item;
+    vm.variantRevisions = VariantRevisions;
+    vm.variantHistory = VariantHistory;
+    vm.variantEdit = angular.copy(vm.variant);
+    vm.variantEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
+    vm.myVariantInfo = variantModel.data.myVariantInfo;
+    vm.variants = variantModel.data.variants;
+    vm.variantGroups = variantModel.data.variantGroups;
 
-      ctrl.user = {};
+    vm.styles = VariantsViewOptions.styles;
 
-      ctrl.variantFields = [
-        {
-          key: 'name',
-          type: 'input',
-          templateOptions: {
-            label: 'Name',
-            value: ctrl.variant.name
-          }
-        },
-        {
-          key: 'description',
-          type: 'textarea',
-          templateOptions: {
-            rows: 8,
-            label: 'Description',
-            value: 'ctrl.variant.description'
-          }
-        },
-        {
-          template: '<hr/>'
-        },
-        {
-          model: ctrl.variantEdit.comment,
-          key: 'title',
-          type: 'input',
-          templateOptions: {
-            label: 'Comment Title',
-            value: 'title'
-          }
-        },
-        {
-          model: ctrl.variantEdit.comment,
-          key: 'text',
-          type: 'textarea',
-          templateOptions: {
-            rows: 5,
-            label: 'Comment',
-            value: 'text'
-          }
+    vm.user = {};
+
+    vm.formErrors = {};
+    vm.formMessages = {};
+    vm.errorMessages = formConfig.errorMessages;
+    vm.errorPrompts = formConfig.errorPrompts;
+
+    vm.variantFields = [
+      {
+        key: 'name',
+        type: 'input',
+        templateOptions: {
+          label: 'Name',
+          disabled: true,
+          value: vm.variant.name
         }
-      ];
+      },
+      {
+        key: 'description',
+        type: 'textarea',
+        templateOptions: {
+          rows: 8,
+          label: 'Description',
+          value: 'vm.variant.description',
+          focus: true,
+          minLength: 32
+        }
+      },
+      {
+        template: '<hr/>'
+      },
+      {
+        model: vm.variantEdit.comment,
+        key: 'title',
+        type: 'input',
+        templateOptions: {
+          label: 'Comment Title',
+          value: 'title'
+        }
+      },
+      {
+        model: vm.variantEdit.comment,
+        key: 'text',
+        type: 'textarea',
+        templateOptions: {
+          rows: 5,
+          label: 'Comment',
+          value: 'text'
+        }
+      }
+    ];
 
-      ctrl.submit = function(variant) {
-        console.log('submitRevision clicked.');
-        variant.variantId = variant.id; // add variantId param for Variants service
-        $scope.ctrl.variantModel.services.Variants.submitChange(variant);
-      };
+    vm.submit = function(variantEdit, options) {
+      variantEdit.variantId = variantEdit.id;
+      vm.formErrors = {};
+      vm.formMessages = {};
+      VariantRevisions.submitRevision(variantEdit)
+        .then(function(response) {
+          console.log('revision submit success!');
+          vm.formMessages['submitSuccess'] = true;
+          // options.resetModel();
+        })
+        .catch(function(error) {
+          console.error('revision submit error!');
+          vm.formErrors[error.status] = true;
+        })
+        .finally(function(){
+          console.log('revision submit done!');
+        });
+    };
 
-      ctrl.apply = function(variant) {
-        console.log('applyRevision clicked.');
-        variant.variantId = variant.id;
-        $scope.ctrl.variantModel.services.Variants.applyChange(variant);
-      };
-
-      ctrl.isAdmin = Security.isAdmin;
-      // unbind watcher after first digest
-      unwatch();
-    }, true);
-
+    vm.apply = function(variantEdit, options) {
+      variantEdit.variantId = variantEdit.id;
+      vm.formErrors = {};
+      vm.formMessages = {};
+      Variants.apply(variantEdit)
+        .then(function(response) {
+          console.log('revision appy success!');
+          vm.formMessages['applySuccess'] = true;
+          // options.resetModel();
+        })
+        .catch(function(response) {
+          console.error('revision application error!');
+          vm.formErrors[response.status] = true;
+        })
+        .finally(function(){
+          console.log('revision apply done!');
+        });
+    };
   }
 })();

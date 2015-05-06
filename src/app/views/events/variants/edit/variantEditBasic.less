@@ -7,21 +7,34 @@
   .fullBleed();
   padding-top: @contentPadding;
 
-  //.edit-summary {
-  //  padding-bottom: @contentPadding;
-  //  border-bottom: 1px solid darken(@pageBackground2, 10%);
-  //}
-  //
-  //.edit-messages {
-  //  padding-top: @contentPadding;
-  //  background-color: @pageBackground;
-  //  border-bottom: 1px solid darken(@pageBackground2, 10%);
-  //  background-color: #EEE;
-  //}
-  //
-  //.edit-form {
-  //  background-color: @pageBackground;
-  //  padding-top: @contentPadding;
-  //  padding-bottom: @contentPadding;
-  //}
+
+  .edit-instructions  {
+    background-color: @pageBackground2;
+    border-radius: @border-radius-small;
+    padding: @contentPadding;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .edit-form {
+    .clearfix();
+    padding-top: @contentPadding;
+  }
+
+  .edit-errors, .edit-messages {
+    .alert {
+      margin-top: @contentPadding;
+      margin-bottom: @contentPadding;
+    }
+  }
+
+  .edit-errors {
+
+  }
+
+  .edit-messages {
+  }
+
+
 }

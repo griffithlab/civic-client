@@ -48,12 +48,13 @@
     var baseUrl = '';
     var baseState = '';
     var tabData = [];
+    var state = {};
     var styles = {};
 
     function init() {
       angular.copy($stateParams, this.state.baseParams);
       this.state.baseState = 'events.genes';
-      this.state.baseUrl = $state.href(baseUrl, $stateParams);
+      this.state.baseUrl = $state.href(this.state.baseState, $stateParams);
 
       angular.copy([
         {
