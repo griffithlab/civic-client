@@ -8,7 +8,7 @@
   // @ngInject
   function variantTalkConfig($stateProvider) {
     $stateProvider
-      .state('events.variants.talk', {
+      .state('events.genes.summary.variants.talk', {
         abstract: true,
         url: '/talk',
         templateUrl: 'app/views/events/variants/talk/VariantTalkView.tpl.html',
@@ -32,7 +32,7 @@
           navMode: 'sub'
         }
       })
-      .state('events.variants.talk.log', {
+      .state('events.genes.summary.variants.talk.log', {
         url: '/log',
         template: '<variant-talk-log></variant-talk-log>',
         data: {
@@ -40,7 +40,7 @@
           navMode: 'sub'
         }
       })
-      .state('events.variants.talk.comments', {
+      .state('events.genes.summary.variants.talk.comments', {
         url: '/comments',
         template: '<variant-talk-comments></variant-talk-comments>',
         data: {
@@ -66,18 +66,18 @@
       angular.copy([
         {
           heading: variant.name + ' Log',
-          route: baseState + '.log',
-          params: { variantId: variant.id }
+          route: this.state.baseState + '.log',
+          params: $stateParams
         },
         {
           heading: variant.name  + ' Comments',
-          route: baseState + '.comments',
-          params: { variantId: variant.id }
+          route: this.state.baseState + '.comments',
+          params: $stateParams
         },
         {
           heading: variant.name + ' Revisions',
-          route: baseState + '.revisions.list',
-          params: { variantId: variant.id }
+          route: this.state.baseState + '.revisions.list',
+          params: $stateParams
         }
       ], tabData);
 
@@ -87,7 +87,7 @@
           talkBackgroundColor: 'pageBackground'
         },
         tabs: {
-          tabRowBackground: 'pageBackground2Gradient'
+          tabRowBackground: 'pageBackgroundGradient'
         }
       }, styles);
     }

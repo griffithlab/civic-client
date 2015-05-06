@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('civic.events.genes')
+  angular.module('civic.events.variants')
     .controller('VariantTalkCommentsController', VariantTalkCommentsController)
     .directive('variantTalkComments', variantTalkCommentsDirective);
 
@@ -9,24 +9,17 @@
     return {
       restrict: 'E',
       scope: {},
-      require: '^^entityTalkView',
-      link: variantTalkCommentsLink,
       controller: 'VariantTalkCommentsController',
       templateUrl: 'app/views/events/variants/talk/variantTalkComments.tpl.html'
     }
   }
 
-  // @ngInject
-  function variantTalkCommentsLink(scope, element, attrs, variantTalkView) {
-    scope.variantTalkModel = variantTalkView.entityTalkModel;
-  }
 
   // @ngInject
-  function VariantTalkCommentsController($scope) {
+  function VariantTalkCommentsController($scope, Variants) {
     var ctrl = $scope.ctrl = {};
-    $scope.$watch('variantTalkModel', function(variantTalkModel) {
-      ctrl.variantTalkModel = variantTalkModel;
-    });
+
+    ctrl.variantTalkModel = Variants;
   }
 
 })();
