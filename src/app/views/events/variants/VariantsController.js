@@ -2,6 +2,7 @@
   'use strict';
   angular.module('civic.events.variants')
     .config(VariantsConfig)
+    .factory('VariantsViewOptions', VariantsViewOptions)
     .controller('VariantsController', VariantsController);
 
   // @ngInject
@@ -13,124 +14,86 @@
         templateUrl: 'app/views/events/variants/VariantsView.tpl.html',
         resolve: /* @ngInject */ {
           Variants: 'Variants',
-          variant: function(Variants, $stateParams) {
-            return Variants.get($stateParams.variantId);
-          },
-          evidenceItems: function(Variants, variant) {
-            return Variants.getEvidenceItems(variant.id);
+          initVariant: function(Variants, $stateParams) {
+            return Variants.initBase($stateParams.geneId);
           }
+
         },
         controller: 'VariantsController',
+        controllerAs: 'vm',
         deepStateRedirect: { params: ['variantId'] }
       })
       .state('events.genes.summary.variants.summary', {
         url: '/summary',
         template: '<variant-summary show-evidence-grid="true"></variant-summary>',
-        deepStateRedirect: { params: ['variantId'] },
+        resolve: {
+          refreshVariant: function(Variants, $stateParams) {
+            return Variants.getFresh($stateParams.geneId);
+          }
+        },
+        // deepStateRedirect: { params: ['variantId'] },
         data: {
           navMode: 'sub',
           titleExp: '"Variant " + variant.name'
-        }
-      })
-      .state('events.genes.summary.variants.edit', {
-        url: '/edit',
-        template: '<variant-edit></variant-edit>',
-        data: {
-          titleExp: '"Variant " + variant.name + " Edit"',
-          navMode: 'sub'
         }
       });
   }
 
   // @ngInject
-  function VariantsController($scope,
-                              $state,
-                              // resolved services
-                              Variants,
-                              variant,
-                              evidenceItems,
-                              // inherited resources
-                              Genes,
-                              gene) {
+  function VariantsViewOptions($state, $stateParams, Variants) {
+    var baseParams = {};
+    var baseUrl = '';
+    var baseState = '';
+    var tabData = [];
+    var styles = {};
 
-    var ctrl = $scope.ctrl;
-    var variantModel = ctrl.variantModel = {};
+    function init() {
+      angular.copy($stateParams, this.state.baseParams);
+      this.state.baseState = 'events.variants';
+      this.state.baseUrl = $state.href(baseUrl, $stateParams);
 
-    variantModel.config = {
-      type: 'variant',
-      name: variant.name,
-      state: {
-        baseState: 'events.genes.summary.variants',
-        baseUrl: $state.href('events.genes.summary.variants', { geneId: gene.id, variantId: variant.id })
-      },
-      tabData: [
+      angular.copy([
         {
           heading: 'Variant Summary',
-          route: 'events.genes.summary.variants.summary',
-          params: { geneId: gene.id, variantId: variant.id }
+          route: 'events.variants.summary',
+          params: { variantId: Variants.data.item.id }
         },
         {
           heading: 'Variant Talk',
-          route: 'events.genes.summary.variants.talk.log',
-          params: { geneId: gene.id, variantId: variant.id }
+          route: 'events.variants.talk.log',
+          params: { variantId: Variants.data.item.id }
         }
-      ],
-      styles: {
+      ], this.tabData);
+
+      angular.copy({
         view: {
-          backgroundColor: 'pageBackground',
-          foregroundColor: 'pageBackground2'
+          backgroundColor: 'pageBackground'
+        },
+        edit: {
+          summaryBackgroundColor: 'pageBackground2'
         }
-      }
-    };
+      }, this.styles);
+    }
 
-    variantModel.data = {
-      // required entity data fields
-      entity: variant,
-      id: variant.id,
-      comments: [],
-      changes: [],
-      revisions: [],
-      // additional entity data fields
-      evidenceItems: evidenceItems
-    };
-
-    variantModel.services = {
-      Variants: Variants,
-      Genes: Genes
-    };
-
-    variantModel.actions = {
-      get: function() {
-        return variant;
+    return {
+      init: init,
+      state: {
+        baseParams: baseParams,
+        baseState: baseState,
+        baseUrl: baseUrl
       },
-
-      update: function(reqObj) {
-        reqObj.variantId = variant.entrez_id;
-        Variants.update(reqObj);
-        this.refresh();
-      },
-
-      refresh: function () {
-        Variants.refresh(variant.entrez_id)
-          .then(function(response) {
-            variant = response;
-            return response;
-          })
-      },
-      submitChange: function(reqObj) {
-        reqObj.variantId = variant.entrez_id;
-        return Variants.submitChange(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-      acceptChange: function(changeId) {
-        return Variants.acceptChange({ variantId: variant.entrez_id, changeId: changeId })
-          .then(function(response) {
-            return response;
-          })
-      }
+      tabData: tabData,
+      styles: styles
     };
+  }
+
+  // @ngInject
+  function VariantsController(Variants, VariantsViewOptions) {
+    VariantsViewOptions.init();
+    // these will be passed to the entity-view directive controller, to be required by child entity component so that they
+    // can get references to the view model and view options
+    this.VariantsViewModel = Variants;
+    this.VariantsViewOptions = VariantsViewOptions;
   }
 
 })();

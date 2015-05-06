@@ -5,32 +5,19 @@
     .directive('variantSummary', function() {
       return {
         restrict: 'E',
-        require: '^^entityView',
         scope: {
           showEvidenceGrid: '='
         },
-        link: VariantSummaryLink,
         controller: 'VariantSummaryController',
         templateUrl: 'app/views/events/variants/summary/variantSummary.tpl.html'
       }
     });
 
-  function VariantSummaryLink(scope, element, attributes, entityView) {
-    scope.variantModel = entityView.entityModel;
-  }
-
   //@ngInject
-  function VariantSummaryController($scope) {
-    var ctrl = $scope.ctrl = {};
-    $scope.variantModel = {};
-
-    var unwatch = $scope.$watchCollection('variantModel', function(variantModel){
-      ctrl.variantModel = variantModel;
-      ctrl.variantDescription = variantModel.data.entity.description;
-      ctrl.showEvidenceGrid = $scope.showEvidenceGrid;
-
-      // unbind watcher after first digest
-      //unwatch();
-    }, true);
+  function VariantSummaryController($scope, Variants, VariantsViewOptions) {
+    $scope.variant = Variants.data.item;
+    $scope.evidence = Variants.data.evidence;
+    $scope.VariantsViewOptions = VariantsViewOptions;
+    $scope.backgroundColor = VariantsViewOptions.styles.view.backgroundColor;
   }
 })();

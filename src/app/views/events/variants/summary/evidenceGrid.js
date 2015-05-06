@@ -10,7 +10,7 @@
       restrict: 'E',
       replace: true,
       scope: {
-        variantModel: '='
+        evidence: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
@@ -98,11 +98,10 @@
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       // TODO: this watch seems unnecessary, but if it's not present then the grid only loads on a fresh page, fails when loaded by a state change
       // Something to do with directive priorities, maybe?
-      $scope.$watch('variantModel', function(variantModel) {
-        ctrl.variant = variantModel.data.entity;
+      $scope.$watch('evidence', function(evidence) {
         ctrl.gridApi = gridApi;
-        ctrl.evidenceGridOptions.minRowsToShow = ctrl.variant.evidence_items.length + 1;
-        ctrl.evidenceGridOptions.data = ctrl.variant.evidence_items;
+        ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
+        ctrl.evidenceGridOptions.data = evidence;
 
         gridApi.selection.on.rowSelectionChanged($scope, function(row){
           var params = _.merge($stateParams, { evidenceId: row.entity.id })

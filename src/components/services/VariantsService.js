@@ -249,7 +249,7 @@
 
     // Variant Collections
     function queryEvidence(variantId) {
-      return VariantsResource.queryVariants({variantId: variantId}).$promise
+      return VariantsResource.queryEvidence({variantId: variantId}).$promise
         .then(function(response) {
           angular.copy(response, evidence);
           return response.$promise;
