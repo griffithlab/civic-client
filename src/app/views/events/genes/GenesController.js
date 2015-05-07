@@ -48,7 +48,11 @@
     var baseUrl = '';
     var baseState = '';
     var tabData = [];
-    var state = {};
+    var state = {
+      baseParams: {},
+      baseState: '',
+      baseUrl: ''
+    };
     var styles = {};
 
     function init() {
@@ -90,11 +94,7 @@
 
     return {
       init: init,
-      state: {
-        baseParams: baseParams,
-        baseState: baseState,
-        baseUrl: baseUrl
-      },
+      state: state,
       tabData: tabData,
       styles: styles
     };

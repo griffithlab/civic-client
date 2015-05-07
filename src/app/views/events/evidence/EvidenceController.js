@@ -2,6 +2,7 @@
   'use strict';
   angular.module('civic.events.evidence')
     .config(EvidenceConfig)
+    .factory('EvidenceViewOptions', EvidenceViewOptions)
     .controller('EvidenceController', EvidenceController);
 
   // @ngInject
@@ -13,47 +14,47 @@
         templateUrl: 'app/views/events/evidence/EvidenceView.tpl.html',
         resolve: /* @ngInject */ {
           Evidence: 'Evidence',
-          evidence: function(Evidence, $stateParams) {
-            return Evidence.get($stateParams.evidenceId);
+          initEvidence: function(Evidence, $stateParams) {
+            return Evidence.initBase($stateParams.geneId);
           }
+
         },
         controller: 'EvidenceController',
+        controllerAs: 'vm',
         deepStateRedirect: { params: ['evidenceId'] }
       })
       .state('events.genes.summary.variants.summary.evidence.summary', {
         url: '/summary',
-        template: '<evidence-summary></evidence-summary>',
+        template: '<evidence-summary show-evidence-grid="true"></evidence-summary>',
+        resolve: {
+          refreshEvidence: function(Evidence, $stateParams) {
+            return Evidence.getFresh($stateParams.geneId);
+          }
+        },
+        // deepStateRedirect: { params: ['evidenceId'] },
         data: {
           navMode: 'sub',
-          titleExp: '"Evidence EID" + evidence.id'
+          titleExp: '"Evidence " + evidence.name'
         }
       });
   }
 
   // @ngInject
-  function EvidenceController($scope,
-                              $state,
-                              $stateParams,
-                              // resolved assets
-                              Evidence,
-                              evidence,
-                              // inherited resolved assets
-                              gene,
-                              variant) {
-    var ctrl,
-        evidenceModel;
+  function EvidenceViewOptions($state, $stateParams, Evidence) {
+    var tabData = [];
+    var state = {
+      baseParams: {},
+      baseState: '',
+      baseUrl: ''
+    };
+    var styles = {};
 
-    ctrl = $scope.ctrl = {};
-    evidenceModel = ctrl.evidenceModel = {};
+    function init() {
+      angular.copy($stateParams, this.state.baseParams);
+      this.state.baseState = 'events.genes.summary.variants.summary.evidence';
+      this.state.baseUrl = $state.href(this.state.baseState, $stateParams);
 
-    evidenceModel.config = {
-      type: 'evidence',
-      name: 'EID' + evidence.id,
-      state: {
-        baseState: 'events.genes.summary.evidences.summary.evidence',
-        baseUrl: $state.href('events.genes.summary.evidences.summary.evidence', $stateParams)
-      },
-      tabData: [
+      angular.copy([
         {
           heading: 'Evidence Summary',
           route: 'events.genes.summary.variants.summary.evidence.summary',
@@ -62,69 +63,35 @@
         {
           heading: 'Evidence Talk',
           route: 'events.genes.summary.variants.summary.evidence.talk.log',
-          params: { geneId: gene.id, variantId: variant.id, evidenceId: evidence.id }
+          params: $stateParams
         }
-      ],
-      styles: {
+      ], this.tabData);
+
+      angular.copy({
         view: {
-          backgroundColor: 'pageBackground2',
-          foregroundColor: 'pageBackground'
+          backgroundColor: 'pageBackground2'
+        },
+        edit: {
+          summaryBackgroundColor: 'pageBackground2'
         }
-      }
+      }, this.styles);
+    }
+
+    return {
+      init: init,
+      state: state,
+      tabData: tabData,
+      styles: styles
     };
+  }
 
-    evidenceModel.data = {
-      // required entity data fields
-      entity: evidence,
-      id: evidence.id,
-      comments: [],
-      changes: [],
-      revisions: [],
-
-      parentEntities: {
-        gene: gene,
-        variant: variant
-      }
-
-      // additional entity data fields
-    };
-
-    evidenceModel.services = {
-      Evidence: Evidence
-    };
-
-    evidenceModel.actions = {
-      get: function() {
-        return evidence;
-      },
-
-      update: function(reqObj) {
-        reqObj.evidenceId = evidence.id;
-        Evidence.update(reqObj);
-        this.refresh();
-      },
-
-      refresh: function () {
-        Evidence.refresh(evidence.id)
-          .then(function(response) {
-            evidence = response;
-            return response;
-          })
-      },
-      submitChange: function(reqObj) {
-        reqObj.evidenceId = evidence.id;
-        return Evidence.submitChange(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-      acceptChange: function(changeId) {
-        return Evidence.acceptChange({ evidenceId: evidence.id, changeId: changeId })
-          .then(function(response) {
-            return response;
-          })
-      }
-    };
+  // @ngInject
+  function EvidenceController(Evidence, EvidenceViewOptions) {
+    EvidenceViewOptions.init();
+    // these will be passed to the entity-view directive controller, to be required by child entity component so that they
+    // can get references to the view model and view options
+    this.EvidenceViewModel = Evidence;
+    this.EvidenceViewOptions = EvidenceViewOptions;
   }
 
 })();

@@ -101,11 +101,13 @@
       $scope.$watch('evidence', function(evidence) {
         ctrl.gridApi = gridApi;
         ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
-        evidence = _.map(evidence, function(item) { item.drugs = _.chain(item.drugs).pluck('name').value().join(", "); return item; })
+        evidence = _.map(evidence, function(item){
+          item.drugs = _.chain(item.drugs).pluck('name').value().join(", "); return item;
+        });
         ctrl.evidenceGridOptions.data = evidence;
 
         gridApi.selection.on.rowSelectionChanged($scope, function(row){
-          var params = _.merge($stateParams, { evidenceId: row.entity.id })
+          var params = _.merge($stateParams, { evidenceId: row.entity.id });
           $state.go('events.genes.summary.variants.summary.evidence.summary', params);
         });
 

@@ -1,16 +1,16 @@
 (function() {
-  'use strict';
   angular.module('civic.services')
     .factory('EvidenceResource', EvidenceResource)
     .factory('Evidence', EvidenceService);
 
   // @ngInject
   function EvidenceResource($resource, $cacheFactory) {
-    var cache = $cacheFactory('evidenceCache');
+    var cache = $cacheFactory.get('$http');
 
     var cacheInterceptor = function(response) {
+      console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(" "));
       cache.remove(response.config.url);
-      return response;
+      return response.$promise;
     };
 
     return $resource('/api/evidence_items/:evidenceId',
@@ -18,21 +18,15 @@
         evidenceId: '@evidenceId'
       },
       {
-        add: {
-          method: 'POST',
-          cache: cache
-        },
-        query: { // get a list of all evidence
+        // Base Evidence Resources
+        query: {
           method: 'GET',
+          isArray: true,
           cache: cache
         },
-        get: { // get a single variant
+        get: { // get a single evidence
           method: 'GET',
           isArray: false,
-          cache: cache
-        },
-        delete: { // get a single variant
-          method: 'DELETE',
           cache: cache
         },
         update: {
@@ -41,304 +35,294 @@
             response: cacheInterceptor
           }
         },
-        getComments: {
-          url: '/api/evidence_items/:evidenceId/comments',
+        delete: {
+          method: 'DELETE',
+          interceptor: {
+            response: cacheInterceptor
+          }
+        },
+        apply: {
+          method: 'PATCH'
+        },
+
+        // Base Evidence Refresh
+        queryFresh: { // get list of evidence
           method: 'GET',
-          isArray: true
+          isArray: true,
+          cache: false
+        },
+        getFresh: { // get evidence, force cache
+          method: 'GET',
+          isArray: false,
+          cache: false
+        },
+
+        // Evidence Comments Resources
+        queryComments: {
+          method: 'GET',
+          url: '/api/evidence_items/:evidenceId/comments',
+          isArray: true,
+          cache: cache
         },
         getComment: {
+          method: 'GET',
           url: '/api/evidence_items/:evidenceId/comments/:commentId',
           params: {
             evidenceId: '@evidenceId',
             commentId: '@commentId'
           },
-          method: 'GET',
-          isArray: false
+          isArray: false,
+          cache: cache
         },
+
         submitComment: {
+          method: 'POST',
           url: '/api/evidence_items/:evidenceId/comments',
           params: {
             evidenceId: '@evidenceId'
           },
-          method: 'POST'
+          cache: cache
         },
         updateComment: {
+          method: 'PATCH',
           url: '/api/evidence_items/:evidenceId/comments/:commentId',
           params: {
             evidenceId: '@evidenceId',
             commentId: '@commentId'
           },
-          method: 'PATCH'
+          interceptor: {
+            response: cacheInterceptor
+          }
         },
         deleteComment: {
+          method: 'DELETE',
           url: '/api/evidence_items/:evidenceId/comments/:commentId',
           params: {
             evidenceId: '@evidenceId',
             commentId: '@commentId'
           },
-          method: 'DELETE'
+          interceptor: {
+            response: cacheInterceptor
+          }
         },
-        getRevisions: {
-          url: '/api/evidence_items/:evidenceId/revisions',
+
+        // Evidence Comments Refresh
+        queryCommentsFresh: {
           method: 'GET',
-          isArray: true
+          url: 'api/evidence_items/:evidenceId/comments',
+          isArray: true,
+          cache: false
         },
-        getRevision: {
-          url: '/api/evidence_items/:evidenceId/revisions/:revisionId',
-          params: {
-            evidenceId: '@evidenceId',
-            revisionId: '@revisionId'
-          },
+        getCommentFresh: {
           method: 'GET',
-          isArray: false
-        },
-        getLastRevision: {
-          url: '/api/evidence_items/:evidenceId/revisions/last',
-          params: {
-            evidenceId: '@evidenceId'
-          },
-          method: 'GET',
-          isArray: false
-        },
-        submitChange: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes',
-          method: 'POST'
-        },
-        getChanges: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes',
-          method: 'GET',
-          isArray: true
-        },
-        getChange: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId',
+          url: '/api/evidence_items/:evidenceId/comments/:commentId',
           params: {
             evidenceId: '@evidenceId',
-            changeId: '@changeId'
-          },
-          method: 'GET',
-          isArray: false
-        },
-        acceptChange: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId/accept',
-          params: {
-            evidenceId: '@evidenceId',
-            changeId: '@changeId'
-          },
-          method: 'POST'
-        },
-        rejectChange: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId/reject',
-          params: {
-            evidenceId: '@evidenceId',
-            changeId: '@changeId'
-          },
-          method: 'POST'
-        },
-        addChangeComment: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId/comments',
-          params: {
-            evidenceId: '@evidenceId',
-            changeId: '@changeId'
-          },
-          method: 'POST'
-        },
-        updateChangeComment: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId/comments/:commentId',
-          params: {
-            evidenceId: '@evidenceId',
-            changeId: '@changeId',
             commentId: '@commentId'
           },
-          method: 'PATCH'
-        },
-        getChangeComments: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId/comments',
-          params: {
-            evidenceId: '@evidenceId',
-            changeId: '@changeId'
-          },
-          method: 'GET',
-          isArray: true
-        },
-        getChangeComment: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId/comments/:commentId',
-          params: {
-            evidenceId: '@evidenceId',
-            changeId: '@changeId',
-            commentId: '@commentId'
-          },
-          method: 'GET',
-          isArray: false
-        },
-        deleteChangeComment: {
-          url: '/api/evidence_items/:evidenceId/suggested_changes/:changeId/comments/:commentId',
-          params: {
-            evidenceId: '@evidenceId',
-            changeId: '@changeId',
-            commentId: '@commentId'
-          },
-          method: 'DELETE'
+          isArray: false,
+          cache: false
         }
-      });
+      }
+    )
   }
 
-  //ngInject
-  function EvidenceService(EvidenceResource) {
+  // @ngInject
+  function EvidenceService(EvidenceResource, $q, $exceptionHandler, $cacheFactory) {
+    var cache = $cacheFactory.get('$http');
+    // Base Evidence and Evidence Collection
+    var item = {};
+    var collection = [];
+    var comment = {};
+    var comments = [];
+
+    // Evidence Collections
+    var evidence = [];
+
     return {
-      // Evidence actions
-      add: function(reqObj) {
-        return EvidenceResource.add(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      delete: function(evidenceId) {
-        return EvidenceResource.delete({evidenceId: evidenceId}).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      get: function(evidenceId) {
-        return EvidenceResource.get({evidenceId: evidenceId}).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      query: function() {
-        return EvidenceResource.query().$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      update: function(reqObj) {
-        return EvidenceResource.update(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getEvidence: function(evidenceId) {
-        return EvidenceResource.getEvidence({evidenceId: evidenceId}).$promise
-          .then(function(response) {
-            return response;
-          });
+      initBase: initBase,
+      initComments: initComments,
+      data: {
+        item: item,
+        collection: collection,
+        comment: comment,
+        comments: comments
       },
 
-      // Evidence comments
-      submitComment: function(reqObj) {
-        return EvidenceResource.submitComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      updateComment: function(reqObj) {
-        return EvidenceResource.updateComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getComments: function(evidenceId) {
-        return EvidenceResource.getComments({evidenceId: evidenceId}).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getComment: function(reqObj) {
-        return EvidenceResource.getComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      deleteComment: function(reqObj) {
-        return EvidenceResource.deleteComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
+      // Evidence Base
+      query: query,
+      get: get,
+      update: update,
+      delete: deleteItem,
+      apply: apply,
 
-      // Evidence revisions
-      getRevisions: function(evidenceId) {
-        return EvidenceResource.getRevisions({evidenceId: evidenceId}).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getRevision: function(reqObj) {
-        return EvidenceResource.getRevision(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getLastRevision: function(evidence_id) {
-        return EvidenceResource.getLastRevision({evidenceId: evidence_id}).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
+      // Evidence Base Refresh
+      queryFresh: queryFresh,
+      getFresh: getFresh,
 
-      // Evidence suggested changes
-      submitChange: function(reqObj) {
-        return EvidenceResource.submitChange(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getChanges: function(evidenceId) {
-        return EvidenceResource.getChanges({evidenceId: evidenceId}).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getChange: function(reqObj) {
-        return EvidenceResource.getChange(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      acceptChange: function(reqObj) {
-        return EvidenceResource.acceptChange(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      rejectChange: function(reqObj) {
-        return EvidenceResource.rejectChange(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
+      // Evidence Comments
+      queryComments: queryComments,
+      getComment: getComment,
+      submitComment: submitComment,
+      updateComment: updateComment,
+      deleteComment: deleteComment,
 
-      // Evidence suggested changes comments
-      addChangeComment: function(reqObj) {
-        return EvidenceResource.addChangeComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      updateChangeComment: function(reqObj) {
-        return EvidenceResource.updateChangeComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getChangeComments: function(reqObj) {
-        return EvidenceResource.getChangeComments(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      getChangeComment: function(reqObj) {
-        return EvidenceResource.getChangeComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
-      },
-      deleteChangeComment: function(reqObj) {
-        return EvidenceResource.deleteChangeComment(reqObj).$promise
-          .then(function(response) {
-            return response;
-          });
+      // Evidence Comments Refresh
+      queryCommentsFresh: queryCommentsFresh,
+      getCommentFresh: getCommentFresh
+    };
+
+    function initBase(evidenceId) {
+      return $q.all([
+        get(evidenceId)
+      ])
+    }
+
+    function initComments(evidenceId) {
+      return $q.all([
+        queryComments(evidenceId)
+      ])
+    }
+    // Evidence Base
+    function query() {
+      return EvidenceResource.query().$promise
+        .then(function(response) {
+          angular.copy(response, collection);
+          return response.$promise;
+        });
+    }
+    function get(evidenceId) {
+      return EvidenceResource.get({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+    function update(reqObj) {
+      return EvidenceResource.update(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+    function deleteItem(evidenceId) {
+      return EvidenceResource.delete({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          item = null;
+          return response.$promise;
+        });
+    }
+    function apply(reqObj) {
+      return EvidenceResource.apply(reqObj).$promise.then(
+        function(response) { // success
+          // remove evidence's cache record
+          cache.remove('/api/evidence_items/' + response.id);
+          get(reqObj.evidenceId);
+          return $q.when(response);
+        },
+        function(error) { // fail
+          return $q.reject(error);
+        })
+    }
+
+    // Evidence Collections
+    function queryEvidence(evidenceId) {
+      return EvidenceResource.queryEvidence({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          angular.copy(response, evidence);
+          return response.$promise;
+        });
+    }
+
+    // Evidence Base Refresh
+    function queryFresh(evidenceId) {
+      return EvidenceResource.queryFresh({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          angular.copy(response, collection);
+          return response.$promise;
+        });
+    }
+    function getFresh(evidenceId) {
+      return EvidenceResource.getFresh({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    // Evidence Collections Refresh
+    function queryEvidenceFresh(evidenceId) {
+      return EvidenceResource.queryEvidenceFresh({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          angular.copy(response, evidence);
+          return response.$promise;
+        });
+    }
+
+    // Evidence Comments
+    function queryComments(evidenceId) {
+      return EvidenceResource.queryComments({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          angular.copy(response, comments);
+          return response.$promise;
+        });
+    }
+    function getComment(evidenceId, commentId) {
+      return EvidenceResource.getComment({evidenceId: evidenceId, commentId: commentId}).$promise
+        .then(function(response) {
+          angular.copy(response, comment);
+          return response.$promise;
+        });
+    }
+    function submitComment(reqObj) {
+      try {
+        if(!_.has(reqObj, 'evidenceId')) {
+          if(_.has(item, 'id')) { // check to see if we have a evidence with an id
+            _.merge(reqObj, { evidenceId: item.id });
+          } else {
+            throw new Error("No evidenceId supplied or found.");
+          }
+        }
+      } catch(e) {
+        $exceptionHandler(e.message, "EvidenceService:submitComment");
       }
+
+      return EvidenceResource.submitComment(reqObj).$promise
+        .then(function(response) {
+          queryCommentsFresh(reqObj.evidenceId);
+          return response.$promise;
+        });
+    }
+    function updateComment(reqObj) {
+      return EvidenceResource.updateComment(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response, comment);
+          getCommentFresh(reqObj);
+          return response.$promise;
+        });
+    }
+    function deleteComment(evidenceId, commentId) {
+      return EvidenceResource.deleteComment({evidenceId: evidenceId, commentId: commentId}).$promise
+        .then(function(response) {
+          comment = null;
+          return response.$promise;
+        });
+    }
+
+    // Evidence Comments Refresh
+    function queryCommentsFresh(evidenceId) {
+      return EvidenceResource.queryCommentsFresh({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          angular.copy(response, comments);
+          return response.$promise;
+        });
+    }
+    function getCommentFresh(evidenceId, commentId) {
+      return EvidenceResource.getCommentFresh({evidenceId: evidenceId, commentId: commentId}).$promise
+        .then(function(response) {
+          angular.copy(response   , comment);
+          return response.$promise;
+        });
     }
   }
-
 })();

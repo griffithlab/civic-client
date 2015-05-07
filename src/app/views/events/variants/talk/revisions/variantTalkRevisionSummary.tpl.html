@@ -6,7 +6,7 @@
   </div>
   <div class="row" ng-if="vm.isAdmin">
     <div class="col-xs-12">
-      <div class="revision-instructions" ng-if="vm.variantTalkModel.data.item.status != 'applied'">
+      <div class="revision-instructions" ng-if="vm.variantTalkModel.data.item.status != 'applied' ">
         <p>Accept or reject this revision by pressing either of the two buttons beneath the diffs.</p>
       </div>
       <div class="revision-instructions" ng-if="vm.variantTalkModel.data.item.status === 'applied' || vm.variantTalkModel.data.item.status === 'closed'">
