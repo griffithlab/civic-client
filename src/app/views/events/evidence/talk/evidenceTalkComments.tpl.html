@@ -10,14 +10,14 @@
           </ul>
         </div>
         <div ng-switch-default>
-          <p>No comments found for Evidence EID{{ ctrl.evidenceTalkModel.data.entity.id }}.</p>
+          <p>No Comments for Evidence Item {{ ctrl.evidenceTalkModel.data.item.name }}. You may add one below.</p>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 comment-form">
-      <entity-comment-form type="comment"></entity-comment-form>
+      <entity-comment-form type="entity" entity-model="ctrl.evidenceTalkModel"></entity-comment-form>
     </div>
   </div>
 </div>

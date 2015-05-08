@@ -60,7 +60,7 @@
     var evidence = Evidence.data.item;
 
     function init() {
-      baseState = 'events.evidence.talk';
+      baseState = 'events.genes.summary.variants.summary.evidence.talk';
       baseUrl = $state.href(baseUrl, $stateParams);
 
       angular.copy([
