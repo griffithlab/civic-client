@@ -1,0 +1,16 @@
+<div class="EvidenceEditView">
+  <entity-edit-view view-model="vm.EvidenceEditViewModel" revisions-model="vm.EvidenceRevisionsModel" view-options="vm.EvidenceTalkViewOptions">
+    <div class="row">
+      <div class="col-xs-12">
+        <evidence-summary></evidence-summary>
+      </div>
+    </div>
+    <div class="row entity-talk-content {{ vm.EvidenceEditViewOptions.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
+
+        </ui-view>
+      </div>
+    </div>
+  </entity-edit-view>
+</div>

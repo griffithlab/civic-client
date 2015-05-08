@@ -15,7 +15,7 @@
         resolve: /* @ngInject */ {
           Evidence: 'Evidence',
           initEvidence: function(Evidence, $stateParams) {
-            return Evidence.initBase($stateParams.geneId);
+            return Evidence.initBase($stateParams.evidenceId);
           }
 
         },

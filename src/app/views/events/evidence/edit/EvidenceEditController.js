@@ -8,7 +8,7 @@
   // @ngInject
   function evidenceEditConfig($stateProvider) {
     $stateProvider
-      .state('events.genes.summary.evidence.edit', {
+      .state('events.genes.summary.variants.summary.evidence.edit', {
         abstract: true,
         url: '/edit',
         templateUrl: 'app/views/events/evidence/edit/EvidenceEditView.tpl.html',
@@ -31,7 +31,7 @@
           navMode: 'sub'
         }
       })
-      .state('events.genes.summary.evidence.edit.basic', {
+      .state('events.genes.summary.variants.summary.evidence.edit.basic', {
         url: '/basic',
         template: '<evidence-edit-basic></evidence-edit-basic>',
         data: {

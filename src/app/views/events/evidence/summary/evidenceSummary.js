@@ -5,9 +5,7 @@
     .directive('evidenceSummary', function() {
       return {
         restrict: 'E',
-        scope: {
-          showEvidenceGrid: '='
-        },
+        scope: {},
         controller: 'EvidenceSummaryController',
         templateUrl: 'app/views/events/evidence/summary/evidenceSummary.tpl.html'
       }
