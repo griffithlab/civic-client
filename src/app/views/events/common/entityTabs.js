@@ -40,11 +40,20 @@
 
   // @ngInject
   function entityTabsLink(scope, element, attributes, entityView) {
+    var vm = scope.vm = {}; // todo convert the rest of this controller to vm
     var entityViewModel = scope.entityViewModel = entityView.entityViewModel;
     var entityViewOptions = scope.entityViewOptions = entityView.entityViewOptions;
 
-    scope.type = entityViewModel.data.item.type;
-    scope.name = entityViewModel.data.item.name;
+    vm.type = entityViewModel.data.item.type;
+    console.log('type initialized: ' + scope.type + '-------');
+    vm.name = entityViewModel.data.item.name;
+    console.log('name initialized: ' + scope.name);
+    scope.$watch('name', function(name) {
+      console.log('name changed: ' + name);
+    });
+    scope.$watch('type', function(type) {
+      console.log('type changed: ' + scope.type);
+    });
     scope.showCorner = (scope.type === 'variant' || scope.type === 'variant group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
     scope.tabs = entityViewOptions.tabData;

@@ -46,10 +46,16 @@
     var baseUrl = '';
     var baseState = '';
     var styles = {};
+    var state = {
+      baseParams: baseParams,
+      baseState: baseState,
+      baseUrl: baseUrl
+    };
 
     function init() {
-      baseState = 'events.genes.summary.variants.edit';
-      baseUrl = $state.href(baseUrl, $stateParams);
+      angular.copy($stateParams, this.state.baseParams);
+      this.state.baseState = 'events.genes.summary.variants.edit';
+      this.state.baseUrl = $state.href(this.state.baseUrl, $stateParams);
 
       angular.copy({
         view: {
@@ -65,11 +71,7 @@
 
     return {
       init: init,
-      state: {
-        baseParams: $stateParams,
-        baseState: baseState,
-        baseUrl: baseUrl
-      },
+      state: state,
       styles: styles
     };
   }

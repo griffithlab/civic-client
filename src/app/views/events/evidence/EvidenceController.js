@@ -26,11 +26,11 @@
       .state('events.genes.summary.variants.summary.evidence.summary', {
         url: '/summary',
         template: '<evidence-summary show-evidence-grid="true"></evidence-summary>',
-        resolve: {
-          refreshEvidence: function(Evidence, $stateParams) {
-            return Evidence.getFresh($stateParams.geneId);
-          }
-        },
+        //resolve: {
+        //  refreshEvidence: function(Evidence, $stateParams) {
+        //    return Evidence.getFresh($stateParams.geneId);
+        //  }
+        //},
         // deepStateRedirect: { params: ['evidenceId'] },
         data: {
           navMode: 'sub',

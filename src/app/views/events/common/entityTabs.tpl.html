@@ -3,8 +3,8 @@
     <div class="detail-corner" ng-show="showCorner"><div class="corner-edge"></div></div>
     <div class="col-xs-6 name">
       <h3 editable-field class="edit-icon-lg tab-name" entity-view-model="entityViewModel" entity-view-options="entityViewOptions">
-         <span ng-bind="type" class="entity-type">Entity</span>
-         <span ng-bind="name" class="entity-name">Name</span>
+        <span ng-bind="entityViewModel.data.item.type" class="entity-type">Entity</span>
+        <span ng-bind="entityViewModel.data.item.name" class="entity-name">Name</span>
       </h3>
     </div>
     <div class="col-xs-6 tabs {{ viewBackground }}">
@@ -22,4 +22,12 @@
       </tabset>
     </div>
   </div>
+  <!--<div ng-if="vm.type === 'evidence'">-->
+    <!--<div class="row">-->
+      <!--<div class="col-xs-12">-->
+        <!--<pre ng-bind="vm.name"></pre>-->
+        <!--<pre ng-bind="entityViewModel|json"></pre>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

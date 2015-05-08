@@ -26,18 +26,18 @@
   }
 
   // @ngInject
-  function EditableFieldController($scope, $state, $log, _) {
+  function EditableFieldController($scope, $state) {
     var ctrl = $scope.ctrl = {};
-    var baseState = '';
-    var stateParams = {};
+    ctrl.baseState = '';
+    ctrl.stateParams = {};
 
-    baseState  = $scope.entityViewOptions.state.baseState;
-    stateParams = $scope.entityViewOptions.state.params;
-    ctrl.entityModel = $scope.entityModel;
+    ctrl.baseState  = $scope.entityViewOptions.state.baseState;
+    ctrl.gstateParams = $scope.entityViewOptions.state.params;
+    ctrl.entityViewModel = $scope.entityViewModel;
 
-    ctrl.active = $state.includes(baseState + '.edit.*');
+    ctrl.active = $state.includes(ctrl.baseState + '.edit.*');
     $scope.$on('$stateChangeSuccess', function() {
-      ctrl.active = $state.includes(baseState + '.edit.*');
+      ctrl.active = $state.includes(ctrl.baseState + '.edit.*');
     });
 
     ctrl.mouseOver = function() {
@@ -49,7 +49,7 @@
     };
 
     ctrl.click = function() {
-      $state.go(baseState + '.edit.basic', stateParams);
+      $state.go(ctrl.baseState + '.edit.basic', ctrl.stateParams);
     }
 
   }
