@@ -1,41 +1,42 @@
 (function() {
   'use strict';
   angular.module('civic.events.evidence')
-    .config(evidenceTalkViewConfig)
-    .controller('EvidenceTalkViewController', EvidenceTalkViewController);
+    .config(evidenceTalkConfig)
+    .factory('EvidenceTalkViewOptions', EvidenceTalkViewOptions)
+    .controller('EvidenceTalkController', EvidenceTalkController);
 
   // @ngInject
-  function evidenceTalkViewConfig($stateProvider) {
+  function evidenceTalkConfig($stateProvider) {
     $stateProvider
       .state('events.genes.summary.variants.summary.evidence.talk', {
+        abstract: true,
         url: '/talk',
         templateUrl: 'app/views/events/evidence/talk/EvidenceTalkView.tpl.html',
-        controller: 'EvidenceTalkViewController',
+        controller: 'EvidenceTalkController',
+        controllerAs: 'vm',
         resolve: {
-          comments: function(Evidence, evidence) {
-            return Evidence.getComments(evidence.id);
-          },
-          changes: function(Evidence, evidence) {
-            return Evidence.getChanges(evidence.id);
-          },
-          revisions: function(Evidence, evidence) {
-            return Evidence.getRevisions(evidence.id);
-          },
-          lastRevision: function(Evidence, evidence) {
-            return Evidence.getLastRevision(evidence.id);
+          EvidenceRevisions: 'EvidenceRevisions',
+          EvidenceHistory: 'EvidenceHistory',
+          initEvidenceTalk: function(Evidence, EvidenceRevisions, EvidenceHistory, $stateParams, $cacheFactory, $q) {
+            var evidenceId = $stateParams.evidenceId;
+            return $q.all([
+              Evidence.initComments(evidenceId),
+              EvidenceRevisions.initRevisions(evidenceId),
+              EvidenceHistory.initBase(evidenceId)
+            ]);
           }
         },
-        deepStateRedirect: true,
+        deepStateRedirect: [ 'evidenceId' ],
         data: {
-          titleExp: '"Evidence EID" + evidence.id + " Talk"',
+          titleExp: '"Evidence " + evidence.name + " Talk"',
           navMode: 'sub'
         }
       })
       .state('events.genes.summary.variants.summary.evidence.talk.log', {
-        url: '/log', // transition to events.genes.talk abstract state defaults to this state
+        url: '/log',
         template: '<evidence-talk-log></evidence-talk-log>',
         data: {
-          titleExp: '"Evidence EID" + evidence.id + " Log"',
+          titleExp: '"Evidence " + evidence.name + " Log"',
           navMode: 'sub'
         }
       })
@@ -43,218 +44,73 @@
         url: '/comments',
         template: '<evidence-talk-comments></evidence-talk-comments>',
         data: {
-          titleExp: '"Evidence EID" + evidence.id + " Comments"',
-          navMode: 'sub'
-        }
-      })
-      .state('events.genes.summary.variants.summary.evidence.talk.revisions', {
-        url: '/revisions/:changeId',
-        template: '<evidence-talk-revisions></evidence-talk-revisions>',
-        data: {
-          titleExp: '"Evidence " + gene.name + " Revisions"',
-          navMode: 'sub'
-        }
-      })
-      .state('events.genes.summary.variants.summary.evidence.talk.revisions.summary', {
-        url: '/summary',
-        template: '<evidence-talk-revision-summary></evidence-talk-revision-summary>',
-        data: {
-          titleExp: '"Evidence " + gene.name + " Revision Summary"',
+          titleExp: '"Evidence " + evidence.name + " Comments"',
           navMode: 'sub'
         }
       });
   }
 
   // @ngInject
-  function EvidenceTalkViewController($scope,
-                                      $state,
-                                      $stateParams,
+  function EvidenceTalkViewOptions($state, $stateParams, Evidence) {
+    var baseUrl = '';
+    var baseState = '';
+    var tabData = [];
+    var styles = {};
 
-                                      // resolved resources
-                                      comments,
-                                      changes,
-                                      revisions,
-                                      lastRevision,
+    var evidence = Evidence.data.item;
 
-                                      // inherited resolved resources
-                                      Evidence,
-                                      gene,
-                                      variant,
-                                      evidence) {
-    console.log('VariantsTalkController called.');
-    var ctrl = $scope.ctrl = {};
-    var evidenceTalkModel = ctrl.evidenceTalkModel = {};
+    function init() {
+      baseState = 'events.evidence.talk';
+      baseUrl = $state.href(baseUrl, $stateParams);
 
-    evidenceTalkModel.config = {
-      type: 'evidence',
-      name: evidence.id,
-      service: Evidence,
-      state: {
-        baseState: 'events.genes.summary.variants.summary.evidence.talk',
-        baseUrl: $state.href('events.genes.summary.variants.summary.evidence.talk', $stateParams)
-      },
-      styles: {
+      angular.copy([
+        {
+          heading: evidence.name + ' Log',
+          route: baseState + '.log',
+          params: { evidenceId: evidence.id }
+        },
+        {
+          heading: evidence.name  + ' Comments',
+          route: baseState + '.comments',
+          params: { evidenceId: evidence.id }
+        },
+        {
+          heading: evidence.name + ' Revisions',
+          route: baseState + '.revisions.list',
+          params: { evidenceId: evidence.id }
+        }
+      ], tabData);
+
+      angular.copy({
         view: {
-          summaryBackgroundColor: 'pageBackground2',
+          summaryBackgroundColor: 'pageBackground',
           talkBackgroundColor: 'pageBackground'
         },
         tabs: {
           tabRowBackground: 'pageBackground2Gradient'
         }
-      },
-      tabData: [
-        {
-          heading: 'EID'+ evidence.id + ' Log',
-          route: 'events.genes.summary.variants.summary.evidence.talk.log',
-          params: { geneId: gene.id, variantId: variant.id, evidenceId: evidence.id }
-        },
-        {
-          heading: 'EID'+ evidence.id + ' Comments',
-          route: 'events.genes.summary.variants.summary.evidence.talk.comments',
-          params: { geneId: gene.id, variantId: variant.id, evidenceId: evidence.id }
-        },
-        {
-          heading: 'EID'+ evidence.id + ' Revisions',
-          route: 'events.genes.summary.variants.summary.evidence.talk.revisions',
-          params: { geneId: gene.id, variantId: variant.id, evidenceId: evidence.id }
-        }
-      ]
-    };
-
-    evidenceTalkModel.data = {
-      entity: evidence,
-      id: evidence.id,
-      parent: variant,
-      parentId: variant.id,
-      comments: comments,
-      changes: changes,
-      change: {},
-      changeComments: [],
-      revisions: revisions,
-      lastRevision: lastRevision
-    };
-
-    evidenceTalkModel.actions = {
-      getComments: function() {
-        return Evidence.getComments(evidence.id)
-          .then(function(response) {
-            evidenceTalkModel.data.comments = response;
-            return response;
-          });
-      },
-
-      getComment: function(commentId) {
-        return Evidence.getComment(evidence.id, commentId);
-      },
-
-      submitComment: function(reqObj) {
-        reqObj.evidenceId = evidence.id;
-        return Evidence.submitComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-
-      updateComment: function(reqObj) {
-        reqObj.evidenceId = evidence.id;
-        return Evidence.updateComment(reqObj)
-          .then(function(response){
-            return response;
-          });
-      },
-
-      deleteComment: function(commentId) {
-        return Evidence.deleteComment({ evidenceId: evidence.id, commentId: commentId })
-          .then(function(response) {
-            return response;
-          });
-      },
-
-      getChanges: function() {
-        return Evidence.getChanges(evidence.id)
-          .then(function(response) {
-            evidenceTalkModel.data.changes = response;
-            return response;
-          });
-      },
-
-      getChange: function(changeId) {
-        return Evidence.getChange({ evidenceId: evidence.id, changeId: changeId })
-          .then(function(response) {
-            evidenceTalkModel.data.change = response;
-            return response;
-          })
-      },
-
-      rejectChange: function(changeId) {
-        return Evidence.rejectChange({ evidenceId: evidence.id, changeId: changeId })
-          .then(function(response) {
-            return response;
-          })
-      },
-
-      submitChangeComment: function(changeId, comment) {
-        var reqObj = comment;
-        reqObj.evidenceId = evidence.id;
-        reqObj.changeId = changeId;
-        return Evidence.submitChangeComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-      updateChangeComment: function(reqObj) {
-        reqObj.evidenceId = evidence.id;
-        return Evidence.updateChangeComment(reqObj)
-          .then(function(response) {
-            return response;
-          });
-      },
-      getChangeComments: function(changeId) {
-        return Evidence.getChangeComments({evidenceId: evidence.id, changeId: changeId})
-          .then(function(response) {
-            evidenceTalkModel.data.changeComments = response;
-            return response;
-          })
-      },
-      getChangeComment: function(changeId, commentId) {
-        return Evidence.getChangeComment({
-          evidenceId: evidence.id,
-          changeId: changeId,
-          commentId: commentId
-        }).then(function(response){
-          return response;
-        });
-      },
-      deleteChangeComment: function(changeId, commentId) {
-        return Evidence.deleteChangeComment({
-          evidenceId: evidence.id,
-          changeId: changeId,
-          commentId: commentId
-        }).then(function(response){
-          return response;
-        });
-      },
-
-      getRevisions: function() {
-        return Evidence.getRevisions(evidence.id)
-          .then(function(response) {
-            evidenceTalkModel.data.revisions = response;
-            return response;
-          });
-      },
-      getRevision: function(revisionId) {
-        return Evidence.getRevision({ evidenceId: evidence.id, revisionId: revisionId })
-          .then(function(response) {
-            return response;
-          });
-      },
-      getLastRevision: function() {
-        return Evidence.getLastRevision({ evidenceId: evidence.id })
-          .then(function(response) {
-            return response;
-          });
-      }
+      }, styles);
     }
+
+    return {
+      init: init,
+      state: {
+        baseParams: $stateParams,
+        baseState: baseState,
+        baseUrl: baseUrl
+      },
+      tabData: tabData,
+      styles: styles
+    };
+  }
+
+  // @ngInject
+  function EvidenceTalkController(Evidence, EvidenceRevisions, EvidenceTalkViewOptions) {
+    console.log('EvidenceTalkController called.');
+    EvidenceTalkViewOptions.init();
+    this.EvidenceTalkViewModel = Evidence; // we're re-using the Evidence model here but could in the future have a EvidenceTalk model if warranted
+    this.EvidenceRevisionsModel = EvidenceRevisions;
+    this.EvidenceTalkViewOptions = EvidenceTalkViewOptions;
   }
 
 })();

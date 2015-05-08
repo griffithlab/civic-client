@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('civic.events.genes')
+  angular.module('civic.events.evidence')
     .controller('EvidenceTalkLogController', EvidenceTalkLogController)
     .directive('evidenceTalkLog', evidenceTalkLogDirective);
 
@@ -9,7 +9,6 @@
     return {
       restrict: 'E',
       scope: {},
-      require: '^^entityTalkView',
       link: evidenceTalkLogLink,
       controller: 'EvidenceTalkLogController',
       templateUrl: 'app/views/events/evidence/talk/evidenceTalkLog.tpl.html'
@@ -17,19 +16,24 @@
   }
 
   // @ngInject
-  function evidenceTalkLogLink(scope, element, attrs, entityTalkView) {
-    scope.entityTalkModel = entityTalkView.entityTalkModel;
+  function evidenceTalkLogLink(scope, element, attrs) {
+
   }
 
   // @ngInject
-  function EvidenceTalkLogController($scope, _) {
+  function EvidenceTalkLogController($scope, _,
+                                 Evidence,
+                                 EvidenceRevisions,
+                                 EvidenceHistory) {
     var ctrl = $scope.ctrl = {}; // create ctrl here, link function will attach entityTalkView after DOM rendered.
-    var comments, revisions, changes;
-
-    var unwatch = $scope.$watch('entityTalkModel', function(entityTalkModel) {
-      comments = _.merge({}, entityTalkModel.data.comments);
-      revisions = _.merge({}, entityTalkModel.data.revisions);
-      changes = _.merge({}, entityTalkModel.data.changes);
+    var comments, revisions, history;
+    $scope.comments = Evidence.data.comments;
+    $scope.revisions = EvidenceRevisions.data.collection;
+    $scope.history = EvidenceHistory.data.collection;
+    $scope.$watchCollection('[comments, revisions, history]', function(collections) {
+      comments = _.merge({}, collections[0]);
+      revisions = _.merge({}, collections[1]);
+      history = _.merge({}, collections[2]);
 
       comments = _.map(comments, function(comment) {
         comment.type = 'comment';
@@ -41,13 +45,14 @@
         return revision;
       });
 
-      changes = _.map(changes, function(change) {
-        change.type='change'
+      history = _.map(history, function(change) {
+        change.type='history'
         return change;
       });
 
+
       // concatenate event arrays, sort by date descending
-      ctrl.logItems = comments.concat(revisions, changes);
+      ctrl.logItems = comments.concat(revisions, history);
       ctrl.logItems = _.chain(ctrl.logItems)
         .map(function(item) {
           // revisions can have an .user attribute that's just a string
@@ -61,9 +66,6 @@
         })
         .reverse()
         .value();
-      unwatch(); // bind once then unwatch
     });
   }
-
-
 })();
