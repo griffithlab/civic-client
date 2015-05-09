@@ -1,4 +1,5 @@
 (function() {
+
   angular.module('civic.services')
     .factory('EvidenceRevisionsResource', EvidenceRevisionsResource)
     .factory('EvidenceRevisions', EvidenceRevisionsService);
@@ -199,6 +200,7 @@
     }
 
     function initRevisions(evidenceId) {
+      console.log('EvidenceRevisionsService.initRevisions called.');
       return $q.all([
         query(evidenceId)
       ])

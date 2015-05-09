@@ -2,31 +2,22 @@
   'use strict';
   angular.module('civic.events.evidence')
     .controller('EvidenceTalkRevisionsController', EvidenceTalkRevisionsController)
-    .directive('evidenceTalkRevisions', evidenceTalkRevisionsDirective);
+    .directive('evidenceTalkRevisions', EvidenceTalkRevisionsDirective);
 
   // @ngInject
-  function evidenceTalkRevisionsDirective() {
+  function EvidenceTalkRevisionsDirective() {
     return {
       restrict: 'E',
       scope: {},
-      require: '^^entityTalkView',
-      link: evidenceTalkRevisionsLink,
       controller: 'EvidenceTalkRevisionsController',
-      templateUrl: 'app/views/events/evidence/talk/evidenceTalkRevisions.tpl.html'
+      templateUrl: 'app/views/events/evidence/talk/revisions/evidenceTalkRevisions.tpl.html'
     }
   }
 
   // @ngInject
-  function evidenceTalkRevisionsLink(scope, element, attrs, entityTalkView) {
-    scope.evidenceTalkModel = entityTalkView.entityTalkModel;
-  }
-
-  // @ngInject
-  function EvidenceTalkRevisionsController($scope) {
-    var ctrl = $scope.ctrl = {};
-    $scope.$watch('evidenceTalkModel', function(evidenceTalkModel) {
-      ctrl.evidenceTalkModel = evidenceTalkModel;
-    });
+  function EvidenceTalkRevisionsController($scope, EvidenceRevisions, EvidenceTalkViewOptions) {
+    $scope.evidenceRevisions = EvidenceRevisions;
+    $scope.viewOptions = EvidenceTalkViewOptions;
   }
 
 })();

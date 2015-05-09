@@ -45,7 +45,7 @@
           navMode: 'sub'
         }
       })
-      .state('events.genes.summary.variants.summary.evidence.talk.revisions.list.summary', {
+      .state('events.genes.summary.variants.summary.evidence.talk.revisions.summary', {
         url: '/summary',
         template: '<evidence-talk-revision-summary></evidence-talk-revision-summary>',
         resolve: {
@@ -73,7 +73,7 @@
     var evidence = Evidence.data.item;
 
     function init() {
-      baseState = 'events.genes.summary.variants.summary.evidence.talk.revisions';
+      baseState = 'events.evidence.talk.revisions';
       baseUrl = $state.href(baseUrl, $stateParams);
 
       angular.copy({
@@ -99,9 +99,9 @@
   }
 
   // @ngInject
-  function EvidenceTalkRevisionsController(Evidence, EvidenceRevisions, EvidenceTalkRevisionsRevisionsViewOptions) {
-    console.log('EvidenceTalkRevisionsRevisionsController called.');
-    EvidenceTalkRevisionsRevisionsViewOptions.init();
+  function EvidenceTalkRevisionsController(Evidence, EvidenceRevisions, EvidenceTalkRevisionsViewOptions) {
+    console.log('EvidenceTalkRevisionsController called.');
+    EvidenceTalkRevisionsViewOptions.init();
     this.EvidenceRevisionsModel = EvidenceRevisions;
     this.EvidenceTalkRevisionsViewOptions = EvidenceTalkRevisionsViewOptions;
   }
