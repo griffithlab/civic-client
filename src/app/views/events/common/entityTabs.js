@@ -54,7 +54,7 @@
     scope.$watch('type', function(type) {
       console.log('type changed: ' + scope.type);
     });
-    scope.showCorner = (scope.type === 'variant' || scope.type === 'variant group');
+    scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
     scope.tabs = entityViewOptions.tabData;
 

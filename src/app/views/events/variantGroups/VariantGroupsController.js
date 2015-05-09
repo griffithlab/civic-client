@@ -2,6 +2,7 @@
   'use strict';
   angular.module('civic.events.variantGroups')
     .config(VariantGroupsConfig)
+    .factory('VariantGroupsViewOptions', VariantGroupsViewOptions)
     .controller('VariantGroupsController', VariantGroupsController);
 
   // @ngInject
@@ -9,121 +10,103 @@
     $stateProvider
       .state('events.genes.summary.variantGroups', {
         abstract: true,
-        url: '/variant_groups/:variantGroupId',
+        url: '/variantGroups/:variantGroupId',
         templateUrl: 'app/views/events/variantGroups/VariantGroupsView.tpl.html',
         resolve: /* @ngInject */ {
           VariantGroups: 'VariantGroups',
-          variantGroup: function(VariantGroups, $stateParams) {
-            return VariantGroups.get($stateParams.variantGroupId);
+          initVariantGroups: function(VariantGroups, $stateParams) {
+            return VariantGroups.initBase($stateParams.variantGroupId);
           }
         },
         controller: 'VariantGroupsController',
-        deepStateRedirect: { params: ['variantGroupId'] }
+        controllerAs: 'vm',
+        deepStateRedirect: [ 'variantGroupId' ],
+        onExit: /* @ngInject */ function($deepStateRedirect) {
+          $deepStateRedirect.reset();
+        }
       })
       .state('events.genes.summary.variantGroups.summary', {
         url: '/summary',
-        template: '<variant-group-summary></variant-group-summary>',
+        template: '<variant-group-summary show-variant-grid="true"></variant-group-summary>',
+        resolve: {
+          VariantGroups: 'VariantGroups',
+          refreshVariantGroups: function(VariantGroups, $stateParams) {
+            return VariantGroups.getFresh($stateParams.variantGroupId);
+          }
+        },
+        deepStateRedirect: [ 'variantGroupId' ],
         data: {
-          titleExp: '"Variant Group " + variantGroup.name',
-          navMode: 'sub'
-        }
-      })
-      .state('events.genes.summary.variantGroups.edit', {
-        url: '/edit',
-        template: '<variant-group-edit></variant-group-edit>',
-        data: {
-          titleExp: '"Variant Group " + variantGroup.name',
+          titleExp: '"VariantGroups " + variantGroup.name + " Summary"',
           navMode: 'sub'
         }
       });
   }
 
   // @ngInject
-  function VariantGroupsController($scope,
-                                   $state,
-                                   $stateParams,
-                                   // resolved assets
-                                   VariantGroups,
-                                   variantGroup,
-                                   // inherited resolved assets
-                                   gene) {
-    var ctrl,
-        variantGroupModel,
-        baseState,
-        baseUrl;
+  function VariantGroupsViewOptions($state, $stateParams, VariantGroups) {
+    var baseParams = {};
+    var baseUrl = '';
+    var baseState = '';
+    var tabData = [];
+    var state = {
+      baseParams: {},
+      baseState: '',
+      baseUrl: ''
+    };
+    var styles = {};
 
-    ctrl = $scope.ctrl = {};
-    variantGroupModel = ctrl.variantGroupModel = {};
-    baseState = 'events.genes.summary.variantGroups';
-    baseUrl = $state.href('events.genes.summary.variantGroups', {
-      geneId: gene.id,
-      variantGroupId: variantGroup.id
-    });
+    function init() {
+      angular.copy($stateParams, this.state.baseParams);
+      this.state.baseState = 'events.genes.summary.variantGroups';
+      this.state.baseUrl = $state.href(this.state.baseState, $stateParams);
 
-    variantGroupModel.config = {
-      type: 'variant group',
-      name: variantGroup.name,
-      state: {
-        baseState: 'events.genes.summary.variantGroups',
-        stateParams: $stateParams,
-        baseUrl: $state.href('events.genes.summary.variantGroups', $stateParams)
-      },
-      tabData: [
+      angular.copy([
         {
-          heading: 'Variant Group Summary',
+          heading: 'VariantGroups Summary',
           route: 'events.genes.summary.variantGroups.summary',
-          params: { geneId: gene.id }
+          params: { variantGroupId: VariantGroups.data.item.id }
         },
         {
-          heading: 'Variant Group Talk',
+          heading: 'VariantGroups Talk',
           route: 'events.genes.summary.variantGroups.talk.log',
-          params: { geneId: gene.id }
+          params: { variantGroupId: VariantGroups.data.item.id }
         }
-      ],
-      styles: {
+      ], this.tabData);
+
+      angular.copy({
         view: {
-          backgroundColor: 'pageBackground'
+          backgroundColor: 'pageBackground2'
         },
         summary: {
-          backgroundColor: 'pageBackground'
+          backgroundColor: 'pageBackground2'
+        },
+        myVariantGroupsInfo: {
+          backgroundColor: 'pageBackground2'
+        },
+        variantMenu: {
+          backgroundColor: 'pageBackground2'
         },
         edit: {
           summaryBackgroundColor: 'pageBackground2'
         }
-      }
+      }, this.styles);
+    }
+
+    return {
+      init: init,
+      state: state,
+      tabData: tabData,
+      styles: styles
     };
+  }
 
-    variantGroupModel.data = {
-      // required entity data fields
-      entity: variantGroup,
-      id: variantGroup.id,
-      comments: [],
-      changes: [],
-      revisions: [],
-
-      // additional entity data
-      variants: variantGroup.variants
-    };
-
-    variantGroupModel.actions = {
-      get: function() {
-        return variantGroup;
-      },
-
-      update: function(reqObj) {
-        reqObj.variantGroupId = variantGroup.id;
-        VariantGroups.update(reqObj);
-        this.refresh();
-      },
-
-      refresh: function () {
-        VariantGroups.refresh(variantGroup.id)
-          .then(function(response) {
-            variantGroup = response;
-            return response;
-          })
-      }
-    };
+  // @ngInject
+  function VariantGroupsController(VariantGroups, VariantGroupsViewOptions) {
+    VariantGroupsViewOptions.init();
+    // these will be passed to the entity-view directive controller, to be required by child entity component so that they
+    // can get references to the view model and view options
+    this.VariantGroupsViewModel = VariantGroups;
+    this.VariantGroupsViewOptions = VariantGroupsViewOptions;
   }
 
 })();
