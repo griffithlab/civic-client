@@ -9,42 +9,54 @@
     var directive = {
       restrict: 'E',
       replace: true,
-      require: '^^entityTalkView',
-      templateUrl: 'app/views/events/evidence/talk/evidenceTalkRevisionSummary.tpl.html',
-      link: evidenceTalkRevisionsSummaryLink,
+      templateUrl: 'app/views/events/evidence/talk/revisions/evidenceTalkRevisionSummary.tpl.html',
       controller: 'EvidenceTalkRevisionSummaryController'
     };
     return directive;
   }
 
   // @ngInject
-  function evidenceTalkRevisionsSummaryLink(scope, element, attributes, entityTalkView) {
-    scope.evidenceTalkModel= entityTalkView.entityTalkModel;
-  }
+  function EvidenceTalkRevisionSummaryController($scope, $stateParams, EvidenceRevisions, Security, formConfig) {
+    var vm = $scope.vm = {};
+    vm.isAdmin = Security.isAdmin();
+    vm.isAuthenticated = Security.isAuthenticated();
+    vm.evidenceTalkModel = EvidenceRevisions;
 
-  // @ngInject
-  function EvidenceTalkRevisionSummaryController($scope, $stateParams) {
-    var ctrl = $scope.ctrl = {};
-    var unwatch = $scope.$watch('evidenceTalkModel', function(evidenceTalkModel) {
-      console.log('ctrl.evidenceTalkRevisionsModel watch triggered.');
-      evidenceTalkModel.actions.getChange($stateParams.changeId);
-      evidenceTalkModel.actions.getChangeComments($stateParams.changeId);
+    vm.formErrors = {};
+    vm.formMessages = {};
+    vm.errorMessages = formConfig.errorMessages;
+    vm.errorPrompts = formConfig.errorPrompts;
 
-      ctrl.acceptChange = function() {
-        evidenceTalkModel.actions.acceptChange($stateParams.changeId)
-          .then(function(response) {
-            evidenceTalkModel.actions.getChanges($stateParams.variantId);
-          });
-      };
+    $scope.acceptRevision = function() {
+      vm.formErrors = {};
+      vm.formMessages = {};
+      EvidenceRevisions.acceptRevision($stateParams.evidenceId, $stateParams.revisionId)
+        .then(function(response) {
+          vm.formMessages['acceptSuccess'] = true;
+        })
+        .catch(function(error) {
+          console.error('revision accept error!');
+          vm.formErrors[error.status] = true;
+        })
+        .finally(function (){
+          console.log('accept revision successful.');
+        });
+    };
 
-      ctrl.rejectChange = function() {
-        evidenceTalkModel.actions.rejectChange($stateParams.changeId)
-          .then(function(response) {
-            evidenceTalkModel.actions.getChanges($stateParams.variantId);
-          });
-      };
-
-      unwatch();
-    });
+    $scope.rejectRevision = function() {
+      vm.formErrors = {};
+      vm.formMessages = {};
+      EvidenceRevisions.rejectRevision($stateParams.evidenceId, $stateParams.revisionId)
+        .then(function(response) {
+          vm.formMessages['rejectSuccess'] = true;
+        })
+        .catch(function(error) {
+          console.error('revision reject error!');
+          vm.formErrors[error.status] = true;
+        })
+        .finally(function (){
+          console.log('reject revision successful.');
+        });
+    };
   }
 })();

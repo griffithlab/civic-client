@@ -45,7 +45,7 @@
           navMode: 'sub'
         }
       })
-      .state('events.genes.summary.variants.summary.evidence.talk.revisions.summary', {
+      .state('events.genes.summary.variants.summary.evidence.talk.revisions.list.summary', {
         url: '/summary',
         template: '<evidence-talk-revision-summary></evidence-talk-revision-summary>',
         resolve: {
@@ -73,7 +73,7 @@
     var evidence = Evidence.data.item;
 
     function init() {
-      baseState = 'events.evidence.talk.revisions';
+      baseState = 'events.genes.summary.variants.summary.evidence.talk.revisions';
       baseUrl = $state.href(baseUrl, $stateParams);
 
       angular.copy({
