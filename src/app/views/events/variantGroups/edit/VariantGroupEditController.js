@@ -53,7 +53,7 @@
 
       angular.copy({
         view: {
-          summaryBackgroundColor: 'pageBackground2',
+          summaryBackgroundColor: 'pageBackground',
           editBackgroundColor: 'pageBackground',
           talkBackgroundColor: 'pageBackground'
         },

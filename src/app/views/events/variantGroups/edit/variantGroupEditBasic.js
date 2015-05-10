@@ -114,7 +114,7 @@
       variantGroupEdit.variantGroupId = variantGroupEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
-      variantGroups.apply(variantGroupEdit)
+      VariantGroups.apply(variantGroupEdit)
         .then(function(response) {
           console.log('revision apply success!');
           vm.formMessages['applySuccess'] = true;

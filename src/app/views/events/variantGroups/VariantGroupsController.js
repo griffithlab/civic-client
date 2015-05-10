@@ -75,7 +75,7 @@
 
       angular.copy({
         view: {
-          backgroundColor: 'pageBackground2'
+          backgroundColor: 'pageBackground'
         },
         summary: {
           backgroundColor: 'pageBackground2'
