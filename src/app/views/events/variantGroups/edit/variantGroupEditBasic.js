@@ -46,7 +46,7 @@
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
-    vm.variantFields = [
+    vm.variantGroupFields = [
       {
         key: 'name',
         type: 'input',
@@ -92,7 +92,7 @@
     ];
 
     vm.submit = function(variantGroupEdit, options) {
-      variantGroupEdit.variantId = variantGroupEdit.id;
+      variantGroupEdit.variantGroupId = variantGroupEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
       VariantGroupRevisions.submitRevision(variantGroupEdit)
@@ -111,12 +111,12 @@
     };
 
     vm.apply = function(variantGroupEdit, options) {
-      variantGroupEdit.variantId = variantGroupEdit.id;
+      variantGroupEdit.variantGroupId = variantGroupEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
-      Variants.apply(variantGroupEdit)
+      variantGroups.apply(variantGroupEdit)
         .then(function(response) {
-          console.log('revision appy success!');
+          console.log('revision apply success!');
           vm.formMessages['applySuccess'] = true;
           // options.resetModel();
         })
