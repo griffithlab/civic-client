@@ -1,16 +1,17 @@
 <div class="VariantGroupTalkView">
-  <entity-talk-view entity-talk-model="ctrl.variantGroupTalkModel">
-    <div class="row variant-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
+  <entity-talk-view view-model="vm.VariantGroupsTalkViewModel" revisions-model="vm.VariantGroupRevisionsModel" view-options="vm.VariantGroupsTalkViewOptions">
+
+    <div class="row variant-group-talk-summary {{ ctrl.styles.view.summaryBackgroundColor }}">
       <div class="col-xs-12">
         <variant-group-summary show-variant-grid="false"></variant-group-summary>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <entity-talk-tabs entity-talk-model="ctrl.variantGroupTalkModel"></entity-talk-tabs>
+        <entity-talk-tabs vertical="false" justified="left"></entity-talk-tabs>
       </div>
     </div>
-    <div class="row variant-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
+    <div class="row variant-group-talk-content {{ ctrl.styles.view.talkBackgroundColor }}">
       <div class="col-xs-12">
         <ui-view>
 
