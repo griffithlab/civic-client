@@ -45,15 +45,8 @@
     var entityViewOptions = scope.entityViewOptions = entityView.entityViewOptions;
 
     vm.type = entityViewModel.data.item.type;
-    console.log('type initialized: ' + scope.type + '-------');
     vm.name = entityViewModel.data.item.name;
-    console.log('name initialized: ' + scope.name);
-    scope.$watch('name', function(name) {
-      console.log('name changed: ' + name);
-    });
-    scope.$watch('type', function(type) {
-      console.log('type changed: ' + scope.type);
-    });
+
     scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
     scope.tabs = entityViewOptions.tabData;
