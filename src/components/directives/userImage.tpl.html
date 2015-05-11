@@ -1,4 +1,11 @@
 <div class="userImage">
-  <img ng-src="{{ctrl.user.avatar_url}}" width="{{ ctrl.width }}" height="{{ ctrl.height }}"/>
+  <span ng-switch="ctrl.hasAvatar">
+    <span ng-switch-when="true">
+      <img ng-src="{{ctrl.user.avatar_url}}" width="{{ ctrl.width }}" height="{{ ctrl.height }}"/>
+    </span>
+    <span ng-switch-default>
+      <img ng-src="assets/images/default-user-img.jpg" width="{{ ctrl.width }}" height="{{ ctrl.height }}"/>
+    </span>
+  </span>
 </div>
 

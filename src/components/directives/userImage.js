@@ -26,7 +26,7 @@
     ctrl.width = $scope.width;
     ctrl.user = $scope.user;
 
-    ctrl.hasEmail = typeof ctrl.user === 'object' && _.has(ctrl.user, 'email') && ctrl.user.email.length != 0;
+    ctrl.hasAvatar = _.has(ctrl.user, 'avatar_url');
     console.log('has email: ' + ctrl.hasEmail);
   }
 
