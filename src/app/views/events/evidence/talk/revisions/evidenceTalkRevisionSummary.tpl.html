@@ -54,8 +54,16 @@
     <div class="col-xs-12 diffs">
       <ul>
         <li ng-repeat="(field, diff) in vm.evidenceTalkModel.data.item.diffs">
-          <h4><strong>{{field|capitalize}}</strong></h4>
-          <p ng-bind-html="diff"></p>
+          <div ng-switch="field">
+            <div ng-switch-when="description">
+              <h4><strong>Description:</strong></h4>
+              <p ng-bind-html="diff"></p>
+            </div>
+            <div ng-switch-when="text">
+              <h4><strong>Description:</strong></h4>
+              <p ng-bind-html="diff"></p>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
