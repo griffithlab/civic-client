@@ -36,8 +36,8 @@
         url: '/list/:revisionId',
         template: '<variant-group-talk-revisions></variant-group-talk-revisions>',
         resolve: {
-          initRevisionList: function(Variants, VariantRevisions, VariantHistory, $stateParams) {
-            return VariantRevisions.queryFresh($stateParams.variantGroupId);
+          initRevisionList: function(VariantGroups, VariantGroupRevisions, VariantGroupHistory, $stateParams) {
+            return VariantGroupRevisions.queryFresh($stateParams.variantGroupId);
           }
         },
         data: {
@@ -49,10 +49,10 @@
         url: '/summary',
         template: '<variant-group-talk-revision-summary></variant-group-talk-revision-summary>',
         resolve: {
-          initRevision: function(VariantRevisions, $stateParams, $q) {
+          initRevision: function(VariantGroupRevisions, $stateParams, $q) {
             return $q.all([
-              VariantRevisions.getFresh($stateParams.variantGroupId, $stateParams.revisionId),
-              VariantRevisions.queryCommentsFresh($stateParams.variantGroupId, $stateParams.revisionId)
+              VariantGroupRevisions.getFresh($stateParams.variantGroupId, $stateParams.revisionId),
+              VariantGroupRevisions.queryCommentsFresh($stateParams.variantGroupId, $stateParams.revisionId)
             ]);
           }
         },

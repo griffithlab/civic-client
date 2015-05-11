@@ -2,7 +2,7 @@
   'use strict';
   angular.module('civic.events.variantGroups')
     .directive('variantGroupTalkRevisionSummary', variantGroupTalkRevisionSummary)
-    .controller('VariantTalkRevisionSummaryController', VariantGroupTalkRevisionSummaryController);
+    .controller('VariantGroupTalkRevisionSummaryController', VariantGroupTalkRevisionSummaryController);
 
   // @ngInject
   function variantGroupTalkRevisionSummary() {
