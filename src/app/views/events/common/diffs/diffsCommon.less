@@ -5,26 +5,35 @@
 
 @insBase: @civicGreen;
 @delBase: @civicRed;
+@resBase: @civicBlue;
+
 @insBg: lighten(@insBase, 60%);
 @delBg: lighten(@delBase, 60%);
+@resBg: desaturate(lighten(@resBase, 55%), 10%);
+
 @insLabelBg: lighten(@insBase, 40%);
 @delLabelBg: lighten(@delBase, 40%);
+@resLabelBg: desaturate(lighten(@resBase, 45%), 20%);
+
 @insLabelFg: lighten(desaturate(@insBase, 30%), 10%);
 @delLabelFg: lighten(desaturate(@delBase, 50%), 10%);
+@resLabelFg: desaturate(lighten(@resBase, 35%), 20%);
 
 .diffs {
   .diff {
     overflow: auto;
+    margin: 0;
+    padding:0;
+
     ul {
-      // background: @pageBackground2;
-      border-radius: @border-radius-small;
-      overflow: auto;
-      font-size: 13px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: table;
-      width: 100%;
+      background:#fff;
+      overflow:auto;
+      font-size:13px;
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:table;
+      width:100%;
     }
 
     del, ins {
@@ -34,14 +43,12 @@
       //      min-height: 250px;
     }
 
-    .label {
-
-    }
     li {
       padding: 0;
       display: table-row;
       margin: 0;
     }
+
     li.ins:before, li.del:before {
       display: block;
       padding: @contentPadding/3 @contentPadding/2;
@@ -52,46 +59,40 @@
       content: 'INSERTIONS';
       background-color: @insLabelBg;
       color: @insLabelFg;
-      border-top-right-radius: @border-radius-large;
-      border-bottom: 1px solid lighten(@insBase, 20%);
     }
+
     li.ins {
       background: @insBg;
       color: #080;
-      width: 49%;
+      width: 50%;
       float: right;
-      border-top-left-radius: @border-radius-small;
-      border-bottom-left-radius: @border-radius-small;
+      border-top-right-radius: @border-radius-large;
     }
+
+    li.del {
+      background: @delBg;
+      color: #b00;
+      width: 50%;
+      float: left;
+      border-top-left-radius: @border-radius-large;
+    }
+
     li.del:before {
       content: 'DELETIONS';
       background-color: @delLabelBg;
       color: @delLabelFg;
-      border-top-left-radius: @border-radius-large;
-      border-bottom: 1px solid lighten(@delBase, 20%);
+      border-bottom: none !important;
     }
-    li.del {
-      background: @delBg;
-      color: #b00;
-      width: 49%;
-      float: left;
-      border-top-right-radius: @border-radius-small;
-      border-bottom-right-radius: @border-radius-small;
-    }
-    li:hover {
-      background: #ffc
-    }
-    del, ins, span {
-      white-space: pre-wrap;
+
+    del, ins, span{
+      white-space:pre-wrap;
       // font-family: courier;
     }
     del strong {
-      font-weight: normal;
-      background: #fcc;
+      font-weight:normal;background:#fcc;
     }
     ins strong {
-      font-weight: normal;
-      background: #9f9;
+      font-weight:normal;background:#9f9;
     }
     li.diff-comment {
       display: none;
@@ -100,4 +101,125 @@
       background: none repeat scroll 0 0 gray;
     }
   }
+
+  .res {
+    background-color: @resBg;
+    border-bottom-right-radius: @border-radius-large;
+    border-bottom-left-radius: @border-radius-large;
+    padding: @contentPadding/2;
+  }
+  .res:before {
+    display: block;
+    padding: @contentPadding/3 @contentPadding/2;
+    margin: -@contentPadding/2 -@contentPadding/2 @contentPadding/2 -@contentPadding/2;
+    font-weight: bold;
+    font-size: @font-size-small;
+    content: 'RESULT';
+    background-color: @resLabelBg;
+    color: @resLabelFg;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  //.diff {
+  //  // overflow: auto;
+  //  ul {
+  //    // background: @pageBackground2;
+  //    border-radius: @border-radius-small;
+  //    overflow: auto;
+  //    font-size: 13px;
+  //    list-style: none;
+  //    margin: 0;
+  //    padding: 0;
+  //    display: table;
+  //    width: 100%;
+  //  }
+  //
+  //  del, ins {
+  //    display: block;
+  //    text-decoration: none;
+  //    padding: @contentPadding/2;
+  //    //      min-height: 250px;
+  //  }
+  //
+  //  .label {
+  //
+  //  }
+  //  li {
+  //    padding: 0;
+  //    display: table-row;
+  //    margin: 0;
+  //  }
+  //
+  //  div.res {
+  //    background-color: #EEF;
+  //  }
+  //
+  //  li.ins:before, li.del:before {
+  //    display: block;
+  //    padding: @contentPadding/3 @contentPadding/2;
+  //    font-weight: bold;
+  //    font-size: @font-size-small;
+  //  }
+  //  li.ins:before {
+  //    content: 'INSERTIONS';
+  //    background-color: @insLabelBg;
+  //    color: @insLabelFg;
+  //    // border-top-right-radius: @border-radius-large;
+  //    border-bottom: 1px solid lighten(@insBase, 20%);
+  //  }
+  //  li.ins {
+  //    background: @insBg;
+  //    color: #080;
+  //    width: 49%;
+  //    float: right;
+  //    // border-top-left-radius: @border-radius-small;
+  //    border-bottom-left-radius: @border-radius-small;
+  //  }
+  //  li.del:before {
+  //    content: 'DELETIONS';
+  //    background-color: @delLabelBg;
+  //    color: @delLabelFg;
+  //    // border-top-left-radius: @border-radius-large;
+  //    border-bottom: 1px solid lighten(@delBase, 20%);
+  //  }
+  //  li.del {
+  //    background: @delBg;
+  //    color: #b00;
+  //    width: 49%;
+  //    float: left;
+  //    // border-top-right-radius: @border-radius-small;
+  //    border-bottom-right-radius: @border-radius-small;
+  //  }
+  //  li:hover {
+  //    background: #ffc
+  //  }
+  //  del, ins, span {
+  //    white-space: pre-wrap;
+  //    // font-family: courier;
+  //  }
+  //  del strong {
+  //    font-weight: normal;
+  //    background: #fcc;
+  //  }
+  //  ins strong {
+  //    font-weight: normal;
+  //    background: #9f9;
+  //  }
+  //  li.diff-comment {
+  //    display: none;
+  //  }
+  //  li.diff-block-info {
+  //    background: none repeat scroll 0 0 gray;
+  //  }
+  //}
 }

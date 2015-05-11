@@ -55,13 +55,35 @@
       <ul>
         <li ng-repeat="(field, diff) in vm.evidenceTalkModel.data.item.diffs">
           <div ng-switch="field">
-            <div ng-switch-when="description">
-              <h4><strong>Description:</strong></h4>
-              <p ng-bind-html="diff"></p>
-            </div>
-            <div ng-switch-when="text">
-              <h4><strong>Description:</strong></h4>
-              <p ng-bind-html="diff"></p>
+            <!--<div ng-switch-when="description">-->
+              <!--<div class="row">-->
+                <!--<div class="col-xs-3">-->
+                  <!--Description:-->
+                <!--</div>-->
+                <!--<div class="col-xs-6">-->
+                  <!--<span ng-bind-html="diff"></span>-->
+                <!--</div>-->
+                <!--<div class="cols-xs-3">-->
+                  <!--<span ng-bind-html="vm.evidenceTalkModel.data.item.suggested_changes['description'][1]"></span>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <div ng-switch-default>
+              <div class="row">
+                <div class="col-xs-12">
+                  {{ field | capitalize}}:
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 wtf">
+                  <span ng-bind-html="diff"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="res" ng-bind-html="vm.evidenceTalkModel.data.item.suggested_changes[field][1]"></div>
+                </div>
+              </div>
             </div>
           </div>
         </li>
