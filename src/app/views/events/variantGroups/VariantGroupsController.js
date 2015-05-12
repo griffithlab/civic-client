@@ -62,12 +62,12 @@
 
       angular.copy([
         {
-          heading: 'VariantGroups Summary',
+          heading: 'Variant Groups Summary',
           route: 'events.genes.summary.variantGroups.summary',
           params: { variantGroupId: VariantGroups.data.item.id }
         },
         {
-          heading: 'VariantGroups Talk',
+          heading: 'Variant Groups Talk',
           route: 'events.genes.summary.variantGroups.talk.log',
           params: { variantGroupId: VariantGroups.data.item.id }
         }

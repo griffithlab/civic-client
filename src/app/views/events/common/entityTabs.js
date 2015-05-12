@@ -44,7 +44,9 @@
     var entityViewModel = scope.entityViewModel = entityView.entityViewModel;
     var entityViewOptions = scope.entityViewOptions = entityView.entityViewOptions;
 
-    vm.type = entityViewModel.data.item.type;
+    vm.type = _.map(entityViewModel.data.item.type.replace('_', ' ').split(" "), function(word) {
+      return word.toUpperCase();
+    }).join(" ");
     vm.name = entityViewModel.data.item.name;
 
     scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
