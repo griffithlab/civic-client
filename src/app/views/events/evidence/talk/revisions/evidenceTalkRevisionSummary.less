@@ -14,12 +14,24 @@
 
   .revision-header {
     #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
-    .name {
+    .stripes-bg {
+      .clearfix();
       background-image: url('/assets/images/grey_stripes.png');
-
+    }
+    .name {
       h3 {
         padding: .5em 0;
         margin: 0;
+      }
+    }
+    .status {
+      span {
+        display: block;
+        padding: .5em 1em;
+        margin: .5em @contentPadding;
+        font-weight: bold;
+        background-color: @pageBackground2;
+        border-radius: @border-radius-small;
       }
     }
   }
@@ -28,6 +40,10 @@
     background-color: @pageBackground2;
     border-bottom: #CCC;
     margin-bottom: @contentPadding;
+  }
+
+  .diffs {
+    margin-top: @contentPadding;
   }
 
   .diffs > ul {

@@ -1,19 +1,26 @@
 <div class="evidenceTalkRevisionSummary">
   <div class="row revision-header">
-    <div class="col-xs-12 name">
-      <h3>Suggested Change #<span ng-bind="vm.evidenceTalkModel.data.item.id">ID</span></h3>
-    </div>
-  </div>
-  <div class="row" ng-if="vm.isAdmin">
-    <div class="col-xs-12">
-      <div class="revision-instructions" ng-if="vm.evidenceTalkModel.data.item.status != 'applied'">
-        <p>Accept or reject this revision by pressing either of the two buttons beneath the diffs.</p>
+    <div class="stripes-bg">
+      <div class="col-xs-10 name">
+        <h3>Suggested Change #<span ng-bind="vm.evidenceTalkModel.data.item.id">ID</span></h3>
       </div>
-      <div class="revision-instructions" ng-if="vm.evidenceTalkModel.data.item.status === 'applied'">
-        <p>This revision has been applied.</p>
+      <div class="col-xs-2 status">
+        <div class="pull-right">
+          <span ng-bind="vm.evidenceTalkModel.data.item.status">status</span>
+        </div>
       </div>
     </div>
   </div>
+  <!--<div class="row" ng-if="vm.isAdmin">-->
+    <!--<div class="col-xs-12">-->
+      <!--<div class="revision-instructions" ng-if="vm.evidenceTalkModel.data.item.status != 'applied'">-->
+        <!--<p>Accept or reject this revision by pressing either of the two buttons beneath the diffs.</p>-->
+      <!--</div>-->
+      <!--<div class="revision-instructions" ng-if="vm.evidenceTalkModel.data.item.status === 'applied'">-->
+        <!--<p>This revision has been applied.</p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
   <div class="row">
     <div class="col-xs-12">
       <div ng-messages="vm.formErrors" class="revision-errors">
@@ -44,34 +51,28 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-xs-12 diffs-header">
-      <h4>Field Differences | Status: <span ng-bind="vm.evidenceTalkModel.data.item.status">status</span></h4>
-    </div>
-  </div>
   <div class="row">
     <div class="col-xs-12 diffs">
       <ul>
         <li ng-repeat="(field, diff) in vm.evidenceTalkModel.data.item.diffs">
           <div ng-switch="field">
             <!--<div ng-switch-when="description">-->
-              <!--<div class="row">-->
-                <!--<div class="col-xs-3">-->
-                  <!--Description:-->
-                <!--</div>-->
-                <!--<div class="col-xs-6">-->
-                  <!--<span ng-bind-html="diff"></span>-->
-                <!--</div>-->
-                <!--<div class="cols-xs-3">-->
-                  <!--<span ng-bind-html="vm.evidenceTalkModel.data.item.suggested_changes['description'][1]"></span>-->
-                <!--</div>-->
-              <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-xs-3">-->
+            <!--Description:-->
+            <!--</div>-->
+            <!--<div class="col-xs-6">-->
+            <!--<span ng-bind-html="diff"></span>-->
+            <!--</div>-->
+            <!--<div class="cols-xs-3">-->
+            <!--<span ng-bind-html="vm.evidenceTalkModel.data.item.suggested_changes['description'][1]"></span>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
             <div ng-switch-default>
               <div class="row">
                 <div class="col-xs-12">
-                  {{ field | capitalize}}:
+                  <h4 class="field-name">{{ field | capitalize}}</h4>
                 </div>
               </div>
               <div class="row">
@@ -81,7 +82,7 @@
               </div>
               <div class="row">
                 <div class="col-xs-12">
-                  <div class="res" ng-bind-html="vm.evidenceTalkModel.data.item.suggested_changes[field][1]"></div>
+                  <div class="res"><span ng-bind-html="vm.evidenceTalkModel.data.item.suggested_changes[field][1]"></span></div>
                 </div>
               </div>
             </div>

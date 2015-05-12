@@ -11,13 +11,13 @@
 @delBg: lighten(@delBase, 60%);
 @resBg: desaturate(lighten(@resBase, 55%), 10%);
 
-@insLabelBg: lighten(@insBase, 40%);
-@delLabelBg: lighten(@delBase, 40%);
-@resLabelBg: desaturate(lighten(@resBase, 45%), 20%);
+@insLabelBg: lighten(@insBase, 50%);
+@delLabelBg: lighten(@delBase, 50%);
+@resLabelBg: desaturate(lighten(@resBase, 50%), 10%);
 
 @insLabelFg: lighten(desaturate(@insBase, 30%), 10%);
 @delLabelFg: lighten(desaturate(@delBase, 50%), 10%);
-@resLabelFg: desaturate(lighten(@resBase, 35%), 20%);
+@resLabelFg: desaturate(lighten(@resBase, 15%), 20%);
 
 .diffs {
   .diff {
@@ -56,7 +56,7 @@
       font-size: @font-size-small;
     }
     li.ins:before {
-      content: 'INSERTIONS';
+      content: '+ INSERTIONS';
       background-color: @insLabelBg;
       color: @insLabelFg;
     }
@@ -78,7 +78,7 @@
     }
 
     li.del:before {
-      content: 'DELETIONS';
+      content: '- DELETIONS';
       background-color: @delLabelBg;
       color: @delLabelFg;
       border-bottom: none !important;
@@ -102,11 +102,23 @@
     }
   }
 
+  .field-name {
+    background-color: @pageBackground2;
+    border-top-left-radius: @border-radius-base;
+    border-top-right-radius: @border-radius-base;
+    border-top: 1px solid darken(@pageBackground2, 10%);
+    border-left: 1px solid darken(@pageBackground2, 10%);
+    border-right: 1px solid darken(@pageBackground2, 10%);
+    margin: 0;
+    padding: @contentPadding/2 @contentPadding/3;
+  }
+
   .res {
     background-color: @resBg;
     border-bottom-right-radius: @border-radius-large;
     border-bottom-left-radius: @border-radius-large;
     padding: @contentPadding/2;
+    color: #00008b;
   }
   .res:before {
     display: block;
@@ -114,7 +126,7 @@
     margin: -@contentPadding/2 -@contentPadding/2 @contentPadding/2 -@contentPadding/2;
     font-weight: bold;
     font-size: @font-size-small;
-    content: 'RESULT';
+    content: '= RESULT';
     background-color: @resLabelBg;
     color: @resLabelFg;
   }
