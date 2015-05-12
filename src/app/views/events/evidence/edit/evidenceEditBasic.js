@@ -47,39 +47,39 @@
 
     vm.formSelects = {
       evidence_levels: [
-        { name: 'A', label: 'Validated'},
-        { name: 'B', label: 'Clinical'},
-        { name: 'C', label: 'Preclinical'},
-        { name: 'D', label: 'Inferential'}
+        { value: 'A', label: 'A - Validated'},
+        { value: 'B', label: 'B - Clinical'},
+        { value: 'C', label: 'C - Preclinical'},
+        { value: 'D', label: 'D - Inferential'}
       ],
       evidence_ratings: [
-        { id: 1, name: 'One Star', label: 'Really Crappy'},
-        { id: 2, name: 'Two Stars', label: 'Pretty Crappy'},
-        { id: 3, name: 'Three Stars', label: 'Just OK'},
-        { id: 4, name: 'Four Stars', label: 'Not Bad'},
-        { id: 5, name: 'Five Stars', label: 'Outstanding'}
+        { value: 1, label: '1 - Poor' },
+        { value: 2, label: '2 - Adequate' },
+        { value: 3, label: '3 - Average' },
+        { value: 4, label: '4 - Good' },
+        { value: 5, label: '5 - Excellent'}
       ],
       clinical_significance: [
-        { id: 1, name: 'Positive' },
-        { id: 2, name: 'Better Outcome' },
-        { id: 3, name: 'Sensitivity' },
-        { id: 4, name: 'Resistance or Non-Response' },
-        { id: 5, name: 'Poor Outcome' },
-        { id: 6, name: 'Negative' },
-        { id: 7, name: 'N/A' }
+        { value: 'Positive', label: 'Positive' },
+        { value: 'Better Outcome', label: 'Better Outcome' },
+        { value: 'Sensitivity', label: 'Sensitivity' },
+        { value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+        { value: 'Poor Outcome', label: 'Poor Outcome' },
+        { value: 'Negative', label: 'Negative' },
+        { value: 'N/A', label: 'N/A' }
       ],
       evidence_types: [
-        { name: 'Predictive' },
-        { name: 'Diagnostic' },
-        { name: 'Prognostic' }
+        { value: 'Predictive', label: 'Predictive' },
+        { value: 'Diagnostic', label: 'Diagnostic' },
+        { value: 'Prognostic', label: 'Prognostic' }
       ],
-      evidence_direction: [
-        { name: 'Supports' },
-        { name: 'Does Not Support' }
+      evidence_directions: [
+        { value: 'Supports', label: 'Supports'},
+        { value: 'Does Not Support', label: 'Does Not Support' }
       ],
       variant_origins: [
-        { name: 'somatic'},
-        { name: 'germline' }
+        { value: 'Somatic', label: 'Somatic'},
+        { value: 'Germline', label: 'Germline' }
       ]
     };
 
@@ -90,36 +90,136 @@
         templateOptions: {
           label: 'Name',
           disabled: true,
-          value: vm.evidence.name
+          value: 'vm.evidenceEdit.name'
         }
       },
       {
         key: 'description',
         type: 'textarea',
         templateOptions: {
-          rows: 8,
+          rows: 3,
           label: 'Description',
-          value: 'vm.evidence.description',
-          focus: true,
+          value: 'vm.evidenceEdit.description',
           minLength: 32
         }
       },
       {
-        template: '<hr/>'
+        key: 'disease',
+        type: 'input',
+        templateOptions: {
+          label: 'Disease',
+          value: 'vm.evidenceEdit.disease',
+          minLength: 32
+        }
       },
       {
-        model: vm.evidenceEdit.comment,
-        key: 'title',
+        key: 'doid',
         type: 'input',
+        templateOptions: {
+          label: 'DOID',
+          value: 'vm.evidenceEdit.doid',
+          minLength: 8,
+          length: 8
+        }
+      },
+      {
+        key: 'pubmed_id',
+        type: 'input',
+        templateOptions: {
+          label: 'Pubmed Id',
+          value: 'vm.evidenceEdit.pubmed_id',
+          minLength: 8,
+          length: 8
+        }
+      },
+      {
+        key: 'drugs',
+        type: 'input',
+        templateOptions: {
+          label: 'Drugs',
+          value: 'vm.evidenceEdit.drugs',
+          disabled: true
+        }
+      },
+      {
+        key: 'rating',
+        type: 'select',
+        templateOptions: {
+          label: 'Rating',
+          options: vm.formSelects.evidence_ratings,
+          valueProp: 'value',
+          labelProp: 'label'
+        }
+      },
+      {
+        key: 'evidence_level',
+        type: 'select',
+        templateOptions: {
+          label: 'Evidence Level',
+          value: 'vm.evidenceEdit.rating',
+          options: vm.formSelects.evidence_levels,
+          valueProp: 'value',
+          labelProp: 'label'
+        }
+      },
+      {
+        key: 'evidence_type',
+        type: 'select',
+        templateOptions: {
+          label: 'Evidence Type',
+          value: 'vm.evidenceEdit.evidence_type',
+          options: vm.formSelects.evidence_types,
+          valueProp: 'value',
+          labelProp: 'label'
+        }
+      },
+      {
+        key: 'evidence_direction',
+        type: 'select',
+        templateOptions: {
+          label: 'Evidence Type',
+          value: 'vm.evidenceEdit.evidence_direction',
+          options: vm.formSelects.evidence_directions,
+          valueProp: 'value',
+          labelProp: 'label'
+        }
+      },
+      {
+        key: 'clinical_significance',
+        type: 'select',
+        templateOptions: {
+          label: 'Clinical Significance',
+          value: 'vm.evidenceEdit.clinical_significance',
+          options: vm.formSelects.clinical_significance,
+          valueProp: 'value',
+          labelProp: 'label'
+        }
+      },
+      {
+        key: 'variant_origin',
+        type: 'select',
+        templateOptions: {
+          label: 'Variant Origin',
+          value: 'vm.evidenceEdit.variant_origin',
+          options: vm.formSelects.variant_origins,
+          valueProp: 'value',
+          labelProp: 'label'
+        }
+      },
+      { template: '<hr/>'},
+      {
+        type: 'input',
+        key: 'title',
+        model: vm.evidenceEdit.comment,
         templateOptions: {
           label: 'Comment Title',
           value: 'title'
         }
       },
       {
-        model: vm.evidenceEdit.comment,
         key: 'text',
         type: 'textarea',
+        model: vm.evidenceEdit.comment,
         templateOptions: {
           rows: 5,
           label: 'Comment',
