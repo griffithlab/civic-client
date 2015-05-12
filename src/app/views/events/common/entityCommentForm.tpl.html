@@ -4,7 +4,7 @@
     <div ng-switch-when="true">
       <div class="row comment-form">
         <div class="col-xs-12">
-          <form name="vm.commentForm" ng-submit="vm.submit(vm.newComment, vm.options.resetModel)">
+          <form name="vm.commentForm">
             <!-- TODO: implement hit-return-to-submit behavior with this: <input ng-keyup="$event.keyCode == 13 ? myFunc() : null" ...> from http://stackoverflow.com/questions/15417125/submit-form-on-pressing-enter-with-angularjs -->
             <formly-form
               options="vm.options"
