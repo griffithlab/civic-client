@@ -14,12 +14,25 @@
 
   .revision-header {
     #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
-    .name {
+    .stripes-bg {
+      .clearfix();
       background-image: url('/assets/images/grey_stripes.png');
-
+    }
+    .name {
       h3 {
-        padding: .5em 0;
+        display: block;
         margin: 0;
+        padding: @contentPadding/2 0;
+      }
+    }
+    .status {
+      span {
+        display: block;
+        padding: .3em .5em;
+        margin: @contentPadding/2 0;
+        font-weight: bold;
+        background-color: @pageBackground2;
+        border-radius: @border-radius-small;
       }
     }
   }
@@ -28,6 +41,10 @@
     background-color: @pageBackground2;
     border-bottom: #CCC;
     margin-bottom: @contentPadding;
+  }
+
+  .diffs {
+    margin-top: @contentPadding;
   }
 
   .diffs > ul {
@@ -64,12 +81,14 @@
 
   .revision-form {
     .clearfix();
-    padding-top: @contentPadding;
   }
 
   .revision-errors, .revision-messages {
-    .alert {
+    .alert:first-of-type {
       margin-top: @contentPadding;
+    }
+    .alert {
+      margin-bottom: @contentPadding;
     }
   }
 
