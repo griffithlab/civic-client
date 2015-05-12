@@ -2,7 +2,7 @@
   <div class="row revision-header">
     <div class="stripes-bg">
       <div class="col-xs-10 name">
-        <h3>Suggested Change #<span ng-bind="vm.evidenceTalkModel.data.item.id">ID</span></h3>
+        <h3>Revision #<span ng-bind="vm.evidenceTalkModel.data.item.id">ID</span></h3>
       </div>
       <div class="col-xs-2 status">
         <div class="pull-right">
@@ -41,7 +41,7 @@
   </div>
   <div class="row ">
     <div class="col-xs-12">
-      <div ng-messages="vm.formMessages" class="edit-messages">
+      <div ng-messages="vm.formMessages" class="revision-messages">
         <div ng-message="acceptSuccess" class="alert alert-success">
           <strong class="status">Success</strong> - <span class="message">The revision was successfully accepted.</span>
         </div>
@@ -56,19 +56,6 @@
       <ul>
         <li ng-repeat="(field, diff) in vm.evidenceTalkModel.data.item.diffs">
           <div ng-switch="field">
-            <!--<div ng-switch-when="description">-->
-            <!--<div class="row">-->
-            <!--<div class="col-xs-3">-->
-            <!--Description:-->
-            <!--</div>-->
-            <!--<div class="col-xs-6">-->
-            <!--<span ng-bind-html="diff"></span>-->
-            <!--</div>-->
-            <!--<div class="cols-xs-3">-->
-            <!--<span ng-bind-html="vm.evidenceTalkModel.data.item.suggested_changes['description'][1]"></span>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
             <div ng-switch-default>
               <div class="row">
                 <div class="col-xs-12">
@@ -101,7 +88,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 comments-header">
-      <h4>Comments</h4>
+      <h4>Revision #<span ng-bind="vm.evidenceTalkModel.data.item.id">ID</span> Comments</h4>
     </div>
   </div>
   <div class="row">
