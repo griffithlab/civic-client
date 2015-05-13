@@ -50,14 +50,15 @@
   .diffs > ul {
     list-style: none;
     margin: 0;
-    margin-bottom: @contentPadding;
     padding: 0;
+    > li {
+      margin-bottom: @contentPadding;
+    }
   }
 
   .admin-buttons {
     padding-bottom: @contentPadding;
     padding-top: @contentPadding;
-    margin-top: @contentPadding;
     border-top: 1px solid #CCC
   }
 

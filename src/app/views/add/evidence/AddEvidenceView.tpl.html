@@ -1,11 +1,16 @@
 <div class="AddEvidenceView">
   <entity-view view-model="vm.AddEvidenceViewModel" view-options="vm.AddEvidenceViewOptions">
     <div class="row">
-      <div class="col-xs-6 name">
-        <span class="entity-action">ADD</span>
-        <span ng-bind="vm.type" class="entity-type">EVIDENCE ITEM</span>
+      <div class="gradient-bg">
+        <div class="col-xs-12 title stripes-bg">
+          <h3>
+            <span class="entity-action">ADD</span>
+            <span ng-bind="vm.type" class="entity-type">EVIDENCE ITEM</span>
+          </h3>
+        </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-xs-12">
         <ui-view id="add-evidence-view"></ui-view>
