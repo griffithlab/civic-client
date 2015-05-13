@@ -28,6 +28,7 @@
     return /* @ngInject */ {
       restrict: 'E',
       scope: {
+        showCorner: '=',
         justified: '=',
         vertical: '='
       },
@@ -49,7 +50,7 @@
     }).join(" ");
     vm.name = entityViewModel.data.item.name;
 
-    scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
+    // scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
     scope.tabs = entityViewOptions.tabData;
 

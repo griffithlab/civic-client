@@ -15,7 +15,7 @@
         resolve: /* @ngInject */ {
           Variants: 'Variants',
           initVariant: function(Variants, $stateParams) {
-            return Variants.initBase($stateParams.geneId);
+            return Variants.initBase($stateParams.variantId);
           }
 
         },
@@ -28,7 +28,7 @@
         template: '<variant-summary show-evidence-grid="true"></variant-summary>',
         resolve: {
           refreshVariant: function(Variants, $stateParams) {
-            return Variants.getFresh($stateParams.geneId);
+            return Variants.getFresh($stateParams.variantId);
           }
         },
         // deepStateRedirect: { params: ['variantId'] },
