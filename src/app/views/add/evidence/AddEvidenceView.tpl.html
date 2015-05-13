@@ -1,0 +1,15 @@
+<div class="AddEvidenceView">
+  <entity-view view-model="vm.AddEvidenceViewModel" view-options="vm.AddEvidenceViewOptions">
+    <div class="row">
+      <div class="col-xs-6 name">
+        <span class="entity-action">ADD</span>
+        <span ng-bind="vm.type" class="entity-type">EVIDENCE ITEM</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <ui-view id="add-evidence-view"></ui-view>
+      </div>
+    </div>
+  </entity-view>
+</div>

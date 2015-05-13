@@ -28,11 +28,12 @@ angular.module('civicClient', [
   'civic.common',
   'angular-lodash',
 
-  // app views
+  // app root views
   'civic.pages',
   'civic.account',
   'civic.browse',
-  'civic.events'
+  'civic.events',
+  'civic.add'
 ])
   .run(appRun)
   .config(appConfig);
@@ -100,6 +101,13 @@ angular.module('civic.common', ['ui.router']);
 angular.module('civic.login', ['ui.router']);
 angular.module('civic.browse', ['ui.grid.selection', 'ui.grid.pagination', 'ui.router']);
 angular.module('civic.search', ['ui.router']);
+
+angular.module('civic.add', [
+  'ui.router',
+  'formly',
+  'formlyBootstrap',
+  'civic.add.evidence'
+]);
 
 angular.module('civic.events', [
   'ui.router',
