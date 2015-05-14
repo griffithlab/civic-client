@@ -14,6 +14,7 @@
   //@ngInject
   function EvidenceSummaryController($scope, Evidence, EvidenceViewOptions) {
     $scope.evidence = Evidence.data.item;
+    $scope.evidence.drugs = _.chain($scope.evidence.drugs).pluck('name').value().join(", ");
 //    $scope.evidence = Evidence.data.evidence;
     $scope.EvidenceViewOptions = EvidenceViewOptions;
     $scope.backgroundColor = EvidenceViewOptions.styles.view.backgroundColor;
