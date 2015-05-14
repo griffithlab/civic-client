@@ -29,23 +29,42 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.newEvidence = {
-      entrez_id: '673',
-      variant_name: 'V600E',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula sed lorem et cursus. In hac habitasse platea dictumst. Sed rhoncus, enim iaculis malesuada scelerisque, quam tortor porttitor tortor, id blandit tellus libero et lectus. Vestibulum nec purus eget purus suscipit ultricies non in dui.',
-      disease: 'Breast Cancer',
-      doid: '3908',
-      pubmed_id: '20979473',
-      pubchem_id: '33042',
+      entrez_id: '',
+      variant_name: '',
+      description: '',
+      disease: '',
+      doid: '',
+      pubmed_id: '',
+      pubchem_id: '',
       drugs: {
         collection: []
       },
-      rating: 4,
-      evidence_level: 'C',
-      evidence_type: 'Predictive',
-      evidence_direction: 'Supports',
-      clinical_significance: 'Positive',
-      variant_origin: 'Somatic'
+      rating: Number(),
+      evidence_level: '',
+      evidence_type: '',
+      evidence_direction: '',
+      clinical_significance: '',
+      variant_origin: ''
     };
+
+    //vm.newEvidence = {
+    //  entrez_id: '673',
+    //  variant_name: 'V600E',
+    //  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula sed lorem et cursus. In hac habitasse platea dictumst. Sed rhoncus, enim iaculis malesuada scelerisque, quam tortor porttitor tortor, id blandit tellus libero et lectus. Vestibulum nec purus eget purus suscipit ultricies non in dui.',
+    //  disease: 'Breast Cancer',
+    //  doid: '3908',
+    //  pubmed_id: '20979473',
+    //  pubchem_id: '33042',
+    //  drugs: {
+    //    collection: []
+    //  },
+    //  rating: 4,
+    //  evidence_level: 'C',
+    //  evidence_type: 'Predictive',
+    //  evidence_direction: 'Supports',
+    //  clinical_significance: 'Positive',
+    //  variant_origin: 'Somatic'
+    //};
 
     vm.newEvidence.comment = { title: 'New Suggested Revision', text:'Comment text.' };
 
