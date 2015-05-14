@@ -188,8 +188,8 @@
       ])
     }
     // Evidence Base
-    function add() {
-      return EvidenceResource.add().$promise
+    function add(reqObj) {
+      return EvidenceResource.add(reqObj).$promise
         .then(function(response) {
           // angular.copy(response, collection);
           return response.$promise;
