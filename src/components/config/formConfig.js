@@ -2,6 +2,11 @@
   'use strict';
   angular.module('civic.config')
     .constant('formConfig', {
+      options: {
+        labelColWidth: 2,
+        inputColWidth: 6,
+        helpColWidth: 4
+      },
       errorMessages: {
         '400': 'Bad Request',
         '401': 'Unauthorized',
@@ -28,36 +33,39 @@
     .config(formlyTemplatesConfig);
 
   // @ngInject
-  function formlyTemplatesConfig(formlyConfigProvider) {
+  function formlyTemplatesConfig(formlyConfigProvider, formConfig) {
+    var inputColWidth = formConfig.options.inputColWidth;
+    var labelColWidth = formConfig.options.labelColWidth;
+    var helpColWidth = formConfig.options.helpColWidth;
     // set templates here
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapLabel',
       template: [
-              '<label for="{{::id}}" class="col-sm-2 control-label">',
+              '<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
               '{{to.label}}',
               '</label>',
-              '<div class="col-sm-8">',
+              '<div class="col-sm-' + inputColWidth + '">',
               '<formly-transclude></formly-transclude>',
               '</div>'
             ].join(' ')
     });
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapHelp',
-      template: ['<label for="{{::id}}" class="col-sm-2 control-label">',
+      template: ['<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
               '{{to.label}}',
               '</label>',
-              '<div class="col-sm-8">',
+              '<div class="col-sm-'+ inputColWidth +'">',
               '<formly-transclude></formly-transclude>',
               '</div>',
-              '<div class="col-sm-2 control-help">',
-              '{{to.helpText}}',
+              '<div class="col-sm-'+ helpColWidth +' control-help">',
+              '<span class="small" ng-bind="to.helpText"></span>',
               '</div>'
             ].join(' ')
     });
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapCheckbox',
       template: [
-              '<div class="col-sm-offset-2 col-sm-8">',
+              '<div class="col-sm-offset-'+ labelColWidth +' col-sm-8">',
               '<formly-transclude></formly-transclude>',
               '</div>'
             ].join(' ')
