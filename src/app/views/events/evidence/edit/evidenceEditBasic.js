@@ -86,144 +86,157 @@
     vm.evidenceFields = [
       {
         key: 'name',
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Name',
           disabled: true,
-          value: 'vm.evidenceEdit.name'
+          value: 'vm.evidenceEdit.name',
+          helpText: 'Evidence Item Name is auto-generated.'
         }
       },
       {
         key: 'description',
-        type: 'horizontalTextarea',
+        type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 3,
           label: 'Description',
           value: 'vm.evidenceEdit.description',
-          minLength: 32
+          minLength: 32,
+          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
       {
         key: 'disease',
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Disease',
           value: 'vm.evidenceEdit.disease',
-          minLength: 32
+          minLength: 32,
+          helpText: 'Enter the disease or subtype that is associated with this evidence statement. This should be a disease in the disease-ontology that carries a DOID (e.g., 1909 for melanoma). If the disease to be entered is not in the disease ontology, enter it as free text. '
         }
       },
       {
         key: 'doid',
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'DOID',
           value: 'vm.evidenceEdit.doid',
           minLength: 8,
-          length: 8
+          length: 8,
+          helpText: 'Disease Ontology ID of the specific disease or disease subtype associated with the evidence statement (e.g., 1909 for melanoma).'
         }
       },
       {
         key: 'pubmed_id',
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Pubmed Id',
           value: 'vm.evidenceEdit.pubmed_id',
           minLength: 8,
-          length: 8
+          length: 8,
+          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
         }
       },
       {
-        key: 'drugs',
-        type: 'horizontalInput',
+        key: 'pubchem_id',
+        type: 'horizontalInputHelp',
         templateOptions: {
-          label: 'Drugs',
-          value: 'vm.evidenceEdit.drugs',
-          disabled: true
+          label: 'Pubchem Id',
+          value: 'vm.evidenceEdit.pubchem_id',
+          helpText: 'For predictive evidence, the PubChem ID for relevant drug (e.g., 44462760 for Dabrafenib).'
         }
       },
       {
         key: 'rating',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Rating',
           options: vm.formSelects.evidence_ratings,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines: One Star: Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. Two Stars: Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing. Three Stars: Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning. Four Stars: Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning. Five Stars: Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'
         }
       },
       {
         key: 'evidence_level',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.evidenceEdit.rating',
           options: vm.formSelects.evidence_levels,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Description of the study performed to produce the evidence statement'
         }
       },
       {
         key: 'evidence_type',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.evidenceEdit.evidence_type',
           options: vm.formSelects.evidence_types,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Type of clinical outcome associated with the evidence statement.'
         }
       },
       {
         key: 'evidence_direction',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.evidenceEdit.evidence_direction',
           options: vm.formSelects.evidence_directions,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event.'
         }
       },
       {
         key: 'clinical_significance',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Clinical Significance',
           value: 'vm.evidenceEdit.clinical_significance',
           options: vm.formSelects.clinical_significance,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, Not Applicable should be selected.'
         }
       },
       {
         key: 'variant_origin',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.evidenceEdit.variant_origin',
           options: vm.formSelects.variant_origins,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Origin of variant. (not super helpful description...)'
         }
       },
       { template: '<hr/>'},
       {
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         key: 'title',
         model: vm.evidenceEdit.comment,
         templateOptions: {
           label: 'Comment Title',
-          value: 'title'
+          value: 'title',
+          helpText: 'Initial Revision Comment Title'
         }
       },
       {
         key: 'text',
-        type: 'horizontalTextarea',
+        type: 'horizontalTextareaHelp',
         model: vm.evidenceEdit.comment,
         templateOptions: {
           rows: 5,
           label: 'Comment',
-          value: 'text'
+          value: 'text',
+          helpText: 'Initial Revision Comment Text'
         }
       }
     ];
