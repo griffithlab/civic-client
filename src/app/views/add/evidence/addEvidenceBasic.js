@@ -29,11 +29,13 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.newEvidence = {
-      name: '',
+      entrez_id: '673',
+      variant_name: 'V600E',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula sed lorem et cursus. In hac habitasse platea dictumst. Sed rhoncus, enim iaculis malesuada scelerisque, quam tortor porttitor tortor, id blandit tellus libero et lectus. Vestibulum nec purus eget purus suscipit ultricies non in dui.',
       disease: 'Breast Cancer',
       doid: '3908',
       pubmed_id: '20979473',
+      pubchem_id: '33042',
       drugs: {
         collection: []
       },
@@ -101,13 +103,34 @@
       //  }
       //},
       {
-        key: 'description',
-        type: 'horizontalTextarea',
+        key: 'entrez_id',
+        type: 'horizontalInputHelp',
         templateOptions: {
-          rows: 3,
+          label: 'Gene Entrez ID',
+          value: 'vm.newEvidence.entrez_id',
+          minLength: 32,
+          helpText: 'Entrez Gene ID (e.g., 673 for BRAF)'
+        }
+      },
+      {
+        key: 'variant_name',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Variant Name',
+          value: 'vm.newEvidence.variant_name',
+          minLength: 32,
+          helpText: 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).'
+        }
+      },
+      {
+        key: 'description',
+        type: 'horizontalTextareaHelp',
+        templateOptions: {
+          rows: 5,
           label: 'Description',
           value: 'vm.newEvidence.description',
-          minLength: 32
+          minLength: 32,
+          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
       {
@@ -117,123 +140,131 @@
           label: 'Disease',
           value: 'vm.newEvidence.disease',
           minLength: 32,
-          helpText: 'Disease Help Text.'
+          helpText: 'Enter the disease or subtype that is associated with this evidence statement. This should be a disease in the disease-ontology that carries a DOID (e.g., 1909 for melanoma). If the disease to be entered is not in the disease ontology, enter it as free text. '
         }
       },
       {
         key: 'doid',
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'DOID',
           value: 'vm.newEvidence.doid',
           minLength: 8,
-          length: 8
+          length: 8,
+          helpText: 'Disease Ontology ID of the specific disease or disease subtype associated with the evidence statement (e.g., 1909 for melanoma).'
         }
       },
       {
         key: 'pubmed_id',
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Pubmed Id',
           value: 'vm.newEvidence.pubmed_id',
           minLength: 8,
-          length: 8
+          length: 8,
+          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
         }
       },
       {
-        key: 'drugs',
-        type: 'horizontalInput',
-        model: vm.newEvidence.drugs,
+        key: 'pubchem_id',
+        type: 'horizontalInputHelp',
         templateOptions: {
-          disabled: true,
-          label: 'Drugs',
-          value: 'vm.newEvidence.drugs'
-          // disabled: true
+          label: 'Pubchem Id',
+          value: 'vm.newEvidence.pubchem_id',
+          helpText: 'For predictive evidence, the PubChem ID for relevant drug (e.g., 44462760 for Dabrafenib).'
         }
       },
       {
         key: 'rating',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Rating',
           options: vm.formSelects.evidence_ratings,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines: One Star: Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. Two Stars: Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing. Three Stars: Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning. Four Stars: Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning. Five Stars: Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'
         }
       },
       {
         key: 'evidence_level',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.newEvidence.rating',
           options: vm.formSelects.evidence_levels,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Description of the study performed to produce the evidence statement'
         }
       },
       {
         key: 'evidence_type',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_type',
           options: vm.formSelects.evidence_types,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Type of clinical outcome associated with the evidence statement.'
         }
       },
       {
         key: 'evidence_direction',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_direction',
           options: vm.formSelects.evidence_directions,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event.'
         }
       },
       {
         key: 'clinical_significance',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Clinical Significance',
           value: 'vm.newEvidence.clinical_significance',
           options: vm.formSelects.clinical_significance,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, Not Applicable should be selected.'
         }
       },
       {
         key: 'variant_origin',
-        type: 'horizontalSelect',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
           options: vm.formSelects.variant_origins,
           valueProp: 'value',
-          labelProp: 'label'
+          labelProp: 'label',
+          helpText: 'Origin of variant. (not super helpful)'
         }
       },
       { template: '<hr/>'},
       {
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         key: 'title',
         model: vm.newEvidence.comment,
         templateOptions: {
           label: 'Comment Title',
-          value: 'title'
+          value: 'title',
+          helpText: 'First Comment Title'
         }
       },
       {
         key: 'text',
-        type: 'horizontalTextarea',
+        type: 'horizontalTextareaHelp',
         model: vm.newEvidence.comment,
         templateOptions: {
           rows: 5,
           label: 'Comment',
-          value: 'text'
+          value: 'text',
+          helpText: 'First Comment Text'
         }
       }
     ];

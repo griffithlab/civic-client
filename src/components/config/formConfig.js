@@ -4,8 +4,8 @@
     .constant('formConfig', {
       options: {
         labelColWidth: 2,
-        inputColWidth: 6,
-        helpColWidth: 4
+        inputColWidth: 5,
+        helpColWidth: 5
       },
       errorMessages: {
         '400': 'Bad Request',
@@ -58,7 +58,7 @@
               '<formly-transclude></formly-transclude>',
               '</div>',
               '<div class="col-sm-'+ helpColWidth +' control-help">',
-              '<span class="small" ng-bind="to.helpText"></span>',
+              '<span class="small" ng-bind-html="to.helpText"></span>',
               '</div>'
             ].join(' ')
     });
@@ -83,7 +83,6 @@
       wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
-
     formlyConfigProvider.setType({
       name: 'horizontalSelect',
       extends: 'select',
@@ -91,9 +90,21 @@
     });
 
     formlyConfigProvider.setType({
+      name: 'horizontalSelectHelp',
+      extends: 'select',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
       name: 'horizontalTextarea',
       extends: 'textarea',
       wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalTextareaHelp',
+      extends: 'textarea',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
     formlyConfigProvider.setType({
