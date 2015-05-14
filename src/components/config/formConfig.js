@@ -58,6 +58,18 @@
     });
 
     formlyConfigProvider.setType({
+      name: 'horizontalSelect',
+      extends: 'select',
+      wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalTextarea',
+      extends: 'textarea',
+      wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
       name: 'horizontalCheckbox',
       extends: 'checkbox',
       wrapper: ['horizontalBootstrapCheckbox', 'bootstrapHasError']

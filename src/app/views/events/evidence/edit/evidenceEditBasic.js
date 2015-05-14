@@ -86,7 +86,7 @@
     vm.evidenceFields = [
       {
         key: 'name',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'Name',
           disabled: true,
@@ -95,7 +95,7 @@
       },
       {
         key: 'description',
-        type: 'textarea',
+        type: 'horizontalTextarea',
         templateOptions: {
           rows: 3,
           label: 'Description',
@@ -105,7 +105,7 @@
       },
       {
         key: 'disease',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'Disease',
           value: 'vm.evidenceEdit.disease',
@@ -114,7 +114,7 @@
       },
       {
         key: 'doid',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'DOID',
           value: 'vm.evidenceEdit.doid',
@@ -124,7 +124,7 @@
       },
       {
         key: 'pubmed_id',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'Pubmed Id',
           value: 'vm.evidenceEdit.pubmed_id',
@@ -134,7 +134,7 @@
       },
       {
         key: 'drugs',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'Drugs',
           value: 'vm.evidenceEdit.drugs',
@@ -143,7 +143,7 @@
       },
       {
         key: 'rating',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Rating',
           options: vm.formSelects.evidence_ratings,
@@ -153,7 +153,7 @@
       },
       {
         key: 'evidence_level',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.evidenceEdit.rating',
@@ -164,7 +164,7 @@
       },
       {
         key: 'evidence_type',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.evidenceEdit.evidence_type',
@@ -175,7 +175,7 @@
       },
       {
         key: 'evidence_direction',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.evidenceEdit.evidence_direction',
@@ -186,7 +186,7 @@
       },
       {
         key: 'clinical_significance',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Clinical Significance',
           value: 'vm.evidenceEdit.clinical_significance',
@@ -197,7 +197,7 @@
       },
       {
         key: 'variant_origin',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.evidenceEdit.variant_origin',
@@ -208,7 +208,7 @@
       },
       { template: '<hr/>'},
       {
-        type: 'input',
+        type: 'horizontalInput',
         key: 'title',
         model: vm.evidenceEdit.comment,
         templateOptions: {
@@ -218,7 +218,7 @@
       },
       {
         key: 'text',
-        type: 'textarea',
+        type: 'horizontalTextarea',
         model: vm.evidenceEdit.comment,
         templateOptions: {
           rows: 5,

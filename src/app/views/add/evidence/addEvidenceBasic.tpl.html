@@ -1,7 +1,9 @@
 <div class="addEvidenceBasic">
-  <div class="row instructions">
+  <div class="row">
     <div class="col-xs-12">
-      <p>Complete the form below then press 'Submit New Evidence'.</p>
+      <div class="edit-instructions">
+        <p>Complete your edits, then click the 'Submit Revision for Review' button. <span ng-if="vm.isAdmin">As you are an Admin, you may also immediately update this Evidence Item by pressing the 'Apply' button.</span></p>
+      </div>
     </div>
   </div>
   <div class="row messages">
@@ -35,22 +37,29 @@
     </div>
   </div>
   <div class="form">
-    <div class="col-xs-12">
-      <form class="form-horizontal">
-        <formly-form options="vm.options" model="vm.newEvidence" fields="vm.evidenceFields">
-          <div class="buttons">
-            <div class="pull-left">
-              <cancel-button></cancel-button>
-            </div>
-            <div class="pull-right">
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal">
+          <formly-form options="vm.options" model="vm.newEvidence" fields="vm.evidenceFields">
+
+          </formly-form>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="buttons">
+          <div class="pull-left">
+            <cancel-button></cancel-button>
+          </div>
+          <div class="pull-right">
             <span ng-if="vm.isAuthenticated">
             <!--<button type="submit" class="btn btn-default" ng-if="vm.isAdmin" ng-click="vm.apply(vm.newEvidence, vm.options)">Apply</button>-->
             <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.newEvidence, vm.options)">Submit New Evidence</button>
           </span>
-            </div>
           </div>
-        </formly-form>
-      </form>
+        </div>
+      </div>
     </div>
   </div>
   <div class="dev">

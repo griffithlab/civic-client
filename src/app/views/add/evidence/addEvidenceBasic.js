@@ -102,7 +102,7 @@
       //},
       {
         key: 'description',
-        type: 'textarea',
+        type: 'horizontalTextarea',
         templateOptions: {
           rows: 3,
           label: 'Description',
@@ -144,6 +144,7 @@
         type: 'horizontalInput',
         model: vm.newEvidence.drugs,
         templateOptions: {
+          disabled: true,
           label: 'Drugs',
           value: 'vm.newEvidence.drugs'
           // disabled: true
@@ -151,7 +152,7 @@
       },
       {
         key: 'rating',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Rating',
           options: vm.formSelects.evidence_ratings,
@@ -161,7 +162,7 @@
       },
       {
         key: 'evidence_level',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.newEvidence.rating',
@@ -172,7 +173,7 @@
       },
       {
         key: 'evidence_type',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_type',
@@ -183,7 +184,7 @@
       },
       {
         key: 'evidence_direction',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_direction',
@@ -194,7 +195,7 @@
       },
       {
         key: 'clinical_significance',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Clinical Significance',
           value: 'vm.newEvidence.clinical_significance',
@@ -205,7 +206,7 @@
       },
       {
         key: 'variant_origin',
-        type: 'select',
+        type: 'horizontalSelect',
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
@@ -226,7 +227,7 @@
       },
       {
         key: 'text',
-        type: 'textarea',
+        type: 'horizontalTextarea',
         model: vm.newEvidence.comment,
         templateOptions: {
           rows: 5,

@@ -38,19 +38,26 @@
   </div>
   <div class="row edit-form">
     <div class="col-xs-12">
-      <formly-form options="vm.options" model="vm.evidenceEdit" fields="vm.evidenceFields">
-        <div class="buttons">
-          <div class="pull-left">
-            <cancel-button></cancel-button>
-          </div>
-          <div class="pull-right">
-            <span ng-if="vm.isAuthenticated">
-            <button type="submit" class="btn btn-default" ng-if="vm.isAdmin" ng-click="vm.apply(vm.evidenceEdit, vm.options)">Apply</button>
-            <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.evidenceEdit, vm.options)">Submit Revision for Review</button>
-          </span>
-          </div>
+      <form class="form-horizontal">
+        <formly-form options="vm.options" model="vm.evidenceEdit" fields="vm.evidenceFields">
+
+        </formly-form>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="buttons">
+        <div class="pull-left">
+          <cancel-button></cancel-button>
         </div>
-      </formly-form>
+        <div class="pull-right">
+              <span ng-if="vm.isAuthenticated">
+                <button type="submit" class="btn btn-default" ng-if="vm.isAdmin" ng-click="vm.apply(vm.evidenceEdit, vm.options)">Apply</button>
+                <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.evidenceEdit, vm.options)">Submit Revision for Review</button>
+              </span>
+        </div>
+      </div>
     </div>
   </div>
 
