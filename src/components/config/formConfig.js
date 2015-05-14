@@ -41,7 +41,19 @@
               '</div>'
             ].join(' ')
     });
-
+    formlyConfigProvider.setWrapper({
+      name: 'horizontalBootstrapHelp',
+      template: ['<label for="{{::id}}" class="col-sm-2 control-label">',
+              '{{to.label}}',
+              '</label>',
+              '<div class="col-sm-8">',
+              '<formly-transclude></formly-transclude>',
+              '</div>',
+              '<div class="col-sm-2 control-help">',
+              '{{to.helpText}}',
+              '</div>'
+            ].join(' ')
+    });
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapCheckbox',
       template: [
@@ -56,6 +68,13 @@
       extends: 'input',
       wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
     });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalInputHelp',
+      extends: 'input',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+
 
     formlyConfigProvider.setType({
       name: 'horizontalSelect',

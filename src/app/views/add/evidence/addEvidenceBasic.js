@@ -112,11 +112,12 @@
       },
       {
         key: 'disease',
-        type: 'horizontalInput',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Disease',
           value: 'vm.newEvidence.disease',
-          minLength: 32
+          minLength: 32,
+          helpText: 'Disease Help Text.'
         }
       },
       {
