@@ -41,10 +41,13 @@
             response: cacheInterceptor
           }
         },
+        add: {
+          method: 'POST',
+          cache: false
+        },
         apply: {
           method: 'PATCH'
         },
-
         // Base Evidence Refresh
         queryFresh: { // get list of evidence
           method: 'GET',
@@ -150,6 +153,7 @@
       },
 
       // Evidence Base
+      add: add,
       query: query,
       get: get,
       update: update,
@@ -184,6 +188,13 @@
       ])
     }
     // Evidence Base
+    function add() {
+      return EvidenceResource.add().$promise
+        .then(function(response) {
+          // angular.copy(response, collection);
+          return response.$promise;
+        });
+    }
     function query() {
       return EvidenceResource.query().$promise
         .then(function(response) {
