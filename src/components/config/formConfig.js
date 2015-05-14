@@ -24,5 +24,44 @@
         '500': 'The CIViC server experienced an unrecoverable error, please check the console output for more information.',
         '501': 'The CIViC client attempted to utilize an unimplemented route.'
       }
+    })
+    .config(formlyTemplatesConfig);
+
+  // @ngInject
+  function formlyTemplatesConfig(formlyConfigProvider) {
+    // set templates here
+    formlyConfigProvider.setWrapper({
+      name: 'horizontalBootstrapLabel',
+      template: [
+              '<label for="{{::id}}" class="col-sm-2 control-label">',
+              '{{to.label}}',
+              '</label>',
+              '<div class="col-sm-8">',
+              '<formly-transclude></formly-transclude>',
+              '</div>'
+            ].join(' ')
     });
+
+    formlyConfigProvider.setWrapper({
+      name: 'horizontalBootstrapCheckbox',
+      template: [
+              '<div class="col-sm-offset-2 col-sm-8">',
+              '<formly-transclude></formly-transclude>',
+              '</div>'
+            ].join(' ')
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalInput',
+      extends: 'input',
+      wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalCheckbox',
+      extends: 'checkbox',
+      wrapper: ['horizontalBootstrapCheckbox', 'bootstrapHasError']
+    });
+  }
+
 })();

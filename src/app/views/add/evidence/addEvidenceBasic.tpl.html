@@ -36,19 +36,21 @@
   </div>
   <div class="form">
     <div class="col-xs-12">
-      <formly-form options="vm.options" model="vm.newEvidence" fields="vm.evidenceFields">
-        <div class="buttons">
-          <div class="pull-left">
-            <cancel-button></cancel-button>
-          </div>
-          <div class="pull-right">
+      <form class="form-horizontal">
+        <formly-form options="vm.options" model="vm.newEvidence" fields="vm.evidenceFields">
+          <div class="buttons">
+            <div class="pull-left">
+              <cancel-button></cancel-button>
+            </div>
+            <div class="pull-right">
             <span ng-if="vm.isAuthenticated">
             <!--<button type="submit" class="btn btn-default" ng-if="vm.isAdmin" ng-click="vm.apply(vm.newEvidence, vm.options)">Apply</button>-->
             <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.newEvidence, vm.options)">Submit New Evidence</button>
           </span>
+            </div>
           </div>
-        </div>
-      </formly-form>
+        </formly-form>
+      </form>
     </div>
   </div>
   <div class="dev">

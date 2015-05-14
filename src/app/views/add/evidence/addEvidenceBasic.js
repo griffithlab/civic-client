@@ -34,7 +34,9 @@
       disease: 'Breast Cancer',
       doid: '3908',
       pubmed_id: '20979473',
-      drugs: [4,5],
+      drugs: {
+        collection: []
+      },
       rating: 4,
       evidence_level: 'C',
       evidence_type: 'Predictive',
@@ -110,7 +112,7 @@
       },
       {
         key: 'disease',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'Disease',
           value: 'vm.newEvidence.disease',
@@ -119,7 +121,7 @@
       },
       {
         key: 'doid',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'DOID',
           value: 'vm.newEvidence.doid',
@@ -129,7 +131,7 @@
       },
       {
         key: 'pubmed_id',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'Pubmed Id',
           value: 'vm.newEvidence.pubmed_id',
@@ -139,8 +141,8 @@
       },
       {
         key: 'drugs',
-        type: 'input',
-//        model: vm.newEvidence.drugs,
+        type: 'horizontalInput',
+        model: vm.newEvidence.drugs,
         templateOptions: {
           label: 'Drugs',
           value: 'vm.newEvidence.drugs'
@@ -214,7 +216,7 @@
       },
       { template: '<hr/>'},
       {
-        type: 'input',
+        type: 'horizontalInput',
         key: 'title',
         model: vm.newEvidence.comment,
         templateOptions: {
@@ -233,8 +235,6 @@
         }
       }
     ];
-
-
 
     vm.submit = function(newEvidence, options) {
       newEvidence.evidenceId = newEvidence.id;
