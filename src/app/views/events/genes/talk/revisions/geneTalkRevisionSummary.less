@@ -1,0 +1,101 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.geneTalkRevisionSummary {
+  min-height: 300px;
+  padding: 0 @contentPadding @contentPadding @contentPadding;
+  border-bottom-right-radius: @border-radius-large;
+  border-bottom-left-radius: @border-radius-large;
+  border-bottom: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+
+  .revision-header {
+    #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
+    .stripes-bg {
+      .clearfix();
+      background-image: url('/assets/images/grey_stripes.png');
+    }
+    .name {
+      h3 {
+        display: block;
+        margin: 0;
+        padding: @contentPadding/2 0;
+      }
+    }
+    .status {
+      span {
+        display: block;
+        padding: .3em .5em;
+        margin: @contentPadding/2 0;
+        font-weight: bold;
+        background-color: @pageBackground2;
+        border-radius: @border-radius-small;
+      }
+    }
+  }
+
+  .diffs-header, .comments-header {
+    background-color: @pageBackground2;
+    border-bottom: #CCC;
+    margin-bottom: @contentPadding;
+  }
+
+  .diffs {
+    margin-top: @contentPadding;
+  }
+
+  .diffs > ul {
+    list-style: none;
+    margin: 0;
+    margin-bottom: @contentPadding;
+    padding: 0;
+  }
+
+  .admin-buttons {
+    padding-bottom: @contentPadding;
+    padding-top: @contentPadding;
+    border-top: 1px solid #CCC
+  }
+
+  .comment-list {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .revision-instructions  {
+    background-color: @pageBackground2;
+    border-radius: @border-radius-small;
+    padding: @contentPadding;
+    margin: @contentPadding 0;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .revision-form {
+    .clearfix();
+  }
+
+  .revision-errors, .revision-messages {
+    .alert:first-of-type {
+      margin-top: @contentPadding;
+    }
+    .alert {
+      margin-bottom: @contentPadding;
+    }
+  }
+
+  .revision-errors {
+
+  }
+
+  .revision-messages {
+  }
+}
+

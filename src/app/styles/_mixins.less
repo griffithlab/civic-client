@@ -1,0 +1,24 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.fullBleed() {
+  // swap horizontal margins with padding, to display a full-width background-color/image
+  // use on first child of a BS3 row div
+  margin: 0 -(@contentPadding);
+  padding: 0 @contentPadding;
+}
+
+.leftBleed() {
+  // swap left margin with padding, to display a background flush with the left side of a row
+  // use on first child of a BS3 row div
+  margin-left: -(@contentPadding);
+  padding-left: @contentPadding;
+}
+
+.rightBleed() {
+  // swap right margin with padding, to display a background flush with the left side of a row
+  // use on first child of a BS3 row div
+  margin-right: -(@contentPadding);
+  padding-right: @contentPadding;
+}

@@ -1,0 +1,41 @@
+<div class="myGeneInfoDialog">
+  <div class="row header">
+    <div class="col-xs-12">
+      <h3>Gene {{ geneInfo.symbol }} Details from <a href="http://mygene.info/" target="_new">MyGene.info</a></h3>
+    </div>
+  </div>
+  <div class="row summary">
+    <div class="col-xs-12">
+      <p>
+        <strong>Gene Summary:</strong><br/>
+        <span ng-bind-html="geneInfo.summary | unsafe"></span>
+      </p>
+    </div>
+  </div>
+  <div class="row synonyms">
+    <div class="col-xs-12">
+      <p>
+        <strong>Synonyms:</strong><br/>
+        <span ng-bind="geneInfo.alias"></span>
+      </p>
+    </div>
+  </div>
+  <div class="row grid-row protein-domains">
+    <div class="col-xs-12">
+      <div ui-grid="ctrl.gridOptions.proteinDomains" class="dataGrid" ui-grid-auto-resize></div>
+    </div>
+  </div>
+  <div class="row grid-row pathways">
+    <div class="col-xs-12">
+      <div ui-grid="ctrl.gridOptions.pathways" class="dataGrid" ui-grid-auto-resize></div>
+    </div>
+  </div>
+  <div class="row buttons">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <button type="button" class="btn btn-default close" ng-click="ctrl.closeDialog()">Done</button>
+      </div>
+    </div>
+  </div>
+
+</div>

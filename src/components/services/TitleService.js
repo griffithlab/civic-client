@@ -13,32 +13,35 @@
       var titleScope = {
         gene: {},
         variant: {},
-        evidenceItem: {},
+        evidence: {},
         variantGroup: {}
       };
 
+      // TODO: get needed entity resources by querying $state.$current.globals
+      // note: requires that all resources necessary for parsing a state's titleExp must be resolved by ui-router state config
+
       // construct promises for relevant entities
       if(_.has(toParams, 'geneId') && titleScope.gene.entrez_id !== toParams.geneId) {
-        var genePromise = Genes.get({'geneId': toParams.geneId }).$promise;
+        var genePromise = Genes.get(toParams.geneId);
       }
 
-      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId')) && titleScope.variant.id !== toParams.variantId) {
-        var variantPromise = Variants.get({'geneId': toParams.geneId, 'variantId': toParams.variantId }).$promise;
+      if(_.has(toParams, 'variantId') && titleScope.variant.id !== toParams.variantId) {
+        var variantPromise = Variants.get(toParams.variantId);
       }
 
-      if((_.has(toParams, 'variantGroupId')) && titleScope.variantGroup.id !== toParams.variantGroupId) {
-        var variantGroupsPromise = VariantGroups.get({'variantGroupId': toParams.variantGroupId }).$promise;
+      if(_.has(toParams, 'variantGroupId') && titleScope.variantGroup.id !== toParams.variantGroupId) {
+        var variantGroupsPromise = VariantGroups.get(toParams.variantGroupId);
       }
 
-      if((_.has(toParams, 'geneId') && _.has(toParams, 'variantId') && _.has(toParams, 'evidenceItemId')) && titleScope.evidenceItem.id !== toParams.evidenceItemId) {
-        var evidenceItemPromise = Evidence.get({'geneId': toParams.geneId, 'variantId': toParams.variantId, 'evidenceItemId': toParams.evidenceItemId }).$promise;
+      if(_.has(toParams, 'evidenceId') && titleScope.evidence.id !== toParams.evidenceId) {
+        var evidencePromise = Evidence.get(toParams.evidenceId);
       }
 
       // resolve promises, apply $parse with constructed title scope
-      $q.all({ gene: genePromise, variant: variantPromise, evidenceItem: evidenceItemPromise, variantGroup: variantGroupsPromise }).then(function(resolutions) {
+      $q.all({ gene: genePromise, variant: variantPromise, evidence: evidencePromise, variantGroup: variantGroupsPromise }).then(function(resolutions) {
         titleScope.gene = resolutions.gene;
         titleScope.variant = resolutions.variant;
-        titleScope.evidenceItem = resolutions.evidenceItem;
+        titleScope.evidence = resolutions.evidence;
         titleScope.variantGroup = resolutions.variantGroup;
         title = $parse(toState.data.titleExp)(titleScope);
         $rootScope.$broadcast('title:update', { newTitle: title });

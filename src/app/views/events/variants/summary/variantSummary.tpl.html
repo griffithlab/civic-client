@@ -1,0 +1,21 @@
+<div class="variantSummary">
+  <div class="row {{ backgroundColor }}">
+    <div class="col-xs-12">
+      <p ng-bind-html="variant.description | unsafe"></p>
+    </div>
+  </div>
+  <div ng-if="showEvidenceGrid === true">
+    <div class="row">
+      <div class="col-xs-12 evidence-item-grid">
+        <evidence-grid evidence="evidence"></evidence-grid>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="evidence-view">
+          <ui-view></ui-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

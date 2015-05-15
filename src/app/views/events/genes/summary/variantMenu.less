@@ -1,0 +1,74 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.variantMenu {
+  .clearfix();
+  .fullBleed();
+  border-bottom-right-radius: @border-radius-large;
+  min-height: 30em;
+  padding-top: 3px; // get the bottom edges of top .title to align w/ bottom of variant tab header
+  padding-bottom: 2*@contentPadding;
+  @tab-padding: .5em;
+
+  .title {
+    padding: @tab-padding;
+    background-color: @pageBackground3;
+    .leftBleed();
+    border-top-right-radius: @border-radius-base;
+    border-bottom-right-radius: @border-radius-base;
+  }
+
+  .sub-title {
+    display: inline-block;
+    padding: @tab-padding;
+    font-weight: bold;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    padding: 0;
+    a {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+
+  }
+
+  .variants {
+    a {
+      display: inline-block;
+      padding: @tab-padding;
+    }
+
+    li.active {
+      margin-right: -@contentPadding; // pull li background all the way to edge of adjacent ui-view
+      background-color: #FFF;
+      border-top-left-radius: @border-radius-base;
+      border-bottom-left-radius: @border-radius-base;
+      a {
+      }
+    }
+  }
+
+  .variant-groups {
+    .variants {
+      li {
+        margin-left: 1em;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,39 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.variantEditBasic {
+  .fullBleed();
+  padding-top: @contentPadding;
+
+
+  .edit-instructions {
+    background-color: @pageBackground2;
+    border-radius: @border-radius-small;
+    padding: @contentPadding;
+    margin-bottom: @contentPadding;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .edit-form {
+    .clearfix();
+  }
+
+  .edit-errors, .edit-messages {
+    .alert {
+      margin-bottom: @contentPadding;
+    }
+  }
+
+  .edit-errors {
+
+  }
+
+  .edit-messages {
+  }
+
+
+}

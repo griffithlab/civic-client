@@ -1,0 +1,78 @@
+<div class="evidenceEditBasic {{ vm.styles.edit.editBackgroundColor }}">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="edit-instructions">
+        <p>Complete your edits, then click the 'Submit Revision for Review' button. <span ng-if="vm.isAdmin">As you are an Admin, you may also immediately update this Evidence Item by pressing the 'Apply' button.</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formErrors" class="edit-errors">
+        <div ng-message="500" class="alert alert-danger">
+          <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
+        </div>
+        <div ng-message="401" class="alert alert-danger">
+          <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
+        </div>
+        <div ng-message="403" class="alert alert-danger">
+          <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
+        </div>
+        <div ng-message="409" class="alert alert-danger">
+          <strong class="status">409 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formMessages" class="edit-messages">
+        <div ng-message="submitSuccess" class="alert alert-success">
+          <strong class="status">Success</strong> - <span class="message">Your revision was successfully submitted.</span>
+        </div>
+        <div ng-message="applySuccess" class="alert alert-success">
+          <strong class="status">Success</strong> - <span class="message">Your revision was successfully applied.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row edit-form">
+    <div class="col-xs-12">
+      <form class="form-horizontal">
+        <formly-form options="vm.options" model="vm.evidenceEdit" fields="vm.evidenceFields">
+
+        </formly-form>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="buttons">
+        <div class="pull-left">
+          <cancel-button></cancel-button>
+        </div>
+        <div class="pull-right">
+              <span ng-if="vm.isAuthenticated">
+                <button type="submit" class="btn btn-default" ng-if="vm.isAdmin" ng-click="vm.apply(vm.evidenceEdit, vm.options)">Apply</button>
+                <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.evidenceEdit, vm.options)">Submit Revision for Review</button>
+              </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+      <!--<h3>Evidence Edit</h3>-->
+      <!--<pre ng-bind="vm.evidenceEdit|json"></pre>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+      <!--<h3>Evidence Fields</h3>-->
+      <!--<pre ng-bind="vm.evidenceFields|json"></pre>-->
+    <!--</div>-->
+  <!--</div>-->
+
+</div>

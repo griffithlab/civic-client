@@ -1,0 +1,21 @@
+<div class="EvidenceTalkView">
+  <entity-talk-view view-model="vm.EvidenceTalkViewModel" revisions-model="vm.EvidenceRevisionsModel" view-options="vm.EvidenceTalkViewOptions">
+    <div class="row">
+      <div class="col-xs-12">
+        <evidence-summary></evidence-summary>
+      </div>
+    </div>
+    <div class="row evidence-talk-tabs">
+      <div class="col-xs-12">
+        <entity-talk-tabs vertical="false" justified="left"></entity-talk-tabs>
+      </div>
+    </div>
+    <div class="row entity-talk-content {{ vm.EvidenceTalkViewOptions.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
+
+        </ui-view>
+      </div>
+    </div>
+  </entity-talk-view>
+</div>

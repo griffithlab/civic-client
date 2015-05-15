@@ -61,15 +61,22 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
 
   return gulp.src('src/*.html')
     .pipe($.inject(
+      // stream JS files in app/component directories
       gulp.src('.tmp/{app,components}/**/*.js'),
       {
         starttag: '<!-- inject:partials -->',
         addRootSlash: false,
         addPrefix: '../'
       }))
-    .pipe(assets = $.useref.assets()) // remove links to individual dev files from index.html
-    .pipe($.rev()) // append revision hash to static files
-    .pipe(jsFilter) // handle scripts
+
+    // parse index.html for links to asset (scripts, html, css), group, concatenate, add to stream
+    .pipe(assets = $.useref.assets())
+
+    // init asset revisioning with gulp-rev on each block
+    .pipe($.rev())
+
+    // pluck javascript block, store everything else
+    .pipe(jsFilter)
     .pipe($.sourcemaps.init()) // initialize sourcemap generation
     .pipe($.ngAnnotate()) // add angular dependency injection to protect from minification
     .pipe($.uglify({ // minify js
@@ -83,23 +90,38 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     ))
     .pipe($.sourcemaps.write('.')) // write sourcemaps
     .pipe(jsFilter.restore())
-    .pipe(cssFilter) // handle CSS
+    // restore non-js blocks to stream
+
+    // pluck CSS, store non-css files
+    .pipe(cssFilter)
     .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts')) // rewrite bootstrap font urls
     .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')')) // rewrite ui-grid font urls
     .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')')) // rewrite font-awesome fonts
     .pipe($.csso()) // minify CSS
     .pipe(cssFilter.restore())
+    // restore non-css blocks to stream
+
+    // strip asset links from index.html, insert links to concatenated, minified assets
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.revReplace()) // substitute new filenames in index.html
-    .pipe(htmlFilter) // handle HTML
+
+    // apply revisions to concatenated assets
+    .pipe($.revReplace())
+
+    // pluck HTML, store everything else
+    .pipe(htmlFilter)
     .pipe($.minifyHtml({ // minify HTML
       empty: true,
       spare: true,
       quotes: true
     }))
     .pipe(htmlFilter.restore())
+    // restore non-HTML files to stream
+
+    // save files
     .pipe(gulp.dest('dist'))
+
+    // generate size report
     .pipe($.size());
 });
 

@@ -1,0 +1,19 @@
+<div class="evidenceTalkRevisions">
+  <div class="row revisions-list {{ viewOptions.styles.view.summaryBackgroundColor }}">
+    <div class="col-xs-12">
+      <revisions-grid changes="evidenceRevisions.data.collection" base-state="events.genes.summary.variants.summary.evidence.talk.revisions"></revisions-grid>
+    </div>
+  </div>
+  <div class="row revisions-view {{ viewOptions.styles.view.talkBackgroundColor }}">
+    <div class="col-xs-12">
+      <ui-view>
+
+      </ui-view>
+    </div>
+  </div>
+  <!--<div class="row">-->
+  <!--<div class="col-xs-12">-->
+  <!--<pre ng-bind="evidenceRevisions.data.collection|json"></pre>-->
+  <!--</div>-->
+  <!--</div>-->
+</div>

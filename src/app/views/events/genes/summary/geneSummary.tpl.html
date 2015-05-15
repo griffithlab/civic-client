@@ -1,0 +1,22 @@
+<div class="geneSummary">
+  <div class="row {{ backgroundColor }}">
+    <div class="col-xs-6">
+      <gene-description gene-data="gene"></gene-description>
+    </div>
+    <div class="col-xs-6">
+      <my-gene-info gene-info="myGeneInfo"></my-gene-info>
+    </div>
+  </div>
+  <div ng-if="showMenu === true">
+    <div class="row">
+      <div class="col-xs-2">
+        <variant-menu options="GenesViewOptions.styles.variantMenu"></variant-menu>
+      </div>
+      <div class="col-xs-10 variant-view">
+        <ui-view>
+          <div class="view-corner"><div class="corner-edge"></div></div>
+        </ui-view>
+      </div>
+    </div>
+  </div>
+</div>

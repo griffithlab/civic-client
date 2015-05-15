@@ -5,7 +5,8 @@
     .filter('arrayToList', arrayToListFilter)
     .filter('encodeUri', encodeUri)
     .filter('capitalize', capitalizeFilter)
-    .filter('decodeUri', decodeUri);
+    .filter('decodeUri', decodeUri)
+    .filter('unsafe', unsafe);
 
   // @ngInject
   function labelifyFilter() {
@@ -60,5 +61,8 @@
 
     };
   }
+
+  // @ngInject
+  function unsafe($sce) { return $sce.trustAsHtml; }
 
 })();

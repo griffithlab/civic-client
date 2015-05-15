@@ -1,0 +1,54 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.evidenceSummary {
+  .fullBleed();
+  padding-top: @contentPadding;
+  padding-bottom: @contentPadding;
+  border-bottom-right-radius: @border-radius-large;
+  border-bottom-left-radius: @border-radius-large;
+
+  .table {
+    margin-bottom: 0!important;
+  }
+
+  .name {
+    text-align: right;
+    font-weight: bold;
+  }
+  .levelBadge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    text-align: center;
+    color: #FFF;
+  }
+
+  .levelA {
+    background-color: #33b358;
+  }
+
+  .levelB {
+    background-color: #08b1e6;
+  }
+
+  .levelC {
+    background-color: #616eb2;
+  }
+
+  .levelD {
+    background-color: #f68f37;
+  }
+
+  .levelE {
+    background-color: #e24759;
+    color: #057abe;
+  }
+
+  .levelF {
+    background-color: #fce452;
+    color: #057abe;
+  }
+}

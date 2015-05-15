@@ -1,0 +1,21 @@
+<div class="VariantTalkView">
+  <entity-talk-view view-model="vm.VariantsTalkViewModel" revisions-model="vm.VariantRevisionsModel" view-options="vm.VariantsTalkViewOptions">
+    <div class="row">
+      <div class="col-xs-12">
+        <variant-summary show-evidence-grid="false"></variant-summary>
+      </div>
+    </div>
+    <div class="row variant-talk-tabs">
+      <div class="col-xs-12">
+        <entity-talk-tabs vertical="false" justified="left"></entity-talk-tabs>
+      </div>
+    </div>
+    <div class="row entity-talk-content {{ vm.VariantsTalkViewOptions.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
+
+        </ui-view>
+      </div>
+    </div>
+  </entity-talk-view>
+</div>

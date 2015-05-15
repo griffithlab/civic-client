@@ -1,15 +1,20 @@
 (function() {
   'use strict';
   angular.module('civic.services')
+    .factory('DatatablesResource', DatatablesResource)
     .factory('Datatables', DatatablesService);
 
   // ?count=10&page=2&sorting[entrez_gene]=asc&sorting[variant]=desc&filter[entrez_gene]=flt
   // @ngInject
-  function DatatablesService($resource) {
-    return $resource('/api/datatables/:perspective',
-      {},
+  function DatatablesResource($resource) {
+    return $resource('/api/datatables/:mode',
       {
-        get: {
+        mode: '@mode',
+        count: '@count',
+        page: '@page'
+      },
+      {
+        query: {
           method: 'GET',
           isArray: false,
           transformResponse: function(data) {
@@ -27,6 +32,18 @@
           }
         }
       });
+  }
+
+  // @ngInject
+  function DatatablesService(DatatablesResource) {
+    return {
+      query: function(reqObj) {
+        return DatatablesResource.query(reqObj).$promise
+          .then(function(response) {
+            return response;
+          })
+      }
+    }
   }
 
 })();

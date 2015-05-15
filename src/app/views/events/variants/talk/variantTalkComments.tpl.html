@@ -1,0 +1,23 @@
+<div class="variantTalkComments">
+  <div class="row">
+    <div class="col-xs-12 comment-list">
+      <div ng-switch="ctrl.variantTalkModel.data.comments.length > 0">
+        <div ng-switch-when="true">
+          <ul class="comments">
+            <li ng-repeat="comment in ctrl.variantTalkModel.data.comments">
+              <entity-comment comment-data="comment"></entity-comment>
+            </li>
+          </ul>
+        </div>
+        <div ng-switch-default>
+          <p>No Comments for Variant {{ ctrl.variantTalkModel.data.item.name }}. You may add one below.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 comment-form">
+      <entity-comment-form type="entity" entity-model="ctrl.variantTalkModel"></entity-comment-form>
+    </div>
+  </div>
+</div>

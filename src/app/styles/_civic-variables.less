@@ -8,12 +8,23 @@
 @civicYellow: #ffdd22;
 @civicGreen: #2f7d22;
 @civicRed: #942830;
+@civicBlue: #31369c;
 
-@pageBackground: #FFF;
-@pageBackground2: #EFEFEF;
-@pageBackground3: #DDD;
-@pageBackground4: #F6F6F6;
+@pageBackground: #FFFFFF;
+@pageBackground2: #F3F3F3;
+@pageBackground3: #DEDEDE;
+@pageBackground4: #CDCDCD;
 @tableBgColor: #FFF;
+
+// classes for more easily assigning colors in templates -
+// we can't assign .less colors in scripts or HTML, but have plenty of ways to apply CSS styles
+.pageBackground { background-color: @pageBackground; };
+.pageBackground2 { background-color: @pageBackground2; };
+.pageBackground3 { background-color: @pageBackground3; };
+.pageBackground4 { background-color: @pageBackground4; };
+
+// horizontal tabs
+@tabExtCornerRadius: 10px;
 
 @menuBarBgSm: @civicPurple;
 

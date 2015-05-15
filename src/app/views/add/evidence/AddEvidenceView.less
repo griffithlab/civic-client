@@ -1,0 +1,30 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.AddEvidenceView {
+
+  .gradient-bg {
+    .clearfix();
+    border-bottom: 1px solid #CCC;
+    #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
+  }
+
+  .stripes-bg {
+    background-image: url('/assets/images/grey_stripes.png') !important;
+  }
+
+  .title {
+    h3 {
+      padding: .5em 0;
+      margin: 0;
+    }
+  }
+
+
+  .entity-action {
+    color: #999;
+  }
+
+}

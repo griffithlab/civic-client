@@ -1,0 +1,14 @@
+<div class="variantGroupSummary">
+  <div class="row">
+    <div class="col-xs-12">
+      <p ng-bind-html="variantGroup.description|unsafe"></p>
+    </div>
+  </div>
+  <div ng-if="showVariantGrid === true">
+    <div class="row variant-grid">
+      <div class="col-xs-12">
+        <variant-grid variants="variants"></variant-grid>
+      </div>
+    </div>
+  </div>
+</div>

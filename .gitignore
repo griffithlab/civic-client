@@ -3,3 +3,8 @@ bower_components
 dist
 .tmp
 .sass-cache
+wallaby.conf.js
+docs/*
+!docs/img/
+!.gitkeep
+

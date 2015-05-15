@@ -1,0 +1,64 @@
+<div class="entityLogEntry">
+  <div ng-switch="ctrl.entry.type">
+    <!-- REVISION ENTRY -->
+    <div ng-switch-when="revision">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="title-block">
+            <div class="user-image">
+              <user-image user="ctrl.user" height="32" width="32"></user-image>
+            </div>
+            <div class="entry-title">
+              <h4 class="title">Revision Submitted {{ctrl.entry.action|capitalize}}</h4>
+          <span class="small">by
+            <strong><span ng-bind="ctrl.username">ctrl.username</span></strong>
+            <span ng-bind="ctrl.entry.created_at | timeAgo">comment.created_at</span>
+          </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUGGESTED REVISION ENTRY -->
+    <div ng-switch-when="history">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="title-block">
+            <div class="user-image">
+              <user-image user="ctrl.user" height="32" width="32"></user-image>
+            </div>
+            <div class="entry-title">
+              <h4 class="title">Revision Applied</h4>
+              <span class="small">by
+                <strong><span ng-bind="ctrl.username">ctrl.username</span></strong>
+                <span ng-bind="ctrl.entry.created_at | timeAgo">ctrl.entry.created_at</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMENT ENTRY -->
+    <div ng-switch-when="comment">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="title-block">
+            <div class="user-image">
+              <user-image user="ctrl.user" height="32" width="32"></user-image>
+            </div>
+            <div class="entry-title">
+              <h4 class="title">Comment Made: {{ ctrl.entry.title }}</h4>
+              <span class="small">by
+                <strong><span ng-bind="ctrl.username">ctrl.username</span></strong>
+                <span ng-bind="ctrl.entry.created_at | timeAgo">ctrl.entry.created_at</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

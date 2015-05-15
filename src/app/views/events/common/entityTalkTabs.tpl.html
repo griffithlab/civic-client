@@ -1,0 +1,20 @@
+<div class="entityTalkTabs">
+  <div class="{{ tabRowBackground }}">
+    <div class="row">
+      <div class="col-xs-12 tabs {{ viewBackground }}">
+        <tabset class="tab-container"
+                type="{{'tabs'}}"
+                vertical="{{false}}"
+                justified="{{false}}">
+          <tab class="tab"
+               ng-repeat="tab in tabs"
+               heading="{{tab.heading}}"
+               active="tab.active"
+               disabled="tab.disabled"
+               ng-click="go(tab)">
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

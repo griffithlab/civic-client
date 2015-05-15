@@ -1,0 +1,24 @@
+{
+  "id": 1,
+  "entrez_name": "ALK",
+  "entrez_id": 238,
+  "description": "ALK amplifications, fusions and mutations have been shown to be driving events in non-small cell lung cancer. While crizontinib has demonstrated efficacy in treating the amplification, mutations in ALK have been shown to confer resistance to current tyrosine kinase inhibitors. Second-generation TKI's have seen varied success in treating these resistant cases, and the HSP90 inhibitor 17-AAG has been shown to be cytostatic in ALK-altered cell lines.",
+  "clinical_description": null,
+  "aliases": [
+    "NBLST3",
+    "CD246"
+  ],
+  "last_modified": {},
+  "sources": [
+    {
+      "citation": "Shaw et al., 2013, J. Clin. Oncol.",
+      "pubmed_id": "23401436",
+      "source_url": "http://www.ncbi.nlm.nih.gov/pubmed/23401436"
+    },
+    {
+      "citation": "Rossi et al., 2014, Int. J. Oncol.",
+      "pubmed_id": "24889366",
+      "source_url": "http://www.ncbi.nlm.nih.gov/pubmed/24889366"
+    }
+  ]
+}

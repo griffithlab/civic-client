@@ -1,0 +1,21 @@
+<div class="GeneTalkView">
+  <entity-talk-view view-model="vm.GenesTalkViewModel" revisions-model="vm.GeneRevisionsModel" view-options="vm.GenesTalkViewOptions">
+    <div class="row">
+      <div class="col-xs-12">
+        <gene-summary show-menu="false"></gene-summary>
+      </div>
+    </div>
+    <div class="row gene-talk-tabs">
+      <div class="col-xs-12">
+        <entity-talk-tabs vertical="false" justified="left"></entity-talk-tabs>
+      </div>
+    </div>
+    <div class="row entity-talk-content {{ vm.GenesTalkViewOptions.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
+
+        </ui-view>
+      </div>
+    </div>
+  </entity-talk-view>
+</div>

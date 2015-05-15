@@ -14,7 +14,8 @@ gulp.task('wiredep', function () {
         /\/bootstrap.js/,
         /bootstrap.css/,
         /jquery.js/,
-        /waypoints.js/
+        /waypoints.js/,
+        /SHA-1.js/
       ]
     }))
     .pipe(gulp.dest('src'));

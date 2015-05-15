@@ -1,0 +1,25 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.EvidenceTalkView {
+  .fullBleed();
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  border-bottom-left-radius: @border-radius-large;
+  border-bottom-right-radius: @border-radius-large;
+
+  .entity-talk-summary {
+    background-color: @pageBackground2;
+  }
+
+  .entity-talk-content {
+    background-color: @pageBackground;
+    min-height: 300px;
+    border-bottom-left-radius: @border-radius-large;
+    border-bottom-right-radius: @border-radius-large;
+  }
+}
+
