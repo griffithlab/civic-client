@@ -15,6 +15,8 @@
 
   function GeneSummaryController($scope, Genes, GenesViewOptions) {
     $scope.gene = Genes.data.item;
+    $scope.variantGroups = Genes.data.variantGroups;
+    $scope.variants = Genes.data.variants;
     $scope.myGeneInfo = Genes.data.myGeneInfo;
     $scope.GenesViewOptions = GenesViewOptions;
     $scope.backgroundColor = GenesViewOptions.styles.view.backgroundColor;
