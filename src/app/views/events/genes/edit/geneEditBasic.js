@@ -51,22 +51,36 @@
     vm.geneFields = [
       {
         key: 'name',
-        type: 'input',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Name',
           disabled: true,
-          value: vm.gene.name
+          value: vm.gene.name,
+          helpText: ''
         }
       },
       {
         key: 'description',
-        type: 'textarea',
+        type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 8,
           label: 'Description',
           value: 'vm.gene.description',
           focus: true,
-          minLength: 32
+          minLength: 32,
+          helpText: ['<p>User-defined summary of the clinical relevance of this Gene.</p>',
+                  '<p>Should include:</p>',
+                  '<ul>',
+                  '<li>relevance to appropriate cancer(s)</li>',
+                  '<li>treatment(s) related specifically to variants affecting this Gene</li>',
+                  '</ul>',
+                  '<p>May include relevant mechanistic information such as:</p>',
+                  '<ul>',
+                  '<li>pathway interactions</li>',
+                  '<li>functional alterations caused by variants in with this Gene (i.e., activating, loss-of-function, etc)</li>',
+                  '<li>normal functions key to its oncogenic properties.</li>',
+                  '</ul>'
+                ].join(" ")
         }
       },
       {
@@ -75,20 +89,22 @@
       {
         model: vm.geneEdit.comment,
         key: 'title',
-        type: 'input',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Comment Title',
-          value: 'title'
+          value: 'title',
+          helpText: 'Short title describing the changes you made to the Clinical Description.'
         }
       },
       {
         model: vm.geneEdit.comment,
         key: 'text',
-        type: 'textarea',
+        type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 5,
           label: 'Comment',
-          value: 'text'
+          value: 'text',
+          helpText: 'Description of the changes you made to the Clinical Summary. If necessary, provide additional rationale for your change to the community.'
         }
       }
     ];

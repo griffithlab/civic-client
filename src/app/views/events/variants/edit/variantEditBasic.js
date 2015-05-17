@@ -51,7 +51,7 @@
     vm.variantFields = [
       {
         key: 'name',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'Name',
           disabled: true,
@@ -60,12 +60,11 @@
       },
       {
         key: 'description',
-        type: 'textarea',
+        type: 'horizontalTextarea',
         templateOptions: {
           rows: 8,
           label: 'Description',
           value: 'vm.variant.description',
-          focus: true,
           minLength: 32
         }
       },
@@ -75,7 +74,7 @@
       {
         model: vm.variantEdit.comment,
         key: 'title',
-        type: 'input',
+        type: 'horizontalInput',
         templateOptions: {
           label: 'Comment Title',
           value: 'title'
@@ -84,7 +83,7 @@
       {
         model: vm.variantEdit.comment,
         key: 'text',
-        type: 'textarea',
+        type: 'horizontalTextarea',
         templateOptions: {
           rows: 5,
           label: 'Comment',
