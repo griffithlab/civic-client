@@ -201,7 +201,14 @@
           options: vm.formSelects.evidence_ratings,
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines: One Star: Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. Two Stars: Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing. Three Stars: Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning. Four Stars: Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning. Five Stars: Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'
+          helpText: [
+                   '<p>Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines:</p>',
+                   '<ul>',
+                   '<li>One Star: Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. </li>',
+                   '<li>Two Stars: Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.</li>',
+                   '<li> Three Stars: Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.</li>',
+                   '<li>Four Stars: Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.</li>',
+                   '<li>Five Stars: Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</li>'].join(" ")
         }
       },
       {
