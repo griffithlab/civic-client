@@ -112,15 +112,6 @@
     };
 
     vm.evidenceFields = [
-      //{
-      //  key: 'name',
-      //  type: 'input',
-      //  templateOptions: {
-      //    label: 'Name',
-      //    disabled: true,
-      //    value: 'vm.newEvidence.name'
-      //  }
-      //},
       {
         key: 'entrez_id',
         type: 'horizontalInputHelp',
@@ -142,14 +133,15 @@
         }
       },
       {
-        key: 'description',
-        type: 'horizontalTextareaHelp',
+        key: 'variant_origin',
+        type: 'horizontalSelectHelp',
         templateOptions: {
-          rows: 5,
-          label: 'Description',
-          value: 'vm.newEvidence.description',
-          minLength: 32,
-          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
+          label: 'Variant Origin',
+          value: 'vm.newEvidence.variant_origin',
+          options: vm.formSelects.variant_origins,
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: 'Origin of variant'
         }
       },
       {
@@ -174,6 +166,17 @@
         }
       },
       {
+        key: 'description',
+        type: 'horizontalTextareaHelp',
+        templateOptions: {
+          rows: 5,
+          label: 'Description',
+          value: 'vm.newEvidence.description',
+          minLength: 32,
+          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
+        }
+      },
+      {
         key: 'pubmed_id',
         type: 'horizontalInputHelp',
         templateOptions: {
@@ -194,21 +197,18 @@
         }
       },
       {
-        key: 'rating',
+        template: '<hr/>'
+      },
+      {
+        key: 'evidence_type',
         type: 'horizontalSelectHelp',
         templateOptions: {
-          label: 'Rating',
-          options: vm.formSelects.evidence_ratings,
+          label: 'Evidence Type',
+          value: 'vm.newEvidence.evidence_type',
+          options: vm.formSelects.evidence_types,
           valueProp: 'value',
           labelProp: 'label',
-          helpText: [
-                   '<p>Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines:</p>',
-                   '<ul>',
-                   '<li>One Star: Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. </li>',
-                   '<li>Two Stars: Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.</li>',
-                   '<li> Three Stars: Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.</li>',
-                   '<li>Four Stars: Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.</li>',
-                   '<li>Five Stars: Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</li>'].join(" ")
+          helpText: 'Type of clinical outcome associated with the evidence statement.'
         }
       },
       {
@@ -224,15 +224,21 @@
         }
       },
       {
-        key: 'evidence_type',
+        key: 'rating',
         type: 'horizontalSelectHelp',
         templateOptions: {
-          label: 'Evidence Type',
-          value: 'vm.newEvidence.evidence_type',
-          options: vm.formSelects.evidence_types,
+          label: 'Rating',
+          options: vm.formSelects.evidence_ratings,
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Type of clinical outcome associated with the evidence statement.'
+          helpText: [
+                   '<p>Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines:</p>',
+                   '<ul>',
+                   '<li><strong>One Star:</strong> Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. </li>',
+                   '<li><strong>Two Stars:</strong> Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.</li>',
+                   '<li><strong>Three Stars:</strong> Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.</li>',
+                   '<li><strong>Four Stars:</strong> Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.</li>',
+                   '<li><strong>Five Stars:</strong> Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</li>'].join(" ")
         }
       },
       {
@@ -257,18 +263,6 @@
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, Not Applicable should be selected.'
-        }
-      },
-      {
-        key: 'variant_origin',
-        type: 'horizontalSelectHelp',
-        templateOptions: {
-          label: 'Variant Origin',
-          value: 'vm.newEvidence.variant_origin',
-          options: vm.formSelects.variant_origins,
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: 'Origin of variant'
         }
       },
       { template: '<hr/>'},
