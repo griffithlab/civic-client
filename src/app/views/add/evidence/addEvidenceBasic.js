@@ -28,50 +28,52 @@
     vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
+    vm.newEvidence = {
+      entrez_id: '',
+      variant_name: '',
+      description: '',
+      disease: '',
+      doid: '',
+      pubmed_id: '',
+      pubchem_id: '',
+      drugs: [],
+      rating: Number(),
+      evidence_level: '',
+      evidence_type: '',
+      evidence_direction: '',
+      clinical_significance: '',
+      variant_origin: ''
+    };
+
     //vm.newEvidence = {
-    //  entrez_id: '',
-    //  variant_name: '',
-    //  description: '',
-    //  disease: '',
-    //  doid: '',
-    //  pubmed_id: '',
-    //  pubchem_id: '',
+    //  entrez_id: '673',
+    //  variant_name: 'V600E',
+    //  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula sed lorem et cursus. In hac habitasse platea dictumst. Sed rhoncus, enim iaculis malesuada scelerisque, quam tortor porttitor tortor, id blandit tellus libero et lectus. Vestibulum nec purus eget purus suscipit ultricies non in dui.',
+    //  disease: 'Breast Cancer',
+    //  doid: '3908',
+    //  pubmed_id: '20979473',
+    //  pubchem_id: '33042',
     //  drugs: {
     //    collection: []
     //  },
-    //  rating: Number(),
-    //  evidence_level: '',
-    //  evidence_type: '',
-    //  evidence_direction: '',
-    //  clinical_significance: '',
-    //  variant_origin: ''
+    //  rating: 4,
+    //  evidence_level: 'C',
+    //  evidence_type: 'Predictive',
+    //  evidence_direction: 'Supports',
+    //  clinical_significance: 'Positive',
+    //  variant_origin: 'Somatic'
     //};
 
-    vm.newEvidence = {
-      entrez_id: '673',
-      variant_name: 'V600E',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula sed lorem et cursus. In hac habitasse platea dictumst. Sed rhoncus, enim iaculis malesuada scelerisque, quam tortor porttitor tortor, id blandit tellus libero et lectus. Vestibulum nec purus eget purus suscipit ultricies non in dui.',
-      disease: 'Breast Cancer',
-      doid: '3908',
-      pubmed_id: '20979473',
-      pubchem_id: '33042',
-      drugs: {
-        collection: []
-      },
-      rating: 4,
-      evidence_level: 'C',
-      evidence_type: 'Predictive',
-      evidence_direction: 'Supports',
-      clinical_significance: 'Positive',
-      variant_origin: 'Somatic'
-    };
-
-    vm.newEvidence.comment = { title: 'New Suggested Revision', text:'Comment text.' };
+    vm.newEvidence.comment = { title: '', text:'' };
 
     vm.formErrors = {};
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+
+    function evidenceLevelChange(value, field, scope) {
+      console.log('***** evidenceLevelChanged.');
+    }
 
     vm.formSelects = {
       evidence_levels: [
@@ -96,11 +98,7 @@
         { value: 'Negative', label: 'Negative' },
         { value: 'N/A', label: 'N/A' }
       ],
-      evidence_types: [
-        { value: 'Predictive', label: 'Predictive' },
-        { value: 'Diagnostic', label: 'Diagnostic' },
-        { value: 'Prognostic', label: 'Prognostic' }
-      ],
+
       evidence_directions: [
         { value: 'Supports', label: 'Supports'},
         { value: 'Does Not Support', label: 'Does Not Support' }
@@ -112,6 +110,23 @@
     };
 
     vm.evidenceFields = [
+      {
+        key: 'evidence_type',
+        type: 'horizontalSelectHelp',
+        templateOptions: {
+          label: 'Evidence Type',
+          value: 'vm.newEvidence.evidence_type',
+          options: [
+            { value: 'Predictive', label: 'Predictive' },
+            { value: 'Diagnostic', label: 'Diagnostic' },
+            { value: 'Prognostic', label: 'Prognostic' }
+          ],
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: 'Type of clinical outcome associated with the evidence statement.',
+          onChange: evidenceLevelChange
+        }
+      },
       {
         key: 'entrez_id',
         type: 'horizontalInputHelp',
@@ -200,18 +215,6 @@
         template: '<hr/>'
       },
       {
-        key: 'evidence_type',
-        type: 'horizontalSelectHelp',
-        templateOptions: {
-          label: 'Evidence Type',
-          value: 'vm.newEvidence.evidence_type',
-          options: vm.formSelects.evidence_types,
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: 'Type of clinical outcome associated with the evidence statement.'
-        }
-      },
-      {
         key: 'evidence_level',
         type: 'horizontalSelectHelp',
         templateOptions: {
@@ -245,7 +248,7 @@
         key: 'evidence_direction',
         type: 'horizontalSelectHelp',
         templateOptions: {
-          label: 'Evidence Type',
+          label: 'Evidence Direction',
           value: 'vm.newEvidence.evidence_direction',
           options: vm.formSelects.evidence_directions,
           valueProp: 'value',
@@ -263,6 +266,11 @@
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, Not Applicable should be selected.'
+        },
+        data: {
+          predictiveOpts: [ 'Sensitivity', 'Resistance or Non-Resistance'],
+          prognosticOpts: ['Better Outcome', 'Poor Outcome'],
+          diagnosticOpts: ['Positive', 'Negative']
         }
       },
       { template: '<hr/>'},
