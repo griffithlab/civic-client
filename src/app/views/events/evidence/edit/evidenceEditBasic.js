@@ -214,7 +214,7 @@
           options: vm.formSelects.variant_origins,
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Origin of variant. (not super helpful description...)'
+          helpText: 'Origin of variant.'
         }
       },
       { template: '<hr/>'},
