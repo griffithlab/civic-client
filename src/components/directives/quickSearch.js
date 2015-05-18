@@ -32,17 +32,18 @@
 
             return {
               /*jshint camelcase: false */
-              gene: event.entrez_id,
+              gene: event.entrez_name,
+              geneId: event.gene_id,
               label: label,
               variant: event.variant,
-              variant_id: event.variant_id
+              variantId: event.variant_id
             };
           });
         });
     };
 
     $scope.onSelect = function($item, $model) {
-      $state.go('events.genes.summary.variants.summary', {geneId: $item.gene, variantId: $item.variant_id});
+      $state.go('events.genes.summary.variants.summary', {geneId: $item.geneId, variantId: $item.variantId});
       $scope.asyncSelected.model = ''; // clear typeahead
     };
 
