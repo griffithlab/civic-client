@@ -98,11 +98,16 @@
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       // TODO: this watch seems unnecessary, but if it's not present then the grid only loads on a fresh page, fails when loaded by a state change
       // Something to do with directive priorities, maybe?
-      $scope.$watch('evidence', function(evidence) {
+      $scope.$watchCollection('evidence', function(evidence) {
         ctrl.gridApi = gridApi;
         ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
         evidence = _.map(evidence, function(item){
-          item.drugs = _.chain(item.drugs).pluck('name').value().join(", "); return item;
+          if (_.isArray(item.drugs)) {
+            item.drugs = _.chain(item.drugs).pluck('name').value().join(", ");
+            return item;
+          } else {
+            return item;
+          }
         });
         ctrl.evidenceGridOptions.data = evidence;
 
