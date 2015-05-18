@@ -50,7 +50,8 @@
         { value: 'A', label: 'A - Validated'},
         { value: 'B', label: 'B - Clinical'},
         { value: 'C', label: 'C - Preclinical'},
-        { value: 'D', label: 'D - Inferential'}
+        { value: 'D', label: 'D - Inferential'},
+        { value: 'E', label: 'E - n of 1'}
       ],
       evidence_ratings: [
         { value: 1, label: '1 - Poor' },
