@@ -9,11 +9,15 @@
       <td class="value" ng-bind="geneInfo.name"></td>
     </tr>
     <tr>
-      <td class="name">Entrez ID:</td>
+      <td class="name">Entrez Symbol:</td>
       <td class="value">
-        <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + geneInfo._id}}" ng-bind="geneInfo._id">
-
+        <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + geneInfo._id}}" ng-bind="geneInfo.symbol">
+          SYMBOL
         </a>
+        &nbsp;
+        &nbsp;
+        <strong>Entrez ID: </strong>
+        <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + geneInfo._id}}" ng-bind="geneInfo._id">ID</a>
       </td>
     </tr>
     <tr>
