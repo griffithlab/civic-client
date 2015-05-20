@@ -27,7 +27,7 @@
           state: 'api'
         },
         {
-          label: 'Nightly Releases',
+          label: 'Data Releases',
           state: 'releases'
         },
         {
