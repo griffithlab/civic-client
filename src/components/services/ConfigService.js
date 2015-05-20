@@ -27,6 +27,10 @@
           state: 'api'
         },
         {
+          label: 'Nightly Releases',
+          state: 'releases'
+        },
+        {
           label: 'Contact',
           state: 'contact'
         }

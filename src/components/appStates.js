@@ -53,6 +53,22 @@
           navMode: 'sub'
         }
       })
+      .state('releases', {
+        url: '/releases',
+        templateUrl: 'app/pages/releases.tpl.html',
+        //resolve: {
+        //  Releases: 'Releases',
+        //  initReleases: function(Releases) {
+        //    return Releases.initBase();
+        //  }
+        //},
+        controller: 'ReleasesController',
+        controllerAs: 'vm',
+        data: {
+          titleExp: '"Data Releases"',
+          navMode: 'sub'
+        }
+      })
       .state('api', {
         url: '/api-documentation',
         templateUrl: 'app/pages/apiDocumentation.tpl.html',

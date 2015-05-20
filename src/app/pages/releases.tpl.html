@@ -1,0 +1,15 @@
+<div class="releasesPage">
+  <div class="row" ng-repeat="release in vm.releases">
+    <div class="col-xs-12">
+      <h3 ng-bind="release.note | capitalize">Release Type</h3>
+      <ul>
+        <li ng-repeat="file in release.files">{{ file }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="vm.releases|json"></pre>
+    </div>
+  </div>
+</div>
