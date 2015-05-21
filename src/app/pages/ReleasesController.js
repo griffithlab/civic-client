@@ -4,10 +4,9 @@
     .controller('ReleasesController', ReleasesController);
 
   // @ngInject
-  function ReleasesController($location, Releases, _) {
+  function ReleasesController($window, Releases, _) {
     console.log('ReleasesController loaded.');
     var vm = this;
-    vm.urlPrefix = $location.protocol() + '://' + $location.host() + ':3000';
     // TODO move releases init to ui-router state resolve
     Releases.initBase().then(function(releases){
       vm.releases = _.map(releases[0], function(release) {
@@ -15,7 +14,7 @@
           return _.last(filename.split('/'));
         });
         release.fileUrls = _.map(release.files, function(filename) {
-          return vm.urlPrefix + filename;
+          return $window.location.origin + filename;
         });
         return release;
       });
