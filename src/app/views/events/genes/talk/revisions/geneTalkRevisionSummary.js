@@ -38,7 +38,7 @@
           console.error('revision accept error!');
           vm.formErrors[error.status] = true;
         })
-        .finally(function (){
+        .finally(function () {
           console.log('accept revision successful.');
         });
     };
@@ -54,7 +54,7 @@
           console.error('revision reject error!');
           vm.formErrors[error.status] = true;
         })
-        .finally(function (){
+        .finally(function () {
           console.log('reject revision successful.');
         });
     };

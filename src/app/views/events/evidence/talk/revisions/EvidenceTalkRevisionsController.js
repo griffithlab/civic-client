@@ -36,7 +36,7 @@
         template: '<evidence-talk-revisions></evidence-talk-revisions>',
         resolve: {
           initRevisionList: function(Evidence, EvidenceRevisions, EvidenceHistory, $stateParams) {
-            return EvidenceRevisions.queryFresh($stateParams.evidenceId);
+            return EvidenceRevisions.query($stateParams.evidenceId);
           }
         },
         data: {
@@ -50,8 +50,8 @@
         resolve: {
           initRevision: function(EvidenceRevisions, $stateParams, $q) {
             return $q.all([
-              EvidenceRevisions.getFresh($stateParams.evidenceId, $stateParams.revisionId),
-              EvidenceRevisions.queryCommentsFresh($stateParams.evidenceId, $stateParams.revisionId)
+              EvidenceRevisions.get($stateParams.evidenceId, $stateParams.revisionId),
+              EvidenceRevisions.queryComments($stateParams.evidenceId, $stateParams.revisionId)
             ]);
           }
         },
