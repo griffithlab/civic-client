@@ -114,32 +114,6 @@
           cache: cache
         },
 
-        // Base Gene Refresh
-        queryFresh: { // get list of genes
-          method: 'GET',
-          isArray: true,
-          cache: false
-        },
-        getFresh: { // get gene, force cache
-          method: 'GET',
-          isArray: false,
-          cache: false
-        },
-
-        // Base Collections Refresh
-        queryVariantsFresh: {
-          method: 'GET',
-          url: '/api/genes/:geneId/variants',
-          isArray: true,
-          cache: false
-        },
-        queryVariantGroupsFresh: {
-          method: 'GET',
-          url: '/api/genes/:geneId/variant_groups',
-          isArray: true,
-          cache: false
-        },
-
         // Gene Comments Resources
         queryComments: {
           method: 'GET',
@@ -188,24 +162,6 @@
             response: cacheInterceptor
           }
         },
-
-        // Gene Comments Refresh
-        queryCommentsFresh: {
-          method: 'GET',
-          url: 'api/genes/:geneId/comments',
-          isArray: true,
-          cache: false
-        },
-        getCommentFresh: {
-          method: 'GET',
-          url: '/api/genes/:geneId/comments/:commentId',
-          params: {
-            geneId: '@geneId',
-            commentId: '@commentId'
-          },
-          isArray: false,
-          cache: false
-        }
       }
     )
   }

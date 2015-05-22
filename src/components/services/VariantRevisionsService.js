@@ -252,13 +252,14 @@
           return $q.reject(error);
         });
     }
+
     function rejectRevision(variantId, revisionId) {
       return VariantRevisionsResource.rejectRevision({ variantId: variantId, revisionId: revisionId }).$promise.then(
         function(response) {
           cache.remove('/api/variants/' + response.id + '/suggested_changes');
-          queryFresh(variantId);
+          query(variantId);
           cache.remove('/api/variants/' + response.id + '/suggested_changes/' + revisionId);
-          getFresh(variantId, revisionId);
+          get(variantId, revisionId);
           return $q.when(response);
         },
         function(error) {

@@ -36,7 +36,7 @@
         template: '<gene-talk-revisions></gene-talk-revisions>',
         resolve: {
           initRevisionList: function(Genes, GeneRevisions, GeneHistory, $stateParams) {
-            return GeneRevisions.queryFresh($stateParams.geneId);
+            return GeneRevisions.query($stateParams.geneId);
           }
         },
         data: {
@@ -50,8 +50,8 @@
         resolve: {
           initRevision: function(GeneRevisions, $stateParams, $q) {
             return $q.all([
-              GeneRevisions.getFresh($stateParams.geneId, $stateParams.revisionId),
-              GeneRevisions.queryCommentsFresh($stateParams.geneId, $stateParams.revisionId)
+              GeneRevisions.get($stateParams.geneId, $stateParams.revisionId),
+              GeneRevisions.queryComments($stateParams.geneId, $stateParams.revisionId)
             ]);
           }
         },
