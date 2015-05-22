@@ -297,21 +297,10 @@
         });
     }
     function submitComment(reqObj) {
-      try {
-        if(!_.has(reqObj, 'variantId')) {
-          if(_.has(item, 'id')) { // check to see if we have a variant with an id
-            _.merge(reqObj, { variantId: item.id });
-          } else {
-            throw new Error("No variantId supplied or found.");
-          }
-        }
-      } catch(e) {
-        $exceptionHandler(e.message, "Variantservice:submitComment");
-      }
-
       return VariantsResource.submitComment(reqObj).$promise
         .then(function(response) {
-          queryCommentsFresh(reqObj.variantId);
+          cache.remove('/api/variants/' + reqObj.variantId + '/comments');
+          queryComments(reqObj.variantId);
           return response.$promise;
         });
     }

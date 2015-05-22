@@ -20,7 +20,6 @@
           initEvidenceTalkRevisions: function(Evidence, EvidenceRevisions, EvidenceHistory, $stateParams, $q) {
             var evidenceId = $stateParams.evidenceId;
             return $q.all([
-              Evidence.initComments(evidenceId),
               EvidenceRevisions.initRevisions(evidenceId),
               EvidenceHistory.initBase(evidenceId)
             ]);

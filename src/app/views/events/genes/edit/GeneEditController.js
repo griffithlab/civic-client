@@ -19,7 +19,6 @@
           initGeneEdit: function(Genes, GeneRevisions, GeneHistory, $stateParams, $q) {
             var geneId = $stateParams.geneId;
             return $q.all([
-              Genes.initComments(geneId),
               GeneRevisions.initRevisions(geneId),
               GeneHistory.initBase(geneId)
             ]);

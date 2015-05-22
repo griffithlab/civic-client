@@ -401,21 +401,10 @@
         });
     }
     function submitComment(reqObj) {
-      try {
-        if(!_.has(reqObj, 'geneId')) {
-          if(_.has(item, 'id')) { // check to see if we have a gene with an id
-            _.merge(reqObj, { geneId: item.id });
-          } else {
-            throw new Error("No geneId supplied or found.");
-          }
-        }
-      } catch(e) {
-        $exceptionHandler(e.message, "GeneService:submitComment");
-      }
-
       return GenesResource.submitComment(reqObj).$promise
         .then(function(response) {
-          queryCommentsFresh(reqObj.geneId);
+          cache.remove('/api/genes/' + reqObj.geneId + '/comments');
+          queryComments(reqObj.geneId);
           return response.$promise;
         });
     }

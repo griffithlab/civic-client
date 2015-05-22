@@ -286,21 +286,10 @@
         });
     }
     function submitComment(reqObj) {
-      try {
-        if(!_.has(reqObj, 'evidenceId')) {
-          if(_.has(item, 'id')) { // check to see if we have a evidence with an id
-            _.merge(reqObj, { evidenceId: item.id });
-          } else {
-            throw new Error("No evidenceId supplied or found.");
-          }
-        }
-      } catch(e) {
-        $exceptionHandler(e.message, "EvidenceService:submitComment");
-      }
-
       return EvidenceResource.submitComment(reqObj).$promise
         .then(function(response) {
-          queryCommentsFresh(reqObj.evidenceId);
+          cache.remove('/api/evidence/' + reqObj.evidenceId + '/comments');
+          queryComments(reqObj.evidenceId);
           return response.$promise;
         });
     }

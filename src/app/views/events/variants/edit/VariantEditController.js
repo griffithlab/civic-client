@@ -19,7 +19,6 @@
           initVariantEdit: function(Variants, VariantRevisions, VariantHistory, $stateParams, $q) {
             var variantId = $stateParams.variantId;
             return $q.all([
-              Variants.initComments(variantId),
               VariantRevisions.initRevisions(variantId),
               VariantHistory.initBase(variantId)
             ]);
