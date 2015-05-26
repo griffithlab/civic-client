@@ -45,7 +45,7 @@
   <div class="row">
     <div class="col-xs-12 diffs">
       <ul>
-        <li ng-repeat="(field, diff) in vm.variantGroupTalkModel.data.item.diffs">
+        <li ng-repeat="(field, diffs) in vm.variantGroupTalkModel.data.item.diffs">
           <div ng-switch="field">
             <div ng-switch-default>
               <div class="row">
@@ -55,12 +55,12 @@
               </div>
               <div class="row">
                 <div class="col-xs-12 wtf">
-                  <span ng-bind-html="diff"></span>
+                  <span ng-bind-html="diffs.diff"></span>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xs-12">
-                  <div class="res"><span ng-bind-html="vm.variantGroupTalkModel.data.item.suggested_changes[field][1]"></span></div>
+                  <div class="res"><span ng-bind-html="diffs.final"></span></div>
                 </div>
               </div>
             </div>

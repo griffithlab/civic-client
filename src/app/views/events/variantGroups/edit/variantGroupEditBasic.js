@@ -34,7 +34,7 @@
     vm.variantGroupRevisions = VariantGroupRevisions;
     vm.variantGroupHistory = VariantGroupHistory;
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
-    vm.variantGroupEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
+    vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
     vm.variants = variantGroupModel.data.variants;
 
     vm.styles = VariantGroupsViewOptions.styles;
@@ -49,7 +49,7 @@
     vm.variantGroupFields = [
       {
         key: 'name',
-        type: 'input',
+        type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Name',
           disabled: true,
@@ -58,7 +58,7 @@
       },
       {
         key: 'description',
-        type: 'textarea',
+        type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 8,
           label: 'Description',
@@ -70,23 +70,24 @@
       {
         template: '<hr/>'
       },
-      {
-        model: vm.variantGroupEdit.comment,
-        key: 'title',
-        type: 'input',
-        templateOptions: {
-          label: 'Comment Title',
-          value: 'title'
-        }
-      },
+      //{
+      //  model: vm.variantGroupEdit.comment,
+      //  key: 'title',
+      //  type: 'input',
+      //  templateOptions: {
+      //    label: 'Comment Title',
+      //    value: 'title'
+      //  }
+      //},
       {
         model: vm.variantGroupEdit.comment,
         key: 'text',
-        type: 'textarea',
+        type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 5,
-          label: 'Comment',
-          value: 'text'
+          label: 'Revision Description',
+          value: 'text',
+          helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
         }
       }
     ];
