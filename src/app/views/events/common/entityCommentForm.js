@@ -30,14 +30,14 @@
     };
 
     vm.newCommentFields = [
-      {
-        key: 'title',
-        type: 'input',
-        templateOptions: {
-          label: 'Title',
-          value: vm.newComment.title
-        }
-      },
+      //{
+      //  key: 'title',
+      //  type: 'input',
+      //  templateOptions: {
+      //    label: 'Title',
+      //    value: vm.newComment.title
+      //  }
+      //},
       {
         key: 'text',
         type: 'textarea',

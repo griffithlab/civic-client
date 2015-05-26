@@ -34,7 +34,7 @@
     vm.geneRevisions = GeneRevisions;
     vm.geneHistory = GeneHistory;
     vm.geneEdit = angular.copy(vm.gene);
-    vm.geneEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
+    vm.geneEdit.comment = { title: 'GENE ' + vm.gene.name + ' Revision Description', text:'' };
     vm.myGeneInfo = geneModel.data.myGeneInfo;
     vm.variants = geneModel.data.variants;
     vm.variantGroups = geneModel.data.variantGroups;
@@ -86,25 +86,25 @@
       {
         template: '<hr/>'
       },
-      {
-        model: vm.geneEdit.comment,
-        key: 'title',
-        type: 'horizontalInputHelp',
-        templateOptions: {
-          label: 'Comment Title',
-          value: 'title',
-          helpText: 'Short title describing the changes you made to the Clinical Description.'
-        }
-      },
+      //{
+      //  model: vm.geneEdit.comment,
+      //  key: 'title',
+      //  type: 'horizontalInputHelp',
+      //  templateOptions: {
+      //    label: 'Comment Title',
+      //    value: 'title',
+      //    helpText: 'Short title describing the changes you made to the Clinical Description.'
+      //  }
+      //},
       {
         model: vm.geneEdit.comment,
         key: 'text',
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 5,
-          label: 'Comment',
+          label: 'Revision Description',
           value: 'text',
-          helpText: 'Description of the changes you made to the Clinical Summary. If necessary, provide additional rationale for your change to the community.'
+          helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
         }
       }
     ];
