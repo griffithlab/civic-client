@@ -52,18 +52,6 @@
           cache: cache
         },
 
-        // Base VariantGroup Revisions Refresh
-        queryFresh: {
-          method: 'GET',
-          isArray: true,
-          cache: false
-        },
-        getFresh: {
-          method: 'GET',
-          isArray: false,
-          cache: false
-        },
-
         // VariantGroup Revisions Comments Resources
         submitComment: {
           method: 'POST',
@@ -118,29 +106,6 @@
           interceptor: {
             response: cacheResponseInterceptor
           }
-        },
-
-        // VariantGroup Revisions Comments Resources Refresh
-        queryCommentsFresh: {
-          method: 'GET',
-          url: '/api/variant_groups/:variantGroupId/suggested_changes/:revisionId/comments',
-          params: {
-            variantGroupId: '@variantGroupId',
-            revisionId: '@revisionId'
-          },
-          isArray: true,
-          cache: false
-        },
-        getCommentFresh: {
-          method: 'GET',
-          url: '/api/variant_groups/:variantGroupId/suggested_changes/:revisionId/comments/:commentId',
-          params: {
-            variantGroupId: '@variantGroupId',
-            revisionId: '@revisionId',
-            commentId: '@commentId'
-          },
-          isArray: false,
-          cache: false
         }
       }
     )
@@ -175,10 +140,6 @@
       acceptRevision: acceptRevision,
       rejectRevision: rejectRevision,
 
-      // VariantGroup Revisions Base Refresh
-      queryFresh: queryFresh,
-      getFresh: getFresh,
-
       // VariantGroup Revisions Comments
       queryComments: queryComments,
       getComment: getComment,
@@ -186,9 +147,6 @@
       updateComment: updateComment,
       deleteComment: deleteComment,
 
-      // VariantGroup Revisions Comments Refresh
-      queryCommentsFresh: queryCommentsFresh,
-      getCommentFresh: getCommentFresh
     };
 
     function initBase(variantGroupId, revisionId) {
@@ -255,29 +213,13 @@
       return VariantGroupRevisionsResource.rejectRevision({ variantGroupId: variantGroupId, revisionId: revisionId }).$promise.then(
         function(response) {
           cache.remove('/api/variant_groups/' + response.id + '/suggested_changes');
-          queryFresh(variantGroupId);
+          query(variantGroupId);
           cache.remove('/api/variant_groups/' + response.id + '/suggested_changes/' + revisionId);
-          getFresh(variantGroupId, revisionId);
+          get(variantGroupId, revisionId);
           return $q.when(response);
         },
         function(error) {
           return $q.reject(error);
-        });
-    }
-
-    // VariantGroup Revisions Base Refresh
-    function queryFresh(variantGroupId) { // works
-      return VariantGroupRevisionsResource.queryFresh({ variantGroupId: variantGroupId }).$promise
-        .then(function(response) {
-          angular.copy(response, collection);
-          return response.$promise;
-        });
-    }
-    function getFresh(variantGroupId, revisionId) {
-      return VariantGroupRevisionsResource.getFresh({ variantGroupId: variantGroupId, revisionId: revisionId }).$promise
-        .then(function(response) {
-          angular.copy(response, item);
-          return response.$promise;
         });
     }
 
@@ -299,38 +241,22 @@
     function submitComment(reqObj) {
       return VariantGroupRevisionsResource.submitComment(reqObj).$promise
         .then(function(response) {
-          queryCommentsFresh(reqObj.variantGroupId, reqObj.revisionId);
+          cache.remove('/api/variant_groups/' + reqObj.variantGroupId + '/suggested_changes/' + reqObj.revisionId + '/comments');
+          queryComments(reqObj.variantGroupId, reqObj.revisionId);
           return response.$promise;
         });
     }
     function updateComment(reqObj) {
       return VariantGroupRevisionsResource.updateComment(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, comment);
-          getCommentFresh(reqObj);
+          cache.remove('/api/variant_groups/' + reqObj.variantGroupId + '/suggested_changes/' + reqObj.revisionId + '/comments');
           return response.$promise;
         });
     }
     function deleteComment(variantGroupId, revisionId, commentId) {
       return VariantGroupRevisionsResource.deleteComment({ variantGroupId: variantGroupId, revisionId: revisionId, commentId: commentId }).$promise
         .then(function(response) {
-          comment = null;
-          return response.$promise;
-        });
-    }
-
-    // VariantGroup Revisions Comments Refresh
-    function queryCommentsFresh(variantGroupId, revisionId) {
-      return VariantGroupRevisionsResource.queryCommentsFresh({ variantGroupId: variantGroupId, revisionId: revisionId }).$promise
-        .then(function(response) {
-          angular.copy(response, comments);
-          return response.$promise;
-        });
-    }
-    function getCommentFresh(variantGroupId, revisionId, commentId) {
-      return VariantGroupRevisionsResource.getCommentFresh({ variantGroupId: variantGroupId, revisionId: revisionId, commentId: commentId }).$promise
-        .then(function(response) {
-          angular.copy(response   , comment);
+          cache.remove('/api/variant_groups/' + reqObj.variantGroupId + '/suggested_changes/' + reqObj.revisionId + '/comments');
           return response.$promise;
         });
     }

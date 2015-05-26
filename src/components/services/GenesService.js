@@ -42,7 +42,8 @@
           }
         },
         apply: {
-          method: 'PATCH'
+          method: 'PATCH',
+          cache: false
         },
 
         // Gene Additional Info
@@ -169,6 +170,7 @@
   // @ngInject
   function GenesService(GenesResource, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
+
     // Base Gene and Gene Collection
     var item = {};
     var collection = [];
@@ -179,7 +181,6 @@
     // Gene Collections
     var variants = [];
     var variantGroups = [];
-    var comment = {};
     var comments = [];
 
     return {

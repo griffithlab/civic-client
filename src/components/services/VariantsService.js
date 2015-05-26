@@ -42,7 +42,8 @@
           }
         },
         apply: {
-          method: 'PATCH'
+          method: 'PATCH',
+          cache: false
         },
 
         // Variant Collections
@@ -70,7 +71,6 @@
           isArray: false,
           cache: cache
         },
-
         submitComment: {
           method: 'POST',
           url: '/api/variants/:variantId/comments',
@@ -108,13 +108,13 @@
   // @ngInject
   function VariantsService(VariantsResource, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
+
     // Base Variant and Variant Collection
     var item = {};
     var collection = [];
 
     // Variant Collections
     var evidence = [];
-    var comment = {};
     var comments = [];
 
     return {
@@ -142,13 +142,13 @@
       getComment: getComment,
       submitComment: submitComment,
       updateComment: updateComment,
-      deleteComment: deleteComment,
+      deleteComment: deleteComment
     };
 
     function initBase(variantId) {
       return $q.all([
         get(variantId),
-        queryEvidence(variantId),
+        queryEvidence(variantId)
       ])
     }
 
@@ -189,7 +189,6 @@
     function apply(reqObj) {
       return VariantsResource.apply(reqObj).$promise.then(
         function(response) { // success
-          // remove variant's cache record
           cache.remove('/api/variants/' + response.id);
           get(reqObj.variantId);
           return $q.when(response);
@@ -219,7 +218,6 @@
     function getComment(variantId, commentId) {
       return VariantsResource.getComment({variantId: variantId, commentId: commentId}).$promise
         .then(function(response) {
-          angular.copy(response, comment);
           return response.$promise;
         });
     }
@@ -234,16 +232,17 @@
     function updateComment(reqObj) {
       return VariantsResource.updateComment(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, comment);
           cache.remove('/api/variants/' + reqObj.variantId + '/comments/' + reqObj.id);
-          getComment(reqObj);
+          cache.remove('/api/variants/' + reqObj.variantId + '/comments');
+          queryComments(reqObj.variantId);
           return response.$promise;
         });
     }
     function deleteComment(variantId, commentId) {
       return VariantsResource.deleteComment({variantId: variantId, commentId: commentId}).$promise
         .then(function(response) {
-          comment = null;
+          cache.remove('/api/variants/' + variantId + '/comments/' + commentId);
+          cache.remove('/api/variants/' + variantId + '/comments');
           return response.$promise;
         });
     }

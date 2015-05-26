@@ -46,17 +46,7 @@
           cache: false
         },
         apply: {
-          method: 'PATCH'
-        },
-        // Base Evidence Refresh
-        queryFresh: { // get list of evidence
-          method: 'GET',
-          isArray: true,
-          cache: false
-        },
-        getFresh: { // get evidence, force cache
-          method: 'GET',
-          isArray: false,
+          method: 'PATCH',
           cache: false
         },
 
@@ -84,7 +74,7 @@
           params: {
             evidenceId: '@evidenceId'
           },
-          cache: cache
+          cache: false
         },
         updateComment: {
           method: 'PATCH',
@@ -107,40 +97,22 @@
           interceptor: {
             response: cacheInterceptor
           }
-        },
-
-        // Evidence Comments Refresh
-        queryCommentsFresh: {
-          method: 'GET',
-          url: 'api/evidence_items/:evidenceId/comments',
-          isArray: true,
-          cache: false
-        },
-        getCommentFresh: {
-          method: 'GET',
-          url: '/api/evidence_items/:evidenceId/comments/:commentId',
-          params: {
-            evidenceId: '@evidenceId',
-            commentId: '@commentId'
-          },
-          isArray: false,
-          cache: false
         }
+
       }
     )
   }
 
   // @ngInject
-  function EvidenceService(EvidenceResource, $q, $exceptionHandler, $cacheFactory) {
+  function EvidenceService(EvidenceResource, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
+
     // Base Evidence and Evidence Collection
     var item = {};
     var collection = [];
-    var comment = {};
-    var comments = [];
 
     // Evidence Collections
-    var evidence = [];
+    var comments = [];
 
     return {
       initBase: initBase,
@@ -148,7 +120,6 @@
       data: {
         item: item,
         collection: collection,
-        comment: comment,
         comments: comments
       },
 
@@ -160,20 +131,12 @@
       delete: deleteItem,
       apply: apply,
 
-      // Evidence Base Refresh
-      queryFresh: queryFresh,
-      getFresh: getFresh,
-
       // Evidence Comments
       queryComments: queryComments,
       getComment: getComment,
       submitComment: submitComment,
       updateComment: updateComment,
-      deleteComment: deleteComment,
-
-      // Evidence Comments Refresh
-      queryCommentsFresh: queryCommentsFresh,
-      getCommentFresh: getCommentFresh
+      deleteComment: deleteComment
     };
 
     function initBase(evidenceId) {
@@ -191,7 +154,6 @@
     function add(reqObj) {
       return EvidenceResource.add(reqObj).$promise
         .then(function(response) {
-          // angular.copy(response, collection);
           return response.$promise;
         });
     }
@@ -226,7 +188,6 @@
     function apply(reqObj) {
       return EvidenceResource.apply(reqObj).$promise.then(
         function(response) { // success
-          // remove evidence's cache record
           cache.remove('/api/evidence_items/' + response.id);
           get(reqObj.evidenceId);
           return $q.when(response);
@@ -234,40 +195,6 @@
         function(error) { // fail
           return $q.reject(error);
         })
-    }
-
-    // Evidence Collections
-    function queryEvidence(evidenceId) {
-      return EvidenceResource.queryEvidence({evidenceId: evidenceId}).$promise
-        .then(function(response) {
-          angular.copy(response, evidence);
-          return response.$promise;
-        });
-    }
-
-    // Evidence Base Refresh
-    function queryFresh(evidenceId) {
-      return EvidenceResource.queryFresh({evidenceId: evidenceId}).$promise
-        .then(function(response) {
-          angular.copy(response, collection);
-          return response.$promise;
-        });
-    }
-    function getFresh(evidenceId) {
-      return EvidenceResource.getFresh({evidenceId: evidenceId}).$promise
-        .then(function(response) {
-          angular.copy(response, item);
-          return response.$promise;
-        });
-    }
-
-    // Evidence Collections Refresh
-    function queryEvidenceFresh(evidenceId) {
-      return EvidenceResource.queryEvidenceFresh({evidenceId: evidenceId}).$promise
-        .then(function(response) {
-          angular.copy(response, evidence);
-          return response.$promise;
-        });
     }
 
     // Evidence Comments
@@ -281,14 +208,13 @@
     function getComment(evidenceId, commentId) {
       return EvidenceResource.getComment({evidenceId: evidenceId, commentId: commentId}).$promise
         .then(function(response) {
-          angular.copy(response, comment);
           return response.$promise;
         });
     }
     function submitComment(reqObj) {
       return EvidenceResource.submitComment(reqObj).$promise
         .then(function(response) {
-          cache.remove('/api/evidence/' + reqObj.evidenceId + '/comments');
+          cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/comments');
           queryComments(reqObj.evidenceId);
           return response.$promise;
         });
@@ -296,31 +222,16 @@
     function updateComment(reqObj) {
       return EvidenceResource.updateComment(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, comment);
-          getCommentFresh(reqObj);
+          cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/comments');
+          queryComments(reqObj.evidenceId);
           return response.$promise;
         });
     }
     function deleteComment(evidenceId, commentId) {
       return EvidenceResource.deleteComment({evidenceId: evidenceId, commentId: commentId}).$promise
         .then(function(response) {
-          comment = null;
-          return response.$promise;
-        });
-    }
-
-    // Evidence Comments Refresh
-    function queryCommentsFresh(evidenceId) {
-      return EvidenceResource.queryCommentsFresh({evidenceId: evidenceId}).$promise
-        .then(function(response) {
-          angular.copy(response, comments);
-          return response.$promise;
-        });
-    }
-    function getCommentFresh(evidenceId, commentId) {
-      return EvidenceResource.getCommentFresh({evidenceId: evidenceId, commentId: commentId}).$promise
-        .then(function(response) {
-          angular.copy(response   , comment);
+          cache.remove('/api/evidence_items/' + evidenceId + '/comments');
+          queryComments(evidenceId);
           return response.$promise;
         });
     }

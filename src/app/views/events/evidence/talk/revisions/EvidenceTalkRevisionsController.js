@@ -63,13 +63,10 @@
   }
 
   // @ngInject
-  function EvidenceTalkRevisionsViewOptions($state, $stateParams, Evidence) {
+  function EvidenceTalkRevisionsViewOptions($state, $stateParams) {
     var baseUrl = '';
     var baseState = '';
-    var tabData = [];
     var styles = {};
-
-    var evidence = Evidence.data.item;
 
     function init() {
       baseState = 'events.genes.summary.variants.summary.evidence.talk.revisions';

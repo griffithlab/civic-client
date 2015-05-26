@@ -20,6 +20,7 @@
           initVariantGroupTalk: function(VariantGroups, VariantGroupRevisions, VariantGroupHistory, $stateParams, $cacheFactory, $q) {
             var variantGroupId = $stateParams.variantGroupId;
             return $q.all([
+              VariantGroups.initComments(variantGroupId),
               VariantGroupRevisions.initRevisions(variantGroupId),
               VariantGroupHistory.initBase(variantGroupId)
             ]);

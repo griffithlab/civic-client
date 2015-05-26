@@ -63,13 +63,10 @@
   }
 
   // @ngInject
-  function GeneTalkRevisionsViewOptions($state, $stateParams, Genes) {
+  function GeneTalkRevisionsViewOptions($state, $stateParams) {
     var baseUrl = '';
     var baseState = '';
-    var tabData = [];
     var styles = {};
-
-    var gene = Genes.data.item;
 
     function init() {
       baseState = 'events.genes.talk.revisions';

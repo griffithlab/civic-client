@@ -31,7 +31,7 @@
         resolve: {
           VariantGroups: 'VariantGroups',
           refreshVariantGroups: function(VariantGroups, $stateParams) {
-            return VariantGroups.getFresh($stateParams.variantGroupId);
+            return VariantGroups.get($stateParams.variantGroupId);
           }
         },
         deepStateRedirect: [ 'variantGroupId' ],
@@ -44,9 +44,6 @@
 
   // @ngInject
   function VariantGroupsViewOptions($state, $stateParams, VariantGroups) {
-    var baseParams = {};
-    var baseUrl = '';
-    var baseState = '';
     var tabData = [];
     var state = {
       baseParams: {},

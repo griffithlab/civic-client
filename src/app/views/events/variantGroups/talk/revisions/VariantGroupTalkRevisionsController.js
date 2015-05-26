@@ -37,7 +37,7 @@
         template: '<variant-group-talk-revisions></variant-group-talk-revisions>',
         resolve: {
           initRevisionList: function(VariantGroups, VariantGroupRevisions, VariantGroupHistory, $stateParams) {
-            return VariantGroupRevisions.queryFresh($stateParams.variantGroupId);
+            return VariantGroupRevisions.query($stateParams.variantGroupId);
           }
         },
         data: {
@@ -51,8 +51,8 @@
         resolve: {
           initRevision: function(VariantGroupRevisions, $stateParams, $q) {
             return $q.all([
-              VariantGroupRevisions.getFresh($stateParams.variantGroupId, $stateParams.revisionId),
-              VariantGroupRevisions.queryCommentsFresh($stateParams.variantGroupId, $stateParams.revisionId)
+              VariantGroupRevisions.get($stateParams.variantGroupId, $stateParams.revisionId),
+              VariantGroupRevisions.queryComments($stateParams.variantGroupId, $stateParams.revisionId)
             ]);
           }
         },
@@ -67,10 +67,7 @@
   function VariantTalkRevisionsViewOptions($state, $stateParams, Variants) {
     var baseUrl = '';
     var baseState = '';
-    var tabData = [];
     var styles = {};
-
-    var variantGroup = VariantGroups.data.item;
 
     function init() {
       baseState = 'events.genes.summary.variantGroups.talk.revisions';

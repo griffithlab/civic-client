@@ -36,7 +36,7 @@
         template: '<variant-talk-revisions></variant-talk-revisions>',
         resolve: {
           initRevisionList: function(Variants, VariantRevisions, VariantHistory, $stateParams) {
-            return VariantRevisions.queryFresh($stateParams.variantId);
+            return VariantRevisions.query($stateParams.variantId);
           }
         },
         data: {
@@ -50,8 +50,8 @@
         resolve: {
           initRevision: function(VariantRevisions, $stateParams, $q) {
             return $q.all([
-              VariantRevisions.getFresh($stateParams.variantId, $stateParams.revisionId),
-              VariantRevisions.queryCommentsFresh($stateParams.variantId, $stateParams.revisionId)
+              VariantRevisions.get($stateParams.variantId, $stateParams.revisionId),
+              VariantRevisions.queryComments($stateParams.variantId, $stateParams.revisionId)
             ]);
           }
         },
@@ -63,13 +63,10 @@
   }
 
   // @ngInject
-  function VariantTalkRevisionsViewOptions($state, $stateParams, Variants) {
+  function VariantTalkRevisionsViewOptions($state, $stateParams) {
     var baseUrl = '';
     var baseState = '';
-    var tabData = [];
     var styles = {};
-
-    var variant = Variants.data.item;
 
     function init() {
       baseState = 'events.genes.summary.variants.talk.revisions';
@@ -98,7 +95,7 @@
   }
 
   // @ngInject
-  function VariantTalkRevisionsController(Variants, VariantRevisions, VariantTalkRevisionsRevisionsViewOptions) {
+  function VariantTalkRevisionsController(VariantRevisions, VariantTalkRevisionsRevisionsViewOptions) {
     console.log('VariantTalkRevisionsRevisionsController called.');
     VariantTalkRevisionsRevisionsViewOptions.init();
     this.VariantRevisionsModel = VariantRevisions;
