@@ -34,7 +34,7 @@
     vm.variantRevisions = VariantRevisions;
     vm.variantHistory = VariantHistory;
     vm.variantEdit = angular.copy(vm.variant);
-    vm.variantEdit.comment = { title: 'New Suggested Revision', text:'Comment text.' };
+    vm.variantEdit.comment = { title: 'VARIANT ' + vm.variant.name + ' Suggested Revision', text:'' };
     vm.myVariantInfo = variantModel.data.myVariantInfo;
     vm.variants = variantModel.data.variants;
     vm.variantGroups = variantModel.data.variantGroups;
@@ -54,8 +54,8 @@
         type: 'horizontalInput',
         templateOptions: {
           label: 'Name',
-          disabled: true,
-          value: vm.variant.name
+          value: vm.variant.name,
+          helpText: ''
         }
       },
       {
@@ -65,7 +65,8 @@
           rows: 8,
           label: 'Description',
           value: 'vm.variant.description',
-          minLength: 32
+          minLength: 32,
+          helpText: 'User-defined summary of the clinical relevance of this Variant.'
         }
       },
       {
@@ -73,21 +74,13 @@
       },
       {
         model: vm.variantEdit.comment,
-        key: 'title',
-        type: 'horizontalInput',
-        templateOptions: {
-          label: 'Comment Title',
-          value: 'title'
-        }
-      },
-      {
-        model: vm.variantEdit.comment,
         key: 'text',
         type: 'horizontalTextarea',
         templateOptions: {
           rows: 5,
-          label: 'Comment',
-          value: 'text'
+          label: 'Revision Description',
+          value: 'text',
+          helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
         }
       }
     ];

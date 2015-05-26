@@ -31,7 +31,7 @@
         resolve: {
           Genes: 'Genes',
           refreshGene: function(Genes, $stateParams) {
-            return Genes.getFresh($stateParams.geneId);
+            return Genes.get($stateParams.geneId);
           }
         },
         deepStateRedirect: [ 'geneId' ],
