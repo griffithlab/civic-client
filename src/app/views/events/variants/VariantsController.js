@@ -28,7 +28,7 @@
         template: '<variant-summary show-evidence-grid="true"></variant-summary>',
         resolve: {
           refreshVariant: function(Variants, $stateParams) {
-            return Variants.getFresh($stateParams.variantId);
+            return Variants.get($stateParams.variantId);
           }
         },
         // deepStateRedirect: { params: ['variantId'] },
@@ -41,14 +41,11 @@
 
   // @ngInject
   function VariantsViewOptions($state, $stateParams, Variants) {
-    var baseParams = {};
-    var baseUrl = '';
-    var baseState = '';
     var tabData = [];
     var state = {
-      baseParams: baseParams,
-      baseState: baseState,
-      baseUrl: baseUrl
+      baseParams: {},
+      baseState: '',
+      baseUrl: ''
     };
     var styles = {};
 

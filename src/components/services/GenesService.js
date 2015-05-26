@@ -138,7 +138,7 @@
           params: {
             geneId: '@geneId'
           },
-          cache: cache
+          cache: false
         },
         updateComment: {
           method: 'PATCH',
@@ -161,13 +161,13 @@
           interceptor: {
             response: cacheInterceptor
           }
-        },
+        }
       }
     )
   }
 
   // @ngInject
-  function GenesService(GenesResource, $q, $exceptionHandler, $cacheFactory) {
+  function GenesService(GenesResource, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
     // Base Gene and Gene Collection
     var item = {};
@@ -191,7 +191,6 @@
         myGeneInfo: myGeneInfo,
         variants: variants,
         variantGroups: variantGroups,
-        comment: comment,
         comments: comments
       },
 
@@ -205,28 +204,17 @@
       // Gene Additional Info
       getMyGeneInfo: getMyGeneInfo,
 
-      // Gene Base Refresh
-      queryFresh: queryFresh,
-      getFresh: getFresh,
-
       // Gene Collections
       queryVariants: queryVariants,
       queryVariantGroups: queryVariantGroups,
-
-      // Gene Collections Refresh
-      queryVariantsFresh: queryVariantsFresh,
-      queryVariantGroupsFresh: queryVariantGroupsFresh,
 
       // Gene Comments
       queryComments: queryComments,
       getComment: getComment,
       submitComment: submitComment,
       updateComment: updateComment,
-      deleteComment: deleteComment,
+      deleteComment: deleteComment
 
-      // Gene Comments Refresh
-      queryCommentsFresh: queryCommentsFresh,
-      getCommentFresh: getCommentFresh
     };
 
     function initBase(geneId) {
@@ -275,7 +263,6 @@
     function apply(reqObj) {
       return GenesResource.apply(reqObj).$promise.then(
         function(response) { // success
-          // remove gene's cache record
           cache.remove('/api/genes/' + response.id);
           get(reqObj.geneId);
           return $q.when(response);
@@ -309,37 +296,6 @@
           return response.$promise;
         });
     }
-    // Gene Base Refresh
-    function queryFresh(geneId) {
-      return GenesResource.queryFresh({geneId: geneId}).$promise
-        .then(function(response) {
-          angular.copy(response, collection);
-          return response.$promise;
-        });
-    }
-    function getFresh(geneId) {
-      return GenesResource.getFresh({geneId: geneId}).$promise
-        .then(function(response) {
-          angular.copy(response, item);
-          return response.$promise;
-        });
-    }
-
-    // Gene Collections Refresh
-    function queryVariantsFresh(geneId) {
-      return GenesResource.queryVariantsFresh({geneId: geneId}).$promise
-        .then(function(response) {
-          angular.copy(response, variants);
-          return response.$promise;
-        });
-    }
-    function queryVariantGroupsFresh(geneId) {
-      return GenesResource.queryVariantGroupsFresh({geneId: geneId}).$promise
-        .then(function(response) {
-          angular.copy(response, variantGroups);
-          return response.$promise;
-        });
-    }
 
     // Gene Comments
     function queryComments(geneId) {
@@ -352,7 +308,6 @@
     function getComment(geneId, commentId) {
       return GenesResource.getComment({geneId: geneId, commentId: commentId}).$promise
         .then(function(response) {
-          angular.copy(response, comment);
           return response.$promise;
         });
     }
@@ -367,31 +322,15 @@
     function updateComment(reqObj) {
       return GenesResource.updateComment(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, comment);
-          getCommentFresh(reqObj);
+          cache.remove('/api/genes/' + reqObj.geneId + '/comments');
+          queryComments(reqObj.geneId);
           return response.$promise;
         });
     }
     function deleteComment(geneId, commentId) {
       return GenesResource.deleteComment({geneId: geneId, commentId: commentId}).$promise
         .then(function(response) {
-          comment = null;
-          return response.$promise;
-        });
-    }
-
-    // Gene Comments Refresh
-    function queryCommentsFresh(geneId) {
-      return GenesResource.queryCommentsFresh({geneId: geneId}).$promise
-        .then(function(response) {
-          angular.copy(response, comments);
-          return response.$promise;
-        });
-    }
-    function getCommentFresh(geneId, commentId) {
-      return GenesResource.getCommentFresh({geneId: geneId, commentId: commentId}).$promise
-        .then(function(response) {
-          angular.copy(response   , comment);
+          cache.remove('/api/genes/' + geneId + '/comments');
           return response.$promise;
         });
     }

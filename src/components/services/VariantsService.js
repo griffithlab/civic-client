@@ -24,7 +24,7 @@
           isArray: true,
           cache: cache
         },
-        get: { // get a single variant
+        get: {
           method: 'GET',
           isArray: false,
           cache: cache
@@ -53,26 +53,6 @@
           cache: cache
         },
 
-        // Base Variant Refresh
-        queryFresh: { // get list of variants
-          method: 'GET',
-          isArray: true,
-          cache: false
-        },
-        getFresh: { // get variant, force cache
-          method: 'GET',
-          isArray: false,
-          cache: false
-        },
-
-        // Base Collections Refresh
-        queryEvidenceFresh: {
-          method: 'GET',
-          url: '/api/variants/:variantId/evidence_items',
-          isArray: true,
-          cache: false
-        },
-
         // Variant Comments Resources
         queryComments: {
           method: 'GET',
@@ -97,7 +77,7 @@
           params: {
             variantId: '@variantId'
           },
-          cache: cache
+          cache: false
         },
         updateComment: {
           method: 'PATCH',
@@ -120,40 +100,22 @@
           interceptor: {
             response: cacheInterceptor
           }
-        },
-
-        // Variant Comments Refresh
-        queryCommentsFresh: {
-          method: 'GET',
-          url: 'api/variants/:variantId/comments',
-          isArray: true,
-          cache: false
-        },
-        getCommentFresh: {
-          method: 'GET',
-          url: '/api/variants/:variantId/comments/:commentId',
-          params: {
-            variantId: '@variantId',
-            commentId: '@commentId'
-          },
-          isArray: false,
-          cache: false
         }
       }
     )
   }
 
   // @ngInject
-  function VariantsService(VariantsResource, $q, $exceptionHandler, $cacheFactory) {
+  function VariantsService(VariantsResource, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
     // Base Variant and Variant Collection
     var item = {};
     var collection = [];
-    var comment = {};
-    var comments = [];
 
     // Variant Collections
     var evidence = [];
+    var comment = {};
+    var comments = [];
 
     return {
       initBase: initBase,
@@ -162,7 +124,6 @@
         item: item,
         collection: collection,
         evidence: evidence,
-        comment: comment,
         comments: comments
       },
 
@@ -173,13 +134,8 @@
       delete: deleteItem,
       apply: apply,
 
-      // Variant Base Refresh
-      queryFresh: queryFresh,
-      getFresh: getFresh,
-
       // Variant Collections
       queryEvidence: queryEvidence,
-      queryEvidenceFresh: queryEvidenceFresh,
 
       // Variant Comments
       queryComments: queryComments,
@@ -187,10 +143,6 @@
       submitComment: submitComment,
       updateComment: updateComment,
       deleteComment: deleteComment,
-
-      // Variant Comments Refresh
-      queryCommentsFresh: queryCommentsFresh,
-      getCommentFresh: getCommentFresh
     };
 
     function initBase(variantId) {
@@ -256,31 +208,6 @@
         });
     }
 
-    // Variant Base Refresh
-    function queryFresh(variantId) {
-      return VariantsResource.queryFresh({variantId: variantId}).$promise
-        .then(function(response) {
-          angular.copy(response, collection);
-          return response.$promise;
-        });
-    }
-    function getFresh(variantId) {
-      return VariantsResource.getFresh({variantId: variantId}).$promise
-        .then(function(response) {
-          angular.copy(response, item);
-          return response.$promise;
-        });
-    }
-
-    // Variant Collections Refresh
-    function queryEvidenceFresh(variantId) {
-      return VariantsResource.queryVariantsFresh({variantId: variantId}).$promise
-        .then(function(response) {
-          angular.copy(response, evidence);
-          return response.$promise;
-        });
-    }
-
     // Variant Comments
     function queryComments(variantId) {
       return VariantsResource.queryComments({variantId: variantId}).$promise
@@ -308,7 +235,8 @@
       return VariantsResource.updateComment(reqObj).$promise
         .then(function(response) {
           angular.copy(response, comment);
-          getCommentFresh(reqObj);
+          cache.remove('/api/variants/' + reqObj.variantId + '/comments/' + reqObj.id);
+          getComment(reqObj);
           return response.$promise;
         });
     }
@@ -316,22 +244,6 @@
       return VariantsResource.deleteComment({variantId: variantId, commentId: commentId}).$promise
         .then(function(response) {
           comment = null;
-          return response.$promise;
-        });
-    }
-
-    // Variant Comments Refresh
-    function queryCommentsFresh(variantId) {
-      return VariantsResource.queryCommentsFresh({variantId: variantId}).$promise
-        .then(function(response) {
-          angular.copy(response, comments);
-          return response.$promise;
-        });
-    }
-    function getCommentFresh(variantId, commentId) {
-      return VariantsResource.getCommentFresh({variantId: variantId, commentId: commentId}).$promise
-        .then(function(response) {
-          angular.copy(response   , comment);
           return response.$promise;
         });
     }
