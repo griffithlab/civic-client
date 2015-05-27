@@ -35,7 +35,7 @@
     vm.variantGroupHistory = VariantGroupHistory;
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
-    vm.variants = variantGroupModel.data.variants;
+    vm.variantGroupEdit.variants = variantGroupModel.data.variants;
 
     vm.styles = VariantGroupsViewOptions.styles;
 
@@ -65,6 +65,17 @@
           value: 'vm.variantGroup.description',
           focus: true,
           minLength: 32
+        }
+      },
+      {
+        key: 'variants',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Variants',
+          inputOptions: {
+            type: 'input'
+          },
+          helpText: 'Manage variants'
         }
       },
       {

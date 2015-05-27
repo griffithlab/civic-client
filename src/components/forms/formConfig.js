@@ -71,6 +71,7 @@
             ].join(' ')
     });
 
+    // input
     formlyConfigProvider.setType({
       name: 'horizontalInput',
       extends: 'input',
@@ -83,6 +84,7 @@
       wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
+    // select
     formlyConfigProvider.setType({
       name: 'horizontalSelect',
       extends: 'select',
@@ -95,6 +97,7 @@
       wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
+    // textarea
     formlyConfigProvider.setType({
       name: 'horizontalTextarea',
       extends: 'textarea',
@@ -107,11 +110,40 @@
       wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
+
+    // checkbox
     formlyConfigProvider.setType({
       name: 'horizontalCheckbox',
       extends: 'checkbox',
       wrapper: ['horizontalBootstrapCheckbox', 'bootstrapHasError']
     });
-  }
 
+    formlyConfigProvider.setType({
+      name: 'horizontalCheckboxHelp',
+      extends: 'checkbox',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+
+    // multiInput field
+    formlyConfigProvider.setType({
+      name: 'multiInput',
+      templateUrl: '/components/forms/multiInput.tpl.html',
+      defaultOptions: {
+        noFormControl: true,
+        wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError'],
+        templateOptions: {
+          inputOptions: {
+            wrapper: null
+          }
+        }
+      },
+      controller: /* @ngInject */ function($scope) {
+        $scope.copyItemOptions = copyItemOptions;
+
+        function copyItemOptions() {
+          return angular.copy($scope.to.inputOptions);
+        }
+      }
+    });
+  }
 })();
