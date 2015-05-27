@@ -102,7 +102,6 @@
       vm.formMessages = {};
       // prep variant edit obj for submission to server
       variantGroupEdit.variants = variantGroupEdit.variantNames;
-      delete variantGroupEdit.variantNames;
 
       VariantGroupRevisions.submitRevision(variantGroupEdit)
         .then(function(response) {
