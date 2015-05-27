@@ -4,20 +4,25 @@
          style="margin-bottom:14px"
          ng-repeat="item in model[options.key] track by $index"
          ng-init="itemOptions = copyItemOptions()">
-      <formly-field class="no-padding col-xs-10"
-                    options="itemOptions"
-                    model="model[options.key]"
-                    form="form"
-                    index="$index">
-      </formly-field>
+      <div class="col-xs-10">
+        <formly-field class="no-padding"
+                      options="itemOptions"
+                      model="model[options.key]"
+                      form="form"
+                      index="$index">
+        </formly-field>
+      </div>
       <div class="col-xs-2" style="margin-top:6px">
-        <a ng-click="model[options.key].splice($index, 1)">
-          x Remove
+        <a ng-click="model[options.key].splice($index, 1)" class="btn btn-danger btn-sm btn-block">
+          <strong>X</strong>
         </a>
       </div>
     </div>
   </div>
-  <div>
-    <button type="button" class="btn btn-success btn-sm" ng-click="model[options.key].push('')">Add</button>
+  <div class="row">
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-success btn-sm btn-block" ng-click="model[options.key].push('')">Add Item</button>
+    </div>
   </div>
+</div>
 </div>

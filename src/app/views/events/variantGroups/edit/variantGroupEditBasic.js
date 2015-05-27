@@ -36,6 +36,7 @@
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
     vm.variantGroupEdit.variants = variantGroupModel.data.variants;
+    vm.variantGroupEdit.variantIds = _.pluck(variantGroupModel.data.variants, 'id');
 
     vm.styles = VariantGroupsViewOptions.styles;
 
@@ -81,15 +82,6 @@
       {
         template: '<hr/>'
       },
-      //{
-      //  model: vm.variantGroupEdit.comment,
-      //  key: 'title',
-      //  type: 'input',
-      //  templateOptions: {
-      //    label: 'Comment Title',
-      //    value: 'title'
-      //  }
-      //},
       {
         model: vm.variantGroupEdit.comment,
         key: 'text',

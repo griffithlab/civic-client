@@ -37,8 +37,12 @@
     var inputColWidth = formConfig.options.inputColWidth;
     var labelColWidth = formConfig.options.labelColWidth;
     var helpColWidth = formConfig.options.helpColWidth;
-    // set templates here
+    /*
+    * FIELD WRAPPERS
+     */
+    // TODO: get all template strings into their own files while preserving the ability to define col widths etc.
     formlyConfigProvider.setWrapper({
+      // horizontal bootstrap row with label
       name: 'horizontalBootstrapLabel',
       template: [
               '<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
@@ -49,6 +53,8 @@
               '</div>'
             ].join(' ')
     });
+
+    // horizontal bootstrap field with label and help column
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapHelp',
       template: ['<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
@@ -62,6 +68,8 @@
               '</div>'
             ].join(' ')
     });
+
+    // horizontal bootstrap checkbox
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapCheckbox',
       template: [
@@ -71,6 +79,10 @@
             ].join(' ')
     });
 
+    /*
+    * BASIC FIELD TYPES
+    * Two versions of each basic field type, one with a help column and one without
+     */
     // input
     formlyConfigProvider.setType({
       name: 'horizontalInput',
@@ -124,7 +136,9 @@
       wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
-    // multiInput field
+    /*
+    * MULTI-INPUT FIELD
+     */
     formlyConfigProvider.setType({
       name: 'multiInput',
       templateUrl: '/components/forms/multiInput.tpl.html',
@@ -139,7 +153,6 @@
       },
       controller: /* @ngInject */ function($scope) {
         $scope.copyItemOptions = copyItemOptions;
-
         function copyItemOptions() {
           return angular.copy($scope.to.inputOptions);
         }
