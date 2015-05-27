@@ -64,7 +64,7 @@
     //  variant_origin: 'Somatic'
     //};
 
-    vm.newEvidence.comment = { title: '', text:'' };
+    vm.newEvidence.comment = { title: 'New Evidence Description', text:'' };
     vm.newEvidence.drugs  = [];
 
     vm.formErrors = {};
@@ -286,16 +286,8 @@
           diagnosticOpts: ['Positive', 'Negative']
         }
       },
-      { template: '<hr/>'},
       {
-        type: 'horizontalInputHelp',
-        key: 'title',
-        model: vm.newEvidence.comment,
-        templateOptions: {
-          label: 'Comment Title',
-          value: 'title',
-          helpText: 'First Comment Title'
-        }
+        template: '<hr/>'
       },
       {
         key: 'text',
@@ -303,9 +295,9 @@
         model: vm.newEvidence.comment,
         templateOptions: {
           rows: 5,
-          label: 'Comment',
+          label: 'New Evidence Description',
           value: 'text',
-          helpText: 'First Comment Text'
+          helpText: 'Please provide a short paragraph that supports the inclusion of this evidence item into the CIViC database.'
         }
       }
     ];
