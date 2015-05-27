@@ -65,6 +65,7 @@
     //};
 
     vm.newEvidence.comment = { title: '', text:'' };
+    vm.newEvidence.drugs  = [];
 
     vm.formErrors = {};
     vm.formMessages = {};
@@ -201,6 +202,17 @@
           minLength: 8,
           length: 8,
           helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+        }
+      },
+      {
+        key: 'drugs',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Drug Names',
+          inputOptions: {
+            type: 'input'
+          },
+          helpText: 'For predictive evidence, specify one or more a drug name. Drug(s) specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
         }
       },
       //{

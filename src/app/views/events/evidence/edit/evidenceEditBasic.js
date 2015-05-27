@@ -35,7 +35,7 @@
     vm.evidenceHistory = EvidenceHistory;
     vm.evidenceEdit = angular.copy(vm.evidence);
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
-
+    vm.evidenceEdit.drugNames = _.filter(_.pluck(vm.evidence.drugs, 'name'), function(name){ return name != 'N/A'; });
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -139,12 +139,14 @@
         }
       },
       {
-        key: 'pubchem_id',
-        type: 'horizontalInputHelp',
+        key: 'drugNames',
+        type: 'multiInput',
         templateOptions: {
-          label: 'Pubchem Id',
-          value: 'vm.evidenceEdit.pubchem_id',
-          helpText: 'For predictive evidence, the PubChem ID for relevant drug (e.g., 44462760 for Dabrafenib).'
+          label: 'Drug Names',
+          inputOptions: {
+            type: 'input'
+          },
+          helpText: 'Manage drugs'
         }
       },
       {
@@ -255,6 +257,9 @@
       evidenceEdit.evidenceId = evidenceEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
+      // prep evidence edit obj for submission to server
+      evidenceEdit.drugs= evidenceEdit.drugNames;
+
       EvidenceRevisions.submitRevision(evidenceEdit)
         .then(function(response) {
           console.log('revision submit success!');
