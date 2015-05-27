@@ -35,7 +35,7 @@
       disease: '',
       doid: '',
       pubmed_id: '',
-      pubchem_id: '',
+      //pubchem_id: '',
       drugs: [],
       rating: Number(),
       evidence_level: '',
@@ -203,15 +203,15 @@
           helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
         }
       },
-      {
-        key: 'pubchem_id',
-        type: 'horizontalInputHelp',
-        templateOptions: {
-          label: 'Pubchem Id',
-          value: 'vm.newEvidence.pubchem_id',
-          helpText: 'For predictive evidence, the PubChem ID for relevant drug (e.g., 44462760 for Dabrafenib).'
-        }
-      },
+      //{
+      //  key: 'pubchem_id',
+      //  type: 'horizontalInputHelp',
+      //  templateOptions: {
+      //    label: 'Pubchem Id',
+      //    value: 'vm.newEvidence.pubchem_id',
+      //    helpText: 'For predictive evidence, the PubChem ID for relevant drug (e.g., 44462760 for Dabrafenib).'
+      //  }
+      //},
       {
         template: '<hr/>'
       },
