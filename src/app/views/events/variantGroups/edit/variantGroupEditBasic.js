@@ -16,12 +16,13 @@
 
   // @ngInject
   function VariantGroupEditBasicController($scope,
-                                   Security,
-                                   VariantGroupRevisions,
-                                   VariantGroups,
-                                   VariantGroupHistory,
-                                   VariantGroupsViewOptions,
-                                   formConfig) {
+                                           $stateParams,
+                                           Security,
+                                           VariantGroupRevisions,
+                                           VariantGroups,
+                                           VariantGroupHistory,
+                                           VariantGroupsViewOptions,
+                                           formConfig) {
     var variantGroupModel, vm;
 
     vm = $scope.vm = {};
@@ -47,6 +48,8 @@
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+    vm.newRevisionId = Number();
+    vm.stateParams = $stateParams;
 
     vm.variantGroupFields = [
       {
@@ -106,6 +109,7 @@
       VariantGroupRevisions.submitRevision(variantGroupEdit)
         .then(function(response) {
           console.log('revision submit success!');
+          vm.newRevisionId = response.id;
           vm.formMessages['submitSuccess'] = true;
           // options.resetModel();
         })

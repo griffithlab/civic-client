@@ -16,12 +16,13 @@
 
   // @ngInject
   function VariantEditBasicController($scope,
-                                   Security,
-                                   VariantRevisions,
-                                   Variants,
-                                   VariantHistory,
-                                   VariantsViewOptions,
-                                   formConfig) {
+                                      $stateParams,
+                                      Security,
+                                      VariantRevisions,
+                                      Variants,
+                                      VariantHistory,
+                                      VariantsViewOptions,
+                                      formConfig) {
     var variantModel, vm;
 
     vm = $scope.vm = {};
@@ -47,6 +48,8 @@
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+    vm.newRevisionId = Number();
+    vm.stateParams = $stateParams;
 
     vm.variantFields = [
       {
@@ -92,6 +95,7 @@
       VariantRevisions.submitRevision(variantEdit)
         .then(function(response) {
           console.log('revision submit success!');
+          vm.newRevisionId = response.id;
           vm.formMessages['submitSuccess'] = true;
           // options.resetModel();
         })

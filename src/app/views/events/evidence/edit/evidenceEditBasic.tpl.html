@@ -28,7 +28,7 @@
     <div class="col-xs-12">
       <div ng-messages="vm.formMessages" class="edit-messages">
         <div ng-message="submitSuccess" class="alert alert-success">
-          <strong class="status">Success</strong> - <span class="message">Your revision was successfully submitted.</span>
+          <strong class="status">Success</strong> - <span class="message">Your revision was successfully submitted. <a ng-href="#/events/genes/{{vm.stateParams.geneId}}/summary/variants/{{vm.stateParams.variantId}}/summary/evidence/{{vm.stateParams.evidenceId}}/talk/revisions/list/{{vm.newRevisionId}}/summary" class="btn btn-small btn-default">View it here</a></span>
         </div>
         <div ng-message="applySuccess" class="alert alert-success">
           <strong class="status">Success</strong> - <span class="message">Your revision was successfully applied.</span>

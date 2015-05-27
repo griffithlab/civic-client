@@ -16,12 +16,13 @@
 
   // @ngInject
   function EvidenceEditBasicController($scope,
-                                   Security,
-                                   EvidenceRevisions,
-                                   Evidence,
-                                   EvidenceHistory,
-                                   EvidenceViewOptions,
-                                   formConfig) {
+                                       $stateParams,
+                                       Security,
+                                       EvidenceRevisions,
+                                       Evidence,
+                                       EvidenceHistory,
+                                       EvidenceViewOptions,
+                                       formConfig) {
     var evidenceModel, vm;
 
     vm = $scope.vm = {};
@@ -44,6 +45,8 @@
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+    vm.newRevisionId = Number();
+    vm.stateParams = $stateParams;
 
     vm.formSelects = {
       evidence_levels: [
@@ -158,13 +161,13 @@
           valueProp: 'value',
           labelProp: 'label',
           helpText: [
-                      '<p>Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines:</p>',
-                      '<ul>',
-                      '<li><strong>One Star:</strong> Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. </li>',
-                      '<li><strong>Two Stars:</strong> Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.</li>',
-                      '<li><strong>Three Stars:</strong> Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.</li>',
-                      '<li><strong>Four Stars:</strong> Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.</li>',
-                      '<li><strong>Five Stars:</strong> Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</li>'].join(" ")
+                   '<p>Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines:</p>',
+                   '<ul>',
+                   '<li><strong>One Star:</strong> Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. </li>',
+                   '<li><strong>Two Stars:</strong> Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.</li>',
+                   '<li><strong>Three Stars:</strong> Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.</li>',
+                   '<li><strong>Four Stars:</strong> Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.</li>',
+                   '<li><strong>Five Stars:</strong> Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</li>'].join(" ")
         }
       },
       {
@@ -263,6 +266,7 @@
       EvidenceRevisions.submitRevision(evidenceEdit)
         .then(function(response) {
           console.log('revision submit success!');
+          vm.newRevisionId = response.id;
           vm.formMessages['submitSuccess'] = true;
           // options.resetModel();
         })
