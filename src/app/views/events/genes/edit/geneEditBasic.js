@@ -47,6 +47,7 @@
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+    vm.newRevisionId = Number();
 
     vm.geneFields = [
       {
@@ -116,6 +117,7 @@
       GeneRevisions.submitRevision(geneEdit)
         .then(function(response) {
           console.log('revision submit success!');
+          vm.newRevisionId = response.id;
           vm.formMessages['submitSuccess'] = true;
           // options.resetModel();
         })
