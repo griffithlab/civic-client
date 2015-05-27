@@ -36,7 +36,7 @@
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
     // vm.variantGroupEdit.variants = variantGroupModel.data.variants;
-    vm.variantGroupEdit.variantIds = _.pluck(variantGroupModel.data.variants, 'id');
+    // vm.variantGroupEdit.variantIds = _.pluck(variantGroupModel.data.variants, 'id');
     vm.variantGroupEdit.variantNames = _.pluck(variantGroupModel.data.variants, 'name');
 
     vm.styles = VariantGroupsViewOptions.styles;
@@ -100,7 +100,9 @@
       variantGroupEdit.variantGroupId = variantGroupEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
+      // prep variant edit obj for submission to server
       variantGroupEdit.variants = variantGroupEdit.variantNames;
+      delete variantGroupEdit.variantNames;
 
       VariantGroupRevisions.submitRevision(variantGroupEdit)
         .then(function(response) {
