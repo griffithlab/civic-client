@@ -57,10 +57,18 @@ The `serve` tasks starts a static file server, and a proxy that routes calls to 
 To make the app ready for deploy to production run:
 
 ```bash
+gulp build
+```
+
+The build task creates a `./dist` folder with all scripts and stylesheets concatenated, minified, and versioned, also third party libraries installed with bower will be concatenated and minified into `vendors.min.js` and `vendors.min.css` respectively.
+
+To test the build version of the app, execute:
+
+```bash
 gulp serve:dist
 ```
 
-The serve:dist task creates a `./dist` folder with all scripts and stylesheets concatenated, minified, and versioned, also third party libraries installed with bower will be concatenated and minified into `vendors.min.js` and `vendors.min.css` respectively.
+This task executes a build, then serves the /dist directory from the same port as the `gulp serve` task, http://127.0.0.1:3001/
 
 ## Pulling Updates
 As the civic-client is under heavy development, we'll be pushing releases to the master branch at a fairly rapid rate. Often, we'll update various packages and modules that are part of the workflow and/or production codebase. So after you do a `git pull` to update your local repository, be sure to:
