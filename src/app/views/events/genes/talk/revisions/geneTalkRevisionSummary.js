@@ -18,8 +18,8 @@
   // @ngInject
   function GeneTalkRevisionSummaryController($scope, $stateParams, GeneRevisions, Security, formConfig) {
     var vm = $scope.vm = {};
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
+    vm.isAdmin = Security.isAdmin;
+    vm.isAuthenticated = Security.isAuthenticated;
     vm.geneTalkModel = GeneRevisions;
 
     vm.formErrors = {};

@@ -83,7 +83,6 @@
       logout: function(redirectTo) {
         $http.get('/api/sign_out').then(function(response) { // success
           service.currentUser = null;
-          $rootScope.digest();
           redirect(redirectTo);
         }, function(response) { // failure
           $log.warn("COULD NOT LOG OUT");
