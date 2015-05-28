@@ -11,14 +11,14 @@
     <hr/>
     <pre>
 <strong>GET</strong> /api/genes
-<strong>GET</strong> /api/genes/:entrez_id
+<strong>GET</strong> /api/genes/:gene_id
     </pre>
     <p>
       The genes endpoint can be used to get either a list of all genes in the system, or more detailed information for a single gene using an Entrez id in the url string.
       As an example, here is (clickable) sample request for the gene "ALK" (Entrez id: 238)
     </p>
     <pre>
-<strong>GET</strong> <a href="/api/genes/238" target="_blank">/api/genes/238</a>
+<strong>GET</strong> <a href="/api/genes/5" target="_blank">/api/genes/5</a>
     </pre>
     <p>
       The next two entities, Variants and Evidence Items, do not have unambiguous identifiers outside of CIViC (such as Entrez IDs) so API calls will use their internally assigned CIViC IDs.
@@ -28,36 +28,36 @@
     <h4>Variants</h4>
     <hr/>
     <pre>
-<strong>GET</strong> /api/genes/:entrez_id/variants
-<strong>GET</strong> /api/genes/:entrez_id/variants/:variant_id
+<strong>GET</strong> /api/genes/:gene_id/variants
+<strong>GET</strong> /api/genes/:gene_id/variants/:variant_id
     </pre>
     <p>
         The variants endpoint can be used to retrieve a list of all variants for a single gene (using an Entrez ID), or a more detailed view of a specific variant (using the Entrez ID and variant ID).
     </p>
     <pre>
-<strong>GET</strong> <a href="/api/genes/238/variants/5" target="_blank">/api/genes/238/variants/5</a>
+<strong>GET</strong> <a href="/api/genes/5/variants/5" target="_blank">/api/genes/5/variants/5</a>
     </pre>
     <br/>
     <h4>Evidence Items</h4>
     <hr/>
     <pre>
-<strong>GET</strong> /api/genes/:entrez_id/variants/:variant_id/evidence_items
-<strong>GET</strong> /api/genes/:entrez_id/variants/:variant_id/evidence_items/:evidence_item_id
+<strong>GET</strong> /api/genes/:gene_id/variants/:variant_id/evidence_items
+<strong>GET</strong> /api/genes/:gene_id/variants/:variant_id/evidence_items/:evidence_item_id
     </pre>
     <p>
         The evidence items endpoint can be used to retrieve a list of all evidence items for a single variant (using an Entrez ID and variant ID), or a more detailed view of a specific evidence_item (using the Entrez ID, variant ID, and evidence item ID).
     </p>
     <pre>
-<strong>GET</strong> <a href="/api/genes/238/variants/5/evidence_items/9" target="_blank">/api/genes/238/variants/5/evidence_items/9</a>
+<strong>GET</strong> <a href="/api/genes/5/variants/5/evidence_items/9" target="_blank">/api/genes/5/variants/5/evidence_items/9</a>
     </pre>
     <br/>
     <h4>Other Features</h4>
     <hr/>
     <pre>
-<strong>GET</strong> /api/genes/:entrez_id/comments
-<strong>GET</strong> /api/genes/:entrez_id/revisions
-<strong>GET</strong> /api/genes/:entrez_id/suggested_changes
-<strong>GET</strong> /api/genes/:entrez_id/suggested_changes/:change_id/comments
+<strong>GET</strong> /api/genes/:gene_id/comments
+<strong>GET</strong> /api/genes/:gene_id/revisions
+<strong>GET</strong> /api/genes/:gene_id/suggested_changes
+<strong>GET</strong> /api/genes/:gene_id/suggested_changes/:change_id/comments
     </pre>
     <p>
       Each of the three main entities in the system (Genes, Variants, and Evidence Items) also support additional endpoints for comments, version history, and suggested changes.
@@ -65,7 +65,7 @@
       For example, to get a list of revisions for the gene "ALK":
     </p>
     <pre>
-<strong>GET</strong> <a href="/api/genes/238/revisions" target="_blank">/api/genes/238/revisions</a>
+<strong>GET</strong> <a href="/api/genes/5/revisions" target="_blank">/api/genes/5/revisions</a>
     </pre>
     <p>
       We are working on additional API support and documentation. Soon, you will be able to do anything you do from the site (add comments, suggest new evidence items, etc) directly from the API.
