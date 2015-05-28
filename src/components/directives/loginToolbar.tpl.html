@@ -8,6 +8,8 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li><a class="small" ng-click="logout(currentUrl)">Sign Out</a></li>
+          <li ng-if="isAdmin()" class="divider"></li>
+          <li ng-if="isAdmin()"><a class="small" ng-href="{{adminUrl}}">Admin Console</a></li>
         </ul>
       </div>
     </div>
@@ -26,6 +28,8 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
+          <li ng-if="isAdmin()" class="divider"></li>
+          <li ng-if="isAdmin()"><a class="small" ng-href="{{adminUrl}}">Admin Console</a></li>
         </ul>
       </div>
     </div>

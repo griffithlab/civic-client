@@ -11,10 +11,13 @@
       restrict: 'E',
       replace: true,
       scope: true,
-      controller: /* @ngInject */ function($scope, $rootScope, $location, Security) {
+      controller: /* @ngInject */ function($scope, $rootScope, $location, Security, ConfigService) {
+        $scope.isAdmin= Security.isAdmin;
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.login = Security.showLogin;
         $scope.logout = Security.logout;
+
+        $scope.adminUrl = ConfigService.serverUrl + 'admin';
 
         // $scope.alert = alert('clicked');
 
