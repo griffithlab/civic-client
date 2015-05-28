@@ -3,8 +3,8 @@
     <h3>CIViC API Documentation</h3>
     <p>CIViC provides a simple API that can be utilized over HTTP in the programming language of your choice or even at the command line.</p>
     <p>
-      The CIViC API attempts to be RESTful whenever appropriate which hopefully makes it intuitive to use. There are three main entities in the system that a user may interact with: Genes, Variants, and Evidence Items.
-      These entities form a hierarchy that is reflected in the API endpoints. A Gene has one or more Variants, each of which may have one or more Evidence Items.
+      The CIViC API attempts to be RESTful whenever appropriate which hopefully makes it intuitive to use. There are four main entities in the system that a user may interact with: Genes, Variants, Variant Groups, and Evidence Items.
+      These entities form a hierarchy that is reflected in the API endpoints. A Gene has one or more Variants, each of which may have one or more Evidence Items. Variants may also be collected into Variant Groups.
     </p>
     <br/>
     <h4>Genes</h4>
@@ -14,14 +14,13 @@
 <strong>GET</strong> /api/genes/:gene_id
     </pre>
     <p>
-      The genes endpoint can be used to get either a list of all genes in the system, or more detailed information for a single gene using an Entrez id in the url string.
+      The genes endpoint can be used to get either a list of all genes in the system, or more detailed information for a single gene using a gene_id in the url string.
       As an example, here is (clickable) sample request for the gene "BRAF" (gene_id: 5)
     </p>
     <pre>
 <strong>GET</strong> <a href="/api/genes/5" target="_blank">/api/genes/5</a>
     </pre>
     <p>
-      The next two entities, Variants and Evidence Items, do not have unambiguous identifiers outside of CIViC (such as Entrez IDs) so API calls will use their internally assigned CIViC IDs.
       You can always use the API call one level up the hierarchy to retrieve a list of IDs for the entity you are interested in. For instance, the genes endpoint will return a list of Variant IDs for that Gene.
     </p>
     <br/>
