@@ -48,7 +48,7 @@ Fire up the civic-server on port 3000 and run:
 gulp serve
 ```
 
-Then head to `http://localhost:3001` in your browser. 
+Then head to `http://127.0.0.1:3001` in your browser. *NOTE:* use `127.0.0.1`, not `localhost`. A couple of the OAuth providers we use for authentication will only work if the app is loaded from `127.0.0.1`. 
 
 The `serve` tasks starts a static file server, and a proxy that routes calls to /api to the civic-server listening on port 3000. It serves the AngularJS application, and a starts a watch task which watches all files for changes and lints, builds and injects them into the index.html accordingly.
 
