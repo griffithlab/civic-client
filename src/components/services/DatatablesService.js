@@ -29,7 +29,8 @@
               return event;
             });
             return events;
-          }
+          },
+          cache: false
         }
       });
   }

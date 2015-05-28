@@ -52,10 +52,7 @@
     //  disease: 'Breast Cancer',
     //  doid: '3908',
     //  pubmed_id: '20979473',
-    //  pubchem_id: '33042',
-    //  drugs: {
-    //    collection: []
-    //  },
+    //  drugs: [],
     //  rating: 4,
     //  evidence_level: 'C',
     //  evidence_type: 'Predictive',
