@@ -55,7 +55,7 @@
     scope.$watch('entityViewModel.data.item.name', function(name) {
       vm.name = name;
     });
-    
+
     // scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
     scope.tabs = entityViewOptions.tabData;
