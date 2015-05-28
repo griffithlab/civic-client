@@ -45,11 +45,17 @@
     var entityViewModel = scope.entityViewModel = entityView.entityViewModel;
     var entityViewOptions = scope.entityViewOptions = entityView.entityViewOptions;
 
+    vm.type = '';
+    vm.name = '';
+
     vm.type = _.map(entityViewModel.data.item.type.replace('_', ' ').split(" "), function(word) {
       return word.toUpperCase();
     }).join(" ");
-    vm.name = entityViewModel.data.item.name;
 
+    scope.$watch('entityViewModel.data.item.name', function(name) {
+      vm.name = name;
+    });
+    
     // scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
     scope.tabs = entityViewOptions.tabData;
