@@ -198,7 +198,7 @@
         key: 'evidence_direction',
         type: 'horizontalSelectHelp',
         templateOptions: {
-          label: 'Evidence Type',
+          label: 'Evidence Direction',
           value: 'vm.evidenceEdit.evidence_direction',
           options: vm.formSelects.evidence_directions,
           valueProp: 'value',
