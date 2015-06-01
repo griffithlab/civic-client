@@ -6,7 +6,8 @@
 // @ngInject
   function BrowseController($scope, uiGridConstants, $http, $state, Datatables, _, $log) {
     var pageCount = 25;
-    var variantsDefaults = {
+    var defaults = {};
+    defaults.variants  = {
       mode: 'variants',
       page: 1,
       count: pageCount,
@@ -14,7 +15,7 @@
       filters: []
     };
 
-    var genesDefaults= {
+    defaults.genes = {
       mode: 'genes',
       page: 1,
       count: pageCount,
@@ -238,16 +239,10 @@
 
     ctrl.switchMode = function(mode) {
       ctrl.mode = mode;
-      if (mode === 'variants') {
-        ctrl.filters = variantsDefaults.filters;
-        ctrl.sorting = variantsDefaults.sorting;
-        ctrl.page = variantsDefaults.page;
-      }
-      if (mode === 'genes') {
-        ctrl.filters = genesDefaults.filters;
-        ctrl.sorting = genesDefaults.sorting;
-        ctrl.page = genesDefaults.page;
-      }
+      ctrl.filters = defaults[mode].filters;
+      ctrl.sorting= defaults[mode].sorting;
+      ctrl.page = defaults[mode].page;
+
       updateData();
     };
 
