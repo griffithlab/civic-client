@@ -1,5 +1,5 @@
 <div class="addEvidenceBasic">
-  <div class="row">
+  <div class="row" ng-if="vm.showInstructions">
     <div class="col-xs-12">
       <div class="edit-instructions">
         <p>To add an evidence item, please complete the following form, provide a short statement supporting its inclusion into the CIViC database, then click the 'Submit Evidence for Inclusion' button.</p>
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div class="form">
+  <div class="form" ng-if="vm.showForm">
     <div class="row">
       <div class="col-xs-12">
         <form class="form-horizontal">
@@ -59,9 +59,10 @@
       </div>
     </div>
   </div>
-  <div class="dev">
-    <div class="col-xs-12">
-
+  <div class="successMessage" ng-if="vm.showSuccessMessage">
+    <div class="col-xs-12 jumbotron">
+      <h1>Thank you.</h1>
+      <p>Your new evidence item is now waiting in a queue for administrator approval. The more complete your evidence submission the more likely it will be approved quickly. In the future, you will be notified when the status of your evidence item changes. But for now you may periodically check your evidence item's variant page to see if the evidence item has been added to the evidence item list.</p>
     </div>
   </div>
 </div>

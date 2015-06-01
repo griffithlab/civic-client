@@ -28,6 +28,10 @@
     vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
+    vm.showForm = true;
+    vm.showSuccessMessage = false;
+    vm.showInstructions = true;
+
     vm.newEvidence = {
       entrez_id: '',
       variant_name: '',
@@ -307,6 +311,9 @@
         .then(function(response) {
           console.log('add evidence success!');
           vm.formMessages['submitSuccess'] = true;
+          vm.showInstructions = false;
+          vm.showForm = false;
+          vm.showSuccessMessage = true;
           // options.resetModel();
         })
         .catch(function(error) {
