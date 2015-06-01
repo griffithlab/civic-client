@@ -46,14 +46,14 @@
         //  allowCellFocus: false,
         //  width: '5%'
         //},
-        { name: 'entrez_id',
-          displayName: 'Entrez ID',
+        { name: 'entrez_name',
+          displayName: 'Gene',
           enableFiltering: false,
           allowCellFocus: false,
           width: '9%'
         },
         { name: 'name',
-          displayName: 'Name',
+          displayName: 'Variant Name',
           enableFiltering: true,
           allowCellFocus: false,
           width: '20%',
