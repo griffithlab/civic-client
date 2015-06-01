@@ -5,13 +5,25 @@
 
 // @ngInject
   function BrowseController($scope, uiGridConstants, $http, $state, Datatables, _, $log) {
-    var defaults = {
+    var pageCount = 25;
+    var variantsDefaults = {
       mode: 'variants',
-      count: 25
+      page: 1,
+      count: pageCount,
+      sorting: [{field: 'variant', direction: uiGridConstants.ASC }],
+      filters: []
+    };
+
+    var genesDefaults= {
+      mode: 'genes',
+      page: 1,
+      count: pageCount,
+      sorting: [{field: 'name', direction: uiGridConstants.ASC }],
+      filters: []
     };
 
     var ctrl = $scope.ctrl = {};
-    var maxRows = ctrl.maxRows = defaults.count;
+    var maxRows = ctrl.maxRows = pageCount;
 
     // declare ui paging/sorting/filtering vars
     ctrl.mode = '';
@@ -25,7 +37,7 @@
     ctrl.isFiltered = ctrl.filters.length > 0;
 
     $scope.$watch('ctrl.totalItems', function() {
-      ctrl.totalPages = Math.ceil(ctrl.totalItems / defaults.count);
+      ctrl.totalPages = Math.ceil(ctrl.totalItems / pageCount);
     });
 
     ctrl.gridOptions = {
@@ -33,6 +45,7 @@
 
       useExternalFiltering: true,
       useExternalSorting: true,
+      useExternalPaging: true,
 
       paginationPageSizes: [maxRows],
       paginationPageSize: maxRows,
@@ -58,6 +71,7 @@
         {
           name: 'variant',
           width: '30%',
+          sort: {direction: uiGridConstants.ASC},
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -67,7 +81,6 @@
         {
           name: 'entrez_gene',
           width: '15%',
-          sort: {direction: uiGridConstants.ASC},
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -225,9 +238,16 @@
 
     ctrl.switchMode = function(mode) {
       ctrl.mode = mode;
-      ctrl.filters = [];
-      ctrl.sorting = [];
-      ctrl.page = 1;
+      if (mode === 'variants') {
+        ctrl.filters = variantsDefaults.filters;
+        ctrl.sorting = variantsDefaults.sorting;
+        ctrl.page = variantsDefaults.page;
+      }
+      if (mode === 'genes') {
+        ctrl.filters = genesDefaults.filters;
+        ctrl.sorting = genesDefaults.sorting;
+        ctrl.page = genesDefaults.page;
+      }
       updateData();
     };
 
@@ -254,6 +274,6 @@
       return Datatables.query(request);
     }
 
-    ctrl.switchMode(defaults.mode);
+    ctrl.switchMode('variants');
   }
 })();
