@@ -41,7 +41,7 @@
 
   // @ngInject
   function entityTabsLink(scope, element, attributes, entityView) {
-    var vm = scope.vm = {}; // todo convert the rest of this controller to vm
+    var vm = scope.vm; // todo convert the rest of this controller to vm
     var entityViewModel = scope.entityViewModel = entityView.entityViewModel;
     var entityViewOptions = scope.entityViewOptions = entityView.entityViewOptions;
 
@@ -78,7 +78,10 @@
   }
 
 // @ngInject
-  function EntityTabsController($scope, $state) {
+  function EntityTabsController($scope, $state, Security) {
+    var vm = $scope.vm = {};
+    vm.isAuthenticated = Security.isAuthenticated;
+    vm.isAdmin = Security.isAdmin;
     // TODO not sure why this watch is necessary for tabs to be properly set to active on 1st load
     var unwatch = $scope.$watchCollection('entityViewModel', function(vm) {
       var currentStateEqualTo = function (tab) {

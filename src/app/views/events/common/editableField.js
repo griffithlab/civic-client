@@ -26,7 +26,7 @@
   }
 
   // @ngInject
-  function EditableFieldController($scope, $state) {
+  function EditableFieldController($scope, $state, Security) {
     var ctrl = $scope.ctrl = {};
     ctrl.baseState = '';
     ctrl.stateParams = {};
@@ -49,7 +49,9 @@
     };
 
     ctrl.click = function() {
-      $state.go(ctrl.baseState + '.edit.basic', ctrl.stateParams);
+      if (Security.isAuthenticated()) {
+        $state.go(ctrl.baseState + '.edit.basic', ctrl.stateParams);
+      }
     }
 
   }

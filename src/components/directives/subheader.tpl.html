@@ -15,21 +15,21 @@
         </div>
         <div class="col-xs-2 search-sub-btn">
 
-          <span ng-switch="isAuthenticated()">
-            <span ng-switch-when="false">
+          <div ng-switch="isAuthenticated()">
+            <div ng-switch-when="false">
               <span tooltip="Please sign in to add Evidence" tooltip-append-to-body="true">
                 <a type="button"
                    class="btn btn-sm btn-add-sub btn-block disabled"
                    ui-sref="add.evidence.basic">Add Evidence</a>
                 </span>
-            </span>
-            <span ng-switch-when="true">
+            </div>
+            <div ng-switch-when="true">
               <a type="button"
                  class="btn btn-sm btn-add-sub btn-block"
                  ng-disabled="$state.includes('add.evidence')"
                  ui-sref="add.evidence.basic">Add Evidence</a>
-            </span>
-          </span>
+            </div>
+          </div>
         </div>
       </div> <!-- /.row -->
     </div> <!-- /.subheader-bg -->
