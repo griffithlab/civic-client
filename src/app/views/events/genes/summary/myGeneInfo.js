@@ -112,7 +112,8 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          enableFiltering: true
+          enableFiltering: true,
+          cellTemplate: 'app/views/events/genes/summary/myGeneInfoGrid/linkCell.tpl.html'
         }
       ]
     };
