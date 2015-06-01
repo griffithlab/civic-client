@@ -1,5 +1,5 @@
 <div class="variantGroupEditBasic {{ vm.styles.edit.editBackgroundColor }}">
-  <div class="row">
+  <div class="row" ng-if="vm.showInstructions">
     <div class="col-xs-12">
       <div class="edit-instructions">
         <p>Complete your edits, then click the 'Submit Revision for Review' button. <span ng-if="vm.isAdmin">As you are an Admin, you may also immediately update this Variant by pressing the 'Apply' button.</span></p>
@@ -28,7 +28,7 @@
     <div class="col-xs-12">
       <div ng-messages="vm.formMessages" class="edit-messages">
         <div ng-message="submitSuccess" class="alert alert-success">
-          <strong class="status">Success</strong> - <span class="message">Your revision was successfully submitted. <a ng-href="#/events/genes/{{vm.stateParams.geneId}}/summary/variantGroups/{{vm.stateParams.variantGroupId}}/talk/revisions/list/{{vm.newRevisionId}}/summary" class="btn btn-small btn-default">View it here</a></span>
+          <strong class="status">Success</strong> - <span class="message">Your revision was successfully submitted.</span>
         </div>
         <div ng-message="applySuccess" class="alert alert-success">
           <strong class="status">Success</strong> - <span class="message">Your revision was successfully applied.</span>
@@ -36,30 +36,37 @@
       </div>
     </div>
   </div>
-  <div class="row edit-form">
-    <div class="col-xs-12">
-      <form class="form-horizontal">
-        <formly-form options="vm.options" model="vm.variantGroupEdit" fields="vm.variantGroupFields">
-          <div class="buttons">
-            <div class="pull-left">
-              <cancel-button></cancel-button>
-            </div>
-            <div class="pull-right">
+  <div ng-if="vm.showForm">
+    <div class="row edit-form">
+      <div class="col-xs-12">
+        <form class="form-horizontal">
+          <formly-form options="vm.options" model="vm.variantGroupEdit" fields="vm.variantGroupFields">
+
+          </formly-form>
+        </form>
+      </div>
+    </div>
+    <div class="row buttons">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="buttons">
+          <div class="pull-left">
+            <cancel-button></cancel-button>
+          </div>
+          <div class="pull-right">
             <span ng-if="vm.isAuthenticated">
             <button type="submit" class="btn btn-default" ng-if="vm.isAdmin" ng-click="vm.apply(vm.variantGroupEdit, vm.options)">Apply</button>
             <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.variantGroupEdit, vm.options)">Submit Revision for Review</button>
           </span>
-            </div>
           </div>
-        </formly-form>
-      </form>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="vm.variantGroupEdit|json"></pre>-->
-    <!--</div>-->
-  <!--</div>-->
-
+  <div class="successMessage" ng-if="vm.showSuccessMessage">
+    <div class="col-xs-12 jumbotron">
+      <h1>Thank you.</h1>
+      <p>Your suggested revision for Variant Group {{ vm.variantGroup.name }} has been accepted.</p>
+      <p> <a ng-href="#/events/genes/{{vm.stateParams.geneId}}/summary/variantGroups/{{vm.stateParams.variantGroupId}}/talk/revisions/list/{{vm.newRevisionId}}/summary" class="btn btn-small btn-default">View it here</a></p>
+    </div>
+  </div>
 </div>

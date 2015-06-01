@@ -48,6 +48,10 @@
     vm.newRevisionId = Number();
     vm.stateParams = $stateParams;
 
+    vm.showForm = true;
+    vm.showSuccessMessage = false;
+    vm.showInstructions = true;
+
     vm.formSelects = {
       evidence_levels: [
         { value: 'A', label: 'A - Validated'},
@@ -268,7 +272,9 @@
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
           vm.formMessages['submitSuccess'] = true;
-          // options.resetModel();
+          vm.showForm = false;
+          vm.showSuccessMessage = true;
+          vm.showInstructions = false;
         })
         .catch(function(error) {
           console.error('revision submit error!');

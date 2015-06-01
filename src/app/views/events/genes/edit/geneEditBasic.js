@@ -49,6 +49,10 @@
     vm.errorPrompts = formConfig.errorPrompts;
     vm.newRevisionId = Number();
 
+    vm.showForm = true;
+    vm.showSuccessMessage = false;
+    vm.showInstructions = true;
+
     vm.geneFields = [
       {
         key: 'name',
@@ -87,16 +91,6 @@
       {
         template: '<hr/>'
       },
-      //{
-      //  model: vm.geneEdit.comment,
-      //  key: 'title',
-      //  type: 'horizontalInputHelp',
-      //  templateOptions: {
-      //    label: 'Comment Title',
-      //    value: 'title',
-      //    helpText: 'Short title describing the changes you made to the Clinical Description.'
-      //  }
-      //},
       {
         model: vm.geneEdit.comment,
         key: 'text',
@@ -119,6 +113,9 @@
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
           vm.formMessages['submitSuccess'] = true;
+          vm.showInstructions = false;
+          vm.showForm = false;
+          vm.showSuccessMessage = true;
           // options.resetModel();
         })
         .catch(function(error) {

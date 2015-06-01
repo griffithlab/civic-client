@@ -51,6 +51,10 @@
     vm.newRevisionId = Number();
     vm.stateParams = $stateParams;
 
+    vm.showForm = true;
+    vm.showSuccessMessage = false;
+    vm.showInstructions = true;
+
     vm.variantFields = [
       {
         key: 'name',
@@ -97,6 +101,9 @@
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
           vm.formMessages['submitSuccess'] = true;
+          vm.showInstructions = false;
+          vm.showForm = false;
+          vm.showSuccessMessage = true;
           // options.resetModel();
         })
         .catch(function(error) {

@@ -146,7 +146,7 @@
       getComment: getComment,
       submitComment: submitComment,
       updateComment: updateComment,
-      deleteComment: deleteComment,
+      deleteComment: deleteComment
     };
 
     function initBase(variantId, revisionId) {
@@ -241,7 +241,7 @@
     function submitComment(reqObj) {
       return VariantRevisionsResource.submitComment(reqObj).$promise
         .then(function(response) {
-          cache.remove('/api/variants/' + reqObj.variantId + '/suggested_changes/' + reqObj.commentId + '/comments');
+          cache.remove('/api/variants/' + reqObj.variantId + '/suggested_changes/' + reqObj.revisionId + '/comments');
           queryComments(reqObj.variantId, reqObj.revisionId);
           return response.$promise;
         });
