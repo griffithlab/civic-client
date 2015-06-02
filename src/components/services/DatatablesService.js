@@ -41,7 +41,7 @@
       query: function(reqObj) {
         return DatatablesResource.query(reqObj).$promise
           .then(function(response) {
-            return response;
+            return response.$promise;
           })
       }
     }

@@ -81,7 +81,7 @@
         templateOptions: {
           label: 'Variants',
           inputOptions: {
-            type: 'input'
+            type: 'typeahead'
           },
           helpText: 'Manage variants'
         }

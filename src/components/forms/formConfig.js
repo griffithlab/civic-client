@@ -158,5 +158,51 @@
         }
       }
     });
+
+    // multi-input typeahead
+    formlyConfigProvider.setType({
+      name: 'typeahead',
+      templateUrl: '/components/forms/typeahead.tpl.html',
+      wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+      controller: /* @ngInject */ function($scope, $state, Datatables) {
+        var vm = $scope.vm = {};
+        // if isDisplay is true, element only shows the variant name & delete button
+        // if false, element shows a typeahead and add button
+        vm.isDisplay = Boolean();
+
+        vm.searchVariants = function(val) {
+          return fetchVariants([{ field: 'variant', term: val}])
+            .then(function(response) {
+              return _.map(response.result, function(event) {
+                return { variant: event.variant, variantId: event.variant_id }
+              });
+            });
+        };
+
+        vm.onSelect = function($item, $model) {
+          $state.go('events.genes.summary.variants.summary', {geneId: $item.geneId, variantId: $item.variantId});
+          $scope.asyncSelected.model = ''; // clear typeahead
+        };
+
+        // typeahead search
+        function fetchVariants (filters) {
+          var request;
+
+          request= {
+            mode: 'variants',
+            count: 5,
+            page: 0
+          };
+
+          if (filters.length > 0) {
+            _.each(filters, function(filter) {
+              request['filter[' + filter.field + ']'] = filter.term;
+            });
+          }
+          return Datatables.query(request);
+        }
+      }
+    });
+
   }
 })();
