@@ -13,7 +13,7 @@
         </formly-field>
       </div>
       <div class="col-xs-2" style="margin-top:6px">
-        <a ng-click="model[options.key].splice($index, 1)" class="btn btn-danger btn-sm btn-block">
+        <a ng-click="deleteItem(model[options.key], $index)" class="btn btn-danger btn-sm btn-block">
           <strong>X</strong>
         </a>
       </div>

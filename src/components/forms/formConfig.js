@@ -153,6 +153,11 @@
       },
       controller: /* @ngInject */ function($scope) {
         $scope.copyItemOptions = copyItemOptions;
+        $scope.deleteItem = deleteItem;
+        function deleteItem(model, index) {
+          model.splice(index,1);
+        }
+
         function copyItemOptions() {
           return angular.copy($scope.to.inputOptions);
         }
@@ -170,18 +175,21 @@
         // if false, element shows a typeahead and add button
         vm.isDisplay = Boolean();
 
-        vm.searchVariants = function(val) {
+        vm.searchItems = function(val) {
           return fetchVariants([{ field: 'variant', term: val}])
             .then(function(response) {
               return _.map(response.result, function(event) {
-                return { variant: event.variant, variantId: event.variant_id }
+                return { name: event.variant, id: event.variant_id }
               });
             });
         };
 
         vm.onSelect = function($item, $model) {
-          $state.go('events.genes.summary.variants.summary', {geneId: $item.geneId, variantId: $item.variantId});
-          $scope.asyncSelected.model = ''; // clear typeahead
+          console.log('selected: ' + $item.name);
+          $model = $item.name;
+
+          // $state.go('events.genes.summary.variants.summary', {geneId: $item.geneId, variantId: $item.variantId});
+          // $scope.asyncSelected.model = ''; // clear typeahead
         };
 
         // typeahead search
