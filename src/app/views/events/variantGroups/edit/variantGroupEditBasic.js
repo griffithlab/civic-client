@@ -38,10 +38,8 @@
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
     vm.variantGroupEdit.variants = _.map(vm.variantGroupEdit.variants, function(variant) {
-      return { name: variant.entrez_name + "/" + variant.name, id: variant.id };
+      return { name: variant.entrez_name + " - " + variant.name, id: variant.id };
     });
-    //vm.variantGroupEdit.variantIds = _.pluck(variantGroupModel.data.variants, 'id');
-    //vm.variantGroupEdit.variantNames = _.pluck(variantGroupModel.data.variants, 'name');
 
     vm.styles = VariantGroupsViewOptions.styles;
 
@@ -96,7 +94,7 @@
                 return Datatables.query(request)
                   .then(function(response) {
                     return _.map(response.result, function(event) {
-                      return { name: event.entrez_gene + "/" + event.variant, id: event.variant_id }
+                      return { name: event.entrez_gene + " - " + event.variant, id: event.variant_id }
                     });
                   });
               }
