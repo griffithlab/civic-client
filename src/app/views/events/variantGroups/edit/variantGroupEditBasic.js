@@ -81,6 +81,8 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Variants',
+          entityName: 'variant',
+          helpText: 'Click the X button to delete a variant, click the Add Variant button to add a variant. Note that variants must be known to CIViC to be available for including here. New variants must be added as part of an evidence item using the the <a href="/#/add/evidence/basic">Add Evidence form</a>.',
           inputOptions: {
             type: 'typeahead',
             data: {
@@ -99,8 +101,7 @@
                   });
               }
             }
-          },
-          helpText: 'Click the X button to delete a variant, click the Add Item button to add a variant. Note that variants must be known to CIViC to be available for including here. New variants must be added as part of an evidence item using the the <a href="/#/add/evidence/basic">Add Evidence form</a>.'
+          }
         }
       },
       {
