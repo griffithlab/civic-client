@@ -184,14 +184,6 @@
             });
         };
 
-        vm.onSelect = function($item, $model) {
-          console.log('selected: ' + $item.name);
-          $model = $item.name;
-
-          // $state.go('events.genes.summary.variants.summary', {geneId: $item.geneId, variantId: $item.variantId});
-          // $scope.asyncSelected.model = ''; // clear typeahead
-        };
-
         // typeahead search
         function fetchVariants (filters) {
           var request;

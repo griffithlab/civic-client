@@ -109,7 +109,7 @@
       vm.formErrors = {};
       vm.formMessages = {};
       // prep variant edit obj for submission to server
-      variantGroupEdit.variants = variantGroupEdit.variantNames;
+      variantGroupEdit.variants = _.pluck(variantGroupEdit.variants, 'id');
 
       VariantGroupRevisions.submitRevision(variantGroupEdit)
         .then(function(response) {
