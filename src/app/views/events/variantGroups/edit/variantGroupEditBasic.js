@@ -18,6 +18,7 @@
   function VariantGroupEditBasicController($scope,
                                            $stateParams,
                                            Security,
+                                           Datatables,
                                            VariantGroupRevisions,
                                            VariantGroups,
                                            VariantGroupHistory,
@@ -83,7 +84,23 @@
         templateOptions: {
           label: 'Variants',
           inputOptions: {
-            type: 'typeahead'
+            type: 'typeahead',
+            data: {
+              typeaheadSearch: function(val) {
+                var request = {
+                  mode: 'variants',
+                  count: 5,
+                  page: 0,
+                  'filter[variant]': val
+                };
+                return Datatables.query(request)
+                  .then(function(response) {
+                    return _.map(response.result, function(event) {
+                      return { name: event.variant, id: event.variant_id }
+                    });
+                  });
+              }
+            }
           },
           helpText: 'Manage variants'
         }
