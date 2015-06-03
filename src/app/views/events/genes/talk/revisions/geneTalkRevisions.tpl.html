@@ -1,19 +1,38 @@
 <div class="geneTalkRevisions">
-  <div class="row revisions-list {{ viewOptions.styles.view.summaryBackgroundColor }}">
-    <div class="col-xs-12">
-      <revisions-grid changes="geneRevisions.data.collection" base-state="events.genes.talk.revisions"></revisions-grid>
+  <div ng-if="geneRevisions.data.collection.length > 0">
+    <div class="row revisions-list {{ viewOptions.styles.view.summaryBackgroundColor }}">
+      <div class="col-xs-12">
+        <revisions-grid changes="geneRevisions.data.collection" base-state="events.genes.talk.revisions"></revisions-grid>
+      </div>
     </div>
-  </div>
-  <div class="row revisions-view {{ viewOptions.styles.view.talkBackgroundColor }}">
-    <div class="col-xs-12">
-      <ui-view>
+    <div class="row revisions-view {{ viewOptions.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
 
-      </ui-view>
+        </ui-view>
+      </div>
     </div>
   </div>
+  <div ng-if="geneRevisions.data.collection.length === 0">
+    <div class="row revisions-prompt">
+      <div class="col-xs-12">
+        <div class="jumbotron">
+          <h2 style="margin:0;padding:0;">No suggested revisions exist for this gene.</h2>
+          <p>You may create a suggested revision by clicking on the gene name at the top of this record.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!--<div class="row">-->
     <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="geneRevisions.data.collection|json"></pre>-->
+      <!--<pre ng-bind="viewOptions|json"></pre>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+      <!--<pre ng-bind="geneRevisions.data|json"></pre>-->
     <!--</div>-->
   <!--</div>-->
 </div>

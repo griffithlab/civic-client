@@ -1,14 +1,26 @@
 <div class="variantGroupTalkRevisions">
-  <div class="row revisions-list {{ viewOptions.styles.view.summaryBackgroundColor }}">
-    <div class="col-xs-12">
-      <revisions-grid changes="variantGroupRevisions.data.collection" base-state="events.genes.summary.variantGroups.talk.revisions"></revisions-grid>
+  <div ng-if="variantGroupRevisions.data.collection.length > 0">
+    <div class="row revisions-list {{ viewOptions.styles.view.summaryBackgroundColor }}">
+      <div class="col-xs-12">
+        <revisions-grid changes="variantGroupRevisions.data.collection" base-state="events.genes.summary.variantGroups.talk.revisions"></revisions-grid>
+      </div>
+    </div>
+    <div class="row revisions-view {{ viewOptions.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
+
+        </ui-view>
+      </div>
     </div>
   </div>
-  <div class="row revisions-view {{ viewOptions.styles.view.talkBackgroundColor }}">
-    <div class="col-xs-12">
-      <ui-view>
-
-      </ui-view>
+  <div ng-if="variantGroupRevisions.data.collection.length === 0">
+    <div class="row revisions-prompt">
+      <div class="col-xs-12">
+        <div class="jumbotron">
+          <h2 style="margin:0;padding:0;">No suggested revisions exist for this variant group.</h2>
+          <p>You may create a suggested revision by clicking on the variant group name at the top of this record.</p>
+        </div>
+      </div>
     </div>
   </div>
   <!--<div class="row">-->

@@ -35,7 +35,7 @@
         url: '/list/:revisionId',
         template: '<gene-talk-revisions></gene-talk-revisions>',
         resolve: {
-          initRevisionList: function(Genes, GeneRevisions, GeneHistory, $stateParams) {
+          initRevisionList: function(GeneRevisions, $stateParams) {
             return GeneRevisions.query($stateParams.geneId);
           }
         },
