@@ -73,11 +73,12 @@
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
-    function evidenceLevelChange(value, field, scope) {
-      console.log('***** evidenceLevelChanged.');
-    }
-
     vm.formSelects = {
+      evidence_types: [
+        { value: 'Predictive', label: 'Predictive' },
+        { value: 'Diagnostic', label: 'Diagnostic' },
+        { value: 'Prognostic', label: 'Prognostic' }
+      ],
       evidence_levels: [
         { value: 'A', label: 'A - Validated'},
         { value: 'B', label: 'B - Clinical'},
@@ -93,12 +94,12 @@
         { value: 5, label: '5 - Excellent'}
       ],
       clinical_significance: [
-        { value: 'Positive', label: 'Positive' },
-        { value: 'Better Outcome', label: 'Better Outcome' },
-        { value: 'Sensitivity', label: 'Sensitivity' },
-        { value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
-        { value: 'Poor Outcome', label: 'Poor Outcome' },
-        { value: 'Negative', label: 'Negative' },
+        { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
+        { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
+        { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
+        { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
+        { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
+        { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
         { value: 'N/A', label: 'N/A' }
       ],
 
@@ -119,15 +120,10 @@
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_type',
-          options: [
-            { value: 'Predictive', label: 'Predictive' },
-            { value: 'Diagnostic', label: 'Diagnostic' },
-            { value: 'Prognostic', label: 'Prognostic' }
-          ],
+          options: vm.formSelects.evidence_types,
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Type of clinical outcome associated with the evidence statement.',
-          onChange: evidenceLevelChange
+          helpText: 'Type of clinical outcome associated with the evidence statement.'
         }
       },
       {
@@ -277,6 +273,7 @@
           label: 'Clinical Significance',
           value: 'vm.newEvidence.clinical_significance',
           options: vm.formSelects.clinical_significance,
+          //ngOptions: 'option.value as option.label for option in to.options',
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, Not Applicable should be selected.'
