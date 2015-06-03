@@ -12,7 +12,16 @@
         <a class="sub-title" ui-sref="events.genes.summary.variantGroups.summary({geneId: gene.id, variantGroupId: variantGroup.id})"><span ng-bind="variantGroup.name">Variant Group Name</span></a>
         <ul class="variants">
           <li ng-repeat="variant in variantGroup.variants"  ui-sref-active="active">
-            <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id})"><span ng-bind="variant.name">Variant Name</span></a>
+            <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id})">
+              <div ng-switch="variant.entrez_name === gene.name">
+                <div ng-switch-when="true">
+                  <span ng-bind="variant.name">Variant Name</span>
+                </div>
+                <div ng-switch-when="false">
+                  <span ng-bind="variant.name">Variant Name</span> <br/><span class="small">(<span style="font-style: oblique" ng-bind="variant.entrez_name"></span>)</span>
+                </div>
+              </div>
+            </a>
           </li>
         </ul>
       </li>
