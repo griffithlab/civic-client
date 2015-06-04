@@ -39,7 +39,7 @@ angular.module('civicClient', [
   .config(appConfig);
 
 // @ngInject
-function appConfig() {
+function appConfig(formlyConfigProvider) {
   // log all rootScope events to the console for debugging
   // (this code should be commented out before building for production)
   //$provide.decorator('$rootScope', function ($delegate) {
@@ -53,6 +53,7 @@ function appConfig() {
   //  return $delegate;
   //});
   window.apiCheck.disabled = false; // set to true in production
+  formlyConfigProvider.removeChromeAutoCompletee = true;
 }
 
 // @ngInject

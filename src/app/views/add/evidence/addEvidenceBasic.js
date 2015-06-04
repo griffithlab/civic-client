@@ -19,7 +19,8 @@
                                       Security,
                                       Evidence,
                                       AddEvidenceViewOptions,
-                                      formConfig) {
+                                      formConfig,
+                                      _) {
     var vm = $scope.vm = {};
 
     vm.evidenceModel = Evidence;
@@ -75,11 +76,13 @@
 
     vm.formSelects = {
       evidence_types: [
+        { value: '', label: 'Please select an Evidence Type' },
         { value: 'Predictive', label: 'Predictive' },
         { value: 'Diagnostic', label: 'Diagnostic' },
         { value: 'Prognostic', label: 'Prognostic' }
       ],
       evidence_levels: [
+        { value: '', label: 'Please select an Evidence Level' },
         { value: 'A', label: 'A - Validated'},
         { value: 'B', label: 'B - Clinical'},
         { value: 'C', label: 'C - Preclinical'},
@@ -87,6 +90,7 @@
         { value: 'E', label: 'E - n of 1'}
       ],
       evidence_ratings: [
+        { value: '', label: 'Please select an Evidence Rating' },
         { value: 1, label: '1 - Poor' },
         { value: 2, label: '2 - Adequate' },
         { value: 3, label: '3 - Average' },
@@ -94,20 +98,23 @@
         { value: 5, label: '5 - Excellent'}
       ],
       clinical_significance: [
-        { value: 'Positive', label: 'Positive' },
-        { value: 'Better Outcome', label: 'Better Outcome' },
-        { value: 'Sensitivity', label: 'Sensitivity' },
-        { value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
-        { value: 'Poor Outcome', label: 'Poor Outcome' },
-        { value: 'Negative', label: 'Negative' },
-        { value: 'N/A', label: 'N/A' }
+        { value: '', label: 'Please select a Clinical Significance' },
+        { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
+        { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
+        { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
+        { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
+        { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
+        { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
+        { type: 'N/A', value: 'N/A', label: 'N/A' }
       ],
 
       evidence_directions: [
+        { value: '', label: 'Please select an Evidence Direction' },
         { value: 'Supports', label: 'Supports'},
         { value: 'Does Not Support', label: 'Does Not Support' }
       ],
       variant_origins: [
+        { value: '', label: 'Please select a Variant Origin' },
         { value: 'Somatic', label: 'Somatic'},
         { value: 'Germline', label: 'Germline' }
       ]
@@ -272,16 +279,26 @@
         templateOptions: {
           label: 'Clinical Significance',
           value: 'vm.newEvidence.clinical_significance',
-          options: vm.formSelects.clinical_significance,
-          //ngOptions: 'option.value as option.label for option in to.options',
+          clinicalSignificance: [
+            { type: '', value: '', label: 'Please select a Clinical Significance' },
+            { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
+            { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
+            { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
+            { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
+            { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
+            { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
+            { type: 'N/A', value: 'N/A', label: 'N/A' }
+          ],
+          options: [],
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, Not Applicable should be selected.'
         },
-        data: {
-          predictiveOpts: [ 'Sensitivity', 'Resistance or Non-Resistance'],
-          prognosticOpts: ['Better Outcome', 'Poor Outcome'],
-          diagnosticOpts: ['Positive', 'Negative']
+        expressionProperties: {
+          //'templateOptions.disabled': '!model.text',
+          'templateOptions.options': function($viewValue, $modelValue, scope) {
+            return _.filter(scope.to.clinicalSignificance, { type: scope.model.evidence_type });
+          }
         }
       },
       {
