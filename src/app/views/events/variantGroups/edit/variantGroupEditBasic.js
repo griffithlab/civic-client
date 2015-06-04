@@ -61,7 +61,7 @@
         type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Name',
-          disabled: true,
+          disabled: false,
           value: vm.variantGroup.name
         }
       },

@@ -203,7 +203,7 @@
           inputOptions: {
             type: 'input'
           },
-          helpText: 'For predictive evidence, specify one or more a drug name. Drug(s) specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
+          helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
         },
         expressionProperties: {
           'hide': function($viewValue, $modelValue, scope) {
