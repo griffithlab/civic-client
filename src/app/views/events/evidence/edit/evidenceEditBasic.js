@@ -22,11 +22,10 @@
                                        Evidence,
                                        EvidenceHistory,
                                        EvidenceViewOptions,
-                                       formConfig) {
-    var evidenceModel, vm;
+                                       formConfig,
+                                       _) {
 
-    vm = $scope.vm = {};
-    evidenceModel = vm.evidenceModel = Evidence;
+    var vm = $scope.vm = {};
 
     vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
@@ -36,7 +35,7 @@
     vm.evidenceHistory = EvidenceHistory;
     vm.evidenceEdit = angular.copy(vm.evidence);
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
-    vm.evidenceEdit.drugNames = _.filter(_.pluck(vm.evidence.drugs, 'name'), function(name){ return name != 'N/A'; });
+    vm.evidenceEdit.drugs = _.filter(_.pluck(vm.evidence.drugs, 'name'), function(name){ return name != 'N/A'; });
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -52,65 +51,41 @@
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
 
-    vm.formSelects = {
-      evidence_levels: [
-        { value: 'A', label: 'A - Validated'},
-        { value: 'B', label: 'B - Clinical'},
-        { value: 'C', label: 'C - Preclinical'},
-        { value: 'D', label: 'D - Inferential'},
-        { value: 'E', label: 'E - n of 1'}
-      ],
-      evidence_ratings: [
-        { value: 1, label: '1 - Poor' },
-        { value: 2, label: '2 - Adequate' },
-        { value: 3, label: '3 - Average' },
-        { value: 4, label: '4 - Good' },
-        { value: 5, label: '5 - Excellent'}
-      ],
-      clinical_significance: [
-        { value: 'Positive', label: 'Positive' },
-        { value: 'Better Outcome', label: 'Better Outcome' },
-        { value: 'Sensitivity', label: 'Sensitivity' },
-        { value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
-        { value: 'Poor Outcome', label: 'Poor Outcome' },
-        { value: 'Negative', label: 'Negative' },
-        { value: 'N/A', label: 'N/A' }
-      ],
-      evidence_types: [
-        { value: 'Predictive', label: 'Predictive' },
-        { value: 'Diagnostic', label: 'Diagnostic' },
-        { value: 'Prognostic', label: 'Prognostic' }
-      ],
-      evidence_directions: [
-        { value: 'Supports', label: 'Supports'},
-        { value: 'Does Not Support', label: 'Does Not Support' }
-      ],
-      variant_origins: [
-        { value: 'Somatic', label: 'Somatic'},
-        { value: 'Germline', label: 'Germline' }
-      ]
-    };
-
     vm.evidenceFields = [
       {
-        key: 'name',
-        type: 'horizontalInputHelp',
+        key: 'evidence_type',
+        type: 'horizontalSelectHelp',
         templateOptions: {
-          label: 'Name',
-          disabled: true,
-          value: 'vm.evidenceEdit.name',
-          helpText: 'Evidence Item Name is auto-generated.'
+          label: 'Evidence Type',
+          value: 'vm.evidenceEdit.evidence_type',
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [
+            { type: 'default', value: '', label: 'Please select an Evidence Type' },
+            { value: 'Predictive', label: 'Predictive' },
+            { value: 'Diagnostic', label: 'Diagnostic' },
+            { value: 'Prognostic', label: 'Prognostic' }
+          ],
+          onChange: function(value, options, scope) {
+            scope.model.clinical_significance = '';
+            console.log('evidence_type changed.');
+          },
+          helpText: 'Type of clinical outcome associated with the evidence statement.'
         }
       },
       {
-        key: 'description',
-        type: 'horizontalTextareaHelp',
+        key: 'variant_origin',
+        type: 'horizontalSelectHelp',
         templateOptions: {
-          rows: 3,
-          label: 'Description',
-          value: 'vm.evidenceEdit.description',
-          minLength: 32,
-          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
+          label: 'Variant Origin',
+          value: 'vm.evidenceEdit.variant_origin',
+          options: [
+            { value: '', label: 'Please select a Variant Origin' },
+            { value: 'Somatic', label: 'Somatic'},
+            { value: 'Germline', label: 'Germline' }
+          ],
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: 'Origin of variant'
         }
       },
       {
@@ -135,6 +110,17 @@
         }
       },
       {
+        key: 'description',
+        type: 'horizontalTextareaHelp',
+        templateOptions: {
+          rows: 5,
+          label: 'Description',
+          value: 'vm.evidenceEdit.description',
+          minLength: 32,
+          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
+        }
+      },
+      {
         key: 'pubmed_id',
         type: 'horizontalInputHelp',
         templateOptions: {
@@ -146,33 +132,23 @@
         }
       },
       {
-        key: 'drugNames',
+        key: 'drugs',
         type: 'multiInput',
         templateOptions: {
           label: 'Drug Names',
           inputOptions: {
             type: 'input'
           },
-          helpText: 'Manage drugs'
+          helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
+        },
+        expressionProperties: {
+          'hide': function($viewValue, $modelValue, scope) {
+            return  scope.model.evidence_type != 'Predictive';
+          }
         }
       },
       {
-        key: 'rating',
-        type: 'horizontalSelectHelp',
-        templateOptions: {
-          label: 'Rating',
-          options: vm.formSelects.evidence_ratings,
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: [
-                   '<p>Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines:</p>',
-                   '<ul>',
-                   '<li><strong>One Star:</strong> Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. </li>',
-                   '<li><strong>Two Stars:</strong> Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.</li>',
-                   '<li><strong>Three Stars:</strong> Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.</li>',
-                   '<li><strong>Four Stars:</strong> Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.</li>',
-                   '<li><strong>Five Stars:</strong> Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</li>'].join(" ")
-        }
+        template: '<hr/>'
       },
       {
         key: 'evidence_level',
@@ -180,22 +156,42 @@
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.evidenceEdit.rating',
-          options: vm.formSelects.evidence_levels,
+          options: [
+            { value: '', label: 'Please select an Evidence Level' },
+            { value: 'A', label: 'A - Validated'},
+            { value: 'B', label: 'B - Clinical'},
+            { value: 'C', label: 'C - Preclinical'},
+            { value: 'D', label: 'D - Inferential'},
+            { value: 'E', label: 'E - n of 1'}
+          ],
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'Description of the study performed to produce the evidence statement'
         }
       },
       {
-        key: 'evidence_type',
+        key: 'rating',
         type: 'horizontalSelectHelp',
         templateOptions: {
-          label: 'Evidence Type',
-          value: 'vm.evidenceEdit.evidence_type',
-          options: vm.formSelects.evidence_types,
+          label: 'Rating',
+          options: [
+            { value: '', label: 'Please select an Evidence Rating' },
+            { value: 1, label: '1 - Poor' },
+            { value: 2, label: '2 - Adequate' },
+            { value: 3, label: '3 - Average' },
+            { value: 4, label: '4 - Good' },
+            { value: 5, label: '5 - Excellent'}
+          ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Type of clinical outcome associated with the evidence statement.'
+          helpText: [
+            '<p>Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines:</p>',
+            '<ul>',
+            '<li><strong>One Star:</strong> Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. </li>',
+            '<li><strong>Two Stars:</strong> Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.</li>',
+            '<li><strong>Three Stars:</strong> Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.</li>',
+            '<li><strong>Four Stars:</strong> Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.</li>',
+            '<li><strong>Five Stars:</strong> Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</li>'].join(" ")
         }
       },
       {
@@ -204,7 +200,11 @@
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.evidenceEdit.evidence_direction',
-          options: vm.formSelects.evidence_directions,
+          options: [
+            { value: '', label: 'Please select an Evidence Direction' },
+            { value: 'Supports', label: 'Supports'},
+            { value: 'Does Not Support', label: 'Does Not Support' }
+          ],
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event.'
@@ -216,49 +216,52 @@
         templateOptions: {
           label: 'Clinical Significance',
           value: 'vm.evidenceEdit.clinical_significance',
-          options: vm.formSelects.clinical_significance,
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, Not Applicable should be selected.'
+          clinicalSignificanceOptions: [
+            { type: 'default', value: '', label: 'Please select a Clinical Significance' },
+            { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
+            { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
+            { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
+            { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
+            { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
+            { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
+            { type: 'N/A', value: 'N/A', label: 'N/A' }
+          ],
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [
+            { type: 'default', value: '', label: 'Please select a Clinical Significance' },
+            { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
+            { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
+            { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
+            { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
+            { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
+            { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
+            { type: 'N/A', value: 'N/A', label: 'N/A' }
+          ],
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A/ should be selected.'
+        },
+        expressionProperties: {
+          'templateOptions.options': function($viewValue, $modelValue, scope) {
+            return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
+              return !!(option.type === scope.model.evidence_type || option.type === 'default' || option.type === 'N/A');
+            });
+          }
         }
       },
       {
-        key: 'variant_origin',
-        type: 'horizontalSelectHelp',
-        templateOptions: {
-          label: 'Variant Origin',
-          value: 'vm.evidenceEdit.variant_origin',
-          options: vm.formSelects.variant_origins,
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: 'Origin of variant.'
-        }
+        template: '<hr/>'
       },
-      { template: '<hr/>'},
-      //{
-      //  type: 'horizontalInputHelp',
-      //  key: 'title',
-      //  model: vm.evidenceEdit.comment,
-      //  templateOptions: {
-      //    label: 'Comment Title',
-      //    value: 'title',
-      //    helpText: 'Initial Revision Comment Title'
-      //  }
-      //},
       {
         key: 'text',
         type: 'horizontalTextareaHelp',
         model: vm.evidenceEdit.comment,
         templateOptions: {
           rows: 5,
-          label: 'Revision Description',
+          label: 'New Evidence Description',
           value: 'text',
-          helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
+          helpText: 'Please provide a short paragraph that supports the inclusion of this evidence item into the CIViC database.'
         }
       }
     ];
-
-
 
     vm.submit = function(evidenceEdit, options) {
       evidenceEdit.evidenceId = evidenceEdit.id;

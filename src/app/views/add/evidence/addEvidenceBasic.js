@@ -74,35 +74,6 @@
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
-    vm.formSelects = {
-      evidence_levels: [
-        { value: '', label: 'Please select an Evidence Level' },
-        { value: 'A', label: 'A - Validated'},
-        { value: 'B', label: 'B - Clinical'},
-        { value: 'C', label: 'C - Preclinical'},
-        { value: 'D', label: 'D - Inferential'},
-        { value: 'E', label: 'E - n of 1'}
-      ],
-      evidence_ratings: [
-        { value: '', label: 'Please select an Evidence Rating' },
-        { value: 1, label: '1 - Poor' },
-        { value: 2, label: '2 - Adequate' },
-        { value: 3, label: '3 - Average' },
-        { value: 4, label: '4 - Good' },
-        { value: 5, label: '5 - Excellent'}
-      ],
-      evidence_directions: [
-        { value: '', label: 'Please select an Evidence Direction' },
-        { value: 'Supports', label: 'Supports'},
-        { value: 'Does Not Support', label: 'Does Not Support' }
-      ],
-      variant_origins: [
-        { value: '', label: 'Please select a Variant Origin' },
-        { value: 'Somatic', label: 'Somatic'},
-        { value: 'Germline', label: 'Germline' }
-      ]
-    };
-
     vm.evidenceFields = [
       {
         key: 'evidence_type',
@@ -117,6 +88,10 @@
             { value: 'Diagnostic', label: 'Diagnostic' },
             { value: 'Prognostic', label: 'Prognostic' }
           ],
+          onChange: function(value, options, scope) {
+            scope.model.clinical_significance = '';
+            console.log('evidence_type changed.');
+          },
           helpText: 'Type of clinical outcome associated with the evidence statement.'
         }
       },
@@ -146,7 +121,11 @@
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
-          options: vm.formSelects.variant_origins,
+          options: [
+            { value: '', label: 'Please select a Variant Origin' },
+            { value: 'Somatic', label: 'Somatic'},
+            { value: 'Germline', label: 'Germline' }
+          ],
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'Origin of variant'
@@ -211,15 +190,6 @@
           }
         }
       },
-      //{
-      //  key: 'pubchem_id',
-      //  type: 'horizontalInputHelp',
-      //  templateOptions: {
-      //    label: 'Pubchem Id',
-      //    value: 'vm.newEvidence.pubchem_id',
-      //    helpText: 'For predictive evidence, the PubChem ID for relevant drug (e.g., 44462760 for Dabrafenib).'
-      //  }
-      //},
       {
         template: '<hr/>'
       },
@@ -229,7 +199,14 @@
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.newEvidence.rating',
-          options: vm.formSelects.evidence_levels,
+          options: [
+            { value: '', label: 'Please select an Evidence Level' },
+            { value: 'A', label: 'A - Validated'},
+            { value: 'B', label: 'B - Clinical'},
+            { value: 'C', label: 'C - Preclinical'},
+            { value: 'D', label: 'D - Inferential'},
+            { value: 'E', label: 'E - n of 1'}
+          ],
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'Description of the study performed to produce the evidence statement'
@@ -240,7 +217,14 @@
         type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Rating',
-          options: vm.formSelects.evidence_ratings,
+          options: [
+            { value: '', label: 'Please select an Evidence Rating' },
+            { value: 1, label: '1 - Poor' },
+            { value: 2, label: '2 - Adequate' },
+            { value: 3, label: '3 - Average' },
+            { value: 4, label: '4 - Good' },
+            { value: 5, label: '5 - Excellent'}
+          ],
           valueProp: 'value',
           labelProp: 'label',
           helpText: [
@@ -259,7 +243,11 @@
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.newEvidence.evidence_direction',
-          options: vm.formSelects.evidence_directions,
+          options: [
+            { value: '', label: 'Please select an Evidence Direction' },
+            { value: 'Supports', label: 'Supports'},
+            { value: 'Does Not Support', label: 'Does Not Support' }
+          ],
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event.'
@@ -282,7 +270,16 @@
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }],
+          options: [
+            { type: 'default', value: '', label: 'Please select a Clinical Significance' },
+            { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
+            { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
+            { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
+            { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
+            { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
+            { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
+            { type: 'N/A', value: 'N/A', label: 'N/A' }
+          ],
           helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A/ should be selected.'
         },
         expressionProperties: {
