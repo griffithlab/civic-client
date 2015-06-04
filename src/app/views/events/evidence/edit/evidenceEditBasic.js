@@ -71,7 +71,7 @@
         { value: 'Positive', label: 'Positive' },
         { value: 'Better Outcome', label: 'Better Outcome' },
         { value: 'Sensitivity', label: 'Sensitivity' },
-        { value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+        { value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
         { value: 'Poor Outcome', label: 'Poor Outcome' },
         { value: 'Negative', label: 'Negative' },
         { value: 'N/A', label: 'N/A' }
