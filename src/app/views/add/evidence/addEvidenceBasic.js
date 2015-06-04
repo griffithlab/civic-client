@@ -75,11 +75,6 @@
     vm.errorPrompts = formConfig.errorPrompts;
 
     vm.formSelects = {
-      evidence_types: [
-        { value: 'Predictive', label: 'Predictive' },
-        { value: 'Diagnostic', label: 'Diagnostic' },
-        { value: 'Prognostic', label: 'Prognostic' }
-      ],
       evidence_levels: [
         { value: '', label: 'Please select an Evidence Level' },
         { value: 'A', label: 'A - Validated'},
@@ -105,16 +100,6 @@
         { value: '', label: 'Please select a Variant Origin' },
         { value: 'Somatic', label: 'Somatic'},
         { value: 'Germline', label: 'Germline' }
-      ],
-      clinical_significance: [
-        { type: 'default', value: '', label: 'Please select a Clinical Significance' },
-        { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
-        { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
-        { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
-        { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
-        { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
-        { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
-        { type: 'N/A', value: 'N/A', label: 'N/A' }
       ]
     };
 
@@ -125,9 +110,13 @@
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_type',
-          options: vm.formSelects.evidence_types,
-          valueProp: 'value',
-          labelProp: 'label',
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [
+            { type: 'default', value: '', label: 'Please select an Evidence Type' },
+            { value: 'Predictive', label: 'Predictive' },
+            { value: 'Diagnostic', label: 'Diagnostic' },
+            { value: 'Prognostic', label: 'Prognostic' }
+          ],
           helpText: 'Type of clinical outcome associated with the evidence statement.'
         }
       },
@@ -277,7 +266,7 @@
         templateOptions: {
           label: 'Clinical Significance',
           value: 'vm.newEvidence.clinical_significance',
-          allOptions: [
+          clinicalSignificanceOptions: [
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
             { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
@@ -287,19 +276,15 @@
             { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
-          ngOptions: 'option[to.valueProp || "value"] as option[to.labelProp || "name"] group by option[to.groupProp || "group"] for option in to.options',
-          options: vm.formSelects.clinical_significance,
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, Not Applicable should be selected.'
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }],
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A/ should be selected.'
         },
         expressionProperties: {
           'templateOptions.options': function($viewValue, $modelValue, scope) {
-            var opts = _.filter(scope.to.allOptions, function(option) {
+            return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
               return !!(option.type === scope.model.evidence_type || option.type === 'default' || option.type === 'N/A');
             });
-            console.log(opts);
-            return opts;
           }
         }
       },
