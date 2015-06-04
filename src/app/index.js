@@ -39,7 +39,7 @@ angular.module('civicClient', [
   .config(appConfig);
 
 // @ngInject
-function appConfig($provide) {
+function appConfig() {
   // log all rootScope events to the console for debugging
   // (this code should be commented out before building for production)
   //$provide.decorator('$rootScope', function ($delegate) {
@@ -52,6 +52,7 @@ function appConfig($provide) {
   //
   //  return $delegate;
   //});
+  window.apiCheck.disabled = false; // set to true in production
 }
 
 // @ngInject
