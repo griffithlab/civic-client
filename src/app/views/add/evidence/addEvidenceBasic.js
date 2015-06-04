@@ -94,12 +94,12 @@
         { value: 5, label: '5 - Excellent'}
       ],
       clinical_significance: [
-        { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
-        { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
-        { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
-        { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
-        { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
-        { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+        { value: 'Positive', label: 'Positive' },
+        { value: 'Better Outcome', label: 'Better Outcome' },
+        { value: 'Sensitivity', label: 'Sensitivity' },
+        { value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
+        { value: 'Poor Outcome', label: 'Poor Outcome' },
+        { value: 'Negative', label: 'Negative' },
         { value: 'N/A', label: 'N/A' }
       ],
 
