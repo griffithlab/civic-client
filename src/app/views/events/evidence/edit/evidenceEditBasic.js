@@ -171,7 +171,7 @@
       },
       {
         key: 'rating',
-        type: 'horizontalSelectHelp',
+        type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
           options: [
