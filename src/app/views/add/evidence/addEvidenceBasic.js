@@ -42,7 +42,7 @@
       pubmed_id: '',
       //pubchem_id: '',
       drugs: [],
-      rating: Number(),
+      rating: Number(0),
       evidence_level: '',
       evidence_type: '',
       evidence_direction: '',
@@ -214,11 +214,11 @@
       },
       {
         key: 'rating',
-        type: 'horizontalSelectHelp',
+        type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
           options: [
-            { value: '', label: 'Please select an Evidence Rating' },
+            { value: 0, label: 'Please select an Evidence Rating' },
             { value: 1, label: '1 - Poor' },
             { value: 2, label: '2 - Adequate' },
             { value: 3, label: '3 - Average' },

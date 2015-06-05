@@ -1,0 +1,10 @@
+<div class="formRating">
+  <rating ng-model="model[options.key]"
+          max="5"
+          readonly="false"
+          on-hover="hoveringOver(value)"
+          on-leave="leave()"
+          class="rating-block">
+  </rating>
+  <span class="description" ng-bind="(to.options | findWhere: { value: overStar }).label"></span>
+</div>
