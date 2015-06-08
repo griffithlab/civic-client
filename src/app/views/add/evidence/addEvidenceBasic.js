@@ -66,7 +66,7 @@
     //  variant_origin: 'Somatic'
     //};
 
-    vm.newEvidence.comment = { title: 'New Evidence Description', text:'' };
+    vm.newEvidence.comment = { title: 'Support for Inclusion', text:'' };
     vm.newEvidence.drugs  = [];
 
     vm.formErrors = {};
@@ -157,7 +157,7 @@
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 5,
-          label: 'Description',
+          label: 'Evidence Statement',
           value: 'vm.newEvidence.description',
           minLength: 32,
           helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
@@ -299,7 +299,7 @@
         model: vm.newEvidence.comment,
         templateOptions: {
           rows: 5,
-          label: 'New Evidence Description',
+          label: 'Support for Inclusion',
           value: 'text',
           helpText: 'Please provide a short paragraph that supports the inclusion of this evidence item into the CIViC database.'
         }
