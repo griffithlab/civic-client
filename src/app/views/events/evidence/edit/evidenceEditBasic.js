@@ -219,7 +219,7 @@
           clinicalSignificanceOptions: [
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
-            { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
+            { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
             { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
             { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
             { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
@@ -230,7 +230,7 @@
           options: [
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
-            { type: 'Predictive', value: 'Resistance or Non-response', label: 'Resistance or Non-response' },
+            { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
             { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
             { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
             { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
