@@ -8,7 +8,7 @@
     "angular-formly": "~6.11.5",
     "ui-router-extras": "~0.0.11",
     "angular-ui-grid": "~3.0.0-rc.16",
-    "angular-bootstrap": "~0.12.1",
+    "angular-bootstrap": "~0.13.0",
     "angular-dialog-service": "~5.2.0",
     "lodash": "~3.3.1",
     "angular-resource": "~1.2.0",
@@ -47,6 +47,6 @@
     }
   },
   "resolutions": {
-    "angular-bootstrap": "~0.12.0"
+    "angular-bootstrap": "~0.13.0"
   }
 }

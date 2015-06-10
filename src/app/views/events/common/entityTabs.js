@@ -52,6 +52,9 @@
       return word.toUpperCase();
     }).join(" ");
 
+    vm.users = {};
+    vm.users.last_modified = entityViewModel.data.item.last_modified;
+
     scope.$watch('entityViewModel.data.item.name', function(name) {
       vm.name = name;
     });

@@ -1,6 +1,6 @@
 (function() {
   angular.module('civic.events.common')
-   .directive('entityComment', entityCommentDirective)
+    .directive('entityComment', entityCommentDirective)
     .controller('EntityCommentController', EntityCommentController);
 
   // @ngInject

@@ -1,0 +1,12 @@
+<div class="entityUsersPopoverTemplate">
+  <table class="table table-condensed borderless">
+    <tbody>
+      <tr ng-repeat="(action, user) in vm.users">
+        <td><strong>{{action | labelify}}</strong></td>
+        <td>{{user.timestamp | timeAgo}}</td>
+        <td><strong>by</strong> {{user.user.username}}</td>
+      </tr>
+    </tbody>
+  </table>
+<!--<p ng-bind="vm.users.last_modified.user.username">username</p>-->
+</div>
