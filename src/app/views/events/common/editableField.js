@@ -41,7 +41,7 @@
     });
 
     ctrl.mouseOver = function() {
-      ctrl.hover = true;
+      Security.isAuthenticated() ? ctrl.hover = true: ctrl.hover = false;
     };
 
     ctrl.mouseLeave = function() {

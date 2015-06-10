@@ -1,7 +1,25 @@
 <div class="variantSummary">
   <div class="row {{ backgroundColor }}">
     <div class="col-xs-12">
-      <p ng-bind-html="variant.description | unsafe"></p>
+      <div ng-switch="variant.description.length > 0">
+        <div ng-switch-when="true">
+          <p ng-bind="variant.description" class="description">
+            Variant description.
+          </p>
+        </div>
+        <div ng-switch-default="false">
+          <p class="description">
+            This Variant does not currently have a description.
+          </p>
+          <div ng-if="isAuthenticated() && !isEdit">
+            <p>
+              <a class="btn btn-small btn-default" ui-sref="events.genes.summary.variants.edit.basic({ geneId: stateParams.geneId, variantId: variant.id })">
+                Add a Description
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div ng-if="showEvidenceGrid === true">

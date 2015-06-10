@@ -2,20 +2,35 @@
   <!-- ctrl inherited from GeneSummaryController -->
   <div class="row">
     <div class="col-xs-12">
-      <p ng-bind="geneData.description" class="description">
-        Gene description.
-      </p>
+      <div ng-switch="geneData.description.length > 0">
+        <div ng-switch-when="true">
+          <p ng-bind="geneData.description" class="description">
+            Gene description.
+          </p>
+        </div>
+        <div ng-switch-default="false">
+          <p class="description">
+            This Gene does not currently have a description.
+          </p>
+          <div ng-if="vm.isAuthenticated() && !vm.isEdit">
+            <p>
+              <a class="btn btn-small btn-default" ui-sref="events.genes.edit.basic({ geneId: geneData.id })">Add a Description</a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <h5>Sources:</h5>
-      <ul class="sources">
-        <li ng-repeat="source in geneData.sources">
-          <a href="{{ source.source_url }}"><span class="small" ng-bind="source.citation"></span></a>
-        </li>
-      </ul>
+  <div ng-if="geneData.sources.length > 0">
+    <div class="row">
+      <div class="col-xs-12">
+        <h5>Sources:</h5>
+        <ul class="sources">
+          <li ng-repeat="source in geneData.sources">
+            <a href="{{ source.source_url }}"><span class="small" ng-bind="source.citation"></span></a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

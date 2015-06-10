@@ -20,7 +20,9 @@
   }
 
   // @ngInject
-  function GeneDescriptionController($scope) {
-
+  function GeneDescriptionController($scope, $state, Security) {
+    var vm = $scope.vm = {};
+    vm.isAuthenticated = Security.isAuthenticated;
+    vm.isEdit = $state.includes('**.edit.**');
   }
 })();

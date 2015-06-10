@@ -14,7 +14,11 @@
     });
 
   //@ngInject
-  function VariantSummaryController($scope, Variants, VariantsViewOptions) {
+  function VariantSummaryController($scope, $state, $stateParams, Security, Variants, VariantsViewOptions) {
+    $scope.isAuthenticated = Security.isAuthenticated;
+    $scope.isEdit = $state.includes('**.edit.**');
+    $scope.stateParams = $stateParams;
+
     $scope.variant = Variants.data.item;
     $scope.evidence = Variants.data.evidence;
     $scope.VariantsViewOptions = VariantsViewOptions;
