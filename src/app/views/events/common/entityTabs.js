@@ -59,6 +59,10 @@
       vm.name = name;
     });
 
+    scope.$watch('entityViewModel.data.item.last_modified', function(last_modified) {
+      vm.users.last_modified = last_modified;
+    });
+
     // scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
     scope.tabs = entityViewOptions.tabData;
