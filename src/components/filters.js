@@ -6,6 +6,7 @@
     .filter('encodeUri', encodeUri)
     .filter('capitalize', capitalizeFilter)
     .filter('decodeUri', decodeUri)
+    .filter('ifEmpty', ifEmpty)
     .filter('unsafe', unsafe);
 
   // @ngInject
@@ -60,6 +61,17 @@
       }
 
     };
+  }
+
+  // @ngInject
+  function ifEmpty() {
+    return function(input, defaultValue) {
+      if (angular.isUndefined(input) || input === null || input === '') {
+        return defaultValue;
+      }
+
+      return input;
+    }
   }
 
   // @ngInject

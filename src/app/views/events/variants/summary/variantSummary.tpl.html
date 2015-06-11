@@ -1,5 +1,5 @@
-<div class="variantSummary">
-  <div class="row {{ backgroundColor }}">
+<div class="variantSummary {{ backgroundColor }}">
+  <div class="row">
     <div class="col-xs-12">
       <div ng-switch="variant.description.length > 0">
         <div ng-switch-when="true">
@@ -20,6 +20,16 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4 style="margin-top: 0; border-bottom: 1px solid #CCC;padding-bottom: .25em">Coordinates</h4>
+      <p>
+        <strong>Chromosome: </strong> {{ variant.chromosome | ifEmpty:'--' }} &nbsp;&nbsp;
+        <strong>Start: </strong> {{ variant.start | ifEmpty:'--' }} &nbsp;&nbsp;
+        <strong>Stop: </strong> {{ variant.stop | ifEmpty:'--' }} &nbsp;&nbsp;
+      </p>
     </div>
   </div>
   <div ng-if="showEvidenceGrid === true">
