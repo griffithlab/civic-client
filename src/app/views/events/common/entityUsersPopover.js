@@ -9,7 +9,8 @@
       restrict: 'E',
       scope: {
         users: '=',
-        type: '='
+        type: '=',
+        name: '='
       },
       controller: 'EntityUsersPopoverController',
       templateUrl: 'app/views/events/common/entityUsersPopover.tpl.html'
@@ -18,12 +19,19 @@
 
   // @ngInject
   function EntityUsersPopoverController($scope) {
-    console.log('EntityUsersPopoverController called.');
     var vm = $scope.vm = {};
+    vm.users = $scope.users;
     vm.usersPopover = {
       templateUrl: 'app/views/events/common/entityUsersPopoverTemplate.tpl.html',
-      title: $scope.type + ' Updates'
+      title: ''
     };
-    vm.users = $scope.users;
+
+    $scope.$watchGroup(['name', 'users'], function(updates, old, scope) {
+      var name = updates[0];
+      var users = updates[1];
+      scope.name = name;
+      scope.users = users;
+      vm.usersPopover.title = $scope.type + ' ' + name + ' Updates'
+    });
   }
 })();
