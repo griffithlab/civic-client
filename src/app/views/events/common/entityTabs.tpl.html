@@ -1,7 +1,7 @@
 <div class="entityTabs">
   <div class="row">
     <div class="detail-corner" ng-show="showCorner"><div class="corner-edge"></div></div>
-    <div class="col-xs-6 name">
+    <div class="col-xs-12 col-md-6 name">
       <div ng-switch="vm.isAuthenticated()">
         <div ng-switch-when="false">
           <span tooltip="Please sign in to suggest a revision" tooltip-append-to-body="true">
@@ -20,7 +20,7 @@
       </div>
 
     </div>
-    <div class="col-xs-6 tabs {{ viewBackground }}">
+    <div class="col-xs-12 col-md-6 tabs {{ viewBackground }}">
       <tabset class="tab-container"
               type="{{'tabs'}}"
               vertical="{{vertical}}"
