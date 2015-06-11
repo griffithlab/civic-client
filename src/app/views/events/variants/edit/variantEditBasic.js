@@ -204,7 +204,7 @@
       vm.formMessages = {};
       variantEdit = _.merge(variantEdit, variantEdit.coordinates); // civic-server needs coords on base variant obj
       delete variantEdit.coordinates;
-      
+
       VariantRevisions.submitRevision(variantEdit)
         .then(function(response) {
           console.log('revision submit success!');

@@ -42,7 +42,7 @@
       pubmed_id: '',
       //pubchem_id: '',
       drugs: [],
-      rating: Number(0),
+      rating: '',
       evidence_level: '',
       evidence_type: '',
       evidence_direction: '',
@@ -217,24 +217,18 @@
         type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
+
           options: [
-            { value: 0, label: 'Please select an Evidence Rating' },
-            { value: 1, label: '1 - Poor' },
-            { value: 2, label: '2 - Adequate' },
-            { value: 3, label: '3 - Average' },
-            { value: 4, label: '4 - Good' },
-            { value: 5, label: '5 - Excellent'}
+            { value: '', label: 'Please select an Evidence Rating' },
+            { value: 1, label: '1 - Poor<br/>Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims.' },
+            { value: 2, label: '2 - Adequate<br/>Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.' },
+            { value: 3, label: '3 - Average<br/>Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.' },
+            { value: 4, label: '4 - Good<br/>Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.' },
+            { value: 5, label: '5 - Excellent<br/>Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'}
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: [
-                   '<p>Please rate your evidence according to the following scale, basing your subjective evaluation on the following guidelines:</p>',
-                   '<ul>',
-                   '<li><strong>One Star:</strong> Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. </li>',
-                   '<li><strong>Two Stars:</strong> Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.</li>',
-                   '<li><strong>Three Stars:</strong> Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.</li>',
-                   '<li><strong>Four Stars:</strong> Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.</li>',
-                   '<li><strong>Five Stars:</strong> Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.</li>'].join(" ")
+          helpText: '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>'
         }
       },
       {
