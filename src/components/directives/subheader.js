@@ -13,7 +13,7 @@
       controller: SubheaderCtrl,
       link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
-        $scope.isAdmin = Security.isAuthenticated;
+        $scope.isEditor = Security.isAuthenticated;
       }
     };
     return directive;
@@ -22,8 +22,8 @@
   // @ngInject
   function SubheaderCtrl($scope, $rootScope, Security) {
     $scope.isAuthenticated = Security.isAuthenticated;
-    $scope.isAdmin = Security.isAuthenticated;
-    
+    $scope.isEditor = Security.isAuthenticated;
+
     $rootScope.$on('title:update', function(event, data) {
       $scope.view.stateTitle = data.newTitle;
     });

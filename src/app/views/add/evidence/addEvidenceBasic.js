@@ -26,7 +26,7 @@
     vm.evidenceModel = Evidence;
     vm.evidenceOptions = AddEvidenceViewOptions;
 
-    vm.isAdmin = Security.isAdmin();
+    vm.isEditor = Security.isEditor();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.showForm = true;

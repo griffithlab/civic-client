@@ -29,7 +29,7 @@
     vm = $scope.vm = {};
     variantGroupModel = vm.variantGroupModel = VariantGroups;
 
-    vm.isAdmin = Security.isAdmin();
+    vm.isEditor = Security.isEditor();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.variantGroup = VariantGroups.data.item;

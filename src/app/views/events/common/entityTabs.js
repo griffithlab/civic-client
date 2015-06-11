@@ -88,7 +88,7 @@
   function EntityTabsController($scope, $state, Security) {
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated;
-    vm.isAdmin = Security.isAdmin;
+    vm.isEditor = Security.isEditor;
     // TODO not sure why this watch is necessary for tabs to be properly set to active on 1st load
     var unwatch = $scope.$watchCollection('entityViewModel', function(vm) {
       var currentStateEqualTo = function (tab) {

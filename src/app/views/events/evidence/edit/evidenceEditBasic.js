@@ -27,7 +27,7 @@
 
     var vm = $scope.vm = {};
 
-    vm.isAdmin = Security.isAdmin();
+    vm.isEditor = Security.isEditor();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.evidence = Evidence.data.item;

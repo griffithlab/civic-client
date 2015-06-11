@@ -20,7 +20,7 @@
     var ctrl = $scope.ctrl = {};
     ctrl.security = {
       isAuthenticated: Security.isAuthenticated(),
-      isAdmin: Security.isAdmin()
+      isAdmin: Security.isEditor()
     };
 
     ctrl.comment = $scope.commentData;

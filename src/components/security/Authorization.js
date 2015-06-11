@@ -31,7 +31,7 @@
           // (use this in a route resolve to prevent non-administrators from entering that route)
           requireAdminUser: function() {
             var promise = Security.requestCurrentUser().then(function() {
-              if ( !Security.isAdmin() ) {
+              if ( !Security.isEditor() ) {
                 return RetryQueue.pushRetryFn('unauthorized-client', service.requireAdminUser);
               }
             });

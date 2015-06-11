@@ -18,7 +18,7 @@
   // @ngInject
   function EvidenceTalkRevisionSummaryController($scope, $stateParams, EvidenceRevisions, Security, formConfig) {
     var vm = $scope.vm = {};
-    vm.isAdmin = Security.isAdmin;
+    vm.isEditor = Security.isEditor;
     vm.isAuthenticated = Security.isAuthenticated;
     vm.evidenceTalkModel = EvidenceRevisions;
 

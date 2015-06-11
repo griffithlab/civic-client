@@ -18,7 +18,7 @@
   // @ngInject
   function VariantTalkRevisionSummaryController($scope, $stateParams, VariantRevisions, Security, formConfig) {
     var vm = $scope.vm = {};
-    vm.isAdmin = Security.isAdmin;
+    vm.isEditor = Security.isEditor;
     vm.isAuthenticated = Security.isAuthenticated;
     vm.variantTalkModel = VariantRevisions;
 

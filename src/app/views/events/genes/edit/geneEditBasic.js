@@ -27,7 +27,7 @@
     vm = $scope.vm = {};
     geneModel = vm.geneModel = Genes;
 
-    vm.isAdmin = Security.isAdmin();
+    vm.isEditor = Security.isEditor();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.gene = Genes.data.item;

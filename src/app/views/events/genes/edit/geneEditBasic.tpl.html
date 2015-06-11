@@ -2,7 +2,7 @@
   <div class="row" ng-if="vm.showInstructions">
     <div class="col-xs-12">
       <div class="edit-instructions">
-        <p>Complete your edits, then click the 'Submit Revision for Review' button. <span ng-if="vm.isAdmin">As you are an Admin, you may also immediately update this Gene by pressing the 'Apply' button.</span></p>
+        <p>Complete your edits, then click the 'Submit Revision for Review' button. <span ng-if="vm.isEditor">As you are an Admin, you may also immediately update this Gene by pressing the 'Apply' button.</span></p>
       </div>
     </div>
   </div>
@@ -54,7 +54,7 @@
           </div>
           <div class="pull-right">
             <div ng-if="vm.isAuthenticated">
-              <button type="submit" class="btn btn-default" ng-if="vm.isAdmin" ng-click="vm.apply(vm.geneEdit, vm.options)">Apply</button>
+              <button type="submit" class="btn btn-default" ng-if="vm.isEditor" ng-click="vm.apply(vm.geneEdit, vm.options)">Apply</button>
               <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.geneEdit, vm.options)">Submit Revision for Review</button>
             </div>
           </div>

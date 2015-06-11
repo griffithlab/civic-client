@@ -12,7 +12,7 @@
       replace: true,
       scope: true,
       controller: /* @ngInject */ function($scope, $rootScope, $location, Security, ConfigService) {
-        $scope.isAdmin= Security.isAdmin;
+        $scope.isEditor= Security.isEditor;
         $scope.isAuthenticated = Security.isAuthenticated;
         $scope.login = Security.showLogin;
         $scope.logout = Security.logout;

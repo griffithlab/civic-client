@@ -22,7 +22,7 @@
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated();
     vm.currentUser = Security.currentUser;
-    vm.isAdmin = Security.isAdmin();
+    vm.isEditor = Security.isEditor();
 
     vm.newComment = {
       title: '',
