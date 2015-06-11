@@ -267,8 +267,6 @@
       evidenceEdit.evidenceId = evidenceEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
-      // prep evidence edit obj for submission to server
-      evidenceEdit.drugs= evidenceEdit.drugNames;
 
       EvidenceRevisions.submitRevision(evidenceEdit)
         .then(function(response) {
