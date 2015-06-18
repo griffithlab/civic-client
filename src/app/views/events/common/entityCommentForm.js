@@ -40,12 +40,13 @@
       //},
       {
         key: 'text',
-        type: 'horizontalTextarea',
+        type: 'comment',
         templateOptions: {
-          label: 'Comment',
+          label: 'Add Comment:',
           rows: 4,
           value: vm.newComment.text,
           minlength: 2,
+          currentUser: vm.currentUser,
           required: true
         },
         validation: {

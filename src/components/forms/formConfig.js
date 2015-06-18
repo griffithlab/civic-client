@@ -62,7 +62,6 @@
         '<div class="field-message-error" ng-message="{{::name}}" ng-repeat="(name, message) in ::options.validation.messages">',
         '{{message(options.formControl.$viewValue, options.formControl.$modelValue, this)}}',
         '</div>',
-        '</div>',
         '</div>'
       ].join(' ')
     });
@@ -112,6 +111,18 @@
             ].join(' ')
     });
 
+    // horizontal bootstrap with current user (intended for comment forms)
+    formlyConfigProvider.setWrapper({
+      name: 'horizontalBootstrapComment',
+      template: [
+        '<label for="{{::id}}" class="col-sm-1 control-label">',
+        '<user-image user="to.currentUser" height="32" width="32"></user-image>',
+        '</label>',
+        '<div class="col-sm-11">',
+        '<formly-transclude></formly-transclude>',
+        '</div>'
+      ].join(' ')
+    });
     /*
     * BASIC FIELD TYPES
     * Two versions of each basic field type, one with a help column and one without
@@ -172,6 +183,13 @@
     /*
      * CUSTOM FIELDS
      */
+
+    // comment submit
+    formlyConfigProvider.setType({
+      name: 'comment',
+      extends: 'textarea',
+      wrapper: ['validationMessages', 'horizontalBootstrapComment', 'bootstrapHasError']
+    });
 
     // rating
     formlyConfigProvider.setType({
