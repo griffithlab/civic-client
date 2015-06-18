@@ -43,10 +43,10 @@
         type: 'horizontalTextarea',
         templateOptions: {
           label: 'Comment',
-          rows: 5,
+          rows: 4,
           value: vm.newComment.text,
-          minlength: 5,
-          required: true,
+          minlength: 2,
+          required: true
         },
         validation: {
           messages: {

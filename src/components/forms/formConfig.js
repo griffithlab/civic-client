@@ -59,7 +59,6 @@
         '<div class="validation"',
         'ng-if="options.validation.errorExistsAndShouldBeVisible"',
         'ng-messages="options.formControl.$error">',
-        '<div ng-messages-include="validationMessages.html"></div>',
         '<div class="field-message-error" ng-message="{{::name}}" ng-repeat="(name, message) in ::options.validation.messages">',
         '{{message(options.formControl.$viewValue, options.formControl.$modelValue, this)}}',
         '</div>',
