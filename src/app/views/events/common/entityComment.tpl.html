@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-block">
-          <p ng-bind="ctrl.comment.text">Comment Text.</p>
+          <p ng-bind-html="ctrl.comment.html|unsafe">Comment Text.</p>
         </div>
       </div>
     </div>
@@ -34,7 +34,11 @@
           </div>
           <div class="comment-content">
             <div class="text-block">
-              <p ng-bind="ctrl.comment.text">Comment Text.</p>
+              <p ng-bind-html="ctrl.comment.html|unsafe">
+                Comment Text.
+              </p>
+            </div>
+            <div class="info-block">
               <span class="small">Posted by
                 <strong><span ng-bind="ctrl.comment.user.username">user.username</span></strong>
                 <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span>
