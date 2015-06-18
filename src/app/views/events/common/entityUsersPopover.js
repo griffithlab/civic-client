@@ -30,7 +30,6 @@
       vm.usersPopover.title = $scope.type + ' ' + name + ' Updates'
     });
     $scope.$watchCollection('users', function(users) {
-      console.log('users watchCollection triggered.');
       vm.users = users;
     })
   }

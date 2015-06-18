@@ -43,12 +43,14 @@
       columnDefs: [
         { name: 'id',
           displayName: 'EID',
+          type: 'number',
           enableFiltering: false,
           allowCellFocus: false,
           width: '5%'
         },
         { name: 'description',
           displayName: 'Supporting Evidence',
+          type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
           width: '45%',
@@ -59,6 +61,7 @@
         },
         { name: 'disease',
           displayName: 'Disease',
+          type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
           filter: {
@@ -68,6 +71,7 @@
         },
         { name: 'drugs',
           displayName: 'Drug',
+          type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
           filter: {
@@ -77,6 +81,7 @@
         },
         { name: 'evidence_level',
           displayName: 'Level',
+          type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
           sort: { direction: uiGridConstants.ASC },
@@ -85,6 +90,7 @@
         },
         { name: 'rating',
           displayName: 'Rating',
+          type: 'number',
           allowCellFocus: false,
           enableFiltering: false,
           sort: { direction: uiGridConstants.DESC },
