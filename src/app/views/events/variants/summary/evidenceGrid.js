@@ -112,33 +112,33 @@
         ctrl.evidenceGridOptions.data = evidence;
 
         // if we're loading an evidence view, highlight the correct row in the table
-        if(_.has($stateParams, 'evidenceId')) {
-          var rowEntity = _.find($scope.evidence, function(item) {
-            return item.id === +$stateParams.evidenceId;
-          });
-
-
-          gridApi.core.on.rowsRendered($scope, function() {
-            gridApi.selection.selectRow(rowEntity);
-          });
-
-          //var pageSet= false;
-          //gridApi.selection.on.rowSelectionChanged($scope, function() {
-          //  console.log('on.rowSelectionChanged -----');
-          //  if(!pageSet) {
-          //    $timeout(function () {
-          //      var row = _.findIndex(ctrl.evidenceGridOptions.data, function (item) {
-          //        return item.id === +$stateParams.evidenceId;
-          //      });
-          //      var page = Math.floor(row / ctrl.evidenceGridOptions.paginationPageSize);
-          //      gridApi.pagination.seek(page);
-          //      pageSet = true;
-          //    });
-          //  }
-          //});
-
-
-        }
+        //if(_.has($stateParams, 'evidenceId')) {
+        //  var rowEntity = _.find($scope.evidence, function(item) {
+        //    return item.id === +$stateParams.evidenceId;
+        //  });
+        //
+        //
+        //  gridApi.core.on.rowsRendered($scope, function() {
+        //    gridApi.selection.selectRow(rowEntity);
+        //  });
+        //
+        //  var pageSet= false;
+        //  gridApi.selection.on.rowSelectionChanged($scope, function() {
+        //    console.log('on.rowSelectionChanged -----');
+        //    if(!pageSet) {
+        //      $timeout(function () {
+        //        var row = _.findIndex(ctrl.evidenceGridOptions.data, function (item) {
+        //          return item.id === +$stateParams.evidenceId;
+        //        });
+        //        var page = Math.floor(row / ctrl.evidenceGridOptions.paginationPageSize);
+        //        gridApi.pagination.seek(page);
+        //        pageSet = true;
+        //      });
+        //    }
+        //  });
+        //
+        //
+        //}
 
         gridApi.selection.on.rowSelectionChanged($scope, function(row){
           var params = _.merge($stateParams, { evidenceId: row.entity.id });
