@@ -89,8 +89,7 @@
             { value: 'Prognostic', label: 'Prognostic' }
           ],
           onChange: function(value, options, scope) {
-            scope.model.clinical_significance = '';
-            console.log('evidence_type changed.');
+            scope.model.clinical_significance = ''; // need to reset clinical_significance on change
           },
           helpText: 'Type of clinical outcome associated with the evidence statement.'
         }

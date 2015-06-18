@@ -40,11 +40,13 @@
       //},
       {
         key: 'text',
-        type: 'textarea',
+        type: 'horizontalTextarea',
         templateOptions: {
           label: 'Comment',
           rows: 5,
-          value: vm.newComment.text
+          value: vm.newComment.text,
+          minlength: 5,
+          required: true
         }
       }
     ];

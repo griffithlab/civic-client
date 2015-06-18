@@ -30,13 +30,42 @@
         '501': 'The CIViC client attempted to utilize an unimplemented route.'
       }
     })
-    .config(formlyTemplatesConfig);
+    .config(formlyTemplatesConfig)
+    .run(formlyTemplatesRun);
+
+  // @ngInject
+  function formlyTemplatesRun(formlyValidationMessages) {
+    // messages
+    formlyValidationMessages.addStringMessage('minlength', 'Too short!');
+    formlyValidationMessages.addStringMessage('required', 'This field is required.');
+  }
 
   // @ngInject
   function formlyTemplatesConfig(formlyConfigProvider, formConfig) {
     var inputColWidth = formConfig.options.inputColWidth;
     var labelColWidth = formConfig.options.labelColWidth;
     var helpColWidth = formConfig.options.helpColWidth;
+
+    /*
+    * ERROR MSG WRAPPERS
+     */
+
+    formlyConfigProvider.setWrapper({
+      name: 'errorMessages',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<div class="validation"',
+        'ng-if="options.validation.errorExistsAndShouldBeVisible"',
+        'ng-messages="options.formControl.$error">',
+        '<div ng-messages-include="commentValidation.tpl.html"></div>',
+        '<div ng-message="{{::name}}" ng-repeat="(name, message) in ::options.validation.messages">',
+        '{{message(options.formControl.$viewValue, options.formControl.$modelValue, this)}}',
+        '</div>',
+        '</div>',
+        '</div>'
+      ].join(' ')
+    });
+
     /*
     * FIELD WRAPPERS
      */
@@ -57,16 +86,19 @@
     // horizontal bootstrap field with label and help column
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapHelp',
-      template: ['<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
-              '{{to.label}}',
-              '</label>',
-              '<div class="col-sm-'+ inputColWidth +'">',
-              '<formly-transclude></formly-transclude>',
-              '</div>',
-              '<div class="col-sm-'+ helpColWidth +' control-help">',
-              '<span class="small" ng-bind-html="to.helpText"></span>',
-              '</div>'
-            ].join(' ')
+      template: [
+        '<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
+        '{{to.label}}',
+        '</label>',
+        '<div class="col-sm-'+ inputColWidth +'">',
+        '<formly-transclude></formly-transclude>',
+        //'<p class="small">errors:</p>',
+        //'<div ng-messages-include="commentValidation.tpl.html"></div>',
+        '</div>',
+        '<div class="col-sm-'+ helpColWidth +' control-help">',
+        '<span class="small" ng-bind-html="to.helpText"></span>',
+        '</div>'
+      ].join(' ')
     });
 
     // horizontal bootstrap checkbox
@@ -113,7 +145,7 @@
     formlyConfigProvider.setType({
       name: 'horizontalTextarea',
       extends: 'textarea',
-      wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
+      wrapper: ['errorMessages', 'horizontalBootstrapLabel', 'bootstrapHasError']
     });
 
     formlyConfigProvider.setType({
@@ -143,7 +175,7 @@
     // rating
     formlyConfigProvider.setType({
       name: 'rating',
-      templateUrl: '/components/forms/rating.tpl.html',
+      templateUrl: '/components/forms/fieldTypes/rating.tpl.html',
       controller: /* @ngInject */ function($scope) {
         $scope.overStar = $scope.model.rating;
         $scope.hoveringOver= function(value) {
@@ -174,7 +206,7 @@
      */
     formlyConfigProvider.setType({
       name: 'multiInput',
-      templateUrl: '/components/forms/multiInput.tpl.html',
+      templateUrl: '/components/forms/fieldTypes/multiInput.tpl.html',
       defaultOptions: {
         noFormControl: true,
         wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError'],
@@ -201,7 +233,7 @@
     // multi-input typeahead
     formlyConfigProvider.setType({
       name: 'typeahead',
-      templateUrl: '/components/forms/typeahead.tpl.html',
+      templateUrl: '/components/forms/fieldTypes/typeahead.tpl.html',
       wrapper: ['bootstrapLabel', 'bootstrapHasError']
     });
 

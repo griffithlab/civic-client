@@ -4,18 +4,28 @@
     <div ng-switch-when="true">
       <div class="row comment-form">
         <div class="col-xs-12">
-          <form name="vm.commentForm">
+          <form class="form-horizontal" name="vm.commentForm">
             <!-- TODO: implement hit-return-to-submit behavior with this: <input ng-keyup="$event.keyCode == 13 ? myFunc() : null" ...> from http://stackoverflow.com/questions/15417125/submit-form-on-pressing-enter-with-angularjs -->
             <formly-form
               options="vm.options"
               model="vm.newComment"
               fields="vm.newCommentFields"
               ng-submit="vm.submit(vm.newComment, vm.options.resetModel())">
-              <div class="pull-right">
-                <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.newComment, vm.options.resetModel)">Submit Comment</button>
-              </div>
             </formly-form>
           </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5 col-xs-offset-2">
+          <div class="pull-right">
+            <button
+              type="submit"
+              class="btn btn-default"
+              ng-disabled="vm.commentForm.$invalid"
+              ng-click="vm.submit(vm.newComment, vm.options.resetModel)">
+              Submit Comment
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -29,10 +39,17 @@
     </div>
 
   </div>
-  <!--<hr/>-->
-  <!--<pre ng-bind="vm.newComment|json"></pre>-->
-  <!--<hr/>-->
-  <!--<pre ng-bind="vm.newCommentFields|json"></pre>-->
-  <!--<hr/>-->
-  <!--<pre ng-bind="entityTalkModel|json"></pre>-->
+  <hr/>
+  <h3>vm.commentForm</h3>
+  <pre ng-bind="vm.commentForm|json"></pre>
+  <hr/>
+  <h3>vm.commentFormFields</h3>
+  <pre ng-bind="vm.newCommentFields|json"></pre>
+
+  <script type="text/ng-template" id="commentValidation.tpl.html">
+    <div ng-message="required">This field is required</div>
+    <div ng-message="minlength">Too short</div>
+    <div ng-message="maxlength">Too long</div>
+    <div ng-message="email">Invalid email address</div>
+  </script>
 </div>
