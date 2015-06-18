@@ -63,7 +63,7 @@
 
     li.active {
       margin-right: -@contentPadding; // pull li background all the way to edge of adjacent ui-view
-      background-color: #FFF;
+      background-color: @pageBackground;
       border-top-left-radius: @border-radius-base;
       border-bottom-left-radius: @border-radius-base;
       a {
@@ -73,11 +73,20 @@
   }
 
   .variant-groups {
+    li.active {
+      margin-right: -(2 * @contentPadding); // pull li background all the way to edge of adjacent ui-view
+
+      > a {
+        display: block;
+        background-color: @pageBackground;
+        border-top-left-radius: @border-radius-base;
+        border-bottom-left-radius: @border-radius-base;
+      }
+    }
     .variants {
       li {
         margin-left: 1em;
       }
     }
   }
-
 }

@@ -8,7 +8,7 @@
   <div ng-if="variantGroups.length > 0">
     <h4 class="title">Variant Groups</h4>
     <ul class="variant-groups">
-      <li ng-repeat="variantGroup in variantGroups"  ui-sref-active="active">
+      <li ng-repeat="variantGroup in variantGroups" ui-sref-active="active">
         <a class="sub-title" ui-sref="events.genes.summary.variantGroups.summary({geneId: gene.id, variantGroupId: variantGroup.id})"><span ng-bind="variantGroup.name">Variant Group Name</span></a>
         <ul class="variants">
           <li ng-repeat="variant in variantGroup.variants"  ui-sref-active="active">
