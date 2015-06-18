@@ -46,7 +46,12 @@
           rows: 5,
           value: vm.newComment.text,
           minlength: 5,
-          required: true
+          required: true,
+        },
+        validation: {
+          messages: {
+            minlength: '"Comment must be at least " + options.templateOptions.minlength + " characters long."'
+          }
         }
       }
     ];

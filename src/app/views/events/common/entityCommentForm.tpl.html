@@ -45,10 +45,10 @@
   <hr/>
   <h3>vm.commentFormFields</h3>
   <pre ng-bind="vm.newCommentFields|json"></pre>
-
-  <script type="text/ng-template" id="commentValidation.tpl.html">
+  <!-- custom validation messages -->
+  <script type="text/ng-template" id="validationMessages.html">
     <div ng-message="required">This field is required</div>
-    <div ng-message="minlength">Too short</div>
+    <div ng-message="minlength">The comment is too damn short!</div>
     <div ng-message="maxlength">Too long</div>
     <div ng-message="email">Invalid email address</div>
   </script>

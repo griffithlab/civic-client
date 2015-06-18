@@ -7,7 +7,7 @@
         inputColWidth: 5,
         helpColWidth: 5
       },
-      errorMessages: {
+      validationMessages: {
         '400': 'Bad Request',
         '401': 'Unauthorized',
         '403': 'Forbidden',
@@ -35,8 +35,10 @@
 
   // @ngInject
   function formlyTemplatesRun(formlyValidationMessages) {
-    // messages
-    formlyValidationMessages.addStringMessage('minlength', 'Too short!');
+    // default messages
+    formlyValidationMessages.addTemplateOptionValueMessage('minlength', 'minlength', '', 'is the minimum length', 'Too short.');
+    formlyValidationMessages.addTemplateOptionValueMessage('maxlength', 'maxlength', '', 'is the maximum length', 'Too long.');
+    formlyValidationMessages.addStringMessage('minlength', 'This field is required.');
     formlyValidationMessages.addStringMessage('required', 'This field is required.');
   }
 
@@ -51,14 +53,14 @@
      */
 
     formlyConfigProvider.setWrapper({
-      name: 'errorMessages',
+      name: 'validationMessages',
       template: [
         '<formly-transclude></formly-transclude>',
         '<div class="validation"',
         'ng-if="options.validation.errorExistsAndShouldBeVisible"',
         'ng-messages="options.formControl.$error">',
-        '<div ng-messages-include="commentValidation.tpl.html"></div>',
-        '<div ng-message="{{::name}}" ng-repeat="(name, message) in ::options.validation.messages">',
+        '<div ng-messages-include="validationMessages.html"></div>',
+        '<div class="field-message-error" ng-message="{{::name}}" ng-repeat="(name, message) in ::options.validation.messages">',
         '{{message(options.formControl.$viewValue, options.formControl.$modelValue, this)}}',
         '</div>',
         '</div>',
@@ -145,7 +147,7 @@
     formlyConfigProvider.setType({
       name: 'horizontalTextarea',
       extends: 'textarea',
-      wrapper: ['errorMessages', 'horizontalBootstrapLabel', 'bootstrapHasError']
+      wrapper: ['validationMessages', 'horizontalBootstrapLabel', 'bootstrapHasError']
     });
 
     formlyConfigProvider.setType({
