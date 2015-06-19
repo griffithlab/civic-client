@@ -49,7 +49,7 @@
               <user-image user="ctrl.user" height="32" width="32"></user-image>
             </div>
             <div class="entry-title">
-              <h4 class="title">Comment Made {{ ctrl.entry.title }}</h4>
+              <h4 class="title">Comment Made<span ng-if="ctrl.entry.title.length> 0">:</span> {{ ctrl.entry.title }}</h4>
               <span class="small">by
                 <strong><span ng-bind="ctrl.username">ctrl.username</span></strong>
                 <span ng-bind="ctrl.entry.created_at | timeAgo">ctrl.entry.created_at</span>
