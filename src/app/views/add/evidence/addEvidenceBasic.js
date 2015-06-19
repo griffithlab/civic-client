@@ -203,8 +203,8 @@
             { value: 'A', label: 'A - Validated'},
             { value: 'B', label: 'B - Clinical'},
             { value: 'C', label: 'C - Preclinical'},
-            { value: 'D', label: 'D - Inferential'},
-            { value: 'E', label: 'E - n of 1'}
+            { value: 'D', label: 'D - Case Study'},
+            { value: 'E', label: 'E - Inferential'}
           ],
           valueProp: 'value',
           labelProp: 'label',
