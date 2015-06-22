@@ -11,7 +11,7 @@
       .state('events.genes.summary.variantGroups', {
         abstract: true,
         url: '/variantGroups/:variantGroupId',
-        templateUrl: 'app/views/events/variantGroups/VariantGroupsView.tpl.html',
+        templateUrl: 'app/views/events/variantGroups/variantGroupsView.tpl.html',
         resolve: /* @ngInject */ {
           VariantGroups: 'VariantGroups',
           initVariantGroups: function(VariantGroups, $stateParams) {
