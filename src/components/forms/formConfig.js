@@ -194,7 +194,7 @@
     // rating
     formlyConfigProvider.setType({
       name: 'rating',
-      templateUrl: '¯components/forms/fieldTypes/rating.tpl.html',
+      templateUrl: 'components/forms/fieldTypes/rating.tpl.html',
       controller: /* @ngInject */ function($scope) {
         $scope.overStar = $scope.model.rating;
         $scope.hoveringOver= function(value) {

@@ -48,6 +48,7 @@
         //},
         { name: 'entrez_name',
           displayName: 'Gene',
+          type: 'string',
           enableFiltering: false,
           allowCellFocus: false,
           width: '9%'
@@ -56,6 +57,7 @@
           displayName: 'Variant Name',
           enableFiltering: true,
           allowCellFocus: false,
+          type: 'string',
           width: '20%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -64,6 +66,7 @@
         {
           name: 'description',
           displayName: 'Description',
+          type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
           filter: {
