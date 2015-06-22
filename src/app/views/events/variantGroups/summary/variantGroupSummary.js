@@ -10,7 +10,7 @@
         },
         controller: 'VariantGroupSummaryController',
         templateUrl: 'app/views/events/variantGroups/summary/variantGroupSummary.tpl.html'
-      }
+      };
     });
 
   function VariantGroupSummaryController($scope, VariantGroups, VariantGroupsViewOptions) {

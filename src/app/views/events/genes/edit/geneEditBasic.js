@@ -11,7 +11,7 @@
       scope: {},
       controller: 'GeneEditBasicController',
       templateUrl: 'app/views/events/genes/edit/geneEditBasic.tpl.html'
-    }
+    };
   }
 
   // @ngInject
@@ -85,7 +85,7 @@
                   '<li>functional alterations caused by variants in with this Gene (i.e., activating, loss-of-function, etc)</li>',
                   '<li>normal functions key to its oncogenic properties.</li>',
                   '</ul>'
-                ].join(" ")
+                ].join(' ')
         }
       },
       {
@@ -104,15 +104,16 @@
       }
     ];
 
-    vm.submit = function(geneEdit, options) {
+    vm.submit = function(geneEdit) {
       geneEdit.geneId = geneEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
+
       GeneRevisions.submitRevision(geneEdit)
         .then(function(response) {
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
-          vm.formMessages['submitSuccess'] = true;
+          vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
@@ -127,15 +128,14 @@
         });
     };
 
-    vm.apply = function(geneEdit, options) {
+    vm.apply = function(geneEdit) {
       geneEdit.geneId = geneEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
       Genes.apply(geneEdit)
-        .then(function(response) {
+        .then(function() {
           console.log('revision appy success!');
-          vm.formMessages['applySuccess'] = true;
-          // options.resetModel();
+          vm.formMessages.applySuccess = true;
         })
         .catch(function(response) {
           console.error('revision application error!');

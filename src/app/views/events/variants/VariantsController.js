@@ -40,7 +40,7 @@
   }
 
   // @ngInject
-  function VariantsViewOptions($state, $stateParams, Variants) {
+  function VariantsViewOptions($state, $stateParams) {
     var tabData = [];
     var state = {
       baseParams: {},

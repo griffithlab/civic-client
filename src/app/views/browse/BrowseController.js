@@ -215,7 +215,7 @@
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         // $log.info(['geneID:', row.entity.id, 'variantId:', row.entity.variant_id].join(' '));
         $log.info(['ctrl.mode:', ctrl.mode, 'geneId:', row.entity.gene_id, 'variantId:', row.entity.variant_id].join(' '));
-        if(ctrl.mode == 'variants') {
+        if(ctrl.mode === 'variants') {
           $state.go('events.genes.summary.variants.summary', {
             geneId: row.entity.gene_id,
             variantId: row.entity.variant_id

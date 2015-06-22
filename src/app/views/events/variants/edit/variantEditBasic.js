@@ -11,7 +11,7 @@
       scope: {},
       controller: 'VariantEditBasicController',
       templateUrl: 'app/views/events/variants/edit/variantEditBasic.tpl.html'
-    }
+    };
   }
 
   // @ngInject
@@ -22,7 +22,8 @@
                                       Variants,
                                       VariantHistory,
                                       VariantsViewOptions,
-                                      formConfig) {
+                                      formConfig,
+                                      _) {
     var variantModel, vm;
 
     vm = $scope.vm = {};
@@ -198,7 +199,7 @@
       }
     ];
 
-    vm.submit = function(variantEdit, options) {
+    vm.submit = function(variantEdit) {
       variantEdit.variantId = variantEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
@@ -209,11 +210,10 @@
         .then(function(response) {
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
-          vm.formMessages['submitSuccess'] = true;
+          vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
-          // options.resetModel();
         })
         .catch(function(error) {
           console.error('revision submit error!');
@@ -224,15 +224,14 @@
         });
     };
 
-    vm.apply = function(variantEdit, options) {
+    vm.apply = function(variantEdit) {
       variantEdit.variantId = variantEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
       Variants.apply(variantEdit)
-        .then(function(response) {
+        .then(function() {
           console.log('revision appy success!');
-          vm.formMessages['applySuccess'] = true;
-          // options.resetModel();
+          vm.formMessages.applySuccess = true;
         })
         .catch(function(response) {
           console.error('revision application error!');

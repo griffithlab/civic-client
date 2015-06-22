@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.events.common')
   .directive('entityUsersPopover', entityUsersPopoverDirective)
   .controller('EntityUsersPopoverController', EntityUsersPopoverController);
@@ -14,7 +15,7 @@
       },
       controller: 'EntityUsersPopoverController',
       templateUrl: 'app/views/events/common/entityUsersPopover.tpl.html'
-    }
+    };
   }
 
   // @ngInject
@@ -27,10 +28,11 @@
     };
 
     $scope.$watch('name', function(name) {
-      vm.usersPopover.title = $scope.type + ' ' + name + ' Updates'
+      vm.usersPopover.title = $scope.type + ' ' + name + ' Updates';
     });
+
     $scope.$watchCollection('users', function(users) {
       vm.users = users;
-    })
+    });
   }
 })();

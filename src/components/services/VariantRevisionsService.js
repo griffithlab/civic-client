@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('VariantRevisionsResource', VariantRevisionsResource)
     .factory('VariantRevisions', VariantRevisionsService);
@@ -108,7 +109,7 @@
           }
         }
       }
-    )
+    );
   }
 
   function VariantRevisionsService(VariantRevisionsResource, Variants, $cacheFactory, $q) {
@@ -152,19 +153,19 @@
     function initBase(variantId, revisionId) {
       return $q.all([
         query(variantId, revisionId)
-      ])
+      ]);
     }
 
     function initRevisions(variantId) {
       return $q.all([
         query(variantId)
-      ])
+      ]);
     }
 
     function initComments(variantId, revisionId) {
       return $q.all([
         query(variantId, revisionId)
-      ])
+      ]);
     }
 
     // Variant Revisions Base
@@ -180,7 +181,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
 
     function submitRevision(reqObj) {
@@ -203,7 +204,7 @@
           get(variantId, revisionId);
           cache.remove('/api/variants/' + variantId );
           Variants.get(variantId);
-          return $q.when(response)
+          return $q.when(response);
         },
         function(error) {
           return $q.reject(error);
@@ -249,7 +250,7 @@
     function updateComment(reqObj) {
       return VariantRevisionsResource.updateComment(reqObj).$promise
         .then(function(response) {
-          cache.remove('/api/variants/' + reqObj.variantId + '/suggested_changes/' + reqObj.commentId + '/comments');
+          cache.remove('/api/variants/' + reqObj.variantId + '/suggested_changes/' + reqObj.revisionId + '/comments/' + reqObj.commentId );
           queryComments(reqObj.variantId, reqObj.revisionId);
           return response.$promise;
         });
@@ -257,8 +258,8 @@
     function deleteComment(variantId, revisionId, commentId) {
       return VariantRevisionsResource.deleteComment({ variantId: variantId, revisionId: revisionId, commentId: commentId }).$promise
         .then(function(response) {
-          cache.remove('/api/variants/' + reqObj.variantId + '/suggested_changes/' + reqObj.commentId + '/comments');
-          queryComments(reqObj.variantId, reqObj.revisionId);
+          cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId + '/comments/' + commentId);
+          queryComments(variantId, revisionId);
           return response.$promise;
         });
     }

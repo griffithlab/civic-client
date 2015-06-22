@@ -29,7 +29,7 @@
   }
 
   // @ngInject
-  function AddEvidenceViewOptions($state, $stateParams, Evidence) {
+  function AddEvidenceViewOptions($state, $stateParams) {
     var state = {
       baseParams: {},
       baseState: '',
@@ -58,7 +58,6 @@
 
   // @ngInject
   function AddEvidenceController(Evidence, AddEvidenceViewOptions) {
-    console.log('--------- AddEvidenceController loaded.');
     AddEvidenceViewOptions.init();
     this.type = 'EVIDENCE ITEM';
     // can get references to the view model and view options

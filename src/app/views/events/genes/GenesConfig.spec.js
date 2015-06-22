@@ -5,24 +5,22 @@ describe('GenesViewConfig', function () {
     $httpBackend,
     $state,
     $controller,
-    Genes,
-    MyGeneInfo,
     state = 'events.genes';
 
   // helpful utilities for testing ui.router state transitions
-  function goTo(url) {
-    $location.url(url);
-    $rootScope.$digest();
-  }
-
-  function goFromUrl(url) {
-    return {
-      toState: function (state, params) {
-        $location.replace().url(url); //Don't actually trigger a reload
-        $state.go(state, params);
-        $rootScope.$digest();
-      }};
-  }
+  //function goTo(url) {
+  //  $location.url(url);
+  //  $rootScope.$digest();
+  //}
+  //
+  //function goFromUrl(url) {
+  //  return {
+  //    toState: function (state, params) {
+  //      $location.replace().url(url); //Don't actually trigger a reload
+  //      $state.go(state, params);
+  //      $rootScope.$digest();
+  //    }};
+  //}
 
   function goFromState(state1, params1) {
     return {
@@ -34,13 +32,13 @@ describe('GenesViewConfig', function () {
       }};
   }
 
-  function resolve(value) {
-    return {
-      forStateAndView: function (state, view) {
-        var viewDefinition = view ? $state.get('events.genes').views[view] : $state.get('events.genes');
-        return $injector.invoke(viewDefinition.resolve[value]);
-      }};
-  }
+  //function resolve(value) {
+  //  return {
+  //    forStateAndView: function (state, view) {
+  //      var viewDefinition = view ? $state.get('events.genes').views[view] : $state.get('events.genes');
+  //      return $injector.invoke(viewDefinition.resolve[value]);
+  //    }};
+  //}
 
   beforeEach(function () {
     module('civic.services');
@@ -65,7 +63,7 @@ describe('GenesViewConfig', function () {
           abstract: false,
           url: '/test2',
           template: '<ui-view></ui-view>'
-        })
+        });
     });
 
     module('q-constructor'); // switch to v1.3 $q constructor for sinon-as-promised

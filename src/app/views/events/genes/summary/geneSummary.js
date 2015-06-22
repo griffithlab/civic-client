@@ -10,7 +10,7 @@
         },
         controller: 'GeneSummaryController',
         templateUrl: 'app/views/events/genes/summary/geneSummary.tpl.html'
-      }
+      };
     });
 
   function GeneSummaryController($scope, Genes, GenesViewOptions) {

@@ -11,7 +11,7 @@
       scope: {},
       controller: 'GeneTalkRevisionsController',
       templateUrl: 'app/views/events/genes/talk/revisions/geneTalkRevisions.tpl.html'
-    }
+    };
   }
 
   // @ngInject

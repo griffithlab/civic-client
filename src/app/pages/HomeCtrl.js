@@ -4,7 +4,7 @@
     .controller('HomeCtrl', HomeCtrl);
 
   // @ngInject
-  function HomeCtrl($rootScope, $scope, $log) {
+  function HomeCtrl() {
     // $log.info('HomeCtrl instantiated');
   }
 })();

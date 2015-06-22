@@ -9,15 +9,9 @@
           geneData: '='
         },
         controller: 'GeneDescriptionController',
-        link: geneDescriptionLink,
         templateUrl: 'app/views/events/genes/summary/geneDescription.tpl.html'
-      }
+      };
     });
-
-  // @ngInject
-  function geneDescriptionLink(scope, element, attrs) {
-
-  }
 
   // @ngInject
   function GeneDescriptionController($scope, $state, Security) {

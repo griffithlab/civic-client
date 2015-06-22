@@ -203,7 +203,7 @@
 
         $scope.leave = function() {
           $scope.model.rating === 0 ? $scope.overStar = 0 : $scope.overStar = $scope.model.rating;
-        }
+        };
       }
     });
 

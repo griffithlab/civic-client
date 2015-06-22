@@ -46,7 +46,7 @@ describe('entityView', function () {
           abstract: false,
           url: '/child',
           template: '<mock-ui-view><entity-view entity-model="geneModel"><p>Entity: <span ng-bind="entityModel.config.name | capitalize"></span></p></p></entity-view></mock-ui-view>'
-        })
+        });
     });
 
     // load json fixtures for httpBackend mocked responses

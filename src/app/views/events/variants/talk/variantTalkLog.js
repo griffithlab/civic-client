@@ -9,15 +9,9 @@
     return {
       restrict: 'E',
       scope: {},
-      link: variantTalkLogLink,
       controller: 'VariantTalkLogController',
       templateUrl: 'app/views/events/variants/talk/variantTalkLog.tpl.html'
-    }
-  }
-
-  // @ngInject
-  function variantTalkLogLink(scope, element, attrs) {
-
+    };
   }
 
   // @ngInject
@@ -46,7 +40,7 @@
       });
 
       history = _.map(history, function(change) {
-        change.type='history'
+        change.type='history';
         return change;
       });
 

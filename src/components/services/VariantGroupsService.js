@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('VariantGroupsResource', VariantGroupsResource)
     .factory('VariantGroups', VariantGroupsService);
@@ -8,7 +9,7 @@
     var cache = $cacheFactory.get('$http');
 
     var cacheInterceptor = function(response) {
-      console.log(['VariantGroupsResource: removing', response.config.url, 'from $http cache.'].join(" "));
+      console.log(['VariantGroupsResource: removing', response.config.url, 'from $http cache.'].join(' '));
       cache.remove(response.config.url);
       return response.$promise;
     };
@@ -102,7 +103,7 @@
           }
         }
       }
-    )
+    );
   }
 
   // @ngInject
@@ -114,7 +115,6 @@
 
     // VariantGroup Collections
     var variants = [];
-    var variantGroups = [];
     var comments = [];
 
     return {
@@ -150,13 +150,13 @@
       return $q.all([
         get(variantGroupId),
         queryVariants(variantGroupId)
-      ])
+      ]);
     }
 
     function initComments(variantGroupId) {
       return $q.all([
         queryComments(variantGroupId)
-      ])
+      ]);
     }
     // VariantGroup Base
     function query() {
@@ -197,11 +197,11 @@
         },
         function(error) { // fail
           return $q.reject(error);
-        })
+        });
     }
 
     // VariantGroup Collections
-    function queryVariants(variantGroupId) {
+    function queryVariants() {
       console.warn('returning copy of variantGroups.variants');
       return $q.when(variants);
       //return VariantGroupsResource.queryVariants({variantGroupId: variantGroupId}).$promise
@@ -236,13 +236,14 @@
     function updateComment(reqObj) {
       return VariantGroupsResource.updateComment(reqObj).$promise
         .then(function(response) {
+          // TODO: delete comment from cache, refresh comments
           return response.$promise;
         });
     }
     function deleteComment(variantGroupId, commentId) {
       return VariantGroupsResource.deleteComment({variantGroupId: variantGroupId, commentId: commentId}).$promise
         .then(function(response) {
-          comment = null;
+          // TODO: delete comment from cache, refresh comments
           return response.$promise;
         });
     }

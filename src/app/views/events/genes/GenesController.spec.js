@@ -7,8 +7,8 @@ describe('GenesViewController', function () {
     $httpBackend,
     GenesViewController,
 
-    scope,
-    state = 'events.genes';
+    scope;
+//    state = 'events.genes';
 
   function goFromState(state1, params1) {
     return {
@@ -55,7 +55,7 @@ describe('GenesViewController', function () {
           abstract: false,
           url: '/child',
           template: '<ui-view></ui-view>'
-        })
+        });
     });
 
     // inject services
@@ -82,7 +82,7 @@ describe('GenesViewController', function () {
       $controller = _$controller_;
       $httpBackend = _$httpBackend_;
 
-      _ = window._;
+      // var _ = window._;
 
       // setup mocked backend responses
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
@@ -444,7 +444,7 @@ describe('GenesViewController', function () {
 
     it('actions.submitChange({ description: "UPDATED DESCRIPTION..."}) should send a POST request to "/api/genes/238/suggested_changes"', function() {
       $httpBackend.expect('POST', '/api/genes/238/suggested_changes');
-      actions.submitChange({ description: "UPDATED DESCRIPTION..." }).then(function(response) {
+      actions.submitChange({ description: 'UPDATED DESCRIPTION...'}).then(function(response) {
         expect(response).to.be.an('object');
       });
       $httpBackend.flush();

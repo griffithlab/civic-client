@@ -11,7 +11,7 @@
       scope: {},
       controller: 'VariantTalkCommentsController',
       templateUrl: 'app/views/events/variants/talk/variantTalkComments.tpl.html'
-    }
+    };
   }
 
 

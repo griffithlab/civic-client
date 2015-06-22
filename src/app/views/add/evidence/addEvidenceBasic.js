@@ -11,7 +11,7 @@
       scope: {},
       templateUrl: 'app/views/add/evidence/addEvidenceBasic.tpl.html',
       controller: 'AddEvidenceBasicController'
-    }
+    };
   }
 
   // @ngInject
@@ -185,7 +185,7 @@
         },
         expressionProperties: {
           'hide': function($viewValue, $modelValue, scope) {
-            return  scope.model.evidence_type != 'Predictive';
+            return  scope.model.evidence_type !== 'Predictive';
           }
         }
       },
@@ -299,14 +299,14 @@
       }
     ];
 
-    vm.submit = function(newEvidence, options) {
+    vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       vm.formErrors = {};
       vm.formMessages = {};
       Evidence.add(newEvidence)
-        .then(function(response) {
+        .then(function() {
           console.log('add evidence success!');
-          vm.formMessages['submitSuccess'] = true;
+          vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;

@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.events.common')
     .controller('EntityTalkRevisionsViewController', EntityTalkRevisionsViewController)
     .directive('entityTalkRevisionsView', function() {
@@ -11,7 +12,7 @@
         transclude: true,
         controller: 'EntityTalkRevisionsViewController',
         templateUrl: 'app/views/events/common/entityTalkRevisionsView.tpl.html'
-      }
+      };
     });
 
   //@ngInject

@@ -11,7 +11,7 @@
       scope: {},
       controller: 'EvidenceEditBasicController',
       templateUrl: 'app/views/events/evidence/edit/evidenceEditBasic.tpl.html'
-    }
+    };
   }
 
   // @ngInject
@@ -35,7 +35,7 @@
     vm.evidenceHistory = EvidenceHistory;
     vm.evidenceEdit = angular.copy(vm.evidence);
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
-    vm.evidenceEdit.drugs = _.filter(_.pluck(vm.evidence.drugs, 'name'), function(name){ return name != 'N/A'; });
+    vm.evidenceEdit.drugs = _.filter(_.pluck(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -143,7 +143,7 @@
         },
         expressionProperties: {
           'hide': function($viewValue, $modelValue, scope) {
-            return  scope.model.evidence_type != 'Predictive';
+            return  scope.model.evidence_type !== 'Predictive';
           }
         }
       },
@@ -256,7 +256,7 @@
       }
     ];
 
-    vm.submit = function(evidenceEdit, options) {
+    vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
@@ -265,7 +265,7 @@
         .then(function(response) {
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
-          vm.formMessages['submitSuccess'] = true;
+          vm.formMessages.submitSuccess = true;
           vm.showForm = false;
           vm.showSuccessMessage = true;
           vm.showInstructions = false;
@@ -279,14 +279,14 @@
         });
     };
 
-    vm.apply = function(evidenceEdit, options) {
+    vm.apply = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
       Evidence.apply(evidenceEdit)
-        .then(function(response) {
+        .then(function() {
           console.log('revision appy success!');
-          vm.formMessages['applySuccess'] = true;
+          vm.formMessages.applySuccess = true;
           // options.resetModel();
         })
         .catch(function(response) {

@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.events.common')
     .directive('entityComment', entityCommentDirective)
     .controller('EntityCommentController', EntityCommentController);
@@ -12,7 +13,7 @@
       },
       controller: 'EntityCommentController',
       templateUrl: 'app/views/events/common/entityComment.tpl.html'
-    }
+    };
   }
 
   // @ngInject
