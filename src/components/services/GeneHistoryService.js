@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('GeneHistoryResource', GeneHistoryResource)
     .factory('GeneHistory', GeneHistoryService);
@@ -7,10 +8,10 @@
     var cache = $cacheFactory.get('$http');
 
     // adding this interceptor to a route will remove cached record
-    var cacheInterceptor = function(response) {
-      cache.remove(response.config.url);
-      return response.$promise;
-    };
+    //var cacheInterceptor = function(response) {
+    //  cache.remove(response.config.url);
+    //  return response.$promise;
+    //};
     return $resource('/api/genes/:geneId/revisions',
       {
         geneId: '@geneId'
@@ -40,7 +41,7 @@
           cache: false
         }
       }
-    )
+    );
   }
 
   function GeneHistoryService(GeneHistoryResource, $q) {
@@ -67,7 +68,7 @@
     function initBase(geneId) {
       return $q.all([
         query(geneId)
-      ])
+      ]);
     }
 
     // Gene History Base
@@ -83,7 +84,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
 
     // Gene History Base Refresh
@@ -99,7 +100,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
   }
 })();

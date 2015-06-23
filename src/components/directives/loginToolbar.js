@@ -37,7 +37,7 @@
           $scope.status.isopen = !$scope.status.isopen;
         };
 
-        if(!$scope.currentUrl) { $scope.currentUrl = $location.url() }
+        if(!$scope.currentUrl) { $scope.currentUrl = $location.url(); }
         $rootScope.$on('$stateChangeSuccess', function() {
           $scope.currentUrl = $location.url();
         });

@@ -10,7 +10,7 @@
       scope: {},
       templateUrl: 'components/directives/cancelButton.tpl.html',
       controller: cancelButtonController
-    }
+    };
   }
 
   // @ngInject

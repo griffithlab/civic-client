@@ -40,13 +40,13 @@
 
         var onEvent = function() {
           if (command) {
-            if (command[0] === '\'') command = '[' + command + ']';
+            if (command[0] === '\''){ command = '[' + command + ']'; }
 
             command = $scope.$eval(command);
           } else {
             // auto command
             var href = $element.attr('href');
-            if (href && href === '#') href = '';
+            if (href && href === '#') { href = ''; }
             var category = $attrs.gaCategory ? $scope.$eval($attrs.gaCategory) :
                 (href && href[0] !== '#' ? (href.match(/\/\//) ? 'link-out' : 'link-in') : 'button'),
               action = $attrs.gaAction ? $scope.$eval($attrs.gaAction) :
@@ -55,7 +55,7 @@
                 ($element[0].title || ($element[0].tagName.match(/input/i) ? $element.attr('value') : $element.text())).substr(0, 64),
               value = $attrs.gaValue ? $scope.$eval($attrs.gaValue) : null;
             command = ['send', 'event', category, action, label];
-            if (value !== null) command.push(value);
+            if (value !== null) { command.push(value); }
           }
           ga.apply(null, command);
         };

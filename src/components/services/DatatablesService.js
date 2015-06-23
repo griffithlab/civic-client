@@ -6,7 +6,7 @@
 
   // ?count=10&page=2&sorting[entrez_gene]=asc&sorting[variant]=desc&filter[entrez_gene]=flt
   // @ngInject
-  function DatatablesResource($resource) {
+  function DatatablesResource($resource, _) {
     return $resource('/api/datatables/:mode',
       {
         mode: '@mode',
@@ -42,9 +42,9 @@
         return DatatablesResource.query(reqObj).$promise
           .then(function(response) {
             return response.$promise;
-          })
+          });
       }
-    }
+    };
   }
 
 })();

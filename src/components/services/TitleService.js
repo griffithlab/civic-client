@@ -10,6 +10,8 @@
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams) {
       var title = '';
 
+      var promises = {};
+
       var titleScope = {
         gene: {},
         variant: {},
@@ -22,23 +24,23 @@
 
       // construct promises for relevant entities
       if(_.has(toParams, 'geneId') && titleScope.gene.entrez_id !== toParams.geneId) {
-        var genePromise = Genes.get(toParams.geneId);
+        promises.gene = Genes.get(toParams.geneId);
       }
 
       if(_.has(toParams, 'variantId') && titleScope.variant.id !== toParams.variantId) {
-        var variantPromise = Variants.get(toParams.variantId);
+        promises.variant = Variants.get(toParams.variantId);
       }
 
       if(_.has(toParams, 'variantGroupId') && titleScope.variantGroup.id !== toParams.variantGroupId) {
-        var variantGroupsPromise = VariantGroups.get(toParams.variantGroupId);
+        promises.variantGroup= VariantGroups.get(toParams.variantGroupId);
       }
 
       if(_.has(toParams, 'evidenceId') && titleScope.evidence.id !== toParams.evidenceId) {
-        var evidencePromise = Evidence.get(toParams.evidenceId);
+        promises.evidence = Evidence.get(toParams.evidenceId);
       }
 
       // resolve promises, apply $parse with constructed title scope
-      $q.all({ gene: genePromise, variant: variantPromise, evidence: evidencePromise, variantGroup: variantGroupsPromise }).then(function(resolutions) {
+      $q.all(promises).then(function(resolutions) {
         titleScope.gene = resolutions.gene;
         titleScope.variant = resolutions.variant;
         titleScope.evidence = resolutions.evidence;

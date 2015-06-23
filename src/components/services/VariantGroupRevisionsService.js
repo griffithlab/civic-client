@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('VariantGroupRevisionsResource', VariantGroupRevisionsResource)
     .factory('VariantGroupRevisions', VariantGroupRevisionsService);
@@ -108,7 +109,7 @@
           }
         }
       }
-    )
+    );
   }
 
   function VariantGroupRevisionsService(VariantGroupRevisionsResource, VariantGroups, $cacheFactory, $q) {
@@ -152,19 +153,19 @@
     function initBase(variantGroupId, revisionId) {
       return $q.all([
         query(variantGroupId, revisionId)
-      ])
+      ]);
     }
 
     function initRevisions(variantGroupId) {
       return $q.all([
         query(variantGroupId)
-      ])
+      ]);
     }
 
     function initComments(variantGroupId, revisionId) {
       return $q.all([
         query(variantGroupId, revisionId)
-      ])
+      ]);
     }
 
     // VariantGroup Revisions Base
@@ -180,7 +181,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
 
     function submitRevision(reqObj) {
@@ -203,7 +204,7 @@
           query(variantGroupId);
           get(variantGroupId, revisionId);
           VariantGroups.get(variantGroupId);
-          return $q.when(response)
+          return $q.when(response);
         },
         function(error) {
           return $q.reject(error);
@@ -256,7 +257,7 @@
     function deleteComment(variantGroupId, revisionId, commentId) {
       return VariantGroupRevisionsResource.deleteComment({ variantGroupId: variantGroupId, revisionId: revisionId, commentId: commentId }).$promise
         .then(function(response) {
-          cache.remove('/api/variant_groups/' + reqObj.variantGroupId + '/suggested_changes/' + reqObj.revisionId + '/comments');
+          cache.remove('/api/variant_groups/' + variantGroupId + '/suggested_changes/' + revisionId + '/comments/' + commentId);
           return response.$promise;
         });
     }

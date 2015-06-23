@@ -1,14 +1,15 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('GenesResource', GenesResource)
     .factory('Genes', GenesService);
 
   // @ngInject
-  function GenesResource($resource, $cacheFactory) {
+  function GenesResource($resource, $cacheFactory, _) {
     var cache = $cacheFactory.get('$http');
 
     var cacheInterceptor = function(response) {
-      console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(" "));
+      console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(' '));
       cache.remove(response.config.url);
       return response.$promise;
     };
@@ -54,7 +55,7 @@
           },
           cache: cache,
           transformResponse: function(data) {
-            if(typeof data == 'string') {
+            if(typeof data === 'string') {
               data = JSON.parse(data);
             }
             var srcMap = {
@@ -164,7 +165,7 @@
           }
         }
       }
-    )
+    );
   }
 
   // @ngInject
@@ -224,13 +225,13 @@
         getMyGeneInfo(geneId),
         queryVariants(geneId),
         queryVariantGroups(geneId)
-      ])
+      ]);
     }
 
     function initComments(geneId) {
       return $q.all([
         queryComments(geneId)
-      ])
+      ]);
     }
     // Gene Base
     function query() {
@@ -270,7 +271,7 @@
         },
         function(error) { // fail
           return $q.reject(error);
-        })
+        });
     }
 
     // Gene Additional Data

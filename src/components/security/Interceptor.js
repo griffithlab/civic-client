@@ -1,8 +1,8 @@
 (function() {
   'use strict';
   angular.module('civic.security.interceptor', ['civic.security.retryQueue'])
-    .factory('Interceptor', Interceptor)
-    .config(interceptorServiceConfig);
+    .factory('Interceptor', Interceptor);
+    // .config(interceptorServiceConfig);
 
   /**
    * @name Interceptor
@@ -36,7 +36,7 @@
    * @param $httpProvider
    * @ngInject
    */
-  function interceptorServiceConfig($httpProvider) {
-    // $httpProvider.interceptors.push('Interceptor');
-  }
+  //function interceptorServiceConfig($httpProvider) {
+  //  // $httpProvider.interceptors.push('Interceptor');
+  //}
 })();

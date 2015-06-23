@@ -4,7 +4,7 @@
     .directive('title', titleDirective);
 
   // @ngInject
-  function titleDirective($rootScope, $timeout, TitleService) {
+  function titleDirective($rootScope, $timeout) {
     var directive = {
       restrict: 'E',
       link: function() {

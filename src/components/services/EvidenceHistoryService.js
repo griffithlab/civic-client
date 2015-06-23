@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('EvidenceHistoryResource', EvidenceHistoryResource)
     .factory('EvidenceHistory', EvidenceHistoryService);
@@ -7,10 +8,10 @@
     var cache = $cacheFactory.get('$http');
 
     // adding this interceptor to a route will remove cached record
-    var cacheInterceptor = function(response) {
-      cache.remove(response.config.url);
-      return response.$promise;
-    };
+    //var cacheInterceptor = function(response) {
+    //  cache.remove(response.config.url);
+    //  return response.$promise;
+    //};
     return $resource('/api/evidence_items/:evidenceId/revisions',
       {
         evidenceId: '@evidenceId'
@@ -40,7 +41,7 @@
           cache: false
         }
       }
-    )
+    );
   }
 
   function EvidenceHistoryService(EvidenceHistoryResource, $q) {
@@ -67,7 +68,7 @@
     function initBase(evidenceId) {
       return $q.all([
         query(evidenceId)
-      ])
+      ]);
     }
 
     // Evidence History Base
@@ -83,7 +84,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
 
     // Evidence History Base Refresh
@@ -99,7 +100,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
   }
 })();

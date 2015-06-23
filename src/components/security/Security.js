@@ -9,7 +9,7 @@
     .factory('Security', Security);
 
 // @ngInject
-  function Security($http, $q, $location, RetryQueue, dialogs, $log, $rootScope, _) {
+  function Security($http, $q, $location, RetryQueue, dialogs, $log) {
     // Redirect to the given url (defaults to '/')
     function redirect(url) {
       url = url || '/';
@@ -81,11 +81,11 @@
 
       // Logout the current user and redirect
       logout: function(redirectTo) {
-        $http.get('/api/sign_out').then(function(response) { // success
+        $http.get('/api/sign_out').then(function() { // success
           service.currentUser = null;
           redirect(redirectTo);
         }, function(response) { // failure
-          $log.warn("COULD NOT LOG OUT");
+          $log.warn('COULD NOT LOG OUT' + JSON.stringify(response));
         });
       },
 

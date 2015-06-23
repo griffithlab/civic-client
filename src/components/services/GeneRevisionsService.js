@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('GeneRevisionsResource', GeneRevisionsResource)
     .factory('GeneRevisions', GeneRevisionsService);
@@ -108,7 +109,7 @@
           }
         }
       }
-    )
+    );
   }
 
   function GeneRevisionsService(GeneRevisionsResource, Genes, $cacheFactory, $q) {
@@ -153,19 +154,19 @@
     function initBase(geneId, revisionId) {
       return $q.all([
         query(geneId, revisionId)
-      ])
+      ]);
     }
 
     function initRevisions(geneId) {
       return $q.all([
         query(geneId)
-      ])
+      ]);
     }
 
     function initComments(geneId, revisionId) {
       return $q.all([
         query(geneId, revisionId)
-      ])
+      ]);
     }
 
     // Gene Revisions Base
@@ -181,7 +182,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
 
     function submitRevision(reqObj) {
@@ -204,7 +205,7 @@
           get(geneId, revisionId);
           cache.remove('/api/genes/' + geneId );
           Genes.get(geneId);
-          return $q.when(response)
+          return $q.when(response);
         },
         function(error) {
           return $q.reject(error);
@@ -252,7 +253,7 @@
         .then(function(response) {
           angular.copy(response, comment);
           cache.remove('/api/genes/' + reqObj.geneId + '/suggested_changes/' + reqObj.revisionId + '/comments');
-          cache.remove('/api/genes/' + reqObj.geneId + '/suggested_changes/' + reqObj.revisionId + '/comments' + reqObj.commentId);
+          cache.remove('/api/genes/' + reqObj.geneId + '/suggested_changes/' + reqObj.revisionId + '/comments/' + reqObj.commentId);
           queryComments(reqObj.geneId, reqObj.revisionId);
           return response.$promise;
         });
@@ -260,7 +261,7 @@
     function deleteComment(geneId, revisionId, commentId) {
       return GeneRevisionsResource.deleteComment({ geneId: geneId, revisionId: revisionId, commentId: commentId }).$promise
         .then(function(response) {
-          cache.remove('/api/genes/' + reqObj.geneId + '/suggested_changes/' + reqObj.revisionId + '/comments' + reqObj.commentId);
+          cache.remove('/api/genes/' + geneId + '/suggested_changes/' + revisionId + '/comments/' + commentId);
           comment = null;
           return response.$promise;
         });
