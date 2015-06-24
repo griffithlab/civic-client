@@ -53,5 +53,13 @@
           return response.$promise;
         });
     }
+
+    function validate(publicationId) {
+      return PublicationsResource.get({publicationId: publicationId}).$promise
+        .then(function (response) {
+          angular.copy(response, item);
+          return response.$promise;
+        });
+    }
   }
 })();

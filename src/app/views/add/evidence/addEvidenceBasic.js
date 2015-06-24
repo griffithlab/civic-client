@@ -40,6 +40,7 @@
       disease: '',
       doid: '',
       pubmed_id: '',
+      pubmed_id_v: '',
       //pubchem_id: '',
       drugs: [],
       rating: '',
@@ -174,6 +175,17 @@
         }
       },
       {
+        key: 'pubmed_id',
+        type: 'publication',
+        templateOptions: {
+          label: 'Pubmed Id Validated',
+          value: 'vm.newEvidence.pubmed_id_v',
+          minLength: 8,
+          length: 8,
+          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+        }
+      },
+      {
         key: 'drugs',
         type: 'multiInput',
         templateOptions: {
@@ -183,10 +195,8 @@
           },
           helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
         },
-        expressionProperties: {
-          'hide': function($viewValue, $modelValue, scope) {
-            return  scope.model.evidence_type !== 'Predictive';
-          }
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return  scope.model.evidence_type !== 'Predictive';
         }
       },
       {

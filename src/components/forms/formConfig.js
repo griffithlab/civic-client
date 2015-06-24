@@ -38,5 +38,6 @@
     formlyValidationMessages.addTemplateOptionValueMessage('minlength', 'minlength', '', 'is the minimum length', 'Too short.');
     formlyValidationMessages.addTemplateOptionValueMessage('maxlength', 'maxlength', '', 'is the maximum length', 'Too long.');
     formlyValidationMessages.addStringMessage('required', 'This field is required.');
+    formlyValidationMessages.addStringMessage('notfound', 'Valid entity could not be found.');
   }
 })();

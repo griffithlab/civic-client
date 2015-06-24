@@ -1,15 +1,22 @@
 (function() {
   'use strict';
   angular.module('civic.config')
-    .config(publicationConfig);
+    .config(publicationConfig)
+    .controller('PublicationController', PublicationController);
 
   // @ngInject
   function publicationConfig(formlyConfigProvider) {
     formlyConfigProvider.setType({
-      name: 'comment',
+      name: 'publication',
       extends: 'input',
-      wrapper: ['validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError'],
+      controller: 'PublicationController'
     });
+  }
+
+  // @ngInject
+  function PublicationController($scope) {
+    console.log('PublicationController called.');
   }
 
 })();

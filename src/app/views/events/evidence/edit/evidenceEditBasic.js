@@ -141,10 +141,8 @@
           },
           helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
         },
-        expressionProperties: {
-          'hide': function($viewValue, $modelValue, scope) {
-            return  scope.model.evidence_type !== 'Predictive';
-          }
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return  scope.model.evidence_type !== 'Predictive';
         }
       },
       {
