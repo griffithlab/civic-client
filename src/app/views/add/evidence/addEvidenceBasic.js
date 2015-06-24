@@ -183,6 +183,9 @@
           value: 'vm.newEvidence.pubmed_id',
           minLength: 1,
           required: true,
+          data: {
+            description: '--'
+          },
           helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
         },
         modelOptions: {
@@ -201,10 +204,12 @@
                 Publications.get($viewValue).then(
                   function (response) {
                     scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = response.description;
                     deferred.resolve(response);
                   },
                   function (error) {
                     scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = '--';
                     deferred.reject(error);
                   }
                 );

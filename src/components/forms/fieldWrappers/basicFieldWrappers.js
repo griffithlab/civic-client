@@ -93,5 +93,13 @@
         '<span class="glyphicon glyphicon-refresh loader" ng-show="to.loading"></span>'
       ].join(' ')
     });
+
+    formlyConfigProvider.setWrapper({
+      name: 'pubdisplay',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small">Publication: {{ to.data.description }}</span>'
+      ].join(' ')
+    });
   }
 })();
