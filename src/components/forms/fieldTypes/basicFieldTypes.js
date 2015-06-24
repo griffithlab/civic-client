@@ -1,0 +1,65 @@
+(function() {
+  'use strict';
+  angular.module('civic.config')
+    .config(basicFieldTypesConfig);
+
+  // @ngInject
+  function basicFieldTypesConfig(formlyConfigProvider) {
+    /*
+     * BASIC FIELD TYPES
+     * Two versions of each basic field type, one with a help column and one without
+     */
+    // input
+    formlyConfigProvider.setType({
+      name: 'horizontalInput',
+      extends: 'input',
+      wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalInputHelp',
+      extends: 'input',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+
+    // select
+    formlyConfigProvider.setType({
+      name: 'horizontalSelect',
+      extends: 'select',
+      wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalSelectHelp',
+      extends: 'select',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+
+    // textarea
+    formlyConfigProvider.setType({
+      name: 'horizontalTextarea',
+      extends: 'textarea',
+      wrapper: ['validationMessages', 'horizontalBootstrapLabel', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalTextareaHelp',
+      extends: 'textarea',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+
+
+    // checkbox
+    formlyConfigProvider.setType({
+      name: 'horizontalCheckbox',
+      extends: 'checkbox',
+      wrapper: ['horizontalBootstrapCheckbox', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalCheckboxHelp',
+      extends: 'checkbox',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+  }
+})();
