@@ -16,8 +16,10 @@
 
   // @ngInject
   function AddEvidenceBasicController($scope,
+                                      $q,
                                       Security,
                                       Evidence,
+                                      Publications,
                                       AddEvidenceViewOptions,
                                       formConfig,
                                       _) {
@@ -40,7 +42,6 @@
       disease: '',
       doid: '',
       pubmed_id: '',
-      pubmed_id_v: '',
       //pubchem_id: '',
       drugs: [],
       rating: '',
@@ -163,26 +164,57 @@
           helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
-      {
-        key: 'pubmed_id',
-        type: 'horizontalInputHelp',
-        templateOptions: {
-          label: 'Pubmed Id',
-          value: 'vm.newEvidence.pubmed_id',
-          minLength: 8,
-          length: 8,
-          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
-        }
-      },
+      //{
+      //  key: 'pubmed_id',
+      //  type: 'horizontalInputHelp',
+      //  templateOptions: {
+      //    label: 'Pubmed Id',
+      //    value: 'vm.newEvidence.pubmed_id',
+      //    minLength: 8,
+      //    length: 8,
+      //    helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+      //  }
+      //},
       {
         key: 'pubmed_id',
         type: 'publication',
         templateOptions: {
           label: 'Pubmed Id Validated',
-          value: 'vm.newEvidence.pubmed_id_v',
-          minLength: 8,
-          length: 8,
+          value: 'vm.newEvidence.pubmed_id',
+          minLength: 1,
+          required: true,
           helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+        },
+        modelOptions: {
+          updateOn: 'default',
+          allowInvalid: true,
+          debounce: {
+            default: 300
+          }
+        },
+        validators: {
+          validPubmedId: {
+            expression: function($viewValue, $modelValue, scope) {
+              if ($viewValue.length > 0) {
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                Publications.get($viewValue).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    deferred.resolve(response);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid Pubmed ID."'
+          }
         }
       },
       {

@@ -46,17 +46,9 @@
         });
     }
 
-    function get(publicationId) {
-      return PublicationsResource.get({publicationId: publicationId}).$promise
+    function get(pubmedId) {
+      return PublicationsResource.get({pubmedId: pubmedId}).$promise
         .then(function(response) {
-          angular.copy(response, item);
-          return response.$promise;
-        });
-    }
-
-    function validate(publicationId) {
-      return PublicationsResource.get({publicationId: publicationId}).$promise
-        .then(function (response) {
           angular.copy(response, item);
           return response.$promise;
         });

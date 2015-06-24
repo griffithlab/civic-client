@@ -9,14 +9,16 @@
     formlyConfigProvider.setType({
       name: 'publication',
       extends: 'input',
-      wrapper: ['validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError'],
-      controller: 'PublicationController'
+      wrapper: ['loader', 'validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
     });
   }
 
   // @ngInject
-  function PublicationController($scope) {
+  function PublicationController($scope, Publications) {
     console.log('PublicationController called.');
+    $scope.validatePublication = function(pubmedId) {
+      return Publications.get(pubmedId);
+    };
   }
 
 })();
