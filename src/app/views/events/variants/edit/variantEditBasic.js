@@ -78,7 +78,17 @@
         }
       },
       {
-        template: '<h3 class="form-subheader">Coordinates</h3><hr/>'
+        template: '<h3 class="form-subheader">Primary Coordinates</h3><hr/>'
+      },
+      {
+        model: vm.variantEdit.coordinates,
+        key: 'reference_build',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Reference Build',
+          value: vm.variantEdit.coordinates.reference_build,
+          helpText: ''
+        }
       },
       {
         model: vm.variantEdit.coordinates,
@@ -115,7 +125,7 @@
         key: 'reference_bases',
         type: 'horizontalInputHelp',
         templateOptions: {
-          label: 'Reference Bases',
+          label: 'Reference Base(s)',
           value: vm.variantEdit.coordinates.reference_bases,
           helpText: ''
         }
@@ -125,7 +135,7 @@
         key: 'variant_bases',
         type: 'horizontalInputHelp',
         templateOptions: {
-          label: 'Variant Bases',
+          label: 'Variant Base(s)',
           value: vm.variantEdit.coordinates.variant_bases,
           helpText: ''
         }
@@ -141,17 +151,7 @@
         }
       },
       {
-        model: vm.variantEdit.coordinates,
-        key: 'reference_bases',
-        type: 'horizontalInputHelp',
-        templateOptions: {
-          label: 'Reference Bases',
-          value: vm.variantEdit.coordinates.reference_bases,
-          helpText: ''
-        }
-      },
-      {
-        template: '<h3 class="form-subheader">Fusion Coordinates</h3><hr/>'
+        template: '<h3 class="form-subheader">Secondary Coordinates <span class="small">(optional)</span></h3><hr/>'
       },
       {
         model: vm.variantEdit.coordinates,

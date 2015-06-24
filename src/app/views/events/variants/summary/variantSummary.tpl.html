@@ -28,6 +28,14 @@
           <tbody>
             <tr>
               <td class="key small">
+                Reference Build:
+              </td>
+              <td class="value small">
+                {{ variant.coordinates.reference_build | ifEmpty: '--' }}
+              </td>
+            </tr>
+            <tr>
+              <td class="key small">
                 Chromosome:
               </td>
               <td class="value small">
