@@ -61,5 +61,16 @@
       extends: 'checkbox',
       wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
     });
+
+    /*
+    * EXTENDED FIELD TYPES
+    * (more complex behavior than the basics, but no controller, template, or additional logic)
+    */
+
+    formlyConfigProvider.setType({
+      name: 'input-loader',
+      extends: 'input',
+      wrapper: ['loader']
+    });
   }
 })();

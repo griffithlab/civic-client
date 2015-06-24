@@ -21,7 +21,7 @@
           cache: false
         }
       }
-    )
+    );
   }
 
   // @ngInject

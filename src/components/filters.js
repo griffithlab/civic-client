@@ -51,7 +51,7 @@
   }
 
   // @ngInject
-  function capitalizeFilter() {
+  function capitalizeFilter(_) {
     return function (input) {
       if (!_.isNull(input) && !_.isUndefined(input)) {
         input = input.toLowerCase();

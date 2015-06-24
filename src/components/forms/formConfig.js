@@ -30,7 +30,6 @@
         '501': 'The CIViC client attempted to utilize an unimplemented route.'
       }
     })
-    .config(formlyTemplatesConfig)
     .run(formlyTemplatesRun);
 
   // @ngInject
@@ -39,11 +38,5 @@
     formlyValidationMessages.addTemplateOptionValueMessage('minlength', 'minlength', '', 'is the minimum length', 'Too short.');
     formlyValidationMessages.addTemplateOptionValueMessage('maxlength', 'maxlength', '', 'is the maximum length', 'Too long.');
     formlyValidationMessages.addStringMessage('required', 'This field is required.');
-  }
-
-  // @ngInject
-  function formlyTemplatesConfig(formlyConfigProvider, formConfig) {
-
-
   }
 })();
