@@ -38,7 +38,6 @@
     // default messages
     formlyValidationMessages.addTemplateOptionValueMessage('minlength', 'minlength', '', 'is the minimum length', 'Too short.');
     formlyValidationMessages.addTemplateOptionValueMessage('maxlength', 'maxlength', '', 'is the maximum length', 'Too long.');
-    formlyValidationMessages.addStringMessage('minlength', 'This field is required.');
     formlyValidationMessages.addStringMessage('required', 'This field is required.');
   }
 
@@ -178,82 +177,6 @@
       name: 'horizontalCheckboxHelp',
       extends: 'checkbox',
       wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
-    });
-
-    /*
-     * CUSTOM FIELDS
-     */
-
-    // comment submit
-    formlyConfigProvider.setType({
-      name: 'comment',
-      extends: 'textarea',
-      wrapper: ['validationMessages', 'horizontalBootstrapComment', 'bootstrapHasError']
-    });
-
-    // rating
-    formlyConfigProvider.setType({
-      name: 'rating',
-      templateUrl: 'components/forms/fieldTypes/rating.tpl.html',
-      controller: /* @ngInject */ function($scope) {
-        $scope.overStar = $scope.model.rating;
-        $scope.hoveringOver= function(value) {
-          $scope.overStar = value;
-        };
-
-        $scope.leave = function() {
-          $scope.model.rating === 0 ? $scope.overStar = 0 : $scope.overStar = $scope.model.rating;
-        };
-      }
-    });
-
-    formlyConfigProvider.setType({
-      name: 'horizontalRating',
-      extends: 'rating',
-      wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
-    });
-
-    formlyConfigProvider.setType({
-      name: 'horizontalRatingHelp',
-      extends: 'rating',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
-    });
-
-
-    /*
-    * MULTI-INPUT FIELD
-     */
-    formlyConfigProvider.setType({
-      name: 'multiInput',
-      templateUrl: 'components/forms/fieldTypes/multiInput.tpl.html',
-      defaultOptions: {
-        noFormControl: true,
-        wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError'],
-        templateOptions: {
-          inputOptions: {
-            wrapper: null
-          }
-        }
-      },
-      controller: /* @ngInject */ function($scope) {
-        $scope.copyItemOptions = copyItemOptions;
-        $scope.deleteItem = deleteItem;
-
-        function deleteItem(model, index) {
-          model.splice(index,1);
-        }
-
-        function copyItemOptions() {
-          return angular.copy($scope.to.inputOptions);
-        }
-      }
-    });
-
-    // multi-input typeahead
-    formlyConfigProvider.setType({
-      name: 'typeahead',
-      templateUrl: '/components/forms/fieldTypes/typeahead.tpl.html',
-      wrapper: ['bootstrapLabel', 'bootstrapHasError']
     });
 
   }
