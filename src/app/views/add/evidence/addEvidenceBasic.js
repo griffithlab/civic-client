@@ -183,16 +183,20 @@
           value: 'vm.newEvidence.pubmed_id',
           minLength: 1,
           required: true,
+          //onBlur: function($viewValue, $modelValue, scope) {
+          //  console.log('pubmed id onblur ------------');
+          //},
           data: {
             description: '--'
           },
           helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
         },
         modelOptions: {
-          updateOn: 'default',
-          allowInvalid: true,
+          updateOn: 'default blur',
+          allowInvalid: false,
           debounce: {
-            default: 300
+            default: 1000,
+            blur: 0
           }
         },
         validators: {
@@ -215,6 +219,7 @@
                 );
                 return deferred.promise;
               } else {
+                scope.options.templateOptions.data.description = '--';
                 return true;
               }
             },

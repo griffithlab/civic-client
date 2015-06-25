@@ -17,6 +17,8 @@
   // @ngInject
   function EvidenceEditBasicController($scope,
                                        $stateParams,
+                                       $q,
+                                       Publications,
                                        Security,
                                        EvidenceRevisions,
                                        Evidence,
@@ -120,15 +122,67 @@
           helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
+      //{
+      //  key: 'pubmed_id',
+      //  type: 'horizontalInputHelp',
+      //  templateOptions: {
+      //    label: 'Pubmed Id',
+      //    value: 'vm.evidenceEdit.pubmed_id',
+      //    minLength: 8,
+      //    length: 8,
+      //    helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+      //  }
+      //},
       {
         key: 'pubmed_id',
-        type: 'horizontalInputHelp',
+        type: 'publication',
         templateOptions: {
-          label: 'Pubmed Id',
+          label: 'Pubmed Id Validated',
           value: 'vm.evidenceEdit.pubmed_id',
-          minLength: 8,
-          length: 8,
+          minLength: 1,
+          required: true,
+          //onBlur: function($viewValue, $modelValue, scope) {
+          //  console.log('pubmed id onblur ------------');
+          //},
+          data: {
+            description: '--'
+          },
           helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+        },
+        modelOptions: {
+          updateOn: 'default blur',
+          allowInvalid: false,
+          debounce: {
+            default: 1000,
+            blur: 0
+          }
+        },
+        validators: {
+          validPubmedId: {
+            expression: function($viewValue, $modelValue, scope) {
+              if ($viewValue.length > 0) {
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                Publications.get($viewValue).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = response.description;
+                    deferred.resolve(response);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = '--';
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                scope.options.templateOptions.data.description = '--';
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid Pubmed ID."'
+          }
         }
       },
       {
