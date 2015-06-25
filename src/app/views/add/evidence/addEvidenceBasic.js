@@ -20,6 +20,7 @@
                                       Security,
                                       Evidence,
                                       Publications,
+                                      PubchemTypeahead,
                                       AddEvidenceViewOptions,
                                       formConfig,
                                       _) {
@@ -233,7 +234,21 @@
         templateOptions: {
           label: 'Drug Names',
           inputOptions: {
-            type: 'input'
+            type: 'typeahead',
+            templateOptions: {
+              formatter: 'model[options.key]',
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)'
+            },
+            data: {
+              typeaheadSearch: function(val) {
+                return PubchemTypeahead.get(val)
+                  .then(function(response) {
+                    return _.map(response.autocp_array, function(drugname) {
+                      return { name: drugname };
+                    });
+                  });
+              }
+            }
           },
           helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
         },

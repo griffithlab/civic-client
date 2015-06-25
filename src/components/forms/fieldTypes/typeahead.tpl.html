@@ -1,9 +1,9 @@
 <input
   type="text"
   ng-model="model[options.key]"
-  typeahead="item as item.name for item in options.data.typeaheadSearch($viewValue)"
+  typeahead="{{ to.typeahead }}"
   class="form-control"
   typeahead-editable="false"
   typeahead-focus-first="true"
   typeahead-append-to-body="true"
-  typeahead-input-formatter="model[options.key].name">
+  typeahead-input-formatter="{{ to.formatter }}">
