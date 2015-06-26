@@ -82,10 +82,11 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Variants',
-          entityName: 'variant',
+          entityName: 'Variant',
           helpText: 'Click the X button to delete a variant, click the Add Variant button to add a variant. Note that variants must be known to CIViC to be available for including here. New variants must be added as part of an evidence item using the the <a href="/#/add/evidence/basic">Add Evidence form</a>.',
           inputOptions: {
             type: 'typeahead',
+            wrapper: null,
             templateOptions: {
               formatter: 'model[options.key].name',
               typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)'

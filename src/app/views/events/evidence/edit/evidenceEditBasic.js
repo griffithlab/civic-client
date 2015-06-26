@@ -194,8 +194,10 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Drug Names',
+          entityName: 'Drug',
           inputOptions: {
             type: 'typeahead',
+            wrapper: null,
             templateOptions: {
               formatter: 'model[options.key]',
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)'

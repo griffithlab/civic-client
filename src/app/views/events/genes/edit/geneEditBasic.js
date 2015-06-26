@@ -97,6 +97,7 @@
         templateOptions: {
           label: 'Sources',
           helpText: 'Please specify the Pubmed IDs of any sources used as references in the Gene description.',
+          entityName: 'Source',
           inputOptions: {
             type: 'publication-multi',
             templateOptions: {

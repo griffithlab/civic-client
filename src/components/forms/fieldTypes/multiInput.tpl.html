@@ -29,14 +29,14 @@
       </div>
     </div>
   </div>
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<button type="button"-->
-              <!--class="btn btn-success btn-sm btn-block"-->
-              <!--ng-click="model[options.key].push('')">-->
-        <!--Add {{ to.entityName | capitalize }}-->
-      <!--</button>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="row" ng-if="model[options.key].length === 0">
+    <div class="col-xs-12">
+      <button type="button"
+              class="btn btn-success btn-sm btn-block"
+              ng-click="model[options.key].push('')">
+        Add {{ to.entityName }}
+      </button>
+    </div>
+  </div>
 </div>
 </div>
