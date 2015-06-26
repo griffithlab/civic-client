@@ -335,8 +335,9 @@
         type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Clinical Significance',
+          required: true,
           value: 'vm.newEvidence.clinical_significance',
-          clinicalSignificanceOptions: [
+          clinicalSignificanceOptions: [ // stores unmodified options array for expressionProperties
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
             { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
@@ -347,7 +348,7 @@
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [
+          options: [ // acutal options displayed in the select, modified by expressionProperties
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
             { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
