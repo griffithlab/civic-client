@@ -83,7 +83,7 @@
       ctrl.gridApi = gridApi;
       ctrl.revisionsGridOptions.data = $scope.changes;
 
-      $scope.$watchCollection('changes', function(changes) {
+      $scope.$watchCollection('changes', function() {
         ctrl.revisionsGridOptions.data = $scope.changes;
       });
 

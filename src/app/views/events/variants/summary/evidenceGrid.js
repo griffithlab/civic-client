@@ -109,7 +109,7 @@
         ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
         evidence = _.map(evidence, function(item){
           if (_.isArray(item.drugs)) {
-            item.drugs = _.chain(item.drugs).pluck('name').value().join(", ");
+            item.drugs = _.chain(item.drugs).pluck('name').value().join(', ');
             return item;
           } else {
             return item;

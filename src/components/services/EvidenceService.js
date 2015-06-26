@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('EvidenceResource', EvidenceResource)
     .factory('Evidence', EvidenceService);
@@ -8,7 +9,7 @@
     var cache = $cacheFactory.get('$http');
 
     var cacheInterceptor = function(response) {
-      console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(" "));
+      console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(' '));
       cache.remove(response.config.url);
       return response.$promise;
     };
@@ -100,7 +101,7 @@
         }
 
       }
-    )
+    );
   }
 
   // @ngInject
@@ -142,13 +143,13 @@
     function initBase(evidenceId) {
       return $q.all([
         get(evidenceId)
-      ])
+      ]);
     }
 
     function initComments(evidenceId) {
       return $q.all([
         queryComments(evidenceId)
-      ])
+      ]);
     }
     // Evidence Base
     function add(reqObj) {
@@ -194,7 +195,7 @@
         },
         function(error) { // fail
           return $q.reject(error);
-        })
+        });
     }
 
     // Evidence Comments
@@ -222,7 +223,7 @@
     function updateComment(reqObj) {
       return EvidenceResource.updateComment(reqObj).$promise
         .then(function(response) {
-          cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/comments');
+          cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/comments/' + reqObj.commentId);
           queryComments(reqObj.evidenceId);
           return response.$promise;
         });
@@ -230,7 +231,7 @@
     function deleteComment(evidenceId, commentId) {
       return EvidenceResource.deleteComment({evidenceId: evidenceId, commentId: commentId}).$promise
         .then(function(response) {
-          cache.remove('/api/evidence_items/' + evidenceId + '/comments');
+          cache.remove('/api/evidence_items/' + evidenceId + '/comments/' + commentId);
           queryComments(evidenceId);
           return response.$promise;
         });

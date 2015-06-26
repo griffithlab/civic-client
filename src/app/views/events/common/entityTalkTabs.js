@@ -1,7 +1,6 @@
 (function() {
   'use strict';
 
-
   /**
    * Permits declarative (and dynamic) definitions of tab links with full routes.
    *
@@ -35,7 +34,7 @@
       link: entityTalkTabsLink,
       controller: 'EntityTalkTabsController',
       templateUrl: 'app/views/events/common/entityTalkTabs.tpl.html'
-    }
+    };
   }
 
   // @ngInject
@@ -69,7 +68,7 @@
 
 // @ngInject
   function EntityTalkTabsController($scope, $state) {
-    var unwatch = $scope.$watchCollection('viewModel', function(vm) {
+    var unwatch = $scope.$watchCollection('viewModel', function() {
       var currentStateEqualTo = function (tab) {
 
         var isEqual = $state.is(tab.route, tab.params, tab.options);

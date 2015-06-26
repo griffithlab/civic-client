@@ -11,7 +11,7 @@
       scope: {},
       controller: 'EvidenceTalkCommentsController',
       templateUrl: 'app/views/events/evidence/talk/evidenceTalkComments.tpl.html'
-    }
+    };
   }
 
 

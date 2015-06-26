@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('VariantsResource', VariantsResource)
     .factory('Variants', VariantsService);
@@ -8,7 +9,7 @@
     var cache = $cacheFactory.get('$http');
 
     var cacheInterceptor = function(response) {
-      console.log(['VariantsResource: removing', response.config.url, 'from $http cache.'].join(" "));
+      // console.log(['VariantsResource: removing', response.config.url, 'from $http cache.'].join(" "));
       cache.remove(response.config.url);
       return response.$promise;
     };
@@ -102,7 +103,7 @@
           }
         }
       }
-    )
+    );
   }
 
   // @ngInject
@@ -149,13 +150,13 @@
       return $q.all([
         get(variantId),
         queryEvidence(variantId)
-      ])
+      ]);
     }
 
     function initComments(variantId) {
       return $q.all([
         queryComments(variantId)
-      ])
+      ]);
     }
     // Variant Base
     function query() {
@@ -195,7 +196,7 @@
         },
         function(error) { // fail
           return $q.reject(error);
-        })
+        });
     }
 
     // Variant Collections

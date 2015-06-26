@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('VariantHistoryResource', VariantHistoryResource)
     .factory('VariantHistory', VariantHistoryService);
@@ -6,11 +7,11 @@
   function VariantHistoryResource($resource, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
-    // adding this interceptor to a route will remove cached record
-    var cacheInterceptor = function(response) {
-      cache.remove(response.config.url);
-      return response.$promise;
-    };
+    //// adding this interceptor to a route will remove cached record
+    //var cacheInterceptor = function(response) {
+    //  cache.remove(response.config.url);
+    //  return response.$promise;
+    //};
     return $resource('/api/variants/:variantId/revisions',
       {
         variantId: '@variantId'
@@ -40,7 +41,7 @@
           cache: false
         }
       }
-    )
+    );
   }
 
   function VariantHistoryService(VariantHistoryResource, $q) {
@@ -67,7 +68,7 @@
     function initBase(variantId) {
       return $q.all([
         query(variantId)
-      ])
+      ]);
     }
 
     // Variant History Base
@@ -83,7 +84,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
 
     // Variant History Base Refresh
@@ -99,7 +100,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
   }
 })();

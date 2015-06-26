@@ -10,7 +10,7 @@
         },
         controller: 'VariantMenuController',
         templateUrl: 'app/views/events/genes/summary/variantMenu.tpl.html'
-      }
+      };
     });
 
   //@ngInject

@@ -1,5 +1,5 @@
 (function() {
-
+  'use strict';
   angular.module('civic.services')
     .factory('EvidenceRevisionsResource', EvidenceRevisionsResource)
     .factory('EvidenceRevisions', EvidenceRevisionsService);
@@ -144,7 +144,7 @@
           cache: false
         }
       }
-    )
+    );
   }
 
   function EvidenceRevisionsService(EvidenceRevisionsResource, Evidence, $cacheFactory, $q) {
@@ -196,20 +196,20 @@
     function initBase(evidenceId, revisionId) {
       return $q.all([
         query(evidenceId, revisionId)
-      ])
+      ]);
     }
 
     function initRevisions(evidenceId) {
       console.log('EvidenceRevisionsService.initRevisions called.');
       return $q.all([
         query(evidenceId)
-      ])
+      ]);
     }
 
     function initComments(evidenceId, revisionId) {
       return $q.all([
         query(evidenceId, revisionId)
-      ])
+      ]);
     }
 
     // Evidence Revisions Base
@@ -225,7 +225,7 @@
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
-        })
+        });
     }
 
     function submitRevision(reqObj) {
@@ -248,7 +248,7 @@
           get(evidenceId, revisionId);
           cache.remove('/api/evidence_items/' + evidenceId );
           Evidence.get(evidenceId);
-          return $q.when(response)
+          return $q.when(response);
         },
         function(error) {
           return $q.reject(error);

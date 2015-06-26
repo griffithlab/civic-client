@@ -15,14 +15,8 @@
         entityViewOptions: '='
       },
       controller: 'EditableFieldController',
-      link: editableFieldLink,
       templateUrl: 'app/views/events/common/editableField.tpl.html'
-    }
-  }
-
-  // @ngInject
-  function editableFieldLink(scope, element, attrs) {
-//    console.log('editableFieldLink fn called.');
+    };
   }
 
   // @ngInject
@@ -52,7 +46,7 @@
       if (Security.isAuthenticated()) {
         $state.go(ctrl.baseState + '.edit.basic', ctrl.stateParams);
       }
-    }
+    };
 
   }
 

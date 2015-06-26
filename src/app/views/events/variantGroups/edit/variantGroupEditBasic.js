@@ -11,7 +11,7 @@
       scope: {},
       controller: 'VariantGroupEditBasicController',
       templateUrl: 'app/views/events/variantGroups/edit/variantGroupEditBasic.tpl.html'
-    }
+    };
   }
 
   // @ngInject
@@ -23,7 +23,8 @@
                                            VariantGroups,
                                            VariantGroupHistory,
                                            VariantGroupsViewOptions,
-                                           formConfig) {
+                                           formConfig,
+                                           _) {
     var variantGroupModel, vm;
 
     vm = $scope.vm = {};
@@ -38,7 +39,7 @@
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
     vm.variantGroupEdit.variants = _.map(vm.variantGroupEdit.variants, function(variant) {
-      return { name: variant.entrez_name + " - " + variant.name, id: variant.id };
+      return { name: variant.entrez_name + ' - ' + variant.name, id: variant.id };
     });
 
     vm.styles = VariantGroupsViewOptions.styles;
@@ -85,6 +86,10 @@
           helpText: 'Click the X button to delete a variant, click the Add Variant button to add a variant. Note that variants must be known to CIViC to be available for including here. New variants must be added as part of an evidence item using the the <a href="/#/add/evidence/basic">Add Evidence form</a>.',
           inputOptions: {
             type: 'typeahead',
+            templateOptions: {
+              formatter: 'model[options.key].name',
+              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)'
+            },
             data: {
               typeaheadSearch: function(val) {
                 var request = {
@@ -96,7 +101,7 @@
                 return Datatables.query(request)
                   .then(function(response) {
                     return _.map(response.result, function(event) {
-                      return { name: event.entrez_gene + " - " + event.variant, id: event.variant_id }
+                      return { name: event.entrez_gene + ' - ' + event.variant, id: event.variant_id };
                     });
                   });
               }
@@ -120,7 +125,7 @@
       }
     ];
 
-    vm.submit = function(variantGroupEdit, options) {
+    vm.submit = function(variantGroupEdit) {
       variantGroupEdit.variantGroupId = variantGroupEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
@@ -131,7 +136,7 @@
         .then(function(response) {
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
-          vm.formMessages['submitSuccess'] = true;
+          vm.formMessages.submitSuccess = true;
           vm.showForm = false;
           vm.showSuccessMessage = true;
           vm.showInstructions = false;
@@ -145,14 +150,14 @@
         });
     };
 
-    vm.apply = function(variantGroupEdit, options) {
+    vm.apply = function(variantGroupEdit) {
       variantGroupEdit.variantGroupId = variantGroupEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
       VariantGroups.apply(variantGroupEdit)
-        .then(function(response) {
+        .then(function() {
           console.log('revision apply success!');
-          vm.formMessages['applySuccess'] = true;
+          vm.formMessages.applySuccess = true;
           // options.resetModel();
         })
         .catch(function(response) {

@@ -14,11 +14,11 @@
       },
       controller: 'EntityCommentFormController',
       templateUrl: 'app/views/events/common/entityCommentForm.tpl.html'
-    }
+    };
   }
 
   // @ngInject
-  function EntityCommentFormController($scope, $stateParams, Security) {
+  function EntityCommentFormController($scope, $stateParams, Security, _) {
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated();
     vm.currentUser = Security.currentUser;

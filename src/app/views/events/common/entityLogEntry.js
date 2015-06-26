@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.events.common')
     .directive('entityLogEntry', entityLogEntryDirective)
     .controller('EntityLogEntryController', EntityLogEntryController);
@@ -11,14 +12,8 @@
         entryData: '='
       },
       controller: 'EntityLogEntryController',
-      link: entityLogEntryLink,
       templateUrl: 'app/views/events/common/entityLogEntry.tpl.html'
-    }
-  }
-
-  // @ngInject
-  function entityLogEntryLink(scope, element, attributes) {
-
+    };
   }
 
   // @ngInject

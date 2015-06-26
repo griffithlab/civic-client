@@ -9,22 +9,17 @@
     return {
       restrict: 'E',
       scope: {},
-      link: evidenceTalkLogLink,
       controller: 'EvidenceTalkLogController',
       templateUrl: 'app/views/events/evidence/talk/evidenceTalkLog.tpl.html'
-    }
+    };
   }
 
   // @ngInject
-  function evidenceTalkLogLink(scope, element, attrs) {
-
-  }
-
-  // @ngInject
-  function EvidenceTalkLogController($scope, _,
-                                 Evidence,
-                                 EvidenceRevisions,
-                                 EvidenceHistory) {
+  function EvidenceTalkLogController($scope,
+                                     Evidence,
+                                     EvidenceRevisions,
+                                     EvidenceHistory,
+                                     _) {
     var ctrl = $scope.ctrl = {}; // create ctrl here, link function will attach entityTalkView after DOM rendered.
     var comments, revisions, history;
     $scope.comments = Evidence.data.comments;
@@ -46,7 +41,7 @@
       });
 
       history = _.map(history, function(change) {
-        change.type='history'
+        change.type='history';
         return change;
       });
 

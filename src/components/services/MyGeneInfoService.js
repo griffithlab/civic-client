@@ -18,7 +18,7 @@
           // isArray: false,
           cache: cache,
           transformResponse: function(data) {
-            if(typeof data == 'string') {
+            if(typeof data === 'string') {
               data = JSON.parse(data);
             }
             var srcMap = {
@@ -77,6 +77,6 @@
             return response;
         });
       }
-    }
+    };
   }
 })();

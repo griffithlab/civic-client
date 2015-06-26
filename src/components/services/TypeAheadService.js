@@ -4,7 +4,7 @@
     .factory('TypeAheadResults', TypeAheadResultsService);
 
   // @ngInject
-  function TypeAheadResultsService($resource, $cacheFactory) {
+  function TypeAheadResultsService($resource) {
     var TypeAheadResults = $resource('/api/variants/typeahead_results',
       {
         query: '@query',

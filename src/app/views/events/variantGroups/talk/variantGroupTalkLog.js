@@ -9,15 +9,9 @@
     return {
       restrict: 'E',
       scope: {},
-      link: variantGroupTalkLogLink,
       controller: 'VariantGroupTalkLogController',
       templateUrl: 'app/views/events/variantGroups/talk/variantGroupTalkLog.tpl.html'
-    }
-  }
-
-  // @ngInject
-  function variantGroupTalkLogLink(scope, element, attrs) {
-
+    };
   }
 
   // @ngInject
@@ -25,11 +19,14 @@
                                     VariantGroups,
                                     VariantGroupRevisions,
                                     VariantGroupHistory) {
+
     var ctrl = $scope.ctrl = {}; // create ctrl here, link function will attach entityTalkView after DOM rendered.
     var comments, revisions, history;
+
     $scope.comments = VariantGroups.data.comments;
     $scope.revisions = VariantGroupRevisions.data.collection;
     $scope.history = VariantGroupHistory.data.collection;
+
     $scope.$watchCollection('[comments, revisions, history]', function(collections) {
       comments = _.merge({}, collections[0]);
       revisions = _.merge({}, collections[1]);
@@ -46,7 +43,7 @@
       });
 
       history = _.map(history, function(change) {
-        change.type='history'
+        change.type='history';
         return change;
       });
 

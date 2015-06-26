@@ -40,7 +40,7 @@
   }
 
   // @ngInject
-  function EvidenceViewOptions($state, $stateParams, Evidence) {
+  function EvidenceViewOptions($state, $stateParams) {
     var tabData = [];
     var state = {
       baseParams: {},

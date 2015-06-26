@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
     .factory('ReleasesResource', ReleasesResource)
     .factory('Releases', ReleasesService);
@@ -7,11 +8,11 @@
   function ReleasesResource($resource, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
-    var cacheInterceptor = function(response) {
-      console.log(['ReleasesResource: removing', response.config.url, 'from $http cache.'].join(" "));
-      cache.remove(response.config.url);
-      return response.$promise;
-    };
+    //var cacheInterceptor = function(response) {
+    //  console.log(['ReleasesResource: removing', response.config.url, 'from $http cache.'].join(" "));
+    //  cache.remove(response.config.url);
+    //  return response.$promise;
+    //};
 
     return $resource('/api/releases',
       {
@@ -22,12 +23,12 @@
           cache: cache
         }
       }
-    )
+    );
   }
 
   // @ngInject
-  function ReleasesService(ReleasesResource, $q, $cacheFactory) {
-    var cache = $cacheFactory.get('$http');
+  function ReleasesService(ReleasesResource, $q) {
+    //var cache = $cacheFactory.get('$http');
 
     var collection = [];
 
@@ -44,7 +45,7 @@
     function initBase() {
       return $q.all([
         query()
-      ])
+      ]);
     }
 
     // Release Base

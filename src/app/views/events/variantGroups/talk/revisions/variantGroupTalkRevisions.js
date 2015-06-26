@@ -11,7 +11,7 @@
       scope: {},
       controller: 'VariantGroupTalkRevisionsController',
       templateUrl: 'app/views/events/variantGroups/talk/revisions/variantGroupTalkRevisions.tpl.html'
-    }
+    };
   }
 
   // @ngInject

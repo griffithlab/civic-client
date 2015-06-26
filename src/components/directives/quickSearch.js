@@ -42,7 +42,7 @@
         });
     };
 
-    $scope.onSelect = function($item, $model) {
+    $scope.onSelect = function($item) {
       $state.go('events.genes.summary.variants.summary', {geneId: $item.geneId, variantId: $item.variantId});
       $scope.asyncSelected.model = ''; // clear typeahead
     };

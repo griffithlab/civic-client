@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.services')
   .directive('uiView', function ($animate, $interpolate) {
     function getViewName(scope, element, attrs) {

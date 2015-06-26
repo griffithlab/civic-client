@@ -11,12 +11,15 @@
       scope: {},
       controller: 'EvidenceEditBasicController',
       templateUrl: 'app/views/events/evidence/edit/evidenceEditBasic.tpl.html'
-    }
+    };
   }
 
   // @ngInject
   function EvidenceEditBasicController($scope,
                                        $stateParams,
+                                       $q,
+                                       Publications,
+                                       PubchemTypeahead,
                                        Security,
                                        EvidenceRevisions,
                                        Evidence,
@@ -35,7 +38,7 @@
     vm.evidenceHistory = EvidenceHistory;
     vm.evidenceEdit = angular.copy(vm.evidence);
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
-    vm.evidenceEdit.drugs = _.filter(_.pluck(vm.evidence.drugs, 'name'), function(name){ return name != 'N/A'; });
+    vm.evidenceEdit.drugs = _.filter(_.pluck(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -120,15 +123,67 @@
           helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
+      //{
+      //  key: 'pubmed_id',
+      //  type: 'horizontalInputHelp',
+      //  templateOptions: {
+      //    label: 'Pubmed Id',
+      //    value: 'vm.evidenceEdit.pubmed_id',
+      //    minLength: 8,
+      //    length: 8,
+      //    helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+      //  }
+      //},
       {
         key: 'pubmed_id',
-        type: 'horizontalInputHelp',
+        type: 'publication',
         templateOptions: {
-          label: 'Pubmed Id',
+          label: 'Pubmed Id Validated',
           value: 'vm.evidenceEdit.pubmed_id',
-          minLength: 8,
-          length: 8,
+          minLength: 1,
+          required: true,
+          //onBlur: function($viewValue, $modelValue, scope) {
+          //  console.log('pubmed id onblur ------------');
+          //},
+          data: {
+            description: '--'
+          },
           helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+        },
+        modelOptions: {
+          updateOn: 'default blur',
+          allowInvalid: false,
+          debounce: {
+            default: 1000,
+            blur: 0
+          }
+        },
+        validators: {
+          validPubmedId: {
+            expression: function($viewValue, $modelValue, scope) {
+              if ($viewValue.length > 0) {
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                Publications.get($viewValue).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = response.description;
+                    deferred.resolve(response);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = '--';
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                scope.options.templateOptions.data.description = '--';
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid Pubmed ID."'
+          }
         }
       },
       {
@@ -137,14 +192,26 @@
         templateOptions: {
           label: 'Drug Names',
           inputOptions: {
-            type: 'input'
+            type: 'typeahead',
+            templateOptions: {
+              formatter: 'model[options.key]',
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)'
+            },
+            data: {
+              typeaheadSearch: function(val) {
+                return PubchemTypeahead.get(val)
+                  .then(function(response) {
+                    return _.map(response.autocp_array, function(drugname) {
+                      return { name: drugname };
+                    });
+                  });
+              }
+            }
           },
           helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
         },
-        expressionProperties: {
-          'hide': function($viewValue, $modelValue, scope) {
-            return  scope.model.evidence_type != 'Predictive';
-          }
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return  scope.model.evidence_type !== 'Predictive';
         }
       },
       {
@@ -256,7 +323,7 @@
       }
     ];
 
-    vm.submit = function(evidenceEdit, options) {
+    vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
@@ -265,7 +332,7 @@
         .then(function(response) {
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
-          vm.formMessages['submitSuccess'] = true;
+          vm.formMessages.submitSuccess = true;
           vm.showForm = false;
           vm.showSuccessMessage = true;
           vm.showInstructions = false;
@@ -279,14 +346,14 @@
         });
     };
 
-    vm.apply = function(evidenceEdit, options) {
+    vm.apply = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       vm.formErrors = {};
       vm.formMessages = {};
       Evidence.apply(evidenceEdit)
-        .then(function(response) {
+        .then(function() {
           console.log('revision appy success!');
-          vm.formMessages['applySuccess'] = true;
+          vm.formMessages.applySuccess = true;
           // options.resetModel();
         })
         .catch(function(response) {

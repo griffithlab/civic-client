@@ -10,7 +10,7 @@
         },
         controller: 'VariantSummaryController',
         templateUrl: 'app/views/events/variants/summary/variantSummary.tpl.html'
-      }
+      };
     });
 
   //@ngInject

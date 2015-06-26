@@ -21,8 +21,8 @@
   }
 
   // @ngInject
-  function AddViewController($log) {
-    console.log('AddViewController instantiated.');
+  function AddViewController() {
+    // console.log('AddViewController instantiated.');
   }
 
 })();

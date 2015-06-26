@@ -21,8 +21,10 @@
   "validthis": true,
   "globals": {
     "angular": false,
+    "sinon": false,
     "window": false,
     "it": false,
+    "inject": false,
     "expect": false,
     "describe": false,
     "beforeEach": false,

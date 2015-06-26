@@ -11,13 +11,16 @@
       scope: {},
       templateUrl: 'app/views/add/evidence/addEvidenceBasic.tpl.html',
       controller: 'AddEvidenceBasicController'
-    }
+    };
   }
 
   // @ngInject
   function AddEvidenceBasicController($scope,
+                                      $q,
                                       Security,
                                       Evidence,
+                                      Publications,
+                                      PubchemTypeahead,
                                       AddEvidenceViewOptions,
                                       formConfig,
                                       _) {
@@ -162,15 +165,67 @@
           helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
+      //{
+      //  key: 'pubmed_id',
+      //  type: 'horizontalInputHelp',
+      //  templateOptions: {
+      //    label: 'Pubmed Id',
+      //    value: 'vm.newEvidence.pubmed_id',
+      //    minLength: 8,
+      //    length: 8,
+      //    helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+      //  }
+      //},
       {
         key: 'pubmed_id',
-        type: 'horizontalInputHelp',
+        type: 'publication',
         templateOptions: {
-          label: 'Pubmed Id',
+          label: 'Pubmed Id Validated',
           value: 'vm.newEvidence.pubmed_id',
-          minLength: 8,
-          length: 8,
+          minLength: 1,
+          required: true,
+          //onBlur: function($viewValue, $modelValue, scope) {
+          //  console.log('pubmed id onblur ------------');
+          //},
+          data: {
+            description: '--'
+          },
           helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+        },
+        modelOptions: {
+          updateOn: 'default blur',
+          allowInvalid: false,
+          debounce: {
+            default: 1000,
+            blur: 0
+          }
+        },
+        validators: {
+          validPubmedId: {
+            expression: function($viewValue, $modelValue, scope) {
+              if ($viewValue.length > 0) {
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                Publications.get($viewValue).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = response.description;
+                    deferred.resolve(response);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = '--';
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                scope.options.templateOptions.data.description = '--';
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid Pubmed ID."'
+          }
         }
       },
       {
@@ -179,14 +234,26 @@
         templateOptions: {
           label: 'Drug Names',
           inputOptions: {
-            type: 'input'
+            type: 'typeahead',
+            templateOptions: {
+              formatter: 'model[options.key]',
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)'
+            },
+            data: {
+              typeaheadSearch: function(val) {
+                return PubchemTypeahead.get(val)
+                  .then(function(response) {
+                    return _.map(response.autocp_array, function(drugname) {
+                      return { name: drugname };
+                    });
+                  });
+              }
+            }
           },
           helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
         },
-        expressionProperties: {
-          'hide': function($viewValue, $modelValue, scope) {
-            return  scope.model.evidence_type != 'Predictive';
-          }
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return  scope.model.evidence_type !== 'Predictive';
         }
       },
       {
@@ -299,14 +366,14 @@
       }
     ];
 
-    vm.submit = function(newEvidence, options) {
+    vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       vm.formErrors = {};
       vm.formMessages = {};
       Evidence.add(newEvidence)
-        .then(function(response) {
+        .then(function() {
           console.log('add evidence success!');
-          vm.formMessages['submitSuccess'] = true;
+          vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;

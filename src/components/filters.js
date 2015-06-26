@@ -51,9 +51,9 @@
   }
 
   // @ngInject
-  function capitalizeFilter() {
+  function capitalizeFilter(_) {
     return function (input) {
-      if (input != null) {
+      if (!_.isNull(input) && !_.isUndefined(input)) {
         input = input.toLowerCase();
         return input.substring(0, 1).toUpperCase() + input.substring(1);
       } else {
@@ -71,7 +71,7 @@
       }
 
       return input;
-    }
+    };
   }
 
   // @ngInject

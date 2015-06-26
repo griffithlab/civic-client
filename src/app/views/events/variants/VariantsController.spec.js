@@ -4,21 +4,21 @@ describe('VariantsViewController', function () {
   var $rootScope,
     $state,
     $controller,
-    $httpBackend,
-    VariantsViewController,
+    $httpBackend;
+    //VariantsViewController,
 
-    scope,
-    state = 'events.variants';
+    //scope,
+    //state = 'events.variants';
 
-  function goFromState(state1, params1) {
-    return {
-      toState: function (state2, params2) {
-        $state.go(state1, params1);
-        $rootScope.$digest();
-        $state.go(state2, params2);
-        $rootScope.$digest();
-      }};
-  }
+  //function goFromState(state1, params1) {
+  //  return {
+  //    toState: function (state2, params2) {
+  //      $state.go(state1, params1);
+  //      $rootScope.$digest();
+  //      $state.go(state2, params2);
+  //      $rootScope.$digest();
+  //    }};
+  //}
 
   beforeEach(function () {
     module('civic.services');
@@ -55,7 +55,7 @@ describe('VariantsViewController', function () {
           abstract: false,
           url: '/child',
           template: '<ui-view></ui-view>'
-        })
+        });
     });
 
     // inject services
@@ -83,7 +83,7 @@ describe('VariantsViewController', function () {
       $controller = _$controller_;
       $httpBackend = _$httpBackend_;
 
-      _ = window._;
+      // var _ = window._;
 
       // setup mocked backend responses for Genes
       $httpBackend.when('GET', '/api/genes/238').respond(servedGene238);
@@ -108,15 +108,15 @@ describe('VariantsViewController', function () {
 
 
       // ui-router state transition debugging
-      function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + " -> " + to.name + angular.toJson(toP); }
-      $rootScope.$on("$stateChangeStart", function(evt, to, toP, from, fromP) {
-        console.log("Start:   " + message(to, toP, from, fromP));
+      function message(to, toP, from, fromP) { return from.name  + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP); }
+      $rootScope.$on('$stateChangeStart', function(evt, to, toP, from, fromP) {
+        console.log('Start:   ' + message(to, toP, from, fromP));
       });
-      $rootScope.$on("$stateChangeSuccess", function(evt, to, toP, from, fromP) {
-        console.log("Success: " + message(to, toP, from, fromP));
+      $rootScope.$on('$stateChangeSuccess', function(evt, to, toP, from, fromP) {
+        console.log('Success: ' + message(to, toP, from, fromP));
       });
-      $rootScope.$on("$stateChangeError", function(evt, to, toP, from, fromP, err) {
-        console.log("Error:   " + message(to, toP, from, fromP), err);
+      $rootScope.$on('$stateChangeError', function(evt, to, toP, from, fromP, err) {
+        console.log('Error:   ' + message(to, toP, from, fromP), err);
       });
 
       // instantiate VariantsViewController using resolved deps from event.variants state

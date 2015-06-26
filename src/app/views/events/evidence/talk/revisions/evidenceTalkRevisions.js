@@ -11,7 +11,7 @@
       scope: {},
       controller: 'EvidenceTalkRevisionsController',
       templateUrl: 'app/views/events/evidence/talk/revisions/evidenceTalkRevisions.tpl.html'
-    }
+    };
   }
 
   // @ngInject

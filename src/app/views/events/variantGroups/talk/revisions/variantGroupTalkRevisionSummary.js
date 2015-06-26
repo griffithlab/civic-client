@@ -31,8 +31,8 @@
       vm.formErrors = {};
       vm.formMessages = {};
       VariantGroupRevisions.acceptRevision($stateParams.variantGroupId, $stateParams.revisionId)
-        .then(function(response) {
-          vm.formMessages['acceptSuccess'] = true;
+        .then(function() {
+          vm.formMessages.acceptSuccess = true;
         })
         .catch(function(error) {
           console.error('revision accept error!');
@@ -47,8 +47,8 @@
       vm.formErrors = {};
       vm.formMessages = {};
       VariantGroupRevisions.rejectRevision($stateParams.variantGroupId, $stateParams.revisionId)
-        .then(function(response) {
-          vm.formMessages['rejectSuccess'] = true;
+        .then(function() {
+          vm.formMessages.rejectSuccess = true;
         })
         .catch(function(error) {
           console.error('revision reject error!');

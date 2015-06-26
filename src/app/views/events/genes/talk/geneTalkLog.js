@@ -9,15 +9,9 @@
     return {
       restrict: 'E',
       scope: {},
-      link: geneTalkLogLink,
       controller: 'GeneTalkLogController',
       templateUrl: 'app/views/events/genes/talk/geneTalkLog.tpl.html'
-    }
-  }
-
-  // @ngInject
-  function geneTalkLogLink(scope, element, attrs) {
-
+    };
   }
 
   // @ngInject
@@ -46,7 +40,7 @@
       });
 
       history = _.map(history, function(change) {
-        change.type='history'
+        change.type='history';
         return change;
       });
 

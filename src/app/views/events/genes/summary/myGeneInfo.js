@@ -11,7 +11,7 @@
         },
         controller: 'MyGeneInfoController',
         templateUrl: 'app/views/events/genes/summary/myGeneInfo.tpl.html'
-      }
+      };
     });
 
   // @ngInject
@@ -26,7 +26,7 @@
 
     ctrl.openDialog = function() {
       if(_.has(ctrl.dialog, 'id')) {
-        ctrl.closeDialog().then(function(dlg) {
+        ctrl.closeDialog().then(function() {
           ctrl.dialog = ngDialog.open(ctrl.popupOptions);
         });
       } else {

@@ -15,11 +15,11 @@
       },
       templateUrl: 'components/directives/userImage.tpl.html',
       controller: 'UserImageController'
-    }
+    };
   }
 
   // @ngInject
-  function UserImageController($scope) {
+  function UserImageController($scope, _) {
     var ctrl = $scope.ctrl = {};
 
     ctrl.height = $scope.height;

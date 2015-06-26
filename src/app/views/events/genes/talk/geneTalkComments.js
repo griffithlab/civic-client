@@ -11,7 +11,7 @@
       scope: {},
       controller: 'GeneTalkCommentsController',
       templateUrl: 'app/views/events/genes/talk/geneTalkComments.tpl.html'
-    }
+    };
   }
 
 

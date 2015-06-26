@@ -64,7 +64,7 @@
   }
 
   // @ngInject
-  function VariantTalkRevisionsViewOptions($state, $stateParams, Variants) {
+  function VariantTalkRevisionsViewOptions($state, $stateParams) {
     var baseUrl = '';
     var baseState = '';
     var styles = {};
@@ -96,9 +96,9 @@
   }
 
   // @ngInject
-  function VariantTalkRevisionsController(VariantGroups, VariantGroupRevisions, VariantGroupTalkRevisionsViewOptions) {
+  function VariantTalkRevisionsController(VariantGroupRevisions, VariantGroupTalkRevisionsViewOptions) {
     console.log('VariantTalkRevisionsRevisionsController called.');
-    VariantTalkRevisionsRevisionsViewOptions.init();
+    VariantTalkRevisionsViewOptions.init();
     this.VariantGroupRevisionsModel = VariantGroupRevisions;
     this.VariantGroupTalkRevisionsViewOptions = VariantGroupTalkRevisionsViewOptions;
   }
