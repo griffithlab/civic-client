@@ -4,7 +4,7 @@
          style="margin-bottom:14px"
          ng-repeat="item in model[options.key] track by $index"
          ng-init="itemOptions = copyItemOptions()">
-      <div class="col-xs-10">
+      <div class="col-xs-9">
         <formly-field class="no-padding"
                       options="itemOptions"
                       model="model[options.key]"
@@ -12,17 +12,30 @@
                       index="$index">
         </formly-field>
       </div>
-      <div class="col-xs-2" style="margin-top:6px">
-        <a ng-click="deleteItem(model[options.key], $index)" class="btn btn-danger btn-sm btn-block">
-          <strong>X</strong>
-        </a>
+      <div class="col-xs-3" style="margin-top:6px">
+        <button
+          type="button"
+          class="btn btn-danger btn-xs"
+          ng-click="deleteItem(model[options.key], $index)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <button
+          type="button"
+          class="btn btn-success btn-xs"
+          ng-click="model[options.key].push('')">
+          <span class="glyphicon glyphicon-plus"></span> </button>
+        </button>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <button type="button" class="btn btn-success btn-sm btn-block" ng-click="model[options.key].push('')">Add {{ to.entityName | capitalize }}</button>
-    </div>
-  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+      <!--<button type="button"-->
+              <!--class="btn btn-success btn-sm btn-block"-->
+              <!--ng-click="model[options.key].push('')">-->
+        <!--Add {{ to.entityName | capitalize }}-->
+      <!--</button>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
 </div>

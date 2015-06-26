@@ -69,8 +69,11 @@
             { value: 'Prognostic', label: 'Prognostic' }
           ],
           onChange: function(value, options, scope) {
+            // need to reset clinical_significance on change
             scope.model.clinical_significance = '';
-            console.log('evidence_type changed.');
+            // if we're switching to Predictive, seed the drugs array w/ a blank entry,
+            // otherwise set to empty array
+            value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
           },
           helpText: 'Type of clinical outcome associated with the evidence statement.'
         }
