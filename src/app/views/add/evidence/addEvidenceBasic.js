@@ -184,7 +184,7 @@
         key: 'pubmed_id',
         type: 'publication',
         templateOptions: {
-          label: 'Pubmed Id Validated',
+          label: 'Pubmed Id',
           value: 'vm.newEvidence.pubmed_id',
           minLength: 1,
           required: true,
@@ -258,6 +258,17 @@
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return  scope.model.evidence_type !== 'Predictive';
+        }
+      },
+      {
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Drug Names',
+          placeholder: 'N/A',
+          helpText: 'Drug names are only applicable for Predictive evidence.'
+        },
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return scope.model.evidence_type === 'Predictive';
         }
       },
       {
