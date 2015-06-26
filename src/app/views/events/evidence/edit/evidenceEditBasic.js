@@ -223,6 +223,7 @@
         type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Drug Names',
+          disabled: true,
           placeholder: 'N/A',
           helpText: 'Drug names are only applicable for Predictive evidence.'
         },

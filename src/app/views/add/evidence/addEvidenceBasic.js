@@ -266,6 +266,7 @@
         templateOptions: {
           label: 'Drug Names',
           placeholder: 'N/A',
+          disabled: true,
           helpText: 'Drug names are only applicable for Predictive evidence.'
         },
         hideExpression: function($viewValue, $modelValue, scope) {

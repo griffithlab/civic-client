@@ -17,6 +17,7 @@
   // @ngInject
   function GeneEditBasicController($scope,
                                    $q,
+                                   _,
                                    Publications,
                                    Security,
                                    GeneRevisions,
