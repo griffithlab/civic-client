@@ -11,6 +11,11 @@
       extends: 'input',
       wrapper: ['loader', 'pubdisplay', 'validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
     });
+    formlyConfigProvider.setType({
+      name: 'publication-multi',
+      extends: 'input',
+      wrapper: ['loader','pubdisplay']
+    });
   }
 
   // @ngInject

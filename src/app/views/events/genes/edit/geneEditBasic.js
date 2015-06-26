@@ -16,6 +16,8 @@
 
   // @ngInject
   function GeneEditBasicController($scope,
+                                   $q,
+                                   Publications,
                                    Security,
                                    GeneRevisions,
                                    Genes,
@@ -35,6 +37,7 @@
     vm.geneHistory = GeneHistory;
     vm.geneEdit = angular.copy(vm.gene);
     vm.geneEdit.comment = { title: 'GENE ' + vm.gene.name + ' Revision Description', text:'' };
+    vm.geneEdit.source_ids = _.pluck(vm.gene.sources, 'pubmed_id');
     vm.myGeneInfo = geneModel.data.myGeneInfo;
     vm.variants = geneModel.data.variants;
     vm.variantGroups = geneModel.data.variantGroups;
@@ -89,6 +92,60 @@
         }
       },
       {
+        key: 'source_ids',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Sources',
+          helpText: 'Please specify the Pubmed IDs of any sources used as references in the Gene description.',
+          inputOptions: {
+            type: 'publication-multi',
+            templateOptions: {
+              label: 'Pubmed Id',
+              minLength: 1,
+              required: true,
+              data: {
+                description: '--'
+              }
+            },
+            modelOptions: {
+              updateOn: 'default blur',
+              allowInvalid: false,
+              debounce: {
+                default: 300,
+                blur: 0
+              }
+            },
+            validators: {
+              validPubmedId: {
+                expression: function($viewValue, $modelValue, scope) {
+                  if ($viewValue.length > 0) {
+                    var deferred = $q.defer();
+                    scope.options.templateOptions.loading = true;
+                    Publications.get($viewValue).then(
+                      function (response) {
+                        scope.options.templateOptions.loading = false;
+                        scope.options.templateOptions.data.description = response.description;
+                        deferred.resolve(response);
+                      },
+                      function (error) {
+                        scope.options.templateOptions.loading = false;
+                        scope.options.templateOptions.data.description = '--';
+                        deferred.reject(error);
+                      }
+                    );
+                    return deferred.promise;
+                  } else {
+                    scope.options.templateOptions.data.description = '--';
+                    return true;
+                  }
+                },
+                message: '"This does not appear to be a valid Pubmed ID."'
+              }
+            }
+          }
+        }
+      },
+      {
         template: '<hr/>'
       },
       {
@@ -106,6 +163,7 @@
 
     vm.submit = function(geneEdit) {
       geneEdit.geneId = geneEdit.id;
+      geneEdit.sources = geneEdit.source_ids;
       vm.formErrors = {};
       vm.formMessages = {};
 

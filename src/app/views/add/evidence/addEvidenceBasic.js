@@ -200,7 +200,7 @@
           updateOn: 'default blur',
           allowInvalid: false,
           debounce: {
-            default: 1000,
+            default: 300,
             blur: 0
           }
         },
@@ -239,6 +239,7 @@
           label: 'Drug Names',
           inputOptions: {
             type: 'typeahead',
+            wrapper: null,
             templateOptions: {
               formatter: 'model[options.key]',
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)'

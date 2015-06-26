@@ -98,7 +98,7 @@
       name: 'pubdisplay',
       template: [
         '<formly-transclude></formly-transclude>',
-        '<span class="small">Publication: {{ to.data.description }}</span>'
+        '<span class="small">Citation: {{ to.data.description }}</span>'
       ].join(' ')
     });
   }

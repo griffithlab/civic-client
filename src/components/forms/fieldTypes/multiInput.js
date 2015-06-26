@@ -13,7 +13,7 @@
         wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError'],
         templateOptions: {
           inputOptions: {
-            wrapper: null
+            // wrapper: null
           }
         }
       },
