@@ -22,6 +22,7 @@
         <button
           type="button"
           class="btn btn-success btn-xs"
+          ng-if="$index + 1 === model[options.key].length"
           ng-click="model[options.key].push('')">
           <span class="glyphicon glyphicon-plus"></span> </button>
         </button>
