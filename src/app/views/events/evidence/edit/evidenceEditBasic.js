@@ -20,6 +20,7 @@
                                        $q,
                                        Publications,
                                        PubchemTypeahead,
+                                       Diseases,
                                        Security,
                                        EvidenceRevisions,
                                        Evidence,
@@ -106,15 +107,66 @@
       },
       {
         key: 'doid',
-        type: 'horizontalInputHelp',
+        type: 'disease',
         templateOptions: {
-          label: 'DOID',
+          label: 'Disease ID',
           value: 'vm.evidenceEdit.doid',
-          minLength: 8,
-          length: 8,
-          helpText: 'Disease Ontology ID of the specific disease or disease subtype associated with the evidence statement (e.g., 1909 for melanoma).'
+          minLength: 1,
+          data: {
+            name: '--'
+          },
+          helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).'
+        },
+        modelOptions: {
+          updateOn: 'default blur',
+          allowInvalid: false,
+          debounce: {
+            default: 300,
+            blur: 0
+          }
+        },
+        validators: {
+          validPubmedId: {
+            expression: function($viewValue, $modelValue, scope) {
+              if ($viewValue.length > 0) {
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                Diseases.verify($viewValue).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.name = response.name;
+                    deferred.resolve(response);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.name = '--';
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                scope.options.templateOptions.data.name = '--';
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid DOID."'
+          }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.noDoid === true'
         }
       },
+      //{
+      //  key: 'doid',
+      //  type: 'horizontalInputHelp',
+      //  templateOptions: {
+      //    label: 'DOID',
+      //    value: 'vm.evidenceEdit.doid',
+      //    minLength: 8,
+      //    length: 8,
+      //    helpText: 'Disease Ontology ID of the specific disease or disease subtype associated with the evidence statement (e.g., 1909 for melanoma).'
+      //  }
+      //},
       {
         key: 'description',
         type: 'horizontalTextareaHelp',

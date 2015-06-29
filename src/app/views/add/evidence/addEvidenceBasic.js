@@ -22,6 +22,7 @@
                                       Genes,
                                       Publications,
                                       Diseases,
+                                      Datatables,
                                       PubchemTypeahead,
                                       AddEvidenceViewOptions,
                                       formConfig,
@@ -155,12 +156,31 @@
       },
       {
         key: 'variant_name',
-        type: 'horizontalInputHelp',
+        type: 'horizontalTypeaheadHelp',
         templateOptions: {
           label: 'Variant Name',
           value: 'vm.newEvidence.variant_name',
           minLength: 32,
-          helpText: 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).'
+          helpText: 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).',
+          formatter: 'model[options.key].name',
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+          editable: true
+        },
+        data: {
+          typeaheadSearch: function(val) {
+            var request = {
+              mode: 'variants',
+              count: 10,
+              page: 0,
+              'filter[variant]': val
+            };
+            return Datatables.query(request)
+              .then(function(response) {
+                return _.map(_.unique(response.result, 'variant'), function(event) {
+                  return { name: event.variant, id: event.variant_id };
+                });
+              });
+          }
         }
       },
       {
@@ -234,7 +254,7 @@
         key: 'noDoid',
         type: 'horizontalCheckbox',
         templateOptions: {
-          label: 'Disease has not been assigned a DOID',
+          label: 'Could not locate a DOID for the associated disease.',
           onChange: 'model.doid = ""'
         }
       },
@@ -245,7 +265,7 @@
           label: 'Disease Name',
           value: 'vm.newEvidence.disease',
           minLength: 32,
-          helpText: 'Enter the name of the disease you wish to associate with this evidence item.'
+          helpText: 'If the disease has no DOID, enter its name here.'
         },
         hideExpression: '!model.noDoid'
       },
@@ -374,7 +394,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Description of the study performed to produce the evidence statement'
+          helpText: 'Type of study performed to produce the evidence statement'
         }
       },
       {

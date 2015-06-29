@@ -3,7 +3,7 @@
   ng-model="model[options.key]"
   typeahead="{{ to.typeahead }}"
   class="form-control"
-  typeahead-editable="false"
+  typeahead-editable="{{ to.editable || false}}"
   typeahead-focus-first="true"
   typeahead-append-to-body="true"
   typeahead-on-select="{{ to.onSelect }}"
