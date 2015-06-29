@@ -123,7 +123,7 @@
                   if ($viewValue.length > 0) {
                     var deferred = $q.defer();
                     scope.options.templateOptions.loading = true;
-                    Publications.get($viewValue).then(
+                    Publications.verify($viewValue).then(
                       function (response) {
                         scope.options.templateOptions.loading = false;
                         scope.options.templateOptions.data.description = response.description;

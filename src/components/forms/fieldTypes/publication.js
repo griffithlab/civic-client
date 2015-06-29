@@ -22,7 +22,7 @@
   function PublicationController($scope, Publications) {
     console.log('PublicationController called.');
     $scope.validatePublication = function(pubmedId) {
-      return Publications.get(pubmedId);
+      return Publications.verify(pubmedId);
     };
   }
 

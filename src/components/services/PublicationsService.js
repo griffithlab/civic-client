@@ -12,13 +12,19 @@
         query: {
           method: 'GET',
           isArray: true,
-          cache: false
+          cache: true
         },
         get: {
           method: 'GET',
           url: '/api/sources/existence/:pubmedId',
           isArray: false,
-          cache: false
+          cache: true
+        },
+        verify: {
+          method: 'GET',
+          url: '/api/sources/existence/:pubmedId',
+          isArray: false,
+          cache: true
         }
       }
     );
@@ -35,7 +41,8 @@
         collection: collection
       },
       query: query,
-      get: get
+      get: get,
+      verify: verify
     };
 
     function query() {
@@ -50,6 +57,13 @@
       return PublicationsResource.get({pubmedId: pubmedId}).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function verify(pubmedId) {
+      return PublicationsResource.verify({pubmedId: pubmedId}).$promise
+        .then(function(response) {
           return response.$promise;
         });
     }

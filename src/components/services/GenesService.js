@@ -46,6 +46,12 @@
           method: 'PATCH',
           cache: false
         },
+        verify: {
+          method: 'GET',
+          url: '/api/genes/existence/:geneId',
+          isArray: false,
+          cache: cache
+        },
 
         // Gene Additional Info
         getMyGeneInfo: {
@@ -206,6 +212,9 @@
       // Gene Additional Info
       getMyGeneInfo: getMyGeneInfo,
 
+      // Verify
+      verify: verify,
+
       // Gene Collections
       queryVariants: queryVariants,
       queryVariantGroups: queryVariantGroups,
@@ -271,6 +280,12 @@
         },
         function(error) { // fail
           return $q.reject(error);
+        });
+    }
+    function verify(geneId) {
+      return GenesResource.verify({geneId: geneId}).$promise
+        .then(function(response) {
+          return response.$promise;
         });
     }
 

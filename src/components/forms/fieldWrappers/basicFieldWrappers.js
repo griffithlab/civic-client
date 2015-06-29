@@ -101,5 +101,13 @@
         '<span class="small">Citation: {{ to.data.description }}</span>'
       ].join(' ')
     });
+
+    formlyConfigProvider.setWrapper({
+      name: 'genedisplay',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small">Gene: {{ to.data.name }}</span>'
+      ].join(' ')
+    });
   }
 })();

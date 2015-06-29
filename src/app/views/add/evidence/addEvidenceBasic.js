@@ -19,6 +19,7 @@
                                       $q,
                                       Security,
                                       Evidence,
+                                      Genes,
                                       Publications,
                                       PubchemTypeahead,
                                       AddEvidenceViewOptions,
@@ -103,12 +104,51 @@
       },
       {
         key: 'entrez_id',
-        type: 'horizontalInputHelp',
+        type: 'gene',
         templateOptions: {
           label: 'Gene Entrez ID',
           value: 'vm.newEvidence.entrez_id',
           minLength: 32,
+          required: true,
+          data: {
+            name: '--'
+          },
           helpText: 'Entrez Gene ID (e.g., 673 for BRAF)'
+        },
+        modelOptions: {
+          updateOn: 'default blur',
+          allowInvalid: false,
+          debounce: {
+            default: 300,
+            blur: 0
+          }
+        },
+        validators: {
+          validPubmedId: {
+            expression: function($viewValue, $modelValue, scope) {
+              if ($viewValue.length > 0) {
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                Genes.verify($viewValue).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.name = response.name;
+                    deferred.resolve(response);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.name = '--';
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                scope.options.templateOptions.data.name = '--';
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid Pubmed ID."'
+          }
         }
       },
       {
@@ -210,7 +250,7 @@
               if ($viewValue.length > 0) {
                 var deferred = $q.defer();
                 scope.options.templateOptions.loading = true;
-                Publications.get($viewValue).then(
+                Publications.verify($viewValue).then(
                   function (response) {
                     scope.options.templateOptions.loading = false;
                     scope.options.templateOptions.data.description = response.description;
