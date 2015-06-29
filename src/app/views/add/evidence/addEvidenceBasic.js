@@ -21,6 +21,7 @@
                                       Evidence,
                                       Genes,
                                       Publications,
+                                      Diseases,
                                       PubchemTypeahead,
                                       AddEvidenceViewOptions,
                                       formConfig,
@@ -42,6 +43,7 @@
       variant_name: '',
       description: '',
       disease: '',
+      noDoid: false,
       doid: '',
       pubmed_id: '',
       //pubchem_id: '',
@@ -119,8 +121,8 @@
           updateOn: 'default blur',
           allowInvalid: false,
           debounce: {
-            default: 300,
-            blur: 0
+            default: 1000,
+            blur: 1000
           }
         },
         validators: {
@@ -178,25 +180,74 @@
         }
       },
       {
-        key: 'disease',
-        type: 'horizontalInputHelp',
+        key: 'doid',
+        type: 'disease',
         templateOptions: {
-          label: 'Disease',
-          value: 'vm.newEvidence.disease',
-          minLength: 32,
-          helpText: 'Enter the disease or subtype that is associated with this evidence statement. This should be a disease in the disease-ontology that carries a DOID (e.g., 1909 for melanoma). If the disease to be entered is not in the disease ontology, enter it as free text. '
+          label: 'Disease ID',
+          value: 'vm.newEvidence.doid',
+          minLength: 1,
+          data: {
+            name: '--'
+          },
+          helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).'
+        },
+        modelOptions: {
+          updateOn: 'default blur',
+          allowInvalid: false,
+          debounce: {
+            default: 300,
+            blur: 0
+          }
+        },
+        validators: {
+          validPubmedId: {
+            expression: function($viewValue, $modelValue, scope) {
+              if ($viewValue.length > 0) {
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                Diseases.verify($viewValue).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.name = response.name;
+                    deferred.resolve(response);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.name = '--';
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                scope.options.templateOptions.data.name = '--';
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid DOID."'
+          }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.noDoid === true'
         }
       },
       {
-        key: 'doid',
+        key: 'noDoid',
+        type: 'horizontalCheckbox',
+        templateOptions: {
+          label: 'Disease has not been assigned a DOID',
+          onChange: 'model.doid = ""'
+        }
+      },
+      {
+        key: 'disease',
         type: 'horizontalInputHelp',
         templateOptions: {
-          label: 'DOID',
-          value: 'vm.newEvidence.doid',
-          minLength: 8,
-          length: 8,
-          helpText: 'Disease Ontology ID of the specific disease or disease subtype associated with the evidence statement (e.g., 1909 for melanoma).'
-        }
+          label: 'Disease Name',
+          value: 'vm.newEvidence.disease',
+          minLength: 32,
+          helpText: 'Enter the name of the disease you wish to associate with this evidence item.'
+        },
+        hideExpression: '!model.noDoid'
       },
       {
         key: 'description',
@@ -209,17 +260,6 @@
           helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
-      //{
-      //  key: 'pubmed_id',
-      //  type: 'horizontalInputHelp',
-      //  templateOptions: {
-      //    label: 'Pubmed Id',
-      //    value: 'vm.newEvidence.pubmed_id',
-      //    minLength: 8,
-      //    length: 8,
-      //    helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
-      //  }
-      //},
       {
         key: 'pubmed_id',
         type: 'publication',
@@ -228,9 +268,6 @@
           value: 'vm.newEvidence.pubmed_id',
           minLength: 1,
           required: true,
-          //onBlur: function($viewValue, $modelValue, scope) {
-          //  console.log('pubmed id onblur ------------');
-          //},
           data: {
             description: '--'
           },

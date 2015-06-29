@@ -109,5 +109,13 @@
         '<span class="small">Gene: {{ to.data.name }}</span>'
       ].join(' ')
     });
+
+    formlyConfigProvider.setWrapper({
+      name: 'diseasedisplay',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small">Disease: {{ to.data.name }}</span>'
+      ].join(' ')
+    });
   }
 })();

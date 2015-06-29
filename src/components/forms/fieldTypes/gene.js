@@ -21,8 +21,8 @@
   // @ngInject
   function GeneController($scope, Genes) {
     console.log('GeneController called.');
-    $scope.validateGene = function(pubmedId) {
-      return Genes.verify(pubmedId);
+    $scope.validateGene = function(geneId) {
+      return Genes.verify(geneId);
     };
   }
 
