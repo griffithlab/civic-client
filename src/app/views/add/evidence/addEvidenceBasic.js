@@ -147,7 +147,7 @@
                 return true;
               }
             },
-            message: '"This does not appear to be a valid Pubmed ID."'
+            message: '"This does not appear to be a valid Entrez ID."'
           }
         }
       },
