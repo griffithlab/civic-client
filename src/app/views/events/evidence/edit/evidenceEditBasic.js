@@ -200,9 +200,14 @@
             wrapper: null,
             templateOptions: {
               formatter: 'model[options.key]',
-              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)'
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)'
             },
             data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
               typeaheadSearch: function(val) {
                 return PubchemTypeahead.get(val)
                   .then(function(response) {
@@ -365,6 +370,7 @@
 
     vm.apply = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
+      evidenceEdit.drugs = _.without(evidenceEdit.drugs, '');
       vm.formErrors = {};
       vm.formMessages = {};
       Evidence.apply(evidenceEdit)
