@@ -21,10 +21,11 @@
       D: 'Case Study',
       E: 'Inferential'
     };
-    $scope.evidence.evidence_level_string = $scope.evidence.evidence_level + ' - ' + evidence_levels[$scope.evidence.evidence_level];
-    $scope.$watch('evidence.drugs', function() {
+    $scope.$watchCollection('evidence', function() {
+      $scope.evidence.evidence_level_string = $scope.evidence.evidence_level + ' - ' + evidence_levels[$scope.evidence.evidence_level];
       $scope.evidence.drugsStr = _.chain($scope.evidence.drugs).pluck('name').value().join(', ');
     });
+
     $scope.EvidenceViewOptions = EvidenceViewOptions;
     $scope.backgroundColor = EvidenceViewOptions.styles.view.backgroundColor;
   }
