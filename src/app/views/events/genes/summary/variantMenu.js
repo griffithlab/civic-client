@@ -14,9 +14,10 @@
     });
 
   //@ngInject
-  function VariantMenuController($scope, Genes) {
+  function VariantMenuController($scope, $stateParams, Genes) {
     $scope.gene = Genes.data.item;
     $scope.variants = Genes.data.variants;
     $scope.variantGroups = Genes.data.variantGroups;
+    $scope.stateParams = $stateParams;
   }
 })();
