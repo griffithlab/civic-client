@@ -3,71 +3,117 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
-.tabRow {
-  .fullBleed();
-  .name h3 {
-    padding: .5em 0 0;
-    margin: 0;
-    display: inline-block;
-  }
+.entityTabs {
 
-  #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
+  .tab-row {
+    .fullBleed();
+    .name h3 {
+      padding: .5em 0 0;
+      margin: 0;
+      display: inline-block;
+    }
 
-  > .row {
-    border-bottom: 1px solid #CCC;
-    background-image: url('/assets/images/grey_stripes.png');
-  }
+    #gradient > .vertical-three-colors(@pageBackground3, @pageBackground3, 60%, darken(@pageBackground3, 8%));
 
-  .detail-corner {
-    @event-corner-radius: 10px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: @event-corner-radius;
-    height: @event-corner-radius;
-    background-color: @pageBackground2;
-    .corner-edge {
-      border-top-left-radius: @event-corner-radius;
-      width: @event-corner-radius;
-      height: @event-corner-radius;
-      background-color: @pageBackground3;
+    > .row {
+      border-bottom: 1px solid #CCC;
       background-image: url('/assets/images/grey_stripes.png');
     }
-  }
 
-  .entity-type {
-    // text-transform: capitalize;
-    color: #999;
-  }
-
-  .tabs {
-    min-height: 3.5em;
-    position: relative;
-
-    .tab-container {
-      padding-right: @contentPadding;
+    .detail-corner {
+      @event-corner-radius: 10px;
       position: absolute;
-      right: 50px;
-      bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
+      top: 0;
+      left: 0;
+      width: @event-corner-radius;
+      height: @event-corner-radius;
+      background-color: @pageBackground2;
+      .corner-edge {
+        border-top-left-radius: @event-corner-radius;
+        width: @event-corner-radius;
+        height: @event-corner-radius;
+        background-color: @pageBackground3;
+        background-image: url('/assets/images/grey_stripes.png');
+      }
     }
 
-    .user-info {
-      position: absolute;
-      right: @contentPadding;
-      bottom: 12px;
+    .entity-type {
+      // text-transform: capitalize;
+      color: #999;
+    }
+
+    .tabs {
+      min-height: 3.5em;
+      position: relative;
+
+      .tab-container {
+        padding-right: @contentPadding;
+        position: absolute;
+        right: 0;
+        bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
+      }
+
+      .user-info {
+        position: absolute;
+        right: @contentPadding;
+        bottom: 12px;
+      }
+    }
+    // override default bootstrap with view background,
+    // assigned to ctrl.viewBackground in entityTabs.js
+    // applied with ng-class in entityTabs.tpl.html
+    .view-pageBackground2 {
+      li.active a {
+        background-color: @pageBackground2 !important;
+      }
+    }
+    .view-pageBackground {
+      li.active a {
+        background-color: @pageBackground !important;
+      }
     }
   }
-  // override default bootstrap with view background,
-  // assigned to ctrl.viewBackground in entityTabs.js
-  // applied with ng-class in entityTabs.tpl.html
-  .view-pageBackground2 {
-    li.active a {
+
+  .user-info-row {
+    .fullBleed();
+
+    ul {
+      margin: 0;
+      margin-left: -5px;
+      padding: @contentPadding/2 0 0 0;
+
+      li {
+        display: inline-block;
+        .action-block {
+          color: #666;
+          padding: 0 5px;
+          border: 1px solid #CCC;
+          display: inline-block;
+          border-radius: @border-radius-small;
+          background-color: #AAA;
+
+          .action-label {
+            font-weight: bold;
+          }
+
+          .action-date {
+
+          }
+        }
+      }
+    }
+
+    .view-pageBackground2 {
       background-color: @pageBackground2 !important;
     }
-  }
-  .view-pageBackground {
-    li.active a {
+    .view-pageBackground {
       background-color: @pageBackground !important;
+    }
+
+    .info-box {
+      border-radius: @border-radius-small;
+      background-color: #AAA;
+      padding: @contentPadding/2;
     }
   }
 }

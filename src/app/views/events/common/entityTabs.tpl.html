@@ -1,5 +1,5 @@
 <div class="entityTabs">
-  <div class="tabRow">
+  <div class="tab-row">
     <div class="row">
       <div class="detail-corner" ng-show="showCorner"><div class="corner-edge"></div></div>
       <div class="col-xs-12 col-md-6 name">
@@ -34,15 +34,33 @@
                ng-click="go(tab)">
           </tab>
         </tabset>
-        <div class="user-info">
-          <entity-users-popover users="vm.users" type="vm.type" name="vm.name"></entity-users-popover>
-        </div>
+        <!--<div class="user-info">-->
+          <!--<entity-users-popover users="vm.users" type="vm.type" name="vm.name"></entity-users-popover>-->
+        <!--</div>-->
       </div>
     </div>
   </div>
-  <div class="userInfoRow">
-    <div class="col-xs-12">
-      <p>user info</p>
+  <div class="user-info-row">
+    <div class="row">
+      <div class="col-xs-12 {{ viewBackground }}">
+        <ul class="actions-list">
+          <li>
+            <div class="action-block view-pageBackground"
+              ng-repeat="(action, user) in vm.users">
+              <span class="action-label small">
+                <strong>{{ action | labelify }}</strong> by
+              </span>
+              <span class="action-date small">
+                {{ user.timestamp | timeAgo }}
+              </span>
+              <span class="user-button small">
+                by <strong>{{ user.user.username }}</strong>
+              </span>
+
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

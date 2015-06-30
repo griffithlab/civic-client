@@ -65,6 +65,7 @@
 
     // scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
+    scope.viewForeground = 'view-' + entityViewOptions.styles.view.foregroundColor;
     scope.tabs = entityViewOptions.tabData;
 
     if (!scope.tabs) {
