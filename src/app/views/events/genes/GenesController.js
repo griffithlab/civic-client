@@ -61,12 +61,12 @@
         {
           heading: 'Gene Summary',
           route: 'events.genes.summary',
-          params: { geneId: Genes.data.item.id }
+          params: { geneId: $stateParams.geneId }
         },
         {
           heading: 'Gene Talk',
           route: 'events.genes.talk.log',
-          params: { geneId: Genes.data.item.id }
+          params: { geneId: $stateParams.geneId }
         }
       ], this.tabData);
 

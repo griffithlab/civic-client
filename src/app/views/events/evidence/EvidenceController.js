@@ -58,12 +58,20 @@
         {
           heading: 'Evidence Summary',
           route: 'events.genes.summary.variants.summary.evidence.summary',
-          params: $stateParams
+          params: {
+            geneId: $stateParams.geneId,
+            variantId: $stateParams.variantId,
+            evidenceId: $stateParams.evidenceId
+          }
         },
         {
           heading: 'Evidence Talk',
           route: 'events.genes.summary.variants.summary.evidence.talk.log',
-          params: $stateParams
+          params: {
+            geneId: $stateParams.geneId,
+            variantId: $stateParams.variantId,
+            evidenceId: $stateParams.evidenceId
+          }
         }
       ], this.tabData);
 
