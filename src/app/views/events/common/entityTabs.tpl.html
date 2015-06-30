@@ -1,41 +1,48 @@
 <div class="entityTabs">
-  <div class="row">
-    <div class="detail-corner" ng-show="showCorner"><div class="corner-edge"></div></div>
-    <div class="col-xs-12 col-md-6 name">
-      <div ng-switch="vm.isAuthenticated()">
-        <div ng-switch-when="false">
+  <div class="tabRow">
+    <div class="row">
+      <div class="detail-corner" ng-show="showCorner"><div class="corner-edge"></div></div>
+      <div class="col-xs-12 col-md-6 name">
+        <div ng-switch="vm.isAuthenticated()">
+          <div ng-switch-when="false">
           <span tooltip="Please sign in to suggest a revision" tooltip-append-to-body="true">
             <h3 editable-field class="edit-icon-lg tab-name" entity-view-model="entityViewModel" entity-view-options="entityViewOptions">
               <span ng-bind="vm.type" class="entity-type">Entity</span>
               <span ng-bind="vm.name" class="entity-name">Name</span>
             </h3>
           </span>
+          </div>
+          <div ng-switch-when="true">
+            <h3 editable-field class="edit-icon-lg tab-name" entity-view-model="entityViewModel" entity-view-options="entityViewOptions">
+              <span ng-bind="vm.type" class="entity-type">Entity</span>
+              <span ng-bind="vm.name" class="entity-name">Name</span>
+            </h3>
+          </div>
         </div>
-        <div ng-switch-when="true">
-          <h3 editable-field class="edit-icon-lg tab-name" entity-view-model="entityViewModel" entity-view-options="entityViewOptions">
-            <span ng-bind="vm.type" class="entity-type">Entity</span>
-            <span ng-bind="vm.name" class="entity-name">Name</span>
-          </h3>
-        </div>
-      </div>
 
-    </div>
-    <div class="col-xs-12 col-md-6 tabs {{ viewBackground }}">
-      <tabset class="tab-container"
-              type="{{'tabs'}}"
-              vertical="{{vertical}}"
-              justified="{{justified}}">
-        <tab class="tab"
-             ng-repeat="tab in tabs"
-             heading="{{tab.heading}}"
-             active="tab.active"
-             disable="tab.disabled"
-             ng-click="go(tab)">
-        </tab>
-      </tabset>
-      <div class="user-info">
-        <entity-users-popover users="vm.users" type="vm.type" name="vm.name"></entity-users-popover>
       </div>
+      <div class="col-xs-12 col-md-6 tabs {{ viewBackground }}">
+        <tabset class="tab-container"
+                type="{{'tabs'}}"
+                vertical="{{vertical}}"
+                justified="{{justified}}">
+          <tab class="tab"
+               ng-repeat="tab in tabs"
+               heading="{{tab.heading}}"
+               active="tab.active"
+               disable="tab.disabled"
+               ng-click="go(tab)">
+          </tab>
+        </tabset>
+        <div class="user-info">
+          <entity-users-popover users="vm.users" type="vm.type" name="vm.name"></entity-users-popover>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="userInfoRow">
+    <div class="col-xs-12">
+      <p>user info</p>
     </div>
   </div>
 </div>
