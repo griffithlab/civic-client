@@ -38,7 +38,7 @@
     vm.variantGroupHistory = VariantGroupHistory;
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
-    vm.variantGroupEdit.variants = _.map(vm.variantGroupEdit.variants, function(variant) {
+    vm.variantGroupEdit.variantsEdit = _.map(vm.variantGroupEdit.variants, function(variant) {
       return { name: variant.entrez_name + ' - ' + variant.name, id: variant.id };
     });
 
@@ -78,12 +78,12 @@
         }
       },
       {
-        key: 'variants',
+        key: 'variantsEdit',
         type: 'multiInput',
         templateOptions: {
           label: 'Variants',
           entityName: 'Variant',
-          helpText: 'Click the X button to delete a variant, click the Add Variant button to add a variant. Note that variants must be known to CIViC to be available for including here. New variants must be added as part of an evidence item using the the <a href="/#/add/evidence/basic">Add Evidence form</a>.',
+          helpText: 'Click the an X button to delete a variant, click the + button to add variant. Note that variants must be known to CIViC to be available for including here. New variants may be added as part of an evidence item using the the <a href="/#/add/evidence/basic">Add Evidence form</a>.',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
@@ -131,7 +131,7 @@
       vm.formErrors = {};
       vm.formMessages = {};
       // prep variant edit obj for submission to server
-      variantGroupEdit.variants = _.pluck(variantGroupEdit.variants, 'id');
+      variantGroupEdit.variants = _.pluck(variantGroupEdit.variantsEdit, 'id');
 
       VariantGroupRevisions.submitRevision(variantGroupEdit)
         .then(function(response) {
