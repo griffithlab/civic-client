@@ -21,14 +21,9 @@
           <li ng-repeat="variant in variantGroup.variants">
             <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id })"
                ng-class="{ active: variant.id == stateParams.variantId }">
-              <div ng-switch="variantGroup.singleGene === true">
-                <div ng-switch-when="true">
-                  <span ng-bind="variant.name" class="variant-name">Variant Name</span>
-                </div>
-                <div ng-switch-when="false">
-                  <span ng-bind="variant.name" class="variant-name">Variant Name</span><br/>
-                  <span class="small gene-name">(<span ng-bind="variant.entrez_name"></span>)</span>
-                </div>
+              <span ng-bind="variant.name" class="variant-name">Variant Name</span>
+              <div ng-hide="variantGroup.singleGene">
+                <span class="small gene-name">(<span ng-bind="variant.entrez_name"></span>)</span>
               </div>
             </a>
           </li>
