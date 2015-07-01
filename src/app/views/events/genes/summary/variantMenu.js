@@ -18,8 +18,12 @@
     var vm = $scope.vm = {};
     $scope.gene = Genes.data.item;
     $scope.variants = Genes.data.variants;
-    $scope.variantGroups = Genes.data.variantGroups;
     $scope.stateParams = $stateParams;
-    $scope.singleGene = _.every($scope.variants, _.first($scope.variants));
+
+    $scope.variantGroups = _.map(Genes.data.variantGroups, function(vg){
+      vg.singleGene = _.every(vg.variants, { gene_id: vg.variants[0].gene_id });
+      return vg;
+    });
+
   }
 })();
