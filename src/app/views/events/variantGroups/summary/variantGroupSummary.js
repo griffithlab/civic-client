@@ -13,7 +13,16 @@
       };
     });
 
-  function VariantGroupSummaryController($scope, VariantGroups, VariantGroupsViewOptions) {
+  function VariantGroupSummaryController($scope,
+                                         $state,
+                                         $stateParams,
+                                         Security,
+                                         VariantGroups,
+                                         VariantGroupsViewOptions) {
+    $scope.isAuthenticated = Security.isAuthenticated;
+    $scope.isEdit = $state.includes('**.edit.**');
+
+    $scope.stateParams = $stateParams;
     $scope.variantGroup = VariantGroups.data.item;
     $scope.variants = VariantGroups.data.variants;
     $scope.VariantGroupsViewOptions = VariantGroupsViewOptions;
