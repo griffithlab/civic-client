@@ -10,25 +10,27 @@
   </ul>
   <div ng-if="variantGroups.length > 0">
     <h4 class="title">Variant Groups</h4>
-    <ul class="variant-groups">
-      <li ng-repeat="variantGroup in variantGroups">
-        <a class="sub-title"
-           ng-class="{ active: variantGroup.id == stateParams.variantGroupId }"
-           ui-sref="events.genes.summary.variantGroups.summary({geneId: gene.id, variantGroupId: variantGroup.id})">
-          <span ng-bind="variantGroup.name">Variant Group Name</span>
-        </a>
-        <ul class="variants">
-          <li ng-repeat="variant in variantGroup.variants">
-            <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id })"
-               ng-class="{ active: variant.id == stateParams.variantId }">
-              <span ng-bind="variant.name" class="variant-name">Variant Name</span>
-              <div ng-hide="variantGroup.singleGene">
-                <span class="small gene-name">(<span ng-bind="variant.entrez_name"></span>)</span>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
   </div>
+  <ul class="variant-groups" ng-if="variantGroups.length > 0">
+    <li ng-repeat="variantGroup in variantGroups">
+      <a class="sub-title"
+         ng-class="{ active: variantGroup.id == stateParams.variantGroupId }"
+         ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id })">
+        <span ng-bind="variantGroup.name">Variant Group Name</span>
+      </a>
+      <ul class="variants">
+        <li ng-repeat="variant in variantGroup.variants">
+          <a
+             ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id })"
+             ng-class="{ active: variant.id == stateParams.variantId }">
+            <span ng-bind="variant.name" class="variant-name">Variant Name</span>
+            <div ng-hide="variantGroup.singleGene">
+              <span class="small gene-name">(<span ng-bind="variant.entrez_name"></span>)</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
 </div>

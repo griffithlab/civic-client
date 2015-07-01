@@ -10,92 +10,73 @@
   min-height: 30em;
   padding-top: 3px; // get the bottom edges of top .title to align w/ bottom of variant tab header
   padding-bottom: 2*@contentPadding;
-  @tab-padding: .5em;
+  @tabPadding: .5em;
 
   .title {
-    padding: @tab-padding;
-    background-color: @pageBackground3;
     .leftBleed();
+    padding: @tabPadding;
+    background-color: @pageBackground3;
     border-top-right-radius: @border-radius-base;
     border-bottom-right-radius: @border-radius-base;
   }
 
   .sub-title {
-    display: inline-block;
-    padding: @tab-padding;
     font-weight: bold;
+    padding: @tabPadding;
   }
 
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
 
-  li {
-    padding: 0;
-    a {
-      display: block;
-      width: 100%;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-        font-weight: bold;
-      }
-    }
-
-  }
-
-  .variants {
     li {
       margin-right: -@contentPadding; // pull li background all the way to edge of adjacent ui-view
-    }
+      padding: 0;
+      margin-top: 3px;
 
+      a {
+        display: block;
+        text-decoration: none;
+        padding: @tabPadding;
+        border-radius: @border-radius-base;
+        margin-right: @contentPadding;
+
+        &:hover, &.active {
+          background-color: @pageBackground;
+        }
+
+        &.active {
+          font-weight: bold;
+        }
+
+        .gene-name {
+          color: #999;
+          text-decoration: none;
+          font-weight: normal;
+          font-style: oblique;
+        }
+      }
+
+      a.active {
+        margin-right: 0;
+        padding-right: @contentPadding;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
+  ul ul li {
+    margin-right: 0;
     a {
-      display: inline-block;
-      padding: @tab-padding;
-      margin-right: @contentPadding;
+      margin-left: @contentPadding/2;
+      margin-right: -@contentPadding/2;
+      padding-right: @contentPadding/2;
     }
-
-    a.active {
-      margin-right: 0;
-      padding-right: @contentPadding;
-      background-color: @pageBackground;
-      border-top-left-radius: @border-radius-base;
-      border-bottom-left-radius: @border-radius-base;
-    }
-
-    .gene-name {
-      color: #999;
-      text-decoration: none;
-      font-weight: normal;
-      font-style: oblique;
-    }
-
   }
 
   .variant-groups {
-    li {
-      margin-right: -(2 * @contentPadding); // pull li background all the way to edge of adjacent ui-view
 
-      > a {
-        display: block;
-        margin-right: (2 * @contentPadding);
-        border-top-left-radius: @border-radius-base;
-        border-bottom-left-radius: @border-radius-base;
-      }
-
-      > a.active {
-        margin-right: -(2 * @contentPadding);
-        padding-right: (2 * @contentPadding);
-        background-color: @pageBackground;
-      }
-    }
-    .variants {
-      li {
-        margin-left: 1em;
-      }
-    }
   }
 }
