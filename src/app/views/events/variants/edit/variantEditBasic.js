@@ -80,13 +80,30 @@
       {
         template: '<h3 class="form-subheader">Primary Coordinates</h3><hr/>'
       },
+      //{
+      //  model: vm.variantEdit.coordinates,
+      //  key: 'reference_build',
+      //  type: 'horizontalInputHelp',
+      //  templateOptions: {
+      //    label: 'Reference Build',
+      //    value: vm.variantEdit.coordinates.reference_build,
+      //    helpText: ''
+      //  }
+      //},
       {
         model: vm.variantEdit.coordinates,
         key: 'reference_build',
-        type: 'horizontalInputHelp',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Reference Build',
           value: vm.variantEdit.coordinates.reference_build,
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [
+            { type: 'default', value: null, label: 'Please select a Reference Build' },
+            { value: 'GCRh38 (hg20)', label: 'GCRh38 (hg20)' },
+            { value: 'GCRh37 (hg19)', label: 'GCRh37 (hg19)' },
+            { value: 'GCRh18 (hg18)', label: 'GCRh18 (hg18)' }
+          ],
           helpText: ''
         }
       },
