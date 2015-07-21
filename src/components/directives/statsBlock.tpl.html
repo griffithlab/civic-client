@@ -1,0 +1,48 @@
+<div class="statsBlock {{ vm.cols}}">
+  <div class="info">
+    <table class="table table-condensed">
+      <colgroup>
+        <col width="70%">
+        <col width="30%">
+      </colgroup>
+      <tr class="title">
+        <td colspan="2" ng-bind="vm.title">
+          TITLE
+        </td>
+      </tr>
+      <tr class="new">
+        <td class="key">
+          New this Week:
+        </td>
+        <td class="value" ng-bind="vm.stats.new_this_week">
+          8
+        </td>
+      </tr>
+      <tr class="new">
+        <td class="key">
+          New this Month:
+        </td>
+        <td class="value" ng-bind="vm.stats.new_this_month">
+          88
+        </td>
+      </tr>
+      <tr class="new">
+        <td class="key">
+          New this Year:
+        </td>
+        <td class="value" ng-bind="vm.stats.new_this_year">
+          888
+        </td>
+      </tr>
+      <tr class="total">
+        <td class="key">
+          Total:
+        </td>
+        <td class="value" ng-bind="vm.stats.total">
+          total
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!--<pre ng-bind="vm.stats|json"></pre>-->
+</div>

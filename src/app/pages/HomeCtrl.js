@@ -4,7 +4,11 @@
     .controller('HomeCtrl', HomeCtrl);
 
   // @ngInject
-  function HomeCtrl() {
-    // $log.info('HomeCtrl instantiated');
+  function HomeCtrl($scope, Stats) {
+    var vm = $scope.vm = {};
+    vm.stats = {};
+    Stats.get('site').then(function(stats) {
+      vm.stats = stats;
+    });
   }
 })();

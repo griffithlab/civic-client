@@ -1,0 +1,53 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.statsBlock {
+  padding: 0 @contentPadding;
+  color: #CCC;
+
+  .table {
+    border-radius: @border-radius-large;
+    background-color: darken(@civicPurple, 10%);
+    margin: 0 !important;
+    td {
+      border-width: 0;
+      padding: @contentPadding/4 @contentPadding/2;
+    }
+    .title {
+      td {
+        font-size: larger;
+        padding: @contentPadding/2 @contentPadding;
+        border-bottom: 1px solid lighten(@civicPurple, 5%);
+      }
+    }
+
+    .new {
+      font-size: small;
+    }
+
+    .total {
+      font-size: larger;
+      .value {
+        font-weight: bold;
+      }
+      td {
+        border-top: 1px solid lighten(@civicPurple, 5%);
+      }
+    }
+
+    .key {
+      text-align: right;
+      vertical-align: middle;
+      padding-right: @contentPadding/4;
+    }
+
+    .value {
+      text-align: right;
+      padding-left: @contentPadding/4;
+      vertical-align: middle;
+      color: @civicYellow;
+    }
+
+  }
+}

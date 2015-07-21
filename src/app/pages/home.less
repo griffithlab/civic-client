@@ -26,16 +26,26 @@
   }
 
   .disclaimer-block {
-    margin-bottom: @contentPadding;
-    margin-top: @contentPadding*2;
-
     .disclaimer {
       padding: @contentPadding;
       border-radius: @border-radius-large;
-      background-color: #795e89;
-      color: #FFF;
+      background-color: darken(@civicPurple, 10%);
+      color: #CCC;
     }
   }
+  .intro-block {
+    .intro {
+      padding: @contentPadding;
+      border-radius: @border-radius-large;
+      background-color: darken(@civicPurple, 10%);
+      color: #CCC;
+    }
+
+    .stats-block {
+      border: 1px solid #F00;
+    }
+  }
+
   .discover, .collaborate {
     p {
       color: #FFF;
