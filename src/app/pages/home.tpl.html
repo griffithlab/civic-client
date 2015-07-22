@@ -26,27 +26,28 @@
     </div>
   </div>
   <div class="row" style="margin-top: 16px;">
-    <div class="col-xs-12 col-sm-6 intro-block">
+    <div class="col-xs-12 intro-block">
       <div class="row">
-        <div class="col-xs-12">
-          <h4 class="title">What is CIViC?</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-6">
           <div class="intro">
-            <h4 style="margin-top: 0;">The Precision Medicine Revolution</h4>
+            <h4>The Precision Medicine Revolution</h4>
             <p>Precision medicine refers to the use of prevention and treatment strategies that are tailored to the unique features of each individual and their disease. In the context of cancer this might involve the identification of specific mutations shown to predict response to a targeted therapy. The biomedical literature describing these associations is large and growing rapidly. Currently these interpretations exist largely in private or encumbered databases resulting in extensive repetition of effort.</p>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="intro">
             <h4>CIViC's Role in Precision Medicine</h4>
             <p>Realizing precision medicine will require this information to be centralized, debated and interpreted for application in the clinic. <strong>CIViC is an open access, open source, community-driven web resource for Clinical Interpretation of Variants in Cancer.</strong> Our goal is to enable precision medicine by providing an educational forum for dissemination of knowledge and active discussion of the clinical significance of cancer genome alterations.</p>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row">
     <div class="col-xs-12 col-sm-6 stats-block">
       <div class="row">
         <div class="col-xs-12">
-          <h4 class="title">Database and Community Statistics</h4>
+          <h4>Database and Community Statistics</h4>
         </div>
       </div>
       <div class="row">
@@ -103,6 +104,23 @@
           cols="col-xs-6">
         </stats-block>
       </div>-->
+    </div>
+    <div class="col-xs-12 col-sm-6 stats-block">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>CIViC Event Stream</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="events">
+            <li ng-repeat="event in vm.events">
+              <span ng-bind="event.description">EVENT</span>
+              <span ng-bind="event.timestamp | timeAgo">TIME</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row" style="margin-top: 32px;">
