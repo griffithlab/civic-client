@@ -35,6 +35,7 @@
     'civic.account',
     'civic.browse',
     'civic.events',
+    'civic.users',
     'civic.add'
   ])
     .run(appRun)
@@ -109,6 +110,7 @@
   angular.module('civic.login', ['ui.router']);
   angular.module('civic.browse', ['ui.grid.selection', 'ui.grid.pagination', 'ui.router']);
   angular.module('civic.search', ['ui.router']);
+  angular.module('civic.users', ['ui.router']);
 
   angular.module('civic.add', [
     'ui.router',
