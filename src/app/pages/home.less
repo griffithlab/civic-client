@@ -34,22 +34,37 @@
     }
   }
   .intro-block {
-    .title {
-      color: @civicYellow;
-      margin-top: 0;
-    }
+
     .intro {
       padding: @contentPadding;
       border-radius: @border-radius-large;
       background-color: darken(@civicPurple, 10%);
       color: #CCC;
+
+      h4 {
+        color: @civicYellow;
+        margin-top: 0;
+      }
     }
 
   }
-  .stats-block,{
-    .title {
+  .stats-block {
+    h4 {
       color: @civicYellow;
-      margin-top: 0;
+    }
+
+    ul.events {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding: @contentPadding/2;
+        margin-bottom: @contentPadding/2;
+        border-radius: @border-radius-large;
+        background-color: darken(@civicPurple, 10%);
+        color: #CCC;
+      }
     }
   }
   .discover, .collaborate {
