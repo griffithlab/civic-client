@@ -2,7 +2,13 @@
   <div class="login-toolbar-lg hidden-xs hidden-sm">
     <div ng-show="isAuthenticated()" class="user-controls">
       <div class="btn-group" dropdown>
-        <button type="button" class="btn btn-xs btn-info">{{ currentUser.name ? currentUser.name : currentUser.nickname }}</button>
+        <button
+          type="button"
+          class="btn btn-xs btn-info"
+          ui-sref="users.profile({userId: 1})">
+
+          {{ currentUser.name ? currentUser.name : currentUser.nickname }}
+        </button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
           <span class="caret"></span>
         </button>
@@ -22,7 +28,12 @@
   <div class="login-toolbar-sm hidden-md hidden-lg">
     <div ng-show="isAuthenticated()" class="user-controls">
       <div class="btn-group" dropdown>
-        <button type="button" class="btn btn-xs btn-info">{{ currentUser.name ?  currentUser.name : currentUser.nickname }}</button>
+        <button
+          type="button"
+          class="btn btn-xs btn-info"
+          ng-href="#/users/{{currentUser.id}}/profile">
+          {{ currentUser.name ?  currentUser.name : currentUser.nickname }}
+        </button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
           <span class="caret"></span>
         </button>

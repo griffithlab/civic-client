@@ -8,24 +8,24 @@
 
   // @ngInject
   function UsersViewConfig($stateProvider) {
+    console.log('UsersViewConfig called.');
     $stateProvider
       .state('users', {
         abstract: true,
         url: '/users/:userId',
         template: '<ui-view id="users-view"></ui-view>',
-        controller: 'UsersViewController',
-        resolve: {
-          Users: 'Users',
-          initUser: function(Users, $stateParams) {
-            return Users.initBase($stateParams.userId);
-          }
-        }
+        controller: 'UsersViewController'
       })
-    .state('users.profile', {
+      .state('users.profile', {
         url:'/profile',
-        template: '<user-profile></user-profile>'
+        templateUrl: '/app/views/users/profile/profile.tpl.html',
+        resolve: {
+          'test': function() {
+            console.log('profile test resolve called.');
+          }
+        },
+        controller: 'ProfileController'
       });
-
   }
 
   // @ngInject

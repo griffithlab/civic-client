@@ -110,7 +110,12 @@
   angular.module('civic.login', ['ui.router']);
   angular.module('civic.browse', ['ui.grid.selection', 'ui.grid.pagination', 'ui.router']);
   angular.module('civic.search', ['ui.router']);
-  angular.module('civic.users', ['ui.router']);
+
+  angular.module('civic.users', [
+    'ui.router',
+    'civic.users.profile',
+    'civic.users.common'
+  ]);
 
   angular.module('civic.add', [
     'ui.router',
