@@ -5,7 +5,7 @@
         <button
           type="button"
           class="btn btn-xs btn-info"
-          ui-sref="users.profile({userId: 1})">
+          ui-sref="users.profile({userId: currentUser.id})">
 
           {{ currentUser.name ? currentUser.name : currentUser.nickname }}
         </button>
@@ -31,7 +31,7 @@
         <button
           type="button"
           class="btn btn-xs btn-info"
-          ng-href="#/users/{{currentUser.id}}/profile">
+          ui-sref="users.profile({userId: currentUser.id})">
           {{ currentUser.name ?  currentUser.name : currentUser.nickname }}
         </button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>

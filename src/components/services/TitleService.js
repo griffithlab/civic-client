@@ -6,7 +6,7 @@
   // @ngInject
   // Titles are constructed by parsing the state's data.titleExp string within a scope constructed
   // of the relevant CIViC entities (gene, variant, evidenceItem, variantGroup)
-  function TitleService($rootScope, Genes, Variants, Evidence, VariantGroups, _, $q, $parse) {
+  function TitleService($rootScope, Genes, Variants, Evidence, VariantGroups, Users, _, $q, $parse) {
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams) {
       var title = '';
 
@@ -14,10 +14,11 @@
         gene: {},
         variant: {},
         evidence: {},
-        variantGroup: {}
+        variantGroup: {},
+        user: {}
       };
 
-      var genePromise, variantPromise, variantGroupsPromise, evidencePromise;
+      var genePromise, variantPromise, variantGroupsPromise, evidencePromise, usersPromise;
 
       // TODO: get needed entity resources by querying $state.$current.globals
       // note: requires that all resources necessary for parsing a state's titleExp must be resolved by ui-router state config
@@ -39,15 +40,28 @@
         evidencePromise = Evidence.get(toParams.evidenceId);
       }
 
+      if(_.has(toParams, 'userId') && titleScope.user.id !== toParams.userId) {
+        usersPromise = Users.get(toParams.userId);
+      }
+
       // resolve promises, apply $parse with constructed title scope
-      $q.all({ gene: genePromise, variant: variantPromise, evidence: evidencePromise, variantGroup: variantGroupsPromise }).then(function(resolutions) {
-        titleScope.gene = resolutions.gene;
-        titleScope.variant = resolutions.variant;
-        titleScope.evidence = resolutions.evidence;
-        titleScope.variantGroup = resolutions.variantGroup;
-        title = $parse(toState.data.titleExp)(titleScope);
-        $rootScope.$broadcast('title:update', { newTitle: title });
-      });
+      $q.all({
+        gene: genePromise,
+        variant: variantPromise,
+        evidence: evidencePromise,
+        variantGroup: variantGroupsPromise,
+        user: usersPromise})
+        .then(function(resolutions) {
+          titleScope.gene = resolutions.gene;
+          titleScope.variant = resolutions.variant;
+          titleScope.evidence = resolutions.evidence;
+          titleScope.variantGroup = resolutions.variantGroup;
+          titleScope.user = resolutions.user;
+
+          title = $parse(toState.data.titleExp)(titleScope);
+
+          $rootScope.$broadcast('title:update', { newTitle: title });
+        });
     });
   }
 
