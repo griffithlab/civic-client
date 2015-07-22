@@ -1,0 +1,18 @@
+<div class="userSummary">
+  <div class="row">
+    <div class="col-xs-1">
+      <img ng-src="{{user.avatar_url}}" width="64" height="64" class="img-responsive"/>
+    </div>
+    <div class="col-xs-11">
+      <p><strong>Name</strong>: {{user.name}}</p>
+      <p><strong>Role:</strong> {{user.role}}</p>
+      <p><strong>Email:</strong> {{user.email}}</p>
+      <p><strong>Area of Expertise:</strong> {{user.area_of_expertise|ifEmpty: '--'}}</p>
+    </div>
+  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+      <!--<pre ng-bind="user|json"></pre>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>

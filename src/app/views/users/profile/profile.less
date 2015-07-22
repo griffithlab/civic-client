@@ -4,6 +4,21 @@
 @import 'src/app/styles/_mixins.less';
 
 .usersProfile{
-  min-height: 500px;
-  border: 1px solid #F00;
+  padding-top: @contentPadding;
+
+  .events-block {
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin-bottom: @contentPadding/2;
+        border-radius: @border-radius-base;
+        background-color: #EFEFEF;
+        padding: @contentPadding/2;
+      }
+    }
+  }
 }

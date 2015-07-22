@@ -19,15 +19,19 @@
       .state('users.profile', {
         url:'/profile',
         templateUrl: '/app/views/users/profile/profile.tpl.html',
-        //resolve: {
-        //  'test': function() {
-        //    console.log('profile test resolve called.');
-        //  }
-        //},
+        resolve: {
+          'Users': 'Users',
+          'user': function(Users, $stateParams) {
+            return Users.get($stateParams.userId);
+          },
+          'events': function(Users, $stateParams) {
+            return Users.queryEvents($stateParams.userId);
+          }
+        },
         controller: 'ProfileController',
         data: {
           navMode: 'sub',
-          titleExp: '"User: " + user.username'
+          titleExp: '"Profile: " + user.username'
         }
       });
   }
