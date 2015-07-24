@@ -73,7 +73,7 @@
     //  variant_origin: 'Somatic'
     //};
 
-    vm.newEvidence.comment = { title: 'Support for Inclusion', text:'' };
+    vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
     vm.newEvidence.drugs  = [];
 
     vm.formErrors = {};
@@ -479,9 +479,9 @@
         model: vm.newEvidence.comment,
         templateOptions: {
           rows: 5,
-          label: 'Support for Inclusion',
+          label: 'Additional Comments',
           value: 'text',
-          helpText: 'Please provide a short paragraph that supports the inclusion of this evidence item into the CIViC database.'
+          helpText: 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.'
         }
       }
     ];
