@@ -1,5 +1,5 @@
 (function() {
-  'user strict';
+  'use strict';
   angular.module('civic.common')
     .directive('statsBlock', statsBlock)
     .controller('StatsBlockController', StatsBlockController)
@@ -16,7 +16,7 @@
         iconUrl: '@',
         cols: '@'
       },
-      templateUrl: '/components/directives/statsBlock.tpl.html',
+      templateUrl: 'components/directives/statsBlock.tpl.html',
       controller: 'StatsBlockController'
     };
   }
