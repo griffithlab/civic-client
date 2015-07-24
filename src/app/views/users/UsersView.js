@@ -18,7 +18,7 @@
       })
       .state('users.profile', {
         url:'/profile',
-        templateUrl: '/app/views/users/profile/profile.tpl.html',
+        templateUrl: 'app/views/users/profile/profile.tpl.html',
         resolve: {
           'Users': 'Users',
           'user': function(Users, $stateParams) {

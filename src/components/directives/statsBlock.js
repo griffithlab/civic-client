@@ -1,4 +1,5 @@
 (function() {
+  'user strict';
   angular.module('civic.common')
     .directive('statsBlock', statsBlock)
     .controller('StatsBlockController', StatsBlockController)
