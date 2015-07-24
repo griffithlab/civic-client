@@ -97,7 +97,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts')) // rewrite bootstrap font urls
     .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')')) // rewrite ui-grid font urls
     .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')')) // rewrite font-awesome fonts
-    .pipe($.csso()) // minify CSS
+    .pipe($.csso(true)) // minify CSS
     .pipe(cssFilter.restore())
     // restore non-css blocks to stream
 
