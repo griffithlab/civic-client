@@ -3,11 +3,19 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
-.usersProfile{
-  padding-top: @contentPadding;
+.profile{
+  .summary {
+    padding-top: @contentPadding;
+    padding-bottom: @contentPadding;
+    background-color: @civicPurple;
+    background-image: url("/assets/images/sub_bg.png");
+    background-repeat: no-repeat;
+    background-position: 0 -134px;
+    border-bottom: 1px solid darken(@civicPurple, 10%);
+  }
 
   .events-block {
-
+    margin-top: @contentPadding;
     ul {
       list-style: none;
       margin: 0;
@@ -20,5 +28,9 @@
         padding: @contentPadding/2;
       }
     }
+  }
+
+  .col-headers {
+    background-color: #EFEFEF;
   }
 }

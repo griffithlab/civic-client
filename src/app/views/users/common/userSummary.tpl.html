@@ -1,18 +1,68 @@
 <div class="userSummary">
   <div class="row">
     <div class="col-xs-1">
-      <img ng-src="{{user.avatar_url}}" width="64" height="64" class="img-responsive"/>
+      <img
+        ng-src="{{user.avatar_url}}"
+        width="64"
+        height="64"
+        class="avatar img-responsive"/>
     </div>
-    <div class="col-xs-11">
-      <p><strong>Name</strong>: {{user.name}}</p>
-      <p><strong>Role:</strong> {{user.role}}</p>
-      <p><strong>Email:</strong> {{user.email}}</p>
-      <p><strong>Area of Expertise:</strong> {{user.area_of_expertise|ifEmpty: '--'}}</p>
+    <div class="col-xs-6">
+      <div class="info-block">
+        <table class="table-info">
+          <tr>
+            <td class="key">Username:</td>
+            <td class="value">{{user.username|ifEmpty: '--'}}</td>
+          </tr>
+          <tr>
+            <td class="key">Name:</td>
+            <td class="value">{{user.name|ifEmpty: '--'}}</td>
+          </tr>
+          <tr>
+            <td class="key">Role:</td>
+            <td class="value">{{user.role|ifEmpty: '--'}}</td>
+          </tr>
+          <tr>
+            <td class="key">Email:</td>
+            <td class="value">{{user.email|ifEmpty: '--'}}</td>
+          </tr>
+          <tr>
+            <td class="key">Area of Expertise:</td>
+            <td class="value">{{user.area_of_expertise|ifEmpty: '--'}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-xs-5">
+      <div class="info-block">
+        <table class="table-info">
+          <tr>
+            <td class="key">Comments:</td>
+            <td class="value">{{vm.stats.comments}}</td>
+          </tr>
+          <tr>
+            <td class="key">Suggested Changes:</td>
+            <td class="value">{{vm.stats.suggested_changes}}</td>
+          </tr>
+          <tr>
+            <td class="key">Applied Changes:</td>
+            <td class="value">{{vm.stats.applied_changes}}</td>
+          </tr>
+          <tr>
+            <td class="key">Subitted Evidence:</td>
+            <td class="value">{{vm.stats.submitted_evidence_items}}</td>
+          </tr>
+          <tr>
+            <td class="key">Accepted Evidence:</td>
+            <td class="value">{{vm.stats.accepted_evidence_items}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
   <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="user|json"></pre>-->
-    <!--</div>-->
+  <!--<div class="col-xs-12">-->
+  <!--<pre ng-bind="user|json"></pre>-->
+  <!--</div>-->
   <!--</div>-->
 </div>

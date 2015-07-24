@@ -13,7 +13,13 @@
       };
     });
 
-  function UserSummaryController() {
-    console.log('UserSummaryController called.');
+  // @ngInject
+  function UserSummaryController($scope, Stats) {
+    var vm = $scope.vm = {};
+    vm.stats = {};
+
+    Stats.user($scope.user.id).then(function(stats) {
+      vm.stats = stats;
+    });
   }
 })();

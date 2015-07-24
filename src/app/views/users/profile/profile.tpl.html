@@ -1,20 +1,22 @@
-<div class="usersProfile">
+<div class="profile">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 summary">
       <user-summary user="vm.user"></user-summary>
     </div>
   </div>
-  <div class="row">
+  <div class="row col-headers">
     <div class="col-xs-6">
-      <div class="events-block">
-        <h4>{{ vm.user.username}} Events:</h4>
-        <ul>
-          <li ng-repeat="event in vm.events">
-            <span ng-bind="event.description"></span>
-            <span ng-bind="event.timestamp | timeAgo"></span>
-          </li>
-        </ul>
-      </div>
+        <h4>Events:</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 events-block">
+      <ul>
+        <li ng-repeat="event in vm.events">
+          <span ng-bind="event.description"></span>
+          <span ng-bind="event.timestamp | timeAgo"></span>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

@@ -7,12 +7,20 @@
   // @ngInject
   function StatsResource($resource) {
 
-    return $resource('/api/stats/:entityName',
+    return $resource('',
+      { },
       {
-        entityName: '@entityName'
-      },
-      {
-        get: {
+        site: {
+          url: '/api/stats/site',
+          method: 'GET',
+          isArray: false,
+          cache: false
+        },
+        user: {
+          url: '/api/users/:userId/stats',
+          params: {
+            userId: '@userId'
+          },
           method: 'GET',
           isArray: false,
           cache: false
@@ -29,13 +37,20 @@
       data: {
         item: item
       },
-      get: get
+      site: site,
+      user: user
     };
 
-    function get(entityName) {
-      return StatsResource.get({entityName: entityName}).$promise
+    function site() {
+      return StatsResource.site().$promise
         .then(function(response) {
-          angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function user(userId) {
+      return StatsResource.user({ userId: userId}).$promise
+        .then(function(response) {
           return response.$promise;
         });
     }

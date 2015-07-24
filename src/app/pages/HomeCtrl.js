@@ -10,7 +10,7 @@
     vm.stats = {};
     vm.events = [];
 
-    Stats.get('site').then(function(stats) {
+    Stats.site().then(function(stats) {
       vm.stats = stats;
     });
     Events.query().then(function(events) {

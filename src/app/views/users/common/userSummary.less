@@ -4,5 +4,47 @@
 @import 'src/app/styles/_mixins.less';
 
 .userSummary {
+  color: #CCC;
+  .avatar {
+    border-radius: @border-radius-large;
+    overflow: hidden;
+    border: 1px solid darken(@civicPurple, 35%);
+  }
+  .info-block {
+    padding: @contentPadding;
+    border-radius: @border-radius-large;
+    background-color: darken(@civicPurple, 10%);
+    color: #CCC;
+  }
 
+  .table-info {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+
+    .key {
+      font-weight: bold;
+      width: 50%;
+    }
+
+    .value {
+      color: @civicYellow;
+      width: 50%;
+    }
+
+    caption, tbody, tfoot, thead, tr, th, td {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+    }
+  }
 }
