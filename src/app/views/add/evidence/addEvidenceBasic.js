@@ -265,21 +265,23 @@
       {
         key: 'doid',
         type: 'horizontalTypeaheadHelp',
+        wrapper: ['diseasedisplay'],
         templateOptions: {
           label: 'Disease DOID',
           value: 'vm.newEvidence.doid',
           minLength: 32,
           helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).',
-          formatter: 'model[options.key].name',
-          typeahead: 'item.doid as item.name for item in options.data.typeaheadSearch($viewValue)',
-          editable: true
-        },
-        data: {
-          typeaheadSearch: function(val) {
-            return Diseases.beginsWith(val)
-              .then(function(response) {
+          typeahead: 'item.doid as item.name for item in to.data.typeaheadSearch($viewValue)',
+          onSelect: 'to.data.name = $label',
+          editable: false,
+          data: {
+            name: '--',
+            typeaheadSearch: function(val) {
+              return Diseases.beginsWith(val)
+                .then(function(response) {
                   return response;
-              });
+                });
+            }
           }
         }
       },
