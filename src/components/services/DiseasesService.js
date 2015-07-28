@@ -25,6 +25,12 @@
           url: '/api/diseases/existence/:doid',
           isArray: false,
           cache: true
+        },
+        beginsWith: {
+          method: 'GET',
+          url: '/api/diseases?name=:name',
+          isArray: true,
+          cache: true
         }
       }
     );
@@ -63,6 +69,13 @@
 
     function verify(doid) {
       return DiseasesResource.verify({doid: doid}).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
+
+    function beginsWith(name) {
+      return DiseasesResource.beginsWith({name: name}).$promise
         .then(function(response) {
           return response.$promise;
         });
