@@ -199,55 +199,88 @@
           helpText: 'Origin of variant'
         }
       },
+      //{
+      //  key: 'doid',
+      //  type: 'disease',
+      //  templateOptions: {
+      //    label: 'Disease ID',
+      //    value: 'vm.newEvidence.doid',
+      //    inputFormatter: 'model[options.key]',
+      //    typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+      //    onSelect: 'options.data.pushNew(model, index)',
+      //    minLength: 1,
+      //    data: {
+      //      name: '--',
+      //      typeaheadSearch: function(name) {
+      //        return Diseases.beginsWith(name)
+      //          .then(function(response) {
+      //            return _.map(response, function(diseases) {
+      //              return diseases;
+      //            });
+      //          });
+      //      }
+      //    },
+      //    helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).'
+      //  },
+      //  modelOptions: {
+      //    updateOn: 'default blur',
+      //    allowInvalid: false,
+      //    debounce: {
+      //      default: 300,
+      //      blur: 0
+      //    }
+      //  },
+      //  validators: {
+      //    validPubmedId: {
+      //      expression: function($viewValue, $modelValue, scope) {
+      //        if ($viewValue.length > 0) {
+      //          var deferred = $q.defer();
+      //          scope.options.templateOptions.loading = true;
+      //          Diseases.verify($viewValue).then(
+      //            function (response) {
+      //              scope.options.templateOptions.loading = false;
+      //              scope.options.templateOptions.data.name = response.name;
+      //              deferred.resolve(response);
+      //            },
+      //            function (error) {
+      //              scope.options.templateOptions.loading = false;
+      //              scope.options.templateOptions.data.name = '--';
+      //              deferred.reject(error);
+      //            }
+      //          );
+      //          return deferred.promise;
+      //        } else {
+      //          scope.options.templateOptions.data.name = '--';
+      //          return true;
+      //        }
+      //      },
+      //      message: '"This does not appear to be a valid DOID."'
+      //    }
+      //  },
+      //  expressionProperties: {
+      //    'templateOptions.disabled': 'model.noDoid === true'
+      //  }
+      //},
+
       {
         key: 'doid',
-        type: 'disease',
+        type: 'horizontalTypeaheadHelp',
         templateOptions: {
-          label: 'Disease ID',
+          label: 'Disease DOID',
           value: 'vm.newEvidence.doid',
-          minLength: 1,
-          data: {
-            name: '--'
-          },
-          helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).'
+          minLength: 32,
+          helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).',
+          formatter: 'model[options.key].name',
+          typeahead: 'item.doid as item.name for item in options.data.typeaheadSearch($viewValue)',
+          editable: true
         },
-        modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
-          debounce: {
-            default: 300,
-            blur: 0
+        data: {
+          typeaheadSearch: function(val) {
+            return Diseases.beginsWith(val)
+              .then(function(response) {
+                  return response;
+              });
           }
-        },
-        validators: {
-          validPubmedId: {
-            expression: function($viewValue, $modelValue, scope) {
-              if ($viewValue.length > 0) {
-                var deferred = $q.defer();
-                scope.options.templateOptions.loading = true;
-                Diseases.verify($viewValue).then(
-                  function (response) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.name = response.name;
-                    deferred.resolve(response);
-                  },
-                  function (error) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.name = '--';
-                    deferred.reject(error);
-                  }
-                );
-                return deferred.promise;
-              } else {
-                scope.options.templateOptions.data.name = '--';
-                return true;
-              }
-            },
-            message: '"This does not appear to be a valid DOID."'
-          }
-        },
-        expressionProperties: {
-          'templateOptions.disabled': 'model.noDoid === true'
         }
       },
       {

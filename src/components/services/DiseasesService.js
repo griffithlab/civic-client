@@ -48,7 +48,8 @@
       },
       query: query,
       get: get,
-      verify: verify
+      verify: verify,
+      beginsWith: beginsWith
     };
 
     function query() {
@@ -73,7 +74,6 @@
           return response.$promise;
         });
     }
-
     function beginsWith(name) {
       return DiseasesResource.beginsWith({name: name}).$promise
         .then(function(response) {
