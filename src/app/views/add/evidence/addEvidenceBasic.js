@@ -199,83 +199,21 @@
           helpText: 'Origin of variant'
         }
       },
-      //{
-      //  key: 'doid',
-      //  type: 'disease',
-      //  templateOptions: {
-      //    label: 'Disease ID',
-      //    value: 'vm.newEvidence.doid',
-      //    inputFormatter: 'model[options.key]',
-      //    typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
-      //    onSelect: 'options.data.pushNew(model, index)',
-      //    minLength: 1,
-      //    data: {
-      //      name: '--',
-      //      typeaheadSearch: function(name) {
-      //        return Diseases.beginsWith(name)
-      //          .then(function(response) {
-      //            return _.map(response, function(diseases) {
-      //              return diseases;
-      //            });
-      //          });
-      //      }
-      //    },
-      //    helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).'
-      //  },
-      //  modelOptions: {
-      //    updateOn: 'default blur',
-      //    allowInvalid: false,
-      //    debounce: {
-      //      default: 300,
-      //      blur: 0
-      //    }
-      //  },
-      //  validators: {
-      //    validPubmedId: {
-      //      expression: function($viewValue, $modelValue, scope) {
-      //        if ($viewValue.length > 0) {
-      //          var deferred = $q.defer();
-      //          scope.options.templateOptions.loading = true;
-      //          Diseases.verify($viewValue).then(
-      //            function (response) {
-      //              scope.options.templateOptions.loading = false;
-      //              scope.options.templateOptions.data.name = response.name;
-      //              deferred.resolve(response);
-      //            },
-      //            function (error) {
-      //              scope.options.templateOptions.loading = false;
-      //              scope.options.templateOptions.data.name = '--';
-      //              deferred.reject(error);
-      //            }
-      //          );
-      //          return deferred.promise;
-      //        } else {
-      //          scope.options.templateOptions.data.name = '--';
-      //          return true;
-      //        }
-      //      },
-      //      message: '"This does not appear to be a valid DOID."'
-      //    }
-      //  },
-      //  expressionProperties: {
-      //    'templateOptions.disabled': 'model.noDoid === true'
-      //  }
-      //},
-
       {
         key: 'doid',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
         templateOptions: {
-          label: 'Disease DOID',
+          label: 'Disease',
           value: 'vm.newEvidence.doid',
+          required: true,
           minLength: 32,
-          helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).',
-          typeahead: 'item.doid as item.name for item in to.data.typeaheadSearch($viewValue)',
-          onSelect: 'to.data.name = $label',
+          helpText: 'Please enter a disease name. If you are unable to locate the disease in the dropdown, please check the \'Could not find disease\' checkbox below and enter the disease in the field that appears.',
+          typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+          onSelect: 'to.data.doid = $model.doid',
           templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
           data: {
-            name: '--',
+            doid: '--',
             typeaheadSearch: function(val) {
               return Diseases.beginsWith(val)
                 .then(function(response) {
@@ -283,13 +221,17 @@
                 });
             }
           }
-        }
+        },
+          expressionProperties: {
+            'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
+            'templateOptions.required': 'model.noDoid === false' // make required only if noDoid is unchecked
+          }
       },
       {
         key: 'noDoid',
         type: 'horizontalCheckbox',
         templateOptions: {
-          label: 'Could not locate a DOID for the associated disease.',
+          label: 'Could not find disease.',
           onChange: 'model.doid = ""'
         }
       },
@@ -523,7 +465,8 @@
 
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
-      newEvidence.drugs = _.without(newEvidence.drugs, '');
+      newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
+      newEvidence.doid = newEvidence.doid.doid; // replace disease obj with DOID string
       vm.formErrors = {};
       vm.formMessages = {};
 

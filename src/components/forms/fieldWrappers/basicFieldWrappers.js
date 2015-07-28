@@ -114,7 +114,7 @@
       name: 'diseasedisplay',
       template: [
         '<formly-transclude></formly-transclude>',
-        '<span class="small">Disease: {{ to.data.name }}</span>'
+        '<span class="small">Disease Ontology ID: {{ to.data.doid}}</span>'
       ].join(' ')
     });
   }
