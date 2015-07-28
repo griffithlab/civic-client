@@ -9,7 +9,7 @@
     var cache = $cacheFactory.get('$http');
 
     var cacheInterceptor = function(response) {
-      console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(' '));
+      // console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(' '));
       cache.remove(response.config.url);
       return response.$promise;
     };
@@ -50,6 +50,12 @@
           method: 'GET',
           url: '/api/genes/existence/:geneId',
           isArray: false,
+          cache: cache
+        },
+        beginsWith: {
+          method: 'GET',
+          url: '/api/genes?name=:name',
+          isArray: true,
           cache: cache
         },
 
