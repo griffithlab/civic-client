@@ -265,7 +265,7 @@
       {
         key: 'doid',
         type: 'horizontalTypeaheadHelp',
-        wrapper: ['diseasedisplay'],
+        wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
         templateOptions: {
           label: 'Disease DOID',
           value: 'vm.newEvidence.doid',
@@ -273,7 +273,7 @@
           helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).',
           typeahead: 'item.doid as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.name = $label',
-          editable: false,
+          templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
           data: {
             name: '--',
             typeaheadSearch: function(val) {
