@@ -546,7 +546,7 @@
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
-      newEvidence.doid = newEvidence.doid.doid; // replace disease obj with DOID string
+      //newEvidence.doid = newEvidence.doid.doid; // replace disease obj with DOID string
       vm.formErrors = {};
       vm.formMessages = {};
 

@@ -60,7 +60,7 @@
         key: 'evidence_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
-        controller: function($scope) {
+        controller: /* ngInject */  function($scope) {
           // set attribute definition
           $scope.options.templateOptions.data.attributeDefinition =
             $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type];
@@ -120,9 +120,13 @@
         }
       },
       {
-        key: 'doid',
+        key: 'disease',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
+        value: '',
+        controller: /* ngInject */ function($scope, Diseases) {
+          $scope.to.data.doid = $scope.model.disease.doid;
+        },
         templateOptions: {
           label: 'Disease',
           value: 'vm.evidenceEdit.doid',
@@ -141,28 +145,6 @@
                 });
             }
           }
-        }
-      },
-      {
-        key: 'disease',
-        type: 'horizontalInputHelp',
-        templateOptions: {
-          label: 'Disease Name',
-          value: 'vm.evidenceEdit.disease',
-          minLength: 32,
-          helpText: 'If the disease has no DOID, enter its name here.'
-        },
-        hideExpression: '!model.noDoid'
-      },
-      {
-        key: 'description',
-        type: 'horizontalTextareaHelp',
-        templateOptions: {
-          rows: 5,
-          label: 'Evidence Statement',
-          value: 'vm.evidenceEdit.description',
-          minLength: 32,
-          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
       {
@@ -455,7 +437,6 @@
 
     vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
-      evidenceEdit.doid = evidenceEdit.doid.doid; // replace disease obj with DOID string
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, ''); // delete blank input values
       vm.formErrors = {};
       vm.formMessages = {};
