@@ -117,5 +117,13 @@
         '<span class="small">Disease Ontology ID: {{ to.data.doid}}</span>'
       ].join(' ')
     });
+
+    formlyConfigProvider.setWrapper({
+      name: 'attributeDefinition',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small" ng-bind-html="to.data.attributeDefinition"></span>'
+      ].join(' ')
+    });
   }
 })();

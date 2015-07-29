@@ -57,22 +57,6 @@
       variant_origin: ''
     };
 
-    //vm.newEvidence = {
-    //  entrez_id: '673',
-    //  variant_name: 'V600E',
-    //  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula sed lorem et cursus. In hac habitasse platea dictumst. Sed rhoncus, enim iaculis malesuada scelerisque, quam tortor porttitor tortor, id blandit tellus libero et lectus. Vestibulum nec purus eget purus suscipit ultricies non in dui.',
-    //  disease: 'Breast Cancer',
-    //  doid: '3908',
-    //  pubmed_id: '20979473',
-    //  drugs: [],
-    //  rating: 4,
-    //  evidence_level: 'C',
-    //  evidence_type: 'Predictive',
-    //  evidence_direction: 'Supports',
-    //  clinical_significance: 'Positive',
-    //  variant_origin: 'Somatic'
-    //};
-
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
     vm.newEvidence.drugs  = [];
 
@@ -85,12 +69,13 @@
       {
         key: 'evidence_type',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [
-            { type: 'default', value: '', label: 'Please select an Evidence Type' },
+            { value: '', label: 'Please select an Evidence Type' },
             { value: 'Predictive', label: 'Predictive' },
             { value: 'Diagnostic', label: 'Diagnostic' },
             { value: 'Prognostic', label: 'Prognostic' }
@@ -101,8 +86,22 @@
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
             value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+            // update evidence direction definition
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+            edField.templateOptions.data.updateDefinition(null, edField, scope);
+
           },
-          helpText: 'Type of clinical outcome associated with the evidence statement.'
+          helpText: 'Type of clinical outcome associated with the evidence statement.',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
+              'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
+              'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival'
+            }
+          }
         }
       },
       {
@@ -224,7 +223,7 @@
         },
           expressionProperties: {
             'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
-            'templateOptions.required': 'model.noDoid === false' // make required only if noDoid is unchecked
+            'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
           }
       },
       {
@@ -396,6 +395,17 @@
       {
         key: 'evidence_direction',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        watcher: {
+          expression: function(field, scope) {
+            return field.formControl && field.formControl.$viewValue;
+          },
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(newValue) {
+              console.log('Function Expression: ' + newValue);
+            }
+          }
+        },
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.newEvidence.evidence_direction',
@@ -406,7 +416,32 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event.'
+          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event.',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Predictive': {
+                'Supports': 'The experiment or study supports this variant\'s response to a drug',
+                'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between the variant and a drug'
+              },
+              'Diagnostic': {
+                'Supports': 'The experiment or study supports variant\'s impact on the diagnosis of disease or subtype',
+                'Does Not Support': 'The experiment or study does not support the variant\'s impact on diagnosis of disease or subtype'
+              },
+              'Prognostic': {
+                'Supports': 'The experiment or study supports a variant\'s impact on prognostic outcome',
+                'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
+              }
+            },
+            updateDefinition: function(value, options, scope) {
+              // set attribute definition
+              options.templateOptions.data.attributeDefinition =
+                options.templateOptions.data.attributeDefinitions[scope.model.evidence_type][scope.model.evidence_direction];
+            }
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.updateDefinition(value, options, scope);
+          }
         }
       },
       {
