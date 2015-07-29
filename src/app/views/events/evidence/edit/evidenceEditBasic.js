@@ -59,24 +59,48 @@
       {
         key: 'evidence_type',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: function($scope) {
+          // set attribute definition
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type];
+        },
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.evidenceEdit.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [
-            { type: 'default', value: '', label: 'Please select an Evidence Type' },
+            { value: '', label: 'Please select an Evidence Type' },
             { value: 'Predictive', label: 'Predictive' },
             { value: 'Diagnostic', label: 'Diagnostic' },
             { value: 'Prognostic', label: 'Prognostic' }
           ],
           onChange: function(value, options, scope) {
-            // need to reset clinical_significance on change
+            // reset clinical_significance, as its options will change
             scope.model.clinical_significance = '';
+
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
             value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
+
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+
+            // update evidence direction attribute definition
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+            if (edField.value() !== '') { // only update if user has selected an option
+              edField.templateOptions.data.updateDefinition(null, edField, scope);
+            }
           },
-          helpText: 'Type of clinical outcome associated with the evidence statement.'
+          helpText: 'Type of clinical outcome associated with the evidence statement.',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
+              'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
+              'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival'
+            }
+          }
         }
       },
       {
@@ -96,99 +120,51 @@
         }
       },
       {
-        key: 'disease',
-        type: 'horizontalInputHelp',
+        key: 'doid',
+        type: 'horizontalTypeaheadHelp',
+        wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
         templateOptions: {
           label: 'Disease',
-          value: 'vm.evidenceEdit.disease',
+          value: 'vm.evidenceEdit.doid',
+          required: true,
           minLength: 32,
-          helpText: 'Enter the disease or subtype that is associated with this evidence statement. This should be a disease in the disease-ontology that carries a DOID (e.g., 1909 for melanoma). If the disease to be entered is not in the disease ontology, enter it as free text. '
+          helpText: 'Please enter a disease name. If you are unable to locate the disease in the dropdown, please check the \'Could not find disease\' checkbox below and enter the disease in the field that appears.',
+          typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+          onSelect: 'to.data.doid = $model.doid',
+          templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
+          data: {
+            doid: '--',
+            typeaheadSearch: function(val) {
+              return Diseases.beginsWith(val)
+                .then(function(response) {
+                  return response;
+                });
+            }
+          }
         }
       },
       {
-        key: 'doid',
-        type: 'disease',
+        key: 'disease',
+        type: 'horizontalInputHelp',
         templateOptions: {
-          label: 'Disease ID',
-          value: 'vm.evidenceEdit.doid',
-          minLength: 1,
-          data: {
-            name: '--'
-          },
-          helpText: 'Disease Ontology ID of the specific disease or disease type (e.g., 1909 for melanoma).'
+          label: 'Disease Name',
+          value: 'vm.evidenceEdit.disease',
+          minLength: 32,
+          helpText: 'If the disease has no DOID, enter its name here.'
         },
-        modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
-          debounce: {
-            default: 300,
-            blur: 0
-          }
-        },
-        validators: {
-          validPubmedId: {
-            expression: function($viewValue, $modelValue, scope) {
-              if ($viewValue.length > 0) {
-                var deferred = $q.defer();
-                scope.options.templateOptions.loading = true;
-                Diseases.verify($viewValue).then(
-                  function (response) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.name = response.name;
-                    deferred.resolve(response);
-                  },
-                  function (error) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.name = '--';
-                    deferred.reject(error);
-                  }
-                );
-                return deferred.promise;
-              } else {
-                scope.options.templateOptions.data.name = '--';
-                return true;
-              }
-            },
-            message: '"This does not appear to be a valid DOID."'
-          }
-        },
-        expressionProperties: {
-          'templateOptions.disabled': 'model.noDoid === true'
-        }
+        hideExpression: '!model.noDoid'
       },
-      //{
-      //  key: 'doid',
-      //  type: 'horizontalInputHelp',
-      //  templateOptions: {
-      //    label: 'DOID',
-      //    value: 'vm.evidenceEdit.doid',
-      //    minLength: 8,
-      //    length: 8,
-      //    helpText: 'Disease Ontology ID of the specific disease or disease subtype associated with the evidence statement (e.g., 1909 for melanoma).'
-      //  }
-      //},
       {
         key: 'description',
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 5,
-          label: 'Description',
+          label: 'Evidence Statement',
           value: 'vm.evidenceEdit.description',
           minLength: 32,
           helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
         }
       },
-      //{
-      //  key: 'pubmed_id',
-      //  type: 'horizontalInputHelp',
-      //  templateOptions: {
-      //    label: 'Pubmed Id',
-      //    value: 'vm.evidenceEdit.pubmed_id',
-      //    minLength: 8,
-      //    length: 8,
-      //    helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
-      //  }
-      //},
       {
         key: 'pubmed_id',
         type: 'publication',
@@ -197,9 +173,6 @@
           value: 'vm.evidenceEdit.pubmed_id',
           minLength: 1,
           required: true,
-          //onBlur: function($viewValue, $modelValue, scope) {
-          //  console.log('pubmed id onblur ------------');
-          //},
           data: {
             description: '--'
           },
@@ -209,7 +182,7 @@
           updateOn: 'default blur',
           allowInvalid: false,
           debounce: {
-            default: 1000,
+            default: 300,
             blur: 0
           }
         },
@@ -246,12 +219,11 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Drug Names',
-          entityName: 'Drug',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
             templateOptions: {
-              formatter: 'model[options.key]',
+              inputFormatter: 'model[options.key]',
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)'
@@ -280,8 +252,8 @@
         type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Drug Names',
-          disabled: true,
           placeholder: 'N/A',
+          disabled: true,
           helpText: 'Drug names are only applicable for Predictive evidence.'
         },
         hideExpression: function($viewValue, $modelValue, scope) {
@@ -294,6 +266,12 @@
       {
         key: 'evidence_level',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: function($scope) {
+          // set attribute definition
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_level];
+        },
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.evidenceEdit.rating',
@@ -307,7 +285,22 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Description of the study performed to produce the evidence statement'
+          helpText: 'Type of study performed to produce the evidence statement',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              A: 'Proven/consensus association in human medicine',
+              B: 'Clinical trial or other primary patient data supports association',
+              C: 'In vivo or in vitro models support association',
+              D: 'Individual case reports from clinical journals',
+              E: 'Indirect evidence'
+            }
+          },
+          onChange: function(value, options, scope) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
+
         }
       },
       {
@@ -315,6 +308,7 @@
         type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
+
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
             { value: 1, label: '1 - Poor<br/>Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims.' },
@@ -331,6 +325,12 @@
       {
         key: 'evidence_direction',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: function($scope) {
+          // set attribute definition
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type][$scope.model.evidence_direction];
+        },
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.evidenceEdit.evidence_direction',
@@ -341,16 +341,51 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event.'
+          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Predictive': {
+                'Supports': 'The experiment or study supports this variant\'s response to a drug',
+                'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between the variant and a drug'
+              },
+              'Diagnostic': {
+                'Supports': 'The experiment or study supports variant\'s impact on the diagnosis of disease or subtype',
+                'Does Not Support': 'The experiment or study does not support the variant\'s impact on diagnosis of disease or subtype'
+              },
+              'Prognostic': {
+                'Supports': 'The experiment or study supports a variant\'s impact on prognostic outcome',
+                'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
+              }
+            },
+            updateDefinition: function(value, options, scope) {
+              // set attribute definition
+              options.templateOptions.data.attributeDefinition =
+                options.templateOptions.data.attributeDefinitions[scope.model.evidence_type][scope.model.evidence_direction];
+            }
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.updateDefinition(value, options, scope);
+          }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },
       {
         key: 'clinical_significance',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: function($scope) {
+          // set attribute definition
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.clinical_significance];
+        },
         templateOptions: {
           label: 'Clinical Significance',
+          required: true,
           value: 'vm.evidenceEdit.clinical_significance',
-          clinicalSignificanceOptions: [
+          clinicalSignificanceOptions: [ // stores unmodified options array for expressionProperties
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
             { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
@@ -361,7 +396,7 @@
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [
+          options: [ // acutal options displayed in the select, modified by expressionProperties
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
             { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
@@ -371,14 +406,35 @@
             { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
-          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A/ should be selected.'
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A/ should be selected. Evidence Type must be selected before this field is enabled.',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Sensitivity': 'Subject exhibits response to drug treatment',
+              'Resistance or Non-Response': 'Subject exhibits a lack of response or active resistance to drug treatment',
+              'Better Outcome': 'Demonstrates better than expected clinical outcome',
+              'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
+              'Positive': 'Associated with diagnosis of disease or subtype',
+              'Negative': 'Associated with lack of disease or subtype',
+              'N/A': 'Not applicable'
+            },
+            updateDefinition: function(value, options, scope) {
+              // set attribute definition
+              options.templateOptions.data.attributeDefinition =
+                options.templateOptions.data.attributeDefinitions[scope.model.clinical_significance];
+            }
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.updateDefinition(value, options, scope);
+          }
         },
         expressionProperties: {
           'templateOptions.options': function($viewValue, $modelValue, scope) {
             return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
               return !!(option.type === scope.model.evidence_type || option.type === 'default' || option.type === 'N/A');
             });
-          }
+          },
+          'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },
       {
@@ -399,6 +455,8 @@
 
     vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
+      evidenceEdit.doid = evidenceEdit.doid.doid; // replace disease obj with DOID string
+      evidenceEdit.drugs = _.without(evidenceEdit.drugs, ''); // delete blank input values
       vm.formErrors = {};
       vm.formMessages = {};
 

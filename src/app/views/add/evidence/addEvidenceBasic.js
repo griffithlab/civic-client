@@ -500,13 +500,13 @@
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
-              'Sensitivity': 'Sensitivity definition',
-              'Resistance or Non-Response': 'Resistance definition',
-              'Better Outcome': 'Better Outcome definition',
-              'Poor Outcome': 'Poor Out come definition',
-              'Positive': 'Positive definition',
-              'Negative': 'Negative definition',
-              'N/A': ''
+              'Sensitivity': 'Subject exhibits response to drug treatment',
+              'Resistance or Non-Response': 'Subject exhibits a lack of response or active resistance to drug treatment',
+              'Better Outcome': 'Demonstrates better than expected clinical outcome',
+              'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
+              'Positive': 'Associated with diagnosis of disease or subtype',
+              'Negative': 'Associated with lack of disease or subtype',
+              'N/A': 'Not applicable'
             },
             updateDefinition: function(value, options, scope) {
               // set attribute definition
