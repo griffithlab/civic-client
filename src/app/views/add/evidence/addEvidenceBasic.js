@@ -81,17 +81,21 @@
             { value: 'Prognostic', label: 'Prognostic' }
           ],
           onChange: function(value, options, scope) {
-            // need to reset clinical_significance on change
+            // reset clinical_significance, as its options will change
             scope.model.clinical_significance = '';
+
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
             value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
+
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
-            // update evidence direction definition
-            var edField = _.find(scope.fields, { key: 'evidence_direction'});
-            edField.templateOptions.data.updateDefinition(null, edField, scope);
 
+            // update evidence direction attribute definition
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+            if (edField.value() !== '') { // only update if user has selected an option
+              edField.templateOptions.data.updateDefinition(null, edField, scope);
+            }
           },
           helpText: 'Type of clinical outcome associated with the evidence statement.',
           data: {
@@ -221,10 +225,10 @@
             }
           }
         },
-          expressionProperties: {
-            'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
-            'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
-          }
+        expressionProperties: {
+          'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
+          'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
+        }
       },
       {
         key: 'noDoid',
@@ -357,6 +361,7 @@
       {
         key: 'evidence_level',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.newEvidence.rating',
@@ -370,7 +375,22 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Type of study performed to produce the evidence statement'
+          helpText: 'Type of study performed to produce the evidence statement',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              A: 'Proven/consensus association in human medicine',
+              B: 'Clinical trial or other primary patient data supports association',
+              C: 'In vivo or in vitro models support association',
+              D: 'Individual case reports from clinical journals',
+              E: 'Indirect evidence'
+            }
+          },
+          onChange: function(value, options, scope) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
+
         }
       },
       {
@@ -416,7 +436,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event.',
+          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
@@ -442,11 +462,15 @@
           onChange: function(value, options, scope) {
             options.templateOptions.data.updateDefinition(value, options, scope);
           }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },
       {
         key: 'clinical_significance',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'Clinical Significance',
           required: true,
@@ -472,14 +496,35 @@
             { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
-          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A/ should be selected.'
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A/ should be selected. Evidence Type must be selected before this field is enabled.',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Sensitivity': 'Sensitivity definition',
+              'Resistance or Non-Response': 'Resistance definition',
+              'Better Outcome': 'Better Outcome definition',
+              'Poor Outcome': 'Poor Out come definition',
+              'Positive': 'Positive definition',
+              'Negative': 'Negative definition',
+              'N/A': ''
+            },
+            updateDefinition: function(value, options, scope) {
+              // set attribute definition
+              options.templateOptions.data.attributeDefinition =
+                options.templateOptions.data.attributeDefinitions[scope.model.clinical_significance];
+            }
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.updateDefinition(value, options, scope);
+          }
         },
         expressionProperties: {
           'templateOptions.options': function($viewValue, $modelValue, scope) {
             return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
               return !!(option.type === scope.model.evidence_type || option.type === 'default' || option.type === 'N/A');
             });
-          }
+          },
+          'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },
       {
