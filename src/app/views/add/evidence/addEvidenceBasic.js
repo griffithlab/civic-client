@@ -356,6 +356,36 @@
         }
       },
       {
+        key: 'drug_interaction_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        templateOptions: {
+          label: 'Drug Interaction Type',
+          value: 'vm.evidenceEdit.drug_interaction_type',
+          options: [
+            { value: '', label: 'Please select a Drug Interaction Type' },
+            { value: 'Combination', label: 'Combination'},
+            { value: 'Sequential', label: 'Sequential'},
+            { value: 'Substitutes', label: 'Substitutes'}
+          ],
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: 'Drug Interaction Type Help text',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Combination': 'The drugs listed were used in as part of a combination therapy approach',
+              'Sequential': 'The drugs listed were used at separate timepoints in the same treatment plan',
+              'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
+            }
+          },
+          onChange: function(value, options, scope) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
+        }
+      },
+      {
         type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Drug Names',
