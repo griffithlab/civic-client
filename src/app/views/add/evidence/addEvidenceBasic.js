@@ -189,6 +189,7 @@
       {
         key: 'variant_origin',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
@@ -199,7 +200,18 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Origin of variant'
+          helpText: 'Origin of variant',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              Somatic: 'Variant is found only in tumor cells',
+              Germline: 'Variant is found in every cell, not restricted to tumor/diseased cells'
+            }
+          },
+          onChange: function(value, options, scope) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
         }
       },
       {
