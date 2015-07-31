@@ -46,8 +46,8 @@
       disease: {
         name: ''
       },
+      disease_name: '',
       noDoid: false,
-      doid: '',
       pubmed_id: '',
       //pubchem_id: '',
       drugs: [],
@@ -114,7 +114,7 @@
       {
         key: 'entrez_id',
         type: 'gene',
-        controller: /* @ngInject */ function($scope, $stateParams, Variants) {
+        controller: /* @ngInject */ function($scope, $stateParams, Genes) {
           // populate field if geneId provided
           if($stateParams.geneId){
             Genes.get($stateParams.geneId).then(function(gene) {
@@ -259,25 +259,24 @@
         expressionProperties: {
           'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
           'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
-        }
+        },
+        hideExpression: 'model.noDoid'
       },
       {
         key: 'noDoid',
         type: 'horizontalCheckbox',
         templateOptions: {
-          label: 'Could not find disease.',
-          onChange: 'model.doid = ""'
+          label: 'Could not find disease.'
         }
       },
       {
-        model: vm.newEvidence.disease,
-        key: 'name',
+        key: 'disease_name',
         type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Disease Name',
-          value: 'vm.newEvidence.disease',
+          value: 'vm.newEvidence.disease_name',
           minLength: 32,
-          helpText: 'If the disease has no DOID, enter its name here.'
+          helpText: 'Enter the name of the disease here.'
         },
         hideExpression: '!model.noDoid'
       },
@@ -597,9 +596,13 @@
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
-      //newEvidence.doid = newEvidence.doid.doid; // replace disease obj with DOID string
       vm.formErrors = {};
       vm.formMessages = {};
+
+      // if noDoid, construct disease obj w/ disease_name
+      if(newEvidence.noDoid) {
+        newEvidence.disease = { name: newEvidence.disease_name };
+      }
 
       Evidence.add(newEvidence)
         .then(function() {
