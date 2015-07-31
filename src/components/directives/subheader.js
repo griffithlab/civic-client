@@ -24,6 +24,20 @@
     $scope.isAuthenticated = Security.isAuthenticated;
     $scope.isEditor = Security.isAuthenticated;
 
+    $scope.$rootScope = $rootScope;
+
+    $scope.addEvidenceUrlBase = $scope.addEvidenceUrl = '#/add/evidence/basic';
+
+    $scope.$watch('$rootScope.stateParams', function(stateParams){
+      if(_.has(stateParams, 'geneId')) {
+        $scope.addEvidenceUrl = $scope.addEvidenceUrlBase + '?geneId=' + stateParams.geneId;
+
+        if(_.has(stateParams, 'variantId')) {
+          $scope.addEvidenceUrl = $scope.addEvidenceUrl + '&variantId=' + stateParams.variantId;
+        }
+      }
+    });
+
     $rootScope.$on('title:update', function(event, data) {
       $scope.view.stateTitle = data.newTitle;
     });

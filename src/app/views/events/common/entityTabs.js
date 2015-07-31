@@ -86,20 +86,14 @@
   }
 
   // @ngInject
-  function EntityTabsController($scope, $state, $stateParams, Security, _) {
+  function EntityTabsController($scope, $state, $rootScope, $stateParams, Security, _) {
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated;
     vm.isEditor = Security.isEditor;
 
-    vm.addEvidenceUrl = '#/add/evidence/basic';
-
-    if($stateParams.geneId) {
-      vm.addEvidenceUrl = vm.addEvidenceUrl + '?geneId=' + $stateParams.geneId;
-
-      if($stateParams.variantId) {
-        vm.addEvidenceUrl = vm.addEvidenceUrl + '&variantId=' + $stateParams.variantId;
-      }
-    }
+    // store latest stateParams on rootscope, primarily so the Add Evidence button can
+    // include gene and variantIds in the URL
+    $rootScope.stateParams = $stateParams;
 
     // TODO not sure why this watch is necessary for tabs to be properly set to active on 1st load
     var unwatch = $scope.$watchCollection('entityViewModel', function() {

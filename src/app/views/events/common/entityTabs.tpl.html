@@ -39,7 +39,7 @@
   </div>
   <div class="user-info-row">
     <div class="row">
-      <div class="col-xs-10 {{ viewBackground }}">
+      <div class="col-xs-12 {{ viewBackground }}">
         <ul class="actions-list">
           <li>
             <div class="action-block view-pageBackground"
@@ -54,15 +54,6 @@
                 by <strong>{{ user.user.username }}</strong>
               </span>
             </div>
-          </li>
-        </ul>
-      </div>
-      <div class="col-xs-2 pull-right {{ viewBackground }}">
-        <ul>
-          <li style="float: right;">
-            <a ng-href="{{ vm.addEvidenceUrl }}"
-               class="btn btn-xs btn-default"
-              ng-hide="vm.type === 'EVIDENCE'">Add Evidence</a>
           </li>
         </ul>
       </div>
