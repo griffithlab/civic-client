@@ -19,7 +19,7 @@
         controllerAs: 'vm'
       })
       .state('add.evidence.basic', {
-        url: '/basic',
+        url: '/basic?geneId&variantId',
         template: '<add-evidence-basic></add-evidence-basic>',
         data: {
           titleExp: '"Add Evidence"',

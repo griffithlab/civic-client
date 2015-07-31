@@ -20,7 +20,7 @@
   }
 
   // @ngInject
-  function SubheaderCtrl($scope, $rootScope, Security) {
+  function SubheaderCtrl($scope, $rootScope, $stateParams, Security) {
     $scope.isAuthenticated = Security.isAuthenticated;
     $scope.isEditor = Security.isAuthenticated;
 

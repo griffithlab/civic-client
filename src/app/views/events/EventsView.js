@@ -17,6 +17,11 @@
         url: '/events',
         template: '<ui-view id="events-view"></ui-view>',
         controller: 'EventsViewController',
+        resolve: {
+          stateParams: /* @ngInject */ function($stateParams) {
+            return $stateParams;
+          }
+        },
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
@@ -25,8 +30,7 @@
   }
 
   // @ngInject
-  function EventsViewController() {
-    //console.log('EventsViewController instantiated.');
+  function EventsViewController($rootScope, stateParams) {
   }
 
 })();

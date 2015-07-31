@@ -43,7 +43,9 @@
       entrez_id: '',
       variant_name: '',
       description: '',
-      disease: '',
+      disease: {
+        name: ''
+      },
       noDoid: false,
       doid: '',
       pubmed_id: '',
@@ -161,6 +163,14 @@
       {
         key: 'variant_name',
         type: 'horizontalTypeaheadHelp',
+        controller: /* @ngInject */ function($scope, $stateParams, Variants) {
+          // populate field if variantId provided
+          if($stateParams.variantId){
+            Variants.get($stateParams.variantId).then(function(variant) {
+              $scope.model.variant_name = variant.name;
+            });
+          }
+        },
         templateOptions: {
           label: 'Variant Name',
           value: 'vm.newEvidence.variant_name',
@@ -216,7 +226,7 @@
         }
       },
       {
-        key: 'doid',
+        key: 'disease',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
         templateOptions: {
@@ -252,7 +262,8 @@
         }
       },
       {
-        key: 'disease',
+        model: vm.newEvidence.disease,
+        key: 'name',
         type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Disease Name',
@@ -381,7 +392,6 @@
             }
           },
           onChange: function(value, options, scope) {
-            // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
         },
@@ -421,7 +431,6 @@
             }
           },
           onChange: function(value, options, scope) {
-            // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
 
