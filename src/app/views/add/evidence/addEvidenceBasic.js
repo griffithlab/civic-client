@@ -49,6 +49,7 @@
       pubmed_id: '',
       //pubchem_id: '',
       drugs: [],
+      drug_interaction_type: '',
       rating: '',
       evidence_level: '',
       evidence_type: '',
@@ -363,7 +364,7 @@
           label: 'Drug Interaction Type',
           value: 'vm.evidenceEdit.drug_interaction_type',
           options: [
-            { value: '', label: 'Please select a Drug Interaction Type' },
+            { type: 'default', value: '', label: 'Please select a Drug Interaction Type' },
             { value: 'Combination', label: 'Combination'},
             { value: 'Sequential', label: 'Sequential'},
             { value: 'Substitutes', label: 'Substitutes'}
@@ -383,18 +384,9 @@
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
-        }
-      },
-      {
-        type: 'horizontalInputHelp',
-        templateOptions: {
-          label: 'Drug Names',
-          placeholder: 'N/A',
-          disabled: true,
-          helpText: 'Drug names are only applicable for Predictive evidence.'
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-          return scope.model.evidence_type === 'Predictive';
+          return  scope.model.evidence_type !== 'Predictive' || scope.model.drugs.length <= 1;
         }
       },
       {
