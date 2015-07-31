@@ -114,6 +114,14 @@
       {
         key: 'entrez_id',
         type: 'gene',
+        controller: /* @ngInject */ function($scope, $stateParams, Variants) {
+          // populate field if geneId provided
+          if($stateParams.geneId){
+            Genes.get($stateParams.geneId).then(function(gene) {
+              $scope.model.entrez_id = gene.entrez_id;
+            });
+          }
+        },
         templateOptions: {
           label: 'Gene Entrez ID',
           value: 'vm.newEvidence.entrez_id',

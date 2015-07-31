@@ -60,7 +60,9 @@
       <div class="col-xs-2 pull-right {{ viewBackground }}">
         <ul>
           <li style="float: right;">
-            <a ng-href="{{ vm.addEvidenceUrl }}" class="btn btn-xs btn-default">Add Evidence</a>
+            <a ng-href="{{ vm.addEvidenceUrl }}"
+               class="btn btn-xs btn-default"
+              ng-hide="vm.type === 'EVIDENCE'">Add Evidence</a>
           </li>
         </ul>
       </div>
