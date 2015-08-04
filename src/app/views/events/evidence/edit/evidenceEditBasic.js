@@ -246,6 +246,11 @@
         key: 'drug_interaction_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
+        controller: function($scope) {
+          // set attribute definition
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.drug_interaction_type];
+        },
         templateOptions: {
           label: 'Drug Interaction Type',
           value: 'vm.evidenceEdit.drug_interaction_type',
@@ -267,12 +272,13 @@
             }
           },
           onChange: function(value, options, scope) {
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+            options.templateOptions.data.attributeDefinition =
+              options.templateOptions.data.attributeDefinitions[value];
           }
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-          return  scope.model.evidence_type !== 'Predictive' || // evidence type must be predictive
-            scope.model.drugs.length <= 2;
+          return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
+            _.without(scope.model.drugs, '').length > 1);
 
         }
       },
@@ -472,6 +478,7 @@
     vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, ''); // delete blank input values
+      if(evidenceEdit.drugs.length < 2) { newEvidence.drug_interaction_type = null } // delete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
 
@@ -496,6 +503,7 @@
     vm.apply = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, '');
+      if(evidenceEdit.drugs.length < 2) { newEvidence.drug_interaction_type = null } // delete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
       Evidence.apply(evidenceEdit)

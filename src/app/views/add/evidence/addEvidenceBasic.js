@@ -403,8 +403,8 @@
           }
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-          return  scope.model.evidence_type !== 'Predictive' || // evidence type must be predictive
-            scope.model.drugs.length <= 2;
+          return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
+          _.without(scope.model.drugs, '').length > 1);
 
         }
       },
@@ -588,6 +588,7 @@
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
+      if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null } // delete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
 
