@@ -117,7 +117,8 @@
 
       // Is the current user an editor?
       isEditor: function() {
-        return !!(service.currentUser && service.currentUser.role === 'editor');
+        return !!(service.currentUser && service.currentUser.role === 'editor' ||
+        service.currentUser && service.currentUser.role === 'admin');
       },
 
       // Is the current user an editor?
