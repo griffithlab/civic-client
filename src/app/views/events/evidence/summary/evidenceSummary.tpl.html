@@ -58,7 +58,10 @@
           <td class="name">Drug:</td>
           <td class="value">{{ evidence.drugsStr }}</td>
         </tr>
-
+        <tr ng-show="evidence.drug_interaction_type">
+          <td class="name">Drug Interaction:</td>
+          <td class="value">{{ evidence.drug_interaction_type }}</td>
+        </tr>
         <tr>
           <td class="name">Citation:</td>
           <td class="value">
