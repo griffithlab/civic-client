@@ -380,7 +380,7 @@
         wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'Drug Interaction Type',
-          value: 'vm.evidenceEdit.drug_interaction_type',
+          value: 'vm.newEvidence.drug_interaction_type',
           options: [
             { type: 'default', value: '', label: 'Please select a Drug Interaction Type' },
             { value: 'Combination', label: 'Combination'},
@@ -403,7 +403,9 @@
           }
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-          return  scope.model.evidence_type !== 'Predictive' || scope.model.drugs.length <= 1;
+          return  scope.model.evidence_type !== 'Predictive' || // evidence type must be predictive
+            scope.model.drugs.length <= 2;
+
         }
       },
       {
@@ -466,16 +468,6 @@
         key: 'evidence_direction',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
-        watcher: {
-          expression: function(field, scope) {
-            return field.formControl && field.formControl.$viewValue;
-          },
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
-            if(newValue) {
-              console.log('Function Expression: ' + newValue);
-            }
-          }
-        },
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.newEvidence.evidence_direction',

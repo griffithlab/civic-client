@@ -106,9 +106,10 @@
       {
         key: 'variant_origin',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'Variant Origin',
-          value: 'vm.evidenceEdit.variant_origin',
+          value: 'vm.newEvidence.variant_origin',
           options: [
             { value: '', label: 'Please select a Variant Origin' },
             { value: 'Somatic', label: 'Somatic'},
@@ -116,7 +117,18 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Origin of variant'
+          helpText: 'Origin of variant',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              Somatic: 'Variant is found only in tumor cells',
+              Germline: 'Variant is found in every cell, not restricted to tumor/diseased cells'
+            }
+          },
+          onChange: function(value, options, scope) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
         }
       },
       {
@@ -231,15 +243,37 @@
         }
       },
       {
-        type: 'horizontalInputHelp',
+        key: 'drug_interaction_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
         templateOptions: {
-          label: 'Drug Names',
-          placeholder: 'N/A',
-          disabled: true,
-          helpText: 'Drug names are only applicable for Predictive evidence.'
+          label: 'Drug Interaction Type',
+          value: 'vm.evidenceEdit.drug_interaction_type',
+          options: [
+            { type: 'default', value: '', label: 'Please select a Drug Interaction Type' },
+            { value: 'Combination', label: 'Combination'},
+            { value: 'Sequential', label: 'Sequential'},
+            { value: 'Substitutes', label: 'Substitutes'}
+          ],
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: 'Drug Interaction Type Help text',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Combination': 'The drugs listed were used in as part of a combination therapy approach',
+              'Sequential': 'The drugs listed were used at separate timepoints in the same treatment plan',
+              'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
+            }
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-          return scope.model.evidence_type === 'Predictive';
+          return  scope.model.evidence_type !== 'Predictive' || // evidence type must be predictive
+            scope.model.drugs.length <= 2;
+
         }
       },
       {
@@ -428,9 +462,9 @@
         model: vm.evidenceEdit.comment,
         templateOptions: {
           rows: 5,
-          label: 'New Evidence Description',
+          label: 'Evidence Edit Comments',
           value: 'text',
-          helpText: 'Please provide a short paragraph that supports the inclusion of this evidence item into the CIViC database.'
+          helpText: 'Please provide a short description of your edits to this Evidence record.'
         }
       }
     ];
