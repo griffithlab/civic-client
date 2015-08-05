@@ -19,6 +19,13 @@
     $scope.isEdit = $state.includes('**.edit.**');
     $scope.stateParams = $stateParams;
 
+
+    $scope.popoverKey = {
+      templateUrl: 'app/views/events/variants/summary/evidenceGridPopoverKey.tpl.html',
+      title: 'Evidence Grid Column Key'
+    };
+
+
     $scope.variant = Variants.data.item;
     $scope.evidence = Variants.data.evidence;
     $scope.VariantsViewOptions = VariantsViewOptions;

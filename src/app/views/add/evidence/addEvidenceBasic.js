@@ -70,48 +70,6 @@
 
     vm.evidenceFields = [
       {
-        key: 'evidence_type',
-        type: 'horizontalSelectHelp',
-        wrapper: 'attributeDefinition',
-        templateOptions: {
-          label: 'Evidence Type',
-          value: 'vm.newEvidence.evidence_type',
-          ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [
-            { value: '', label: 'Please select an Evidence Type' },
-            { value: 'Predictive', label: 'Predictive' },
-            { value: 'Diagnostic', label: 'Diagnostic' },
-            { value: 'Prognostic', label: 'Prognostic' }
-          ],
-          onChange: function(value, options, scope) {
-            // reset clinical_significance, as its options will change
-            scope.model.clinical_significance = '';
-
-            // if we're switching to Predictive, seed the drugs array w/ a blank entry,
-            // otherwise set to empty array
-            value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
-
-            // set attribute definition
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
-
-            // update evidence direction attribute definition
-            var edField = _.find(scope.fields, { key: 'evidence_direction'});
-            if (edField.value() !== '') { // only update if user has selected an option
-              edField.templateOptions.data.updateDefinition(null, edField, scope);
-            }
-          },
-          helpText: 'Type of clinical outcome associated with the evidence statement.',
-          data: {
-            attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-              'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
-              'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival'
-            }
-          }
-        }
-      },
-      {
         key: 'entrez_id',
         type: 'gene',
         controller: /* @ngInject */ function($scope, $stateParams, Genes) {
@@ -205,6 +163,7 @@
           }
         }
       },
+
       {
         key: 'variant_origin',
         type: 'horizontalSelectHelp',
@@ -230,6 +189,55 @@
           onChange: function(value, options, scope) {
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
+        }
+      },
+      {
+        key: 'pubmed_id',
+        type: 'publication',
+        templateOptions: {
+          label: 'Pubmed ID',
+          value: 'vm.newEvidence.pubmed_id',
+          minLength: 1,
+          required: true,
+          data: {
+            description: '--'
+          },
+          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+        },
+        modelOptions: {
+          updateOn: 'default blur',
+          allowInvalid: false,
+          debounce: {
+            default: 300,
+            blur: 0
+          }
+        },
+        validators: {
+          validPubmedId: {
+            expression: function($viewValue, $modelValue, scope) {
+              if ($viewValue.length > 0) {
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                Publications.verify($viewValue).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = response.description;
+                    deferred.resolve(response);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.description = '--';
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                scope.options.templateOptions.data.description = '--';
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid Pubmed ID."'
           }
         }
       },
@@ -292,124 +300,46 @@
         }
       },
       {
-        key: 'pubmed_id',
-        type: 'publication',
-        templateOptions: {
-          label: 'Pubmed Id',
-          value: 'vm.newEvidence.pubmed_id',
-          minLength: 1,
-          required: true,
-          data: {
-            description: '--'
-          },
-          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
-        },
-        modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
-          debounce: {
-            default: 300,
-            blur: 0
-          }
-        },
-        validators: {
-          validPubmedId: {
-            expression: function($viewValue, $modelValue, scope) {
-              if ($viewValue.length > 0) {
-                var deferred = $q.defer();
-                scope.options.templateOptions.loading = true;
-                Publications.verify($viewValue).then(
-                  function (response) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = response.description;
-                    deferred.resolve(response);
-                  },
-                  function (error) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = '--';
-                    deferred.reject(error);
-                  }
-                );
-                return deferred.promise;
-              } else {
-                scope.options.templateOptions.data.description = '--';
-                return true;
-              }
-            },
-            message: '"This does not appear to be a valid Pubmed ID."'
-          }
-        }
-      },
-      {
-        key: 'drugs',
-        type: 'multiInput',
-        templateOptions: {
-          label: 'Drug Names',
-          inputOptions: {
-            type: 'typeahead',
-            wrapper: null,
-            templateOptions: {
-              inputFormatter: 'model[options.key]',
-              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
-              // focus: true,
-              onSelect: 'options.data.pushNew(model, index)'
-            },
-            data: {
-              pushNew: function(model, index) {
-                model.splice(index+1, 0, '');
-              },
-              typeaheadSearch: function(val) {
-                return PubchemTypeahead.get(val)
-                  .then(function(response) {
-                    return _.map(response.autocp_array, function(drugname) {
-                      return { name: drugname };
-                    });
-                  });
-              }
-            }
-          },
-          helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
-        },
-        hideExpression: function($viewValue, $modelValue, scope) {
-          return  scope.model.evidence_type !== 'Predictive';
-        }
-      },
-      {
-        key: 'drug_interaction_type',
+        key: 'evidence_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
         templateOptions: {
-          label: 'Drug Interaction Type',
-          value: 'vm.newEvidence.drug_interaction_type',
+          label: 'Evidence Type',
+          value: 'vm.newEvidence.evidence_type',
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [
-            { type: 'default', value: '', label: 'Please select a Drug Interaction Type' },
-            { value: 'Combination', label: 'Combination'},
-            { value: 'Sequential', label: 'Sequential'},
-            { value: 'Substitutes', label: 'Substitutes'}
+            { value: '', label: 'Please select an Evidence Type' },
+            { value: 'Predictive', label: 'Predictive' },
+            { value: 'Diagnostic', label: 'Diagnostic' },
+            { value: 'Prognostic', label: 'Prognostic' }
           ],
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: 'Drug Interaction Type Help text',
+          onChange: function(value, options, scope) {
+            // reset clinical_significance, as its options will change
+            scope.model.clinical_significance = '';
+
+            // if we're switching to Predictive, seed the drugs array w/ a blank entry,
+            // otherwise set to empty array
+            value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
+
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+
+            // update evidence direction attribute definition
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+            if (edField.value() !== '') { // only update if user has selected an option
+              edField.templateOptions.data.updateDefinition(null, edField, scope);
+            }
+          },
+          helpText: 'Type of clinical outcome associated with the evidence statement.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
-              'Combination': 'The drugs listed were used in as part of a combination therapy approach',
-              'Sequential': 'The drugs listed were used at separate timepoints in the same treatment plan',
-              'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
+              'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
+              'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
+              'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival'
             }
-          },
-          onChange: function(value, options, scope) {
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
-        },
-        hideExpression: function($viewValue, $modelValue, scope) {
-          return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
-          _.without(scope.model.drugs, '').length > 1);
-
         }
-      },
-      {
-        template: '<hr/>'
       },
       {
         key: 'evidence_level',
@@ -443,25 +373,6 @@
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
 
-        }
-      },
-      {
-        key: 'rating',
-        type: 'horizontalRatingHelp',
-        templateOptions: {
-          label: 'Rating',
-
-          options: [
-            { value: '', label: 'Please select an Evidence Rating' },
-            { value: 1, label: '1 - Poor<br/>Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims.' },
-            { value: 2, label: '2 - Adequate<br/>Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.' },
-            { value: 3, label: '3 - Average<br/>Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.' },
-            { value: 4, label: '4 - Good<br/>Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.' },
-            { value: 5, label: '5 - Excellent<br/>Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'}
-          ],
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>'
         }
       },
       {
@@ -570,7 +481,91 @@
         }
       },
       {
-        template: '<hr/>'
+        key: 'drugs',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Drug Names',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              inputFormatter: 'model[options.key]',
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)'
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return PubchemTypeahead.get(val)
+                  .then(function(response) {
+                    return _.map(response.autocp_array, function(drugname) {
+                      return { name: drugname };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
+        },
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return  scope.model.evidence_type !== 'Predictive';
+        }
+      },
+      {
+        key: 'drug_interaction_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        templateOptions: {
+          label: 'Drug Interaction Type',
+          value: 'vm.newEvidence.drug_interaction_type',
+          options: [
+            { type: 'default', value: '', label: 'Please select a Drug Interaction Type' },
+            { value: 'Combination', label: 'Combination'},
+            { value: 'Sequential', label: 'Sequential'},
+            { value: 'Substitutes', label: 'Substitutes'}
+          ],
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: 'Drug Interaction Type Help text',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Combination': 'The drugs listed were used in as part of a combination therapy approach',
+              'Sequential': 'The drugs listed were used at separate timepoints in the same treatment plan',
+              'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
+            }
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
+        },
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
+          _.without(scope.model.drugs, '').length > 1);
+
+        }
+      },
+      {
+        key: 'rating',
+        type: 'horizontalRatingHelp',
+        templateOptions: {
+          label: 'Rating',
+
+          options: [
+            { value: '', label: 'Please select an Evidence Rating' },
+            { value: 1, label: '1 - Poor<br/>Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims.' },
+            { value: 2, label: '2 - Adequate<br/>Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.' },
+            { value: 3, label: '3 - Average<br/>Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.' },
+            { value: 4, label: '4 - Good<br/>Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.' },
+            { value: 5, label: '5 - Excellent<br/>Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'}
+          ],
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>'
+        }
       },
       {
         key: 'text',

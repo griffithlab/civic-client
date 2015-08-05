@@ -41,64 +41,158 @@
       noUnselect: true,
       rowTemplate: 'app/views/events/variants/summary/evidenceGridRow.tpl.html',
       columnDefs: [
-        { name: 'id',
-          displayName: 'EID',
-          type: 'number',
-          enableFiltering: false,
-          allowCellFocus: false,
-          width: '5%'
-        },
-        { name: 'description',
-          displayName: 'Supporting Evidence',
-          type: 'string',
-          enableFiltering: true,
-          allowCellFocus: false,
-          width: '45%',
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
+          { name: 'id',
+            displayName: 'EID',
+            type: 'number',
+            enableFiltering: false,
+            allowCellFocus: false,
+            width: '5%'
           },
-          cellTemplate: 'app/views/events/variants/summary/evidenceGridEvidenceCell.tpl.html'
-        },
-        { name: 'disease',
-          displayName: 'Disease',
-          type: 'string',
-          allowCellFocus: false,
-          enableFiltering: true,
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
+          { name: 'description',
+            displayName: 'Supporting Evidence',
+            type: 'string',
+            enableFiltering: true,
+            allowCellFocus: false,
+            width: '45%',
+            filter: {
+              condition: uiGridConstants.filter.CONTAINS
+            },
+            cellTemplate: 'app/views/events/variants/summary/evidenceGridEvidenceCell.tpl.html'
           },
-          cellTemplate: 'app/views/events/variants/summary/evidenceGridDiseaseCell.tpl.html'
-        },
-        { name: 'drugs',
-          displayName: 'Drug',
-          type: 'string',
-          allowCellFocus: false,
-          enableFiltering: true,
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
+          { name: 'disease',
+            displayName: 'Disease',
+            type: 'string',
+            allowCellFocus: false,
+            enableFiltering: true,
+            filter: {
+              condition: uiGridConstants.filter.CONTAINS
+            },
+            cellTemplate: 'app/views/events/variants/summary/evidenceGridDiseaseCell.tpl.html'
           },
-          cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugCell.tpl.html'
-        },
-        { name: 'evidence_level',
-          displayName: 'Level',
-          type: 'string',
-          allowCellFocus: false,
-          enableFiltering: true,
-          sort: { direction: uiGridConstants.ASC },
-          width: '8%',
-          cellTemplate: 'app/views/events/variants/summary/evidenceGridLevelCell.tpl.html'
-        },
-        { name: 'rating',
-          displayName: 'Rating',
-          type: 'number',
-          allowCellFocus: false,
-          enableFiltering: false,
-          sort: { direction: uiGridConstants.DESC },
-          width: '15%',
-          cellTemplate: 'app/views/events/variants/summary/evidenceGridRatingCell.tpl.html'
-          //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
-        }
-      ]
+          { name: 'drugs',
+            displayName: 'Drug',
+            type: 'string',
+            allowCellFocus: false,
+            enableFiltering: true,
+            filter: {
+              condition: uiGridConstants.filter.CONTAINS
+            },
+            cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugCell.tpl.html'
+          },
+          { name: 'evidence_level',
+            displayName: 'Level',
+            type: 'string',
+            allowCellFocus: false,
+            enableFiltering: true,
+            sort: { direction: uiGridConstants.ASC },
+            width: '8%',
+            cellTemplate: 'app/views/events/variants/summary/evidenceGridLevelCell.tpl.html'
+          },
+          { name: 'rating',
+            displayName: 'Rating',
+            type: 'number',
+            allowCellFocus: false,
+            enableFiltering: false,
+            sort: { direction: uiGridConstants.DESC },
+            width: '15%',
+            cellTemplate: 'app/views/events/variants/summary/evidenceGridRatingCell.tpl.html'
+            //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
+          }
+        ]
+
+      //  [
+      //  { name: 'id',
+      //    displayName: 'EID',
+      //    type: 'number',
+      //    enableFiltering: false,
+      //    allowCellFocus: false,
+      //    width: '5%'
+      //  },
+      //  { name: 'description',
+      //    displayName: 'DESC',
+      //    type: 'string',
+      //    enableFiltering: true,
+      //    allowCellFocus: false,
+      //    filter: {
+      //      condition: uiGridConstants.filter.CONTAINS
+      //    },
+      //    cellTemplate: 'app/views/events/variants/summary/evidenceGridEvidenceCell.tpl.html'
+      //  },
+      //  { name: 'disease',
+      //    displayName: 'DIS',
+      //    type: 'string',
+      //    allowCellFocus: false,
+      //    enableFiltering: true,
+      //    filter: {
+      //      condition: uiGridConstants.filter.CONTAINS
+      //    },
+      //    cellTemplate: 'app/views/events/variants/summary/evidenceGridDiseaseCell.tpl.html'
+      //  },
+      //  { name: 'drugs',
+      //    displayName: 'DRUG',
+      //    type: 'string',
+      //    allowCellFocus: false,
+      //    enableFiltering: true,
+      //    filter: {
+      //      condition: uiGridConstants.filter.CONTAINS
+      //    },
+      //    cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugCell.tpl.html'
+      //  },
+      //  //{ name: 'drug_interaction_type',
+      //  //  displayName: 'DI',
+      //  //  type: 'string',
+      //  //  allowCellFocus: false,
+      //  //  enableFiltering: false,
+      //  //  width: '5%',
+      //  //  filter: {
+      //  //    condition: uiGridConstants.filter.CONTAINS
+      //  //  },
+      //  //  cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugInteractionTypeCell.tpl.html'
+      //  //},
+      //  { name: 'evidence_level',
+      //    displayName: 'EL',
+      //    type: 'string',
+      //    allowCellFocus: false,
+      //    enableFiltering: false,
+      //    sort: { direction: uiGridConstants.ASC },
+      //    width: '5%',
+      //    cellTemplate: 'app/views/events/variants/summary/evidenceGridLevelCell.tpl.html'
+      //  },
+      //  { name: 'evidence_type',
+      //    displayName: 'ET',
+      //    type: 'string',
+      //    allowCellFocus: false,
+      //    enableFiltering: false,
+      //    width: '5%',
+      //    cellTemplate: 'app/views/events/variants/summary/evidenceGridTypeCell.tpl.html'
+      //  },
+      //  { name: 'clinical_significance',
+      //    displayName: 'CS',
+      //    type: 'string',
+      //    allowCellFocus: false,
+      //    enableFiltering: false,
+      //    width: '5%',
+      //    cellTemplate: 'app/views/events/variants/summary/evidenceGridClinicalSignificanceCell.tpl.html'
+      //  },
+      //  { name: 'variant_origin',
+      //    displayName: 'VO',
+      //    type: 'string',
+      //    allowCellFocus: false,
+      //    enableFiltering: false,
+      //    width: '5%',
+      //    cellTemplate: 'app/views/events/variants/summary/evidenceGridVariantOriginCell.tpl.html'
+      //  },
+      //  { name: 'rating',
+      //    displayName: 'TR',
+      //    type: 'number',
+      //    allowCellFocus: false,
+      //    enableFiltering: false,
+      //    sort: { direction: uiGridConstants.DESC },
+      //    width: '5%',
+      //    cellTemplate: 'app/views/events/variants/summary/evidenceGridRatingCell.tpl.html'
+      //    //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
+      //  }
+      //]
     };
 
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
