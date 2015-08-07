@@ -1,5 +1,8 @@
-<div class="typeCell ngCellText" style="{{ 'height:' + row.height + 'px;'}}">
-  <span ng-cell-text>
-    {{ row.entity[col.field] }}
+<div class="typeCell"
+     style="{{ 'height:' + row.height + 'px;'}}"
+     ng-class="col.colIndex()">
+  <span
+    class="glyphicon"
+    ng-class="{ 'glyphicon-eye-open': row.entity[col.field] === 'Predictive', 'glyphicon-search': row.entity[col.field] === 'Diagnostic', 'glyphicon-road': row.entity[col.field] === 'Prognostic' }">
   </span>
 </div>
