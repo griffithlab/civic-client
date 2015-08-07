@@ -115,11 +115,7 @@
   <div ng-if="showEvidenceGrid === true">
     <div class="row">
       <div class="col-xs-12 evidence-item-grid">
-        <h4>
-          Evidence for {{ variant.name }} Description
-          <button popover-template="keyPopover.templateUrl" popover-title="{{keyPopover.title}}" class="btn btn-default btn-xs">Column Key</button>
-        </h4>
-        <evidence-grid evidence="evidence"></evidence-grid>
+        <evidence-grid evidence="evidence" variant="variant"></evidence-grid>
       </div>
     </div>
     <div class="row">

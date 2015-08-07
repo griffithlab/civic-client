@@ -1,5 +1,6 @@
-<div class="variantOriginCell ngCellText" style="{{ 'height:' + row.height + 'px;'}}">
-  <span ng-cell-text>
-    {{ row.entity[col.field] }}
+<div class="variantOriginCell originCell" style="{{ 'height:' + row.height + 'px;'}}">
+  <span
+    class="glyphicon"
+    ng-class="{ 'glyphicon-option-vertical': row.entity[col.field] === 'Germline', 'glyphicon-option-horizontal': row.entity[col.field] === 'Somatic' }">
   </span>
 </div>

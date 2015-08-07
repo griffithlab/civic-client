@@ -1,4 +1,18 @@
 <div class="evidenceGrid">
+  <div class="row">
+    <div class="col-xs-10">
+      <h4>Evidence for {{ variant.name }}</h4>
+    </div>
+    <div class="col-xs-2">
+      <button
+        class="btn btn-default btn-xs pull-right col-key"
+        popover-template="ctrl.keyPopover.templateUrl"
+        popover-title="{{ctrl.keyPopover.title}}"
+        popover-placement="left">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Column Key
+      </button>
+    </div>
+  </div>
   <div ui-grid="ctrl.evidenceGridOptions"
        ui-grid-cellnav
        ui-grid-auto-resize

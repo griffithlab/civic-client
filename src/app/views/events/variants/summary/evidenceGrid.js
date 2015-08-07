@@ -10,7 +10,8 @@
       restrict: 'E',
       replace: true,
       scope: {
-        evidence: '='
+        evidence: '=',
+        variant: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
@@ -22,6 +23,13 @@
   function EvidenceGridController($scope, $stateParams, $state, $timeout, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
+
+    ctrl.keyPopover = {
+      content: 'Hello, World!',
+      //templateUrl: 'myPopoverTemplate.html',
+      templateUrl: 'app/views/events/variants/summary/evidenceGridPopoverKey.tpl.html',
+      title: 'Evidence Grid Column Key'
+    };
 
     ctrl.evidenceGridOptions = {
       enablePaginationControls: true,
@@ -46,7 +54,8 @@
           type: 'number',
           enableFiltering: false,
           allowCellFocus: false,
-          width: '5%'
+          minWidth: 45,
+          width: '7%'
         },
         { name: 'description',
           displayName: 'DESC',
@@ -96,6 +105,7 @@
           enableFiltering: false,
           sort: { direction: uiGridConstants.ASC },
           width: '5%',
+          minWidth: 45,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridLevelCell.tpl.html'
         },
         { name: 'evidence_type',
@@ -104,6 +114,7 @@
           allowCellFocus: false,
           enableFiltering: false,
           width: '5%',
+          minWidth: 45,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridTypeCell.tpl.html'
         },
         { name: 'clinical_significance',
@@ -112,6 +123,7 @@
           allowCellFocus: false,
           enableFiltering: false,
           width: '5%',
+          minWidth: 45,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridClinicalSignificanceCell.tpl.html'
         },
         { name: 'variant_origin',
@@ -120,6 +132,7 @@
           allowCellFocus: false,
           enableFiltering: false,
           width: '5%',
+          minWidth: 45,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridVariantOriginCell.tpl.html'
         },
         { name: 'rating',
@@ -129,6 +142,7 @@
           enableFiltering: false,
           sort: { direction: uiGridConstants.DESC },
           width: '5%',
+          minWidth: 45,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridRatingCell.tpl.html'
           //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
         }
