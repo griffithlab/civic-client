@@ -1,8 +1,10 @@
-<div class="typeCell"
+<div class="typeCell ngCellText"
      style="{{ 'height:' + row.height + 'px;'}}"
-     ng-class="col.colIndex()">
-  <span
-    class="glyphicon"
-    ng-class="{ 'glyphicon-eye-open': row.entity[col.field] === 'Predictive', 'glyphicon-search': row.entity[col.field] === 'Diagnostic', 'glyphicon-road': row.entity[col.field] === 'Prognostic' }">
-  </span>
+     ng-class="col.colIndex()"
+     tooltip="{{row.entity[col.field]}}"
+     tooltip-append-to-body="true">
+    <span
+      class="glyphicon"
+      ng-class="{ 'glyphicon-eye-open': row.entity[col.field] === 'Predictive', 'glyphicon-search': row.entity[col.field] === 'Diagnostic', 'glyphicon-road': row.entity[col.field] === 'Prognostic' }">
+    </span>
 </div>
