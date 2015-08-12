@@ -98,6 +98,15 @@
         //  },
         //  cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugInteractionTypeCell.tpl.html'
         //},
+        { name: 'evidence_direction',
+          displayName: 'ED',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: false,
+          width: '5%',
+          minWidth: 45,
+          cellTemplate: 'app/views/events/variants/summary/evidenceDirectionCell.tpl.html'
+        },
         { name: 'evidence_level',
           displayName: 'EL',
           type: 'string',

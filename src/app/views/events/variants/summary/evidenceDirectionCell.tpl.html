@@ -1,0 +1,10 @@
+<div class="evidenceDirectionCell"
+     style="{{ 'height:' + row.height + 'px;'}}"
+     ng-class="col.colIndex()"
+     tooltip="{{row.entity[col.field]}}"
+     tooltip-append-to-body="true">
+  <span
+    class="glyphicon"
+    ng-class="{ 'glyphicon-thumbs-up': row.entity[col.field] === 'Supports', 'glyphicon-thumbs-down': row.entity[col.field] === 'Does Not Support'}">
+  </span>
+</div>
