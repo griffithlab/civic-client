@@ -33,8 +33,8 @@
 
     ctrl.evidenceGridOptions = {
       enablePaginationControls: true,
-      paginationPageSizes: [4],
-      paginationPageSize: 4,
+      paginationPageSizes: [5],
+      paginationPageSize: 5,
       minRowsToShow: 5,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,

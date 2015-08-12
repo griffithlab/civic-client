@@ -7,7 +7,7 @@
     "angular-sanitize": "1.2.x",
     "angular-formly": "~6.15.1",
     "ui-router-extras": "~0.0.14",
-    "angular-ui-grid": "~3.0.0-rc.22",
+    "angular-ui-grid": "~3.0.3",
     "angular-bootstrap": "~0.13.0",
     "angular-dialog-service": "~5.2.0",
     "lodash": "~3.3.1",
