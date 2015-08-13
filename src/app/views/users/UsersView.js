@@ -33,6 +33,21 @@
           navMode: 'sub',
           titleExp: '"Profile: " + user.username'
         }
+      })
+      .state('users.edit', {
+        url:'/edit',
+        templateUrl: 'app/views/users/profile/edit/profileEdit.tpl.html',
+        resolve: {
+          'Users': 'Users',
+          'user': function(Users, $stateParams) {
+            return Users.get($stateParams.userId);
+          }
+        },
+        controller: 'ProfileEditController',
+        data: {
+          navMode: 'sub',
+          titleExp: '"Profile: " + user.username'
+        }
       });
   }
 
