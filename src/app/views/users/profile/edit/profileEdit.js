@@ -11,6 +11,10 @@
     vm.userEdit = angular.copy(user);
     vm.currentUser = Security.currentUser;
 
+    // TODO: implement better error handling and success message
+    vm.submitSuccess = false;
+    vm.submitFail = false;
+
     vm.userEditFields = [
       {
         key: 'name',
@@ -66,10 +70,12 @@
       Users.update(userEdit)
       .then(function(response) {
           console.log('updated user successfully');
-          Security.currentUser = response;
+          vm.user = Security.currentUser = response;
+          vm.submitSuccess = true;
         })
       .catch(function(error) {
           console.error('update user error!');
+          vm.submitFail = false;
         })
 
     }
