@@ -5,7 +5,15 @@
     .factory('Users', UsersService);
 
   // @ngInject
-  function UsersResource($resource) {
+  function UsersResource($resource, $cacheFactory) {
+    var cache = $cacheFactory.get('$http');
+
+    var cacheInterceptor = function(response) {
+      console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(' '));
+      cache.remove(response.config.url);
+      return response.$promise;
+    };
+
 
     return $resource('/api/users/:userId',
       {
@@ -15,6 +23,13 @@
         get: {
           method: 'GET',
           isArray: false,
+          cache: false
+        },
+        update: {
+          method: 'PATCH',
+          params: {
+            userId: '@id'
+          },
           cache: false
         },
         queryEvents: {
@@ -38,7 +53,8 @@
         events: events
       },
       get: get,
-      queryEvents: queryEvents
+      queryEvents: queryEvents,
+      update: update
     };
 
     function get(userId) {
@@ -52,6 +68,12 @@
       return UsersResource.queryEvents({userId: userId}).$promise
         .then(function(response) {
           angular.copy(response, events);
+          return response.$promise;
+        });
+    }
+    function update(user) {
+      return UsersResource.update(user).$promise
+        .then(function(response) {
           return response.$promise;
         });
     }

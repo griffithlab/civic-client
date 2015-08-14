@@ -14,8 +14,9 @@
     });
 
   // @ngInject
-  function UserSummaryController($scope, Stats) {
+  function UserSummaryController($scope, Stats, Security) {
     var vm = $scope.vm = {};
+    vm.currentUser= Security.currentUser;
     vm.stats = {};
 
     Stats.user($scope.user.id).then(function(stats) {

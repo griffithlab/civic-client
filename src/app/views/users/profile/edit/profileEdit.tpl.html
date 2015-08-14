@@ -1,7 +1,41 @@
 <div class="profileEdit">
   <div class="row">
-    <div class="col-xs-12">
-      <h4>Edit Profile</h4>
+    <div class="col-xs-2">
+      <img
+        ng-src="{{vm.user.avatar_url}}"
+        width="64"
+        height="64"
+        class="avatar img-responsive"/>
+
+      <button
+        class="btn btn-xs btn-default"
+        ui-sref="users.edit"
+        style="margin-top: 16px;">
+        Edit Avatar
+      </button>
+
+    </div>
+    <div class="col-xs-10">
+
+      <form class="form-horizontal">
+        <formly-form
+          options="vm.options"
+          model="vm.userEdit"
+          fields="vm.userEditFields">
+        </formly-form>
+      </form>
+
+    </div>
+    <div class="col-xs-10 col-xs-offset-2">
+      <cancel-button></cancel-button>
+
+      <button
+        type="submit"
+        class="btn btn-default"
+        ng-click="vm.saveProfile(vm.userEdit, vm.options)">
+        Save Profile
+      </button>
+
     </div>
   </div>
 </div>

@@ -6,11 +6,19 @@
         width="64"
         height="64"
         class="avatar img-responsive"/>
-      <button class="btn btn-xs btn-default" ui-sref="users.edit" style="margin-top: 16px;">Edit Profile</button>
+      <button
+        ng-show="user.id === vm.currentUser.id"
+        class="btn btn-xs btn-default"
+        ui-sref="users.edit"
+        style="margin-top: 16px;">Edit Profile</button>
     </div>
     <div class="col-xs-6">
       <div class="info-block">
         <table class="table-info">
+          <tr>
+            <td class="key">Role:</td>
+            <td class="value">{{user.role|ifEmpty: '--'}}</td>
+          </tr>
           <tr>
             <td class="key">Username:</td>
             <td class="value">{{user.username|ifEmpty: '--'}}</td>
@@ -63,7 +71,10 @@
   </div>
   <!--<div class="row">-->
   <!--<div class="col-xs-12">-->
-  <!--<pre ng-bind="user|json"></pre>-->
+    <!--<h4>user:</h4>-->
+    <!--<pre ng-bind="user|json"></pre>-->
+    <!--<h4>Security.currentUser:</h4>-->
+    <!--<pre ng-bind="vm.currentUser|json"></pre>-->
   <!--</div>-->
   <!--</div>-->
 </div>
