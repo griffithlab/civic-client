@@ -98,11 +98,54 @@
         //  },
         //  cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugInteractionTypeCell.tpl.html'
         //},
+        { name: 'evidence_type',
+          displayName: 'ET',
+          type: 'string',
+          allowCellFocus: false,
+          //enableFiltering: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: true,
+            selectOptions: [
+              {
+                value: null,
+                label: '--'
+              },
+              {
+                value: 'Predictive',
+                label: 'Predictive'
+              },
+              {
+                value: 'Diagnostic',
+                label: 'Diagnostic'
+              },
+              {
+                value: 'Prognostic',
+                label: 'Prognostic'
+              }
+            ]
+          },
+          width: '5%',
+          minWidth: 45,
+          cellTemplate: 'app/views/events/variants/summary/evidenceGridTypeCell.tpl.html'
+        },
         { name: 'evidence_level',
           displayName: 'EL',
           type: 'string',
           allowCellFocus: false,
-          enableFiltering: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: true,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'A', label: 'A - Validated'},
+              { value: 'B', label: 'B - Clinical'},
+              { value: 'C', label: 'C - Preclinical'},
+              { value: 'D', label: 'D - Case Study'},
+              { value: 'E', label: 'E - Inferential'}]
+          },
           sort: { direction: uiGridConstants.ASC },
           width: '5%',
           minWidth: 45,
@@ -112,25 +155,39 @@
           displayName: 'ED',
           type: 'string',
           allowCellFocus: false,
-          enableFiltering: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: true,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Supports', label: 'Supports' },
+              { value: 'Does not Support', label: 'Does not Support' }
+            ]
+          },
           width: '5%',
           minWidth: 45,
           cellTemplate: 'app/views/events/variants/summary/evidenceDirectionCell.tpl.html'
-        },
-        { name: 'evidence_type',
-          displayName: 'ET',
-          type: 'string',
-          allowCellFocus: false,
-          enableFiltering: false,
-          width: '5%',
-          minWidth: 45,
-          cellTemplate: 'app/views/events/variants/summary/evidenceGridTypeCell.tpl.html'
         },
         { name: 'clinical_significance',
           displayName: 'CS',
           type: 'string',
           allowCellFocus: false,
-          enableFiltering: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: true,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Sensitivity', label: 'Sensitivity' },
+              { value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+              { value: 'Better Outcome', label: 'Better Outcome' },
+              { value: 'Poor Outcome', label: 'Poor Outcome' },
+              { value: 'Positive', label: 'Positive' },
+              { value: 'Negative', label: 'Negative' },
+            ]
+
+          },
           width: '5%',
           minWidth: 45,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridClinicalSignificanceCell.tpl.html'
@@ -139,7 +196,16 @@
           displayName: 'VO',
           type: 'string',
           allowCellFocus: false,
-          enableFiltering: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: true,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Somatic', label: 'Somatic'},
+              { value: 'Germline', label: 'Germline' }
+            ]
+          },
           width: '5%',
           minWidth: 45,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridVariantOriginCell.tpl.html'
@@ -148,7 +214,19 @@
           displayName: 'TR',
           type: 'number',
           allowCellFocus: false,
-          enableFiltering: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: true,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: '5', label: '5 stars'},
+              { value: '4', label: '4 stars'},
+              { value: '3', label: '3 stars'},
+              { value: '2', label: '2 stars'},
+              { value: '1', label: '1 stars'},
+            ]
+          },
           sort: { direction: uiGridConstants.DESC },
           width: '5%',
           minWidth: 45,

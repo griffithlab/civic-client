@@ -474,7 +474,9 @@
         expressionProperties: {
           'templateOptions.options': function($viewValue, $modelValue, scope) {
             return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
-              return !!(option.type === scope.model.evidence_type || option.type === 'default' || option.type === 'N/A');
+              return !!(option.type === scope.model.evidence_type ||
+              option.type === 'default' ||
+              option.type === 'N/A');
             });
           },
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
