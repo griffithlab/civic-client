@@ -32,7 +32,7 @@
       gene_id: $stateParams.geneId,
       name: '',
       description: '',
-      variants: []
+      variants: [{id: 0, name:''}]
     };
 
     vm.variantGroupFields = [
