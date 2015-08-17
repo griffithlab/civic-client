@@ -45,6 +45,10 @@
         apply: {
           method: 'PATCH'
         },
+        add: {
+          method: 'POST',
+          cache: false
+        },
 
         // VariantGroup Collections Resources
         queryVariants: {
@@ -133,6 +137,7 @@
       update: update,
       delete: deleteItem,
       apply: apply,
+      add: add,
 
       // VariantGroup Collections
       queryVariants: queryVariants,
@@ -197,6 +202,12 @@
         },
         function(error) { // fail
           return $q.reject(error);
+        });
+    }
+    function add(reqObj) {
+      return VariantGroupsResource.add(reqObj).$promise
+        .then(function(response) {
+          return response.$promise;
         });
     }
 

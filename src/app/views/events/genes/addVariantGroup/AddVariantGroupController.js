@@ -1,83 +1,110 @@
 (function() {
   'use strict';
   angular.module('civic.events.genes')
-    .config(geneEditConfig)
-    .controller('GeneEditController', GeneEditController);
+    .config(addVariantGroupConfig)
+    .controller('AddVariantGroupController', AddVariantGroupController);
 
   // @ngInject
-  function geneEditConfig($stateProvider) {
+  function addVariantGroupConfig($stateProvider) {
     $stateProvider
-      .state('events.genes.addVariantGroup', {
+      .state('events.genes.summary.addVariantGroup', {
         url: '/addVariantGroup',
         templateUrl: 'app/views/events/genes/addVariantGroup/addVariantGroup.tpl.html',
-        controller: 'variantGroupAddController',
-        controllerAs: 'vm',
+        controller: 'AddVariantGroupController',
         resolve: {
-          GeneRevisions: 'GeneRevisions',
-          initGeneEdit: function(Genes, GeneRevisions, GeneHistory, $stateParams, $q) {
-            var geneId = $stateParams.geneId;
-            return $q.all([
-              GeneRevisions.initRevisions(geneId),
-              GeneHistory.initBase(geneId)
-            ]);
-          }
+          'VariantGroups': 'VariantGroups'
         },
         deepStateRedirect: [ 'geneId' ],
         data: {
-          titleExp: '"Gene " + gene.name + " Edit"',
-          navMode: 'sub'
-        }
-      })
-      .state('events.genes.edit.basic', {
-        url: '/basic',
-        template: '<gene-edit-basic></gene-edit-basic>',
-        data: {
-          titleExp: '"Gene " + gene.name + " Edit"',
+          titleExp: '"Add Variant Group"',
           navMode: 'sub'
         }
       });
   }
 
   // @ngInject
-  function GeneEditViewOptions($state, $stateParams) {
-    var baseUrl = '';
-    var baseState = '';
-    var styles = {};
+  function AddVariantGroupController($scope, $stateParams, VariantGroups, Datatables) {
+    console.log('AddVariantGroupController called.');
 
-    function init() {
-      baseState = 'events.genes.edit';
-      baseUrl = $state.href(baseUrl, $stateParams);
+    var vm = $scope.vm = {};
 
-      angular.copy({
-        view: {
-          summaryBackgroundColor: 'pageBackground2',
-          editBackgroundColor: 'pageBackground',
-          talkBackgroundColor: 'pageBackground'
-        },
-        tabs: {
-          tabRowBackground: 'pageBackground2Gradient'
+    vm.variantGroup = {
+      gene_id: $stateParams.geneId,
+      name: '',
+      description: '',
+      variants: []
+    };
+
+    vm.variantGroupFields = [
+      {
+        key: 'name',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Name',
+          disabled: false,
+          value: vm.variantGroup.name
         }
-      }, styles);
+      },
+      {
+        key: 'description',
+        type: 'horizontalTextareaHelp',
+        templateOptions: {
+          rows: 8,
+          label: 'Description',
+          value: 'vm.variantGroup.description',
+          focus: true,
+          minLength: 32
+        }
+      },
+      {
+        key: 'variants',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Variants',
+          entityName: 'Variant',
+          helpText: 'Click the an X button to delete a variant, click the + button to add variant. Note that variants must be known to CIViC to be available for including here. New variants may be added as part of an evidence item using the the <a href="/#/add/evidence/basic">Add Evidence form</a>.',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              formatter: 'model[options.key].name',
+              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)'
+            },
+            data: {
+              typeaheadSearch: function(val) {
+                var request = {
+                  mode: 'variants',
+                  count: 5,
+                  page: 0,
+                  'filter[variant]': val
+                };
+                return Datatables.query(request)
+                  .then(function(response) {
+                    return _.map(response.result, function(event) {
+                      return { name: event.entrez_gene + ' - ' + event.variant, id: event.variant_id };
+                    });
+                  });
+              }
+            }
+          }
+        }
+      }
+    ];
+
+    vm.add = function(newVariantGroup, options) {
+      VariantGroups.add(newVariantGroup)
+        .then(function(response) {
+          console.log('new variant group created!');
+        })
+        .catch(function(error) {
+          console.error('revision submit error!');
+          // vm.formErrors[error.status] = true;
+        })
+        .finally(function(){
+          console.log('revision submit done!');
+        });
     }
 
-    return {
-      init: init,
-      state: {
-        baseParams: $stateParams,
-        baseState: baseState,
-        baseUrl: baseUrl
-      },
-      styles: styles
-    };
-  }
-
-  // @ngInject
-  function GeneEditController(Genes, GeneRevisions, GeneEditViewOptions) {
-    console.log('GeneEditController called.');
-    GeneEditViewOptions.init();
-    this.GeneEditViewModel = Genes; // we're re-using the Genes model here but could in the future have a GeneEdit model if warranted
-    this.GeneRevisionsModel = GeneRevisions;
-    this.GeneEditViewOptions = GeneEditViewOptions;
   }
 
 })();
