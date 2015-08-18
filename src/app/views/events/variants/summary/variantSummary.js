@@ -23,5 +23,6 @@
     $scope.evidence = Variants.data.evidence;
     $scope.VariantsViewOptions = VariantsViewOptions;
     $scope.backgroundColor = VariantsViewOptions.styles.view.backgroundColor;
+
   }
 })();

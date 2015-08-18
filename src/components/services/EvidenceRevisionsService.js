@@ -147,7 +147,12 @@
     );
   }
 
-  function EvidenceRevisionsService(EvidenceRevisionsResource, Evidence, $cacheFactory, $q) {
+  function EvidenceRevisionsService(
+    $cacheFactory,
+    $q,
+    Variants,
+    EvidenceRevisionsResource,
+    Evidence) {
     // fetch evidence cache, need to delete evidence record when revision is submitted
     var cache = $cacheFactory.get('$http');
 
@@ -239,12 +244,19 @@
         });
     }
 
-    function acceptRevision(evidenceId, revisionId) {
+    function acceptRevision(evidenceId, revisionId, variantId) {
       return EvidenceRevisionsResource.acceptRevision({ evidenceId: evidenceId, revisionId: revisionId }).$promise.then(
         function(response) {
+          // flush evidence_item cache and refresh, in order to update the variant summary evidence grid
+          cache.remove('/api/variants/' + variantId);
+          cache.remove('/api/variants/' + variantId + '/evidence_items');
+          Variants.queryEvidence(variantId);
+          // refresh suggested changes
           cache.remove('/api/evidence_items/' + evidenceId + '/suggested_changes');
           query(evidenceId);
+          // refresh revision
           cache.remove('/api/evidence_items/' + evidenceId + '/suggested_changes/' + revisionId);
+          // refresh evidence item
           get(evidenceId, revisionId);
           cache.remove('/api/evidence_items/' + evidenceId );
           Evidence.get(evidenceId);
