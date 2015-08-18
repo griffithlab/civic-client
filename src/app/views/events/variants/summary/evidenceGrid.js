@@ -29,7 +29,7 @@
       title: 'Evidence Grid Column Key'
     };
 
-    ctrl.tooltipPopupDelay = 250;
+    ctrl.tooltipPopupDelay = 500;
 
     ctrl.evidenceLevels = {
       'A': 'A - Validated',
