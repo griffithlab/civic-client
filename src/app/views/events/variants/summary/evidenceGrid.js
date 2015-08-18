@@ -31,6 +31,14 @@
       title: 'Evidence Grid Column Key'
     };
 
+    ctrl.evidenceLevels = {
+      'A': 'A - Validated',
+      'B': 'B - Clinical',
+      'C': 'C - Preclinical',
+      'D': 'D - Case Study',
+      'E': 'E - Inferential'
+    };
+
     ctrl.evidenceGridOptions = {
       enablePaginationControls: true,
       paginationPageSizes: [5],
