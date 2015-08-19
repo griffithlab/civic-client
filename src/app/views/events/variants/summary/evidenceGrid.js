@@ -57,6 +57,7 @@
       multiSelect: false,
       modifierKeysToMultiSelect: false,
       noUnselect: true,
+      showGridFooter: true,
       columnDefs: [
         { name: 'id',
           displayName: 'EID',
