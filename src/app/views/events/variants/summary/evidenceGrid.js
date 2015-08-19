@@ -225,6 +225,7 @@
           allowCellFocus: false,
           filter: {
             type: uiGridConstants.filter.SELECT,
+            condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
             term: null,
             disableCancelFilterButton: false,
             selectOptions: [
