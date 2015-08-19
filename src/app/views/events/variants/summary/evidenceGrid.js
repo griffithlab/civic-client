@@ -57,15 +57,14 @@
       multiSelect: false,
       modifierKeysToMultiSelect: false,
       noUnselect: true,
-      showGridFooter: true,
       columnDefs: [
         { name: 'id',
           displayName: 'EID',
           type: 'number',
           enableFiltering: false,
           allowCellFocus: false,
-          minWidth: 45,
-          width: '7%'
+          minWidth: 50,
+          width: '6%'
         },
         { name: 'description',
           displayName: 'DESC',
@@ -102,7 +101,7 @@
         //  type: 'string',
         //  allowCellFocus: false,
         //  enableFiltering: false,
-        //  width: '5%',
+        //  width: '7%,
         //  filter: {
         //    condition: uiGridConstants.filter.CONTAINS
         //  },
@@ -116,7 +115,7 @@
           filter: {
             type: uiGridConstants.filter.SELECT,
             term: null,
-            disableCancelFilterButton: true,
+            disableCancelFilterButton: false,
             selectOptions: [
               {
                 value: null,
@@ -136,8 +135,8 @@
               }
             ]
           },
-          width: '5%',
-          minWidth: 45,
+          width: '6%',
+          minWidth: 50,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridTypeCell.tpl.html'
         },
         { name: 'evidence_level',
@@ -147,7 +146,7 @@
           filter: {
             type: uiGridConstants.filter.SELECT,
             term: null,
-            disableCancelFilterButton: true,
+            disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
               { value: 'A', label: 'A - Validated'},
@@ -157,8 +156,8 @@
               { value: 'E', label: 'E - Inferential'}]
           },
           sort: { direction: uiGridConstants.ASC },
-          width: '5%',
-          minWidth: 45,
+          width: '6%',
+          minWidth: 50,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridLevelCell.tpl.html'
         },
         { name: 'evidence_direction',
@@ -168,15 +167,15 @@
           filter: {
             type: uiGridConstants.filter.SELECT,
             term: null,
-            disableCancelFilterButton: true,
+            disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
               { value: 'Supports', label: 'Supports' },
               { value: 'Does not Support', label: 'Does not Support' }
             ]
           },
-          width: '5%',
-          minWidth: 45,
+          width: '6%',
+          minWidth: 50,
           cellTemplate: 'app/views/events/variants/summary/evidenceDirectionCell.tpl.html'
         },
         { name: 'clinical_significance',
@@ -186,7 +185,7 @@
           filter: {
             type: uiGridConstants.filter.SELECT,
             term: null,
-            disableCancelFilterButton: true,
+            disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
               { value: 'Sensitivity', label: 'Sensitivity' },
@@ -198,8 +197,8 @@
             ]
 
           },
-          width: '5%',
-          minWidth: 45,
+          width: '6%',
+          minWidth: 50,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridClinicalSignificanceCell.tpl.html'
         },
         { name: 'variant_origin',
@@ -209,15 +208,15 @@
           filter: {
             type: uiGridConstants.filter.SELECT,
             term: null,
-            disableCancelFilterButton: true,
+            disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
               { value: 'Somatic', label: 'Somatic'},
               { value: 'Germline', label: 'Germline' }
             ]
           },
-          width: '5%',
-          minWidth: 45,
+          width: '6%',
+          minWidth: 50,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridVariantOriginCell.tpl.html'
         },
         { name: 'rating',
@@ -227,7 +226,7 @@
           filter: {
             type: uiGridConstants.filter.SELECT,
             term: null,
-            disableCancelFilterButton: true,
+            disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
               { value: '5', label: '5 stars'},
@@ -238,8 +237,8 @@
             ]
           },
           sort: { direction: uiGridConstants.DESC },
-          width: '5%',
-          minWidth: 45,
+          width: '6%',
+          minWidth: 50,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridRatingCell.tpl.html'
           //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
         }
