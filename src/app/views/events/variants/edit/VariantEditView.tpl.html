@@ -1,16 +1,19 @@
 <div class="VariantEditView">
-  <entity-edit-view view-model="vm.VariantEditViewModel" revisions-model="vm.VariantRevisionsModel" view-options="vm.VariantTalkViewOptions">
+  <entity-edit-view
+    view-model="vm.VariantEditViewModel"
+    revisions-model="vm.VariantRevisionsModel"
+    view-options="vm.VariantTalkViewOptions">
     <div class="row">
       <div class="col-xs-12">
-        <variant-summary show-menu="false"></variant-summary>
+        <variant-summary show-evidence-grid="true"></variant-summary>
       </div>
     </div>
-    <div class="row entity-talk-content {{ vm.VariantEditViewOptions.styles.view.talkBackgroundColor }}">
-      <div class="col-xs-12">
-        <ui-view>
+    <!--<div class="row entity-talk-content {{ vm.VariantEditViewOptions.styles.view.talkBackgroundColor }}">-->
+      <!--<div class="col-xs-12">-->
+        <!--<ui-view>-->
 
-        </ui-view>
-      </div>
-    </div>
+        <!--</ui-view>-->
+      <!--</div>-->
+    <!--</div>-->
   </entity-edit-view>
 </div>

@@ -16,7 +16,11 @@
   }
 
   // @ngInject
-  function EvidenceTalkRevisionSummaryController($scope, $stateParams, EvidenceRevisions, Security, formConfig) {
+  function EvidenceTalkRevisionSummaryController($scope,
+                                                 $stateParams,
+                                                 EvidenceRevisions,
+                                                 Security,
+                                                 formConfig) {
     var vm = $scope.vm = {};
     vm.isEditor = Security.isEditor;
     vm.isAuthenticated = Security.isAuthenticated;
@@ -30,7 +34,7 @@
     $scope.acceptRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};
-      EvidenceRevisions.acceptRevision($stateParams.evidenceId, $stateParams.revisionId)
+      EvidenceRevisions.acceptRevision($stateParams.evidenceId, $stateParams.revisionId,$stateParams.variantId)
         .then(function() {
           vm.formMessages.acceptSuccess = true;
         })

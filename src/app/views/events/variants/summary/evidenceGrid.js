@@ -25,20 +25,30 @@
     var ctrl = $scope.ctrl = {};
 
     ctrl.keyPopover = {
-      content: 'Hello, World!',
-      //templateUrl: 'myPopoverTemplate.html',
       templateUrl: 'app/views/events/variants/summary/evidenceGridPopoverKey.tpl.html',
       title: 'Evidence Grid Column Key'
     };
 
+    ctrl.tooltipPopupDelay = 500;
+
+    ctrl.evidenceLevels = {
+      'A': 'A - Validated',
+      'B': 'B - Clinical',
+      'C': 'C - Preclinical',
+      'D': 'D - Case Study',
+      'E': 'E - Inferential'
+    };
+
+    ctrl.rowsToShow = 5;
+
     ctrl.evidenceGridOptions = {
-      enablePaginationControls: true,
-      paginationPageSizes: [5],
-      paginationPageSize: 5,
-      minRowsToShow: 5,
+      //enablePaginationControls: true,
+      //paginationPageSizes: [5],
+      //paginationPageSize: 5,
+      minRowsToShow: ctrl.rowsToShow - 1,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
+      enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS,
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
@@ -47,7 +57,6 @@
       multiSelect: false,
       modifierKeysToMultiSelect: false,
       noUnselect: true,
-      rowTemplate: 'app/views/events/variants/summary/evidenceGridRow.tpl.html',
       columnDefs: [
         { name: 'id',
           displayName: 'EID',
@@ -242,6 +251,7 @@
       $scope.$watchCollection('evidence', function(evidence) {
         ctrl.gridApi = gridApi;
         ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
+        // convert drug array into comma delimited list
         evidence = _.map(evidence, function(item){
           if (_.isArray(item.drugs)) {
             item.drugs = _.chain(item.drugs).pluck('name').value().join(', ');
@@ -253,33 +263,16 @@
         ctrl.evidenceGridOptions.data = evidence;
 
         // if we're loading an evidence view, highlight the correct row in the table
-        //if(_.has($stateParams, 'evidenceId')) {
-        //  var rowEntity = _.find($scope.evidence, function(item) {
-        //    return item.id === +$stateParams.evidenceId;
-        //  });
-        //
-        //
-        //  gridApi.core.on.rowsRendered($scope, function() {
-        //    gridApi.selection.selectRow(rowEntity);
-        //  });
-        //
-        //  var pageSet= false;
-        //  gridApi.selection.on.rowSelectionChanged($scope, function() {
-        //    console.log('on.rowSelectionChanged -----');
-        //    if(!pageSet) {
-        //      $timeout(function () {
-        //        var row = _.findIndex(ctrl.evidenceGridOptions.data, function (item) {
-        //          return item.id === +$stateParams.evidenceId;
-        //        });
-        //        var page = Math.floor(row / ctrl.evidenceGridOptions.paginationPageSize);
-        //        gridApi.pagination.seek(page);
-        //        pageSet = true;
-        //      });
-        //    }
-        //  });
-        //
-        //
-        //}
+        if(_.has($stateParams, 'evidenceId')) {
+          var rowEntity = _.find(evidence, function(item) {
+            return item.id === +$stateParams.evidenceId;
+          });
+
+          gridApi.core.on.rowsRendered($scope, function() {
+            gridApi.selection.selectRow(rowEntity);
+            gridApi.grid.scrollTo(rowEntity);
+          });
+        }
 
         gridApi.selection.on.rowSelectionChanged($scope, function(row){
           var params = _.merge($stateParams, { evidenceId: row.entity.id });

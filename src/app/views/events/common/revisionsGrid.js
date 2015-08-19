@@ -26,14 +26,16 @@
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
 
+    ctrl.rowsToShow = 3;
+
     ctrl.revisionsGridOptions = {
-      enablePaginationControls: true,
-      paginationPageSizes: [5],
-      paginationPageSize: 5,
-      minRowsToShow: 6,
+      //enablePaginationControls: true,
+      //paginationPageSizes: [5],
+      //paginationPageSize: 5,
+      minRowsToShow: ctrl.rowsToShow - 1,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
+      enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS,
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
@@ -44,7 +46,7 @@
       noUnselect: true,
       columnDefs: [
         { name: 'id',
-          displayName: 'ID',
+          displayName: 'RID',
           enableFiltering: false,
           allowCellFocus: false,
           width: '5%'
@@ -83,14 +85,26 @@
       ctrl.gridApi = gridApi;
       ctrl.revisionsGridOptions.data = $scope.changes;
 
-      $scope.$watchCollection('changes', function() {
-        ctrl.revisionsGridOptions.data = $scope.changes;
-      });
+      $scope.$watchCollection('changes', function(changes) {
+        ctrl.revisionsGridOptions.data = changes;
 
-      gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        var params = _.merge($scope.$stateParams, { revisionId: row.entity.id });
-        var newState = $scope.baseState + '.list.summary';
-        $scope.$state.go(newState, params);
+        // if we're loading a revision, highlight the correct row in the table
+        if(_.has($stateParams, 'revisionId')) {
+          var rowEntity = _.find(changes, function(item) {
+            return item.id === +$stateParams.revisionId;
+          });
+
+          gridApi.core.on.rowsRendered($scope, function() {
+            gridApi.selection.selectRow(rowEntity);
+            gridApi.grid.scrollTo(rowEntity);
+          });
+        }
+
+        gridApi.selection.on.rowSelectionChanged($scope, function(row){
+          var params = _.merge($scope.$stateParams, { revisionId: row.entity.id });
+          var newState = $scope.baseState + '.list.summary';
+          $scope.$state.go(newState, params);
+        });
       });
     };
   }

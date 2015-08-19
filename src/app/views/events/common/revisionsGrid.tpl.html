@@ -1,7 +1,13 @@
 <div class="revisionsGrid">
+  <span
+
+    class="record-info">
+    Showing {{ ctrl.rowsToShow }} of {{ctrl.revisionsGridOptions.data.length}} revisions
+  </span>
+
   <div ui-grid="ctrl.revisionsGridOptions"
        ui-grid-cellnav
        ui-grid-auto-resize
-       ui-grid-pagination
-       ui-grid-selection></div>
+       ui-grid-selection>
+  </div>
 </div>
