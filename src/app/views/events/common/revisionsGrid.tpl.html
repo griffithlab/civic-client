@@ -1,8 +1,9 @@
 <div class="revisionsGrid">
-  <span
-
-    class="record-info">
-    Showing {{ ctrl.rowsToShow }} of {{ctrl.revisionsGridOptions.data.length}} revisions
+  <span class="record-info">
+    <span>{{ ctrl.gridApi.grid.rows.length }} total revisions</span>
+    <span ng-if="ctrl.gridApi.grid.renderContainers.body.visibleRowCache.length !== ctrl.gridApi.grid.rows.length">
+      (showing {{ctrl.gridApi.grid.renderContainers.body.visibleRowCache.length}})
+    </span>
   </span>
 
   <div ui-grid="ctrl.revisionsGridOptions"
