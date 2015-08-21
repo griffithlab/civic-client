@@ -134,7 +134,7 @@
         },
         {
           name: 'diseases',
-          width: '30%',
+          //width: '30%',
           displayName: 'Diseases',
           enableFiltering: true,
           allowCellFocus: false,
