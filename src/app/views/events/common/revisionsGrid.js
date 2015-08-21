@@ -89,16 +89,16 @@
         ctrl.revisionsGridOptions.data = changes;
 
         // if we're loading a revision, highlight the correct row in the table
-        if(_.has($stateParams, 'revisionId')) {
-          var rowEntity = _.find(changes, function(item) {
-            return item.id === +$stateParams.revisionId;
-          });
-
-          gridApi.core.on.rowsRendered($scope, function() {
-            gridApi.selection.selectRow(rowEntity);
-            gridApi.grid.scrollTo(rowEntity);
-          });
-        }
+        //if(_.has($stateParams, 'revisionId')) {
+        //  var rowEntity = _.find(changes, function(item) {
+        //    return item.id === +$stateParams.revisionId;
+        //  });
+        //
+        //  gridApi.core.on.rowsRendered($scope, function() {
+        //    gridApi.selection.selectRow(rowEntity);
+        //    gridApi.grid.scrollTo(rowEntity);
+        //  });
+        //}
 
         gridApi.selection.on.rowSelectionChanged($scope, function(row){
           var params = _.merge($scope.$stateParams, { revisionId: row.entity.id });
