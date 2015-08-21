@@ -12,7 +12,6 @@
     'ui.grid.autoResize',
     'ui.grid.pagination',
     'ui.grid.cellNav',
-    'ui.gravatar',
     'formly',
     'dialogs.main',
     'yaru22.angular-timeago',
@@ -141,13 +140,4 @@
 // disable anchor-scrolling
   angular.module('civicClient').value('$anchorScroll', angular.noop);
 
-// configure gravatar service
-  angular.module('ui.gravatar').config([
-    'gravatarServiceProvider', function (gravatarServiceProvider) {
-      gravatarServiceProvider.defaults = {
-        size:      32,
-        'default': 'retro'  // retro 8-bit style as default for missing avatars
-      };
-    }
-  ]);
 })();
