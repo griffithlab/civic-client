@@ -35,7 +35,9 @@
         ng-click="vm.saveProfile(vm.userEdit, vm.options)">
         Save Profile
       </button>
-      <span ng-show="vm.submitSuccess" style="color: forestgreen; margin-left: 10px;">Profile successfully updated.</span>
+      <span ng-show="vm.submitSuccess" style="color: forestgreen; margin-left: 10px;">
+        Profile successfully updated. Returning you to your profile in {{ vm.count }} seconds.
+      </span>
       <span ng-show="vm.submitFail" style="color: darkred; margin-left: 10px;">Error updating profile!</span>
     </div>
   </div>

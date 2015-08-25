@@ -4,12 +4,18 @@
     .controller('ProfileEditController', ProfileEditController);
 
   // @ngInject
-  function ProfileEditController ($scope, Security, Users, user){
+  function ProfileEditController ($scope,
+                                  $state,
+                                  $interval,
+                                  Security,
+                                  Users,
+                                  user){
     var vm = $scope.vm = {};
 
     vm.user = user;
     vm.userEdit = angular.copy(user);
     vm.currentUser = Security.currentUser;
+    vm.secondsReturn = 5;
 
     // TODO: implement better error handling and success message
     vm.submitSuccess = false;
@@ -72,6 +78,16 @@
           console.log('updated user successfully');
           vm.user = Security.currentUser = response;
           vm.submitSuccess = true;
+          vm.count = vm.secondsReturn;
+          var int = $interval(function() {
+            if (vm.count <= 1) {
+              $state.go('users.profile', { userId: user.id });
+              $interval.cancel(int);
+            } else {
+              vm.count--;
+            }
+          }, 1000);
+
         })
       .catch(function(error) {
           console.error('update user error!');
