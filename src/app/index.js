@@ -56,8 +56,8 @@
     //});
     window.apiCheck.disabled = false; // set to true in production
     formlyConfigProvider.removeChromeAutoCompletee = true;
-    $uiViewScrollProvider.useAnchorScroll();
-    $anchorScrollProvider.disableAutoScrolling()
+    //$uiViewScrollProvider.useAnchorScroll();
+    //$anchorScrollProvider.disableAutoScrolling()
   }
 
 // @ngInject

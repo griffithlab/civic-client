@@ -13,7 +13,7 @@
       .state('users', {
         abstract: true,
         url: '/users/:userId',
-        template: '<ui-view id="users-view"></ui-view>',
+        template: '<ui-view autoscroll="true" id="users-view"></ui-view>',
         controller: 'UsersViewController'
       })
       .state('users.profile', {

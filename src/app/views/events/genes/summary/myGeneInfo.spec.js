@@ -42,7 +42,7 @@ describe('myGeneInfo', function () {
         .state('initial', {
           abstract: false,
           url: '/initial',
-          template: '<ui-view></ui-view>'
+          template: '<ui-view autoscroll="true"></ui-view>'
         })
         .state('events.genes.child', {
           abstract: false,
