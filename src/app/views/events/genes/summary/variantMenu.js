@@ -23,9 +23,13 @@
       isAdmin: Security.isEditor()
     };
 
-    $scope.variantGroups = _.map(Genes.data.variantGroups, function(vg){
-      vg.singleGene = _.every(vg.variants, { gene_id: vg.variants[0].gene_id });
-      return vg;
-    });
+    $scope.$watchCollection(
+      function() { return Genes.data.variantGroups },
+      function(variantGroups){
+        $scope.variantGroups = _.map(variantGroups, function(vg){
+          vg.singleGene = _.every(vg.variants, { gene_id: vg.variants[0].gene_id });
+          return vg;
+        });
+      });
   }
 })();

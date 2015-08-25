@@ -27,6 +27,7 @@
                                      $stateParams,
                                      formConfig,
                                      VariantGroups,
+                                     Genes,
                                      Datatables,
                                      Security) {
     console.log('AddVariantGroupController called.');
@@ -117,6 +118,9 @@
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
+
+          // update parent Gene object to refresh variant menu
+          Genes.queryVariantGroups(Genes.data.item.id);
         })
         .catch(function(error) {
           console.error('revision submit error!');
