@@ -5,6 +5,22 @@
 
 .addVariantGroup {
 
+  .detail-corner {
+    @event-corner-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @event-corner-radius;
+    height: @event-corner-radius;
+    background-color: @pageBackground2;
+    .corner-edge {
+      border-top-left-radius: @event-corner-radius;
+      width: @event-corner-radius;
+      height: @event-corner-radius;
+      background-color: @pageBackground;
+    }
+  }
+
   .add-instructions  {
     background-color: @pageBackground2;
     border-radius: @border-radius-small;
