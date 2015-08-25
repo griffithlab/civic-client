@@ -102,7 +102,7 @@
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = _.merge($scope.$stateParams, { revisionId: row.entity.id });
         var newState = $scope.baseState + '.list.summary';
-        $scope.$state.go(newState, params);
+        $state.go(newState, params);
       });
 
       // watch for any revisions updates

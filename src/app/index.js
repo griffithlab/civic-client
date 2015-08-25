@@ -41,7 +41,7 @@
     .config(appConfig);
 
 // @ngInject
-  function appConfig(formlyConfigProvider) {
+  function appConfig(formlyConfigProvider, $anchorScrollProvider, $uiViewScrollProvider) {
     // log all rootScope events to the console for debugging
     // (this code should be commented out before building for production)
     //$provide.decorator('$rootScope', function ($delegate) {
@@ -56,6 +56,8 @@
     //});
     window.apiCheck.disabled = false; // set to true in production
     formlyConfigProvider.removeChromeAutoCompletee = true;
+    $uiViewScrollProvider.useAnchorScroll();
+    $anchorScrollProvider.disableAutoScrolling()
   }
 
 // @ngInject
@@ -136,8 +138,5 @@
     'civic.events.variantGroups',
     'civic.events.evidence'
   ]);
-
-// disable anchor-scrolling
-  angular.module('civicClient').value('$anchorScroll', angular.noop);
 
 })();

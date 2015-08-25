@@ -34,11 +34,6 @@
       .state('events.genes.summary.variants.talk.revisions.list', {
         url: '/list/:revisionId',
         template: '<variant-talk-revisions></variant-talk-revisions>',
-        resolve: {
-          initRevisionList: function(Variants, VariantRevisions, VariantHistory, $stateParams) {
-            return VariantRevisions.query($stateParams.variantId);
-          }
-        },
         data: {
           titleExp: '"Variant " + variant.name + " Revisions"',
           navMode: 'sub'
