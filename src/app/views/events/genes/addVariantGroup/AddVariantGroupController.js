@@ -23,10 +23,28 @@
   }
 
   // @ngInject
-  function AddVariantGroupController($scope, $stateParams, VariantGroups, Datatables) {
+  function AddVariantGroupController($scope,
+                                     $stateParams,
+                                     formConfig,
+                                     VariantGroups,
+                                     Datatables,
+                                     Security) {
     console.log('AddVariantGroupController called.');
 
     var vm = $scope.vm = {};
+
+    vm.isEditor = Security.isEditor();
+    vm.isAuthenticated = Security.isAuthenticated();
+
+    vm.showForm = true;
+    vm.showSuccessMessage = false;
+    vm.showInstructions = true;
+
+    vm.formErrors = {};
+    vm.formMessages = {};
+    vm.errorMessages = formConfig.errorMessages;
+    vm.errorPrompts = formConfig.errorPrompts;
+
 
     vm.variantGroup = {
       gene_id: $stateParams.geneId,
@@ -95,10 +113,14 @@
       VariantGroups.add(newVariantGroup)
         .then(function(response) {
           console.log('new variant group created!');
+          vm.formMessages.submitSuccess = true;
+          vm.showInstructions = false;
+          vm.showForm = false;
+          vm.showSuccessMessage = true;
         })
         .catch(function(error) {
           console.error('revision submit error!');
-          // vm.formErrors[error.status] = true;
+          vm.formErrors[error.status] = true;
         })
         .finally(function(){
           console.log('revision submit done!');

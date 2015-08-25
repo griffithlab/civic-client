@@ -1,3 +1,33 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
 .addVariantGroup {
 
+  .add-instructions  {
+    background-color: @pageBackground2;
+    border-radius: @border-radius-small;
+    padding: @contentPadding;
+    margin-bottom: @contentPadding;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .successMessage {
+    margin-top: @contentPadding;
+  }
+
+  .add-errors, .add-messages {
+    .alert {
+      margin-bottom: @contentPadding;
+    }
+  }
+
+  .buttons {
+    border-top: 3px solid #CCC;
+    padding-top: @contentPadding;
+    margin-top: @contentPadding;
+  }
 }

@@ -2,31 +2,80 @@
   <div class="row">
     <div class="col-xs-12">
       <h4>Add Variant Group</h4>
-      <form class="form-horizontal">
-        <formly-form
-          options="vm.options"
-          model="vm.variantGroup"
-          fields="vm.variantGroupFields">
-
-        </formly-form>
-      </form>
     </div>
   </div>
-  <div class="row buttons">
-    <div class="col-xs-5 col-xs-offset-2">
-      <div class="buttons">
-        <div class="pull-left">
-          <cancel-button></cancel-button>
-        </div>
-        <div class="pull-right">
-            <button type="submit" class="btn btn-default" ng-click="vm.add(vm.variantGroup, vm.options)">Add Variant Group</button>
+  <!-- INSTRUCTIONS -->
+  <div class="row" ng-if="vm.showInstructions">
+    <div class="col-xs-12">
+      <div class="add-instructions">
+        <p>To add a Variant Group, please complete the following form, then click the 'Add Variant Group' button.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MESSAGES -->
+  <div class="row messages">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formMessages" class="add-messages">
+        <div ng-message="submitSuccess" class="alert alert-success">
+          <strong class="status">Success</strong> - <span class="message">Your new evidence item was successfully submitted.</span>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- ERRORS -->
+  <div class="row errors">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formErrors" class="add-errors">
+        <div ng-message="500" class="alert alert-danger">
+          <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
+        </div>
+        <div ng-message="401" class="alert alert-danger">
+          <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
+        </div>
+        <div ng-message="403" class="alert alert-danger">
+          <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
+        </div>
+        <div ng-message="409" class="alert alert-danger">
+          <strong class="status">409 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form class="form-horizontal" ng-if="vm.showForm">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <formly-form
+          options="vm.options"
+          model="vm.variantGroup"
+          fields="vm.variantGroupFields">
+        </formly-form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="buttons">
+          <div class="pull-left">
+            <cancel-button></cancel-button>
+          </div>
+          <div class="pull-right">
+            <button type="submit" class="btn btn-default" ng-click="vm.add(vm.variantGroup, vm.options)">Add Variant Group</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="successMessage" ng-if="vm.showSuccessMessage">
+    <div class="col-xs-12 jumbotron">
+      <h1>Thank you.</h1>
+      <p>Your new Variant Group has been added. If it includes a variant in the currently selected Gene, you should see the new variant group in the variant menu to the left. Otherwise, you may view it by navigating to a variant it contains.</p>
+    </div>
+  </div>
   <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="vm.variantGroup|json"></pre>-->
-    <!--</div>-->
+  <!--<div class="col-xs-12">-->
+  <!--<pre ng-bind="vm.variantGroup|json"></pre>-->
+  <!--</div>-->
   <!--</div>-->
 </div>
