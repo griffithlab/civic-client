@@ -52,9 +52,12 @@
           isArray: false,
           cache: cache
         },
+        search: {
+
+        },
         beginsWith: {
           method: 'GET',
-          url: '/api/genes?name=:name',
+          url: '/api/genes?name=:name&detailed=false',
           isArray: true,
           cache: cache
         },
@@ -230,8 +233,10 @@
       getComment: getComment,
       submitComment: submitComment,
       updateComment: updateComment,
-      deleteComment: deleteComment
+      deleteComment: deleteComment,
 
+      // Misc
+      beginsWith: beginsWith
     };
 
     function initBase(geneId) {
@@ -290,6 +295,13 @@
     }
     function verify(geneId) {
       return GenesResource.verify({geneId: geneId}).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
+
+    function beginsWith(name) {
+      return GenesResource.beginsWith({name: name}).$promise
         .then(function(response) {
           return response.$promise;
         });

@@ -111,6 +111,14 @@
     });
 
     formlyConfigProvider.setWrapper({
+      name: 'entrezIdDisplay',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small">Entrez ID: {{ to.data.entrez_id }}</span>'
+      ].join(' ')
+    });
+
+    formlyConfigProvider.setWrapper({
       name: 'diseasedisplay',
       template: [
         '<formly-transclude></formly-transclude>',

@@ -41,6 +41,7 @@
 
     vm.newEvidence = {
       entrez_id: '',
+      gene: '',
       variant_name: '',
       description: '',
       disease: {
@@ -70,59 +71,40 @@
 
     vm.evidenceFields = [
       {
-        key: 'entrez_id',
-        type: 'gene',
-        controller: /* @ngInject */ function($scope, $stateParams, Genes) {
-          // populate field if geneId provided
-          if($stateParams.geneId){
-            Genes.get($stateParams.geneId).then(function(gene) {
-              $scope.model.entrez_id = gene.entrez_id;
-            });
-          }
-        },
+        key: 'gene',
+        type: 'horizontalTypeaheadHelp',
+        wrapper: 'entrezIdDisplay',
+        //controller: /* @ngInject */ function($scope, $stateParams, Genes) {
+        //  // populate field if geneId provided
+        //  if($stateParams.geneId){
+        //    Genes.get($stateParams.geneId).then(function(gene) {
+        //      $scope.model.entrez_id = gene.entrez_id;
+        //    });
+        //  }
+        //},
         templateOptions: {
-          label: 'Gene Entrez ID',
-          value: 'vm.newEvidence.entrez_id',
+          label: 'Gene Entrez Name',
+          value: 'vm.newEvidence.gene',
           minLength: 32,
           required: true,
+          formatter: 'model[options.key].name',
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+          helpText: 'Entrez Gene name (e.g. BRAF). Gene name must be known to the Entrez database.',
           data: {
-            name: '--'
-          },
-          helpText: 'Entrez Gene ID (e.g., 673 for BRAF)'
-        },
-        modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
-          debounce: {
-            default: 1000,
-            blur: 1000
+            entrez_id: '--'
           }
         },
-        validators: {
-          validPubmedId: {
-            expression: function($viewValue, $modelValue, scope) {
-              if ($viewValue.length > 0) {
-                var deferred = $q.defer();
-                scope.options.templateOptions.loading = true;
-                Genes.verify($viewValue).then(
-                  function (response) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.name = response.name;
-                    deferred.resolve(response);
-                  },
-                  function (error) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.name = '--';
-                    deferred.reject(error);
-                  }
-                );
-                return deferred.promise;
-              } else {
-                scope.options.templateOptions.data.name = '--';
-                return true;
-              }
-            },
-            message: '"This does not appear to be a valid Entrez ID."'
+        modelOptions: {
+          debounce: {
+            default: 300
+          }
+        },
+        data: {
+          typeaheadSearch: function(val) {
+            return Genes.beginsWith(val)
+              .then(function(response) {
+                return response;
+              });
           }
         }
       },
