@@ -11,7 +11,7 @@
       .state('add', {
         abstract: true,
         url: '/add',
-        template: '<ui-view autoscroll="true" id="add-view"></ui-view>',
+        template: '<ui-view id="add-view"></ui-view>',
         controller: 'AddViewController',
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();

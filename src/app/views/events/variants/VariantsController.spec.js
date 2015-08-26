@@ -48,13 +48,13 @@ describe('VariantsViewController', function () {
         .state('initial', {
           abstract: false,
           url: '/initial',
-          template: '<ui-view autoscroll="true"></ui-view>'
+          template: '<ui-view></ui-view>'
         });
       $stateProvider
         .state('events.variants.child', {
           abstract: false,
           url: '/child',
-          template: '<ui-view autoscroll="true"></ui-view>'
+          template: '<ui-view></ui-view>'
         });
     });
 

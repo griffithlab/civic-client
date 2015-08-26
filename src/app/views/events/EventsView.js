@@ -15,7 +15,7 @@
       .state('events', {
         abstract: true,
         url: '/events',
-        template: '<ui-view autoscroll="true" id="events-view"></ui-view>',
+        template: '<ui-view id="events-view"></ui-view>',
         controller: 'EventsViewController',
         resolve: {
           stateParams: /* @ngInject */ function($stateParams) {
