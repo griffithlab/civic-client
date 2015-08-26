@@ -61,7 +61,8 @@
         templateOptions: {
           label: 'Name',
           disabled: false,
-          value: vm.variantGroup.name
+          value: vm.variantGroup.name,
+          helpText: 'A brief and meaninful name for the new variant group.'
         }
       },
       {
@@ -72,7 +73,8 @@
           label: 'Description',
           value: 'vm.variantGroup.description',
           focus: true,
-          minLength: 32
+          minLength: 32,
+          helpText: 'A brief description of this new variant group.'
         }
       },
       {
