@@ -40,7 +40,6 @@
     vm.showInstructions = true;
 
     vm.newEvidence = {
-      entrez_id: '',
       gene: '',
       variant_name: '',
       description: '',
@@ -73,7 +72,7 @@
       {
         key: 'gene',
         type: 'horizontalTypeaheadHelp',
-        wrapper: 'entrezIdDisplay',
+        wrapper: ['loader', 'entrezIdDisplay', 'validationMessages'],
         //controller: /* @ngInject */ function($scope, $stateParams, Genes) {
         //  // populate field if geneId provided
         //  if($stateParams.geneId){
@@ -88,23 +87,22 @@
           minLength: 32,
           required: true,
           formatter: 'model[options.key].name',
-          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+          typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+          onSelect: 'to.data.entrez_id = $model.entrez_id',
           helpText: 'Entrez Gene name (e.g. BRAF). Gene name must be known to the Entrez database.',
           data: {
-            entrez_id: '--'
+            entrez_id: '--',
+            typeaheadSearch: function(val) {
+              return Genes.beginsWith(val)
+                .then(function(response) {
+                  return response;
+                });
+            }
           }
         },
         modelOptions: {
           debounce: {
             default: 300
-          }
-        },
-        data: {
-          typeaheadSearch: function(val) {
-            return Genes.beginsWith(val)
-              .then(function(response) {
-                return response;
-              });
           }
         }
       },
