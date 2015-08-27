@@ -73,14 +73,15 @@
         key: 'gene',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'entrezIdDisplay', 'validationMessages'],
-        //controller: /* @ngInject */ function($scope, $stateParams, Genes) {
-        //  // populate field if geneId provided
-        //  if($stateParams.geneId){
-        //    Genes.get($stateParams.geneId).then(function(gene) {
-        //      $scope.model.entrez_id = gene.entrez_id;
-        //    });
-        //  }
-        //},
+        controller: /* @ngInject */ function($scope, $stateParams, Genes) {
+          // populate field if geneId provided
+          if($stateParams.geneId){
+            Genes.get($stateParams.geneId).then(function(gene) {
+              $scope.model.gene = gene;
+              $scope.to.data.entrez_id = gene.entrez_id;
+            });
+          }
+        },
         templateOptions: {
           label: 'Gene Entrez Name',
           value: 'vm.newEvidence.gene',

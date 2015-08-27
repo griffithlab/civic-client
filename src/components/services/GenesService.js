@@ -30,6 +30,12 @@
           isArray: false,
           cache: cache
         },
+        getName: { // get a single gene's name and entrez_id
+          method: 'GET',
+          url: '/api/genes/:geneId&detailed=false',
+          isArray: false,
+          cache: cache
+        },
         update: {
           method: 'PATCH',
           interceptor: {
@@ -214,6 +220,7 @@
       // Gene Base
       query: query,
       get: get,
+      getName: getName,
       update: update,
       delete: deleteItem,
       apply: apply,
@@ -265,6 +272,12 @@
       return GenesResource.get({geneId: geneId}).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+    function getName(geneId) {
+      return GenesResource.getName({geneId: geneId}).$promise
+        .then(function(response) {
           return response.$promise;
         });
     }
