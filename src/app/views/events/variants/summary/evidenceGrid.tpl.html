@@ -1,5 +1,6 @@
 <div class="evidenceGrid">
   <div class="row">
+
     <div class="col-xs-10">
       <h4>Evidence for {{ variant.name }}
 
@@ -11,19 +12,34 @@
         </span>
       </h4>
     </div>
+
     <div class="col-xs-2">
       <button
         class="btn btn-default btn-xs pull-right col-key"
-        popover-template="ctrl.keyPopover.templateUrl"
-        popover-title="{{ctrl.keyPopover.title}}"
-        popover-placement="left"
-        popover-animation="false">
-        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Column Key
+        ng-click="ctrl.showGridKey = !ctrl.showGridKey">
+        <span class="glyphicon"
+              aria-hidden="true"
+              ng-class="{ 'glyphicon-triangle-right': ctrl.showGridKey === false, 'glyphicon-triangle-bottom': ctrl.showGridKey === true}">
+        </span>
+        Evidence Grid Key
       </button>
     </div>
+
   </div>
-  <div ui-grid="ctrl.evidenceGridOptions"
-       ui-grid-cellnav
-       ui-grid-auto-resize
-       ui-grid-selection></div>
+
+  <div class="row column-key" ng-show="ctrl.showGridKey">
+    <div class="col-xs-12">
+      <div ng-include="'app/views/events/variants/summary/evidenceGridPopoverKey.tpl.html'"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div ui-grid="ctrl.evidenceGridOptions"
+           ui-grid-cellnav
+           ui-grid-auto-resize
+           ui-grid-selection>
+      </div>
+    </div>
+  </div>
 </div>

@@ -24,6 +24,8 @@
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
 
+    ctrl.showGridKey = false;
+
     ctrl.keyPopover = {
       templateUrl: 'app/views/events/variants/summary/evidenceGridPopoverKey.tpl.html',
       title: 'Evidence Grid Column Key'
