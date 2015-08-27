@@ -25,6 +25,7 @@
   // @ngInject
   function AddVariantGroupController($scope,
                                      $stateParams,
+                                     _,
                                      formConfig,
                                      VariantGroups,
                                      Genes,
@@ -112,9 +113,9 @@
       }
     ];
 
-    vm.add = function(newVariantGroup, options) {
+    vm.add = function(newVariantGroup) {
       VariantGroups.add(newVariantGroup)
-        .then(function(response) {
+        .then(function() {
           console.log('new variant group created!');
           vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
@@ -131,7 +132,7 @@
         .finally(function(){
           console.log('revision submit done!');
         });
-    }
+    };
 
   }
 

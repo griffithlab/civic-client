@@ -22,7 +22,6 @@
 
   // @ngInject
   function EventsService(EventsResource) {
-    var item = { };
     var collection = [];
 
     return {

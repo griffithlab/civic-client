@@ -74,7 +74,7 @@
     vm.saveProfile = function(userEdit) {
 
       Users.update(userEdit)
-      .then(function(response) {
+        .then(function(response) {
           console.log('updated user successfully');
           vm.user = Security.currentUser = response;
           vm.submitSuccess = true;
@@ -89,11 +89,11 @@
           }, 1000);
 
         })
-      .catch(function(error) {
+        .catch(function() {
           console.error('update user error!');
           vm.submitFail = false;
-        })
+        });
 
-    }
+    };
   }
 })();

@@ -5,14 +5,14 @@
     .factory('Users', UsersService);
 
   // @ngInject
-  function UsersResource($resource, $cacheFactory) {
-    var cache = $cacheFactory.get('$http');
+  function UsersResource($resource) {
+    //var cache = $cacheFactory.get('$http');
 
-    var cacheInterceptor = function(response) {
-      console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(' '));
-      cache.remove(response.config.url);
-      return response.$promise;
-    };
+    //var cacheInterceptor = function(response) {
+    //  console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(' '));
+    //  cache.remove(response.config.url);
+    //  return response.$promise;
+    //};
 
 
     return $resource('/api/users/:userId',

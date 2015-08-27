@@ -6,8 +6,7 @@
   angular.module('civic.events.evidence', ['ui.router']);
   angular.module('civic.events.common', []);
   angular.module('civic.events')
-    .config(EventsViewConfig)
-    .controller('EventsViewController', EventsViewController);
+    .config(EventsViewConfig);
 
   // @ngInject
   function EventsViewConfig($stateProvider) {
@@ -16,21 +15,11 @@
         abstract: true,
         url: '/events',
         template: '<ui-view id="events-view"></ui-view>',
-        controller: 'EventsViewController',
-        resolve: {
-          stateParams: /* @ngInject */ function($stateParams) {
-            return $stateParams;
-          }
-        },
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
       });
 
-  }
-
-  // @ngInject
-  function EventsViewController($rootScope, stateParams) {
   }
 
 })();

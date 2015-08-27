@@ -41,7 +41,7 @@
     .config(appConfig);
 
 // @ngInject
-  function appConfig(formlyConfigProvider, $anchorScrollProvider, $uiViewScrollProvider) {
+  function appConfig(formlyConfigProvider) {
     // log all rootScope events to the console for debugging
     // (this code should be commented out before building for production)
     //$provide.decorator('$rootScope', function ($delegate) {

@@ -167,7 +167,7 @@
               Germline: 'Variant is found in every cell, not restricted to tumor/diseased cells'
             }
           },
-          onChange: function(value, options, scope) {
+          onChange: function(value, options) {
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
@@ -350,7 +350,7 @@
               E: 'Indirect evidence'
             }
           },
-          onChange: function(value, options, scope) {
+          onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
 
@@ -521,7 +521,7 @@
               'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
             }
           },
-          onChange: function(value, options, scope) {
+          onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
         },
@@ -566,7 +566,7 @@
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
-      if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null } // delete interaction if only 1 drug
+      if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
 

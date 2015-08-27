@@ -78,7 +78,7 @@
               Germline: 'Variant is found in every cell, not restricted to tumor/diseased cells'
             }
           },
-          onChange: function(value, options, scope) {
+          onChange: function(value, options) {
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
@@ -138,7 +138,7 @@
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
         value: '',
-        controller: /* ngInject */ function($scope, Diseases) {
+        controller: /* ngInject */ function($scope) {
           $scope.to.data.doid = $scope.model.disease.doid;
         },
         templateOptions: {
@@ -252,7 +252,7 @@
               E: 'Indirect evidence'
             }
           },
-          onChange: function(value, options, scope) {
+          onChange: function(value, options) {
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
@@ -437,7 +437,7 @@
               'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
             }
           },
-          onChange: function(value, options, scope) {
+          onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition =
               options.templateOptions.data.attributeDefinitions[value];
           }
@@ -483,7 +483,7 @@
     vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, ''); // delete blank input values
-      if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null } // delete interaction if only 1 drug
+      if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delbete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
 
@@ -508,7 +508,7 @@
     vm.apply = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, '');
-      if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null } // delete interaction if only 1 drug
+      if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
       Evidence.apply(evidenceEdit)

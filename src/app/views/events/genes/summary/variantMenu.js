@@ -14,7 +14,7 @@
     });
 
   //@ngInject
-  function VariantMenuController($scope, $state, $stateParams, Genes, Security) {
+  function VariantMenuController($scope, $state, $stateParams, Genes, Security, _) {
     $scope.gene = Genes.data.item;
     $scope.variants = Genes.data.variants;
     $scope.stateParams = $stateParams;
@@ -24,7 +24,7 @@
     };
 
     $scope.$watchCollection(
-      function() { return Genes.data.variantGroups },
+      function() { return Genes.data.variantGroups; },
       function(variantGroups){
         $scope.variantGroups = _.map(variantGroups, function(vg){
           vg.singleGene = _.every(vg.variants, { gene_id: vg.variants[0].gene_id });

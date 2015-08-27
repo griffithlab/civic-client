@@ -2,12 +2,10 @@
   'use strict';
   angular.module('civic.common')
     .directive('statsBlock', statsBlock)
-    .controller('StatsBlockController', StatsBlockController)
-
+    .controller('StatsBlockController', StatsBlockController);
 
   // @ngInject
-  function statsBlock(ConfigService) {
-    'use strict';
+  function statsBlock() {
     return {
       restrict: 'E',
       scope: {

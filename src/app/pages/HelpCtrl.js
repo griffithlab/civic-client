@@ -28,6 +28,6 @@
         template: 'app/pages/help_trust_ratings.tpl.html',
         active: false
       }
-    ]
+    ];
   }
 })();

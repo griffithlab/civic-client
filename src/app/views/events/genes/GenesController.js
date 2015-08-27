@@ -43,7 +43,7 @@
   }
 
   // @ngInject
-  function GenesViewOptions($state, $stateParams, Genes) {
+  function GenesViewOptions($state, $stateParams) {
     var tabData = [];
     var state = {
       baseParams: {},
