@@ -11,15 +11,19 @@
       <div ng-messages="vm.formErrors" class="edit-errors">
         <div ng-message="500" class="alert alert-danger">
           <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
+          <span class="server-message">{{ vm.serverMsg }}</span>
         </div>
         <div ng-message="401" class="alert alert-danger">
           <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
+          <span class="server-message">{{ vm.serverMsg }}</span>
         </div>
         <div ng-message="403" class="alert alert-danger">
           <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
+          <span class="server-message">{{ vm.serverMsg }}</span>
         </div>
         <div ng-message="409" class="alert alert-danger">
           <strong class="status">409 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
+          <span class="server-message">{{ vm.serverMsg }}</span>
         </div>
       </div>
     </div>
@@ -69,8 +73,8 @@
     </div>
   </div>
   <!--<div class="row" style="margin-top: 16px;">-->
-    <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="vm.variantGroupEdit|json"></pre>-->
-    <!--</div>-->
+  <!--<div class="col-xs-12">-->
+  <!--<pre ng-bind="vm.variantGroupEdit|json"></pre>-->
+  <!--</div>-->
   <!--</div>-->
 </div>

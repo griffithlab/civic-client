@@ -48,6 +48,7 @@
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+    vm.serverMsg = '';
     vm.newRevisionId = Number();
     vm.stateParams = $stateParams;
 
@@ -499,6 +500,7 @@
         .catch(function(error) {
           console.error('revision submit error!');
           vm.formErrors[error.status] = true;
+          vm.serverMsg = error.data.error;
         })
         .finally(function(){
           console.log('revision submit done!');
