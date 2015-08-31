@@ -112,10 +112,23 @@
       background-color: transparent !important;
       border: none !important;
 
-      td {
+      td, th {
         border: none !important;
       }
+
+      th.col-name, th.col-description {
+        font-style: oblique;
+        font-size: small;
+        font-weight: normal !important;
+        text-decoration: underline;
+        color: #999;
+      }
+
+      th.col-name{
+        text-align: right;
+      }
     }
+
     border: 1px solid #DDD;
     background-color: #F7F7F7;
     border-radius: @border-radius-base;
@@ -125,6 +138,9 @@
   }
 
   .popoverKey {
+    .popover-description {
+      font-size: small;
+    }
     .column-key {
       .col-name {
         text-align: right;
@@ -133,6 +149,7 @@
 
       .col-description > span {
         font-weight: bold;
+        padding-top: 5px;
       }
 
       .symbol-key {
