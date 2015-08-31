@@ -254,6 +254,8 @@
       $scope.$watchCollection('evidence', function(evidence) {
         ctrl.gridApi = gridApi;
         ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
+        var suppressGo = false;
+
         // convert drug array into comma delimited list
         evidence = _.map(evidence, function(item){
           if (_.isArray(item.drugs)) {
@@ -272,14 +274,19 @@
           });
 
           gridApi.core.on.rowsRendered($scope, function() {
+            suppressGo = true;
             gridApi.selection.selectRow(rowEntity);
             gridApi.grid.scrollTo(rowEntity);
+            suppressGo = false;
           });
         }
 
         gridApi.selection.on.rowSelectionChanged($scope, function(row){
           var params = _.merge($stateParams, { evidenceId: row.entity.id });
-          $state.go('events.genes.summary.variants.summary.evidence.summary', params);
+
+          if(!suppressGo) {
+            $state.go('events.genes.summary.variants.summary.evidence.summary', params)
+          }
         });
 
       });
