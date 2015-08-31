@@ -1,6 +1,7 @@
 <div class="ngCellText" ng-class="col.colIndex()"
      tooltip="{{row.entity['drug_interaction_type'] ? row.entity[col.field] + ' (' + row.entity['drug_interaction_type'] + ')' : row.entity[col.field]  }}"
      tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
+     tooltip-placement="left"
      tooltip-append-to-body="true">
   <div class="ui-grid-cell-contents">
     {{ row.entity['drug_interaction_type'] ? row.entity[col.field] + ' (' + row.entity['drug_interaction_type'] + ')' : row.entity[col.field] }}
