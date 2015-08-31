@@ -24,6 +24,9 @@
     vm.currentUser = Security.currentUser;
     vm.isEditor = Security.isEditor();
 
+    vm.showMarkdownHelp = false;
+    vm.markdownHelpUrl = 'app/views/events/common/entityCommentMarkdownHelp.tpl.html';
+
     vm.newComment = {
       title: '',
       text: ''
