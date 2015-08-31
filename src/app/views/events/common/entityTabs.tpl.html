@@ -42,18 +42,7 @@
       <div class="col-xs-12 {{ viewBackground }}">
         <ul class="actions-list">
           <li>
-            <div class="action-block view-pageBackground"
-              ng-repeat="(action, user) in vm.users">
-              <span class="action-label small">
-                <strong>{{ action | labelify }}</strong>
-              </span>
-              <span class="action-date small">
-                {{ user.timestamp | timeAgo }}
-              </span>
-              <span class="user-button small">
-                by <strong>{{ user.user.username }}</strong>
-              </span>
-            </div>
+            <action-block users="vm.users"></action-block>
           </li>
         </ul>
       </div>

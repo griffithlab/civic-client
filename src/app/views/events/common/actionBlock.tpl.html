@@ -1,0 +1,16 @@
+<div class="actionBlock">
+  <div class="action-block view-pageBackground"
+       ng-repeat="(action, user) in users">
+  <span class="action-label small">
+    <strong>{{ action | labelify }}</strong>
+  </span>
+
+  <span class="action-date small">
+    {{ user.timestamp | timeAgo }}
+  </span>
+
+  <span class="user-button small">
+    by <strong>{{ user.user.username }}</strong>
+  </span>
+  </div>
+</div>
