@@ -104,9 +104,7 @@
             revisionId: '@revisionId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         }
       }
     );
@@ -118,6 +116,7 @@
 
     // Base Gene Revision and Gene Revisions Collection
     var item = {};
+    var parent = Genes.data.item;
     var collection = [];
 
     // Gene Revisions Comments
@@ -130,6 +129,7 @@
       initComments: initComments,
       data: {
         item: item,
+        parent: parent,
         collection: collection,
         comment: comment,
         comments: comments
@@ -258,11 +258,11 @@
           return response.$promise;
         });
     }
-    function deleteComment(geneId, revisionId, commentId) {
-      return GeneRevisionsResource.deleteComment({ geneId: geneId, revisionId: revisionId, commentId: commentId }).$promise
+    function deleteComment(commentId) {
+      return GeneRevisionsResource.deleteComment({ geneId: parent.id, revisionId: item.id, commentId: commentId }).$promise
         .then(function(response) {
-          cache.remove('/api/genes/' + geneId + '/suggested_changes/' + revisionId + '/comments/' + commentId);
-          comment = null;
+          cache.remove('/api/genes/' + parent.id + '/suggested_changes/' + item.id+ '/comments');
+          queryComments(parent.id, item.id);
           return response.$promise;
         });
     }

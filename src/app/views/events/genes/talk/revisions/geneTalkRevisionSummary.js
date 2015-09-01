@@ -20,6 +20,7 @@
     var vm = $scope.vm = {};
     vm.isEditor = Security.isEditor;
     vm.isAuthenticated = Security.isAuthenticated;
+
     vm.geneTalkModel = GeneRevisions;
 
     vm.formErrors = {};
