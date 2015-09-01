@@ -5,7 +5,9 @@
         <div ng-switch-when="true">
           <ul class="comments">
             <li ng-repeat="comment in ctrl.variantGroupTalkModel.data.comments">
-              <entity-comment comment-data="comment"></entity-comment>
+              <entity-comment
+                comment-data="comment"
+                entity-model="ctrl.variantGroupTalkModel"></entity-comment>
             </li>
           </ul>
         </div>

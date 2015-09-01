@@ -11,7 +11,7 @@
     var cacheInterceptor = function(response) {
       console.log(['VariantGroupsResource: removing', response.config.url, 'from $http cache.'].join(' '));
       cache.remove(response.config.url);
-      return response.$promise;
+      return response;
     };
 
     return $resource('/api/variant_groups/:variantGroupId',
@@ -91,9 +91,7 @@
             variantGroupId: '@variantGroupId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheInterceptor
-          }
+          cache: false
         },
         deleteComment: {
           method: 'DELETE',
@@ -102,9 +100,7 @@
             variantGroupId: '@variantGroupId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheInterceptor
-          }
+          cache: false
         }
       }
     );
@@ -251,10 +247,11 @@
           return response.$promise;
         });
     }
-    function deleteComment(variantGroupId, commentId) {
-      return VariantGroupsResource.deleteComment({variantGroupId: variantGroupId, commentId: commentId}).$promise
+    function deleteComment(commentId) {
+      return VariantGroupsResource.deleteComment({variantGroupId: item.id, commentId: commentId}).$promise
         .then(function(response) {
-          // TODO: delete comment from cache, refresh comments
+          cache.remove('/api/variant_groups/' + item.id + '/comments');
+          queryComments(item.id);
           return response.$promise;
         });
     }
