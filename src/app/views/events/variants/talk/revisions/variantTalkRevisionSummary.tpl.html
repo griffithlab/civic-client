@@ -91,7 +91,10 @@
         <div ng-switch-default>
           <ul class="comments">
             <li ng-repeat="comment in vm.variantTalkModel.data.comments">
-              <entity-comment comment-data="comment"></entity-comment>
+              <entity-comment
+                comment-data="comment"
+                entity-model="vm.variantTalkModel">
+              </entity-comment>
             </li>
           </ul>
         </div>

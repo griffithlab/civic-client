@@ -116,9 +116,7 @@
             revisionId: '@revisionId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         },
 
         // Evidence Revisions Comments Resources Refresh
@@ -158,6 +156,7 @@
 
     // Base Evidence Revision and Evidence Revisions Collection
     var item = {};
+    var parent = Evidence.data.item;
     var collection = [];
 
     // Evidence Revisions Comments
@@ -170,6 +169,7 @@
       initComments: initComments,
       data: {
         item: item,
+        parent: parent,
         collection: collection,
         comment: comment,
         comments: comments
@@ -326,10 +326,11 @@
           return response.$promise;
         });
     }
-    function deleteComment(evidenceId, revisionId, commentId) {
-      return EvidenceRevisionsResource.deleteComment({ evidenceId: evidenceId, revisionId: revisionId, commentId: commentId }).$promise
+    function deleteComment(commentId) {
+      return EvidenceRevisionsResource.deleteComment({ evidenceId: parent.id, revisionId: item.id, commentId: commentId }).$promise
         .then(function(response) {
-          comment = null;
+          cache.remove('/api/evidence_items/' + parent.id + '/suggested_changes/' + item.id + '/comments');
+          queryComments(parent.id, item.id);
           return response.$promise;
         });
     }

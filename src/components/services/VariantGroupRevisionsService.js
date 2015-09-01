@@ -104,9 +104,7 @@
             revisionId: '@revisionId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheResponseInterceptor
-          }
+          cache: false
         }
       }
     );
@@ -117,6 +115,7 @@
 
     // Base VariantGroup Revision and VariantGroup Revisions Collection
     var item = {};
+    var parent = VariantGroups.data.item;
     var collection = [];
 
     // VariantGroup Revisions Comments
@@ -129,6 +128,7 @@
       initComments: initComments,
       data: {
         item: item,
+        parent: parent,
         collection: collection,
         comment: comment,
         comments: comments
@@ -254,10 +254,11 @@
           return response.$promise;
         });
     }
-    function deleteComment(variantGroupId, revisionId, commentId) {
-      return VariantGroupRevisionsResource.deleteComment({ variantGroupId: variantGroupId, revisionId: revisionId, commentId: commentId }).$promise
+    function deleteComment(commentId) {
+      return VariantGroupRevisionsResource.deleteComment({ variantGroupId: parent.id, revisionId: item.id, commentId: commentId }).$promise
         .then(function(response) {
-          cache.remove('/api/variant_groups/' + variantGroupId + '/suggested_changes/' + revisionId + '/comments/' + commentId);
+          cache.remove('/api/variant_groups/' + parent.id + '/suggested_changes/' + item.id + '/comments');
+          queryComments(parent.id, item.id);
           return response.$promise;
         });
     }
