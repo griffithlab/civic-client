@@ -1,0 +1,13 @@
+<span class="userBlock" ng-switch="user.username">
+  <span ng-switch-when="Admin">
+    <span class="username">{{user.username}}</span>
+  </span>
+  <span ng-switch-default>
+    <button
+      type="button"
+      class="btn btn-xs btn-default btn-user"
+      ui-sref="users.profile({userId: user.id})">
+      <span class="username">{{user.username}}</span>
+    </button>
+  </span>
+</span>

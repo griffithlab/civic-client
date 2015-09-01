@@ -1,0 +1,30 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.userBlock {
+  .btn-user {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border: none;
+    background-color: #EFEFEF;
+    padding-right: 10px;
+    margin-left: 3px;
+
+    .avatar {
+      width: 14px;
+      height: 14px;
+      position: relative;
+      top: 1px;
+      display: inline-block;
+      line-height: 1;
+      background-size: 14px 14px;
+    }
+  }
+
+  .username {
+    font-weight: bold;
+    display: inline-block;
+  }
+}
