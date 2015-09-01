@@ -20,6 +20,11 @@
     var ctrl = $scope.ctrl = {};
 
     ctrl.evidenceTalkModel = Evidence;
+
+    $scope.$watchCollection('ctrl.evidenceTalkModel.data.comments', function(comments) {
+      console.log('Evidence comments watch triggered.');
+    });
+
   }
 
 })();

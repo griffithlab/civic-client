@@ -39,10 +39,20 @@
               </p>
             </div>
             <div class="info-block">
-              <span class="small">Posted by
+              <span class="posted-time small pull-left">Posted by
                 <strong><span ng-bind="ctrl.comment.user.username">user.username</span></strong>
                 <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span>
               </span>
+              <div class="comment-actions pull-right">
+                <button
+                  ng-show="ctrl.comment.user.id === ctrl.security.currentUser.id"
+                  ng-click="ctrl.deleteComment(ctrl.comment)"
+                  class="btn btn-xs btn-default">
+                  Delete
+                </button>
+
+              </div>
+
             </div>
           </div>
         </div>

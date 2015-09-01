@@ -9,7 +9,8 @@
     return {
       restrict: 'E',
       scope: {
-        commentData: '='
+        commentData: '=',
+        entityModel: '='
       },
       controller: 'EntityCommentController',
       templateUrl: 'app/views/events/common/entityComment.tpl.html'
@@ -21,9 +22,23 @@
     var ctrl = $scope.ctrl = {};
     ctrl.security = {
       isAuthenticated: Security.isAuthenticated(),
-      isAdmin: Security.isEditor()
+      isAdmin: Security.isEditor(),
+      currentUser: Security.currentUser
     };
 
     ctrl.comment = $scope.commentData;
+
+    ctrl.deleteComment = function(comment) {
+      $scope.entityModel.deleteComment(comment.id)
+        .then(function() {
+          console.log('delete comment successful.');
+        })
+        .catch(function(error) {
+          console.error('error deleting comment.');
+        })
+        .finally(function() {
+          console.log('comment delete done!');
+        })
+    }
   }
 })();

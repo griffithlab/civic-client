@@ -84,9 +84,7 @@
             evidenceId: '@evidenceId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheInterceptor
-          }
+          cache: false
         },
         deleteComment: {
           method: 'DELETE',
@@ -95,11 +93,8 @@
             evidenceId: '@evidenceId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheInterceptor
-          }
+          cache: false
         }
-
       }
     );
   }
@@ -228,11 +223,11 @@
           return response.$promise;
         });
     }
-    function deleteComment(evidenceId, commentId) {
-      return EvidenceResource.deleteComment({evidenceId: evidenceId, commentId: commentId}).$promise
+    function deleteComment(commentId) {
+      return EvidenceResource.deleteComment({evidenceId: item.id, commentId: commentId}).$promise
         .then(function(response) {
-          cache.remove('/api/evidence_items/' + evidenceId + '/comments/' + commentId);
-          queryComments(evidenceId);
+          cache.remove('/api/evidence_items/' + item.id + '/comments');
+          queryComments(item.id);
           return response.$promise;
         });
     }

@@ -5,7 +5,10 @@
         <div ng-switch-when="true">
           <ul class="comments">
             <li ng-repeat="comment in ctrl.evidenceTalkModel.data.comments">
-              <entity-comment comment-data="comment"></entity-comment>
+              <entity-comment
+                comment-data="comment"
+                entity-model="ctrl.evidenceTalkModel">
+              </entity-comment>
             </li>
           </ul>
         </div>
@@ -17,7 +20,9 @@
   </div>
   <div class="row">
     <div class="col-xs-12 comment-form">
-      <entity-comment-form type="entity" entity-model="ctrl.evidenceTalkModel"></entity-comment-form>
+      <entity-comment-form
+        type="entity"
+        entity-model="ctrl.evidenceTalkModel"></entity-comment-form>
     </div>
   </div>
 </div>

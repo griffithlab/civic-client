@@ -239,11 +239,12 @@
           return response.$promise;
         });
     }
-    function deleteComment(variantId, commentId) {
-      return VariantsResource.deleteComment({variantId: variantId, commentId: commentId}).$promise
+    function deleteComment(commentId) {
+      return VariantsResource.deleteComment({variantId: item.id, commentId: commentId}).$promise
         .then(function(response) {
-          cache.remove('/api/variants/' + variantId + '/comments/' + commentId);
-          cache.remove('/api/variants/' + variantId + '/comments');
+          cache.remove('/api/variants/' + item.id + '/comments/' + commentId);
+          cache.remove('/api/variants/' + item.id + '/comments');
+          queryComments(item.id);
           return response.$promise;
         });
     }
