@@ -170,9 +170,7 @@
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheInterceptor
-          }
+          cache: false
         },
         deleteComment: {
           method: 'DELETE',
@@ -181,9 +179,7 @@
             geneId: '@geneId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheInterceptor
-          }
+          cache: false
         }
       }
     );
@@ -375,10 +371,11 @@
           return response.$promise;
         });
     }
-    function deleteComment(geneId, commentId) {
-      return GenesResource.deleteComment({geneId: geneId, commentId: commentId}).$promise
+    function deleteComment(commentId) {
+      return GenesResource.deleteComment({geneId: item.id, commentId: commentId}).$promise
         .then(function(response) {
-          cache.remove('/api/genes/' + geneId + '/comments');
+          cache.remove('/api/genes/' + item.id + '/comments');
+          queryComments(item.id);
           return response.$promise;
         });
     }

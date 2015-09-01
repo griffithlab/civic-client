@@ -5,12 +5,16 @@
         <div ng-switch-when="true">
           <ul class="comments">
             <li ng-repeat="comment in ctrl.variantTalkModel.data.comments">
-              <entity-comment comment-data="comment"></entity-comment>
+              <entity-comment
+                comment-data="comment"
+                entity-model="ctrl.variantTalkModel">
+
+              </entity-comment>
             </li>
           </ul>
         </div>
         <div ng-switch-default>
-          <p>No Comments for Variant {{ ctrl.variantTalkModel.data.item.name }}. You may add one below.</p>
+          <p>No Comments for Variant {{ ctrl.variantTalkModel.data.item.name }}.</p>
         </div>
       </div>
     </div>

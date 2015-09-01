@@ -87,9 +87,7 @@
             variantId: '@variantId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheInterceptor
-          }
+          cache: false
         },
         deleteComment: {
           method: 'DELETE',
@@ -98,9 +96,7 @@
             variantId: '@variantId',
             commentId: '@commentId'
           },
-          interceptor: {
-            response: cacheInterceptor
-          }
+          cache: false
         }
       }
     );
@@ -242,7 +238,6 @@
     function deleteComment(commentId) {
       return VariantsResource.deleteComment({variantId: item.id, commentId: commentId}).$promise
         .then(function(response) {
-          cache.remove('/api/variants/' + item.id + '/comments/' + commentId);
           cache.remove('/api/variants/' + item.id + '/comments');
           queryComments(item.id);
           return response.$promise;
