@@ -9,7 +9,7 @@
     vm.tabs = [
 
       {
-        heading: 'Evidence Statement',
+        heading: 'Evidence Item',
         template: 'app/pages/help_evidence_statement.tpl.html',
         active: true
       },
