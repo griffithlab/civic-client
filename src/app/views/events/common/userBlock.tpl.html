@@ -5,8 +5,11 @@
   <span ng-switch-default>
     <button
       type="button"
-      class="btn btn-xs btn-default btn-user"
+      class="btn btn-xs btn-user"
       ui-sref="users.profile({userId: user.id})">
+      <span class="avatar">
+        <img ng-src="{{user.avatars.x14}}" width="14" height="14"/>
+      </span>
       <span class="username">{{user.username}}</span>
     </button>
   </span>

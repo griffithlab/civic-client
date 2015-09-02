@@ -10,6 +10,7 @@
     border: none;
     background-color: #EFEFEF;
     padding-right: 10px;
+    padding-left: 2px;
     margin-left: 3px;
     margin-top: -2px;
 
@@ -17,15 +18,36 @@
       width: 14px;
       height: 14px;
       position: relative;
-      top: 1px;
+      top: 2px;
+      left: 2px;
       display: inline-block;
       line-height: 1;
-      background-size: 14px 14px;
+      border-radius: 3px;
+      overflow: hidden;
     }
+  }
+
+  .btn-user:focus, .btn-user:active:focus, .btn-user.active:focus {
+    outline: 0 none;
+  }
+
+  .btn-user {
+    background: @civicLightBlue;
+    color: #ffffff;
+  }
+
+  .btn-user:hover, .btn-user:focus, .btn-user:active, .btn-user.active, .open > .dropdown-toggle.btn-primary {
+    background: darken(@civicLightBlue, 10%);
+  }
+
+  .btn-user:active, .btn-user.active {
+    background: #007299;
+    box-shadow: none;
   }
 
   .username {
     font-weight: bold;
     display: inline-block;
+    padding-left: 4px;
   }
 }
