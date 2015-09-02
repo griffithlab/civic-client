@@ -139,7 +139,7 @@
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
         value: '',
-        controller: /* ngInject */ function($scope) {
+        controller: /* @ngInject */ function($scope) {
           $scope.to.data.doid = $scope.model.disease.doid;
         },
         templateOptions: {
@@ -177,7 +177,7 @@
         key: 'evidence_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
-        controller: /* ngInject */  function($scope) {
+        controller: /* @ngInject */  function($scope) {
           // set attribute definition
           $scope.options.templateOptions.data.attributeDefinition =
             $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type];
@@ -264,7 +264,7 @@
         key: 'evidence_direction',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
-        controller: /* ngInject */ function($scope) {
+        controller: /* @ngInject */ function($scope) {
           // set attribute definition
           $scope.options.templateOptions.data.attributeDefinition =
             $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type][$scope.model.evidence_direction];
@@ -314,7 +314,7 @@
         key: 'clinical_significance',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
-        controller: /* ngInject */ function($scope) {
+        controller: /* @ngInject */ function($scope) {
           // set attribute definition
           $scope.options.templateOptions.data.attributeDefinition =
             $scope.options.templateOptions.data.attributeDefinitions[$scope.model.clinical_significance];
@@ -413,7 +413,7 @@
         key: 'drug_interaction_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
-        controller: /* ngInject */ function($scope) {
+        controller: /* @ngInject */ function($scope) {
           // set attribute definition
           $scope.options.templateOptions.data.attributeDefinition =
             $scope.options.templateOptions.data.attributeDefinitions[$scope.model.drug_interaction_type];
