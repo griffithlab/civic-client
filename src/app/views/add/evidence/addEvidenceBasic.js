@@ -76,7 +76,7 @@
         controller: /* @ngInject */ function($scope, $stateParams, Genes) {
           // populate field if geneId provided
           if($stateParams.geneId){
-            Genes.get($stateParams.geneId).then(function(gene) {
+            Genes.getName($stateParams.geneId).then(function(gene) {
               $scope.model.gene = gene;
               $scope.to.data.entrez_id = gene.entrez_id;
             });

@@ -124,6 +124,22 @@
   color: darken(#fce452, 50%)
 }
 
+// status badges
+.statusAccepted {
+  background-color: #B2D49C;
+  color: #144522;
+}
+
+.statusSubmitted {
+  background-color: #F3BC94;
+  color: #4A2B11;
+}
+
+.statusRejected {
+  background-color: #ECA2C0;
+  color: #47161C;
+}
+
 // common form styles
 
 /*requires font awesome*/
@@ -141,4 +157,14 @@ div.validation-error {
   font-weight: bold;
   width: 300px;
   text-align: left;
+}
+
+// evidence grid
+.ui-grid-menu-button {
+  height: 25px;
+  width: 25px;
+  border-bottom-left-radius: @border-radius-base;
+  border-top-right-radius: @border-radius-base;
+  border-top: none;
+  border-right: none;
 }

@@ -1,0 +1,9 @@
+<div class="ngCellText idCell" ng-class="col.colIndex()"
+     tooltip="EID{{row.entity[col.field]}}: {{row.entity['status']}}"
+     tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
+     tooltip-placement="right"
+     tooltip-append-to-body="true">
+  <span class="btn-block" ng-class="{ 'statusAccepted': row.entity['status'] === 'accepted', 'statusSubmitted': row.entity['status'] === 'submitted', 'statusRejected': row.entity['status'] === 'rejected' }">
+    {{ row.entity[col.field] }}
+  </span>
+</div>
