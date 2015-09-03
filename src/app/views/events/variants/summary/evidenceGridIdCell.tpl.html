@@ -1,0 +1,9 @@
+<div class="ngCellText idCell" ng-class="col.colIndex()"
+     tooltip="{{row.entity['status']"
+     tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
+     tooltip-placement="right"
+     tooltip-append-to-body="true">
+  <div class="ui-grid-cell-contents" ng-class="{ 'accepted': row.entity['status'] === 'accepted', 'submitted': row.entity['status'] === 'submitted', 'rejected': row.entity['status'] === 'rejected' }">
+    {{ row.entity[col.field] }}
+  </div>
+</div>

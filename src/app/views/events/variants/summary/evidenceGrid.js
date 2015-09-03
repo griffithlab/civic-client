@@ -23,6 +23,7 @@
   function EvidenceGridController($scope, $stateParams, $state, $timeout, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
+    var statusFilters = ['accepted'];
 
     ctrl.showGridKey = false;
 
@@ -44,9 +45,6 @@
     ctrl.rowsToShow = 5;
 
     ctrl.evidenceGridOptions = {
-      //enablePaginationControls: true,
-      //paginationPageSizes: [5],
-      //paginationPageSize: 5,
       minRowsToShow: ctrl.rowsToShow - 1,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
@@ -59,14 +57,54 @@
       multiSelect: false,
       modifierKeysToMultiSelect: false,
       noUnselect: true,
+
+      // grid menu
+      enableGridMenu: true,
+      gridMenuShowHideColumns: false,
+      gridMenuCustomItems: [
+        {
+          title: 'Show Accepted',
+          active: function() {
+            return _.contains(statusFilters, 'accepted');
+          },
+          action: function($event) {
+            filterByStatus('accepted', this.grid, $event);
+          }
+        },
+        {
+          title: 'Show Pending',
+          active: function() {
+            return _.contains(statusFilters, 'pending');
+          },
+          action: function($event) {
+            filterByStatus('pending', this.grid, $event);
+          }
+        },
+        {
+          title: 'Show Rejected',
+          active: function() {
+            return _.contains(statusFilters, 'rejected');
+          },
+          action: function($event) {
+            filterByStatus('rejected', this.grid, $event);
+          }
+        }
+      ],
       columnDefs: [
+        {
+          name: 'status',
+          displayName: 'ST',
+          type: 'string',
+          visible: false
+        },
         { name: 'id',
           displayName: 'EID',
           type: 'number',
           enableFiltering: false,
           allowCellFocus: false,
           minWidth: 50,
-          width: '6%'
+          width: '6%',
+          cellTemplate: 'app/views/events/variants/summary/evidenceGridIdCell.tpl.html'
         },
         { name: 'description',
           displayName: 'DESC',
@@ -247,6 +285,20 @@
         }
       ]
     };
+
+    function filterByStatus(status, grid, $event) {
+      console.log('Filter by Status: ' + status);
+      if(_.contains(statusFilters, status)) {
+        _.pull(statusFilters, status);
+      } else {
+        statusFilters.push(status);
+      }
+      applyStatusFilters(status, grid);
+    }
+
+    function applyStatusFilters(status, grid) {
+      console.log('apply status filters called: ' + status + ' ' + grid);
+    }
 
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       // TODO: this watch seems unnecessary, but if it's not present then the grid only loads on a fresh page, fails when loaded by a state change

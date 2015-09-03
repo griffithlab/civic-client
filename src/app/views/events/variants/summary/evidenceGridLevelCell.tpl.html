@@ -3,7 +3,7 @@
      tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
      tooltip-placement="left"
      tooltip-append-to-body="true"  >
-  <span ng-cell-text class="btn-block" ng-class="{'levelA': row.entity[col.field] === 'A', 'levelB': row.entity[col.field] === 'B','levelC': row.entity[col.field] === 'C', 'levelD': row.entity[col.field] === 'D', 'levelE': row.entity[col.field] === 'E' }">
+  <span class="btn-block" ng-class="{'levelA': row.entity[col.field] === 'A', 'levelB': row.entity[col.field] === 'B','levelC': row.entity[col.field] === 'C', 'levelD': row.entity[col.field] === 'D', 'levelE': row.entity[col.field] === 'E' }">
     {{ row.entity[col.field] }}
   </span>
 </div>
