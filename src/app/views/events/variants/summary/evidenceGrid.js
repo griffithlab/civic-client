@@ -99,8 +99,6 @@
           filter: {
             noTerm: true,
             condition: function(searchTerm, cellValue) {
-              console.log('status filter condition called. searchTerm: ' + ' cellValue: ' + cellValue);
-              console.log('_.contains(statusFilters, cellValue): ' + _.contains(statusFilters, cellValue));
               return _.contains(statusFilters, cellValue);
             }
           }
@@ -295,7 +293,6 @@
     };
 
     function filterByStatus(status, grid, $event) {
-      console.log('Filter by Status: ' + status);
       if(_.contains(statusFilters, status)) {
         _.pull(statusFilters, status);
       } else {
