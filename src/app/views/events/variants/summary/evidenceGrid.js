@@ -72,12 +72,12 @@
           }
         },
         {
-          title: 'Show Pending',
+          title: 'Show Submitted',
           active: function() {
-            return _.contains(statusFilters, 'pending');
+            return _.contains(statusFilters, 'submitted');
           },
           action: function($event) {
-            filterByStatus('pending', this.grid, $event);
+            filterByStatus('submitted', this.grid, $event);
           }
         },
         {
@@ -95,7 +95,15 @@
           name: 'status',
           displayName: 'ST',
           type: 'string',
-          visible: false
+          visible: false,
+          filter: {
+            noTerm: true,
+            condition: function(searchTerm, cellValue) {
+              console.log('status filter condition called. searchTerm: ' + ' cellValue: ' + cellValue);
+              console.log('_.contains(statusFilters, cellValue): ' + _.contains(statusFilters, cellValue));
+              return _.contains(statusFilters, cellValue);
+            }
+          }
         },
         { name: 'id',
           displayName: 'EID',
@@ -293,11 +301,7 @@
       } else {
         statusFilters.push(status);
       }
-      applyStatusFilters(status, grid);
-    }
-
-    function applyStatusFilters(status, grid) {
-      console.log('apply status filters called: ' + status + ' ' + grid);
+      grid.refresh();
     }
 
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
