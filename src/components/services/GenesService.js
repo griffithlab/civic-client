@@ -31,8 +31,9 @@
           cache: cache
         },
         getName: { // get a single gene's name and entrez_id
+          url: '/api/genes/:geneId',
+          params: { detailed: 'false' },
           method: 'GET',
-          url: '/api/genes/:geneId&detailed=false',
           isArray: false,
           cache: cache
         },
