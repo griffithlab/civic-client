@@ -153,6 +153,27 @@
         //  },
         //  cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugInteractionTypeCell.tpl.html'
         //},
+        { name: 'evidence_level',
+          displayName: 'EL',
+          type: 'string',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'A', label: 'A - Validated'},
+              { value: 'B', label: 'B - Clinical'},
+              { value: 'C', label: 'C - Preclinical'},
+              { value: 'D', label: 'D - Case Study'},
+              { value: 'E', label: 'E - Inferential'}]
+          },
+          sort: { direction: uiGridConstants.ASC },
+          width: '6%',
+          minWidth: 50,
+          cellTemplate: 'app/views/events/variants/summary/evidenceGridLevelCell.tpl.html'
+        },
         { name: 'evidence_type',
           displayName: 'ET',
           type: 'string',
@@ -184,27 +205,6 @@
           width: '6%',
           minWidth: 50,
           cellTemplate: 'app/views/events/variants/summary/evidenceGridTypeCell.tpl.html'
-        },
-        { name: 'evidence_level',
-          displayName: 'EL',
-          type: 'string',
-          allowCellFocus: false,
-          filter: {
-            type: uiGridConstants.filter.SELECT,
-            term: null,
-            disableCancelFilterButton: false,
-            selectOptions: [
-              { value: null, label: '--' },
-              { value: 'A', label: 'A - Validated'},
-              { value: 'B', label: 'B - Clinical'},
-              { value: 'C', label: 'C - Preclinical'},
-              { value: 'D', label: 'D - Case Study'},
-              { value: 'E', label: 'E - Inferential'}]
-          },
-          sort: { direction: uiGridConstants.ASC },
-          width: '6%',
-          minWidth: 50,
-          cellTemplate: 'app/views/events/variants/summary/evidenceGridLevelCell.tpl.html'
         },
         { name: 'evidence_direction',
           displayName: 'ED',
