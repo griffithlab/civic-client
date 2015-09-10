@@ -77,7 +77,7 @@
           // populate field if geneId provided
           if($stateParams.geneId){
             Genes.getName($stateParams.geneId).then(function(gene) {
-              $scope.model.gene = gene;
+              $scope.model.gene = _.pick(gene,['id', 'name', 'entrez_id']);
               $scope.to.data.entrez_id = gene.entrez_id;
             });
           }
@@ -114,7 +114,7 @@
           // populate field if variantId provided
           if($stateParams.variantId){
             Variants.get($stateParams.variantId).then(function(variant) {
-              $scope.model.variant_name = variant.name;
+              $scope.model.variant_name = { name: variant.name };
             });
           }
         },
@@ -138,7 +138,7 @@
             return Datatables.query(request)
               .then(function(response) {
                 return _.map(_.unique(response.result, 'variant'), function(event) {
-                  return { name: event.variant, id: event.variant_id };
+                  return { name: event.variant };
                 });
               });
           }
@@ -567,6 +567,10 @@
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
       if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
+      // convert variant name to object, if a string
+      if(_.isString(newEvidence.variant_name)){
+        newEvidence.variant_name = { name: newEvidence.variant_name };
+      }
       vm.formErrors = {};
       vm.formMessages = {};
 
