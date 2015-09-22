@@ -102,8 +102,8 @@
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [
             { type: 'default', value: null, label: 'Please select a Reference Build' },
-            { value: 'GRCh38', label: 'GCRh38 (hg20)' },
-            { value: 'GRCh37', label: 'GCRh37 (hg19)' },
+            { value: 'GRCh38', label: 'GRCh38 (hg20)' },
+            { value: 'GRCh37', label: 'GRCh37 (hg19)' },
             { value: 'NCBI36', label: 'NCBI36 (hg18)' }
           ],
           helpText: ''
