@@ -65,7 +65,7 @@
         },
         {
           heading: 'Gene Talk',
-          route: 'events.genes.talk.log',
+          route: 'events.genes.talk.revisions.list',
           params: { geneId: $stateParams.geneId }
         }
       ], this.tabData);

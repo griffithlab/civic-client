@@ -62,7 +62,7 @@
         },
         {
           heading: 'Variant Talk',
-          route: 'events.genes.summary.variants.talk.log',
+          route: 'events.genes.summary.variants.talk.revisions.list',
           params: { geneId: $stateParams.geneId, variantId: $stateParams.variantId }
         }
       ], this.tabData);

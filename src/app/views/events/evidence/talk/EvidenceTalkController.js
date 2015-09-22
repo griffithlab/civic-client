@@ -65,8 +65,8 @@
 
       angular.copy([
         {
-          heading: evidence.name + ' Log',
-          route: baseState + '.log',
+          heading: evidence.name + ' Revisions',
+          route: baseState + '.revisions.list',
           params: { evidenceId: evidence.id }
         },
         {
@@ -75,8 +75,8 @@
           params: { evidenceId: evidence.id }
         },
         {
-          heading: evidence.name + ' Revisions',
-          route: baseState + '.revisions.list',
+          heading: evidence.name + ' Log',
+          route: baseState + '.log',
           params: { evidenceId: evidence.id }
         }
       ], tabData);

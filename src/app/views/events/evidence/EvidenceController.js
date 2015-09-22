@@ -66,7 +66,7 @@
         },
         {
           heading: 'Evidence Talk',
-          route: 'events.genes.summary.variants.summary.evidence.talk.log',
+          route: 'events.genes.summary.variants.summary.evidence.talk.revisions.list',
           params: {
             geneId: $stateParams.geneId,
             variantId: $stateParams.variantId,

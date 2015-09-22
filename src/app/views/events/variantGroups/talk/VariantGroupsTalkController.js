@@ -65,8 +65,8 @@
 
       angular.copy([
         {
-          heading: variantGroup.name + ' Log',
-          route: this.state.baseState + '.log',
+          heading: variantGroup.name + ' Revisions',
+          route: this.state.baseState + '.revisions.list',
           params: $stateParams
         },
         {
@@ -75,8 +75,8 @@
           params: $stateParams
         },
         {
-          heading: variantGroup.name + ' Revisions',
-          route: this.state.baseState + '.revisions.list',
+          heading: variantGroup.name + ' Log',
+          route: this.state.baseState + '.log',
           params: $stateParams
         }
       ], tabData);
