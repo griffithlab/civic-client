@@ -41,7 +41,7 @@
 
     vm.newEvidence = {
       gene: '',
-      variant_name: '',
+      variant: '',
       description: '',
       disease: {
         name: ''
@@ -108,19 +108,19 @@
         }
       },
       {
-        key: 'variant_name',
+        key: 'variant',
         type: 'horizontalTypeaheadHelp',
         controller: /* @ngInject */ function($scope, $stateParams, Variants) {
           // populate field if variantId provided
           if($stateParams.variantId){
             Variants.get($stateParams.variantId).then(function(variant) {
-              $scope.model.variant_name = { name: variant.name };
+              $scope.model.variant = { name: variant.name };
             });
           }
         },
         templateOptions: {
           label: 'Variant Name',
-          value: 'vm.newEvidence.variant_name',
+          value: 'vm.newEvidence.variant',
           minLength: 32,
           helpText: 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).',
           formatter: 'model[options.key].name',
@@ -568,8 +568,9 @@
       newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
       if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
       // convert variant name to object, if a string
-      if(_.isString(newEvidence.variant_name)){
-        newEvidence.variant_name = { name: newEvidence.variant_name };
+      // TODO: figure out how to handle this more elegantly using angular-formly config object
+      if(_.isString(newEvidence.variant)){
+        newEvidence.variant = { name: newEvidence.variant };
       }
       vm.formErrors = {};
       vm.formMessages = {};
