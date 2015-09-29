@@ -115,8 +115,7 @@
         <div class="col-xs-12">
           <ul class="events">
             <li ng-repeat="event in vm.events | limitTo:10">
-              <span ng-bind="event.description">EVENT</span>
-              <span ng-bind="event.timestamp | timeAgo">TIME</span>
+              <event-item event="event">EVENT</event-item>
             </li>
           </ul>
         </div>

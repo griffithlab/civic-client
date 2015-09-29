@@ -1,0 +1,17 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.eventItem {
+  padding: @contentPadding/2;
+  margin-bottom: @contentPadding/2;
+  border-radius: @border-radius-large;
+  background-color: darken(@civicPurple, 10%);
+  border: 2px solid darken(@civicPurple, 10%);
+  color: #CCC;
+
+  &.hover {
+    cursor: pointer;
+    border-color: @civicYellow;
+  }
+}
