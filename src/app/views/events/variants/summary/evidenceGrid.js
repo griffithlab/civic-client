@@ -23,7 +23,7 @@
   function EvidenceGridController($scope, $stateParams, $state, $timeout, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
-    var statusFilters = ['accepted'];
+    var statusFilters = ['accepted', 'submitted'];
 
     ctrl.showGridKey = false;
 
