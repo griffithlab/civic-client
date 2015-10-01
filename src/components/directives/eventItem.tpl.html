@@ -6,15 +6,14 @@
   <user-block user="event.user"></user-block>
   <!-- preposition, if necessary -->
   <span ng-switch="event.event_type">
-    &nbsp;
     <span ng-switch-when="commented">commented on</span>
     <span ng-switch-when="submitted">submitted</span>
-    <span ng-switch-when="change suggested">suggested a change to</span>
-    <span ng-switch-when="change accepted">accepted a change to</span>
-    <span ng-switch-when="change rejected">rejected a change to</span>
+    <span ng-switch-when="change suggested">suggested a revision to</span>
+    <span ng-switch-when="change accepted">accepted a revision to</span>
+    <span ng-switch-when="change rejected">rejected a revision to</span>
     <span ng-switch-default></span>
   </span>
-
+  <strong>
   <span ng-switch="event.subject_type">
     <span ng-switch-when="genes">
       <span ng-bind="event.state_params.gene.name">GENE</span>
@@ -29,5 +28,6 @@
       <span ng-bind="event.state_params.evidence_item.name">EVIDENCE ITEM</span>
     </span>
   </span>
+  </strong>
 
 </div>

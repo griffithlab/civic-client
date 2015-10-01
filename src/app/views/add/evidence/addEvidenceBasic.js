@@ -72,7 +72,7 @@
       {
         key: 'gene',
         type: 'horizontalTypeaheadHelp',
-        wrapper: ['loader', 'entrezIdDisplay', 'validationMessages'],
+        wrapper: ['entrezIdDisplay', 'validationMessages'],
         controller: /* @ngInject */ function($scope, $stateParams, Genes) {
           // populate field if geneId provided
           if($stateParams.geneId){
@@ -87,6 +87,7 @@
           value: 'vm.newEvidence.gene',
           minLength: 32,
           required: true,
+          editable: false,
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.entrez_id = $model.entrez_id',
@@ -572,6 +573,9 @@
       if(_.isString(newEvidence.variant)){
         newEvidence.variant = { name: newEvidence.variant };
       }
+      //if(_.isString(newEvidence.gene)){
+      //  newEvidence.gene = { name: newEvidence.gene };
+      //}
       vm.formErrors = {};
       vm.formMessages = {};
 

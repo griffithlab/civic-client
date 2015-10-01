@@ -36,11 +36,18 @@
   <div class="form" ng-if="vm.showForm">
     <div class="row">
       <div class="col-xs-12">
-        <form class="form-horizontal">
+        <form class="form-horizontal" name="vm.form" novalidate>
           <formly-form options="vm.options" model="vm.newEvidence" fields="vm.evidenceFields">
 
           </formly-form>
         </form>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.form.$invalid">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="alert alert-danger">
+          This Evidence Item submission is incomplete or contains errors. Please ensure that all fields have been specified, and that any remaining errors have been fixed before submitting.
+        </div>
       </div>
     </div>
     <div class="row">
@@ -51,7 +58,12 @@
           </div>
           <div class="pull-right">
             <span ng-if="vm.isAuthenticated">
-            <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.newEvidence, vm.options)">Submit Evidence for Inclusion</button>
+            <button type="submit"
+                    class="btn btn-default"
+                    ng-disabled="vm.form.$invalid"
+                    ng-click="vm.submit(vm.newEvidence, vm.options)">
+              Submit Evidence for Inclusion
+            </button>
           </span>
           </div>
         </div>
@@ -64,16 +76,19 @@
       <p>Your new evidence item is now waiting in a queue for administrator approval. The more complete your evidence submission the more likely it will be approved quickly. In the future, you will be notified when the status of your evidence item changes. But for now you may periodically check your evidence item's variant page to see if the evidence item has been added to the evidence item list.</p>
     </div>
   </div>
+
   <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<hr/>-->
-      <!--<pre ng-bind="vm.newEvidence|json"></pre>-->
+    <!--<div class="col-xs-4">-->
+      <!--<h3>vm.newEvidence</h3>-->
+      <!--<pre ng-bind="vm.newEvidence|json" class="small"></pre>-->
     <!--</div>-->
-  <!--</div>-->
-  <!--<hr/>-->
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="vm.options|json"></pre>-->
+    <!--<div class="col-xs-4">-->
+      <!--<h3>vm.form</h3>-->
+      <!--<pre ng-bind="vm.form|json" class="small"></pre>-->
+    <!--</div>-->
+    <!--<div class="col-xs-4">-->
+      <!--<h3>vm.evidenceFields</h3>-->
+      <!--<pre ng-bind="vm.evidenceFields|json" class="small"></pre>-->
     <!--</div>-->
   <!--</div>-->
 </div>
