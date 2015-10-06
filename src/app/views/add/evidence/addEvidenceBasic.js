@@ -513,7 +513,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Drug Interaction Type Help text',
+          helpText: 'Please indicate whether the drugs specified above are subtitutes, or act as sequential or combination treatments.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
