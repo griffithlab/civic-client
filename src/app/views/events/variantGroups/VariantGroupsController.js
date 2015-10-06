@@ -65,7 +65,7 @@
         },
         {
           heading: 'Variant Group Talk',
-          route: 'events.genes.summary.variantGroups.revisions.list',
+          route: 'events.genes.summary.variantGroups.talk.revisions.list',
           params: { variantGroupId: VariantGroups.data.item.id }
         }
       ], this.tabData);
