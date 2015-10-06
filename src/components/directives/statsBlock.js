@@ -29,7 +29,6 @@
     vm.cols = $scope.cols;
 
     $scope.$watchCollection('stats', function(stats) {
-      console.log('watchcollection triggered.');
       vm.stats = stats;
     });
   }

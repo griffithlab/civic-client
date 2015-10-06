@@ -13,21 +13,32 @@
     <span ng-switch-when="change rejected">rejected a revision to</span>
     <span ng-switch-default></span>
   </span>
-  <strong>
   <span ng-switch="event.subject_type">
     <span ng-switch-when="genes">
+      <span class="subject-type">gene</span>
       <span ng-bind="event.state_params.gene.name">GENE</span>
     </span>
     <span ng-switch-when="variants">
+      <span class="subject-type">variant</span>
       <span ng-bind="event.state_params.gene.name">GENE</span> /
       <span ng-bind="event.state_params.variant.name">VARIANT</span>
     </span>
+    <span ng-switch-when="variantgroups">
+      <span class="subject-type">variant group</span>
+      <span ng-bind="event.state_params.gene.name">GENE</span> /
+      <span ng-bind="event.state_params.variantgroup.name">VARIANT GROUP</span>
+    </span>
     <span ng-switch-when="evidenceitems">
+      <span class="subject-type">evidence item</span>
+      <span ng-bind="event.state_params.gene.name">GENE</span> /
+      <span ng-bind="event.state_params.variant.name">VARIANT</span> /
+      <span ng-bind="event.state_params.evidence_item.name">EVIDENCE ITEM</span>
+    </span>
+    <span ng-switch-when="suggestedchanges">
+      <span class="subject-type">a suggested revision to</span>
       <span ng-bind="event.state_params.gene.name">GENE</span> /
       <span ng-bind="event.state_params.variant.name">VARIANT</span> /
       <span ng-bind="event.state_params.evidence_item.name">EVIDENCE ITEM</span>
     </span>
   </span>
-  </strong>
-
 </div>

@@ -24,6 +24,7 @@
       var subjectStates = {
         genes: 'events.genes',
         variants: 'events.genes.summary.variants',
+        variantgroups: 'events.genes.summary.variantgroup',
         evidenceitems: 'events.genes.summary.variants.summary.evidence'
       };
 
@@ -34,6 +35,11 @@
         'change accepted': '.talk.revisions.list.summary',
         'change rejected': '.talk.revisions.list.summary'
       };
+
+      // revision comments are shown in their revision's summary view
+      if(event.subject_type === 'suggestedchanges') {
+        stateExtension.commented = '.talk.revisions.list.summary'
+      }
 
       var stateParams = {};
       _.each(event.state_params, function(obj, entity) {
