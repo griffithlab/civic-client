@@ -513,7 +513,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Please indicate whether the drugs specified above are subtitutes, or act as sequential or combination treatments.',
+          helpText: 'Please indicate whether the drugs specified above are subtitutes, or are used in sequential or combination treatments.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {

@@ -24,9 +24,26 @@
       var subjectStates = {
         genes: 'events.genes',
         variants: 'events.genes.summary.variants',
-        variantgroups: 'events.genes.summary.variantgroup',
+        variantgroups: 'events.genes.summary.variantGroups',
         evidenceitems: 'events.genes.summary.variants.summary.evidence'
       };
+
+      // revision comments require some more logic to determine the proper state
+      if(event.subject_type === 'suggestedchanges') {
+        var state;
+        var type = event.state_params.suggested_change.subject_type;
+        if(type === 'evidenceitems') {
+          state = 'events.genes.summary.variants.summary.evidence';
+        } else if (type === 'variantgroups') {
+          state = 'events.genes.summary.variantGroups';
+        } else if (type === 'variants') {
+          state = 'events.genes.summary.variants';
+        } else if (type === 'genes') {
+          state = 'events.genes';
+        }
+        subjectStates.suggestedchanges = state;
+      }
+
 
       var stateExtension = {
         'commented': '.talk.comments',
@@ -36,7 +53,7 @@
         'change rejected': '.talk.revisions.list.summary'
       };
 
-      // revision comments are shown in their revision's summary view
+      // revision comments are shown in their revision's summary view, override commented extension
       if(event.subject_type === 'suggestedchanges') {
         stateExtension.commented = '.talk.revisions.list.summary'
       }
@@ -48,6 +65,8 @@
           entityId = 'revisionId';
         } else if (entity === 'evidence_item') {
           entityId = 'evidenceId';
+        } else if (entity === 'variant_group') {
+          entityId = 'variantGroupId';
         } else {
           entityId = entity + 'Id';
         }
