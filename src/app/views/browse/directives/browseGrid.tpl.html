@@ -1,0 +1,33 @@
+<div class="browseGrid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="gridContainer">
+        <div ui-grid="ctrl.gridOptions"
+             ui-grid-cellnav
+             ui-grid-selection
+             ui-grid-pagination
+             ui-grid-auto-resize></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 text-center grid-pagination">
+      <pagination
+        class="pagination-sm"
+        ng-change="ctrl.pageChanged()"
+        ng-model="ctrl.page"
+        items-per-page="ctrl.maxRows"
+        max-size="15"
+        boundary-links="true"
+        rotate="false"
+        align="true"
+        total-items="ctrl.totalItems"
+        direction-links="true">
+      </pagination>
+      <p class="page-info small">
+        {{ ctrl.totalItems }} {{ ctrl.isFiltered ? "filtered" : "total" }} {{ ctrl.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
+        Page {{ ctrl.page }} of {{ ctrl.totalPages }}
+      </p>
+    </div>
+  </div>
+</div>

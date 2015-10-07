@@ -49,6 +49,7 @@
   },
   "resolutions": {
     "angular-bootstrap": "~0.13.4",
-    "angular": "~1.4.7"
+    "angular": "~1.4.7",
+    "waypoints": "~3.1.1"
   }
 }
