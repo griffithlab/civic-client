@@ -4,8 +4,8 @@
     .controller('BrowseController', BrowseController);
 
 // @ngInject
-  function BrowseController($scope, uiGridConstants, $state, $stateParams, Datatables, _, $log) {
+  function BrowseController($scope, $log, mode) {
     var ctrl = $scope.ctrl = {};
-    ctrl.mode = 'variants';
+    ctrl.mode = mode;
   }
 })();

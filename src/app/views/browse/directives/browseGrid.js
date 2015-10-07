@@ -19,7 +19,7 @@
   }
 
   // @ngInject
-  function BrowseGridController($scope, $state, $timeout, uiGridConstants, _, Datatables) {
+  function BrowseGridController($scope, $state, $log, uiGridConstants, _, Datatables) {
     var ctrl = $scope.ctrl = {};
 
     var pageCount = 25;
