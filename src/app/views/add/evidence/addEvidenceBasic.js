@@ -473,7 +473,6 @@
             type: 'typeahead',
             wrapper: null,
             templateOptions: {
-              inputFormatter: 'model[options.key]',
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)'
