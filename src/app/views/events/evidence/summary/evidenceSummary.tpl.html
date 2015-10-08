@@ -15,7 +15,9 @@
           <td class="name" style="line-height: 2em;">Evidence Level:</td>
           <td class="value">
             <span class="levelBadge"
-                  ng-class="{'levelA': evidence.evidence_level === 'A', 'levelB': evidence.evidence_level === 'B','levelC': evidence.evidence_level === 'C', 'levelD': evidence.evidence_level === 'D', 'levelE': evidence.evidence_level === 'E' }">
+                  ng-class="{'levelA': evidence.evidence_level === 'A', 'levelB': evidence.evidence_level === 'B','levelC': evidence.evidence_level === 'C', 'levelD': evidence.evidence_level === 'D', 'levelE': evidence.evidence_level === 'E' }"
+                  tooltip="{{tipText.evidence_level[evidence.evidence_level]}}"
+                  tooltip-placement="right">
               {{ evidence.evidence_level_string }}
             </span>
           </td>
@@ -23,22 +25,43 @@
         <tr>
           <td class="name">Evidence Type:</td>
           <td class="value">
-            <span ng-bind="evidence.evidence_type">evidence type</span>
+            <span ng-bind="evidence.evidence_type"
+                  tooltip="{{tipText.evidence_type[evidence.evidence_type]}}"
+                  tooltip-placement="right">
+              evidence type</span>
           </td>
         </tr>
         <tr>
           <td class="name">Evidence Direction:</td>
-          <td class="value">{{ evidence.evidence_direction }}</td>
+          <td class="value">
+            <span ng-bind="evidence.evidence_direction"
+                  tooltip="{{tipText.evidence_direction[evidence.evidence_type][evidence.evidence_direction]}}"
+                  tooltip-placement="right">
+              evidence.evidence_direction
+            </span>
+          </td>
         </tr>
 
         <tr>
           <td class="name">Clinical Significance:</td>
-          <td class="value">{{ evidence.clinical_significance }}</td>
+          <td class="value">
+            <span ng-bind="evidence.clinical_significance"
+                  tooltip="{{tipText.clinical_significance[evidence.clinical_significance]}}"
+                  tooltip-placement="right">
+              evidence.clinical_significance
+            </span>
+          </td>
         </tr>
 
         <tr>
           <td class="name">Variant Origin:</td>
-          <td class="value">{{ evidence.variant_origin | capitalize }}</td>
+          <td class="value">
+            <span ng-bind="evidence.variant_origin | capitalize"
+                  tooltip="{{tipText.variant_origin[evidence.variant_origin]}}"
+                  tooltip-placement="right">
+              evidence.variant_origin
+            </span>
+          </td>
         </tr>
 
       </table>
@@ -73,15 +96,20 @@
 
         <tr>
           <td class="name">Trust Rating:</td>
-          <td class="value"><rating ng-model="evidence.rating" max="5" readonly="true"></rating></td>
+          <td class="value">
+            <rating ng-model="evidence.rating" max="5" readonly="true"
+                    tooltip="{{tipText.rating[evidence.rating]}}"
+                    tooltip-placement="left">
+            </rating>
+          </td>
         </tr>
 
       </table>
     </div>
   </div>
   <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<pre ng-bind="evidence|json">evidence</pre>-->
-    <!--</div>-->
+  <!--<div class="col-xs-12">-->
+  <!--<pre ng-bind="evidence|json">evidence</pre>-->
+  <!--</div>-->
   <!--</div>-->
 </div>

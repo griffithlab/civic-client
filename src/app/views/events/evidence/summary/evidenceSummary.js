@@ -12,8 +12,10 @@
     });
 
   //@ngInject
-  function EvidenceSummaryController($scope, Evidence, EvidenceViewOptions, _) {
+  function EvidenceSummaryController($scope, Evidence, EvidenceViewOptions, _, ConfigService) {
     $scope.evidence = Evidence.data.item;
+    $scope.tipText = ConfigService.evidenceAttributeDescriptions;
+
     var evidence_levels = {
       A: 'Validated',
       B: 'Clinical',
