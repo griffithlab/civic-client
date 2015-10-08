@@ -20,7 +20,7 @@
   }
 
   // @ngInject
-  function EvidenceGridController($scope, $stateParams, $state, $timeout, uiGridConstants, _) {
+  function EvidenceGridController($scope, $stateParams, $state, $log, uiGridConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
     var statusFilters = ['accepted', 'submitted'];
@@ -302,48 +302,43 @@
     }
 
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
-      // TODO: this watch seems unnecessary, but if it's not present then the grid only loads on a fresh page, fails when loaded by a state change
-      // Something to do with directive priorities, maybe?
-      $scope.$watchCollection('evidence', function(evidence) {
-        ctrl.gridApi = gridApi;
-        ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
-        var suppressGo = false;
+      var evidence = $scope.evidence;
+      ctrl.gridApi = gridApi;
+      ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
+      var suppressGo = false;
 
-        // convert drug array into comma delimited list
-        evidence = _.map(evidence, function(item){
-          if (_.isArray(item.drugs)) {
-            item.drugs = _.chain(item.drugs).pluck('name').value().join(', ');
-            return item;
-          } else {
-            return item;
-          }
-        });
-        ctrl.evidenceGridOptions.data = evidence;
-
-        // if we're loading an evidence view, highlight the correct row in the table
-        if(_.has($stateParams, 'evidenceId')) {
-          var rowEntity = _.find(evidence, function(item) {
-            return item.id === +$stateParams.evidenceId;
-          });
-
-          gridApi.core.on.rowsRendered($scope, function() {
-            suppressGo = true;
-            gridApi.selection.selectRow(rowEntity);
-            gridApi.grid.scrollTo(rowEntity);
-            suppressGo = false;
-          });
+      // convert drug array into comma delimited list
+      evidence = _.map(evidence, function(item){
+        if (_.isArray(item.drugs)) {
+          item.drugs = _.chain(item.drugs).pluck('name').value().join(', ');
+          return item;
+        } else {
+          return item;
         }
+      });
+      ctrl.evidenceGridOptions.data = evidence;
 
-        gridApi.selection.on.rowSelectionChanged($scope, function(row){
-          var params = _.merge($stateParams, { evidenceId: row.entity.id });
-
-          if(!suppressGo) {
-            $state.go('events.genes.summary.variants.summary.evidence.summary', params)
-          }
+      // if we're loading an evidence view, highlight the correct row in the table
+      if(_.has($stateParams, 'evidenceId')) {
+        var rowEntity = _.find(evidence, function(item) {
+          return item.id === +$stateParams.evidenceId;
         });
 
-      });
+        gridApi.core.on.rowsRendered($scope, function() {
+          suppressGo = true;
+          gridApi.selection.selectRow(rowEntity);
+          gridApi.grid.scrollTo(rowEntity);
+          suppressGo = false;
+        });
+      }
 
+      gridApi.selection.on.rowSelectionChanged($scope, function(row){
+        var params = _.merge($stateParams, { evidenceId: row.entity.id });
+
+        if(!suppressGo) {
+          $state.go('events.genes.summary.variants.summary.evidence.summary', params)
+        }
+      });
     };
   }
 
