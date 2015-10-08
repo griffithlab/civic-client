@@ -12,7 +12,8 @@
         templateUrl: 'app/views/browse/browse.tpl.html'
       })
       .state('browse.variants', {
-        url: '/variants',
+        url: '/variants?page',
+        reloadOnSearch: false,
         controller: 'BrowseController',
         templateUrl: 'app/views/browse/browseViews.tpl.html',
         data: {
@@ -22,11 +23,16 @@
         resolve: {
           mode: function() {
             return 'variants';
+          },
+          page: /* @ngInject */ function($stateParams) {
+            if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
+            else { return 1; }
           }
         }
       })
       .state('browse.genes', {
-        url: '/genes',
+        url: '/genes?page',
+        reloadOnSearch: false,
         controller: 'BrowseController',
         templateUrl: 'app/views/browse/browseViews.tpl.html',
         data: {
@@ -36,6 +42,10 @@
         resolve: {
           mode: function() {
             return 'genes';
+          },
+          page: /* @ngInject */ function($stateParams) {
+            if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
+            else { return 1; }
           }
         }
       });

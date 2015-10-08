@@ -10,7 +10,8 @@
       restrict: 'E',
       replace: true,
       scope: {
-        mode: '='
+        mode: '=',
+        page: '='
       },
       templateUrl: 'app/views/browse/directives/browseGrid.tpl.html',
       controller: 'BrowseGridController'
@@ -19,32 +20,17 @@
   }
 
   // @ngInject
-  function BrowseGridController($scope, $state, $log, uiGridConstants, _, Datatables) {
+  function BrowseGridController($scope, $state, $location, $log, uiGridConstants, _,
+                                Datatables) {
     var ctrl = $scope.ctrl = {};
 
     var pageCount = 25;
     var maxRows = ctrl.maxRows = pageCount;
-    var defaults = {
-      variants: {
-        mode: 'variants',
-        page: 1,
-        count: pageCount,
-        sorting: [{field: 'variant', direction: uiGridConstants.ASC}],
-        filters: []
-      },
-      genes: {
-        mode: 'genes',
-        page: 1,
-        count: pageCount,
-        sorting: [{field: 'name', direction: uiGridConstants.ASC}],
-        filters: []
-      }
-    };
 
     // declare ui paging/sorting/filtering vars
     ctrl.mode = $scope.mode;
     ctrl.totalItems = Number();
-    ctrl.page = 1;
+    ctrl.page = $scope.page;
     ctrl.count= Number();
 
     ctrl.filters = [];
@@ -183,14 +169,10 @@
 
     ctrl.gridOptions.onRegisterApi = function(gridApi) {
       ctrl.gridApi = gridApi;
-
-      $scope.$watch('mode', function(mode) {
-        ctrl.switchMode(mode);
-      });
-
-        // called from pagination directive when page changes
+      // called from pagination directive when page changes
       ctrl.pageChanged = function() {
         $log.info('page changed: ' + ctrl.page);
+        $location.search('page', ctrl.page);
         updateData();
       };
 
@@ -256,15 +238,6 @@
         });
     }
 
-    ctrl.switchMode = function(mode) {
-      ctrl.mode = mode;
-      ctrl.filters = defaults[mode].filters;
-      ctrl.sorting= defaults[mode].sorting;
-      ctrl.page = defaults[mode].page;
-
-      updateData();
-    };
-
     function fetchData(mode, count, page, sorting, filters) {
       var request;
 
@@ -288,8 +261,6 @@
       return Datatables.query(request);
     }
 
-    ctrl.switchMode('variants');
-
-
+    updateData();
   }
 })();
