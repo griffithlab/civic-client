@@ -6,7 +6,7 @@
           type="button"
           class="btn btn-xs btn-info"
           ui-sref="users.profile({userId: currentUser.id})">
-          {{ currentUser.name ? currentUser.name : currentUser.username }}
+          {{ currentUser.display_name }}
         </button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
           <span class="caret"></span>
