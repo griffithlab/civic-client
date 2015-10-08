@@ -2,32 +2,42 @@
   <div class="container-fluid">
     <div class="subheader-bg">
       <div class="row">
-        <div class="col-xs-5">
-          <h1>{{ view.stateTitle }}</h1>
-        </div>
-        <div class="col-xs-3 search-sub-input">
+        <div class="col-xs-4 search-sub-input">
           <quick-search></quick-search>
         </div>
+
+        <div class="col-xs-2">
+          <a type="button"
+             class="btn btn-sm btn-adv-search btn-block"
+             ui-sref="search">Search</a>
+        </div>
+
+        <div class="col-xs-2">
+          <a type="button"
+             class="btn btn-sm btn-adv-search btn-block"
+             ui-sref="activity">Activity</a>
+        </div>
+
         <div class="col-xs-2 search-sub-btn">
           <a type="button"
              class="btn btn-sm btn-browse-sub btn-block"
              ui-sref="browse.variants">Browse</a>
         </div>
-        <div class="col-xs-2 search-sub-btn">
 
+        <div class="col-xs-2 search-sub-btn">
           <div ng-switch="isAuthenticated()">
             <div ng-switch-when="false">
               <span tooltip="Please sign in to add Evidence" tooltip-append-to-body="true">
                 <a type="button"
                    class="btn btn-sm btn-add-sub btn-block disabled"
-                   ui-sref="add.evidence.basic">Add Evidence</a>
+                   ui-sref="add.evidence.basic">Add</a>
                 </span>
             </div>
             <div ng-switch-when="true">
               <a type="button"
                  class="btn btn-sm btn-add-sub btn-block"
                  ng-disabled="$state.includes('add.evidence')"
-                 ng-href="{{ addEvidenceUrl }}">Add Evidence</a>
+                 ng-href="{{ addEvidenceUrl }}">Add</a>
             </div>
           </div>
         </div>
