@@ -31,7 +31,7 @@
         controller: 'ProfileController',
         data: {
           navMode: 'sub',
-          titleExp: '"Profile: " + user.username'
+          titleExp: '"Profile: " + user.display_name'
         }
       })
       .state('users.edit', {
@@ -46,7 +46,7 @@
         controller: 'ProfileEditController',
         data: {
           navMode: 'sub',
-          titleExp: '"Profile: " + user.username'
+          titleExp: '"Profile: " + user.display_name'
         }
       });
   }

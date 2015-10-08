@@ -4,7 +4,7 @@
       <tr ng-repeat="(action, user) in vm.users">
         <td><strong>{{action | labelify}}</strong></td>
         <td>{{user.timestamp | timeAgo}}</td>
-        <td><strong>by</strong> {{user.user.username}}</td>
+        <td><strong>by</strong> {{user.user.display_name}}</td>
       </tr>
     </tbody>
   </table>

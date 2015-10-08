@@ -9,7 +9,7 @@
           <div class="comment-title">
             <h4 class="title" ng-bind="ctrl.comment.title">Comment Title</h4>
           <span class="small">Posted by
-            <strong><span ng-bind="ctrl.comment.user.username">user.username</span></strong>
+            <strong><span ng-bind="ctrl.comment.user.display_name">user.display_name</span></strong>
             <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span>
           </span>
           </div>
@@ -40,7 +40,7 @@
             </div>
             <div class="info-block">
               <span class="posted-time small pull-left">Posted by
-                <strong><span ng-bind="ctrl.comment.user.username">user.username</span></strong>
+                <strong><span ng-bind="ctrl.comment.user.display_name">user.display_name</span></strong>
                 <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span>
               </span>
               <div class="comment-actions pull-right">
