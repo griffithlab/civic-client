@@ -6,7 +6,10 @@
           type="button"
           class="btn btn-xs btn-info"
           ui-sref="users.profile({userId: currentUser.id})">
-          {{ currentUser.display_name }}
+          <span class="avatar">
+            <img ng-src="{{currentUser.avatars.x14}}" width="14" height="14"/>
+          </span>
+          <span class="username">{{currentUser.display_name}}</span>
         </button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
           <span class="caret"></span>
@@ -31,7 +34,10 @@
           type="button"
           class="btn btn-xs btn-info"
           ui-sref="users.profile({userId: currentUser.id})">
-          {{ currentUser.name ?  currentUser.name : currentUser.nickname }}
+          <span class="avatar">
+            <img ng-src="{{currentUser.avatars.x14}}" width="14" height="14"/>
+          </span>
+          <span class="username">{{currentUser.display_name}}</span>
         </button>
         <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
           <span class="caret"></span>

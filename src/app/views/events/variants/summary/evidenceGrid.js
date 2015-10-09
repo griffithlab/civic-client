@@ -104,7 +104,9 @@
           }
         },
         { name: 'id',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'EID',
+          headerTooltip: 'Evidence ID',
           type: 'number',
           enableFiltering: false,
           allowCellFocus: false,
@@ -113,7 +115,9 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceGridIdCell.tpl.html'
         },
         { name: 'description',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'DESC',
+          headerTooltip: 'Description',
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
@@ -123,7 +127,9 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceGridEvidenceCell.tpl.html'
         },
         { name: 'disease',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'DIS',
+          headerTooltip: 'Disease',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
@@ -133,7 +139,9 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceGridDiseaseCell.tpl.html'
         },
         { name: 'drugs',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'DRUG',
+          headerTooltip: 'Drug',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
@@ -154,7 +162,9 @@
         //  cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugInteractionTypeCell.tpl.html'
         //},
         { name: 'evidence_level',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'EL',
+          headerTooltip: 'Evidence Level',
           type: 'string',
           allowCellFocus: false,
           filter: {
@@ -175,7 +185,9 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceGridLevelCell.tpl.html'
         },
         { name: 'evidence_type',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'ET',
+          headerTooltip: 'Evidence Type',
           type: 'string',
           allowCellFocus: false,
           //enableFiltering: false,
@@ -207,7 +219,9 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceGridTypeCell.tpl.html'
         },
         { name: 'evidence_direction',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'ED',
+          headerTooltip: 'Evidence Direction',
           type: 'string',
           allowCellFocus: false,
           filter: {
@@ -225,7 +239,9 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceDirectionCell.tpl.html'
         },
         { name: 'clinical_significance',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'CS',
+          headerTooltip: 'Clinical Significance',
           type: 'string',
           allowCellFocus: false,
           filter: {
@@ -248,7 +264,9 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceGridClinicalSignificanceCell.tpl.html'
         },
         { name: 'variant_origin',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'VO',
+          headerTooltip: 'Variant Origin',
           type: 'string',
           allowCellFocus: false,
           filter: {
@@ -266,7 +284,9 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceGridVariantOriginCell.tpl.html'
         },
         { name: 'rating',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'TR',
+          headerTooltip: 'Trust Rating',
           type: 'number',
           allowCellFocus: false,
           filter: {
