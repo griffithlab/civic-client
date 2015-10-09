@@ -73,7 +73,11 @@
   <div class="successMessage" ng-if="vm.showSuccessMessage">
     <div class="col-xs-12 jumbotron">
       <h1>Thank you.</h1>
-      <p>Your new evidence item is now waiting in a queue for administrator approval. The more complete your evidence submission the more likely it will be approved quickly. In the future, you will be notified when the status of your evidence item changes. But for now you may periodically check your evidence item's variant page to see if the evidence item has been added to the evidence item list.</p>
+      <p>The evidence item has been added to the database with a status of 'Pending'. In the meantime before it is accepted by an Administrator, CIViC users may review and comment upon it.</p>
+      <p>
+        <a ng-href="#/events/genes/{{vm.linkParams.geneId}}/summary/variants/{{vm.linkParams.variantId}}/summary/evidence/{{vm.linkParams.evidenceId}}/summary"
+           class="btn btn-small btn-default">View it here</a>
+      </p>
     </div>
   </div>
 

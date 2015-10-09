@@ -584,13 +584,23 @@
       }
 
       Evidence.add(newEvidence)
-        .then(function() {
+        .then(function(response) {
           console.log('add evidence success!');
           vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
           // options.resetModel();
+          vm.linkParams = {
+            geneId: response.gene.id,
+            variantId: response.variant.id,
+            evidenceId: response.evidence_item.id
+          };
+          vm.linkNames = {
+            gene: response.gene.name,
+            variant: response.variant.name,
+            evidence_item: response.evidence_item.name
+          }
         })
         .catch(function(error) {
           console.error('add evidence error!');
