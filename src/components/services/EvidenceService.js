@@ -100,7 +100,7 @@
   }
 
   // @ngInject
-  function EvidenceService(EvidenceResource, $q, $cacheFactory) {
+  function EvidenceService(EvidenceResource, Variants, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
     // Base Evidence and Evidence Collection
@@ -150,6 +150,9 @@
     function add(reqObj) {
       return EvidenceResource.add(reqObj).$promise
         .then(function(response) {
+          // flush cached variant and evidence item lists
+          cache.remove('/api/variants/' + response.variant.id);
+          cache.remove('/api/variants/' + response.variant.id + '/evidence_items');
           return response.$promise;
         });
     }
