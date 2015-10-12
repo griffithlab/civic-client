@@ -1,0 +1,23 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.searchView{
+
+  .title-row {
+    .fullBleed();
+    .name h3 {
+      margin: 0;
+      display: inline-block;
+      line-height: 2em;
+    }
+
+    #gradient > .vertical-three-colors(@pageBackground3, @pageBackground3, 60%, darken(@pageBackground3, 8%));
+
+    > .row {
+      border-bottom: 1px solid #CCC;
+      background-image: url('/assets/images/grey_stripes.png');
+    }
+  }
+}

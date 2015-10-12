@@ -1,3 +1,42 @@
 <div class="searchView">
-  <h1>Search</h1>
+  <div class="title-row">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="name">
+          <h3>Search Evidence Items</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <form ng-submit="vm.onSubmit()" novalidate>
+        <formly-form
+          model="vm.model"
+          fields="vm.fields"
+          form="vm.form"
+          options="vm.options">
+          <button
+            type="submit"
+            class="btn btn-primary submit-button"
+            ng-disabled="vm.form.$invalid">
+
+            Submit
+
+          </button>
+        </formly-form>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <hr />
+      <h2>Model</h2>
+      <pre>{{vm.model | json}}</pre>
+      <h2>Fields <small>(note, functions are not shown)</small></h2>
+      <pre>{{vm.originalFields | json}}</pre>
+      <h2>Form</h2>
+      <pre>{{vm.form | json}}</pre>
+    </div>
+  </div>
 </div>
