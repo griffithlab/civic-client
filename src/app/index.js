@@ -32,6 +32,8 @@
 
     // app root views
     'civic.pages',
+    'civic.activity',
+    'civic.search',
     'civic.account',
     'civic.browse',
     'civic.events',
@@ -112,6 +114,7 @@
   angular.module('civic.login', ['ui.router']);
   angular.module('civic.browse', ['ui.grid.selection', 'ui.grid.pagination', 'ui.router']);
   angular.module('civic.search', ['ui.router']);
+  angular.module('civic.activity', ['ui.router']);
 
   angular.module('civic.users', [
     'ui.router',
