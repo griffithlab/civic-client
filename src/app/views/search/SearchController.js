@@ -10,12 +10,6 @@
     // funcation assignment
     vm.onSubmit = onSubmit;
 
-    // variable assignment
-    vm.author = { // optionally fill in your info below :-)
-      name: 'Joe Zhou',
-      url: 'https://plus.google.com/u/0/111062476999618400219/posts' // a link to your twitter/github/blog/whatever
-    };
-    vm.exampleTitle = 'Repeating Section'; // add this
     vm.env = {
       angularVersion: angular.version.full,
       formlyVersion: formlyVersion
@@ -28,7 +22,7 @@
 
     // function definition
     function onSubmit() {
-      alert(JSON.stringify(vm.model), null, 2);
+      $log.debug(JSON.stringify(vm.model));
     }
 
 
