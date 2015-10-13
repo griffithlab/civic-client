@@ -69,7 +69,8 @@
                     { value: undefined, name: 'Please select a field' },
                     { value: 'description', name: 'Description' },
                     { value: 'rating', name: 'Rating' },
-                    { value: 'citation', name: 'Citation' }
+                    { value: 'citation', name: 'Citation' },
+                    { value: 'citation_id', name: 'Citation ID' }
                   ],
                   onChange: function(value, options, scope) {
                     scope.model.condition = {};
@@ -148,6 +149,30 @@
                 },
                 {
                   key: 'string',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              citation_id: [
+                {
+                  key: 'name',
+                  type: 'input',
+                  defaultValue: 'is',
+                  hideExpression: 'true',
+                  templateOptions: {
+                    label: ''
+                  }
+                },
+                {
+                  template: 'is',
+                  className: 'inline-field'
+                },
+                {
+                  key: 'id',
                   type: 'input',
                   className: 'inline-field',
                   templateOptions: {
