@@ -10,6 +10,13 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
+      <formly-form fields="vm.operatorField" model="vm.model">
+
+      </formly-form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
       <form ng-submit="vm.onSubmit()" novalidate>
         <formly-form
           model="vm.model"

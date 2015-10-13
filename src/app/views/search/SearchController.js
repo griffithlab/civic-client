@@ -36,21 +36,28 @@
       vm.model = {
         queries: [
           {
-            field: 'description',
+            field: undefined,
             condition: {
-              name: 'contains',
-              string: 'abcdef'
-            }
-          },
-          {
-            field: 'rating',
-            condition: {
-              name: 'is_greater_than',
-              rating: 3
+              name: undefined
             }
           }
         ]
       };
+
+      vm.operatorField = [
+        {
+          key: 'operator',
+          type: 'select',
+          templateOptions: {
+            label: 'Operator',
+            options: [
+              { value: undefined, name: 'Please select AND or OR' },
+              { value: 'OR', name: 'OR' },
+              { value: 'AND', name: 'AND' }
+            ]
+          }
+        }
+      ];
 
       vm.fields = [
         {
@@ -63,14 +70,17 @@
                 key: 'field',
                 type: 'select',
                 templateOptions: {
-                  label: 'Field:',
+                  label: '',
                   required: true,
                   options: [
                     { value: undefined, name: 'Please select a field' },
                     { value: 'description', name: 'Description' },
                     { value: 'rating', name: 'Rating' },
                     { value: 'citation', name: 'Citation' },
-                    { value: 'citation_id', name: 'Citation ID' }
+                    { value: 'drug_name', name: 'Drug Name' },
+                    { value: 'drug_id', name: 'Drug PubChem ID' },
+                    { value: 'disease_name', name: 'Disease Name' },
+                    { value: 'disease_id', name: 'Disease DOID' }
                   ],
                   onChange: function(value, options, scope) {
                     scope.model.condition = {};
@@ -180,7 +190,107 @@
                     required: true
                   }
                 }
-              ]
+              ],
+              drug_name: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: undefined, name: 'Please select a condition'},
+                      {value: 'contains', name: 'contains'},
+                      {value: 'begins_with', name: 'begins with'},
+                      {value: 'does_not_contain', name: 'does not contain'}
+                    ]
+                  }
+                },
+                {
+                  key: 'string',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              drug_id: [
+                {
+                  key: 'name',
+                  type: 'input',
+                  defaultValue: 'is',
+                  hideExpression: 'true',
+                  templateOptions: {
+                    label: ''
+                  }
+                },
+                {
+                  template: 'is',
+                  className: 'inline-field'
+                },
+                {
+                  key: 'id',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              disease_name: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: undefined, name: 'Please select a condition'},
+                      {value: 'contains', name: 'contains'},
+                      {value: 'begins_with', name: 'begins with'},
+                      {value: 'does_not_contain', name: 'does not contain'}
+                    ]
+                  }
+                },
+                {
+                  key: 'string',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              disease_id: [
+                {
+                  key: 'name',
+                  type: 'input',
+                  defaultValue: 'is',
+                  hideExpression: 'true',
+                  templateOptions: {
+                    label: ''
+                  }
+                },
+                {
+                  template: 'is',
+                  className: 'inline-field'
+                },
+                {
+                  key: 'id',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
             }
           }
         }
