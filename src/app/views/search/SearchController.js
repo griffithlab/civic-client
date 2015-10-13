@@ -72,9 +72,32 @@
                   ]
                 }
               }
+            ],
+            ratingFields: [
+              {
+                key: 'name',
+                type: 'select',
+                templateOptions: {
+                  label: 'Condition:',
+                  required: true,
+                  options: [
+                    { value: '', name: 'Please select a Condition' },
+                    { value: 'is_greater_than', name: 'is greater than'},
+                    { value: 'is_less_than', name: 'is less than' },
+                    { value: 'is_equal_to', name: 'is equal to' }
+                  ]
+                }
+              },
+              {
+                key: 'rating',
+                type: 'input',
+                templateOptions: {
+                  label: 'Rating:',
+                  required: true
+                }
+              }
             ]
           }
-
         }
       ];
     }

@@ -30,14 +30,20 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
-      <hr />
+    <div class="col-xs-3">
       <h2>Model</h2>
       <pre>{{vm.model | json}}</pre>
+    </div>
+    <div class="col-xs-3">
       <h2>Fields <small>(note, functions are not shown)</small></h2>
       <pre>{{vm.originalFields | json}}</pre>
+    </div>
+    <div class="col-xs-3">
       <h2>Form</h2>
       <pre>{{vm.form | json}}</pre>
+    </div>
+    <div class="col-xs-3">
+      <pre>{{vm.conditionForm | json}}</pre>
     </div>
   </div>
 </div>

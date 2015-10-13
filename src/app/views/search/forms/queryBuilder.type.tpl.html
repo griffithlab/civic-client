@@ -1,6 +1,6 @@
 <div class="queryBuilder">
   <!--loop through each element in model array-->
-  <div class="row" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
+  <div class="row" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields);ratingFields = copyFields(to.ratingFields)">
     <div class="col-xs-12">
       <div class="query-row">
         <div class="row">
@@ -12,7 +12,8 @@
             </formly-form>
           </div>
           <div class="col-xs-8 field-form">
-            FIELD FORM GOES HERE.
+            <formly-form fields="ratingFields"
+                         model="element.condition"></formly-form>
           </div>
           <div class="col-xs-1 row-buttons">
             <button type="button" class="btn btn-xs btn-primary" ng-click="addNew()" >
