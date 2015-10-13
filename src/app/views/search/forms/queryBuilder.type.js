@@ -15,7 +15,6 @@
 
         $scope.copyFields = copyFields;
 
-
         function copyFields(fields) {
           fields = angular.copy(fields);
           addRandomIds(fields);

@@ -57,8 +57,8 @@
           type: 'queryRow',
           key: 'queries',
           templateOptions: {
-            btnText:'Add another investment',
-            fields: [
+            btnText: 'Add another investment',
+            rowFields: [
               {
                 key: 'field',
                 type: 'select',
@@ -66,37 +66,68 @@
                   label: 'Field:',
                   required: true,
                   options: [
-                    { value: '', name: 'Please select a Field' },
-                    { value: 'description', name: 'Description'},
-                    { value: 'rating', name: 'Rating' }
+                    {value: '', name: 'Please select a Field'},
+                    {value: 'description', name: 'Description'},
+                    {value: 'rating', name: 'Rating'}
                   ]
                 }
               }
             ],
-            ratingFields: [
-              {
-                key: 'name',
-                type: 'select',
-                templateOptions: {
-                  label: 'Condition:',
-                  required: true,
-                  options: [
-                    { value: '', name: 'Please select a Condition' },
-                    { value: 'is_greater_than', name: 'is greater than'},
-                    { value: 'is_less_than', name: 'is less than' },
-                    { value: 'is_equal_to', name: 'is equal to' }
-                  ]
+            conditionFields: {
+              rating: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'col-xs-6',
+                  templateOptions: {
+                    label: 'Condition:',
+                    required: true,
+                    options: [
+                      {value: '', name: 'Please select a Condition'},
+                      {value: 'is_greater_than', name: 'is greater than'},
+                      {value: 'is_less_than', name: 'is less than'},
+                      {value: 'is_equal_to', name: 'is equal to'}
+                    ]
+                  }
+                },
+                {
+                  key: 'rating',
+                  type: 'input',
+                  className: 'col-xs-6',
+                  templateOptions: {
+                    label: 'Rating:',
+                    required: true
+                  }
                 }
-              },
-              {
-                key: 'rating',
-                type: 'input',
-                templateOptions: {
-                  label: 'Rating:',
-                  required: true
+              ],
+              description: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'col-xs-6',
+                  templateOptions: {
+                    label: 'Condition:',
+                    required: true,
+                    options: [
+                      {value: '', name: 'Please select a Condition'},
+                      {value: 'contains', name: 'contains'},
+                      {value: 'begins_with', name: 'begins with'},
+                      {value: 'does_not_contain', name: 'does not contain'}
+                    ]
+                  }
+                },
+                {
+                  key: 'string',
+                  type: 'input',
+                  className: 'col-xs-6',
+                  templateOptions: {
+                    label: 'String:',
+                    required: true
+                  }
                 }
-              }
-            ]
+              ]
+
+            }
           }
         }
       ];
