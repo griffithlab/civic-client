@@ -34,148 +34,43 @@
 
     function init() {
       vm.model = {
-        investments: [
+        queries: [
           {
-            investmentName:'abc',
-            investmentDate:(new Date()).toDateString(),
-            stockIdentifier:'',
-            investmentValue:'',
-            relationshipName:'',
-            complianceApprover:'',
-            requestorComment:''
+            field: 'description',
+            condition: {
+              name: 'contains',
+              string: 'abcdef'
+            }
           },
           {
-            investmentName:'haf',
-            investmentDate:(new Date()).toDateString(),
-            stockIdentifier:'',
-            investmentValue:'',
-            relationshipName:'',
-            complianceApprover:'',
-            requestorComment:''
+            field: 'rating',
+            condition: {
+              name: 'is_greater_than',
+              rating: 3
+            }
           }
         ]
       };
 
       vm.fields = [
         {
-          type: 'repeatSection',
-          key: 'investments',
+          type: 'queryRow',
+          key: 'queries',
           templateOptions: {
             btnText:'Add another investment',
             fields: [
               {
-                className: 'row',
-                fieldGroup: [
-                  {
-                    className: 'col-xs-4',
-                    type: 'input',
-                    key: 'investmentName',
-                    templateOptions: {
-                      label: 'Name of Investment:',
-                      required: true
-                    }
-                  },
-                  {
-                    type: 'input',
-                    key: 'investmentDate',
-                    className: 'col-xs-4',
-                    templateOptions: {
-                      label: 'Date of Investment:',
-                      placeholder: 'dd/mm/yyyy such as 20/05/2015',
-                      dateFormat: 'DD, d  MM, yy'
-                    }
-                  },
-                  {
-                    type: 'input',
-                    key: 'stockIdentifier',
-                    className: 'col-xs-4',
-                    templateOptions: {
-                      label: 'Stock Identifier:'
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "radio",
-                "key": "type",
-                "templateOptions": {
-                  "options": [
-                    {
-                      "name": "Text Field",
-                      "value": "input"
-                    },
-                    {
-                      "name": "TextArea Field",
-                      "value": "textarea"
-                    },
-                    {
-                      "name": "Radio Buttons",
-                      "value": "radio"
-                    },
-                    {
-                      "name": "Checkbox",
-                      "value": "checkbox"
-                    }
-                  ],
-                  "label": "Field Type",
-                  "required": true
-                }
-              },
-              {
-                type: 'input',
-                key: 'investmentValue',
+                key: 'field',
+                type: 'select',
                 templateOptions: {
-                  label: 'Value:'
-                },
-                expressionProperties: {
-                  'templateOptions.disabled': '!model.stockIdentifier'
+                  label: 'Field:',
+                  required: true,
+                  options: [
+                    { value: '', name: 'Please select a Field' },
+                    { value: 'description', name: 'Description'},
+                    { value: 'rating', name: 'Rating' }
+                  ]
                 }
-              },
-              {
-                type: 'checkbox',
-                model: 'formState',
-                key: 'selfExecuting',
-                templateOptions: {
-                  label: 'Are you executing this trade?'
-                }
-              },
-              {
-                hideExpression: '!formState.selfExecuting',
-                fieldGroup: [
-                  {
-                    type: 'input',
-                    key: 'relationshipName',
-                    templateOptions: {
-                      label: 'Name:'
-                    }
-                  },
-                  {
-                    type: 'select',
-                    key: 'complianceApprover',
-                    templateOptions:
-                    {
-                      label: 'Compliance Approver:',
-                      options: [
-                        {
-                          name: 'approver 1',
-                          value:'some one 1'
-                        },
-                        {
-                          name: 'approver 2',
-                          value:'some one 2'
-                        }]
-                    }
-                  },
-                  {
-                    type: 'textarea',
-                    key: 'requestorComment',
-                    templateOptions:
-                    {
-                      label: 'Requestor Comment',
-                      rows: 4
-                    }
-                  }
-                ]
               }
             ]
           }

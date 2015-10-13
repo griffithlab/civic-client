@@ -1,14 +1,14 @@
 (function() {
   'use strict';
-  angular.module('civic.config')
+  angular.module('civic.search')
     .config(queryBuilderConfig);
 
   // @ngInject
   function queryBuilderConfig(formlyConfigProvider) {
     var unique = 1;
     formlyConfigProvider.setType({
-      name: 'repeatSection',
-      templateUrl: 'app/views/search/forms/queryBuilder.tpl.html',
+      name: 'queryRow',
+      templateUrl: 'app/views/search/forms/queryBuilder.type.tpl.html',
       controller: function($scope) {
         $scope.formOptions = {formState: $scope.formState};
         $scope.addNew = addNew;
