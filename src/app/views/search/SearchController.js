@@ -66,10 +66,14 @@
                   label: 'Field:',
                   required: true,
                   options: [
-                    {value: '', name: 'Please select a Field'},
-                    {value: 'description', name: 'Description'},
-                    {value: 'rating', name: 'Rating'}
-                  ]
+                    { value: undefined, name: 'Please select a field' },
+                    { value: 'description', name: 'Description' },
+                    { value: 'rating', name: 'Rating' },
+                    { value: 'citation', name: 'Citation' }
+                  ],
+                  onChange: function(value, options, scope) {
+                    scope.model.condition = {};
+                  }
                 }
               }
             ],
@@ -78,24 +82,24 @@
                 {
                   key: 'name',
                   type: 'select',
-                  className: 'col-xs-6',
+                  className: 'inline-field',
                   templateOptions: {
-                    label: 'Condition:',
                     required: true,
+                    label: '',
                     options: [
-                      {value: '', name: 'Please select a Condition'},
-                      {value: 'is_greater_than', name: 'is greater than'},
-                      {value: 'is_less_than', name: 'is less than'},
-                      {value: 'is_equal_to', name: 'is equal to'}
+                      { value: undefined, name: 'Please select a condition' },
+                      { value: 'is_greater_than', name: 'is greater than' },
+                      { value: 'is_less_than', name: 'is less than' },
+                      { value: 'is_equal_to', name: 'is equal to' }
                     ]
                   }
                 },
                 {
                   key: 'rating',
-                  type: 'input',
-                  className: 'col-xs-6',
+                  type: 'rating',
+                  className: 'inline-field',
                   templateOptions: {
-                    label: 'Rating:',
+                    label: '',
                     required: true
                   }
                 }
@@ -104,12 +108,12 @@
                 {
                   key: 'name',
                   type: 'select',
-                  className: 'col-xs-6',
+                  className: 'inline-field',
                   templateOptions: {
-                    label: 'Condition:',
+                    label: '',
                     required: true,
                     options: [
-                      {value: '', name: 'Please select a Condition'},
+                      {value: undefined, name: 'Please select a condition'},
                       {value: 'contains', name: 'contains'},
                       {value: 'begins_with', name: 'begins with'},
                       {value: 'does_not_contain', name: 'does not contain'}
@@ -119,14 +123,39 @@
                 {
                   key: 'string',
                   type: 'input',
-                  className: 'col-xs-6',
+                  className: 'inline-field',
                   templateOptions: {
-                    label: 'String:',
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              citation: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: undefined, name: 'Please select a condition'},
+                      {value: 'contains', name: 'contains'},
+                      {value: 'begins_with', name: 'begins with'},
+                      {value: 'does_not_contain', name: 'does not contain'}
+                    ]
+                  }
+                },
+                {
+                  key: 'string',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
                     required: true
                   }
                 }
               ]
-
             }
           }
         }

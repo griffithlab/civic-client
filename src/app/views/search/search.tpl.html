@@ -16,19 +16,23 @@
           fields="vm.fields"
           form="vm.form"
           options="vm.options">
-          <hr/>
-          <button
-            type="submit"
-            class="btn btn-primary submit-button"
-            ng-disabled="vm.form.$invalid">
-
-            Submit
-
-          </button>
         </formly-form>
       </form>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="button-row pull-right">
+        <button
+          type="submit"
+          class="btn btn-primary submit-button"
+          ng-disabled="vm.form.$invalid">
+          Search Evidence Items
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xs-4">
       <h2>Model</h2>
