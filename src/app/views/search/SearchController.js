@@ -28,6 +28,7 @@
 
     function init() {
       vm.model = {
+        operator: 'AND',
         queries: [
           {
             field: undefined,
@@ -42,12 +43,12 @@
         {
           key: 'operator',
           type: 'select',
+          defaultValue: 'AND',
           templateOptions: {
-            label: 'Operator',
+            label: '',
             options: [
-              { value: undefined, name: 'Please select AND or OR' },
-              { value: 'OR', name: 'OR' },
-              { value: 'AND', name: 'AND' }
+              { value: 'AND', name: 'all' },
+              { value: 'OR', name: 'any' }
             ]
           }
         }
@@ -312,6 +313,7 @@
                     required: true,
                     options: [
                       {value: undefined, name: 'Please select a condition'},
+                      {value: 'is', name: 'is'},
                       {value: 'contains', name: 'contains'},
                       {value: 'begins_with', name: 'begins with'},
                       {value: 'does_not_contain', name: 'does not contain'}
@@ -340,6 +342,7 @@
                 },
                 {
                   template: 'is',
+                  defaultValue: 'is',
                   className: 'inline-field'
                 },
                 {
@@ -396,6 +399,7 @@
                     required: true,
                     options: [
                       {value: undefined, name: 'Please select a condition'},
+                      {value: 'is', name: 'is'},
                       {value: 'contains', name: 'contains'},
                       {value: 'begins_with', name: 'begins with'},
                       {value: 'does_not_contain', name: 'does not contain'}
@@ -422,6 +426,7 @@
                     label: '',
                     options: [
                       { value: undefined, name: 'Please select a condition' },
+                      { value: 'is', name: 'is' },
                       { value: 'is_greater_than', name: 'is greater than' },
                       { value: 'is_less_than', name: 'is less than' },
                       { value: 'is_equal_to', name: 'is equal to' },
@@ -464,6 +469,7 @@
                     required: true,
                     options: [
                       {value: undefined, name: 'Please select a condition'},
+                      {value: 'is', name: 'is'},
                       {value: 'contains', name: 'contains'},
                       {value: 'begins_with', name: 'begins with'},
                       {value: 'does_not_contain', name: 'does not contain'}
