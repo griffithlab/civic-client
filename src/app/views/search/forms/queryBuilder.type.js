@@ -25,7 +25,7 @@
           $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
           var repeatsection = $scope.model[$scope.options.key];
           //var lastSection = repeatsection[repeatsection.length - 1];
-          var newsection = { field: undefined, condition: {} };
+          var newsection = { field: null, condition: { name: null } };
           //if (lastSection) {
           //  newsection = angular.copy(lastSection);
           //}

@@ -32,7 +32,7 @@
           {
             field: undefined,
             condition: {
-              name: undefined
+              name: null
             }
           }
         ]
@@ -68,13 +68,20 @@
                   required: true,
                   options: [
                     { value: undefined, name: 'Please select a field' },
-                    { value: 'description', name: 'Description' },
-                    { value: 'rating', name: 'Rating' },
+                    { value: 'applied_suggested_changes', name: 'Applied Suggested Revisions' },
                     { value: 'citation', name: 'Citation' },
-                    { value: 'drug_name', name: 'Drug Name' },
-                    { value: 'drug_id', name: 'Drug PubChem ID' },
+                    { value: 'citation_id', name: 'Citation ID' },
+                    { value: 'description', name: 'Description' },
+                    { value: 'disease_id', name: 'Disease DOID' },
                     { value: 'disease_name', name: 'Disease Name' },
-                    { value: 'disease_id', name: 'Disease DOID' }
+                    { value: 'drug_id', name: 'Drug PubChem ID' },
+                    { value: 'drug_name', name: 'Drug Name' },
+                    { value: 'disease_id', name: 'Disease DOID' },
+                    { value: 'evidence_level', name: 'Evidence Level' },
+                    { value: 'gene_name', name: 'Gene Name' },
+                    { value: 'pending_suggested_changes', name: 'Pending Suggested Revisions' },
+                    { value: 'rating', name: 'Rating' },
+                    { value: 'variant_name', name: 'Variant Name' }
                   ],
                   onChange: function(value, options, scope) {
                     scope.model.condition = {};
@@ -83,7 +90,7 @@
               }
             ],
             conditionFields: {
-              rating: [
+              applied_suggested_changes: [
                 {
                   key: 'name',
                   type: 'select',
@@ -95,40 +102,30 @@
                       { value: undefined, name: 'Please select a condition' },
                       { value: 'is_greater_than', name: 'is greater than' },
                       { value: 'is_less_than', name: 'is less than' },
-                      { value: 'is_equal_to', name: 'is equal to' }
+                      { value: 'is_equal_to', name: 'is equal to' },
+                      { value: 'is_in_the_range', name: 'is in the range' }
                     ]
                   }
                 },
                 {
-                  key: 'rating',
-                  type: 'rating',
+                  key: 'count',
+                  type: 'input',
                   className: 'inline-field',
                   templateOptions: {
                     label: '',
                     required: true
                   }
-                }
-              ],
-              description: [
-                {
-                  key: 'name',
-                  type: 'select',
-                  className: 'inline-field',
-                  templateOptions: {
-                    label: '',
-                    required: true,
-                    options: [
-                      {value: undefined, name: 'Please select a condition'},
-                      {value: 'contains', name: 'contains'},
-                      {value: 'begins_with', name: 'begins with'},
-                      {value: 'does_not_contain', name: 'does not contain'}
-                    ]
-                  }
                 },
                 {
-                  key: 'string',
+                  template: 'to',
+                  className: 'inline-field',
+                  hideExpression: 'model.name != "is_in_the_range"'
+                },
+                {
+                  key: 'to_count',
                   type: 'input',
                   className: 'inline-field',
+                  hideExpression: 'model.name != "is_in_the_range"',
                   templateOptions: {
                     label: '',
                     required: true
@@ -174,6 +171,126 @@
                 {
                   template: 'is',
                   className: 'inline-field'
+                },
+                {
+                  key: 'id',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              rating: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    required: true,
+                    label: '',
+                    options: [
+                      { value: undefined, name: 'Please select a condition' },
+                      { value: 'is_greater_than', name: 'is greater than' },
+                      { value: 'is_less_than', name: 'is less than' },
+                      { value: 'is_equal_to', name: 'is equal to' },
+                      { value: 'is_in_the_range', name: 'is in the range'}
+                    ]
+                  }
+                },
+                {
+                  key: 'rating',
+                  type: 'rating',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                },
+                {
+                  template: 'to',
+                  className: 'inline-field',
+                  hideExpression: 'model.name != "is_in_the_range"'
+                },
+                {
+                  key: 'to_rating',
+                  type: 'rating',
+                  className: 'inline-field',
+                  hideExpression: 'model.name != "is_in_the_range"',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              description: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: undefined, name: 'Please select a condition'},
+                      {value: 'contains', name: 'contains'},
+                      {value: 'begins_with', name: 'begins with'},
+                      {value: 'does_not_contain', name: 'does not contain'}
+                    ]
+                  }
+                },
+                {
+                  key: 'string',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              disease_name: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: undefined, name: 'Please select a condition'},
+                      {value: 'contains', name: 'contains'},
+                      {value: 'begins_with', name: 'begins with'},
+                      {value: 'does_not_contain', name: 'does not contain'}
+                    ]
+                  }
+                },
+                {
+                  key: 'string',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              disease_id: [
+                {
+                  key: 'name',
+                  type: 'input',
+                  defaultValue: 'is',
+                  hideExpression: 'true',
+                  templateOptions: {
+                    label: ''
+                  }
+                },
+                {
+                  key: 'name',
+                  template: 'is',
+                  className: 'inline-field',
+                  defaultValue: 'is'
                 },
                 {
                   key: 'id',
@@ -235,7 +352,41 @@
                   }
                 }
               ],
-              disease_name: [
+              evidence_level: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: undefined, name: 'Please select a condition'},
+                      {value: 'is', name: 'is'},
+                      {value: 'is_above', name: 'is above'},
+                      {value: 'is_below', name: 'is below'}
+                    ]
+                  }
+                },
+                {
+                  key: 'level',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      { value: undefined, name: 'Please select an Evidence Level' },
+                      { value: 'A', name: 'A - Validated'},
+                      { value: 'B', name: 'B - Clinical'},
+                      { value: 'C', name: 'C - Preclinical'},
+                      { value: 'D', name: 'D - Case Study'},
+                      { value: 'E', name: 'E - Inferential'}
+                    ]
+                  }
+                }
+              ],
+              gene_name: [
                 {
                   key: 'name',
                   type: 'select',
@@ -261,22 +412,66 @@
                   }
                 }
               ],
-              disease_id: [
+              pending_suggested_changes: [
                 {
                   key: 'name',
-                  type: 'input',
-                  defaultValue: 'is',
-                  hideExpression: 'true',
+                  type: 'select',
+                  className: 'inline-field',
                   templateOptions: {
-                    label: ''
+                    required: true,
+                    label: '',
+                    options: [
+                      { value: undefined, name: 'Please select a condition' },
+                      { value: 'is_greater_than', name: 'is greater than' },
+                      { value: 'is_less_than', name: 'is less than' },
+                      { value: 'is_equal_to', name: 'is equal to' },
+                      { value: 'is_in_the_range', name: 'is in the range' }
+                    ]
                   }
                 },
                 {
-                  template: 'is',
-                  className: 'inline-field'
+                  key: 'count',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
                 },
                 {
-                  key: 'id',
+                  template: 'to',
+                  className: 'inline-field',
+                  hideExpression: 'model.name != "is_in_the_range"'
+                },
+                {
+                  key: 'to_count',
+                  type: 'input',
+                  className: 'inline-field',
+                  hideExpression: 'model.name != "is_in_the_range"',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              variant_name: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: undefined, name: 'Please select a condition'},
+                      {value: 'contains', name: 'contains'},
+                      {value: 'begins_with', name: 'begins with'},
+                      {value: 'does_not_contain', name: 'does not contain'}
+                    ]
+                  }
+                },
+                {
+                  key: 'string',
                   type: 'input',
                   className: 'inline-field',
                   templateOptions: {
@@ -284,7 +479,7 @@
                     required: true
                   }
                 }
-              ],
+              ]
             }
           }
         }

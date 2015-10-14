@@ -18,7 +18,10 @@
           </div>
           <div class="col-xs-2 row-buttons">
             <div class="pull-right">
-              <button type="button" class="btn btn-xs btn-danger" ng-click="model[options.key].splice($index, 1)">
+              <button type="button"
+                      class="btn btn-xs btn-danger"
+                      ng-if="model[options.key].length > 1"
+                      ng-click="model[options.key].splice($index, 1)">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
 
