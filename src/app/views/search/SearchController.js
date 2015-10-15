@@ -131,7 +131,7 @@
                 {
                   key: 'parameters[1]', // from value
                   type: 'input',
-                  className: 'inline-field inline-field-small',
+                  className: 'inline-field inline-field-xs',
                   templateOptions: {
                     label: '',
                     required: true
@@ -145,7 +145,7 @@
                 {
                   key: 'parameters[2]', // to value
                   type: 'input',
-                  className: 'inline-field inline-field-small',
+                  className: 'inline-field inline-field-xs',
                   hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',
                   templateOptions: {
                     label: '',
