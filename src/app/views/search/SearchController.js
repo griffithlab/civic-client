@@ -11,6 +11,7 @@
     vm.onSubmit = onSubmit;
     vm.options = {};
     vm.searchResults = [];
+    vm.showEvidenceGrid = false;
 
     init();
 
@@ -20,6 +21,7 @@
     function onSubmit() {
       $log.debug(JSON.stringify(vm.model));
       vm.searchResults = Search.post(vm.model);
+      vm.showEvidenceGrid = true;
     }
 
     vm.buttonLabel = 'Search Evidence Items';

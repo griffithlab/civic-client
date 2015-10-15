@@ -52,15 +52,21 @@
       </div>
     </div>
   </div>
-
+  <div ng-if="vm.showEvidenceGrid === true">
+    <div class="row">
+      <div class="col-xs-12 evidence-item-grid">
+        <evidence-grid evidence="vm.searchResults"></evidence-grid>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-6">
       <h2>Model</h2>
       <pre>{{vm.model | json}}</pre>
     </div>
     <div class="col-xs-6">
-      <h2>Form</h2>
-      <pre>{{vm.form | json}}</pre>
+      <h2>Results</h2>
+      <pre>{{vm.searchResults | json}}</pre>
     </div>
   </div>
 </div>
