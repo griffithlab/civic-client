@@ -12,16 +12,16 @@
     <div class="col-xs-12">
       <div class="operator-prompt">
         <div ng-if="vm.model.queries.length <= 1">
-          Match the following condition:
+          <span class="prompt-text">Match the following condition:</span>
         </div>
         <div ng-if="vm.model.queries.length > 1">
-          Match
+          <span class="prompt-text">Match</span>
           <div class="operator-select">
             <formly-form fields="vm.operatorField" model="vm.model">
 
             </formly-form>
           </div>
-          of the following conditions:
+          <span class="prompt-text">of the following conditions:</span>
         </div>
       </div>
     </div>
