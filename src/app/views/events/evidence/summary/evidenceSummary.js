@@ -12,7 +12,15 @@
     });
 
   //@ngInject
-  function EvidenceSummaryController($scope, Evidence, EvidenceViewOptions, _, ConfigService) {
+  function EvidenceSummaryController($scope,
+                                     $log,
+                                     Evidence,
+                                     Security,
+                                     EvidenceViewOptions,
+                                     _,
+                                     ConfigService) {
+    $scope.isEditor = Security.isEditor;
+    $scope.isAuthenticated = Security.isAuthenticated;
     $scope.evidence = Evidence.data.item;
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;
 
@@ -30,5 +38,25 @@
 
     $scope.EvidenceViewOptions = EvidenceViewOptions;
     $scope.backgroundColor = EvidenceViewOptions.styles.view.backgroundColor;
+
+    $scope.acceptItem = function(id) {
+      $log.debug('accept item ' + id);
+      Evidence.accept(id)
+        .then(function(response) {
+          $log.debug('Accept success.');
+          $log.debug(response);
+        })
+        .catch(function(response) {
+          $log.error('Ooops! There was an error accepting this evidence item.');
+          $log.error(response);
+        })
+        .finally(function(response) {
+          $log.debug('Accept Item done.');
+        })
+    };
+
+    $scope.rejectItem = function(id) {
+      $log.debug('accept item ' + id);
+    };
   }
 })();

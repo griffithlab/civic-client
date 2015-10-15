@@ -50,6 +50,11 @@
           method: 'PATCH',
           cache: false
         },
+        accept: {
+          url: '/api/evidence_items/:evidenceId/accept',
+          method: 'POST',
+          cache: false
+        },
 
         // Evidence Comments Resources
         queryComments: {
@@ -126,6 +131,7 @@
       update: update,
       delete: deleteItem,
       apply: apply,
+      accept: accept,
 
       // Evidence Comments
       queryComments: queryComments,
@@ -153,6 +159,15 @@
           // flush cached variant and evidence item lists
           cache.remove('/api/variants/' + response.variant.id);
           cache.remove('/api/variants/' + response.variant.id + '/evidence_items');
+          return response.$promise;
+        });
+    }
+    function accept(evidenceId) {
+      return EvidenceResource.accept({ evidenceId: evidenceId }).$promise
+        .then(function(response) {
+          // flush cached variant and evidence item lists
+          //cache.remove('/api/variants/' + response.variant.id);
+          //cache.remove('/api/variants/' + response.variant.id + '/evidence_items');
           return response.$promise;
         });
     }

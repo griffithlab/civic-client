@@ -63,7 +63,6 @@
             </span>
           </td>
         </tr>
-
       </table>
     </div>
     <div class="col-xs-12 col-md-6 details">
@@ -108,6 +107,20 @@
         </tr>
 
       </table>
+    </div>
+  </div>
+  <div class="row" ng-if="isEditor()" style="margin-top: 1em;">
+    <div class="col-xs-6">
+      <button class="btn btn-default btn-block btn-danger"
+              ng-click="rejectItem(evidence.id)">
+        Reject Evidence Item
+      </button>
+    </div>
+    <div class="col-xs-6">
+      <button class="btn btn-default btn-block btn-success"
+              ng-click="acceptItem(evidence.id)">
+        Accept Evidence Item
+      </button>
     </div>
   </div>
   <!--<div class="row">-->
