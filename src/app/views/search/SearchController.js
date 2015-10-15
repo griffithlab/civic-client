@@ -25,15 +25,17 @@
       $log.debug(JSON.stringify(vm.model));
     }
 
+    vm.buttonLabel = 'Search Evidence Items';
 
     function init() {
       vm.model = {
         operator: 'AND',
         queries: [
           {
-            field: undefined,
+            field: '',
             condition: {
-              name: null
+              name: undefined,
+              parameters: []
             }
           }
         ]
@@ -59,7 +61,6 @@
           type: 'queryRow',
           key: 'queries',
           templateOptions: {
-            btnText: 'Add another investment',
             rowFields: [
               {
                 key: 'field',
@@ -68,7 +69,7 @@
                   label: '',
                   required: true,
                   options: [
-                    { value: undefined, name: 'Please select a field' },
+                    { value: '', name: 'Please select a field' },
                     { value: 'applied_suggested_changes', name: 'Applied Suggested Revisions' },
                     { value: 'citation', name: 'Citation' },
                     { value: 'citation_id', name: 'Citation ID' },
@@ -85,7 +86,10 @@
                     { value: 'variant_name', name: 'Variant Name' }
                   ],
                   onChange: function(value, options, scope) {
-                    scope.model.condition = {};
+                    scope.model.condition = {
+                      name: undefined,
+                      parameters: []
+                    };
                   }
                 }
               }
@@ -96,11 +100,11 @@
                   key: 'name',
                   type: 'select',
                   className: 'inline-field',
+                  defaultValue: 'is_greater_than',
                   templateOptions: {
                     required: true,
                     label: '',
                     options: [
-                      { value: undefined, name: 'Please select a condition' },
                       { value: 'is_greater_than', name: 'is greater than' },
                       { value: 'is_less_than', name: 'is less than' },
                       { value: 'is_equal_to', name: 'is equal to' },
@@ -109,7 +113,7 @@
                   }
                 },
                 {
-                  key: 'count',
+                  key: 'parameters[0]',
                   type: 'input',
                   className: 'inline-field',
                   templateOptions: {
@@ -120,14 +124,13 @@
                 {
                   template: 'to',
                   className: 'inline-field',
-                  hideExpression: 'model.name != "is_in_the_range"'
+                  hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"'
                 },
                 {
-                  key: 'to_count',
+                  key: 'paramters[1]',
                   type: 'input',
                   className: 'inline-field',
-                  hideExpression: 'model.name != "is_in_the_range"',
-                  templateOptions: {
+                  hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',                              templateOptions: {
                     label: '',
                     required: true
                   }
@@ -142,7 +145,7 @@
                     label: '',
                     required: true,
                     options: [
-                      {value: undefined, name: 'Please select a condition'},
+                      {value: null, name: 'Please select a condition'},
                       {value: 'contains', name: 'contains'},
                       {value: 'begins_with', name: 'begins with'},
                       {value: 'does_not_contain', name: 'does not contain'}
@@ -192,7 +195,7 @@
                     required: true,
                     label: '',
                     options: [
-                      { value: undefined, name: 'Please select a condition' },
+                      { value: '', name: 'Please select a condition' },
                       { value: 'is_greater_than', name: 'is greater than' },
                       { value: 'is_less_than', name: 'is less than' },
                       { value: 'is_equal_to', name: 'is equal to' },
@@ -379,7 +382,7 @@
                     label: '',
                     required: true,
                     options: [
-                      { value: undefined, name: 'Please select an Evidence Level' },
+                      { value: '', name: 'Please select an Evidence Level' },
                       { value: 'A', name: 'A - Validated'},
                       { value: 'B', name: 'B - Clinical'},
                       { value: 'C', name: 'C - Preclinical'},
@@ -425,7 +428,7 @@
                     required: true,
                     label: '',
                     options: [
-                      { value: undefined, name: 'Please select a condition' },
+                      { value: '', name: 'Please select a condition' },
                       { value: 'is', name: 'is' },
                       { value: 'is_greater_than', name: 'is greater than' },
                       { value: 'is_less_than', name: 'is less than' },
