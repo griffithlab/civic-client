@@ -4,17 +4,13 @@
     .controller('SearchController', SearchController);
 
   // @ngInject
-  function SearchController($scope, $log, formlyVersion) {
+  function SearchController($scope, $log, Search) {
     var vm = $scope.vm = {};
 
     // funcation assignment
     vm.onSubmit = onSubmit;
-
-    vm.env = {
-      angularVersion: angular.version.full,
-      formlyVersion: formlyVersion
-    };
     vm.options = {};
+    vm.searchResults = [];
 
     init();
 
@@ -23,6 +19,7 @@
     // function definition
     function onSubmit() {
       $log.debug(JSON.stringify(vm.model));
+      vm.searchResults = Search.post(vm.model);
     }
 
     vm.buttonLabel = 'Search Evidence Items';
