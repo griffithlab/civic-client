@@ -52,11 +52,23 @@
         })
         .finally(function(response) {
           $log.debug('Accept Item done.');
-        })
+        });
     };
 
     $scope.rejectItem = function(id) {
-      $log.debug('accept item ' + id);
+      $log.debug('reject item ' + id);
+      Evidence.reject(id)
+        .then(function(response) {
+          $log.debug('Reject success.');
+          $log.debug(response);
+        })
+        .catch(function(response) {
+          $log.error('Ooops! There was an error rejecting this evidence item.');
+          $log.error(response);
+        })
+        .finally(function(response) {
+          $log.debug('Reject Item done.');
+        });
     };
   }
 })();
