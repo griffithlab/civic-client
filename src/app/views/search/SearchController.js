@@ -84,6 +84,7 @@
                     { value: 'pubmed_id', name: 'Pubmed ID' },
                     { value: 'rating', name: 'Rating' },
                     { value: 'suggested_changes_count', name: 'Suggested Revisions' },
+                    { value: 'status', name: 'Status' },
                     { value: 'variant_name', name: 'Variant Name' }
                   ],
                   onChange: function(value, options, scope) {
@@ -96,70 +97,6 @@
               }
             ],
             conditionFields: {
-              suggested_changes_count: [
-                {
-                  template: 'with status',
-                  className: 'inline-field'
-                },
-                {
-                  key: 'parameters[0]', // status
-                  type: 'select',
-                  className: 'inline-field',
-                  defaultValue: 'pending',
-                  templateOptions: {
-                    required: true,
-                    label: '',
-                    options: [
-                      { value: 'pending', name: 'pending' },
-                      { value: 'applied', name: 'applied' },
-                      { value: 'rejected', name: 'rejected' }
-                    ]
-                  }
-                },
-                {
-                  key: 'name',
-                  type: 'select',
-                  className: 'inline-field',
-                  defaultValue: 'is_greater_than',
-                  templateOptions: {
-                    required: true,
-                    label: '',
-                    options: [
-                      { value: 'is_greater_than', name: 'is greater than' },
-                      { value: 'is_less_than', name: 'is less than' },
-                      { value: 'is_equal_to', name: 'is equal to' },
-                      { value: 'is_in_the_range', name: 'is in the range' }
-                    ],
-                    onChange: function(value, options, scope) {
-                      _.pullAt(scope.model.parameters, 1,2);
-                    }
-                  }
-                },
-                {
-                  key: 'parameters[1]', // from value
-                  type: 'input',
-                  className: 'inline-field inline-field-xs',
-                  templateOptions: {
-                    label: '',
-                    required: true
-                  }
-                },
-                {
-                  template: 'to',
-                  className: 'inline-field',
-                  hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"'
-                },
-                {
-                  key: 'parameters[2]', // to value
-                  type: 'input',
-                  className: 'inline-field inline-field-xs',
-                  hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',
-                  templateOptions: {
-                    label: '',
-                    required: true
-                  }
-                }
-              ],
               pubmed_id: [
                 {
                   key: 'name',
@@ -390,6 +327,101 @@
                       { value: 'D', name: 'D - Case Study'},
                       { value: 'E', name: 'E - Inferential'}
                     ]
+                  }
+                }
+              ],
+              status: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field inline-field-small',
+                  defaultValue: 'is',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: 'is', name: 'is'},
+                      {value: 'is_not', name: 'is not'}
+                    ]
+                  }
+                },
+                {
+                  key: 'parameters[0]',
+                  type: 'select',
+                  className: 'inline-field',
+                  defaultValue: 'submitted',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      { value: 'submitted', name: 'Submitted'},
+                      { value: 'accepted', name: 'Accepted'},
+                      { value: 'rejected', name: 'Rejected'}
+                    ]
+                  }
+                }
+              ],
+              suggested_changes_count: [
+                {
+                  template: 'with status',
+                  className: 'inline-field'
+                },
+                {
+                  key: 'parameters[0]', // status
+                  type: 'select',
+                  className: 'inline-field',
+                  defaultValue: 'pending',
+                  templateOptions: {
+                    required: true,
+                    label: '',
+                    options: [
+                      { value: 'pending', name: 'pending' },
+                      { value: 'applied', name: 'applied' },
+                      { value: 'rejected', name: 'rejected' }
+                    ]
+                  }
+                },
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  defaultValue: 'is_greater_than',
+                  templateOptions: {
+                    required: true,
+                    label: '',
+                    options: [
+                      { value: 'is_greater_than', name: 'is greater than' },
+                      { value: 'is_less_than', name: 'is less than' },
+                      { value: 'is_equal_to', name: 'is equal to' },
+                      { value: 'is_in_the_range', name: 'is in the range' }
+                    ],
+                    onChange: function(value, options, scope) {
+                      _.pullAt(scope.model.parameters, 1,2);
+                    }
+                  }
+                },
+                {
+                  key: 'parameters[1]', // from value
+                  type: 'input',
+                  className: 'inline-field inline-field-xs',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                },
+                {
+                  template: 'to',
+                  className: 'inline-field',
+                  hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"'
+                },
+                {
+                  key: 'parameters[2]', // to value
+                  type: 'input',
+                  className: 'inline-field inline-field-xs',
+                  hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',
+                  templateOptions: {
+                    label: '',
+                    required: true
                   }
                 }
               ],
