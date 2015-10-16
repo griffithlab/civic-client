@@ -11,7 +11,8 @@
       replace: true,
       scope: {
         evidence: '=',
-        variant: '='
+        variant: '=',
+        rows: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
@@ -42,7 +43,7 @@
       'E': 'E - Inferential'
     };
 
-    ctrl.rowsToShow = 5;
+    ctrl.rowsToShow = $scope.rows === undefined ? 5 : $scope.rows;
 
     ctrl.evidenceGridOptions = {
       minRowsToShow: ctrl.rowsToShow - 1,
@@ -328,15 +329,15 @@
       var suppressGo = false;
 
       // convert drug array into comma delimited list
-      evidence = _.map(evidence, function(item){
-        if (_.isArray(item.drugs)) {
-          item.drugs = _.chain(item.drugs).pluck('name').value().join(', ');
-          return item;
-        } else {
-          return item;
-        }
-      });
+      evidence = prepareDrugArray(evidence);
+
+      // assign evidence data to grid
       ctrl.evidenceGridOptions.data = evidence;
+
+      // setup watcher to update grid
+      $scope.$watchCollection('evidence', function(evidence) {
+        ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
+      });
 
       // if we're loading an evidence view, highlight the correct row in the table
       if(_.has($stateParams, 'evidenceId')) {
@@ -359,6 +360,17 @@
           $state.go('events.genes.summary.variants.summary.evidence.summary', params)
         }
       });
+
+      function prepareDrugArray(evidence) {
+        return _.map(evidence, function(item){
+          if (_.isArray(item.drugs)) {
+            item.drugs = _.chain(item.drugs).pluck('name').value().join(', ');
+            return item;
+          } else {
+            return item;
+          }
+        });
+      }
     };
   }
 

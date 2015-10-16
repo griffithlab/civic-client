@@ -4,7 +4,7 @@
     .controller('SearchController', SearchController);
 
   // @ngInject
-  function SearchController($scope, $log, Search) {
+  function SearchController($scope, $log, _, Search) {
     var vm = $scope.vm = {};
 
     // funcation assignment
@@ -20,8 +20,13 @@
     // function definition
     function onSubmit() {
       $log.debug(JSON.stringify(vm.model));
-      vm.searchResults = Search.post(vm.model);
-      vm.showEvidenceGrid = true;
+      //vm.searchResults = Search.post(vm.model);
+      //vm.showEvidenceGrid = true;
+      Search.post(vm.model)
+        .then(function(results) {
+          vm.searchResults = results;
+          vm.showEvidenceGrid = true;
+        });
     }
 
     vm.buttonLabel = 'Search Evidence Items';
@@ -124,7 +129,10 @@
                       { value: 'is_less_than', name: 'is less than' },
                       { value: 'is_equal_to', name: 'is equal to' },
                       { value: 'is_in_the_range', name: 'is in the range' }
-                    ]
+                    ],
+                    onChange: function(value, options, scope) {
+                      _.pullAt(scope.model.parameters, 1,2);
+                    }
                   }
                 },
                 {
@@ -191,7 +199,10 @@
                       { value: 'is_less_than', name: 'is less than' },
                       { value: 'is_equal_to', name: 'is equal to' },
                       { value: 'is_in_the_range', name: 'is in the range'}
-                    ]
+                    ],
+                    onChange: function(value, options, scope) {
+                      _.pullAt(scope.model.parameters, 1,2);
+                    }
                   }
                 },
                 {
@@ -427,7 +438,7 @@
                   }
                 },
                 {
-                  key: 'paramters[0]',
+                  key: 'parameters[0]',
                   type: 'input',
                   className: 'inline-field',
                   templateOptions: {

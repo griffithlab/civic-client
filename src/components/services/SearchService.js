@@ -1,10 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.services')
-    .factory('Search',SearchService);
+    .factory('SearchResource',SearchResource)
+    .factory('Search', SearchService);
 
   // @ngInject
-  function SearchService($resource) {
+  function SearchResource($resource) {
     var SearchService = $resource('/api/evidence_items/search',
       {},
       {
@@ -16,6 +17,26 @@
       });
 
     return SearchService;
+  }
+
+  // @ngInject
+  function SearchService(SearchResource) {
+    var results = [];
+
+    return {
+      results: results,
+      post: post
+    };
+
+    // @ngInject
+    function post(reqObj) {
+      return SearchResource.post(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response, results);
+          return response.$promise;
+        });
+    }
+
   }
 
 })();
