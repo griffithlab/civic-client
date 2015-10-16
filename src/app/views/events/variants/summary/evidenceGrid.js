@@ -354,10 +354,24 @@
       }
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        var params = _.merge($stateParams, { evidenceId: row.entity.id });
+        var params = {};
+        if($stateParams.geneId != undefined && $stateParams.variantId != undefined) {
+          params = _.merge($stateParams, { evidenceId: row.entity.id });
 
-        if(!suppressGo) {
-          $state.go('events.genes.summary.variants.summary.evidence.summary', params)
+          if(!suppressGo) {
+            $state.go('events.genes.summary.variants.summary.evidence.summary', params)
+          }
+        } else if (row.entity.state_params != undefined){
+          params = {
+            geneId: row.entity.state_params.gene.id,
+            variantId: row.entity.state_params.variant.id,
+            evidenceId: row.entity.id
+          };
+          if(!suppressGo) {
+            $state.go('events.genes.summary.variants.summary.evidence.summary', params)
+          }
+        } else {
+          console.error('Could not locate gene and variant params for evidence row link!');
         }
       });
 
