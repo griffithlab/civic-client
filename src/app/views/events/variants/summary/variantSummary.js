@@ -21,6 +21,12 @@
 
     $scope.variant = Variants.data.item;
     $scope.evidence = Variants.data.evidence;
+
+    $scope.$watch(function() { return Variants.data.item}, function(variant) {
+      $scope.variant = variant;
+      $scope.evidence = variant.evidence_items;
+    }, true);
+
     $scope.VariantsViewOptions = VariantsViewOptions;
     $scope.backgroundColor = VariantsViewOptions.styles.view.backgroundColor;
 

@@ -14,6 +14,7 @@
   //@ngInject
   function EvidenceSummaryController($scope,
                                      $log,
+                                     $stateParams,
                                      Evidence,
                                      Security,
                                      EvidenceViewOptions,
@@ -41,7 +42,7 @@
 
     $scope.acceptItem = function(id) {
       $log.debug('accept item ' + id);
-      Evidence.accept(id)
+      Evidence.accept(id, $stateParams.variantId)
         .then(function(response) {
           $log.debug('Accept success.');
           $log.debug(response);
@@ -57,7 +58,7 @@
 
     $scope.rejectItem = function(id) {
       $log.debug('reject item ' + id);
-      Evidence.reject(id)
+      Evidence.reject(id, $stateParams.variantId)
         .then(function(response) {
           $log.debug('Reject success.');
           $log.debug(response);

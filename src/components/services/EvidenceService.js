@@ -162,12 +162,15 @@
           return response.$promise;
         });
     }
-    function accept(evidenceId) {
+    function accept(evidenceId, variantId) {
       return EvidenceResource.accept({ evidenceId: evidenceId }).$promise
         .then(function(response) {
           // flush cached variant and evidence item lists
-          //cache.remove('/api/variants/' + response.variant.id);
-          //cache.remove('/api/variants/' + response.variant.id + '/evidence_items');
+          cache.remove('/api/evidence_items/' + response.id);
+          cache.remove('/api/variants/' + variantId);
+          cache.remove('/api/variants/' + variantId + '/evidence_items');
+          get(response.id);
+          Variants.get(variantId);
           return response.$promise;
         });
     }
