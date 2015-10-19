@@ -1,16 +1,19 @@
 <div class="quickSearch">
   <form class="form-horizontal">
-    <div class="form-group form-group-sm has-feedback">
+    <div class="input-group">
       <input
         type="text"
         class="form-control input-sm"
         ng-model="asyncSelected.model"
-        placeholder="Jump to Genes & Variants"
+        placeholder="Go to Genes & Variants"
         typeahead="gene as gene.label for gene in getVariants($viewValue)"
         typeahead-loading="loadingGenes"
         typeahead-on-select="onSelect($item, $model, $label)"
-        typeahead-append-to-body="true">
-      <span ng-show="loadingGenes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+        typeahead-append-to-body="true"/>
+      <span class="input-group-btn">
+        <button class="btn btn-default btn-sm" type="button">Go!</button>
+      </span>
     </div>
   </form>
 </div>
+
