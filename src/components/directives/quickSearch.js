@@ -5,12 +5,26 @@
     .controller('quickSearchCtrl', quickSearchCtrl);
 
   // @ngInject
-  function quickSearchCtrl($scope, TypeAheadResults, $state, _) {
+  function quickSearch() {
+    var directive = {
+      templateUrl: 'components/directives/quickSearch.tpl.html',
+      restrict: 'E',
+      scope: true,
+      controller: quickSearchCtrl
+    };
+
+    return directive;
+  }
+
+  // @ngInject
+  function quickSearchCtrl($scope, $state, $log, TypeAheadResults, _) {
+    var topResult = {};
     $scope.getVariants = function (val) {
       return TypeAheadResults.query({ query: val }).$promise
         .then(function (response) {
           var labelLimit = 75;
-          return _.map(response.result, function (event) {
+          return _.map(response.result, function (event, index) {
+            var result;
             var label = event.entrez_gene + ' / ' + event.variant;
 
             if (_.includes(event.terms, 'gene_aliases')) {
@@ -30,7 +44,7 @@
 
             if (label.length > labelLimit) { label = _.trunc(label, labelLimit); }
 
-            return {
+            result = {
               /*jshint camelcase: false */
               gene: event.entrez_name,
               geneId: event.gene_id,
@@ -38,6 +52,10 @@
               variant: event.variant,
               variantId: event.variant_id
             };
+
+            if(index === 0) { topResult = result; }
+
+            return result;
           });
         });
     };
@@ -47,16 +65,14 @@
       $scope.asyncSelected.model = ''; // clear typeahead
     };
 
-  }
-  // @ngInject
-  function quickSearch() {
-    var directive = {
-      templateUrl: 'components/directives/quickSearch.tpl.html',
-      restrict: 'E',
-      scope: true,
-      controller: quickSearchCtrl
-    };
+    $scope.onGo = function(scope) {
+      // NOTE: typeahead control does not make the currently selected item available outside its
+      // scope, so we have no way to know which item the user has highlighted. So the Go button
+      // cheats and just sends them to the first item on the list.
+      // TODO: figure out how to access typeahead dropdown items and current activeIndex
+      $state.go('events.genes.summary.variants.summary', {geneId: topResult.geneId, variantId: topResult.variantId});
+    }
 
-    return directive;
   }
+
 })();

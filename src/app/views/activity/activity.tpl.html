@@ -10,11 +10,16 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="well" style="min-height: 450px;">
-        <br/><br/><br/>
-        <p style="text-align: center;">Events Table</p>
-        <br/><br/><br/>
-      </div>
+      <div ui-grid="ctrl.gridOptions"
+           ui-grid-cellnav
+           ui-grid-auto-resize
+           ui-grid-pagination
+           ui-grid-selection></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="ctrl.events|json"></pre>
     </div>
   </div>
 </div>

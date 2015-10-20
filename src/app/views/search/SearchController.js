@@ -370,12 +370,12 @@
                   key: 'parameters[0]', // status
                   type: 'select',
                   className: 'inline-field',
-                  defaultValue: 'pending',
+                  defaultValue: 'new',
                   templateOptions: {
                     required: true,
                     label: '',
                     options: [
-                      { value: 'pending', name: 'pending' },
+                      { value: 'new', name: 'new' },
                       { value: 'applied', name: 'applied' },
                       { value: 'rejected', name: 'rejected' }
                     ]

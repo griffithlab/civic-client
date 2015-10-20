@@ -7,11 +7,13 @@
         ng-model="asyncSelected.model"
         placeholder="Go to Genes & Variants"
         typeahead="gene as gene.label for gene in getVariants($viewValue)"
+        typeahead-editable="false"
         typeahead-loading="loadingGenes"
         typeahead-on-select="onSelect($item, $model, $label)"
         typeahead-append-to-body="true"/>
       <span class="input-group-btn">
-        <button class="btn btn-default btn-sm" type="button">Go!</button>
+        <button class="btn btn-default btn-sm" type="button"
+          ng-click="onGo(this)">Go!</button>
       </span>
     </div>
   </form>
