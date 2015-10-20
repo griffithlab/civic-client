@@ -19,6 +19,7 @@
   // @ngInject
   function quickSearchCtrl($scope, $state, $log, TypeAheadResults, _) {
     var topResult = {};
+
     $scope.getVariants = function (val) {
       return TypeAheadResults.query({ query: val }).$promise
         .then(function (response) {
@@ -70,7 +71,10 @@
       // scope, so we have no way to know which item the user has highlighted. So the Go button
       // cheats and just sends them to the first item on the list.
       // TODO: figure out how to access typeahead dropdown items and current activeIndex
+      // TODO: figure out how to clear typeahead after state transition (asyncSelected.model is unavaiable to this function when called). This doesn't work:
+      // scope.$$childHead.query= ''; // clear typeahead
       $state.go('events.genes.summary.variants.summary', {geneId: topResult.geneId, variantId: topResult.variantId});
+
     }
 
   }
