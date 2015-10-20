@@ -55,6 +55,11 @@
           method: 'POST',
           cache: false
         },
+        reject: {
+          url: '/api/evidence_items/:evidenceId/reject',
+          method: 'POST',
+          cache: false
+        },
 
         // Evidence Comments Resources
         queryComments: {
@@ -132,6 +137,7 @@
       delete: deleteItem,
       apply: apply,
       accept: accept,
+      reject: reject,
 
       // Evidence Comments
       queryComments: queryComments,
@@ -164,6 +170,18 @@
     }
     function accept(evidenceId, variantId) {
       return EvidenceResource.accept({ evidenceId: evidenceId }).$promise
+        .then(function(response) {
+          // flush cached variant and evidence item lists
+          cache.remove('/api/evidence_items/' + response.id);
+          cache.remove('/api/variants/' + variantId);
+          cache.remove('/api/variants/' + variantId + '/evidence_items');
+          get(response.id);
+          Variants.get(variantId);
+          return response.$promise;
+        });
+    }
+    function reject(evidenceId, variantId) {
+      return EvidenceResource.reject({ evidenceId: evidenceId }).$promise
         .then(function(response) {
           // flush cached variant and evidence item lists
           cache.remove('/api/evidence_items/' + response.id);

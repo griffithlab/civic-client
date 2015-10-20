@@ -49,6 +49,7 @@
         'commented': '.talk.comments',
         'submitted': '.summary',
         'accepted': '.summary',
+        'rejected': '.summary',
         'change suggested': '.talk.revisions.list.summary',
         'change accepted': '.talk.revisions.list.summary',
         'change rejected': '.talk.revisions.list.summary'
