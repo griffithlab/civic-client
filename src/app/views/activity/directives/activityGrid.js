@@ -40,12 +40,12 @@
       noUnselect: true,
       columnDefs: [
         { name: 'user',
-          field: 'user',
           displayName: 'User',
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
-          width: '10%',
+          width: '20%',
+          cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -61,8 +61,31 @@
           }
         },
         {
-          name: 'state_params.gene.name',
+          name: 'gene',
+          field: 'state_params.gene.name',
           displayName: 'Gene',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'variant',
+          field: 'state_params.variant.name',
+          displayName: 'Variant',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'evidence_item',
+          field: 'state_params.evidence_item.name',
+          displayName: 'Evidence Item',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
