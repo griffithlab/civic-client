@@ -10,13 +10,15 @@
     color: #DDD;
   }
 
-  .btn-browse {
-    margin-top: 0;
-    .button-variant(white; @civicGreen; darken(@civicGreen, 15%));
+  @media (min-width: @screen-sm-min) {
+    quick-search {
+      margin-bottom: 0;
+    }
+  }
+  @media (min-width: @screen-md-min) {
+    quick-search {
+      margin-bottom: @contentPadding;
+    }
   }
 
-  .btn-browse-margin {
-    margin-top: .3em;
-    .button-variant(white; @civicGreen; darken(@civicGreen, 15%));
-  }
 }

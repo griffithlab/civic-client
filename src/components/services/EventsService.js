@@ -9,6 +9,8 @@
 
     return $resource('/api/events',
       {
+        count: '@count',
+        page: '@page'
       },
       {
         query: {
@@ -31,8 +33,8 @@
       query: query
     };
 
-    function query() {
-      return EventsResource.query().$promise
+    function query(reqObj) {
+      return EventsResource.query(reqObj).$promise
         .then(function(response) {
           angular.copy(response, collection);
           return response.$promise;
