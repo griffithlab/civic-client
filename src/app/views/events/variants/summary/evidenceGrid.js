@@ -56,8 +56,8 @@
       enableRowSelection: true,
       enableRowHeaderSelection: false,
       multiSelect: false,
-      modifierKeysToMultiSelect: false,
       noUnselect: true,
+      modifierKeysToMultiSelect: false,
 
       // grid menu
       enableGridMenu: true,
@@ -341,11 +341,11 @@
 
       // if we're loading an evidence view, highlight the correct row in the table
       if(_.has($stateParams, 'evidenceId')) {
-        var rowEntity = _.find(evidence, function(item) {
-          return item.id === +$stateParams.evidenceId;
-        });
-
         gridApi.core.on.rowsRendered($scope, function() {
+          var rowEntity = _.find($scope.evidence, function(item) {
+            return item.id === +$stateParams.evidenceId;
+          });
+          
           suppressGo = true;
           gridApi.selection.selectRow(rowEntity);
           gridApi.grid.scrollTo(rowEntity);
