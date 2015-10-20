@@ -340,18 +340,19 @@
       });
 
       // if we're loading an evidence view, highlight the correct row in the table
-      if(_.has($stateParams, 'evidenceId')) {
-        gridApi.core.on.rowsRendered($scope, function() {
-          var rowEntity = _.find($scope.evidence, function(item) {
+      gridApi.core.on.rowsRendered($scope, function() {
+        if(_.has($stateParams, 'evidenceId')) {
+          var rowEntity = _.find($scope.evidence, function (item) {
             return item.id === +$stateParams.evidenceId;
           });
-          
+
           suppressGo = true;
           gridApi.selection.selectRow(rowEntity);
           gridApi.grid.scrollTo(rowEntity);
           suppressGo = false;
-        });
-      }
+        }
+      });
+
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = {};
