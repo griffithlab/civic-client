@@ -73,7 +73,7 @@
         {
           name: 'variant',
           width: '30%',
-          sort: {direction: uiGridConstants.ASC},
+          sort: { direction: uiGridConstants.ASC },
           enableFiltering: true,
           allowCellFocus: false,
           filter: {

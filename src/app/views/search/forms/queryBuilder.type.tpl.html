@@ -24,9 +24,9 @@
                       ng-click="model[options.key].splice($index, 1)">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
-
               <button type="button"
                       class="btn btn-xs btn-primary"
+                      style="margin-left: 6px;"
                       ng-if="$index + 1 === model[options.key].length"
                       ng-click="addNew()">
                 <span class="glyphicon glyphicon-plus"></span>

@@ -8,21 +8,33 @@
     .clearfix();
     margin-top: @contentPadding;
     padding: @contentPadding/2;
-    border: 1px solid #CCC;
+    background-color: #EFEFEF;
     border-radius: @border-radius-base;
 
     .field-selector {
-      select {
-        display: block;
+      .formly {
         width: 100%;
+        .formly-field {
+          width: 100%;
+          .form-group {
+            width: 100%;
+            margin-bottom: 0 !important;
+            select {
+              display: block;
+              width: 100%;
+            }
+          }
+        }
       }
+
     }
     .field-form {
 
     }
     .row-buttons {
+      white-space: nowrap;
       button {
-        margin-right: @contentPadding/2;
+        margin-top: 5px;
       }
     }
     .inline-field {
