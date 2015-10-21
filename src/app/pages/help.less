@@ -1,11 +1,39 @@
 @import 'bower_components/bootstrap/less/mixins.less';
 @import 'bower_components/bootstrap/less/variables.less';
 @import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
 
 .helpPage {
-  margin-top: @contentPadding;
+  .subtitle {
+    margin-top: 0;
+    padding-bottom: .3em;
+    border-bottom: 1px solid #CCC;
+  }
+
+  .help-tabs {
+    margin-bottom: 1em;
+
+    .nav {
+      padding-left: 15px;
+      padding-right: 0;
+    }
+  }
+
+  .help-button {
+    margin-top: .5em;
+  }
 
   .help-tab {
+    //padding: @contentPadding;
+    //border-radius: @border-radius-large;
+    //border-top-left-radius: 0;
+    //border-top-right-radius: 0;
+    //border-left: 1px solid @nav-tabs-border-color;
+    //border-right: 1px solid @nav-tabs-border-color;
+    //border-bottom: 1px solid @nav-tabs-border-color;
+  }
+
+  .help-sub-tab {
     padding: @contentPadding;
     border-radius: @border-radius-large;
     border-top-left-radius: 0;
