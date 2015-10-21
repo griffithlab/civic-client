@@ -10,6 +10,6 @@
     console.log(user);
 
     vm.user = user;
-    vm.events = events;
+    vm.events = events.result;
   }
 })();

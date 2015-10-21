@@ -35,7 +35,7 @@
         queryEvents: {
           url: '/api/users/:userId/events',
           method: 'GET',
-          isArray: true,
+          isArray: false,
           cache: false
         }
       }
