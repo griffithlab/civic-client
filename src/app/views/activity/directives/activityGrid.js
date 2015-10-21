@@ -72,6 +72,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          enableSorting: false,
           width: '15%',
           cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>',
           filter: {
@@ -83,6 +84,7 @@
           displayName: 'Role',
           enableFiltering: true,
           allowCellFocus: false,
+          enableSorting: false,
           type: 'string',
           width: '8%',
           filter: {
@@ -93,6 +95,7 @@
           displayName: 'Event Type',
           enableFiltering: true,
           allowCellFocus: false,
+          enableSorting: false,
           type: 'string',
           width: '20%',
           filter: {
@@ -106,6 +109,7 @@
           type: 'string',
           allowCellFocus: false,
           enableFiltering: false,
+          enableSorting: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -118,6 +122,7 @@
           width: '15%',
           allowCellFocus: false,
           enableFiltering: false,
+          enableSorting: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -129,6 +134,7 @@
           type: 'string',
           allowCellFocus: false,
           enableFiltering: false,
+          enableSorting: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -141,6 +147,7 @@
           sort: {direction: uiGridConstants.DESC},
           allowCellFocus: false,
           enableFiltering: false,
+          enableSorting: true,
           cellTemplate: '<div class="ui-grid-cell-contents"><span ng-bind="row.entity[col.field]|timeAgo"></span></div>',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
