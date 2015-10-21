@@ -13,8 +13,8 @@
     Stats.site().then(function(stats) {
       vm.stats = stats;
     });
-    Events.query().then(function(events) {
-      vm.events = events;
+    Events.query({count: 7}).then(function(response) {
+      vm.events = response.result;
     });
   }
 })();

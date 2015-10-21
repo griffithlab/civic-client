@@ -260,8 +260,8 @@
     function updateData() {
       fetchData(ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
         .then(function(data){
-          ctrl.gridOptions.data = data;
-          ctrl.totalItems = data.length + 85;
+          ctrl.gridOptions.data = data.result;
+          ctrl.totalItems = data.total;
         });
     }
 

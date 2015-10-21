@@ -15,7 +15,7 @@
       {
         query: {
           method: 'GET',
-          isArray: true,
+          isArray: false,
           cache: false
         }
       }
