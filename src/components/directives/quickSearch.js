@@ -73,7 +73,9 @@
       // TODO: figure out how to access typeahead dropdown items and current activeIndex
       // TODO: figure out how to clear typeahead after state transition (asyncSelected.model is unavaiable to this function when called). This doesn't work:
       // scope.$$childHead.query= ''; // clear typeahead
-      $state.go('events.genes.summary.variants.summary', {geneId: topResult.geneId, variantId: topResult.variantId});
+      if(!_.isEmpty(topResult)) {
+        $state.go('events.genes.summary.variants.summary', {geneId: topResult.geneId, variantId: topResult.variantId});
+      }
 
     }
 
