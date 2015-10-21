@@ -390,6 +390,7 @@
         if($stateParams.geneId != undefined && $stateParams.variantId != undefined) {
           params = _.merge($stateParams, { evidenceId: row.entity.id });
 
+          // the highlight in onRowsRendered will trigger a state change unless we catch it here
           if(!suppressGo) {
             $state.go('events.genes.summary.variants.summary.evidence.summary', params)
           }
