@@ -115,7 +115,13 @@
   <div ng-if="showEvidenceGrid === true">
     <div class="row">
       <div class="col-xs-12 evidence-item-grid">
-        <evidence-grid evidence="evidence" variant="variant"></evidence-grid>
+        <evidence-grid
+          evidence="evidence"
+          variant="variant"
+          show-gene-col="false"
+          show-variant-col="false">
+
+        </evidence-grid>
       </div>
     </div>
     <div class="row">

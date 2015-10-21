@@ -58,7 +58,11 @@
   <div ng-if="vm.showEvidenceGrid === true">
     <div class="row">
       <div class="col-xs-12 evidence-item-grid">
-        <evidence-grid evidence="vm.searchResults" rows="20"></evidence-grid>
+        <evidence-grid
+          evidence="vm.searchResults"
+          rows="20"
+          show-gene-col="true"
+          show-variant-col="true"></evidence-grid>
       </div>
     </div>
   </div>

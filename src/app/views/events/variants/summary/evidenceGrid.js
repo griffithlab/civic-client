@@ -12,7 +12,9 @@
       scope: {
         evidence: '=',
         variant: '=',
-        rows: '='
+        rows: '=',
+        showGeneCol: '=',
+        showVariantCol: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
@@ -114,6 +116,28 @@
           minWidth: 50,
           width: '6%',
           cellTemplate: 'app/views/events/variants/summary/evidenceGridIdCell.tpl.html'
+        },
+        { name: 'gene',
+          field: 'state_params.gene.name',
+          displayName: 'GENE',
+          visible: $scope.showGeneCol,
+          headerTooltip: 'Gene',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+          width: '6%'
+        },
+        { name: 'variant',
+          field: 'state_params.variant.name',
+          displayName: 'VARIANT',
+          visible: $scope.showVariantCol,
+          headerTooltip: 'Variant',
+          headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+          width: '8%'
         },
         { name: 'description',
           headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
