@@ -32,7 +32,7 @@
     ctrl.events = $scope.events;
 
     ctrl.totalItems = Number();
-    ctrl.page = $scope.page;
+    ctrl.page = $scope.page || 1;
     ctrl.count= maxRows;
 
     ctrl.filters = [];
@@ -58,7 +58,7 @@
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
 
-      enableFiltering: true,
+      enableFiltering: false,
       enableColumnMenus: false,
       enableSorting: true,
       enableRowSelection: true,
@@ -84,7 +84,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
-          width: '10%',
+          width: '8%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -105,7 +105,6 @@
           displayName: 'Gene',
           type: 'string',
           allowCellFocus: false,
-          width: '15%',
           enableFiltering: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -116,7 +115,7 @@
           field: 'state_params.variant.name',
           displayName: 'Variant',
           type: 'string',
-          width: '20%',
+          width: '15%',
           allowCellFocus: false,
           enableFiltering: false,
           filter: {
@@ -130,7 +129,6 @@
           type: 'string',
           allowCellFocus: false,
           enableFiltering: false,
-          width: '10%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -140,7 +138,7 @@
           field: 'timestamp',
           displayName: 'Timestamp',
           type: 'date',
-          sort: {direction: uiGridConstants.ASC},
+          sort: {direction: uiGridConstants.DESC},
           allowCellFocus: false,
           enableFiltering: false,
           cellTemplate: '<div class="ui-grid-cell-contents"><span ng-bind="row.entity[col.field]|timeAgo"></span></div>',
