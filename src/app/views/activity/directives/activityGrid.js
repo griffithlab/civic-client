@@ -21,13 +21,13 @@
   function ActivityGridController($log,
                                   $scope,
                                   $state,
+                                  $location,
                                   uiGridConstants,
                                   _,
                                   Events) {
     var ctrl = $scope.ctrl = {};
 
-    var pageCount = 25;
-    var maxRows = ctrl.maxRows = pageCount;
+    var maxRows = ctrl.maxRows = 20;
 
     ctrl.events = $scope.events;
 
@@ -41,7 +41,7 @@
     ctrl.isFiltered = ctrl.filters.length > 0;
 
     $scope.$watch('ctrl.totalItems', function() {
-      ctrl.totalPages = Math.ceil(ctrl.totalItems / pageCount);
+      ctrl.totalPages = Math.ceil(ctrl.totalItems / maxRows);
     });
 
     ctrl.gridOptions = {
@@ -53,7 +53,7 @@
 
       paginationPageSizes: [maxRows],
       paginationPageSize: maxRows,
-      minRowsToShow: maxRows + 1,
+      minRowsToShow: maxRows-1,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
@@ -78,6 +78,17 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         },
+        { name: 'role',
+          field: 'user.role',
+          displayName: 'Role',
+          enableFiltering: true,
+          allowCellFocus: false,
+          type: 'string',
+          width: '10%',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
         { name: 'event_type',
           displayName: 'Event Type',
           enableFiltering: true,
@@ -95,7 +106,7 @@
           type: 'string',
           allowCellFocus: false,
           width: '15%',
-          enableFiltering: true,
+          enableFiltering: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -107,7 +118,7 @@
           type: 'string',
           width: '20%',
           allowCellFocus: false,
-          enableFiltering: true,
+          enableFiltering: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -118,7 +129,7 @@
           displayName: 'Item',
           type: 'string',
           allowCellFocus: false,
-          enableFiltering: true,
+          enableFiltering: false,
           width: '10%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
