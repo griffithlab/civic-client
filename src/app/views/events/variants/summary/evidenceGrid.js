@@ -361,6 +361,12 @@
 
       // setup watcher to update grid
       $scope.$watchCollection('evidence', function(evidence) {
+        // if we get an evidence list that is rejected items only, let's show those instead of showing nothing
+        if(_.every(evidence, 'status', 'rejected')) {
+          statusFilters = ['accepted', 'submitted', 'rejected'];
+        } else {
+          statusFilters = ['accepted', 'submitted'];
+        }
         ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
       });
 
