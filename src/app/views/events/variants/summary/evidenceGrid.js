@@ -152,6 +152,7 @@
           cellTemplate: 'app/views/events/variants/summary/evidenceGridEvidenceCell.tpl.html'
         },
         { name: 'disease',
+          field: 'disease.name',
           headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'DIS',
           headerTooltip: 'Disease',
