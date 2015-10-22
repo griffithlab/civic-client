@@ -1,8 +1,79 @@
 <div class="help-tab col-xs-12 col-sm-10 col-lg-9">
-  <h3 class="subtitle">Genes</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut est auctor, tincidunt sem sed, ornare est. Nam et vehicula mi, non ornare ligula. Praesent placerat, dui sed congue imperdiet, tellus enim consequat diam, ac placerat neque mi et ligula. </p>
+  <h3 class="subtitle">Genes in the CIViC Database</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dictum massa ut ligula rutrum, eu molestie massa laoreet. Vestibulum lectus ipsum, efficitur sit amet semper eu, venenatis sed massa. Aenean gravida nisi vel mi laoreet egestas.</p>
 
-  <p>Praesent elementum ex eget tempor facilisis. Nunc nec ipsum suscipit, efficitur quam vitae, pretium nisl. Donec eu diam in leo convallis feugiat. Sed leo diam, aliquet sed nisl et, lobortis commodo ipsum. Maecenas quis ornare neque. Curabitur et tempor mauris, et euismod purus. Nullam augue sem, blandit ac magna et, bibendum cursus mi.</p>
-
-  <p>Proin id augue vel odio suscipit molestie. Proin non dignissim nibh, a consequat nisl. Nam eget pulvinar lacus, vitae ornare nisi. Donec ut felis eu tortor tristique commodo sed ullamcorper arcu. Ut faucibus egestas faucibus.</p>
+  <h4>Gene Attributes</h4>
+  <table class="table table-condensed table-attributes">
+    <tr>
+      <th class="attribute">
+        Attribute
+      </th>
+      <th class="description">
+        Description
+      </th>
+      <th class="source">
+        Source
+      </th>
+      <th class="editable">
+        Editable
+      </th>
+    </tr>
+    <tr>
+      <td class="attribute">
+        Name
+      </td>
+      <td class="description">
+        Entrez symbol of the gene.
+      </td>
+      <td class="source">
+        EntrezDB
+      </td>
+      <td class="editable">
+        No
+      </td>
+    </tr>
+    <tr>
+      <td class="attribute">
+        MyGene Info
+      </td>
+      <td class="description">
+        Aliases, synonyms, protein domains, and pathways retrieved from the MyGene.info database at runtime and cached based on gene's Entrez ID.
+      </td>
+      <td class="source">
+        MyGene.info
+      </td>
+      <td class="editable">
+        No
+      </td>
+    </tr>
+    <tr>
+      <td class="attribute">
+        Description
+      </td>
+      <td class="description">
+        User-defined summary of the clinical relevance of this Gene. Should include relevance to appropriate cancer(s), treatment(s) related specifically to variants affecting this Gene. May include relevant mechanistic information such as pathway interactions, functional alterations caused by variants in with this Gene (i.e., activating, loss-of-function, etc), and normal functions key to its oncogenic properties.
+      </td>
+      <td class="source">
+        CIViC
+      </td>
+      <td class="editable">
+        Yes
+      </td>
+    </tr>
+    <tr>
+      <td class="attribute">
+        Sources<br/>
+        <span style="font-weight: normal; font-size: small; color: #666;">(PubMed IDs)</span>
+      </td>
+      <td class="description">
+        A list of PubMed IDs referring to evidence supporting statemens made in the Gene's description. Source descriptions (e.g. <em>'Weisberg et al., 2007, Nat. Rev. Cancer'</em>) are pulled from the PubMed database at the time of submission, and are not editable.
+      </td>
+      <td class="source">
+        CIViC, PubMed
+      </td>
+      <td class="editable">
+        Yes
+      </td>
+    </tr>
+  </table>
 </div>

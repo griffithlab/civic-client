@@ -32,6 +32,16 @@
           heading: 'Variant Groups',
           template: 'app/pages/help_variant_groups.tpl.html',
           active: false
+        },
+        {
+          heading: 'Get Help',
+          template: 'app/pages/help_get.tpl.html',
+          active: false
+        },
+        {
+          heading: 'Report Problem',
+          template: 'app/pages/help_report_problem.tpl.html',
+          active: false
         }
       ],
       evidence: [
