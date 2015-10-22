@@ -70,7 +70,7 @@
         { name: 'created_at',
           displayName: 'Created',
           allowCellFocus: false,
-          enableFiltering: true,
+          enableFiltering: false,
           sort: { direction: uiGridConstants.DESC },
           filter: {
             condition: uiGridConstants.filter.CONTAINS
