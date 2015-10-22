@@ -28,7 +28,7 @@
 
     $scope.addEvidenceUrlBase = $scope.addEvidenceUrl = '#/add/evidence/basic';
 
-    $scope.$watch('$rootScope.stateParams', function(stateParams){
+    $scope.$watchCollection('$rootScope.stateParams', function(stateParams){
       if(_.has(stateParams, 'geneId')) {
         $scope.addEvidenceUrl = $scope.addEvidenceUrlBase + '?geneId=' + stateParams.geneId;
 
