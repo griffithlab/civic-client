@@ -2,7 +2,7 @@
   <h4 class="title"><span ng-bind="gene.name"></span></h4>
   <ul class="variants">
     <li ng-repeat="variant in variants|orderBy:'name'">
-      <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id })"
+      <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
          ng-class="{ active: variant.id == stateParams.variantId }">
         <span ng-bind="variant.name">Variant Name</span>
       </a>
@@ -15,13 +15,13 @@
     <li ng-repeat="variantGroup in variantGroups|orderBy:'name'">
       <a class="sub-title"
          ng-class="{ active: variantGroup.id == stateParams.variantGroupId }"
-         ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id })">
+         ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id, '#': 'variant-group' })">
         <span ng-bind="variantGroup.name">Variant Group Name</span>
       </a>
       <ul class="variants">
         <li ng-repeat="variant in variantGroup.variants|orderBy:'name'">
           <a
-             ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id })"
+             ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
              ng-class="{ active: variant.id == stateParams.variantId }">
             <span ng-bind="variant.name" class="variant-name">Variant Name</span>
             <div ng-hide="variantGroup.singleGene">
@@ -34,7 +34,7 @@
   </ul>
   <button
     ng-show="security.isAdmin"
-    ui-sref="events.genes.summary.addVariantGroup"
+    ui-sref="events.genes.summary.addVariantGroup({'#': 'variant-group'})"
     class="btn btn-xs btn-default btn-block">
     Add Variant Group
   </button>

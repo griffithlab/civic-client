@@ -58,12 +58,12 @@
         {
           heading: 'Variant Summary',
           route: 'events.genes.summary.variants.summary',
-          params: { geneId: $stateParams.geneId, variantId: $stateParams.variantId }
+          params: { geneId: $stateParams.geneId, variantId: $stateParams.variantId, '#': 'variant'  }
         },
         {
           heading: 'Variant Talk',
           route: 'events.genes.summary.variants.talk.revisions.list',
-          params: { geneId: $stateParams.geneId, variantId: $stateParams.variantId }
+          params: { geneId: $stateParams.geneId, variantId: $stateParams.variantId, '#': 'variant'  }
         }
       ], this.tabData);
 

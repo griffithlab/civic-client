@@ -61,7 +61,8 @@
           params: {
             geneId: $stateParams.geneId,
             variantId: $stateParams.variantId,
-            evidenceId: $stateParams.evidenceId
+            evidenceId: $stateParams.evidenceId,
+            '#': 'evidence'
           }
         },
         {
@@ -70,7 +71,8 @@
           params: {
             geneId: $stateParams.geneId,
             variantId: $stateParams.variantId,
-            evidenceId: $stateParams.evidenceId
+            evidenceId: $stateParams.evidenceId,
+            '#': 'evidence'
           }
         }
       ], this.tabData);

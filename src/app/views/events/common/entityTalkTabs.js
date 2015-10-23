@@ -103,7 +103,7 @@
         //}
         //var isAncestorOfCurrentRoute = $state.includes(route, tab.params, tab.options);
         //return isAncestorOfCurrentRoute;
-        var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
+        var isAncestorOfCurrentRoute = $state.includes(tab.route, _.omit(tab.params, '#'), tab.options);
         return isAncestorOfCurrentRoute;
       };
 

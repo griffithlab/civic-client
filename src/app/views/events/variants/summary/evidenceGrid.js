@@ -388,7 +388,7 @@
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = {};
         if($stateParams.geneId != undefined && $stateParams.variantId != undefined) {
-          params = _.merge($stateParams, { evidenceId: row.entity.id });
+          params = _.merge($stateParams, { evidenceId: row.entity.id, '#': 'evidence' });
 
           // the highlight in onRowsRendered will trigger a state change unless we catch it here
           if(!suppressGo) {
@@ -398,7 +398,8 @@
           params = {
             geneId: row.entity.state_params.gene.id,
             variantId: row.entity.state_params.variant.id,
-            evidenceId: row.entity.id
+            evidenceId: row.entity.id,
+            '#': 'evidence'
           };
           if(!suppressGo) {
             $state.go('events.genes.summary.variants.summary.evidence.summary', params)

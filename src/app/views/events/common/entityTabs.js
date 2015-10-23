@@ -59,7 +59,7 @@
     vm.users = {};
     vm.users.last_modified = entityViewModel.data.item.last_modified;
 
-    vm.anchorId = vm.type.toLowerCase();
+    vm.anchorId = _.kebabCase(vm.type);
 
     scope.$watch('entityViewModel.data.item.name', function(name) {
       vm.name = name;
@@ -104,12 +104,11 @@
     vm.isAuthenticated = Security.isAuthenticated;
     vm.isEditor = Security.isEditor;
 
-    var prevScroll = null;
     $scope.scroll = function() {
       var loc = $location.hash();
-      if(vm.type.toLowerCase() === loc && prevScroll != loc) {
+      if(_.kebabCase(vm.type) === loc && $rootScope.prevScroll != loc) {
         var elem = document.getElementById(loc);
-        prevScroll = loc;
+        $rootScope.prevScroll = $location.hash();
         $document.scrollToElementAnimated(elem);
       }
     };
@@ -151,7 +150,7 @@
           // drop the last route element so all talk ancestor $state.includes() evaluates to true
           route = _.chain(tab.route.split('.')).dropRight().value().join('.');
         }
-        var isAncestorOfCurrentRoute = $state.includes(route, tab.params, tab.options);
+        var isAncestorOfCurrentRoute = $state.includes(route, _.omit(tab.params, '#'), tab.options);
         return isAncestorOfCurrentRoute;
       };
 
