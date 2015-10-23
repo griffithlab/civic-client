@@ -106,7 +106,9 @@
 
     $scope.scroll = function() {
       var loc = $location.hash();
-      if(_.kebabCase(vm.type) === loc && $rootScope.prevScroll != loc) {
+      if(!_.isUndefined($location.hash()) &&
+          _.kebabCase(vm.type) === loc &&
+          $rootScope.prevScroll != loc) {
         var elem = document.getElementById(loc);
         $rootScope.prevScroll = $location.hash();
         $document.scrollToElementAnimated(elem);

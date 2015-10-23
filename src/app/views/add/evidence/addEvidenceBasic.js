@@ -17,6 +17,7 @@
   // @ngInject
   function AddEvidenceBasicController($scope,
                                       $q,
+                                      $document,
                                       Security,
                                       Evidence,
                                       Genes,
@@ -38,6 +39,11 @@
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
+
+    vm.scroll = function() {
+      var elem = document.getElementById('add-evidence-basic');
+      $document.scrollToElementAnimated(elem);
+    };
 
     vm.newEvidence = {
       gene: '',
