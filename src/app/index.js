@@ -8,6 +8,7 @@
     'ngTouch',
     'ngDialog',
     'ngMessages',
+    'duScroll',
     'ui.bootstrap',
     'ui.grid',
     'ui.grid.autoResize',
@@ -44,7 +45,7 @@
     .config(appConfig);
 
 // @ngInject
-  function appConfig(formlyConfigProvider) {
+  function appConfig($uiViewScrollProvider, formlyConfigProvider) {
     // log all rootScope events to the console for debugging
     // (this code should be commented out before building for production)
     //$provide.decorator('$rootScope', function ($delegate) {
@@ -60,12 +61,12 @@
     window.apiCheck.disabled = false; // set to true in production
     formlyConfigProvider.removeChromeAutoCompletee = true;
     //$uiViewScrollProvider.useAnchorScroll();
+
     //$anchorScrollProvider.disableAutoScrolling()
   }
 
 // @ngInject
-  function appRun(Security, $rootScope, $state, $analytics) {
-
+  function appRun(Security, $rootScope, $state, $analytics, $timeout, $anchorScroll) {
     $rootScope.view = {};
 
     // ensure $state is globally addressable/injectable
@@ -91,6 +92,9 @@
     });
     $rootScope.$on('$stateChangeSuccess', function (evt, to, toP, from, fromP) {
       console.log('Success: ' + message(to, toP, from, fromP));
+      //$timeout(function() {
+      //  $anchorScroll();
+      //}, 2000);
     });
     $rootScope.$on('$stateChangeError', function (evt, to, toP, from, fromP, err) {
       console.error('Error:   ' + message(to, toP, from, fromP), err);

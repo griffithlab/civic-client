@@ -45,6 +45,10 @@
     var entityViewModel = scope.entityViewModel = entityView.entityViewModel;
     var entityViewOptions = scope.entityViewOptions = entityView.entityViewOptions;
 
+    element.ready(function() {
+      scope.scroll();
+    });
+
     vm.type = '';
     vm.name = '';
 
@@ -54,6 +58,8 @@
 
     vm.users = {};
     vm.users.last_modified = entityViewModel.data.item.last_modified;
+
+    vm.anchorId = vm.type.toLowerCase();
 
     scope.$watch('entityViewModel.data.item.name', function(name) {
       vm.name = name;
@@ -86,10 +92,27 @@
   }
 
   // @ngInject
-  function EntityTabsController($scope, $state, $rootScope, $stateParams, Security, _) {
+  function EntityTabsController($scope,
+                                $state,
+                                $rootScope,
+                                $stateParams,
+                                $location,
+                                $document,
+                                Security,
+                                _) {
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated;
     vm.isEditor = Security.isEditor;
+
+    var prevScroll = null;
+    $scope.scroll = function() {
+      var loc = $location.hash();
+      if(vm.type.toLowerCase() === loc && prevScroll != loc) {
+        var elem = document.getElementById(loc);
+        prevScroll = loc;
+        $document.scrollToElementAnimated(elem);
+      }
+    };
 
     // store latest stateParams on rootscope, primarily so the Add Evidence button can
     // include gene and variantIds in the URL

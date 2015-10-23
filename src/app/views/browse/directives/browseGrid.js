@@ -219,11 +219,13 @@
         if(ctrl.mode === 'variants') {
           $state.go('events.genes.summary.variants.summary', {
             geneId: row.entity.gene_id,
-            variantId: row.entity.variant_id
+            variantId: row.entity.variant_id,
+            '#': 'variant'
           });
         } else {
           $state.go('events.genes.summary', {
-            geneId: row.entity.id
+            geneId: row.entity.id,
+            '#': 'gene'
           });
         }
       });
