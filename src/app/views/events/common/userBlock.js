@@ -14,11 +14,11 @@
       },
       controller: 'UserBlockController',
       templateUrl: 'app/views/events/common/userBlock.tpl.html'
-    }
+    };
   }
 
   // @inject
-  function UserBlockController($scope) {
+  function UserBlockController() {
     console.log('userBlock controller called.');
   }
 })();

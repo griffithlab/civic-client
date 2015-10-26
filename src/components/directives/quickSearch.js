@@ -66,7 +66,7 @@
       $scope.asyncSelected.model = ''; // clear typeahead
     };
 
-    $scope.onGo = function(scope) {
+    $scope.onGo = function() {
       // NOTE: typeahead control does not make the currently selected item available outside its
       // scope, so we have no way to know which item the user has highlighted. So the Go button
       // cheats and just sends them to the first item on the list.
@@ -77,7 +77,7 @@
         $state.go('events.genes.summary.variants.summary', {geneId: topResult.geneId, variantId: topResult.variantId});
       }
 
-    }
+    };
 
   }
 

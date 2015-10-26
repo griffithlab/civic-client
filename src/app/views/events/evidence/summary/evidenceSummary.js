@@ -51,7 +51,7 @@
           $log.error('Ooops! There was an error accepting this evidence item.');
           $log.error(response);
         })
-        .finally(function(response) {
+        .finally(function() {
           $log.debug('Accept Item done.');
         });
     };
@@ -67,7 +67,7 @@
           $log.error('Ooops! There was an error rejecting this evidence item.');
           $log.error(response);
         })
-        .finally(function(response) {
+        .finally(function() {
           $log.debug('Reject Item done.');
         });
     };

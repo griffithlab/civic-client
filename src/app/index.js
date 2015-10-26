@@ -66,7 +66,7 @@
   }
 
 // @ngInject
-  function appRun(Security, $rootScope, $state, $analytics, $timeout, $anchorScroll) {
+  function appRun(Security, $rootScope, $state, $analytics) {
     $rootScope.view = {};
 
     // ensure $state is globally addressable/injectable

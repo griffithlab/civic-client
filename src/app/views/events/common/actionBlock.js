@@ -13,11 +13,11 @@
       },
       controller: 'ActionBlockController',
       templateUrl: 'app/views/events/common/actionBlock.tpl.html'
-    }
+    };
   }
 
   // @ngInject
-  function ActionBlockController($scope) {
+  function ActionBlockController() {
     console.log('action block controller loaded.');
   }
 })();

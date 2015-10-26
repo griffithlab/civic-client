@@ -24,7 +24,7 @@
           mode: function() {
             return 'variants';
           },
-          page: /* @ngInject */ function($stateParams) {
+          page: /* @ngInject */ function($stateParams, _) {
             if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
             else { return 1; }
           }
@@ -43,7 +43,7 @@
           mode: function() {
             return 'genes';
           },
-          page: /* @ngInject */ function($stateParams) {
+          page: /* @ngInject */ function($stateParams, _) {
             if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
             else { return 1; }
           }

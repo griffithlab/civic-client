@@ -67,7 +67,7 @@
   }
 
 // @ngInject
-  function EntityTalkTabsController($scope, $state) {
+  function EntityTalkTabsController($scope, $state, _) {
     var unwatch = $scope.$watchCollection('viewModel', function() {
       var currentStateEqualTo = function (tab) {
 

@@ -606,7 +606,7 @@
             gene: response.gene.name,
             variant: response.variant.name,
             evidence_item: response.evidence_item.name
-          }
+          };
         })
         .catch(function(error) {
           console.error('add evidence error!');

@@ -22,7 +22,7 @@
     $scope.variant = Variants.data.item;
     $scope.evidence = Variants.data.evidence;
 
-    $scope.$watch(function() { return Variants.data.item}, function(variant) {
+    $scope.$watch(function() { return Variants.data.item; }, function(variant) {
       $scope.variant = variant;
       $scope.evidence = variant.evidence_items;
     }, true);

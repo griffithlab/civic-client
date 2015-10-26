@@ -57,7 +57,7 @@
 
       // revision comments are shown in their revision's summary view, override commented extension
       if(event.subject_type === 'suggestedchanges') {
-        stateExtension.commented = '.talk.revisions.list.summary'
+        stateExtension.commented = '.talk.revisions.list.summary';
       }
 
       var stateParams = {};
@@ -77,6 +77,6 @@
 
       $state.go(subjectStates[event.subject_type]+stateExtension[event.event_type], stateParams);
 
-    }
+    };
   }
 })();

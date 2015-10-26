@@ -4,8 +4,7 @@
     .controller('ActivityController', ActivityController);
 
   // @ngInject
-  function ActivityController($scope, $log, uiGridConstants, Events) {
-    var ctrl = $scope.ctrl = {};
+  function ActivityController() {
 
   }
 })();

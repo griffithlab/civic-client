@@ -33,12 +33,12 @@
         .then(function() {
           console.log('delete comment successful.');
         })
-        .catch(function(error) {
+        .catch(function() {
           console.error('error deleting comment.');
         })
         .finally(function() {
           console.log('comment delete done!');
-        })
-    }
+        });
+    };
   }
 })();
