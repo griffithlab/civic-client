@@ -9,7 +9,7 @@
     formlyConfigProvider.setType({
       name: 'queryRow',
       templateUrl: 'app/views/search/forms/queryBuilder.type.tpl.html',
-      controller: function($scope) {
+      controller: /* @ngInject */ function($scope) {
         $scope.formOptions = {formState: $scope.formState};
         $scope.addNew = addNew;
 

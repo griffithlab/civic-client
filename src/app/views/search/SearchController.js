@@ -7,7 +7,7 @@
   function SearchController($scope, $log, _, Search) {
     var vm = $scope.vm = {};
 
-    // funcation assignment
+    // function assignment
     vm.onSubmit = onSubmit;
     vm.options = {};
     vm.searchResults = [];
