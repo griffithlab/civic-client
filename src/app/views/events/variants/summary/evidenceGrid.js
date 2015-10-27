@@ -27,7 +27,6 @@
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
     var statusFilters = ['accepted', 'submitted'];
-
     ctrl.showGridKey = false;
 
     ctrl.keyPopover = {
@@ -364,7 +363,7 @@
         // if we get an evidence list that is rejected items only, let's show those instead of showing nothing
         if(_.every(evidence, 'status', 'rejected')) {
           statusFilters = ['accepted', 'submitted', 'rejected'];
-        } else {
+        } else if (!_.includes(statusFilters, 'rejected')) {
           statusFilters = ['accepted', 'submitted'];
         }
         ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
@@ -376,6 +375,14 @@
           var rowEntity = _.find($scope.evidence, function (item) {
             return item.id === +$stateParams.evidenceId;
           });
+
+          // if a highlighted row is a rejected item, show rejected items
+          if(rowEntity.status === 'rejected') {
+            $log.debug('highlight row is for rejected entity.');
+            if(!_.includes(statusFilters, 'rejected')) {
+              statusFilters.push('rejected');
+            }
+          }
 
           suppressGo = true;
           gridApi.selection.selectRow(rowEntity);
