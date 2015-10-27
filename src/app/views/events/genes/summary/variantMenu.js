@@ -23,6 +23,14 @@
       isAdmin: Security.isEditor()
     };
 
+    var addVarGroupUrlBase = $scope.addVarGroupUrl = '#/add/variantGroup';
+
+    $scope.$watchCollection('stateParams', function(stateParams){
+      if(_.has(stateParams, 'geneId')) {
+        $scope.addVarGroupUrl = addVarGroupUrlBase + '?geneId=' + stateParams.geneId;
+      }
+    });
+
     $scope.$watchCollection(
       function() { return Genes.data.variantGroups; },
       function(variantGroups){
