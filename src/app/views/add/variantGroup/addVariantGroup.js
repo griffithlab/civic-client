@@ -9,7 +9,7 @@
     $stateProvider
       .state('add.variantGroup', {
         url: '/variantGroup?geneId',
-        templateUrl: 'app/views/add/variantGroup/AddVariantGroup.tpl.html',
+        templateUrl: 'app/views/add/variantGroup/addVariantGroup.tpl.html',
         resolve: {
           VariantGroups: 'VariantGroups'
         },
