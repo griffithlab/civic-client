@@ -76,18 +76,22 @@
   <div class="successMessage" ng-if="vm.showSuccessMessage">
     <div class="col-xs-12 jumbotron">
       <h1>Thank you.</h1>
-      <p>Your new Variant Group has been added. If it includes a variant in the currently selected Gene, you should see the new variant group in the variant menu to the left. Otherwise, you may view it by navigating to a variant it contains.</p>
+      <p>Your new Variant Group has been added.</p>
+      <p>
+        <a ng-href="#/events/genes/{{vm.newGeneId}}/summary/variantGroups/{{vm.newGroupId}}/summary"
+           class="btn btn-small btn-default">View it here</a>
+      </p>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-6">
-      <h4>Variant Group</h4>
-      <pre ng-bind="vm.variantGroup | json"></pre>
-    </div>
-    <div class="col-xs-6">
-      <h4>vm.options</h4>
-      <pre ng-bind="vm.options | json"></pre>
-    </div>
-  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-xs-6">-->
+      <!--<h4>Variant Group</h4>-->
+      <!--<pre ng-bind="vm.variantGroup | json"></pre>-->
+    <!--</div>-->
+    <!--<div class="col-xs-6">-->
+      <!--<h4>vm.options</h4>-->
+      <!--<pre ng-bind="vm.options | json"></pre>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

@@ -28,7 +28,6 @@
                                      _,
                                      formConfig,
                                      VariantGroups,
-                                     Genes,
                                      Datatables,
                                      Security) {
     var vm = this;
@@ -48,7 +47,6 @@
 
 
     vm.variantGroup = {
-      gene_id: $stateParams.geneId,
       name: '',
       description: '',
       variants: [{id: 0, name:''}]
@@ -101,7 +99,7 @@
           label: 'Name',
           disabled: false,
           value: vm.variantGroup.name,
-          helpText: 'A brief and meaninful name for the new variant group.'
+          helpText: 'A brief and meaningful name for the new variant group.'
         }
       },
       {
@@ -153,22 +151,21 @@
 
     vm.add = function(newVariantGroup) {
       VariantGroups.add(newVariantGroup)
-        .then(function() {
+        .then(function(response) {
           console.log('new variant group created!');
           vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
-
-          // update parent Gene object to refresh variant menu
-          Genes.queryVariantGroups(Genes.data.item.id);
+          vm.newGroupId= response.id;
+          vm.newGeneId = response.variants[0].gene_id; // grab gene id from first variant in group
         })
         .catch(function(error) {
-          console.error('revision submit error!');
+          console.error('variant group submit error!');
           vm.formErrors[error.status] = true;
         })
         .finally(function(){
-          console.log('revision submit done!');
+          console.log('variant group submit done!');
         });
     };
   }
