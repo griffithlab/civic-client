@@ -34,7 +34,10 @@
     ctrl.count= Number();
 
     ctrl.filters = [];
-    ctrl.sorting = [];
+    ctrl.sorting = [{
+      field: $scope.mode === 'variants' ? 'variant' : 'gene',
+      direction: 'asc'
+    }];
 
     ctrl.isFiltered = ctrl.filters.length > 0;
 
