@@ -114,7 +114,7 @@
         key: 'ensembl_version',
         type: 'horizontalInputHelp',
         templateOptions: {
-          label: 'Ensemble Version',
+          label: 'Ensembl Version',
           value: vm.variantEdit.coordinates.ensembl_version,
           helpText: 'Ensembl version'
         }
