@@ -111,6 +111,16 @@
       },
       {
         model: vm.variantEdit.coordinates,
+        key: 'ensembl_version',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Ensemble Version',
+          value: vm.variantEdit.coordinates.ensembl_version,
+          helpText: 'Ensembl version'
+        }
+      },
+      {
+        model: vm.variantEdit.coordinates,
         key: 'chromosome',
         type: 'horizontalInputHelp',
         templateOptions: {
@@ -199,6 +209,16 @@
         templateOptions: {
           label: 'Stop 2',
           value: vm.variantEdit.coordinates.stop2,
+          helpText: ''
+        }
+      },
+      {
+        model: vm.variantEdit.coordinates,
+        key: 'representative_transcript2',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Representative Transcript 2',
+          value: vm.variantEdit.coordinates.representative_transcript2,
           helpText: ''
         }
       },
