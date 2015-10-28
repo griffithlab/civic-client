@@ -126,9 +126,13 @@
             wrapper: null,
             templateOptions: {
               formatter: 'model[options.key].name',
-              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)'
+              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+              onSelect: 'options.data.pushNew(model, index)'
             },
             data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
               typeaheadSearch: function(val) {
                 var request = {
                   mode: 'variants',
@@ -150,6 +154,7 @@
     ];
 
     vm.add = function(newVariantGroup) {
+      newVariantGroup.variants = _.without(newVariantGroup.variants, ''); // delete blank input values
       VariantGroups.add(newVariantGroup)
         .then(function(response) {
           console.log('new variant group created!');
