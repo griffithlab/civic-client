@@ -1,6 +1,6 @@
 <div class="eventItem"
      ng-click="vm.eventClick(event)"
-     ng-class="{ hover: mouseover }"
+     ng-class="{ hover: mouseover, dark: theme === 'dark', light: theme === 'light'}"
      ng-mouseover="mouseover=true"
      ng-mouseleave="mouseover=false">
   <div class="user-time">

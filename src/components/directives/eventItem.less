@@ -6,9 +6,18 @@
   padding: @contentPadding/2;
   margin-bottom: @contentPadding/2;
   border-radius: @border-radius-large;
-  background-color: darken(@civicPurple, 10%);
-  border: 2px solid darken(@civicPurple, 10%);
-  color: #CCC;
+
+  &.dark {
+    background-color: darken(@civicPurple, 10%);
+    border: 2px solid darken(@civicPurple, 10%);
+    color: #CCC;
+  }
+
+  &.light {
+    background-color: #FAFAFA;
+    border: 2px solid #DDD;
+    color: #333;
+  }
 
   &.hover {
     cursor: pointer;

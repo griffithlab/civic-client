@@ -8,7 +8,8 @@
     return {
       restrict: 'E',
       scope: {
-        event: '='
+        event: '=',
+        theme: '='
       },
       templateUrl: 'components/directives/eventItem.tpl.html',
       controller: eventItemController
