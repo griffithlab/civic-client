@@ -106,7 +106,7 @@
 
     $scope.scroll = function() {
       var loc = $location.hash();
-      if(!_.isUndefined($location.hash()) &&
+      if(!_.isEmpty(loc) &&
           _.kebabCase(vm.type) === loc &&
           $rootScope.prevScroll !== loc) {// if view has already been scrolled, ignore subsequent requests
         var elem = document.getElementById(loc);

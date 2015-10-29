@@ -53,7 +53,7 @@
   }
 
 // @ngInject
-  function appRun(Security, $rootScope, $state, $analytics) {
+  function appRun(Security, $rootScope, $state, $analytics, $location, _) {
     $rootScope.view = {};
 
     // ensure $state is globally addressable/injectable
@@ -61,6 +61,7 @@
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
       $rootScope.view.navMode = toState.data.navMode;
+      if(_.isEmpty($location.hash())) { $rootScope.prevScroll = null; }
       $analytics.eventTrack(toState.name);
       $analytics.pageTrack(window.location.hash);
     });
