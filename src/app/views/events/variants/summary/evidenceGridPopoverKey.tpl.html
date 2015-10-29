@@ -1,13 +1,22 @@
 <div class="popoverKey">
   <div class="row">
-    <div class="col-xs-4 popover-description">
-      <p>The Evidence Grid below lists all of the evidence items for {{ variant.name }}'s description. In order to condense all of the relevant details for each evidence item onto a single row, we've abbreviated the column headers, and have used icons instead of text to indicate the values of various evidence item properties.</p>
+    <div class="col-xs-12 popover-description">
+      <p>The Evidence Grid below lists all of the evidence items
+        <span ng-switch="context">
+          <span ng-switch-when="summary">
+            for {{ variant.name }}'s description.
+          </span>
+          <span ng-switch-when="search">
+            your search.
+          </span>
+        </span>
+          In order to condense all of the relevant details for each evidence item onto a single row, we've abbreviated the column headers, and have used icons instead of text to indicate the values of various evidence item properties.</p>
       <p>This key shows the meaning of the abbreviations and icons.</p>
       <p>All of the table cells display their values in tooltips. For example, if you wish to read the entire description of an evidence item without clicking on it, or see what an icon means, hold the mouse pointer over the cell and its tooltip will be displayed.</p>
       <p>The <span class="glyphicon glyphicon-remove-circle"></span> symbol means 'Not Applicable'.</p>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-6">
       <table class="table table-condensed column-key" style="border-right: 1px solid #CCC">
         <tr>
           <th class="col-name">
@@ -161,7 +170,7 @@
         </tr>
       </table>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-6">
       <table class="table table-condensed column-key">
         <tr>
           <th class="col-name">
