@@ -1,5 +1,11 @@
 <div class="geneEditBasic {{ vm.styles.edit.editBackgroundColor }}" id="gene-edit-basic">
-
+  <div class="row form-header" id="gene-edit-form">
+    <div class="stripes-bg">
+      <div class="col-xs-12 name">
+        <h3>EDIT GENE <span ng-bind="vm.gene.name">NAME</span></h3>
+      </div>
+    </div>
+  </div>
   <div class="row" ng-if="vm.showInstructions">
     <div class="col-xs-12">
       <div class="edit-instructions">

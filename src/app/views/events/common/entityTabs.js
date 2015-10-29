@@ -108,7 +108,7 @@
       var loc = $location.hash();
       if(!_.isUndefined($location.hash()) &&
           _.kebabCase(vm.type) === loc &&
-          $rootScope.prevScroll !== loc) {
+          $rootScope.prevScroll !== loc) {// if view has already been scrolled, ignore subsequent requests
         var elem = document.getElementById(loc);
         $rootScope.prevScroll = $location.hash();
         $document.scrollToElementAnimated(elem);

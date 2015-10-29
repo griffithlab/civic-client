@@ -5,8 +5,32 @@
 
 .variantEditBasic {
   .fullBleed();
-  padding-top: @contentPadding;
   padding-bottom: @contentPadding;
+
+  .form-header {
+    #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
+    .stripes-bg {
+      .clearfix();
+      background-image: url('/assets/images/grey_stripes.png');
+    }
+    .name {
+      h3 {
+        display: block;
+        margin: 0;
+        padding: @contentPadding/2 0;
+      }
+    }
+    .status {
+      span {
+        display: block;
+        padding: .3em .5em;
+        margin: @contentPadding/2 0;
+        font-weight: bold;
+        background-color: @pageBackground2;
+        border-radius: @border-radius-small;
+      }
+    }
+  }
 
   .edit-instructions {
     background-color: @pageBackground2;

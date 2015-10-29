@@ -17,6 +17,7 @@
   // @ngInject
   function GeneEditBasicController($scope,
                                    $q,
+                                   $document,
                                    _,
                                    Publications,
                                    Security,
@@ -57,6 +58,12 @@
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
+
+    // scroll to form header
+    $document.ready(function() {
+      var elem = document.getElementById('gene-edit-form');
+      $document.scrollToElementAnimated(elem);
+    });
 
     vm.geneFields = [
       {

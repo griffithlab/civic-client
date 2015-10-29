@@ -17,6 +17,7 @@
   // @ngInject
   function VariantEditBasicController($scope,
                                       $stateParams,
+                                      $document,
                                       Security,
                                       VariantRevisions,
                                       Variants,
@@ -57,6 +58,12 @@
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
+
+    // scroll to form header
+    $document.ready(function() {
+      var elem = document.getElementById('variant-edit-form');
+      $document.scrollToElementAnimated(elem);
+    });
 
     vm.variantFields = [
       {

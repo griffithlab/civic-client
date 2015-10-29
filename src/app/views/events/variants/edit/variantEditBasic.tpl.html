@@ -1,4 +1,11 @@
 <div class="variantEditBasic {{ vm.styles.edit.editBackgroundColor }}" id="variant-edit-basic">
+  <div class="row form-header" id="variant-edit-form">
+    <div class="stripes-bg">
+      <div class="col-xs-12 name">
+        <h3>EDIT VARIANT <span ng-bind="vm.variant.name">NAME</span></h3>
+      </div>
+    </div>
+  </div>
   <div class="row" ng-if="vm.showInstructions">
     <div class="col-xs-12">
       <div class="edit-instructions">

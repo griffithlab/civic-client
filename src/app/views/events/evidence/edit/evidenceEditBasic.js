@@ -18,6 +18,7 @@
   function EvidenceEditBasicController($scope,
                                        $stateParams,
                                        $q,
+                                       $document,
                                        Publications,
                                        PubchemTypeahead,
                                        Diseases,
@@ -55,6 +56,12 @@
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
+
+    // scroll to form header
+    $document.ready(function() {
+      var elem = document.getElementById('evidence-edit-form');
+      $document.scrollToElementAnimated(elem);
+    });
 
     vm.evidenceFields = [
       {

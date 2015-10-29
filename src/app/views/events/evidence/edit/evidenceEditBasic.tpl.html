@@ -1,4 +1,11 @@
 <div class="evidenceEditBasic {{ vm.styles.edit.editBackgroundColor }}" id="evidence-edit-basic">
+  <div class="row form-header" id="evidence-edit-form">
+    <div class="stripes-bg">
+      <div class="col-xs-12 name">
+        <h3>EDIT EVIDENCE ITEM <span ng-bind="vm.evidence.name">NAME</span></h3>
+      </div>
+    </div>
+  </div>
   <div class="row" ng-if="vm.showInstructions">
     <div class="col-xs-12">
       <div class="edit-instructions">

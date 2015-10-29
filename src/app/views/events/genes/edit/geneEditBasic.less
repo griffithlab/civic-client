@@ -5,8 +5,23 @@
 
 .geneEditBasic {
   .fullBleed();
-  padding-top: @contentPadding;
+  .form-header {
+    margin-bottom: 1em;
+    border-top: 1px solid #AAA;
 
+    #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
+    .stripes-bg {
+      .clearfix();
+      background-image: url('/assets/images/grey_stripes.png');
+    }
+    .name {
+      h3 {
+        display: block;
+        margin: 0;
+        padding: @contentPadding/2 0;
+      }
+    }
+  }
 
   .edit-instructions  {
     background-color: @pageBackground2;
