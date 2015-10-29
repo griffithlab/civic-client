@@ -19,6 +19,15 @@
   function eventItemController($scope, $state, _) {
     console.log('eventItemController called.');
     var vm = $scope.vm = {};
+    var params = $scope.event.state_params;
+
+    vm.entityNames = [];
+
+    if(_.has(params, 'gene')) {vm.entityNames.push(params.gene.name);}
+    if(_.has(params, 'variant')) {vm.entityNames.push(params.variant.name);}
+    if(_.has(params, 'evidence_item')) {vm.entityNames.push(params.evidence_item.name);}
+
+    vm.entityName = _.compact(vm.entityNames).join(' / ');
 
     vm.eventClick = function(event) {
       var subjectStates = {
