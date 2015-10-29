@@ -45,24 +45,11 @@
     .config(appConfig);
 
 // @ngInject
-  function appConfig($uiViewScrollProvider, formlyConfigProvider) {
-    // log all rootScope events to the console for debugging
-    // (this code should be commented out before building for production)
-    //$provide.decorator('$rootScope', function ($delegate) {
-    //  var _emit = $delegate.$emit;
-    //
-    //  $delegate.$emit = function () {
-    //    console.log.apply(console, arguments);
-    //    _emit.apply(this, arguments);
-    //  };
-    //
-    //  return $delegate;
-    //});
+  function appConfig($uiViewScrollProvider, $anchorScrollProvider, formlyConfigProvider) {
     window.apiCheck.disabled = false; // set to true in production
     formlyConfigProvider.removeChromeAutoCompletee = true;
-    //$uiViewScrollProvider.useAnchorScroll();
-
-    //$anchorScrollProvider.disableAutoScrolling()
+    $uiViewScrollProvider.useAnchorScroll();
+    $anchorScrollProvider.disableAutoScrolling();
   }
 
 // @ngInject
