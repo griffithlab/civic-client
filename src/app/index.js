@@ -68,8 +68,6 @@
 
     Security.requestCurrentUser();
 
-    // console.table($state.get());
-
     /*  ui-router debug logging */
     function message(to, toP, from, fromP) {
       return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
@@ -80,9 +78,6 @@
     });
     $rootScope.$on('$stateChangeSuccess', function (evt, to, toP, from, fromP) {
       console.log('Success: ' + message(to, toP, from, fromP));
-      //$timeout(function() {
-      //  $anchorScroll();
-      //}, 2000);
     });
     $rootScope.$on('$stateChangeError', function (evt, to, toP, from, fromP, err) {
       console.error('Error:   ' + message(to, toP, from, fromP), err);
