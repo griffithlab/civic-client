@@ -15,7 +15,8 @@
         rows: '=',
         showGeneCol: '=',
         showVariantCol: '=',
-        context: '='
+        context: '=',
+        rounded: '='
       },
       templateUrl: 'app/views/events/variants/summary/evidenceGrid.tpl.html',
       controller: 'EvidenceGridController'
