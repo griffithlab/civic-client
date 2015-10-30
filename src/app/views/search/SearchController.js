@@ -23,8 +23,8 @@
       //vm.searchResults = Search.post(vm.model);
       //vm.showEvidenceGrid = true;
       Search.post(vm.model)
-        .then(function(results) {
-          vm.searchResults = results;
+        .then(function(response) {
+          vm.searchResults = response.results;
           vm.showEvidenceGrid = true;
         });
     }

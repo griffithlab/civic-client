@@ -11,7 +11,7 @@
       {
         post: {
           method: 'POST',
-          isArray: true,
+          isArray: false,
           cache: false
         }
       });
