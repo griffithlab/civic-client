@@ -137,9 +137,10 @@
     </div>
   </div>
   <div class="row users-block">
-    <div class="col-sm-3 col-lg-2" ng-repeat="user in vm.users">
-      <user-card user="user" class="col-lg-2 col-sm-3"></user-card>
-    </div>
+    <user-card user="user"
+               class="col-xs-6 col-sm-3 col-lg-2"
+               ng-repeat="user in vm.users">
+    </user-card>
   </div>
   <div class="row">
     <div class="col-xs-12">

@@ -4,7 +4,39 @@
 @import 'src/app/styles/_mixins.less';
 
 .userCard {
+  .clearfix();
+  cursor: pointer;
   border-radius: @border-radius-large;
   border: 1px solid #AAA;
   background-color: #EFEFEF;
+  display: block;
+  min-height: 175px;
+  overflow: hidden;
+  margin-bottom: @contentPadding;
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    margin: @contentPadding/2 auto;
+    border-radius: @border-radius-small;
+    border: 1px solid #CCC;
+    overflow: hidden;
+  }
+
+  .info {
+    text-align: center;
+    .display-name {
+      font-weight: bold;
+      font-size: large;
+    }
+    .role {
+      font-style: oblique;
+    }
+    .last-seen-title {
+      font-weight: bold;
+    }
+    .last-seen {
+
+    }
+  }
 }

@@ -12,13 +12,20 @@
       scope: {
         user: '='
       },
-      controller: 'UserCardController',
+      controller: 'UserCardController as vm',
+      bindToController: true,
       templateUrl: 'components/directives/userCard.tpl.html'
     };
   }
 
   // @inject
-  function UserCardController() {
+  function UserCardController($state) {
     console.log('userCard controller called.');
+    var vm = this;
+
+    vm.userClick = function(id) {
+      $state.go('users.profile', { userId: id});
+    };
+
   }
 })();

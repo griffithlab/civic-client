@@ -1,3 +1,13 @@
-<div class="userCard">
-  Name: {{ user.display_name }}
+<div class="userCard" ng-click="vm.userClick(vm.user.id)">
+  <div class="avatar">
+    <img ng-src="{{vm.user.avatars.x64}}" width="64" height="64"/>
+  </div>
+  <div class="info">
+    <span class="display-name" ng-bind="vm.user.display_name">display name</span><br/>
+    <span class="role" ng-bind="vm.user.role">role</span><br/>
+    <span ng-if="vm.user.last_seen_at">
+      <span class="last-seen-title">Last seen:</span><br/>
+      <span class="last-seen" ng-bind="vm.user.last_seen_at | timeAgo">last seen</span>
+    </span>
+  </div>
 </div>
