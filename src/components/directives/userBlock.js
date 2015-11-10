@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('civic.events.common')
+  angular.module('civic.common')
     .directive('userBlock', userBlockDirective)
     .controller('UserBlockController', UserBlockController);
 
@@ -13,7 +13,7 @@
         user: '='
       },
       controller: 'UserBlockController',
-      templateUrl: 'app/views/events/common/userBlock.tpl.html'
+      templateUrl: 'components/directives/userBlock.tpl.html'
     };
   }
 

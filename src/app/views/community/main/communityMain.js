@@ -398,11 +398,35 @@
       ]
 
     };
+
     //Community.getLeaderboards()
     //  .then(function(response) {
     //    angular.copy(vm.leaderboards, response);
     //  });
 
+
+    function fetchUsers(mode, count, page, sorting, filters) {
+      var request;
+
+      request= {
+        mode: mode,
+        count: count,
+        page: page
+      };
+
+      if (filters.length > 0) {
+        _.each(filters, function(filter) {
+          request['filter[' + filter.field + ']'] = filter.term;
+        });
+      }
+
+      if (sorting.length > 0) {
+        _.each(sorting, function(sort) {
+          request['sorting[' + sort.field + ']'] = sort.direction;
+        });
+      }
+      return Datatables.query(request);
+    }
   }
 
 })();

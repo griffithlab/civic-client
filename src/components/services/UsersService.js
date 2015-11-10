@@ -25,6 +25,11 @@
           isArray: false,
           cache: false
         },
+        query: {
+          method: 'GET',
+          isArray: true,
+          cache: false
+        },
         update: {
           method: 'PATCH',
           params: {
@@ -45,11 +50,13 @@
   // @ngInject
   function UsersService(UsersResource) {
     var item = { };
+    var collection = [];
     var events = [];
 
     return {
       data: {
         item: item,
+        collection: collection,
         events: events
       },
       get: get,
@@ -61,6 +68,13 @@
       return UsersResource.get({userId: userId}).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+    function query(reqObj) {
+      return UsersResource.query(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response, collection);
           return response.$promise;
         });
     }
