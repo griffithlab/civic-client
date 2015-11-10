@@ -39,7 +39,8 @@
     'civic.browse',
     'civic.events',
     'civic.users',
-    'civic.add'
+    'civic.add',
+    'civic.community'
   ])
     .run(appRun)
     .config(appConfig);
@@ -85,7 +86,7 @@
 
   }
 
-// define top-level app modules & dependencies
+// define root modules & dependencies
   angular.module('civic.security', [
     'civic.security.authorization',
     'civic.security.service',
@@ -102,6 +103,7 @@
   angular.module('civic.browse', ['ui.grid.selection', 'ui.grid.pagination', 'ui.router']);
   angular.module('civic.search', ['ui.router']);
   angular.module('civic.activity', ['ui.router']);
+  angular.module('civic.community', ['ui.router']);
 
   angular.module('civic.users', [
     'ui.router',

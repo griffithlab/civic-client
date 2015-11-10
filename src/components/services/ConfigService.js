@@ -9,6 +9,10 @@
           state: 'collaborate'
         },
         {
+          label: 'Community',
+          state: 'community.main'
+        },
+        {
           label: 'Help',
           state: 'help'
         },
