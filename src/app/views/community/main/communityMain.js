@@ -34,30 +34,46 @@
                                    Community,
                                    Users) {
     var vm = this;
+
     vm.isEditor = Security.isEditor();
     vm.isAuthenticated = Security.isAuthenticated();
     vm.leaderboards = {};
     vm.users = [];
-
-    vm.filters = [];
-    vm.count = 20;
-    vm.total = Number();
-
-    vm.sorting = [{
-      field: 'display_name',
-      direction: 'asc'
-    }];
 
     Community.getLeaderboards()
       .then(function(response) {
         angular.copy(response, vm.leaderboards);
       });
 
-    fetchUsers(24,1,vm.sorting,vm.filters)
-      .then(function(response) {
-        angular.copy(response.result, vm.users);
-        angular.copy(response.total, vm.total);
-      });
+    // setup initial paging var and data update
+    vm.page = 1;
+    vm.count = 24;
+    vm.totalItems = Number();
+    vm.totalPages = Number();
+
+    $scope.$watch(function(){ return vm.totalItems; }, function() {
+      vm.totalPages = Math.ceil(vm.totalItems / vm.count);
+    });
+
+    vm.sorting = [{
+      field: 'display_name',
+      direction: 'asc'
+    }];
+    vm.filters = [];
+
+    updateData();
+
+    vm.pageChanged = function() {
+      updateData();
+    };
+
+    function updateData() {
+      fetchUsers(vm.count, vm.page, vm.sorting, vm.filters)
+        .then(function(data){
+          angular.copy(data.result, vm.users);
+          vm.totalItems = data.total;
+        });
+    }
 
     function fetchUsers(count, page, sorting, filters) {
       var request;
