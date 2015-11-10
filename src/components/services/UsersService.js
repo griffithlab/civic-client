@@ -27,7 +27,7 @@
         },
         query: {
           method: 'GET',
-          isArray: true,
+          isArray: false,
           cache: false
         },
         update: {
@@ -60,6 +60,7 @@
         events: events
       },
       get: get,
+      query: query,
       queryEvents: queryEvents,
       update: update
     };

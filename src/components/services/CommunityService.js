@@ -42,7 +42,7 @@
     function getLeaderboards() {
       return CommunityResource.leaderboards().$promise
         .then(function(response) {
-          angular.copy(leaderboards, response);
+          angular.copy(response, leaderboards);
           return response.$promise;
         });
     }

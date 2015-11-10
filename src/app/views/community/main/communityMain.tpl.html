@@ -32,13 +32,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="user in vm.leaderboards.comments">
+            <tr ng-repeat="row in vm.leaderboards.most_comments">
               <td class="user">
-                <user-block user="user"></user-block>
+                <user-block user="row.user"></user-block>
               </td>
-              <td class="count">
-                88
-              </td>
+              <td class="count" ng-bind="row.count"></td>
             </tr>
           </tbody>
         </table>
@@ -61,13 +59,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="user in vm.leaderboards.submissions">
+            <tr ng-repeat="row in vm.leaderboards.most_submissions">
               <td class="user">
-                <user-block user="user"></user-block>
+                <user-block user="row.user"></user-block>
               </td>
-              <td class="count">
-                88
-              </td>
+              <td class="count" ng-bind="row.count"></td>
             </tr>
           </tbody>
         </table>
@@ -81,22 +77,20 @@
         <table class="table table-condensed">
           <thead>
             <tr>
-              <th>
+              <th class="user">
                 User
               </th>
-              <th>
+              <th class="count">
                 Revisions
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="user in vm.leaderboards.suggested_changes">
+            <tr ng-repeat="row in vm.leaderboards.most_suggested_changes">
               <td class="user">
-                <user-block user="user"></user-block>
+                <user-block user="row.user"></user-block>
               </td>
-              <td class="count">
-                88
-              </td>
+              <td class="count" ng-bind="row.count"></td>
             </tr>
           </tbody>
         </table>
@@ -110,22 +104,20 @@
         <table class="table table-condensed">
           <thead>
             <tr>
-              <th>
+              <th class="user">
                 User
               </th>
-              <th>
+              <th class="count">
                 Moderations
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="user in vm.leaderboards.most_moderations">
+            <tr ng-repeat="row in vm.leaderboards.most_moderations">
               <td class="user">
-                <user-block user="user"></user-block>
+                <user-block user="row.user"></user-block>
               </td>
-              <td class="count">
-                88
-              </td>
+              <td class="count" ng-bind="row.count"></td>
             </tr>
           </tbody>
         </table>
@@ -145,9 +137,7 @@
     </div>
   </div>
   <div class="row users-block">
-    <div class="col-xs-12">
-      users
-    </div>
+    <user-card user="row.user" ng-repeat="row in vm.users" class="col-lg-2 col-sm-3"></user-card>
   </div>
 
   <!--<div class="row">-->
