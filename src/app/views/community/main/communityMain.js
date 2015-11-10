@@ -41,6 +41,8 @@
 
     vm.filters = [];
     vm.count = 20;
+    vm.total = Number();
+
     vm.sorting = [{
       field: 'display_name',
       direction: 'asc'
@@ -51,9 +53,10 @@
         angular.copy(response, vm.leaderboards);
       });
 
-    fetchUsers(10,1,vm.sorting,vm.filters)
+    fetchUsers(24,1,vm.sorting,vm.filters)
       .then(function(response) {
         angular.copy(response.result, vm.users);
+        angular.copy(response.total, vm.total);
       });
 
     function fetchUsers(count, page, sorting, filters) {

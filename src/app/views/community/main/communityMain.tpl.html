@@ -137,17 +137,13 @@
     </div>
   </div>
   <div class="row users-block">
-    <user-card user="row.user" ng-repeat="row in vm.users" class="col-lg-2 col-sm-3"></user-card>
+    <div class="col-sm-3 col-lg-2" ng-repeat="user in vm.users">
+      <user-card user="user" class="col-lg-2 col-sm-3"></user-card>
+    </div>
   </div>
-
-  <!--<div class="row">-->
-  <!--<div class="col-xs-6">-->
-  <!--<h4>Variant Group</h4>-->
-  <!--<pre ng-bind="vm.variantGroup | json"></pre>-->
-  <!--</div>-->
-  <!--<div class="col-xs-6">-->
-  <!--<h4>vm.options</h4>-->
-  <!--<pre ng-bind="vm.options | json"></pre>-->
-  <!--</div>-->
-  <!--</div>-->
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="vm.users|json"></pre>
+    </div>
+  </div>
 </div>
