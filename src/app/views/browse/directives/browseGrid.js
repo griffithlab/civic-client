@@ -39,8 +39,6 @@
       direction: 'asc'
     }];
 
-    ctrl.isFiltered = ctrl.filters.length > 0;
-
     $scope.$watch('ctrl.totalItems', function() {
       ctrl.totalPages = Math.ceil(ctrl.totalItems / pageCount);
     });

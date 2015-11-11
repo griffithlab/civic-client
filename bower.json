@@ -11,7 +11,7 @@
     "angular-bootstrap": "0.13.4",
     "angular-dialog-service": "~5.2.0",
     "lodash": "~3.3.1",
-    "angular-resource": "~1.2.29",
+    "angular-resource": "~1.4.7",
     "angular-timeago": "~0.1.6",
     "font-awesome": "~4.3.0",
     "angulartics": "~0.20.1",

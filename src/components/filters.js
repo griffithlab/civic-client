@@ -7,7 +7,8 @@
     .filter('capitalize', capitalizeFilter)
     .filter('decodeUri', decodeUri)
     .filter('ifEmpty', ifEmpty)
-    .filter('unsafe', unsafe);
+    .filter('unsafe', unsafe)
+    .filter('ordinal', ordinal);
 
   // @ngInject
   function labelifyFilter() {
@@ -76,5 +77,25 @@
 
   // @ngInject
   function unsafe($sce) { return $sce.trustAsHtml; }
+
+  // @ngInject
+  function ordinal () {
+    return function(input) {
+      var num = parseInt(input, 10);
+      return isNaN(num) ? input : num + suffix(num);
+    };
+
+    function suffix (n) {
+      return Math.floor(n / 10) === 1
+        ? 'th'
+        : (n % 10 === 1
+        ? 'st'
+        : (n % 10 === 2
+        ? 'nd'
+        : (n % 10 === 3
+        ? 'rd'
+        : 'th')));
+    }
+  }
 
 })();

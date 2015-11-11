@@ -1,0 +1,197 @@
+<div class="communityMain">
+  <div class="row">
+    <div class="gradient-bg">
+      <div class="col-xs-12 title stripes-bg">
+        <h3>
+          <span class="entity-action">COMMUNITY</span>
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="sub-title">Leaderboards</h3>
+    </div>
+  </div>
+
+  <div class="row leaderboards-block">
+
+    <!-- COMMENTS LEADERBOARD -->
+    <div class="col-xs-6 col-lg-3">
+      <div class="leaderboard">
+        <h4>Top Commentors</h4>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="user">
+                User
+              </th>
+              <th class="count">
+                Comments
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in vm.leaderboards.most_comments">
+              <td class="user">
+                <user-block user="row.user"></user-block>
+              </td>
+              <td class="count" ng-bind="row.count"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SUBMISSIONS LEADERBOARD -->
+    <div class="col-xs-6 col-lg-3">
+      <div class="leaderboard">
+        <h4>Top Submittors</h4>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="user">
+                User
+              </th>
+              <th class="count">
+                Submissions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in vm.leaderboards.most_submissions">
+              <td class="user">
+                <user-block user="row.user"></user-block>
+              </td>
+              <td class="count" ng-bind="row.count"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REVISIONS LEADERBOARD -->
+    <div class="col-xs-6 col-lg-3">
+      <div class="leaderboard">
+        <h4>Top Revisors</h4>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="user">
+                User
+              </th>
+              <th class="count">
+                Revisions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in vm.leaderboards.most_suggested_changes">
+              <td class="user">
+                <user-block user="row.user"></user-block>
+              </td>
+              <td class="count" ng-bind="row.count"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODERATIONS LEADERBOARD -->
+    <div class="col-xs-6 col-lg-3">
+      <div class="leaderboard">
+        <h4>Top Moderators</h4>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="user">
+                User
+              </th>
+              <th class="count">
+                Moderations
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in vm.leaderboards.most_moderations">
+              <td class="user">
+                <user-block user="row.user"></user-block>
+              </td>
+              <td class="count" ng-bind="row.count"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+    <!--<pre ng-bind="vm.leaderboards.comments|json">-->
+    <!---->
+    <!--</pre>-->
+    <!--</div>-->
+    <!--</div>-->
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="sub-title">Users</h3>
+    </div>
+  </div>
+  <div class="row users-form">
+    <div class="col-xs-4">
+      <form novalidate class="form-horizontal">
+        <formly-form
+          model="vm.model"
+          fields="vm.filterFields"
+          form="vm.form"
+          options="vm.options">
+        </formly-form>
+      </form>
+    </div>
+    <div class="col-xs-4">
+      <form novalidate class="form-horizontal">
+        <formly-form
+          model="vm.model"
+          fields="vm.limitFields"
+          form="vm.form"
+          options="vm.options2">
+        </formly-form>
+      </form>
+    </div>
+    <div class="col-xs-4">
+      <form novalidate class="form-horizontal">
+        <formly-form
+          model="vm.model"
+          fields="vm.sortFields"
+          form="vm.form"
+          options="vm.options">
+        </formly-form>
+      </form>
+    </div>
+  </div>
+  <div class="row users-block">
+    <user-card user="user"
+               class="col-xs-6 col-sm-3 col-lg-2"
+               ng-repeat="user in vm.users">
+    </user-card>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 text-center users-pagination">
+      <pagination
+        class="pagination-sm"
+        ng-change="vm.pageChanged()"
+        ng-model="vm.page"
+        items-per-page="vm.count"
+        max-size="15"
+        boundary-links="true"
+        rotate="false"
+        align="true"
+        total-items="vm.totalItems"
+        direction-links="true">
+      </pagination>
+      <p class="page-info small">
+        {{ vm.totalItems }} {{ vm.isFiltered ? "filtered" : "total" }} {{ vm.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
+        Page {{ vm.page }} of {{ vm.totalPages }}
+      </p>
+    </div>
+  </div>
+</div>
