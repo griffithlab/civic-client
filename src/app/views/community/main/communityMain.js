@@ -137,7 +137,7 @@
 
       var sorting = [{
         field: vm.model.sort_by,
-        direction: 'asc'
+        direction: 'desc'
       }];
       fetchUsers(vm.count, vm.page, sorting, filters)
         .then(function(data){
@@ -162,7 +162,7 @@
 
       if (sorting.length > 0) {
         _.each(sorting, function(sort) {
-          request['sorting[' + sort.field + ']'] = 'asc';
+          request['sorting[' + sort.field + ']'] = 'desc';
         });
       }
       return Users.query(request);
