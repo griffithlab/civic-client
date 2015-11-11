@@ -6,15 +6,25 @@
 
   // @ngInject
   function SearchResource($resource) {
-    var SearchService = $resource('/api/evidence_items/search',
-      {},
+    var SearchService = $resource('/api/evidence_items/search/:token',
+      {
+        token: '@token'
+      },
       {
         post: {
           method: 'POST',
           isArray: false,
           cache: false
         }
-      });
+      },
+      {
+        get: {
+          method: 'GET',
+          isArray: false,
+          cache: false
+        }
+      }
+    );
 
     return SearchService;
   }
@@ -25,12 +35,23 @@
 
     return {
       results: results,
-      post: post
+      post: post,
+      get: get
     };
 
     // @ngInject
     function post(reqObj) {
+      reqObj.save = true;
       return SearchResource.post(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response, results);
+          return response.$promise;
+        });
+    }
+
+    // @ngInject
+    function get(token) {
+      return SearchResource.get({token: token}).$promise
         .then(function(response) {
           angular.copy(response, results);
           return response.$promise;

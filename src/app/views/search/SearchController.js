@@ -4,7 +4,7 @@
     .controller('SearchController', SearchController);
 
   // @ngInject
-  function SearchController($scope, $log, _, Search) {
+  function SearchController($scope, $state, $stateParams, $log, $location, _, Search) {
     var vm = $scope.vm = {};
 
     // function assignment
@@ -26,24 +26,39 @@
         .then(function(response) {
           vm.searchResults = response.results;
           vm.showEvidenceGrid = true;
+          if(_.has(response, 'token') && !_.isNull(response.token)) {
+            $state.transitionTo('search', { token: response.token}, {notify: false});
+          }
         });
     }
 
     vm.buttonLabel = 'Search Evidence Items';
 
     function init() {
-      vm.model = {
-        operator: 'AND',
-        queries: [
-          {
-            field: '',
-            condition: {
-              name: undefined,
-              parameters: []
+      if(_.has($stateParams, 'token') && !_.isEmpty($stateParams.token)){
+        Search.get($stateParams.token)
+          .then(function(response) {
+            vm.model.operator = response.params.operator;
+            vm.model.queries= response.params.queries;
+            vm.searchResults = response.results;
+            vm.showEvidenceGrid = true;
+          });
+      } else {
+        vm.model = {
+          operator: 'AND',
+          queries: [
+            {
+              field: '',
+              condition: {
+                name: undefined,
+                parameters: []
+              }
             }
-          }
-        ]
-      };
+          ]
+        };
+      }
+
+
 
       vm.operatorField = [
         {

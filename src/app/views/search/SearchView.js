@@ -9,7 +9,8 @@
     console.log('SearchView called.');
     $stateProvider
       .state('search', {
-        url: '/search',
+        url: '/search/:token',
+        reloadOnSearch: false,
         controller: 'SearchController',
         templateUrl: 'app/views/search/search.tpl.html',
         data: {
