@@ -10,7 +10,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <h3>LEADERBOARDS</h3>
+      <h3 class="sub-title">Leaderboards</h3>
     </div>
   </div>
 
@@ -133,7 +133,39 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <h3>USERS</h3>
+      <h3 class="sub-title">Users</h3>
+    </div>
+  </div>
+  <div class="row users-form">
+    <div class="col-xs-4">
+      <form novalidate class="form-horizontal">
+        <formly-form
+          model="vm.model"
+          fields="vm.filterFields"
+          form="vm.form"
+          options="vm.options">
+        </formly-form>
+      </form>
+    </div>
+    <div class="col-xs-4">
+      <form novalidate class="form-horizontal">
+        <formly-form
+          model="vm.model"
+          fields="vm.limitFields"
+          form="vm.form"
+          options="vm.options2">
+        </formly-form>
+      </form>
+    </div>
+    <div class="col-xs-4">
+      <form novalidate class="form-horizontal">
+        <formly-form
+          model="vm.model"
+          fields="vm.sortFields"
+          form="vm.form"
+          options="vm.options">
+        </formly-form>
+      </form>
     </div>
   </div>
   <div class="row users-block">

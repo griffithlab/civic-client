@@ -55,11 +55,73 @@
       vm.totalPages = Math.ceil(vm.totalItems / vm.count);
     });
 
-    vm.sorting = [{
-      field: 'display_name',
-      direction: 'asc'
-    }];
-    vm.filters = [];
+    vm.model = {
+      sort_by: 'display_name',
+      limit: 'all_time',
+      filter: ''
+    };
+
+    vm.filterFields = [
+      {
+        key: 'filter',
+        type: 'input',
+        templateOptions: {
+          label: 'Find User',
+          required: false
+        },
+        watcher: {
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            updateData();
+          }
+        }
+      }
+    ];
+    vm.limitFields = [
+      {
+        key: 'limit',
+        type: 'select',
+        templateOptions: {
+          label: 'Limit To',
+          required: false,
+          options: [
+            // this_week, this_month, this_year, all_time
+            {name: 'All time', value: 'all_time'},
+            {name: 'This week', value: 'this_week'},
+            {name: 'This month', value: 'this_month'},
+            {name: 'This year', value: 'this_year'}
+          ]
+        },
+        watcher: {
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            updateData();
+          }
+        }
+      }
+    ];
+
+    vm.sortFields = [
+      {
+        key: 'sort_by',
+        type: 'select',
+        templateOptions: {
+          label: 'Sort By',
+          required: false,
+          options: [
+            // last_seen, recent_activity, join_date, most_active
+            {name: 'Display name', value: 'display_name'},
+            {name: 'Last seen', value: 'last_seen'},
+            {name: 'Recent activity', value: 'recent_activity'},
+            {name: 'Join date', value: 'join_date'},
+            {name: 'Most active', value: 'most_active'}
+          ]
+        },
+        watcher: {
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            updateData();
+          }
+        }
+      }
+    ];
 
     updateData();
 
@@ -68,7 +130,16 @@
     };
 
     function updateData() {
-      fetchUsers(vm.count, vm.page, vm.sorting, vm.filters)
+      var filters = [{
+        field: 'display_name',
+        term: vm.model.filter
+      }];
+
+      var sorting = [{
+        field: vm.model.sort_by,
+        direction: 'asc'
+      }];
+      fetchUsers(vm.count, vm.page, sorting, filters)
         .then(function(data){
           angular.copy(data.result, vm.users);
           vm.totalItems = data.total;
@@ -91,7 +162,7 @@
 
       if (sorting.length > 0) {
         _.each(sorting, function(sort) {
-          request['sorting[' + sort.field + ']'] = sort.direction;
+          request['sorting[' + sort.field + ']'] = 'asc';
         });
       }
       return Users.query(request);
