@@ -4,6 +4,12 @@
     <div class="row button-row">
       <div class="col-xs-4">
         <a type="button"
+           class="btn btn-sm btn-default btn-block btn-subhead-default"
+           ng-disabled="$state.includes('browse')"
+           ui-sref="browse.variants">Browse</a>
+      </div>
+      <div class="col-xs-4">
+        <a type="button"
            class="btn btn-default btn-sm btn-block btn-subhead-default"
            ng-disabled="$state.includes('search')"
            ui-sref="search">Search</a>
@@ -13,12 +19,6 @@
            class="btn btn-default btn-sm btn-block btn-subhead-default"
            ng-disabled="$state.includes('activity')"
            ui-sref="activity">Activity</a>
-      </div>
-      <div class="col-xs-4">
-        <a type="button"
-           class="btn btn-sm btn-default btn-block btn-subhead-default"
-           ng-disabled="$state.includes('browse')"
-           ui-sref="browse.variants">Browse</a>
       </div>
     </div>
   </div>
