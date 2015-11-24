@@ -1,14 +1,13 @@
 (function() {
   'use strict';
   angular.module('civic.common')
-    .directive('headerSearch', headerSearch)
-    .controller('HeaderSearchController', HeaderSearchController);
+    .directive('headerSearch', headerSearch);
 
   function headerSearch() {
     return {
       restrict: 'E',
       templateUrl: 'components/directives/headerSearch.tpl.html',
-      controller: 'HeaderSearchController'
+      controller: HeaderSearchController
     };
 
   }
@@ -16,8 +15,7 @@
   // @ngInject
   function HeaderSearchController($scope, Security) {
     var vm = $scope.vm = {};
-    vm.isEditor= Security.isEditor;
     vm.isAuthenticated = Security.isAuthenticated;
-    vm.test = "test";
+    vm.isEditor = Security.isEditor;
   }
 })();
