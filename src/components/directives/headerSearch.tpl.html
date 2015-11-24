@@ -2,23 +2,32 @@
   <quick-search class="col-xs-5 col-md-12"></quick-search>
   <div class="col-xs-7 col-md-12">
     <div class="row button-row">
-      <div class="col-xs-4">
+      <div class="col-xs-3">
         <a type="button"
            class="btn btn-sm btn-default btn-block btn-subhead-default"
            ng-disabled="$state.includes('browse')"
            ui-sref="browse.variants">Browse</a>
       </div>
-      <div class="col-xs-4">
+
+      <div class="col-xs-3">
         <a type="button"
            class="btn btn-default btn-sm btn-block btn-subhead-default"
            ng-disabled="$state.includes('search')"
            ui-sref="search">Search</a>
       </div>
-      <div class="col-xs-4">
+
+      <div class="col-xs-3">
         <a type="button"
            class="btn btn-default btn-sm btn-block btn-subhead-default"
            ng-disabled="$state.includes('activity')"
            ui-sref="activity">Activity</a>
+      </div>
+
+      <div class="col-xs-3">
+        <a type="button"
+           class="btn btn-sm btn-subhead-emphasized btn-block"
+           ng-disabled="!vm.isAuthenticated()"
+           ui-sref="add.evidence.basic">Add</a>
       </div>
     </div>
   </div>
