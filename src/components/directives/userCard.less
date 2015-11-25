@@ -3,17 +3,34 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
+@curatorColor: #91A0A9;
+@editorColor: #616EB2;
+@adminColor: #08B1E6;
+
 .userCard {
   .clearfix();
   cursor: pointer;
   border-radius: @border-radius-large;
-  border: 1px solid #AAA;
   background-color: #EFEFEF;
   display: block;
   min-height: 225px;
   overflow: hidden;
   margin-bottom: @contentPadding;
   padding: 0 @contentPadding/2;
+
+  // borders
+  border-width: 2px 2px 4px 2px;
+  border-style: solid;
+
+  &.curator {
+    border-color: @curatorColor;
+  }
+  &.editor {
+    border-color: @editorColor;
+  }
+  &.admin {
+    border-color: @adminColor;
+  }
 
   .avatar {
     width: 64px;
@@ -32,6 +49,15 @@
     }
     .role {
       font-style: oblique;
+      &.curator {
+        color: @curatorColor;
+      }
+      &.editor {
+        color: @editorColor;
+      }
+      &.admin {
+        color: @adminColor;
+      }
     }
     .last-seen-title {
       font-weight: bold;
