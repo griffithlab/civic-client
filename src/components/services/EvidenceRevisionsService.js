@@ -236,7 +236,7 @@
     function submitRevision(reqObj) {
       return EvidenceRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
-          cache.remove('/api/evidence_items/' + reqObj.id + '/suggested_changes');
+          cache.remove('/api/evidence_items/' + reqObj.id + '/suggested_changes/');
           return $q.when(response);
         },
         function(error) { //fail
