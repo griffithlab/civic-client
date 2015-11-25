@@ -55,11 +55,7 @@
       vm.totalPages = Math.ceil(vm.totalItems / vm.count);
     });
 
-    vm.model = {
-      sort_by: 'display_name',
-      limit: 'all_time',
-      filter: ''
-    };
+    vm.model = {};
 
     vm.filterFields = [
       {
@@ -80,6 +76,7 @@
       {
         key: 'limit',
         type: 'select',
+        defaultValue: 'all_time',
         templateOptions: {
           label: 'Limit To',
           required: false,
@@ -103,16 +100,41 @@
       {
         key: 'sort_by',
         type: 'select',
+        defaultValue: 'last_seen',
         templateOptions: {
           label: 'Sort By',
           required: false,
           options: [
             // last_seen, recent_activity, join_date, most_active
-            {name: 'Display name', value: 'display_name'},
-            {name: 'Last seen', value: 'last_seen'},
-            {name: 'Recent activity', value: 'recent_activity'},
-            {name: 'Join date', value: 'join_date'},
-            {name: 'Most active', value: 'most_active'}
+            {name: 'Display name', value: 'display_name', sort_order: 'asc'},
+            {name: 'Last seen', value: 'last_seen', sort_order: 'asc'},
+            {name: 'Recent activity', value: 'recent_activity', sort_order: 'asc'},
+            {name: 'Join date', value: 'join_date', sort_order: 'desc'},
+            {name: 'Most active', value: 'most_active', sort_order: 'desc'}
+          ]
+        },
+        watcher: {
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(!_.isUndefined(newValue)) {
+              vm.model.sort_order = _.find(field.templateOptions.options, {value: newValue}).sort_order;
+            }
+            updateData();
+          }
+        }
+      }
+    ];
+
+    vm.sortOrderFields = [
+      {
+        key: 'sort_order',
+        type: 'select',
+        defaultValue: 'desc',
+        templateOptions: {
+          label: 'Sort Order',
+          required: false,
+          options: [
+            {name: 'Ascending', value: 'asc'},
+            {name: 'Descending', value: 'desc'}
           ]
         },
         watcher: {
@@ -137,7 +159,7 @@
 
       var sorting = [{
         field: vm.model.sort_by,
-        direction: 'desc'
+        direction: vm.model.sort_order
       }];
       fetchUsers(vm.count, vm.page, sorting, filters)
         .then(function(data){
@@ -162,7 +184,7 @@
 
       if (sorting.length > 0) {
         _.each(sorting, function(sort) {
-          request['sorting[' + sort.field + ']'] = 'desc';
+          request['sorting[' + sort.field + ']'] = sort.direction;
         });
       }
       return Users.query(request);

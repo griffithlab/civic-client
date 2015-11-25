@@ -137,17 +137,17 @@
     </div>
   </div>
   <div class="row users-form">
-    <div class="col-xs-4">
+    <div class="col-xs-3">
       <form novalidate class="form-horizontal">
         <formly-form
           model="vm.model"
           fields="vm.filterFields"
           form="vm.form"
-          options="vm.options">
+          options="vm.options1">
         </formly-form>
       </form>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
       <form novalidate class="form-horizontal">
         <formly-form
           model="vm.model"
@@ -157,13 +157,23 @@
         </formly-form>
       </form>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
       <form novalidate class="form-horizontal">
         <formly-form
           model="vm.model"
           fields="vm.sortFields"
           form="vm.form"
-          options="vm.options">
+          options="vm.options3">
+        </formly-form>
+      </form>
+    </div>
+    <div class="col-xs-3">
+      <form novalidate class="form-horizontal">
+        <formly-form
+          model="vm.model"
+          fields="vm.sortOrderFields"
+          form="vm.form"
+          options="vm.options4">
         </formly-form>
       </form>
     </div>
