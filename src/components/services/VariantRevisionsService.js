@@ -187,7 +187,7 @@
     function submitRevision(reqObj) {
       return VariantRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
-          cache.remove('/api/variants/' + reqObj.id + '/suggested_changes');
+          cache.remove('/api/variants/' + reqObj.id + '/suggested_changes/');
           return $q.when(response);
         },
         function(error) { //fail
