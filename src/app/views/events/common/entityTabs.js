@@ -56,8 +56,8 @@
       return word.toUpperCase();
     }).join(' ');
 
-    vm.users = {};
-    vm.users.last_modified = entityViewModel.data.item.last_modified;
+    vm.actions = {};
+    vm.actions = entityViewModel.data.item.lifecycle_actions;
 
     vm.anchorId = _.kebabCase(vm.type);
 
@@ -65,8 +65,8 @@
       vm.name = name;
     });
 
-    scope.$watch('entityViewModel.data.item.last_modified', function(last_modified) {
-      vm.users.last_modified = last_modified;
+    scope.$watchCollection('entityViewModel.data.item.lifecycle_actions', function(lifecycle_actions) {
+      vm.actions = lifecycle_actions;
     });
 
     // scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');

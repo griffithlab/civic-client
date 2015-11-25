@@ -9,7 +9,7 @@
     return /* @ngInject */ {
       restrict: 'E',
       scope: {
-        users: '='
+        actions: '='
       },
       controller: 'ActionBlockController',
       templateUrl: 'app/views/events/common/actionBlock.tpl.html'

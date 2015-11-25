@@ -1,17 +1,17 @@
 <div class="actionBlock">
   <div class="action-block view-pageBackground"
-       ng-repeat="(action, user) in users">
-  <span class="action-label small">
-    <strong>{{ action | labelify }}</strong>
-  </span>
+       ng-repeat="(action, details) in actions">
+    <span class="action-label small">
+      <strong>{{ action | labelify }}</strong>
+    </span>
 
-  <span class="action-date small">
-    {{ user.timestamp | timeAgo }}
-  </span>
+    <span class="action-date small">
+      {{ details.timestamp | timeAgo }}
+    </span>
 
-  <span class="user-button small">
-    by
-    <user-block user="user.user"></user-block>
-  </span>
+    <span class="user-button small">
+      by
+      <user-block user="details.user"></user-block>
+    </span>
   </div>
 </div>
