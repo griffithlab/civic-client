@@ -84,7 +84,7 @@
     gridOptions.pathways = {
       data: $scope.geneInfo.pathway,
       enableFiltering: true,
-      enableColumnxsMenus: false,
+      enableColumnMenus: false,
       enableSorting: true,
       minRowsToShow: 7,
       filter: {

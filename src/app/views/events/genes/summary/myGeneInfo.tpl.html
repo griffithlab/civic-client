@@ -25,6 +25,22 @@
       <td class="value" ng-bind="geneInfo.alias | arrayToList "></td>
     </tr>
     <tr>
+      <td class="name">Chromosome:</td>
+      <td class="value">
+        <!-- Chromosome -->
+        <span ng-bind="geneInfo.genomic_pos.chr"></span>
+        &nbsp;&nbsp;
+        <strong>Start:</strong>
+        <span ng-bind="geneInfo.genomic_pos.start"></span>
+        &nbsp;&nbsp;
+        <strong>End:</strong>
+        <span ng-bind="geneInfo.genomic_pos.end"></span>
+        &nbsp;&nbsp;
+        <strong>Strand:</strong>
+        <span ng-bind="geneInfo.genomic_pos.strand"></span>
+      </td>
+    </tr>
+    <tr>
       <td class="name">Protein Domains:</td>
       <td class="value" ng-bind-html="geneInfo.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true | unsafe"></td>
     </tr>
