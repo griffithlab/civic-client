@@ -12,7 +12,7 @@
     $stateProvider
       .state('community.main', {
         url: '/main',
-        templateUrl: 'app/views/community/main/CommunityMain.tpl.html',
+        templateUrl: 'app/views/community/main/communityMain.tpl.html',
         resolve: {
           Users: 'Users',
           Community: 'Community'
