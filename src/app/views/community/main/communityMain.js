@@ -108,7 +108,7 @@
             // last_seen, recent_activity, join_date, most_active
             {name: 'Display name', value: 'display_name', sort_order: 'asc'},
             {name: 'Last seen', value: 'last_seen', sort_order: 'asc'},
-            {name: 'Recent activity', value: 'recent_activity', sort_order: 'asc'},
+            {name: 'Recent activity', value: 'recent_activity', sort_order: 'desc'},
             {name: 'Join date', value: 'join_date', sort_order: 'desc'},
             {name: 'Most active', value: 'most_active', sort_order: 'desc'}
           ]
