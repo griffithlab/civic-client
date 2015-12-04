@@ -110,7 +110,11 @@
     );
   }
 
-  function VariantRevisionsService(VariantRevisionsResource, Variants, $cacheFactory, $q) {
+  function VariantRevisionsService(VariantRevisionsResource,
+                                   Variants,
+                                   Genes,
+                                   $cacheFactory,
+                                   $q) {
     // fetch variants cache, need to delete variant record when revision is submitted
     var cache = $cacheFactory.get('$http');
 
@@ -196,14 +200,19 @@
     }
 
     function acceptRevision(variantId, revisionId) {
-      return VariantRevisionsResource.acceptRevision({ variantId: variantId, revisionId: revisionId }).$promise.then(
+      return VariantRevisionsResource.acceptRevision({
+        variantId: variantId,
+        revisionId: revisionId
+      }).$promise.then(
         function(response) {
-          cache.remove('/api/variants/' + variantId + '/suggested_changes');
+          cache.remove('/api/variants/' + variantId + '/suggested_changes/');
           query(variantId);
           cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId);
           get(variantId, revisionId);
           cache.remove('/api/variants/' + variantId );
           Variants.get(variantId);
+          cache.remove('/api/genes/' + response.gene_id + '/variants');
+          Genes.queryVariants(response.gene_id);
           return $q.when(response);
         },
         function(error) {

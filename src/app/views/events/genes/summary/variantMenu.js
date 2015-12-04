@@ -32,6 +32,13 @@
     });
 
     $scope.$watchCollection(
+      function() { return Genes.data.variants; },
+      function(variants){
+        $scope.variants = variants;
+      });
+
+
+    $scope.$watchCollection(
       function() { return Genes.data.variantGroups; },
       function(variantGroups){
         $scope.variantGroups = _.map(variantGroups, function(vg){
