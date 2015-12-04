@@ -3,10 +3,14 @@
     <colgroup>
       <col width="30%"/>
       <col width="70%"/>
+      <col width="21"/>
     </colgroup>
     <tr>
       <td class="name">Name:</td>
       <td class="value" ng-bind="geneInfo.name"></td>
+      <td class="mygenelogo" rowspan="7"">
+        <img src="assets/images/mygeneinfo_logo.png" width="21" height="116"/>
+      </td>
     </tr>
     <tr>
       <td class="name">Entrez Symbol:</td>
@@ -50,7 +54,7 @@
     </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>
+      <td colspan="2">
         <button class="btn btn-block btn-default view-gene-details" ng-click="ctrl.openDialog()">View Full Details from MyGene.info</button>
       </td>
     </tr>

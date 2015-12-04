@@ -3,6 +3,9 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .myGeneInfo {
+  border: 1px solid #2c7ccb !important;
+  border-radius: @border-radius-large;
+  background-color: #edf4fa;
   td .more {
     font-style: oblique;
     color: #999;
@@ -11,18 +14,15 @@
     text-align: right;
     font-weight: bold;
   }
-
   .table {
     margin-bottom: 0 !important;
   }
-
 }
 
 .ngdialog.ngdialog-theme-default .ngdialog-content {
   .pathways {
     margin-top: @contentPadding;
   }
-
 
   @media (max-width: @screen-sm-min) {
     width: 100%;
