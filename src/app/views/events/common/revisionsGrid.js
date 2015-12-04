@@ -51,10 +51,12 @@
           allowCellFocus: false,
           width: '5%'
         },
-        { name: 'user.username',
+        { name: 'user',
           displayName: 'Submitted by',
           enableFiltering: true,
           allowCellFocus: false,
+          cellFilter: 'user.display_name',
+          cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
