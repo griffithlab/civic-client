@@ -15,16 +15,24 @@
 
     border: none;
     position: relative;
+    line-height: 20px;
+
     .avatar {
       width: 14px;
       height: 14px;
       position: absolute;
-      top: 2px;
-      left: 2px;
+      top: 4px;
+      left: 4px;
       display: inline-block;
-      line-height: 1;
       border-radius: 3px;
       overflow: hidden;
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 14px;
+        height: 14px;
+      }
     }
   }
 
@@ -49,6 +57,6 @@
   .username {
     font-weight: bold;
     display: inline-block;
-    margin-left: 18px;
+    margin-left: 20px;
   }
 }
