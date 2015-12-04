@@ -126,6 +126,15 @@
               </td>
             </tr>
           </tbody>
+          <tbody ng-if="isAuthenticated() && !isEdit">
+            <tr>
+              <td colspan="2">
+                <a class="btn btn-default btn-xs btn-block" ng-click="editClick()">
+                  Edit Coordinates
+                </a>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

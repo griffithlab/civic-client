@@ -14,7 +14,12 @@
     });
 
   //@ngInject
-  function VariantSummaryController($scope, $state, $stateParams, Security, Variants, VariantsViewOptions) {
+  function VariantSummaryController($scope,
+                                    $state,
+                                    $stateParams,
+                                    Security,
+                                    Variants,
+                                    VariantsViewOptions) {
     $scope.isAuthenticated = Security.isAuthenticated;
     $scope.isEdit = $state.includes('**.edit.**');
     $scope.stateParams = $stateParams;
@@ -29,6 +34,12 @@
 
     $scope.VariantsViewOptions = VariantsViewOptions;
     $scope.backgroundColor = VariantsViewOptions.styles.view.backgroundColor;
+
+    $scope.editClick = function() {
+      if (Security.isAuthenticated()) {
+        $state.go('events.genes.summary.variants.edit.basic', $stateParams);
+      }
+    }
 
   }
 })();
