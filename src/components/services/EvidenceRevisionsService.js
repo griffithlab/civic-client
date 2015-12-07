@@ -252,7 +252,7 @@
           cache.remove('/api/variants/' + variantId + '/evidence_items');
           Variants.queryEvidence(variantId);
           // refresh suggested changes
-          cache.remove('/api/evidence_items/' + evidenceId + '/suggested_changes');
+          cache.remove('/api/evidence_items/' + evidenceId + '/suggested_changes/');
           query(evidenceId);
           // refresh revision
           cache.remove('/api/evidence_items/' + evidenceId + '/suggested_changes/' + revisionId);
@@ -269,10 +269,10 @@
     function rejectRevision(evidenceId, revisionId) {
       return EvidenceRevisionsResource.rejectRevision({ evidenceId: evidenceId, revisionId: revisionId }).$promise.then(
         function(response) {
-          cache.remove('/api/evidence_items/' + response.id + '/suggested_changes');
-          queryFresh(evidenceId);
+          cache.remove('/api/evidence_items/' + response.id + '/suggested_changes/');
+          query(evidenceId);
           cache.remove('/api/evidence_items/' + response.id + '/suggested_changes/' + revisionId);
-          getFresh(evidenceId, revisionId);
+          get(evidenceId, revisionId);
           return $q.when(response);
         },
         function(error) {

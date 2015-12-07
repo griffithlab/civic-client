@@ -205,12 +205,19 @@
         revisionId: revisionId
       }).$promise.then(
         function(response) {
-          cache.remove('/api/variants/' + variantId + '/suggested_changes/');
-          query(variantId);
-          cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId);
-          get(variantId, revisionId);
+          // flush variant cache and refresh
           cache.remove('/api/variants/' + variantId );
           Variants.get(variantId);
+
+          // flush variant suggested_changes and refresh
+          cache.remove('/api/variants/' + variantId + '/suggested_changes/');
+          query(variantId);
+
+          // flush revision and refresh
+          cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId);
+          get(variantId, revisionId);
+
+          // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + response.gene_id + '/variants');
           Genes.queryVariants(response.gene_id);
           return $q.when(response);
@@ -223,10 +230,14 @@
     function rejectRevision(variantId, revisionId) {
       return VariantRevisionsResource.rejectRevision({ variantId: variantId, revisionId: revisionId }).$promise.then(
         function(response) {
-          cache.remove('/api/variants/' + response.id + '/suggested_changes');
+          // flush variant suggested_changes and refresh
+          cache.remove('/api/variants/' + variantId + '/suggested_changes/');
           query(variantId);
-          cache.remove('/api/variants/' + response.id + '/suggested_changes/' + revisionId);
+
+          // flush revision and refresh
+          cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId);
           get(variantId, revisionId);
+
           return $q.when(response);
         },
         function(error) {

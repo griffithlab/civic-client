@@ -198,11 +198,15 @@
     function acceptRevision(variantGroupId, revisionId) {
       return VariantGroupRevisionsResource.acceptRevision({ variantGroupId: variantGroupId, revisionId: revisionId }).$promise.then(
         function(response) {
-          cache.remove('/api/variant_groups/' + variantGroupId + '/suggested_changes');
-          cache.remove('/api/variant_groups/' + variantGroupId + '/suggested_changes/' + revisionId);
-          cache.remove('/api/variant_groups/' + variantGroupId );
+          cache.remove('/api/variant_groups/' + variantGroupId + '/suggested_changes/');
           query(variantGroupId);
+          cache.remove('/api/variant_groups/' + variantGroupId + '/suggested_changes/' + revisionId);
           get(variantGroupId, revisionId);
+          cache.remove('/api/variant_groups/' + variantGroupId );
+          // TODO: ensure that gene_id is returned in response, uncomment gene cache flush
+          //cache.remove('/api/genes/' + response.gene_id + '/variant_groups');
+          //Genes.queryVariantGroups(response.gene_id);
+
           VariantGroups.get(variantGroupId);
           return $q.when(response);
         },
@@ -213,7 +217,7 @@
     function rejectRevision(variantGroupId, revisionId) {
       return VariantGroupRevisionsResource.rejectRevision({ variantGroupId: variantGroupId, revisionId: revisionId }).$promise.then(
         function(response) {
-          cache.remove('/api/variant_groups/' + response.id + '/suggested_changes');
+          cache.remove('/api/variant_groups/' + response.id + '/suggested_changes/');
           query(variantGroupId);
           cache.remove('/api/variant_groups/' + response.id + '/suggested_changes/' + revisionId);
           get(variantGroupId, revisionId);

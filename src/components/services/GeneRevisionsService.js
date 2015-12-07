@@ -199,7 +199,7 @@
     function acceptRevision(geneId, revisionId) {
       return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise.then(
         function(response) {
-          cache.remove('/api/genes/' + geneId + '/suggested_changes');
+          cache.remove('/api/genes/' + geneId + '/suggested_changes/');
           query(geneId);
           cache.remove('/api/genes/' + geneId + '/suggested_changes/' + revisionId);
           get(geneId, revisionId);
@@ -214,7 +214,7 @@
     function rejectRevision(geneId, revisionId) {
       return GeneRevisionsResource.rejectRevision({ geneId: geneId, revisionId: revisionId }).$promise.then(
         function(response) {
-          cache.remove('/api/genes/' + response.id + '/suggested_changes');
+          cache.remove('/api/genes/' + response.id + '/suggested_changes/');
           query(geneId);
           cache.remove('/api/genes/' + response.id + '/suggested_changes/' + revisionId);
           get(geneId, revisionId);
