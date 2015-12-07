@@ -22,7 +22,7 @@
       if ( loginDialog ) {
         throw new Error('Trying to open a dialog that is already open!');
       }
-      loginDialog= dialogs.create('components/security/login/LoginForm.tpl.html','LoginFormController',{},'lg');
+      loginDialog= dialogs.create('components/security/login/LoginForm.tpl.html','LoginFormController',{},{backdrop: 'static'});
       loginDialog.result.then(onLoginDialogClose);
     }
     function closeLoginDialog(success) {
