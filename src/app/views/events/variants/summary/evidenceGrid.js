@@ -330,7 +330,7 @@
 
     function filterByStatus(status, grid, event) {
       if (grid.selection.lastSelectedRow.entity.status === 'rejected') {
-        console.warn('Cannot toggle Show Rejected if viewing a rejected evidence item.');
+        console.warn('Cannot hide rejected items if currently selected item is itself rejected.');
         return;
       }
       if(_.contains(statusFilters, status)) {
