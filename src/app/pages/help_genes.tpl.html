@@ -2,78 +2,9 @@
   <h3 class="subtitle">Genes in the CIViC Database</h3>
   <p>CIViC provides a user-written and curated summary of the clinical relevance of genes, as well as data pulled from the MyGeneInfo database. The gene summary includes the gene's relevance to different cancer types, patient outcomes and treatment decisions and highlight differences and similarities between different variants of this gene. It may also include information about the gene product's pathway interactions, functional alterations caused by variants within the gene and normal functions that are relevant to its association with cancer.</p>
 
-  <h4>Gene Attributes</h4>
-  <table class="table table-condensed table-attributes">
-    <tr>
-      <th class="attribute">
-        Attribute
-      </th>
-      <th class="description">
-        Description
-      </th>
-      <th class="source">
-        Source
-      </th>
-      <th class="editable">
-        Editable
-      </th>
-    </tr>
-    <tr>
-      <td class="attribute">
-        Name
-      </td>
-      <td class="description">
-        Entrez symbol of the gene.
-      </td>
-      <td class="source">
-        EntrezDB
-      </td>
-      <td class="editable">
-        No
-      </td>
-    </tr>
-    <tr>
-      <td class="attribute">
-        MyGene Info
-      </td>
-      <td class="description">
-        Aliases, synonyms, protein domains, and pathways retrieved from the MyGene.info database at runtime and cached based on gene's Entrez ID.
-      </td>
-      <td class="source">
-        MyGene.info
-      </td>
-      <td class="editable">
-        No
-      </td>
-    </tr>
-    <tr>
-      <td class="attribute">
-        Description
-      </td>
-      <td class="description">
-        User-defined summary of the clinical relevance of this Gene. Should include relevance to appropriate cancer(s), treatment(s) related specifically to variants affecting this Gene. May include relevant mechanistic information such as pathway interactions, functional alterations caused by variants in with this Gene (i.e., activating, loss-of-function, etc), and normal functions key to its oncogenic properties.
-      </td>
-      <td class="source">
-        CIViC
-      </td>
-      <td class="editable">
-        Yes
-      </td>
-    </tr>
-    <tr>
-      <td class="attribute">
-        Sources<br/>
-        <span style="font-weight: normal; font-size: small; color: #666;">(PubMed IDs)</span>
-      </td>
-      <td class="description">
-        A list of PubMed IDs referring to evidence supporting statemens made in the Gene's description. Source descriptions (e.g. <em>'Weisberg et al., 2007, Nat. Rev. Cancer'</em>) are pulled from the PubMed database at the time of submission, and are not editable.
-      </td>
-      <td class="source">
-        CIViC, PubMed
-      </td>
-      <td class="editable">
-        Yes
-      </td>
-    </tr>
-  </table>
+  <tabset>
+    <tab ng-repeat="tab in vm.tabs.gene" heading="{{ tab.heading }}" active="tab.active">
+      <div ng-include="tab.template"></div>
+    </tab>
+  </tabset>
 </div>

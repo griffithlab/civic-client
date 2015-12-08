@@ -93,6 +93,18 @@
           active: false
         },
       ],
+      gene: [
+        {
+          heading: 'Overview',
+          template: 'app/pages/help_gene_overview.tpl.html',
+          active: true
+        },
+        {
+          heading: 'Gene Summary',
+          template: 'app/pages/help_gene_summary.tpl.html',
+          active: false
+        },
+      ],  
     };
   }
 })();
