@@ -71,20 +71,19 @@
           enableFiltering: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/events/variantGroups/summary/variantGridDescriptionCell.tpl.html'
         }
       ]
     };
 
     ctrl.variantGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
+      ctrl.variants = $scope.variants;
       // TODO: this watch seems unnecessary, but if it's not present then the grid only loads on a fresh page, fails when loaded by a state change
       // Something to do with directive priorities, maybe?
-      $scope.$watch('variants', function(variants){
-        ctrl.variants = variants;
-        ctrl.variantGridOptions.minRowsToShow = variants.length + 1;
-        ctrl.variantGridOptions.data = variants;
-      });
+      ctrl.variantGridOptions.minRowsToShow = $scope.variants.length + 1;
+      ctrl.variantGridOptions.data = $scope.variants;
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = _.merge($stateParams, { variantId: row.entity.id, geneId: row.entity.gene_id });
