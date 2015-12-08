@@ -1,13 +1,17 @@
 <div class="actionBlock">
   <div class="action-block view-pageBackground"
-       ng-repeat="(action, details) in actions">
+       ng-repeat="(action, details) in actions"
+       tooltip="{{details.timestamp | timeAgo}}"
+       tooltip-placement="bottom"
+       tooltip-apppend-to-body="true">
     <span class="action-label small">
       <strong>{{ action | labelify }}</strong>
     </span>
 
-    <span class="action-date small">
-      {{ details.timestamp | timeAgo }}
-    </span>
+    <!--<span class="action-date small"-->
+          <!--ng-if="action === 'last_modified'">-->
+      <!--{{ details.timestamp | timeAgo }}-->
+    <!--</span>-->
 
     <span class="user-button small">
       by
