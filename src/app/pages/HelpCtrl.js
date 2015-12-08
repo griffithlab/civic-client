@@ -105,6 +105,28 @@
           active: false
         },
       ],  
+      variant_group: [
+        {
+          heading: 'Overview',
+          template: 'app/pages/help_variant_group_overview.tpl.html',
+          active: true
+        },
+        {
+          heading: 'Variant Group Summary',
+          template: 'app/pages/help_variant_group_summary.tpl.html',
+          active: false
+        },
+        {
+          heading: 'Create a Variant Group',
+          template: 'app/pages/help_variant_group_create.tpl.html',
+          active: false
+        },
+        {
+          heading: 'Add to a Variant Group',
+          template: 'app/pages/help_variant_group_addto.tpl.html',
+          active: false
+        },
+      ],
     };
   }
 })();
