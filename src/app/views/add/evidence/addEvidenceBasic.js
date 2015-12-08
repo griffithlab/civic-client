@@ -45,6 +45,12 @@
       $document.scrollToElementAnimated(elem);
     };
 
+    function toUpperCase(value) {
+      return {
+        name: (value.name || '').toUpperCase()
+      };
+    }
+
     vm.newEvidence = {
       gene: '',
       variant: '',

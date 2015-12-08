@@ -329,7 +329,8 @@
     };
 
     function filterByStatus(status, grid, event) {
-      if (grid.selection.lastSelectedRow.entity.status === 'rejected') {
+      if (_.has(grid.selection.lastSelectedRow, 'entity') &&
+        grid.selection.lastSelectedRow.entity.status === 'rejected') {
         console.warn('Cannot hide rejected items if currently selected item is itself rejected.');
         return;
       }
