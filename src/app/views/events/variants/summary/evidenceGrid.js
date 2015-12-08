@@ -177,17 +177,6 @@
           },
           cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugCell.tpl.html'
         },
-        //{ name: 'drug_interaction_type',
-        //  displayName: 'DI',
-        //  type: 'string',
-        //  allowCellFocus: false,
-        //  enableFiltering: false,
-        //  width: '7%,
-        //  filter: {
-        //    condition: uiGridConstants.filter.CONTAINS
-        //  },
-        //  cellTemplate: 'app/views/events/variants/summary/evidenceGridDrugInteractionTypeCell.tpl.html'
-        //},
         { name: 'evidence_level',
           headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'EL',
@@ -339,13 +328,17 @@
       ]
     };
 
-    function filterByStatus(status, grid) {
+    function filterByStatus(status, grid, event) {
+      if (grid.selection.lastSelectedRow.entity.status === 'rejected') {
+        console.warn('Cannot toggle Show Rejected if viewing a rejected evidence item.');
+        return;
+      }
       if(_.contains(statusFilters, status)) {
         _.pull(statusFilters, status);
       } else {
         statusFilters.push(status);
       }
-      grid.refresh();
+      grid.queueGridRefresh();
     }
 
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
