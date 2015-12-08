@@ -17,6 +17,7 @@ var proxy = require('proxy-middleware');
 function connectInit(baseDir, livereload) {
   connect.server({
     root: baseDir,
+    host: '127.0.0.1',
     port: 3001,
     livereload: livereload,
     middleware: function() {
