@@ -7,64 +7,10 @@
     <li>Variants with strong data to support a very similar effect on protein function (e.g., loss-of-function, activating)</li>
     <li>Variants that can be effectively combined when considering patient outcomes/treatment</li>
   </ul>
-  <h4>Variant Group Attributes</h4>
 
-  <table class="table table-condensed table-attributes">
-    <tr>
-      <th class="attribute">
-        Attribute
-      </th>
-      <th class="description">
-        Description
-      </th>
-      <th class="source">
-        Source
-      </th>
-      <th class="editable">
-        Editable
-      </th>
-    </tr>
-    <tr>
-      <td class="attribute">
-        Name
-      </td>
-      <td class="description">
-        Name of the Variant Group
-      </td>
-      <td class="source">
-        CIViC
-      </td>
-      <td class="editable">
-        Yes
-      </td>
-    </tr>
-    <tr>
-      <td class="attribute">
-        Description
-      </td>
-      <td class="description">
-        User-defined summary of the clinical relevance of this variant group.
-      </td>
-      <td class="source">
-        CIViC
-      </td>
-      <td class="editable">
-        Yes
-      </td>
-    </tr>
-    <tr>
-      <td class="attribute">
-        Variants
-      </td>
-      <td class="description">
-        User-defined list of variants in the variant group.
-      </td>
-      <td class="source">
-        CIViC
-      </td>
-      <td class="editable">
-        Yes
-      </td>
-    </tr>
-  </table>
+  <tabset>
+    <tab ng-repeat="tab in vm.tabs.variant_group" heading="{{ tab.heading }}" active="tab.active">
+      <div ng-include="tab.template"></div>
+    </tab>
+  </tabset>
 </div>
