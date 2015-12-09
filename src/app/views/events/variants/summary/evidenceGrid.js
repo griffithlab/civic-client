@@ -330,10 +330,20 @@
 
     function filterByStatus(status, grid, event) {
       if (_.has(grid.selection.lastSelectedRow, 'entity') &&
-        grid.selection.lastSelectedRow.entity.status === 'rejected') {
+        status === 'rejected' &&
+        grid.selection.lastSelectedRow.entity.status === 'rejected'
+      ) {
         console.warn('Cannot hide rejected items if currently selected item is itself rejected.');
         return;
       }
+      if (_.has(grid.selection.lastSelectedRow, 'entity') &&
+        status === 'submitted' &&
+        grid.selection.lastSelectedRow.entity.status === 'submitted'
+      ) {
+        console.warn('Cannot hide submitted items if currently selected item is itself submitted.');
+        return;
+      }
+
       if(_.contains(statusFilters, status)) {
         _.pull(statusFilters, status);
       } else {
