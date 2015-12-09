@@ -91,7 +91,7 @@
           heading: 'Variant Coordinates',
           template: 'app/pages/help_variant_coordinates.tpl.html',
           active: false
-        },
+        }
       ],
       gene: [
         {
@@ -103,8 +103,8 @@
           heading: 'Gene Summary',
           template: 'app/pages/help_gene_summary.tpl.html',
           active: false
-        },
-      ],  
+        }
+      ],
       variant_group: [
         {
           heading: 'Overview',
@@ -125,8 +125,8 @@
           heading: 'Add to a Variant Group',
           template: 'app/pages/help_variant_group_addto.tpl.html',
           active: false
-        },
-      ],
+        }
+      ]
     };
   }
 })();

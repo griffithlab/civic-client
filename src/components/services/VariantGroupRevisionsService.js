@@ -4,6 +4,7 @@
     .factory('VariantGroupRevisionsResource', VariantGroupRevisionsResource)
     .factory('VariantGroupRevisions', VariantGroupRevisionsService);
 
+  // @ngInject
   function VariantGroupRevisionsResource($resource, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
@@ -110,7 +111,12 @@
     );
   }
 
-  function VariantGroupRevisionsService(VariantGroupRevisionsResource, VariantGroups, $cacheFactory, $q) {
+  // @ngInject
+  function VariantGroupRevisionsService(VariantGroupRevisionsResource,
+                                        VariantGroups,
+                                        Genes,
+                                        $cacheFactory,
+                                        $q) {
     var cache = $cacheFactory.get('$http');
 
     // Base VariantGroup Revision and VariantGroup Revisions Collection
@@ -203,11 +209,13 @@
           cache.remove('/api/variant_groups/' + variantGroupId + '/suggested_changes/' + revisionId);
           get(variantGroupId, revisionId);
           cache.remove('/api/variant_groups/' + variantGroupId );
-          // TODO: ensure that gene_id is returned in response, uncomment gene cache flush
-          //cache.remove('/api/genes/' + response.gene_id + '/variant_groups');
-          //Genes.queryVariantGroups(response.gene_id);
-
           VariantGroups.get(variantGroupId);
+
+          // flush/query all gene variant group caches with this variant group
+          _.each(response.gene_ids, function(id) {
+            cache.remove('/api/genes/' + id + '/variant_groups');
+            Genes.queryVariantGroups(id);
+          });
           return $q.when(response);
         },
         function(error) {
