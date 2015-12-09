@@ -12,13 +12,7 @@
       scope: {
         user: '='
       },
-      controller: 'UserBlockController',
       templateUrl: 'components/directives/userBlock.tpl.html'
     };
-  }
-
-  // @inject
-  function UserBlockController() {
-    console.log('userBlock controller called.');
   }
 })();

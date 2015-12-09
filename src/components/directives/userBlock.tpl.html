@@ -3,9 +3,16 @@
       type="button"
       class="btn btn-xs btn-user"
       ui-sref="users.profile({userId: user.id})">
-      <span class="avatar">
-        <img ng-src="{{user.avatars.x14}}" width="14" height="14"/>
-      </span>
-      <span class="username">{{user.display_name}}</span>
+      <div ng-switch="user.username === 'Admin'">
+        <div ng-switch-when="false">
+          <span class="avatar">
+            <img ng-src="{{user.avatars.x14}}" width="14" height="14"/>
+          </span>
+          <span class="username">{{user.display_name}}</span>
+        </div>
+        <div ng-switch-when="true">
+          <span class="username" style="margin-left: 5px;">Admin</span>
+        </div>
+      </div>
     </button>
 </span>
