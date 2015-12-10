@@ -488,7 +488,7 @@
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)',
-              typeaheadEditable: true
+              editable: true
             },
             data: {
               pushNew: function(model, index) {
