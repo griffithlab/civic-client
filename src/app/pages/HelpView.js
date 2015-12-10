@@ -1,62 +1,113 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .controller('HelpCtrl', HelpCtrl)
-    .config(helpConfig);
+    .controller('HelpViewController', HelpViewController)
+    .config(helpViewConfig);
 
   // @ngInject
-  function helpConfig($stateProvider, $urlRouterProvider) {
+  function helpViewConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('help', {
         url: '/help',
-        controller: 'HelpCtrl',
+        abstract: true,
+        controller: 'HelpViewController',
         templateUrl: 'app/pages/help.tpl.html',
         data: {
           titleExp: '"Help"',
           navMode: 'sub'
         }
       })
+      .state('help.introduction', {
+        url: '/introduction',
+        templateUrl: 'app/pages/help_intro.tpl.html',
+        data: {
+          titleExp: '"Help: Introduction"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.evidence', {
+        url: '/evidence',
+        templateUrl: 'app/pages/help_evidence_main.tpl.html',
+        data: {
+          titleExp: '"Help: Evidence"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.variants', {
+        url: '/variants',
+        templateUrl: 'app/pages/help_variants.tpl.html',
+        data: {
+          titleExp: '"Help: Variants"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.genes', {
+        url: '/genes',
+        templateUrl: 'app/pages/help_genes.tpl.html',
+        data: {
+          titleExp: '"Help: Genes"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.variantGroups', {
+        url: '/variantGroups',
+        templateUrl: 'app/pages/help_variant_groups.tpl.html',
+        data: {
+          titleExp: '"Help: Variant Groups"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.get', {
+        url: '/get',
+        templateUrl: 'app/pages/help_get.tpl.html',
+        data: {
+          titleExp: '"Help: Get Help"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.report', {
+        url: '/get',
+        templateUrl: 'app/pages/help_report_problem.tpl.html',
+        data: {
+          titleExp: '"Help: Report a Problem"',
+          navMode: 'sub'
+        }
+      })
   }
 
   // @ngInject
-  function HelpCtrl($scope) {
+  function HelpViewController($scope) {
     var vm = $scope.vm = {};
     vm.tabs = {
       main: [
         {
           heading: 'Introduction',
-          template: 'app/pages/help_intro.tpl.html',
-          active: true
+          state: 'help.introduction'
         },
         {
           heading: 'Evidence',
-          template: 'app/pages/help_evidence_main.tpl.html',
-          active: false
-        },
+          state: 'help.evidence'
+        }
+        ,
         {
           heading: 'Variants',
-          template: 'app/pages/help_variants.tpl.html',
-          active: false
+          state: 'help.variants'
         },
         {
           heading: 'Genes',
-          template: 'app/pages/help_genes.tpl.html',
-          active: false
+          state: 'help.genes'
         },
         {
           heading: 'Variant Groups',
-          template: 'app/pages/help_variant_groups.tpl.html',
-          active: false
+          state: 'help.variantGroups'
         },
         {
           heading: 'Get Help',
-          template: 'app/pages/help_get.tpl.html',
-          active: false
+          state: 'help.get'
         },
         {
           heading: 'Report Problem',
-          template: 'app/pages/help_report_problem.tpl.html',
-          active: false
+          state: 'help.report'
         }
       ],
       evidence: [

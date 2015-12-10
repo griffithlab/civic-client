@@ -14,7 +14,7 @@
         },
         {
           label: 'Help',
-          state: 'help'
+          state: 'help.introduction'
         },
         {
           label: 'FAQ',
