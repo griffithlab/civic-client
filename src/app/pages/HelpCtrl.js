@@ -46,7 +46,7 @@
       ],
       evidence: [
         {
-          heading: 'Evidence Item',
+          heading: 'Overview',
           template: 'app/pages/help_evidence_statement.tpl.html',
           active: true
         },
@@ -78,7 +78,7 @@
           active: true
         },
         {
-          heading: 'Variant Naming',
+          heading: 'Variant Name',
           template: 'app/pages/help_variant_naming.tpl.html',
           active: false
         },
