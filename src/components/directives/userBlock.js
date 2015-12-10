@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('civic.common')
-    .directive('userBlock', userBlockDirective)
-    .controller('UserBlockController', UserBlockController);
+    .directive('userBlock', userBlockDirective);
+
 
   // @ngInject
   function userBlockDirective() {
