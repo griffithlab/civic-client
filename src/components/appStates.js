@@ -77,15 +77,6 @@
           navMode: 'sub'
         }
       })
-      .state('help', {
-        url: '/help',
-        controller: 'HelpCtrl',
-        templateUrl: 'app/pages/help.tpl.html',
-        data: {
-          titleExp: '"Help"',
-          navMode: 'sub'
-        }
-      })
       .state('contact', {
         url: '/contact',
         controller: 'ContactCtrl',

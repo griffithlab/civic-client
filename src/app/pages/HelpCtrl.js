@@ -1,7 +1,22 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .controller('HelpCtrl', HelpCtrl);
+    .controller('HelpCtrl', HelpCtrl)
+    .config(helpConfig);
+
+  // @ngInject
+  function helpConfig($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('help', {
+        url: '/help',
+        controller: 'HelpCtrl',
+        templateUrl: 'app/pages/help.tpl.html',
+        data: {
+          titleExp: '"Help"',
+          navMode: 'sub'
+        }
+      })
+  }
 
   // @ngInject
   function HelpCtrl($scope) {
