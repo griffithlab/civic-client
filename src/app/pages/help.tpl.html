@@ -10,21 +10,11 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-2 col-lg-3">
-      <div class="help-tabs">
-        <ul class="nav nav-pills nav-stacked">
-          <li ng-repeat="tab in vm.tabs.main" ui-sref-active="active">
-            <a ui-sref="{{tab.state}}">{{ tab.heading }}</a>
-          </li>
-        </ul>
-        <!--<tabset vertical="true" type="nav nav-pills nav-stacked col-xs-12 col-sm-2 col-lg-3 pull-left">-->
-        <!--<tab-->
-        <!--ng-repeat="tab in vm.tabs.main"-->
-        <!--heading="{{ tab.heading }}"-->
-        <!--active="tab.active">-->
-        <!--<div ng-include="tab.template"></div>-->
-        <!--</tab>-->
-        <!--</tabset>-->
-      </div>
+      <ul class="nav nav-pills nav-stacked">
+        <li ng-repeat="tab in vm.tabs.main" ui-sref-active="active">
+          <a ui-sref="{{tab.state}}">{{ tab.heading }}</a>
+        </li>
+      </ul>
     </div>
     <div class="col-xs-12 col-xm-10 col-lg-9">
       <ui-view></ui-view>
