@@ -9,11 +9,12 @@
     .factory('Security', Security);
 
 // @ngInject
-  function Security($http, $q, $location, RetryQueue, dialogs, $log) {
+  function Security($http, $q, $location, $state, RetryQueue, dialogs, $log) {
     // Redirect to the given url (defaults to '/')
     function redirect(url) {
       url = url || '/';
       $location.url(url);
+      $state.reload();
     }
 
     // Login form dialog stuff
