@@ -113,7 +113,7 @@
       evidence: [
         {
           heading: 'Overview',
-          template: 'app/pages/help_evidence_statement.tpl.html',
+          template: 'app/pages/help_evidence_overview.tpl.html',
           active: true
         },
         {
