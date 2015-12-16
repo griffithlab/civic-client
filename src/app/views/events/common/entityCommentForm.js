@@ -70,6 +70,9 @@
       {
         key: 'text',
         type: 'comment',
+        ngModelElAttrs: {
+          'msd-elastic': 'true'
+        },
         templateOptions: {
           label: 'Add Comment:',
           rows: 4,

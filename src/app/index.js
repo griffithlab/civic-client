@@ -19,6 +19,7 @@
     'yaru22.angular-timeago',
     'angulartics',
     'angulartics.google.analytics',
+    'monospaced.elastic',
 
     // config
     'civic.states',
