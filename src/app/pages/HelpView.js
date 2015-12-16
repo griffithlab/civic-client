@@ -66,7 +66,7 @@
         }
       })
       .state('help.report', {
-        url: '/get',
+        url: '/report',
         templateUrl: 'app/pages/help_report_problem.tpl.html',
         data: {
           titleExp: '"Help: Report a Problem"',
