@@ -10,6 +10,10 @@
       display name
     </span>
     <br/>
+    <span ng-if="vm.user.area_of_expertise">
+      <span class="area-of-expertise" ng-bind="vm.user.area_of_expertise">expertise</span>
+      <br/>
+    </span>
     <span class="role"
           ng-class="vm.user.role"
           ng-bind="vm.user.role | capitalize">

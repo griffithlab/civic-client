@@ -1,21 +1,11 @@
 <div class="profileEdit">
   <div class="row">
-    <div class="col-xs-2">
-      <img
-        ng-src="{{vm.user.avatars.x128}}"
-        width="64"
-        height="64"
-        class="avatar img-responsive"/>
-
-      <!--<button-->
-        <!--class="btn btn-xs btn-default"-->
-        <!--ui-sref="users.edit"-->
-        <!--style="margin-top: 16px;">-->
-        <!--Edit Avatar-->
-      <!--</button>-->
-
+    <div class="col-xs-3">
+      <div class="card-block">
+        <user-card user="vm.userEdit"></user-card>
+      </div>
     </div>
-    <div class="col-xs-10">
+    <div class="col-xs-9">
 
       <form class="form-horizontal">
         <formly-form
@@ -23,10 +13,8 @@
           model="vm.userEdit"
           fields="vm.userEditFields">
         </formly-form>
-      </form>
 
-    </div>
-    <div class="col-xs-10 col-xs-offset-2">
+      </form>
       <cancel-button></cancel-button>
 
       <button
@@ -39,6 +27,12 @@
         Profile successfully updated. Returning you to your profile in {{ vm.count }} seconds.
       </span>
       <span ng-show="vm.submitFail" style="color: darkred; margin-left: 10px;">Error updating profile!</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <p>vm.userEdit:</p>
+      <pre ng-bind="vm.userEdit|json"></pre>
     </div>
   </div>
 </div>
