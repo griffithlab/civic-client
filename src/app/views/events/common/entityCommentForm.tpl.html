@@ -16,6 +16,11 @@
             ng-click="vm.switchMode('preview')">
             PREVIEW
           </button>
+          &nbsp;
+          <span class="comment-message">
+            <i class="glyphicon glyphicon-refresh" ng-show="vm.previewLoading"></i>
+            <span class="small" ng-bind="vm.commentMessage"></span>
+          </span>
         </div>
       </div>
       <div ng-switch="vm.mode">
@@ -33,45 +38,47 @@
               </form>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="pull-left markdown-prompt">
-                <p>Use
-                  <button type="button" class="btn btn-default btn-xs"
-                          ng-click="vm.showMarkdownHelp = !vm.showMarkdownHelp">
-                <span class="glyphicon"
-                      aria-hidden="true"
-                      ng-class="{ 'glyphicon-triangle-right': vm.showMarkdownHelp === false, 'glyphicon-triangle-bottom': vm.showMarkdownHelp === true}">
-                </span>
-                    markdown
-                  </button>
-                  to add <strong>emphasis</strong>, <span style="font-style: oblique;">styling</span>, images, and links to your comments.</p>
-              </div>
-              <div class="pull-right">
-                <button
-                  type="submit"
-                  class="btn btn-default"
-                  ng-disabled="vm.commentForm.$invalid"
-                  ng-click="vm.submit(vm.newComment, vm.options.resetModel)">
-                  Submit Comment
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="row" ng-show="vm.showMarkdownHelp">
-            <div class="col-xs-12">
-              <div ng-include="'app/views/events/common/entityCommentMarkdownHelp.tpl.html'"></div>
-            </div>
-          </div>
         </div>
         <div ng-switch-when="preview">
           <div class="row preview-block">
             <div class="col-xs-12">
               <div class="preview">
-                <span class="glyphicon glyphicon-refresh loader" ng-show="vm.previewLoading"></span>                           <div ng-bind="vm.preview" ng-hide="vm.previewLoading">PREVIEW</div>
+                <div ng-bind="vm.preview" ng-hide="vm.previewLoading">PREVIEW</div>
+                <div ng-bind-html="vm.previewText">
+                  Preview Text
+                </div>
               </div>
-
             </div>
+          </div>
+        </div>
+        <div class="row comment-buttons">
+          <div class="col-xs-12">
+            <div class="pull-left markdown-prompt">
+              <p>Use
+                <button type="button" class="btn btn-default btn-xs"
+                        ng-click="vm.showMarkdownHelp = !vm.showMarkdownHelp">
+                <span class="glyphicon"
+                      aria-hidden="true"
+                      ng-class="{ 'glyphicon-triangle-right': vm.showMarkdownHelp === false, 'glyphicon-triangle-bottom': vm.showMarkdownHelp === true}">
+                </span>
+                  markdown
+                </button>
+                to add <strong>emphasis</strong>, <span style="font-style: oblique;">styling</span>, images, and links to your comments.</p>
+            </div>
+            <div class="pull-right">
+              <button
+                type="submit"
+                class="btn btn-default"
+                ng-disabled="vm.commentForm.$invalid"
+                ng-click="vm.submit(vm.newComment, vm.options.resetModel)">
+                Submit Comment
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-show="vm.showMarkdownHelp">
+          <div class="col-xs-12">
+            <div ng-include="'app/views/events/common/entityCommentMarkdownHelp.tpl.html'"></div>
           </div>
         </div>
       </div>

@@ -4,16 +4,36 @@
 @import 'src/app/styles/_mixins.less';
 
 .entityCommentForm {
-  margin-bottom: @contentPadding;
   padding-top: @contentPadding;
+  margin-bottom: @contentPadding;
   border-top: #CCC solid 5px;
 
   .popover {
     max-width: 750px !important;
   }
 
+  .form-group {
+    margin-bottom: 0;
+  }
+
   .comment-modes {
     margin-bottom: @contentPadding/2;
+    .comment-message {
+
+    }
+  }
+
+  .comment-buttons {
+    margin-top: @contentPadding;
+  }
+
+  .preview-block {
+    .preview {
+      padding: @contentPadding/2;
+      min-height: 90px;
+      border: 1px solid #F1F1F1;
+      border-radius: @border-radius-small;
+    }
   }
 
   .markdown-prompt {

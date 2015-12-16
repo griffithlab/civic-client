@@ -7,9 +7,7 @@
   // @ngInject
   function CommentPreviewResource($resource) {
     return $resource('/api/markdown',
-      {
-        markdown: '@'
-      },
+      {},
       {
         preview: {
           method: 'POST',
