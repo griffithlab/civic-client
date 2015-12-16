@@ -24,8 +24,13 @@
     vm.currentUser = Security.currentUser;
     vm.isEditor = Security.isEditor();
 
+    vm.mode = 'edit';
+    vm.previewLoading = true;
+
     vm.showMarkdownHelp = false;
     vm.markdownHelpUrl = 'app/views/events/common/entityCommentMarkdownHelp.tpl.html';
+
+    vm.switchMode = function(mode) {vm.mode = mode;};
 
     vm.newComment = {
       title: '',
@@ -33,14 +38,6 @@
     };
 
     vm.newCommentFields = [
-      //{
-      //  key: 'title',
-      //  type: 'input',
-      //  templateOptions: {
-      //    label: 'Title',
-      //    value: vm.newComment.title
-      //  }
-      //},
       {
         key: 'text',
         type: 'comment',
