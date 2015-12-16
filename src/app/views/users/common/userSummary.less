@@ -4,12 +4,18 @@
 @import 'src/app/styles/_mixins.less';
 
 .userSummary {
+  .clearfix();
   color: #CCC;
   .avatar {
     border-radius: @border-radius-large;
     overflow: hidden;
     border: 1px solid darken(@civicPurple, 35%);
   }
+
+  .card-block {
+    .clearfix();
+  }
+
   .info-block {
     padding: @contentPadding;
     border-radius: @border-radius-large;
