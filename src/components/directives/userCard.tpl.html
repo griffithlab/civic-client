@@ -10,61 +10,61 @@
       display name
     </span>
     <br/>
-    <span ng-if="vm.user.area_of_expertise">
-      <span class="area-of-expertise" ng-bind="vm.user.area_of_expertise">expertise</span>
-      <br/>
-    </span>
     <span class="role"
           ng-class="vm.user.role"
           ng-bind="vm.user.role | capitalize">
       role
     </span>
     <br/>
+    <span ng-if="vm.user.area_of_expertise">
+      <span class="area-of-expertise" ng-bind="vm.user.area_of_expertise">expertise</span>
+      <br/>
+    </span>
     <span ng-if="vm.user.last_seen_at">
       <span class="title">Last seen:</span><br/>
       <span class="last-seen" ng-bind="vm.user.last_seen_at | timeAgo">last seen</span>
       <br/>
     </span>
-    <span ng-if="vm.user.activity_level">
-      <span class="title">Activity Level:</span>
-      <span class="activity-level" ng-bind="vm.user.activity_level">888</span>
-      <br/>
-    </span>
-    <span ng-if="vm.user.last_event">
-      <span class="title">Last Event:</span>
-      <div class="entity">
-        <!-- preposition, if necessary -->
-        <span ng-switch="vm.user.last_event.event_type">
-          <span ng-switch-when="commented">&nbsp;commented on</span>
-          <span ng-switch-when="submitted">&nbsp;submitted</span>
-          <span ng-switch-when="accepted">&nbsp;accepted</span>
-          <span ng-switch-when="rejected">&nbsp;rejected</span>
-          <span ng-switch-when="change suggested">&nbsp;suggested a revision to</span>
-          <span ng-switch-when="change accepted">&nbsp;accepted a revision to</span>
-          <span ng-switch-when="change rejected">&nbsp;rejected a revision to</span>
-          <span ng-switch-default></span>
-        </span>
-        <span ng-switch="vm.user.last_event.subject_type">
-          <span ng-switch-when="genes">
-            <span class="subject-type">gene</span>
-          </span>
-          <span ng-switch-when="variants">
-            <span class="subject-type">variant</span>
-          </span>
-          <span ng-switch-when="variantgroups">
-            <span class="subject-type">variant group</span>
-          </span>
-          <span ng-switch-when="evidenceitems">
-            <span class="subject-type">evidence item</span>
-          </span>
-          <span ng-switch-when="suggestedchanges">
-            <span class="subject-type">a suggested revision to</span>
-          </span>
-        </span><br/>
-        <strong>
-          <span ng-bind="vm.entityName">GENE / VARIANT / EVIDENCE</span>
-        </strong>
-      </div>
-    </span>
+    <!--<span ng-if="vm.user.activity_level">-->
+      <!--<span class="title">Activity Level:</span>-->
+      <!--<span class="activity-level" ng-bind="vm.user.activity_level">888</span>-->
+      <!--<br/>-->
+    <!--</span>-->
+    <!--<span ng-if="vm.user.last_event">-->
+      <!--<span class="title">Last Event:</span>-->
+      <!--<div class="entity">-->
+        <!--&lt;!&ndash; preposition, if necessary &ndash;&gt;-->
+        <!--<span ng-switch="vm.user.last_event.event_type">-->
+          <!--<span ng-switch-when="commented">&nbsp;commented on</span>-->
+          <!--<span ng-switch-when="submitted">&nbsp;submitted</span>-->
+          <!--<span ng-switch-when="accepted">&nbsp;accepted</span>-->
+          <!--<span ng-switch-when="rejected">&nbsp;rejected</span>-->
+          <!--<span ng-switch-when="change suggested">&nbsp;suggested a revision to</span>-->
+          <!--<span ng-switch-when="change accepted">&nbsp;accepted a revision to</span>-->
+          <!--<span ng-switch-when="change rejected">&nbsp;rejected a revision to</span>-->
+          <!--<span ng-switch-default></span>-->
+        <!--</span>-->
+        <!--<span ng-switch="vm.user.last_event.subject_type">-->
+          <!--<span ng-switch-when="genes">-->
+            <!--<span class="subject-type">gene</span>-->
+          <!--</span>-->
+          <!--<span ng-switch-when="variants">-->
+            <!--<span class="subject-type">variant</span>-->
+          <!--</span>-->
+          <!--<span ng-switch-when="variantgroups">-->
+            <!--<span class="subject-type">variant group</span>-->
+          <!--</span>-->
+          <!--<span ng-switch-when="evidenceitems">-->
+            <!--<span class="subject-type">evidence item</span>-->
+          <!--</span>-->
+          <!--<span ng-switch-when="suggestedchanges">-->
+            <!--<span class="subject-type">a suggested revision to</span>-->
+          <!--</span>-->
+        <!--</span><br/>-->
+        <!--<strong>-->
+          <!--<span ng-bind="vm.entityName">GENE / VARIANT / EVIDENCE</span>-->
+        <!--</strong>-->
+      <!--</div>-->
+    <!--</span>-->
   </div>
 </div>
