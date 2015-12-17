@@ -43,13 +43,6 @@
         </form>
       </div>
     </div>
-    <div class="row" ng-if="vm.form.$invalid">
-      <div class="col-xs-5 col-xs-offset-2">
-        <div class="alert alert-danger">
-          This Evidence Item submission is incomplete or contains errors. Please ensure that all fields have been specified, and that any remaining errors have been fixed before submitting.
-        </div>
-      </div>
-    </div>
     <div class="row">
       <div class="col-xs-5 col-xs-offset-2">
         <div class="buttons">
@@ -66,6 +59,13 @@
             </button>
           </span>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.form.$invalid">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="alert alert-info">
+          The Submit button is disabled because the Evidence form is incomplete or contains errors. Please ensure that all fields are completed and error free.
         </div>
       </div>
     </div>
