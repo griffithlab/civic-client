@@ -53,4 +53,108 @@
 
   <h4>Selecting variant coordinates based on variant type</h4>
   <p>Start and stop positions are dependent upon the reference genome and the specific isoform/transcript being used.</p>
+
+  <table class="table table-condensed table-attributes">
+    <tbody>
+      <tr class="subheader">
+        <td colspan="2">
+          <h4>Single Nucleotide Variants (SNVs)</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="source">
+          <img src="assets/images/ChoosingCoordinates_SNVs.png" class="img-fluid" width="45%" height="45%" alt="CIViC SNV coordinate diagram"/>
+        </td>
+        <td>
+          <ul>
+            <li>Secondary coordinates do not apply</li>
+            <li>Start and stop coordinates are the same</li>
+          </ul>
+        </td>
+      </tr>
+      
+      <tr class="subheader">
+        <td colspan="2">
+          <h4>Insertions</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="source">
+          <img src="assets/images/ChoosingCoordinates_Insertions.png" class="img-fluid" width="45%" height="45%" alt="CIViC Insertion coordinate diagram"/>
+        </td>
+        <td>
+          <ul>
+            <li>Secondary coordinates do not apply</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="subheader">
+        <td colspan="2">
+          <h4>Deletions</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="source">          
+          <img src="assets/images/ChoosingCoordinates_Deletions.png" class="img-fluid" width="45%" height="45%" alt="CIViC Ecosystem Diagram"/>
+        </td>
+        <td>
+          <ul>
+            <li>Secondary coordinates do not apply</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="subheader">
+        <td colspan="2">
+          <h4>Fusions</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="source">
+          <img src="assets/images/ChoosingCoordinates_Fusions.png" class="img-fluid" width="65%" height="65%" alt="CIViC Ecosystem Diagram"/>
+        </td>
+        <td>
+          <ul>
+            <li>Secondary coordinates correspond to the 3' partner</li>
+            <li>Stop1 and Start2 coordinates correspond to the edge of the nearest exon</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="subheader">
+        <td colspan="2">
+          <h4>Whole Gene alterations (altered expression, deletion, amplification) </h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="source">
+          <img src="assets/images/ChoosingCoordinates_Whole_Gene.png" class="img-fluid" width="65%" height="65%" alt="CIViC Ecosystem Diagram"/>
+        </td>
+        <td>
+          <ul>
+            <li>Secondary coordinates do not apply</li>
+            <li>Variant coordinates include UTRs</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="subheader">
+        <td colspan="2">
+          <h4>Gene Segments ('hotspot' regions including exons or domains)</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="source">
+          <img src="assets/images/ChoosingCoordinates_Gene_Segment.png" class="img-fluid" width="60%" height="60%" alt="CIViC Ecosystem Diagram"/>
+        </td>
+        <td>
+          <ul>
+            <li>Secondary coordinates do not apply</li>
+          </ul>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
 </div>
