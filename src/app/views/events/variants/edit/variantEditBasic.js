@@ -83,7 +83,7 @@
           label: 'Description',
           value: 'vm.variant.description',
           minLength: 32,
-          helpText: 'User-defined summary of the clinical relevance of this Variant.'
+          helpText: 'User-defined summary of the clinical relevance of this Variant. The Variant summary should be a synthesis of the existing evidence statements for this variant. Basic information on recurrence rates and biological/functional impact of the Variant may be included, but the focus should be on the clinical impact (i.e. predictive, prognostic, and diagnostic value).'
         }
       },
       {
@@ -113,7 +113,7 @@
             { value: 'GRCh37', label: 'GRCh37 (hg19)' },
             { value: 'NCBI36', label: 'NCBI36 (hg18)' }
           ],
-          helpText: ''
+          helpText: 'Version of the human genome reference sequence from which coordinates will be obtained'
         }
       },
       {
@@ -123,7 +123,7 @@
         templateOptions: {
           label: 'Ensembl Version',
           value: vm.variantEdit.coordinates.ensembl_version,
-          helpText: 'Ensembl version'
+          helpText: 'Ensembl database version (e.g. \"75\")'
         }
       },
       {
@@ -133,7 +133,7 @@
         templateOptions: {
           label: 'Chromosome',
           value: vm.variantEdit.coordinates.chromosome,
-          helpText: 'Chromosome in which this variant occurs'
+          helpText: 'Chromosome in which this variant occurs (e.g. \"17\")'
         }
       },
       {
