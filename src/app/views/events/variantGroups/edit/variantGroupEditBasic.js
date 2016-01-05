@@ -73,7 +73,7 @@
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 8,
-          label: 'Description',
+          label: 'Summary',
           value: 'vm.variantGroup.description',
           focus: true,
           minLength: 32

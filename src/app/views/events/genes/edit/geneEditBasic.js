@@ -81,7 +81,7 @@
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 8,
-          label: 'Description',
+          label: 'Summary',
           value: 'vm.gene.description',
           focus: true,
           minLength: 32,
@@ -105,7 +105,7 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Sources',
-          helpText: 'Please specify the Pubmed IDs of any sources used as references in the Gene description.',
+          helpText: 'Please specify the Pubmed IDs of any sources used as references in the Gene Summary.',
           entityName: 'Source',
           inputOptions: {
             type: 'publication-multi',

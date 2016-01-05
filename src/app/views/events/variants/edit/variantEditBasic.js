@@ -80,10 +80,10 @@
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 8,
-          label: 'Description',
+          label: 'Summary',
           value: 'vm.variant.description',
           minLength: 32,
-          helpText: 'User-defined summary of the clinical relevance of this Variant. The Variant summary should be a synthesis of the existing evidence statements for this variant. Basic information on recurrence rates and biological/functional impact of the Variant may be included, but the focus should be on the clinical impact (i.e. predictive, prognostic, and diagnostic value).'
+          helpText: 'User-defined summary of the clinical relevance of this Variant. The Variant Summary should be a synthesis of the existing Evidence Statements for this variant. Basic information on recurrence rates and biological/functional impact of the Variant may be included, but the focus should be on the clinical impact (i.e. predictive, prognostic, and diagnostic value).'
         }
       },
       {
