@@ -4,17 +4,17 @@
       <div ng-switch="variant.description.length > 0">
         <div ng-switch-when="true">
           <p ng-bind="variant.description" class="description">
-            Variant description.
+            Variant Summary.
           </p>
         </div>
         <div ng-switch-default="false">
           <p class="description">
-            This Variant does not currently have a description.
+            This Variant does not currently have a Summary.
           </p>
           <div ng-if="isAuthenticated() && !isEdit">
             <p>
               <a class="btn btn-small btn-default" ui-sref="events.genes.summary.variants.edit.basic({ geneId: stateParams.geneId, variantId: variant.id })">
-                Add a Description
+                Add a Summary
               </a>
             </p>
           </div>

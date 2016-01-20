@@ -80,10 +80,10 @@
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 8,
-          label: 'Description',
+          label: 'Summary',
           value: 'vm.variant.description',
           minLength: 32,
-          helpText: 'User-defined summary of the clinical relevance of this Variant.'
+          helpText: 'User-defined summary of the clinical relevance of this Variant. The Variant Summary should be a synthesis of the existing Evidence Statements for this variant. Basic information on recurrence rates and biological/functional impact of the Variant may be included, but the focus should be on the clinical impact (i.e. predictive, prognostic, and diagnostic value).'
         }
       },
       {
@@ -113,7 +113,7 @@
             { value: 'GRCh37', label: 'GRCh37 (hg19)' },
             { value: 'NCBI36', label: 'NCBI36 (hg18)' }
           ],
-          helpText: ''
+          helpText: 'Version of the human genome reference sequence from which coordinates will be obtained.'
         }
       },
       {
@@ -123,7 +123,7 @@
         templateOptions: {
           label: 'Ensembl Version',
           value: vm.variantEdit.coordinates.ensembl_version,
-          helpText: 'Ensembl version'
+          helpText: 'Ensembl database version (e.g. 75).'
         }
       },
       {
@@ -133,7 +133,7 @@
         templateOptions: {
           label: 'Chromosome',
           value: vm.variantEdit.coordinates.chromosome,
-          helpText: 'Chromosome in which this variant occurs'
+          helpText: 'Chromosome in which this variant occurs (e.g. 17).'
         }
       },
       {
@@ -143,7 +143,7 @@
         templateOptions: {
           label: 'Start',
           value: vm.variantEdit.coordinates.start,
-          helpText: ''
+          helpText: 'Left/first coordinate of the variant. Must be <= the Stop coordinate. Must be compatible with the selected reference build.'
         }
       },
       {
@@ -153,7 +153,7 @@
         templateOptions: {
           label: 'Stop',
           value: vm.variantEdit.coordinates.stop,
-          helpText: ''
+          helpText: 'Right/second coordinate of the variant. Must be >= the Start coordinate.'
         }
       },
       {
@@ -163,7 +163,7 @@
         templateOptions: {
           label: 'Reference Base(s)',
           value: vm.variantEdit.coordinates.reference_bases,
-          helpText: ''
+          helpText: 'The nucleotide(s) of the reference genome affected by the variant. Only used for SNVs and Indels (otherwise leave blank).'
         }
       },
       {
@@ -173,7 +173,7 @@
         templateOptions: {
           label: 'Variant Base(s)',
           value: vm.variantEdit.coordinates.variant_bases,
-          helpText: ''
+          helpText: 'The nucleotide(s) of the variant allele. Only used for SNVs and Indels (otherwise leave blank).'
         }
       },
       {
@@ -183,11 +183,11 @@
         templateOptions: {
           label: 'Representative Transcript',
           value: vm.variantEdit.coordinates.representative_transcript,
-          helpText: ''
+          helpText: 'Transcript ID including version number (e.g. ENST00000348159.4, the canonical transcript defined by Ensembl).'
         }
       },
       {
-        template: '<h3 class="form-subheader">Secondary Coordinates <span class="small">(optional)</span></h3><hr/>'
+        template: '<h3 class="form-subheader">Secondary Coordinates <span class="small">(for fusions)</span></h3><hr/>'
       },
       {
         model: vm.variantEdit.coordinates,
@@ -196,7 +196,7 @@
         templateOptions: {
           label: 'Chromosome 2',
           value: vm.variantEdit.coordinates.chromosome2,
-          helpText: 'If variant is a fusion, specify its coordinates'
+          helpText: 'If this variant is a fusion (e.g. BCR-ABL1), specify the chromosome name, coordinates, and representative transcript for the 3-prime partner.'
         }
       },
       {

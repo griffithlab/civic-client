@@ -78,7 +78,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Origin of variant',
+          helpText: 'Origin of variant.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
@@ -103,7 +103,7 @@
           data: {
             description: '--'
           },
-          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675).'
         },
         modelOptions: {
           updateOn: 'default blur',
@@ -249,7 +249,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Type of study performed to produce the evidence statement',
+          helpText: 'Type of study performed to produce the evidence statement.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
@@ -351,7 +351,7 @@
             { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
-          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A/ should be selected. Evidence Type must be selected before this field is enabled.',
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
@@ -436,7 +436,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Drug Interaction Type Help text',
+          helpText: 'If multiple drugs were added, please select an interaction type that describes their relationship to each other.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {

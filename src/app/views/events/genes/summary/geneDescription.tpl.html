@@ -5,16 +5,16 @@
       <div ng-switch="geneData.description.length > 0">
         <div ng-switch-when="true">
           <p ng-bind="geneData.description" class="description">
-            Gene description.
+            Gene Summary.
           </p>
         </div>
         <div ng-switch-default="false">
           <p class="description">
-            This Gene does not currently have a description.
+            This Gene does not currently have a Summary.
           </p>
           <div ng-if="vm.isAuthenticated() && !vm.isEdit">
             <p>
-              <a class="btn btn-small btn-default" ui-sref="events.genes.edit.basic({ geneId: geneData.id })">Add a Description</a>
+              <a class="btn btn-small btn-default" ui-sref="events.genes.edit.basic({ geneId: geneData.id })">Add a Summary</a>
             </p>
           </div>
         </div>

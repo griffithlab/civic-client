@@ -81,7 +81,7 @@
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 8,
-          label: 'Description',
+          label: 'Summary',
           value: 'vm.gene.description',
           focus: true,
           minLength: 32,
@@ -94,7 +94,7 @@
                   '<p>May include relevant mechanistic information such as:</p>',
                   '<ul>',
                   '<li>pathway interactions</li>',
-                  '<li>functional alterations caused by variants in with this Gene (i.e., activating, loss-of-function, etc)</li>',
+                  '<li>functional alterations caused by variants in this Gene (i.e., activating, loss-of-function, etc.)</li>',
                   '<li>normal functions key to its oncogenic properties.</li>',
                   '</ul>'
                 ].join(' ')
@@ -105,7 +105,7 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Sources',
-          helpText: 'Please specify the Pubmed IDs of any sources used as references in the Gene description.',
+          helpText: 'Please specify the Pubmed IDs of any sources used as references in the Gene Summary.',
           entityName: 'Source',
           inputOptions: {
             type: 'publication-multi',
@@ -203,7 +203,7 @@
       vm.formMessages = {};
       Genes.apply(geneEdit)
         .then(function() {
-          console.log('revision appy success!');
+          console.log('revision apply success!');
           vm.formMessages.applySuccess = true;
         })
         .catch(function(response) {

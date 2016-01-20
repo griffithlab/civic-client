@@ -10,8 +10,8 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-      <p>
-        <strong><i>What is CIViC?</i></strong><br/>
+      
+      <p><strong><i>What is CIViC?</i></strong><br/>
 
         CIViC is an open access, open source, community-driven web resource for Clinical Interpretation of Variants in Cancer. Our goal is to enable precision medicine by providing an educational forum for dissemination of knowledge and active discussion of the clinical significance of cancer genome alterations.</p>
 
@@ -25,23 +25,31 @@
 
       <p><strong><i>Who should be using CIViC?</i></strong><br/>
 
-        CIViC is intended to bring together a diverse group of individuals interested in the clinical application and advancement of cancer genomics including health professionals (oncologists, pathologists and other clinicians), researchers (cancer genome and data scientists), and patient advocates.</b>
+        CIViC is intended to bring together a diverse group of individuals interested in the clinical application and advancement of cancer genomics including health professionals (oncologists, pathologists and other clinicians), researchers (cancer genome and data scientists), and patient advocates.</p>
+
+      <p><strong><i>What are the characteristics of an 'ideal' CIViC curator/editor?</i></strong><br/>
+
+        Here are some guidelines. A strong interest in clinical cancer genomics. Expertise and ideally a degree (e.g. PhD or MD) in a related field such as basic cancer biology, oncology, genomics, clinical informatics, etc. Trainees in these areas are also very welcome (e.g. PhD students, medical students, residents, and fellows). Skepticism. There is sometimes pressure in academia to present one's research findings in a clinically relevant context. When CIViC evidence statements are created, the curator should aspire to conduct an objective assessment of how well the data presented really supports any assertion of clinical relevance. Open to sharing information with the community. Respectful of other contributors. Professional, truthful, ethical, and unbiased. All aspects of the CIViC project are open to debate and amendment, including these guidelines.</p>
 
       <p><strong><i>What is a <b>Variant</b>?</i></strong><br/>
 
-        A variant in CIViC is any genomic alteration associated with cancer. This includes single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's), structural variants (SVs), transcript fusions, and other genomic/molecular events with cancer associations, including germline variants.</p>
+        A variant in CIViC is any 'omic' alteration associated with cancer. This includes single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's), structural variants (SVs), transcript fusions, and other genomic/molecular events with cancer associations. Though we have focused on DNA changes, alterations that manifest at the RNA, protein, or epigenetic level are allowed, again as long as there is a demonstrated clinical relevance. In general, the concept of a variant in CIViC is very flexible but it is highly preferred that the variant be something that could be measured with some quantitative assay (NGS sequencing, qPCR, etc.).</p>
 
+      <p><strong><i>What kinds of Variants belong in CIViC? What does not?</i></strong><br>
+
+        In order to be accepted by CIViC, a variant must be related to cancer and have some *clinical* relevance. Relevance to cancer biology alone is NOT sufficient unless there is also some documented relationship between the variant and diagnosis, prognosis, or response to a specific treatment. Variants related to diseases other than cancer should not be entered (there is some grey area for cancer like conditions). Most variants in CIViC are somatic but rare germline variants or common polymorphisms are also welcome (as long as they have diagnostic, prognostic or predictive value). The quality of evidence suggesting clinical relevance of a variant may vary considerably. Before contributing to CIViC please review the <a ui-sref="help.evidence"> data model</a>.</p>
+  
       <p><strong><i>What is an <b>Evidence Statement</b>?</i></strong><br/>
 
-        An evidence statement is the result of an experiment, trial or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis. A single citation can be the source of multiple evidence statments.</p>
+        An evidence statement is an assertion about the clinical relevance of a variant that has been determined by an experiment, trial, or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis. A single citation can be the source of multiple evidence statments but each evidence statment has only one source. A single evidence statement should correspond to only one clinical interpretation and disease. For example, if a paper describes both a predictive and prognostic relevance for a variant, two evidence statements should be created. If two publications, draw the same conclusions about the clinical relevance of a variant, these should also be entered as two evidence statements.</p>
 
       <p><strong><i>How is this information organized?</i></strong><br/>
 
-        An in-depth description of the data model behind CIViC can be found <a ui-sref="help"> here</a>.</p>
+        An in-depth description of the data model behind CIViC can be found <a ui-sref="help.evidence">here</a>.</p>
 
       <p><strong><i>What information is currently in CIViC?</i></strong><br/>
 
-        CIViC currently houses over 450 evidence statements about 125 variants in 50 genes across 40 cancer types, and these numbers are growing rapidly with your help!</p>
+      CIViC currently houses over 700 evidence statements about 312 variants in 132 genes across 90 cancer types, and these numbers are growing rapidly with your help! Refer to the <a ui-sref="home">Home</a> page for up to date statistics.</p>
 
       <p><strong><i>How do I contribute information?</i></strong><br/>
 
@@ -49,31 +57,27 @@
 
       <p><strong><i>My favorite Gene/Variant is not in CIViC?!?</i></strong><br/>
 
-        The manual curation involved in adding evidence statements means we have not been able to populate a published evidence statement from every variant or gene of interest. This is precisely why we need community-driven efforts to grow this database. In order for a gene or variant to appear in CIViC, it must have an evidence statement associated with it. To add evidence statements and begin the discussion about your gene/variant of interest, go <a ui-sref="collaborate">here</a>!</p>
-
-      <p><strong><i>What kinds of variants belong in CIViC? What does not?</i></strong><br>
-
-        In order to be accepted by CIViC, a variant must be related to cancer and have some *clinical* relevance. Relevance to cancer biology alone is insufficient unless there is also some documented relationship between the variant and diagnosis, prognosis, or response to a specific treatment. Variants related to diseases other than cancer should not be entered. Most variants in CIViC are somatic but germline variants are also welcome (as long as they have diagnostic, prognostic or predictive value). The quality of evidence suggesting clinical relevance of a variant may vary considerably. Before contributing to CIViC please review the <a ui-sref="help"> data model</a>.</p>
+        The extensive manual curation involved in adding evidence statements means we have not been able to populate a published evidence statement from every variant or gene of interest. This is precisely why we need community-driven efforts to grow this database. In order for a gene or variant to appear in CIViC, it must have an evidence statement associated with it. To add evidence statements and begin the discussion about your gene/variant of interest, go <a ui-sref="collaborate">here</a>!</p>
 
       <p><strong><i>May I enter unpublished results from n-of-1 observations?</i></strong><br>
 
-        At this time, a publication is considered a minimum requirement for all evidence statements in CIViC. N-of-1 results from early stage clinical trials or patients treated under compassionate use doctrines are allowed, but only if a case report has been published in a peer reviewed journal. We are considering options for centers that wish to use a local instance of CIViC to capture individual patient observations.
+      At this time, a publication is considered a minimum requirement for all evidence statements in CIViC. N-of-1 results from early stage clinical trials or patients treated under compassionate use doctrines are allowed, but only if a case report has been published in a peer reviewed journal. We are considering options for centers that wish to use a local instance of CIViC to capture unpublished individual patient observations.</p>
 
       <p><strong><i>Why must my changes be approved by a moderator before I can see them?</i></strong><br/>
 
-        In an effort to ensure quality (and prevent automated spam), we require that edits be submitted to the review queue before they are shown on the live server. Moderators are used for this review step to protect the CIViC resource and will approve your changes as soon as possible.</p>
+        In an effort to ensure quality (and prevent automated spam), we require that edits be submitted to the review queue before they are shown on the live server. Moderators are used for this review step to protect the CIViC resource and will approve your changes as soon as possible. An editor, moderator or administrator may comment on your proposed addition or revision. You will be able to see your new content in a pending state while it awaits review. To expedite the review process, we encourage you to submit high quality evidence (evidence level of validated or clinical) as the top priority. Similarly, proposing evidence statements for a new variant or gene may take longer for the community to review.</p>
 
       <p><strong><i>What is a Disease Ontology ID (DOID)?</i></strong><br/>
 
-        In order to provide a structured representation of the diseases associated with evidence statements, we ask that you provide a Disease Ontology ID from <a href="http://disease-ontology.org/"> disease-ontology.org</a>. This allows for consistent representation and  minimized ambiguity when referring to diseases. Such ontologies also support more flexible data queries that allow disease groupings ranging from generic terms to highly specific subtypes.</p>
+        In order to provide a structured representation of the diseases associated with evidence statements, we ask that you use disease names as they exist in the Disease Ontology from <a href="http://disease-ontology.org/"> disease-ontology.org</a>. This allows for consistent representation and minimized ambiguity when referring to diseases. Such ontologies also support more flexible data queries that allow disease groupings ranging from generic terms to highly specific subtypes. If the disease ontology is missing an important recognized sub-type of disease, we will try to work with them to update their resource. Please contact us if you find such cases.</p>
 
       <p><strong><i>What is a PubChem ID (PCID)?</i></strong><br/>
 
-        Providing a PubChem ID with your evidence statement allows us to minimize ambiguity within drug naming. As a default, drug compound names are used instead of branded trade names in an effort to be as consistent across experiment types as possible. PubChem ID's can be found by searching the compound <a href="https://pubchem.ncbi.nlm.nih.gov/"> here</a>. However, when a PCID is not available, "N/A" is accepted.</p>
+        Providing a drug name recognized by PubChem with your evidence statement allows us to minimize ambiguity within drug naming. As a default, drug compound names are used instead of branded trade names in an effort to be as consistent across experiment types as possible. PubChecm compounds can be searched <a href="https://pubchem.ncbi.nlm.nih.gov/"> here</a>. However, when a PubChem representation of a drug is not available, free-form text will be allowed.</p>
 
       <p><strong><i>Where does this information come from? Can I submit my abstract?</i></strong><br/>
 
-        The information in CIViC is derived from peer-reviewed, published literature. Every evidence item currently requires a citation from a PubMed ID. This means that conference abstracts are not supported until they are published and peer-reviewed with a PubMed ID.
+      The information in CIViC is derived from peer-reviewed, published literature. Every evidence item currently requires a citation from a PubMed ID. This means that conference abstracts are not supported until they are peer-reviewed, published, and a PubMed ID is assigned.</p>
 
       <p><strong><i>What does the "Beta" label on CIViC mean?</i></strong><br/>
 
@@ -81,11 +85,11 @@
 
       <p><strong><i>What if a drug is shown to have a negative effect on patients with a variant? Or the study was inconclusive?</i></strong><br/>
 
-        The data model, specifically the Evidence Direction field, is used to indicate whether the study supports or refutes (including inconclusive determinations) any interaction between the variant and a clinical action or result. The Clinical Significance field indicates the type of effect the variant is determined to have on clinical results within the evidence statement as having a positive, negative or neutral/no impact. These descriptions provide human readible interpretations of evidence statements that either support or refute sensitivity or resistance predictions to therapeutics (or other clinical outcomes). For more detailed definitions and specific examples, please review the data model <a ui-sref="help"> here</a>.</p>
+        The data model, specifically the Evidence Direction field, is used to indicate whether the study supports or refutes (including inconclusive determinations) any interaction between the variant and a clinical action or result. The Clinical Significance field indicates the type of effect the variant is determined to have on clinical results within the evidence statement as having a positive, negative or neutral/no impact. These descriptions provide human readible interpretations of evidence statements that either support or refute sensitivity or resistance predictions to therapeutics (or other clinical outcomes). For more detailed definitions and specific examples, please review the data model <a ui-sref="help.evidence"> here</a>.</p>
 
       <p><strong><i>My evidence statement disagrees with evidence from another source, should I still add it?</i></strong><br/>
 
-        Absolutely. CIViC provides a forum for discussion of disagreements in the field or literature. Simply log in, go to the "Variant Talk" or "Evidence Talk" pages, and discuss this disagreement with the community.</p>
+        Absolutely. CIViC is a forum for discussion of disagreements in the field or literature. Simply log in, go to the "Variant Talk" or "Evidence Talk" pages, and discuss this disagreement with the community.</p>
 
       <p><strong><i>I don't want to add evidence statements, can I still contribute?</i></strong><br/>
 
@@ -93,19 +97,27 @@
 
       <p><strong><i>What is MyGene.info?</i></strong><br/>
 
-        <a href=http://mygene.info/> MyGene.info</a> is a web service that allows simple query and retrieval of gene annotation data. We use it in CIViC to automatically import gene details from Entrez Gene (<a href=http://www.ncbi.nlm.nih.gov/gene>http://www.ncbi.nlm.nih.gov/gene</a>) such as gene name, synonyms, protein domains and pathways. MyGene.info was created and is maintained by the <a href=http://sulab.org/>Su Lab</a> (at The Scripps Research Institute).
+      <a href=http://mygene.info/> MyGene.info</a> is a web service that allows simple query and retrieval of gene annotation data. We use it in CIViC to automatically import gene details from Entrez Gene (<a href=http://www.ncbi.nlm.nih.gov/gene>http://www.ncbi.nlm.nih.gov/gene</a>) such as gene name, synonyms, protein domains and pathways. MyGene.info was created and is maintained by the <a href=http://sulab.org/>Su Lab</a> (at The Scripps Research Institute).</p>
 
       <p><strong><i>Is there an API I can access?</i></strong><br/>
 
-        Yes! Please visit the <a href="https://civic.genome.wustl.edu/#/api-documentation">API documentation</a> for more details.
+      Yes! Please visit the <a href="https://civic.genome.wustl.edu/#/api-documentation">API documentation</a> for more details.</p>
 
       <p><strong><i>What is the difference between "Supports a Negative association" and "Does not support a Positive association"?</i></strong><br/>
 
-        This can be confusing. We have reserved "Does not support - Positive" for statements that contradict previous statements that are supporting positive associations. For example, they would read "Contrary to the previous study which found this mutation sensitive to drug X, this study reported no effect.". The information that this study "Does not support" the prior study's conclusion is what we are trying to capture with these classifications.
+      This can be confusing. We have reserved "Does not support - Positive" for statements that contradict previous statements that are supporting positive associations. For example, they would read "Contrary to the previous study which found this mutation sensitive to drug X, this study reported no effect." The information that this study "Does not support" the prior study's conclusion is what we are trying to capture with these classifications.</p>
+
+      <p><strong><i>Where do I begin to curate evidence statements? Are certain evidence types or genes a priority?</i></strong></br>
+
+      The evidence statements that make up CIViC are generated from peer-reviewed, published literature. Our top priority is high quality (4+ star rating) Evidence Level A and B statements that associate specific variants with clinical outcomes using well powered patient cohorts. To help direct users towards genes known to be associated with clinical outcomes, we have compiled a list of high priority genes which you can download <a href="https://github.com/genome/civic-server/tree/master/public/downloads/RankedCivicGeneCandidates.tsv">here</a>. This list is based on a survey of 90 commerically available clinical gene panels developed by 40 distinct institutes and companies. If many independent groups feel that a gene is important to profile on their assay, it might be important. CIViC aims to spell out, with complete provenance, the evidence that each of these genes really is clinically important and why/how.</p>
+
+      <p><strong><i>Can I use a review article to create an evidence statement?</i></strong></br>
+
+      Yes, but we urge caution when using such sources. It is generally preferable to find the primary source articles cited by the review article instead. Particularly, when a review article is describing contradictory findings from multiple studies. Individual evidence items created from each study should be created to capture this debate. The Variant Summary might be a better place to cite relevant review articles.</p>
 
       <p><strong><i>How is CIViC licensed?</i></strong><br/>
 
-        The content of CIViC, hosted by <a href="http://genome.wustl.edu/">The McDonnell Genome Institute at Washington University School of Medicine</a> is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> and the source code for the CIViC <a href="https://github.com/genome/civic-server">server</a> and <a href="https://github.com/genome/civic-client">client</a> is licensed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.
+      The content of CIViC, hosted by <a href="http://genome.wustl.edu/">The McDonnell Genome Institute at Washington University School of Medicine</a> is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> and the source code for the CIViC <a href="https://github.com/genome/civic-server">server</a> and <a href="https://github.com/genome/civic-client">client</a> is licensed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
 
     </div>
   </div>

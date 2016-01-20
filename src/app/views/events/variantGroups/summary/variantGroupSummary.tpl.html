@@ -4,16 +4,16 @@
       <div ng-switch="variantGroup.description.length > 0">
         <div ng-switch-when="true">
           <p ng-bind="variantGroup.description|unsafe" class="description">
-            Variant group description.
+            Variant Group Summary.
           </p>
         </div>
         <div ng-switch-default="false">
           <p class="description">
-            This Variant Group does not currently have a description.
+            This Variant Group does not currently have a Summary.
           </p>
           <div ng-if="isAuthenticated() && !isEdit">
             <p>
-              <a class="btn btn-small btn-default" ui-sref="events.genes.summary.variantGroups.edit.basic({ geneId: variantGroup.id })">Add a Description</a>
+              <a class="btn btn-small btn-default" ui-sref="events.genes.summary.variantGroups.edit.basic({ geneId: variantGroup.id })">Add a Summary</a>
             </p>
           </div>
         </div>

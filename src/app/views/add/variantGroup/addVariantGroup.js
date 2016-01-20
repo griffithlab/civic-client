@@ -120,7 +120,7 @@
         templateOptions: {
           label: 'Variants',
           entityName: 'Variant',
-          helpText: 'Click the an X button to delete a variant, click the + button to add variant. Note that variants must be known to CIViC to be available for including here. New variants may be added as part of an evidence item using the the <a href="/#/add/evidence/basic">Add Evidence form</a>.',
+          helpText: 'Click the X button to delete a variant, click the + button to add a variant. Note that variants must be known to CIViC to be available for including here. New variants may be added as part of an evidence item using the <a href="/#/add/evidence/basic">Add Evidence form</a>.',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
