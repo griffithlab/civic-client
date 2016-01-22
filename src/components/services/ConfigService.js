@@ -41,8 +41,11 @@
       ],
       evidenceAttributeDescriptions: {
         variant_origin: {
-          Somatic: 'Variant is found only in tumor cells',
-          Germline: 'Variant is found in every cell, not restricted to tumor/diseased cells'
+          'Somatic Mutation': 'Variant is found only in tumor cells',
+          'Germline Mutation': 'Variant is found in every cell, not restricted to tumor/diseased cells',
+          'Germline Polymorphism': 'FIXME',
+          'Unknown': 'FIXME',
+          'N/A': 'FIXME',
         },
         evidence_type: {
           'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
