@@ -328,7 +328,7 @@
                     label: '',
                     required: true,
                     options: [
-                      {value: 'is', name: 'is'},
+                      {value: 'is_equal_to', name: 'is'},
                       {value: 'is_above', name: 'is above'},
                       {value: 'is_below', name: 'is below'}
                     ]
