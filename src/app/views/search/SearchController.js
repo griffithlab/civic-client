@@ -100,7 +100,8 @@
                     { value: 'rating', name: 'Rating' },
                     { value: 'suggested_changes_count', name: 'Suggested Revisions' },
                     { value: 'status', name: 'Status' },
-                    { value: 'variant_name', name: 'Variant Name' }
+                    { value: 'variant_name', name: 'Variant Name' },
+                    { value: 'submitter', name: 'Submitter' }
                   ],
                   onChange: function(value, options, scope) {
                     scope.model.condition = {
@@ -492,6 +493,31 @@
                       {value: 'contains', name: 'contains'},
                       {value: 'begins_with', name: 'begins with'},
                       {value: 'does_not_contain', name: 'does not contain'}
+                    ]
+                  }
+                },
+                {
+                  key: 'parameters[0]',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              submitter: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  defaultValue: 'contains',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: 'contains', name: 'contains'},
+                      {value: 'begins_with', name: 'begins with'},
                     ]
                   }
                 },
