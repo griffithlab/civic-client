@@ -272,6 +272,7 @@
               { value: 'Poor Outcome', label: 'Poor Outcome' },
               { value: 'Positive', label: 'Positive' },
               { value: 'Negative', label: 'Negative' },
+              { value: 'Adverse Response', label: 'Adverse Response' },
               { value: 'N/A', label: 'N/A' }
             ]
 

@@ -334,6 +334,7 @@
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
             { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+            { type: 'Predictive', value: 'Adverse Response', label: 'Adverse Response' },
             { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
             { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
             { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
@@ -345,6 +346,7 @@
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
             { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+            { type: 'Predictive', value: 'Adverse Response', label: 'Adverse Response' },
             { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
             { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
             { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
@@ -357,6 +359,7 @@
             attributeDefinitions: {
               'Sensitivity': 'Subject exhibits response to drug treatment',
               'Resistance or Non-Response': 'Subject exhibits a lack of response or active resistance to drug treatment',
+              'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
               'Better Outcome': 'Demonstrates better than expected clinical outcome',
               'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
               'Positive': 'Associated with diagnosis of disease or subtype',

@@ -77,6 +77,7 @@
           'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
           'Positive': 'Associated with diagnosis of disease or subtype',
           'Negative': 'Associated with lack of disease or subtype',
+          'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
           'N/A': 'Not applicable'
         },
         drug_interaction_type: {
