@@ -74,7 +74,11 @@
 
         <tr>
           <td class="name">Disease:</td>
-          <td class="value">{{ evidence.disease.name }}</td>
+          <td class="value">
+            <a target="_blank" href="{{ evidence.disease.url }}" _target="blank">
+              {{ evidence.disease.name }}
+            </a>
+          </td>
         </tr>
         <tr>
           <td class="name">Drug:</td>
