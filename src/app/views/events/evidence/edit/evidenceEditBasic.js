@@ -402,6 +402,7 @@
             templateOptions: {
               inputFormatter: 'model[options.key]',
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              editable: true,
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)'
             },
