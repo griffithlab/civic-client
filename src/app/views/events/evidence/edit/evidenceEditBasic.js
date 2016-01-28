@@ -292,7 +292,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'A indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
+          helpText: 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
