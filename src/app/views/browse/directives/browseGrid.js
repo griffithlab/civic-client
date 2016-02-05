@@ -35,7 +35,7 @@
 
     ctrl.filters = [];
     ctrl.sorting = [{
-      field: $scope.mode === 'variants' ? 'variant' : 'gene',
+      field: $scope.mode === 'variants' ? 'variant' : 'name',
       direction: 'asc'
     }];
 
