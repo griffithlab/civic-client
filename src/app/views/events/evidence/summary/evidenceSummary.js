@@ -28,8 +28,8 @@
     var evidence_levels = {
       A: 'Validated',
       B: 'Clinical',
-      C: 'Preclinical',
-      D: 'Case Study',
+      C: 'Case Study',
+      D: 'Preclinical',
       E: 'Inferential'
     };
     $scope.$watchCollection('evidence', function() {

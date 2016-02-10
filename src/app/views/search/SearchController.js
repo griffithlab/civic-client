@@ -348,8 +348,8 @@
                     options: [
                       { value: 'A', name: 'A - Validated'},
                       { value: 'B', name: 'B - Clinical'},
-                      { value: 'C', name: 'C - Preclinical'},
-                      { value: 'D', name: 'D - Case Study'},
+                      { value: 'C', name: 'C - Case Study'},
+                      { value: 'D', name: 'D - Preclinical'},
                       { value: 'E', name: 'E - Inferential'}
                     ]
                   }

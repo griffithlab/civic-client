@@ -249,8 +249,8 @@
             { value: '', label: 'Please select an Evidence Level' },
             { value: 'A', label: 'A - Validated'},
             { value: 'B', label: 'B - Clinical'},
-            { value: 'C', label: 'C - Preclinical'},
-            { value: 'D', label: 'D - Case Study'},
+            { value: 'C', name: 'C - Case Study'},
+            { value: 'D', name: 'D - Preclinical'},
             { value: 'E', label: 'E - Inferential'}
           ],
           valueProp: 'value',
