@@ -27,6 +27,15 @@
           navMode: 'home'
         }
       })
+      .state('about', {
+        url: '/about',
+        controller: 'AboutCtrl',
+        templateUrl: 'app/pages/about.tpl.html',
+        data: {
+          titleExp: '"About"',
+          navMode: 'sub'
+        }
+      })
       .state('collaborate', {
         url: '/collaborate',
         controller: 'CollaborateCtrl',
