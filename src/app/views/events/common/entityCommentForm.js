@@ -76,24 +76,28 @@
         templateOptions: {
           label: 'Add Comment:',
           rows: 4,
+          minimum_length: 3,
           value: vm.newComment.text,
-          minlength: 2,
           currentUser: vm.currentUser,
-          required: true
+          required: false
         },
-        validation: {
-          messages: {
-            minlength: '"Comment must be at least " + options.templateOptions.minlength + " characters long."'
+        validators: {
+          length: {
+            expression: function(viewValue, modelValue, scope) {
+              var value = viewValue || modelValue;
+              return value.length >= scope.to.minimum_length;
+            },
+            message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
           }
         }
       }
     ];
 
-    vm.submit = function(comment) {
+    vm.submit = function(comment, resetModel) {
       comment = _.merge(comment, $stateParams);
       $scope.entityModel.submitComment(comment).then(function () {
         console.log('comment submitted.');
-        vm.newComment.text = '';
+        resetModel();
         vm.previewText = '';
         vm.commentMessage = '';
         vm.mode = 'edit';
