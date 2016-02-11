@@ -85,11 +85,11 @@
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
-              "Somatic Mutation": 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
-              "Germline Mutation": 'Variant is a mutation, found in every cell, not restricted to tumor/diseased cells, is expected to have arisen de novo in the germ cells responsible for the current generation or only very recent generations (e.g., close family members), and is not thought to exist in the population at large.',
-              "Germline Polymorphism": 'Variant is found in every cell, not restricted to tumor/diseased cells, and thought to represent common (or relatively rare) variation in the population at large.',
-              "Unknown": 'The variant origin is uncertain based on the available evidence.',
-              "N/A": 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concepts of variant origin.'
+              'Somatic Mutation': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
+              'Germline Mutation': 'Variant is a mutation, found in every cell, not restricted to tumor/diseased cells, is expected to have arisen de novo in the germ cells responsible for the current generation or only very recent generations (e.g., close family members), and is not thought to exist in the population at large.',
+              'Germline Polymorphism': 'Variant is found in every cell, not restricted to tumor/diseased cells, and thought to represent common (or relatively rare) variation in the population at large.',
+              'Unknown': 'The variant origin is uncertain based on the available evidence.',
+              'N/A': 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concepts of variant origin.'
             }
           },
           onChange: function(value, options) {
@@ -249,8 +249,8 @@
             { value: '', label: 'Please select an Evidence Level' },
             { value: 'A', label: 'A - Validated'},
             { value: 'B', label: 'B - Clinical'},
-            { value: 'C', name: 'C - Case Study'},
-            { value: 'D', name: 'D - Preclinical'},
+            { value: 'C', label: 'C - Case Study'},
+            { value: 'D', label: 'D - Preclinical'},
             { value: 'E', label: 'E - Inferential'}
           ],
           valueProp: 'value',

@@ -5,7 +5,7 @@
     .config(helpViewConfig);
 
   // @ngInject
-  function helpViewConfig($stateProvider, $urlRouterProvider) {
+  function helpViewConfig($stateProvider) {
     $stateProvider
       .state('help', {
         url: '/help',
@@ -72,7 +72,7 @@
           titleExp: '"Help: Report a Problem"',
           navMode: 'sub'
         }
-      })
+      });
   }
 
   // @ngInject
@@ -87,8 +87,7 @@
         {
           heading: 'Evidence',
           state: 'help.evidence'
-        }
-        ,
+        },
         {
           heading: 'Variants',
           state: 'help.variants'
@@ -204,7 +203,7 @@
         'ng-click="$close()"' +
         '/></div>',
         size: 'lg'
-      })
+      });
     };
   }
 })();

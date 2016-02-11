@@ -39,7 +39,7 @@
       if (Security.isAuthenticated()) {
         $state.go('events.genes.summary.variants.edit.basic', $stateParams);
       }
-    }
+    };
 
   }
 })();

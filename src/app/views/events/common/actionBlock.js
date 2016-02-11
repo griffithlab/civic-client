@@ -17,7 +17,7 @@
   }
 
   // @ngInject
-  function ActionBlockController($scope) {
+  function ActionBlockController() {
     console.log('action block controller loaded.');
   }
 })();

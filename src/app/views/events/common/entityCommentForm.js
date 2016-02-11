@@ -30,9 +30,9 @@
 
     vm.mode = 'edit';
     vm.previewLoading = false;
-    vm.previewText = "";
+    vm.previewText = '';
 
-    vm.commentMessage = "";
+    vm.commentMessage = '';
 
     vm.showMarkdownHelp = false;
     vm.markdownHelpUrl = 'app/views/events/common/entityCommentMarkdownHelp.tpl.html';
@@ -40,19 +40,19 @@
     vm.switchMode = function(mode) {
       if (mode === 'preview') {
         if (!_.isUndefined(vm.newComment.text) && vm.newComment.text.length >0) {
-          vm.commentMessage = "";
+          vm.commentMessage = '';
           vm.mode = 'preview';
           vm.previewLoading = true;
           CommentPreview.getPreview(vm.newComment.text)
             .then(function(response) { // success
               vm.previewText = response.html;
               vm.previewLoading = false;
-            }, function(error) { // failure
+            }, function() { // failure
               vm.previewLoading = false;
-              vm.commentMessage="Error loading preview."
-            })
+              vm.commentMessage = 'Error loading preview.';
+            });
         } else {
-          vm.commentMessage = "Please enter Markdown text to preview.";
+          vm.commentMessage = 'Please enter Markdown text to preview.';
         }
       } else {
         vm.mode = 'edit';
@@ -89,7 +89,7 @@
       }
     ];
 
-    vm.submit = function(comment, resetModel) {
+    vm.submit = function(comment) {
       comment = _.merge(comment, $stateParams);
       $scope.entityModel.submitComment(comment).then(function () {
         console.log('comment submitted.');
@@ -97,7 +97,7 @@
         vm.previewText = '';
         vm.commentMessage = '';
         vm.mode = 'edit';
-      }, function(error) {
+      }, function() {
         vm.commentMessage = 'Error submitting comment.';
       });
     };

@@ -28,7 +28,6 @@
 
   // @ngInject
   function CommunityMainController($scope,
-                                   $stateParams,
                                    _,
                                    Security,
                                    Community,
@@ -66,7 +65,7 @@
           required: false
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function() {
             updateData();
           }
         }
@@ -89,7 +88,7 @@
           ]
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function() {
             updateData();
           }
         }
@@ -113,7 +112,7 @@
           ]
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue) {
             if(!_.isUndefined(newValue)) {
               vm.model.sort_order = _.find(field.templateOptions.options, {value: newValue}).sort_order;
             }
@@ -137,7 +136,7 @@
           ]
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function() {
             updateData();
           }
         }

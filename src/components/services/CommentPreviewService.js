@@ -20,7 +20,7 @@
 
   // @ngInject
   function CommentPreviewService(CommentPreviewResource) {
-    var preview = "";
+    var preview = '';
 
     return {
       data: {

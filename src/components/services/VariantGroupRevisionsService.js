@@ -116,7 +116,8 @@
                                         VariantGroups,
                                         Genes,
                                         $cacheFactory,
-                                        $q) {
+                                        $q,
+                                        _) {
     var cache = $cacheFactory.get('$http');
 
     // Base VariantGroup Revision and VariantGroup Revisions Collection

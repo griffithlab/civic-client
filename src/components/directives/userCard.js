@@ -19,7 +19,7 @@
   }
 
   // @inject
-  function UserCardController($state) {
+  function UserCardController($state, _) {
     console.log('userCard controller called.');
     var vm = this;
 
@@ -39,7 +39,7 @@
 
       vm.entityName = _.compact(vm.entityNames).join(' / ');
     }
-    
+
     vm.userClick = function(id) {
       $state.go('users.profile', { userId: id});
     };

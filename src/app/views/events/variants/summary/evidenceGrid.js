@@ -333,7 +333,7 @@
       ]
     };
 
-    function filterByStatus(status, grid, event) {
+    function filterByStatus(status, grid) {
       if (_.has(grid.selection.lastSelectedRow, 'entity') &&
         status === 'rejected' &&
         grid.selection.lastSelectedRow.entity.status === 'rejected'
