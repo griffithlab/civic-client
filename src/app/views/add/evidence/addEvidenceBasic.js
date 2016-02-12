@@ -117,6 +117,7 @@
       {
         key: 'variant',
         type: 'horizontalTypeaheadHelp',
+        className: 'input-caps',
         controller: /* @ngInject */ function($scope, $stateParams, Variants) {
           // populate field if variantId provided
           if($stateParams.variantId){
