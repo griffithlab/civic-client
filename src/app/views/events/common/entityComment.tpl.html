@@ -3,13 +3,18 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="title-block">
-          <div class="user-image">
-            <user-image user="ctrl.comment.user" height="32" width="32"></user-image>
-          </div>
+          <a ui-sref="users.profile({userId: ctrl.comment.user.id})">
+            <div class="user-image">
+              <user-image user="ctrl.comment.user" height="32" width="32"></user-image>
+
+            </div>
+          </a>
           <div class="comment-title">
             <h4 class="title" ng-bind="ctrl.comment.title">Comment Title</h4>
           <span class="small">Posted by
-            <strong><span ng-bind="ctrl.comment.user.display_name">user.display_name</span></strong>
+            <a ui-sref="users.profile({userId: ctrl.comment.user.id})">
+              <strong><span ng-bind="ctrl.comment.user.display_name">user.display_name</span></strong>
+            </a>
             <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span>
           </span>
           </div>
@@ -30,7 +35,9 @@
       <div class="col-xs-12">
         <div class="comment-block">
           <div class="user-image">
-            <user-image user="ctrl.comment.user" height="32" width="32"></user-image>
+            <a ui-sref="users.profile({userId: ctrl.comment.user.id})">
+              <user-image user="ctrl.comment.user" height="32" width="32"></user-image>
+            </a>
           </div>
           <div class="comment-content">
             <div class="text-block">
@@ -39,10 +46,12 @@
               </p>
             </div>
             <div class="info-block">
-              <span class="posted-time small pull-left">Posted by
-                <strong><span ng-bind="ctrl.comment.user.display_name">user.display_name</span></strong>
-                <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span>
-              </span>
+              <span class="small">Posted by
+            <a ui-sref="users.profile({userId: ctrl.comment.user.id})">
+              <strong><span ng-bind="ctrl.comment.user.display_name">user.display_name</span></strong>
+            </a>
+            <span ng-bind="ctrl.comment.created_at | timeAgo">comment.created_at</span>
+          </span>
               <div class="comment-actions pull-right">
                 <button
                   ng-show="ctrl.comment.user.id === ctrl.security.currentUser.id"
