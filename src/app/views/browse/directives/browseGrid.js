@@ -35,8 +35,8 @@
 
     ctrl.filters = [];
     ctrl.sorting = [{
-      field: $scope.mode === 'variants' ? 'variant' : 'name',
-      direction: 'asc'
+      field: 'evidence_item_count',
+      direction: 'desc'
     }];
 
     $scope.$watch('ctrl.totalItems', function() {
@@ -74,7 +74,6 @@
         {
           name: 'variant',
           width: '30%',
-          sort: { direction: uiGridConstants.ASC },
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -105,6 +104,9 @@
           name: 'evidence_item_count',
           width: '10%',
           displayName: 'Evidence',
+          sort: {
+            direction: uiGridConstants.DESC
+          },
           enableFiltering: false,
           allowCellFocus: false,
           filter: {
@@ -116,7 +118,6 @@
         {
           name: 'name',
           width: '15%',
-          sort: {direction: uiGridConstants.ASC},
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -159,6 +160,9 @@
           name: 'evidence_item_count',
           width: '10%',
           displayName: 'Evidence',
+          sort: {
+            direction: uiGridConstants.DESC
+          },
           enableFiltering: false,
           allowCellFocus: false,
           filter: {
