@@ -95,6 +95,7 @@
                     { value: 'drug_id', name: 'Drug PubChem ID' },
                     { value: 'drug_name', name: 'Drug Name' },
                     { value: 'id', name: 'Evidence ID'},
+                    { value: 'evidence_type', name: 'Evidence Type' },
                     { value: 'evidence_level', name: 'Evidence Level' },
                     { value: 'gene_name', name: 'Gene Name' },
                     { value: 'pubmed_id', name: 'Pubmed ID' },
@@ -319,6 +320,37 @@
                   templateOptions: {
                     label: '',
                     required: true
+                  }
+                }
+              ],
+              evidence_type: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field inline-field-md',
+                  defaultValue: 'is',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: 'is', name: 'is'},
+                      {value: 'is_not', name: 'is not'}
+                    ]
+                  }
+                },
+                {
+                  key: 'parameters[0]',
+                  type: 'select',
+                  className: 'inline-field',
+                  defaultValue: 'Predictive',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      { value: 'Predictive', name: 'Predictive' },
+                      { value: 'Diagnostic', name: 'Diagnostic' },
+                      { value: 'Prognostic', name: 'Prognostic' }
+                    ]
                   }
                 }
               ],
