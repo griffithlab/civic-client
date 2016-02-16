@@ -167,8 +167,8 @@
         },
         { name: 'drugs',
           headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
-          displayName: 'DRUG',
-          headerTooltip: 'Drug',
+          displayName: 'DRUGS',
+          headerTooltip: 'Drugs',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
@@ -429,10 +429,11 @@
 
       function prepareDrugArray(evidence) {
         return _.map(evidence, function(item){
-          if (_.isArray(item.drugs)) {
+          if (_.isArray(item.drugs) && item.drugs.length > 0) {
             item.drugs = _.chain(item.drugs).pluck('name').value().join(', ');
             return item;
           } else {
+            item.drugs = 'N/A';
             return item;
           }
         });
