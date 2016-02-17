@@ -165,7 +165,7 @@
           },
           cellTemplate: 'app/views/events/variants/summary/evidenceGridDiseaseCell.tpl.html'
         },
-        { name: 'drugs',
+        { name: 'druglist',
           headerCellTemplate: 'app/views/events/variants/summary/evidenceGridTooltipHeader.tpl.html',
           displayName: 'DRUGS',
           headerTooltip: 'Drugs',
@@ -430,10 +430,10 @@
       function prepareDrugArray(evidence) {
         return _.map(evidence, function(item){
           if (_.isArray(item.drugs) && item.drugs.length > 0) {
-            item.drugs = _.chain(item.drugs).pluck('name').value().join(', ');
+            item.druglist = _.chain(item.drugs).pluck('name').value().join(', ');
             return item;
           } else {
-            item.drugs = 'N/A';
+            item.druglist = 'N/A';
             return item;
           }
         });
