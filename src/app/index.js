@@ -70,7 +70,7 @@
 
     Security.requestCurrentUser();
 
-    /*  ui-router debug logging */
+    /*  ui-router debug logging - uncomment these if you run into links/routes silently failing. */
     //function message(to, toP, from, fromP) {
     //  return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
     //}
