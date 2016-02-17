@@ -33,10 +33,10 @@
               'save': false,
               'queries': [
                 {
-                  'field':'submitter',
+                  'field':'submitter_id',
                   'condition': {
-                    'name':'is',
-                    'parameters':[user.display_name]
+                    'name':'is_equal_to',
+                    'parameters':[user.id]
                   }
                 }
               ]};
