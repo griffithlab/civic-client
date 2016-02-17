@@ -24,7 +24,7 @@
                                       Publications,
                                       Diseases,
                                       Datatables,
-                                      PubchemTypeahead,
+                                      DrugSuggestions,
                                       AddEvidenceViewOptions,
                                       formConfig,
                                       _) {
@@ -499,9 +499,9 @@
                 model.splice(index+1, 0, '');
               },
               typeaheadSearch: function(val) {
-                return PubchemTypeahead.get(val)
+                return DrugSuggestions.query(val)
                   .then(function(response) {
-                    return _.map(response.autocp_array, function(drugname) {
+                    return _.map(response, function(drugname) {
                       return { name: drugname };
                     });
                   });
