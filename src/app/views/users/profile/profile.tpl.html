@@ -6,19 +6,43 @@
       </div>
     </div>
   </div>
-  <div class="row col-headers">
-    <div class="col-xs-6">
-        <h4>Events:</h4>
+  <div ng-if="vm.evidence.length > 0">
+    <div class="row col-headers">
+      <div class="col-xs-12">
+        <h4>Submitted Evidence Items:</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 evidence-table-block">
+        <evidence-grid
+          evidence="vm.evidence"
+          show-gene-col="true"
+          show-variant-col="true"
+          context="'summary'"
+          rounded="true">
+        </evidence-grid>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-6 events-block">
-      <ul>
-        <li ng-repeat="event in vm.events">
-          <event-item event="event" theme="'light'">EVENT</event-item>
-        </li>
-      </ul>
+  <div class="row col-headers" style="margin-top: 1em;">
+    <div class="col-xs-12">
+      <h4>Events:</h4>
     </div>
   </div>
+  <div class="col-xs-12 events-block">
+    <div ng-switch="vm.events.length > 0">
+      <div ng-switch-when="true">
+        <ul>
+          <li ng-repeat="event in vm.events">
+            <event-item event="event" theme="'light'">EVENT</event-item>
+          </li>
+        </ul>
+      </div>
+      <div ng-switch-when="false">
+        <p>User has not generated any CIViC events.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>

@@ -598,6 +598,7 @@
                     options: [
                       {value: 'contains', name: 'contains'},
                       {value: 'begins_with', name: 'begins with'},
+                      {value: 'is', name: 'is'}
                     ]
                   }
                 },

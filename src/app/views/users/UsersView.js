@@ -26,6 +26,21 @@
           },
           'events': function(Users, $stateParams) {
             return Users.queryEvents($stateParams.userId);
+          },
+          'evidence': function(Search, user) {
+            var query = {
+              'operator':'AND',
+              'save': false,
+              'queries': [
+                {
+                  'field':'submitter',
+                  'condition': {
+                    'name':'is',
+                    'parameters':[user.display_name]
+                  }
+                }
+              ]};
+            return Search.post(query);
           }
         },
         controller: 'ProfileController',
