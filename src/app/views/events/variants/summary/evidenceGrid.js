@@ -191,8 +191,8 @@
               { value: null, label: '--' },
               { value: 'A', label: 'A - Validated'},
               { value: 'B', label: 'B - Clinical'},
-              { value: 'C', name: 'C - Case Study'},
-              { value: 'D', name: 'D - Preclinical'},
+              { value: 'C', label: 'C - Case Study'},
+              { value: 'D', label: 'D - Preclinical'},
               { value: 'E', label: 'E - Inferential'}]
           },
           sort: { direction: uiGridConstants.ASC },
