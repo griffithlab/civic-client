@@ -501,7 +501,7 @@
               typeaheadSearch: function(val) {
                 return PubchemTypeahead.get(val)
                   .then(function(response) {
-                    return _.map(response.autocp_array, function(drugname) {
+                    return _.map(response, function(drugname) {
                       return { name: drugname };
                     });
                   });
