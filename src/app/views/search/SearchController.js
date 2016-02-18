@@ -329,7 +329,7 @@
                   key: 'name',
                   type: 'select',
                   className: 'inline-field inline-field-md',
-                  defaultValue: 'is',
+                  defaultValue: 'is_equal_to',
                   templateOptions: {
                     label: '',
                     required: true,
