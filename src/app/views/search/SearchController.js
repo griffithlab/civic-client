@@ -102,8 +102,9 @@
                     { value: 'rating', name: 'Rating' },
                     { value: 'suggested_changes_count', name: 'Suggested Revisions' },
                     { value: 'status', name: 'Status' },
-                    { value: 'submitter', name: 'Submitter' },
-                    { value: 'variant_name', name: 'Variant Name' }
+                    { value: 'variant_name', name: 'Variant Name' },
+                    { value: 'submitter', name: 'Submitter Display Name' },
+                    { value: 'submitter_id', name: 'Submitter ID' }
                   ],
                   onChange: function(value, options, scope) {
                     scope.model.condition = {
@@ -597,8 +598,32 @@
                     required: true,
                     options: [
                       {value: 'contains', name: 'contains'},
-                      {value: 'begins_with', name: 'begins with'},
-                      {value: 'is', name: 'is'}
+                      {value: 'begins_with', name: 'begins with'}
+                    ]
+                  }
+                },
+                {
+                  key: 'parameters[0]',
+                  type: 'input',
+                  className: 'inline-field',
+                  templateOptions: {
+                    label: '',
+                    required: true
+                  }
+                }
+              ],
+              submitter_id: [
+                {
+                  key: 'name',
+                  type: 'select',
+                  className: 'inline-field',
+                  defaultValue: 'is_equal_to',
+                  templateOptions: {
+                    label: '',
+                    required: true,
+                    options: [
+                      {value: 'is_equal_to', name: 'is'},
+                      {value: 'is_not_equal_to', name: 'is not'}
                     ]
                   }
                 },
