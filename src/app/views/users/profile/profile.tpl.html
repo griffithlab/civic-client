@@ -7,11 +7,6 @@
     </div>
   </div>
   <div ng-if="vm.evidence.length > 0">
-    <div class="row col-headers">
-      <div class="col-xs-12">
-        <h4>Submitted Evidence Items:</h4>
-      </div>
-    </div>
     <div class="row">
       <div class="col-xs-12 evidence-table-block">
         <evidence-grid
@@ -19,7 +14,7 @@
           show-gene-col="true"
           show-variant-col="true"
           rows="10"
-          context="'summary'"
+          context="'profile'"
           rounded="true">
         </evidence-grid>
       </div>

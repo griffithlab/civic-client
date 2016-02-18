@@ -29,6 +29,7 @@
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
     var statusFilters = ['accepted', 'submitted'];
+    ctrl.context = $scope.context;
     ctrl.showGridKey = false;
 
     ctrl.keyPopover = {
