@@ -1,13 +1,41 @@
 <div class="searchView">
-  <div class="title-row">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="name">
-          <h3>Search Evidence Items</h3>
+  <div class="row">
+    <div class="subTabs col-xs-12">
+      <div class="row">
+        <div class="col-xs-6 name">
+          <h3>
+            Search
+          </h3>
+        </div>
+
+        <div class="col-xs-6 tabs">
+          <ul class="nav nav-tabs" style="float: right;">
+            <li ui-sref-active="active">
+              <a ui-sref="search.evidence">Search Evidence</a>
+            </li>
+
+            <li ui-sref-active="active">
+              <a ui-sref="search.genes">Search Genes</a>
+            </li>
+
+            <li ui-sref-active="active">
+              <a ui-sref="search.variants">Search Variants</a>
+            </li>
+
+          </ul>
         </div>
       </div>
     </div>
   </div>
+  <!--<div class="title-row">-->
+    <!--<div class="row">-->
+      <!--<div class="col-xs-12">-->
+        <!--<div class="name">-->
+          <!--<h3>Search Evidence Items</h3>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
   <div class="row">
     <div class="col-xs-12">
       <ui-view></ui-view>
