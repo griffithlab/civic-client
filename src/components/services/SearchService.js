@@ -6,9 +6,10 @@
 
   // @ngInject
   function SearchResource($resource) {
-    var SearchService = $resource('/api/evidence_items/search/:token',
+    var SearchService = $resource('/api/:entity/search/:token',
       {
-        token: '@token'
+        token: '@token',
+        entity: '@entity'
       },
       {
         post: {
@@ -55,8 +56,8 @@
     }
 
     // @ngInject
-    function get(token) {
-      return SearchResource.get({token: token}).$promise
+    function get(reqObj) {
+      return SearchResource.get(reqObj).$promise
         .then(function(response) {
           angular.copy(response, results);
           return response.$promise;

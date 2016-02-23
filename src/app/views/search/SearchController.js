@@ -4,7 +4,7 @@
     .controller('SearchController', SearchController);
 
   // @ngInject
-  function SearchController($scope, $state, $stateParams, $log, $location, _, Search) {
+  function SearchController($scope, $state, $stateParams, $log, _, Search) {
     var vm = $scope.vm = {};
 
     // function assignment
@@ -15,13 +15,12 @@
 
     init();
 
-//    vm.originalFields = angular.copy(vm.fields);
-
     // function definition
     function onSubmit() {
       $log.debug(JSON.stringify(vm.model));
       //vm.searchResults = Search.post(vm.model);
       //vm.showEvidenceGrid = true;
+      vm.model.entity = 'evidence_items';
       Search.post(vm.model)
         .then(function(response) {
           vm.searchResults = response.results;
@@ -36,7 +35,7 @@
 
     function init() {
       if(_.has($stateParams, 'token') && !_.isEmpty($stateParams.token)){
-        Search.get($stateParams.token)
+        Search.get({ entity: 'evidence_items', token: $stateParams.token })
           .then(function(response) {
             vm.model.operator = response.params.operator;
             vm.model.queries= response.params.queries;
@@ -46,6 +45,7 @@
       } else {
         Search.reset();
         vm.model = {
+          entity: 'evidence_items',
           operator: 'AND',
           queries: [
             {
