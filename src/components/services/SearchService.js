@@ -31,13 +31,18 @@
 
   // @ngInject
   function SearchService(SearchResource) {
-    var results = [];
+    var results = {};
 
     return {
       results: results,
       post: post,
-      get: get
+      get: get,
+      reset: reset
     };
+
+    function reset() {
+      results = {};
+    }
 
     // @ngInject
     function post(reqObj) {

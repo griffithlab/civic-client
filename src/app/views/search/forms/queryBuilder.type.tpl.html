@@ -1,6 +1,7 @@
 <div class="queryBuilder">
   <!--loop through each element in model array-->
-  <div class="row" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.rowFields);conditionFields = copyFields(to.conditionFields)">
+  <div class="row" ng-repeat="element in model[options.key]"
+       ng-init="fields = copyFields(to.rowFields); conditionFields = copyFields(to.conditionFields)">
     <div class="col-xs-12">
       <div class="query-row">
         <div class="row">

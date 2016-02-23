@@ -6,6 +6,22 @@
   // @ngInject
   function queryBuilderConfig(formlyConfigProvider) {
     var unique = 1;
+
+    formlyConfigProvider.setType({
+      name: 'queryBuilderSelect',
+      extends: 'select',
+      controller: function($scope, $parse) {
+        // angular-formly's options.defaultValue appears to ignore current model values,
+        // so we must implement our own default value feature here
+        var getter = $parse($scope.options.key);
+        var setter = getter.assign;
+        if(getter($scope.model) === undefined) {
+          // no model value found, so set field value to default value
+          setter($scope.model, $scope.options.data.defaultValue);
+        }
+      }
+    });
+
     formlyConfigProvider.setType({
       name: 'queryRow',
       templateUrl: 'app/views/search/forms/queryBuilder.type.tpl.html',

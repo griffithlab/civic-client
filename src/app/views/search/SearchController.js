@@ -15,7 +15,7 @@
 
     init();
 
-    vm.originalFields = angular.copy(vm.fields);
+//    vm.originalFields = angular.copy(vm.fields);
 
     // function definition
     function onSubmit() {
@@ -44,6 +44,7 @@
             vm.showEvidenceGrid = true;
           });
       } else {
+        Search.reset();
         vm.model = {
           operator: 'AND',
           queries: [
@@ -58,13 +59,13 @@
         };
       }
 
-
-
       vm.operatorField = [
         {
           key: 'operator',
-          type: 'select',
-          defaultValue: 'AND',
+          type: 'queryBuilderSelect',
+          data: {
+            defaultValue: 'AND'
+          },
           templateOptions: {
             label: '',
             options: [
@@ -83,7 +84,7 @@
             rowFields: [
               {
                 key: 'field',
-                type: 'select',
+                type: 'queryBuilderSelect',
                 templateOptions: {
                   label: '',
                   required: true,
@@ -119,9 +120,11 @@
               pubmed_id: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field inline-field-md',
-                  defaultValue: 'is',
+                  data: {
+                    defaultValue: 'is'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -144,9 +147,11 @@
               rating: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'is_greater_than_or_equal_to',
+                  data: {
+                    defaultValue: 'is_greater_than_or_equal_to'
+                  },
                   templateOptions: {
                     required: true,
                     label: '',
@@ -191,9 +196,11 @@
               description: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'contains',
+                  data: {
+                    defaultValue: 'contains'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -219,9 +226,11 @@
               disease_name: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'contains',
+                  data: {
+                    defaultValue: 'contains'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -247,9 +256,11 @@
               disease_doid: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field inline-field-small',
-                  defaultValue: 'is',
+                  data: {
+                    defaultValue: 'is'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -274,9 +285,11 @@
               drug_name: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'contains',
+                  data: {
+                    defaultValue: 'contains'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -302,9 +315,11 @@
               drug_id: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field inline-field-small',
-                  defaultValue: 'is',
+                  data: {
+                    defaultValue: 'is'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -327,9 +342,11 @@
               evidence_type: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field inline-field-md',
-                  defaultValue: 'is_equal_to',
+                  data: {
+                    defaultValue: 'is_equal_to'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -341,9 +358,11 @@
                 },
                 {
                   key: 'parameters[0]',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'Predictive',
+                  data: {
+                    defaultValue: 'Predictive'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -358,9 +377,11 @@
               evidence_level: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'is_above',
+                  data: {
+                    defaultValue: 'is_above'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -373,9 +394,11 @@
                 },
                 {
                   key: 'parameters[0]',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'C',
+                  data: {
+                    defaultValue: 'C'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -392,9 +415,11 @@
               status: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field inline-field-small',
-                  defaultValue: 'is',
+                  data: {
+                    defaultValue: 'is'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -406,9 +431,11 @@
                 },
                 {
                   key: 'parameters[0]',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'submitted',
+                  data: {
+                    defaultValue: 'submitted'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -427,9 +454,11 @@
                 },
                 {
                   key: 'parameters[0]', // status
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'new',
+                  data: {
+                    defaultValue: 'new'
+                  },
                   templateOptions: {
                     required: true,
                     label: '',
@@ -442,9 +471,11 @@
                 },
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'is_greater_than_or_equal_to',
+                  data: {
+                    defaultValue: 'is_greater_than_or_equal_to'
+                  },
                   templateOptions: {
                     required: true,
                     label: '',
@@ -489,9 +520,11 @@
               id: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'is_equal_to',
+                  data: {
+                    defaultValue: 'is_equal_to'
+                  },
                   templateOptions: {
                     required: true,
                     label: '',
@@ -536,9 +569,11 @@
               gene_name: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'contains',
+                  data: {
+                    defaultValue: 'contains'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -563,9 +598,11 @@
               variant_name: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'contains',
+                  data: {
+                    defaultValue: 'contains'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -590,9 +627,11 @@
               submitter: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'contains',
+                  data: {
+                    defaultValue: 'contains'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
@@ -615,9 +654,11 @@
               submitter_id: [
                 {
                   key: 'name',
-                  type: 'select',
+                  type: 'queryBuilderSelect',
                   className: 'inline-field',
-                  defaultValue: 'is_equal_to',
+                  data: {
+                    defaultValue: 'is_equal_to'
+                  },
                   templateOptions: {
                     label: '',
                     required: true,
