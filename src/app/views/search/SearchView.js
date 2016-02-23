@@ -9,10 +9,15 @@
     console.log('SearchView called.');
     $stateProvider
       .state('search', {
-        url: '/search/:token',
+        abstract: true,
+        url: '/search',
+        templateUrl: 'app/views/search/search.tpl.html'
+      })
+      .state('search.evidence', {
+        url: '/evidence/:token',
         reloadOnSearch: false,
-        controller: 'SearchController',
-        templateUrl: 'app/views/search/search.tpl.html',
+        controller: 'SearchEvidenceController',
+        templateUrl: 'app/views/search/searchEvidence.tpl.html',
         data: {
           titleExp: '"Search Evidence"',
           navMode: 'sub'

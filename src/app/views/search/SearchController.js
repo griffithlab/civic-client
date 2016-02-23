@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.search')
-    .controller('SearchController', SearchController);
+    .controller('SearchEvidenceController', SearchController);
 
   // @ngInject
   function SearchController($scope, $state, $stateParams, $log, _, Search) {
@@ -26,7 +26,7 @@
           vm.searchResults = response.results;
           vm.showEvidenceGrid = true;
           if(_.has(response, 'token') && !_.isNull(response.token)) {
-            $state.transitionTo('search', { token: response.token}, {notify: false});
+            $state.transitionTo('search.evidence', { token: response.token }, {notify: false});
           }
         });
     }
