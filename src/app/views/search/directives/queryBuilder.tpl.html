@@ -1,0 +1,63 @@
+<div class="queryBuilder">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="operator-prompt">
+        <div ng-if="vm.model.queries.length <= 1">
+          <span class="prompt-text">Match the following condition:</span>
+        </div>
+        <div ng-if="vm.model.queries.length > 1">
+          <span class="prompt-text">Match</span>
+          <div class="operator-select">
+            <formly-form fields="vm.operatorField" model="vm.model">
+
+            </formly-form>
+          </div>
+          <span class="prompt-text">of the following conditions:</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <form ng-submit="vm.onSubmit()" novalidate>
+        <formly-form
+          model="vm.model"
+          fields="vm.fields"
+          form="vm.form"
+          options="vm.options">
+        </formly-form>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="button-row pull-right">
+        <span class="form-warning" ng-if="vm.form.$pristine === false && vm.form.$invalid">
+          Ensure all fields are specified to submit your search.
+        </span>
+        <button
+          type="submit"
+          class="btn btn-primary submit-button"
+          ng-disabled="vm.form.$invalid"
+          ng-click="vm.onSubmit()"
+          ng-bind="vm.buttonLabel">
+          BUTTON LABEL
+        </button>
+      </div>
+    </div>
+  </div>
+  <div ng-if="vm.showEvidenceGrid === true">
+    <div class="row">
+      <div class="col-xs-12 evidence-item-grid">
+        <evidence-grid
+          evidence="vm.searchResults"
+          rows="20"
+          show-gene-col="true"
+          show-variant-col="true"
+          context="'search'"
+          rounded="true">
+        </evidence-grid>
+      </div>
+    </div>
+  </div>
+</div>
