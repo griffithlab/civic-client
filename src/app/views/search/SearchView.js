@@ -22,6 +22,26 @@
           titleExp: '"Search Evidence"',
           navMode: 'sub'
         }
+      })
+      .state('search.genes', {
+        url: '/genes/:token',
+        reloadOnSearch: false,
+        controller: 'SearchController',
+        templateUrl: 'app/views/search/searchGenes.tpl.html',
+        data: {
+          titleExp: '"Search Genes"',
+          navMode: 'sub'
+        }
+      })
+      .state('search.variants', {
+        url: '/variants/:token',
+        reloadOnSearch: false,
+        controller: 'SearchController',
+        templateUrl: 'app/views/search/searchVariants.tpl.html',
+        data: {
+          titleExp: '"Search Variants"',
+          navMode: 'sub'
+        }
       });
   }
 
