@@ -46,17 +46,27 @@
       </div>
     </div>
   </div>
-  <div ng-if="vm.showEvidenceGrid === true">
+  <div ng-if="vm.showGrid === true">
     <div class="row">
-      <div class="col-xs-12 evidence-item-grid">
-        <evidence-grid
-          evidence="vm.searchResults"
-          rows="20"
-          show-gene-col="true"
-          show-variant-col="true"
-          context="'search'"
-          rounded="true">
-        </evidence-grid>
+      <div class="col-xs-12 entity-grid">
+        <div ng-switch="vm.entity">
+          <div ng-switch-when="evidence_items">
+            <evidence-grid
+              evidence="vm.searchResults"
+              rows="20"
+              show-gene-col="true"
+              show-variant-col="true"
+              context="'search'"
+              rounded="true">
+            </evidence-grid>
+          </div>
+          <div ng-switch-when="variants">
+            <p>Variant Grid will go here.</p>
+          </div>
+          <div ng-switch-when="genes">
+            <p>Genes Grid will go here.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

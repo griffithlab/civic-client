@@ -16,7 +16,7 @@
       .state('search.evidence', {
         url: '/evidence/:token',
         reloadOnSearch: false,
-        controller: 'SearchEvidenceController',
+        controller: 'SearchController',
         templateUrl: 'app/views/search/searchEvidence.tpl.html',
         data: {
           titleExp: '"Search Evidence"',
