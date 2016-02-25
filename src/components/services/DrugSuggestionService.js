@@ -16,7 +16,7 @@
           cache: false
         }
       }
-    )
+    );
   }
 
   // @ngInject
@@ -29,6 +29,6 @@
             return response.$promise;
           })
       }
-    }
+    };
   }
 })();

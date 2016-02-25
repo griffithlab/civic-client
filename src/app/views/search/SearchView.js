@@ -2,15 +2,16 @@
   'use strict';
   console.log('SearchView loaded.');
   angular.module('civic.search')
+    .controller('SearchViewController', SearchViewController)
     .config(SearchView);
 
   // @ngInject
   function SearchView($stateProvider) {
-    console.log('SearchView called.');
     $stateProvider
       .state('search', {
         abstract: true,
         url: '/search',
+        controller: 'SearchViewController',
         templateUrl: 'app/views/search/search.tpl.html'
       })
       .state('search.evidence', {
@@ -43,6 +44,13 @@
           navMode: 'sub'
         }
       });
+  }
+
+  // @ngInject
+  function SearchViewController($scope, $state) {
+    $scope.$watch(function() { return $state.current.name; }, function(state) {
+      $scope.state = $state.current.name;
+    });
   }
 
 })();
