@@ -47,7 +47,6 @@
 
     // @ngInject
     function post(reqObj) {
-      reqObj.save = true;
       return SearchResource.post(reqObj).$promise
         .then(function(response) {
           angular.copy(response, results);

@@ -40,12 +40,14 @@
       //vm.searchResults = Search.post(vm.model);
       //vm.showEvidenceGrid = true;
       vm.model.entity = entity;
+      vm.model.save = true;
       Search.post(vm.model)
         .then(function(response) {
           vm.searchResults = response.results;
           vm.showGrid = true;
           if(_.has(response, 'token') && !_.isNull(response.token)) {
-            $state.transitionTo('search.' + entity, { token: response.token }, {notify: false});
+            var state = entity === 'evidence_items' ? 'search.evidence' : 'search.' + entity;
+            $state.transitionTo(state, { token: response.token }, {notify: false});
           }
         });
     }
@@ -54,7 +56,7 @@
 
     function init() {
       if (_.has($stateParams, 'token') && !_.isEmpty($stateParams.token)) {
-        Search.get({entity: 'evidence_items', token: $stateParams.token})
+        Search.get({entity: entity, token: $stateParams.token})
           .then(function (response) {
             vm.model.operator = response.params.operator;
             vm.model.queries = response.params.queries;
