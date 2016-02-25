@@ -29,7 +29,11 @@
       <td class="value" ng-bind="geneInfo.alias | arrayToList "></td>
     </tr>
     <tr>
-      <td class="name">Chromosome:</td>
+      <td class="name">
+        Chromosome:<br/>
+        <small style="color: grey;"><i>(GRCh37)</i></small>
+
+      </td>
       <td class="value">
         <!-- Chromosome -->
         <span ng-bind="geneInfo.genomic_pos_hg19.chr"></span>
