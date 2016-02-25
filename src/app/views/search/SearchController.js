@@ -872,18 +872,18 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'contains'
+                  defaultValue: 'is'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
                     {value: 'is', name: 'is'},
-                    {value: 'is_not', name: 'is_not'},
+                    {value: 'is_not', name: 'is not'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
-                    {value: 'is_empty', name: 'is empty'}
+                    {value: 'none', name: 'none'}
                   ]
                 }
               },
@@ -891,7 +891,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
-                hideExpression: 'model.name === "is_empty"',
+                hideExpression: 'model.name === "none"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -1339,9 +1339,6 @@
         }
       }
     ];
-
-    _.forEach(vm.fields.genes[0].templateOptions.conditionFields)
-      .value();
 
   }
 })();
