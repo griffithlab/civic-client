@@ -783,6 +783,7 @@
                   { value: '', name: 'Please select a field' },
                   { value: 'name', name: 'Name' },
                   { value: 'description', name: 'Description' },
+                  { value: 'variant_group', name: 'Variant Group' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'ensembl_version', name: 'Ensembl Version' },
                   { value: 'reference_bases', name: 'Reference Base(s)' },
@@ -847,6 +848,38 @@
                   label: '',
                   required: true,
                   options: [
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'},
+                    {value: 'is_empty', name: 'is empty'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name === "is_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            variant_group: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is_not'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
@@ -1306,6 +1339,9 @@
         }
       }
     ];
+
+    _.forEach(vm.fields.genes[0].templateOptions.conditionFields)
+      .value();
 
   }
 })();
