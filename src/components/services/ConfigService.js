@@ -9,8 +9,8 @@
           state: 'about'
         },
         {
-          label: 'Collaborate',
-          state: 'collaborate'
+          label: 'Participate',
+          state: 'participate'
         },
         {
           label: 'Community',

@@ -36,12 +36,12 @@
           navMode: 'sub'
         }
       })
-      .state('collaborate', {
-        url: '/collaborate',
-        controller: 'CollaborateCtrl',
-        templateUrl: 'app/pages/collaborate.tpl.html',
+      .state('participate', {
+        url: '/participate',
+        controller: 'ParticipateCtrl',
+        templateUrl: 'app/pages/participate.tpl.html',
         data: {
-          titleExp: '"Collaborate"',
+          titleExp: '"Participate"',
           navMode: 'sub'
         }
       })
