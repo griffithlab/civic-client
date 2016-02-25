@@ -45,7 +45,7 @@
           vm.searchResults = response.results;
           vm.showGrid = true;
           if(_.has(response, 'token') && !_.isNull(response.token)) {
-            $state.transitionTo('search.evidence', { token: response.token }, {notify: false});
+            $state.transitionTo('search.' + entity, { token: response.token }, {notify: false});
           }
         });
     }

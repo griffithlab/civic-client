@@ -29,6 +29,7 @@
           },
           'evidence': function(Search, user) {
             var query = {
+              'entity': 'evidence_items',
               'operator':'AND',
               'save': false,
               'queries': [
