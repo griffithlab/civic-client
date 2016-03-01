@@ -59,8 +59,8 @@
         evidence_level: {
           A: 'Proven/consensus association in human medicine',
           B: 'Clinical trial or other primary patient data supports association',
-          C: 'In vivo or in vitro models support association',
-          D: 'Individual case reports from clinical journals',
+          C: 'Individual case reports from clinical journals',
+          D: 'In vivo or in vitro models support association',
           E: 'Indirect evidence'
         },
         evidence_direction:{
