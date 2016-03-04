@@ -43,6 +43,16 @@
           titleExp: '"Search Variants"',
           navMode: 'sub'
         }
+      })
+      .state('search.variantGroups', {
+        url: '/variantGroups/:token',
+        reloadOnSearch: false,
+        controller: 'SearchController',
+        templateUrl: 'app/views/search/searchVariantGroups.tpl.html',
+        data: {
+          titleExp: '"Search Variant Groups"',
+          navMode: 'sub'
+        }
       });
   }
 
