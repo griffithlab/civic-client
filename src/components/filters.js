@@ -8,7 +8,8 @@
     .filter('decodeUri', decodeUri)
     .filter('ifEmpty', ifEmpty)
     .filter('unsafe', unsafe)
-    .filter('ordinal', ordinal);
+    .filter('ordinal', ordinal)
+    .filter('keyToLabel', keyToLabel);
 
   // @ngInject
   function labelifyFilter() {
@@ -52,6 +53,18 @@
   }
 
   // @ngInject
+  function keyToLabel(_) {
+    return function (input) {
+      if (!_.isNull(input) && !_.isUndefined(input)) {
+        input = input.replace(/_/g, ' ');
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+      } else {
+        return;
+      }
+    };
+  }
+
+  // @ngInject
   function capitalizeFilter(_) {
     return function (input) {
       if (!_.isNull(input) && !_.isUndefined(input)) {
@@ -60,7 +73,6 @@
       } else {
         return;
       }
-
     };
   }
 
@@ -86,7 +98,15 @@
     };
 
     function suffix (n) {
-      return Math.floor(n / 10) === 1 ? 'th' : (n % 10 === 1 ? 'st' : (n % 10 === 2 ? 'nd' : (n % 10 === 3 ? 'rd' : 'th')));
+      return Math.floor(n / 10) === 1
+        ? 'th'
+        : (n % 10 === 1
+        ? 'st'
+        : (n % 10 === 2
+        ? 'nd'
+        : (n % 10 === 3
+        ? 'rd'
+        : 'th')));
     }
   }
 

@@ -1,0 +1,35 @@
+<div class="accountView">
+  <div class="row">
+    <div class="accountTabs col-xs-12">
+      <div class="row">
+        <!--<div class="col-xs-6 name">-->
+        <!--<h3>-->
+        <!--Browse by {{ ctrl.mode|capitalize }}-->
+        <!--</h3>-->
+        <!--</div>-->
+
+        <div class="col-xs-12 tabs">
+          <ul class="nav nav-tabs" style="float: left;">
+            <li ui-sref-active="active">
+              <a ui-sref="account.mentions">Mentions</a>
+            </li>
+
+            <li ui-sref-active="active">
+              <a ui-sref="account.subscribed">Subscribed Events</a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="account.messages">Messages</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ui-view></ui-view>
+    </div>
+  </div>
+
+</div>
