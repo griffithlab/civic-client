@@ -1,7 +1,28 @@
 <div class="variantGrid">
-  <div ui-grid="ctrl.variantGridOptions"
-       ui-grid-cellnav
-       ui-grid-auto-resize
-       ui-grid-pagination
-       ui-grid-selection></div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>
+        <span ng-switch="ctrl.context">
+          <span ng-switch-when="summary">Variants in {{ ctrl.variantGroup.name }}</span>
+          <span ng-switch-when="search">Search Results</span>
+        </span>
+        <span class="record-info">
+          <span>{{ ctrl.gridApi.grid.rows.length }} total items</span>
+          <span ng-if="ctrl.gridApi.grid.renderContainers.body.visibleRowCache.length !== ctrl.gridApi.grid.rows.length">
+            (showing {{ctrl.gridApi.grid.renderContainers.body.visibleRowCache.length}})
+          </span>
+        </span>
+      </h4>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div ui-grid="ctrl.variantGridOptions"
+           ui-grid-cellnav
+           ui-grid-auto-resize
+           ui-grid-pagination
+           ui-grid-selection></div>
+    </div>
+  </div>
 </div>

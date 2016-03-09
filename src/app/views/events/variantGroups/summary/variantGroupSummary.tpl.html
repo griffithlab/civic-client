@@ -23,7 +23,11 @@
   <div ng-if="showVariantGrid === true">
     <div class="row variant-grid">
       <div class="col-xs-12">
-        <variant-grid variants="variants"></variant-grid>
+        <variant-grid
+          context="'summary'"
+          variant-group="variantGroup"
+          variants="variants">
+        </variant-grid>
       </div>
     </div>
     <div class="row">
