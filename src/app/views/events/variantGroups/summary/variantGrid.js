@@ -11,6 +11,7 @@
       replace: true,
       scope: {
         variants: '=',
+        rows: '=',
         context: '=',
         variantGroup: '='
       },
@@ -25,11 +26,13 @@
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
 
+    ctrl.rowsToShow = $scope.rows === undefined ? 5 : $scope.rows;
     ctrl.variantGridOptions = {
-      enablePaginationControls: true,
-      paginationPageSizes: [8],
-      paginationPageSize: 8,
-      minRowsToShow: 9,
+      minRowsToShow: ctrl.rowsToShow - 1,
+      //enablePaginationControls: true,
+      //paginationPageSizes: [8],
+      //paginationPageSize: 8,
+      enablePaging: false,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
