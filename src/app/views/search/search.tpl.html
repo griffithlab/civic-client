@@ -10,11 +10,11 @@
               <span ng-switch-when="search.evidence">
                 Evidence
               </span>
-              <span ng-switch-when="search.genes">
-                Genes
-              </span>
               <span ng-switch-when="search.variants">
                 Variants
+              </span>
+              <span ng-switch-when="search.genes">
+                Genes
               </span>
             </span>
           </h3>
@@ -27,12 +27,12 @@
             </li>
 
             <li ui-sref-active="active">
-              <a ui-sref="search.genes">Search Genes</a>
-            </li>
-
-            <li ui-sref-active="active">
               <a ui-sref="search.variants">Search Variants</a>
             </li>
+
+            <!--<li ui-sref-active="active">-->
+              <!--<a ui-sref="search.genes">Search Genes</a>-->
+            <!--</li>-->
 
           </ul>
         </div>

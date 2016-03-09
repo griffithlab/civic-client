@@ -926,7 +926,7 @@
                   label: '',
                   required: true,
                   options: [
-                    { value: 'GRCh38', name: 'GRCh38 (hg38)' },
+                    { value: 'GRCh38', name: 'GRCh38 (hg20)' },
                     { value: 'GRCh37', name: 'GRCh37 (hg19)' },
                     { value: 'NCBI36', name: 'NCBI36 (hg18)' }
                   ]
