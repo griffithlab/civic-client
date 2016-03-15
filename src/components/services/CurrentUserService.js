@@ -24,7 +24,7 @@
           cache: false
         },
         getStats: {
-          url:'/api/current_user/stats',
+          ur1l:'/api/current_user/stats',
           isArray: false,
           cache: false
         },
@@ -43,9 +43,10 @@
           isArray: false,
           cache: false
         },
-        getMentions: {
-          url:'/api/current_user/mentions',
-          isArray: true,
+        markAllAsRead: {
+          method: 'PATCH',
+          url: '/api/current_user/feed',
+          isArray: false,
           cache: false
         }
       }
@@ -75,7 +76,7 @@
       getEvents: getEvents,
       getFeed: getFeed,
       getUnread: getUnread,
-      getMentions: getMentions
+      markAllAsRead: markAllAsRead
     };
 
     function get() {
@@ -118,12 +119,12 @@
         });
     }
 
-    function getMentions() {
-      return CurrentUserResource.getMentions().$promise
+    function markAllAsRead() {
+      var t = new Date().toISOString();
+      return CurrentUserResource.markAllAsRead({ upto: t }).$promise
         .then(function(response) {
-          angular.copy(response, mentions);
           return response.$promise;
-        });
+        })
     }
   }
 })();

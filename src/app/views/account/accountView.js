@@ -16,35 +16,34 @@
           navMode: 'sub'
         }
       })
-      .state('account.main', {
-        url: '/main',
-        templateUrl: 'app/views/account/main.tpl.html',
+      .state('account.notifications', {
+        url: '/notifications',
+        templateUrl: 'app/views/account/notifications.tpl.html',
         data: {
-          titleExp: '"My Account"',
+          titleExp: '"Account Notifications"',
           navMode: 'sub'
         },
         resolve: {
-          mentions: /* @ngInject */ function(CurrentUser) {
-            CurrentUser.getMentions().then(function(response) {
-              return response;
-            });
+          feed: /* @ngInject */ function(CurrentUser) {
+            return CurrentUser.getFeed();
           }
-        }
+        },
+        controller: 'AccountNotificationsController'
       })
-      .state('account.mentions', {
-        url: '/mentions',
-        templateUrl: 'app/views/account/mentions.tpl.html',
+      .state('account.profile', {
+        url: '/profile',
+        templateUrl: 'app/views/account/profile.tpl.html',
         data: {
-          titleExp: '"My Mentions"',
+          titleExp: '"Account Profile"',
           navMode: 'sub'
         },
-        resolve: {
-          mentions: /* @ngInject */ function(CurrentUser) {
-            CurrentUser.getMentions().then(function(response) {
-              return response;
-            });
-          }
-        }
+        //resolve: {
+        //  mentions: /* @ngInject */ function(CurrentUser) {
+        //    CurrentUser.getMentions().then(function(response) {
+        //      return response;
+        //    });
+        //  }
+        //}
       });
   }
 

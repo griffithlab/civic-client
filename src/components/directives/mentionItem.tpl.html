@@ -1,25 +1,16 @@
-<div class="eventItem"
-     ng-click="vm.eventClick(event)"
+<div class="mentionItem"
+     ng-click="vm.eventClick(mention.event)"
      ng-class="{ hover: mouseover, dark: theme === 'dark', light: theme === 'light', unseen: vm.seen === false }"
      ng-mouseover="mouseover=true"
      ng-mouseleave="mouseover=false">
   <div class="user-time">
-    <user-block user="event.user"></user-block>&nbsp;<span ng-bind="event.timestamp|timeAgo">time ago</span><br/>
+    <user-block user="mention.originating_user"></user-block>&nbsp;mentioned you <span ng-bind="mention.created_at|timeAgo">time ago</span><br/>
   </div>
 
   <div class="entity">
     <!-- preposition, if necessary -->
-    <span ng-switch="event.event_type">
-      <span ng-switch-when="commented">&nbsp;commented on</span>
-      <span ng-switch-when="submitted">&nbsp;submitted</span>
-      <span ng-switch-when="accepted">&nbsp;accepted</span>
-      <span ng-switch-when="rejected">&nbsp;rejected</span>
-      <span ng-switch-when="change suggested">&nbsp;suggested a revision to</span>
-      <span ng-switch-when="change accepted">&nbsp;accepted a revision to</span>
-      <span ng-switch-when="change rejected">&nbsp;rejected a revision to</span>
-      <span ng-switch-default></span>
-    </span>
-    <span ng-switch="event.subject_type">
+    in a comment on
+    <span ng-switch="mention.event.subject_type">
       <span ng-switch-when="genes">
         <span class="subject-type">gene</span>
       </span>
