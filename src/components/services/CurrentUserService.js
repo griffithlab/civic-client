@@ -145,9 +145,11 @@
         .value();
 
       var subscribed_events = _.chain(response.notifications.subscribed_events)
-        .map(function(event) {
+        .map(function(evt) {
+          var event = evt.event;
           event.type = 'event';
-          event.event.seen = event.seen;
+          event.seen = evt.seen;
+          event.created_at = evt.created_at;
           return event})
         .sortBy('created_at')
         .value();

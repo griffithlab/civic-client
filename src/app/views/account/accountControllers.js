@@ -24,12 +24,7 @@
     }, true);
 
     vm.markAllAsRead = function() {
-      CurrentUser.markAllAsRead()
-        .then(function(response) {
-          console.log(response);
-//          angular.copy(CurrentUser.data.feed, vm.notifications);
-          // vm.notifications = CurrentUser.data.feed;
-        })
+      CurrentUser.markAllAsRead();
     }
   }
 

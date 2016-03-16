@@ -21,7 +21,7 @@
         <li ng-repeat="notification in vm.notifications">
           <div ng-switch="notification.type">
             <div ng-switch-when="event">
-              <event-item event="notification.event" theme="'light'"></event-item>
+              <event-item event="notification" theme="'light'"></event-item>
             </div>
             <div ng-switch-when="mention">
               <mention-item mention="notification" theme="'light'"></mention-item>
