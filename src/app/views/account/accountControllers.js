@@ -15,30 +15,20 @@
     var vm = $scope.vm = {};
     vm.total = feed.total;
 
-    vm.mentions = _.chain(feed.notifications.mentions)
-      .map(function(mention) { mention.type = 'mention'; return mention;})
-      .sortBy('created_at')
-      .reverse()
-      .value();
+    vm.notifications = [];
 
-    vm.subscribed_events = _.chain(feed.notifications.subscribed_events)
-      .map(function(event) {
-        event.type = 'event';
-        event.event.seen = event.seen;
-        return event})
-      .sortBy('created_at')
-      .value();
-
-    vm.notifications = _.chain(vm.mentions)
-      .concat(vm.subscribed_events)
-      .sortBy('created_at')
-      .reverse()
-      .value();
+    $scope.$watch(function() { return CurrentUser.data.feed; }, function(feed) {
+      console.log('feed updated.');
+      console.log(feed);
+      angular.copy(CurrentUser.data.feed, vm.notifications);
+    }, true);
 
     vm.markAllAsRead = function() {
       CurrentUser.markAllAsRead()
         .then(function(response) {
           console.log(response);
+//          angular.copy(CurrentUser.data.feed, vm.notifications);
+          // vm.notifications = CurrentUser.data.feed;
         })
     }
   }

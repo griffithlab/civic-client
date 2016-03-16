@@ -54,7 +54,7 @@
   }
 
   // @ngInject
-  function CurrentUserService(CurrentUserResource) {
+  function CurrentUserService(CurrentUserResource, _) {
     var user = {};
     var events = [];
     var stats = [];
@@ -106,7 +106,7 @@
     function getFeed() {
       return CurrentUserResource.getFeed().$promise
         .then(function(response) {
-          angular.copy(response, feed);
+          angular.copy(parseFeed(response), feed);
           return response.$promise;
         });
     }
@@ -123,8 +123,40 @@
       var t = new Date().toISOString();
       return CurrentUserResource.markAllAsRead({ upto: t }).$promise
         .then(function(response) {
+          var updated= parseFeed(response);
+          var updatedIds = _.map(updated, 'id');
+
+          _.forEach(feed, function(notification) {
+            if(_.includes(updatedIds, notification.id)) {
+              notification.seen = true;
+            }
+          });
+
+          //angular.copy(parseFeed(response), feed);
           return response.$promise;
         })
+    }
+
+    function parseFeed(response) {
+      var mentions = _.chain(response.notifications.mentions)
+        .map(function(mention) { mention.type = 'mention'; return mention;})
+        .sortBy('created_at')
+        .reverse()
+        .value();
+
+      var subscribed_events = _.chain(response.notifications.subscribed_events)
+        .map(function(event) {
+          event.type = 'event';
+          event.event.seen = event.seen;
+          return event})
+        .sortBy('created_at')
+        .value();
+
+      return _.chain(mentions)
+        .concat(subscribed_events)
+        .sortBy('created_at')
+        .reverse()
+        .value();
     }
   }
 })();
