@@ -19,6 +19,7 @@
                                        $stateParams,
                                        $q,
                                        $document,
+                                       $state,
                                        Publications,
                                        DrugSuggestions,
                                        Diseases,
@@ -36,6 +37,10 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.evidence = Evidence.data.item;
+    vm.pendingFields = EvidenceRevisions.data.collection.length > 0;
+    vm.pendingFieldsList = _.map(_.keys(EvidenceRevisions.data.pendingFields), function(field) {
+      return field.charAt(0).toUpperCase() + field.slice(1);
+    });
     vm.evidenceRevisions = EvidenceRevisions;
     vm.evidenceHistory = EvidenceHistory;
     vm.evidenceEdit = angular.copy(vm.evidence);
@@ -510,6 +515,7 @@
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
           vm.formMessages.submitSuccess = true;
+          vm.pendingFields = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
           vm.showInstructions = false;
@@ -544,5 +550,9 @@
           console.log('revision apply done!');
         });
     };
+
+    vm.revisionsClick = function() {
+      $state.go('events.genes.summary.variants.summary.evidence.talk.revisions', { evidenceId: Evidence.data.item.id });
+    }
   }
 })();

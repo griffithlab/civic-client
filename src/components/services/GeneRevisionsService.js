@@ -154,7 +154,6 @@
       acceptRevision: acceptRevision,
       rejectRevision: rejectRevision,
 
-
       // Gene Revisions Comments
       queryComments: queryComments,
       getComment: getComment,

@@ -20,6 +20,7 @@
             var evidenceId = $stateParams.evidenceId;
             return $q.all([
               EvidenceRevisions.initRevisions(evidenceId),
+              EvidenceRevisions.getPendingFields(evidenceId),
               EvidenceHistory.initBase(evidenceId)
             ]);
           }

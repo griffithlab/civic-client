@@ -30,6 +30,14 @@
           isArray: false,
           cache: cache
         },
+        getPendingFields: {
+          method: 'GET',
+          url: '/api/evidence_items/:evidenceId/fields_with_pending_changes',
+          params: {
+            evidenceId: '@evidenceId'
+          },
+          cache: false
+        },
         submitRevision: {
           method: 'POST',
           cache: false
@@ -163,6 +171,8 @@
     var comment = {};
     var comments = [];
 
+    var pendingFields = {};
+
     return {
       initBase: initBase,
       initRevisions: initRevisions,
@@ -172,12 +182,14 @@
         parent: parent,
         collection: collection,
         comment: comment,
-        comments: comments
+        comments: comments,
+        pendingFields: pendingFields
       },
 
       // Evidence Revisions Base
       query: query,
       get: get,
+      getPendingFields: getPendingFields,
       submitRevision: submitRevision,
       acceptRevision: acceptRevision,
       rejectRevision: rejectRevision,
@@ -229,6 +241,14 @@
       return EvidenceRevisionsResource.get({ evidenceId: evidenceId, revisionId: revisionId }).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function getPendingFields(evidenceId) {
+      return EvidenceRevisionsResource.getPendingFields({ evidenceId: evidenceId }).$promise
+        .then(function(response) {
+          angular.copy(response.toJSON(), pendingFields);
           return response.$promise;
         });
     }

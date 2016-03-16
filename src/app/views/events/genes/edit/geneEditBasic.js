@@ -188,6 +188,7 @@
           vm.newRevisionId = response.id;
           vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
+          vm.pendingFields = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
           // options.resetModel();
