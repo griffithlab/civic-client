@@ -15,19 +15,20 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-right" role="menu">
-        <li class="dropdown-header">Account</li>
-        <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
-        <li><a ui-sref="account.notifications">My Account</a></li>
-        <li ng-if="isEditor()">
-          <a ng-href="{{adminUrl}}" target="_blank">Admin Console</a>
-        </li>
         <li ng-if="hasNotifications" class="dropdown-header">Notifications<br/>
         </li>
         <li ng-repeat="(label, count) in currentUser.unread_notifications">
-          <a href="">
+          <a ui-sref="account.notifications">
             <span ng-bind="label | keyToLabel">type</span>
             <span ng-bind="count" class="badge">count</span>
           </a>
+        </li>
+        <li class="dropdown-header">Account</li>
+        <li><a ui-sref="account.notifications">My Account</a></li>
+        <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
+        <li ng-if="isEditor()" class="dropdown-header">Administrator Tools</li>
+        <li ng-if="isEditor()">
+          <a ng-href="{{adminUrl}}" target="_blank">Admin Console</a>
         </li>
       </ul>
     </div>

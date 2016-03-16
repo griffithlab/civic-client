@@ -34,6 +34,14 @@
           method: 'POST',
           cache: false
         },
+        getPendingFields: {
+          method: 'GET',
+          url: '/api/genes/:geneId/fields_with_pending_changes',
+          params: {
+            geneId: '@geneId'
+          },
+          cache: false
+        },
         acceptRevision: {
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:revisionId/accept',
@@ -123,6 +131,8 @@
     var comment = {};
     var comments = [];
 
+    var pendingFields = {};
+
     return {
       initBase: initBase,
       initRevisions: initRevisions,
@@ -132,12 +142,14 @@
         parent: parent,
         collection: collection,
         comment: comment,
-        comments: comments
+        comments: comments,
+        pendingFields: pendingFields
       },
 
       // Gene Revisions Base
       query: query,
       get: get,
+      getPendingFields: getPendingFields,
       submitRevision: submitRevision,
       acceptRevision: acceptRevision,
       rejectRevision: rejectRevision,
@@ -181,6 +193,14 @@
       return GeneRevisionsResource.get({ geneId: geneId, revisionId: revisionId }).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function getPendingFields(geneId) {
+      return GeneRevisionsResource.getPendingFields({ geneId: geneId }).$promise
+        .then(function(response) {
+          angular.copy(response.toJSON(), pendingFields);
           return response.$promise;
         });
     }
