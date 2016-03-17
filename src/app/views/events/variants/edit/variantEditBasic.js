@@ -18,6 +18,7 @@
   function VariantEditBasicController($scope,
                                       $stateParams,
                                       $document,
+                                      $state,
                                       Security,
                                       VariantRevisions,
                                       Variants,
