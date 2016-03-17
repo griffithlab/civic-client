@@ -34,7 +34,7 @@
           method: 'GET',
           url: '/api/variants/:variantId/fields_with_pending_changes',
           params: {
-            geneId: '@geneId'
+            variantId: '@variantId'
           },
           cache: false
         },
