@@ -10,7 +10,10 @@
       restrict: 'E',
       replace: true,
       scope: {
-        variants: '='
+        variants: '=',
+        rows: '=',
+        context: '=',
+        variantGroup: '='
       },
       templateUrl: 'app/views/events/variantGroups/summary/variantGrid.tpl.html',
       controller: 'VariantGridController'
@@ -23,11 +26,13 @@
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
 
+    ctrl.rowsToShow = $scope.rows === undefined ? 5 : $scope.rows;
     ctrl.variantGridOptions = {
-      enablePaginationControls: true,
-      paginationPageSizes: [8],
-      paginationPageSize: 8,
-      minRowsToShow: 9,
+      minRowsToShow: ctrl.rowsToShow - 1,
+      //enablePaginationControls: true,
+      //paginationPageSizes: [8],
+      //paginationPageSize: 8,
+      enablePaging: false,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
@@ -63,6 +68,16 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         },
+        { name: 'variant_group_list',
+          displayName: 'Variant Group(s)',
+          enableFiltering: true,
+          allowCellFocus: false,
+          type: 'string',
+          width: '20%',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
         {
           name: 'description',
           displayName: 'Description',
@@ -78,17 +93,34 @@
     };
 
     ctrl.variantGridOptions.onRegisterApi = function(gridApi){
+      var variants = $scope.variants;
       ctrl.gridApi = gridApi;
-      ctrl.variants = $scope.variants;
-      // TODO: this watch seems unnecessary, but if it's not present then the grid only loads on a fresh page, fails when loaded by a state change
-      // Something to do with directive priorities, maybe?
-      ctrl.variantGridOptions.minRowsToShow = $scope.variants.length + 1;
-      ctrl.variantGridOptions.data = $scope.variants;
+
+      ctrl.context = $scope.context;
+      ctrl.variantGroup = $scope.variantGroup;
+      ctrl.variantGridOptions.data = prepVariantGroups(variants);
+
+      $scope.$watchCollection('variants', function(variants) {
+        ctrl.variantGridOptions.minRowsToShow = variants.length + 1;
+        ctrl.variantGridOptions.data = prepVariantGroups(variants);
+      });
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = _.merge($stateParams, { variantId: row.entity.id, geneId: row.entity.gene_id });
         $state.go('events.genes.summary.variants.summary', params);
       });
+
+      function prepVariantGroups(variants) {
+        return _.map(variants, function(item){
+          if (_.isArray(item.variant_groups) && item.variant_groups.length > 0) {
+            item.variant_group_list = _.chain(item.variant_groups).pluck('name').value().join(', ');
+            return item;
+          } else {
+            item.variant_group_list = 'N/A';
+            return item;
+          }
+        });
+      }
     };
   }
 

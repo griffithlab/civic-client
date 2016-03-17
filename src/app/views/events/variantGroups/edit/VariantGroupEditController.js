@@ -20,6 +20,7 @@
             var variantGroupId = $stateParams.variantGroupId;
             return $q.all([
               VariantGroupRevisions.initRevisions(variantGroupId),
+              VariantGroupRevisions.getPendingFields(variantGroupId),
               VariantGroupHistory.initBase(variantGroupId)
             ]);
           }

@@ -30,7 +30,7 @@
     vm.onSubmit = onSubmit;
     vm.options = {};
     vm.searchResults = [];
-    vm.showGrid = false;
+    vm.showGrid = true;
 
     init();
 

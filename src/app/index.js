@@ -55,7 +55,8 @@
   }
 
 // @ngInject
-  function appRun(Security, $rootScope, $state, $analytics, $location, _) {
+  function appRun(Security, $rootScope, $state, $analytics, $window, $location, _) {
+    $window.loading_screen.finish();
     $rootScope.view = {};
 
     // ensure $state is globally addressable/injectable
@@ -71,19 +72,19 @@
     Security.requestCurrentUser();
 
     /*  ui-router debug logging - uncomment these if you run into links/routes silently failing. */
-    //function message(to, toP, from, fromP) {
-    //  return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
-    //}
-    //
-    //$rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
-    //  console.log('Start:   ' + message(to, toP, from, fromP));
-    //});
-    //$rootScope.$on('$stateChangeSuccess', function (evt, to, toP, from, fromP) {
-    //  console.log('Success: ' + message(to, toP, from, fromP));
-    //});
-    //$rootScope.$on('$stateChangeError', function (evt, to, toP, from, fromP, err) {
-    //  console.error('Error:   ' + message(to, toP, from, fromP), err);
-    //});
+    function message(to, toP, from, fromP) {
+      return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
+    }
+
+    $rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
+      console.log('Start:   ' + message(to, toP, from, fromP));
+    });
+    $rootScope.$on('$stateChangeSuccess', function (evt, to, toP, from, fromP) {
+      console.log('Success: ' + message(to, toP, from, fromP));
+    });
+    $rootScope.$on('$stateChangeError', function (evt, to, toP, from, fromP, err) {
+      console.error('Error:   ' + message(to, toP, from, fromP), err);
+    });
 
   }
 

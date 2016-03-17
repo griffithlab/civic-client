@@ -13,6 +13,19 @@
       </div>
     </div>
   </div>
+  <div class="row" ng-if="vm.pendingFields">
+    <div class="col-xs-12">
+      <div class="edit-warning">
+        <p>This Gene has pending revisions to the following fields:</p>
+        <ul class="field-list">
+          <li ng-repeat="field in vm.pendingFieldsList">
+            {{ field | keyToLabel }}
+          </li>
+        </ul>
+        <p>Please <a href="" ng-click="vm.revisionsClick()" style="text-decoration: underline; font-weight: bold;">review all pending revisions</a> in order to prevent conflicting submissions.</p>
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-xs-12">

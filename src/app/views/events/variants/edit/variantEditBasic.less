@@ -33,9 +33,21 @@
   }
 
   .edit-instructions {
-    background-color: @pageBackground2;
+    background-color: @pageBackground;
+    margin-top: @contentPadding;
     border-radius: @border-radius-small;
     padding: @contentPadding;
+    margin-bottom: @contentPadding;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .edit-warning {
+    background-color: lightyellow;
+    border-radius: @border-radius-small;
+    padding: @contentPadding;
+    border: 1px solid darken(yellow, 10%);
     margin-bottom: @contentPadding;
     p {
       margin-bottom: 0;

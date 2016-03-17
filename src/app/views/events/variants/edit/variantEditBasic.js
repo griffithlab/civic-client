@@ -18,6 +18,7 @@
   function VariantEditBasicController($scope,
                                       $stateParams,
                                       $document,
+                                      $state,
                                       Security,
                                       VariantRevisions,
                                       Variants,
@@ -34,6 +35,11 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.variant = Variants.data.item;
+    vm.pendingFields = VariantRevisions.data.collection.length > 0;
+    vm.pendingFieldsList = _.map(_.keys(VariantRevisions.data.pendingFields), function(field) {
+      return field.charAt(0).toUpperCase() + field.slice(1);
+    });
+
     vm.variantRevisions = VariantRevisions;
     vm.variantHistory = VariantHistory;
     vm.variantEdit = angular.copy(vm.variant);
@@ -258,6 +264,7 @@
           vm.newRevisionId = response.id;
           vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
+          vm.pendingFields = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
         })
@@ -288,5 +295,9 @@
           console.log('revision apply done!');
         });
     };
+
+    vm.revisionsClick = function() {
+      $state.go('events.genes.summary.variants.talk.revisions.list', { variantId: Variants.data.item.id });
+    }
   }
 })();

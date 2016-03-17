@@ -20,6 +20,7 @@
             var geneId = $stateParams.geneId;
             return $q.all([
               GeneRevisions.initRevisions(geneId),
+              GeneRevisions.getPendingFields(geneId),
               GeneHistory.initBase(geneId)
             ]);
           }

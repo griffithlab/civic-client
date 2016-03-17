@@ -31,6 +31,14 @@
           isArray: false,
           cache: cache
         },
+        getPendingFields: {
+          method: 'GET',
+          url: '/api/variant_groups/:variantGroupId/fields_with_pending_changes',
+          params: {
+            variantGroupId: '@variantGroupId'
+          },
+          cache: false
+        },
         submitRevision: {
           method: 'POST',
           cache: false
@@ -129,6 +137,8 @@
     var comment = {};
     var comments = [];
 
+    var pendingFields = {};
+
     return {
       initBase: initBase,
       initRevisions: initRevisions,
@@ -138,12 +148,14 @@
         parent: parent,
         collection: collection,
         comment: comment,
-        comments: comments
+        comments: comments,
+        pendingFields: pendingFields
       },
 
       // VariantGroup Revisions Base
       query: query,
       get: get,
+      getPendingFields: getPendingFields,
       submitRevision: submitRevision,
       acceptRevision: acceptRevision,
       rejectRevision: rejectRevision,
@@ -153,7 +165,7 @@
       getComment: getComment,
       submitComment: submitComment,
       updateComment: updateComment,
-      deleteComment: deleteComment,
+      deleteComment: deleteComment
 
     };
 
@@ -187,6 +199,14 @@
       return VariantGroupRevisionsResource.get({ variantGroupId: variantGroupId, revisionId: revisionId }).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function getPendingFields(variantGroupId) {
+      return VariantGroupRevisionsResource.getPendingFields({ variantGroupId: variantGroupId }).$promise
+        .then(function(response) {
+          angular.copy(response.toJSON(), pendingFields);
           return response.$promise;
         });
     }

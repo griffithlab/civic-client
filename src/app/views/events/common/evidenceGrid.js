@@ -361,14 +361,10 @@
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       var evidence = $scope.evidence;
       ctrl.gridApi = gridApi;
-      ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
       var suppressGo = false;
 
-      // convert drug array into comma delimited list
-      evidence = prepareDrugArray(evidence);
-
       // assign evidence data to grid
-      ctrl.evidenceGridOptions.data = evidence;
+      ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
 
       // setup watcher to update grid
       $scope.$watchCollection('evidence', function(evidence) {
@@ -378,6 +374,7 @@
         } else if (!_.includes(statusFilters, 'rejected')) {
           statusFilters = ['accepted', 'submitted'];
         }
+        ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
         ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
       });
 

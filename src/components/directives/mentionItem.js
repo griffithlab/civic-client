@@ -1,28 +1,28 @@
 (function() {
   'use strict';
   angular.module('civic.common')
-    .directive('eventItem', eventItem);
+    .directive('mentionItem', mentionItem);
 
   // @ngInject
-  function eventItem() {
+  function mentionItem() {
     return {
       restrict: 'E',
       scope: {
-        event: '=',
+        mention: '=',
         theme: '='
       },
-      templateUrl: 'components/directives/eventItem.tpl.html',
-      controller: eventItemController
+      templateUrl: 'components/directives/mentionItem.tpl.html',
+      controller: mentionItemController
     };
   }
 
   // @ngInject
-  function eventItemController($scope, $state, _) {
-    console.log('eventItemController called.');
+  function mentionItemController($scope, $state, _) {
+    console.log('mentionItemController called.');
     var vm = $scope.vm = {};
-    var params = $scope.event.state_params;
+    var params = $scope.mention.event.state_params;
 
-    vm.seen = $scope.event.seen;
+    vm.seen = $scope.mention.seen;
 
     vm.entityNames = [];
 

@@ -53,7 +53,7 @@
           <div ng-switch-when="evidence_items">
             <evidence-grid
               evidence="vm.searchResults"
-              rows="20"
+              rows="15"
               show-gene-col="true"
               show-variant-col="true"
               context="'search'"
@@ -61,7 +61,11 @@
             </evidence-grid>
           </div>
           <div ng-switch-when="variants">
-            <variant-grid variants="variants"></variant-grid>
+            <variant-grid
+              context="'search'"
+              rows="15"
+              variants="vm.searchResults">
+            </variant-grid>
           </div>
           <div ng-switch-when="genes">
             <p>Genes Grid will go here.</p>

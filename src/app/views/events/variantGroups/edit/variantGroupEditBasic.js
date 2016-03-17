@@ -17,6 +17,7 @@
   // @ngInject
   function VariantGroupEditBasicController($scope,
                                            $stateParams,
+                                           $state,
                                            Security,
                                            Datatables,
                                            VariantGroupRevisions,
@@ -34,6 +35,11 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.variantGroup = VariantGroups.data.item;
+    vm.pendingFields = VariantGroupRevisions.data.collection.length > 0;
+    vm.pendingFieldsList = _.map(_.keys(VariantGroupRevisions.data.pendingFields), function(field) {
+      return field.charAt(0).toUpperCase() + field.slice(1);
+    });
+
     vm.variantGroupRevisions = VariantGroupRevisions;
     vm.variantGroupHistory = VariantGroupHistory;
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
@@ -143,6 +149,7 @@
           vm.showForm = false;
           vm.showSuccessMessage = true;
           vm.showInstructions = false;
+          vm.pendingFields = false;
         })
         .catch(function(error) {
           console.error('revision submit error!');
@@ -172,5 +179,9 @@
           console.log('revision apply done!');
         });
     };
+
+    vm.revisionsClick = function() {
+      $state.go('events.genes.summary.variantGroups.talk.revisions.list', { variantGroupId: VariantGroups.data.item.id });
+    }
   }
 })();

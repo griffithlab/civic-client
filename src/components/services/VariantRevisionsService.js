@@ -30,6 +30,14 @@
           isArray: false,
           cache: cache
         },
+        getPendingFields: {
+          method: 'GET',
+          url: '/api/variants/:variantId/fields_with_pending_changes',
+          params: {
+            variantId: '@variantId'
+          },
+          cache: false
+        },
         submitRevision: {
           method: 'POST',
           cache: false
@@ -127,6 +135,8 @@
     var comment = {};
     var comments = [];
 
+    var pendingFields = {};
+
     return {
       initBase: initBase,
       initRevisions: initRevisions,
@@ -136,12 +146,14 @@
         parent: parent,
         collection: collection,
         comment: comment,
-        comments: comments
+        comments: comments,
+        pendingFields: pendingFields
       },
 
       // Variant Revisions Base
       query: query,
       get: get,
+      getPendingFields: getPendingFields,
       submitRevision: submitRevision,
       acceptRevision: acceptRevision,
       rejectRevision: rejectRevision,
@@ -184,6 +196,14 @@
       return VariantRevisionsResource.get({ variantId: variantId, revisionId: revisionId }).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function getPendingFields(variantId) {
+      return VariantRevisionsResource.getPendingFields({ variantId: variantId }).$promise
+        .then(function(response) {
+          angular.copy(response.toJSON(), pendingFields);
           return response.$promise;
         });
     }

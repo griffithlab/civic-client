@@ -18,6 +18,7 @@
   function GeneEditBasicController($scope,
                                    $q,
                                    $document,
+                                   $state,
                                    _,
                                    Publications,
                                    Security,
@@ -35,6 +36,10 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.gene = Genes.data.item;
+    vm.pendingFields = GeneRevisions.data.collection.length > 0;
+    vm.pendingFieldsList = _.map(_.keys(GeneRevisions.data.pendingFields), function(field) {
+      return field.charAt(0).toUpperCase() + field.slice(1);
+    });
     vm.geneRevisions = GeneRevisions;
     vm.geneHistory = GeneHistory;
     vm.geneEdit = angular.copy(vm.gene);
@@ -183,6 +188,7 @@
           vm.newRevisionId = response.id;
           vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
+          vm.pendingFields = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
           // options.resetModel();
@@ -214,5 +220,9 @@
           console.log('revision apply done!');
         });
     };
+
+    vm.revisionsClick = function() {
+      $state.go('events.genes.talk.revisions.list', { geneId: Genes.data.item.id });
+    }
   }
 })();

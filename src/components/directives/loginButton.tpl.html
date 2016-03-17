@@ -1,0 +1,39 @@
+<div class="loginButton">
+  <div ng-show="isAuthenticated()" class="user-controls">
+    <div class="btn-group" dropdown>
+      <button
+        type="button"
+        class="btn btn-xs btn-info"
+        ui-sref="users.profile({userId: currentUser.id})">
+          <span class="avatar">
+            <img ng-src="{{currentUser.avatars.x14}}" width="14" height="14"/>
+          </span>
+        <span class="username">{{currentUser.display_name}}</span>
+        <span ng-bind="totalNotifications" class="badge small"></span>
+      </button>
+      <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li ng-if="hasNotifications" class="dropdown-header">Notifications<br/>
+        </li>
+        <li ng-repeat="(label, count) in currentUser.unread_notifications">
+          <a ui-sref="account.notifications">
+            <span ng-bind="label | keyToLabel">type</span>
+            <span ng-bind="count" class="badge">count</span>
+          </a>
+        </li>
+        <li class="dropdown-header">Account</li>
+        <li><a ui-sref="account.notifications">My Account</a></li>
+        <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
+        <li ng-if="isEditor()" class="dropdown-header">Administrator Tools</li>
+        <li ng-if="isEditor()">
+          <a ng-href="{{adminUrl}}" target="_blank">Admin Console</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div ng-hide="isAuthenticated()" class="viewer-controls">
+    <button class="btn btn-xs btn-login" ng-click="showLogin()">Sign In/Sign Up</button>
+  </div>
+</div>

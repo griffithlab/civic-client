@@ -1,0 +1,35 @@
+<div class="notifications">
+  <div class="row">
+    <div class="col-xs-10">
+
+      <p ng-if="vm.notifications.length > 0">
+        Showing {{ vm.notifications.length  }} of {{ vm.total }} notifications.
+      </p>
+      <p ng-if="vm.notifications.length === 0">
+        No notifications.
+      </p>
+    </div>
+    <div class="col-xs-2">
+      <input type="button" class="btn btn-xs btn-default pull-right" value="Mark All As Seen"
+             ng-click="vm.markAllAsRead()"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="notifications-list">
+        <li ng-repeat="notification in vm.notifications">
+          <div ng-switch="notification.type">
+            <div ng-switch-when="event">
+              <event-item event="notification" theme="'light'"></event-item>
+            </div>
+            <div ng-switch-when="mention">
+              <mention-item mention="notification" theme="'light'"></mention-item>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
