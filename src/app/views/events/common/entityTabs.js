@@ -43,6 +43,7 @@
     var _ = window._;
     var vm = scope.vm; // todo convert the rest of this controller to vm
     var entityViewModel = scope.entityViewModel = entityView.entityViewModel;
+    var entityViewRevisions = scope.entityViewRevisions = entityView.entityViewRevisions;
     var entityViewOptions = scope.entityViewOptions = entityView.entityViewOptions;
 
     element.ready(function() {
@@ -58,6 +59,11 @@
 
     vm.actions = {};
     vm.actions = entityViewModel.data.item.lifecycle_actions;
+    entityViewRevisions.getPendingFields(entityViewModel.data.item.id)
+      .then(function(fields) {
+        vm.pendingFields = _.keys(entityViewRevisions.data.pendingFields);
+        vm.hasPendingFields = fields.length > 0;
+      });
 
     vm.anchorId = _.kebabCase(vm.type);
 

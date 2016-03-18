@@ -86,11 +86,12 @@
   }
 
   // @ngInject
-  function VariantsController(Variants, VariantsViewOptions) {
+  function VariantsController(Variants, VariantRevisions, VariantsViewOptions) {
     VariantsViewOptions.init();
     // these will be passed to the entity-view directive controller, to be required by child entity component so that they
     // can get references to the view model and view options
     this.VariantsViewModel = Variants;
+    this.VariantsViewRevisions = VariantRevisions;
     this.VariantsViewOptions = VariantsViewOptions;
   }
 

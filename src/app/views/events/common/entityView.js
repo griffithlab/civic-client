@@ -7,6 +7,7 @@
         restrict: 'E',
         scope: {
           viewModel: '=',
+          viewRevisions: '=',
           viewOptions: '='
         },
         transclude: true,
@@ -21,6 +22,7 @@
     // this directive in [entity]View templates. This controller can then be required by child common components
     // to obtain references to view models and view options.
     this.entityViewModel = $scope.viewModel;
+    this.entityViewRevisions = $scope.viewRevisions;
     this.entityViewOptions= $scope.viewOptions;
   }
 

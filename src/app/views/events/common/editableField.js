@@ -12,6 +12,7 @@
       transclude: true,
       scope: {
         entityViewModel: '=',
+        entityViewRevisions: '=',
         entityViewOptions: '='
       },
       controller: 'EditableFieldController',
@@ -32,6 +33,11 @@
     ctrl.active = $state.includes(ctrl.baseState + '.edit.*');
     $scope.$on('$stateChangeSuccess', function() {
       ctrl.active = $state.includes(ctrl.baseState + '.edit.*');
+    });
+
+    $scope.$watch('entityViewRevisions.data.pendingFields', function(fields) {
+      console.log('******* entity fields updated');
+      ctrl.pending = _.keys(fields).length >0;
     });
 
     ctrl.mouseOver = function() {

@@ -98,11 +98,12 @@
   }
 
   // @ngInject
-  function GenesController(Genes, GenesViewOptions) {
+  function GenesController(Genes, GeneRevisions, GenesViewOptions) {
     GenesViewOptions.init();
     // these will be passed to the entity-view directive controller, to be required by child entity component so that they
     // can get references to the view model and view options
     this.GenesViewModel = Genes;
+    this.GenesViewRevisions = GeneRevisions;
     this.GenesViewOptions = GenesViewOptions;
   }
 
