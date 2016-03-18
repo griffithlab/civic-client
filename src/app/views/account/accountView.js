@@ -17,15 +17,20 @@
         }
       })
       .state('account.notifications', {
-        url: '/notifications',
+        url: '/notifications?page',
         templateUrl: 'app/views/account/notifications.tpl.html',
         data: {
           titleExp: '"Account Notifications"',
           navMode: 'sub'
         },
         resolve: {
-          feed: /* @ngInject */ function(CurrentUser) {
-            return CurrentUser.getFeed();
+          feed: /* @ngInject */ function($stateParams, CurrentUser) {
+            //return CurrentUser.getFeed({page: $stateParams.page});
+            return CurrentUser.getFeed({page: $stateParams.page});
+          },
+          page: /* @ngInject */ function($stateParams, _) {
+            if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
+            else { return 1; }
           }
         },
         controller: 'AccountNotificationsController'
@@ -36,7 +41,8 @@
         data: {
           titleExp: '"Account Profile"',
           navMode: 'sub'
-        },
+        }
+        //,
         //resolve: {
         //  mentions: /* @ngInject */ function(CurrentUser) {
         //    CurrentUser.getMentions().then(function(response) {

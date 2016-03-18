@@ -103,8 +103,8 @@
         });
     }
 
-    function getFeed() {
-      return CurrentUserResource.getFeed().$promise
+    function getFeed(reqObj) {
+      return CurrentUserResource.getFeed(reqObj).$promise
         .then(function(response) {
           angular.copy(parseFeed(response), feed);
           return response.$promise;

@@ -31,5 +31,25 @@
       </ul>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-xs-12 text-center grid-pagination">
+      <pagination
+        ng-if="vm.totalItems"
+        class="pagination-sm"
+        ng-change="vm.pageChanged()"
+        ng-model="vm.page"
+        items-per-page="vm.itemsPerPage"
+        max-size="15"
+        boundary-links="true"
+        rotate="false"
+        align="true"
+        total-items="vm.totalItems"
+        direction-links="true">
+      </pagination>
+      <p class="page-info small">
+        {{ vm.totalItems }} {{ vm.isFiltered ? "filtered" : "total" }} {{ vm.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
+        Page {{ vm.page }} of {{ vm.totalPages }}
+      </p>
+    </div>
+  </div>
 </div>
