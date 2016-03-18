@@ -16,9 +16,9 @@ function handleError(err) {
 
 gulp.task('styles', ['wiredep'],  function () {
   return gulp.src([
-    'src/{app,components}/**/*.less',
-    '!src/{app,components}/**/_*.less'
-  ])
+      'src/{app,components}/**/*.less',
+      '!src/{app,components}/**/_*.less'
+    ])
     .pipe($.less({
       paths: [
         'src/bower_components',
@@ -82,6 +82,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.uglify({ // minify js
         preserveComments: $.uglifySaveLicense,
         mangle: true,
+        //beautify: true,
         compress: {
           drop_console: true,
           unused: true
@@ -140,7 +141,7 @@ gulp.task('fonts', function () {
   return es.concat(
     gulp.src($.mainBowerFiles()),
     gulp.src('src/assets/fonts/**/*')
-  )
+    )
     .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
     .pipe($.flatten())
     .pipe(gulp.dest('dist/assets/fonts'))

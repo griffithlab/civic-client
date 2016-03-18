@@ -10,7 +10,7 @@
     formlyConfigProvider.setType({
       name: 'queryBuilderSelect',
       extends: 'select',
-      controller: function($scope, $parse) {
+      controller: /* @ngInject */ function($scope, $parse) {
         // angular-formly's options.defaultValue appears to ignore current model values,
         // so we must implement our own default value feature here
         var getter = $parse($scope.options.key);
