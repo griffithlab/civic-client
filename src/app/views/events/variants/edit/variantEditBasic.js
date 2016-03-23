@@ -43,11 +43,7 @@
     vm.variantRevisions = VariantRevisions;
     vm.variantHistory = VariantHistory;
     vm.variantEdit = angular.copy(vm.variant);
-
-    if(_.isUndefined(vm.variantEdit.variant_types)) {
-      vm.variantEdit.variant_types = [];
-    }
-
+    
     vm.variantEdit.comment = { title: 'VARIANT ' + vm.variant.name + ' Suggested Revision', text:'' };
     vm.myVariantInfo = variantModel.data.myVariantInfo;
     vm.variants = variantModel.data.variants;
