@@ -24,7 +24,7 @@
         <p>
           <strong>Variant Types:</strong>
           <span ng-repeat="type in variant.variant_types">
-            {{$first ? '' : $last ? ', and ' : ', '}}{{ type.display_name}}
+            <a ng-href="type.url" target="_blank">{{$first ? '' : $last ? ', and ' : ', '}}{{ type.display_name}}</a>
           </span>
         </p>
       </div>
