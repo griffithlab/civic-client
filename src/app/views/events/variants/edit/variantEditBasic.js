@@ -35,7 +35,7 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.variant = Variants.data.item;
-    vm.pendingFields = VariantRevisions.data.collection.length > 0;
+    vm.pendingFields = _.keys(VariantRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(VariantRevisions.data.pendingFields), function(field) {
       return field.charAt(0).toUpperCase() + field.slice(1);
     });
@@ -43,7 +43,7 @@
     vm.variantRevisions = VariantRevisions;
     vm.variantHistory = VariantHistory;
     vm.variantEdit = angular.copy(vm.variant);
-    
+
     vm.variantEdit.comment = { title: 'VARIANT ' + vm.variant.name + ' Suggested Revision', text:'' };
     vm.myVariantInfo = variantModel.data.myVariantInfo;
     vm.variants = variantModel.data.variants;
@@ -104,8 +104,8 @@
             type: 'typeahead',
             wrapper: null,
             templateOptions: {
-              formatter: 'model[options.key].name',
-              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)'
+              formatter: 'model[options.key].display_name',
+              typeahead: 'item as item.display_name for item in options.data.typeaheadSearch($viewValue)'
             },
             data: {
               typeaheadSearch: function(val) {
@@ -117,7 +117,7 @@
                 return Variants.queryVariantTypes(request)
                   .then(function(response) {
                     return _.map(response.records, function(event) {
-                      return { name: event.display_name, id: event.id };
+                      return event;
                     });
                   });
               }

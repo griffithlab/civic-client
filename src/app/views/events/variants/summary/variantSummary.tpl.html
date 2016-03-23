@@ -23,9 +23,7 @@
       <div class="variant-types" ng-if="variant.variant_types.length > 0">
         <p>
           <strong>Variant Types:</strong>
-          <span ng-repeat="type in variant.variant_types">
-            {{$first ? '' : $last ? ', and ' : ', '}}<a ng-href="type.url" target="_blank">{{ type.display_name}}</a>
-          </span>
+          <span ng-repeat="type in variant.variant_types">{{$first ? '' : $last ? ', and ' : ', '}}<a ng-href="{{ type.url }}" target="_blank">{{ type.display_name}}</a></span>
         </p>
       </div>
     </div>
