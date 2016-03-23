@@ -20,6 +20,14 @@
           </div>
         </div>
       </div>
+      <div class="variant-types" ng-if="variant.variant_types.length > 0">
+        <p>
+          <strong>Variant Types:</strong>
+          <span ng-repeat="type in variant.variant_types">
+            {{$first ? '' : $last ? ', and ' : ', '}}{{ type.display_name}}
+          </span>
+        </p>
+      </div>
     </div>
     <div class="col-xs-4">
       <div class="coordinates-block">
