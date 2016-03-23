@@ -37,7 +37,7 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.evidence = Evidence.data.item;
-    vm.pendingFields = EvidenceRevisions.data.collection.length > 0;
+    vm.pendingFields = _.keys(EvidenceRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(EvidenceRevisions.data.pendingFields), function(field) {
       return field.charAt(0).toUpperCase() + field.slice(1);
     });

@@ -35,7 +35,7 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.variantGroup = VariantGroups.data.item;
-    vm.pendingFields = VariantGroupRevisions.data.collection.length > 0;
+    vm.pendingFields = _.keys(VariantGroupRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(VariantGroupRevisions.data.pendingFields), function(field) {
       return field.charAt(0).toUpperCase() + field.slice(1);
     });

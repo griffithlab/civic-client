@@ -36,7 +36,7 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.gene = Genes.data.item;
-    vm.pendingFields = GeneRevisions.data.collection.length > 0;
+    vm.pendingFields = _.keys(GeneRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(GeneRevisions.data.pendingFields), function(field) {
       return field.charAt(0).toUpperCase() + field.slice(1);
     });
