@@ -783,6 +783,7 @@
                   { value: '', name: 'Please select a field' },
                   { value: 'name', name: 'Name' },
                   { value: 'description', name: 'Description' },
+                  { value: 'variant_types', name: 'Variant Types' },
                   { value: 'variant_group', name: 'Variant Group' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'ensembl_version', name: 'Ensembl Version' },
@@ -850,6 +851,35 @@
                   options: [
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'},
+                    {value: 'is_empty', name: 'is empty'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name === "is_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            variant_types: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'contains', name: 'contains'},
                     {value: 'does_not_contain', name: 'does not contain'},
                     {value: 'is_empty', name: 'is empty'}
                   ]
