@@ -97,6 +97,16 @@
             commentId: '@commentId'
           },
           cache: false
+        },
+        queryVariantTypes: {
+          method: 'GET',
+          url: '/api/variant_types',
+          params: {
+            name: '@name',
+            count: '@count',
+            page: '@page'
+          },
+          cache: false
         }
       }
     );
@@ -139,7 +149,9 @@
       getComment: getComment,
       submitComment: submitComment,
       updateComment: updateComment,
-      deleteComment: deleteComment
+      deleteComment: deleteComment,
+
+      queryVariantTypes: queryVariantTypes
     };
 
     function initBase(variantId) {
@@ -240,6 +252,12 @@
         .then(function(response) {
           cache.remove('/api/variants/' + item.id + '/comments');
           queryComments(item.id);
+          return response.$promise;
+        });
+    }
+    function queryVariantTypes(reqObj) {
+      return VariantsResource.queryVariantTypes(reqObj).$promise
+        .then(function(response) {
           return response.$promise;
         });
     }

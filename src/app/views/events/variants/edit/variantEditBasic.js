@@ -43,6 +43,11 @@
     vm.variantRevisions = VariantRevisions;
     vm.variantHistory = VariantHistory;
     vm.variantEdit = angular.copy(vm.variant);
+
+    if(_.isUndefined(vm.variantEdit.variant_types)) {
+      vm.variantEdit.variant_types = [];
+    }
+
     vm.variantEdit.comment = { title: 'VARIANT ' + vm.variant.name + ' Suggested Revision', text:'' };
     vm.myVariantInfo = variantModel.data.myVariantInfo;
     vm.variants = variantModel.data.variants;
@@ -93,18 +98,40 @@
         }
       },
       {
+        key: 'variant_types',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Variant Types',
+          helpText: 'Add one or more variant types from the Sequence Ontology',
+          entityName: 'Type',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              formatter: 'model[options.key].name',
+              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)'
+            },
+            data: {
+              typeaheadSearch: function(val) {
+                var request = {
+                  count: 5,
+                  page: 0,
+                  name: val
+                };
+                return Variants.queryVariantTypes(request)
+                  .then(function(response) {
+                    return _.map(response.records, function(event) {
+                      return { name: event.display_name, id: event.id };
+                    });
+                  });
+              }
+            }
+          }
+        }
+      },
+      {
         template: '<h3 class="form-subheader">Primary Coordinates</h3><hr/>'
       },
-      //{
-      //  model: vm.variantEdit.coordinates,
-      //  key: 'reference_build',
-      //  type: 'horizontalInputHelp',
-      //  templateOptions: {
-      //    label: 'Reference Build',
-      //    value: vm.variantEdit.coordinates.reference_build,
-      //    helpText: ''
-      //  }
-      //},
       {
         model: vm.variantEdit.coordinates,
         key: 'reference_build',
@@ -253,6 +280,7 @@
 
     vm.submit = function(variantEdit) {
       variantEdit.variantId = variantEdit.id;
+      variantEdit.variant_types = _.map(variantEdit.variant_types, 'id');
       vm.formErrors = {};
       vm.formMessages = {};
       variantEdit = _.merge(variantEdit, variantEdit.coordinates); // civic-server needs coords on base variant obj
