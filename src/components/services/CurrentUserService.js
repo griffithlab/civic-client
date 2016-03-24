@@ -59,7 +59,7 @@
     var events = [];
     var stats = [];
     var feed = [];
-    var unread = [];
+    var unread = {};
     var mentions = [];
 
     return {

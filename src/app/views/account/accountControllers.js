@@ -11,7 +11,13 @@
   }
 
   // @ngInject
-  function AccountNotificationsController($scope, $location, CurrentUser, feed, page, _) {
+  function AccountNotificationsController($scope,
+                                          $location,
+                                          CurrentUser,
+                                          Security,
+                                          feed,
+                                          page,
+                                          _) {
     var vm = $scope.vm = {};
     vm.total = feed.total;
 
@@ -42,7 +48,9 @@
     };
 
     vm.markAllAsRead = function() {
-      CurrentUser.markAllAsRead();
+      CurrentUser.markAllAsRead().then(function() {
+        Security.reloadCurrentUser(); // to update notification counts
+      });
     }
   }
 
