@@ -11,17 +11,7 @@
             </span>
           </div>
           <div ng-switch-when="true">
-            <div ng-switch="vm.pendingFields.length > 0">
-              <div ng-switch-when="true">
-                <span tooltip-template="'/pendingTooltip.tpl.html'"
-                      tooltip-append-to-body="true">
-                  <span ng-include="'/entityTitle.tpl.html'"></span>
-                </span>
-              </div>
-              <div ng-switch-when="false">
-                <span ng-include="'/entityTitle.tpl.html'"></span>
-              </div>
-            </div>
+            <span ng-include="'/entityTitle.tpl.html'"></span>
           </div>
         </div>
 
@@ -39,6 +29,13 @@
                ng-click="go(tab)">
           </tab>
         </tabset>
+        <div class="tab-info" ng-if="vm.pendingFields.length > 0">
+          <span tooltip-template="'/pendingTooltip.tpl.html'"
+                tooltip-placement="left"
+                tooltip-append-to-body="true">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+          </span>
+        </div>
       </div>
     </div>
   </div>

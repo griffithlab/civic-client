@@ -49,10 +49,16 @@
       .tab-container {
         padding-right: @contentPadding;
         position: absolute;
-        right: 0;
+        right: @contentPadding * 1.5;
         bottom: -1px; // forces the bootstrap tab bottom line to overlap with the .row border
       }
 
+      .tab-info {
+        position: absolute;
+        right: @contentPadding;
+        opacity: 0.5;
+        bottom: 12px;
+      }
     }
     // override default bootstrap with view background,
     // assigned to ctrl.viewBackground in entityTabs.js

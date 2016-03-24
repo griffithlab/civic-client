@@ -35,11 +35,6 @@
       ctrl.active = $state.includes(ctrl.baseState + '.edit.*');
     });
 
-    $scope.$watch('entityViewRevisions.data.pendingFields', function(fields) {
-      console.log('******* entity fields updated');
-      ctrl.pending = _.keys(fields).length >0;
-    });
-
     ctrl.mouseOver = function() {
       Security.isAuthenticated() ? ctrl.hover = true: ctrl.hover = false;
     };
