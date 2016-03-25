@@ -783,7 +783,7 @@
                   { value: '', name: 'Please select a field' },
                   { value: 'name', name: 'Name' },
                   { value: 'description', name: 'Description' },
-                  { value: 'variant_types', name: 'Variant Types' },
+                  { value: 'variant_types', name: 'Variant Type(s)' },
                   { value: 'variant_group', name: 'Variant Group' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'ensembl_version', name: 'Ensembl Version' },

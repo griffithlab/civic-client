@@ -153,7 +153,7 @@
           active: false
         },
         {
-          heading: 'Variant Types',
+          heading: 'Variant Type(s)',
           template: 'app/pages/help_variant_varianttypes.tpl.html',
           active: false
         },

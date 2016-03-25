@@ -97,7 +97,7 @@
         key: 'variant_types',
         type: 'multiInput',
         templateOptions: {
-          label: 'Variant Types',
+          label: 'Variant Type(s)',
           helpText: 'Add one or more variant types from the Sequence Ontology',
           entityName: 'Type',
           inputOptions: {
