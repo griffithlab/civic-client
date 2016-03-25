@@ -121,17 +121,17 @@
           active: false
         },
         {
-          heading: 'Evidence Types',
+          heading: 'Evidence Type',
           template: 'app/pages/help_evidence_types.tpl.html',
           active: false
         },
         {
-          heading: 'Evidence Levels',
+          heading: 'Evidence Level',
           template: 'app/pages/help_evidence_levels.tpl.html',
           active: false
         },
         {
-          heading: 'Trust Ratings',
+          heading: 'Trust Rating',
           template: 'app/pages/help_evidence_trust_ratings.tpl.html',
           active: false
         }
@@ -153,7 +153,7 @@
           active: false
         },
         {
-          heading: 'Variant Type(s)',
+          heading: 'Variant Type',
           template: 'app/pages/help_variant_varianttypes.tpl.html',
           active: false
         },
