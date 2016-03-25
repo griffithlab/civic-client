@@ -153,6 +153,11 @@
           active: false
         },
         {
+          heading: 'Variant Types',
+          template: 'app/pages/help_variant_varianttypes.tpl.html',
+          active: false
+        },
+        {
           heading: 'Variant Coordinates',
           template: 'app/pages/help_variant_coordinates.tpl.html',
           active: false
