@@ -20,10 +20,17 @@
           </div>
         </div>
       </div>
-      <div class="variant-types" ng-if="variant.variant_types.length > 0">
+      <div class="variant-types">
         <p>
           <strong>Variant Type(s):</strong>
-          <span ng-repeat="type in variant.variant_types">{{$first ? '' : $last ? ', and ' : ', '}}<a ng-href="{{ type.url }}" target="_blank">{{ type.display_name}}</a></span>
+          <span ng-switch="variant.variant_types.length > 0">
+            <span ng-switch-when="true">
+              <span ng-repeat="type in variant.variant_types">{{$first ? '' : $last ? ', and ' : ', '}}<a ng-href="{{ type.url }}" target="_blank">{{ type.display_name}}</a></span>
+            </span>
+            <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
+              None specified.
+            </span>
+          </span>
         </p>
       </div>
     </div>
