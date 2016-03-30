@@ -71,7 +71,25 @@
         key: 'text',
         type: 'comment',
         ngModelElAttrs: {
-          'msd-elastic': 'true'
+          'msd-elastic': 'true',
+          'mentio': '',
+          'mentio-id': '"commentForm"',
+          'mentio-trigger-char': '"@"',
+          'mentio-items': 'options.data.users',
+          'mentio-template-url': '/user-mentions.tpl',
+          'mentio-search': 'options.data.searchUsers(term)',
+          'mentio-select': 'options.data.getUser(item)',
+          'mentio-typed-term': 'options.data.typedTerm'
+        },
+        data: {
+          typedTerm: '',
+          getUser: function(item) {
+            console.log('getUser called.');
+          },
+          searchUsers: function(term) {
+            console.log('searchUser called.');
+          },
+          users: []
         },
         templateOptions: {
           label: 'Add Comment:',
@@ -79,7 +97,7 @@
           minimum_length: 3,
           value: vm.newComment.text,
           currentUser: vm.currentUser,
-          required: false
+          required: false,
         },
         validators: {
           length: {

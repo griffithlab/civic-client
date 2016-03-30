@@ -94,6 +94,14 @@
     </div>
 
   </div>
+  <!-- @mention dropdown template -->
+  <script type="text/ng-template" id="/user-mentions.tpl">
+    <ul class="list-group user-search">
+      <li mentio-menu-item="user" ng-repeat="user in items" class="list-group-item">
+        <span class="text-primary" ng-bind-html="person.display_name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
+      </li>
+    </ul>
+  </script>
   <!--<hr/>-->
   <!--<h3>vm.commentForm</h3>-->
   <!--<pre ng-bind="vm.commentForm|json"></pre>-->

@@ -5,6 +5,7 @@
     'ui.router',
     'ct.ui.router.extras',
     'angular-loading-bar',
+    'mentio',
     'ngTouch',
     'ngDialog',
     'ngMessages',
