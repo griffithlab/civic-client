@@ -21,6 +21,7 @@
   function EntityCommentFormController($scope,
                                        $stateParams,
                                        Security,
+                                       Users,
                                        CommentPreview,
                                        _) {
     var vm = $scope.vm = {};
@@ -73,22 +74,28 @@
         ngModelElAttrs: {
           'msd-elastic': 'true',
           'mentio': '',
-          'mentio-id': '"commentForm"',
           'mentio-trigger-char': '"@"',
           'mentio-items': 'options.data.users',
           'mentio-template-url': '/user-mentions.tpl',
-          'mentio-search': 'options.data.searchUsers(term)',
-          'mentio-select': 'options.data.getUser(item)',
+          'mentio-search': 'searchUsers(term)',
+          'mentio-select': 'getUser(item)',
           'mentio-typed-term': 'options.data.typedTerm'
+        },
+        controller: /* @ngInject */ function($scope) {
+          $scope.searchUsers = function(term) {
+            Users.getSuggestions(term).then(function(response) {
+              $scope.options.data.users = _.map(response, function(name) {
+                return '@' + name;
+              });
+            });
+          };
+
+          $scope.getUser = function(item) {
+            return item;
+          }
         },
         data: {
           typedTerm: '',
-          getUser: function(item) {
-            console.log('getUser called.');
-          },
-          searchUsers: function(term) {
-            console.log('searchUser called.');
-          },
           users: []
         },
         templateOptions: {
@@ -97,7 +104,7 @@
           minimum_length: 3,
           value: vm.newComment.text,
           currentUser: vm.currentUser,
-          required: false,
+          required: false
         },
         validators: {
           length: {

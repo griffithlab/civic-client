@@ -42,6 +42,15 @@
           method: 'GET',
           isArray: false,
           cache: false
+        },
+        getSuggestions: {
+          method: 'GET',
+          url: '/api/users/suggestions',
+          //params: {
+          //  username: '@username'
+          //},
+          isArray: true,
+          cache: false
         }
       }
     );
@@ -52,17 +61,20 @@
     var item = { };
     var collection = [];
     var events = [];
+    var suggestions = []
 
     return {
       data: {
         item: item,
         collection: collection,
-        events: events
+        events: events,
+        suggestions: suggestions
       },
       get: get,
       query: query,
       queryEvents: queryEvents,
-      update: update
+      update: update,
+      getSuggestions: getSuggestions
     };
 
     function get(userId) {
@@ -89,6 +101,13 @@
     function update(user) {
       return UsersResource.update(user).$promise
         .then(function(response) {
+          return response.$promise;
+        });
+    }
+    function getSuggestions(str) {
+      return UsersResource.getSuggestions({username: str}).$promise
+        .then(function(response) {
+          angular.copy(response, suggestions);
           return response.$promise;
         });
     }

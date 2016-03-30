@@ -36,6 +36,12 @@
         "src/angulartics.js"
       ]
     },
+    "ment.io": {
+      "main": [
+        "dist/mentio.js",
+        "ment.io/styles.css"
+      ]
+    },
     "angulartics-google-analytics": {
       "main": "./lib/angulartics-google-analytics.js"
     },
