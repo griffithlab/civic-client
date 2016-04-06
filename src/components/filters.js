@@ -9,7 +9,8 @@
     .filter('ifEmpty', ifEmpty)
     .filter('unsafe', unsafe)
     .filter('ordinal', ordinal)
-    .filter('keyToLabel', keyToLabel);
+    .filter('keyToLabel', keyToLabel)
+    .filter('words', words);
 
   // @ngInject
   function labelifyFilter() {
@@ -19,6 +20,25 @@
     };
   }
 
+  // @ngInject
+  function words() {
+    return function (input, words) {
+      if (isNaN(words)) {
+        return input;
+      }
+      if (words <= 0) {
+        return '';
+      }
+      if (input) {
+        var inputWords = input.split(/\s+/);
+        if (inputWords.length > words) {
+          input = inputWords.slice(0, words).join(' ') + '\u2026';
+        }
+      }
+      return input;
+    };
+  }
+  
   // @ngInject
   function arrayToListFilter(_) {
     return function(input, limitTo, terminator, showTotal) {
