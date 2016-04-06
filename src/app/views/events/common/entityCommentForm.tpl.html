@@ -97,8 +97,8 @@
   <!-- @mention dropdown template -->
   <script type="text/ng-template" id="/user-mentions.tpl">
     <ul class="list-group user-search">
-      <li mentio-menu-item="user" ng-repeat="user in items" class="list-group-item">
-        <span class="text-primary" ng-bind-html="user | mentioHighlight:options.data.typedTerm:'menu-highlighted' | unsafe"></span>
+      <li mentio-menu-item="user" ng-repeat="user in items track by $index" class="list-group-item">
+        @<span class="text-primary" ng-bind-html="user.display_name | mentioHighlight:options.data.typedTerm:'menu-highlighted' | unsafe"></span>
       </li>
     </ul>
   </script>

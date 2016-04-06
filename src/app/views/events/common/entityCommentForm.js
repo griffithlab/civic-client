@@ -84,14 +84,12 @@
         controller: /* @ngInject */ function($scope) {
           $scope.searchUsers = function(term) {
             Users.getSuggestions(term).then(function(response) {
-              $scope.options.data.users = _.map(response, function(name) {
-                return '@' + name;
-              });
+              $scope.options.data.users = response;
             });
           };
 
-          $scope.getUser = function(item) {
-            return item;
+          $scope.getUser = function(user) {
+            return '@' + user.display_name;
           }
         },
         data: {
