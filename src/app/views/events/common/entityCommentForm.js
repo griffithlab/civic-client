@@ -21,7 +21,7 @@
   function EntityCommentFormController($scope,
                                        $stateParams,
                                        Security,
-                                       Users,
+                                       CommentSuggestions,
                                        CommentPreview,
                                        _) {
     var vm = $scope.vm = {};
@@ -78,7 +78,7 @@
         },
         controller: /* @ngInject */ function($scope) {
           $scope.searchUsers = function(term) {
-            Users.getSuggestions(term).then(function(response) {
+            CommentSuggestions.getUserSuggestions(term).then(function(response) {
               $scope.options.data.users = response;
             });
           };
