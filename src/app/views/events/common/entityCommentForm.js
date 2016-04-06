@@ -2,7 +2,8 @@
   'use strict';
   angular.module('civic.events.common')
     .directive('entityCommentForm', entityCommenntFormDirective)
-    .controller('EntityCommentFormController', EntityCommentFormController);
+    .controller('EntityCommentFormController', EntityCommentFormController)
+    .filter('mentioHighlightEntity', mentioHighlightEntity);
 
   // @ngInject
   function entityCommenntFormDirective() {
@@ -148,4 +149,27 @@
 
 
   }
+
+  // version of ment.io's highlight filter which discards the entity token and colon from the query
+  // in order to properly highlight matching strings to returned values
+  function mentioHighlightEntity() {
+    function escapeRegexp (queryToEscape) {
+      return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
+    }
+
+    return function (matchItem, query, hightlightClass) {
+      if (query) {
+        if(_.includes(query, ':')) {
+          query = query.split(':')[1];
+        }
+        var replaceText = hightlightClass ?
+        '<span class="' + hightlightClass + '">$&</span>' :
+          '<strong>$&</strong>';
+        return ('' + matchItem).replace(new RegExp(escapeRegexp(query), 'gi'), replaceText);
+      } else {
+        return matchItem;
+      }
+    };
+  }
+
 })();

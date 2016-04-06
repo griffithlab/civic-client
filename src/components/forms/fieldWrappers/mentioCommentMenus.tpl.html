@@ -19,7 +19,7 @@
           ng-repeat="entity in items | limitTo:8 track by $index"
           class="list-group-item">
         <span class="text-primary"
-              ng-bind-html="'<strong>' + entity.display_type + '</strong> ' + entity.preview | mentioHighlight:typedTerm:'menu-highlighted' | unsafe">
+              ng-bind-html="'<strong>' + entity.display_type + '</strong> ' + entity.preview | mentioHighlightEntity:typedTerm:'menu-highlighted' | unsafe">
         </span>
         <!--<em class="text-muted" ng-bind="entity.preview"></em>-->
       </li>
