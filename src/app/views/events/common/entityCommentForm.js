@@ -76,7 +76,7 @@
           'mentio': '',
           'mentio-id': '"commentForm"'
         },
-        controller: /* @ngInject */ function($scope) {
+        controller: /* @ngInject */ function($scope, $filter) {
           $scope.searchUsers = function(term) {
             CommentSuggestions.getUserSuggestions(term).then(function(response) {
               $scope.users = response;
@@ -89,12 +89,22 @@
 
           $scope.searchEntities = function(term) {
             CommentSuggestions.getEntitySuggestions(term).then(function(response) {
-              $scope.entities = response;
+              $scope.entities = _.map(response, function(entity) {
+                entity.display_type = $filter('keyToLabel')(entity.type).toUpperCase();
+                return entity;
+              });
             });
           };
 
           $scope.getEntity= function(entity) {
-            return '#' + entity.type + entity.id;
+            var types = {
+              gene: 'G',
+              variant: 'V',
+              variant_group: 'VG',
+              evidence_item: 'EI'
+            };
+            console.log(entity);
+            return '#' + types[entity.type] + entity.id;
           };
 
           $scope.typedTerm = '';

@@ -14,16 +14,16 @@
 
   <!-- dropdown template for entity suggestions-->
   <script type="text/ng-template" id="/entity-mentions.tpl">
-    <ul class="list-group entity-search">
+    <ul class="list-group user-search">
       <li mentio-menu-item="entity"
-          ng-repeat="entity in items track by $index"
+          ng-repeat="entity in items | limitTo:8 track by $index"
           class="list-group-item">
         <span class="text-primary"
-              ng-bind-html="'#' + entity.id + ': ' + entity.name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe">
+              ng-bind-html="'<strong>' + entity.display_type + '</strong> ' + entity.preview | mentioHighlight:typedTerm:'menu-highlighted' | unsafe">
         </span>
-        &nbsp;&nbsp;
-        <em class="text-muted" ng-bind="entity.preview"></em>
+        <!--<em class="text-muted" ng-bind="entity.preview"></em>-->
       </li>
+      <li class="list-group-item"><span class="small"><em>Search term: {{ typedTerm }}</em></span></li>
     </ul>
   </script>
 
