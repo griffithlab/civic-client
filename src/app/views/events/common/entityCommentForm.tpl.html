@@ -97,11 +97,15 @@
   <!-- @mention dropdown template -->
   <script type="text/ng-template" id="/user-mentions.tpl">
     <ul class="list-group user-search">
-      <li mentio-menu-item="user" ng-repeat="user in items track by $index" class="list-group-item">
+      <li mentio-menu-item="user"
+          ng-repeat="user in items track by $index"
+          class="list-group-item">
         <img ng-src="{{user.avatars.x32}}" class="user-photo">
-        <span class="text-primary" ng-bind-html="'&commat;' + user.display_name | mentioHighlight:options.data.typedTerm:'menu-highlighted' | unsafe"></span>
-        <em class="text-muted" ng-bind="person.bio | words:5"></em>
-
+        <span class="text-primary"
+              ng-bind-html="'&commat;' + user.display_name | mentioHighlight:options.data.typedTerm:'menu-highlighted' | unsafe">
+        </span>
+        &nbsp;&nbsp;
+        <em class="text-muted" ng-bind="user.area_of_expertise"></em>
       </li>
     </ul>
   </script>

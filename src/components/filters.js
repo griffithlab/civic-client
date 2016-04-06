@@ -38,7 +38,7 @@
       return input;
     };
   }
-  
+
   // @ngInject
   function arrayToListFilter(_) {
     return function(input, limitTo, terminator, showTotal) {
