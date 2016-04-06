@@ -1,36 +1,37 @@
 <div>
   <formly-transclude></formly-transclude>
-  <!-- ment.io menu directive for entity mentions -->
-  <!--<mentio-menu-->
-  <!--mentio-for="'theTextArea'"-->
-  <!--mentio-trigger-char="'@'"-->
-  <!--mentio-items="products"-->
-  <!--mentio-template-url="/entity-mentions.tpl"-->
-  <!--mentio-search="searchProducts(term)"-->
-  <!--mentio-select="getProductTextRaw(item)">-->
-  <!--</mentio-menu>-->
 
-  <!--&lt;!&ndash; dropdown template for entity suggestions&ndash;&gt;-->
-  <!--<script type="text/ng-template" id="/entity-mentions.tpl">-->
-  <!--<ul class="list-group user-search">-->
-  <!--<li mentio-menu-item="user"-->
-  <!--ng-repeat="user in items track by $index"-->
-  <!--class="list-group-item">-->
-  <!--<img ng-src="{{user.avatars.x32}}" class="user-photo">-->
-  <!--<span class="text-primary"-->
-  <!--ng-bind-html="'&commat;' + user.display_name | mentioHighlight:options.data.typedTerm:'menu-highlighted' | unsafe">-->
-  <!--</span>-->
-  <!--&nbsp;&nbsp;-->
-  <!--<em class="text-muted" ng-bind="user.area_of_expertise"></em>-->
-  <!--</li>-->
-  <!--</ul>-->
-  <!--</script>-->
+  <!-- menu directive for entity suggestions -->
+  <mentio-menu
+    mentio-for="'commentForm'"
+    mentio-trigger-char="'#'"
+    mentio-items="entities"
+    mentio-template-url="/entity-mentions.tpl"
+    mentio-search="searchEntities(term)"
+    mentio-select="getEntity(item)"
+    mentio-typed-term="typedTerm">
+  </mentio-menu>
+
+  <!-- dropdown template for entity suggestions-->
+  <script type="text/ng-template" id="/entity-mentions.tpl">
+    <ul class="list-group entity-search">
+      <li mentio-menu-item="entity"
+          ng-repeat="entity in items track by $index"
+          class="list-group-item">
+        <span class="text-primary"
+              ng-bind-html="'#' + entity.id + ': ' + entity.name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe">
+        </span>
+        &nbsp;&nbsp;
+        <em class="text-muted" ng-bind="entity.preview"></em>
+      </li>
+    </ul>
+  </script>
 
   <!-- ment.io menu directive for user mentions -->
   <mentio-menu
     mentio-for="'commentForm'"
     mentio-trigger-char="'@'"
-    mentio-items="options.data.users"
+    mentio-items="users"
     mentio-template-url="/user-mentions.tpl"
     mentio-search="searchUsers(term)"
     mentio-select="getUser(item)"
@@ -45,7 +46,7 @@
           class="list-group-item">
         <img ng-src="{{user.avatars.x32}}" class="user-photo">
         <span class="text-primary"
-              ng-bind-html="'&commat;' + user.display_name | mentioHighlight:options.data.typedTerm:'menu-highlighted' | unsafe">
+              ng-bind-html="'&commat;' + user.display_name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe">
         </span>
         &nbsp;&nbsp;
         <em class="text-muted" ng-bind="user.area_of_expertise"></em>

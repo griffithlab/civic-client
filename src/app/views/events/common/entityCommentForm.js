@@ -79,7 +79,7 @@
         controller: /* @ngInject */ function($scope) {
           $scope.searchUsers = function(term) {
             CommentSuggestions.getUserSuggestions(term).then(function(response) {
-              $scope.options.data.users = response;
+              $scope.users = response;
             });
           };
 
@@ -87,11 +87,21 @@
             return '@' + user.display_name;
           };
 
+          $scope.searchEntities = function(term) {
+            CommentSuggestions.getEntitySuggestions(term).then(function(response) {
+              $scope.entities = response;
+            });
+          };
+
+          $scope.getEntity= function(entity) {
+            return '#' + entity.type + entity.id;
+          };
+
           $scope.typedTerm = '';
         },
         data: {
-          typedTerm: '',
-          users: []
+          users: [],
+          entities: []
         },
         templateOptions: {
           label: 'Add Comment:',
