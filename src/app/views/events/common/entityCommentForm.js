@@ -74,12 +74,7 @@
         ngModelElAttrs: {
           'msd-elastic': 'true',
           'mentio': '',
-          'mentio-trigger-char': '"@"',
-          'mentio-items': 'options.data.users',
-          'mentio-template-url': '/user-mentions.tpl',
-          'mentio-search': 'searchUsers(term)',
-          'mentio-select': 'getUser(item)',
-          'mentio-typed-term': 'options.data.typedTerm'
+          'mentio-id': '"commentForm"'
         },
         controller: /* @ngInject */ function($scope) {
           $scope.searchUsers = function(term) {
@@ -90,7 +85,9 @@
 
           $scope.getUser = function(user) {
             return '@' + user.display_name;
-          }
+          };
+
+          $scope.typedTerm = '';
         },
         data: {
           typedTerm: '',
