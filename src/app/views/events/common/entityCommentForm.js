@@ -104,7 +104,6 @@
               variant_group: 'VG',
               evidence_item: 'EI'
             };
-            console.log(entity);
             return '#' + types[entity.type] + entity.id;
           };
 
