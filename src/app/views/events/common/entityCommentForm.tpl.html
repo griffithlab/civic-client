@@ -54,8 +54,8 @@
           </div>
         </div>
         <div class="row comment-buttons">
-          <div class="col-xs-12">
-            <div class="pull-left markdown-prompt">
+          <div class="col-xs-10">
+            <div class="markdown-prompt">
               <p>Use
                 <button type="button" class="btn btn-default btn-xs"
                         ng-click="vm.showMarkdownHelp = !vm.showMarkdownHelp">
@@ -65,22 +65,37 @@
                 </span>
                   markdown
                 </button>
-                to add <strong>emphasis</strong>, <span style="font-style: oblique;">styling</span>, images, and links to your comments.</p>
+                to add <strong>emphasis</strong>, <span style="font-style: oblique;">styling</span>, images, and links to your comments. Use @user and #ENTITY
+                <button type="button" class="btn btn-default btn-xs"
+                        ng-click="vm.showMacroHelp = !vm.showMacroHelp">
+                <span class="glyphicon"
+                      aria-hidden="true"
+                      ng-class="{ 'glyphicon-triangle-right': vm.showMacroHelp === false, 'glyphicon-triangle-bottom': vm.showMacroHelp === true}">
+                </span>
+                macros
+                </button>
+                to add links to specific users and entity summaries.</p>
             </div>
+          </div>
+          <div class="col-xs-2">
             <div class="pull-right">
               <button
                 type="submit"
                 class="btn btn-default"
                 ng-disabled="vm.commentForm.$invalid"
                 ng-click="vm.submit(vm.newComment, vm.options.resetModel)">
-                Submit Comment
+                Submit
+                <span class="hidden-sm">Comment</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="row" ng-show="vm.showMarkdownHelp">
-          <div class="col-xs-12">
+        <div class="row">
+          <div class="col-xs-6" ng-show="vm.showMarkdownHelp">
             <div ng-include="'app/views/events/common/entityCommentMarkdownHelp.tpl.html'"></div>
+          </div>
+          <div class="col-xs-6" ng-show="vm.showMacroHelp" ng-class="{'col-xs-offset-6': !vm.showMarkdownHelp }">
+            <div ng-include="'app/views/events/common/entityCommentMacroHelp.tpl.html'"></div>
           </div>
         </div>
       </div>

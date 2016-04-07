@@ -1,0 +1,27 @@
+<div class="entityCommentMarkdownHelp">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <h4>@username mention macro</h4>
+      <p>'@' followed by a user's display name will be displayed as a link to the user's profile page, and generate a notification to the mentioned user. This is useful for calling a user's attention to a particular comment.<p>
+      <h5>@ mention suggestions</h5>
+    </p>Type '@', and the first couple letters of a user's name, and CIViC will show you a dropdown menu of users with matching display names. Hit enter to insert an user mention link, which will display in the rendered comment as a link to the user's profile page, and generate a notification to the mentioned user.</p>
+
+<pre><code class="markdown">Hey @username, I've submitted a change, could you check it out?
+</code></pre>
+
+      <h4>#ENTITY link macro</h4>
+      <p>'#' followed by an entity type abbreviation, a colon, and an entity ID will be displayed as a link to that entity's summary view.</p>
+      <h5># entity link suggestions</h5>
+      <p>Type '#', followed by an entity type abbreviation, a colon and search string, and CIViC will show you a list of entities with matching names (or summaries, in the case of evidence items). For example, entering '#V:v600' will display a list of variants with 'V600' in the names. Select an entity to insert an #[ENTITY][ID] string for that entity.</p>
+
+<pre><code class="markdown">For example with #V123 we see the opposite effect.
+
+#V123    Variant link
+#G123    Gene link
+#E123    Evidence Item link
+#VG123   Variant Group link</code></pre>
+
+    </div>
+  </div>
+</div>

@@ -37,7 +37,7 @@
     vm.commentMessage = '';
 
     vm.showMarkdownHelp = false;
-    vm.markdownHelpUrl = 'app/views/events/common/entityCommentMarkdownHelp.tpl.html';
+    vm.showMacroHelp = false;
 
     vm.switchMode = function(mode) {
       if (mode === 'preview') {
