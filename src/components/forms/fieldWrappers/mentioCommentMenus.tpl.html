@@ -18,10 +18,10 @@
       <li mentio-menu-item="entity"
           ng-repeat="entity in items | limitTo:8 track by $index"
           class="list-group-item">
-        <span class="text-primary"
-              ng-bind-html="'<strong>' + entity.display_type + '</strong> ' + entity.preview | mentioHighlightEntity:typedTerm:'menu-highlighted' | unsafe">
+        <span class="text-primary">
+          <span ng-bind="entity.display_type" class="text-muted">TYPE</span>
+          <span ng-bind-html="entity.preview | mentioHighlightEntity:typedTerm:'menu-highlighted' | unsafe">Preview</span>
         </span>
-        <!--<em class="text-muted" ng-bind="entity.preview"></em>-->
       </li>
       <li class="list-group-item"><span class="small"><em>Search term: {{ typedTerm }}</em></span></li>
     </ul>
@@ -44,7 +44,8 @@
       <li mentio-menu-item="user"
           ng-repeat="user in items track by $index"
           class="list-group-item">
-        <img ng-src="{{user.avatars.x32}}" class="user-photo">
+        <img ng-src="{{user.avatars.x32}}" class="userImage">
+        &nbsp;
         <span class="text-primary"
               ng-bind-html="'&commat;' + user.display_name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe">
         </span>
