@@ -47,7 +47,8 @@
           url: '/api/genes/:geneId/suggested_changes/:revisionId/accept',
           params: {
             geneId: '@geneId',
-            revisionId: '@revisionId'
+            revisionId: '@revisionId',
+            force: true
           },
           cache: false
         },
@@ -56,7 +57,8 @@
           url: '/api/genes/:geneId/suggested_changes/:revisionId/reject',
           params: {
             geneId: '@geneId',
-            revisionId: '@revisionId'
+            revisionId: '@revisionId',
+            force: true
           },
           cache: false
         },

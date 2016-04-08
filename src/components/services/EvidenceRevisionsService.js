@@ -47,7 +47,8 @@
           url: '/api/evidence_items/:evidenceId/suggested_changes/:revisionId/accept',
           params: {
             evidenceId: '@evidenceId',
-            revisionId: '@revisionId'
+            revisionId: '@revisionId',
+            force: true
           },
           cache: false
         },
@@ -56,7 +57,8 @@
           url: '/api/evidence_items/:evidenceId/suggested_changes/:revisionId/reject',
           params: {
             evidenceId: '@evidenceId',
-            revisionId: '@revisionId'
+            revisionId: '@revisionId',
+            force: true
           },
           cache: cache
         },

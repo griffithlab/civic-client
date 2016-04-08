@@ -47,7 +47,8 @@
           url: '/api/variants/:variantId/suggested_changes/:revisionId/accept',
           params: {
             variantId: '@variantId',
-            revisionId: '@revisionId'
+            revisionId: '@revisionId',
+            force: true
           },
           cache: false
         },
@@ -56,7 +57,8 @@
           url: '/api/variants/:variantId/suggested_changes/:revisionId/reject',
           params: {
             variantId: '@variantId',
-            revisionId: '@revisionId'
+            revisionId: '@revisionId',
+            force: true
           },
           cache: cache
         },
