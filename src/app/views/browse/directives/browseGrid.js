@@ -73,7 +73,7 @@
       'variants': [
         {
           name: 'variant',
-          width: '30%',
+          width: '25%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -92,7 +92,18 @@
         {
           name: 'diseases',
           displayName: 'Diseases',
-          width: '45%',
+          width: '25%',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
+        },
+        {
+          name: 'drugs',
+          displayName: 'Drugs',
+          width: '25%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -139,6 +150,17 @@
           name: 'diseases',
           //width: '30%',
           displayName: 'Diseases',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
+        },
+        {
+          name: 'drugs',
+          //width: '30%',
+          displayName: 'Drugs',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -219,8 +241,6 @@
 
       // called when user clicks on a row
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        // $log.info(['geneID:', row.entity.id, 'variantId:', row.entity.variant_id].join(' '));
-        $log.info(['ctrl.mode:', ctrl.mode, 'geneId:', row.entity.gene_id, 'variantId:', row.entity.variant_id].join(' '));
         if(ctrl.mode === 'variants') {
           $state.go('events.genes.summary.variants.summary', {
             geneId: row.entity.gene_id,
