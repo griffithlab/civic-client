@@ -18,7 +18,7 @@
     });
 
     // refresh stats and events periodically
-    $interval(function() {
+    var query = $interval(function() {
       Stats.site().then(function(stats) {
         vm.stats = stats;
       });
@@ -26,5 +26,11 @@
         vm.events = response.result;
       });
     }, 60000);
+
+    $scope.$on('$destroy', function() {
+      console.log('destroying events query');
+      if(angular.isDefined(query)) { $interval.cancel(query); }
+    });
+
   }
 })();
