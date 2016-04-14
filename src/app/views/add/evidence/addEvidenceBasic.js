@@ -45,16 +45,33 @@
       $document.scrollToElementAnimated(elem);
     };
 
+    //vm.duplicates = [];
+
+
+    vm.duplicates = true;
+
     vm.newEvidence = {
       gene: '',
       variant: '',
+      pubmed_id: '',
       description: '',
+      duplicates: [
+        {
+          gene: 'BRAF',
+          variant: 'V5001',
+          eid: 123
+        },
+        {
+          gene: 'BRAF',
+          variant: 'V5001',
+          eid: 123
+        }
+      ],
       disease: {
         name: ''
       },
       disease_name: '',
       noDoid: false,
-      pubmed_id: '',
       //pubchem_id: '',
       drugs: [],
       drug_interaction_type: '',
@@ -234,6 +251,18 @@
             },
             message: '"This does not appear to be a valid Pubmed ID."'
           }
+        }
+      },
+      {
+        templateUrl: 'app/views/add/evidence/addEvidenceDuplicateWarning.tpl.html',
+        controller: /* @ngInject */ function($scope, Search) {
+          console.log('dup warning controller loaded.');
+          var vm = $scope.vm = {};
+          vm.duplicates = true;
+          Search.post({"operator":"AND","queries":[{"field":"gene_name","condition":{"name":"contains","parameters":["BRAF"]}},{"field":"variant_name","condition":{"name":"contains","parameters":["V600"]}},{"field":"pubmed_id","condition":{"name":"is","parameters":["123"]}}],"entity":"evidence_items","save":true})
+            .then(function(response) {
+              vm.duplicates = response.results;
+            })
         }
       },
       {

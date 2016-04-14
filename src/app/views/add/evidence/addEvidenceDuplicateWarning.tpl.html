@@ -1,0 +1,9 @@
+<div class="row" ng-show="model.duplicates.length > 0">
+  <div class="col-xs-offset-1 col-xs-10">
+    <div class="alert alert-warning">
+      <p>Evidence items already exist for this variant. Please check the following evidence items to ensure that your intended contribution does not replicate the efforts of other curators:</p>
+      <evidence-grid evidence="vm.duplicates"></evidence-grid>
+    </div>
+  </div>
+</div>
+
