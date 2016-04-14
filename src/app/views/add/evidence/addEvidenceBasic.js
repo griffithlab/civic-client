@@ -55,18 +55,6 @@
       variant: '',
       pubmed_id: '',
       description: '',
-      duplicates: [
-        {
-          gene: 'BRAF',
-          variant: 'V5001',
-          eid: 123
-        },
-        {
-          gene: 'BRAF',
-          variant: 'V5001',
-          eid: 123
-        }
-      ],
       disease: {
         name: ''
       },
@@ -171,40 +159,6 @@
       },
 
       {
-        key: 'variant_origin',
-        type: 'horizontalSelectHelp',
-        wrapper: 'attributeDefinition',
-        templateOptions: {
-          label: 'Variant Origin',
-          value: 'vm.newEvidence.variant_origin',
-          options: [
-            { value: '', label: 'Please select a Variant Origin' },
-            { value: 'Somatic Mutation', label: 'Somatic Mutation'},
-            { value: 'Germline Mutation', label: 'Germline Mutation' },
-            { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
-            { value: 'Unknown', label: 'Unknown' },
-            { value: 'N/A', label: 'N/A' },
-          ],
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: 'Origin of variant',
-          data: {
-            attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Somatic Mutation': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
-              'Germline Mutation': 'Variant is a mutation, found in every cell, not restricted to tumor/diseased cells, is expected to have arisen de novo in the germ cells responsible for the current generation or only very recent generations (e.g., close family members), and is not thought to exist in the population at large.',
-              'Germline Polymorphism': 'Variant is found in every cell, not restricted to tumor/diseased cells, and thought to represent common (or relatively rare) variation in the population at large.',
-              'Unknown': 'The variant origin is uncertain based on the available evidence.',
-              'N/A': 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concepts of variant origin.'
-            }
-          },
-          onChange: function(value, options) {
-            // set attribute definition
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
-          }
-        }
-      },
-      {
         key: 'pubmed_id',
         type: 'publication',
         templateOptions: {
@@ -253,16 +207,85 @@
           }
         }
       },
-      {
+      { // duplicates warning row
         templateUrl: 'app/views/add/evidence/addEvidenceDuplicateWarning.tpl.html',
         controller: /* @ngInject */ function($scope, Search) {
           console.log('dup warning controller loaded.');
           var vm = $scope.vm = {};
-          vm.duplicates = true;
-          Search.post({"operator":"AND","queries":[{"field":"gene_name","condition":{"name":"contains","parameters":["BRAF"]}},{"field":"variant_name","condition":{"name":"contains","parameters":["V600"]}},{"field":"pubmed_id","condition":{"name":"is","parameters":["123"]}}],"entity":"evidence_items","save":true})
-            .then(function(response) {
-              vm.duplicates = response.results;
-            })
+          vm.duplicates = [];
+          vm.pubmedName = '';
+
+          function searchForDups(model, form, fields, values) {
+            if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
+              Search.post({
+                  "operator": "AND",
+                  "queries": [
+                    {
+                      "field": "gene_name",
+                      "condition": {"name": "contains", "parameters": [values[0]]}
+                    },
+                    {
+                      "field": "variant_name",
+                      "condition": {"name": "contains", "parameters": [values[1]]}
+                    },
+                    {
+                      "field": "pubmed_id",
+                      "condition": {"name": "is", "parameters": [values[2]]
+                      }
+                    }
+                  ],
+                  "entity": "evidence_items",
+                  "save": true
+                })
+                .then(function (response) {
+                  vm.duplicates = response.results;
+                });
+            }
+          }
+
+          $scope.pubmedField = _.find($scope.fields, { key: 'pubmed_id' });
+
+          $scope.$watchGroup([
+              'model.gene.name',
+              'model.variant.name',
+              'model.pubmed_id'
+            ],
+            _.partial(searchForDups, $scope.model, $scope.form, $scope.fields)
+          );
+        }
+      },
+      {
+        key: 'variant_origin',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        templateOptions: {
+          label: 'Variant Origin',
+          value: 'vm.newEvidence.variant_origin',
+          options: [
+            { value: '', label: 'Please select a Variant Origin' },
+            { value: 'Somatic Mutation', label: 'Somatic Mutation'},
+            { value: 'Germline Mutation', label: 'Germline Mutation' },
+            { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
+            { value: 'Unknown', label: 'Unknown' },
+            { value: 'N/A', label: 'N/A' },
+          ],
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: 'Origin of variant',
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: {
+              'Somatic Mutation': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
+              'Germline Mutation': 'Variant is a mutation, found in every cell, not restricted to tumor/diseased cells, is expected to have arisen de novo in the germ cells responsible for the current generation or only very recent generations (e.g., close family members), and is not thought to exist in the population at large.',
+              'Germline Polymorphism': 'Variant is found in every cell, not restricted to tumor/diseased cells, and thought to represent common (or relatively rare) variation in the population at large.',
+              'Unknown': 'The variant origin is uncertain based on the available evidence.',
+              'N/A': 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concepts of variant origin.'
+            }
+          },
+          onChange: function(value, options) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
         }
       },
       {
