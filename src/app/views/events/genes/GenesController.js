@@ -20,7 +20,7 @@
         },
         controller: 'GenesController',
         controllerAs: 'vm',
-        deepStateRedirect: [ 'geneId' ],
+        deepStateRedirect: {params: [ 'geneId' ]},
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
@@ -34,7 +34,7 @@
             return Genes.get($stateParams.geneId);
           }
         },
-        deepStateRedirect: [ 'geneId' ],
+        deepStateRedirect: {params: [ 'geneId' ]},
         data: {
           titleExp: '"Gene " + gene.name + " Summary"',
           navMode: 'sub'
