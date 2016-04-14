@@ -41,7 +41,7 @@
           &nbsp;&nbsp;
           <strong>Area of Expertise:</strong> {{expert.area_of_expertise}}
         </p>
-        <p ng-bind="expert.description">Description</p>
+        <p ng-bind-html="expert.description|unsafe">Description</p>
       </div>
     </div>
   </div>
