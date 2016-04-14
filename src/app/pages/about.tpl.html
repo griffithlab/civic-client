@@ -23,19 +23,18 @@
       <p><h4>Current Domain Experts:</h4></p>
     </div>
   </div>
-  <div class="row expert-row"
-       ng-repeat="expert in vm.experts track by $index"
-       ui-sref="users.profile({userId: expert.id})">
+  <div class="row expert-row" ng-repeat="expert in vm.experts track by $index">
     <div class="col-xs-3 col-sm-2 col-lg-2 col-sm-offset-1 col-md-offset-2 expert-image">
       <div class="image">
-        <img ng-src="{{expert.avatar_url}}" width="270" height="270" class="img-responsive"/>
+        <img ng-src="{{expert.avatars.x270}}" width="270" height="270" class="img-responsive"/>
       </div>
+
     </div>
     <div class="col-xs-9 col-sm-8 col-md-6 expert-description">
       <div class="description">
         <h4 ng-bind="expert.name">NAME</h4>
         <p class="small">
-          <strong>Display name:</strong> {{expert.display_name}}
+          <strong>Display name:</strong> <user-block user="expert"></user-block>
           &nbsp;&nbsp;
           <strong>Role:</strong> {{expert.role}}
           &nbsp;&nbsp;
