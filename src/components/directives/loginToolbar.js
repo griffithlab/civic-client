@@ -19,8 +19,6 @@
 
         $scope.adminUrl = ConfigService.serverUrl + 'admin';
 
-        // $scope.alert = alert('clicked');
-
         $scope.$watch(function() {
           return Security.currentUser;
         }, function(currentUser) {

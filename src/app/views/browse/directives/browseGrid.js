@@ -20,7 +20,7 @@
   }
 
   // @ngInject
-  function BrowseGridController($scope, $state, $location, $log, uiGridConstants, _,
+  function BrowseGridController($scope, $state, $location, uiGridConstants, _,
                                 Datatables) {
     var ctrl = $scope.ctrl = {};
 
@@ -198,14 +198,12 @@
       ctrl.gridApi = gridApi;
       // called from pagination directive when page changes
       ctrl.pageChanged = function() {
-        $log.info('page changed: ' + ctrl.page);
         $location.search('page', ctrl.page);
         updateData();
       };
 
       // reset paging and do some other stuff on filter changes
       gridApi.core.on.filterChanged($scope, function() {
-        $log.info('filter changed.');
         // updateData with new filters
         var filteredCols = _.filter(this.grid.columns, function(col) {
           return _.has(col.filter, 'term') && !_.isEmpty(col.filter.term) && _.isString(col.filter.term);
@@ -225,7 +223,6 @@
       });
 
       gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
-        $log.info('sort changed.');
         if (sortColumns.length > 0) {
           ctrl.sorting = _.map(sortColumns, function(col) {
             return {
