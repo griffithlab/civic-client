@@ -102,7 +102,8 @@
               gene: 'G',
               variant: 'V',
               variant_group: 'VG',
-              evidence_item: 'EI'
+              evidence_item: 'EI',
+              revision: 'R'
             };
             return '#' + types[entity.type] + entity.id;
           };
