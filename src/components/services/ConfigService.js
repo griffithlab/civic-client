@@ -32,7 +32,7 @@
         },
         {
           label: 'API Documentation',
-          state: 'api'
+          url: 'https://genome.github.io/civic-api-docs/'
         },
         {
           label: 'Data Releases',
