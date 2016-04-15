@@ -22,7 +22,7 @@
         'description': 'Dr. Mardis is the Robert E. and Louise F. Dunn Distinguished Professor of Medicine and Co-director of the McDonnell Genome Institute at Washington University School of Medicine. She is the Editor-In-Chief of Molecular Case Studies and also serves as an editorial board member of <em>Molecular Cancer Research</em>, <em>Disease Models and Mechanisms</em>, and <em>Annals of Oncology</em>. She helped create methods and automation pipelines for sequencing the human genome and was one of the team leaders to first sequence and analyze a whole cancer genome using next-generation sequencing methods. Her studies of cancer genomes have led to characterization of multiple tumor types including pediatric and adult disease as well as the understanding of acquired resistance to targeted therapies. These studies have led to development of methods to identify and characterize changes in genomic heterogeneity and design novel, personalized vaccines for individual patients.'
       },
       {
-        'id': 144,
+        'id': 141,
         'name': 'Ron Bose',
         'role': 'Editor',
         'avatars': {
@@ -49,13 +49,13 @@
       {
         'id': 3,
         'name': 'Obi Griffith',
-        'role': 'Curator',
+        'role': 'Admin',
         'avatars': {
           'x14': 'assets/images/experts/ogriffith.jpg',
           'x270': 'assets/images/experts/ogriffith.jpg'
         },
         'area_of_expertise': 'Research Scientist',
-        'display_name': 'ogriffith',
+        'display_name': 'obigriffith',
         'description': 'Dr. Griffith is Assistant Professor of Medicine and Assistant Director of the McDonnell Genome Institute at Washington University School of Medicine. He has worked in genomics and bioinformatics since the earliest phase of reference genome sequencing. He contributed to the Mammalian Gene Collection, producing some of the first full-length sequences for many human genes. He also was part of a small team of bioinformaticians that helped sequence and release the first whole genome reference sequence for the severe acute respiratory syndrome (SARS) virus at the height of the 2003 epidemic. He has contributed to the identification of molecular markers at the DNA, RNA and protein level that are useful for diagnosis and prognosis of thyroid, breast, liver and other cancers. His lab’s research is focused on the development of informatics resources and personalized medicine strategies for cancer using genomic technologies. He is a co-creator of the CIViC resource.'
       },
       {
