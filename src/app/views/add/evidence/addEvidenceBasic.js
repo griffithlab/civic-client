@@ -215,7 +215,7 @@
           vm.duplicates = [];
           vm.pubmedName = '';
 
-          function searchForDups(model, form, fields, values) {
+          function searchForDups(values) {
             if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
               Search.post({
                   "operator": "AND",
@@ -235,7 +235,7 @@
                     }
                   ],
                   "entity": "evidence_items",
-                  "save": true
+                  "save": false
                 })
                 .then(function (response) {
                   vm.duplicates = response.results;
@@ -249,9 +249,7 @@
               'model.gene.name',
               'model.variant.name',
               'model.pubmed_id'
-            ],
-            _.partial(searchForDups, $scope.model, $scope.form, $scope.fields)
-          );
+            ], searchForDups);
         }
       },
       {
