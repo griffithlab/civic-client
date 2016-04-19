@@ -18,7 +18,7 @@
         <li ng-if="hasNotifications" class="dropdown-header">Notifications<br/>
         </li>
         <li ng-repeat="(label, count) in currentUser.unread_notifications">
-          <a ui-sref="account.notifications">
+          <a ui-sref="account.notifications({category: '{{label}}'})">
             <span ng-bind="label | keyToLabel">type</span>
             <span ng-bind="count" class="badge">count</span>
           </a>
