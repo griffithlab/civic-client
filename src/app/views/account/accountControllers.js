@@ -24,10 +24,11 @@
     var vm = $scope.vm = {};
 
     vm.max = 25;
-    vm.maxOptions = [1,25,50,100,150,200];
+    vm.maxOptions = [25,50,100,150,200];
     vm.notifications = [];
 
     vm.total = Number();
+    vm.totalNotifications = feed.total;
 
     vm.fetch = function() {
       CurrentUser.getFeed({count: vm.max})
