@@ -65,12 +65,6 @@
       .state('releases', {
         url: '/releases',
         templateUrl: 'app/pages/releases.tpl.html',
-        //resolve: {
-        //  Releases: 'Releases',
-        //  initReleases: function(Releases) {
-        //    return Releases.initBase();
-        //  }
-        //},
         controller: 'ReleasesController',
         controllerAs: 'vm',
         data: {
@@ -83,6 +77,14 @@
         templateUrl: 'app/pages/apiDocumentation.tpl.html',
         data: {
           titleExp: '"API Documentation"',
+          navMode: 'sub'
+        }
+      })
+      .state('graphics', {
+        url: '/graphics',
+        templateUrl: 'app/pages/graphics.tpl.html',
+        data: {
+          titleExp: '"Presentation Graphics"',
           navMode: 'sub'
         }
       })

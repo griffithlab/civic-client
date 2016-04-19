@@ -39,6 +39,10 @@
           state: 'releases'
         },
         {
+          label: 'Presentation Graphics',
+          state: 'graphics'
+        },        
+        {
           label: 'Contact',
           state: 'contact'
         }
