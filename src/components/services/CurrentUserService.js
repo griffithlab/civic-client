@@ -147,7 +147,7 @@
       var subscribed_events = _.chain(response.notifications.subscribed_events)
         .map(function(evt) {
           var event = evt.event;
-          event.type = 'event';
+          event.type = 'subscribed_event';
           event.seen = evt.seen;
           event.created_at = evt.created_at;
           return event})

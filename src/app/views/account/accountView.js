@@ -17,7 +17,7 @@
         }
       })
       .state('account.notifications', {
-        url: '/notifications?page',
+        url: '/notifications?category',
         templateUrl: 'app/views/account/notifications.tpl.html',
         data: {
           titleExp: '"Account Notifications"',
@@ -26,11 +26,7 @@
         resolve: {
           feed: /* @ngInject */ function($stateParams, CurrentUser) {
             //return CurrentUser.getFeed({page: $stateParams.page});
-            return CurrentUser.getFeed({page: $stateParams.page});
-          },
-          page: /* @ngInject */ function($stateParams, _) {
-            if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
-            else { return 1; }
+            return CurrentUser.getFeed();
           }
         },
         controller: 'AccountNotificationsController'

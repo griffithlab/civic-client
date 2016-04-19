@@ -12,40 +12,46 @@
 
   // @ngInject
   function AccountNotificationsController($scope,
-                                          $location,
+                                          $state,
+                                          $stateParams,
                                           CurrentUser,
                                           Security,
                                           feed,
-                                          page,
                                           _) {
+    if(_.isUndefined($stateParams.category)) {
+      $state.go('account.notifications', {category: 'all'})
+    }
     var vm = $scope.vm = {};
-    vm.total = feed.total;
-
-    vm.itemsPerPage = 25;
 
     vm.notifications = [];
 
-    vm.totalItems = feed.total;
-    vm.page = page;
-    vm.count = Number();
+    vm.total = Number();
 
-    $scope.$watch('vm.total', function() {
-      vm.totalPages = Math.ceil(vm.total / vm.itemsPerPage);
+    $scope.$watch(function() { return CurrentUser.data.feed}, function(feed){
+      vm.total = feed.length;
+
+      vm.notifications = $stateParams.category == 'all'
+        ? feed
+        : _.filter(feed, {type: $stateParams.category.substring(0,$stateParams.category.length-1)});
+
+      vm.categories = [
+        {
+          name: 'All',
+          state: 'account.notifications({category:"all"})',
+          count: feed.length
+        },
+        {
+          name: 'Mentions',
+          state: 'account.notifications({category:"mentions"})',
+          count: _(feed).filter({type: 'mention'}).value().length
+        },
+        {
+          name: 'Subscribed Events',
+          state: 'account.notifications({category:"subscribed_events"})',
+          count: _(feed).filter({type: 'subscribed_event'}).value().length
+        }
+      ];
     });
-
-    $scope.$watch(function() { return CurrentUser.data.feed; }, function(feed) {
-      console.log('feed updated.');
-      console.log(feed);
-      angular.copy(CurrentUser.data.feed, vm.notifications);
-    }, true);
-
-    vm.pageChanged = function() {
-      $location.search('page', vm.page);
-      CurrentUser.getFeed({page: vm.page })
-        .then(function() {
-          angular.copy(CurrentUser.data.feed, vm.notifications);
-        })
-    };
 
     vm.markAllAsRead = function() {
       CurrentUser.markAllAsRead().then(function() {
