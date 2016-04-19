@@ -132,7 +132,6 @@
             }
           });
 
-          //angular.copy(parseFeed(response), feed);
           return response.$promise;
         })
     }

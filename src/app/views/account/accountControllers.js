@@ -36,9 +36,13 @@
     $scope.$watch(function() { return CurrentUser.data.feed}, function(feed){
       vm.total = feed.length;
 
-      vm.notifications = $stateParams.category == 'all'
-        ? feed
-        : _.filter(feed, {type: $stateParams.category.substring(0,$stateParams.category.length-1)});
+      if($stateParams.category == 'all') {
+        angular.copy(feed, vm.notifications);
+      } else {
+        angular.copy(
+          _.filter(feed, {type: $stateParams.category.substring(0,$stateParams.category.length-1)}),
+          vm.notifications);
+      }
 
       vm.categories = [
         {
