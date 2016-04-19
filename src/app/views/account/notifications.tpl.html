@@ -1,13 +1,20 @@
 <div class="notifications">
   <div class="row">
     <div class="col-xs-10">
-
-      <p ng-if="vm.notifications.length > 0">
-        Showing {{ vm.notifications.length  }} of {{ vm.total }} notifications.
-      </p>
-      <p ng-if="vm.notifications.length === 0">
-        No notifications.
-      </p>
+      <form>
+        <p ng-if="vm.notifications.length > 0">
+          Showing {{ vm.notifications.length  }} of {{ vm.total }} notifications.
+          Fetch up to
+          <select ng-model="vm.max"
+                  ng-options="option for option in vm.maxOptions"
+                  ng-change="vm.fetch()">
+          </select>
+          notifications.
+        </p>
+        <p ng-if="vm.notifications.length === 0">
+          No notifications.
+        </p>
+      </form>
     </div>
     <div class="col-xs-2">
       <input type="button" class="btn btn-xs btn-default pull-right" value="Mark All As Seen"

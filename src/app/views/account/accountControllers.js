@@ -19,13 +19,19 @@
                                           feed,
                                           _) {
     if(_.isUndefined($stateParams.category)) {
-      $state.go('account.notifications', {category: 'all'})
+      $state.go('account.notifications', {category: 'all', count: 25})
     }
     var vm = $scope.vm = {};
 
+    vm.max = 25;
+    vm.maxOptions = [1,25,50,100,150,200];
     vm.notifications = [];
 
     vm.total = Number();
+
+    vm.fetch = function() {
+      CurrentUser.getFeed({count: vm.max})
+    };
 
     $scope.$watch(function() { return CurrentUser.data.feed}, function(feed){
       vm.total = feed.length;
@@ -51,7 +57,7 @@
           count: _(feed).filter({type: 'subscribed_event'}).value().length
         }
       ];
-    });
+    }, true);
 
     vm.markAllAsRead = function() {
       CurrentUser.markAllAsRead().then(function() {

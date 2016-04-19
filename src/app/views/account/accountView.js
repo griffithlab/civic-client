@@ -26,7 +26,7 @@
         resolve: {
           feed: /* @ngInject */ function($stateParams, CurrentUser) {
             //return CurrentUser.getFeed({page: $stateParams.page});
-            return CurrentUser.getFeed();
+            return CurrentUser.getFeed({count: 25});
           }
         },
         controller: 'AccountNotificationsController'
