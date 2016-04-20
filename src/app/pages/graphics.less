@@ -1,8 +1,19 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
 .civicGraphics {
   .subtitle {
     margin-top: 0;
   }
 
+  .graphic {
+    margin-bottom: 1em;
+    border-radius: @border-radius-base;
+    overflow: hidden;
+    border: 1px solid #CCC;
+  }
   .description {
     .title {
       font-weight: bold;

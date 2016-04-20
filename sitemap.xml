@@ -18,7 +18,7 @@
   <url>
     <loc>http://civic.genome.wustl.edu/#/search/evidence</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/activity</loc>
@@ -26,53 +26,53 @@
     <changefreq>hourly</changefreq>
   </url>
   <url>
-    <loc>http://civic.genome.wustl.edu/#/add/evidence/basic</loc>
-    <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
-  </url>
-  <url>
     <loc>http://civic.genome.wustl.edu/#/about</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/participate</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/community</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/help</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/faq</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/glossary</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/api-documentation</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://civic.genome.wustl.edu/#/graphics</loc>
+    <priority>0.5</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/releases</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>http://civic.genome.wustl.edu/#/contact</loc>
     <priority>0.5</priority>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
 </urlset>
