@@ -62,6 +62,12 @@
       wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
+    formlyConfigProvider.setType({
+      name: 'horizontalCommentHelp',
+      extends: 'comment',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+
     /*
     * EXTENDED FIELD TYPES
     * (more complex behavior than the basics, but no controller, template, or additional logic)
