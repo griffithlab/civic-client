@@ -262,14 +262,30 @@
         template: '<hr/>'
       },
       {
-        model: vm.variantEdit.comment,
         key: 'text',
-        type: 'horizontalTextareaHelp',
+        type: 'horizontalCommentHelp',
+        model: vm.variantEdit.comment,
+        ngModelElAttrs: {
+          'msd-elastic': 'true',
+          'mentio': '',
+          'mentio-id': '"commentForm"'
+        },
         templateOptions: {
           rows: 5,
+          minimum_length: 3,
+          required: false,
           label: 'Revision Description',
           value: 'text',
           helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
+        },
+        validators: {
+          length: {
+            expression: function(viewValue, modelValue, scope) {
+              var value = viewValue || modelValue;
+              return value.length >= scope.to.minimum_length;
+            },
+            message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
+          }
         }
       }
     ];

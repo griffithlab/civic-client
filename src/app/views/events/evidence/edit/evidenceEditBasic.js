@@ -502,8 +502,7 @@
         templateOptions: {
           rows: 5,
           minimum_length: 3,
-          label: 'Evidence Edit Comments',
-          currentUser: vm.currentUser,
+          label: 'Revision Description',
           required: false,
           value: 'text',
           helpText: 'Please provide a short description of your edits to this Evidence record.'
