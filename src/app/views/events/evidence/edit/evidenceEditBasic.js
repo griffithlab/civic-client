@@ -492,13 +492,30 @@
       },
       {
         key: 'text',
-        type: 'horizontalTextareaHelp',
+        type: 'horizontalCommentHelp',
+        ngModelElAttrs: {
+          'msd-elastic': 'true',
+          'mentio': '',
+          'mentio-id': '"commentForm"'
+        },
         model: vm.evidenceEdit.comment,
         templateOptions: {
           rows: 5,
+          minimum_length: 3,
           label: 'Evidence Edit Comments',
+          currentUser: vm.currentUser,
+          required: false,
           value: 'text',
           helpText: 'Please provide a short description of your edits to this Evidence record.'
+        },
+        validators: {
+          length: {
+            expression: function(viewValue, modelValue, scope) {
+              var value = viewValue || modelValue;
+              return value.length >= scope.to.minimum_length;
+            },
+            message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
+          }
         }
       }
     ];

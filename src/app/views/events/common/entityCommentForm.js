@@ -77,43 +77,6 @@
           'mentio': '',
           'mentio-id': '"commentForm"'
         },
-        controller: /* @ngInject */ function($scope, $filter) {
-          $scope.searchUsers = function(term) {
-            CommentSuggestions.getUserSuggestions(term).then(function(response) {
-              $scope.users = response;
-            });
-          };
-
-          $scope.getUser = function(user) {
-            return '@' + user.display_name;
-          };
-
-          $scope.searchEntities = function(term) {
-            CommentSuggestions.getEntitySuggestions(term).then(function(response) {
-              $scope.entities = _.map(response, function(entity) {
-                entity.display_type = $filter('keyToLabel')(entity.type).toUpperCase();
-                return entity;
-              });
-            });
-          };
-
-          $scope.getEntity= function(entity) {
-            var types = {
-              gene: 'G',
-              variant: 'V',
-              variant_group: 'VG',
-              evidence_item: 'E',
-              revision: 'R'
-            };
-            return '#' + types[entity.type] + entity.id;
-          };
-
-          $scope.typedTerm = '';
-        },
-        data: {
-          users: [],
-          entities: []
-        },
         templateOptions: {
           label: 'Add Comment:',
           rows: 4,
