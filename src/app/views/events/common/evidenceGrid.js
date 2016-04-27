@@ -113,10 +113,10 @@
           displayName: 'EID',
           headerTooltip: 'Evidence ID',
           type: 'number',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
           minWidth: 50,
-          width: '6%',
+          width: '7%',
           cellTemplate: 'app/views/events/common/evidenceGridIdCell.tpl.html'
         },
         { name: 'gene',
