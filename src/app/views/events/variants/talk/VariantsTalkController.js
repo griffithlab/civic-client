@@ -67,17 +67,17 @@
         {
           heading: variant.name + ' Revisions',
           route: this.state.baseState + '.revisions.list',
-          params: { geneId: $stateParams.geneId, variantId: variant.id }
+          params: {  variantId: variant.id }
         },
         {
           heading: variant.name  + ' Comments',
           route: this.state.baseState + '.comments',
-          params: { geneId: $stateParams.geneId, variantId: variant.id }
+          params: { variantId: variant.id }
         },
         {
           heading: variant.name + ' Log',
           route: this.state.baseState + '.log',
-          params: { geneId: $stateParams.geneId, variantId: variant.id }
+          params: {  variantId: variant.id }
         },
 
       ], tabData);
