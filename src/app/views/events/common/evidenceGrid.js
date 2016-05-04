@@ -25,7 +25,7 @@
   }
 
   // @ngInject
-  function EvidenceGridController($scope, $stateParams, $state, $log, uiGridConstants, _) {
+  function EvidenceGridController($scope, $stateParams, $state, $log, $filter, uiGridConstants, uiGridExporterConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
     var statusFilters = ['accepted', 'submitted'];
@@ -35,6 +35,13 @@
     ctrl.keyPopover = {
       templateUrl: 'app/views/events/common/evidenceGridPopoverKey.tpl.html',
       title: 'Evidence Grid Column Key'
+    };
+
+    ctrl.exportPopover = {
+      templateUrl: 'app/views/events/common/evidenceGridExport.tpl.html',
+      title: 'Save a PDF or CSV',
+      include: 'all',
+      type: 'csv'
     };
 
     ctrl.tooltipPopupDelay = 500;
@@ -63,7 +70,13 @@
       noUnselect: true,
       modifierKeysToMultiSelect: false,
 
+      exporterOlderExcelCompatibility: true,
+      exporterHeaderFilter: function( displayName ) {
+        return _.find(ctrl.evidenceGridOptions.columnDefs, { displayName: displayName}).headerTooltip;
+      },
+
       // grid menu
+      exporterMenuCsv: false,
       enableGridMenu: true,
       gridMenuShowHideColumns: false,
       gridMenuCustomItems: [
@@ -98,6 +111,7 @@
       columnDefs: [
         {
           name: 'status',
+          headerTooltip: 'Status',
           displayName: 'ST',
           type: 'string',
           visible: false,
@@ -366,6 +380,16 @@
       // assign evidence data to grid
       ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
 
+      ctrl.exportData = function() {
+        ctrl.evidenceGridOptions.exporterCsvFilename = getFilename($scope.variant);
+        var rows = ctrl.exportPopover.include === 'all' ? uiGridExporterConstants.ALL : uiGridExporterConstants.VISIBLE;
+        if(ctrl.exportPopover.type === 'csv') {
+          gridApi.exporter.csvExport(rows, uiGridExporterConstants.ALL);
+        } else {
+          gridApi.exporter.pdfExport(rows, uiGridExporterConstants.ALL);
+        }
+      };
+
       // setup watcher to update grid
       $scope.$watchCollection('evidence', function(evidence) {
         // if we get an evidence list that is rejected items only, let's show those instead of showing nothing
@@ -436,13 +460,13 @@
           }
         });
       }
-      function getFilename(variantName) {
+      function getFilename(variant) {
         var filename;
         var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
-        if(_.isUndefined(variantName)) {
-          filename = 'CIViC_' + variantName + '_evidence_' + dateTime + '.csv';
-        } else {
+        if(_.isUndefined(variant)) {
           filename = 'CIViC_evidence_' + dateTime + '.csv';
+        } else {
+          filename = 'CIViC_' + variant.name+ '_evidence_' + dateTime + '.csv';
         }
         return filename;
       }

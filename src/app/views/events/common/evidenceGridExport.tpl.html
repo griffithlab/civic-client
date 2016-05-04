@@ -1,0 +1,35 @@
+<div class="evidenceGridExport">
+  <div class="form-inline">
+    <div class="controls-row">
+      <label class="radio inline control-label">Include:</label><br/>
+      <div class="form-group">
+        <label class="radio inline">
+          <input type="radio" ng-model="ctrl.exportPopover.include" value="all" /> All Rows
+        </label><br/>
+        <label class="radio inline">
+          <input type="radio" ng-model="ctrl.exportPopover.include" value="filtered" /> Filtered Rows
+        </label>
+      </div>
+    </div>
+    <!--<label class="radio inline control-label">Filetype:</label><br/>-->
+    <!--<div class="form-group">-->
+      <!--<label class="radio inline">-->
+        <!--<input type="radio" ng-model="ctrl.exportPopover.type" value="csv" /> CSV-->
+      <!--</label><br/>-->
+      <!--<label class="radio inline">-->
+        <!--<input type="radio" ng-model="ctrl.exportPopover.type" value="pdf" /> PDF-->
+      <!--</label>-->
+    <!--</div>-->
+  </div>
+
+  <button
+    class="btn btn-default btn-xs btn-block"
+    ng-click="ctrl.exportData()">
+        <span class="glyphicon glyphicon-save"
+              aria-hidden="true">
+        </span>
+    Download <span ng-bind="ctrl.exportPopover.type.toUpperCase()">File</span>
+  </button>
+
+</div>
+</div>

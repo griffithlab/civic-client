@@ -19,11 +19,12 @@
     <div class="col-xs-2">
       <button
         class="btn btn-default btn-xs pull-right col-key btn-block"
-        ng-click="ctrl.exportCSV()">
-        <span class="glyphicon glyphicon-triangle-right"
+        popover-placement="bottom"
+        popover-template="ctrl.exportPopover.templateUrl">
+        <span class="glyphicon glyphicon-export"
               aria-hidden="true">
         </span>
-        Export CSV
+        Get Data
       </button>
     </div>
     <div class="col-xs-2">
