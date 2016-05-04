@@ -1,7 +1,7 @@
 <div class="evidenceGrid" ng-class="{ 'rounded': rounded === true }">
   <div class="row">
 
-    <div class="col-xs-10">
+    <div class="col-xs-8">
       <h4>
         <span ng-switch="ctrl.context">
           <span ng-switch-when="summary">Evidence for {{ variant.name }}</span>
@@ -16,16 +16,25 @@
         </span>
       </h4>
     </div>
-
     <div class="col-xs-2">
       <button
-        class="btn btn-default btn-xs pull-right col-key"
+        class="btn btn-default btn-xs pull-right col-key btn-block"
+        ng-click="ctrl.exportCSV()">
+        <span class="glyphicon glyphicon-triangle-right"
+              aria-hidden="true">
+        </span>
+        Export CSV
+      </button>
+    </div>
+    <div class="col-xs-2">
+      <button
+        class="btn btn-default btn-xs pull-right col-key btn-block"
         ng-click="ctrl.showGridKey = !ctrl.showGridKey">
         <span class="glyphicon"
               aria-hidden="true"
               ng-class="{ 'glyphicon-triangle-right': ctrl.showGridKey === false, 'glyphicon-triangle-bottom': ctrl.showGridKey === true}">
         </span>
-        Evidence Grid Instructions
+        Help
       </button>
     </div>
 
@@ -41,6 +50,7 @@
       <div ui-grid="ctrl.evidenceGridOptions"
            ui-grid-cellnav
            ui-grid-auto-resize
+           ui-grid-exporter
            ui-grid-selection>
       </div>
     </div>

@@ -436,6 +436,16 @@
           }
         });
       }
+      function getFilename(variantName) {
+        var filename;
+        var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
+        if(_.isUndefined(variantName)) {
+          filename = 'CIViC_' + variantName + '_evidence_' + dateTime + '.csv';
+        } else {
+          filename = 'CIViC_evidence_' + dateTime + '.csv';
+        }
+        return filename;
+      }
     };
   }
 

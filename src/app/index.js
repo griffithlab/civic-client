@@ -48,11 +48,12 @@
     .config(appConfig);
 
 // @ngInject
-  function appConfig($uiViewScrollProvider, $anchorScrollProvider, formlyConfigProvider) {
+  function appConfig($uiViewScrollProvider, $anchorScrollProvider, formlyConfigProvider, $compileProvider) {
     window.apiCheck.disabled = false; // set to true in production
     formlyConfigProvider.removeChromeAutoCompletee = true;
     $uiViewScrollProvider.useAnchorScroll();
     $anchorScrollProvider.disableAutoScrolling();
+    //$compileProvider.debugInfoEnabled(false);
   }
 
 // @ngInject
