@@ -70,10 +70,22 @@
       noUnselect: true,
       modifierKeysToMultiSelect: false,
 
+      // data export
       exporterOlderExcelCompatibility: true,
       exporterHeaderFilter: function( displayName ) {
+        // replace short col headers w/ header tooltip strings
         return _.find(ctrl.evidenceGridOptions.columnDefs, { displayName: displayName}).headerTooltip;
       },
+      exporterPdfDefaultStyle: {fontSize: 7},
+      exporterPdfPageSize: 'LETTER',
+      exporterPdfOrientation: 'landscape',
+
+      exporterPdfTableStyle: {
+        margin: [0, 0, 0, 0]
+      },
+      exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'darkgrey'},
+      exporterPdfMaxGridWidth: 630,
+      exporterPdfTableLayout: 'lightHorizontalLines',
 
       // grid menu
       exporterMenuCsv: false,
@@ -398,7 +410,7 @@
         } else if (!_.includes(statusFilters, 'rejected')) {
           statusFilters = ['accepted', 'submitted'];
         }
-        ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
+        //ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
         ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
       });
 
