@@ -85,7 +85,7 @@
       },
       exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'darkgrey'},
       exporterPdfMaxGridWidth: 630,
-      exporterPdfTableLayout: 'lightHorizontalLines',
+      exporterPdfTableLayout: 'lightHorizontalLines', // does not appear to have any effect :(ch
 
       // grid menu
       exporterMenuCsv: false,
@@ -388,9 +388,6 @@
       var evidence = $scope.evidence;
       ctrl.gridApi = gridApi;
       var suppressGo = false;
-
-      // assign evidence data to grid
-      ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
 
       ctrl.exportData = function() {
         ctrl.evidenceGridOptions.exporterCsvFilename = getFilename($scope.variant);
