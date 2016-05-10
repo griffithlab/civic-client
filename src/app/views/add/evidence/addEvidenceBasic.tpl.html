@@ -77,6 +77,10 @@
       <p>
         <a ng-href="#/events/genes/{{vm.linkParams.geneId}}/summary/variants/{{vm.linkParams.variantId}}/summary/evidence/{{vm.linkParams.evidenceId}}/summary"
            class="btn btn-small btn-default">View it here</a>
+        &nbsp;or&nbsp;
+        <a ui-sref="add.evidence.basic"
+           ui-sref-opts="{reload:true, inherit: true}"
+           class="btn btn-small btn-default">Add Another Evidence Item</a>
       </p>
     </div>
   </div>
