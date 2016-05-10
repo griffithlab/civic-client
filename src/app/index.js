@@ -15,6 +15,7 @@
     'ui.grid.autoResize',
     'ui.grid.pagination',
     'ui.grid.cellNav',
+    'ui.grid.exporter',
     'formly',
     'dialogs.main',
     'yaru22.angular-timeago',
@@ -48,11 +49,12 @@
     .config(appConfig);
 
 // @ngInject
-  function appConfig($uiViewScrollProvider, $anchorScrollProvider, formlyConfigProvider) {
+  function appConfig($uiViewScrollProvider, $anchorScrollProvider, formlyConfigProvider, $compileProvider) {
     window.apiCheck.disabled = false; // set to true in production
     formlyConfigProvider.removeChromeAutoCompletee = true;
     $uiViewScrollProvider.useAnchorScroll();
     $anchorScrollProvider.disableAutoScrolling();
+    $compileProvider.debugInfoEnabled(false);
   }
 
 // @ngInject

@@ -25,7 +25,7 @@
   }
 
   // @ngInject
-  function EvidenceGridController($scope, $stateParams, $state, $log, uiGridConstants, _) {
+  function EvidenceGridController($scope, $stateParams, $state, $log, $filter, uiGridConstants, uiGridExporterConstants, _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
     var statusFilters = ['accepted', 'submitted'];
@@ -35,6 +35,13 @@
     ctrl.keyPopover = {
       templateUrl: 'app/views/events/common/evidenceGridPopoverKey.tpl.html',
       title: 'Evidence Grid Column Key'
+    };
+
+    ctrl.exportPopover = {
+      templateUrl: 'app/views/events/common/evidenceGridExport.tpl.html',
+      title: 'Save a PDF or CSV',
+      include: 'all',
+      type: 'csv'
     };
 
     ctrl.tooltipPopupDelay = 500;
@@ -63,7 +70,25 @@
       noUnselect: true,
       modifierKeysToMultiSelect: false,
 
+      // data export
+      exporterOlderExcelCompatibility: true,
+      exporterHeaderFilter: function( displayName ) {
+        // replace short col headers w/ header tooltip strings
+        return _.find(ctrl.evidenceGridOptions.columnDefs, { displayName: displayName}).headerTooltip;
+      },
+      exporterPdfDefaultStyle: {fontSize: 7},
+      exporterPdfPageSize: 'LETTER',
+      exporterPdfOrientation: 'landscape',
+
+      exporterPdfTableStyle: {
+        margin: [0, 0, 0, 0]
+      },
+      exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'darkgrey'},
+      exporterPdfMaxGridWidth: 630,
+      exporterPdfTableLayout: 'lightHorizontalLines', // does not appear to have any effect :(ch
+
       // grid menu
+      exporterMenuCsv: false,
       enableGridMenu: true,
       gridMenuShowHideColumns: false,
       gridMenuCustomItems: [
@@ -98,6 +123,7 @@
       columnDefs: [
         {
           name: 'status',
+          headerTooltip: 'Status',
           displayName: 'ST',
           type: 'string',
           visible: false,
@@ -113,10 +139,10 @@
           displayName: 'EID',
           headerTooltip: 'Evidence ID',
           type: 'number',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
           minWidth: 50,
-          width: '6%',
+          width: '7%',
           cellTemplate: 'app/views/events/common/evidenceGridIdCell.tpl.html'
         },
         { name: 'gene',
@@ -363,8 +389,15 @@
       ctrl.gridApi = gridApi;
       var suppressGo = false;
 
-      // assign evidence data to grid
-      ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
+      ctrl.exportData = function() {
+        ctrl.evidenceGridOptions.exporterCsvFilename = getFilename($scope.variant);
+        var rows = ctrl.exportPopover.include === 'all' ? uiGridExporterConstants.ALL : uiGridExporterConstants.VISIBLE;
+        if(ctrl.exportPopover.type === 'csv') {
+          gridApi.exporter.csvExport(rows, uiGridExporterConstants.ALL);
+        } else {
+          gridApi.exporter.pdfExport(rows, uiGridExporterConstants.ALL);
+        }
+      };
 
       // setup watcher to update grid
       $scope.$watchCollection('evidence', function(evidence) {
@@ -374,7 +407,7 @@
         } else if (!_.includes(statusFilters, 'rejected')) {
           statusFilters = ['accepted', 'submitted'];
         }
-        ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
+        //ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
         ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
       });
 
@@ -435,6 +468,16 @@
             return item;
           }
         });
+      }
+      function getFilename(variant) {
+        var filename;
+        var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
+        if(_.isUndefined(variant)) {
+          filename = 'CIViC_evidence_' + dateTime + '.csv';
+        } else {
+          filename = 'CIViC_' + variant.name+ '_evidence_' + dateTime + '.csv';
+        }
+        return filename;
       }
     };
   }
