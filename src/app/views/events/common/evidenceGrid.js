@@ -25,7 +25,14 @@
   }
 
   // @ngInject
-  function EvidenceGridController($scope, $stateParams, $state, $log, $filter, uiGridConstants, uiGridExporterConstants, _) {
+  function EvidenceGridController($scope,
+                                  $stateParams,
+                                  $state,
+                                  $log,
+                                  $filter,
+                                  uiGridConstants,
+                                  uiGridExporterConstants,
+                                  _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
     var statusFilters = ['accepted', 'submitted'];
@@ -429,18 +436,20 @@
             return item.id === +$stateParams.evidenceId;
           });
 
-          // if a highlighted row is a rejected item, show rejected items
-          if(rowEntity.status === 'rejected') {
-            $log.debug('highlight row is for rejected entity.');
-            if(!_.includes(statusFilters, 'rejected')) {
-              statusFilters.push('rejected');
+          if(!_.isUndefined(rowEntity)) {
+            // if a highlighted row is a rejected item, show rejected items
+            if (rowEntity.status === 'rejected') {
+              $log.debug('highlight row is for rejected entity.');
+              if (!_.includes(statusFilters, 'rejected')) {
+                statusFilters.push('rejected');
+              }
             }
-          }
 
-          suppressGo = true;
-          gridApi.selection.selectRow(rowEntity);
-          gridApi.grid.scrollTo(rowEntity);
-          suppressGo = false;
+            suppressGo = true;
+            gridApi.selection.selectRow(rowEntity);
+            gridApi.grid.scrollTo(rowEntity);
+            suppressGo = false;
+          }
         }
       });
 
