@@ -246,10 +246,10 @@
           $scope.pubmedField = _.find($scope.fields, { key: 'pubmed_id' });
 
           $scope.$watchGroup([
-              'model.gene.name',
-              'model.variant.name',
-              'model.pubmed_id'
-            ], searchForDups);
+            'model.gene.name',
+            'model.variant.name',
+            'model.pubmed_id'
+          ], searchForDups);
         }
       },
       {
@@ -619,15 +619,42 @@
       },
       {
         key: 'text',
-        type: 'horizontalTextareaHelp',
+        type: 'horizontalCommentHelp',
         model: vm.newEvidence.comment,
+        ngModelElAttrs: {
+          'msd-elastic': 'true',
+          'mentio': '',
+          'mentio-id': '"commentForm"'
+        },
         templateOptions: {
           rows: 5,
+          minimum_length: 3,
           label: 'Additional Comments',
           value: 'text',
+          required: false,
           helpText: 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.'
-        }
-      }
+        },
+        // validators: {
+        //   length: {
+        //     expression: function(viewValue, modelValue, scope) {
+        //       var value = viewValue || modelValue;
+        //       return value.length >= scope.to.minimum_length;
+        //     },
+        //     message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
+        //   }
+        // }
+      },
+      // {
+      //   key: 'text',
+      //   type: 'horizontalTextareaHelp',
+      //   model: vm.newEvidence.comment,
+      //   templateOptions: {
+      //     rows: 5,
+      //     label: 'Additional Comments',
+      //     value: 'text',
+      //     helpText: 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.'
+      //   }
+      // }
     ];
 
     vm.submit = function(newEvidence) {
