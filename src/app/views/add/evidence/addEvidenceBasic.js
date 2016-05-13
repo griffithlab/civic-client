@@ -630,19 +630,20 @@
           rows: 5,
           minimum_length: 3,
           label: 'Additional Comments',
+          currentUser: Security.currentUser,
           value: 'text',
           required: false,
           helpText: 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.'
         },
-        // validators: {
-        //   length: {
-        //     expression: function(viewValue, modelValue, scope) {
-        //       var value = viewValue || modelValue;
-        //       return value.length >= scope.to.minimum_length;
-        //     },
-        //     message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
-        //   }
-        // }
+        validators: {
+          length: {
+            expression: function(viewValue, modelValue, scope) {
+              var value = viewValue || modelValue;
+              return value.length >= scope.to.minimum_length;
+            },
+            message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
+          }
+        }
       },
       // {
       //   key: 'text',
