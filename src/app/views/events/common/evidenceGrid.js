@@ -85,10 +85,11 @@
       },
       exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'darkgrey'},
       exporterPdfMaxGridWidth: 630,
-      exporterPdfTableLayout: 'lightHorizontalLines', // does not appear to have any effect :(ch
+      exporterPdfTableLayout: 'lightHorizontalLines', // does not appear to have any effect :(
 
       // grid menu
       exporterMenuCsv: false,
+      exporterMenuPdf: false,
       enableGridMenu: true,
       gridMenuShowHideColumns: false,
       gridMenuCustomItems: [
@@ -120,6 +121,7 @@
           }
         }
       ],
+      data: [],
       columnDefs: [
         {
           name: 'status',
@@ -385,9 +387,10 @@
     }
 
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
-      var evidence = $scope.evidence;
       ctrl.gridApi = gridApi;
       var suppressGo = false;
+
+      ctrl.evidenceGridOptions.data = prepareDrugArray($scope.evidence);
 
       ctrl.exportData = function() {
         ctrl.evidenceGridOptions.exporterCsvFilename = getFilename($scope.variant);
@@ -401,6 +404,7 @@
 
       // setup watcher to update grid
       $scope.$watchCollection('evidence', function(evidence) {
+        console.log('ui-grid watchCollection called.');
         // if we get an evidence list that is rejected items only, let's show those instead of showing nothing
         if(_.every(evidence, 'status', 'rejected')) {
           statusFilters = ['accepted', 'submitted', 'rejected'];
@@ -408,11 +412,18 @@
           statusFilters = ['accepted', 'submitted'];
         }
         //ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
-        ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
+        if(!_.isUndefined(evidence) && evidence.length > 0) {
+          ctrl.gridApi.grid.queueRefresh().then(function() {
+            // fixes intermittent bug where col headers wouldn't render on reloaded Search pages
+            // forcing data update after a refresh I think prevents the update from interrupting col render
+            ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
+          });
+        }
       });
 
       // if we're loading an evidence view, highlight the correct row in the table
       gridApi.core.on.rowsRendered($scope, function() {
+        console.log('ui-grid onRowsRendered called.');
         if(_.has($stateParams, 'evidenceId')) {
           var rowEntity = _.find($scope.evidence, function (item) {
             return item.id === +$stateParams.evidenceId;
@@ -435,6 +446,7 @@
 
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
+        console.log('ui-grid onSelectionChanged called.');
         var params = {};
         if($stateParams.geneId !== undefined && $stateParams.variantId !== undefined) {
           params = _.merge($stateParams, { evidenceId: row.entity.id, '#': 'evidence' });
