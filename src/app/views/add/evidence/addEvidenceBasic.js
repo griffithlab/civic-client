@@ -639,7 +639,7 @@
           length: {
             expression: function(viewValue, modelValue, scope) {
               var value = viewValue || modelValue;
-              return value.length >= scope.to.minimum_length;
+              return value.length >= scope.to.minimum_length || value.length === 0;
             },
             message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
           }
