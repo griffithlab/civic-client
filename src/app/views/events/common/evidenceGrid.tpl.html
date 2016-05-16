@@ -4,9 +4,11 @@
     <div class="col-xs-8">
       <h4>
         <span ng-switch="ctrl.context">
+          <!-- TODO: it would be better to pass in the title instead of adding a new condition for every context -->
           <span ng-switch-when="summary">Evidence for {{ variant.name }}</span>
           <span ng-switch-when="search">Search Results</span>
           <span ng-switch-when="profile">Submitted Evidence Items</span>
+          <span ng-switch-when="conflict">Existing Evidence Items</span>
         </span>
         <span class="record-info">
           <span>{{ ctrl.gridApi.grid.rows.length }} total items</span>
