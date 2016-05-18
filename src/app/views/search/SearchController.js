@@ -477,8 +477,9 @@
               {
                 key: 'parameters[1]', // from value
                 type: 'input',
-                className: 'inline-field inline-field-xs',
+                className: 'inline-field inline-field-sm',
                 templateOptions: {
+                  size: 8,
                   label: '',
                   required: true
                 }
