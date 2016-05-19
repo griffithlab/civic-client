@@ -138,26 +138,28 @@
 
     function parseFeed(response) {
       var mentions = _.chain(response.notifications.mentions)
-        .map(function(mention) { mention.type = 'mention'; return mention;})
+        .map(function(mention) {
+          mention.type = 'mention'; return mention;})
         .sortBy('created_at')
         .reverse()
         .value();
 
       var subscribed_events = _.chain(response.notifications.subscribed_events)
         .map(function(evt) {
-          var event = evt.event;
-          event.type = 'subscribed_event';
-          event.seen = evt.seen;
-          event.created_at = evt.created_at;
-          return event})
+          evt.type = 'subscribed_event';
+          return evt})
         .sortBy('created_at')
         .value();
 
-      return _.chain(mentions)
+      var notifications = _.chain(mentions)
         .concat(subscribed_events)
         .sortBy('created_at')
         .reverse()
         .value();
+
+      console.log(notifications);
+
+      return notifications;
     }
   }
 })();

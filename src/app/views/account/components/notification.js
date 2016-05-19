@@ -20,7 +20,7 @@
   function notificationController($scope, $state, _) {
     console.log('notificationController called.');
     var vm = $scope.vm = {};
-    var params = $scope.notification.state_params;
+    var params = $scope.notification.event.state_params;
 
     vm.seen = $scope.notification.seen;
 

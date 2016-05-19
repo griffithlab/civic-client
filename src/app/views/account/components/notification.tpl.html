@@ -4,12 +4,21 @@
      ng-mouseover="mouseover=true"
      ng-mouseleave="mouseover=false">
   <div class="user-time">
-    <user-block user="notification.event.user"></user-block>&nbsp;<span ng-bind="notification.event.timestamp|timeAgo">time ago</span><br/>
+    <span ng-switch="notification.type">
+      <span ng-switch-when="mention">
+        <user-block user="notification.originating_user"></user-block>&nbsp;<span ng-bind="notification.event.timestamp|timeAgo">time ago</span>
+      </span>
+      <span ng-switch-default>
+        <user-block user="notification.event.user"></user-block>&nbsp;<span ng-bind="notification.event.timestamp|timeAgo">time ago</span>
+
+      </span>
+    </span>
+   <br/>
   </div>
 
   <div class="entity">
     <!-- preposition, if necessary -->
-    <span ng-switch="notification.event_type">
+    <span ng-switch="notification.event.event_type">
       <span ng-switch-when="commented">&nbsp;commented on</span>
       <span ng-switch-when="submitted">&nbsp;submitted</span>
       <span ng-switch-when="accepted">&nbsp;accepted</span>
@@ -19,7 +28,7 @@
       <span ng-switch-when="change rejected">&nbsp;rejected a revision to</span>
       <span ng-switch-default></span>
     </span>
-    <span ng-switch="notification.subject_type">
+    <span ng-switch="notification.event.subject_type">
       <span ng-switch-when="genes">
         <span class="subject-type">gene</span>
       </span>
@@ -40,7 +49,7 @@
       <span ng-bind="vm.entityName">GENE / VARIANT / EVIDENCE</span>
     </strong>
   </div>
-  <pre ng-bind="notification|json"></pre>
+  <!--<pre ng-bind="notification|json"></pre>-->
 </div>
 
 
