@@ -48,6 +48,12 @@
           url: '/api/current_user/feed',
           isArray: false,
           cache: false
+        },
+        markAsRead: {
+          method: 'PATCH',
+          url: '/api/current_user/feed',
+          isArray: false,
+          cache: false
         }
       }
     );
@@ -76,7 +82,8 @@
       getEvents: getEvents,
       getFeed: getFeed,
       getUnread: getUnread,
-      markAllAsRead: markAllAsRead
+      markAllAsRead: markAllAsRead,
+      markAsRead: markAsRead
     };
 
     function get() {
@@ -122,6 +129,22 @@
     function markAllAsRead() {
       var t = new Date().toISOString();
       return CurrentUserResource.markAllAsRead({ upto: t }).$promise
+        .then(function(response) {
+          var updated= parseFeed(response);
+          var updatedIds = _.map(updated, 'id');
+
+          _.forEach(feed, function(notification) {
+            if(_.includes(updatedIds, notification.id)) {
+              notification.seen = true;
+            }
+          });
+
+          return response.$promise;
+        })
+    }
+
+    function markAsRead(id) {
+      return CurrentUserResource.markAsRead({notification_ids: [id]}).$promise
         .then(function(response) {
           var updated= parseFeed(response);
           var updatedIds = _.map(updated, 'id');

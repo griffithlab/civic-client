@@ -17,7 +17,7 @@
   }
 
   // @ngInject
-  function notificationController($scope, $state, _) {
+  function notificationController($scope, $state, CurrentUser, _) {
     console.log('notificationController called.');
     var vm = $scope.vm = {};
     var params = $scope.notification.event.state_params;
@@ -90,5 +90,9 @@
       $state.go(subjectStates[notification.subject_type]+stateExtension[notification.event_type], stateParams);
 
     };
+
+    vm.markAsSeen = function() {
+      CurrentUser.markAsRead($scope.notification.id);
+    }
   }
 })();

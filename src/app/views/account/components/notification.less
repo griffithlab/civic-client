@@ -3,34 +3,44 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .notification {
-  padding: @contentPadding/2;
-  margin-bottom: @contentPadding/2;
-  border-radius: @border-radius-large;
+  position: relative;
+  .content {
+    position: absolute;
+    z-index: 0;
+    padding: @contentPadding/2;
+    margin-bottom: @contentPadding/2;
+    border-radius: @border-radius-large;
 
-  &.dark {
-    background-color: darken(@civicPurple, 10%);
-    border: 2px solid darken(@civicPurple, 10%);
-    color: #CCC;
+    &.dark {
+      background-color: darken(@civicPurple, 10%);
+      border: 2px solid darken(@civicPurple, 10%);
+      color: #CCC;
+    }
+
+    &.light {
+      background-color: #FAFAFA;
+      border: 2px solid #DDD;
+      color: #333;
+    }
+
+    &.hover {
+      cursor: pointer;
+      border-color: @civicYellow;
+    }
+
+    &.unseen {
+      border-left-width: 10px;
+
+    }
+
+    .user-time {
+      margin-bottom: .45em;
+    }
   }
-
-  &.light {
-    background-color: #FAFAFA;
-    border: 2px solid #DDD;
-    color: #333;
+  .mark-as-seen {
+    position: absolute;
+    z-index: 10;
+    right: .5em;
+    top: .5em;
   }
-
-  &.hover {
-    cursor: pointer;
-    border-color: @civicYellow;
-  }
-
-  &.unseen {
-    border-left-width: 10px;
-
-  }
-
-  .user-time {
-    margin-bottom: .45em;
-  }
-
 }
