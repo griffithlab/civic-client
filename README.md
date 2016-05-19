@@ -1,23 +1,5 @@
 civic-client
 ============
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/genome/civic-client?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
-
-## Screenshots
-**Homepage:**
-![Homepage](notes/screenshots/home-view.png)
-
-**Browse Events:**
-![Homepage](notes/screenshots/gene-browse-view.png)
-
-**View Event:**
-![Homepage](notes/screenshots/gene-variant-evidence-view.png)
-
-**Edit Gene:**
-![Homepage](notes/screenshots/gene-edit-view.png)
-
-**Also looks pretty good on tablet and mobile displays:**
-![Homepage](notes/screenshots/tablet-gene-view.png)
-
 ## To Install
 
 civic-client uses npm for development, build, and resource server tasks, so ensure that you have npm (and node) installed and running. Checkout this repository and cd to it, then:
@@ -85,4 +67,25 @@ This will install any new packages or modules that the new updates require.
 * [My Cancer Genome - Genetically Informed Cancer Medicine (Vanderbilt-Ingram Cancer Center)](http://www.mycancergenome.org/)
 * [Targeted Cancer Care (Massachusetts General Hospital)](https://targetedcancercare.massgeneral.org/My-Trial-Guide/Mutations.aspx)
 
+## Screenshots
+**Homepage:**
+![Homepage](notes/screenshots/home-view.png)
+
+**Browse Genes in the CIViC database:**
+![Homepage](notes/screenshots/gene-browse-view.png)
+
+**View an Evidence Item:**
+![Homepage](notes/screenshots/gene-variant-evidence-view.png)
+
+**Edit a Gene:**
+![Homepage](notes/screenshots/gene-edit-view.png)
+
+**View and comment on revisions to Genes, Variants, Evidence Items:**
+![Homepage](notes/screenshots/revision-view.png)
+
+**Catch up with recent CIViC activity:**
+![Homepage](notes/screenshots/activity-view.png)
+
+**Community leaderboards and user directory:**
+![Homepage](notes/screenshots/community-view.png)
 
