@@ -39,16 +39,15 @@
     <div class="col-xs-12 col-sm-10 col-lg-9">
       <ul class="notifications-list">
         <li ng-repeat="notification in vm.notifications">
-          <div ng-switch="notification.type">
-            <div ng-switch-when="subscribed_event">
-              <event-item event="notification" theme="'light'"></event-item>
-            </div>
-            <div ng-switch-when="mention">
-              <mention-item mention="notification" theme="'light'"></mention-item>
-            </div>
-          </div>
+          <!--<pre ng-bind="notification|json"></pre>-->
+          <notification notification="notification" theme="'light'"></notification>
         </li>
       </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <pre ng-bind="vm.notifications|json"></pre>
     </div>
   </div>
 </div>

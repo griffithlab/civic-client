@@ -1,0 +1,46 @@
+<div class="notification"
+     ng-click="vm.eventClick(event)"
+     ng-class="{ hover: mouseover, dark: theme === 'dark', light: theme === 'light', unseen: vm.seen === false }"
+     ng-mouseover="mouseover=true"
+     ng-mouseleave="mouseover=false">
+  <div class="user-time">
+    <user-block user="notification.event.user"></user-block>&nbsp;<span ng-bind="notification.event.timestamp|timeAgo">time ago</span><br/>
+  </div>
+
+  <div class="entity">
+    <!-- preposition, if necessary -->
+    <span ng-switch="notification.event_type">
+      <span ng-switch-when="commented">&nbsp;commented on</span>
+      <span ng-switch-when="submitted">&nbsp;submitted</span>
+      <span ng-switch-when="accepted">&nbsp;accepted</span>
+      <span ng-switch-when="rejected">&nbsp;rejected</span>
+      <span ng-switch-when="change suggested">&nbsp;suggested a revision to</span>
+      <span ng-switch-when="change accepted">&nbsp;accepted a revision to</span>
+      <span ng-switch-when="change rejected">&nbsp;rejected a revision to</span>
+      <span ng-switch-default></span>
+    </span>
+    <span ng-switch="notification.subject_type">
+      <span ng-switch-when="genes">
+        <span class="subject-type">gene</span>
+      </span>
+      <span ng-switch-when="variants">
+        <span class="subject-type">variant</span>
+      </span>
+      <span ng-switch-when="variantgroups">
+        <span class="subject-type">variant group</span>
+      </span>
+      <span ng-switch-when="evidenceitems">
+        <span class="subject-type">evidence item</span>
+      </span>
+      <span ng-switch-when="suggestedchanges">
+        <span class="subject-type">a suggested revision to</span>
+      </span>
+    </span>
+    <strong>
+      <span ng-bind="vm.entityName">GENE / VARIANT / EVIDENCE</span>
+    </strong>
+  </div>
+  <pre ng-bind="notification|json"></pre>
+</div>
+
+
