@@ -22,7 +22,7 @@
         // Base Variant Resources
         query: {
           method: 'GET',
-          isArray: true,
+          isArray: false,
           cache: cache
         },
         get: {
@@ -51,7 +51,7 @@
         queryEvidence: {
           method: 'GET',
           url: '/api/variants/:variantId/evidence_items',
-          isArray: true,
+          isArray: false,
           cache: cache
         },
 
@@ -170,7 +170,7 @@
     function query() {
       return VariantsResource.query().$promise
         .then(function(response) {
-          angular.copy(response, collection);
+          angular.copy(response.records, collection);
           return response.$promise;
         });
     }
@@ -211,7 +211,7 @@
     function queryEvidence(variantId) {
       return VariantsResource.queryEvidence({variantId: variantId}).$promise
         .then(function(response) {
-          angular.copy(response, evidence);
+          angular.copy(response.records, evidence);
           return response.$promise;
         });
     }

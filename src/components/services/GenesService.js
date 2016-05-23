@@ -22,7 +22,7 @@
         // Base Gene Resources
         query: {
           method: 'GET',
-          isArray: true,
+          isArray: false,
           cache: cache
         },
         get: { // get a single gene
@@ -261,7 +261,7 @@
     function query() {
       return GenesResource.query().$promise
         .then(function(response) {
-          angular.copy(response, collection);
+          angular.copy(response.records, collection);
           return response.$promise;
         });
     }
