@@ -19,9 +19,6 @@
       </form>
     </div>
     <div class="col-xs-2">
-      <input type="button" class="btn btn-xs btn-default pull-right" value="Mark All As Seen"
-             ng-click="vm.markAllAsRead()"
-      />
     </div>
   </div>
   <div class="row">
@@ -32,6 +29,11 @@
             <a ui-sref="{{category.state}}">
               {{ category.name }} <span class="small">({{category.count}})</span>
             </a>
+          </li>
+          <li style="padding-top: 1em;" ng-show="vm.notifications.length > 0">
+            <input type="button" class="btn btn-xs btn-primary btn-block" value="Mark All As Seen"
+                   ng-click="vm.markAllAsRead()"
+            />
           </li>
         </ul>
       </div>

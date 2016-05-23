@@ -30,12 +30,18 @@
     vm.total = Number();
     vm.totalNotifications = feed.total;
 
+    vm.totalUnseenNotifications = Number();
+
     vm.fetch = function() {
       CurrentUser.getFeed({count: vm.max})
     };
 
     $scope.$watch(function() { return CurrentUser.data.feed}, function(feed){
       vm.total = feed.length;
+
+      vm.totalUnseenNotifications = _.filter(feed, function(n) {
+        return n.seen === false;
+      }).length;
 
       if($stateParams.category == 'all') {
         angular.copy(feed, vm.notifications);
