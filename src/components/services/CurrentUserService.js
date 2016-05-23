@@ -115,7 +115,7 @@
       var t = new Date().toISOString();
       return CurrentUserResource.markAllAsRead({ upto: t }).$promise
         .then(function(response) {
-          var updated= parseFeed(response);
+          var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
           _.forEach(feed, function(notification) {
@@ -131,7 +131,7 @@
     function markAsRead(id) {
       return CurrentUserResource.markAsRead({notification_ids: [id]}).$promise
         .then(function(response) {
-          var updated= parseFeed(response);
+          var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
           _.forEach(feed, function(notification) {
@@ -142,32 +142,6 @@
 
           return response.$promise;
         })
-    }
-
-    function parseFeed(response) {
-      var mentions = _.chain(response.notifications.mentions)
-        .map(function(mention) {
-          mention.type = 'mention'; return mention;})
-        .sortBy('created_at')
-        .reverse()
-        .value();
-
-      var subscribed_events = _.chain(response.notifications.subscribed_events)
-        .map(function(evt) {
-          evt.type = 'subscribed_event';
-          return evt})
-        .sortBy('created_at')
-        .value();
-
-      var notifications = _.chain(mentions)
-        .concat(subscribed_events)
-        .sortBy('created_at')
-        .reverse()
-        .value();
-
-      console.log(notifications);
-
-      return notifications;
     }
   }
 })();
