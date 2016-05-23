@@ -1,6 +1,6 @@
 <div class="notification">
   <div class="content"
-       ng-click="vm.eventClick(event)"
+       ng-click="vm.eventClick(notification)"
        ng-class="{ hover: mouseover, dark: theme === 'dark', light: theme === 'light', unseen: vm.seen === false }"
        ng-mouseover="mouseover=true"
        ng-mouseleave="mouseover=false">
@@ -31,7 +31,7 @@
       <span ng-switch-when="change rejected">&nbsp;rejected a revision to</span>
       <span ng-switch-default></span>
     </span>
-    <span ng-switch="notification.event.subject_type">
+    <span ng-switch="notification.event.subject_type">p
       <span ng-switch-when="genes">
         <span class="subject-type">gene</span>
       </span>
@@ -54,7 +54,7 @@
     </div>
   </div>
   <a
-    class="mark-as-seen btn btn-xs btn-default"
+    class="mark-as-seen btn btn-xs btn-primary"
     ng-click="vm.markAsSeen()"
     ng-hide="notification.seen">Mark As Seen</a>
 </div>

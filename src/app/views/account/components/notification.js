@@ -32,7 +32,7 @@
 
     vm.entityName = _.compact(vm.entityNames).join(' / ');
 
-    vm.eventClick = function(event) {
+    vm.eventClick = function(notification) {
       var subjectStates = {
         genes: 'events.genes',
         variants: 'events.genes.summary.variants',
@@ -41,9 +41,9 @@
       };
 
       // revision comments require some more logic to determine the proper state
-      if(notification.subject_type === 'suggestedchanges') {
+      if(notification.event.subject_type === 'suggestedchanges') {
         var state;
-        var type = notification.state_params.suggested_change.subject_type;
+        var type = notification.event.state_params.suggested_change.subject_type;
         if(type === 'evidenceitems') {
           state = 'events.genes.summary.variants.summary.evidence';
         } else if (type === 'variantgroups') {
@@ -68,12 +68,12 @@
       };
 
       // revision comments are shown in their revision's summary view, override commented extension
-      if(notification.subject_type === 'suggestedchanges') {
+      if(notification.event.subject_type === 'suggestedchanges') {
         stateExtension.commented = '.talk.revisions.list.summary';
       }
 
       var stateParams = {};
-      _.each(notification.state_params, function(obj, entity) {
+      _.each(notification.event.state_params, function(obj, entity) {
         var entityId;
         if(entity === 'suggested_change') {
           entityId = 'revisionId';
@@ -87,7 +87,7 @@
         stateParams[entityId] = obj.id;
       });
 
-      $state.go(subjectStates[notification.subject_type]+stateExtension[notification.event_type], stateParams);
+      $state.go(subjectStates[notification.event.subject_type]+stateExtension[notification.event.event_type], stateParams);
 
     };
 
