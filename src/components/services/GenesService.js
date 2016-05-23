@@ -128,13 +128,13 @@
         queryVariants: {
           method: 'GET',
           url: '/api/genes/:geneId/variants',
-          isArray: true,
+          isArray: false,
           cache: cache
         },
         queryVariantGroups: {
           method: 'GET',
           url: '/api/genes/:geneId/variant_groups',
-          isArray: true,
+          isArray: false,
           cache: cache
         },
 
@@ -330,14 +330,14 @@
     function queryVariants(geneId) {
       return GenesResource.queryVariants({geneId: geneId}).$promise
         .then(function(response) {
-          angular.copy(response, variants);
+          angular.copy(response.records, variants);
           return response.$promise;
         });
     }
     function queryVariantGroups(geneId) {
       return GenesResource.queryVariantGroups({geneId: geneId}).$promise
         .then(function(response) {
-          angular.copy(response, variantGroups);
+          angular.copy(response.records, variantGroups);
           return response.$promise;
         });
     }
