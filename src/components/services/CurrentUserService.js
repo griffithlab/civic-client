@@ -38,11 +38,6 @@
           isArray: false,
           cache: false
         },
-        getUnread: {
-          url:'/api/current_user/unread_feed',
-          isArray: false,
-          cache: false
-        },
         markAllAsRead: {
           method: 'PATCH',
           url: '/api/current_user/feed',
@@ -74,14 +69,12 @@
         events: events,
         stats: stats,
         feed: feed,
-        unread: unread,
         mentions: mentions
       },
       get: get,
       getStats: getStats,
       getEvents: getEvents,
       getFeed: getFeed,
-      getUnread: getUnread,
       markAllAsRead: markAllAsRead,
       markAsRead: markAsRead
     };
@@ -113,15 +106,7 @@
     function getFeed(reqObj) {
       return CurrentUserResource.getFeed(reqObj).$promise
         .then(function(response) {
-          angular.copy(parseFeed(response), feed);
-          return response.$promise;
-        });
-    }
-
-    function getUnread() {
-      return CurrentUserResource.getUnread().$promise
-        .then(function(response) {
-          angular.copy(response, unread);
+          angular.copy(response.records, feed);
           return response.$promise;
         });
     }
