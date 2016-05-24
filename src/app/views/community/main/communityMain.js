@@ -5,7 +5,9 @@
     .controller('CommunityMainController', CommunityMainController);
 
   // @ngInject
-  function CommunityMainConfig($stateProvider, $resourceProvider) {
+  function CommunityMainConfig($stateProvider,
+                               $resourceProvider,
+                               formlyConfigProvider) {
     // TODO: toggle trailing-slash trim after civic-server configured to accept either
     $resourceProvider.defaults.stripTrailingSlashes = false;
 
@@ -24,6 +26,7 @@
           title: 'Community'
         }
       });
+
   }
 
   // @ngInject
@@ -56,28 +59,30 @@
 
     vm.model = {};
 
-    vm.filterFields = [
+    vm.formFields = [
       {
         key: 'filter',
         type: 'input',
+        className: 'col-xs-3',
         templateOptions: {
           label: 'Find User',
-          required: false
+          colSpan: 3,
+          required: false,
         },
         watcher: {
           listener: function() {
             updateData();
           }
         }
-      }
-    ];
-    vm.limitFields = [
+      },
       {
         key: 'limit',
         type: 'select',
+        className: 'col-xs-3',
         defaultValue: 'all_time',
         templateOptions: {
           label: 'Limit To',
+          colSpan: 3,
           required: false,
           options: [
             // this_week, this_month, this_year, all_time
@@ -92,16 +97,15 @@
             updateData();
           }
         }
-      }
-    ];
-
-    vm.sortFields = [
+      },
       {
         key: 'sort_by',
         type: 'select',
+        className: 'col-xs-3',
         defaultValue: 'last_seen',
         templateOptions: {
           label: 'Sort By',
+          colSpan: 3,
           required: false,
           options: [
             // last_seen, recent_activity, join_date, most_active
@@ -119,20 +123,19 @@
             updateData();
           }
         }
-      }
-    ];
-
-    vm.sortOrderFields = [
+      },
       {
         key: 'sort_order',
         type: 'select',
+        className: 'col-xs-3',
         defaultValue: 'desc',
         templateOptions: {
           label: 'Sort Order',
+          colSpan: 3,
           required: false,
           options: [
-            {name: 'Ascending', value: 'asc'},
-            {name: 'Descending', value: 'desc'}
+            { name: 'Ascending', value: 'asc' },
+            { name: 'Descending', value: 'desc' }
           ]
         },
         watcher: {

@@ -123,13 +123,6 @@
         </table>
       </div>
     </div>
-    <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-    <!--<pre ng-bind="vm.leaderboards.comments|json">-->
-    <!---->
-    <!--</pre>-->
-    <!--</div>-->
-    <!--</div>-->
   </div>
   <div class="row">
     <div class="col-xs-12">
@@ -137,46 +130,13 @@
     </div>
   </div>
   <div class="row users-form">
-    <div class="col-xs-3">
-      <form novalidate class="form-horizontal">
-        <formly-form
-          model="vm.model"
-          fields="vm.filterFields"
-          form="vm.form"
-          options="vm.options1">
-        </formly-form>
-      </form>
-    </div>
-    <div class="col-xs-3">
-      <form novalidate class="form-horizontal">
-        <formly-form
-          model="vm.model"
-          fields="vm.limitFields"
-          form="vm.form"
-          options="vm.options2">
-        </formly-form>
-      </form>
-    </div>
-    <div class="col-xs-3">
-      <form novalidate class="form-horizontal">
-        <formly-form
-          model="vm.model"
-          fields="vm.sortFields"
-          form="vm.form"
-          options="vm.options3">
-        </formly-form>
-      </form>
-    </div>
-    <div class="col-xs-3">
-      <form novalidate class="form-horizontal">
-        <formly-form
-          model="vm.model"
-          fields="vm.sortOrderFields"
-          form="vm.form"
-          options="vm.options4">
-        </formly-form>
-      </form>
-    </div>
+    <form novalidate class="form-horizontal">
+      <formly-form
+        model="vm.model"
+        fields="vm.formFields"
+        options="vm.formOptions">
+      </formly-form>
+    </form>
   </div>
   <div class="row users-rows">
     <user-card user="user"
