@@ -162,19 +162,23 @@
         field: vm.model.sort_by,
         direction: vm.model.sort_order
       }];
-      fetchUsers(vm.count, vm.page, sorting, filters)
+
+      var limit = vm.model.limit;
+
+      fetchUsers(vm.count, vm.page, sorting, filters, limit)
         .then(function(data){
           angular.copy(data.result, vm.users);
           vm.totalItems = data.total;
         });
     }
 
-    function fetchUsers(count, page, sorting, filters) {
+    function fetchUsers(count, page, sorting, filters, limit) {
       var request;
 
-      request= {
+      request = {
         count: count,
-        page: page
+        page: page,
+        'limit[last_seen]':  limit
       };
 
       if (filters.length > 0) {
