@@ -67,7 +67,7 @@
         templateOptions: {
           label: 'Find User',
           colSpan: 3,
-          required: false,
+          required: false
         },
         watcher: {
           listener: function() {
@@ -102,7 +102,7 @@
         key: 'sort_by',
         type: 'select',
         className: 'col-xs-3',
-        defaultValue: 'last_seen',
+        defaultValue: 'most_active',
         templateOptions: {
           label: 'Sort By',
           colSpan: 3,
