@@ -177,10 +177,11 @@
 
       request = {
         count: count,
-        page: page,
-        'limit[last_seen]':  limit
+        page: page
       };
 
+      request['limit[' + sorting[0].field + ']'] = limit;
+      
       if (filters.length > 0) {
         _.each(filters, function(filter) {
           request['filter[' + filter.field + ']'] = filter.term;
