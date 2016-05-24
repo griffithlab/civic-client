@@ -25,8 +25,7 @@
     "angular-scroll": "0.7.3",
     "angular-elastic": "~2.5.1",
     "please-wait": "~0.0.5",
-    "ment.io": "~0.9.24",
-    "pdfmake": "~0.1.20"
+    "ment.io": "~0.9.24"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0"
