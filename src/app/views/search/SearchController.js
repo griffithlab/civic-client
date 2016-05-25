@@ -797,7 +797,9 @@
                   { value: 'chromosome2', name: 'CHR2 Chromosome' },
                   { value: 'start2', name: 'CHR2 Start' },
                   { value: 'stop2', name: 'CHR2 Stop' },
-                  { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' }                     ],
+                  { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
+                  { value: 'suggested_changes_count', name: 'Suggested Revisions' }
+                ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
                     name: undefined,
@@ -1360,6 +1362,76 @@
                 type: 'input',
                 className: 'inline-field',
                 hideExpression: 'model.name === "is_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            suggested_changes_count: [
+              {
+                template: 'with status',
+                className: 'inline-field'
+              },
+              {
+                key: 'parameters[0]', // status
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'new'
+                },
+                templateOptions: {
+                  required: true,
+                  label: '',
+                  options: [
+                    { value: 'new', name: 'new' },
+                    { value: 'applied', name: 'applied' },
+                    { value: 'rejected', name: 'rejected' }
+                  ]
+                }
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_greater_than_or_equal_to'
+                },
+                templateOptions: {
+                  required: true,
+                  label: '',
+                  options: [
+                    { value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to' },
+                    { value: 'is_greater_than', name: 'is greater than' },
+                    { value: 'is_less_than', name: 'is less than' },
+                    { value: 'is_less_than_or_equal_to', name: 'is less than or equal to' },
+                    { value: 'is_equal_to', name: 'is equal to' },
+                    { value: 'is_in_the_range', name: 'is in the range'}
+                  ],
+                  onChange: function(value, options, scope) {
+                    _.pullAt(scope.model.parameters, 1,2);
+                  }
+                }
+              },
+              {
+                key: 'parameters[1]', // from value
+                type: 'input',
+                className: 'inline-field inline-field-xs',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              },
+              {
+                template: 'to',
+                className: 'inline-field',
+                hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"'
+              },
+              {
+                key: 'parameters[2]', // to value
+                type: 'input',
+                className: 'inline-field inline-field-xs',
+                hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',
                 templateOptions: {
                   label: '',
                   required: true
