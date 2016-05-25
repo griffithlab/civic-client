@@ -8,11 +8,21 @@
     var TypeAheadResults = $resource('/api/variants/typeahead_results',
       {
         query: '@query',
-        limit: 12
+        limit: '@limit'
       },
       {
         query: { // get matching variants
           method: 'GET',
+          isArray: false,
+          cache: true
+        },
+        variants: {
+          url: '/api/typeahead_searches/variants',
+          method: 'GET',
+          params: {
+            query: '@query',
+            count: '@count'
+          },
           isArray: false,
           cache: true
         }

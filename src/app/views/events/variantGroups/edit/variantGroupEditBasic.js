@@ -24,6 +24,7 @@
                                            VariantGroups,
                                            VariantGroupHistory,
                                            VariantGroupsViewOptions,
+                                           TypeAheadResults,
                                            formConfig,
                                            _) {
     var variantGroupModel, vm;
@@ -102,15 +103,13 @@
             data: {
               typeaheadSearch: function(val) {
                 var request = {
-                  mode: 'variants',
-                  count: 5,
-                  page: 0,
-                  'filter[variant]': val
+                  query: val,
+                  count: 10
                 };
-                return Datatables.query(request)
+                return TypeAheadResults.variants(request).$promise
                   .then(function(response) {
-                    return _.map(response.result, function(event) {
-                      return { name: event.entrez_gene + ' - ' + event.variant, id: event.variant_id };
+                    return _.map(response.records, function(event) {
+                      return { name: event.gene_name + ' - ' + event.name, id: event.id };
                     });
                   });
               }
