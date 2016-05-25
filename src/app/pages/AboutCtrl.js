@@ -83,5 +83,16 @@
         'description': 'Nick Spies is a staff analyst at the McDonnell Genome Institute and an MD student at Washington University School of Medicine. He has made substantial contributions to the development of genome analysis tools and resources at the Genome Institute including the Drug-Gene Interaction Database. He is a founding member of the CIViC team, helping to define the CIViC data model, and a leading content curator and a feature development consultant.'
       }
     ];
+    vm.partners = [
+      {
+        'id': 0,
+        'name': 'Personalized Oncogenomics at BC Cancer Agency',
+        'avatars': {
+          'x14': 'assets/images/partners/bc_cancer_agency.png',
+          'x270': 'assets/images/partners/bc_cancer_agency.png'
+        },
+        'description': 'The BC Cancer Agency\'s Personalized Onco-Genomics (POG) program is a clinical research initiative that is embedding genomic sequencing into real-time treatment planning for BC patients with incurable cancers. Cancer is a complex biological process. We categorize cancers according to their site of origin (e.g. lung, breast, liver, colon) as each one is different, but even within these groupings there are subtypes with differences in response to treatment and overall behaviour. The POG program is a collaborative research study including many BCCA oncologists, pathologists and other clinicians along with the Genome Sciences Centre (GSC), which aims to decode the genome – the entire DNA and RNA inside the cell – of each patient\'s cancer, to understand what is enabling it to grow. Using this genomic data in clinical decision-making should allow us to develop treatment strategies to block its growth, identify clinical trials that the patient may benefit from and potentially identify less toxic and more effective therapeutic options.'
+      }
+    ];
   }
 })();
