@@ -10,10 +10,6 @@ gulp.task('cdnize', ['wiredep'], function () {
     allowRev: false, //stricter version matching
     allowMin: true, //request minified files
     relativeRoot: 'src/', //asset root directory
-    //regex for allowing vendor stylesheets to be cdnized as well
-    matchers: [
-      /(<link rel="stylesheet" href=")(.+?)(" \/>)/gi
-    ],
     files: [
       //list of host:package pairs for simple packages
       'cdnjs:angular-scroll',
@@ -24,7 +20,6 @@ gulp.task('cdnize', ['wiredep'], function () {
       'cdnjs:angular-elastic',
       'cdnjs:angulartics',
       'cdnjs:angular-formly-templates-bootstrap',
-      'cdnjs:font-awesome',
       'cdnjs:api-check@7.5.3',
       //manual file->cdn settings for packages which could not be
       //automatically resolved by cdnizer using the above method
@@ -107,7 +102,7 @@ gulp.task('cdnize', ['wiredep'], function () {
         cdn: 'cdnjs:waypoints:${ filename }'
       },
       {
-        file: '**/angular-ui-grid/**/*.{js,css}',
+        file: '**/angular-ui-grid/**/*.js',
         package: 'angular-ui-grid',
         cdn: 'cdnjs:angular-ui-grid:${ filenameMin }'
       },
