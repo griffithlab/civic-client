@@ -53,13 +53,13 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts', 'partials'], function () {
+gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
-  var assets;
+  $.gulpif = require('gulp-if');
 
-  return gulp.src('src/*.html')
+  return gulp.src('.tmp/*.html')
     .pipe($.inject(
       // stream JS files in app/component directories
       gulp.src('.tmp/{app,components}/**/*.js'),
@@ -69,11 +69,37 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
         addPrefix: '../'
       }))
 
+
+
     // parse index.html for links to asset (scripts, html, css), group, concatenate, add to stream
-    .pipe(assets = $.useref.assets())
+    .pipe($.useref()) //Run useref on any vendor files which couldn't be cdnized
+
+    //This call to useref will parse all app assets and concatenate
+    //It also filters out any remote assets which have been cdnized,
+    //leaving only those which couldn't behind to be parsed into vendor files
+    .pipe($.useref({
+      //this function scans build:filter_cdn blocks for assets which have been cdnized
+      filter_cdn: function(content, target, mode, altPath){
+        var scripts = content.split(/\r?\n/gm);
+        var output = "";
+        //prepare the build tag for the next run of useref
+        var parse = "<!-- build:"+mode+"("+altPath+") "+target+" -->\n";
+        scripts.forEach(function(line){
+          if(line.search(/(cloudflare.com|googleapis.com|jsdelivr.net)/g)!=-1)
+          {
+            output+=line+"\n";
+          }
+          else {
+            parse+=line+"\n";
+          }
+        });
+        parse+="<!-- endbuild -->";
+        return output+"\n"+parse;
+      }
+    }))
 
     // init asset revisioning with gulp-rev on each block
-    .pipe($.rev())
+    .pipe($.gulpif("!*.html",$.rev()))
 
     // pluck javascript block, store everything else
     .pipe(jsFilter)
@@ -102,9 +128,6 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe(cssFilter.restore())
     // restore non-css blocks to stream
 
-    // strip asset links from index.html, insert links to concatenated, minified assets
-    .pipe(assets.restore())
-    .pipe($.useref())
 
     // apply revisions to concatenated assets
     .pipe($.revReplace())
