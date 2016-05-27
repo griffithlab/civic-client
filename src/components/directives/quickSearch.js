@@ -21,7 +21,7 @@
     var topResult = {};
 
     $scope.getVariants = function (val) {
-      return TypeAheadResults.query({ query: val }).$promise
+      return TypeAheadResults.query({ query: val, limit: 12}).$promise
         .then(function (response) {
           var labelLimit = 75;
           return _.map(response.result, function (event, index) {
