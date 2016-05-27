@@ -162,4 +162,28 @@ gulp.task('clean', function (done) {
   $.del(['.tmp', 'dist'], done);
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'misc']);
+gulp.task('build', ['html', 'images', 'fonts', 'misc'], function() {
+  var glob = require("glob");
+  return gulp.src("dist/styles/vendor*.css")
+    .pipe($.uncss({
+      html: glob.sync("dist/**/*.{js,html}"),
+      ignore : [
+        /.*?active.*?/,
+        ":hover",
+        ":click",
+        ":focus",
+        /\.(col|row).*?/,
+        '.page-bg',
+        '.home',
+        /\.?ng.*?/,
+        /\.ui-.*?/,
+        /\.tooltip.*?/,
+        /.*?hide.*?/,
+        '.open',
+        /#.*?/,
+        '.fade'
+      ],
+      //report : true
+    }))
+    .pipe(gulp.dest("dist/styles"));
+});
