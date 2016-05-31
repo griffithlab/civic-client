@@ -181,9 +181,11 @@ gulp.task('build', ['html', 'images', 'fonts', 'misc'], function() {
         /.*?hide.*?/,
         '.open',
         /#.*?/,
-        '.fade'
+        /\.fade(\.in)?/,
+        /.*?\[disabled\].*?/,
+        '.popover'
       ],
-      //report : true
     }))
+    .pipe($.csso(true))
     .pipe(gulp.dest("dist/styles"));
 });
