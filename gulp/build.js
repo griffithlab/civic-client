@@ -130,8 +130,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
         /\.myGeneInfo.*?/
       ],
     }))
-    .pipe($.csso(true))
-    //.pipe($.csso(true)) // minify CSS
+    .pipe($.csso(true)) // minify CSS
     .pipe(cssFilter.restore())
     // restore non-css blocks to stream
 
