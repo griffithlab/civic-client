@@ -57,6 +57,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
+  var glob = require("glob");
   var assets;
 
   return gulp.src('src/*.html')
@@ -98,7 +99,39 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts')) // rewrite bootstrap font urls
     .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')')) // rewrite ui-grid font urls
     .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')')) // rewrite font-awesome fonts
-    .pipe($.csso(true)) // minify CSS
+    .pipe($.uncss({
+      html: glob.sync("src/**/*.{html,js}"),
+      ignore : [
+        /.*?active.*?/,
+        ":hover",
+        ":click",
+        ":focus",
+        /.*?row.*?/,
+        /.*?page-bg.*?/,
+        /.*?\.home.*?/,
+        /.*?\.ui.*?/,
+        /\.?ng.*?/,
+        /\.role\..*?/,
+        /\.userCard.*?/,
+        /\.evidenceGrid.*?/,
+        /.*?tooltip.*?/,
+        /.*?hide.*?/,
+        '.open',
+         /#.*?/,
+        /.*?fade(.*?\.in)?.*?/,
+        /.*?\[disabled\].*?/,
+        /\.popover.*?/,
+        /\.eventItem.*?/,
+        /\.pagination.*?/,
+        /\.entityCommentForm.*?/,
+        '.sr-only',
+        /\.pageBackground.*?/,
+        /.*?diff.*?/,
+        /\.myGeneInfo.*?/
+      ],
+    }))
+    .pipe($.csso(true))
+    //.pipe($.csso(true)) // minify CSS
     .pipe(cssFilter.restore())
     // restore non-css blocks to stream
 
@@ -162,30 +195,4 @@ gulp.task('clean', function (done) {
   $.del(['.tmp', 'dist'], done);
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'misc'], function() {
-  var glob = require("glob");
-  return gulp.src("dist/styles/vendor*.css")
-    .pipe($.uncss({
-      html: glob.sync("dist/**/*.{js,html}"),
-      ignore : [
-        /.*?active.*?/,
-        ":hover",
-        ":click",
-        ":focus",
-        /\.(col|row).*?/,
-        '.page-bg',
-        '.home',
-        /\.?ng.*?/,
-        /\.ui-.*?/,
-        /\.tooltip.*?/,
-        /.*?hide.*?/,
-        '.open',
-        /#.*?/,
-        /\.fade(\.in)?/,
-        /.*?\[disabled\].*?/,
-        '.popover'
-      ],
-    }))
-    .pipe($.csso(true))
-    .pipe(gulp.dest("dist/styles"));
-});
+gulp.task('build', ['html', 'images', 'fonts', 'misc']);
