@@ -80,6 +80,16 @@
         }
       },
       {
+        key: 'url',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Personal Website',
+          minLength: 5,
+          value: 'vm.userEdit.url',
+          helpText: 'Your personal website/blog.'
+        }
+      },
+      {
         template:'<h3 class="form-subheader">Social Media</h3>'
       },
       {
