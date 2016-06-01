@@ -38,6 +38,12 @@
           isArray: false,
           cache: false
         },
+        markFeed: {
+          method: 'PATCH',
+          url: '/api/current_user/feed',
+          isArray: false,
+          cache: false
+        },
         markAllAsRead: {
           method: 'PATCH',
           url: '/api/current_user/feed',
@@ -49,13 +55,20 @@
           url: '/api/current_user/feed',
           isArray: false,
           cache: false
+        },
+        markAsUnread: {
+          method: 'PATCH',
+          url: '/api/current_user/feed',
+          isArray: false,
+          cache: false
         }
+
       }
     );
   }
 
   // @ngInject
-  function CurrentUserService(CurrentUserResource, _) {
+  function CurrentUserService(CurrentUserResource, Security, _) {
     var user = {};
     var events = [];
     var stats = [];
@@ -76,7 +89,7 @@
       getEvents: getEvents,
       getFeed: getFeed,
       markAllAsRead: markAllAsRead,
-      markAsRead: markAsRead
+      markFeed: markFeed
     };
 
     function get() {
@@ -113,7 +126,7 @@
 
     function markAllAsRead() {
       var t = new Date().toISOString();
-      return CurrentUserResource.markAllAsRead({ upto: t }).$promise
+      return CurrentUserResource.markFeed({ upto: t, seen: true }).$promise
         .then(function(response) {
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
@@ -123,23 +136,23 @@
               notification.seen = true;
             }
           });
-
+          Security.reloadCurrentUser();
           return response.$promise;
         })
     }
 
-    function markAsRead(id) {
-      return CurrentUserResource.markAsRead({notification_ids: [id]}).$promise
+    function markFeed(ids, seen) {
+      return CurrentUserResource.markFeed({notification_ids: ids, seen: seen }).$promise
         .then(function(response) {
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
           _.forEach(feed, function(notification) {
             if(_.includes(updatedIds, notification.id)) {
-              notification.seen = true;
+              notification.seen = seen;
             }
           });
-
+          Security.reloadCurrentUser();
           return response.$promise;
         })
     }
