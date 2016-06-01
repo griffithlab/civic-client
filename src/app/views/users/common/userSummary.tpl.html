@@ -29,15 +29,6 @@
             <td class="key">Area of Expertise:</td>
             <td class="value">{{user.area_of_expertise|ifEmpty: '--'}}</td>
           </tr>
-          <tr>
-            <td colspan="2">
-              <button
-                ng-show="user.id === vm.currentUser.id"
-                class="btn btn-xs btn-default btn-block"
-                ui-sref="users.edit"
-                style="margin-top: 16px;">Edit Profile</button>
-            </td>
-          </tr>
         </table>
       </div>
     </div>

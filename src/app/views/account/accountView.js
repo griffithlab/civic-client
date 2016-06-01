@@ -37,15 +37,14 @@
         data: {
           titleExp: '"Account Profile"',
           navMode: 'sub'
-        }
-        //,
-        //resolve: {
-        //  mentions: /* @ngInject */ function(CurrentUser) {
-        //    CurrentUser.getMentions().then(function(response) {
-        //      return response;
-        //    });
-        //  }
-        //}
+        },
+        resolve: {
+          'CurrentUser': 'CurrentUser',
+          'user': function (CurrentUser) {
+            return CurrentUser.get();
+          }
+        },
+        controller: 'AccountProfileController'
       });
   }
 
