@@ -28,7 +28,7 @@
     vm.notifications = [];
 
     vm.total = Number();
-    vm.totalNotifications = feed.total;
+    vm.totalNotifications = feed._meta.total_count;
 
     vm.totalUnseenNotifications = Number();
 
