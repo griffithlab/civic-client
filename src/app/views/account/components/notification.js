@@ -92,7 +92,11 @@
     };
 
     vm.markAsSeen = function() {
-      CurrentUser.markAsRead($scope.notification.id);
-    }
+      CurrentUser.markFeed([$scope.notification.id], true);
+    };
+
+    vm.markAsUnseen = function() {
+      CurrentUser.markFeed([$scope.notification.id], false);
+    };
   }
 })();

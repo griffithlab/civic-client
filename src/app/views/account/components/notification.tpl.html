@@ -57,4 +57,8 @@
     class="mark-as-seen btn btn-xs btn-primary"
     ng-click="vm.markAsSeen()"
     ng-hide="notification.seen">Mark As Seen</a>
+  <a
+    class="mark-as-seen btn btn-xs btn-default"
+    ng-click="vm.markAsUnseen()"
+    ng-show="notification.seen">Mark As Unseen</a>
 </div>
