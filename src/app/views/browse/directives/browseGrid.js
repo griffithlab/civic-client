@@ -230,6 +230,7 @@
         },
         {
           name: 'evidence_item_count',
+          type: 'number',
           displayName: 'Evidence Items',
           width: '15%',
           enableFiltering: true,
