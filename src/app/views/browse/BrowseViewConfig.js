@@ -48,6 +48,25 @@
             else { return 1; }
           }
         }
+      })
+      .state('browse.variantGroups', {
+        url: '/variantGroups?page',
+        reloadOnSearch: false,
+        controller: 'BrowseController',
+        templateUrl: 'app/views/browse/browseViews.tpl.html',
+        data: {
+          titleExp: '"Browse Variant Groups"',
+          navMode: 'sub'
+        },
+        resolve: {
+          mode: function() {
+            return 'variant_groups';
+          },
+          page: /* @ngInject */ function($stateParams, _) {
+            if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
+            else { return 1; }
+          }
+        }
       });
   }
 

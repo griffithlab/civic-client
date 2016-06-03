@@ -20,8 +20,12 @@
   }
 
   // @ngInject
-  function BrowseGridController($scope, $state, $location, uiGridConstants, _,
-                                Datatables) {
+  function BrowseGridController($scope,
+                                $state,
+                                $location,
+                                uiGridConstants,
+                                Datatables,
+                                _) {
     var ctrl = $scope.ctrl = {};
 
     var pageCount = 25;
@@ -186,6 +190,49 @@
             direction: uiGridConstants.DESC
           },
           enableFiltering: false,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        }
+      ],
+      'variant_groups': [
+        {
+          name: 'name',
+          displayName: 'Name',
+          width: '20%',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'variants',
+          displayName: 'Variants',
+          width: '40%',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
+        },
+        {
+          name: 'entrez_genes',
+          displayName: 'Genes',
+          width: '25%',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'evidence_item_count',
+          displayName: 'Evidence Items',
+          width: '15%',
+          enableFiltering: true,
           allowCellFocus: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
