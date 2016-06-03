@@ -119,7 +119,7 @@
     function getFeed(reqObj) {
       return CurrentUserResource.getFeed(reqObj).$promise
         .then(function(response) {
-          angular.copy(response.records, feed);
+          angular.copy(response, feed);
           return response.$promise;
         });
     }

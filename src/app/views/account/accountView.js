@@ -17,8 +17,8 @@
         }
       })
       .state('account.notifications', {
-        url: '/notifications?category',
-        templateUrl: 'app/views/account/notifications.tpl.html',
+        url: '/notifications?category?page?count',
+        templateUrl: 'app/views/account/notifications/notifications.tpl.html',
         data: {
           titleExp: '"Account Notifications"',
           navMode: 'sub'
@@ -26,7 +26,10 @@
         resolve: {
           feed: /* @ngInject */ function($stateParams, CurrentUser) {
             //return CurrentUser.getFeed({page: $stateParams.page});
-            return CurrentUser.getFeed({count: 25});
+            $stateParams.page = _.isUndefined($stateParams.page) ? 1 : $stateParams.page;
+            $stateParams.count = _.isUndefined($stateParams.count) ? 10 : $stateParams.count;
+            $stateParams.category = _.isUndefined($stateParams.category) ? 'all' : $stateParams.category;
+            return CurrentUser.getFeed($stateParams);
           }
         },
         controller: 'AccountNotificationsController'
