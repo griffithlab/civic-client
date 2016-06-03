@@ -786,6 +786,7 @@
                   { value: 'description', name: 'Description' },
                   { value: 'variant_types', name: 'Variant Type(s)' },
                   { value: 'variant_group', name: 'Variant Group' },
+                  { value: 'gene', name: 'Gene' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'ensembl_version', name: 'Ensembl Version' },
                   { value: 'reference_bases', name: 'Reference Base(s)' },
@@ -900,6 +901,38 @@
               }
             ],
             variant_group: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'},
+                    {value: 'none', name: 'none'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name === "none"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            gene: [
               {
                 key: 'name',
                 type: 'queryBuilderSelect',
