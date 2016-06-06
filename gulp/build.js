@@ -57,6 +57,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
+  var glob = require("glob");
   var assets;
 
   return gulp.src('src/*.html')
@@ -98,6 +99,37 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.replace('/bower_components/bootstrap/fonts','/assets/fonts')) // rewrite bootstrap font urls
     .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')')) // rewrite ui-grid font urls
     .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')')) // rewrite font-awesome fonts
+    .pipe($.uncss({
+      html: glob.sync("src/**/*.{html,js}"),
+      ignore : [
+        /.*?active.*?/,
+        ":hover",
+        ":click",
+        ":focus",
+        /.*?row.*?/,
+        /.*?page-bg.*?/,
+        /.*?\.home.*?/,
+        /.*?\.ui.*?/,
+        /\.?ng.*?/,
+        /\.role\..*?/,
+        /\.userCard.*?/,
+        /\.evidenceGrid.*?/,
+        /.*?tooltip.*?/,
+        /.*?hide.*?/,
+        '.open',
+         /#.*?/,
+        /.*?fade(.*?\.in)?.*?/,
+        /.*?\[disabled\].*?/,
+        /\.popover.*?/,
+        /\.eventItem.*?/,
+        /\.pagination.*?/,
+        /\.entityCommentForm.*?/,
+        '.sr-only',
+        /\.pageBackground.*?/,
+        /.*?diff.*?/,
+        /\.myGeneInfo.*?/
+      ],
+    }))
     .pipe($.csso(true)) // minify CSS
     .pipe(cssFilter.restore())
     // restore non-css blocks to stream
