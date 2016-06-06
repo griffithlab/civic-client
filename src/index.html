@@ -11,6 +11,18 @@
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <script type="text/javascript">
+      function testModule(m) {
+        try {
+          angular.module(m);
+        }
+        catch(error) {
+          console.log("Failed loading angular module: "+m);
+          return false;
+        }
+        return true;
+      }
+    </script>
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
 
     <!-- preloader styles -->
