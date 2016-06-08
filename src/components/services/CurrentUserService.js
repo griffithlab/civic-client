@@ -119,7 +119,7 @@
     function getFeed(reqObj) {
       return CurrentUserResource.getFeed(reqObj).$promise
         .then(function(response) {
-          angular.copy(response.records, feed);
+          angular.copy(response, feed);
           return response.$promise;
         });
     }
@@ -131,7 +131,7 @@
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
-          _.forEach(feed, function(notification) {
+          _.forEach(feed.records, function(notification) {
             if(_.includes(updatedIds, notification.id)) {
               notification.seen = true;
             }
@@ -147,7 +147,7 @@
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
-          _.forEach(feed, function(notification) {
+          _.forEach(feed.records, function(notification) {
             if(_.includes(updatedIds, notification.id)) {
               notification.seen = seen;
             }

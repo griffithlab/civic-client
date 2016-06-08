@@ -1,0 +1,85 @@
+<div class="notifications">
+  <div class="row">
+    <div class="col-xs-12 col-sm-2 col-lg-3">
+      <div class="notification-tabs">
+        <ul class="nav nav-pills nav-stacked">
+          <li ng-repeat="category in vm.categories" ui-sref-active="active">
+            <a ui-sref="{{category.state}}">
+              {{ category.name }} <span class="small">({{category.count}})</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="filter-controls">
+        <form novalidate class="form">
+          <formly-form
+            model="vm.filters"
+            fields="vm.filterFields"
+            options="vm.formOptions">
+          </formly-form>
+        </form>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-10 col-lg-9">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-bg">
+            <form>
+              <span ng-if="vm.notifications.length > 0">
+                Showing {{ vm.notifications.length  }} of {{ vm.totalItems }} notifications.
+                <span ng-if="vm.totalItems > 10">
+                  Show
+                  <select ng-model="vm.count"
+                          ng-options="option for option in vm.countOptions"
+                          ng-change="vm.pageChanged()">
+                  </select>
+                  per page.
+                </span>
+              </span>
+              <span ng-if="vm.notifications.length === 0">
+                No notifications.
+              </span>
+              <a class="mark-as-seen btn btn-xs btn-primary pull-right"
+                 style="width: 140px;"
+                 ng-click="vm.markAllAsRead()"
+                 ng-hide="vm.notifications.length === 0">Mark All As Seen</a>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="notifications-list">
+            <li ng-repeat="notification in vm.notifications">
+              <!--<pre ng-bind="notification|json"></pre>-->
+              <notification notification="notification" theme="'light'"></notification>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 text-center grid-pagination"
+        ng-hide="vm.notifications.length === 0">
+          <pagination
+            ng-if="vm.totalItems"
+            class="pagination-sm"
+            ng-change="vm.pageChanged()"
+            ng-model="vm.page"
+            items-per-page="vm.count"
+            max-size="15"
+            boundary-links="true"
+            rotate="false"
+            align="true"
+            total-items="vm.totalItems"
+            direction-links="true">
+          </pagination>
+          <p class="page-info small">
+            {{ vm.totalItems }} {{ vm.isFiltered ? "filtered" : "total" }} {{ vm.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
+            Page {{ vm.page }} of {{ vm.totalPages }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
