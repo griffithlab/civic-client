@@ -24,6 +24,10 @@
       }
     };
 
+    vm.setUrl = function(anchor) {
+      $location.hash(anchor);
+    };
+
     vm.experts = [
       {
         'id': 133,

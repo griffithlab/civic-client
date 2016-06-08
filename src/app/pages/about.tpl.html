@@ -14,13 +14,13 @@
       <div class="well affix">
         <ul class="nav nav-pills nav-stacked about-nav">
           <li du-scrollspy="top">
-            <a du-smooth-scroll="top">About CIViC</a>
+            <a du-smooth-scroll="top" ng-click="vm.setUrl('top')">About CIViC</a>
           </li>
           <li du-scrollspy="domain-experts">
-            <a du-smooth-scroll="domain-experts">Domain Experts</a>
+            <a du-smooth-scroll="domain-experts" ng-click="vm.setUrl('domain-experts')">Domain Experts</a>
           </li>
           <li du-scrollspy="partners">
-            <a du-smooth-scroll="partners">Partners</a>
+            <a du-smooth-scroll="partners" ng-click="vm.setUrl('partners')">Partners</a>
           </li>
         </ul>
       </div>

@@ -31,6 +31,7 @@
         url: '/about',
         controller: 'AboutCtrl',
         templateUrl: 'app/pages/about.tpl.html',
+        reloadOnSearch: false,
         data: {
           titleExp: '"About"',
           navMode: 'sub'
