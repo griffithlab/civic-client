@@ -23,6 +23,7 @@
           titleExp: '"Account Notifications"',
           navMode: 'sub'
         },
+        reloadOnSearch: false,
         resolve: {
           feed: /* @ngInject */ function($stateParams, CurrentUser) {
             //return CurrentUser.getFeed({page: $stateParams.page});
