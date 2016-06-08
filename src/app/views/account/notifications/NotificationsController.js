@@ -31,49 +31,81 @@
     };
 
     var fetch = function() {
-      CurrentUser.getFeed({count: vm.count, page: vm.page})
-    };
+      var request = {
+        count: vm.count,
+        page: vm.page
+      };
 
-    $scope.$watch(function() { return CurrentUser.data.feed}, function(feed){
-      vm.count = feed._meta.per_page;
-      vm.page = feed._meta.current_page;
-      vm.totalItems = feed._meta.total_count;
-      vm.totalPages = feed._meta.total_pages;
-
-      vm.totalUnseenNotifications = _.filter(feed.records, function(n) {
-        return n.seen === false;
-      }).length;
-
-      if($stateParams.category == 'all') {
-        angular.copy(feed.records, vm.notifications);
-      } else {
-        angular.copy(
-          _.filter(feed.records, {type: $stateParams.category.substring(0,$stateParams.category.length-1)}),
-          vm.notifications);
+      if(!_.isEmpty(vm.filters.limit)) {
+        request['filter[limit]'] = vm.filters.limit;
       }
 
-      vm.categories = [
-        {
-          name: 'All',
-          state: 'account.notifications({category:"all"})',
-          count: feed.records.length
+      CurrentUser.getFeed(request)
+    };
+
+    vm.filterFields = [
+      {
+        key: 'limit',
+        type: 'select',
+        defaultValue: 'all_time',
+        templateOptions: {
+          label: 'Limit To',
+          colSpan: 3,
+          required: false,
+          options: [
+            // this_week, this_month, this_year, all_time
+            {name: 'All time', value: 'all_time'},
+            {name: 'This week', value: 'this_week'},
+            {name: 'This month', value: 'this_month'},
+            {name: 'This year', value: 'this_year'}
+          ]
         },
-        {
-          name: 'Mentions',
-          state: 'account.notifications({category:"mentions"})',
-          count: _(feed.records).filter({type: 'mention'}).value().length
-        },
-        {
-          name: 'Subscribed Events',
-          state: 'account.notifications({category:"subscribed_events"})',
-          count: _(feed.records).filter({type: 'subscribed_event'}).value().length
+        watcher: {
+          listener: function() {
+            fetch();
+          }
         }
-      ];
-    }, true);
+      }
+    ];
+
+    $scope.$watch(
+      function() { return CurrentUser.data.feed.records},
+      function(records){
+        var meta = CurrentUser.data.feed._meta;
+
+        vm.count = meta.per_page;
+        vm.page = meta.current_page;
+        vm.totalItems = meta.total_count;
+        vm.totalPages = meta.total_pages;
+
+        vm.totalUnseenNotifications = _.filter(records, function(n) {
+          return n.seen === false;
+        }).length;
+
+        vm.notifications = records;
+
+        vm.categories = [
+          {
+            name: 'All',
+            state: 'account.notifications({category:"all"})',
+            count: records.length
+          },
+          {
+            name: 'Mentions',
+            state: 'account.notifications({category:"mentions"})',
+            count: _(records).filter({type: 'mention'}).value().length
+          },
+          {
+            name: 'Subscribed Events',
+            state: 'account.notifications({category:"subscribed_events"})',
+            count: _(records).filter({type: 'subscribed_event'}).value().length
+          }
+        ];
+      }, true);
 
     vm.markAllAsRead = function() {
       CurrentUser.markAllAsRead().then(function() {
-        Security.reloadCurrentUser(); // to update notification counts
+        console.log('records marked as seen');
       });
     }
   }

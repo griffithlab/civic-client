@@ -131,7 +131,7 @@
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
-          _.forEach(feed, function(notification) {
+          _.forEach(feed.records, function(notification) {
             if(_.includes(updatedIds, notification.id)) {
               notification.seen = true;
             }
@@ -147,7 +147,7 @@
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
-          _.forEach(feed, function(notification) {
+          _.forEach(feed.records, function(notification) {
             if(_.includes(updatedIds, notification.id)) {
               notification.seen = seen;
             }

@@ -10,6 +10,15 @@
           </li>
         </ul>
       </div>
+      <div class="filter-controls">
+        <form novalidate class="form">
+          <formly-form
+            model="vm.filters"
+            fields="vm.filterFields"
+            options="vm.formOptions">
+          </formly-form>
+        </form>
+      </div>
     </div>
     <div class="col-xs-12 col-sm-10 col-lg-9">
       <div class="row">
@@ -19,12 +28,12 @@
               <span ng-if="vm.notifications.length > 0">
                 Showing {{ vm.notifications.length  }} of {{ vm.totalItems }} notifications.
                 <span ng-if="vm.totalItems > 10">
-                  Fetch up to
+                  Show
                   <select ng-model="vm.count"
                           ng-options="option for option in vm.countOptions"
                           ng-change="vm.pageChanged()">
                   </select>
-                  notifications.
+                  per page.
                 </span>
               </span>
               <span ng-if="vm.notifications.length === 0">
