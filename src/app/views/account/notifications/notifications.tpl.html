@@ -42,7 +42,7 @@
               <a class="mark-as-seen btn btn-xs btn-primary pull-right"
                  style="width: 140px;"
                  ng-click="vm.markAllAsRead()"
-                 ng-hide="notification.seen">Mark All As Seen</a>
+                 ng-hide="vm.notifications.length === 0">Mark All As Seen</a>
             </form>
 
           </div>
@@ -59,7 +59,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12 text-center grid-pagination">
+        <div class="col-xs-12 text-center grid-pagination"
+        ng-hide="vm.notifications.length === 0">
           <pagination
             ng-if="vm.totalItems"
             class="pagination-sm"

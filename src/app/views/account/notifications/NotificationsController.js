@@ -32,10 +32,10 @@
         page: vm.page
       };
 
-      if(!_.isEmpty(vm.filters.limit)) {
+      if(!_.isEmpty(vm.filters.name)) {
         request['filter[name]'] = vm.filters.name;
       }
-      if(!_.isEmpty(vm.filters.name)) {
+      if(!_.isEmpty(vm.filters.limit)) {
         request['filter[limit]'] = vm.filters.limit;
       }
 
