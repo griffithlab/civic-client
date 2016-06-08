@@ -5,8 +5,24 @@
     .controller('AboutCtrl', AboutCtrl);
 
 // @ngInject
-  function AboutCtrl ($scope, $state) {
+  function AboutCtrl ($scope, $state, $location, $document) {
     var vm = $scope.vm = {};
+
+    if(!_.isEmpty($location.hash())) {
+      var elem = document.getElementById($location.hash());
+      $document.scrollToElementAnimated(elem);
+    }
+
+    $scope.scroll = function() {
+      var loc = $location.hash();
+      if(!_.isEmpty(loc) &&
+        _.kebabCase(vm.type) === loc &&
+        $rootScope.prevScroll !== loc) {// if view has already been scrolled, ignore subsequent requests
+        var elem = document.getElementById(loc);
+        $rootScope.prevScroll = $location.hash();
+        $document.scrollToElementAnimated(elem);
+      }
+    };
 
     vm.experts = [
       {

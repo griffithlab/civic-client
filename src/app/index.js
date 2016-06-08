@@ -65,29 +65,36 @@
     // ensure $state is globally addressable/injectable
     $rootScope.$state = $state;
 
+    Security.requestCurrentUser();
+
+
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
       $rootScope.view.navMode = toState.data.navMode;
       if(_.isEmpty($location.hash())) { $rootScope.prevScroll = null; }
       $analytics.eventTrack(toState.name);
       $analytics.pageTrack(window.location.hash);
     });
-
-    Security.requestCurrentUser();
-
+    $rootScope.$on('duScrollspy:becameActive', function($event, $element, $target){
+      //Automatically update location
+      var hash = $element.prop('hash');
+      if (hash) {
+        history.replaceState(null, null, hash);
+      }
+    });
     /*  ui-router debug logging - uncomment these if you run into links/routes silently failing. */
-    function message(to, toP, from, fromP) {
-      return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
-    }
-
-    $rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
-      console.log('Start:   ' + message(to, toP, from, fromP));
-    });
-    $rootScope.$on('$stateChangeSuccess', function (evt, to, toP, from, fromP) {
-      console.log('Success: ' + message(to, toP, from, fromP));
-    });
-    $rootScope.$on('$stateChangeError', function (evt, to, toP, from, fromP, err) {
-      console.error('Error:   ' + message(to, toP, from, fromP), err);
-    });
+    // function message(to, toP, from, fromP) {
+    //   return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
+    // }
+    //
+    // $rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
+    //   console.log('Start:   ' + message(to, toP, from, fromP));
+    // });
+    // $rootScope.$on('$stateChangeSuccess', function (evt, to, toP, from, fromP) {
+    //   console.log('Success: ' + message(to, toP, from, fromP));
+    // });
+    // $rootScope.$on('$stateChangeError', function (evt, to, toP, from, fromP, err) {
+    //   console.error('Error:   ' + message(to, toP, from, fromP), err);
+    // });
 
   }
 
