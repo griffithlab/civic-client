@@ -29,7 +29,8 @@
     var fetch = function() {
       var request = {
         count: vm.count,
-        page: vm.page
+        page: vm.page,
+        category: vm.category
       };
 
       if(!_.isEmpty(vm.filters.name)) {
@@ -98,17 +99,20 @@
         vm.categories = [
           {
             name: 'All',
-            state: 'account.notifications({category:"all"})',
+            shortName: 'all',
+            state: 'account.notifications({category:"all", page: vm.page, count: vm.count })',
             count: records.length
           },
           {
             name: 'Mentions',
-            state: 'account.notifications({category:"mentions"})',
+            shortName: 'mentions',
+            state: 'account.notifications({category:"mentions", page: vm.page, count: vm.count })',
             count: _(records).filter({type: 'mention'}).value().length
           },
           {
             name: 'Subscribed Events',
-            state: 'account.notifications({category:"subscribed_events"})',
+            shortName: 'subscribed_events',
+            state: 'account.notifications({category:"subscribed_events", page: vm.page, count: vm.count })',
             count: _(records).filter({type: 'subscribed_event'}).value().length
           }
         ];
