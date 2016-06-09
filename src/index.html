@@ -11,12 +11,24 @@
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <script type="text/javascript">
+      function testModule(m) {
+        try {
+          angular.module(m);
+        }
+        catch(error) {
+          console.log("Failed loading angular module: "+m);
+          return false;
+        }
+        return true;
+      }
+    </script>
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
 
     <!-- preloader styles -->
     <link rel="stylesheet" href="../bower_components/please-wait/build/please-wait.css" />
 
-    <!-- build:css({.tmp,src}) styles/vendor.css -->
+    <!-- build:filter_cdn({.tmp,src}) styles/vendor.css css -->
     <link rel="stylesheet" href="app/vendor.css">
 
     <!-- bower:css -->
@@ -336,7 +348,7 @@
       });
     </script>
 
-    <!-- build:js scripts/vendor.js -->
+    <!-- build:filter_cdn scripts/vendor.js js -->
     <!-- bower:js -->
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
