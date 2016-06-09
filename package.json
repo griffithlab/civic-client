@@ -22,7 +22,7 @@
     "gulp-cdnizer": "^1.1.6",
     "gulp-connect": "^4.0.0",
     "gulp-csso": "^2.0.0",
-    "gulp-filter": "^4.0.0",
+    "gulp-filter": "^3.0.1",
     "gulp-flatten": "^0.2.0",
     "gulp-htmlmin": "^2.0.0",
     "gulp-if": "^2.0.1",
