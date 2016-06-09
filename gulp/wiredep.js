@@ -13,6 +13,7 @@ gulp.task('wiredep', function () {
         /bootstrap-sass-official/,
         /\/bootstrap.js/,
         /bootstrap.css/,
+        /please-wait/,
         /jquery.js/,
         /waypoints.js/,
         /SHA-1.js/
