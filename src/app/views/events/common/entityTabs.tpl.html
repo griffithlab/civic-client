@@ -63,8 +63,10 @@
 </script>
 
 <script type="text/ng-template" id="/pendingTooltip.tpl.html">
-  <span>
-    This {{ vm.type.toLowerCase() }} has pending revisions to the {{vm.pendingFields.length > 1 ? 'fields' : 'field' }}
-    <span ng-repeat="field in vm.pendingFields">{{$first ? '' : $last ? ', and ' : ', '}}{{ field | keyToLabel}}</span>
-  </span>
+<div>
+    This {{ vm.type.toLowerCase() }} has pending revisions to:
+    <ul>
+      <li ng-repeat="field in vm.pendingFields">{{ field | keyToLabel}}</li>
+    </ul>
+</div>
 </script>
