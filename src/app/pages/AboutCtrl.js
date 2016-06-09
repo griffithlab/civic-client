@@ -54,6 +54,30 @@
         'description': 'Dr. Bose is Assistant Professor of Medicine with board certifications in medical oncology and internal medicine at Washington University School of Medicine. His lab studies how dysregulation of signal transduction pathways impacts the development of human cancers. In particular his focus is on the HER2 receptor tyrosine kinase, a member of the EGFR growth factor receptor family, a gene amplified and activated in about 20% of human breast cancer cases. His lab discovered that HER2 activating mutations can be found in many solid tumors, including breast cancer.'
       },
       {
+        'id': 135,
+        'name': 'David Spencer',
+        'role': 'Editor',
+        'avatars': {
+          'x14': 'assets/images/experts/dspencer.jpg',
+          'x270': 'assets/images/experts/dspencer.jpg'
+        },
+        'area_of_expertise': 'Clinical Scientist',
+        'display_name': 'DavidSpencer',
+        'description': 'Dr. Spencer is an Assistant Professor of Medicine and Medical Director of the McDonnell Genome Institute CAP/CLIA Sequencing Lab at Washington University School of Medicine. He holds board certifications in Clinical Pathology and Molecular Genetic Pathology. His clinical focus is on the design, validation and interpretation of clinical sequencing assays, and has contributed to the application of NGS to predict outcomes in acute myeloid leukemia. His research lab studies the genetics and epigenetics of myeloid malignancies, and how mutations in these cancers alter epigenetic gene regulation and contribute to cancer development.'
+      },
+      {
+        'id': 169,
+        'name': 'Lukas Wartman',
+        'role': 'Editor',
+        'avatars': {
+          'x14': 'assets/images/experts/lwartman.jpg',
+          'x270': 'assets/images/experts/lwartman.jpg'
+        },
+        'area_of_expertise': 'Clinical Scientist',
+        'display_name': 'Lukas Wartman',
+        'description': 'Dr. Wartman is an Assistant Professor of Medicine and Assistant Director of the McDonnell Genome Institute at Washington University School of Medicine and board certified in medical oncology and internal medicine. His lab studies the role of the H3K27 histone methyltransferase KDM6A in normal and malignant hematopoiesis. KDM6A is mutated in a range of cancers, including acute myeloid leukemia, and is the most commonly acquired event in a mouse model of acute promyelocytic leukemia studied in his lab. He also leads the multidisciplinary Washington University Genomics Tumor Board which focuses on sequencing analysis of clinical cases (N-of-1) or small cohorts presented by cancer care professionals in order to inform clinical decisions and/or advance biological or etiological understanding of cancer subtypes.'
+      },
+      {
         'id': 15,
         'name': 'Malachi Griffith',
         'username': 'malachigriffith',
