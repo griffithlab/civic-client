@@ -3,23 +3,27 @@
 var gulp = require('gulp');
 var wiredep = require('wiredep').stream;
 var path = require('path');
-var karma = require('karma').server;
+var karma = require('karma').Server;
 
 //Run test once and exit
 gulp.task('test:unit', ['test:unit:wiredep'], function (done) {
-  karma.start({
+  var server = new karma({
     configFile: __dirname + '/../test/karma.conf.js',
     logLevel: 'info',
     singleRun: true
-  }, done);
+  }, function(){done();});
+
+  server.start();
 });
 
 
 // Watch for file changes and re-run tests on each change
 gulp.task('test:unit:watch', ['test:unit:wiredep'], function (done) {
-  karma.start({
+  var server = new karma({
     configFile: __dirname + '/../test/karma.conf.js'
-  }, done);
+  }, function(){done();});
+
+  server.start();
 });
 
 // Run all unit tests in debug mode
@@ -54,6 +58,7 @@ gulp.task('test:unit:wiredep', function () {
         /bootstrap-sass-official/,
         /\/bootstrap.js/,
         /bootstrap.css/,
+        /please-wait/,
         /jquery.js/,
         /waypoints.js/,
         /SHA-1.js/
@@ -74,4 +79,3 @@ gulp.task('test:unit:wiredep', function () {
     }))
     .pipe(gulp.dest('test'));
 });
-
