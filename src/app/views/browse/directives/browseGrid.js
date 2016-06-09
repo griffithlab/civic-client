@@ -292,10 +292,16 @@
             variantId: row.entity.variant_id,
             '#': 'variant'
           });
-        } else {
+        } else if (ctrl.mode === 'genes'){
           $state.go('events.genes.summary', {
             geneId: row.entity.id,
             '#': 'gene'
+          });
+        } else {
+          $state.go('events.genes.summary.variantGroups.summary', {
+            geneId: row.entity.gene_ids[0],
+            variantGroupId: row.entity.id,
+            '#': 'variant-group'
           });
         }
       });
