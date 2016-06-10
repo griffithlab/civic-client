@@ -128,6 +128,7 @@
       var t = new Date().toISOString();
       return CurrentUserResource.markFeed({ upto: t, seen: true }).$promise
         .then(function(response) {
+          feed._meta.unread = response._meta.unread;
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
@@ -144,7 +145,7 @@
     function markFeed(ids, seen) {
       return CurrentUserResource.markFeed({notification_ids: ids, seen: seen }).$promise
         .then(function(response) {
-          feed._meta = response._meta;
+          feed._meta.unread = response._meta.unread;
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
