@@ -154,6 +154,7 @@
               notification.seen = seen;
             }
           });
+          Security.reloadCurrentUser();
           return response.$promise;
         })
     }
