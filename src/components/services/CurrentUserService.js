@@ -144,6 +144,7 @@
     function markFeed(ids, seen) {
       return CurrentUserResource.markFeed({notification_ids: ids, seen: seen }).$promise
         .then(function(response) {
+          feed._meta = response._meta;
           var updated= response.records;
           var updatedIds = _.map(updated, 'id');
 
@@ -152,7 +153,6 @@
               notification.seen = seen;
             }
           });
-          Security.reloadCurrentUser();
           return response.$promise;
         })
     }

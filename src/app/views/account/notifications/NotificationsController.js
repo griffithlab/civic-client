@@ -21,6 +21,9 @@
     vm.countOptions= [10,25,50,100];
     vm.notifications = [];
 
+    vm.unRead = Security.currentUser.unread_notifications;
+    vm.category = $stateParams.category;
+
     vm.pageChanged = function() {
       $location.search({page: vm.page, count: vm.count, category: vm.category});
       fetch();
@@ -89,33 +92,51 @@
         vm.page = Number(meta.current_page);
         vm.totalItems = Number(meta.total_count);
         vm.totalPages = Number(meta.total_pages);
+        vm.category = $stateParams.category;
 
-        vm.totalUnseenNotifications = _.filter(records, function(n) {
-          return n.seen === false;
-        }).length;
+        vm.unread = meta.unread;
+        vm.totalUnread = _.reduce(vm.unread, function(result, value, key) {
+          return result + value;
+        });
 
-        vm.notifications = CurrentUser.data.feed.records;
+        angular.copy(CurrentUser.data.feed.records, vm.notifications);
 
-        vm.categories = [
-          {
-            name: 'All',
-            shortName: 'all',
-            state: 'account.notifications({category:"all", page: vm.page, count: vm.count })',
-            count: records.length
-          },
-          {
-            name: 'Mentions',
-            shortName: 'mentions',
-            state: 'account.notifications({category:"mentions", page: vm.page, count: vm.count })',
-            count: _(records).filter({type: 'mention'}).value().length
-          },
-          {
-            name: 'Subscribed Events',
-            shortName: 'subscribed_events',
-            state: 'account.notifications({category:"subscribed_events", page: vm.page, count: vm.count })',
-            count: _(records).filter({type: 'subscribed_event'}).value().length
-          }
-        ];
+        vm.categories = [{
+          name: 'all',
+          state: 'account.notifications({category:"all", page: vm.page, count: vm.count })',
+          unread: _.reduce(vm.unread, function(res, val, key) {
+            return res + val;
+          })
+        }];
+
+        _.forEach(vm.unread, function(val, key) {
+          vm.categories.push({
+            name: key,
+            state: 'account.notifications({category:"' + key + '", page: vm.page, count: vm.count })',
+            unread: val
+          });
+        });
+
+        // vm.categories = [
+        //   {
+        //     name: 'All',
+        //     shortName: 'all',
+        //     state: 'account.notifications({category:"all", page: vm.page, count: vm.count })',
+        //     count: vm.totalUnread
+        //   },
+        //   {
+        //     name: 'Mentions',
+        //     shortName: 'mentions',
+        //     state: 'account.notifications({category:"mentions", page: vm.page, count: vm.count })',
+        //     count: vm.unread.mentions
+        //   },
+        //   {
+        //     name: 'Subscribed Events',
+        //     shortName: 'subscribed_events',
+        //     state: 'account.notifications({category:"subscribed_events", page: vm.page, count: vm.count })',
+        //     count: vm.unread.subscribed_events
+        //   }
+        // ];
       }, true);
 
     vm.markAllAsRead = function() {

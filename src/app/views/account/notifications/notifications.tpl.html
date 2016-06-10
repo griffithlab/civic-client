@@ -5,7 +5,7 @@
         <ul class="nav nav-pills nav-stacked">
           <li ng-repeat="category in vm.categories" ui-sref-active="active">
             <a ui-sref="{{category.state}}">
-              {{ category.name }} <span class="small">({{category.count}})</span>
+              {{ category.name | keyToLabel}} ({{category.unread}})
             </a>
           </li>
         </ul>
