@@ -17,7 +17,8 @@
       <ul class="dropdown-menu dropdown-menu-right" role="menu">
         <li ng-if="hasNotifications" class="dropdown-header">Notifications<br/>
         </li>
-        <li ng-repeat="(label, count) in currentUser.unread_notifications">
+        <li ng-repeat="(label, count) in currentUser.unread_notifications"
+            ng-if="count > 0">
           <a ui-sref="account.notifications({category: '{{label}}'})">
             <span ng-bind="label | keyToLabel">type</span>
             <span ng-bind="count" class="badge">count</span>
