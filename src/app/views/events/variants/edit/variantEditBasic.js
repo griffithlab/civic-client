@@ -19,6 +19,7 @@
                                       $stateParams,
                                       $document,
                                       $state,
+                                      $q,
                                       Security,
                                       VariantRevisions,
                                       Variants,
@@ -102,24 +103,62 @@
           entityName: 'Type',
           inputOptions: {
             type: 'typeahead',
-            wrapper: null,
+            wrapper: ['variantTypeNotice', 'validationMessages'],
             templateOptions: {
               formatter: 'model[options.key].display_name',
-              typeahead: 'item as item.display_name for item in options.data.typeaheadSearch($viewValue)'
-            },
-            data: {
-              typeaheadSearch: function(val) {
-                var request = {
-                  count: 5,
-                  page: 0,
-                  name: val
-                };
-                return Variants.queryVariantTypes(request)
-                  .then(function(response) {
-                    return _.map(response.records, function(event) {
-                      return event;
+              typeahead: 'item as item.display_name for item in to.data.typeaheadSearch($viewValue)',
+              data: {
+                typeaheadSearch: function(val) {
+                  var request = {
+                    count: 5,
+                    page: 0,
+                    name: val
+                  };
+                  return Variants.queryVariantTypes(request)
+                    .then(function(response) {
+                      return _.map(response.records, function(event) {
+                        return event;
+                      });
                     });
-                  });
+                },
+                hasRedundancy: false,
+                redundancies: []
+              }
+            },
+            asyncValidators: {
+              typeRelationshipRedundancy: {
+                expression: function($viewValue, $modelValue, scope) {
+                  // if $modelValue empty, return true
+                  // else query variant relationships
+                  // then
+                  // if empty array, resolve
+                  // if array contains only 'is' relationships, resolve
+                  // if array contains parent or child relationships, reject
+                  var deferred = $q.defer();
+                  if(_.isEmpty($modelValue)) {
+                    deferred.resolve(true); // empty model value, no need to verify
+                  } else {
+                    Variants.queryVariantTypeRelationships({
+                      variant_id: vm.variant.id,
+                      variant_type_id: $modelValue.id
+                    }).then(function (response) {
+                      if(_.isEmpty(response)) {
+                        deferred.resolve(true); // no relations, resolve.
+                      } else {
+                        var types = _.map(response, 'relationship');
+                        if(types.length === 1 && types[0] === 'is') {
+                          deferred.resolve(true); // only relationship is an 'is' relationship, resolve
+                        } else {
+                          scope.options.templateOptions.hasRedundancy = true;
+                          scope.options.templateOptions.redundancies = response;
+                          deferred.reject('message!');
+                        }
+                      }
+                    });
+                  }
+                  return deferred.promise;
+                },
+                message: ''
               }
             }
           }

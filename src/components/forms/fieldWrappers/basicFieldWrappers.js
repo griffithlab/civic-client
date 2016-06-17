@@ -108,6 +108,14 @@
     });
 
     formlyConfigProvider.setWrapper({
+      name: 'variantTypeNotice',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small" ng-if="to.data.notice">.</span>'
+      ].join(' ')
+    });
+
+    formlyConfigProvider.setWrapper({
       name: 'genedisplay',
       template: [
         '<formly-transclude></formly-transclude>',
