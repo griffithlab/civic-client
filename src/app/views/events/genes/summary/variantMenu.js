@@ -23,6 +23,17 @@
       isAdmin: Security.isEditor()
     };
 
+    $scope.hasValidEvidenceItems = function(variant) {
+      var non_rejected_count = _.reduce(variant.evidence_items, function(acc, val, key) {
+        if(key !== 'rejected_count') {
+          return acc + val;
+        } else {
+          return acc;
+        }
+      });
+      return non_rejected_count > 0;
+    };
+
     var addVarGroupUrlBase = $scope.addVarGroupUrl = '#/add/variantGroup';
 
     $scope.$watchCollection('stateParams', function(stateParams){
