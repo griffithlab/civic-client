@@ -41,10 +41,8 @@ gulp.task('scripts', function () {
 
 gulp.task('partials', function () {
   return gulp.src('src/{app,components}/**/*.html')
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true
+    .pipe($.htmlmin({
+      collapseWhitespace: true
     }))
     .pipe($.ngHtml2js({
       moduleName: 'civicClient'
@@ -54,9 +52,9 @@ gulp.task('partials', function () {
 });
 
 gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
-  var htmlFilter = $.filter('*.html');
-  var jsFilter = $.filter('**/*.js');
-  var cssFilter = $.filter('**/*.css');
+  var htmlFilter = $.filter('*.html', {restore: true});
+  var jsFilter = $.filter('**/*.js', {restore: true});
+  var cssFilter = $.filter('**/*.css', {restore: true});
   $.gulpif = require('gulp-if');
 
   return gulp.src('.tmp/*.html')
@@ -116,7 +114,7 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
       }
     ))
     .pipe($.sourcemaps.write('.')) // write sourcemaps
-    .pipe(jsFilter.restore())
+    .pipe(jsFilter.restore)
     // restore non-js blocks to stream
 
     // pluck CSS, store non-css files
@@ -125,7 +123,7 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
     .pipe($.replace(/url\('ui-grid\.(.*?)'\)/g,'url(\'/assets/fonts/ui-grid.$1\')')) // rewrite ui-grid font urls
     .pipe($.replace(/url\('\.\.\/fonts\/fontawesome-webfont\.(.*?)'\)/g,'url(\'/assets/fonts/fontawesome-webfont.$1\')')) // rewrite font-awesome fonts
     .pipe($.csso(true)) // minify CSS
-    .pipe(cssFilter.restore())
+    .pipe(cssFilter.restore)
     // restore non-css blocks to stream
 
 
@@ -134,12 +132,10 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
 
     // pluck HTML, store everything else
     .pipe(htmlFilter)
-    .pipe($.minifyHtml({ // minify HTML
-      empty: true,
-      spare: true,
-      quotes: true
+    .pipe($.htmlmin({
+      collapseWhitespace: true
     }))
-    .pipe(htmlFilter.restore())
+    .pipe(htmlFilter.restore)
     // restore non-HTML files to stream
 
     // save files
