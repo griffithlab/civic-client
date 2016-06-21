@@ -28,7 +28,6 @@
                                       formConfig,
                                       _) {
     var variantModel, vm;
-
     vm = $scope.vm = {};
     variantModel = vm.variantModel = Variants;
 
@@ -104,6 +103,9 @@
           inputOptions: {
             type: 'typeahead',
             wrapper: ['variantTypeNotice', 'validationMessages'],
+            modelOptions: {
+              updateOn: 'default select'
+            },
             templateOptions: {
               formatter: 'model[options.key].display_name',
               typeahead: 'item as item.display_name for item in to.data.typeaheadSearch($viewValue)',
@@ -126,7 +128,7 @@
               }
             },
             asyncValidators: {
-              typeRelationshipRedundancy: {
+              conflict: {
                 expression: function($viewValue, $modelValue, scope) {
                   // if $modelValue empty, return true
                   // else query variant relationships
@@ -143,7 +145,7 @@
                       variant_type_id: $modelValue.id
                     }).then(function (response) {
                       if(_.isEmpty(response)) {
-                        deferred.resolve(true); // no relations, resolve.
+                        deferred.resolve('Variant type has no conflicts.'); // no relations, resolve.
                       } else {
                         var types = _.map(response, 'relationship');
                         if(types.length === 1 && types[0] === 'is') {
@@ -151,14 +153,14 @@
                         } else {
                           scope.options.templateOptions.hasRedundancy = true;
                           scope.options.templateOptions.redundancies = response;
-                          deferred.reject('message!');
+                          deferred.reject('Variant type conflicts with an existing type.');
                         }
                       }
                     });
                   }
                   return deferred.promise;
                 },
-                message: ''
+                message: '"This variant type is either a parent or child of existing type."'
               }
             }
           }
