@@ -59,14 +59,33 @@
 
     vm.model = {};
 
+    var updateData = _.debounce(function () {
+      var filters = [{
+        field: 'display_name',
+        term: vm.model.filter
+      }];
+
+      var sorting = [{
+        field: vm.model.sort_by,
+        direction: vm.model.sort_order
+      }];
+
+      var limit = vm.model.limit;
+
+      fetchUsers(vm.count, vm.page, sorting, filters, limit, vm.model.role, vm.model.area_of_expertise)
+        .then(function(data){
+          angular.copy(data.result, vm.users);
+          vm.totalItems = data.total;
+        });
+    }, 250);
+
     vm.formFields = [
       {
         key: 'filter',
         type: 'input',
-        className: 'col-xs-3',
+        className: 'col-xs-2',
         templateOptions: {
           label: 'Find User',
-          colSpan: 3,
           required: false
         },
         watcher: {
@@ -76,13 +95,55 @@
         }
       },
       {
+        key: 'role',
+        type: 'select',
+        className: 'col-xs-2',
+        defaultValue: undefined,
+        templateOptions: {
+          label: 'Role',
+          required: false,
+          options: [
+            { value: undefined, name: '--' },
+            { value: 'curator', name: 'Curator'},
+            { value: 'moderator', name: 'Moderator' },
+            { value: 'editor', name: 'Editor' },
+            { value: 'admin', name: 'Administrator' }
+          ]
+        },
+        watcher: {
+          listener: function(field, newValue) {
+            updateData();
+          }
+        }
+      },
+      {
+        key: 'area_of_expertise',
+        type: 'select',
+        className: 'col-xs-2',
+        defaultValue: undefined,
+        templateOptions: {
+          label: 'Area of Expertise',
+          required: false,
+          options: [
+            { value: undefined, name: '--' },
+            { value: 'Patient Advocate', name: 'Patient Advocate'},
+            { value: 'Clinical Scientist', name: 'Clinical Scientist' },
+            { value: 'Research Scientist', name: 'Research Scientist' }
+          ]
+        },
+        watcher: {
+          listener: function(field, newValue) {
+            updateData();
+          }
+        }
+      },
+      {
         key: 'limit',
         type: 'select',
-        className: 'col-xs-3',
+        className: 'col-xs-2',
         defaultValue: 'all_time',
         templateOptions: {
           label: 'Limit To',
-          colSpan: 3,
           required: false,
           options: [
             // this_week, this_month, this_year, all_time
@@ -101,11 +162,10 @@
       {
         key: 'sort_by',
         type: 'select',
-        className: 'col-xs-3',
+        className: 'col-xs-2',
         defaultValue: 'most_active',
         templateOptions: {
           label: 'Sort By',
-          colSpan: 3,
           required: false,
           options: [
             // last_seen, recent_activity, join_date, most_active
@@ -127,11 +187,10 @@
       {
         key: 'sort_order',
         type: 'select',
-        className: 'col-xs-3',
+        className: 'col-xs-2',
         defaultValue: 'desc',
         templateOptions: {
           label: 'Sort Order',
-          colSpan: 3,
           required: false,
           options: [
             { name: 'Ascending', value: 'asc' },
@@ -152,27 +211,7 @@
       updateData();
     };
 
-    function updateData() {
-      var filters = [{
-        field: 'display_name',
-        term: vm.model.filter
-      }];
-
-      var sorting = [{
-        field: vm.model.sort_by,
-        direction: vm.model.sort_order
-      }];
-
-      var limit = vm.model.limit;
-
-      fetchUsers(vm.count, vm.page, sorting, filters, limit)
-        .then(function(data){
-          angular.copy(data.result, vm.users);
-          vm.totalItems = data.total;
-        });
-    }
-
-    function fetchUsers(count, page, sorting, filters, limit) {
+    function fetchUsers(count, page, sorting, filters, limit, role, area_of_expertise) {
       var request;
 
       request = {
@@ -180,8 +219,15 @@
         page: page
       };
 
+      if(role) {
+        request['filter[role]'] = role;
+      }
+      if(area_of_expertise) {
+        request['filter[area_of_expertise]'] = area_of_expertise;
+      }
+
       request['limit[' + sorting[0].field + ']'] = limit;
-      
+
       if (filters.length > 0) {
         _.each(filters, function(filter) {
           request['filter[' + filter.field + ']'] = filter.term;
