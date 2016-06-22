@@ -102,13 +102,11 @@
           entityName: 'Type',
           inputOptions: {
             type: 'typeahead',
-            wrapper: ['variantTypeNotice', 'validationMessages'],
-            modelOptions: {
-              updateOn: 'default select'
-            },
+            wrapper: ['bootstrapHasError', 'validationMessages'],
             templateOptions: {
               formatter: 'model[options.key].display_name',
               typeahead: 'item as item.display_name for item in to.data.typeaheadSearch($viewValue)',
+              editable: false,
               data: {
                 typeaheadSearch: function(val) {
                   var request = {
@@ -123,7 +121,6 @@
                       });
                     });
                 },
-                hasRedundancy: false,
                 redundancies: []
               }
             },
@@ -148,11 +145,13 @@
                         deferred.resolve('Variant type has no conflicts.'); // no relations, resolve.
                       } else {
                         var types = _.map(response, 'relationship');
-                        if(types.length === 1 && types[0] === 'is') {
-                          deferred.resolve(true); // only relationship is an 'is' relationship, resolve
+                        if(types.length === 1 && (types[0] === 'is' || types[0] === 'none')) {
+                          deferred.resolve(true); // only relationship is an 'is' or 'none' relationship, resolve
                         } else {
-                          scope.options.templateOptions.hasRedundancy = true;
-                          scope.options.templateOptions.redundancies = response;
+                          scope.options.templateOptions.data.redundancies = _.filter(response,
+                            function(r) {
+                              return r.relationship !== 'is' || r.relationship !== 'none';
+                            });
                           deferred.reject('Variant type conflicts with an existing type.');
                         }
                       }
@@ -160,7 +159,10 @@
                   }
                   return deferred.promise;
                 },
-                message: '"This variant type is either a parent or child of existing type."'
+                message: '$modelValue.display_name  + " is a "' +
+                ' + to.data.redundancies[0].relationship + ' +
+                '" of " ' +
+                '+ to.data.redundancies[0].variant_type.display_name + "."'
               }
             }
           }
