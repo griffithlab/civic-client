@@ -121,7 +121,7 @@
                       });
                     });
                 },
-                redundancy: String()
+                redundancy: {}
               }
             },
             asyncValidators: {
@@ -152,6 +152,14 @@
                           deferred.resolve(true); // only 'none' relationship, resolve
                         } else {
                           scope.to.data.redundancy = rel;
+                          if(rel.relationship === 'is') {
+                            scope.to.data.redundancyMsg = rel.variant_type.display_name  + ' is already specified as a variant type.';
+                          } else {
+                            scope.to.data.redundancyMsg = $modelValue.display_name  + ' is a ' +
+                              rel.relationship +
+                              ' of ' +
+                              rel.variant_type.display_name + '.'
+                          }
                           deferred.reject('Variant type conflicts with an existing type.');
                         }
                       }
@@ -160,10 +168,7 @@
                   }
                   return deferred.promise;
                 },
-                message: '$modelValue.display_name  + " is a "' +
-                ' + to.data.redundancy.relationship + ' +
-                '" of " ' +
-                '+ to.data.redundancy.variant_type.display_name + "."'
+                message: 'to.data.redundancyMsg'
               }
             }
           }
