@@ -10,7 +10,6 @@
                                           $location,
                                           CurrentUser,
                                           Security,
-                                          feed,
                                           _) {
 
     if(_.isUndefined($stateParams.category)) {
@@ -24,12 +23,17 @@
     vm.unRead = Security.currentUser.unread_notifications;
     vm.category = $stateParams.category;
 
+    vm.filters = {
+      showUnlinkable: true,
+      showUnread: true
+    }
+
     vm.pageChanged = function() {
       $location.search({page: vm.page, count: vm.count, category: vm.category});
       fetch();
     };
 
-    var fetch = function() {
+    var fetch = _.debounce(function() {
       var request = {
         count: vm.count,
         page: vm.page,
@@ -43,8 +47,11 @@
         request['filter[limit]'] = vm.filters.limit;
       }
 
+      request.show_unlinkable = vm.filters.showUnlinkable;
+      request.show_unreadable = vm.filters.showUnread;
+
       CurrentUser.getFeed(request)
-    };
+    }, 250);
 
     vm.filterFields = [
       {
@@ -80,6 +87,34 @@
             fetch();
           }
         }
+      },
+      {
+        key: 'showUnlinkable',
+        type: 'checkbox',
+        defaultValue: 'true',
+        templateOptions: {
+          label: 'Show Unlinkable',
+          required: false
+        },
+        watcher: {
+          listener: function() {
+            fetch();
+          }
+        }
+      },
+      {
+        key: 'showUnread',
+        type: 'checkbox',
+        defaultValue: 'true',
+        templateOptions: {
+          label: 'Show Unreadable',
+          required: false
+        },
+        watcher: {
+          listener: function() {
+            fetch();
+          }
+        }
       }
     ];
 
@@ -93,6 +128,7 @@
         vm.totalItems = Number(meta.total_count);
         vm.totalPages = Number(meta.total_pages);
         vm.category = $stateParams.category;
+        vm.showUnlinkable =
 
         vm.unread = meta.unread;
         vm.totalUnread = _.reduce(vm.unread, function(result, value, key) {
