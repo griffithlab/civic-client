@@ -28,6 +28,13 @@
     });
 
     formlyConfigProvider.setWrapper({
+      name: 'simpleHasError',
+      template: '<div ng-class="{\'has-error\': showError}">' +
+      '<formly-transclude></formly-transclude>' +
+      '</div>'
+    });
+
+    formlyConfigProvider.setWrapper({
       name: 'mentioCommentMenus',
       templateUrl: 'components/forms/fieldWrappers/mentioCommentMenus.tpl.html'
     });

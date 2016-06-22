@@ -112,9 +112,10 @@
           method: 'GET',
           url: '/api/variant_types/relationships',
           params: {
-            variant_id: '@variant_id',
-            variant_type_id: '@variant_type_id'
+            new_variant_type_id: '@new_variant_type_id',
+            existing_variant_type_ids: '@existing_variant_type_ids'
           },
+          paramSerializer: '$httpParamSerializerJQLike',
           isArray: true
         }
       }
@@ -272,6 +273,7 @@
         });
     }
     function queryVariantTypeRelationships(reqObj) {
+      //reqObj.existing_variant_type_ids = JSON.stringify(reqObj.existing_variant_type_ids);
       return VariantsResource.queryVariantTypeRelationships(reqObj).$promise
         .then(function(response) {
           return response.$promise;

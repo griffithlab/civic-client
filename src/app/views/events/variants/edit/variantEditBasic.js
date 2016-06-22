@@ -102,7 +102,7 @@
           entityName: 'Type',
           inputOptions: {
             type: 'typeahead',
-            wrapper: ['bootstrapHasError', 'validationMessages'],
+            wrapper: ['simpleHasError', 'validationMessages'],
             templateOptions: {
               formatter: 'model[options.key].display_name',
               typeahead: 'item as item.display_name for item in to.data.typeaheadSearch($viewValue)',
@@ -121,48 +121,49 @@
                       });
                     });
                 },
-                redundancies: []
+                redundancy: String()
               }
             },
             asyncValidators: {
               conflict: {
                 expression: function($viewValue, $modelValue, scope) {
-                  // if $modelValue empty, return true
-                  // else query variant relationships
-                  // then
-                  // if empty array, resolve
-                  // if array contains only 'is' relationships, resolve
-                  // if array contains parent or child relationships, reject
                   var deferred = $q.defer();
-                  if(_.isEmpty($modelValue)) {
+                  if(_.isEmpty($modelValue) || scope.model.length < 2) {
                     deferred.resolve(true); // empty model value, no need to verify
                   } else {
+                    // get existing IDs
+                    var existing = _(scope.model)
+                      .map('id')
+                      .compact()
+                      .value();
+
+                    // pull the current Id from existing, assign it to newId
+                    var newId = _.pullAt(existing, _.indexOf(existing, $modelValue.id));
+
                     Variants.queryVariantTypeRelationships({
-                      variant_id: vm.variant.id,
-                      variant_type_id: $modelValue.id
+                      existing_variant_type_ids: existing,
+                      new_variant_type_id: newId[0]
                     }).then(function (response) {
-                      if(_.isEmpty(response)) {
+                      if (_.isEmpty(response)) {
                         deferred.resolve('Variant type has no conflicts.'); // no relations, resolve.
                       } else {
-                        var types = _.map(response, 'relationship');
-                        if(types.length === 1 && (types[0] === 'is' || types[0] === 'none')) {
-                          deferred.resolve(true); // only relationship is an 'is' or 'none' relationship, resolve
+                        var rel = response[0];
+                        if (rel.relationship === 'none') {
+                          deferred.resolve(true); // only 'none' relationship, resolve
                         } else {
-                          scope.options.templateOptions.data.redundancies = _.filter(response,
-                            function(r) {
-                              return r.relationship !== 'is' || r.relationship !== 'none';
-                            });
+                          scope.to.data.redundancy = rel;
                           deferred.reject('Variant type conflicts with an existing type.');
                         }
                       }
                     });
+
                   }
                   return deferred.promise;
                 },
                 message: '$modelValue.display_name  + " is a "' +
-                ' + to.data.redundancies[0].relationship + ' +
+                ' + to.data.redundancy.relationship + ' +
                 '" of " ' +
-                '+ to.data.redundancies[0].variant_type.display_name + "."'
+                '+ to.data.redundancy.variant_type.display_name + "."'
               }
             }
           }
