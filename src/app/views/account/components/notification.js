@@ -87,7 +87,9 @@
         stateParams[entityId] = obj.id;
       });
 
-      $state.go(subjectStates[notification.event.subject_type]+stateExtension[notification.event.event_type], stateParams);
+      if (!notification.event.unlinkable) {
+        $state.go(subjectStates[notification.event.subject_type]+stateExtension[notification.event.event_type], stateParams);
+      }
 
     };
 

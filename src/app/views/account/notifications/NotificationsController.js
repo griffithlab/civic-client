@@ -24,9 +24,11 @@
     vm.category = $stateParams.category;
 
     vm.filters = {
+      name: String(),
+      limit: Number(),
       showUnlinkable: true,
       showUnread: true
-    }
+    };
 
     vm.pageChanged = function() {
       $location.search({page: vm.page, count: vm.count, category: vm.category});
@@ -153,26 +155,6 @@
           });
         });
 
-        // vm.categories = [
-        //   {
-        //     name: 'All',
-        //     shortName: 'all',
-        //     state: 'account.notifications({category:"all", page: vm.page, count: vm.count })',
-        //     count: vm.totalUnread
-        //   },
-        //   {
-        //     name: 'Mentions',
-        //     shortName: 'mentions',
-        //     state: 'account.notifications({category:"mentions", page: vm.page, count: vm.count })',
-        //     count: vm.unread.mentions
-        //   },
-        //   {
-        //     name: 'Subscribed Events',
-        //     shortName: 'subscribed_events',
-        //     state: 'account.notifications({category:"subscribed_events", page: vm.page, count: vm.count })',
-        //     count: vm.unread.subscribed_events
-        //   }
-        // ];
       }, true);
 
     vm.markAllAsRead = function() {

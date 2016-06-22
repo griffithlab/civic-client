@@ -1,8 +1,8 @@
-<div class="notification">
+<div class="notification" ng-class="{unlinkable: notification.event.unlinkable}">
   <div class="content"
        ng-click="vm.eventClick(notification)"
        ng-class="{ hover: mouseover, dark: theme === 'dark', light: theme === 'light', unseen: vm.seen === false }"
-       ng-mouseover="mouseover=true"
+       ng-mouseover="notification.event.unlinkable ? mouseover=false : mouseover=true"
        ng-mouseleave="mouseover=false">
 
 
@@ -51,6 +51,7 @@
       <strong>
         <span ng-bind="vm.entityName">GENE / VARIANT / EVIDENCE</span>
       </strong>
+      <span ng-show="notification.event.unlinkable" class="small"><em>(entity unlinkable, no longer exists)</em></span>
     </div>
   </div>
   <a
