@@ -19,6 +19,7 @@
                                       $stateParams,
                                       $document,
                                       $state,
+                                      $q,
                                       Security,
                                       VariantRevisions,
                                       Variants,
@@ -27,7 +28,6 @@
                                       formConfig,
                                       _) {
     var variantModel, vm;
-
     vm = $scope.vm = {};
     variantModel = vm.variantModel = Variants;
 
@@ -102,24 +102,73 @@
           entityName: 'Type',
           inputOptions: {
             type: 'typeahead',
-            wrapper: null,
+            wrapper: ['simpleHasError', 'validationMessages'],
             templateOptions: {
               formatter: 'model[options.key].display_name',
-              typeahead: 'item as item.display_name for item in options.data.typeaheadSearch($viewValue)'
-            },
-            data: {
-              typeaheadSearch: function(val) {
-                var request = {
-                  count: 5,
-                  page: 0,
-                  name: val
-                };
-                return Variants.queryVariantTypes(request)
-                  .then(function(response) {
-                    return _.map(response.records, function(event) {
-                      return event;
+              typeahead: 'item as item.display_name for item in to.data.typeaheadSearch($viewValue)',
+              editable: false,
+              data: {
+                typeaheadSearch: function(val) {
+                  var request = {
+                    count: 5,
+                    page: 0,
+                    name: val
+                  };
+                  return Variants.queryVariantTypes(request)
+                    .then(function(response) {
+                      return _.map(response.records, function(event) {
+                        return event;
+                      });
                     });
-                  });
+                },
+                redundancy: {}
+              }
+            },
+            asyncValidators: {
+              conflict: {
+                expression: function($viewValue, $modelValue, scope) {
+                  var deferred = $q.defer();
+                  if(_.isEmpty($modelValue) || scope.model.length < 2) {
+                    deferred.resolve(true); // empty model value, no need to verify
+                  } else {
+                    // get existing IDs
+                    var existing = _(scope.model)
+                      .map('id')
+                      .compact()
+                      .value();
+
+                    // pull the current Id from existing, assign it to newId
+                    var newId = _.pullAt(existing, _.indexOf(existing, $modelValue.id));
+
+                    Variants.queryVariantTypeRelationships({
+                      existing_variant_type_ids: existing,
+                      new_variant_type_id: newId[0]
+                    }).then(function (response) {
+                      if (_.isEmpty(response)) {
+                        deferred.resolve('Variant type has no conflicts.'); // no relations, resolve.
+                      } else {
+                        var rel = response[0];
+                        if (rel.relationship === 'none') {
+                          deferred.resolve(true); // only 'none' relationship, resolve
+                        } else {
+                          scope.to.data.redundancy = rel;
+                          if(rel.relationship === 'is') {
+                            scope.to.data.redundancyMsg = rel.variant_type.display_name  + ' is already specified as a variant type.';
+                          } else {
+                            scope.to.data.redundancyMsg = $modelValue.display_name  + ' is a ' +
+                              rel.relationship +
+                              ' of ' +
+                              rel.variant_type.display_name + '.'
+                          }
+                          deferred.reject('Variant type conflicts with an existing type.');
+                        }
+                      }
+                    });
+
+                  }
+                  return deferred.promise;
+                },
+                message: 'to.data.redundancyMsg'
               }
             }
           }

@@ -28,6 +28,13 @@
     });
 
     formlyConfigProvider.setWrapper({
+      name: 'simpleHasError',
+      template: '<div ng-class="{\'has-error\': showError}">' +
+      '<formly-transclude></formly-transclude>' +
+      '</div>'
+    });
+
+    formlyConfigProvider.setWrapper({
       name: 'mentioCommentMenus',
       templateUrl: 'components/forms/fieldWrappers/mentioCommentMenus.tpl.html'
     });
@@ -104,6 +111,14 @@
       template: [
         '<formly-transclude></formly-transclude>',
         '<span class="small">Citation: {{ to.data.description }}</span>'
+      ].join(' ')
+    });
+
+    formlyConfigProvider.setWrapper({
+      name: 'variantTypeNotice',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small" ng-if="to.data.notice">.</span>'
       ].join(' ')
     });
 

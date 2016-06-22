@@ -107,6 +107,16 @@
             page: '@page'
           },
           cache: false
+        },
+        queryVariantTypeRelationships: {
+          method: 'GET',
+          url: '/api/variant_types/relationships',
+          params: {
+            new_variant_type_id: '@new_variant_type_id',
+            existing_variant_type_ids: '@existing_variant_type_ids'
+          },
+          paramSerializer: '$httpParamSerializerJQLike',
+          isArray: true
         }
       }
     );
@@ -151,7 +161,8 @@
       updateComment: updateComment,
       deleteComment: deleteComment,
 
-      queryVariantTypes: queryVariantTypes
+      queryVariantTypes: queryVariantTypes,
+      queryVariantTypeRelationships: queryVariantTypeRelationships
     };
 
     function initBase(variantId) {
@@ -257,6 +268,13 @@
     }
     function queryVariantTypes(reqObj) {
       return VariantsResource.queryVariantTypes(reqObj).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
+    function queryVariantTypeRelationships(reqObj) {
+      //reqObj.existing_variant_type_ids = JSON.stringify(reqObj.existing_variant_type_ids);
+      return VariantsResource.queryVariantTypeRelationships(reqObj).$promise
         .then(function(response) {
           return response.$promise;
         });
