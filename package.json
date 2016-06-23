@@ -1,6 +1,7 @@
 {
   "name": "civicClient",
   "version": "0.0.0",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/genome/civic-client"
