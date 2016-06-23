@@ -11,14 +11,14 @@
         <span class="username">{{currentUser.display_name}}</span>
       </button>
       <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
-        <span ng-bind="totalNotifications" class="badge small"></span>
+        <span ng-bind="totalNotifications" class="badge small" ng-if="hasNotifications"></span>
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-right" role="menu">
         <li ng-if="hasNotifications" class="dropdown-header">Notifications<br/>
         </li>
-        <li ng-repeat="(label, count) in currentUser.unread_notifications"
-            ng-if="count > 0">
+        <li ng-if="count > 0"
+            ng-repeat="(label, count) in currentUser.unread_notifications">
           <a ui-sref="account.notifications({category: '{{label}}'})">
             <span ng-bind="label | keyToLabel">type</span>
             <span ng-bind="count" class="badge">count</span>

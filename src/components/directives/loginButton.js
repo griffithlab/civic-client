@@ -30,7 +30,7 @@
             $scope.totalNotifications = _.reduce(currentUser.unread_notifications, function (acc, value) {
               return acc + value;
             });
-            $scope.hasNotifications = _.keys(currentUser.unread_notifications).length > 0;
+            $scope.hasNotifications = $scope.totalNotifications > 0;
           }
         });
 
