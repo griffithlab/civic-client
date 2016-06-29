@@ -89,7 +89,10 @@
           length: {
             expression: function(viewValue, modelValue, scope) {
               var value = viewValue || modelValue;
-              return value.length >= scope.to.minimum_length;
+              if(_.isUndefined(value)) { return false }
+              else {
+                return value.length >= scope.to.minimum_length;
+              }
             },
             message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
           }
@@ -103,6 +106,7 @@
         console.log('comment submitted.');
         resetModel();
         vm.previewText = '';
+        vm.text = '';
         vm.commentMessage = '';
         vm.mode = 'edit';
       }, function() {
