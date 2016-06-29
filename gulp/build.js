@@ -186,6 +186,6 @@ gulp.task('build', ['e2e:build'], function(){
 
   return gulp.src('dist/scripts/app*.js')
     .pipe($.replace(/window\.apiCheck\.disabled=![01]/g, 'window.apiCheck.disabled=!0'))
-    .pipe($.replace(/\.debugInfoEnabled\(![01]\)/g, '.debugInfoEnabled(!1);'))
+    .pipe($.replace(/\.debugInfoEnabled\(![01]\)/g, '.debugInfoEnabled(!1)'))
     .pipe(gulp.dest('dist/scripts'))
 });
