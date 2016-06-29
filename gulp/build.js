@@ -55,7 +55,6 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
   var htmlFilter = $.filter('*.html', {restore: true});
   var jsFilter = $.filter('**/*.js', {restore: true});
   var cssFilter = $.filter('**/*.css', {restore: true});
-  $.gulpif = require('gulp-if');
 
   return gulp.src('.tmp/*.html')
     .pipe($.inject(
@@ -97,7 +96,7 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
     }))
 
     // init asset revisioning with gulp-rev on each block
-    .pipe($.gulpif("!*.html",$.rev()))
+    .pipe($.if("!*.html",$.rev()))
 
     // pluck javascript block, store everything else
     .pipe(jsFilter)
@@ -181,4 +180,12 @@ gulp.task('clean', function (done) {
   $.del(['.tmp', 'dist'], done);
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'misc']);
+gulp.task('e2e:build', ['html', 'images', 'fonts', 'misc']);
+
+gulp.task('build', ['e2e:build'], function(){
+
+  return gulp.src('dist/scripts/app*.js')
+    .pipe($.replace(/window\.apiCheck\.disabled=![01]/g, 'window.apiCheck.disabled=!0'))
+    .pipe($.replace(/\.debugInfoEnabled\(![01]\)/g, '.debugInfoEnabled(!1);'))
+    .pipe(gulp.dest('dist/scripts'))
+});

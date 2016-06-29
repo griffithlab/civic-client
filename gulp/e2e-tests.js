@@ -15,7 +15,7 @@ gulp.task('test:e2e', ['serve'], function() {
     .once('end', function() { process.exit(); });
 });
 
-gulp.task('test:e2e:dist', ['serve:dist'], function() {
+gulp.task('test:e2e:dist', ['serve:e2e-dist-static'], function() {
   gulp.src(['test/e2e/**/*.spec.js'])
     .pipe(angularProtractor({
       'configFile': 'test/protractor.conf.js',
