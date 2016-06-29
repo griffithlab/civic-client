@@ -25,6 +25,7 @@
                                       Variants,
                                       VariantHistory,
                                       VariantsViewOptions,
+                                      Publications,
                                       formConfig,
                                       _) {
     var variantModel, vm;
@@ -45,6 +46,7 @@
     vm.variantEdit = angular.copy(vm.variant);
 
     vm.variantEdit.comment = { title: 'VARIANT ' + vm.variant.name + ' Suggested Revision', text:'' };
+    vm.variantEdit.source_ids = _.pluck(vm.variant.sources, 'pubmed_id');
     vm.myVariantInfo = variantModel.data.myVariantInfo;
     vm.variants = variantModel.data.variants;
     vm.variantGroups = variantModel.data.variantGroups;
@@ -91,6 +93,61 @@
           value: 'vm.variant.description',
           minLength: 32,
           helpText: 'User-defined summary of the clinical relevance of this Variant. The Variant Summary should be a synthesis of the existing Evidence Statements for this variant. Basic information on recurrence rates and biological/functional impact of the Variant may be included, but the focus should be on the clinical impact (i.e. predictive, prognostic, and diagnostic value).'
+        }
+      },
+      {
+        key: 'source_ids',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Sources',
+          helpText: 'Please specify the Pubmed IDs of any sources used as references in the Variant Summary.',
+          entityName: 'Source',
+          inputOptions: {
+            type: 'publication-multi',
+            templateOptions: {
+              label: 'Pubmed Id',
+              minLength: 1,
+              required: true,
+              data: {
+                description: '--'
+              }
+            },
+            modelOptions: {
+              updateOn: 'default blur',
+              allowInvalid: false,
+              debounce: {
+                default: 300,
+                blur: 0
+              }
+            },
+            validators: {
+              validPubmedId: {
+                expression: function($viewValue, $modelValue, scope) {
+                  if ($viewValue.length > 0) {
+                    var deferred = $q.defer();
+                    scope.options.templateOptions.loading = true;
+                    Publications.verify($viewValue).then(
+                      function (response) {
+                        scope.options.templateOptions.loading = false;
+                        scope.options.templateOptions.data.description = response.description;
+                        deferred.resolve(response);
+                      },
+                      function (error) {
+                        scope.options.templateOptions.loading = false;
+                        scope.options.templateOptions.data.description = '--';
+                        deferred.reject(error);
+                      }
+                    );
+                    return deferred.promise;
+                  } else {
+                    scope.options.templateOptions.data.description = '--';
+                    return true;
+                  }
+                },
+                message: '"This does not appear to be a valid Pubmed ID."'
+              }
+            }
+          }
         }
       },
       {

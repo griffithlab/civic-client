@@ -18,6 +18,7 @@
   function VariantGroupEditBasicController($scope,
                                            $stateParams,
                                            $state,
+                                           $q,
                                            Security,
                                            Datatables,
                                            VariantGroupRevisions,
@@ -25,6 +26,7 @@
                                            VariantGroupHistory,
                                            VariantGroupsViewOptions,
                                            TypeAheadResults,
+                                           Publications,
                                            formConfig,
                                            _) {
     var variantGroupModel, vm;
@@ -45,6 +47,7 @@
     vm.variantGroupHistory = VariantGroupHistory;
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
+    vm.variantGroupEdit.source_ids = _.pluck(vm.variantGroup.sources, 'pubmed_id');
     vm.variantGroupEdit.variantsEdit = _.map(vm.variantGroupEdit.variants, function(variant) {
       return { name: variant.entrez_name + ' - ' + variant.name, id: variant.id };
     });
@@ -84,6 +87,61 @@
           value: 'vm.variantGroup.description',
           focus: true,
           minLength: 32
+        }
+      },
+      {
+        key: 'source_ids',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Sources',
+          helpText: 'Please specify the Pubmed IDs of any sources used as references in the Variant Group Summary.',
+          entityName: 'Source',
+          inputOptions: {
+            type: 'publication-multi',
+            templateOptions: {
+              label: 'Pubmed Id',
+              minLength: 1,
+              required: true,
+              data: {
+                description: '--'
+              }
+            },
+            modelOptions: {
+              updateOn: 'default blur',
+              allowInvalid: false,
+              debounce: {
+                default: 300,
+                blur: 0
+              }
+            },
+            validators: {
+              validPubmedId: {
+                expression: function($viewValue, $modelValue, scope) {
+                  if ($viewValue.length > 0) {
+                    var deferred = $q.defer();
+                    scope.options.templateOptions.loading = true;
+                    Publications.verify($viewValue).then(
+                      function (response) {
+                        scope.options.templateOptions.loading = false;
+                        scope.options.templateOptions.data.description = response.description;
+                        deferred.resolve(response);
+                      },
+                      function (error) {
+                        scope.options.templateOptions.loading = false;
+                        scope.options.templateOptions.data.description = '--';
+                        deferred.reject(error);
+                      }
+                    );
+                    return deferred.promise;
+                  } else {
+                    scope.options.templateOptions.data.description = '--';
+                    return true;
+                  }
+                },
+                message: '"This does not appear to be a valid Pubmed ID."'
+              }
+            }
+          }
         }
       },
       {
