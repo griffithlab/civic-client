@@ -6,7 +6,7 @@ var gulp = require('gulp');
 gulp.task('wiredep', function () {
   var wiredep = require('wiredep').stream;
 
-  return gulp.src('src/index.html')
+  return gulp.src('src/{index,404}.html')
     .pipe(wiredep({
       directory: 'bower_components',
       exclude: [
