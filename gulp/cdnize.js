@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var cdnizer = require('gulp-cdnizer');
 
 gulp.task('cdnize', ['wiredep'], function () {
-  return gulp.src('src/*.html')
+  return gulp.src('.tmp/*.html')
   .pipe(cdnizer({
     //configure cdnizer's version and naming settings
     allowRev: false, //stricter version matching
