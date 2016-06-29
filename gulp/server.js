@@ -46,10 +46,14 @@ gulp.task('serve:dist', ['build'], function () {
   connectInit(['dist', path.resolve('./')], false);
 });
 
-gulp.task('serve:e2e', ['build'], function () {
+gulp.task('serve:e2e', ['watch'], function () {
   connectInit(['src', '.tmp', path.resolve('./')], false);
 });
 
-gulp.task('serve:e2e-dist', ['build', 'watch'], function () {
+gulp.task('serve:e2e-dist', ['e2e:build', 'watch'], function () {
   connectInit(['dist', path.resolve('./')], true);
+});
+
+gulp.task('serve:e2e-dist-static', ['e2e:build'], function () {
+  connectInit(['dist', path.resolve('./')], false);
 });
