@@ -40,11 +40,12 @@ function connectInit(baseDir, livereload) {
   });
 }
 
+
 gulp.task('serve', ['images', 'fonts', 'watch'], function () {
   connectInit([
-    './.tmp',
-    './src',
-    './docs',
+    '.tmp',
+    'src',
+    'docs',
     path.resolve('./') // include root (kludge necessary to make bower_components available where index.html expects them)
   ], true);
 });
