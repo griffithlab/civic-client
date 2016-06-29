@@ -26,8 +26,8 @@
     vm.filters = {
       name: String(),
       limit: Number(),
-      showUnlinkable: true,
-      showUnread: true
+      showUnseen: true,
+      showUnlinkable: true
     };
 
     vm.pageChanged = function() {
@@ -49,8 +49,8 @@
         request['filter[limit]'] = vm.filters.limit;
       }
 
-      request.show_unlinkable = vm.filters.showUnlinkable;
-      request.show_unreadable = vm.filters.showUnread;
+      request['filter[unlinkable]'] = vm.filters.showUnlinkable;
+      request['filter[unread]'] = vm.filters.showUnseen;
 
       CurrentUser.getFeed(request)
     }, 250);
@@ -105,11 +105,11 @@
         }
       },
       {
-        key: 'showUnread',
+        key: 'showUnseen',
         type: 'checkbox',
         defaultValue: 'true',
         templateOptions: {
-          label: 'Show Unreadable',
+          label: 'Show Unseen',
           required: false
         },
         watcher: {
@@ -130,7 +130,6 @@
         vm.totalItems = Number(meta.total_count);
         vm.totalPages = Number(meta.total_pages);
         vm.category = $stateParams.category;
-        vm.showUnlinkable =
 
         vm.unread = meta.unread;
         vm.totalUnread = _.reduce(vm.unread, function(result, value, key) {
