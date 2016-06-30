@@ -46,7 +46,7 @@
     vm.variantEdit = angular.copy(vm.variant);
 
     vm.variantEdit.comment = { title: 'VARIANT ' + vm.variant.name + ' Suggested Revision', text:'' };
-    vm.variantEdit.source_ids = _.pluck(vm.variant.sources, 'pubmed_id');
+    vm.variantEdit.sources = _.pluck(vm.variant.sources, 'pubmed_id');
     vm.myVariantInfo = variantModel.data.myVariantInfo;
     vm.variants = variantModel.data.variants;
     vm.variantGroups = variantModel.data.variantGroups;
@@ -96,7 +96,7 @@
         }
       },
       {
-        key: 'source_ids',
+        key: 'sources',
         type: 'multiInput',
         templateOptions: {
           label: 'Sources',

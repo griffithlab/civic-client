@@ -20,6 +20,14 @@
           </div>
         </div>
       </div>
+      <div ng-if="variant.sources.length > 0">
+        <h5>Sources:</h5>
+        <ul class="sources">
+          <li ng-repeat="source in variant.sources">
+            <a href="{{ source.source_url }}"><span class="small" ng-bind="source.citation"></span></a>
+          </li>
+        </ul>
+      </div>
       <div class="variant-types">
         <p>
           <strong>Variant Type(s):</strong>
