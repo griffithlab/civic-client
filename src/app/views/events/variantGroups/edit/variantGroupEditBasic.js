@@ -47,7 +47,7 @@
     vm.variantGroupHistory = VariantGroupHistory;
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
-    vm.variantGroupEdit.source_ids = _.pluck(vm.variantGroup.sources, 'pubmed_id');
+    vm.variantGroupEdit.sources = _.pluck(vm.variantGroup.sources, 'pubmed_id');
     vm.variantGroupEdit.variantsEdit = _.map(vm.variantGroupEdit.variants, function(variant) {
       return { name: variant.entrez_name + ' - ' + variant.name, id: variant.id };
     });
@@ -90,7 +90,7 @@
         }
       },
       {
-        key: 'source_ids',
+        key: 'sources',
         type: 'multiInput',
         templateOptions: {
           label: 'Sources',
