@@ -26,8 +26,8 @@
     vm.filters = {
       name: String(),
       limit: Number(),
-      showUnseen: true,
-      showUnlinkable: true
+      showUnseen: false,
+      showUnlinkable: false
     };
 
     vm.pageChanged = function() {
@@ -109,7 +109,7 @@
         type: 'checkbox',
         defaultValue: 'true',
         templateOptions: {
-          label: 'Show Unseen',
+          label: 'Show Read',
           required: false
         },
         watcher: {
