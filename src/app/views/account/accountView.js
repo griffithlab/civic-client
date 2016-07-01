@@ -30,6 +30,8 @@
             $stateParams.page = _.isUndefined($stateParams.page) ? 1 : $stateParams.page;
             $stateParams.count = _.isUndefined($stateParams.count) ? 10 : $stateParams.count;
             $stateParams.category = _.isUndefined($stateParams.category) ? 'all' : $stateParams.category;
+            $stateParams.show_unlinkable = false;
+            $stateParams.show_read = false;
             return CurrentUser.getFeed($stateParams);
           }
         },

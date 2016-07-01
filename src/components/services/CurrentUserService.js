@@ -126,7 +126,7 @@
 
     function markAllAsRead() {
       var t = new Date().toISOString();
-      return CurrentUserResource.markFeed({ upto: t, seen: true }).$promise
+      return CurrentUserResource.markFeed({ upto: t, read: true }).$promise
         .then(function(response) {
           feed._meta.unread = response._meta.unread;
           var updated= response.records;
@@ -134,7 +134,7 @@
 
           _.forEach(feed.records, function(notification) {
             if(_.includes(updatedIds, notification.id)) {
-              notification.seen = true;
+              notification.read = true;
             }
           });
           Security.reloadCurrentUser();
@@ -142,8 +142,8 @@
         })
     }
 
-    function markFeed(ids, seen) {
-      return CurrentUserResource.markFeed({notification_ids: ids, seen: seen }).$promise
+    function markFeed(ids, read) {
+      return CurrentUserResource.markFeed({notification_ids: ids, read: read }).$promise
         .then(function(response) {
           feed._meta.unread = response._meta.unread;
           var updated= response.records;
@@ -151,7 +151,7 @@
 
           _.forEach(feed.records, function(notification) {
             if(_.includes(updatedIds, notification.id)) {
-              notification.seen = seen;
+              notification.read = read;
             }
           });
           Security.reloadCurrentUser();
