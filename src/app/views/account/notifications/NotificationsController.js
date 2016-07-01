@@ -26,7 +26,7 @@
     vm.filters = {
       name: String(),
       limit: Number(),
-      showUnseen: false,
+      showRead: false,
       showUnlinkable: false
     };
 
@@ -39,7 +39,9 @@
       var request = {
         count: vm.count,
         page: vm.page,
-        category: vm.category
+        category: vm.category,
+        show_unread: vm.filters.showUnread,
+        show_unlinkable: vm.filters.showUnlinkable
       };
 
       if(!_.isEmpty(vm.filters.name)) {
@@ -48,9 +50,6 @@
       if(!_.isEmpty(vm.filters.limit)) {
         request['filter[limit]'] = vm.filters.limit;
       }
-
-      request['filter[unlinkable]'] = vm.filters.showUnlinkable;
-      request['filter[unread]'] = vm.filters.showUnseen;
 
       CurrentUser.getFeed(request)
     }, 250);
@@ -93,7 +92,6 @@
       {
         key: 'showUnlinkable',
         type: 'checkbox',
-        defaultValue: 'true',
         templateOptions: {
           label: 'Show Unlinkable',
           required: false
@@ -105,9 +103,8 @@
         }
       },
       {
-        key: 'showUnseen',
+        key: 'showUnread',
         type: 'checkbox',
-        defaultValue: 'true',
         templateOptions: {
           label: 'Show Read',
           required: false

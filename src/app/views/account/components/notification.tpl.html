@@ -1,7 +1,7 @@
 <div class="notification" ng-class="{unlinkable: notification.event.unlinkable}">
   <div class="content"
        ng-click="vm.eventClick(notification)"
-       ng-class="{ hover: mouseover, dark: theme === 'dark', light: theme === 'light', unseen: vm.seen === false }"
+       ng-class="{ hover: mouseover, dark: theme === 'dark', light: theme === 'light', unread: vm.read === false }"
        ng-mouseover="notification.event.unlinkable ? mouseover=false : mouseover=true"
        ng-mouseleave="mouseover=false">
 
@@ -56,10 +56,10 @@
   </div>
   <a
     class="mark-as-seen btn btn-xs btn-primary"
-    ng-click="vm.markAsSeen()"
-    ng-hide="notification.seen">Mark As Seen</a>
+    ng-click="vm.markAsRead()"
+    ng-hide="notification.read">Mark As Read</a>
   <a
     class="mark-as-seen btn btn-xs btn-default"
-    ng-click="vm.markAsUnseen()"
-    ng-show="notification.seen">Mark As Unseen</a>
+    ng-click="vm.markAsUnread()"
+    ng-show="notification.read">Mark As Unread</a>
 </div>
