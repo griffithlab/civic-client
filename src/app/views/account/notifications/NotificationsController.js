@@ -40,7 +40,7 @@
         count: vm.count,
         page: vm.page,
         category: vm.category,
-        show_unread: vm.filters.showUnread,
+        show_read: vm.filters.showRead,
         show_unlinkable: vm.filters.showUnlinkable
       };
 
@@ -52,7 +52,7 @@
       }
 
       CurrentUser.getFeed(request)
-    }, 250);
+    }, 250); // angular-formly calls the watcher for each field on init, need to throttle here
 
     vm.filterFields = [
       {
@@ -103,7 +103,7 @@
         }
       },
       {
-        key: 'showUnread',
+        key: 'showRead',
         type: 'checkbox',
         templateOptions: {
           label: 'Show Read',
