@@ -17,7 +17,11 @@
   }
 
   // @ngInject
-  function notificationController($scope, $state, CurrentUser, _) {
+  function notificationController($scope,
+                                  $state,
+                                  $stateParams,
+                                  CurrentUser,
+                                  _) {
     console.log('notificationController called.');
     var vm = $scope.vm = {};
     var params = $scope.notification.event.state_params;
@@ -31,6 +35,9 @@
     if(_.has(params, 'evidence_item')) {vm.entityNames.push(params.evidence_item.name);}
 
     vm.entityName = _.compact(vm.entityNames).join(' / ');
+
+    console.log('id:' +  $scope.notification.id);
+    console.log('seen: ' + $scope.notification.seen);
 
     vm.eventClick = function(notification) {
       var subjectStates = {
@@ -94,11 +101,11 @@
     };
 
     vm.markAsRead = function() {
-      CurrentUser.markFeed([$scope.notification.id], true);
+      CurrentUser.markFeed($stateParams, [$scope.notification.id], true);
     };
 
     vm.markAsUnread = function() {
-      CurrentUser.markFeed([$scope.notification.id], false);
+      CurrentUser.markFeed($stateParams, [$scope.notification.id], false);
     };
   }
 })();

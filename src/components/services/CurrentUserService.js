@@ -124,36 +124,20 @@
         });
     }
 
-    function markAllAsRead() {
+    function markAllAsRead(params) {
       var t = new Date().toISOString();
-      return CurrentUserResource.markFeed({ upto: t, read: true }).$promise
+      return CurrentUserResource.markFeed(_.merge(params, { upto: t, read: true })).$promise
         .then(function(response) {
-          feed._meta.unread = response._meta.unread;
-          var updated= response.records;
-          var updatedIds = _.map(updated, 'id');
-
-          _.forEach(feed.records, function(notification) {
-            if(_.includes(updatedIds, notification.id)) {
-              notification.read = true;
-            }
-          });
+          angular.copy(response, feed);
           Security.reloadCurrentUser();
           return response.$promise;
         })
     }
 
-    function markFeed(ids, read) {
-      return CurrentUserResource.markFeed({notification_ids: ids, read: read }).$promise
+    function markFeed(params, ids, read) {
+      return CurrentUserResource.markFeed(_.merge(params, {notification_ids: ids, read: read })).$promise
         .then(function(response) {
-          feed._meta.unread = response._meta.unread;
-          var updated= response.records;
-          var updatedIds = _.map(updated, 'id');
-
-          _.forEach(feed.records, function(notification) {
-            if(_.includes(updatedIds, notification.id)) {
-              notification.read = read;
-            }
-          });
+          angular.copy(response, feed);
           Security.reloadCurrentUser();
           return response.$promise;
         })

@@ -154,7 +154,7 @@
       }, true);
 
     vm.markAllAsRead = function() {
-      CurrentUser.markAllAsRead().then(function() {
+      CurrentUser.markAllAsRead($stateParams).then(function() {
         console.log('records marked as seen');
       });
     }
