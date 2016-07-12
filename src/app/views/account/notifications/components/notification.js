@@ -11,7 +11,7 @@
         notification: '=',
         theme: '='
       },
-      templateUrl: 'app/views/account/components/notification.tpl.html',
+      templateUrl: 'app/views/account/notifications/components/notification.tpl.html',
       controller: notificationController
     };
   }

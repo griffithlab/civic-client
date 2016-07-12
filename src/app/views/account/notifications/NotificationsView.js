@@ -1,21 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.account')
-    .config(AccountView);
+    .config(NotificationsView);
 
   // @ngInject
-  function AccountView($stateProvider) {
+  function NotificationsView($stateProvider) {
     $stateProvider
-      .state('account', {
-        abstract: true,
-        url: '/account',
-        controller: 'AccountViewController',
-        templateUrl: 'app/views/account/account.tpl.html',
-        data: {
-          titleExp: '"My Account"',
-          navMode: 'sub'
-        }
-      })
       .state('account.notifications', {
         url: '/notifications?category?page?count',
         templateUrl: 'app/views/account/notifications/notifications.tpl.html',
@@ -36,22 +26,6 @@
           }
         },
         controller: 'AccountNotificationsController'
-      })
-      .state('account.profile', {
-        url: '/profile',
-        templateUrl: 'app/views/account/profile.tpl.html',
-        data: {
-          titleExp: '"Account Profile"',
-          navMode: 'sub'
-        },
-        resolve: {
-          'CurrentUser': 'CurrentUser',
-          'user': function (CurrentUser) {
-            return CurrentUser.get();
-          }
-        },
-        controller: 'AccountProfileController'
       });
   }
-
 })();
