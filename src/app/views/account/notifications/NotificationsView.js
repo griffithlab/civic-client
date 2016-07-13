@@ -7,7 +7,7 @@
   function NotificationsView($stateProvider) {
     $stateProvider
       .state('account.notifications', {
-        url: '/notifications?category?page?count?show_unlinkable?show_read',
+        url: '/notifications?category?page?count?show_unlinkable?show_read&filter[name]&filter[limit]',
         templateUrl: 'app/views/account/notifications/notifications.tpl.html',
         data: {
           titleExp: '"Account Notifications"',
