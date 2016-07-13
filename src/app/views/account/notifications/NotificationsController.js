@@ -7,7 +7,6 @@
   function AccountNotificationsController($scope,
                                           $state,
                                           $stateParams,
-                                          $location,
                                           CurrentUser,
                                           Security,
                                           _) {
@@ -42,7 +41,7 @@
     // vm.filters.showUnlinkable = $stateParams.show_unlinkable;
 
     vm.countOptions= [10,25,50,100];
-    vm.notifications = CurrentUser.data.feed.records;
+    vm.notifications = [];
 
     vm.unRead = Security.currentUser.unread_notifications;
 
@@ -154,7 +153,6 @@
     $scope.$watch(
       function() { return CurrentUser.data.feed.records},
       function(records){
-//        if(records.length > 0) {
         var meta = CurrentUser.data.feed._meta;
         vm.totalItems = Number(meta.total_count);
         vm.totalPages = Number(meta.total_pages);
@@ -163,9 +161,9 @@
         vm.totalUnread = _.reduce(vm.unread, function(result, value, key) {
           return result + value;
         });
-        if (!(records.length === 0 && vm.notifications.length === 0)) {
-          angular.copy(records, vm.notifications);
-        }
+
+        angular.copy(records, vm.notifications);
+
         //vm.notifications = CurrentUser.data.feed.records;
 
         var getNgHref = function(category) {
@@ -190,8 +188,6 @@
             unread: val
           });
         });
-        console.log(vm.categories);
-        //      }
       }, true);
 
     vm.markAllAsRead = function() {
