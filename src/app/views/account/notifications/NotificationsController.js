@@ -11,48 +11,71 @@
                                           CurrentUser,
                                           Security,
                                           _) {
-
-    if(_.isUndefined($stateParams.category)) {
-      $state.go('account.notifications', { category: 'all' })
+    if(_.isUndefined(vm)) {
+      var vm = $scope.vm = {};
     }
-    var vm = $scope.vm = {};
-
-    vm.countOptions= [10,25,50,100];
-    vm.notifications = [];
-
-    vm.unRead = Security.currentUser.unread_notifications;
-    vm.category = $stateParams.category;
 
     vm.filters = {
       name: String(),
-      limit: Number(),
-      showRead: false,
-      showUnlinkable: false
+      limit: 'all_time'
     };
 
+    if(_.isUndefined(vm.page)) {
+      vm.page = 1;
+    }
+    if(_.isUndefined(vm.category)) {
+      vm.category = 'all';
+    }
+    if(_.isUndefined(vm.count)) {
+      vm.count = 10;
+    }
+    if(_.isUndefined(vm.filters.showRead)) {
+      vm.filters.showRead = false;
+    }
+    if(_.isUndefined(vm.filters.showUnlinkable)) {
+      vm.filters.showUnlinkable  = false;
+    }
+    // vm.page = $stateParams.page;
+    // vm.category = $stateParams.category;
+    // vm.count = Number($stateParams.count);
+    // vm.filters.showRead = $stateParams.show_read;
+    // vm.filters.showUnlinkable = $stateParams.show_unlinkable;
+
+    vm.countOptions= [10,25,50,100];
+    vm.notifications = CurrentUser.data.feed.records;
+
+    vm.unRead = Security.currentUser.unread_notifications;
+
     vm.pageChanged = function() {
-      $location.search({page: vm.page, count: vm.count, category: vm.category});
       fetch();
     };
 
-    var fetch = _.debounce(function() {
-      var request = {
-        count: vm.count,
+    var fetch = function() {
+      var loc = {
         page: vm.page,
+        count: vm.count,
         category: vm.category,
         show_read: vm.filters.showRead,
         show_unlinkable: vm.filters.showUnlinkable
       };
 
       if(!_.isEmpty(vm.filters.name)) {
-        request['filter[name]'] = vm.filters.name;
+        loc['filter[name]'] = vm.filters.name;
       }
       if(!_.isEmpty(vm.filters.limit)) {
-        request['filter[limit]'] = vm.filters.limit;
+        loc['filter[limit]'] = vm.filters.limit;
       }
 
-      CurrentUser.getFeed(request)
-    }, 250); // angular-formly calls the watcher for each field on init, need to throttle here
+      $state.transitionTo('account.notifications', loc, {notify: false});
+
+      CurrentUser.getFeed(loc)
+    };
+
+    vm.changeCategory = function(category) {
+      vm.category = category;
+      vm.page = 1;
+      fetch();
+    };
 
     vm.filterFields = [
       {
@@ -63,8 +86,10 @@
           required: false
         },
         watcher: {
-          listener: function() {
-            fetch();
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(newValue !== oldValue) {
+              fetch();
+            }
           }
         }
       },
@@ -84,8 +109,10 @@
           ]
         },
         watcher: {
-          listener: function() {
-            fetch();
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(newValue !== oldValue) {
+              fetch();
+            }
           }
         }
       },
@@ -97,47 +124,61 @@
           required: false
         },
         watcher: {
-          listener: function() {
-            fetch();
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(newValue !== oldValue) {
+              fetch();
+            }
           }
         }
       },
       {
         key: 'showRead',
         type: 'checkbox',
+        defaultValue: false,
         templateOptions: {
           label: 'Show Read',
           required: false
         },
         watcher: {
-          listener: function() {
-            fetch();
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(newValue !== oldValue) {
+              fetch();
+            }
           }
         }
       }
     ];
 
+    fetch();
+
     $scope.$watch(
       function() { return CurrentUser.data.feed.records},
       function(records){
+//        if(records.length > 0) {
         var meta = CurrentUser.data.feed._meta;
-
-        vm.count = Number(meta.per_page);
-        vm.page = Number(meta.current_page);
         vm.totalItems = Number(meta.total_count);
         vm.totalPages = Number(meta.total_pages);
-        vm.category = $stateParams.category;
 
         vm.unread = meta.unread;
         vm.totalUnread = _.reduce(vm.unread, function(result, value, key) {
           return result + value;
         });
+        if (!(records.length === 0 && vm.notifications.length === 0)) {
+          angular.copy(records, vm.notifications);
+        }
+        //vm.notifications = CurrentUser.data.feed.records;
 
-        angular.copy(CurrentUser.data.feed.records, vm.notifications);
+        var getNgHref = function(category) {
+          return '/#/account/notifications?' +
+            'category=' + category + '&' +
+            'page=' + vm.page + '&' +
+            'count=' + vm.count + '&' +
+            'show_unlinkable=' + vm.filters.showUnlinkable + '&' +
+            'show_read=' + vm.filters.showRead;
+        };
 
         vm.categories = [{
           name: 'all',
-          state: 'account.notifications({category:"all", page: vm.page, count: vm.count })',
           unread: _.reduce(vm.unread, function(res, val, key) {
             return res + val;
           })
@@ -146,15 +187,16 @@
         _.forEach(vm.unread, function(val, key) {
           vm.categories.push({
             name: key,
-            state: 'account.notifications({category:"' + key + '", page: vm.page, count: vm.count })',
             unread: val
           });
         });
-
+        console.log(vm.categories);
+        //      }
       }, true);
 
     vm.markAllAsRead = function() {
-      CurrentUser.markAllAsRead($stateParams).then(function() {
+      var req = $stateParams;
+      CurrentUser.markAllAsRead(req).then(function() {
         console.log('records marked as seen');
       });
     }

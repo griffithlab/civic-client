@@ -72,7 +72,10 @@
     var user = {};
     var events = [];
     var stats = [];
-    var feed = [];
+    var feed = {
+      records: [],
+      _meta: {}
+    };
     var unread = {};
     var mentions = [];
 
@@ -117,6 +120,11 @@
     }
 
     function getFeed(reqObj) {
+      _.forEach(reqObj, function(val, key) {
+        if(_.isBoolean(val)) {
+          reqObj[key] = String(val);
+        }
+      });
       return CurrentUserResource.getFeed(reqObj).$promise
         .then(function(response) {
           angular.copy(response, feed);
@@ -125,6 +133,11 @@
     }
 
     function markAllAsRead(params) {
+      _.forEach(params, function(val, key) {
+        if(_.isBoolean(val)) {
+          params[key] = String(val);
+        }
+      });
       var t = new Date().toISOString();
       return CurrentUserResource.markFeed(_.merge(params, { upto: t, read: true })).$promise
         .then(function(response) {
@@ -135,6 +148,11 @@
     }
 
     function markFeed(params, ids, read) {
+      _.forEach(params, function(val,key) {
+        if(_.isBoolean(val)) {
+          params[key] = String(val);
+        }
+      });
       return CurrentUserResource.markFeed(_.merge(params, {notification_ids: ids, read: read })).$promise
         .then(function(response) {
           angular.copy(response, feed);
