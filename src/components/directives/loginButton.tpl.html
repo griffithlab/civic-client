@@ -25,7 +25,7 @@
           </a>
         </li>
         <li class="dropdown-header">Account</li>
-        <li><a ui-sref="account.notifications">My Account</a></li>
+        <li><a ui-sref="account.notifications({category: 'all', page: 1, count: 10, show_read: false, show_unlinkable: false})">My Account</a></li>
         <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
         <li ng-if="isEditor()" class="dropdown-header">Administrator Tools</li>
         <li ng-if="isEditor()">
