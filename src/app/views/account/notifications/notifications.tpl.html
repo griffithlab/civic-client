@@ -5,7 +5,7 @@
         <ul class="nav nav-pills nav-stacked">
           <li ng-repeat="category in vm.categories" ng-class="{'active': category.name === vm.category}">
             <a ng-click="vm.changeCategory(category.name)">
-              {{ category.name | keyToLabel}} ({{category.unread}})
+              {{ category.name | keyToLabel}} <span style="color: #BBB" class="small">({{category.unread}})</span>
             </a>
 
           </li>
