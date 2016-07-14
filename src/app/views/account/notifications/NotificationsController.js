@@ -168,7 +168,7 @@
         });
 
         generateCategories();
-        $state.transitionTo('account.notifications', params, {notify: false});
+        $state.transitionTo('account.notifications', params, {notify: true});
         angular.copy(response.records, vm.notifications);
       });
     }
