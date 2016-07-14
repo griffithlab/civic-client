@@ -9,7 +9,8 @@
       restrict: 'E',
       scope: {
         notification: '=',
-        theme: '='
+        theme: '=',
+        fetch: '='
       },
       templateUrl: 'app/views/account/notifications/components/notification.tpl.html',
       controller: notificationController
@@ -22,6 +23,7 @@
                                   $stateParams,
                                   CurrentUser,
                                   _) {
+    console.log('notificationController called.');
     var vm = $scope.vm = {};
     var params = $scope.notification.event.state_params;
 
@@ -34,6 +36,9 @@
     if(_.has(params, 'evidence_item')) {vm.entityNames.push(params.evidence_item.name);}
 
     vm.entityName = _.compact(vm.entityNames).join(' / ');
+
+    console.log('id:' +  $scope.notification.id);
+    console.log('seen: ' + $scope.notification.seen);
 
     vm.eventClick = function(notification) {
       var subjectStates = {
@@ -97,13 +102,13 @@
     };
 
     vm.markAsRead = function() {
-      var req = $stateParams;
-      CurrentUser.markFeed(req, [$scope.notification.id], true);
+      CurrentUser.markFeed($stateParams, [$scope.notification.id], true);
+      $scope.fetch();
     };
 
     vm.markAsUnread = function() {
-      var req = $stateParams;
-      CurrentUser.markFeed(req, [$scope.notification.id], false);
+      CurrentUser.markFeed($stateParams, [$scope.notification.id], false);
+      $scope.fetch();
     };
   }
 })();

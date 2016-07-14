@@ -53,7 +53,7 @@
         watcher: {
           listener: function(field, newValue, oldValue, scope, stopWatching) {
             if(newValue !== oldValue) {
-              fetch();
+              vm.fetch();
             }
           }
         }
@@ -75,7 +75,7 @@
         watcher: {
           listener: function(field, newValue, oldValue, scope, stopWatching) {
             if(newValue !== oldValue) {
-              fetch();
+              vm.fetch();
             }
           }
         }
@@ -90,7 +90,7 @@
         watcher: {
           listener: function(field, newValue, oldValue, scope, stopWatching) {
             if(newValue !== oldValue) {
-              fetch();
+              vm.fetch();
             }
           }
         }
@@ -105,7 +105,7 @@
         watcher: {
           listener: function(field, newValue, oldValue, scope, stopWatching) {
             if(newValue !== oldValue) {
-              fetch();
+              vm.fetch();
             }
           }
         }
@@ -134,7 +134,7 @@
     }
 
     // fetch the user's feed using vm.category, vm.page etc.
-    function fetch() {
+    vm.fetch =  function() {
       var params = {
         page: vm.page,
         count: vm.count,
@@ -160,31 +160,30 @@
           return result + value;
         });
 
+        generateCategories();
         $state.transitionTo('account.notifications', params, {notify: false});
         angular.copy(response.records, vm.notifications);
       });
     }
 
-    generateCategories();
-    fetch();
+    vm.fetch();
 
     // called from sidebar menu item onClick
     vm.changeCategory = function(category) {
       vm.category = category;
       vm.page = 1;
-      fetch();
+      vm.fetch();
     };
 
     // called from pagination control
     vm.pageChanged = function() {
-      fetch();
+      vm.fetch();
     };
 
     vm.markAllAsRead = function() {
       CurrentUser.markAllAsRead($stateParams).then(function () {
         console.log('records marked as seen');
-        generateCategories();
-        fetch();
+        vm.fetch();
       });
     };
 
@@ -224,7 +223,7 @@
     // vm.unRead = Security.currentUser.unread_notifications;
     //
     // vm.pageChanged = function() {
-    //   fetch();
+    //   vm.fetch();
     // };
     //
     // var fetch = function() {
@@ -251,7 +250,7 @@
     // vm.changeCategory = function(category) {
     //   vm.category = category;
     //   vm.page = 1;
-    //   fetch();
+    //   vm.fetch();
     // };
     //
     // vm.filterFields = [
@@ -265,7 +264,7 @@
     //     watcher: {
     //       listener: function(field, newValue, oldValue, scope, stopWatching) {
     //         if(newValue !== oldValue) {
-    //           fetch();
+    //           vm.fetch();
     //         }
     //       }
     //     }
@@ -288,7 +287,7 @@
     //     watcher: {
     //       listener: function(field, newValue, oldValue, scope, stopWatching) {
     //         if(newValue !== oldValue) {
-    //           fetch();
+    //           vm.fetch();
     //         }
     //       }
     //     }
@@ -303,7 +302,7 @@
     //     watcher: {
     //       listener: function(field, newValue, oldValue, scope, stopWatching) {
     //         if(newValue !== oldValue) {
-    //           fetch();
+    //           vm.fetch();
     //         }
     //       }
     //     }
@@ -319,14 +318,14 @@
     //     watcher: {
     //       listener: function(field, newValue, oldValue, scope, stopWatching) {
     //         if(newValue !== oldValue) {
-    //           fetch();
+    //           vm.fetch();
     //         }
     //       }
     //     }
     //   }
     // ];
     //
-    // fetch();
+    // vm.fetch();
     //
     // $scope.$watch(
     //   function() { return CurrentUser.data.feed.records},
