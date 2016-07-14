@@ -112,24 +112,26 @@
       }
     ];
 
-    // Security.currentUser currently stores the best representation of available categories
-    // TODO: probably should make this info available via a more appropriate endpoint
-    vm.unread = Security.currentUser.unread_notifications;
-
     // create categories array to populate sidebar menu
-    vm.categories = [{
-      name: 'all',
-      unread: _.reduce(vm.unread, function(res, val, key) {
-        return res + val;
-      })
-    }];
+    function generateCategories() {
+      // Security.currentUser currently stores the best representation of available categories
+      // TODO: probably should make this info available via a more appropriate endpoint
+      vm.unread = Security.currentUser.unread_notifications;
 
-    _.forEach(vm.unread, function(val, key) {
-      vm.categories.push({
-        name: key,
-        unread: val
+      vm.categories = [{
+        name: 'all',
+        unread: _.reduce(vm.unread, function(res, val, key) {
+          return res + val;
+        })
+      }];
+
+      _.forEach(vm.unread, function(val, key) {
+        vm.categories.push({
+          name: key,
+          unread: val
+        });
       });
-    });
+    }
 
     // fetch the user's feed using vm.category, vm.page etc.
     function fetch() {
@@ -163,6 +165,7 @@
       });
     }
 
+    generateCategories();
     fetch();
 
     // called from sidebar menu item onClick
@@ -180,6 +183,7 @@
     vm.markAllAsRead = function() {
       CurrentUser.markAllAsRead($stateParams).then(function () {
         console.log('records marked as seen');
+        generateCategories();
         fetch();
       });
     };
