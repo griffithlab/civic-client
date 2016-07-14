@@ -18,7 +18,11 @@
 
     // assign page params to vm from $stateParams, or defaults
     _.defaults(vm,
-      $stateParams,
+      {
+        category: $stateParams.category,
+        page: $stateParams.page,
+        count: $stateParams.count
+      },
       {
         category: 'all',
         page: 1,
@@ -29,6 +33,9 @@
     vm.filters = {};
     _.defaults(vm.filters,
       {
+        // convert show_read, _unlinkable to bools if necessary
+        show_read: _.isString($stateParams.show_read) ? $stateParams.show_read === 'true' : $stateParams.show_read,
+        show_unlinkable: _.isString($stateParams.show_unlinkable) ? $stateParams.show_unlinkable === 'true' : $stateParams.show_unlinkable,
         limit: $stateParams['filter[limit]'],
         name: $stateParams['filter[name]']
       },
