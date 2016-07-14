@@ -105,7 +105,6 @@
           options: [
             { value: undefined, name: '--' },
             { value: 'curator', name: 'Curator'},
-            { value: 'moderator', name: 'Moderator' },
             { value: 'editor', name: 'Editor' },
             { value: 'admin', name: 'Administrator' }
           ]
