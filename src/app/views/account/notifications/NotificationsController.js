@@ -33,11 +33,13 @@
         name: $stateParams['filter[name]']
       },
       {
-      show_read: false,
-      show_unlinkable: false,
-      limit: 'all_time',
-      name: ''
-    });
+        show_read: false,
+        show_unlinkable: false,
+        limit: 'all_time',
+        name: ''
+      });
+
+    vm.countOptions= ['10','25','50','100']; // per-page dropdown options
 
     // set up filter fields
     vm.filterFields = [
@@ -110,6 +112,25 @@
       }
     ];
 
+    // Security.currentUser currently stores the best representation of available categories
+    // TODO: probably should make this info available via a more appropriate endpoint
+    vm.unread = Security.currentUser.unread_notifications;
+
+    // create categories array to populate sidebar menu
+    vm.categories = [{
+      name: 'all',
+      unread: _.reduce(vm.unread, function(res, val, key) {
+        return res + val;
+      })
+    }];
+
+    _.forEach(vm.unread, function(val, key) {
+      vm.categories.push({
+        name: key,
+        unread: val
+      });
+    });
+
     // fetch the user's feed using vm.category, vm.page etc.
     function fetch() {
       var params = {
@@ -128,12 +149,40 @@
       }
 
       CurrentUser.getFeed(params).then(function(response) {
+        var meta = response._meta;
+        vm.totalItems = Number(meta.total_count);
+        vm.totalPages = Number(meta.total_pages);
+
+        vm.unread = Number(meta.unread);
+        vm.totalUnread = _.reduce(vm.unread, function(result, value, key) {
+          return result + value;
+        });
+
         $state.transitionTo('account.notifications', params, {notify: false});
         angular.copy(response.records, vm.notifications);
       });
     }
 
     fetch();
+
+    // called from sidebar menu item onClick
+    vm.changeCategory = function(category) {
+      vm.category = category;
+      vm.page = 1;
+      fetch();
+    };
+
+    // called from pagination control
+    vm.pageChanged = function() {
+      fetch();
+    };
+
+    vm.markAllAsRead = function() {
+      CurrentUser.markAllAsRead($stateParams).then(function () {
+        console.log('records marked as seen');
+        fetch();
+      });
+    };
 
     // if(_.isUndefined(vm)) {
     //   var vm = $scope.vm = {};
