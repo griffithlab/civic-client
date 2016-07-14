@@ -5,6 +5,7 @@
 
   // @ngInject
   function AccountNotificationsController($scope,
+                                          $location,
                                           $state,
                                           $stateParams,
                                           CurrentUser,
@@ -157,6 +158,8 @@
         params['filter[limit]'] = vm.filters.limit;
       }
 
+      var allParams =
+
       CurrentUser.getFeed(params).then(function(response) {
         var meta = response._meta;
         vm.totalItems = Number(meta.total_count);
@@ -168,10 +171,12 @@
         });
 
         generateCategories();
-        $state.transitionTo('account.notifications', params, {notify: true});
+        // TODO: figure out how to specify filter[] query params in $stateProvider so we can keep track of those in the URL as well - until then, omit these from the query params update
+        $location.search(_.omit(params, ['filter[limit]', 'filter[name]']));
+
         angular.copy(response.records, vm.notifications);
       });
-    }
+    };
 
     vm.fetch();
 
