@@ -1,7 +1,23 @@
 (function() {
   'use strict';
   angular.module('civic.account')
-    .controller('AccountNotificationsController', AccountNotificationsController);
+    .controller('AccountNotificationsController', AccountNotificationsController)
+    .filter('trimPlural', trimPlural);
+
+  // @ngInject
+  function trimPlural() {
+    return function(input) {
+      if (!_.isNull(input) && !_.isUndefined(input)) {
+        if (input.substring(input.length, input.length - 1) === 's') {
+          return input.substring(0, input.length - 1)
+        } else {
+          return input;
+        }
+      } else {
+        return;
+      }
+    }
+  }
 
   // @ngInject
   function AccountNotificationsController($scope,

@@ -27,18 +27,18 @@
           <div class="form-bg">
             <form>
               <span ng-if="vm.notifications.length > 0">
-                Showing {{ vm.notifications.length  }} of {{ vm.totalItems }} notifications.
+                Showing {{ vm.notifications.length  }} of {{ vm.totalItems }} {{ vm.category | keyToLabel | lowercase | trimPlural }} notifications.
                 <span ng-if="vm.totalItems > 10">
-                  Show
+                  Show&nbsp;
                   <select ng-model="vm.count"
                           ng-options="option for option in vm.countOptions"
                           ng-change="vm.pageChanged()">
                   </select>
-                  per page
+                  &nbsp;per page
                 </span>
               </span>
               <span ng-if="vm.notifications.length === 0">
-                No notifications.
+                No {{ vm.category | keyToLabel | lowercase | trimPlural }} notifications.
               </span>
               <a class="mark-as-seen btn btn-xs btn-primary pull-right"
                  style="width: 140px;"
