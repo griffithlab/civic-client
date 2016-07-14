@@ -21,8 +21,8 @@
     _.defaults(vm,
       {
         category: $stateParams.category,
-        page: $stateParams.page,
-        count: $stateParams.count
+        page: Number($stateParams.page),
+        count: Number($stateParams.count)
       },
       {
         category: 'all',
@@ -47,7 +47,7 @@
         name: ''
       });
 
-    vm.countOptions= ['10','25','50','100']; // per-page dropdown options
+    vm.countOptions= [10,25,50,100]; // per-page dropdown options
 
     // set up filter fields
     vm.filterFields = [
@@ -144,8 +144,8 @@
     // fetch the user's feed using vm.category, vm.page etc.
     vm.fetch =  function() {
       var params = {
-        page: vm.page,
-        count: vm.count,
+        page: Number(vm.page),
+        count: Number(vm.count),
         category: vm.category,
         show_read: vm.filters.show_read,
         show_unlinkable: vm.filters.show_unlinkable
