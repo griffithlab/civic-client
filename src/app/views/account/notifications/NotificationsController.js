@@ -129,6 +129,7 @@
 
       CurrentUser.getFeed(params).then(function(response) {
         $state.transitionTo('account.notifications', params, {notify: false});
+        angular.copy(response.records, vm.notifications);
       });
     }
 
