@@ -111,15 +111,16 @@
       });
 
       function prepVariantGroups(variants) {
-        return _.map(variants, function(item){
+        var vargroups = _.map(variants, function(item){
           if (_.isArray(item.variant_groups) && item.variant_groups.length > 0) {
-            item.variant_group_list = _.chain(item.variant_groups).pluck('name').value().join(', ');
+            item.variant_group_list = item.variant_groups.join(', ');
             return item;
           } else {
             item.variant_group_list = 'N/A';
             return item;
           }
         });
+        return vargroups;
       }
     };
   }
