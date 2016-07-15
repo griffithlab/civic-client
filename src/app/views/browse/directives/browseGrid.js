@@ -219,6 +219,13 @@
           cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
         },
         {
+          name: 'variant_count',
+          displayName: 'Count',
+          width: '8%',
+          enableFiltering: false,
+          allowCellFocus: false,
+        },
+        {
           name: 'entrez_genes',
           displayName: 'Genes',
           width: '25%',
@@ -310,7 +317,16 @@
     function updateData() {
       fetchData(ctrl.mode, ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
         .then(function(data){
-          ctrl.gridOptions.data = data.result;
+          if(ctrl.mode === 'variant_groups') {
+            // add variant_count attribute
+            _.forEach(data.result, function(variant_group) {
+              variant_group.variant_count = variant_group.variants.split(', ').length;
+              return variant_group;
+            });
+            ctrl.gridOptions.data = data.result;
+          } else {
+            ctrl.gridOptions.data = data.result;
+          }
           ctrl.gridOptions.columnDefs = modeColumnDefs[ctrl.mode];
           ctrl.totalItems = data.total;
         });
