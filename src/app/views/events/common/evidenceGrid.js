@@ -26,6 +26,7 @@
 
   // @ngInject
   function EvidenceGridController($scope,
+                                  $window,
                                   $stateParams,
                                   $state,
                                   $log,
@@ -99,6 +100,13 @@
       exporterMenuPdf: false,
       enableGridMenu: true,
       gridMenuShowHideColumns: false,
+      appScopeProvider: {
+        onDblClick: function(row) {
+          console.log('dbl-click!');
+          console.log(row);
+        }
+      },
+      rowTemplate: 'app/views/events/common/evidenceGridRowTemplate.tpl.html',
       gridMenuCustomItems: [
         {
           title: 'Show Accepted',
@@ -454,7 +462,7 @@
       });
 
 
-      gridApi.selection.on.rowSelectionChanged($scope, function(row){
+      gridApi.selection.on.rowSelectionChanged($scope, function(row, event){
         console.log('ui-grid onSelectionChanged called.');
         var params = {};
         if($stateParams.geneId !== undefined && $stateParams.variantId !== undefined) {
@@ -462,7 +470,15 @@
 
           // the highlight in onRowsRendered will trigger a state change unless we catch it here
           if(!suppressGo) {
-            $state.go('events.genes.summary.variants.summary.evidence.summary', params);
+            if(event.metaKey) {
+              // if meta key (alt or command) pressed, generate a state URL and open it in a new tab/window
+              // shift would be preferable to meta but ui-grid's selection module appears to be capturing shift-clicks for multi-select feature
+              // keep an eye on: https://github.com/angular-ui/ui-grid/issues/4926
+              var url = $state.href('events.genes.summary.variants.summary.evidence.summary', params, {absolute: true});
+              $window.open(url, '_blank');
+            } else {
+              $state.go('events.genes.summary.variants.summary.evidence.summary', params);
+            }
           }
         } else if (row.entity.state_params !== undefined){
           params = {
