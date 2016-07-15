@@ -210,7 +210,7 @@
         {
           name: 'variants',
           displayName: 'Variants',
-          width: '40%',
+          width: '35%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -221,14 +221,14 @@
         {
           name: 'variant_count',
           displayName: 'Count',
-          width: '8%',
+          width: '7%',
           enableFiltering: false,
           allowCellFocus: false,
         },
         {
           name: 'entrez_genes',
           displayName: 'Genes',
-          width: '25%',
+          width: '23%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
