@@ -61,14 +61,18 @@
             </evidence-grid>
           </div>
           <div ng-switch-when="variants">
-            <variant-grid
+            <variant-g1rid
               context="'search'"
               rows="15"
               variants="vm.searchResults">
-            </variant-grid>
+            </variant-g1rid>
           </div>
           <div ng-switch-when="genes">
-            <p>Genes Grid will go here.</p>
+            <gene-grid
+              context="'search'"
+              rows="15"
+              genes="vm.searchResults">
+            </gene-grid>
           </div>
           <div ng-switch-when="variantGroups">
             <p>Variant Groups Grid will go here.</p>
