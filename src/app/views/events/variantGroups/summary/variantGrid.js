@@ -126,7 +126,7 @@
       function prepVariantGroups(variants) {
         var vargroups = _.map(variants, function(item){
           if (_.isArray(item.variant_groups) && item.variant_groups.length > 0) {
-            item.variant_group_list = item.variant_groups.join(', ');
+            item.variant_group_list = _.map(item.variant_groups, 'name').join(', ');
             return item;
           } else {
             item.variant_group_list = 'N/A';
