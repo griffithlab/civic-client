@@ -22,7 +22,12 @@
   }
 
   // @ngInject
-  function VariantGridController($scope, $stateParams, $state, uiGridConstants, _) {
+  function VariantGridController($scope,
+                                 $window,
+                                 $stateParams,
+                                 $state,
+                                 uiGridConstants,
+                                 _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
 
@@ -107,7 +112,15 @@
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = _.merge($stateParams, { variantId: row.entity.id, geneId: row.entity.gene_id });
-        $state.go('events.genes.summary.variants.summary', params);
+        if(event.metaKey) {
+          // if meta key (alt or command) pressed, generate a state URL and open it in a new tab/window
+          // shift would be preferable to meta but ui-grid's selection module appears to be capturing shift-clicks for multi-select feature
+          // keep an eye on: https://github.com/angular-ui/ui-grid/issues/4926
+          var url = $state.href('events.genes.summary.variants.summary', params, {absolute: true});
+          $window.open(url, '_blank');
+        } else {
+          $state.go('events.genes.summary.variants.summary', params);
+        }
       });
 
       function prepVariantGroups(variants) {
