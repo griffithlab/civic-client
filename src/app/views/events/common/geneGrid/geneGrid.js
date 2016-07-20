@@ -51,14 +51,14 @@
         //  allowCellFocus: false,
         //  width: '5%'
         //},
-        { name: 'entrez_name',
+        { name: 'name',
           displayName: 'Entrez Name',
           type: 'string',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
           width: '9%'
         },
-        { name: 'variants',
+        { name: 'variant_list',
           displayName: 'Variants',
           enableFiltering: true,
           allowCellFocus: false,
@@ -69,11 +69,11 @@
           }
         },
         { name: 'variant_count',
-          displayName: 'Variant Count',
-          enableFiltering: true,
+          displayName: 'Count',
+          enableFiltering: false,
           allowCellFocus: false,
           type: 'string',
-          width: '20%',
+          width: '10%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -113,11 +113,17 @@
         var genes = _.map(genes, function(item){
           if (_.isArray(item.variants) && item.variants.length > 0) {
             item.variant_list = _.map(item.variants, 'name').join(', ');
-            return item;
+            item.variant_count = item.variants.length;
           } else {
-            item.variants = 'N/A';
-            return item;
+            item.variant_list = 'No variants found.';
+            item.variant_count = 0;
           }
+
+          if(Number(item.description.length) === 0) {
+            item.description = 'No description found.';
+          }
+
+          return item;
         });
         return genes;
       }
