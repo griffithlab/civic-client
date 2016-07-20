@@ -64,6 +64,7 @@
           allowCellFocus: false,
           type: 'string',
           width: '40%',
+          cellTemplate: 'app/views/events/common/geneGrid/tooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -84,6 +85,7 @@
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
+          cellTemplate: 'app/views/events/common/geneGrid/tooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -106,7 +108,7 @@
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var params = _.merge($stateParams, { variantId: row.entity.id, geneId: row.entity.gene_id });
-        $state.go('events.genes.summary.genes.summary', params);
+        $state.go('events.genes.summary', params);
       });
 
       function prepGeneData(genes) {
