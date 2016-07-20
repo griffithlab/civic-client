@@ -69,7 +69,7 @@
       multiSelect: false,
       modifierKeysToMultiSelect: false,
       noUnselect: true,
-      rowTemplate: 'app/views/browse/browseGridRow.tpl.html'
+      rowTemplate: 'app/views/browse/directives/browseGridRow.tpl.html'
     };
 
     // set up column defs and data transforms for each mode
@@ -102,7 +102,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html'
         },
         {
           name: 'drugs',
@@ -113,7 +113,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html'
         },
         {
           name: 'evidence_item_count',
@@ -145,7 +145,7 @@
           displayName: 'Gene Aliases',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html',
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -159,7 +159,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html'
         },
         {
           name: 'drugs',
@@ -170,7 +170,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html'
         },
         {
           name: 'variant_count',
@@ -216,7 +216,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: 'app/views/browse/browseGridTooltipCell.tpl.html'
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html'
         },
         {
           name: 'variant_count',

@@ -56,14 +56,14 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
-          width: '9%'
+          width: '10%'
         },
         { name: 'variant_list',
           displayName: 'Variants',
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
-          width: '30%',
+          width: '40%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -73,7 +73,7 @@
           enableFiltering: false,
           allowCellFocus: false,
           type: 'string',
-          width: '10%',
+          width: '8%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -112,7 +112,7 @@
       function prepGeneData(genes) {
         var genes = _.map(genes, function(item){
           if (_.isArray(item.variants) && item.variants.length > 0) {
-            item.variant_list = _.map(item.variants, 'name').join(', ');
+            item.variant_list = _.map(item.variants, 'name').sort().join(', ');
             item.variant_count = item.variants.length;
           } else {
             item.variant_list = 'No variants found.';
