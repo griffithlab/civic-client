@@ -22,6 +22,7 @@
   // @ngInject
   function BrowseGridController($scope,
                                 $state,
+                                $window,
                                 $location,
                                 uiGridConstants,
                                 Datatables,
@@ -292,25 +293,41 @@
       });
 
       // called when user clicks on a row
-      gridApi.selection.on.rowSelectionChanged($scope, function(row){
+      gridApi.selection.on.rowSelectionChanged($scope, function(row, event){
+        var state = '';
+        var params = {};
         if(ctrl.mode === 'variants') {
-          $state.go('events.genes.summary.variants.summary', {
+          state = 'events.genes.summary.variants.summary';
+          params = {
             geneId: row.entity.gene_id,
             variantId: row.entity.variant_id,
             '#': 'variant'
-          });
+          };
         } else if (ctrl.mode === 'genes'){
-          $state.go('events.genes.summary', {
+          state = 'events.genes.summary';
+          params = {
             geneId: row.entity.id,
             '#': 'gene'
-          });
+          };
         } else {
-          $state.go('events.genes.summary.variantGroups.summary', {
+          state = 'events.genes.summary.variantGroups.summary';
+          params = {
             geneId: row.entity.gene_ids[0],
             variantGroupId: row.entity.id,
             '#': 'variant-group'
-          });
+          };
         }
+
+        if(event.metaKey) {
+          // if meta key (alt or command) pressed, generate a state URL and open it in a new tab/window
+          // shift would be preferable to meta but ui-grid's selection module appears to be capturing shift-clicks for multi-select feature
+          // keep an eye on: https://github.com/angular-ui/ui-grid/issues/4926
+          var url = $state.href(state, params, {absolute: true});
+          $window.open(url, '_blank');
+        } else {
+          $state.go(state, params);
+        }
+
       });
     };
 
