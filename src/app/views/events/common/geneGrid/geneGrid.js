@@ -107,7 +107,7 @@
       });
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        var params = _.merge($stateParams, { variantId: row.entity.id, geneId: row.entity.gene_id });
+        var params = _.merge($stateParams, {  geneId: row.entity.id });
         $state.go('events.genes.summary', params);
       });
 
