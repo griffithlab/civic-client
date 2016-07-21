@@ -7,3 +7,4 @@
 * fixed variant grid variant list cell
 * all entity grids can now open record in new tab if meta key (alt/command) held while clicking
 * contributors no longer able to accept their own evidence items and revisions
+* facebook and linkedin profile attributes now accept nicknames/handles instead of full URLs
