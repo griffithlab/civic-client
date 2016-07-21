@@ -121,10 +121,15 @@
       </button>
     </div>
     <div class="col-xs-6">
+      <span tooltip="Contributors may not accept their own submissions."
+            tooltip-append-to-body="true"
+            tooltip-enable="ownerIsCurrentUser">
       <button class="btn btn-default btn-block btn-success"
+              ng-disabled="ownerIsCurrentUser"
               ng-click="acceptItem(evidence.id)">
         Accept Evidence Item
       </button>
+        </span>
     </div>
   </div>
   <!--<div class="row">-->

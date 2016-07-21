@@ -31,6 +31,10 @@
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
+    var currentUserId = Security.currentUser.id;
+    var submitterId = EvidenceRevisions.data.item.user.id;
+    vm.ownerIsCurrentUser = submitterId === currentUserId;
+
     $scope.acceptRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};

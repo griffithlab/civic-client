@@ -25,6 +25,10 @@
     $scope.evidence = Evidence.data.item;
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;
 
+    var currentUserId = Security.currentUser.id;
+    var submitterId = $scope.evidence.lifecycle_actions.submitted.user.id;
+    $scope.ownerIsCurrentUser = submitterId === currentUserId;
+
     var evidence_levels = {
       A: 'Validated',
       B: 'Clinical',
