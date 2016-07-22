@@ -28,6 +28,7 @@
                   { value: 'disease_name', name: 'Disease Name' },
                   { value: 'drug_id', name: 'Drug PubChem ID' },
                   { value: 'drug_name', name: 'Drug Name' },
+                  { value: 'interaction_type', name: 'Drug Interaction Type' },
                   { value: 'id', name: 'Evidence ID'},
                   { value: 'evidence_type', name: 'Evidence Type' },
                   { value: 'evidence_level', name: 'Evidence Level' },
@@ -269,6 +270,42 @@
                 templateOptions: {
                   label: '',
                   required: true
+                }
+              }
+            ],
+            interaction_type: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'none'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'none', name: 'None (single drug)' },
+                    { value: 'Combination', name: 'Combination' },
+                    { value: 'Sequential', name: 'Sequential' },
+                    { value: 'Substitutes', name: 'Substitutes' }
+                  ]
                 }
               }
             ],
