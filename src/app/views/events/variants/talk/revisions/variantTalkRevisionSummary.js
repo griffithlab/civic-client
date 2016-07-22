@@ -27,9 +27,13 @@
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
-    var currentUserId = Security.currentUser.id;
-    var submitterId = VariantRevisions.data.item.user.id;
-    vm.ownerIsCurrentUser = submitterId === currentUserId;
+    if(Security.currentUser) {
+      var currentUserId = Security.currentUser.id;
+      var submitterId = VariantRevisions.data.item.user.id;
+      vm.ownerIsCurrentUser = submitterId === currentUserId;
+    } else {
+      vm.ownerIsCurrentUser = false;
+    }
 
     $scope.acceptRevision = function() {
       vm.formErrors = {};

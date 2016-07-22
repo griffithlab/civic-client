@@ -25,9 +25,13 @@
     $scope.evidence = Evidence.data.item;
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;
 
-    var currentUserId = Security.currentUser.id;
-    var submitterId = $scope.evidence.lifecycle_actions.submitted.user.id;
-    $scope.ownerIsCurrentUser = submitterId === currentUserId;
+    if(Security.currentUser) {
+      var currentUserId = Security.currentUser.id;
+      var submitterId = $scope.evidence.lifecycle_actions.submitted.user.id;
+      $scope.ownerIsCurrentUser = submitterId === currentUserId;
+    } else {
+      $scope.ownerIsCurrentUser = false;
+    }
 
     var evidence_levels = {
       A: 'Validated',
