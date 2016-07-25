@@ -38,6 +38,7 @@
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
                   { value: 'status', name: 'Status' },
                   { value: 'variant_name', name: 'Variant Name' },
+                  { value: 'variant_origin', name: 'Variant Origin' },
                   { value: 'submitter', name: 'Submitter Display Name' },
                   { value: 'submitter_id', name: 'Submitter ID' }
                 ],
@@ -592,6 +593,43 @@
                 templateOptions: {
                   label: '',
                   required: true
+                }
+              }
+            ],
+            variant_origin: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'Somatic Mutation'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options:[
+                    { value: 'Somatic Mutation', label: 'Somatic Mutation'},
+                    { value: 'Germline Mutation', label: 'Germline Mutation' },
+                    { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
+                    { value: 'Unknown', label: 'Unknown' },
+                    { value: 'N/A', label: 'N/A' }
+                  ]
                 }
               }
             ],
