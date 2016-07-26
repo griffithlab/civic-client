@@ -4,6 +4,7 @@
 * users may no longer approving/accept their own items/updates - approve/accept buttons will show as disabled
 * HOTFIX: some components that compare entity owner to current user threw an error when rendering if user logged out
 * evidence item advanced search now includes a Variant Origin option
+* added note regarding CIViC partner relationships to About page
 
 
 0.0.1 / 2016-07-21
