@@ -6,6 +6,7 @@
 * evidence item advanced search now includes a Variant Origin option
 * added note regarding CIViC partner relationships to About page
 * evidence item / disease search option now provides typeahead assistance
+* advanced search query builder now indicates if no records returned
 - evidence grid row now indicates if pending changes exist using indicator/tooltip in ID cell
 
 

@@ -34,6 +34,10 @@
 
     init();
 
+    $scope.$watch('vm.model', function() {
+      vm.formError = false;
+    }, true);
+
     // function definition
     function onSubmit() {
       $log.debug(JSON.stringify(vm.model));
@@ -41,14 +45,21 @@
       //vm.showEvidenceGrid = true;
       vm.model.entity = entity;
       vm.model.save = true;
+      vm.formError = false;
       Search.post(vm.model)
-        .then(function(response) {
+        .then(function(response) { // success
           vm.searchResults = response.results;
           vm.showGrid = true;
           if(_.has(response, 'token') && !_.isNull(response.token)) {
             var state = entity === 'evidence_items' ? 'search.evidence' : 'search.' + entity;
             $state.transitionTo(state, { token: response.token }, {notify: false});
           }
+        },
+        function(response) { // error
+          console.log(response);
+          vm.searchResults = [];
+          vm.showGrid = false;
+          vm.formError = response;
         });
     }
 

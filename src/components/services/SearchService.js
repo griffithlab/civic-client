@@ -5,7 +5,7 @@
     .factory('Search', SearchService);
 
   // @ngInject
-  function SearchResource($resource) {
+  function SearchResource($resource, $q) {
     var SearchService = $resource('/api/:entity/search/:token',
       {
         token: '@token',
@@ -15,7 +15,16 @@
         post: {
           method: 'POST',
           isArray: false,
-          cache: false
+          cache: false,
+          cancellable: true,
+          interceptor: {
+            response: function(response) {
+              if (response.resource.results.length > 0) {
+                return $q.resolve(response.resource);
+              }
+              return $q.reject('No results returned. Please try narrowing your search parameters.');
+            }
+          }
         }
       },
       {
