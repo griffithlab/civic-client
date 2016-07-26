@@ -4,7 +4,9 @@
     .controller('SearchController', SearchController);
 
   // @ngInject
-  function SearchController($scope, _) {
+  function SearchController($scope,
+                            _,
+                            Diseases) {
     var vm = $scope.vm = {};
 
     vm.fields = {};
@@ -179,12 +181,22 @@
               },
               {
                 key: 'parameters[0]',
-                type: 'input',
+                type: 'typeahead',
                 className: 'inline-field',
                 hideExpression: 'model.name === "is_empty"',
                 templateOptions: {
                   label: '',
-                  required: true
+                  required: true,
+                  typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+                  editable: true,
+                  templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',                                 data: {
+                    typeaheadSearch: function(val) {
+                      return Diseases.beginsWith(val)
+                        .then(function(response) {
+                          return response;
+                        });
+                    }
+                  }
                 }
               }
             ],

@@ -5,6 +5,8 @@
 * HOTFIX: some components that compare entity owner to current user threw an error when rendering if user logged out
 * evidence item advanced search now includes a Variant Origin option
 * added note regarding CIViC partner relationships to About page
+* evidence item / disease search option now provides typeahead assistance
+- evidence grid row now indicates if pending changes exist using indicator/tooltip in ID cell
 
 
 0.0.1 / 2016-07-21
