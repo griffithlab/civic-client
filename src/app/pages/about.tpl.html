@@ -66,7 +66,8 @@
       <p><h4><a name="partners" id="partners" style="text-decoration: none; color: inherit;">Partners:</a></h4></p>
     </div>
   </div>
-  <div class="row expert-row" ng-repeat="partner in vm.partners track by $index">
+  <div class="row expert-row"
+       ng-repeat="partner in vm.partners track by $index">
     <div class="col-xs-3 col-sm-2 col-lg-2 col-sm-offset-1 col-md-offset-2 expert-image">
       <div class="image">
         <img ng-src="{{partner.avatars.x270}}" width="270" height="270" class="img-responsive"/>
@@ -78,6 +79,12 @@
         <h4 ng-bind="partner.name">NAME</h4>
         <p ng-bind-html="partner.description|unsafe">Description</p>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2" style="color: #999;">
+      <p class="small">We're always looking for new partners. If you would your organization to have acknowledged a substantial contribution to CIViC and be listed in this section, please email <a href="mailto:civic-help@genome.wustl.edu">civic-help@genome.wustl.edu</a>.</p>
+      <p class="small"><strong>NOTE:</strong> CIViC partners have no preferential relationship - financial or otherwise - with the CIViC project.</p>
     </div>
   </div>
   <div class="row" style="margin-bottom: 600px;">
