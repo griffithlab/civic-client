@@ -187,7 +187,7 @@
                 templateOptions: {
                   label: '',
                   required: true,
-                  typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+                  typeahead: 'item.name as item.name for item in to.data.typeaheadSearch($viewValue)',
                   editable: true,
                   templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',                                 data: {
                     typeaheadSearch: function(val) {
