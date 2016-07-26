@@ -1,3 +1,11 @@
+0.0.2 / 2016-07-28
+==================
+
+* users may no longer approving/accept their own items/updates - approve/accept buttons will show as disabled
+* HOTFIX: some components that compare entity owner to current user threw an error when rendering if user logged out
+* evidence item advanced search now includes a Variant Origin option
+
+
 0.0.1 / 2016-07-21
 ==================
 
