@@ -7,7 +7,8 @@
 * added note regarding CIViC partner relationships to About page
 * evidence item / disease search option now provides typeahead assistance
 * advanced search query builder now indicates if no records returned
-- evidence grid row now indicates if pending changes exist using indicator/tooltip in ID cell
+* added biography attribute to profile display and edit views
+* evidence grid row now indicates if pending changes exist using indicator/tooltip in ID cell
 
 
 0.0.1 / 2016-07-21

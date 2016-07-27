@@ -33,8 +33,10 @@
               </tr>
               <tr ng-if="user.bio.length > 0">
                 <td colspan="2">
-                  <span class="key">Biography:</span><br/>
-                  {{user.bio|ifEmpty: '--'}}</td>
+                  <p><span class="key">Biography:</span><br/>
+                  {{user.bio|ifEmpty: '--'}}
+                  </p>
+                </td>
               </tr>
             </table>
           </div>

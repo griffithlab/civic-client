@@ -1,9 +1,9 @@
 <div class="ngCellText idCell" ng-class="col.colIndex()"
-     tooltip="EID{{row.entity[col.field]}}: {{row.entity['status']|capitalize}}"
+     tooltip="EID{{row.entity[col.field]}}: {{row.entity['status']|capitalize}}{{row.entity['open_change_count'] > 0 ? '; ' + row.entity['open_change_count'] + ' changes pending' : ''}}"
      tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
      tooltip-placement="right"
      tooltip-append-to-body="true">
-  <span class="btn-block" ng-class="{ 'statusAccepted': row.entity['status'] === 'accepted', 'statusSubmitted': row.entity['status'] === 'submitted', 'statusRejected': row.entity['status'] === 'rejected' }">
+  <span class="btn-block" ng-class="{ 'statusAccepted': row.entity['status'] === 'accepted', 'statusSubmitted': row.entity['status'] === 'submitted', 'statusRejected': row.entity['status'] === 'rejected',  'hasChanges': row.entity['open_change_count'] > 0}">
     {{ row.entity[col.field] }}
   </span>
 </div>
