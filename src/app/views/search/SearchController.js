@@ -636,11 +636,11 @@
                   label: '',
                   required: true,
                   options:[
-                    { value: 'Somatic Mutation', label: 'Somatic Mutation'},
-                    { value: 'Germline Mutation', label: 'Germline Mutation' },
-                    { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
-                    { value: 'Unknown', label: 'Unknown' },
-                    { value: 'N/A', label: 'N/A' }
+                    { value: 'Somatic Mutation', name: 'Somatic Mutation'},
+                    { value: 'Germline Mutation', name: 'Germline Mutation' },
+                    { value: 'Germline Polymorphism', name: 'Germline Polymorphism' },
+                    { value: 'Unknown', name: 'Unknown' },
+                    { value: 'N/A', name: 'N/A' }
                   ]
                 }
               }
