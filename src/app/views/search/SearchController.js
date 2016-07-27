@@ -314,7 +314,7 @@
                   label: '',
                   required: true,
                   options: [
-                    { value: 'none', name: 'None (single drug)' },
+                    { value: 'none', name: 'None' },
                     { value: 'Combination', name: 'Combination' },
                     { value: 'Sequential', name: 'Sequential' },
                     { value: 'Substitutes', name: 'Substitutes' }
