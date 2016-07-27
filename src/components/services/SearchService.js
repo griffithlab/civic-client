@@ -22,7 +22,7 @@
               if (response.resource.results.length > 0) {
                 return $q.resolve(response.resource);
               }
-              return $q.reject('No results returned. Please try narrowing your search parameters.');
+              return $q.reject('No results returned. Please try using less-specific search parameters.');
             }
           }
         }
