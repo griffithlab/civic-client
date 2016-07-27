@@ -90,6 +90,16 @@
         }
       },
       {
+        key: 'bio',
+        type: 'horizontalTextareaHelp',
+        templateOptions: {
+          label: 'Biography',
+          rows: 4,
+          value: 'vm.userEdit.bio',
+          helpText: 'A short bio describing your interests, accomplishments, associations, and/or anything else about yourself you would like to share with the CIViC community.'
+        }
+      },
+      {
         template:'<h3 class="form-subheader">Social Media</h3>'
       },
       {

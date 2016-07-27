@@ -6,58 +6,68 @@
         </user-card>
       </div>
     </div>
-    <div class="col-xs-5">
-      <div class="info-block">
-        <table class="table-info">
-          <tr>
-            <td class="key">Role:</td>
-            <td class="value">{{user.role|ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">Username:</td>
-            <td class="value">{{user.username|ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">Name:</td>
-            <td class="value">{{user.name|ifEmpty: '--'}}</td>
-          </tr>
-          <!--<tr>-->
-            <!--<td class="key">Email:</td>-->
-            <!--<td class="value">{{user.email|ifEmpty: '&#45;&#45;'}}</td>-->
-          <!--</tr>-->
-          <tr>
-            <td class="key">Area of Expertise:</td>
-            <td class="value">{{user.area_of_expertise|ifEmpty: '--'}}</td>
-          </tr>
-        </table>
+    <div class="col-xs-9">
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="info-block">
+            <table class="table-info">
+              <tr>
+                <td class="key">Role:</td>
+                <td class="value">{{user.role|ifEmpty: '--'}}</td>
+              </tr>
+              <tr>
+                <td class="key">Username:</td>
+                <td class="value">{{user.username|ifEmpty: '--'}}</td>
+              </tr>
+              <tr>
+                <td class="key">Name:</td>
+                <td class="value">{{user.name|ifEmpty: '--'}}</td>
+              </tr>
+              <!--<tr>-->
+              <!--<td class="key">Email:</td>-->
+              <!--<td class="value">{{user.email|ifEmpty: '&#45;&#45;'}}</td>-->
+              <!--</tr>-->
+              <tr>
+                <td class="key">Area of Expertise:</td>
+                <td class="value">{{user.area_of_expertise|ifEmpty: '--'}}</td>
+              </tr>
+              <tr ng-if="user.bio.length > 0">
+                <td colspan="2">
+                  <span class="key">Biography:</span><br/>
+                  {{user.bio|ifEmpty: '--'}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="info-block">
+            <table class="table-info">
+              <tr>
+                <td class="key">Comments:</td>
+                <td class="value">{{vm.stats.comments}}</td>
+              </tr>
+              <tr>
+                <td class="key">Suggested Changes:</td>
+                <td class="value">{{vm.stats.suggested_changes}}</td>
+              </tr>
+              <tr>
+                <td class="key">Applied Changes:</td>
+                <td class="value">{{vm.stats.applied_changes}}</td>
+              </tr>
+              <tr>
+                <td class="key">Submitted Evidence:</td>
+                <td class="value">{{vm.stats.submitted_evidence_items}}</td>
+              </tr>
+              <tr>
+                <td class="key">Accepted Evidence:</td>
+                <td class="value">{{vm.stats.accepted_evidence_items}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-xs-4">
-      <div class="info-block">
-        <table class="table-info">
-          <tr>
-            <td class="key">Comments:</td>
-            <td class="value">{{vm.stats.comments}}</td>
-          </tr>
-          <tr>
-            <td class="key">Suggested Changes:</td>
-            <td class="value">{{vm.stats.suggested_changes}}</td>
-          </tr>
-          <tr>
-            <td class="key">Applied Changes:</td>
-            <td class="value">{{vm.stats.applied_changes}}</td>
-          </tr>
-          <tr>
-            <td class="key">Submitted Evidence:</td>
-            <td class="value">{{vm.stats.submitted_evidence_items}}</td>
-          </tr>
-          <tr>
-            <td class="key">Accepted Evidence:</td>
-            <td class="value">{{vm.stats.accepted_evidence_items}}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
+
   </div>
   <!--<div class="row">-->
   <!--<div class="col-xs-12">-->
