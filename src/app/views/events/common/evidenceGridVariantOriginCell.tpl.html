@@ -7,7 +7,7 @@
      tooltip-append-to-body="true">
   <span
     class="glyphicon"
-    ng-class="{ 'glyphicon-option-vertical': row.entity[col.field] === 'Germline Mutation', 'glyphicon-option-horizontal': row.entity[col.field] === 'Somatic Mutation', 'glyphicon-equalizer': row.entity[col.field] === 'Germline Polymorphism', 'glyphicon-question-sign': row.entity[col.field] === 'Unknown', 'glyphicon-remove-circle not-applicable': row.entity[col.field] === 'N/A' }">
+    ng-class="{ 'glyphicon-option-vertical': row.entity[col.field] === 'Germline Mutation', 'glyphicon-option-horizontal': row.entity[col.field] === 'Somatic Mutation', 'glyphicon-equalizer': row.entity[col.field] === 'Germline Polymorphism', 'glyphicon-question-sign': row.entity[col.field] === 'Unknown', 'glyphicon-remove-circle not-applicable': row.entity[col.field] === 'N/A' || row.entity[col.field] === null }">
   </span>
 </div>
 
