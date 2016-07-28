@@ -57,8 +57,8 @@
         },
         function(response) { // error
           console.log(response);
-          vm.searchResults = [];
-          vm.showGrid = false;
+          angular.copy([], vm.searchResults);
+          vm.showGrid = true;
           vm.formError = response;
         });
     }

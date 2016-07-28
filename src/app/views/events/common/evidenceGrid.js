@@ -426,8 +426,7 @@
         } else if (!_.includes(statusFilters, 'rejected')) {
           statusFilters = ['accepted', 'submitted'];
         }
-        //ctrl.evidenceGridOptions.minRowsToShow = evidence.length + 1;
-        if(!_.isUndefined(evidence) && evidence.length > 0) {
+        if(!_.isUndefined(evidence)) {
           ctrl.gridApi.grid.queueRefresh().then(function() {
             // fixes intermittent bug where col headers wouldn't render on reloaded Search pages
             // forcing data update after a refresh I think prevents the update from interrupting col render
