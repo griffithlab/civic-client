@@ -26,22 +26,6 @@
           },
           'events': function(Users, $stateParams) {
             return Users.queryEvents($stateParams.userId);
-          },
-          'evidence': function(Search, user) {
-            var query = {
-              'entity': 'evidence_items',
-              'operator':'AND',
-              'save': false,
-              'queries': [
-                {
-                  'field':'submitter_id',
-                  'condition': {
-                    'name':'is_equal_to',
-                    'parameters':[user.id]
-                  }
-                }
-              ]};
-            return Search.post(query);
           }
         },
         controller: 'ProfileController',
