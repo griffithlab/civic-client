@@ -5,6 +5,9 @@
         <user-card user="user">
         </user-card>
       </div>
+      <div ng-if="vm.currentUser.id === user.id"style="margin-top: 1em;">
+        <a ui-sref="account.profile" class="btn btn-default btn-block btn-sm">Edit Your Profile</a>
+      </div>
     </div>
     <div class="col-xs-9">
       <div class="row">
