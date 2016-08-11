@@ -3,6 +3,7 @@
 * browse view tabs no longer wrap when displayed in sm and md window widths
 * user profile links now work even if user has no events returned from Search service
 * users viewing their profile are now provided a button linking to the account profile edit page
+* comment help text now details @admins and @editors mention notifications
 
 
 0.0.2 / 2016-07-28
