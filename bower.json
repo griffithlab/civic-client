@@ -1,6 +1,6 @@
 {
-  "name": "civicClient",
-  "version": "0.0.2",
+  "name": "civic-client",
+  "version": "0.0.3",
   "dependencies": {
     "angular": "1.4.7",
     "angular-ui-router": "0.2.15",
