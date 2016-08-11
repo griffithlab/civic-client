@@ -65,11 +65,11 @@ gulp.task('cdnize', ['wiredep'], function () {
         cdn: '//cdnjs.cloudflare.com/ajax/libs/ui-router-extras/${ version }/${ filenameMin }',
         test: 'testModule("ct.ui.router.extras")'
       },
-      {
-        file: '**/angulartics-google-analytics/**/*.js',
-        cdn: '//cdnjs.cloudflare.com/ajax/libs/angulartics-google-analytics/0.1.1/${ filenameMin }',
-        test: 'testModule("angulartics.google.analytics")'
-      },
+      // {
+      //   file: '**/angulartics-google-analytics/**/*.js',
+      //   cdn: '//cdnjs.cloudflare.com/ajax/libs/angulartics-google-analytics/0.1.1/${ filenameMin }',
+      //   test: 'testModule("angulartics.google.analytics")'
+      // },
       {
         file: '**/ngDialog/**/*.js',
         package: 'ngDialog',
