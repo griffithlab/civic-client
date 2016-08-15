@@ -38,6 +38,7 @@
                   { value: 'pubmed_id', name: 'Pubmed ID' },
                   { value: 'rating', name: 'Rating' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
+                  { value: 'publication_year', name: 'Publication Year' },
                   { value: 'status', name: 'Status' },
                   { value: 'variant_name', name: 'Variant Name' },
                   { value: 'variant_origin', name: 'Variant Origin' },
@@ -427,6 +428,37 @@
                     { value: 'accepted', name: 'Accepted'},
                     { value: 'rejected', name: 'Rejected'}
                   ]
+                }
+              }
+            ],
+            publication_year: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'is_equal_to', name: 'is' },
+                    { value: 'is_not_equal_to', name: 'is not' },
+                    { value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to' },
+                    { value: 'is_greater_than', name: 'is greater than' },
+                    { value: 'is_less_than', name: 'is less than' },
+                    { value: 'is_less_than_or_equal_to', name: 'is less than or equal to' },
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
                 }
               }
             ],
