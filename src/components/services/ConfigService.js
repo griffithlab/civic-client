@@ -27,6 +27,10 @@
       ],
       footerMenuItems: [
         {
+          label: 'Publications',
+          state: 'publications'
+        },
+        {
           label: 'Glossary of Terms',
           state: 'glossary'
         },
@@ -41,7 +45,7 @@
         {
           label: 'Presentation Graphics',
           state: 'graphics'
-        },        
+        },
         {
           label: 'Contact',
           state: 'contact'

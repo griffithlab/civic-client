@@ -181,6 +181,10 @@
     <link rel="stylesheet" href="app/views/account/notifications/components/notification.css">
     <link rel="stylesheet" href="app/views/account/notifications/notifications.css">
 
+    <!-- Publications Styles -->
+    <link rel="stylesheet" href="app/views/publications/list/publicationsList.css">
+    <link rel="stylesheet" href="app/views/publications/detail/publicationsDetail.css">
+
     <!-- endbuild -->
   </head>
   <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
@@ -638,6 +642,12 @@
     <script src="app/views/account/profile/ProfileController.js"></script>
     <script src="app/views/account/profile/ProfileView.js"></script>
     <script src="app/views/account/notifications/components/notification.js"></script>
+
+    <!-- ** Publications View ** -->
+    <script src="app/views/publications/PublicationsView.js"></script>
+    <script src="app/views/publications/list/PublicationsListController.js"></script>
+    <script src="app/views/publications/detail/PublicationsDetailController.js"></script>
+
     <!-- inject:partials -->
 
     <!-- endinject -->
