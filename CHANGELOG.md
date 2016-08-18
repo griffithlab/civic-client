@@ -1,3 +1,8 @@
+0.0.4 / 2016-08-18
+==================
+* added publication year to evidence search query builder
+
+
 0.0.3 / 2016-08-11
 ==================
 * browse view tabs no longer wrap when displayed in sm and md window widths
