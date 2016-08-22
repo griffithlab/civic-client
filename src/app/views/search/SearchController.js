@@ -1845,5 +1845,282 @@
       }
     ];
 
+    vm.fields.sources = [
+      {
+        type: 'queryRow',
+        key: 'queries',
+        templateOptions: {
+          rowFields: [
+            {
+              key: 'field',
+              type: 'queryBuilderSelect',
+              templateOptions: {
+                label: '',
+                required: true,
+                options: [
+                  { value: '', name: 'Please select a field' },
+                  { value: 'pubmed_id', name: 'PubMed ID' },
+                  { value: 'journal', name: 'Journal Name' },
+                  { value: 'abstract', name: 'Abstract' },
+                  { value: 'publication_year', name: 'Publication Year' },
+                  { value: 'author', name: 'Author' },
+                  { value: 'evidence_item_count', name: 'Evidence Items' },
+                  { value: 'pmc_id', name: 'PMC ID' }
+                ],
+                onChange: function(value, options, scope) {
+                  scope.model.condition = {
+                    name: undefined,
+                    parameters: []
+                  };
+                }
+              }
+            }
+          ],
+          conditionFields: {
+            pubmed_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            journal: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'},
+                    {value: 'is_empty', name: 'is empty'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            abstract: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'},
+                    {value: 'is_empty', name: 'is empty'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            pmc_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            author: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'},
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            publication_year: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'},
+                    {value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to'},
+                    {value: 'is_less_than_or_equal_to', name: 'is less than or equal to'},
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            evidence_item_count: [
+              {
+                template: 'with status',
+                className: 'inline-field'
+              },
+              {
+                key: 'parameters[0]', // status
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'accepted'
+                },
+                templateOptions: {
+                  required: true,
+                  label: '',
+                  options: [
+                    { value: 'accepted', name: 'accepted' },
+                    { value: 'submitted', name: 'submitted' },
+                    { value: 'any', name: 'any' },
+                    { value: 'rejected', name: 'rejected' },
+                    { value: 'not rejected', name: 'not rejected' }
+                  ]
+                }
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_greater_than_or_equal_to'
+                },
+                templateOptions: {
+                  required: true,
+                  label: '',
+                  options: [
+                    { value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to' },
+                    { value: 'is_greater_than', name: 'is greater than' },
+                    { value: 'is_less_than', name: 'is less than' },
+                    { value: 'is_less_than_or_equal_to', name: 'is less than or equal to' },
+                    { value: 'is_equal_to', name: 'is equal to' },
+                    { value: 'is_in_the_range', name: 'is in the range'}
+                  ],
+                  onChange: function(value, options, scope) {
+                    _.pullAt(scope.model.parameters, 1,2);
+                  }
+                }
+              },
+              {
+                key: 'parameters[1]', // from value
+                type: 'input',
+                className: 'inline-field inline-field-xs',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              },
+              {
+                template: 'to',
+                className: 'inline-field',
+                hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"'
+              },
+              {
+                key: 'parameters[2]', // to value
+                type: 'input',
+                className: 'inline-field inline-field-xs',
+                hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ]
+          }
+        }
+      }
+    ];
   }
 })();
