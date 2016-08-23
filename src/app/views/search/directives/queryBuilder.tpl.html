@@ -78,6 +78,13 @@
               genes="vm.searchResults">
             </gene-grid>
           </div>
+          <div ng-switch-when="sources">
+            <source-grid
+              context="'search'"
+              rows="15"
+              sources="vm.searchResults">
+            </source-grid>
+          </div>
           <div ng-switch-when="variantGroups">
             <p>Variant Groups Grid will go here.</p>
           </div>

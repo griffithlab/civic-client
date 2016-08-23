@@ -1,0 +1,40 @@
+<div class="sourcesSummary">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 ng-bind="vm.source.title">Source title goes here, currently we're not scraping it</h3>
+      <p ng-bind="vm.source.author_list_string">Authors, go, here!</p>
+      <p><strong>Published: </strong><span ng-bind="vm.source.publication_date_string">8888-88-88</span></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <p ng-bind="vm.source.abstract">Abstract</p>
+    </div>
+    <div class="col-xs-6">
+      <table class="table-compact">
+        <tr>
+          <td class="key">Pubmed ID:</td>
+          <td class="value" ng-bind="vm.source.pubmed_id"></td>
+        </tr>
+        <tr>
+          <td class="key">Citation:</td>
+          <td class="value" ng-bind="vm.source.citation"></td>
+        </tr>
+        <tr>
+          <td class="key">Journal:</td>
+          <td class="value" ng-bind="vm.source.journal"></td>
+        </tr>
+        <tr>
+          <td class="key">Open Access:</td>
+          <td class="value" ng-bind="vm.source.open_access"></td>
+        </tr>
+        <tr>
+          <td class="key">PMC ID:</td>
+          <td class="value" ng-bind="vm.source.pmc_id"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+</div>
