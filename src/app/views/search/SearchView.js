@@ -44,6 +44,16 @@
           navMode: 'sub'
         }
       })
+      .state('search.sources', {
+        url: '/sources/:token',
+        reloadOnSearch: false,
+        controller: 'SearchController',
+        templateUrl: 'app/views/search/searchSources.tpl.html',
+        data: {
+          titleExp: '"Search Sources"',
+          navMode: 'sub'
+        }
+      })
       .state('search.variantGroups', {
         url: '/variantGroups/:token',
         reloadOnSearch: false,
