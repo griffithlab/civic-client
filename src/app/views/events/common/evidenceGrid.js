@@ -12,6 +12,7 @@
       scope: {
         evidence: '=',
         variant: '=',
+        source: '=',
         rows: '=',
         showGeneCol: '=',
         showVariantCol: '=',

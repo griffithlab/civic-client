@@ -4,16 +4,28 @@
 @import 'src/app/styles/_mixins.less';
 
 .sourcesSummary {
-  border: 1px solid #F00;
-  .key {
-    text-align: right;
-    vertical-align: middle;
-    padding-right: @contentPadding/4;
-    font-weight: bold;
+  .table {
+    th {
+      border: none;
+    }
+    td {
+      border: none;
+    }
+
+    .key {
+      text-align: right;
+      vertical-align: middle;
+      padding-right: @contentPadding/2;
+      font-weight: bold;
+    }
+    .value {
+      text-align: left;
+      padding-left: @contentPadding/2;
+      vertical-align: middle;
+    }
   }
-  .value {
-    text-align: left;
-    padding-left: @contentPadding/4;
-    vertical-align: middle;
+
+  .source-title {
+    margin-top: 0;
   }
 }

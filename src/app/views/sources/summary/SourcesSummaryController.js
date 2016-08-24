@@ -4,7 +4,7 @@
     .controller('SourcesSummaryController', SourcesSummaryController);
 
   // @ngInject
-  function SourcesSummaryController($scope, source) {
+  function SourcesSummaryController($scope, source, Search) {
     console.log('SourcesSummaryController called.');
     var vm = $scope.vm = {};
     source.author_list_string = _(source.author_list)
@@ -26,5 +26,28 @@
     source.publication_date_string = pubDate.join('-');
 
     vm.source = source;
+
+    // fetch evidence items associated w/ source
+    var query = {
+      "operator": "AND",
+      "queries": [
+        {"field": "pubmed_id",
+          "condition": {
+          "name": "is",
+            "parameters": [
+              source.pubmed_id
+            ]
+        }
+        }],
+      "entity": "evidence_items",
+      "save": true
+    };
+
+    Search.post(query)
+      .then(function(response) {
+        vm.evidence_items = response.results;
+      });
+
+
   }
 })();

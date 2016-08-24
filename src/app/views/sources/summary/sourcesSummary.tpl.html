@@ -1,9 +1,17 @@
 <div class="sourcesSummary">
+  <div class="title-row">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="name">
+          <h3><a name="top" id="top" style="text-decoration: none; color: inherit;"><span ng-bind="vm.source.citation">Citation</span> Summary</a></h3>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12">
-      <h3 ng-bind="vm.source.title">Source title goes here, currently we're not scraping it</h3>
-      <p ng-bind="vm.source.author_list_string">Authors, go, here!</p>
-      <p><strong>Published: </strong><span ng-bind="vm.source.publication_date_string">8888-88-88</span></p>
+      <h3 ng-bind="vm.source.name" class="source-title">Full Source Title</h3>
+      <p ng-bind="vm.source.author_list_string">Authors List</p>
     </div>
   </div>
   <div class="row">
@@ -11,30 +19,51 @@
       <p ng-bind="vm.source.abstract">Abstract</p>
     </div>
     <div class="col-xs-6">
-      <table class="table-compact">
-        <tr>
-          <td class="key">Pubmed ID:</td>
-          <td class="value" ng-bind="vm.source.pubmed_id"></td>
-        </tr>
-        <tr>
-          <td class="key">Citation:</td>
-          <td class="value" ng-bind="vm.source.citation"></td>
-        </tr>
-        <tr>
-          <td class="key">Journal:</td>
-          <td class="value" ng-bind="vm.source.journal"></td>
-        </tr>
-        <tr>
-          <td class="key">Open Access:</td>
-          <td class="value" ng-bind="vm.source.open_access"></td>
-        </tr>
-        <tr>
-          <td class="key">PMC ID:</td>
-          <td class="value" ng-bind="vm.source.pmc_id"></td>
-        </tr>
-      </table>
+      <div class="well">
+        <table class="table">
+          <tr>
+            <td class="key">Published:</td>
+            <td class="value" ng-bind="vm.source.publication_date_string"></td>
+          </tr>
+          <tr>
+          <tr>
+            <td class="key">Pubmed ID:</td>
+            <td class="value">
+              <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{vm.source.pubmed_id}}"
+              ng-bind="vm.source.pubmed_id" target="_blank">pubmed_id</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="key">Citation:</td>
+            <td class="value" ng-bind="vm.source.citation"></td>
+          </tr>
+          <tr>
+            <td class="key">Journal:</td>
+            <td class="value" ng-bind="vm.source.full_journal_title ? vm.source.full_journal_title : vm.source.journal"></td>
+          </tr>
+          <tr>
+            <td class="key">Open Access:</td>
+            <td class="value" ng-bind="vm.source.open_access ? vm.source.open_access : 'N/A'"></td>
+          </tr>
+          <tr>
+            <td class="key">PMC ID:</td>
+            <td class="value" ng-bind="vm.source.pmc_id ? vm.source.pmc_id : 'N/A'"></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
-
-
+  <div class="row">
+    <div class="col-xs-12">
+      <evidence-grid
+        evidence="vm.evidence_items"
+        rows="8"
+        show-gene-col="true"
+        show-variant-col="true"
+        context="'source_summary'"
+        source="vm.source"
+        rounded="true">
+      </evidence-grid>
+    </div>
+  </div>
 </div>
