@@ -268,17 +268,18 @@
           allowCellFocus: false,
           type: 'string',
           width: '20%',
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
           name: 'publication_year',
-          displayName: 'Pub. Year',
+          displayName: 'Year',
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
-          width: '10%'
+          width: '8%'
         },
         {
           name: 'journal',
@@ -287,16 +288,18 @@
           enableFiltering: true,
           allowCellFocus: false,
           width: '15%',
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
-          name: 'abstract',
-          displayName: 'Abstract',
+          name: 'name',
+          displayName: 'Name',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
