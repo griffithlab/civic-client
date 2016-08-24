@@ -243,6 +243,7 @@
           width: '15%',
           enableFiltering: true,
           allowCellFocus: false,
+          sort: { direction: uiGridConstants.DESC },
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -261,7 +262,7 @@
           }
         },
         {
-          name: 'author_list_string',
+          name: 'author_list',
           displayName: 'Authors',
           enableFiltering: true,
           allowCellFocus: false,
@@ -272,10 +273,10 @@
           }
         },
         {
-          name: 'publication_date_string',
-          displayName: 'Date',
+          name: 'publication_year',
+          displayName: 'Pub. Year',
           type: 'string',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
           width: '10%'
         },
@@ -283,9 +284,12 @@
           name: 'journal',
           displayName: 'Journal',
           type: 'string',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
-          width: '15%'
+          width: '15%',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         },
         {
           name: 'abstract',
@@ -296,6 +300,15 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'evidence_item_count',
+          type: 'number',
+          displayName: 'Evidence Items',
+          width: '15%',
+          enableFiltering: false,
+          allowCellFocus: false,
+          sort: { direction: uiGridConstants.DESC }
         }
       ]
     };
@@ -395,6 +408,8 @@
               variant_group.variant_count = variant_group.variants.split(', ').length;
               return variant_group;
             });
+            ctrl.gridOptions.data = data.result;
+          } else if (ctrl.mode === 'sources') {
             ctrl.gridOptions.data = data.result;
           } else {
             ctrl.gridOptions.data = data.result;

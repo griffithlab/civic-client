@@ -127,6 +127,7 @@
 
       function prepSources(sources) {
         return _.map(sources, function(source) {
+          // TODO: refactor this into the service, we're doing the same munging in 3 places
           // format publication date
           var pubDate = [source.publication_date.year];
           if(!_.isUndefined(source.publication_date.month))
