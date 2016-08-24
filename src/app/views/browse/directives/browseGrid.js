@@ -247,6 +247,56 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         }
+      ],
+      'sources': [
+        {
+          name: 'pubmed_id',
+          displayName: 'Pubmed ID',
+          enableFiltering: true,
+          allowCellFocus: false,
+          type: 'string',
+          width: '8%',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'author_list_string',
+          displayName: 'Authors',
+          enableFiltering: true,
+          allowCellFocus: false,
+          type: 'string',
+          width: '20%',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'publication_date_string',
+          displayName: 'Date',
+          type: 'string',
+          enableFiltering: false,
+          allowCellFocus: false,
+          width: '10%'
+        },
+        {
+          name: 'journal',
+          displayName: 'Journal',
+          type: 'string',
+          enableFiltering: false,
+          allowCellFocus: false,
+          width: '15%'
+        },
+        {
+          name: 'abstract',
+          displayName: 'Abstract',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        }
       ]
     };
 
@@ -309,12 +359,17 @@
             geneId: row.entity.id,
             '#': 'gene'
           };
-        } else {
+        } else if (ctrl.mode === 'variant_groups') {
           state = 'events.genes.summary.variantGroups.summary';
           params = {
             geneId: row.entity.gene_ids[0],
             variantGroupId: row.entity.id,
             '#': 'variant-group'
+          };
+        } else if (ctrl.mode === 'sources') {
+          state = 'sources.summary';
+          params = {
+            sourceId: row.entity.id
           };
         }
 

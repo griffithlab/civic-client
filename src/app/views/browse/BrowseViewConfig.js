@@ -67,6 +67,25 @@
             else { return 1; }
           }
         }
+      })
+      .state('browse.sources', {
+        url: '/sources?page',
+        reloadOnSearch: false,
+        controller: 'BrowseController',
+        templateUrl: 'app/views/browse/browseViews.tpl.html',
+        data: {
+          titleExp: '"Browse Sources"',
+          navMode: 'sub'
+        },
+        resolve: {
+          mode: function() {
+            return 'sources';
+          },
+          page: /* @ngInject */ function($stateParams, _) {
+            if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
+            else { return 1; }
+          }
+        }
       });
   }
 
