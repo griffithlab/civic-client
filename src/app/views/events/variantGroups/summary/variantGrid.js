@@ -59,9 +59,12 @@
         { name: 'entrez_name',
           displayName: 'Gene',
           type: 'string',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
-          width: '9%'
+          width: '9%',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         },
         { name: 'name',
           displayName: 'Variant Name',
@@ -79,6 +82,15 @@
           allowCellFocus: false,
           type: 'string',
           width: '20%',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        { name: 'variant_type_list',
+          displayName: 'Variant Types(s)',
+          enableFiltering: true,
+          allowCellFocus: false,
+          type: 'string',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -103,11 +115,11 @@
 
       ctrl.context = $scope.context;
       ctrl.variantGroup = $scope.variantGroup;
-      ctrl.variantGridOptions.data = prepVariantGroups(variants);
+      ctrl.variantGridOptions.data = prepVariants(variants);
 
       $scope.$watchCollection('variants', function(variants) {
         ctrl.variantGridOptions.minRowsToShow = variants.length + 1;
-        ctrl.variantGridOptions.data = prepVariantGroups(variants);
+        ctrl.variantGridOptions.data = prepVariants(variants);
       });
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
@@ -123,17 +135,23 @@
         }
       });
 
-      function prepVariantGroups(variants) {
-        var vargroups = _.map(variants, function(item){
+      function prepVariants(variants) {
+        return  _.map(variants, function(item){
+          // create variant group list
           if (_.isArray(item.variant_groups) && item.variant_groups.length > 0) {
             item.variant_group_list = _.map(item.variant_groups, 'name').join(', ');
-            return item;
           } else {
             item.variant_group_list = 'N/A';
-            return item;
           }
+
+          // create variant types list
+          if (_.isArray(item.variant_types) && item.variant_types.length > 0) {
+            item.variant_type_list = _.map(item.variant_types, 'display_name').join(', ');
+          } else {
+            item.variant_type_list = 'N/A';
+          }
+          return item;
         });
-        return vargroups;
       }
     };
   }
