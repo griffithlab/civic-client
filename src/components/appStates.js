@@ -54,6 +54,14 @@
           navMode: 'sub'
         }
       })
+      .state('meetings', {
+        url: '/meetings',
+        templateUrl: 'app/pages/meetings.tpl.html',
+        data: {
+          titleExp: '"Meetings"',
+          navMode: 'sub'
+        }
+      })
       .state('glossary', {
         url: '/glossary',
         templateUrl: 'app/pages/glossary.tpl.html',
