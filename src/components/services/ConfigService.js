@@ -27,8 +27,8 @@
       ],
       footerMenuItems: [
         {
-          label: 'Publications',
-          state: 'publications'
+          label: 'Meetings',
+          state: 'meetings'
         },
         {
           label: 'Glossary of Terms',
