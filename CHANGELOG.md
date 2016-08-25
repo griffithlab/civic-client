@@ -1,3 +1,10 @@
+0.0.5 / 2016-08-18
+==================
+* sources now have their own summary view
+* advanced search now provides an option to search sources
+* browse view now provides option to browse sources
+
+
 0.0.4 / 2016-08-18
 ==================
 * added publication year to evidence search query builder
