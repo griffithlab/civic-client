@@ -93,7 +93,8 @@
           type: 'string',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/events/variantGroups/summary/variantGridTooltipCell.tpl.html'
         },
         {
           name: 'description',
