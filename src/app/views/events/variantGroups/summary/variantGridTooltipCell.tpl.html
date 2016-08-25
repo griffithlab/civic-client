@@ -1,0 +1,10 @@
+<div class="ngCellText" ng-class="col.colIndex()"
+     tooltip="{{row.entity[col.field]}}"
+     tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
+     tooltip-placement="top"
+     tooltip-append-to-body="true">
+  <div class="ui-grid-cell-contents">
+    {{ row.entity[col.field] }}
+  </div>
+</div>
+
