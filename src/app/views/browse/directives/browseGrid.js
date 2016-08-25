@@ -308,7 +308,7 @@
           name: 'evidence_item_count',
           type: 'number',
           displayName: 'Evidence Items',
-          width: '15%',
+          width: '10%',
           enableFiltering: false,
           allowCellFocus: false,
           sort: { direction: uiGridConstants.DESC }
