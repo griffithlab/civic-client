@@ -26,16 +26,19 @@
             <td class="value" ng-bind="vm.source.publication_date_string"></td>
           </tr>
           <tr>
+            <td class="key">Citation:</td>
+            <td class="value" ng-bind="vm.source.citation"></td>
+          </tr>
           <tr>
             <td class="key">Pubmed ID:</td>
             <td class="value">
               <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{vm.source.pubmed_id}}"
-                 ng-bind="vm.source.pubmed_id" target="_blank">pubmed_id</a>
+                 class="btn btn-xs button-pubmed"
+                 target="_blank">
+                <span class="glyphicon glyphicon-new-window"></span>
+                <span ng-bind="vm.source.pubmed_id"></span>
+              </a>
             </td>
-          </tr>
-          <tr>
-            <td class="key">Citation:</td>
-            <td class="value" ng-bind="vm.source.citation"></td>
           </tr>
           <tr>
             <td class="key">Journal:</td>
