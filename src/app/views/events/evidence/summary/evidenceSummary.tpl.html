@@ -17,7 +17,8 @@
             <span class="levelBadge"
                   ng-class="{'levelA': evidence.evidence_level === 'A', 'levelB': evidence.evidence_level === 'B','levelC': evidence.evidence_level === 'C', 'levelD': evidence.evidence_level === 'D', 'levelE': evidence.evidence_level === 'E' }"
                   tooltip="{{tipText.evidence_level[evidence.evidence_level]}}"
-                  tooltip-placement="right">
+                  tooltip-placement="right"
+                  class="help-tooltip">
               {{ evidence.evidence_level_string }}
             </span>
           </td>
@@ -27,7 +28,8 @@
           <td class="value">
             <span ng-bind="evidence.evidence_type"
                   tooltip="{{tipText.evidence_type[evidence.evidence_type]}}"
-                  tooltip-placement="right">
+                  tooltip-placement="right"
+                  class="help-tooltip">
               evidence type</span>
           </td>
         </tr>
@@ -36,7 +38,8 @@
           <td class="value">
             <span ng-bind="evidence.evidence_direction"
                   tooltip="{{tipText.evidence_direction[evidence.evidence_type][evidence.evidence_direction]}}"
-                  tooltip-placement="right">
+                  tooltip-placement="right"
+                  class="help-tooltip">
               evidence.evidence_direction
             </span>
           </td>
@@ -47,7 +50,9 @@
           <td class="value">
             <span ng-bind="evidence.clinical_significance"
                   tooltip="{{tipText.clinical_significance[evidence.clinical_significance]}}"
-                  tooltip-placement="right">
+                  tooltip-placement="right"
+                  class="help-tooltip"
+                  class="help-tooltip">
               evidence.clinical_significance
             </span>
           </td>
@@ -58,7 +63,8 @@
           <td class="value">
             <span ng-bind="evidence.variant_origin"
                   tooltip="{{tipText.variant_origin[evidence.variant_origin]}}"
-                  tooltip-placement="right">
+                  tooltip-placement="right"
+                  class="help-tooltip">
               evidence.variant_origin
             </span>
           </td>
@@ -92,17 +98,28 @@
           <td class="name">Citation:</td>
           <td class="value">
             <a ui-sref="sources.summary({sourceId: evidence.source.id })">
-              {{ evidence.citation }}
+              {{ evidence.source.citation }}
             </a>
           </td>
         </tr>
-
+        <tr>
+          <td class="name">Pubmed ID:</td>
+          <td class="value">
+            <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{evidence.source.pubmed_id}}"
+               class="btn btn-xs button-pubmed"
+               target="_blank">
+              <span class="glyphicon glyphicon-new-window"></span>
+              <span ng-bind="evidence.source.pubmed_id"></span>
+            </a>
+          </td>
+        </tr>
         <tr>
           <td class="name">Trust Rating:</td>
           <td class="value">
             <rating ng-model="evidence.rating" max="5" readonly="true"
                     tooltip="{{tipText.rating[evidence.rating]}}"
-                    tooltip-placement="left">
+                    tooltip-placement="left"
+                    class="help-tooltip">
             </rating>
           </td>
         </tr>
@@ -123,7 +140,8 @@
     <div class="col-xs-6">
       <span tooltip="Contributors may not accept their own submissions."
             tooltip-append-to-body="true"
-            tooltip-enable="ownerIsCurrentUser">
+            tooltip-enable="ownerIsCurrentUser"
+            class="help-tooltip">
       <button class="btn btn-default btn-block btn-success"
               ng-disabled="ownerIsCurrentUser"
               ng-click="acceptItem(evidence.id)">
