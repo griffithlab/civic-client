@@ -11,12 +11,12 @@
   <div class="row">
     <div class="col-xs-12">
       <h3 ng-bind="vm.source.name" class="source-title">Full Source Title</h3>
-      <p ng-bind="vm.source.author_list_string">Authors List</p>
+      <p><strong>Authors:</strong> <span ng-bind="vm.source.author_list_string">Authors List</span></p>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <p ng-bind="vm.source.abstract">Abstract</p>
+      <p><strong>Abstract:</strong> <span ng-bind="vm.source.abstract">Abstract</span></p>
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="well">

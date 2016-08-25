@@ -75,7 +75,7 @@
           name: 'publication_date_string',
           displayName: 'Date',
           type: 'string',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
           width: '10%'
         },
@@ -83,7 +83,7 @@
           name: 'journal',
           displayName: 'Journal',
           type: 'string',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
           width: '15%'
         },
