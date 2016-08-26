@@ -8,22 +8,57 @@
       </div>
     </div>
   </div>
-  <div class="row" ng-repeat="release in vm.releases">
-    <div class="col-xs-4">
-      <h2 ng-bind="release.note | capitalize">Release Type</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li ng-repeat="fileName in release.fileNames">
-          <a ng-href="{{release.fileUrls[$index]}}">
-            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;
-            <strong>{{ fileName }}</strong>
-          </a>
-        </li>
-      </ul>
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table">
+        <tr>
+          <th class="date">
+            Date
+          </th>
+          <th>
+            Gene Summaries
+          </th>
+          <th>
+            Variant Summaries
+          </th>
+          <th>
+            Variant Group Summaries
+          </th>
+          <th>
+            Evidence Summaries
+          </th>
+        </tr>
+        <tr ng-repeat="release in vm.releases">
+          <td class="date" ng-bind="release.note | capitalize">
+
+          </td>
+          <td class="link">
+            <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[0]}}">
+              <span class="glyphicon glyphicon-download-alt"></span>
+              GeneSummaries.tsv
+            </a>
+          </td>
+          <td class="link">
+            <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[1]}}">
+              <span class="glyphicon glyphicon-download-alt"></span>
+              VariantSummaries.tsv
+            </a>
+          </td>
+          <td class="link">
+            <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[3]}}">
+              <span class="glyphicon glyphicon-download-alt"></span>
+              VariantGroupSummaries.tsv
+            </a>
+          </td>
+
+          <td class="link">
+            <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[2]}}">
+              <span class="glyphicon glyphicon-download-alt"></span>
+              ClinicalEvidenceSummaries.tsv
+            </a>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
-  <!--<div class="row">-->
-  <!--<div class="col-xs-12">-->
-  <!--<pre ng-bind="vm.releases|json"></pre>-->
-  <!--</div>-->
-  <!--</div>-->
 </div>
