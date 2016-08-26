@@ -80,7 +80,7 @@
           width: '10%'
         },
         {
-          name: 'journal',
+          name: 'full_journal_title',
           displayName: 'Journal',
           type: 'string',
           enableFiltering: true,
