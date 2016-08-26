@@ -29,7 +29,7 @@
 
     var vm = $scope.vm = {};
 
-    vm.rowsToShow = $scope.rows ? 10 : $scope.rows;
+    vm.rowsToShow = $scope.rows ? $scope.rows : 10;
     vm.sourceGridOptions = {
       minRowsToShow: vm.rowsToShow - 1,
       //enablePaginationControls: true,
