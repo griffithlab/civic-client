@@ -27,10 +27,6 @@
       ],
       footerMenuItems: [
         {
-          label: 'Meetings',
-          state: 'meetings'
-        },
-        {
           label: 'Glossary of Terms',
           state: 'glossary'
         },
@@ -45,6 +41,10 @@
         {
           label: 'Presentation Graphics',
           state: 'graphics'
+        },
+        {
+          label: 'Meetings and Events',
+          state: 'meetings'
         },
         {
           label: 'Contact',
