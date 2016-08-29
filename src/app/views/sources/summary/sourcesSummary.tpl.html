@@ -45,21 +45,9 @@
             <td class="value" ng-bind="vm.source.full_journal_title ? vm.source.full_journal_title : vm.source.journal"></td>
           </tr>
           <tr>
-            <td class="key">Open Access:</td>
+            <td class="key">PMC ID:</td>
             <td class="value">
-              <span ng-switch="vm.source.open_access">
-                <span ng-switch-when="true">
-                  <i class="glyphicon glyphicon-ok-sign" style="color: darkgreen;"></i>
-                </span>
-                <span ng-switch-when="false">
-                  <i class="glyphicon glyphicon-remove-sign" style="color: darkred"></i>
-                </span>
-              </span>
-              &nbsp;
-              <span ng-if="vm.source.open_access">
-                <strong>PMC ID:</strong>
-                <span ng-bind="vm.source.pmc_id ? vm.source.pmc_id : 'N/A'"> PMC ID </span>
-              </span>
+              <span ng-bind="vm.source.pmc_id ? vm.source.pmc_id : 'N/A'"> PMC ID </span>
             </td>
           </tr>
         </table>
