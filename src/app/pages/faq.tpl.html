@@ -37,15 +37,15 @@
 
       <p><strong><i>What is a <b>Variant</b>?</i></strong><br/>
 
-        A variant in CIViC is any 'omic' alteration associated with cancer. This includes single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's), structural variants (SVs), transcript fusions, and other genomic/molecular events with cancer associations. Though we have focused on DNA changes, alterations that manifest at the RNA, protein, or epigenetic level are allowed, again as long as there is a demonstrated clinical relevance. In general, the concept of a variant in CIViC is very flexible but it is highly preferred that the variant be something that could be measured with some quantitative assay (NGS sequencing, qPCR, etc.).</p>
+        A genetic variant is a non-exact copy of a biological sequence. This includes single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's), structural variants (SVs), transcript fusions, and other genomic/molecular events with cancer associations. The vast majority of variants described in CIViC represent mutations at the DNA level, however, alterations that manifest at the RNA, protein, or epigenetic level are also accepted so as long as there is a demonstrated clinical relevance. In general, the concept of a variant in CIViC is very flexible but it is highly preferred that the variant be something that could be measured with some quantitative assay (NGS sequencing, qPCR, etc.).</p>
 
       <p><strong><i>What kinds of Variants belong in CIViC? What does not?</i></strong><br>
 
-        In order to be accepted by CIViC, a variant must be related to cancer and have some *clinical* relevance. Relevance to cancer biology alone is NOT sufficient unless there is also some documented relationship between the variant and diagnosis, prognosis, or response to a specific treatment. Variants related to diseases other than cancer should not be entered (there is some grey area for cancer like conditions). Most variants in CIViC are somatic but rare germline variants or common polymorphisms are also welcome (as long as they have diagnostic, prognostic or predictive value). The quality of evidence suggesting clinical relevance of a variant may vary considerably. Before contributing to CIViC please review the <a ui-sref="help.evidence"> data model</a>.</p>
+        Variant descriptions will be accepted into CIViC provided there is evidence linking the variant to cancer with some *clinical* relevance. Relevance to cancer biology alone is NOT sufficient unless there is also some documented relationship between the variant and diagnosis, prognosis, or response to a specific treatment. Variants related to diseases other than cancer should not be entered (there is some grey area for cancer-like conditions). CIViC accepts somatic variants, germline variants, and common polymorphisms related to cancer (as long as they have clinical relevance), however, most variants in CIViC are somatic mutations. The quality of evidence suggesting clinical relevance of a variant may vary considerably. Before contributing to CIViC please review the <a ui-sref="help.evidence"> data model</a>.</p>
 
       <p><strong><i>What is an <b>Evidence Statement</b>?</i></strong><br/>
 
-        An evidence statement is an assertion about the clinical relevance of a variant that has been determined by an experiment, trial, or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis. A single citation can be the source of multiple evidence statments but each evidence statment has only one source. A single evidence statement should correspond to only one clinical interpretation and disease. For example, if a paper describes both a predictive and prognostic relevance for a variant, two evidence statements should be created. If two publications, draw the same conclusions about the clinical relevance of a variant, these should also be entered as two evidence statements.</p>
+        An evidence statement is an assertion about the clinical relevance of a variant that has been determined by an experiment, trial, or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis. A single citation can be the source of multiple evidence statments, but each evidence statment has only one source. A single evidence statement should correspond to only one clinical interpretation and disease. For example, if a paper describes both a predictive and prognostic relevance for a variant, two evidence statements should be created. If two publications draw the same conclusions about the clinical relevance of a variant, these should also be entered as two evidence statements.</p>
 
       <p><strong><i>How is this information organized?</i></strong><br/>
 
@@ -53,7 +53,7 @@
 
       <p><strong><i>What information is currently in CIViC?</i></strong><br/>
 
-      CIViC currently houses over 700 evidence statements about 312 variants in 132 genes across 90 cancer types, and these numbers are growing rapidly with your help! Refer to the <a ui-sref="home">Home</a> page for up to date statistics.</p>
+      CIViC currently houses over hundreds of evidence statements, variants and genes across multiple cancer types and these numbers are growing rapidly with your help! Refer to the <a ui-sref="home">Home</a> page for up to date statistics.</p>
 
       <p><strong><i>How do I contribute information?</i></strong><br/>
 
@@ -61,7 +61,7 @@
 
       <p><strong><i>My favorite Gene/Variant is not in CIViC?!?</i></strong><br/>
 
-        The extensive manual curation involved in adding evidence statements means we have not been able to populate a published evidence statement from every variant or gene of interest. This is precisely why we need community-driven efforts to grow this database. In order for a gene or variant to appear in CIViC, it must have an evidence statement associated with it. To add evidence statements and begin the discussion about your gene/variant of interest, go <a ui-sref="collaborate">here</a>!</p>
+        The extensive manual curation required to add evidence statements means that there might not yet be a published evidence statement for every variant or gene of interest. This is precisely why we need community-driven efforts to grow this database. For a gene or variant to appear in CIViC, it must have an evidence statement associated with it. To add evidence statements and begin the discussion about your gene/variant of interest, go <a ui-sref="collaborate">here</a>!</p>
 
       <p><strong><i>May I enter unpublished results from n-of-1 observations?</i></strong><br>
 
@@ -73,7 +73,7 @@
 
       <p><strong><i>What is a Disease Ontology ID (DOID)?</i></strong><br/>
 
-        In order to provide a structured representation of the diseases associated with evidence statements, we ask that you use disease names as they exist in the Disease Ontology from <a href="http://disease-ontology.org/"> disease-ontology.org</a>. This allows for consistent representation and minimized ambiguity when referring to diseases. Such ontologies also support more flexible data queries that allow disease groupings ranging from generic terms to highly specific subtypes. If the disease ontology is missing an important recognized sub-type of disease, we will try to work with them to update their resource. Please contact us if you find such cases.</p>
+        To provide a structured representation of the diseases associated with evidence statements, we ask that you use disease names as they exist in the Disease Ontology from <a href="http://disease-ontology.org/"> disease-ontology.org</a>. This allows for consistent representation and minimized ambiguity when referring to diseases. Such ontologies also support more flexible data queries that allow disease groupings ranging from generic terms to highly specific subtypes. If the disease ontology is missing an important recognized sub-type of disease, we will try to work with them to update their resource. Please contact us if you find such cases.</p>
 
       <p><strong><i>What is a PubChem ID (PCID)?</i></strong><br/>
 
