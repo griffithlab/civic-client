@@ -1,4 +1,98 @@
 <div class="help-sub-tab">
   <p>
   Variant types are used to classify variants within the structured ontology terms provided by <a href='http://www.sequenceontology.org/index.html'>The Sequence Ontology Project</a>. Multiple terms for a variant are allowed to facilitate functional and structural effects of the variant. Ideally, the most specific child terms of a branch are used. These variant types can be used to search for variants within the CIViC database that meet a users' criteria via the advanced search page or through the API.</p>
+  <p>
+  General Rules:<br>
+  1) Choose the most specific terms.<br>
+  2) Do not use terms that are ancestors/decendants of each other.<br>
+  3) Wherever possible use the 'sequence_variant' tree of the sequence ontology.</p>
+
+  <h4>Variant Type Guidelines</h4>
+
+  <table class="table table-striped table-condensed table-bordered">
+    <tr>
+      <th class="term">
+        Sequence Ontology Term
+      </th>
+      <th class="definition">
+        Sequence Ontology Definition
+      </th>
+      <th class="comments">
+        Comments
+      </th>
+      <th class="examples">
+        Examples
+      </th>
+    </tr>
+    <tr>
+      <td class="term">
+        missense_variant
+      </td>
+      <td class="definition">
+        A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved.
+      </td>
+      <td class="comments">
+      </td>
+      <td class="examples">
+        <a href='https://civic.genome.wustl.edu/#/events/genes/30/summary/variants/79/summary'>G12D</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="term">
+        protein_altering_variant
+      </td>
+      <td class="definition">
+        A sequence_variant which is predicted to change the protein encoded in the coding sequence.
+      </td>
+      <td class="comments">
+      </td>
+      <td class="examples">
+        <p><a href='https://civic.genome.wustl.edu/#/events/genes/30/summary/variants/76/summary#variant'>G12</a></p>
+        <p><a href='https://civic.genome.wustl.edu/#/events/genes/20/summary/variants/413/summary'>KINASE DOMAIN MUTATION</a></p>
+      </td>
+    </tr>
+    <tr>
+      <td class="term">
+        frameshift_truncation
+      </td>
+      <td class="definition">
+        A frameshift variant that causes the translational reading frame to be shortened relative to the reference feature.
+      </td>
+      <td class="comments">
+      </td>
+      <td class="examples">
+        <a href='https://civic.genome.wustl.edu/#/events/genes/69/summary/variants/243/summary'>V2288fs*1</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="term">
+        inframe_deletion
+      </td>
+      <td class="definition">
+        An inframe non synonymous variant that deletes bases from the coding sequence.
+      </td>
+      <td class="comments">
+      </td>
+      <td class="examples">
+        <p><a href='https://civic.genome.wustl.edu/#/events/genes/38/summary/variants/101/summary'>DEL I843</a></p>
+        <p><a href='https://civic.genome.wustl.edu/#/events/genes/29/summary/variants/202/summary'>V560DEL</a></p>
+        <p><a href='https://civic.genome.wustl.edu/#/events/genes/20/summary/variants/37/summary'>DEL 755-759</a></p>
+      </td>
+    </tr>
+    <tr>
+      <td class="term">
+        inframe_insertion
+      </td>
+      <td class="definition">
+        An inframe non synonymous variant that inserts bases into in the coding sequence.
+      </td>
+      <td class="comments">
+      </td>
+      <td class="examples">
+        <p><a href='https://civic.genome.wustl.edu/#/events/genes/20/summary/variants/41/summary'>P780INS</a></p>
+        <p><a href='https://civic.genome.wustl.edu/#/events/genes/20/summary/variants/414/summary'>M774INSAYVM</a></p>
+      <p><a href='https://civic.genome.wustl.edu/#/events/genes/24/summary/variants/55/summary'>ITD</a></p>
+      </td>
+    </tr>
+  </table>
 </div>
