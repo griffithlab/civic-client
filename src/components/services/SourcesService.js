@@ -19,6 +19,12 @@
           url: '/api/sources/:sourceId',
           isArray: false,
           cache: true
+        },
+        suggest: {
+          method: 'POST',
+          url: '/api/sources/suggest',
+          isArray: false,
+          cache: false
         }
       }
     );
@@ -35,7 +41,8 @@
         collection: collection
       },
       query: query,
-      get: get
+      get: get,
+      suggest: suggest
     };
 
     function query() {
@@ -48,6 +55,14 @@
 
     function get(sourceId) {
       return SourcesResource.get({sourceId: sourceId}).$promise
+        .then(function(response) {
+          angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function suggest(reqObj) {
+      return SourcesResource.get(reqObj).$promise
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;

@@ -4,9 +4,12 @@
     .controller('SourcesSummaryController', SourcesSummaryController);
 
   // @ngInject
-  function SourcesSummaryController($scope, source, Search) {
+  function SourcesSummaryController($scope, source, Security, Search) {
     console.log('SourcesSummaryController called.');
     var vm = $scope.vm = {};
+
+    vm.isEditor = Security.isEditor();
+
     source.author_list_string = _(source.author_list)
       .sortBy('position')
       .map(function(author) {
