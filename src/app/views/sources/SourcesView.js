@@ -29,15 +29,6 @@
             return Sources.get($stateParams.sourceId);
           }
         }
-      })
-      .state('sources.suggest', {
-        url: '/suggest',
-        templateUrl: 'app/views/sources/suggest/sourcesSuggest.tpl.html',
-        controller: 'SourcesSuggestController',
-        data: {
-          titleExp: '"Suggest a Source"',
-          navMode: 'sub'
-        }
       });
   }
 

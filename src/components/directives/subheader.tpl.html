@@ -34,14 +34,14 @@
                 <div ng-switch-when="false">
               <span tooltip="Please sign in to add Evidence" tooltip-append-to-body="true">
                 <a type="button"
-                   class="btn btn-sm btn-subhead-emphasized btn-block disabled">
+                   class="btn btn-sm btn-subhead-add btn-block disabled">
                   Add
                 </a>
               </span>
                 </div>
                 <div ng-switch-when="true">
                   <a type="button"
-                     class="btn btn-sm btn-subhead-emphasized btn-block"
+                     class="btn btn-sm btn-subhead-add btn-block"
                      ng-disabled="$state.includes('add.evidence')"
                      ng-href="{{ addEvidenceUrl }}">
                     Add
@@ -54,16 +54,16 @@
                 <div ng-switch-when="false">
               <span tooltip="Please sign in to Suggest a Source" tooltip-append-to-body="true">
                 <a type="button"
-                   class="btn btn-sm btn-subhead-emphasized btn-block disabled">
+                   class="btn btn-sm btn-subhead-suggest btn-block disabled">
                   Suggest
                 </a>
               </span>
                 </div>
                 <div ng-switch-when="true">
                   <a type="button"
-                     class="btn btn-sm btn-subhead-emphasized btn-block"
+                     class="btn btn-sm btn-subhead-suggest btn-block"
                      ng-disabled="$state.includes('add.evidence')"
-                     ui-sref="sources.suggest">
+                     ui-sref="suggest.source">
                     Suggest
                   </a>
                 </div>
