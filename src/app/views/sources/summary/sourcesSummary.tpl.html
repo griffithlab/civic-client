@@ -64,9 +64,13 @@
         </div>
       </div>
       <div class="row" ng-if="vm.isEditor">
-        <div class="col-xs-12">
-          <a ng-click="deQueue()"
-             class="btn btn-success btn-sm btn-block">Remove from Curation Queue</a>
+        <div class="col-xs-6">
+          <a ng-click="vm.addEvidence()"
+             class="btn btn-subhead-add btn-sm btn-block">Add Evidence Item</a>
+        </div>
+        <div class="col-xs-6">
+          <a ng-click="vm.deQueue()"
+             class="btn btn-default btn-sm btn-block">REMOVE FROM CURATION QUEUE</a>
         </div>
       </div>
 
