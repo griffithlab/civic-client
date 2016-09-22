@@ -189,6 +189,10 @@
     <!-- Suggest Styles -->
     <link rel="stylesheet" href="app/views/suggest/source/suggestSource.css">
 
+    <!-- Curation Tools Styles -->
+    <link rel="stylesheet" href="app/views/curation/sources/sourcesQueue.css">
+    <link rel="stylesheet" href="app/views/curation/evidence/evidenceQueues.css">
+
     <!-- endbuild -->
   </head>
   <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
@@ -653,9 +657,14 @@
     <script src="app/views/sources/summary/SourcesSummaryController.js"></script>
     <script src="app/views/sources/components/sourceGrid.js"></script>
 
-    <!-- ** Suggest View -->
+    <!-- ** Suggest View ** -->
     <script src="app/views/suggest/SuggestView.js"></script>
     <script src="app/views/suggest/source/SuggestSourceController.js"></script>
+
+
+    <!-- ** Curation View ** -->
+    <script src="app/views/curation/CurationView.js"></script>
+    <script src="app/views/curation/sources/SourcesQueueController.js"></script>
 
     <!-- inject:partials -->
 

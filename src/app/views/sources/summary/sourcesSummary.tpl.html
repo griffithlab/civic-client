@@ -52,6 +52,12 @@
                   <span ng-bind="vm.source.pmc_id ? vm.source.pmc_id : 'N/A'"> PMC ID </span>
                 </td>
               </tr>
+              <tr>
+                <td class="key">Status:</td>
+                <td class="value">
+                  <span ng-bind="vm.source.status"> Source Status</span>
+                </td>
+              </tr>
             </table>
 
           </div>
@@ -66,7 +72,7 @@
 
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="margin-top: 1.5em">
     <div class="col-xs-12">
       <evidence-grid
         evidence="vm.evidence_items"
@@ -79,33 +85,33 @@
       </evidence-grid>
     </div>
   </div>
-  <div class="row" style="margin-top: 1.5em">
-    <div class="col-xs-12">
-      <h4>Source Comments</h4>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 comment-list">
-      <div ng-switch="vm.comments.length > 0">
-        <div ng-switch-when="true">
-          <ul class="comments">
-            <li ng-repeat="comment in vm.comments">
-              <entity-comment
-                comment-data="comment"
-                entity-model="vm.source">
-              </entity-comment>
-            </li>
-          </ul>
-        </div>
-        <div ng-switch-default>
-          <p>No Comments for this Source.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 comment-form">
-      <entity-comment-form type="entity" entity-model="vm.source"></entity-comment-form>
-    </div>
-  </div>
+  <!--<div class="row" style="margin-top: 1.5em">-->
+    <!--<div class="col-xs-12">-->
+      <!--<h4>Source Comments</h4>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12 comment-list">-->
+      <!--<div ng-switch="vm.comments.length > 0">-->
+        <!--<div ng-switch-when="true">-->
+          <!--<ul class="comments">-->
+            <!--<li ng-repeat="comment in vm.comments">-->
+              <!--<entity-comment-->
+                <!--comment-data="comment"-->
+                <!--entity-model="vm.source">-->
+              <!--</entity-comment>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div ng-switch-default>-->
+          <!--<p>No Comments for this Source.</p>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12 comment-form">-->
+      <!--<entity-comment-form type="entity" entity-model="vm.source"></entity-comment-form>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

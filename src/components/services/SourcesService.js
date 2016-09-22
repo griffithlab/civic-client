@@ -22,7 +22,17 @@
         },
         suggest: {
           method: 'POST',
-          url: '/api/sources/suggest',
+          url: '/api/sources',
+          isArray: false,
+          cache: false
+        },
+        querySuggested: {
+          method: 'GET',
+          url: '/api/datatables/source_suggestions',
+          params: {
+            count: '@count',
+            page: '@page'
+          },
           isArray: false,
           cache: false
         }
@@ -34,15 +44,17 @@
   function SourcesService(SourcesResource) {
     var item = {};
     var collection = [];
-
+    var suggested = [];
     return {
       data: {
         item: item,
-        collection: collection
+        collection: collection,
+        suggested: suggested
       },
       query: query,
       get: get,
-      suggest: suggest
+      suggest: suggest,
+      getSuggested: getSuggested
     };
 
     function query() {
@@ -62,9 +74,16 @@
     }
 
     function suggest(reqObj) {
-      return SourcesResource.get(reqObj).$promise
+      return SourcesResource.suggest(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function getSuggested(reqObj) {
+      return SourcesResource.querySuggested(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response.result, suggested);
           return response.$promise;
         });
     }

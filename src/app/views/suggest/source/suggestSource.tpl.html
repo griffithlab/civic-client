@@ -8,27 +8,28 @@
       </div>
     </div>
   </div>
-  <div class="row instructions">
-    <div class="col-xs-12">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ex lorem, fringilla sit amet laoreet at, feugiat sit amet turpis. Sed vehicula libero sed elementum tincidunt. Fusce at ligula id justo dictum luctus. Sed scelerisque, ipsum nec viverra condimentum, quam ante bibendum ipsum, non bibendum lorem dui id dolor. In eleifend cursus molestie. Duis eu rhoncus nibh. Sed molestie, magna at vehicula sollicitudin, nisl nulla scelerisque lectus, non elementum nisi erat vitae elit.</p>
+  <div ng-if="vm.showForm">
+    <div class="row instructions">
+      <div class="col-xs-12">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ex lorem, fringilla sit amet laoreet at, feugiat sit amet turpis. Sed vehicula libero sed elementum tincidunt. Fusce at ligula id justo dictum luctus. Sed scelerisque, ipsum nec viverra condimentum, quam ante bibendum ipsum, non bibendum lorem dui id dolor. In eleifend cursus molestie. Duis eu rhoncus nibh. Sed molestie, magna at vehicula sollicitudin, nisl nulla scelerisque lectus, non elementum nisi erat vitae elit.</p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <form class="form-horizontal" name="vm.form" novalidate>
-        <formly-form options="vm.formOptions" model="vm.newSuggestion" fields="vm.suggestionFields">
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal" name="vm.form" novalidate>
+          <formly-form options="vm.formOptions" model="vm.newSuggestion" fields="vm.suggestionFields">
 
-        </formly-form>
-      </form>
+          </formly-form>
+        </form>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-5 col-xs-offset-2">
-      <div class="buttons">
-        <div class="pull-left">
-          <cancel-button></cancel-button>
-        </div>
-        <div class="pull-right">
+    <div class="row">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="buttons">
+          <div class="pull-left">
+            <cancel-button></cancel-button>
+          </div>
+          <div class="pull-right">
             <span ng-disabled="vm.isAuthenticated">
             <button type="submit"
                     class="btn btn-default"
@@ -37,14 +38,15 @@
               Submit Evidence for Inclusion
             </button>
           </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row" ng-if="vm.form.$invalid" style="margin-top: 1em;">
-    <div class="col-xs-5 col-xs-offset-2">
-      <div class="alert alert-info">
-        The Submit button is disabled because the Suggest Source form is incomplete or contains errors. Please ensure that all fields are completed and error free.
+    <div class="row" ng-if="vm.form.$invalid" style="margin-top: 1em;">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="alert alert-info">
+          The Submit button is disabled because the Suggest Source form is incomplete or contains errors. Please ensure that all fields are completed and error free.
+        </div>
       </div>
     </div>
   </div>
@@ -53,21 +55,20 @@
       <h1>Thank you.</h1>
       <p>Your suggested source has been added to the source curation queue.</p>
       <p>
-        <a ng-href="#/events/genes/{{vm.linkParams.geneId}}/summary/variants/{{vm.linkParams.variantId}}/summary/evidence/{{vm.linkParams.evidenceId}}/summary"
-           class="btn btn-small btn-default">View it here</a>
+        <a ui-sref="sources.summary({sourceId: {{vm.newSourceId}} })">View it here</a>
         &nbsp;or&nbsp;
-        <a ui-sref="add.evidence.basic"
+        <a ui-sref="suggest.source"
            ui-sref-opts="{reload:true, inherit: true}"
            class="btn btn-small btn-default">Suggest Another Source</a>
       </p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-6">
-      <pre ng-bind="vm.newSuggestion|json"></pre>
-    </div>
-    <div class="col-xs-6">
-      <pre ng-bind="vm.form|json"></pre>
-    </div>
-  </div>
+  <!--<div class="row" style="margin-top: 3em;">-->
+    <!--<div class="col-xs-6">-->
+      <!--<pre ng-bind="vm.newSuggestion|json"></pre>-->
+    <!--</div>-->
+    <!--<div class="col-xs-6">-->
+      <!--<pre ng-bind="vm.form|json"></pre>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

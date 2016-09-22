@@ -29,7 +29,7 @@
         <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
         <li ng-if="isEditor()" class="dropdown-header">Administrator Tools</li>
         <li ng-if="isEditor()">
-          <a ui-sref="queues.sources" target="_blank">Curation Queues</a>
+          <a ui-sref="curation.sources">Curation</a>
         </li>
         <li ng-if="isEditor()">
           <a ng-href="{{adminUrl}}" target="_blank">Admin Console</a>

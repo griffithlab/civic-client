@@ -17,6 +17,7 @@
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated();
     vm.showSuccessMessage = false;
+    vm.showForm = true;
 
     vm.newSuggestion= {
       suggestion: {
@@ -96,7 +97,7 @@
           value: 'vm.newEvidence.gene',
           minLength: 32,
           required: false,
-          editable: false,
+          editable: true,
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.entrez_id = $model.entrez_id',
@@ -211,6 +212,7 @@
           label: 'Disease',
           value: 'vm.newEvidence.doid',
           required: false,
+          editable: true,
           minLength: 32,
           helpText: 'Please enter a disease name.',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
@@ -253,14 +255,25 @@
       }
     ];
 
-    vm.submit = function(reqObj, options) {
+    vm.submit = function(req, options) {
+      var reqObj = {
+        pubmed_id: req.suggestion.pubmed_id,
+        gene_name: req.suggestion.gene.name,
+        variant_name: req.suggestion.variant.name,
+        disease_name: req.suggestion.disease.name,
+        comment: req.comment
+      };
+      reqObj.comment = req.comment;
       Sources.suggest(reqObj).then(
         function(response) { // success
           console.log('source suggestion submit success.');
+          vm.newSourceId = response.id;
+          vm.showForm = false;
+          vm.showSuccessMessage = true;
           console.log(response);
         },
         function(error) { // fail
-          console.error('source suggestion submit success.');
+          console.error('source suggestion submit error.');
           console.log(error);
         },
         function() { // complete

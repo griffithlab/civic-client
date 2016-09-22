@@ -1,0 +1,60 @@
+<div class="sourcesQueue">
+  <h3 style="margin-top: 0">Sources Queue</h3>
+  <table class="table table-condensed">
+    <tbody>
+      <tr>
+        <th>
+          Citation
+        </th>
+
+        <th>
+          Year
+        </th>
+
+        <th>
+          Journal
+        </th>
+
+        <th>
+          Gene
+        </th>
+
+        <th>
+          Variant
+        </th>
+
+        <th>
+          Disease
+        </th>
+        <th>
+          Submitted By
+        </th>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr ng-repeat="source in vm.suggestedSources" ng-click="vm.viewPublication(source.source_id)">
+        <td>
+          {{ source.citation }}
+        </td>
+        <td>
+          {{ source.publication_year }}
+        </td>
+        <td>
+          {{ source.journal }}
+        </td>
+        <td>
+          {{ source.gene }}
+        </td>
+        <td>
+          {{ source.variant }}
+        </td>
+        <td>
+          {{ source.disease }}
+        </td>
+        <td>
+          <user-block user="source.submitter"></user-block>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
