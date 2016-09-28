@@ -102,6 +102,26 @@
           label: 'Aliases',
           helpText: 'Please specify any aliases commonly used to refer to this variant.',
           entityName: 'Alias',
+          required: false,
+          inputOptions: {
+            type: 'basicInput',
+            wrapper: '',
+            templateOptions: {
+              label: '',
+              minLength: 1,
+              required: true
+            }
+          }
+        }
+      },
+      {
+        key: 'hgvs_expressions',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'HGVS Expressions',
+          helpText: 'Please specify any HGVS expressions for this variant.',
+          entityName: 'HGVS Expression',
+          required: false,
           inputOptions: {
             type: 'basicInput',
             wrapper: '',
