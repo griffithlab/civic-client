@@ -1,5 +1,7 @@
 0.0.6 / 2016-09-29
 ==================
+* variants now show aliases and HGVS expressions
+* variant edit form provides multi-inputs for HGVS expressions and aliases
 * gene advanced search now provides Suggested Revisions attribute
 * gene grid variant count column now filterable and sortable
 * meetings page updates for NKI
