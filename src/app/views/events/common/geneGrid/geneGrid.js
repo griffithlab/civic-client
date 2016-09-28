@@ -76,9 +76,9 @@
         },
         { name: 'variant_count',
           displayName: 'Count',
-          enableFiltering: false,
+          enableFiltering: true,
           allowCellFocus: false,
-          type: 'string',
+          type: 'number',
           width: '8%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
