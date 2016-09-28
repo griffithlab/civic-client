@@ -103,7 +103,8 @@
           helpText: 'Please specify any aliases commonly used to refer to this variant.',
           entityName: 'Alias',
           inputOptions: {
-            type: 'input',
+            type: 'basicInput',
+            wrapper: '',
             templateOptions: {
               label: '',
               minLength: 1,

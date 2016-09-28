@@ -11,6 +11,11 @@
      */
     // input
     formlyConfigProvider.setType({
+      name: 'basicInput',
+      template: '<input class="form-control" ng-model="model[options.key]">'
+    });
+
+    formlyConfigProvider.setType({
       name: 'horizontalInput',
       extends: 'input',
       wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError']
