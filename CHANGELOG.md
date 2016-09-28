@@ -1,3 +1,9 @@
+0.0.6 / 2016-09-29
+==================
+* gene advanced search now provides Suggested Revisions attribute
+* gene grid variant count column now filterable and sortable
+* meetings page updates for NKI
+
 0.0.5 / 2016-08-26
 ==================
 * sources now have their own summary view

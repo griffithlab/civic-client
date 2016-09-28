@@ -96,6 +96,23 @@
         }
       },
       {
+        key: 'variant_aliases',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Aliases',
+          helpText: 'Please specify any aliases commonly used to refer to this variant.',
+          entityName: 'Alias',
+          inputOptions: {
+            type: 'input',
+            templateOptions: {
+              label: '',
+              minLength: 1,
+              required: true
+            }
+          }
+        }
+      },
+      {
         key: 'sources',
         type: 'multiInput',
         templateOptions: {
