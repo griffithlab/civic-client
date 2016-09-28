@@ -60,7 +60,7 @@
   }
 
 // @ngInject
-  function appRun(Security, $rootScope, $state, $analytics, $window, $location, _) {
+  function appRun(Security, $rootScope, $http, $state, $analytics, $window, $location, _) {
     $window.loading_screen.finish();
     $rootScope.view = {};
 
@@ -69,6 +69,8 @@
 
     Security.requestCurrentUser();
 
+    // client header identifier
+    $http.defaults.headers.common['Civic-Web-Client-Version'] = '0.0.6';
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
       $rootScope.view.navMode = toState.data.navMode;
