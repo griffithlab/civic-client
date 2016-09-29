@@ -8,6 +8,7 @@
 * meetings page updates for NKI
 * added custom header to client requests so server can better differentiate between client and direct API access
 * variant name on add evidence for now a required field.
+* gene variant sidebar now shows all variants instead just the first 25 returned from query
 
 0.0.5 / 2016-08-26
 ==================
