@@ -384,7 +384,7 @@
               'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
               'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
               'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
-              'Predisposing': 'Evidence pertains to a variant\'s impact on a patient\'s likelihood to contract a disease'
+              'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease'
             }
           }
         }
@@ -454,8 +454,8 @@
                 'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
               },
             'Predisposing': {
-              'Supports': 'The experiment or study supports a variant\'s likelihood to contract a disease',
-              'Does Not Support': 'The experiment or study does not support a variant\'s likelihood to contract a disease'
+              'Supports': 'The experiment or study supports a variant\'s role in conferring susceptibility to a disease',
+              'Does Not Support': 'The experiment or study does not support a variant\'s role in conferring susceptibility to a disease'
             }
             },
             updateDefinition: function(value, options, scope) {
