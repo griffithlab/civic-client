@@ -357,7 +357,8 @@
             { value: '', label: 'Please select an Evidence Type' },
             { value: 'Predictive', label: 'Predictive' },
             { value: 'Diagnostic', label: 'Diagnostic' },
-            { value: 'Prognostic', label: 'Prognostic' }
+            { value: 'Prognostic', label: 'Prognostic' },
+            { value: 'Predisposing', label: 'Predisposing' }
           ],
           onChange: function(value, options, scope) {
             // reset clinical_significance, as its options will change
@@ -382,7 +383,8 @@
             attributeDefinitions: {
               'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
               'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
-              'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival'
+              'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
+              'Predisposing': 'Evidence pertains to a variant\'s impact on a patient\'s likelihood to contract a disease'
             }
           }
         }
@@ -450,7 +452,11 @@
               'Prognostic': {
                 'Supports': 'The experiment or study supports a variant\'s impact on prognostic outcome',
                 'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
-              }
+              },
+            'Predisposing': {
+              'Supports': 'The experiment or study supports a variant\'s likelihood to contract a disease',
+              'Does Not Support': 'The experiment or study does not support a variant\'s likelihood to contract a disease'
+            }
             },
             updateDefinition: function(value, options, scope) {
               // set attribute definition
@@ -483,10 +489,12 @@
             { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
             { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
             { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
+            { type: 'Predisposing', value: 'Positive', label: 'Positive' },
+            { type: 'Predisposing', value: 'Negative', label: 'Negative' },
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [ // acutal options displayed in the select, modified by expressionProperties
+          options: [ // actual options displayed in the select, modified by expressionProperties
             { type: 'default', value: '', label: 'Please select a Clinical Significance' },
             { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
             { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
@@ -495,9 +503,11 @@
             { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
             { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
             { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
+            { type: 'Predisposing', value: 'Positive', label: 'Positive' },
+            { type: 'Predisposing', value: 'Negative', label: 'Negative' },
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
-          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
@@ -580,7 +590,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Please indicate whether the drugs specified above are subtitutes, or are used in sequential or combination treatments.',
+          helpText: 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
