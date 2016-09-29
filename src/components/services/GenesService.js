@@ -328,7 +328,7 @@
 
     // Gene Collections
     function queryVariants(geneId) {
-      return GenesResource.queryVariants({geneId: geneId}).$promise
+      return GenesResource.queryVariants({geneId: geneId, count: 999}).$promise
         .then(function(response) {
           angular.copy(response.records, variants);
           return response.$promise;
