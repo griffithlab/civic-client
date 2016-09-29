@@ -32,11 +32,18 @@
 
     .expert-image {
       .image {
-        display: block;
+        width: 128px;
+        height: 128px;
+        position: relative;
+        float: right;
         border: 1px solid #CCC;
         margin-top: 1em;
         border-radius: @border-radius-large;
         overflow: hidden;
+        img {
+          width: 128px;
+          height: 128px;
+        }
       }
     }
   }

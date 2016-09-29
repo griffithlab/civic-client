@@ -5,7 +5,11 @@
     .controller('AboutCtrl', AboutCtrl);
 
 // @ngInject
-  function AboutCtrl ($scope, $state, $location, $document) {
+  function AboutCtrl ($scope,
+                      $state,
+                      $location,
+                      $document,
+                      Users) {
     var vm = $scope.vm = {};
 
     if(!_.isEmpty($location.hash())) {
@@ -27,6 +31,10 @@
     vm.setUrl = function(anchor) {
       $location.hash(anchor);
     };
+
+    Users.query({'filter[featured_expert]': true}).then(function(response) {
+      vm.experts = response.result;
+    });
 
     vm.experts = [
       {

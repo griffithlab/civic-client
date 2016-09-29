@@ -43,7 +43,7 @@
   <div class="row expert-row" ng-repeat="expert in vm.experts track by $index">
     <div class="col-xs-3 col-sm-2 col-lg-2 col-sm-offset-1 col-md-offset-2 expert-image">
       <div class="image">
-        <img ng-src="{{expert.avatars.x270}}" width="270" height="270" class="img-responsive"/>
+        <img ng-src="{{expert.avatars.x128}}"/>
       </div>
 
     </div>
@@ -57,7 +57,7 @@
           &nbsp;&nbsp;
           <strong>Area of Expertise:</strong> {{expert.area_of_expertise}}
         </p>
-        <p ng-bind-html="expert.description|unsafe">Description</p>
+        <p ng-bind-html="expert.bio|unsafe"></p>
       </div>
     </div>
   </div>
