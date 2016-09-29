@@ -13,7 +13,7 @@
     formlyConfigProvider.setType({
       name: 'horizontalTypeaheadHelp',
       extends: 'typeahead',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
     });
   }
 

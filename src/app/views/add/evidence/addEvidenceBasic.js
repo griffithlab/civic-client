@@ -133,6 +133,7 @@
         },
         templateOptions: {
           label: 'Variant Name',
+          required: true,
           value: 'vm.newEvidence.variant',
           minLength: 32,
           helpText: 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).',
