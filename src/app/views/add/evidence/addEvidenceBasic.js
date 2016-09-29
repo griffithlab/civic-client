@@ -83,7 +83,7 @@
       {
         key: 'gene',
         type: 'horizontalTypeaheadHelp',
-        wrapper: ['entrezIdDisplay', 'validationMessages'],
+        wrapper: ['entrezIdDisplay'],
         controller: /* @ngInject */ function($scope, $stateParams, Genes) {
           // populate field if geneId provided
           if($stateParams.geneId){

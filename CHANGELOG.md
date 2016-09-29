@@ -7,7 +7,7 @@
 * gene grid variant count column now filterable and sortable
 * meetings page updates for NKI
 * added custom header to client requests so server can better differentiate between client and direct API access
-* variant name on add evidence for now a required field
+* variant name on add evidence for now a required field.
 
 0.0.5 / 2016-08-26
 ==================
