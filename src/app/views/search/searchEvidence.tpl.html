@@ -1,6 +1,26 @@
 <div class="searchEvidence">
-  <query-builder
-    entity="'evidence_items'"
-    fields="vm.fields.evidence_items">
-  </query-builder>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="well suggested-searches">
+        <h4>Suggested Searches:</h4>
+        <ul class="nav nav-pills">
+          <li ng-repeat="suggestion in vm.suggestedSearches.evidence">
+            <a ng-click="vm.setSearch(suggestion.search)"
+               tooltip="{{suggestion.tooltip}}"
+               ng-bind="suggestion.name">
+              NAME
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <query-builder
+        entity="'evidence_items'"
+        fields="vm.fields.evidence_items">
+      </query-builder>
+    </div>
+  </div>
 </div>

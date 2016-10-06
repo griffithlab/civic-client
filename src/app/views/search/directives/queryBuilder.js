@@ -32,11 +32,24 @@
     vm.searchResults = [];
     vm.showGrid = true;
 
+    vm.model = {
+      operator: "",
+      queries: {}
+    };
+
     init();
 
     $scope.$watch('vm.model', function() {
       vm.formError = false;
     }, true);
+
+    $scope.$on('setSearch', function(event, search) {
+      if (!_.isUndefined(search)) {
+        vm.model.operator = search.operator;
+        vm.model.queries = search.queries;
+        onSubmit();
+      }
+    });
 
     // function definition
     function onSubmit() {

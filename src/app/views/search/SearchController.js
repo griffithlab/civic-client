@@ -759,7 +759,7 @@
                   { value: 'name', name: 'Name' },
                   { value: 'aliases', name: 'Aliases' },
                   { value: 'entrez_id', name: 'Entrez ID' },
-                  { value: 'description', name: 'Summary' },
+                  { value: 'description', name: 'Description' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' }
                 ],
                 onChange: function(value, options, scope) {
@@ -2205,36 +2205,53 @@
       "evidence": [
         {
           name: "Has Pending Suggested Revisions",
+          tooltip: "Lorem ipsum dolor sit amet",
           search: {"operator":"AND","queries":[{"field":"suggested_changes_count","condition":{"name":"is_greater_than_or_equal_to","parameters":["new","1"]}}]}
         },
         {
           name: "High Quality Predictive",
+          tooltip: "Lorem ipsum dolor sit amet",
           search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Predictive"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["B"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[4]}}]}
         },
         {
           name: "High Quality Diagnostic",
+          tooltip: "Lorem ipsum dolor sit amet",
           search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Diagnostic"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["B"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[4]}}]}
         },
         {
           name: "High Quality Prognostic",
+          tooltip: "Lorem ipsum dolor sit amet",
           search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Prognostic"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["B"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[4]}}]}
         },
       ],
       "genes": [
         {
           name: "Has Pending Suggested Revisions",
+          tooltip: "Lorem ipsum dolor sit amet",
           search: {"operator":"AND","queries":[{"field":"suggested_changes_count","condition":{"name":"is_greater_than_or_equal_to","parameters":["new","1"]}}]}
+        },
+        {
+          name: "Empty Description",
+          tooltip: "Lorem ipsum dolor sit amet",
+          search: {"operator":"AND","queries":[{"field":"description","condition":{"name":"is_empty","parameters":null}}]}
         }
       ],
       "variants": [
         {
           name: "Has Pending Suggested Revisions",
+          tooltip: "Lorem ipsum dolor sit amet",
           search: {"operator":"AND","queries":[{"field":"suggested_changes_count","condition":{"name":"is_greater_than_or_equal_to","parameters":["new","1"]}}]}
+        },
+        {
+          name: "Empty Description",
+          tooltip: "Lorem ipsum dolor sit amet",
+          search: {"operator":"AND","queries":[{"field":"description","condition":{"name":"is_empty","parameters":[]}},{"field":"evidence_item_count","condition":{"name":"is_greater_than_or_equal_to","parameters":["accepted","1"]}}],"entity":"variants"}
         }
       ],
       "sources": [
         {
           name: "Abstract is Empty",
+          tooltip: "Lorem ipsum dolor sit amet",
           search: {"operator":"AND","queries":[{"field":"abstract","condition":{"name":"is_empty","parameters":[]}}]}
         }
       ]

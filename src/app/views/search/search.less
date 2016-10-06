@@ -20,6 +20,33 @@
       background-image: url('/assets/images/grey_stripes.png');
     }
   }
+
+  .suggested-searches {
+    padding-top: 1em;
+    padding-bottom: .65em;
+    h4 {
+      margin-top: 0;
+      padding-top: 0;
+      font-size: 1em;
+    }
+
+    li {
+      a {
+        background-color: #fff;
+        border: 1px solid #CCC;
+        padding: 0 8px;
+        line-height: 2em;
+        font-size: 1em;
+        cursor: pointer;
+        margin-bottom: .5em;
+        &:hover {
+          border-color: @civicLightBlue;
+          background-color: lighten(@civicLightBlue, 35%);
+        }
+      }
+    }
+  }
+
   .button-row {
     margin-top: @contentPadding;
   }
