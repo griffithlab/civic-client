@@ -9,6 +9,12 @@
                             Diseases) {
     var vm = $scope.vm = {};
 
+    vm.suggestedSearch = {};
+
+    vm.setSearch = function(search) {
+      $scope.$broadcast('setSearch', search);
+    };
+
     vm.fields = {};
 
     vm.fields.evidence_items = [
@@ -2026,6 +2032,7 @@
               {
                 key: 'parameters[0]',
                 type: 'input',
+                hideExpression: 'model.name === "is_empty"',
                 className: 'inline-field',
                 templateOptions: {
                   label: '',
@@ -2193,5 +2200,44 @@
         }
       }
     ];
+
+    vm.suggestedSearches = {
+      "evidence": [
+        {
+          name: "Has Pending Suggested Revisions",
+          search: {"operator":"AND","queries":[{"field":"suggested_changes_count","condition":{"name":"is_greater_than_or_equal_to","parameters":["new","1"]}}]}
+        },
+        {
+          name: "High Quality Predictive",
+          search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Predictive"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["B"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[4]}}]}
+        },
+        {
+          name: "High Quality Diagnostic",
+          search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Diagnostic"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["B"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[4]}}]}
+        },
+        {
+          name: "High Quality Prognostic",
+          search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Prognostic"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["B"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[4]}}]}
+        },
+      ],
+      "genes": [
+        {
+          name: "Has Pending Suggested Revisions",
+          search: {"operator":"AND","queries":[{"field":"suggested_changes_count","condition":{"name":"is_greater_than_or_equal_to","parameters":["new","1"]}}]}
+        }
+      ],
+      "variants": [
+        {
+          name: "Has Pending Suggested Revisions",
+          search: {"operator":"AND","queries":[{"field":"suggested_changes_count","condition":{"name":"is_greater_than_or_equal_to","parameters":["new","1"]}}]}
+        }
+      ],
+      "sources": [
+        {
+          name: "Abstract is Empty",
+          search: {"operator":"AND","queries":[{"field":"abstract","condition":{"name":"is_empty","parameters":[]}}]}
+        }
+      ]
+    };
   }
 })();
