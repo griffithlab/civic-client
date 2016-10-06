@@ -53,7 +53,7 @@
 
     // function definition
     function onSubmit() {
-      $log.debug(JSON.stringify(vm.model));
+      $log.debug(angular.toJson(vm.model));
       //vm.searchResults = Search.post(vm.model);
       //vm.showEvidenceGrid = true;
       vm.model.entity = entity;
@@ -69,7 +69,6 @@
           }
         },
         function(response) { // error
-          console.log(response);
           angular.copy([], vm.searchResults);
           vm.showGrid = true;
           vm.formError = response;
