@@ -43,6 +43,11 @@
               label = label + ' -- ' + diseaseLabel + ': ' + event.disease_names.join(', ');
             }
 
+            if (_.includes(event.terms, 'variant_aliases')) {
+              var variantAliasLabel = event.variant_aliases.length > 1 ? 'Variant Aliases' : 'Variant Alias';
+              label = label + ' -- ' + variantAliasLabel + ': ' + event.variant_aliases.join(', ');
+            }
+
             if (label.length > labelLimit) { label = _.trunc(label, labelLimit); }
 
             result = {
