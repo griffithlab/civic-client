@@ -47,6 +47,7 @@
                   { value: 'publication_year', name: 'Publication Year' },
                   { value: 'status', name: 'Status' },
                   { value: 'variant_name', name: 'Variant Name' },
+                  { value: 'variant_alias', name: 'Variant Alias' },
                   { value: 'variant_origin', name: 'Variant Origin' },
                   { value: 'submitter', name: 'Submitter Display Name' },
                   { value: 'submitter_id', name: 'Submitter ID' }
@@ -646,6 +647,35 @@
                 }
               }
             ],
+            variant_alias: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
             variant_origin: [
               {
                 key: 'name',
@@ -982,6 +1012,7 @@
                   { value: 'description', name: 'Description' },
                   { value: 'variant_types', name: 'Variant Type(s)' },
                   { value: 'variant_group', name: 'Variant Group' },
+                  { value: 'variant_alias', name: 'Variant Alias' },
                   { value: 'gene', name: 'Gene' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'ensembl_version', name: 'Ensembl Version' },
@@ -1123,6 +1154,35 @@
                 type: 'input',
                 className: 'inline-field',
                 hideExpression: 'model.name === "none"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            variant_alias: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
                 templateOptions: {
                   label: '',
                   required: true
