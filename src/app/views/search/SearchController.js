@@ -40,6 +40,7 @@
                   { value: 'id', name: 'Evidence ID'},
                   { value: 'evidence_type', name: 'Evidence Type' },
                   { value: 'evidence_level', name: 'Evidence Level' },
+                  { value: 'evidence_direction', name: 'Evidence Direction' },
                   { value: 'gene_name', name: 'Gene Name' },
                   { value: 'pubmed_id', name: 'Pubmed ID' },
                   { value: 'rating', name: 'Rating' },
@@ -399,6 +400,40 @@
                     { value: 'C', name: 'C - Case Study'},
                     { value: 'D', name: 'D - Preclinical'},
                     { value: 'E', name: 'E - Inferential'}
+                  ]
+                }
+              }
+            ],
+            evidence_direction: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'Supports'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'Supports', name: 'Supports'},
+                    { value: 'Does Not Support', name: 'Does Not Support' }
                   ]
                 }
               }
@@ -2272,6 +2307,11 @@
           name: "High Quality Predictive Evidence",
           tooltip: "Predictive Evidence with high Evidence Levels and Ratings",
           search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Predictive"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["B"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[4]}}]}
+        },
+        {
+          name: "High Quality Drug Predictions",
+          tooltip: "Highly rated drug predictive evidence indicating successful outcomes",
+          search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Predictive"]}},{"field":"evidence_direction","condition":{"name":"is_equal_to","parameters":["Supports"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["C"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[3]}}],"entity":"evidence_items","save":true}
         },
         {
           name: "Alectinib Evidence",
