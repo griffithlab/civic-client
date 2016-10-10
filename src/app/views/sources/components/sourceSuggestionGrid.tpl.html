@@ -2,10 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h4>
-        <span ng-switch="vm.context">
-          <span ng-switch-when="summary">Sources</span>
-          <span ng-switch-when="search">Search Results</span>
-        </span>
+        Source Suggestions
         <span class="record-info">
           <span>{{ vm.gridApi.grid.rows.length }} total items</span>
           <span ng-if="vm.gridApi.grid.renderContainers.body.visibleRowCache.length !== vm.gridApi.grid.rows.length">

@@ -92,6 +92,15 @@
               $scope.to.data.entrez_id = gene.entrez_id;
             });
           }
+          // if gene name provide, get id, entrez_id
+          if($stateParams.geneName){
+            Genes.beginsWith($stateParams.geneName)
+              .then(function(response) {
+                // set field to first item on typeahead suggest
+                $scope.model.gene = response[0];
+                $scope.to.data.entrez_id = response[0].entrez_id;
+              });
+          }
         },
         templateOptions: {
           label: 'Gene Entrez Name',
@@ -129,6 +138,10 @@
             Variants.get($stateParams.variantId).then(function(variant) {
               $scope.model.variant = { name: variant.name };
             });
+          }
+          // just drop in the variant name string if provided
+          if($stateParams.variantName){
+            $scope.model.variant = { name: $stateParams.variantName };
           }
         },
         templateOptions: {
@@ -177,6 +190,11 @@
           debounce: {
             default: 300,
             blur: 0
+          }
+        },
+        controller: /* @ngInject */ function($scope, $stateParams) {
+          if($stateParams.pubmedId) {
+            $scope.model.pubmed_id = $stateParams.pubmedId;
           }
         },
         validators: {
@@ -309,6 +327,16 @@
             }
           }
         },
+        controller: /* @ngInject */ function($scope, $stateParams, Diseases) {
+          if($stateParams.diseaseName) {
+            Diseases.beginsWith($stateParams.diseaseName)
+              .then(function(response) {
+                $scope.model.disease = response[0];
+                $scope.to.data.doid = response[0].doid;
+              });
+          }
+        },
+
         expressionProperties: {
           'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
           'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked

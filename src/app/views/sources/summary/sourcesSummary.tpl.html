@@ -89,6 +89,15 @@
       </evidence-grid>
     </div>
   </div>
+  <div class="row" ng-if="vm.source.source_suggestions.length > 0">
+    <div class="col-xs-12">
+      <source-suggestion-grid
+        suggestions="vm.source.source_suggestions"
+        rows="5"
+        mode="full">
+      </source-suggestion-grid>
+    </div>
+  </div>
   <!--<div class="row" style="margin-top: 1.5em">-->
     <!--<div class="col-xs-12">-->
       <!--<h4>Source Comments</h4>-->
