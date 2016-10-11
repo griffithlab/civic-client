@@ -60,7 +60,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
-          width: '5%',
+          width: '8%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -174,6 +174,7 @@
           enableFiltering: false,
           width: '5%',
           cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="{{row.entity.addEvidenceUrl}}"' +
+          'ng-disabled="row.entity[\'status\'] != \'new\'"' +
           'class="btn btn-xs btn-cell-add">Add</a></div>'
         }
       ]
