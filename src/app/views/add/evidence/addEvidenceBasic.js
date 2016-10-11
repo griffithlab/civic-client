@@ -650,7 +650,10 @@
         key: 'markCurated',
         type: 'horizontalCheckboxHelp',
         defaultValue: true,
-        hideExpression: 'scope.model.source_suggestion_id != null',
+        // hideExpression: 'scope.model.source_suggestion_id != null',
+        hideExpression: function(vval, mval, scope) {
+          return scope.model.source_suggestion_id === null;
+        },
         templateOptions: {
           label: 'Mark originating source suggestion as curated.',
           helpText: 'This evidence item appears to have been pre-populated from a suggestion link. Check this box if you wish the originating suggestion to be marked as curated.'
