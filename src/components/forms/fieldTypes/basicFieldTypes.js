@@ -59,7 +59,7 @@
     formlyConfigProvider.setType({
       name: 'horizontalCheckboxHelp',
       extends: 'checkbox',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['horizontalBootstrapHelpNoLabel', 'bootstrapHasError']
     });
 
     formlyConfigProvider.setType({

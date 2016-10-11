@@ -18,12 +18,14 @@
   function AddEvidenceBasicController($scope,
                                       $q,
                                       $document,
+                                      $stateParams,
                                       Security,
                                       Evidence,
                                       Genes,
                                       Publications,
                                       Diseases,
                                       Datatables,
+                                      Sources,
                                       DrugSuggestions,
                                       AddEvidenceViewOptions,
                                       formConfig,
@@ -44,9 +46,6 @@
       var elem = document.getElementById('add-evidence-basic');
       $document.scrollToElementAnimated(elem);
     };
-
-    //vm.duplicates = [];
-
 
     vm.duplicates = true;
 
@@ -73,6 +72,8 @@
 
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
     vm.newEvidence.drugs  = [];
+
+    vm.newEvidence.source_suggestion_id = _.isUndefined($stateParams.sourceSuggestionId) ? null : Number($stateParams.sourceSuggestionId);
 
     vm.formErrors = {};
     vm.formMessages = {};
@@ -607,7 +608,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Please indicate whether the drugs specified above are subtitutes, or are used in sequential or combination treatments.',
+          helpText: 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
@@ -646,6 +647,16 @@
         }
       },
       {
+        key: 'markCurated',
+        type: 'horizontalCheckboxHelp',
+        defaultValue: true,
+        hideExpression: 'scope.model.source_suggestion_id != null',
+        templateOptions: {
+          label: 'Mark originating source suggestion as curated.',
+          helpText: 'This evidence item appears to have been pre-populated from a suggestion link. Check this box if you wish the originating suggestion to be marked as curated.'
+        }
+      },
+      {
         key: 'text',
         type: 'horizontalCommentHelp',
         model: vm.newEvidence.comment,
@@ -672,18 +683,7 @@
             message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
           }
         }
-      },
-      // {
-      //   key: 'text',
-      //   type: 'horizontalTextareaHelp',
-      //   model: vm.newEvidence.comment,
-      //   templateOptions: {
-      //     rows: 5,
-      //     label: 'Additional Comments',
-      //     value: 'text',
-      //     helpText: 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.'
-      //   }
-      // }
+      }
     ];
 
     vm.submit = function(newEvidence) {
@@ -695,11 +695,13 @@
       if(_.isString(newEvidence.variant)){
         newEvidence.variant = { name: newEvidence.variant };
       }
-      //if(_.isString(newEvidence.gene)){
-      //  newEvidence.gene = { name: newEvidence.gene };
-      //}
       vm.formErrors = {};
       vm.formMessages = {};
+
+      // if markCurated is unchecked, remove source_suggestion_id from model
+      if(newEvidence.markCurated != true) {
+        newEvidence = _.omit(newEvidence, 'source_suggestion_id');
+      }
 
       // if noDoid, construct disease obj w/ disease_name
       if(newEvidence.noDoid) {

@@ -26,6 +26,16 @@
           isArray: false,
           cache: false
         },
+        setStatus: {
+          method: 'PATCH',
+          params: {
+            suggestionId: '@suggestionId',
+            status: '@status'
+          },
+          url: '/api/source_suggestions/:suggestionId',
+          isArray: false,
+          cache: false
+        },
         querySuggested: {
           method: 'GET',
           url: '/api/datatables/source_suggestions',
@@ -54,7 +64,8 @@
       query: query,
       get: get,
       suggest: suggest,
-      getSuggested: getSuggested
+      getSuggested: getSuggested,
+      setStatus: setStatus
     };
 
     function query() {
@@ -84,6 +95,13 @@
       return SourcesResource.querySuggested(reqObj).$promise
         .then(function(response) {
           angular.copy(response.result, suggested);
+          return response.$promise;
+        });
+    }
+
+    function setStatus(reqObj) {
+      return SourcesResource.querySuggested(reqObj).$promise
+        .then(function(response) {
           return response.$promise;
         });
     }

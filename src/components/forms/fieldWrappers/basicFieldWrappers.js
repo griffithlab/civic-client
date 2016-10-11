@@ -74,6 +74,23 @@
       ].join(' ')
     });
 
+    // horizontal bootstrap field without label and help column (good for checkboxes)
+    formlyConfigProvider.setWrapper({
+      name: 'horizontalBootstrapHelpNoLabel',
+      template: [
+        '<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
+        '</label>',
+        '<div class="col-sm-'+ inputColWidth +'">',
+        '<formly-transclude></formly-transclude>',
+        //'<p class="small">errors:</p>',
+        //'<div ng-messages-include="commentValidation.tpl.html"></div>',
+        '</div>',
+        '<div class="col-sm-'+ helpColWidth +' control-help">',
+        '<span class="small" ng-bind-html="to.helpText"></span>',
+        '</div>'
+      ].join(' ')
+    });
+
     // horizontal bootstrap checkbox
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapCheckbox',

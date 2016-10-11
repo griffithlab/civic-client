@@ -174,7 +174,7 @@
           enableFiltering: false,
           width: '5%',
           cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="{{row.entity.addEvidenceUrl}}"' +
-          'class="btn btn-xs btn-default">Add</a></div>'
+          'class="btn btn-xs btn-cell-add">Add</a></div>'
         }
       ]
     };
@@ -207,6 +207,8 @@
           if(_.has(source, 'pubmed_id')) {
             urlElements.push('pubmedId=' + source.pubmed_id);
           }
+
+          urlElements.push('sourceSuggestionId=' + source.id);
           source.addEvidenceUrl = urlBase + '?' + urlElements.join('&') + '&' + 'suggestionId=' + source.id;
           return source;
         });
