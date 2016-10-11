@@ -1,0 +1,11 @@
+<div class="ui-grid-cell-contents">
+  <a ng-href="{{row.entity.addEvidenceUrl}}"
+     ng-disabled="row.entity['status'] != 'new'"
+     class="btn btn-xs btn-cell-add">
+    Add
+  </a>&nbsp;<a ng-click="grid.appScope.vm.rejectSuggestion(row.entity.id)"
+     ng-disabled="row.entity['status'] != 'new'"
+     class="btn btn-xs btn-danger">
+    Reject
+  </a>
+</div>

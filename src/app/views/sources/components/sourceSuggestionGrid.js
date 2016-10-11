@@ -31,9 +31,8 @@
 
     var mode = $scope.mode;
 
-    vm.addEvidence = function(suggestion) {
-      console.log('addEvidence called.');
-      console.log(suggestion);
+    vm.rejectSuggestion= function(id) {
+      console.log('reject suggestion called.');
     };
 
     vm.rowsToShow = $scope.rows ? $scope.rows : 10;
@@ -79,18 +78,7 @@
         {
           name: 'pubmed_id',
           displayName: 'Pubmed ID',
-          visible: mode === 'full',
-          enableFiltering: true,
-          allowCellFocus: false,
-          type: 'string',
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
-        },
-
-        {
-          name: 'author_list_string',
-          displayName: 'Authors',
+          width: '10%',
           visible: mode === 'full',
           enableFiltering: true,
           allowCellFocus: false,
@@ -100,28 +88,13 @@
           }
         },
         {
-          name: 'publication_date_string',
-          displayName: 'Date',
+          name: 'citation',
+          displayName: 'Citation',
           visible: mode === 'full',
-          type: 'string',
           enableFiltering: true,
-          allowCellFocus: false
-        },
-        {
-          name: 'full_journal_title',
-          displayName: 'Journal',
-          visible: mode === 'full',
-          type: 'string',
-          enableFiltering: true,
-          allowCellFocus: false
-        },
-        {
-          name: 'abstract',
-          displayName: 'Abstract',
-          visible: mode === 'full',
-          type: 'string',
           allowCellFocus: false,
-          enableFiltering: true,
+          type: 'string',
+          cellTemplate: 'app/views/sources/components/cellTemplateCitation.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -129,9 +102,11 @@
         {
           name: 'gene',
           displayName: 'Gene',
+          width: '8%',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
+          cellTemplate: 'app/views/events/common/geneGrid/tooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -139,9 +114,11 @@
         {
           name: 'variant',
           displayName: 'Variant',
+          width: '12%',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
+          cellTemplate: 'app/views/events/common/geneGrid/tooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -152,6 +129,7 @@
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
+          cellTemplate: 'app/views/events/common/geneGrid/tooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -169,13 +147,10 @@
         },
         {
           name: 'action',
-          displayName: '',
+          displayName: 'Actions',
           allowCellFocus: false,
           enableFiltering: false,
-          width: '5%',
-          cellTemplate: '<div class="ui-grid-cell-contents"><a ng-href="{{row.entity.addEvidenceUrl}}"' +
-          'ng-disabled="row.entity[\'status\'] != \'new\'"' +
-          'class="btn btn-xs btn-cell-add">Add</a></div>'
+          cellTemplate: 'app/views/sources/components/cellTemplateActions.tpl.html'
         }
       ]
     };
