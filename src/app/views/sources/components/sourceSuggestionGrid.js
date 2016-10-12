@@ -185,7 +185,8 @@
           }
 
           urlElements.push('sourceSuggestionId=' + source.id);
-          source.addEvidenceUrl = urlBase + '?' + urlElements.join('&') + '&' + 'suggestionId=' + source.id;
+          
+          source.addEvidenceUrl = urlBase + '?' + urlElements.join('&');
           return source;
         });
       }
