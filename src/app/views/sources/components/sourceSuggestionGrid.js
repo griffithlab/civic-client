@@ -23,8 +23,9 @@
 
   // @ngInject
   function SourceSuggestionGridController($scope,
-                                $state,
-                                uiGridConstants) {
+                                          $state,
+                                          Sources,
+                                          uiGridConstants) {
     console.log('SourceSuggestionGridController Loaded.');
 
     var vm = $scope.vm = {};
@@ -33,6 +34,9 @@
 
     vm.rejectSuggestion= function(id) {
       console.log('reject suggestion called.');
+      Sources.setStatus({suggestionId: id, status: 'rejected'}).then(function(response) {
+        $scope.$emit('suggestion:rejected');
+      });
     };
 
     vm.rowsToShow = $scope.rows ? $scope.rows : 10;
@@ -63,6 +67,18 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'created_at',
+          displayName: 'Submitted',
+          width: '10%',
+          enableFiltering: false,
+          allowCellFocus: false,
+          type: 'date',
+          sort: {
+            direction: uiGridConstants.DESC
+          },
+          cellTemplate: '<div class="ui-grid-cell-contents">{{ row.entity[col.field] | timeAgo }}</div>'
         },
         {
           name: 'submitter',
@@ -185,7 +201,7 @@
           }
 
           urlElements.push('sourceSuggestionId=' + source.id);
-          
+
           source.addEvidenceUrl = urlBase + '?' + urlElements.join('&');
           return source;
         });

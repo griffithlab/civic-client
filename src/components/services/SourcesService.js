@@ -18,7 +18,7 @@
           method: 'GET',
           url: '/api/sources/:sourceId',
           isArray: false,
-          cache: true
+          cache: false
         },
         suggest: {
           method: 'POST',
@@ -28,11 +28,10 @@
         },
         setStatus: {
           method: 'PATCH',
-          params: {
-            suggestionId: '@suggestionId',
-            status: '@status'
-          },
           url: '/api/source_suggestions/:suggestionId',
+          params: {
+            suggestionId: '@suggestionId'
+          },
           isArray: false,
           cache: false
         },
@@ -100,7 +99,7 @@
     }
 
     function setStatus(reqObj) {
-      return SourcesResource.querySuggested(reqObj).$promise
+      return SourcesResource.setStatus(reqObj).$promise
         .then(function(response) {
           return response.$promise;
         });
