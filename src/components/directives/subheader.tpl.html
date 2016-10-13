@@ -40,12 +40,14 @@
               </span>
                 </div>
                 <div ng-switch-when="true">
-                  <a type="button"
-                     class="btn btn-sm btn-subhead-add btn-block"
-                     ng-disabled="$state.includes('add.evidence')"
-                     ng-href="{{ addEvidenceUrl }}">
-                    Add
-                  </a>
+                  <span tooltip="Add an Evidence Item" tooltip-append-to-body="true">
+                    <a type="button"
+                       class="btn btn-sm btn-subhead-add btn-block"
+                       ng-disabled="$state.includes('add.evidence')"
+                       ng-href="{{ addEvidenceUrl }}">
+                      Add
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>
@@ -60,12 +62,14 @@
               </span>
                 </div>
                 <div ng-switch-when="true">
-                  <a type="button"
-                     class="btn btn-sm btn-subhead-suggest btn-block"
-                     ng-disabled="$state.includes('suggest.source')"
-                     ui-sref="suggest.source">
-                    Suggest
-                  </a>
+                  <span tooltip="Suggest publications to be curated" tooltip-append-to-body="true">
+                    <a type="button"
+                       class="btn btn-sm btn-subhead-suggest btn-block"
+                       ng-disabled="$state.includes('suggest.source')"
+                       ui-sref="suggest.source">
+                      Suggest
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>
