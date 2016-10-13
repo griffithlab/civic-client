@@ -11,7 +11,7 @@
   <div ng-if="vm.showForm">
     <div class="row instructions">
       <div class="col-xs-12">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ex lorem, fringilla sit amet laoreet at, feugiat sit amet turpis. Sed vehicula libero sed elementum tincidunt. Fusce at ligula id justo dictum luctus. Sed scelerisque, ipsum nec viverra condimentum, quam ante bibendum ipsum, non bibendum lorem dui id dolor. In eleifend cursus molestie. Duis eu rhoncus nibh. Sed molestie, magna at vehicula sollicitudin, nisl nulla scelerisque lectus, non elementum nisi erat vitae elit.</p>
+        <p>If you have a source publication that you believe to contain research relevant to CIViC's curation efforts, the community would appreciate your input! Please specify as many details as you can using the form below (only the Pubmed ID and Comment are required). Your suggested source will be placed in a queue that curators check regularly, and you will be given a suggestion credit if your suggestion results in a new item of evidence added to the CIViC database.</p>
       </div>
     </div>
     <div class="row">
@@ -63,12 +63,12 @@
       </p>
     </div>
   </div>
-  <!--<div class="row" style="margin-top: 3em;">-->
-    <!--<div class="col-xs-6">-->
-      <!--<pre ng-bind="vm.newSuggestion|json"></pre>-->
-    <!--</div>-->
-    <!--<div class="col-xs-6">-->
-      <!--<pre ng-bind="vm.form|json"></pre>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="row" style="margin-top: 3em;">
+    <div class="col-xs-6">
+      <pre ng-bind="vm.newSuggestion|json"></pre>
+    </div>
+    <div class="col-xs-6">
+      <pre ng-bind="vm.form|json"></pre>
+    </div>
+  </div>
 </div>

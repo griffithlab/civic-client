@@ -54,7 +54,7 @@
             <div class="col-xs-6 subhead-btn">
               <div ng-switch="isAuthenticated()">
                 <div ng-switch-when="false">
-              <span tooltip="Please sign in to Suggest a Source" tooltip-append-to-body="true">
+              <span tooltip="Please sign in to Suggest a source" tooltip-append-to-body="true">
                 <a type="button"
                    class="btn btn-sm btn-subhead-suggest btn-block disabled">
                   Suggest
@@ -62,7 +62,7 @@
               </span>
                 </div>
                 <div ng-switch-when="true">
-                  <span tooltip="Suggest publications to be curated" tooltip-append-to-body="true">
+                  <span tooltip="Suggest a publication" tooltip-append-to-body="true">
                     <a type="button"
                        class="btn btn-sm btn-subhead-suggest btn-block"
                        ng-disabled="$state.includes('suggest.source')"

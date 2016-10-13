@@ -34,7 +34,7 @@
         model: vm.newSuggestion.suggestion,
         templateOptions: {
           label: 'Pubmed ID',
-          value: 'vm.newEvidence.pubmed_id',
+          value: 'vm.newSuggestion.pubmed_id',
           minLength: 1,
           required: true,
           data: {
@@ -94,7 +94,7 @@
         },
         templateOptions: {
           label: 'Gene Entrez Name',
-          value: 'vm.newEvidence.gene',
+          value: 'vm.newSuggestion.gene',
           minLength: 32,
           required: false,
           editable: true,
@@ -133,7 +133,6 @@
         },
         templateOptions: {
           label: 'Variant Name',
-          value: 'vm.newEvidence.variant',
           minLength: 32,
           helpText: 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).',
           formatter: 'model[options.key].name',
@@ -158,51 +157,6 @@
           }
         }
       },
-      { // duplicates warning row
-        templateUrl: 'app/views/add/evidence/addEvidenceDuplicateWarning.tpl.html',
-        controller: /* @ngInject */ function($scope, Search) {
-          console.log('dup warning controller loaded.');
-          var vm = $scope.vm = {};
-          vm.duplicates = [];
-          vm.pubmedName = '';
-
-          function searchForDups(values) {
-            if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
-              Search.post({
-                "operator": "AND",
-                "queries": [
-                  {
-                    "field": "gene_name",
-                    "condition": {"name": "contains", "parameters": [values[0]]}
-                  },
-                  {
-                    "field": "variant_name",
-                    "condition": {"name": "contains", "parameters": [values[1]]}
-                  },
-                  {
-                    "field": "pubmed_id",
-                    "condition": {"name": "is", "parameters": [values[2]]
-                    }
-                  }
-                ],
-                "entity": "evidence_items",
-                "save": false
-              })
-                .then(function (response) {
-                  vm.duplicates = response.results;
-                });
-            }
-          }
-
-          $scope.pubmedField = _.find($scope.fields, { key: 'pubmed_id' });
-
-          $scope.$watchGroup([
-            'model.suggestion.gene.name',
-            'model.suggestion.variant.name',
-            'model.suggestion.pubmed_id'
-          ], searchForDups);
-        }
-      },
       {
         key: 'disease',
         type: 'horizontalTypeaheadHelp',
@@ -210,7 +164,7 @@
         wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
         templateOptions: {
           label: 'Disease',
-          value: 'vm.newEvidence.doid',
+          value: 'vm.suggestion.doid',
           required: false,
           editable: true,
           minLength: 32,
@@ -234,6 +188,59 @@
         },
         hideExpression: 'model.noDoid'
       },
+      { // duplicates warning row
+        templateUrl: 'app/views/suggest/source/evidenceDuplicateWarning.tpl.html',
+        controller: /* @ngInject */ function($scope, Search) {
+          console.log('dup warning controller loaded.');
+          var vm = $scope.vm = {};
+          vm.duplicates = [];
+          vm.pubmedName = '';
+
+          function searchForDups(values) {
+            if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
+              Search.post({
+                "operator": "AND",
+                "queries": [
+                  {
+                    "field": "gene_name",
+                    "condition": {"name": "contains", "parameters": [values[0]]}
+                  },
+                  {
+                    "field": "variant_name",
+                    "condition": {"name": "contains", "parameters": [values[1]]}
+                  },
+                  {
+                    "field": "pubmed_id",
+                    "condition": {"name": "is", "parameters": [values[2]]
+                    }
+                  },
+                  {
+                    "field": "disease_doid",
+                    "condition": {"name": "is", "parameters": [values[3]]
+                    }
+                  }
+                ],
+                "entity": "evidence_items",
+                "save": false
+              })
+                .then(function (response) {
+                  vm.duplicates = response.results;
+                });
+            }
+          }
+
+          $scope.pubmedField = _.find($scope.fields, { key: 'pubmed_id' });
+
+          // {"operator":"AND","queries":[{"field":"pubmed_id","condition":{"name":"is","parameters":["25589621"]}},{"field":"gene_name","condition":{"name":"contains","parameters":["BRAF"]}},{"field":"variant_name","condition":{"name":"contains","parameters":["V600E"]}},{"field":"disease_doid","condition":{"name":"is","parameters":["9256"]}}]}
+
+          $scope.$watchGroup([
+            'model.suggestion.pubmed_id',
+            'model.suggestion.gene.name',
+            'model.suggestion.variant.name',
+            'model.suggestion.disease.doid'
+          ], searchForDups);
+        }
+      },
       {
         key: 'text',
         type: 'horizontalCommentHelp',
@@ -246,10 +253,10 @@
         templateOptions: {
           rows: 5,
           minimum_length: 3,
-          label: 'Additional Comments',
+          label: 'Comment',
           currentUser: Security.currentUser,
           value: 'text',
-          required: false,
+          required: true,
           helpText: 'Please provide any additional comments you wish to make about this source. This comment will aid curators when evaluating your suggested source for inclusion.'
         }
       }
