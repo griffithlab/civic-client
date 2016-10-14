@@ -38,6 +38,8 @@
       });
     };
 
+    var statusFilters = ['new'];
+
     vm.rowsToShow = $scope.rows ? $scope.rows : 10;
     vm.sourceSuggestionGridOptions = {
       minRowsToShow: vm.rowsToShow - 1,
@@ -64,7 +66,10 @@
           type: 'string',
           width: '8%',
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
+            noTerm: true,
+            condition: function(searchTerm, cellValue) {
+              return _.contains(statusFilters, cellValue);
+            }
           }
         },
         {
@@ -167,8 +172,40 @@
           enableFiltering: false,
           cellTemplate: 'app/views/sources/components/cellTemplateActions.tpl.html'
         }
+      ],
+      // grid menu
+      enableGridMenu: true,
+      gridMenuShowHideColumns: false,
+      gridMenuCustomItems: [
+        {
+          title: 'Show Curated',
+          active: function() {
+            return _.contains(statusFilters, 'curated');
+          },
+          action: function($event) {
+            filterByStatus('curated', this.grid, $event);
+          }
+        },
+        {
+          title: 'Show Rejected',
+          active: function() {
+            return _.contains(statusFilters, 'rejected');
+          },
+          action: function($event) {
+            filterByStatus('rejected', this.grid, $event);
+          }
+        }
       ]
     };
+
+    function filterByStatus(status, grid) {
+     if(_.contains(statusFilters, status)) {
+        _.pull(statusFilters, status);
+      } else {
+        statusFilters.push(status);
+      }
+      grid.queueGridRefresh();
+    }
 
     vm.sourceSuggestionGridOptions.onRegisterApi = function (gridApi) {
       var suggestions = $scope.suggestions;
