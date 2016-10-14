@@ -3,9 +3,15 @@
      ng-disabled="row.entity['status'] != 'new'"
      class="btn btn-xs btn-cell-add">
     Add
-  </a>&nbsp;<a ng-click="grid.appScope.vm.rejectSuggestion(row.entity.id)"
+  </a>
+  <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'rejected')"
      ng-disabled="row.entity['status'] != 'new'"
      class="btn btn-xs btn-danger">
     Reject
+  </a>
+  <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
+     ng-disabled="row.entity['status'] != 'new'"
+     class="btn btn-xs btn-success">
+    Curated
   </a>
 </div>

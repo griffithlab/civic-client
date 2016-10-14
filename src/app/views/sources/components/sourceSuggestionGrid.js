@@ -32,10 +32,9 @@
 
     var mode = $scope.mode;
 
-    vm.rejectSuggestion= function(id) {
-      console.log('reject suggestion called.');
-      Sources.setStatus({suggestionId: id, status: 'rejected'}).then(function(response) {
-        $scope.$emit('suggestion:rejected');
+    vm.setSuggestion = function(id, status) {
+      Sources.setStatus({suggestionId: id, status: status}).then(function(response) {
+        $scope.$emit('suggestion:updated');
       });
     };
 

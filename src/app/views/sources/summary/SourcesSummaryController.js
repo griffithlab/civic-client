@@ -54,7 +54,7 @@
         vm.evidence_items = response.results;
       });
 
-    $scope.$on('suggestion:rejected', function() {
+    $scope.$on('suggestion:updated', function() {
       Sources.get(source.id).then(function(response) {
         angular.copy(response, vm.source);
       });
