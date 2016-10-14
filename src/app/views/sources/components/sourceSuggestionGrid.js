@@ -64,7 +64,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
-          width: '8%',
+          width: '6%',
           filter: {
             noTerm: true,
             condition: function(searchTerm, cellValue) {
@@ -75,9 +75,10 @@
         {
           name: 'created_at',
           displayName: 'Submitted',
-          width: '10%',
+          width: '8%',
           enableFiltering: false,
           allowCellFocus: false,
+          visible: false,
           type: 'date',
           sort: {
             direction: uiGridConstants.DESC
@@ -99,7 +100,8 @@
           name: 'pubmed_id',
           displayName: 'Pubmed ID',
           width: '10%',
-          visible: mode === 'full',
+          visible: false,
+          //visible: mode === 'full',
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
@@ -113,6 +115,7 @@
           visible: mode === 'full',
           enableFiltering: true,
           allowCellFocus: false,
+          width: '15%',
           type: 'string',
           cellTemplate: 'app/views/sources/components/cellTemplateCitation.tpl.html',
           filter: {
@@ -122,7 +125,7 @@
         {
           name: 'gene',
           displayName: 'Gene',
-          width: '8%',
+          width: '6%',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
@@ -168,6 +171,7 @@
         {
           name: 'action',
           displayName: 'Actions',
+          width: '15%',
           allowCellFocus: false,
           enableFiltering: false,
           cellTemplate: 'app/views/sources/components/cellTemplateActions.tpl.html'
