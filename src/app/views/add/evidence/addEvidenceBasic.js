@@ -67,7 +67,8 @@
       evidence_type: '',
       evidence_direction: '',
       clinical_significance: '',
-      variant_origin: ''
+      variant_origin: '',
+      keepSourceStatus: false
     };
 
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
@@ -647,7 +648,7 @@
         }
       },
       {
-        key: 'markCurated',
+        key: 'keepSourceStatus',
         type: 'horizontalCheckboxHelp',
         defaultValue: false,
         // hideExpression: 'scope.model.source_suggestion_id != null',
@@ -701,8 +702,8 @@
       vm.formErrors = {};
       vm.formMessages = {};
 
-      // if markCurated is unchecked, remove source_suggestion_id from model
-      if(newEvidence.markCurated != true) {
+      // if keepSourceStatus is checked, remove source_suggestion_id from model
+      if(newEvidence.keepSourceStatus === true) {
         newEvidence = _.omit(newEvidence, 'source_suggestion_id');
       }
 
