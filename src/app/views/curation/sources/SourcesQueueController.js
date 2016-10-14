@@ -24,7 +24,7 @@
       vm.suggestedSources = response.result;
     });
 
-    $scope.$on('suggestion:rejected', function() {
+    $scope.$on('suggestion:updated', function() {
       Sources.getSuggested({count: 999}).then(function(response) {
         vm.suggestedSources = response.result;
       });
