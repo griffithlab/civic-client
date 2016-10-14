@@ -23,4 +23,12 @@
       <i class="glyphicon glyphicon-thumbs-up"></i>
     </a>
   </span>
+  <span tooltip="Re-queue Suggestion"
+        tooltip-append-to-body="true">
+    <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'new')"
+       ng-disabled="row.entity['status'] === 'new'"
+       class="btn btn-xs btn-default">
+      <i class="glyphicon glyphicon-repeat"></i>
+    </a>
+  </span>
 </div>
