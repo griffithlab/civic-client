@@ -1,17 +1,26 @@
 <div class="ui-grid-cell-contents">
-  <a ng-href="{{row.entity.addEvidenceUrl}}"
-     ng-disabled="row.entity['status'] != 'new'"
-     class="btn btn-xs btn-cell-add">
-    Add
-  </a>
-  <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'rejected')"
-     ng-disabled="row.entity['status'] != 'new'"
-     class="btn btn-xs btn-danger">
-    Reject
-  </a>
-  <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
-     ng-disabled="row.entity['status'] != 'new'"
-     class="btn btn-xs btn-success">
-    Curated
-  </a>
+  <span tooltip="Add Evidence Item"
+        tooltip-append-to-body="true">
+    <a ng-href="{{row.entity.addEvidenceUrl}}"
+       ng-disabled="row.entity['status'] != 'new'"
+       class="btn btn-xs btn-cell-add">
+      <i class="glyphicon glyphicon-plus"></i>
+    </a>
+    </span>
+  <span tooltip="Reject Suggestion"
+        tooltip-append-to-body="true">
+    <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'rejected')"
+       ng-disabled="row.entity['status'] != 'new'"
+       class="btn btn-xs btn-danger">
+      <i class="glyphicon glyphicon-thumbs-down"></i>
+    </a>
+  </span>
+  <span tooltip="Mark Suggestion as Curated"
+        tooltip-append-to-body="true">
+    <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
+       ng-disabled="row.entity['status'] != 'new'"
+       class="btn btn-xs btn-success">
+      <i class="glyphicon glyphicon-thumbs-up"></i>
+    </a>
+  </span>
 </div>
