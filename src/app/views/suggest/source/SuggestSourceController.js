@@ -19,6 +19,8 @@
     vm.showSuccessMessage = false;
     vm.showForm = true;
 
+    vm.duplicates = [];
+
     vm.newSuggestion= {
       suggestion: {
       },
@@ -202,17 +204,17 @@
                 "operator": "AND",
                 "queries": [
                   {
-                    "field": "gene_name",
-                    "condition": {"name": "contains", "parameters": [values[0]]}
+                    "field": "pubmed_id",
+                    "condition": {"name": "is", "parameters": [values[0]]
+                    }
                   },
                   {
-                    "field": "variant_name",
+                    "field": "gene_name",
                     "condition": {"name": "contains", "parameters": [values[1]]}
                   },
                   {
-                    "field": "pubmed_id",
-                    "condition": {"name": "is", "parameters": [values[2]]
-                    }
+                    "field": "variant_name",
+                    "condition": {"name": "contains", "parameters": [values[2]]}
                   },
                   {
                     "field": "disease_doid",
