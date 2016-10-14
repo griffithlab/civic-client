@@ -1,0 +1,7 @@
+<div class="ngCellText" ng-class="col.colIndex()"
+     tooltip="{{row.entity.citation}}"
+     tooltip-append-to-body="true">
+  <div class="ui-grid-cell-contents">
+    <a ui-sref="sources.summary({sourceId: row.entity.source_id })">{{row.entity.citation}}</a>
+  </div>
+</div>

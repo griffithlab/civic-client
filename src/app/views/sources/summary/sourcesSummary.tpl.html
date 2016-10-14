@@ -19,42 +19,60 @@
       <p><strong>Abstract:</strong> <span ng-bind="vm.source.abstract">Abstract</span></p>
     </div>
     <div class="col-xs-12 col-md-5 col-lg-6">
-      <div class="well">
-        <table class="table">
-          <tr>
-            <td class="key">Published:</td>
-            <td class="value" ng-bind="vm.source.publication_date_string"></td>
-          </tr>
-          <tr>
-            <td class="key">Citation:</td>
-            <td class="value" ng-bind="vm.source.citation"></td>
-          </tr>
-          <tr>
-            <td class="key">Pubmed ID:</td>
-            <td class="value">
-              <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{vm.source.pubmed_id}}"
-                 class="btn btn-xs button-pubmed"
-                 target="_blank">
-                <span class="glyphicon glyphicon-new-window"></span>
-                <span ng-bind="vm.source.pubmed_id"></span>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td class="key">Journal:</td>
-            <td class="value" ng-bind="vm.source.full_journal_title ? vm.source.full_journal_title : vm.source.journal"></td>
-          </tr>
-          <tr>
-            <td class="key">PMC ID:</td>
-            <td class="value">
-              <span ng-bind="vm.source.pmc_id ? vm.source.pmc_id : 'N/A'"> PMC ID </span>
-            </td>
-          </tr>
-        </table>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="well">
+            <table class="table">
+              <tr>
+                <td class="key">Published:</td>
+                <td class="value" ng-bind="vm.source.publication_date_string"></td>
+              </tr>
+              <tr>
+                <td class="key">Citation:</td>
+                <td class="value" ng-bind="vm.source.citation"></td>
+              </tr>
+              <tr>
+                <td class="key">Pubmed ID:</td>
+                <td class="value">
+                  <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{vm.source.pubmed_id}}"
+                     class="btn btn-xs button-pubmed"
+                     target="_blank">
+                    <span class="glyphicon glyphicon-new-window"></span>
+                    <span ng-bind="vm.source.pubmed_id"></span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="key">Journal:</td>
+                <td class="value" ng-bind="vm.source.full_journal_title ? vm.source.full_journal_title : vm.source.journal"></td>
+              </tr>
+              <tr>
+                <td class="key">PMC ID:</td>
+                <td class="value">
+                  <span ng-bind="vm.source.pmc_id ? vm.source.pmc_id : 'N/A'"> PMC ID </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="key">Status:</td>
+                <td class="value">
+                  <span ng-bind="vm.source.status"> Source Status</span>
+                </td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
       </div>
+      <!--<div class="row" ng-if="vm.isEditor">-->
+        <!--<div class="col-xs-12">-->
+          <!--<a ng-click="vm.deQueue()"-->
+             <!--class="btn btn-default btn-sm btn-block">REMOVE FROM CURATION QUEUE</a>-->
+        <!--</div>-->
+      <!--</div>-->
+
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="margin-top: 1.5em">
     <div class="col-xs-12">
       <evidence-grid
         evidence="vm.evidence_items"
@@ -67,4 +85,42 @@
       </evidence-grid>
     </div>
   </div>
+  <div class="row" ng-if="vm.source.source_suggestions.length > 0">
+    <div class="col-xs-12">
+      <source-suggestion-grid
+        suggestions="vm.source.source_suggestions"
+        rows="5"
+        mode="full">
+      </source-suggestion-grid>
+    </div>
+  </div>
+  <!--<div class="row" style="margin-top: 1.5em">-->
+    <!--<div class="col-xs-12">-->
+      <!--<h4>Source Comments</h4>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12 comment-list">-->
+      <!--<div ng-switch="vm.comments.length > 0">-->
+        <!--<div ng-switch-when="true">-->
+          <!--<ul class="comments">-->
+            <!--<li ng-repeat="comment in vm.comments">-->
+              <!--<entity-comment-->
+                <!--comment-data="comment"-->
+                <!--entity-model="vm.source">-->
+              <!--</entity-comment>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div ng-switch-default>-->
+          <!--<p>No Comments for this Source.</p>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col-xs-12 comment-form">-->
+      <!--<entity-comment-form type="entity" entity-model="vm.source"></entity-comment-form>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

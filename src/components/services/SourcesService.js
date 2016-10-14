@@ -18,7 +18,32 @@
           method: 'GET',
           url: '/api/sources/:sourceId',
           isArray: false,
-          cache: true
+          cache: false
+        },
+        suggest: {
+          method: 'POST',
+          url: '/api/sources',
+          isArray: false,
+          cache: false
+        },
+        setStatus: {
+          method: 'PATCH',
+          url: '/api/source_suggestions/:suggestionId',
+          params: {
+            suggestionId: '@suggestionId'
+          },
+          isArray: false,
+          cache: false
+        },
+        querySuggested: {
+          method: 'GET',
+          url: '/api/datatables/source_suggestions',
+          params: {
+            count: '@count',
+            page: '@page'
+          },
+          isArray: false,
+          cache: false
         }
       }
     );
@@ -28,14 +53,18 @@
   function SourcesService(SourcesResource) {
     var item = {};
     var collection = [];
-
+    var suggested = [];
     return {
       data: {
         item: item,
-        collection: collection
+        collection: collection,
+        suggested: suggested
       },
       query: query,
-      get: get
+      get: get,
+      suggest: suggest,
+      getSuggested: getSuggested,
+      setStatus: setStatus
     };
 
     function query() {
@@ -50,6 +79,28 @@
       return SourcesResource.get({sourceId: sourceId}).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function suggest(reqObj) {
+      return SourcesResource.suggest(reqObj).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
+
+    function getSuggested(reqObj) {
+      return SourcesResource.querySuggested(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response.result, suggested);
+          return response.$promise;
+        });
+    }
+
+    function setStatus(reqObj) {
+      return SourcesResource.setStatus(reqObj).$promise
+        .then(function(response) {
           return response.$promise;
         });
     }

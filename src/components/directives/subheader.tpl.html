@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="subheader-bg">
       <div class="row">
-        <div class="col-xs-4 subhead-input">
+        <div class="col-xs-3 subhead-input">
           <quick-search></quick-search>
         </div>
 
@@ -26,24 +26,56 @@
              ng-disabled="$state.includes('activity')"
              ui-sref="activity">Activity</a>
         </div>
+        <div class="col-xs-3">
 
-        <div class="col-xs-2 subhead-btn">
-          <div ng-switch="isAuthenticated()">
-            <div ng-switch-when="false">
+          <div class="row">
+            <div class="col-xs-6 subhead-btn">
+              <div ng-switch="isAuthenticated()">
+                <div ng-switch-when="false">
               <span tooltip="Please sign in to add Evidence" tooltip-append-to-body="true">
                 <a type="button"
-                   class="btn btn-sm btn-subhead-emphasized btn-block disabled"
-                   ui-sref="add.evidence.basic">Add</a>
-                </span>
+                   class="btn btn-sm btn-subhead-add btn-block disabled">
+                  Add
+                </a>
+              </span>
+                </div>
+                <div ng-switch-when="true">
+                  <span tooltip="Add an Evidence Item" tooltip-append-to-body="true">
+                    <a type="button"
+                       class="btn btn-sm btn-subhead-add btn-block"
+                       ng-disabled="$state.includes('add.evidence')"
+                       ng-href="{{ addEvidenceUrl }}">
+                      Add
+                    </a>
+                  </span>
+                </div>
+              </div>
             </div>
-            <div ng-switch-when="true">
-              <a type="button"
-                 class="btn btn-sm btn-subhead-emphasized btn-block"
-                 ng-disabled="$state.includes('add.evidence')"
-                 ng-href="{{ addEvidenceUrl }}">Add</a>
+            <div class="col-xs-6 subhead-btn">
+              <div ng-switch="isAuthenticated()">
+                <div ng-switch-when="false">
+              <span tooltip="Please sign in to Suggest a source" tooltip-append-to-body="true">
+                <a type="button"
+                   class="btn btn-sm btn-subhead-suggest btn-block disabled">
+                  Suggest
+                </a>
+              </span>
+                </div>
+                <div ng-switch-when="true">
+                  <span tooltip="Suggest a publication" tooltip-append-to-body="true">
+                    <a type="button"
+                       class="btn btn-sm btn-subhead-suggest btn-block"
+                       ng-disabled="$state.includes('suggest.source')"
+                       ui-sref="suggest.source">
+                      Suggest
+                    </a>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
       </div> <!-- /.row -->
     </div> <!-- /.subheader-bg -->
   </div>

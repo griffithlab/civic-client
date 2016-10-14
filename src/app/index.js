@@ -44,7 +44,8 @@
     'civic.sources',
     'civic.users',
     'civic.add',
-    'civic.community'
+    'civic.community',
+    'civic.curation'
   ])
     .run(appRun)
     .config(appConfig);
@@ -121,6 +122,7 @@
   angular.module('civic.search', ['ui.router']);
   angular.module('civic.activity', ['ui.router']);
   angular.module('civic.community', ['ui.router']);
+  angular.module('civic.curation', ['ui.router']);
 
   angular.module('civic.users', [
     'ui.router',

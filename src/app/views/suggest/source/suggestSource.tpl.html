@@ -1,0 +1,76 @@
+<div class="suggestSource">
+  <div class="title-row">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="name">
+          <h3><a name="top" id="top" style="text-decoration: none; color: inherit;">Suggest Source</a></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="vm.showForm">
+    <div class="row instructions">
+      <div class="col-xs-12">
+        <p>If you have a source publication that you believe to contain research relevant to CIViC's curation efforts, the community would appreciate your input! Please specify as many details as you can using the form below (only the Pubmed ID and Comment are required). Your suggested source will be placed in a queue that curators check regularly, and you will be given a suggestion credit if your suggestion results in a new Evidence Item added to the CIViC database.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal" name="vm.form" novalidate>
+          <formly-form options="vm.formOptions" model="vm.newSuggestion" fields="vm.suggestionFields">
+
+          </formly-form>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="buttons">
+          <div class="pull-left">
+            <cancel-button></cancel-button>
+          </div>
+          <div class="pull-right">
+            <span ng-disabled="vm.isAuthenticated">
+            <button type="submit"
+                    class="btn btn-default"
+                    ng-disabled="vm.form.$invalid"
+                    ng-click="vm.submit(vm.newSuggestion, vm.formOptions)">
+              Submit Evidence for Inclusion
+            </button>
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.form.$invalid" style="margin-top: 1em;">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="alert alert-info">
+          The Submit button is disabled because the Suggest Source form is incomplete or contains errors. Please ensure that all required fields are completed and error free.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="successMessage" ng-if="vm.showSuccessMessage">
+    <div class="col-xs-12 jumbotron">
+      <h1>Thank you.</h1>
+      <p>Your suggested source has been added to the source curation queue.</p>
+      <p>
+        <a ui-sref="sources.summary({sourceId: {{vm.newSourceId}} })">View it here</a>
+        &nbsp;or&nbsp;
+        <a ui-sref="suggest.source"
+           ui-sref-opts="{reload:true, inherit: true}"
+           class="btn btn-small btn-default">Suggest Another Source</a>
+      </p>
+    </div>
+  </div>
+  <!--<div class="row" style="margin-top: 3em;">-->
+    <!--<div class="col-xs-6">-->
+      <!--<p>vm.newSuggestion</p>-->
+      <!--<pre ng-bind="vm.newSuggestion|json"></pre>-->
+    <!--</div>-->
+    <!--<div class="col-xs-6">-->
+      <!--<p>Duplicates:</p>-->
+      <!--<pre ng-bind="vm.duplicates|json"></pre>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>

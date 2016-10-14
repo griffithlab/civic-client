@@ -24,13 +24,21 @@
             <span ng-bind="count" class="badge">count</span>
           </a>
         </li>
-        <li class="dropdown-header">Account</li>
-        <li><a ui-sref="account.notifications({category: 'all', page: 1, count: 10, show_read: false, show_unlinkable: false})">My Account</a></li>
-        <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
+
+        <li ng-if="isEditor()" class="dropdown-header">Curator Tools</li>
+        <li ng-if="isEditor()">
+          <a ui-sref="curation.sources">Source Suggestions</a>
+        </li>
+
         <li ng-if="isEditor()" class="dropdown-header">Administrator Tools</li>
         <li ng-if="isEditor()">
           <a ng-href="{{adminUrl}}" target="_blank">Admin Console</a>
         </li>
+
+        <li class="dropdown-header">Account</li>
+        <li><a ui-sref="account.notifications({category: 'all', page: 1, count: 10, show_read: false, show_unlinkable: false})">My Account</a></li>
+        <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
+
       </ul>
     </div>
   </div>
