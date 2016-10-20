@@ -96,43 +96,8 @@
           </tbody>
           <tbody class="transcript1">
             <tr>
-              <td class="key small">
-                Chromosome:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.chromosome | ifEmpty: '--' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="key small">
-                Start:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.start | ifEmpty: '--' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="key small">
-                Stop:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.stop | ifEmpty: '--' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="key small">
-                Reference Bases:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.reference_bases| ifEmpty: '--' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="key small">
-                Variant Bases:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.variant_bases | ifEmpty: '--' }}
+              <td class="full-value small" colspan="2">
+               chr{{variant.coordinates.chromosome}}:{{variant.coordinates.start}}_{{variant.coordinates.stop}}:{{variant.coordinates.reference_bases}}&gt;{{variant.coordinates.variant_bases}}
               </td>
             </tr>
             <tr>
