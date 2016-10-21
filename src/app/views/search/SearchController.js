@@ -40,6 +40,7 @@
                   { value: 'id', name: 'Evidence ID'},
                   { value: 'evidence_type', name: 'Evidence Type' },
                   { value: 'evidence_level', name: 'Evidence Level' },
+                  { value: 'evidence_direction', name: 'Evidence Direction' },
                   { value: 'gene_name', name: 'Gene Name' },
                   { value: 'pubmed_id', name: 'Pubmed ID' },
                   { value: 'rating', name: 'Rating' },
@@ -399,6 +400,40 @@
                     { value: 'C', name: 'C - Case Study'},
                     { value: 'D', name: 'D - Preclinical'},
                     { value: 'E', name: 'E - Inferential'}
+                  ]
+                }
+              }
+            ],
+            evidence_direction: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'Supports'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'Supports', name: 'Supports'},
+                    { value: 'Does Not Support', name: 'Does Not Support' }
                   ]
                 }
               }
@@ -2002,7 +2037,8 @@
                   { value: 'publication_year', name: 'Publication Year' },
                   { value: 'author', name: 'Author' },
                   { value: 'evidence_item_count', name: 'Evidence Items' },
-                  { value: 'pmc_id', name: 'PMC ID' }
+                  { value: 'pmc_id', name: 'PMC ID' },
+                  { value: 'source_suggestion_count', name: 'Source Suggestions' },
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -2255,6 +2291,77 @@
                   required: true
                 }
               }
+            ],
+            source_suggestion_count: [
+              {
+                template: 'with status',
+                className: 'inline-field'
+              },
+              {
+                key: 'parameters[0]', // status
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'new'
+                },
+                templateOptions: {
+                  required: true,
+                  label: '',
+                  options: [
+                    { value: 'new', name: 'new' },
+                    { value: 'rejected', name: 'rejected' },
+                    { value: 'any', name: 'any' },
+                    { value: 'curated', name: 'curated' },
+                  ]
+                }
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_greater_than_or_equal_to'
+                },
+                templateOptions: {
+                  required: true,
+                  label: '',
+                  options: [
+                    { value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to' },
+                    { value: 'is_greater_than', name: 'is greater than' },
+                    { value: 'is_less_than', name: 'is less than' },
+                    { value: 'is_less_than_or_equal_to', name: 'is less than or equal to' },
+                    { value: 'is_equal_to', name: 'is equal to' },
+                    { value: 'is_in_the_range', name: 'is in the range'}
+                  ],
+                  onChange: function(value, options, scope) {
+                    _.pullAt(scope.model.parameters, 1,2);
+                  }
+                }
+              },
+              {
+                key: 'parameters[1]', // from value
+                type: 'input',
+                className: 'inline-field inline-field-xs',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              },
+              {
+                template: 'to',
+                className: 'inline-field',
+                hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"'
+              },
+              {
+                key: 'parameters[2]', // to value
+                type: 'input',
+                className: 'inline-field inline-field-xs',
+                hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
             ]
           }
         }
@@ -2272,6 +2379,11 @@
           name: "High Quality Predictive Evidence",
           tooltip: "Predictive Evidence with high Evidence Levels and Ratings",
           search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Predictive"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["B"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[4]}}]}
+        },
+        {
+          name: "High Quality Drug Predictions",
+          tooltip: "Highly rated drug predictive evidence indicating successful outcomes",
+          search: {"operator":"AND","queries":[{"field":"evidence_type","condition":{"name":"is_equal_to","parameters":["Predictive"]}},{"field":"evidence_direction","condition":{"name":"is_equal_to","parameters":["Supports"]}},{"field":"evidence_level","condition":{"name":"is_above","parameters":["C"]}},{"field":"rating","condition":{"name":"is_greater_than_or_equal_to","parameters":[3]}}],"entity":"evidence_items","save":true}
         },
         {
           name: "Alectinib Evidence",

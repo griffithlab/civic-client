@@ -18,12 +18,14 @@
   function AddEvidenceBasicController($scope,
                                       $q,
                                       $document,
+                                      $stateParams,
                                       Security,
                                       Evidence,
                                       Genes,
                                       Publications,
                                       Diseases,
                                       Datatables,
+                                      Sources,
                                       DrugSuggestions,
                                       AddEvidenceViewOptions,
                                       formConfig,
@@ -45,9 +47,6 @@
       $document.scrollToElementAnimated(elem);
     };
 
-    //vm.duplicates = [];
-
-
     vm.duplicates = true;
 
     vm.newEvidence = {
@@ -68,11 +67,14 @@
       evidence_type: '',
       evidence_direction: '',
       clinical_significance: '',
-      variant_origin: ''
+      variant_origin: '',
+      keepSourceStatus: false
     };
 
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
     vm.newEvidence.drugs  = [];
+
+    vm.newEvidence.source_suggestion_id = _.isUndefined($stateParams.sourceSuggestionId) ? null : Number($stateParams.sourceSuggestionId);
 
     vm.formErrors = {};
     vm.formMessages = {};
@@ -91,6 +93,15 @@
               $scope.model.gene = _.pick(gene,['id', 'name', 'entrez_id']);
               $scope.to.data.entrez_id = gene.entrez_id;
             });
+          }
+          // if gene name provide, get id, entrez_id
+          if($stateParams.geneName){
+            Genes.beginsWith($stateParams.geneName)
+              .then(function(response) {
+                // set field to first item on typeahead suggest
+                $scope.model.gene = response[0];
+                $scope.to.data.entrez_id = response[0].entrez_id;
+              });
           }
         },
         templateOptions: {
@@ -129,6 +140,10 @@
             Variants.get($stateParams.variantId).then(function(variant) {
               $scope.model.variant = { name: variant.name };
             });
+          }
+          // just drop in the variant name string if provided
+          if($stateParams.variantName){
+            $scope.model.variant = { name: $stateParams.variantName };
           }
         },
         templateOptions: {
@@ -178,6 +193,11 @@
           debounce: {
             default: 300,
             blur: 0
+          }
+        },
+        controller: /* @ngInject */ function($scope, $stateParams) {
+          if($stateParams.pubmedId) {
+            $scope.model.pubmed_id = $stateParams.pubmedId;
           }
         },
         validators: {
@@ -310,6 +330,16 @@
             }
           }
         },
+        controller: /* @ngInject */ function($scope, $stateParams, Diseases) {
+          if($stateParams.diseaseName) {
+            Diseases.beginsWith($stateParams.diseaseName)
+              .then(function(response) {
+                $scope.model.disease = response[0];
+                $scope.to.data.doid = response[0].doid;
+              });
+          }
+        },
+
         expressionProperties: {
           'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
           'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
@@ -629,6 +659,19 @@
         }
       },
       {
+        key: 'keepSourceStatus',
+        type: 'horizontalCheckboxHelp',
+        defaultValue: false,
+        // hideExpression: 'scope.model.source_suggestion_id != null',
+        hideExpression: function(vval, mval, scope) {
+          return scope.model.source_suggestion_id === null;
+        },
+        templateOptions: {
+          label: 'Originating source suggestion supports the creation of additional evidence items',
+          helpText: 'Check this box if you wish the originating source suggestion to keep its un-curated status. Otherwise, it will be marked as curated and removed from the source suggestion queues.'
+        }
+      },
+      {
         key: 'text',
         type: 'horizontalCommentHelp',
         model: vm.newEvidence.comment,
@@ -655,18 +698,7 @@
             message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
           }
         }
-      },
-      // {
-      //   key: 'text',
-      //   type: 'horizontalTextareaHelp',
-      //   model: vm.newEvidence.comment,
-      //   templateOptions: {
-      //     rows: 5,
-      //     label: 'Additional Comments',
-      //     value: 'text',
-      //     helpText: 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.'
-      //   }
-      // }
+      }
     ];
 
     vm.submit = function(newEvidence) {
@@ -678,11 +710,13 @@
       if(_.isString(newEvidence.variant)){
         newEvidence.variant = { name: newEvidence.variant };
       }
-      //if(_.isString(newEvidence.gene)){
-      //  newEvidence.gene = { name: newEvidence.gene };
-      //}
       vm.formErrors = {};
       vm.formMessages = {};
+
+      // if keepSourceStatus is checked, remove source_suggestion_id from model
+      if(newEvidence.keepSourceStatus === true) {
+        newEvidence = _.omit(newEvidence, 'source_suggestion_id');
+      }
 
       // if noDoid, construct disease obj w/ disease_name
       if(newEvidence.noDoid) {
