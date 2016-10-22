@@ -267,9 +267,9 @@
     vm.submit = function(req, options) {
       var reqObj = {
         pubmed_id: req.suggestion.pubmed_id,
-        gene_name: req.suggestion.gene.name,
-        variant_name: req.suggestion.variant.name,
-        disease_name: req.suggestion.disease.name,
+        gene_name: _.isUndefined(req.suggestion.gene) ? '' : req.suggestion.gene.name,
+        variant_name: _.isUndefined(req.suggestion.variant) ? '' : req.suggestion.variant.name,
+        disease_name: _.isUndefined(req.suggestion.disease) ? '' : req.suggestion.disease.name,
         comment: req.comment
       };
       reqObj.comment = req.comment;
