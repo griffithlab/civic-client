@@ -53,10 +53,6 @@
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
-      enableRowHeaderSelection: false,
-      multiSelect: false,
-      modifierKeysToMultiSelect: false,
-      noUnselect: true,
       columnDefs: [
         {
           name: 'status',
