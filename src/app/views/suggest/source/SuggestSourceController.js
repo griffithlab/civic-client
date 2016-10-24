@@ -21,6 +21,8 @@
 
     vm.duplicates = [];
 
+    vm.error = {};
+
     vm.newSuggestion= {
       suggestion: {
       },
@@ -265,6 +267,7 @@
     ];
 
     vm.submit = function(req, options) {
+      vm.error = {};
       var reqObj = {
         pubmed_id: req.suggestion.pubmed_id,
         gene_name: _.isUndefined(req.suggestion.gene) ? '' : req.suggestion.gene.name,
@@ -283,7 +286,7 @@
         },
         function(error) { // fail
           console.error('source suggestion submit error.');
-          console.log(error);
+          vm.error = error;
         },
         function() { // complete
           console.error('source suggestion submit complete.');
