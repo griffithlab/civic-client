@@ -48,7 +48,7 @@
       name: 'horizontalBootstrapLabel',
       template: [
         '<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
-        '{{to.label}}',
+        '{{to.label}}<span ng-if="to.required" style="color:#999;">&nbsp;*</span>',
         '</label>',
         '<div class="col-sm-' + inputColWidth + '">',
         '<formly-transclude></formly-transclude>',
@@ -61,7 +61,7 @@
       name: 'horizontalBootstrapHelp',
       template: [
         '<label for="{{::id}}" class="col-sm-'+ labelColWidth +' control-label">',
-        '{{to.label}}',
+        '{{to.label}}<span ng-if="to.required" style="color:#999;">&nbsp;*</span>',
         '</label>',
         '<div class="col-sm-'+ inputColWidth +'">',
         '<formly-transclude></formly-transclude>',
