@@ -270,12 +270,11 @@
       vm.error = {};
       var reqObj = {
         pubmed_id: req.suggestion.pubmed_id,
-        gene_name: _.isUndefined(req.suggestion.gene) ? '' : req.suggestion.gene.name,
-        variant_name: _.isUndefined(req.suggestion.variant) ? '' : req.suggestion.variant.name,
-        disease_name: _.isUndefined(req.suggestion.disease) ? '' : req.suggestion.disease.name,
         comment: req.comment
       };
-      reqObj.comment = req.comment;
+      if(!_.isUndefined(req.suggestion.gene) && _.isObject(req.suggestion.gene)) {reqObj.gene_name = req.suggestion.gene.name}
+      if(!_.isUndefined(req.suggestion.variant) && _.isObject(req.suggestion.variant)) {reqObj.variant_name = req.suggestion.variant.name}
+      if(!_.isUndefined(req.suggestion.disease) && _.isObject(req.suggestion.disease)) {reqObj.disease_name = req.suggestion.disease.name}
       Sources.suggest(reqObj).then(
         function(response) { // success
           console.log('source suggestion submit success.');
