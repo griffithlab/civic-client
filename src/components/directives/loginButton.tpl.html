@@ -25,8 +25,8 @@
           </a>
         </li>
 
-        <li ng-if="isEditor()" class="dropdown-header">Curator Tools</li>
-        <li ng-if="isEditor()">
+        <li ng-if="isCurator() || isEditor()" class="dropdown-header">Curator Tools</li>
+        <li ng-if="isCurator() || isEditor()">
           <a ui-sref="curation.sources">Source Suggestions</a>
         </li>
 
