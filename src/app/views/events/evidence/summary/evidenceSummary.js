@@ -27,7 +27,7 @@
 
     if(Security.currentUser) {
       var currentUserId = Security.currentUser.id;
-      var submitterId = $scope.evidence.lifecycle_actions.submitted.user.id;
+      var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
       $scope.ownerIsCurrentUser = submitterId === currentUserId;
     } else {
       $scope.ownerIsCurrentUser = false;
