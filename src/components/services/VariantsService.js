@@ -47,6 +47,15 @@
           cache: false
         },
 
+        // Variant Additional Info
+        getMyVariantInfo: {
+          url: '/api/variants/:variantId/myvariant_info_proxy',
+          params: {
+            variantId: '@variantId'
+          },
+          cache: cache
+        },
+
         // Variant Collections
         queryEvidence: {
           method: 'GET',
@@ -129,6 +138,7 @@
     // Base Variant and Variant Collection
     var item = {};
     var collection = [];
+    var myVariantInfo = {};
 
     // Variant Collections
     var evidence = [];
@@ -140,6 +150,7 @@
       data: {
         item: item,
         collection: collection,
+        myVariantInfo: myVariantInfo,
         evidence: evidence,
         comments: comments
       },
@@ -150,6 +161,9 @@
       update: update,
       delete: deleteItem,
       apply: apply,
+
+      // Gene Additional Info
+      getMyVariantInfo: getMyVariantInfo,
 
       // Variant Collections
       queryEvidence: queryEvidence,
@@ -168,7 +182,8 @@
     function initBase(variantId) {
       return $q.all([
         get(variantId),
-        queryEvidence(variantId)
+        queryEvidence(variantId),
+        getMyVariantInfo(variantId)
       ]);
     }
 
@@ -215,6 +230,15 @@
         },
         function(error) { // fail
           return $q.reject(error);
+        });
+    }
+
+    // Variant Additional Data
+    function getMyVariantInfo(variantId) {
+      return VariantsResource.getMyVariantInfo({variantId: variantId}).$promise
+        .then(function(response) {
+          angular.copy(angular.fromJson(angular.toJson(response)), myVariantInfo);
+          return response.$promise;
         });
     }
 
