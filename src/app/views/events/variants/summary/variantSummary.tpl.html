@@ -169,52 +169,8 @@
           <a class="btn btn-default btn-xs btn-block"
              ng-click="editClick()">Edit Coordinates</a>
         </div>
-        <!--<table class="table table-condensed borderless">-->
-        <!--<tbody ng-if="variant.coordinates.chromosome2" class="transcript2">-->
-        <!--<tr>-->
-        <!--<td class="key small">-->
-        <!--Chromosome 2:-->
-        <!--</td>-->
-        <!--<td class="value small">-->
-        <!--{{ variant.coordinates.chromosome2| ifEmpty: '&#45;&#45;' }}-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td class="key small">-->
-        <!--Start 2:-->
-        <!--</td>-->
-        <!--<td class="value small">-->
-        <!--{{ variant.coordinates.start2| ifEmpty: '&#45;&#45;' }}-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td class="key small">-->
-        <!--Stop 2:-->
-        <!--</td>-->
-        <!--<td class="value small">-->
-        <!--{{ variant.coordinates.stop2| ifEmpty: '&#45;&#45;' }}-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td class="key small">-->
-        <!--Rep. Transcript 2:-->
-        <!--</td>-->
-        <!--<td class="value small">-->
-        <!--{{ variant.coordinates.representative_transcript2 | ifEmpty: '&#45;&#45;' }}-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-
-        <!--<tbody ng-if="isAuthenticated() && !isEdit">-->
-        <!--<tr>-->
-        <!--<td colspan="2">-->
-        <!--<a class="btn btn-default btn-xs btn-block" ng-click="editClick()">-->
-        <!--Edit Coordinates-->
-        <!--</a>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-        </table>
+      </div>
+      <my-variant-info></my-variant-info>
       </div>
     </div>
   </div>

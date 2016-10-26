@@ -1,0 +1,40 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.myVariantInfo {
+  border: 1px solid #71b2e3 !important;
+  border-radius: @border-radius-large;
+  background-color: #edf4fa;
+  td .more {
+    font-style: oblique;
+    color: #999;
+  }
+  .name {
+    text-align: right;
+    font-weight: bold;
+  }
+  .table {
+    margin-bottom: 0 !important;
+  }
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+  .pathways {
+    margin-top: @contentPadding;
+  }
+
+  @media (max-width: @screen-sm-min) {
+    width: 100%;
+    border-radius: 0;
+  }
+  @media (min-width: @screen-sm-min) {
+    width: 90%;
+  }
+  @media (min-width: @screen-md-min) {
+    width: @container-md - 100px;
+  }
+  @media (min-width: @screen-lg-min) {
+    width: @container-lg - 200px;
+  }
+}

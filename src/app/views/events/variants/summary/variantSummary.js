@@ -32,6 +32,10 @@
       $scope.evidence = variant.evidence_items;
     }, true);
 
+    $scope.$watch(function() { return Variants.data.myVariantInfo;}, function(myVariantInfo) {
+      $scope.myVariantInfo = myVariantInfo;
+    }, true);
+
     $scope.VariantsViewOptions = VariantsViewOptions;
     $scope.backgroundColor = VariantsViewOptions.styles.view.backgroundColor;
 
