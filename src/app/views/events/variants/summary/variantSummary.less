@@ -39,15 +39,35 @@
     }
 
     .key {
-      width: 50%;
       font-weight: bold;
-      text-align: right;
+      font-size: small;
+      padding-bottom: 0;
+      color: #666;
     }
     .value {
-      width: 50%;
+      padding-top: 0;
+      font-size: small;
     }
     .full-value {
       text-align: center;
+    }
+    .section-title {
+      margin-left: -@contentPadding/2;
+      margin-right: -@contentPadding/2;
+      margin-top: @contentPadding/2;
+      font-size: small;
+      font-weight: bold;
+      color: #666;
+      background-color: #DDD;
+      padding: @contentPadding/2;
+      .val {
+        font-weight: normal;
+      }
+    }
+    .section-title.first {
+      margin-top: -@contentPadding/2;
+      border-top-left-radius: @border-radius-base;
+      border-top-right-radius: @border-radius-base;
     }
   }
   .sources {

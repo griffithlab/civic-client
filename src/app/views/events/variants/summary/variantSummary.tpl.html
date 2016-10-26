@@ -1,6 +1,6 @@
 <div class="variantSummary {{ backgroundColor }}">
   <div class="row">
-    <div class="col-xs-8">
+    <div class="col-xs-12 col-md-7">
       <div class="row">
         <div class="col-xs-12">
           <div ng-if="variant.variant_aliases.length > 0">
@@ -73,85 +73,147 @@
 
       </div>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-12 col-md-5">
       <div class="coordinates-block">
+        <div class="section-title first">
+          Ref. Build: <span class="val">{{ variant.coordinates.reference_build | ifEmpty: '--' }}</span>&nbsp;&nbsp;
+          Ensembl Version: <span class="val">{{ variant.coordinates.ensembl_version| ifEmpty: '--' }}</span>
+        </div>
         <table class="table table-condensed borderless">
           <tbody class="common">
             <tr>
-              <td class="key small">
-                Reference Build:
+              <td class="key">
+                Chr.
               </td>
-              <td class="value small">
-                {{ variant.coordinates.reference_build | ifEmpty: '--' }}
+              <td class="key">
+                Start
+              </td>
+              <td class="key ">
+                Stop
+              </td>
+              <td class="key">
+                Ref. Bases
+              </td>
+              <td class="key">
+                Var. Bases
               </td>
             </tr>
             <tr>
-              <td class="key small">
-                Ensembl Version:
+              <td class="value">
+                {{variant.coordinates.chromosome | ifEmpty: '--'}}
               </td>
-              <td class="value small">
-                {{ variant.coordinates.ensembl_version| ifEmpty: '--' }}
+              <td class="value">
+                {{variant.coordinates.start | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variant.coordinates.stop | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variant.coordinates.reference_bases | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variant.coordinates.variant_bases | ifEmpty: '--'}}
+              </td>
+            </tr>
+
+            <tr>
+              <td class="key small" colspan="5">
+                Rep. Transcript
+              </td>
+            </tr>
+            <tr>
+              <td class="value" colspan="5">
+                {{variant.coordinates.representative_transcript | ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
-          <tbody class="transcript1">
-            <tr>
-              <td class="full-value small" colspan="2">
-               chr{{variant.coordinates.chromosome}}:{{variant.coordinates.start}}_{{variant.coordinates.stop}}:{{variant.coordinates.reference_bases}}&gt;{{variant.coordinates.variant_bases}}
-              </td>
-            </tr>
-            <tr>
-              <td class="key small">
-                Rep. Transcript:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.representative_transcript| ifEmpty: '--' }}
-              </td>
-            </tr>
-          </tbody>
-          <tbody ng-if="variant.coordinates.chromosome2" class="transcript2">
-            <tr>
-              <td class="key small">
-                Chromosome 2:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.chromosome2| ifEmpty: '--' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="key small">
-                Start 2:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.start2| ifEmpty: '--' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="key small">
-                Stop 2:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.stop2| ifEmpty: '--' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="key small">
-                Rep. Transcript 2:
-              </td>
-              <td class="value small">
-                {{ variant.coordinates.representative_transcript2 | ifEmpty: '--' }}
-              </td>
-            </tr>
-          </tbody>
-          <tbody ng-if="isAuthenticated() && !isEdit">
-            <tr>
-              <td colspan="2">
-                <a class="btn btn-default btn-xs btn-block" ng-click="editClick()">
-                  Edit Coordinates
-                </a>
-              </td>
-            </tr>
-          </tbody>
+        </table>
+        <div ng-if="variant.coordinates.chromosome2">
+          <div class="section-title">
+            COORDINATE 2
+          </div>
+          <table class="table table-condensed borderless">
+            <tbody class="common">
+              <tr>
+                <td class="key">
+                  Chr.
+                </td>
+                <td class="key small">
+                  Start
+                </td>
+                <td class="key small">
+                  Stop
+                </td>
+                <td class="key small">
+                  Rep. Transcript
+                </td>
+              </tr>
+              <tr>
+                <td class="value">
+                  {{variant.coordinates.chromosome2 | ifEmpty: '--'}}
+                </td>
+                <td class="value">
+                  {{variant.coordinates.start2 | ifEmpty: '--'}}
+                </td>
+                <td class="value">
+                  {{variant.coordinates.stop2 | ifEmpty: '--'}}
+                </td>
+                <td class="value">
+                  {{variant.coordinates.representative_transcript2 | ifEmpty: '--'}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-if="isAuthenticated() && !isEdit">
+          <a class="btn btn-default btn-xs btn-block"
+             ng-click="editClick()">Edit Coordinates</a>
+        </div>
+        <!--<table class="table table-condensed borderless">-->
+        <!--<tbody ng-if="variant.coordinates.chromosome2" class="transcript2">-->
+        <!--<tr>-->
+        <!--<td class="key small">-->
+        <!--Chromosome 2:-->
+        <!--</td>-->
+        <!--<td class="value small">-->
+        <!--{{ variant.coordinates.chromosome2| ifEmpty: '&#45;&#45;' }}-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="key small">-->
+        <!--Start 2:-->
+        <!--</td>-->
+        <!--<td class="value small">-->
+        <!--{{ variant.coordinates.start2| ifEmpty: '&#45;&#45;' }}-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="key small">-->
+        <!--Stop 2:-->
+        <!--</td>-->
+        <!--<td class="value small">-->
+        <!--{{ variant.coordinates.stop2| ifEmpty: '&#45;&#45;' }}-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="key small">-->
+        <!--Rep. Transcript 2:-->
+        <!--</td>-->
+        <!--<td class="value small">-->
+        <!--{{ variant.coordinates.representative_transcript2 | ifEmpty: '&#45;&#45;' }}-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+
+        <!--<tbody ng-if="isAuthenticated() && !isEdit">-->
+        <!--<tr>-->
+        <!--<td colspan="2">-->
+        <!--<a class="btn btn-default btn-xs btn-block" ng-click="editClick()">-->
+        <!--Edit Coordinates-->
+        <!--</a>-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
         </table>
       </div>
     </div>
