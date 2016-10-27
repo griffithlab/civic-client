@@ -1,3 +1,70 @@
 <div class="myVariantInfo">
+  <table class="table table-condensed summary-details">
+    <colgroup>
+      <col width="30%"/>
+      <col width="70%"/>
+      <col width="21"/>
+    </colgroup>
+    <tr>
+      <td class="name">Name:</td>
+      <td class="value" ng-bind="geneInfo.name"></td>
+      <td class="mygenelogo" rowspan="7">
+        <img src="assets/images/myvariantinfo_logo.png" width="21" height="116"/>
+      </td>
+    </tr>
+    <tr>
+      <td class="name">Entrez Symbol:</td>
+      <td class="value">
+        <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + geneInfo._id}}" ng-bind="geneInfo.symbol">
+          SYMBOL
+        </a>
+        &nbsp;
+        &nbsp;
+        <strong>Entrez ID: </strong>
+        <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + geneInfo._id}}" ng-bind="geneInfo._id">ID</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="name">Aliases:</td>
+      <td class="value" ng-bind="geneInfo.alias | arrayToList "></td>
+    </tr>
+    <tr>
+      <td class="name">
+        Chromosome:<br/>
+        <small style="font-weight: normal;color: grey;"><i>(GRCh37)</i></small>
+
+      </td>
+      <td class="value">
+        <!-- Chromosome -->
+        <span ng-bind="geneInfo.genomic_pos_hg19.chr"></span>
+        &nbsp;&nbsp;
+        <strong>Start:</strong>
+        <span ng-bind="geneInfo.genomic_pos_hg19.start"></span>
+        &nbsp;&nbsp;
+        <strong>End:</strong>
+        <span ng-bind="geneInfo.genomic_pos_hg19.end"></span>
+        &nbsp;&nbsp;
+        <strong>Strand:</strong>
+        <span ng-bind="geneInfo.genomic_pos_hg19.strand"></span>
+      </td>
+    </tr>
+    <tr>
+      <td class="name">Protein Domains:</td>
+      <td class="value" ng-bind-html="geneInfo.interpro | pluck: 'desc' | arrayToList:5:'&hellip;':true | unsafe"></td>
+    </tr>
+    <tr>
+      <td class="name">Pathways:</td>
+      <td class="value" ng-bind-html="geneInfo.pathway | pluck: 'name' | arrayToList:5:'&hellip;':true | unsafe"></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="2">
+        <button class="btn btn-block btn-default view-gene-details" ng-click="ctrl.openDialog()">View MyGene.info Details</button>
+      </td>
+    </tr>
+  </table>
   <pre ng-bind="vm.info">info</pre>
+
 </div>
+
+
