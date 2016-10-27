@@ -27,7 +27,7 @@
           </tbody>
         </table>
       </td>
-      <td class="myvariantlogo" rowspan="3">
+      <td class="myvariantlogo" rowspan="4">
         <div class="pull-right">
           <img src="assets/images/myvariantinfo_logo.png" width="21" height="116" style="padding-top: 3px;"/>
         </div>
@@ -63,7 +63,7 @@
           <tbody class="common">
             <tr>
               <td class="key">
-                EGL CLass
+                EGL Class
               </td>
               <td class="key">
                 SNP Effect
@@ -88,50 +88,28 @@
       </td>
     </tr>
     <tr>
+      <td class="row">
+        <table class="table table-condensed borderless">
+          <tbody class="common">
+            <tr>
+              <td class="key">
+                ExAC Non TCGA Adj AF
+              </td>
+            </tr>
+            <tr>
+              <td class="value">
+                {{variantInfo.exac_nontcga.adj_af| ifEmpty: '--'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
       <td colspan="2">
         <button class="btn btn-block btn-sm btn-default view-gene-details" ng-click="ctrl.openDialog()">View MyVariant.info Details</button>
       </td>
     </tr>
-    <!--<tr>-->
-    <!--<td class="name">Clinvar ID:</td>-->
-    <!--<td class="value" ng-bind="variantInfo.clinvar.variant_id"></td>-->
-    <!--<td class="myvariantlogo" rowspan="7">-->
-    <!--<div class="pull-right">-->
-    <!--<img src="assets/images/myvariantinfo_logo.png" width="21" height="116" style="padding-top: 3px;"/>-->
-    <!--</div>-->
-    <!--</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td class="name">Clin.&nbsp;Sig.:</td>-->
-    <!--<td class="value" ng-bind="variantInfo.clinvar.rcv[0].clinical_significance | ifEmpty: '&#45;&#45;'"></td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td class="name">COSMIC&nbsp;ID:</td>-->
-    <!--<td class="value" ng-bind="variantInfo.cosmic.cosmic_id | ifEmpty: '&#45;&#45;'"></td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td class="name">dbSNP&nbsp;RSID:</td>-->
-    <!--<td class="value" ng-bind="variantInfo.dbsnp.rsid | ifEmpty: '&#45;&#45;'"></td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td class="name">EGL&nbsp;Class.:</td>-->
-    <!--<td class="value" ng-bind="variantInfo.egl.classification | ifEmpty: '&#45;&#45;'"></td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td class="name">Effect:</td>-->
-    <!--<td class="value">-->
-    <!--<span ng-bind="variantInfo.snpeff.ann[0].effect | ifEmpty: '&#45;&#45;'"></span>-->
-    <!--&nbsp;&nbsp;-->
-    <!--<strong>Impact:</strong>-->
-    <!--<span ng-bind="variantInfo.snpeff.ann[0].putative_effect | ifEmpty: '&#45;&#45;'"></span>-->
-    <!--</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td>&nbsp;</td>-->
-    <!--<td colspan="2">-->
-    <!--<button class="btn btn-block btn-sm btn-default view-gene-details" ng-click="ctrl.openDialog()">View MyVariant.info Details</button>-->
-    <!--</td>-->
-    <!--</tr>-->
   </table>
 </div>
 
