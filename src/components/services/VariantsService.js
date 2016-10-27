@@ -237,7 +237,7 @@
     function getMyVariantInfo(variantId) {
       return VariantsResource.getMyVariantInfo({variantId: variantId}).$promise
         .then(function(response) {
-          angular.copy(angular.fromJson(angular.toJson(response)), myVariantInfo);
+          angular.copy(response, myVariantInfo);
           return response.$promise;
         });
     }

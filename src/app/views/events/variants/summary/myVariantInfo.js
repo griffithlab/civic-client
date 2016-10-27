@@ -7,7 +7,7 @@
       return {
         restrict: 'E',
         scope: {
-          geneInfo: '='
+          variantInfo: '='
         },
         controller: 'MyVariantInfoController',
         templateUrl: 'app/views/events/variants/summary/myVariantInfo.tpl.html'
