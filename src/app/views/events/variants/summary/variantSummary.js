@@ -34,7 +34,9 @@
     }, true);
 
     $scope.$watch(function() { return Variants.data.myVariantInfo;}, function(myVariantInfo) {
-      myVariantInfo.cosmic.cosmic_id_short = _.trim(myVariantInfo.cosmic.cosmic_id, 'COSM');
+      if(!_.isUndefined(myVariantInfo.cosmic)) {
+        myVariantInfo.cosmic.cosmic_id_short = _.trim(myVariantInfo.cosmic.cosmic_id, 'COSM');
+      }
       $scope.myVariantInfo = myVariantInfo;
     }, true);
 
