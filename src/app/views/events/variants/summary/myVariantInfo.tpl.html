@@ -1,0 +1,122 @@
+<div class="myVariantInfo">
+  <table class="table table-condensed summary-details">
+    <colgroup>
+      <col width="100%"/>
+      <col width="21"/>
+    </colgroup>
+    <tr>
+      <td class="row">
+        <table class="table table-condensed borderless">
+          <tbody class="common">
+            <tr>
+              <td class="key">
+                Clinvar ID
+              </td>
+              <td class="key">
+                Clinvar Clinical Significance
+              </td>
+            </tr>
+            <tr>
+              <td class="value">
+                {{variantInfo.clinvar.variant_id | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variantInfo.clinvar.rcv[0].clinical_significance | ifEmpty: '--'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td class="myvariantlogo" rowspan="4">
+        <div class="pull-right">
+          <img src="assets/images/myvariantinfo_logo.png" width="21" height="116" style="padding-top: 3px;"/>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="row">
+        <table class="table table-condensed borderless">
+          <tbody class="common">
+            <tr>
+              <td class="key">
+                COSMIC ID
+              </td>
+              <td class="key">
+                dbSNP RSID
+              </td>
+              <td class="key">
+                HGVS ID
+              </td>
+            </tr>
+            <tr>
+              <td class="value">
+                {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variantInfo.dbsnp.rsid | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variantInfo._id| ifEmpty: '--'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="row">
+        <table class="table table-condensed borderless">
+          <tbody class="common">
+            <tr>
+              <td class="key">
+                EGL Class
+              </td>
+              <td class="key">
+                SNP Effect
+              </td>
+              <td class="key">
+                SNP Impact
+              </td>
+            </tr>
+            <tr>
+              <td class="value">
+                {{variantInfo.egl.classification | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variantInfo.snpeff.ann[0].effect | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variantInfo.snpeff.ann[0].putative_impact | ifEmpty: '--'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="row">
+        <table class="table table-condensed borderless">
+          <tbody class="common">
+            <tr>
+              <td class="key">
+                ExAC Non TCGA Adj AF
+              </td>
+            </tr>
+            <tr>
+              <td class="value">
+                {{variantInfo.exac_nontcga.adj_af| ifEmpty: '--'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button class="btn btn-block btn-sm btn-default view-gene-details" ng-click="ctrl.openDialog()">View MyVariant.info Details</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
