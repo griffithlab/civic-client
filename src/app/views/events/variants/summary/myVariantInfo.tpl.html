@@ -44,6 +44,9 @@
               <td class="key">
                 dbSNP RSID
               </td>
+              <td class="key">
+                HGVS ID
+              </td>
             </tr>
             <tr>
               <td class="value">
@@ -51,6 +54,9 @@
               </td>
               <td class="value">
                 {{variantInfo.dbsnp.rsid | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variantInfo._id| ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
