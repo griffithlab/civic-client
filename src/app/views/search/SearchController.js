@@ -2039,6 +2039,7 @@
                   { value: 'evidence_item_count', name: 'Evidence Items' },
                   { value: 'pmc_id', name: 'PMC ID' },
                   { value: 'source_suggestion_count', name: 'Source Suggestions' },
+                  { value: 'title', name: 'Title' }
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -2362,7 +2363,36 @@
                   required: true
                 }
               }
-            ]
+            ],
+            title: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'},
+                    {value: 'is_empty', name: 'is empty'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
           }
         }
       }
