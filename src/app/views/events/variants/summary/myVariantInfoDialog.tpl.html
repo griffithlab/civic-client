@@ -1,7 +1,7 @@
 <div class="myVariantInfoDialog">
   <div class="row header">
     <div class="col-xs-12">
-      <h3>Variant {{ variantInfo.entrez_id }} Details from <a href="http://mygene.info/" target="_new">MyVariant.info</a></h3>
+      <h3>Variant {{ variantInfo.entrez_id }} Details from <a href="http://myvariant.info/" target="_new">MyVariant.info</a></h3>
     </div>
   </div>
   <div class="row">
@@ -29,20 +29,20 @@
             <td class="value">{{variantInfo.cadd.sift.val | ifEmpty: '--'}}</td>
           </tr>
           <tr>
-            <td class="key">clinvar.HGVS.coding</td>
-            <td class="value">{{variantInfo.clinvar.HGVS.coding | ifEmpty: '--'}}</td>
+            <td class="key">clinvar.hgvs.coding</td>
+            <td class="value">{{variantInfo.clinvar.hgvs.coding | ifEmpty: '--'}}</td>
           </tr>
           <tr>
-            <td class="key">clinvar.HGVS.genomic</td>
-            <td class="value">{{variantInfo.clinvar.HGVS.genomic | ifEmpty: '--'}}</td>
+            <td class="key">clinvar.hgvs.genomic</td>
+            <td class="value">{{variantInfo.clinvar.hgvs.genomic | ifEmpty: '--'}}</td>
           </tr>
           <tr>
-            <td class="key">clinvar.HGVS.non-coding</td>
-            <td class="value">{{variantInfo.clinvar.HGVS.non-coding| ifEmpty: '--'}}</td>
+            <td class="key">clinvar.hgvs.non-coding</td>
+            <td class="value">{{variantInfo.clinvar.hgvs.non-coding| ifEmpty: '--'}}</td>
           </tr>
           <tr>
-            <td class="key">clinvar.HGVS.protein</td>
-            <td class="value">{{variantInfo.clinvar.HGVS.protein| ifEmpty: '--'}}</td>
+            <td class="key">clinvar.hgvs.protein</td>
+            <td class="value">{{variantInfo.clinvar.hgvs.protein| ifEmpty: '--'}}</td>
           </tr>
           <tr>
             <td class="key">clinvar.omim</td>
