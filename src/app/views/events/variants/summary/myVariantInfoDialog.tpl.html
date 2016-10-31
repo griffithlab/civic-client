@@ -62,7 +62,16 @@
           </tr>
           <tr>
             <td class="key">emv.hgvs</td>
-            <td class="value">{{variantInfo.emv.hgvs | ifEmpty: '--'}}</td>
+            <td class="value">
+              <span ng-switch="variantInfo.emv.hgvs.length > 0">
+                <span ng-switch-when="true">
+                  <span ng-repeat="hgvs in variantInfo.emv.hgvs">{{hgvs}}{{$last ? '' : ', '}}</span>
+                </span>
+                <span ng-switch-default>
+                  --
+                </span>
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
