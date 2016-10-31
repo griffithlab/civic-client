@@ -36,6 +36,7 @@
     $scope.$watch(function() { return Variants.data.myVariantInfo;}, function(myVariantInfo) {
       if(!_.isUndefined(myVariantInfo.cosmic)) {
         myVariantInfo.cosmic.cosmic_id_short = _.trim(myVariantInfo.cosmic.cosmic_id, 'COSM');
+        myVariantInfo.entrez_id = $scope.variant.name;
       }
       $scope.myVariantInfo = myVariantInfo;
     }, true);
