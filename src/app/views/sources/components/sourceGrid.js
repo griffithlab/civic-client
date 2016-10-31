@@ -59,7 +59,18 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         },
-
+        {
+          name: 'name',
+          displayName: 'Title',
+          enableFiltering: true,
+          allowCellFocus: false,
+          type: 'string',
+          width: '20%',
+          cellTemplate: 'app/views/sources/components/cellTemplateTooltip.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
         {
           name: 'author_list_string',
           displayName: 'Authors',
@@ -67,6 +78,7 @@
           allowCellFocus: false,
           type: 'string',
           width: '20%',
+          cellTemplate: 'app/views/sources/components/cellTemplateTooltip.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -85,6 +97,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          cellTemplate: 'app/views/sources/components/cellTemplateTooltip.tpl.html',
           width: '15%'
         },
         {
@@ -93,6 +106,7 @@
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
+          cellTemplate: 'app/views/sources/components/cellTemplateTooltip.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
