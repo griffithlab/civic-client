@@ -1,7 +1,65 @@
 <div class="myVariantInfoDialog">
   <div class="row header">
     <div class="col-xs-12">
-      <h3>Variant {{ variantInfo.entrez_id }} Details from <a href="http://myvariant.info/" target="_new">MyVariant.info</a></h3>
+      <h3>Variant {{ variantInfo.entrez_id }} Details from <a href="http://myvariant.info/"
+                                                              target="_new">MyVariant.info</a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="well">
+        <strong>CADD</strong>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">cadd.consdetail</td>
+              <td class="value">{{variantInfo.cadd.consdetail | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">cadd.consequence</td>
+              <td class="value">{{variantInfo.cadd.consequence | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">cadd.sift.cat</td>
+              <td class="value">{{variantInfo.cadd.sift.cat | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">cadd.sift.val</td>
+              <td class="value">{{variantInfo.cadd.sift.val | ifEmpty: '--'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <div class="well">
+        <strong>Clinvar</strong>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">HGVS Coding</td>
+              <td class="value">{{variantInfo.clinvar.hgvs.coding | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">HGVS Genomic</td>
+              <td class="value">{{variantInfo.clinvar.hgvs.genomic | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">HGVS Non-coding</td>
+              <td class="value">{{variantInfo.clinvar.hgvs.non-coding| ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">HGVA Protein</td>
+              <td class="value">{{variantInfo.clinvar.hgvs.protein| ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Omim</td>
+              <td class="value">{{variantInfo.clinvar.omim | ifEmpty: '--'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -12,42 +70,7 @@
           <col width="70%"/>
         </colgroup>
         <tbody>
-          <tr>
-            <td class="key">cadd.consdetail</td>
-            <td class="value">{{variantInfo.cadd.consdetail | ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">cadd.consequence</td>
-            <td class="value">{{variantInfo.cadd.consequence | ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">cadd.sift.cat</td>
-            <td class="value">{{variantInfo.cadd.sift.cat | ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">cadd.sift.val</td>
-            <td class="value">{{variantInfo.cadd.sift.val | ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">clinvar.hgvs.coding</td>
-            <td class="value">{{variantInfo.clinvar.hgvs.coding | ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">clinvar.hgvs.genomic</td>
-            <td class="value">{{variantInfo.clinvar.hgvs.genomic | ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">clinvar.hgvs.non-coding</td>
-            <td class="value">{{variantInfo.clinvar.hgvs.non-coding| ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">clinvar.hgvs.protein</td>
-            <td class="value">{{variantInfo.clinvar.hgvs.protein| ifEmpty: '--'}}</td>
-          </tr>
-          <tr>
-            <td class="key">clinvar.omim</td>
-            <td class="value">{{variantInfo.clinvar.omim | ifEmpty: '--'}}</td>
-          </tr>
+
           <tr>
             <td class="key">dbsnpfp.interpro_domain</td>
             <td class="value">{{variantInfo.clinvar.omim | ifEmpty: '--'}}</td>
