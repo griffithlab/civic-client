@@ -70,7 +70,9 @@
                 {{variantInfo.dbsnp.rsid | ifEmpty: '--'}}
               </td>
               <td class="value">
-                {{variantInfo._id| ifEmpty: '--'}}
+                <div class="overflow-ellipses">
+                  {{variantInfo._id| ifEmpty: '--'}}
+                </div>
               </td>
             </tr>
           </tbody>
