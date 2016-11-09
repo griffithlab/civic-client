@@ -33,9 +33,7 @@
             <p>
               <strong>Variant Type<span ng-if="variant.variant_types.length > 1">s</span>:</strong><br/>
               <span ng-switch="variant.variant_types.length > 0">
-                <span ng-switch-when="true">
-                  <span ng-repeat="type in variant.variant_types" class="small">{{$first ? '' : $last ? ', and ' : ', '}}<a ng-href="{{ type.url }}" target="_blank">{{ type.display_name}}</a></span>
-                </span>
+                <span ng-switch-when="true"><span ng-repeat="type in variant.variant_types">{{$first ? '' : $last ? ', and ' : ', '}}<span  ng-if="type.display_name !== 'N/A'"><a ng-href="{{ type.url }}" target="_blank">{{type.display_name}}</a></span><span ng-if="type.display_name === 'N/A'">{{type.display_name}}</span></span></span>
                 <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
                   None specified.
                 </span>
