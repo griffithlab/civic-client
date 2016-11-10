@@ -98,6 +98,10 @@
           enableSorting: false,
           type: 'string',
           width: '20%',
+          cellTemplate: '<div class="ui-grid-cell-contents">' +
+          '{{row.entity[col.field]}}' +
+          '<span ng-if="row.entity.unlinkable === true" style="color: #999;" class="small"> (deleted)</span>' +
+          '</div>',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -257,8 +261,9 @@
           }
           stateParams[entityId] = obj.id;
         });
-
-        $state.go(subjectStates[event.subject_type]+stateExtension[event.event_type], stateParams);
+        if (event.unlinkable === false) {
+          $state.go(subjectStates[event.subject_type] + stateExtension[event.event_type], stateParams);
+        }
       });
     };
 
