@@ -100,7 +100,7 @@
           width: '20%',
           cellTemplate: '<div class="ui-grid-cell-contents">' +
           '{{row.entity[col.field]}}' +
-          '<span ng-if="row.entity.unlinkable === true" style="color: #999;" class="small"> (deleted)</span>' +
+          '<span ng-if="row.entity.unlinkable === true" style="color: #999;" class="small"> (unlinkable)</span>' +
           '</div>',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
