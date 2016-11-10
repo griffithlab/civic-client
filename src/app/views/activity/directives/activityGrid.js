@@ -261,6 +261,7 @@
           }
           stateParams[entityId] = obj.id;
         });
+
         if (event.unlinkable === false) {
           $state.go(subjectStates[event.subject_type] + stateExtension[event.event_type], stateParams);
         }

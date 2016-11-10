@@ -90,9 +90,9 @@
         }
         stateParams[entityId] = obj.id;
       });
-
-      $state.go(subjectStates[event.subject_type]+stateExtension[event.event_type], stateParams);
-
+      if (event.unlinkable === false) {
+        $state.go(subjectStates[event.subject_type] + stateExtension[event.event_type], stateParams);
+      }
     };
   }
 })();
