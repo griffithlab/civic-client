@@ -119,7 +119,7 @@
           label: 'Facebook Profile',
           minLength: 5,
           value: 'vm.userEdit.facebook_profile',
-          helpText: 'A link to your Facebook profile, displayed on your profile page and user cards.'
+          helpText: 'Your Facebook handle, displayed on your profile page and user cards.'
         }
       },
       {
