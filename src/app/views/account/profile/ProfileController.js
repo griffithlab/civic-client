@@ -129,7 +129,7 @@
           label: 'LinkedIn Profile',
           minLength: 5,
           value: 'vm.userEdit.linkedin_profile',
-          helpText: 'A link to your LinkedIn profile, displayed on your profile page and user cards.'
+          helpText: 'Your LinkedIn username, displayed on your profile page and user cards.'
         }
       }
     ];
