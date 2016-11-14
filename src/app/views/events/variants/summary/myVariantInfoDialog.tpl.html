@@ -135,11 +135,29 @@
           <tbody>
             <tr>
               <td class="key">Consequence</td>
-              <td class="value">{{variantInfo.cadd.consequence | ifEmpty: '--'}}</td>
+              <td class="value">
+                <span ng-switch="variantInfo.cadd.consequence.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="consequence in variantInfo.cadd.consequence">{{consequence}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td class="key">Consequence Detail</td>
-              <td class="value">{{variantInfo.cadd.consdetail | ifEmpty: '--'}}</td>
+              <td class="value">
+                <span ng-switch="variantInfo.cadd.consdetail.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="detail in variantInfo.cadd.consdetail">{{detail}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td class="key">SIFT Effect Cateogry</td>
@@ -194,14 +212,14 @@
             <tr>
               <td class="key">HGVS</td>
               <td class="value">
-              <span ng-switch="variantInfo.emv.hgvs.length > 0">
-                <span ng-switch-when="true">
-                  <span ng-repeat="hgvs in variantInfo.emv.hgvs">{{hgvs}}{{$last ? '' : ', '}}</span>
-                </span>
-                <span ng-switch-default>
+                <span ng-switch="variantInfo.emv.hgvs.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="hgvs in variantInfo.emv.hgvs">{{hgvs}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
                   --
+                  </span>
                 </span>
-              </span>
               </td>
             </tr>
           </tbody>
