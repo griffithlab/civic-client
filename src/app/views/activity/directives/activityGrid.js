@@ -213,7 +213,8 @@
           genes: 'events.genes',
           variants: 'events.genes.summary.variants',
           variantgroups: 'events.genes.summary.variantGroups',
-          evidenceitems: 'events.genes.summary.variants.summary.evidence'
+          evidenceitems: 'events.genes.summary.variants.summary.evidence',
+          sources: 'sources'
         };
 
         // revision comments require some more logic to determine the proper state
@@ -237,6 +238,8 @@
           'commented': '.talk.comments',
           'submitted': '.summary',
           'accepted': '.summary',
+          'rejected': '.summary',
+          'publication suggested': '.summary',
           'change suggested': '.talk.revisions.list.summary',
           'change accepted': '.talk.revisions.list.summary',
           'change rejected': '.talk.revisions.list.summary'
@@ -256,6 +259,8 @@
             entityId = 'evidenceId';
           } else if (entity === 'variant_group') {
             entityId = 'variantGroupId';
+          } else if (entity === 'source') {
+            entityId = 'sourceId';
           } else {
             entityId = entity + 'Id';
           }
