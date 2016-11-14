@@ -30,8 +30,8 @@
           <a ui-sref="curation.sources">Source Suggestions</a>
         </li>
 
-        <li ng-if="isEditor()" class="dropdown-header">Administrator Tools</li>
-        <li ng-if="isEditor()">
+        <li ng-if="isAdmin()" class="dropdown-header">Administrator Tools</li>
+        <li ng-if="isAdmin()">
           <a ng-href="{{adminUrl}}" target="_blank">Admin Console</a>
         </li>
 

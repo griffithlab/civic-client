@@ -18,6 +18,7 @@
                                            Security,
                                            ConfigService) {
         $scope.adminUrl = ConfigService.serverUrl + 'admin';
+        $scope.isAdmin = Security.isAdmin;
         $scope.isEditor = Security.isEditor;
         $scope.logout = Security.logout;
         $scope.showLogin = Security.showLogin;
