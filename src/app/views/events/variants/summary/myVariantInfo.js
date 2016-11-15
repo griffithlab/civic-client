@@ -2,7 +2,6 @@
   'use strict';
   angular.module('civic.events.variants')
     .controller('MyVariantInfoController', MyVariantInfoController)
-   .controller('MyVariantInfoDialogController', MyVariantInfoDialogController)
     .directive('myVariantInfo', function () {
       return {
         restrict: 'E',
@@ -17,10 +16,25 @@
   // @ngInject
   function MyVariantInfoController($scope, ngDialog, _) {
     var ctrl = $scope.ctrl = {};
+    ctrl.variantInfo = $scope.variantInfo;
+
+    // MyVariant.info returns some fields as strings OR arrays, this
+    // converts strings to a single-element array
+    var multiTypeFields = [
+      'cadd.consdetail',
+      'cadd.consequence',
+      'clinvar.hgvs.coding',
+      'clinvar.hgvs.genomic',
+      'clinvar.hgvs.non-coding',
+      'emv.hgvs'
+    ];
+    _.each(multiTypeFields, function(field) {
+      var val = _.get(ctrl.variantInfo,field);
+      if (_.isString(val)) { _.set(ctrl.variantInfo, field, [val]); }
+    });
 
     ctrl.popupOptions = {
       template: 'app/views/events/variants/summary/myVariantInfoDialog.tpl.html',
-      controller: 'MyVariantInfoDialogController',
       scope: $scope
     };
 
@@ -41,8 +55,4 @@
     };
   }
 
-  // @ngInject
-  function MyVariantInfoDialogController($scope) {
-    var ctrl = $scope.$parent.ctrl;
-  }
 })();

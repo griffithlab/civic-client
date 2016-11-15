@@ -18,9 +18,9 @@
             </tr>
             <tr>
               <td class="value">
-                <span ng-switch="!!variantInfo.clinvar.variant_id">
+                <span ng-switch="!!ctrl.variantInfoclinvar.variant_id">
                   <span ng-switch-when="true">
-                    <a ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{variantInfo.clinvar.variant_id}}/" target="_blank">{{variantInfo.clinvar.variant_id}}</a>
+                    <a ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{ctrl.variantInfoclinvar.variant_id}}/" target="_blank">{{ctrl.variantInfoclinvar.variant_id}}</a>
                   </span>
                   <span ng-switch-default>
                     --
@@ -28,7 +28,7 @@
                 </span>
               </td>
               <td class="value">
-                {{variantInfo.clinvar.rcv[0].clinical_significance | ifEmpty: '--'}}
+                {{ctrl.variantInfoclinvar.rcv[0].clinical_significance | ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
@@ -57,21 +57,21 @@
             </tr>
             <tr>
               <td class="value">
-                <span ng-switch="!!variantInfo.cosmic.cosmic_id">
+                <span ng-switch="!!ctrl.variantInfocosmic.cosmic_id">
                   <span ng-switch-when="true">
-                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{variantInfo.cosmic.cosmic_id_short}}" target="_blank">{{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}</a>
+                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{ctrl.variantInfocosmic.cosmic_id_short}}" target="_blank">{{ctrl.variantInfocosmic.cosmic_id | ifEmpty: '--'}}</a>
                   </span>
                   <span ng-switch-default>
-                    {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
+                    {{ctrl.variantInfocosmic.cosmic_id | ifEmpty: '--'}}
                   </span>
                 </span>
               </td>
               <td class="value">
-                {{variantInfo.dbsnp.rsid | ifEmpty: '--'}}
+                {{ctrl.variantInfodbsnp.rsid | ifEmpty: '--'}}
               </td>
               <td class="value">
                 <div class="overflow-ellipses">
-                  {{variantInfo._id| ifEmpty: '--'}}
+                  {{ctrl.variantInfo_id| ifEmpty: '--'}}
                 </div>
               </td>
             </tr>
@@ -96,20 +96,20 @@
             </tr>
             <tr>
               <td class="value">
-                {{variantInfo.egl.classification | ifEmpty: '--'}}
+                {{ctrl.variantInfoegl.classification | ifEmpty: '--'}}
               </td>
               <td class="value">
-                {{variantInfo.snpeff.ann[0].effect | ifEmpty: '--'}}
+                {{ctrl.variantInfosnpeff.ann[0].effect | ifEmpty: '--'}}
               </td>
               <td class="value">
-                {{variantInfo.snpeff.ann[0].putative_impact | ifEmpty: '--'}}
+                {{ctrl.variantInfosnpeff.ann[0].putative_impact | ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
         </table>
       </td>
     </tr>
-    <tr ng-if="variantInfo.exac_nontcga.adj_af">
+    <tr ng-if="ctrl.variantInfoexac_nontcga.adj_af">
       <td class="row">
         <table class="table table-condensed borderless">
           <tbody class="common">
@@ -120,7 +120,7 @@
             </tr>
             <tr>
               <td class="value">
-                {{variantInfo.exac_nontcga.adj_af| ifEmpty: '--'}}
+                {{ctrl.variantInfoexac_nontcga.adj_af| ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
