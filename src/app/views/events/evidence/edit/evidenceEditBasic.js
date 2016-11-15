@@ -580,6 +580,6 @@
 
     vm.revisionsClick = function() {
       $state.go('events.genes.summary.variants.summary.evidence.talk.revisions.list', { evidenceId: Evidence.data.item.id });
-    }
+    };
   }
 })();

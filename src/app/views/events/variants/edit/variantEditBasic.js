@@ -253,7 +253,7 @@
                             scope.to.data.redundancyMsg = $modelValue.display_name  + ' is a ' +
                               rel.relationship +
                               ' of ' +
-                              rel.variant_type.display_name + '.'
+                              rel.variant_type.display_name + '.';
                           }
                           deferred.reject('Variant type conflicts with an existing type.');
                         }
@@ -482,6 +482,6 @@
 
     vm.revisionsClick = function() {
       $state.go('events.genes.summary.variants.talk.revisions.list', { variantId: Variants.data.item.id });
-    }
+    };
   }
 })();

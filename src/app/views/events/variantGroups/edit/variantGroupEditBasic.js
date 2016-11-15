@@ -255,6 +255,6 @@
 
     vm.revisionsClick = function() {
       $state.go('events.genes.summary.variantGroups.talk.revisions.list', { variantGroupId: VariantGroups.data.item.id });
-    }
+    };
   }
 })();

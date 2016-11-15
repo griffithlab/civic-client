@@ -23,8 +23,8 @@
 
   // @ngInject
   function SourceSuggestionGridController($scope,
-                                          $state,
                                           Sources,
+                                          _,
                                           uiGridConstants) {
     console.log('SourceSuggestionGridController Loaded.');
 
@@ -33,7 +33,7 @@
     var mode = $scope.mode;
 
     vm.setSuggestion = function(id, status) {
-      Sources.setStatus({suggestionId: id, status: status}).then(function(response) {
+      Sources.setStatus({suggestionId: id, status: status}).then(function() {
         $scope.$emit('suggestion:updated');
       });
     };

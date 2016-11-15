@@ -4,7 +4,7 @@
     .controller('SourcesSummaryController', SourcesSummaryController);
 
   // @ngInject
-  function SourcesSummaryController($scope, source, Sources, Security, Search) {
+  function SourcesSummaryController($scope, _, source, Sources, Security, Search) {
     console.log('SourcesSummaryController called.');
     var vm = $scope.vm = {};
 
@@ -21,11 +21,13 @@
 
       // format publication date
       var pubDate = [source.publication_date.year];
-      if(!_.isUndefined(source.publication_date.month))
+      if(!_.isUndefined(source.publication_date.month)) {
         pubDate.push(source.publication_date.month);
+      }
 
-      if(!_.isUndefined(source.publication_date.day))
+      if(!_.isUndefined(source.publication_date.day)) {
         pubDate.push(source.publication_date.day);
+      }
 
       source.publication_date_string = pubDate.join('-');
       return source;
@@ -35,18 +37,18 @@
 
     // fetch evidence items associated w/ source
     var query = {
-      "operator": "AND",
-      "queries": [
-        {"field": "pubmed_id",
-          "condition": {
-            "name": "is",
-            "parameters": [
+      'operator': 'AND',
+      'queries': [
+        {'field': 'pubmed_id',
+          'condition': {
+            'name': 'is',
+            'parameters': [
               source.pubmed_id
             ]
           }
         }],
-      "entity": "evidence_items",
-      "save": true
+      'entity': 'evidence_items',
+      'save': true
     };
 
     Search.post(query)

@@ -239,6 +239,6 @@
 
     vm.revisionsClick = function() {
       $state.go('events.genes.talk.revisions.list', { geneId: Genes.data.item.id });
-    }
+    };
   }
 })();

@@ -24,7 +24,9 @@
   // @ngInject
   function SourceGridController($scope,
                                 $state,
-                                uiGridConstants) {
+                                $window,
+                                uiGridConstants,
+                                _) {
     console.log('SourceGridController Loaded.');
 
     var vm = $scope.vm = {};
@@ -126,7 +128,7 @@
         vm.sourceGridOptions.data = prepSources(sources);
       });
 
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+      gridApi.selection.on.rowSelectionChanged($scope, function (row, event) {
         var params = {sourceId: row.entity.id};
         if (event.metaKey) {
           // if meta key (alt or command) pressed, generate a state URL and open it in a new tab/window
@@ -144,11 +146,13 @@
           // TODO: refactor this into the service, we're doing the same munging in 3 places
           // format publication date
           var pubDate = [source.publication_date.year];
-          if(!_.isUndefined(source.publication_date.month))
+          if(!_.isUndefined(source.publication_date.month)) {
             pubDate.push(source.publication_date.month);
+          }
 
-          if(!_.isUndefined(source.publication_date.day))
+          if(!_.isUndefined(source.publication_date.day)) {
             pubDate.push(source.publication_date.day);
+          }
 
           source.publication_date_string = pubDate.join('-');
 

@@ -123,7 +123,7 @@
         ctrl.variantGridOptions.data = prepVariants(variants);
       });
 
-      gridApi.selection.on.rowSelectionChanged($scope, function(row){
+      gridApi.selection.on.rowSelectionChanged($scope, function(row, event){
         var params = _.merge($stateParams, { variantId: row.entity.id, geneId: row.entity.gene_id });
         if(event.metaKey) {
           // if meta key (alt or command) pressed, generate a state URL and open it in a new tab/window

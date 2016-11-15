@@ -52,14 +52,6 @@
   }
 
   function parseVariant(variant) {
-
-
     return variant;
   }
-
-  function getName(chromosome, start, stop, refBase, varBase) {
-    var template = _.template('chr<%= chromosome %>:<%= start =>_<%= stop %>:<%=refBases=>')
-    var parts = [chromosome, start, stop, refBase, varBase];
-
-  };
 })();

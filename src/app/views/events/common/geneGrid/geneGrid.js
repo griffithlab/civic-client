@@ -111,7 +111,7 @@
         ctrl.geneGridOptions.data = prepGeneData(genes);
       });
 
-      gridApi.selection.on.rowSelectionChanged($scope, function(row){
+      gridApi.selection.on.rowSelectionChanged($scope, function(row, event){
         var params = _.merge($stateParams, {  geneId: row.entity.id });
         if(event.metaKey) {
           // if meta key (alt or command) pressed, generate a state URL and open it in a new tab/window
@@ -125,7 +125,7 @@
       });
 
       function prepGeneData(genes) {
-        var genes = _.map(genes, function(item){
+        genes = _.map(genes, function(item){
           if (_.isArray(item.variants) && item.variants.length > 0) {
             item.variant_list = _.map(item.variants, 'name').sort().join(', ');
             item.variant_count = item.variants.length;
