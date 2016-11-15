@@ -79,11 +79,12 @@
       $analytics.eventTrack(toState.name);
       $analytics.pageTrack(window.location.hash);
     });
-    $rootScope.$on('duScrollspy:becameActive', function($event, $element, $target){
+    $rootScope.$on('duScrollspy:becameActive', function($event, $element){
       //Automatically update location
       var hash = $element.prop('hash');
       if (hash) {
-        history.replaceState(null, null, hash);
+        // jshint unused:false
+        window.history.replaceState(null, null, hash);
       }
     });
     /*  ui-router debug logging - uncomment these if you run into links/routes silently failing. */

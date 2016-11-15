@@ -33,7 +33,7 @@
     vm.showGrid = true;
 
     vm.model = {
-      operator: "",
+      operator: '',
       queries: {}
     };
 

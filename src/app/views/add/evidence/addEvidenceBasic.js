@@ -239,24 +239,24 @@
           function searchForDups(values) {
             if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
               Search.post({
-                  "operator": "AND",
-                  "queries": [
+                  'operator': 'AND',
+                  'queries': [
                     {
-                      "field": "gene_name",
-                      "condition": {"name": "contains", "parameters": [values[0]]}
+                      'field': 'gene_name',
+                      'condition': {'name': 'contains', 'parameters': [values[0]]}
                     },
                     {
-                      "field": "variant_name",
-                      "condition": {"name": "contains", "parameters": [values[1]]}
+                      'field': 'variant_name',
+                      'condition': {'name': 'contains', 'parameters': [values[1]]}
                     },
                     {
-                      "field": "pubmed_id",
-                      "condition": {"name": "is", "parameters": [values[2]]
+                      'field': 'pubmed_id',
+                      'condition': {'name': 'is', 'parameters': [values[2]]
                       }
                     }
                   ],
-                  "entity": "evidence_items",
-                  "save": false
+                  'entity': 'evidence_items',
+                  'save': false
                 })
                 .then(function (response) {
                   vm.duplicates = response.results;

@@ -27,7 +27,7 @@
         return DrugSuggestionsResource.query(reqObj).$promise
           .then(function(response) {
             return response.$promise;
-          })
+          });
       }
     };
   }

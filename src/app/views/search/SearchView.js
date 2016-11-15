@@ -69,7 +69,7 @@
   // @ngInject
   function SearchViewController($scope, $state) {
     $scope.$watch(function() { return $state.current.name; }, function(state) {
-      $scope.state = $state.current.name;
+      $scope.state = state;
     });
   }
 

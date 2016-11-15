@@ -5,6 +5,7 @@
 
   // @ngInject
   function commentConfig(formlyConfigProvider) {
+    var _ = window._;
     formlyConfigProvider.setType({
       name: 'comment',
       extends: 'textarea',

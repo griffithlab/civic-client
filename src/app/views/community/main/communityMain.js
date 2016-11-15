@@ -6,8 +6,7 @@
 
   // @ngInject
   function CommunityMainConfig($stateProvider,
-                               $resourceProvider,
-                               formlyConfigProvider) {
+                               $resourceProvider) {
     // TODO: toggle trailing-slash trim after civic-server configured to accept either
     $resourceProvider.defaults.stripTrailingSlashes = false;
 
@@ -110,7 +109,7 @@
           ]
         },
         watcher: {
-          listener: function(field, newValue) {
+          listener: function() {
             updateData();
           }
         }
@@ -131,7 +130,7 @@
           ]
         },
         watcher: {
-          listener: function(field, newValue) {
+          listener: function() {
             updateData();
           }
         }

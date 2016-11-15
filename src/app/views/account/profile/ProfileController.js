@@ -6,8 +6,6 @@
 
   // @ngInject
   function AccountProfileController($scope,
-                                    $state,
-                                    $interval,
                                     Security,
                                     Users,
                                     user){
@@ -137,7 +135,7 @@
     vm.saveProfile = function(userEdit) {
 
       Users.update(userEdit)
-        .then(function(response) {
+        .then(function() {
           console.log('updated user successfully');
           vm.submitSuccess = true;
           vm.user = Security.reloadCurrentUser();

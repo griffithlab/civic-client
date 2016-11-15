@@ -76,7 +76,7 @@
       records: [],
       _meta: {}
     };
-    var unread = {};
+
     var mentions = [];
 
     return {
@@ -144,7 +144,7 @@
           angular.copy(response, feed);
           Security.reloadCurrentUser();
           return response.$promise;
-        })
+        });
     }
 
     function markFeed(params, ids, read) {
@@ -158,7 +158,7 @@
           angular.copy(response, feed);
           Security.reloadCurrentUser();
           return response.$promise;
-        })
+        });
     }
   }
 })();

@@ -101,7 +101,7 @@
     // these will be passed to the entity-view directive controller, to be required by child entity component so that they
     // can get references to the view model and view options
     this.EvidenceViewModel = Evidence;
-    this.EvidenceViewRevisions = EvidenceRevisions
+    this.EvidenceViewRevisions = EvidenceRevisions;
     this.EvidenceViewOptions = EvidenceViewOptions;
   }
 

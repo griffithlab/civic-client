@@ -6,9 +6,10 @@
 
 // @ngInject
   function AboutCtrl ($scope,
-                      $state,
+                      $rootScope,
                       $location,
                       $document,
+                      _,
                       Users) {
     var vm = $scope.vm = {};
 

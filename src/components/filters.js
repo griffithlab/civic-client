@@ -119,15 +119,16 @@
 
     function suffix (n) {
       return Math.floor(n / 10) === 1
-        ? 'th'
+        ? 'th' // jshint ignore: line
         : (n % 10 === 1
-        ? 'st'
+        ? 'st' // jshint ignore: line
         : (n % 10 === 2
-        ? 'nd'
+        ? 'nd' // jshint ignore: line
         : (n % 10 === 3
-        ? 'rd'
+        ? 'rd' // jshint ignore: line
         : 'th')));
     }
+
   }
 
 })();

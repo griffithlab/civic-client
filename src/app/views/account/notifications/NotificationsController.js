@@ -5,24 +5,24 @@
     .filter('trimPlural', trimPlural);
 
   // @ngInject
-  function trimPlural() {
+  function trimPlural(_) {
     return function(input) {
       if (!_.isNull(input) && !_.isUndefined(input)) {
         if (input.substring(input.length, input.length - 1) === 's') {
-          return input.substring(0, input.length - 1)
+          return input.substring(0, input.length - 1);
         } else {
           return input;
         }
       } else {
         return;
       }
-    }
+    };
   }
 
   // @ngInject
   function AccountNotificationsController($scope,
                                           $location,
-                                          $state,
+                                          $rootScope,
                                           $stateParams,
                                           CurrentUser,
                                           Security,
@@ -75,7 +75,7 @@
           required: false
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue, oldValue) {
             if(newValue !== oldValue) {
               vm.fetch();
             }
@@ -97,7 +97,7 @@
           ]
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue, oldValue) {
             if(newValue !== oldValue) {
               vm.fetch();
             }
@@ -112,7 +112,7 @@
           required: false
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue, oldValue) {
             if(newValue !== oldValue) {
               vm.fetch();
             }
@@ -127,7 +127,7 @@
           required: false
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue, oldValue) {
             if(newValue !== oldValue) {
               vm.fetch();
             }
@@ -144,7 +144,7 @@
 
       vm.categories = [{
         name: 'all',
-        unread: _.reduce(vm.unread, function(res, val, key) {
+        unread: _.reduce(vm.unread, function(res, val) {
           return res + val;
         })
       }];
@@ -174,15 +174,13 @@
         params['filter[limit]'] = vm.filters.limit;
       }
 
-      var allParams =
-
       CurrentUser.getFeed(params).then(function(response) {
         var meta = response._meta;
         vm.totalItems = Number(meta.total_count);
         vm.totalPages = Number(meta.total_pages);
 
         vm.unread = Number(meta.unread);
-        vm.totalUnread = _.reduce(vm.unread, function(result, value, key) {
+        vm.totalUnread = _.reduce(vm.unread, function(result, value) {
           return result + value;
         });
 

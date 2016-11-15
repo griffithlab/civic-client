@@ -89,7 +89,7 @@
           length: {
             expression: function(viewValue, modelValue, scope) {
               var value = viewValue || modelValue;
-              if(_.isUndefined(value)) { return false }
+              if(_.isUndefined(value)) { return false; }
               else {
                 return value.length >= scope.to.minimum_length;
               }
@@ -119,7 +119,8 @@
 
   // version of ment.io's highlight filter which discards the entity token and colon from the query
   // in order to properly highlight matching strings to returned values
-  function mentioHighlightEntity() {
+  // @ngInject
+  function mentioHighlightEntity(_) {
     function escapeRegexp (queryToEscape) {
       return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
     }

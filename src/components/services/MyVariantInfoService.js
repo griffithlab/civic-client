@@ -5,7 +5,7 @@
     .factory('MyVariantInfo', MyVariantInfoService);
 
   // @ngInject
-  function MyVariantInfoResource($resource, $cacheFactory, _) {
+  function MyVariantInfoResource($resource, $cacheFactory) {
 
     var cache = $cacheFactory('MyVariantInfo'); // default cache doesn't work for some reason
 
