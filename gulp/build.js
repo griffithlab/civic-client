@@ -104,8 +104,7 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
     .pipe($.ngAnnotate()) // add angular dependency injection to protect from minification
     .pipe($.uglify({ // minify js
         preserveComments: $.uglifySaveLicense,
-        mangle: false,
-        beautify: true,
+        mangle: true,
         compress: {
           drop_console: true,
           unused: true
