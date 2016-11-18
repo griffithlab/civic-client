@@ -129,19 +129,19 @@
         return !!service.currentUser;
       },
 
-      // Is the current user an admin?
+      // Does the current user have admin privileges?
       isAdmin: function() {
         return !!(service.currentUser && service.currentUser.role === 'admin');
       },
 
-      // Is the current user an editor?
+      // Does the current user have editor privileges?
       isEditor: function() {
-        return !!(service.currentUser && service.currentUser.role === 'editor');
+        return !!(service.currentUser && service.currentUser.role === 'editor' || service.currentUser && service.currentUser.role === 'admin');
       },
 
       // Is the current user an editor?
       isCurator: function() {
-        return !!(service.currentUser && (service.currentUser.role === 'curator' || service.currentUser.role === 'editor'));
+        return !!(service.currentUser && (service.currentUser.role === 'curator'));
       }
     };
 
