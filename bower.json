@@ -30,9 +30,6 @@
     "angular-mocks": "~1.2.0"
   },
   "overrides": {
-    "angulartics-google-analytics": {
-      "name": "angulartics-ga"
-    },
     "ment.io": {
       "main": [
         "dist/mentio.js",

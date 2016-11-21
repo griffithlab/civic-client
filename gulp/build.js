@@ -33,7 +33,9 @@ gulp.task('styles', ['wiredep'],  function () {
 });
 
 gulp.task('scripts', function () {
+  var angularticsFilter = $.filter('!**/angulartics-ga.js');
   return gulp.src('src/{app,components}/**/*.js')
+    .pipe(angularticsFilter)
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.size());
