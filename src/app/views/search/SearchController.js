@@ -361,7 +361,8 @@
                   options: [
                     { value: 'Predictive', name: 'Predictive' },
                     { value: 'Diagnostic', name: 'Diagnostic' },
-                    { value: 'Prognostic', name: 'Prognostic' }
+                    { value: 'Prognostic', name: 'Prognostic' },
+                    { value: 'Predisposing', name: 'Predisposing' }
                   ]
                 }
               }
