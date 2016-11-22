@@ -120,8 +120,16 @@
         <table class="table table-compact">
           <tbody>
             <tr>
-              <td class="key">ExAC Non TCGA Adj AF</td>
-              <td class="value">{{variantInfo.exac_nontcga.adj_af | ifEmpty: '--'}}</td>
+              <td class="key">Allele Count</td>
+              <td class="value">{{variantInfo.exac.ac.ac_adj | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Allele Number</td>
+              <td class="value">{{variantInfo.exac.an.an_adj | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Adjusted Allele Frequency</td>
+              <td class="value">{{variantInfo.exac.adj_allele_freq | ifEmpty: '--'}}</td>
             </tr>
           </tbody>
         </table>

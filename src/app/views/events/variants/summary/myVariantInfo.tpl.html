@@ -109,24 +109,6 @@
         </table>
       </td>
     </tr>
-    <tr ng-if="variantInfo.exac_nontcga.adj_af">
-      <td class="row">
-        <table class="table table-condensed borderless">
-          <tbody class="common">
-            <tr>
-              <td class="key">
-                ExAC Non TCGA Adj AF
-              </td>
-            </tr>
-            <tr>
-              <td class="value">
-                {{variantInfo.exac_nontcga.adj_af| ifEmpty: '--'}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
     <tr>
       <td colspan="2">
         <button class="btn btn-block btn-sm btn-default view-gene-details" ng-click="ctrl.openDialog()">View MyVariant.info Details</button>
