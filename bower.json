@@ -30,13 +30,6 @@
     "angular-mocks": "~1.2.0"
   },
   "overrides": {
-    "ment.io": {
-      "main": [
-        "dist/mentio.js",
-        "ment.io/styles.css"
-      ]
-    },
-
     "bootstrap": {
       "main": [
         "less/bootstrap.less",
