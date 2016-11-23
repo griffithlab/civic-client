@@ -136,10 +136,10 @@
 
       // Does the current user have editor privileges?
       isEditor: function() {
-        return !!(service.currentUser && service.currentUser.role === 'editor' || service.currentUser && service.currentUser.role === 'admin');
+        return !!(service.currentUser && service.currentUser.role === 'editor');
       },
 
-      // Is the current user an editor?
+      // Is the current user an curator?
       isCurator: function() {
         return !!(service.currentUser && (service.currentUser.role === 'curator'));
       }

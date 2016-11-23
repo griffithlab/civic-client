@@ -20,7 +20,8 @@
     $scope.stateParams = $stateParams;
     $scope.security = {
       isAuthenticated: Security.isAuthenticated(),
-      isAdmin: Security.isEditor()
+      isEditor: Security.isEditor(),
+      isAdmin: Security.isAdmin()
     };
 
     $scope.hasValidEvidenceItems = function(variant) {

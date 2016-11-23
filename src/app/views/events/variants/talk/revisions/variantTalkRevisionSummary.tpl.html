@@ -70,7 +70,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 admin-buttons" ng-if="vm.isEditor() && vm.variantTalkModel.data.item.status === 'new'">
+    <div class="col-xs-12 admin-buttons" ng-if="(vm.isEditor() || vm.isAdmin()) && vm.variantTalkModel.data.item.status === 'new'">
       <div class="pull-right">
         <span tooltip="Contributors may not accept their own suggested changes."
               tooltip-append-to-body="true"

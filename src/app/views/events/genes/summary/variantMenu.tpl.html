@@ -33,7 +33,7 @@
     </li>
   </ul>
   <a
-    ng-show="security.isAdmin"
+    ng-show="security.isAdmin || security.isEditor"
     ng-href="{{ addVarGroupUrl }}"
     class="btn btn-xs btn-default btn-block">
     Add Variant Group
