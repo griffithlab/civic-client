@@ -25,6 +25,7 @@
   function SourceSuggestionGridController($scope,
                                           Sources,
                                           _,
+                                          Security,
                                           uiGridConstants) {
     console.log('SourceSuggestionGridController Loaded.');
 
@@ -36,6 +37,14 @@
       Sources.setStatus({suggestionId: id, status: status}).then(function() {
         $scope.$emit('suggestion:updated');
       });
+    };
+
+    vm.hasEditorPerms = function() {
+      return (Security.isAdmin() || Security.isEditor());
+    };
+
+    vm.isAuthenticated = function() {
+      return Security.isAuthenticated();
     };
 
     var statusFilters = ['new'];
