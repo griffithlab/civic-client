@@ -14,8 +14,7 @@
     "angular-resource": "1.4.7",
     "angular-timeago": "0.1.6",
     "font-awesome": "4.3.0",
-    "angulartics": "0.20.1",
-    "angulartics-google-analytics": "0.1.1",
+    "angulartics-google-analytics": "^0.3.0",
     "ngDialog": "0.5.5",
     "angular-loading-bar": "0.8.0",
     "api-check": "7.5.3",
@@ -31,20 +30,6 @@
     "angular-mocks": "~1.2.0"
   },
   "overrides": {
-    "angulartics": {
-      "main": [
-        "src/angulartics.js"
-      ]
-    },
-    "ment.io": {
-      "main": [
-        "dist/mentio.js",
-        "ment.io/styles.css"
-      ]
-    },
-    "angulartics-google-analytics": {
-      "main": "./lib/angulartics-google-analytics.js"
-    },
     "bootstrap": {
       "main": [
         "less/bootstrap.less",

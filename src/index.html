@@ -37,7 +37,6 @@
     <link rel="stylesheet" href="../bower_components/ngDialog/css/ngDialog.css" />
     <link rel="stylesheet" href="../bower_components/ngDialog/css/ngDialog-theme-default.css" />
     <link rel="stylesheet" href="../bower_components/angular-loading-bar/build/loading-bar.css" />
-    <link rel="stylesheet" href="../bower_components/ment.io/ment.io/styles.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -380,10 +379,8 @@
     <script src="../bower_components/lodash/lodash.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.js"></script>
     <script src="../bower_components/angular-timeago/src/timeAgo.js"></script>
-    <script src="../bower_components/waypoints/lib/noframework.waypoints.min.js"></script>
     <script src="../bower_components/SHA-1/sha1.js"></script>
     <script src="../bower_components/angulartics/src/angulartics.js"></script>
-    <script src="../bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js"></script>
     <script src="../bower_components/ngDialog/js/ngDialog.js"></script>
     <script src="../bower_components/angular-loading-bar/build/loading-bar.js"></script>
     <script src="../bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
@@ -396,6 +393,15 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,src}) scripts/app.js -->
+
+    <!--
+    Google analytics angular plugin must be included with the app code in order to
+    avoid blocking by ad-blockers looking for the string 'google-analytics'
+    NOTE: If users have an ad-blocker installed, it will still block calls to Google Analytics
+    made from Google's script - this workaround merely prevents the client from
+    crashing during config if it can't find the google-analytics module.
+    -->
+    <script src="components/angulartics-ga.js"></script>
 
     <!-- ** Core Config/Startup Components ** -->
     <script src="app/index.js"></script>

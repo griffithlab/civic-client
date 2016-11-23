@@ -272,6 +272,10 @@
               {
                 value: 'Prognostic',
                 label: 'Prognostic'
+              },
+              {
+                value: 'Predisposing',
+                label: 'Predisposing'
               }
             ]
           },
