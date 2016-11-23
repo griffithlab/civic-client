@@ -22,7 +22,8 @@
     var ctrl = $scope.ctrl = {};
     ctrl.security = {
       isAuthenticated: Security.isAuthenticated(),
-      isAdmin: Security.isEditor(),
+      isAdmin: Security.isAdmin(),
+      isEditor: Security.isEditor(),
       currentUser: Security.currentUser
     };
 

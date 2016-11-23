@@ -9,6 +9,7 @@
     var vm = $scope.vm = {};
 
     vm.isEditor = Security.isEditor();
+    vm.isAdmin = Security.isAdmin();
 
     function parseSource (source) {
       source.author_list_string = _(source.author_list)

@@ -35,6 +35,7 @@
     variantGroupModel = vm.variantGroupModel = VariantGroups;
 
     vm.isEditor = Security.isEditor();
+    vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.variantGroup = VariantGroups.data.item;

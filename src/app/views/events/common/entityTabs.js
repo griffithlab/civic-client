@@ -109,6 +109,7 @@
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated;
     vm.isEditor = Security.isEditor;
+    vm.isAdmin = Security.isAdmin;
 
     $scope.scroll = function() {
       var loc = $location.hash();

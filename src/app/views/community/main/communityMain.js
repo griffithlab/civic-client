@@ -37,6 +37,7 @@
     var vm = this;
 
     vm.isEditor = Security.isEditor();
+    vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
     vm.leaderboards = {};
     vm.users = [];

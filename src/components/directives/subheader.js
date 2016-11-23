@@ -13,7 +13,8 @@
       controller: SubheaderCtrl,
       link: /* @ngInject */ function($scope) {
         $scope.isAuthenticated = Security.isAuthenticated;
-        $scope.isEditor = Security.isAuthenticated;
+        $scope.isEditor = Security.isEditor;
+        $scope.isAdmin = Security.isAdmin;
       }
     };
     return directive;

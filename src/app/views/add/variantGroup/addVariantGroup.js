@@ -34,6 +34,7 @@
     vm.type = 'VARIANT GROUP';
 
     vm.isEditor = Security.isEditor();
+    vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.showForm = true;
