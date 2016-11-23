@@ -33,6 +33,7 @@
     variantModel = vm.variantModel = Variants;
 
     vm.isEditor = Security.isEditor();
+    vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.variant = Variants.data.item;

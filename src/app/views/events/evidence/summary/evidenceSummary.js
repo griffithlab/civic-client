@@ -21,6 +21,7 @@
                                      _,
                                      ConfigService) {
     $scope.isEditor = Security.isEditor;
+    $scope.isAdmin = Security.isAdmin;
     $scope.isAuthenticated = Security.isAuthenticated;
     $scope.evidence = Evidence.data.item;
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;

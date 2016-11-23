@@ -33,6 +33,7 @@
     geneModel = vm.geneModel = Genes;
 
     vm.isEditor = Security.isEditor();
+    vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.gene = Genes.data.item;
