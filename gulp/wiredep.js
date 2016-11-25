@@ -11,7 +11,6 @@ gulp.task('wiredep', function () {
       directory: 'bower_components',
       exclude: [
         /bootstrap-sass-official/,
-        /angulartics-google-analytics/, // see note in index.html and components/angulartics-ga.js
         /\/bootstrap.js/,
         /bootstrap.css/,
         /please-wait/,
