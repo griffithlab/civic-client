@@ -332,11 +332,6 @@
                 }
               }
             ],
-
-
-
-
-
             clinical_significance: [
               {
                 key: 'name',
@@ -367,22 +362,16 @@
                   options: [
                     { value: 'Sensitivity', name: 'Sensitivity' },
                     { value: 'Resistance or Non-Response', name: 'Resistance or Non-Response' },
-                    { value: 'Adverse Response', name: 'Adverse Response' }
+                    { value: 'Adverse Response', name: 'Adverse Response' },
+		    { value: 'Positive', name: 'Positive' },
+		    { value: 'Negative', name: 'Negative' },
+		    { value: 'Better Outcome', name: 'Better Outcome' },
+		    { value: 'Poor Outcome', name: 'Poor Outcome' },
+		    { value: 'N/A', name: 'N/A' }
                   ]
                 }
               }
             ],
-
-
-
-
-
-
-
-
-
-
-
             evidence_type: [
               {
                 key: 'name',
