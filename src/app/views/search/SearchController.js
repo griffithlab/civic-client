@@ -31,6 +31,7 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
+		  { value: 'clinical_significance', name: 'Clinical Significance' },
                   { value: 'description', name: 'Statement' },
                   { value: 'disease_doid', name: 'Disease DOID' },
                   { value: 'disease_name', name: 'Disease Name' },
@@ -331,6 +332,57 @@
                 }
               }
             ],
+
+
+
+
+
+            clinical_significance: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'Sensitivity'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'Sensitivity', name: 'Sensitivity' },
+                    { value: 'Resistance or Non-Response', name: 'Resistance or Non-Response' },
+                    { value: 'Adverse Response', name: 'Adverse Response' }
+                  ]
+                }
+              }
+            ],
+
+
+
+
+
+
+
+
+
+
+
             evidence_type: [
               {
                 key: 'name',
@@ -367,6 +419,10 @@
                 }
               }
             ],
+
+
+
+
             evidence_level: [
               {
                 key: 'name',
