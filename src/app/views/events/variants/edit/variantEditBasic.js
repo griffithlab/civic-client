@@ -135,6 +135,25 @@
         }
       },
       {
+        key: 'clinvar_entries',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'ClinVar IDs',
+          helpText: 'Please specify any corresponding ClinVar identifiers for this variant.',
+          entityName: 'ClinVar ID',
+          required: false,
+          inputOptions: {
+            type: 'basicInput',
+            wrapper: '',
+            templateOptions: {
+              label: '',
+              minLength: 1,
+              required: true
+            }
+          }
+        }
+      },
+      {
         key: 'sources',
         type: 'multiInput',
         templateOptions: {
