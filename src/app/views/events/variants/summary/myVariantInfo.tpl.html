@@ -85,24 +85,24 @@
           <tbody class="common">
             <tr>
               <td class="key">
-                EGL Class
+                SnpEff&nbsp;Effect
               </td>
               <td class="key">
-                SnpEff Effect
+                SnpEff&nbsp;Impact
               </td>
               <td class="key">
-                SnpEff Impact
+                ExAC&nbsp;Adj.&nbsp;AF
               </td>
             </tr>
             <tr>
-              <td class="value">
-                {{variantInfo.egl.classification | ifEmpty: '--'}}
-              </td>
               <td class="value">
                 {{variantInfo.snpeff.ann[0].effect | ifEmpty: '--'}}
               </td>
               <td class="value">
                 {{variantInfo.snpeff.ann[0].putative_impact | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variantInfo.exac.adj_allele_freq | ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
