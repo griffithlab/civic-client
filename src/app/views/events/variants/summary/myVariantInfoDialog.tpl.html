@@ -75,7 +75,16 @@
             </tr>
             <tr>
               <td class="key">Omim</td>
-              <td class="value">{{variantInfo.clinvar.omim | ifEmpty: '--'}}</td>
+              <td class="value">
+                <span ng-switch="!!variantInfo.clinvar.omim">
+                  <span ng-switch-when="true">
+                    <a ng-href="http://omim.org/entry/{{variantInfo.clinvar.omim.split('.')[0]}}" target="_blank">{{variantInfo.clinvar.omim | ifEmpty: '--'}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    {{variantInfo.clinvar.omim | ifEmpty: '--'}}
+                  </span>
+                </span>
+              </td>
             </tr>
           </tbody>
         </table>
