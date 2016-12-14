@@ -192,7 +192,16 @@
           <tbody>
             <tr>
               <td class="key">dbSNP RSID</td>
-              <td class="value">{{variantInfo.dbsnp.rsid | ifEmpty: '--'}}</td>
+              <td class="value">
+                <span ng-switch="!!variantInfo.dbsnp.rsid">
+                  <span ng-switch-when="true">
+                    <a ng-href="https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?searchType=adhoc_search&type=rs&rs={{variantInfo.dbsnp.rsid}}/" target="_blank">{{variantInfo.dbsnp.rsid}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    --
+                  </span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td class="key">InterPro Domain</td>
