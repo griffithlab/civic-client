@@ -41,8 +41,12 @@
     }
 
     // replace ampersands with commas in SnpEff Effect strings
-    ctrl.variantInfo.snpeff.ann[0].effect = ctrl.variantInfo.snpeff.ann[0].effect.replace(/_/g, ' ');
-    ctrl.variantInfo.snpeff.ann[0].effect = ctrl.variantInfo.snpeff.ann[0].effect.replace(/&/g, ', ');
+    if(!_.isUndefined(ctrl.variantInfo.snpeff) && !_.isUndefined(ctrl.variantInfo.snpeff.ann[0])) {
+      if(!_.isUndefined(ctrl.variantInfo.snpeff.ann[0])) {
+        ctrl.variantInfo.snpeff.ann[0].effect = ctrl.variantInfo.snpeff.ann[0].effect.replace(/_/g, ' ');
+        ctrl.variantInfo.snpeff.ann[0].effect = ctrl.variantInfo.snpeff.ann[0].effect.replace(/&/g, ', ');
+      }
+    }
 
     ctrl.popupOptions = {
       template: 'app/views/events/variants/summary/myVariantInfoDialog.tpl.html',
