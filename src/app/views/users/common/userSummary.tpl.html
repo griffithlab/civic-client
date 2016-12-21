@@ -37,7 +37,7 @@
               <tr ng-if="user.bio.length > 0">
                 <td colspan="2">
                   <p><span class="key">Biography:</span><br/>
-                  {{user.bio|ifEmpty: '--'}}
+                    {{user.bio|ifEmpty: '--'}}
                   </p>
                 </td>
               </tr>
@@ -75,15 +75,22 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h5 class="sub-title">Awards:</h5>
+          <div class="info-block">
+            <span ng-repeat="badge in vm.currentUser.trophy_case.badges">
+              <trophy-badge badge="badge"></trophy-badge>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
-  <!--<div class="row">-->
-  <!--<div class="col-xs-12">-->
-    <!--<h4>user:</h4>-->
-    <!--<pre ng-bind="user|json"></pre>-->
-    <!--<h4>Security.currentUser:</h4>-->
-    <!--<pre ng-bind="vm.currentUser|json"></pre>-->
-  <!--</div>-->
-  <!--</div>-->
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-12"> -->
+  <!-- <h4>user:</h4> -->
+  <!-- <pre ng-bind="vm.currentUser.trophy_case.badges|json"></pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
 </div>
