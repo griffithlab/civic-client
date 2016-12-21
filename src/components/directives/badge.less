@@ -1,0 +1,20 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.trophyBadge {
+  border: 1px solid @civicPurple;
+  border-radius: 5px;
+  background-color: rgba(255,255,255, 0.3);
+  padding: @contentPadding/3;
+  display: inline-block;
+  .badge-image {
+    display: inline-block;
+  }
+  .badge-name {
+    color: #EFEFEF;
+    margin: @contentPadding/2;
+    display: inline-block;
+  }
+}
