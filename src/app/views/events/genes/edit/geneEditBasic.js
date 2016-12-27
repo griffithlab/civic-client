@@ -91,7 +91,7 @@
           value: 'vm.gene.description',
           focus: true,
           minLength: 32,
-          helpText: ['<p>User-defined summary of the clinical relevance of this Gene.</p>',
+          helpText: ['<p>User-defined summary of the clinical relevance of this Gene. By submitting content to CIViC you agree to release it to the public domain as described by the <a href="https://creativecommons.org/publicdomain/zero/1.0/" title="CreativeCommons.org CC0 license" target="_blank">Creative Commons Public Domain Dedication (CC0 1.0 Universal)</a></p>',
                   '<p>Should include:</p>',
                   '<ul>',
                   '<li>relevance to appropriate cancer(s)</li>',
