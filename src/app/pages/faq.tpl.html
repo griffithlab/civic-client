@@ -40,11 +40,11 @@
 
       <p><strong><i>What kinds of Variants belong in CIViC? What does not?</i></strong><br>
 
-        Variant descriptions will be accepted into CIViC provided there is evidence linking the variant to cancer with some *clinical* relevance. Relevance to cancer biology alone is NOT sufficient unless there is also some documented relationship between the variant and diagnosis, prognosis, or response to a specific treatment. Variants related to diseases other than cancer should not be entered (there is some grey area for cancer-like conditions). CIViC accepts somatic variants, germline variants, and common polymorphisms related to cancer (as long as they have clinical relevance), however, most variants in CIViC are somatic mutations. The quality of evidence suggesting clinical relevance of a variant may vary considerably. Before contributing to CIViC please review the <a ui-sref="help.evidence"> data model</a>.</p>
+        Variant descriptions will be accepted into CIViC provided there is evidence linking the variant to cancer with some *clinical* relevance. Relevance to cancer biology alone is NOT sufficient unless there is also some documented relationship between the variant and diagnosis, predisposition, prognosis, or response to a specific treatment. Variants related to diseases other than cancer should not be entered (there is some grey area for cancer-like conditions). CIViC accepts somatic variants, germline variants, and common polymorphisms related to cancer (as long as they have clinical relevance), however, most variants in CIViC are somatic mutations. The quality of evidence suggesting clinical relevance of a variant may vary considerably. Before contributing to CIViC please review <a ui-sref="help.introduction">introductory materials</a> and the <a ui-sref="help.evidence"> data model</a>.</p>
 
       <p><strong><i>What is an <b>Evidence Statement</b>?</i></strong><br/>
 
-        An evidence statement is an assertion about the clinical relevance of a variant that has been determined by an experiment, trial, or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, or inform disease diagnosis. A single citation can be the source of multiple evidence statments, but each evidence statment has only one source. A single evidence statement should correspond to only one clinical interpretation and disease. For example, if a paper describes both a predictive and prognostic relevance for a variant, two evidence statements should be created. If two publications draw the same conclusions about the clinical relevance of a variant, these should also be entered as two evidence statements.</p>
+        An evidence statement is an assertion about the clinical relevance of a variant that has been determined by an experiment, trial, or study from a published literature source. It captures a variant's impact on clinical action, which can be predictive of therapy, correlated with prognostic outcome, inform disease diagnosis (i.e. cancer type or subtype), or predispose a person to get cancer in the first place. A single citation can be the source of multiple evidence statments, but each evidence statment has only one source. A single evidence statement should correspond to only one clinical interpretation and disease. For example, if a paper describes both a predictive and prognostic relevance for a variant, two evidence statements should be created. If two publications draw the same conclusions about the clinical relevance of a variant, these should also be entered as two evidence statements.</p>
 
       <p><strong><i>How is this information organized?</i></strong><br/>
 
@@ -52,7 +52,7 @@
 
       <p><strong><i>What information is currently in CIViC?</i></strong><br/>
 
-      CIViC currently houses over hundreds of evidence statements, variants and genes across multiple cancer types and these numbers are growing rapidly with your help! Refer to the <a ui-sref="home">Home</a> page for up to date statistics.</p>
+      CIViC currently houses hundreds of evidence statements, variants and genes across multiple cancer types and these numbers are growing rapidly with your help! Refer to the <a ui-sref="home">Home</a> page for up to date statistics.</p>
 
       <p><strong><i>How do I contribute information?</i></strong><br/>
 
@@ -64,27 +64,19 @@
 
       <p><strong><i>May I enter unpublished results from n-of-1 observations?</i></strong><br>
 
-      At this time, a publication is considered a minimum requirement for all evidence statements in CIViC. N-of-1 results from early stage clinical trials or patients treated under compassionate use doctrines are allowed, but only if a case report has been published in a peer reviewed journal. We are considering options for centers that wish to use a local instance of CIViC to capture unpublished individual patient observations.</p>
+      At this time, a publication is considered a minimum requirement for all evidence statements in CIViC. N-of-1 results from early stage clinical trials or patients treated under compassionate use doctrines are allowed, but only if a case report has been published in a peer reviewed journal. We are considering options for centers that wish to use a local instance of CIViC to capture unpublished individual patient observations. We are also considering other source types including ASCO abstracts, clinical trial records, and ClinVar records.</p>
 
-      <p><strong><i>Why must my changes be approved by a moderator before I can see them?</i></strong><br/>
+      <p><strong><i>Why must my changes be approved by a moderator?</i></strong><br/>
 
-        In an effort to ensure quality (and prevent automated spam), we require that edits be submitted to the review queue before they are shown on the live server. Moderators are used for this review step to protect the CIViC resource and will approve your changes as soon as possible. An editor, moderator or administrator may comment on your proposed addition or revision. You will be able to see your new content in a pending state while it awaits review. To expedite the review process, we encourage you to submit high quality evidence (evidence level of validated or clinical) as the top priority. Similarly, proposing evidence statements for a new variant or gene may take longer for the community to review.</p>
+        In an effort to ensure quality (and prevent automated spam), we require that edits be submitted to the review queue before they are shown as accepted. Moderators are used for this review step to protect the CIViC resource and will approve your changes as soon as possible. An editor, moderator or administrator may comment on your proposed addition or revision. You will be able to see your new content in a pending state while it awaits review. To expedite the review process, we encourage you to submit high quality evidence (evidence level of validated or clinical) as the top priority. Similarly, proposing evidence statements for a new variant or gene may take longer for the community to review.</p>
 
       <p><strong><i>What is a Disease Ontology ID (DOID)?</i></strong><br/>
 
         To provide a structured representation of the diseases associated with evidence statements, we ask that you use disease names as they exist in the Disease Ontology from <a href="http://disease-ontology.org/"> disease-ontology.org</a>. This allows for consistent representation and minimized ambiguity when referring to diseases. Such ontologies also support more flexible data queries that allow disease groupings ranging from generic terms to highly specific subtypes. If the disease ontology is missing an important recognized sub-type of disease, we will try to work with them to update their resource. Please contact us if you find such cases.</p>
 
-      <p><strong><i>What is a PubChem ID (PCID)?</i></strong><br/>
-
-        Providing a drug name recognized by PubChem with your evidence statement allows us to minimize ambiguity within drug naming. As a default, drug compound names are used instead of branded trade names in an effort to be as consistent across experiment types as possible. PubChem compounds can be searched <a href="https://pubchem.ncbi.nlm.nih.gov/"> here</a>. However, when a PubChem representation of a drug is not available, free-form text will be allowed.</p>
-
       <p><strong><i>Where does this information come from? Can I submit my abstract?</i></strong><br/>
 
       The information in CIViC is derived from peer-reviewed, published literature. Every evidence item currently requires a citation from a PubMed ID. This means that conference abstracts are not supported until they are peer-reviewed, published, and a PubMed ID is assigned.</p>
-
-      <p><strong><i>What does the "Beta" label on CIViC mean?</i></strong><br/>
-
-        This is in reference to the current software release state of CIViC. The "Beta" state indicates we are currently in the software testing phase with additional features and content actively being added.</p>
 
       <p><strong><i>What if a drug is shown to have a negative effect on patients with a variant? Or the study was inconclusive?</i></strong><br/>
 
@@ -96,7 +88,7 @@
 
       <p><strong><i>I don't want to add evidence statements, can I still contribute?</i></strong><br/>
 
-        Yes. Evaluation of the literature is a collaborative effort. If you don't want to add new evidence you can rate, edit or discuss existing evidence. You can also help to make sure the Variant Summary is an effective, consise, and accurate summary of the current set of evidence statements for each variant.</p>
+        Yes. Evaluation of the literature is a collaborative effort. If you don't want to add new evidence you can rate, edit or discuss existing evidence. You can also help to make sure the Variant Summary is an effective, consise, and accurate summary of the current set of evidence statements for each variant. You can also add promising publications to the source suggestion queue.</p>
 
       <p><strong><i>What is MyGene.info?</i></strong><br/>
 
