@@ -32,27 +32,27 @@
                 options: [
                   { value: '', name: 'Please select a field' },
 		  { value: 'clinical_significance', name: 'Clinical Significance' },
-                  { value: 'description', name: 'Statement' },
                   { value: 'disease_doid', name: 'Disease DOID' },
+                  { value: 'interaction_type', name: 'Drug Interaction Type' },
                   { value: 'disease_name', name: 'Disease Name' },
                   { value: 'drug_id', name: 'Drug PubChem ID' },
                   { value: 'drug_name', name: 'Drug Name' },
-                  { value: 'interaction_type', name: 'Drug Interaction Type' },
-                  { value: 'id', name: 'Evidence ID'},
-                  { value: 'evidence_type', name: 'Evidence Type' },
-                  { value: 'evidence_level', name: 'Evidence Level' },
                   { value: 'evidence_direction', name: 'Evidence Direction' },
+                  { value: 'id', name: 'Evidence ID'},
+                  { value: 'evidence_level', name: 'Evidence Level' },
+                  { value: 'evidence_type', name: 'Evidence Type' },
+                  { value: 'description', name: 'Evidence Statement' },
                   { value: 'gene_name', name: 'Gene Name' },
+                  { value: 'publication_year', name: 'Publication Year' },
                   { value: 'pubmed_id', name: 'Pubmed ID' },
                   { value: 'rating', name: 'Rating' },
-                  { value: 'suggested_changes_count', name: 'Suggested Revisions' },
-                  { value: 'publication_year', name: 'Publication Year' },
                   { value: 'status', name: 'Status' },
-                  { value: 'variant_name', name: 'Variant Name' },
-                  { value: 'variant_alias', name: 'Variant Alias' },
-                  { value: 'variant_origin', name: 'Variant Origin' },
                   { value: 'submitter', name: 'Submitter Display Name' },
-                  { value: 'submitter_id', name: 'Submitter ID' }
+                  { value: 'submitter_id', name: 'Submitter ID' },
+                  { value: 'suggested_changes_count', name: 'Suggested Revisions' },
+                  { value: 'variant_alias', name: 'Variant Alias' },
+                  { value: 'variant_name', name: 'Variant Name' },
+                  { value: 'variant_origin', name: 'Variant Origin' }
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -408,10 +408,6 @@
                 }
               }
             ],
-
-
-
-
             evidence_level: [
               {
                 key: 'name',
@@ -867,10 +863,10 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'name', name: 'Name' },
                   { value: 'aliases', name: 'Aliases' },
-                  { value: 'entrez_id', name: 'Entrez ID' },
                   { value: 'description', name: 'Description' },
+                  { value: 'entrez_id', name: 'Entrez ID' },
+                  { value: 'name', name: 'Name' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' }
                 ],
                 onChange: function(value, options, scope) {
@@ -1089,16 +1085,6 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'name', name: 'Name' },
-                  { value: 'description', name: 'Description' },
-                  { value: 'variant_types', name: 'Variant Type(s)' },
-                  { value: 'variant_group', name: 'Variant Group' },
-                  { value: 'variant_alias', name: 'Variant Alias' },
-                  { value: 'gene', name: 'Gene' },
-                  { value: 'reference_build', name: 'Reference Build' },
-                  { value: 'ensembl_version', name: 'Ensembl Version' },
-                  { value: 'reference_bases', name: 'Reference Base(s)' },
-                  { value: 'variant_bases', name: 'Variant Base(s)' },
                   { value: 'chromosome', name: 'CHR1 Chromosome' },
                   { value: 'start', name: 'CHR1 Start' },
                   { value: 'stop', name: 'CHR1 Stop' },
@@ -1107,8 +1093,18 @@
                   { value: 'start2', name: 'CHR2 Start' },
                   { value: 'stop2', name: 'CHR2 Stop' },
                   { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
+                  { value: 'description', name: 'Description' },
+                  { value: 'ensembl_version', name: 'Ensembl Version' },
+                  { value: 'evidence_item_count', name: 'Evidence Items' },
+                  { value: 'gene', name: 'Gene' },
+                  { value: 'name', name: 'Name' },
+                  { value: 'reference_bases', name: 'Reference Base(s)' },
+                  { value: 'reference_build', name: 'Reference Build' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
-                  { value: 'evidence_item_count', name: 'Evidence Items' }
+                  { value: 'variant_alias', name: 'Variant Alias' },
+                  { value: 'variant_bases', name: 'Variant Base(s)' },
+                  { value: 'variant_group', name: 'Variant Group' },
+                  { value: 'variant_types', name: 'Variant Type(s)' }
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -2077,13 +2073,13 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'pubmed_id', name: 'PubMed ID' },
-                  { value: 'journal', name: 'Journal Name' },
                   { value: 'abstract', name: 'Abstract' },
-                  { value: 'publication_year', name: 'Publication Year' },
                   { value: 'author', name: 'Author' },
                   { value: 'evidence_item_count', name: 'Evidence Items' },
+                  { value: 'journal', name: 'Journal Name' },
                   { value: 'pmc_id', name: 'PMC ID' },
+                  { value: 'publication_year', name: 'Publication Year' },
+                  { value: 'pubmed_id', name: 'PubMed ID' },
                   { value: 'source_suggestion_count', name: 'Source Suggestions' },
                   { value: 'title', name: 'Title' }
                 ],
