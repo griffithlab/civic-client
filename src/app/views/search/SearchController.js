@@ -739,7 +739,8 @@
                     {value: 'is', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
-                    {value: 'does_not_contain', name: 'does not contain'}
+                    {value: 'does_not_contain', name: 'does not contain'},
+		    {value: 'is_empty', name: 'is empty'}
                   ]
                 }
               },
@@ -747,6 +748,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
+		hideExpression: 'model.name === "is_empty"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -1252,7 +1254,8 @@
                     {value: 'is', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
-                    {value: 'does_not_contain', name: 'does not contain'}
+                    {value: 'does_not_contain', name: 'does not contain'},
+		    {value: 'is_empty', name: 'is empty'}
                   ]
                 }
               },
@@ -1260,6 +1263,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
+		hideExpression: 'model.name === "is_empty"',
                 templateOptions: {
                   label: '',
                   required: true
