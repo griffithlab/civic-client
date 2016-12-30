@@ -1,0 +1,14 @@
+<div>
+  <h3 class="subtitle">Getting started as a CIViC Curator</h3>
+  <p>CIViC curators are a community of users dedicated to improving the CIViC knowledgebase and its contents.</p>
+    <p>Prerequisites:</p>
+  <ul>
+    <li>Create an account.</li>
+  </ul>
+
+  <tabset>
+    <tab ng-repeat="tab in vm.tabs.getting_started" heading="{{ tab.heading }}" active="tab.active">
+      <div ng-include="tab.template"></div>
+    </tab>
+  </tabset>
+</div>
