@@ -2522,6 +2522,11 @@
           name: 'CHR1 Start between 16 and 60K',
           tooltip: 'Variants with a variant starting between 16 and 60K in its primary chromosome',
           search: {'operator':'AND','queries':[{'field':'start','condition':{'name':'is_in_the_range','parameters':['16000000','60000000']}}]}
+        },
+        { 
+          name: 'Variant type contains frameshift',
+          tooltip: 'Variants with a variant type that contains the world frameshift',
+          search: {'operator':'AND','queries':[{'field':'variant_types','condition':{'name':'contains','parameters':['frameshift']}}]}
         }
       ],
       'sources': [
