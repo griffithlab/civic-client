@@ -2273,19 +2273,38 @@
                     {value: 'is_not_equal_to', name: 'is not'},
                     {value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to'},
                     {value: 'is_less_than_or_equal_to', name: 'is less than or equal to'},
-                  ]
+                    { value: 'is_in_the_range', name: 'is in the range' }
+                  ],
+                  onChange: function(value, options, scope) {
+                    _.pullAt(scope.model.parameters, 1,2);
+                  }
                 }
               },
               {
-                key: 'parameters[0]',
+                key: 'parameters[1]',
                 type: 'input',
+                className: 'inline-field inline-field-small',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              },
+              {
+                template: 'to',
                 className: 'inline-field',
+                hideExpression: 'model.name != "is_in_the_range"'
+              },
+              {
+                key: 'parameters[2]',
+                type: 'input',
+                className: 'inline-field inline-field-small',
+                hideExpression: 'model.name != "is_in_the_range"',
                 templateOptions: {
                   label: '',
                   required: true
                 }
               }
-            ],
+           ],
             evidence_item_count: [
               {
                 template: 'with status',
