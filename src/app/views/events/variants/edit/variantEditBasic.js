@@ -213,7 +213,7 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Variant Type(s)',
-          helpText: 'Add one or more variant types from the Sequence Ontology',
+          helpText: 'Add one or more variant types from the <a href="http://www.sequenceontology.org/browser/" title="Opens a new tab for the Sequence Ontology Browser" target="_blank">Sequence Ontology</a> (e.g., missense, loss-of-function).',
           entityName: 'Type',
           inputOptions: {
             type: 'typeahead',
