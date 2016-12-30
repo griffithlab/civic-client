@@ -130,17 +130,17 @@
         {
           heading: 'Example Activities',
           template: 'app/pages/help_started_example.tpl.html',
-          active: true
+          active: false
         },
         {
           heading: 'Source Ideas',
           template: 'app/pages/help_started_source.tpl.html',
-          active: true
+          active: false
         },
         {
           heading: 'Monitoring',
           template: 'app/pages/help_started_monitoring.tpl.html',
-          active: true
+          active: false
         }
 	],
       evidence: [
