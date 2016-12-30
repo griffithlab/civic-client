@@ -541,7 +541,7 @@
                 }
               },
               {
-                key: 'parameters[1]',
+                key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field inline-field-small',
                 templateOptions: {
@@ -555,7 +555,7 @@
                 hideExpression: 'model.name != "is_in_the_range"'
               },
               {
-                key: 'parameters[2]',
+                key: 'parameters[1]',
                 type: 'input',
                 className: 'inline-field inline-field-small',
                 hideExpression: 'model.name != "is_in_the_range"',
@@ -2281,7 +2281,7 @@
                 }
               },
               {
-                key: 'parameters[1]',
+                key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field inline-field-small',
                 templateOptions: {
@@ -2295,7 +2295,7 @@
                 hideExpression: 'model.name != "is_in_the_range"'
               },
               {
-                key: 'parameters[2]',
+                key: 'parameters[1]',
                 type: 'input',
                 className: 'inline-field inline-field-small',
                 hideExpression: 'model.name != "is_in_the_range"',
@@ -2529,6 +2529,11 @@
           name: 'Name contains "New England"',
           tooltip: 'Sources likely from the New England Journal of Medicine',
           search: {'operator':'AND','queries':[{'field':'journal','condition':{'name':'contains','parameters':['New England']}}]}
+        },
+        {
+          name: 'Publication Year between 2014 and 2016',
+          tooltip: 'Source publication year between 2014 and 2016',
+          search: {'operator':'AND','queries':[{'field':'publication_year','condition':{'name':'is_in_the_range','parameters':['2014','2016']}}]}
         }
       ]
     };
