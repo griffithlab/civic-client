@@ -116,8 +116,8 @@
           active: true
         },
         {
-          heading: 'Variant Origin',
-          template: 'app/pages/help_evidence_variant_origin.tpl.html',
+          heading: 'Evidence Level',
+          template: 'app/pages/help_evidence_levels.tpl.html',
           active: false
         },
         {
@@ -126,8 +126,8 @@
           active: false
         },
         {
-          heading: 'Evidence Level',
-          template: 'app/pages/help_evidence_levels.tpl.html',
+          heading: 'Variant Origin',
+          template: 'app/pages/help_evidence_variant_origin.tpl.html',
           active: false
         },
         {
