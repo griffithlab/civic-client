@@ -16,28 +16,39 @@
           <li du-scrollspy="top">
             <a du-smooth-scroll="top" ng-click="vm.setUrl('top')">About CIViC</a>
           </li>
-          <li du-scrollspy="domain-experts">
-            <a du-smooth-scroll="domain-experts" ng-click="vm.setUrl('domain-experts')">Domain Experts</a>
-          </li>
           <li du-scrollspy="acknowledgements">
             <a du-smooth-scroll="acknowledgements" ng-click="vm.setUrl('acknowledgements')">Acknowledgements</a>
+          </li>
+          <li du-scrollspy="domain-experts">
+            <a du-smooth-scroll="domain-experts" ng-click="vm.setUrl('domain-experts')">Domain Experts</a>
           </li>
           <li du-scrollspy="partners">
             <a du-smooth-scroll="partners" ng-click="vm.setUrl('partners')">Partners</a>
           </li>
-
+          <li du-scrollspy="data-clients">
+            <a du-smooth-scroll="data-clients" ng-click="vm.setUrl('data-clients')">Data Clients</a>
+          </li>
+          <li du-scrollspy="join-civic">
+            <a du-smooth-scroll="join-civic" ng-click="vm.setUrl('join-civic')">Join CIViC</a>
+          </li>
         </ul>
       </div>
     </div>
     <div class="col-xs-8">
       <p><strong>Advancing Cancer Precision Medicine with Community Collaboration</strong><br/>
         Precision medicine refers to the use of prevention and treatment strategies that are tailored to the unique features of each individual and their disease. In the context of cancer this might involve the identification of specific mutations shown to predict response to a targeted therapy. The biomedical literature describing these associations is large and growing rapidly. Currently these interpretations exist largely in private or encumbered databases resulting in extensive repetition of effort. Realizing precision medicine will require this information to be centralized, debated and interpreted for application in the clinic. CIViC is an open access, open source, community-driven web resource for Clinical Interpretation of Variants in Cancer. Our goal is to enable precision medicine by providing an educational forum for dissemination of knowledge and active discussion of the clinical significance of cancer genome alterations.</p>
-
       <p><strong>How our Collaborative Process is Different</strong><br/>
       All content created in CIViC is, and will continue to be, freely available, without restriction (<a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons Public Domain Dedication, CC0 1.0 Universal</a>). Anyone can contribute to CIViC by simply registering for an account. Users join the community with "Curator" level privileges that allow them to comment or propose additions or revisions on any knowledge in CIViC. Proposed additions and revisions are then reviewed by users with "Editor" level privileges before entering the public CIViC record. Community curators work together with editors towards comprehensive and accurate interpretations of the clinical relevance of variants in cancer.</p>
-
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <p><h4><a name="acknowledgements" id="acknowledgements" style="text-decoration: none; color: inherit;">Acknowledgements and Funding:</a></h4></p>
+      <p>First and foremost we are grateful to the community of curators, editors, domain experts, and users who make CIViC possible. Malachi Griffith was supported by the National Human Genome Research Institute (NHGRI) of the National Institutes of Health (NIH) under Award Number K99HG007940. Obi Lee Griffith was supported by the National Cancer Institute of the NIH under Award Number K22CA188163. This work was also supported by a grant to Richard K. Wilson from the NHGRI under Award Number U54HG003079. The CIViC project is also supported by the NCI under Award Number U01CA209936 to Obi Lee Griffith (with Malachi Griffith and Elaine R Mardis as co-PIs). The content of this website is solely the responsibility of the creators and does not necessarily represent the official views of the National Institutes of Health.</p>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
       <p><h4><a name="domain-experts" id="domain-experts" style="text-decoration: none; color: inherit;">Domain Experts</a></h4></p>
@@ -67,17 +78,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-      <p><h4><a name="acknowledgements" id="acknowledgements" style="text-decoration: none; color: inherit;">Acknowledgements and Funding:</a></h4></p>
-    </div>
-  </div>
-  <div class="row expert-row">
-    <div class="col-xs-8 col-xs-offset-2 expert-description" style="padding-top: 1em;">
-      <p>First and foremost we are grateful to the community of curators, editors, domain experts, and users who make CIViC possible. Malachi Griffith was supported by the National Human Genome Research Institute (NHGRI) of the National Institutes of Health (NIH) under Award Number K99HG007940. Obi Lee Griffith was supported by the National Cancer Institute of the NIH under Award Number K22CA188163. This work was also supported by a grant to Richard K. Wilson from the NHGRI under Award Number U54HG003079. The CIViC project is also supported by the NCI under Award Number U01CA209936 to Obi Lee Griffith (with Malachi Griffith and Elaine R Mardis as co-PIs). The content of this website is solely the responsibility of the creators and does not necessarily represent the official views of the National Institutes of Health.</p>
 
-    </div>
-  </div>
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
       <p><h4><a name="partners" id="partners" style="text-decoration: none; color: inherit;">Partners:</a></h4></p>
@@ -98,14 +99,34 @@
       </div>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2" style="color: #999;">
-      <p class="small">We're always looking for new partners. If you would like your organization to have acknowledged a substantial contribution to CIViC and be listed in this section, please email <a href="mailto:civic-help@genome.wustl.edu">civic-help@genome.wustl.edu</a>.</p>
-      <p class="small"><strong>NOTE:</strong> CIViC partners have no preferential relationship - financial or otherwise - with the CIViC project.</p>
+    <div class="col-xs-8 col-xs-offset-2">
+      <p><h4><a name="data-clients" id="data-clients" style="text-decoration: none; color: inherit;">Data Clients:</a></h4></p>
+      <p>Data clients are academic and commercial resources that use CIViC data (for example by integrating CIViC interpretations into their own tool). The current list of CIViC data clients includes:
+      <ul>
+        <li><a href="http://www.agilent.com/en-us/products/software-informatics/bioinformatics-(cartagenia)-/cartagenia-bench-lab" title="agilent.com product description" target="_blank">Agilent Cartagenia Bench Lab</a></li>
+	<li><a href="http://biogps.org/plugin/1238/civic/" title="biogps.org civic plugin" target="_blank">BioGPS</a></li>
+	<li><a href="http://www.cbioportal.org/" title="cbioportal.org project" target="_blank">CBioPortal</a></li>
+	<li><a href="https://genome.ucsc.edu/cgi-bin/hgHubConnect" title="genome.ucsc.edu project" target="_blank">UCSC Genome Browser (Track Data Hubs, Cancer Genomics)</a></li>
+	<li><a href="https://www.solvebio.com/" title="solvebio.com product description" target="_blank">SolveBio</a></li>
+        <li><a href="https://www.wikidata.org/" title="wikidata.org project" target="_blank">Wikidata</a></li>
+      </ul>
+      </p>
+      <p>If you are using CIViC data, please let us know so that we can list you here. If you need help integrating CIViC into your resource, please email <a href="mailto:civic-help@genome.wustl.edu">civic-help@genome.wustl.edu</a>.</p>
+
     </div>
   </div>
-  <div class="row" style="margin-bottom: 600px;">
 
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <p><h4><a name="join-civic" id="join-civic" style="text-decoration: none; color: inherit;">Join the CIViC Effort:</a></h4></p>
+      <p>We're always looking for new domain experts, partners, and data clients. If you or your organization would like to participate in one of these ways, or believe that you should already be listed here, please email <a href="mailto:civic-help@genome.wustl.edu">civic-help@genome.wustl.edu</a>.</p>
+      <p class="small" style="color: #999;"><strong>NOTE:</strong> CIViC partners, data clients, and domain experts have no preferential relationship - financial or otherwise - with the CIViC project.</p>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 600px;">
   </div>
 
 </div>
