@@ -1,16 +1,18 @@
 <div class="help-sub-tab">
-
-  <p>The rows in the following table describe the minimal components of a CIViC evidence statement. Once clinical evidence statements for a variant have been curated, a summary is manually generated describing the variant's significance in cancer, along with current treatment methods. A gene level summary then synthesizes the variant summaries, and adds important gene-level information. Each variant can belong to one or more variant groups, these act to combine functionally similar or clinically related variants into a single entity.  For example, 'FGFR Fusions' is a group that contains several gene fusions where FGFR2 (or FGFR3) is involved in a fusion with various 3' partner genes, and 'Imatinib Resistance Mutations' is a group of variants that confer resistance to imatinib treatment. A variant group may also contain variants from multiple genes. For example, the group 'EGFR TKI Resistance' consists of variants in EGFR, MET, and KRAS.</p>
+  <p>The rows in the following table describe the minimal components of a CIViC Evidence Item. Several Evidence Statements are synthesized at the Variant level into Variant Summaries but each Evidence Statement is directly linked to a single article in PubMed. <i>More specific guidelines about Evidence Item components can be found in additional help tabs.</i></p>
 
 <h4>General Guidelines</h4>
 <ul>
-  <li>Should be derived from primary literature sources (not review articles) whenever possible.</li>
-  <li>Should be as concise as possible while providing sufficient experiemental detail to interpret and evaluate the evidence (N values, statistics, etc).</li>
-  <li>Should be a single Predictive, Predisposing, Diagnostic or Prognostic assertion, not a combination.</li>
-  <li>Multiple evidence items can be derived from a single publication.</li>
+  <li>Evidence Statements should be:</li>
+  <ul>
+    <li>derived from primary literature sources (not review articles) whenever possible.</li>
+    <li>as concise as possible while providing sufficient experiemental detail to interpret and evaluate the evidence (N values, statistics, etc).</li>
+    <li>a single Predictive, Predisposing, Diagnostic or Prognostic assertion, not a combination.</li>
+    <li>aimed at a general audience, avoiding field-specific acronyms and colloquialisms.</li>
+  </ul>
+  <li>Multiple, separate Evidence Items can be and often are derived from a single publication.</li>
   <li>Generally, assertions involving drugs should be classified as being of the Predictive Evidence Type.</li>
-  <li>Star Ratings should be based on the strength of the assertion. Multiple assertions from the same publication can have different star ratings.</li>
-  <li>Should be aimed at a general audience, avoiding field-specific acronyms and colloquialisms.</li>
+  <li>Star Ratings should be based on the strength of the specific assertion. Multiple assertions from the same publication can have different star ratings.</li>
 </ul>
 <h4>Evidence Attributes</h4>
     <table class="table table-striped table-condensed table-bordered">
@@ -94,7 +96,7 @@
         <td>CIViC</td>
       <tr>
         <td>Citation</td>
-        <td>Publication where the event was described/explored automatically generated from entered PubMed ID. Links to internal CIViC publication page showing all Evidence Items from the publication.</td>
+        <td>Publication where the event was described/explored automatically generated from curator-provided PubMed ID and links to internal CIViC publication page showing all Evidence Items from the publication.</td>
         <td>Toy et al., 2013, Nat. Genet. (PMID: 24185512)</td>
         <td>CIViC (PubMed)</td>
       </tr>
