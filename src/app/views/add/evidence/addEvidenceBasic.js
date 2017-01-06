@@ -413,7 +413,7 @@
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
               'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-              'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
+              'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
               'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
               'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease'
             }

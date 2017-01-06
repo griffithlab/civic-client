@@ -49,7 +49,7 @@
           label: 'Email Address',
           minLength: 5,
           value: 'vm.userEdit.email',
-          helpText: 'Email address will be used for sending CIViC notifications, news, and updates.'
+          helpText: 'Email address will not be visible to others or shared. Email addresses will only be used for sending CIViC notifications, news, and updates.'
         }
       },
       {

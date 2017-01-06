@@ -25,6 +25,14 @@
           navMode: 'sub'
         }
       })
+      .state('help.gettingStarted', {
+        url: '/gettingStarted',
+        templateUrl: 'app/pages/help_getting_started_main.tpl.html',
+        data: {
+          titleExp: '"Help: Getting Started"',
+          navMode: 'sub'
+        }
+      })
       .state('help.evidence', {
         url: '/evidence',
         templateUrl: 'app/pages/help_evidence_main.tpl.html',
@@ -85,6 +93,10 @@
           state: 'help.introduction'
         },
         {
+          heading: 'Getting Started',
+          state: 'help.gettingStarted'
+        },
+        {
           heading: 'Evidence',
           state: 'help.evidence'
         },
@@ -109,6 +121,28 @@
           state: 'help.report'
         }
       ],
+      getting_started: [
+	{
+	  heading: 'Introductory Materials',
+          template: 'app/pages/help_started_introductory_materials.tpl.html',
+          active: true
+        },
+        {
+          heading: 'Example Activities',
+          template: 'app/pages/help_started_example.tpl.html',
+          active: false
+        },
+        {
+          heading: 'Source Ideas',
+          template: 'app/pages/help_started_source.tpl.html',
+          active: false
+        },
+        {
+          heading: 'Monitoring',
+          template: 'app/pages/help_started_monitoring.tpl.html',
+          active: false
+        }
+	],
       evidence: [
         {
           heading: 'Overview',
@@ -116,8 +150,8 @@
           active: true
         },
         {
-          heading: 'Variant Origin',
-          template: 'app/pages/help_evidence_variant_origin.tpl.html',
+          heading: 'Evidence Level',
+          template: 'app/pages/help_evidence_levels.tpl.html',
           active: false
         },
         {
@@ -126,8 +160,8 @@
           active: false
         },
         {
-          heading: 'Evidence Level',
-          template: 'app/pages/help_evidence_levels.tpl.html',
+          heading: 'Variant Origin',
+          template: 'app/pages/help_evidence_variant_origin.tpl.html',
           active: false
         },
         {
