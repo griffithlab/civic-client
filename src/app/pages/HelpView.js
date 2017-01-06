@@ -236,7 +236,7 @@
       $modal.open({
         animation: false,
         backdrop: true,
-        template: '<div><img src="assets/images/GP-113_CIViC_schema-collaboration_SCHEMA_v1a.png" ' +
+        template: '<div><img src="assets/images/GP-113_CIViC_schema-collaboration_SCHEMA_v3a.png" ' +
         'class="img-fluid" width="100%" height="100%" ' +
         'alt="CIViC Schema Diagram" ' +
         'ng-click="$close()"' +
