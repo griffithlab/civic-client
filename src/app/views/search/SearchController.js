@@ -32,27 +32,27 @@
                 options: [
                   { value: '', name: 'Please select a field' },
 		  { value: 'clinical_significance', name: 'Clinical Significance' },
-                  { value: 'description', name: 'Statement' },
                   { value: 'disease_doid', name: 'Disease DOID' },
+                  { value: 'interaction_type', name: 'Drug Interaction Type' },
                   { value: 'disease_name', name: 'Disease Name' },
                   { value: 'drug_id', name: 'Drug PubChem ID' },
                   { value: 'drug_name', name: 'Drug Name' },
-                  { value: 'interaction_type', name: 'Drug Interaction Type' },
-                  { value: 'id', name: 'Evidence ID'},
-                  { value: 'evidence_type', name: 'Evidence Type' },
-                  { value: 'evidence_level', name: 'Evidence Level' },
                   { value: 'evidence_direction', name: 'Evidence Direction' },
+                  { value: 'id', name: 'Evidence ID'},
+                  { value: 'evidence_level', name: 'Evidence Level' },
+                  { value: 'evidence_type', name: 'Evidence Type' },
+                  { value: 'description', name: 'Evidence Statement' },
                   { value: 'gene_name', name: 'Gene Name' },
+                  { value: 'publication_year', name: 'Publication Year' },
                   { value: 'pubmed_id', name: 'Pubmed ID' },
                   { value: 'rating', name: 'Rating' },
-                  { value: 'suggested_changes_count', name: 'Suggested Revisions' },
-                  { value: 'publication_year', name: 'Publication Year' },
                   { value: 'status', name: 'Status' },
-                  { value: 'variant_name', name: 'Variant Name' },
-                  { value: 'variant_alias', name: 'Variant Alias' },
-                  { value: 'variant_origin', name: 'Variant Origin' },
                   { value: 'submitter', name: 'Submitter Display Name' },
-                  { value: 'submitter_id', name: 'Submitter ID' }
+                  { value: 'submitter_id', name: 'Submitter ID' },
+                  { value: 'suggested_changes_count', name: 'Suggested Revisions' },
+                  { value: 'variant_alias', name: 'Variant Alias' },
+                  { value: 'variant_name', name: 'Variant Name' },
+                  { value: 'variant_origin', name: 'Variant Origin' }
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -408,10 +408,6 @@
                 }
               }
             ],
-
-
-
-
             evidence_level: [
               {
                 key: 'name',
@@ -536,14 +532,33 @@
                     { value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to' },
                     { value: 'is_greater_than', name: 'is greater than' },
                     { value: 'is_less_than', name: 'is less than' },
-                    { value: 'is_less_than_or_equal_to', name: 'is less than or equal to' }
-                  ]
+                    { value: 'is_less_than_or_equal_to', name: 'is less than or equal to' },
+                    { value: 'is_in_the_range', name: 'is in the range' }
+                  ],
+                  onChange: function(value, options, scope) {
+                    _.pullAt(scope.model.parameters, 1,2);
+                  }
                 }
               },
               {
                 key: 'parameters[0]',
                 type: 'input',
+                className: 'inline-field inline-field-small',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              },
+              {
+                template: 'to',
                 className: 'inline-field',
+                hideExpression: 'model.name != "is_in_the_range"'
+              },
+              {
+                key: 'parameters[1]',
+                type: 'input',
+                className: 'inline-field inline-field-small',
+                hideExpression: 'model.name != "is_in_the_range"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -743,7 +758,8 @@
                     {value: 'is', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
-                    {value: 'does_not_contain', name: 'does not contain'}
+                    {value: 'does_not_contain', name: 'does not contain'},
+		    {value: 'is_empty', name: 'is empty'}
                   ]
                 }
               },
@@ -751,6 +767,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
+		hideExpression: 'model.name === "is_empty"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -867,10 +884,10 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'name', name: 'Name' },
                   { value: 'aliases', name: 'Aliases' },
-                  { value: 'entrez_id', name: 'Entrez ID' },
                   { value: 'description', name: 'Description' },
+                  { value: 'entrez_id', name: 'Entrez ID' },
+                  { value: 'name', name: 'Name' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' }
                 ],
                 onChange: function(value, options, scope) {
@@ -1089,16 +1106,6 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'name', name: 'Name' },
-                  { value: 'description', name: 'Description' },
-                  { value: 'variant_types', name: 'Variant Type(s)' },
-                  { value: 'variant_group', name: 'Variant Group' },
-                  { value: 'variant_alias', name: 'Variant Alias' },
-                  { value: 'gene', name: 'Gene' },
-                  { value: 'reference_build', name: 'Reference Build' },
-                  { value: 'ensembl_version', name: 'Ensembl Version' },
-                  { value: 'reference_bases', name: 'Reference Base(s)' },
-                  { value: 'variant_bases', name: 'Variant Base(s)' },
                   { value: 'chromosome', name: 'CHR1 Chromosome' },
                   { value: 'start', name: 'CHR1 Start' },
                   { value: 'stop', name: 'CHR1 Stop' },
@@ -1107,8 +1114,18 @@
                   { value: 'start2', name: 'CHR2 Start' },
                   { value: 'stop2', name: 'CHR2 Stop' },
                   { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
+                  { value: 'description', name: 'Description' },
+                  { value: 'ensembl_version', name: 'Ensembl Version' },
+                  { value: 'evidence_item_count', name: 'Evidence Items' },
+                  { value: 'gene', name: 'Gene' },
+                  { value: 'name', name: 'Name' },
+                  { value: 'reference_bases', name: 'Reference Base(s)' },
+                  { value: 'reference_build', name: 'Reference Build' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
-                  { value: 'evidence_item_count', name: 'Evidence Items' }
+                  { value: 'variant_alias', name: 'Variant Alias' },
+                  { value: 'variant_bases', name: 'Variant Base(s)' },
+                  { value: 'variant_group', name: 'Variant Group' },
+                  { value: 'variant_types', name: 'Variant Type(s)' }
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -1256,7 +1273,8 @@
                     {value: 'is', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
-                    {value: 'does_not_contain', name: 'does not contain'}
+                    {value: 'does_not_contain', name: 'does not contain'},
+		    {value: 'is_empty', name: 'is empty'}
                   ]
                 }
               },
@@ -1264,6 +1282,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
+		hideExpression: 'model.name === "is_empty"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -2077,13 +2096,13 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'pubmed_id', name: 'PubMed ID' },
-                  { value: 'journal', name: 'Journal Name' },
                   { value: 'abstract', name: 'Abstract' },
-                  { value: 'publication_year', name: 'Publication Year' },
                   { value: 'author', name: 'Author' },
                   { value: 'evidence_item_count', name: 'Evidence Items' },
+                  { value: 'journal', name: 'Journal Name' },
                   { value: 'pmc_id', name: 'PMC ID' },
+                  { value: 'publication_year', name: 'Publication Year' },
+                  { value: 'pubmed_id', name: 'PubMed ID' },
                   { value: 'source_suggestion_count', name: 'Source Suggestions' },
                   { value: 'title', name: 'Title' }
                 ],
@@ -2254,19 +2273,38 @@
                     {value: 'is_not_equal_to', name: 'is not'},
                     {value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to'},
                     {value: 'is_less_than_or_equal_to', name: 'is less than or equal to'},
-                  ]
+                    { value: 'is_in_the_range', name: 'is in the range' }
+                  ],
+                  onChange: function(value, options, scope) {
+                    _.pullAt(scope.model.parameters, 1,2);
+                  }
                 }
               },
               {
                 key: 'parameters[0]',
                 type: 'input',
+                className: 'inline-field inline-field-small',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              },
+              {
+                template: 'to',
                 className: 'inline-field',
+                hideExpression: 'model.name != "is_in_the_range"'
+              },
+              {
+                key: 'parameters[1]',
+                type: 'input',
+                className: 'inline-field inline-field-small',
+                hideExpression: 'model.name != "is_in_the_range"',
                 templateOptions: {
                   label: '',
                   required: true
                 }
               }
-            ],
+           ],
             evidence_item_count: [
               {
                 template: 'with status',
@@ -2484,6 +2522,11 @@
           name: 'CHR1 Start between 16 and 60K',
           tooltip: 'Variants with a variant starting between 16 and 60K in its primary chromosome',
           search: {'operator':'AND','queries':[{'field':'start','condition':{'name':'is_in_the_range','parameters':['16000000','60000000']}}]}
+        },
+        { 
+          name: 'Variant type contains frameshift',
+          tooltip: 'Variants with a variant type that contains the world frameshift',
+          search: {'operator':'AND','queries':[{'field':'variant_types','condition':{'name':'contains','parameters':['frameshift']}}]}
         }
       ],
       'sources': [
@@ -2491,6 +2534,11 @@
           name: 'Name contains "New England"',
           tooltip: 'Sources likely from the New England Journal of Medicine',
           search: {'operator':'AND','queries':[{'field':'journal','condition':{'name':'contains','parameters':['New England']}}]}
+        },
+        {
+          name: 'Publication Year between 2014 and 2016',
+          tooltip: 'Source publication year between 2014 and 2016',
+          search: {'operator':'AND','queries':[{'field':'publication_year','condition':{'name':'is_in_the_range','parameters':['2014','2016']}}]}
         }
       ]
     };
