@@ -3,7 +3,7 @@
   angular.module('civic.services')
     .constant('ConfigService', {
       serverUrl: 'http://127.0.0.1:3000/',
-      mainMenuItems: [
+      mainMenuItems: [ 
         {
           label: 'About',
           state: 'about'
@@ -25,7 +25,7 @@
           state: 'faq'
         }
       ],
-      footerMenuItems: [
+      footerMenuItems: [ 
         {
           label: 'Glossary of Terms',
           state: 'glossary'
@@ -51,7 +51,7 @@
           state: 'contact'
         }
       ],
-      evidenceAttributeDescriptions: {
+      evidenceAttributeDescriptions: { 
         variant_origin: {
           'Somatic Mutation': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
           'Germline Mutation': 'Variant is a mutation, found in every cell, not restricted to tumor/diseased cells, is expected to have arisen de novo in the germ cells responsible for the current generation or only very recent generations (e.g., close family members), and is not thought to exist in the population at large.',
@@ -107,6 +107,22 @@
           4: 'Strong - Well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.',
           5: 'Excellent - Solid, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'
         }
+      },
+      evidenceHelpText: {
+        'Gene Entrez Name' : 'Entrez Gene name (e.g. BRAF). Gene name must be known to the Entrez database.',
+        'Variant Name' : 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).',
+        'Pubmed ID' : 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)',
+        'Variant Origin' : 'Origin of variant',
+        'Disease' : 'Please enter a disease name. If you are unable to locate the disease in the dropdown, please check the \'Could not find disease\' checkbox below and enter the disease in the field that appears.'
+        'Disease Name' : 'Enter the name of the disease here.',
+        'Evidence Statement' : 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.',
+        'Evidence Type' : 'Type of clinical outcome associated with the evidence statement.',
+        'Evidence Level' : 'Type of study performed to produce the evidence statement',
+        'Evidence Direction' : 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
+        'Clinical Significance' : 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
+        'Drug Names' : 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
+        'Drug Interaction Type' : 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
+        'Rating' : '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>'
       }
     }
   );
