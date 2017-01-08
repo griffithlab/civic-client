@@ -32,6 +32,12 @@
                                       _,
                                       ConfigService) {
     var descriptions = ConfigService.evidenceAttributeDescriptions;
+    
+    //handle labels for rating template options
+    function ratingLabel(index){
+      return index + " - " + descriptions.rating[index].str.replace(' - ','<br/>');
+    }
+
     var help = ConfigService.evidenceHelpText;
     var vm = $scope.vm = {};
 
@@ -584,11 +590,7 @@
           helpText: help['Drug Interaction Type'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Combination': 'The drugs listed were used in as part of a combination therapy approach',
-              'Sequential': 'The drugs listed were used at separate timepoints in the same treatment plan',
-              'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
-            }
+            attributeDefinitions: descriptions.drug_interaction_type
           },
           onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
@@ -605,14 +607,13 @@
         type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
-
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
-            { value: 1, label: '1 - Poor<br/>Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims.' },
-            { value: 2, label: '2 - Adequate<br/>Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.' },
-            { value: 3, label: '3 - Average<br/>Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.' },
-            { value: 4, label: '4 - Good<br/>Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.' },
-            { value: 5, label: '5 - Excellent<br/>Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'}
+            { value: 1, label: ratingLabel(1) },
+            { value: 2, label: ratingLabel(2) },
+            { value: 3, label: ratingLabel(3) },
+            { value: 4, label: ratingLabel(4) },
+            { value: 5, label: ratingLabel(5) }
           ],
           valueProp: 'value',
           labelProp: 'label',
@@ -629,7 +630,7 @@
         },
         templateOptions: {
           label: 'Originating source suggestion supports the creation of additional evidence items',
-          helpText: 'Check this box if you wish the originating source suggestion to keep its un-curated status. Otherwise, it will be marked as curated and removed from the source suggestion queues.'
+          helpText: help['keepSourceStatus']
         }
       },
       {
@@ -648,7 +649,7 @@
           currentUser: Security.currentUser,
           value: 'text',
           required: false,
-          helpText: 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.'
+          helpText: help['Additional Comments']
         },
         validators: {
           length: {

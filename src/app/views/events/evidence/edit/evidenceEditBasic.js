@@ -31,7 +31,15 @@
                                        formConfig,
                                        _,
                                        ConfigService) {
+    
     var descriptions = ConfigService.evidenceAttributeDescriptions;
+
+    //handle labels for rating template options
+    function ratingLabel(index){
+      return index + " - " + descriptions.rating[index].str.replace(' - ','<br/>');
+    }
+    
+    var help = ConfigService.evidenceHelpText;
     var vm = $scope.vm = {};
 
     vm.isEditor = Security.isEditor();
@@ -89,7 +97,7 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Origin of variant.',
+          helpText: help['Variant Origin'],
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: descriptions.variant_origin
@@ -104,14 +112,14 @@
         key: 'pubmed_id',
         type: 'publication',
         templateOptions: {
-          label: 'Pubmed Id',
+          label: 'Pubmed ID',
           value: 'vm.evidenceEdit.pubmed_id',
           minLength: 1,
           required: true,
           data: {
             description: '--'
           },
-          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675).'
+          helpText: help['Pubmed ID']
         },
         modelOptions: {
           updateOn: 'default blur',
@@ -162,7 +170,7 @@
           value: 'vm.evidenceEdit.doid',
           required: true,
           minLength: 32,
-          helpText: 'Please enter a disease name. If you are unable to locate the disease in the dropdown, please check the \'Could not find disease\' checkbox below and enter the disease in the field that appears.',
+          helpText: help['Disease'],
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.doid = $model.doid',
           templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
@@ -185,7 +193,7 @@
           label: 'Evidence Statement',
           value: 'vm.evidenceEdit.description',
           minLength: 32,
-          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence).'
+          helpText: help['Evidence Statement']
         }
       },
       {
@@ -225,15 +233,10 @@
               edField.templateOptions.data.updateDefinition(null, edField, scope);
             }
           },
-          helpText: 'Type of clinical outcome associated with the evidence statement.',
+          helpText: help['Evidence Type'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-              'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
-              'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
-              'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease'
-            }
+            attributeDefinitions: descriptions.evidence_type
           }
         }
       },
@@ -259,22 +262,15 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Type of study performed to produce the evidence statement.',
+          helpText: help['Evidence Level'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              A: 'Proven/consensus association in human medicine',
-              B: 'Clinical trial or other primary patient data supports association',
-              C: 'Individual case reports from clinical journals',
-              D: 'In vivo or in vitro models support association',
-              E: 'Indirect evidence'
-            }
+            attributeDefinitions: descriptions.evidence_level
           },
           onChange: function(value, options) {
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
-
         }
       },
       {
@@ -296,26 +292,10 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
+          helpText: help['Evidence Direction'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Predictive': {
-                'Supports': 'The experiment or study supports this variant\'s response to a drug',
-                'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between the variant and a drug'
-              },
-              'Diagnostic': {
-                'Supports': 'The experiment or study supports variant\'s impact on the diagnosis of disease or subtype',
-                'Does Not Support': 'The experiment or study does not support the variant\'s impact on diagnosis of disease or subtype'
-              },
-              'Prognostic': {
-                'Supports': 'The experiment or study supports a variant\'s impact on prognostic outcome',
-                'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
-              },
-              'Predisposing': {
-                'Supports': 'The experiment or study supports a variant\'s role in conferring susceptibility to a disease',
-                'Does Not Support': 'The experiment or study does not support a variant\'s role in conferring susceptibility to a disease'
-              }
+            attributeDefinitions: descriptions.evidence_direction
             },
             updateDefinition: function(value, options, scope) {
               // set attribute definition
@@ -371,19 +351,10 @@
             { type: 'Predisposing', value: 'Negative', label: 'Negative' },
             { type: 'N/A', value: 'N/A', label: 'N/A' }
           ],
-          helpText: 'Positive or negative association of the Variant with predictive, prognostic, or diagnostic evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
+          helpText: help['Clinical Significance'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Sensitivity': 'Subject exhibits response to drug treatment',
-              'Resistance or Non-Response': 'Subject exhibits a lack of response or active resistance to drug treatment',
-              'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
-              'Better Outcome': 'Demonstrates better than expected clinical outcome',
-              'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
-              'Positive': 'Associated with diagnosis of disease or subtype',
-              'Negative': 'Associated with lack of disease or subtype',
-              'N/A': 'Not applicable'
-            },
+            attributeDefinitions: descriptions.clinical_significance,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
@@ -432,8 +403,7 @@
               }
             }
           },
-          helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
-        },
+          helpText: help['Drug Names']},
         hideExpression: function($viewValue, $modelValue, scope) {
           return  scope.model.evidence_type !== 'Predictive';
         }
@@ -458,14 +428,10 @@
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
+          helpText: help['Drug Interaction Type'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Combination': 'The drugs listed were used in as part of a combination therapy approach',
-              'Sequential': 'The drugs listed were used at separate timepoints in the same treatment plan',
-              'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
-            }
+            attributeDefinitions: descriptions.drug_interaction_type
           },
           onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition =
@@ -483,18 +449,17 @@
         type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
-
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
-            { value: 1, label: '1 - Poor<br/>Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims.' },
-            { value: 2, label: '2 - Adequate<br/>Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.' },
-            { value: 3, label: '3 - Average<br/>Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.' },
-            { value: 4, label: '4 - Good<br/>Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.' },
-            { value: 5, label: '5 - Excellent<br/>Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'}
+            { value: 1, label: ratingLabel(1) },
+            { value: 2, label: ratingLabel(2) },
+            { value: 3, label: ratingLabel(3) },
+            { value: 4, label: ratingLabel(4) },
+            { value: 5, label: ratingLabel(5) }
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>'
+          helpText: help['Rating']
         }
       },
       {
@@ -512,7 +477,7 @@
           label: 'Revision Description',
           required: false,
           value: 'text',
-          helpText: 'Please provide a short description of your edits to this Evidence record.'
+          helpText: help['Revision Description']
         },
         validators: {
           length: {
