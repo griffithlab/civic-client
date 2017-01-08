@@ -51,6 +51,36 @@
           state: 'contact'
         }
       ],
+      helpMenuItems: [
+        {
+          heading: 'Introduction',
+          state: 'help.introduction'
+        },
+        {
+          heading: 'Evidence',
+          state: 'help.evidence'
+        },
+        {
+          heading: 'Variants',
+          state: 'help.variants'
+        },
+        {
+          heading: 'Genes',
+          state: 'help.genes'
+        },
+        {
+          heading: 'Variant Groups',
+          state: 'help.variantGroups'
+        },
+        {
+          heading: 'Get Help',
+          state: 'help.get'
+        },
+        {
+          heading: 'Report Problem',
+          state: 'help.report'
+        }
+      ],
       evidenceAttributeDescriptions: { 
         variant_origin: {
           'Somatic Mutation': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
@@ -125,7 +155,8 @@
         'Rating' : '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>',
         'Revision Description' : 'Please provide a short description of your edits to this Evidence record.',
         'Additional Comments' : 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.',
-        'keepSourceStatus' : 'Check this box if you wish the originating source suggestion to keep its un-curated status. Otherwise, it will be marked as curated and removed from the source suggestion queues.'
+        'keepSourceStatus' : 'Check this box if you wish the originating source suggestion to keep its un-curated status. Otherwise, it will be marked as curated and removed from the source suggestion queues.',
+        'suggestionComment' : 'Please provide any additional comments you wish to make about this source. This comment will aid curators when evaluating your suggested source for inclusion.'
       }
     }
   );

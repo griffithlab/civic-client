@@ -76,39 +76,11 @@
   }
 
   // @ngInject
-  function HelpViewController($scope, $modal) {
+  function HelpViewController($scope, $modal, ConfigService) {
     var vm = $scope.vm = {};
+    var helpMenuItems = ConfigService.helpMenuItems;
     vm.tabs = {
-      main: [
-        {
-          heading: 'Introduction',
-          state: 'help.introduction'
-        },
-        {
-          heading: 'Evidence',
-          state: 'help.evidence'
-        },
-        {
-          heading: 'Variants',
-          state: 'help.variants'
-        },
-        {
-          heading: 'Genes',
-          state: 'help.genes'
-        },
-        {
-          heading: 'Variant Groups',
-          state: 'help.variantGroups'
-        },
-        {
-          heading: 'Get Help',
-          state: 'help.get'
-        },
-        {
-          heading: 'Report Problem',
-          state: 'help.report'
-        }
-      ],
+      main: helpMenuItems,
       evidence: [
         {
           heading: 'Overview',
