@@ -3,7 +3,7 @@
   angular.module('civic.services')
     .constant('ConfigService', {
       serverUrl: 'http://127.0.0.1:3000/',
-      mainMenuItems: [ 
+      mainMenuItems: [
         {
           label: 'About',
           state: 'about'
@@ -25,7 +25,7 @@
           state: 'faq'
         }
       ],
-      footerMenuItems: [ 
+      footerMenuItems: [
         {
           label: 'Glossary of Terms',
           state: 'glossary'
@@ -161,4 +161,3 @@
     }
   );
 })();
-

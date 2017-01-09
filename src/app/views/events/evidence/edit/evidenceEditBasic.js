@@ -89,7 +89,7 @@
           value: 'vm.evidenceEdit.variant_origin',
           options: [
             { value: '', label: 'Please select a Variant Origin' },
-            { value: 'Somatic Mutation', label: 'Somatic Mutation'},
+            { value: 'Somatic Mutation', label: 'Somatic Mutation' },
             { value: 'Germline Mutation', label: 'Germline Mutation' },
             { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
             { value: 'Unknown', label: 'Unknown' },
@@ -403,7 +403,8 @@
               }
             }
           },
-          helpText: help['Drug Names']},
+          helpText: help['Drug Names']
+        },
         hideExpression: function($viewValue, $modelValue, scope) {
           return  scope.model.evidence_type !== 'Predictive';
         }
@@ -451,11 +452,11 @@
           label: 'Rating',
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
-            { value: 1, label: ratingLabel(1) },
-            { value: 2, label: ratingLabel(2) },
-            { value: 3, label: ratingLabel(3) },
-            { value: 4, label: ratingLabel(4) },
-            { value: 5, label: ratingLabel(5) }
+            { value: 1, label: (ratingLabel(1)) },
+            { value: 2, label: (ratingLabel(2)) },
+            { value: 3, label: (ratingLabel(3)) },
+            { value: 4, label: (ratingLabel(4)) },
+            { value: 5, label: (ratingLabel(5)) }
           ],
           valueProp: 'value',
           labelProp: 'label',

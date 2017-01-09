@@ -68,7 +68,7 @@
           $log.debug('Accept Item done.');
         });
     };
-
+    
     $scope.rejectItem = function(id) {
       $log.debug('reject item ' + id);
       Evidence.reject(id, $stateParams.variantId)
