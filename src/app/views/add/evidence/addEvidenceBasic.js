@@ -35,7 +35,7 @@
     
     //handle labels for rating template options
     function ratingLabel(index){
-      return index + " - " + descriptions.rating[index].str.replace(' - ','<br/>');
+      return index + " - " + descriptions.rating[index].replace(' - ','<br/>');
     }
 
     var help = ConfigService.evidenceHelpText;

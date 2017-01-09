@@ -295,8 +295,7 @@
           helpText: help['Evidence Direction'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.evidence_direction
-            },
+            attributeDefinitions: descriptions.evidence_direction,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
@@ -307,7 +306,7 @@
             options.templateOptions.data.updateDefinition(value, options, scope);
           }
         },
-        expressionProperties: {
+        expressionProperties:{
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },
