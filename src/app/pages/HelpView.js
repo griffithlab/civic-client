@@ -5,7 +5,7 @@
     .config(helpViewConfig);
 
   // @ngInject
-  function helpViewConfig($stateProvider) {
+  function helpViewConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('help', {
         url: '/help',
@@ -246,6 +246,13 @@
           navMode: 'sub'
         }
       });
+
+    // redirects for old root-level Help pages
+    $urlRouterProvider.when('/help/getting-started', '/help/getting-started/introductory-materials');
+    $urlRouterProvider.when('/help/evidence', '/help/evidence/overview');
+    $urlRouterProvider.when('/help/variantGroups', '/help/variant-groups/overview');
+    $urlRouterProvider.when('/help/genes', '/help/genes/overview');
+
   }
 
   // @ngInject
