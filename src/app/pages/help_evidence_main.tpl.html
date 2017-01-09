@@ -14,9 +14,5 @@
       </p>
     </div>
   </div>
-  <tabset>
-    <tab ng-repeat="tab in vm.tabs.evidence" heading="{{ tab.heading }}" active="tab.active">
-      <div ng-include="tab.template"></div>
-    </tab>
-  </tabset>
+  <simple-tabs tabs="vm.tabs.evidence"></simple-tabs>
 </div>

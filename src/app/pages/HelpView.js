@@ -25,11 +25,44 @@
           navMode: 'sub'
         }
       })
-      .state('help.gettingStarted', {
-        url: '/gettingStarted',
+      .state('help.getting-started', {
+        url: '/getting-started',
+        abstract: true,
         templateUrl: 'app/pages/help_getting_started_main.tpl.html',
         data: {
           titleExp: '"Help: Getting Started"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.getting-started.introductory-materials', {
+        url: '/introductory-materials',
+        templateUrl: 'app/pages/help_started_introductory_materials.tpl.html',
+        data: {
+          titleExp: '"Help: Introductory Materials"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.getting-started.example-activities', {
+        url: '/example-activities',
+        templateUrl: 'app/pages/help_started_example.tpl.html',
+        data: {
+          titleExp: '"Help: Example Activities"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.getting-started.source-ideas', {
+        url: '/source-ideas',
+        templateUrl: 'app/pages/help_started_source.tpl.html',
+        data: {
+          titleExp: '"Help: Source Ideas"',
+          navMode: 'sub'
+        }
+      })
+      .state('help.getting-started.monitoring', {
+        url: '/monitoring',
+        templateUrl: 'app/pages/help_started_monitoring.tpl.html',
+        data: {
+          titleExp: '"Help: Monitoring"',
           navMode: 'sub'
         }
       })
@@ -156,16 +189,16 @@
           navMode: 'sub'
         }
       })
-      .state('help.variantGroups', {
+      .state('help.variant-groups', {
         abstract: true,
-        url: '/variantGroups',
+        url: '/variant-groups',
         templateUrl: 'app/pages/help_variant_groups.tpl.html',
         data: {
           titleExp: '"Help: Variant Groups"',
           navMode: 'sub'
         }
       })
-      .state('help.variantGroups.overview', {
+      .state('help.variant-groups.overview', {
         url: '/overview',
         templateUrl: 'app/pages/help_variant_group_overview.tpl.html',
         data: {
@@ -173,7 +206,7 @@
           navMode: 'sub'
         }
       })
-      .state('help.variantGroups.summary', {
+      .state('help.variant-groups.summary', {
         url: '/summary',
         templateUrl: 'app/pages/help_variant_group_summary.tpl.html',
         data: {
@@ -181,7 +214,7 @@
           navMode: 'sub'
         }
       })
-      .state('help.variantGroups.creating', {
+      .state('help.variant-groups.creating', {
         url: '/creating',
         templateUrl: 'app/pages/help_variant_group_create.tpl.html',
         data: {
@@ -189,7 +222,7 @@
           navMode: 'sub'
         }
       })
-      .state('help.variantGroups.adding', {
+      .state('help.variant-groups.adding', {
         url: '/adding',
         templateUrl: 'app/pages/help_variant_group_addto.tpl.html',
         data: {
@@ -230,7 +263,8 @@
         },
         {
           heading: 'Getting Started',
-          state: 'help.gettingStarted'
+          state: 'help.getting-started.introductory-materials',
+          parent: 'help.getting-started'
         },
         {
           heading: 'Evidence',
@@ -249,8 +283,8 @@
         },
         {
           heading: 'Variant Groups',
-          state: 'help.variantGroups.overview',
-          parent: 'help.variantGroups'
+          state: 'help.variant-groups.overview',
+          parent: 'help.variant-groups'
         },
         {
           heading: 'Get Help',
@@ -264,25 +298,21 @@
         }
       ],
       getting_started: [
-	{
-	  heading: 'Introductory Materials',
-          template: 'app/pages/help_started_introductory_materials.tpl.html',
-          active: true
+	      {
+	        heading: 'Introductory Materials',
+          state: 'help.getting-started.introductory-materials'
         },
         {
           heading: 'Example Activities',
-          template: 'app/pages/help_started_example.tpl.html',
-          active: false
+          state: 'help.getting-started.example-activities'
         },
         {
           heading: 'Source Ideas',
-          template: 'app/pages/help_started_source.tpl.html',
-          active: false
+          state: 'help.getting-started.source-ideas'
         },
         {
           heading: 'Monitoring',
-          template: 'app/pages/help_started_monitoring.tpl.html',
-          active: false
+          state: 'help.getting-started.monitoring'
         }
 	],
       evidence: [
@@ -342,19 +372,19 @@
       variant_group: [
         {
           heading: 'Overview',
-          state: 'help.variantGroups.overview'
+          state: 'help.variant-groups.overview'
         },
         {
           heading: 'Variant Group Summary',
-          state: 'help.variantGroups.summary'
+          state: 'help.variant-groups.summary'
         },
         {
           heading: 'Create a Variant Group',
-          state: 'help.variantGroups.creating'
+          state: 'help.variant-groups.creating'
         },
         {
           heading: 'Add to a Variant Group',
-          state: 'help.variantGroups.adding'
+          state: 'help.variant-groups.adding'
         }
       ]
     };

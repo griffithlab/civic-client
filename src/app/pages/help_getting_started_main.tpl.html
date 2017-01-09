@@ -8,9 +8,6 @@
   <p>Although curators are not required to have any specific training, background or skill set, curator-generated content can only be "Accepted" once it is reviewed by a CIViC Editor. Editors are experts in cancer genomics, oncology, pathology and other relevant fields. This gate-keeper model allows significant contributions from curators with any level of experience while maintaining the quality of an expert-driven resource. Curators can be promoted to Editors once they have demonstrated sufficient understanding of the CIViC data model and requirements for cancer variant interpretation.</p>
   <p>Even small contributions can make a big impact on how up-to-date and comprehensive the CIViC resource is. Examples of small curation activities include: commenting on existing entries, identifying additional literature sources, improving the wording of a variant interpretation, adding variant IDs or aliases, etc.</p>
 
-  <tabset>
-    <tab ng-repeat="tab in vm.tabs.getting_started" heading="{{ tab.heading }}" active="tab.active">
-      <div ng-include="tab.template"></div>
-    </tab>
-  </tabset>
+  <simple-tabs tabs="vm.tabs.getting_started"></simple-tabs>
+
 </div>
