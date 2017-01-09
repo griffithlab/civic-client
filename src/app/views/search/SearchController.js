@@ -31,7 +31,7 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-		  { value: 'clinical_significance', name: 'Clinical Significance' },
+                  { value: 'clinical_significance', name: 'Clinical Significance' },
                   { value: 'disease_doid', name: 'Disease DOID' },
                   { value: 'interaction_type', name: 'Drug Interaction Type' },
                   { value: 'disease_name', name: 'Disease Name' },
@@ -363,11 +363,16 @@
                     { value: 'Sensitivity', name: 'Sensitivity' },
                     { value: 'Resistance or Non-Response', name: 'Resistance or Non-Response' },
                     { value: 'Adverse Response', name: 'Adverse Response' },
-		    { value: 'Positive', name: 'Positive' },
-		    { value: 'Negative', name: 'Negative' },
-		    { value: 'Better Outcome', name: 'Better Outcome' },
-		    { value: 'Poor Outcome', name: 'Poor Outcome' },
-		    { value: 'N/A', name: 'N/A' }
+                    { value: 'Positive', name: 'Positive' },
+                    { value: 'Negative', name: 'Negative' },
+                    { value: 'Better Outcome', name: 'Better Outcome' },
+                    { value: 'Poor Outcome', name: 'Poor Outcome' },
+                    { value: 'Pathogenic', name: 'Pathogenic' },
+                    { value: 'Likely Pathogenic', name: 'Likely Pathogenic' },
+                    { value: 'Benign', name: 'Benign' },
+                    { value: 'Likely Benign', name: 'Likely Benign' },
+                    { value: 'Uncertain Significance', name: 'Uncertain Significance' },
+                    { value: 'N/A', name: 'N/A' }
                   ]
                 }
               }

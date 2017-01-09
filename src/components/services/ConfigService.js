@@ -94,6 +94,11 @@
           'Positive': 'Associated with diagnosis of disease or subtype',
           'Negative': 'Associated with lack of disease or subtype',
           'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
+          'Pathogenic': '',
+          'Likely Pathogenic': '',
+          'Benign': '',
+          'Likely Benign': '',
+          'Uncertain Significance': '',
           'N/A': 'Not applicable'
         },
         drug_interaction_type: {
