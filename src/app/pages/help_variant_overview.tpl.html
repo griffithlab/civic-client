@@ -1,6 +1,6 @@
 <div class="help-sub-tab">
   <p>
-  CIViC variants are usually genomic alterations, including single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's such as amplification or deletion), structural variants (SVs such as translocations and inversions), and other events that differ from the "normal" genome. In some cases a CIViC variant may represent events of the transcriptome or proteome. For example, 'expression' or 'over-expression' is a valid variant. Regardless of the variant, it must have an predictive, prognostic or diagnostic clinical relevance to be entered in CIViC. New curators should generally avoid proposing new variants that are unlike any already in CIViC.
+  CIViC variants are usually genomic alterations, including single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's such as amplification or deletion), structural variants (SVs such as translocations and inversions), and other events that differ from the "normal" genome. In some cases a CIViC variant may represent events of the transcriptome or proteome. For example, 'expression' or 'over-expression' is a valid variant. Regardless of the variant, it must have an Predictive, Prognostic, Predisposing or Diagnostic clinical relevance to be entered in CIViC. New curators should generally avoid proposing new variants that are unlike any already in CIViC.
 
   <h4>Variant Attributes</h4>
 
@@ -29,13 +29,57 @@
     </tr>
     <tr>
       <td class="attribute">
-        Description
+        Summary
       </td>
       <td class="Summary">
         User-defined summary of the clinical relevance of this Variant.
       </td>
       <td class="source">
         CIViC
+      </td>
+    </tr>
+    <tr>
+      <td class="attribute">
+        Alias
+      </td>
+      <td class="description">
+        Alternative names for this Variant. May be more verbose (e.g., 'Val600Glu') versions, dbSNP IDs or alternative nomenclature used in the literature.
+      </td>
+      <td class="source">
+        CIViC
+      </td>
+    </tr>
+    <tr>
+      <td class="attribute">
+        HGVS Expression
+      </td>
+      <td class="Summary">
+        User-defined HGVS strings following <a href='http://varnomen.hgvs.org/'>HGVS nomenclature</a> that represent this Variant at the DNA, RNA or protein level.
+      </td>
+      <td class="source">
+        CIViC      
+      </td>    
+    </tr>
+    <tr>
+      <td class="attribute">
+        ClinVar ID
+      </td>
+      <td class="description">
+        User-defined ClinVar ID referencing this Variant which will be linked directly to ClinVar.
+      </td>
+      <td class="source">
+        CIViC (ClinVar)
+      </td>
+    </tr>
+    <tr>
+      <td class="attribute">
+        Sources
+      </td>
+      <td class="Summary">
+        A list of PubMed IDs referring to evidence supporting statements made in the Gene's description. Source descriptions (e.g. <em>'Weisberg et al., 2007, Nat. Rev. Cancer'</em>) are pulled from the PubMed database at the time of submission, and are not editable.
+      </td>
+      <td class="source">
+        CIViC (PubMed)
       </td>
     </tr>
     <tr>
@@ -124,6 +168,22 @@
       </td>
       <td class="source">
         CIViC
+      </td>
+    </tr>
+    <tr class="subheader">
+      <td colspan="4">
+        <h4>MyVariant.Info</h4>
+      </td>
+    </tr>
+    <tr>
+      <td class="attribute">
+        MyVariant Info
+      </td>
+      <td class="description">
+        Data retrieved from MyVariant.Info using the curated Primary Coordinates (chromosome, start, stop, reference base, variant base) described above as the query. Includes external IDs and links whenever possible with additional data displayed by clicking the "Details" button.
+      </td>
+      <td class="source">
+        MyVariant.Info
       </td>
     </tr>
   </table>

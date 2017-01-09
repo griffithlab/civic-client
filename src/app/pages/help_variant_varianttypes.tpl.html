@@ -1,8 +1,8 @@
 <div class="help-sub-tab">
   <p>
-  Variant types are used to classify variants within the structured ontology terms provided by <a href='http://www.sequenceontology.org/index.html'>The Sequence Ontology Project</a>. Multiple terms for a variant are allowed to facilitate functional and structural effects of the variant. Ideally, the most specific child terms of a branch are used. These variant types can be used to search for variants within the CIViC database that meet a users' criteria via the advanced search page or through the API.</p>
+  Variant types are used to classify variants within the structured ontology terms provided by <a href='http://www.sequenceontology.org/index.html'>The Sequence Ontology Project</a>. Multiple terms for a variant are allowed to facilitate functional and structural effects of the variant. Ideally, the most specific child terms of a branch are used. These variant types can be used to search for variants within the CIViC database that meet a users' criteria via the <a ui-sref='search.variants'>advanced search page</a> or through the <a href='https://genome.github.io/civic-api-docs/'>API</a>.</p>
   <p>
-  General Rules:<br>
+  <h4>General Guidelines</h4>
   1) Choose the most specific terms.<br>
   2) Do not use terms that are ancestors/decendants of each other.<br>
   3) Wherever possible use the 'sequence_variant' tree of the sequence ontology.</p>
@@ -330,6 +330,7 @@
       <td class="definition">
       </td>
       <td class="comments">
+	The Sequence Ontology does not currently describe expression or epigenetic variants.
       </td>
       <td class="examples">
         <p><a href='https://civic.genome.wustl.edu/#/events/genes/8/summary/variants/19/summary'>EXPRESSION</a></p>
