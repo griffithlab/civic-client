@@ -94,11 +94,11 @@
           'Positive': 'Associated with diagnosis of disease or subtype',
           'Negative': 'Associated with lack of disease or subtype',
           'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
-          'Pathogenic': '',
-          'Likely Pathogenic': '',
-          'Benign': '',
-          'Likely Benign': '',
-          'Uncertain Significance': '',
+          'Pathogenic': 'Directly contributes to the development of disease',
+          'Likely Pathogenic': 'Likely contributes to the development of disease',
+          'Benign': 'Does not cause disease',
+          'Likely Benign': 'Not expected to have a major effect on disease',
+          'Uncertain Significance': 'Not enough information to support a more definitive classification',
           'N/A': 'Not applicable'
         },
         drug_interaction_type: {
@@ -117,4 +117,3 @@
     }
   );
 })();
-

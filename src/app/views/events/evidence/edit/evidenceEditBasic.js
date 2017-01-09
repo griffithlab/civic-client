@@ -386,14 +386,19 @@
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: {
-              'Sensitivity': 'Subject exhibits response to drug treatment',
-              'Resistance or Non-Response': 'Subject exhibits a lack of response or active resistance to drug treatment',
+              'Sensitivity': 'Variant is associated with positive response to treatment ',
+              'Resistance or Non-Response': 'Variant is associated with negative treatment response',
               'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
               'Better Outcome': 'Demonstrates better than expected clinical outcome',
               'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
               'Positive': 'Associated with diagnosis of disease or subtype',
-              'Negative': 'Associated with lack of disease or subtype',
-              'N/A': 'Not applicable'
+              'Negative': 'Variant is associated with the lack of diagnosis of disease or subtype',
+              'Pathogenic': 'Very strong evidence the variant is pathogenic',
+              'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic.',
+              'Benign': 'Very strong evidence the variant is benign',
+              'Likely Benign': 'Not expected to have a major effect on disease',
+              'Uncertain Significance': 'The variant fullfills the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
+              'N/A': 'Variant does not inform clinical action'
             },
             updateDefinition: function(value, options, scope) {
               // set attribute definition
