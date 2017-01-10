@@ -91,8 +91,9 @@
         },
         evidence_type: {
           'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-          'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis',
-          'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival'
+          'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
+          'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
+          'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease'
         },
         evidence_level: {
           A: 'Proven/consensus association in human medicine',
@@ -123,6 +124,11 @@
           'Positive': 'Associated with diagnosis of disease or subtype',
           'Negative': 'Associated with lack of disease or subtype',
           'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
+          'Pathogenic': '',
+          'Likely Pathogenic': '',
+          'Benign': '',
+          'Likely Benign': '',
+          'Uncertain Significance': '',
           'N/A': 'Not applicable'
         },
         drug_interaction_type: {

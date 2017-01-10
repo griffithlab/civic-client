@@ -8,9 +8,6 @@
     <li>Variants that can be effectively combined when considering patient outcomes/treatment</li>
   </ul>
 
-  <tabset>
-    <tab ng-repeat="tab in vm.tabs.variant_group" heading="{{ tab.heading }}" active="tab.active">
-      <div ng-include="tab.template"></div>
-    </tab>
-  </tabset>
+  <simple-tabs tabs="vm.tabs.variant_group"></simple-tabs>
+
 </div>

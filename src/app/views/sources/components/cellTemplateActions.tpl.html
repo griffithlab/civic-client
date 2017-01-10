@@ -1,37 +1,37 @@
 <div class="ui-grid-cell-contents">
   <span tooltip="Add Evidence Item"
         tooltip-append-to-body="true">
-    <a ng-href="{{row.entity.addEvidenceUrl}}"
+    <button ng-href="{{row.entity.addEvidenceUrl}}"
        ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
        class="btn btn-xs btn-cell-add">
       <i class="glyphicon glyphicon-plus"></i>
-    </a>
+    </button>
     </span>
   &nbsp;
   <span tooltip="Reject Suggestion"
         tooltip-append-to-body="true">
-    <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'rejected')"
+    <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'rejected')"
        ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.hasEditorPerms()"
        class="btn btn-xs btn-danger">
       <i class="glyphicon glyphicon-thumbs-down"></i>
-    </a>
+    </button>
   </span>
   &nbsp;
   <span tooltip="Mark Suggestion as Curated"
         tooltip-append-to-body="true">
-    <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
+    <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
        ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.hasEditorPerms()"
        class="btn btn-xs btn-success">
       <i class="glyphicon glyphicon-thumbs-up"></i>
-    </a>
+    </button>
   </span>
   &nbsp;
   <span tooltip="Re-queue Suggestion"
         tooltip-append-to-body="true">
-    <a ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'new')"
+    <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'new')"
        ng-disabled="row.entity['status'] === 'new' || !grid.appScope.vm.hasEditorPerms()"
        class="btn btn-xs btn-default">
       <i class="glyphicon glyphicon-repeat"></i>
-    </a>
+    </button>
   </span>
 </div>

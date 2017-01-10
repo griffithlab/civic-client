@@ -2,21 +2,17 @@
   <h3 class="subtitle">The CIViC Evidence Item</h3>
   <div class="row">
     <div class="col-xs-5">
-      <p>At the heart of CIViC is the clinical evidence statement. The clinical evidence statement is a piece of information that has been manually curated from trustable medical literature about a variant or genomic 'event' that has implications in cancer diagnosis, prognosis, or predictive response to therapy. For example, “Patients with BRAF V600 mutations respond well to the drug dabrafenib”. A variant may be a single nucleotide substitution, a small insertion or deletion, a chromosomal rearrangement, an RNA gene fusion, an RNA expression pattern (e.g. over-expression), and others. Each clinical evidence statement corresponds to a single citable publication. Ready to jump into the literature? Please check out our <a href="https://github.com/genome/civic-server/tree/master/public/downloads/RankedCivicGeneCandidates.tsv">ranked list of high priority genes</a> for inspiration first.</p>
+      <p>At the heart of CIViC is the clinical evidence statement. The clinical evidence statement is a piece of information that has been manually curated from trustable medical literature about a variant or genomic 'event' that has implications in cancer predisposition, diagnosis (aka molecular classification), prognosis, or predictive response to therapy. For example, “Patients with BRAF V600 mutations respond well to the drug dabrafenib”. A variant may be a single nucleotide substitution, a small insertion or deletion, an RNA gene fusion, a chromosomal rearrangement, an RNA expression pattern (e.g. over-expression), etc. Each clinical evidence statement corresponds to a single citable publication. Ready to jump into the literature? First you will need to login (or create an account if you don't have one yet). Once you are logged in, you can check out our <a href="https://github.com/genome/civic-server/tree/master/public/downloads/RankedCivicGeneCandidates.tsv">ranked list of high priority genes</a> or visit the <a ui-sref="curation.sources">Source Suggestion queue</a> for inspiration.</p>
     </div>
     <div class="col-xs-7">
       <p class="diagram">
         <img
-          src="assets/images/GP-113_CIViC_schema-collaboration_SCHEMA_v1a.png"
+          src="assets/images/GP-113_CIViC_schema-collaboration_SCHEMA_v3a.png"
           class="img-fluid img-popup" width="100%" height="100%"
           alt="CIViC Schema Diagram"
           ng-click="vm.imgPopup()"/>
       </p>
     </div>
   </div>
-  <tabset>
-    <tab ng-repeat="tab in vm.tabs.evidence" heading="{{ tab.heading }}" active="tab.active">
-      <div ng-include="tab.template"></div>
-    </tab>
-  </tabset>
+  <simple-tabs tabs="vm.tabs.evidence"></simple-tabs>
 </div>

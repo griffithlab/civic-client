@@ -52,11 +52,11 @@
                 <td class="value">{{vm.stats.comments}}</td>
               </tr>
               <tr>
-                <td class="key">Suggested Changes:</td>
+                <td class="key">Suggested Revisions:</td>
                 <td class="value">{{vm.stats.suggested_changes}}</td>
               </tr>
               <tr>
-                <td class="key">Applied Changes:</td>
+                <td class="key">Applied Revisions:</td>
                 <td class="value">{{vm.stats.applied_changes}}</td>
               </tr>
               <tr>
@@ -78,7 +78,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h5 class="sub-title">Awards:</h5>
-          <div class="info-block">
+          <div class="info-block" style="padding-bottom: 10px;">
             <span ng-repeat="badge in vm.currentUser.trophy_case.badges">
               <trophy-badge badge="badge"></trophy-badge>
             </span>

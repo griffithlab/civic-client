@@ -1,0 +1,10 @@
+<div class="simpleTabs" >
+  <ul class="nav nav-tabs">
+    <li ui-sref-active="active" ng-repeat="tab in tabs">
+    <a ui-sref="{{tab.state}}">{{tab.heading}}</a>
+      </li>
+  </ul>
+  <div class="tabContent">
+    <div ui-view></div>
+  </div>
+</div>
