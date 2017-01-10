@@ -27,6 +27,9 @@
         resolve: {
           source: function($stateParams, Sources) {
             return Sources.get($stateParams.sourceId);
+          },
+          comments: function($stateParams, Sources) {
+            return Sources.queryComments($stateParams.sourceId);
           }
         }
       });
