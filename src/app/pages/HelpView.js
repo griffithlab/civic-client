@@ -395,11 +395,11 @@
         }
       ]
     };
-    vm.imgPopup = function imgPopup() {
+    vm.imgPopup = function imgPopup(src) {
       $modal.open({
         animation: false,
         backdrop: true,
-        template: '<div><img src="assets/images/GP-113_CIViC_schema-collaboration_SCHEMA_v3a.png" ' +
+        template: '<div><img src="' + src + '"' +
         'class="img-fluid" width="100%" height="100%" ' +
         'alt="CIViC Schema Diagram" ' +
         'ng-click="$close()"' +
