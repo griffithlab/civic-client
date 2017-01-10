@@ -556,7 +556,7 @@
               'Positive': 'Associated with diagnosis of disease or subtype',
               'Negative': 'Variant is associated with the lack of diagnosis of disease or subtype',
               'Pathogenic': 'Very strong evidence the variant is pathogenic',
-              'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic.',
+              'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic',
               'Benign': 'Very strong evidence the variant is benign',
               'Likely Benign': 'Not expected to have a major effect on disease',
               'Uncertain Significance': 'The variant fullfills the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
