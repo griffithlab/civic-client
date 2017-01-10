@@ -51,36 +51,142 @@
           state: 'contact'
         }
       ],
-      helpMenuItems: [
-        {
-          heading: 'Introduction',
-          state: 'help.introduction'
-        },
-        {
-          heading: 'Evidence',
-          state: 'help.evidence'
-        },
-        {
-          heading: 'Variants',
-          state: 'help.variants'
-        },
-        {
-          heading: 'Genes',
-          state: 'help.genes'
-        },
-        {
-          heading: 'Variant Groups',
-          state: 'help.variantGroups'
-        },
-        {
-          heading: 'Get Help',
-          state: 'help.get'
-        },
-        {
-          heading: 'Report Problem',
-          state: 'help.report'
-        }
-      ],
+      helpMenuItems: {
+        main: [
+          {
+            heading: 'Introduction',
+            parent: 'help.introduction',
+            // TODO: figure out why ui-sref-active isn't working with the help main menu
+            // thus requireing this parent state & ng-class kludge (see menu links in help.tpl.html)
+            state: 'help.introduction'
+          },
+          {
+            heading: 'Getting Started',
+            state: 'help.getting-started.introductory-materials',
+            parent: 'help.getting-started'
+          },
+          {
+            heading: 'Evidence',
+            state: 'help.evidence.overview',
+            parent: 'help.evidence',
+          },
+          {
+            heading: 'Variants',
+            state: 'help.variants.overview',
+            parent: 'help.variants',
+          },
+          {
+            heading: 'Genes',
+            state: 'help.genes.overview',
+            parent: 'help.genes'
+          },
+          {
+            heading: 'Variant Groups',
+            state: 'help.variant-groups.overview',
+            parent: 'help.variant-groups'
+          },
+          {
+            heading: 'Get Help',
+            state: 'help.get',
+            parent: 'help.get'
+          },
+          {
+            heading: 'Report Problem',
+            state: 'help.report',
+            parent: 'help.report'
+          }
+        ],
+        getting_started: [
+          {
+            heading: 'Introductory Materials',
+            state: 'help.getting-started.introductory-materials'
+          },
+          {
+            heading: 'Example Activities',
+            state: 'help.getting-started.example-activities'
+          },
+          {
+            heading: 'Source Ideas',
+            state: 'help.getting-started.source-ideas'
+          },
+          {
+            heading: 'Monitoring',
+            state: 'help.getting-started.monitoring'
+          }
+        ],
+        evidence: [
+          {
+            heading: 'Overview',
+            state: 'help.evidence.overview'
+          },
+          {
+            heading: 'Variant Origin',
+            state: 'help.evidence.variant-origin'
+          },
+          {
+            heading: 'Evidence Types',
+            state: 'help.evidence.evidence-types'
+          },
+          {
+            heading: 'Evidence Levels',
+            state: 'help.evidence.evidence-levels'
+          },
+          {
+            heading: 'Trust Ratings',
+            state: 'help.evidence.trust-ratings'
+          }
+        ],
+        variant: [
+          {
+            heading: 'Overview',
+            state: 'help.variants.overview'
+          },
+          {
+            heading: 'Variant Name',
+            state: 'help.variants.naming'
+          },
+          {
+            heading: 'Variant Summary',
+            state: 'help.variants.summary'
+          },
+          {
+            heading: 'Variant Type',
+            state: 'help.variants.type'
+          },
+          {
+            heading: 'Variant Coordinates',
+            state: 'help.variants.coordinates'
+          }
+        ],
+        gene: [
+          {
+            heading: 'Overview',
+            state: 'help.genes.overview'
+          },
+          {
+            heading: 'Gene Summary',
+            state: 'help.genes.summary'
+          }
+        ],
+        variant_group: [
+          {
+            heading: 'Overview',
+            state: 'help.variant-groups.overview'
+          },
+          {
+            heading: 'Variant Group Summary',
+            state: 'help.variant-groups.summary'
+          },
+          {
+            heading: 'Create a Variant Group',
+            state: 'help.variant-groups.creating'
+          },
+          {
+            heading: 'Add to a Variant Group',
+            state: 'help.variant-groups.adding'
+          }
+        ]
+      },
       evidenceAttributeDescriptions: { 
         variant_origin: {
           'Somatic Mutation': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
@@ -95,6 +201,13 @@
           'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
           'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease'
         },
+        evidence_level_brief: {
+          A: 'Validated association',
+          B: 'Clinical evidence',
+          C: 'Case study',
+          D: 'Preclinical evidence',
+          E: 'Inferential association'
+        },
         evidence_level: {
           A: 'Proven/consensus association in human medicine',
           B: 'Clinical trial or other primary patient data supports association',
@@ -105,31 +218,45 @@
         evidence_direction:{
           'Predictive': {
             'Supports': 'The experiment or study supports this variant\'s response to a drug',
-            'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between the variant and a drug'
+            'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between this variant and a drug'
           },
           'Diagnostic': {
-            'Supports': 'The experiment or study supports variant\'s impact on the diagnosis of disease or subtype',
-            'Does Not Support': 'The experiment or study does not support the variant\'s impact on diagnosis of disease or subtype'
+            'Supports': 'The experiment or study supports this variant\'s impact on the diagnosis of disease or subtype',
+            'Does Not Support': 'The experiment or study does not support this variant\'s impact on diagnosis of disease or subtype'
           },
           'Prognostic': {
-            'Supports': 'The experiment or study supports a variant\'s impact on prognostic outcome',
+            'Supports': 'The experiment or study supports this variant\'s impact on prognostic outcome',
             'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
+          },
+          'Predisposing': {
+            'Supports': 'The experiment or study supports a variant\'s impact on prognostic outcome',
+            'Does Not Support': 'The experiment or study does not support a predisposing association between variant and outcome'
           }
         },
         clinical_significance: {
-          'Sensitivity': 'Subject exhibits response to drug treatment',
-          'Resistance or Non-Response': 'Subject exhibits a lack of response or active resistance to drug treatment',
-          'Better Outcome': 'Demonstrates better than expected clinical outcome',
-          'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
-          'Positive': 'Associated with diagnosis of disease or subtype',
-          'Negative': 'Associated with lack of disease or subtype',
-          'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
-          'Pathogenic': '',
-          'Likely Pathogenic': '',
-          'Benign': '',
-          'Likely Benign': '',
-          'Uncertain Significance': '',
-          'N/A': 'Not applicable'
+          'Predictive': {
+            'Sensitivity': 'Subject exhibits response to drug treatment',
+            'Resistance or Non-Response': 'Subject exhibits a lack of response or active resistance to drug treatment',
+            'Adverse Response': 'Subject exhibits an adverse response to drug treatment'
+          },
+          'Diagnostic': {
+            'Better Outcome': 'Demonstrates better than expected clinical outcome',
+            'Poor Outcome': 'Demonstrates worse than expected clinical outcome'
+          },
+          'Prognostic': {
+            'Positive': 'Associated with diagnosis of disease or subtype',
+            'Negative': 'Associated with lack of disease or subtype'
+          },
+          'Predisposing': {
+            'Pathogenic': 'Very strong evidence the variant is pathogenic',
+            'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic.',
+            'Benign': 'Very strong evidence the variant is benign',
+            'Likely Benign': 'Not expected to have a major effect on disease',
+            'Uncertain Significance': 'The variant fullfills the ACMG criteria for pathogenic/benign, or the evidence is conflicting'
+          },
+          'N/A': {
+            'N/A': 'Not applicable'
+          }
         },
         drug_interaction_type: {
           'Combination': 'The drugs listed were used in as part of a combination therapy approach',

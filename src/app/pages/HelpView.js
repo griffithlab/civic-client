@@ -256,144 +256,18 @@
   }
 
   // @ngInject
-  function HelpViewController($scope, $state, $modal) {
+  function HelpViewController($scope, $state, $modal, ConfigService) {
+    var menuItems = ConfigService.helpMenuItems;
     var vm = $scope.vm = {};
     vm.$state = $state;
+    vm.descriptions = ConfigService.evidenceAttributeDescriptions;
     vm.tabs = {
-      main: [
-        {
-          heading: 'Introduction',
-          parent: 'help.introduction',
-          // TODO: figure out why ui-sref-active isn't working with the help main menu
-          // thus requireing this parent state & ng-class kludge (see menu links in help.tpl.html)
-          state: 'help.introduction'
-        },
-        {
-          heading: 'Getting Started',
-          state: 'help.getting-started.introductory-materials',
-          parent: 'help.getting-started'
-        },
-        {
-          heading: 'Evidence',
-          state: 'help.evidence.overview',
-          parent: 'help.evidence',
-        },
-        {
-          heading: 'Variants',
-          state: 'help.variants.overview',
-          parent: 'help.variants',
-        },
-        {
-          heading: 'Genes',
-          state: 'help.genes.overview',
-          parent: 'help.genes'
-        },
-        {
-          heading: 'Variant Groups',
-          state: 'help.variant-groups.overview',
-          parent: 'help.variant-groups'
-        },
-        {
-          heading: 'Get Help',
-          state: 'help.get',
-          parent: 'help.get'
-        },
-        {
-          heading: 'Report Problem',
-          state: 'help.report',
-          parent: 'help.report'
-        }
-      ],
-      getting_started: [
-	      {
-	        heading: 'Introductory Materials',
-          state: 'help.getting-started.introductory-materials'
-        },
-        {
-          heading: 'Example Activities',
-          state: 'help.getting-started.example-activities'
-        },
-        {
-          heading: 'Source Ideas',
-          state: 'help.getting-started.source-ideas'
-        },
-        {
-          heading: 'Monitoring',
-          state: 'help.getting-started.monitoring'
-        }
-	],
-      evidence: [
-        {
-          heading: 'Overview',
-          state: 'help.evidence.overview'
-        },
-        {
-          heading: 'Variant Origin',
-          state: 'help.evidence.variant-origin'
-        },
-        {
-          heading: 'Evidence Types',
-          state: 'help.evidence.evidence-types'
-        },
-        {
-          heading: 'Evidence Levels',
-          state: 'help.evidence.evidence-levels'
-        },
-        {
-          heading: 'Trust Ratings',
-          state: 'help.evidence.trust-ratings'
-        }
-      ],
-      variant: [
-        {
-          heading: 'Overview',
-          state: 'help.variants.overview'
-        },
-        {
-          heading: 'Variant Name',
-          state: 'help.variants.naming'
-        },
-        {
-          heading: 'Variant Summary',
-          state: 'help.variants.summary'
-        },
-        {
-          heading: 'Variant Type',
-          state: 'help.variants.type'
-        },
-        {
-          heading: 'Variant Coordinates',
-          state: 'help.variants.coordinates'
-        }
-      ],
-      gene: [
-        {
-          heading: 'Overview',
-          state: 'help.genes.overview'
-        },
-        {
-          heading: 'Gene Summary',
-          state: 'help.genes.summary'
-        }
-      ],
-      variant_group: [
-        {
-          heading: 'Overview',
-          state: 'help.variant-groups.overview'
-        },
-        {
-          heading: 'Variant Group Summary',
-          state: 'help.variant-groups.summary'
-        },
-        {
-          heading: 'Create a Variant Group',
-          state: 'help.variant-groups.creating'
-        },
-        {
-          heading: 'Add to a Variant Group',
-          state: 'help.variant-groups.adding'
-        }
-      ]
+      main: menuItems.main,
+      getting_started: menuItems.getting_started,
+      evidence: menuItems.evidence,
+      variant: menuItems.variant,
+      gene: menuItems.gene,
+      variant_group: menuItems.variant_group
     };
     vm.imgPopup = function imgPopup() {
       $modal.open({
