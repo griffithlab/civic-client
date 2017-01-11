@@ -29,7 +29,69 @@
                                       DrugSuggestions,
                                       AddEvidenceViewOptions,
                                       formConfig,
-                                      _) {
+                                      _,
+                                      ConfigService) {
+    var descriptions = ConfigService.evidenceAttributeDescriptions;
+
+    var make_obj = function(val, lbl) {
+      return { value: val, label: lbl };
+    }
+
+    // make options for pull down
+    var make_options = function(obj) {
+      var options = [];
+      var keys = Object.keys(obj);
+      for (var i = 0; i < keys.length; i++) {
+        var new_obj = make_obj(keys[i], keys[i]);
+        options.push(new_obj);
+      }
+      return options;
+    }
+
+    // make options for evidence level
+    var el_options = function(obj) {
+      var options = [];
+      var keys = Object.keys(obj);
+      for (var i = 0; i < keys.length; i++) {
+        var new_obj = make_obj(keys[i], keys[i] + " - " + obj[keys[i]]);
+        options.push(new_obj);
+      }
+      return options;
+    }
+
+    // make options for clinical significance
+    var cs_options = function(obj) {
+      var options = [];
+      var keys = Object.keys(obj);
+      for (var i = 0; i < keys.length; i++) {
+        var subkeys = Object.keys(obj[keys[i]]);
+        for (var j = 0; j < subkeys.length; j++){
+          var new_obj = { type: keys[i], value: subkeys[j], label: subkeys[j] };
+          options.push(new_obj);
+        }
+      }
+      return options;
+    }
+
+    // merge two objects, obj and src
+    var extend = function(obj, src) {
+      Object.keys(src).forEach(function(key) { obj[key] = src[key]; });
+      return obj;
+    }
+
+    // reduce depth of object tree by 1; by merging properties of properties of obj
+    var merge_props = function(obj) {
+      var new_obj = {};
+      Object.keys(obj).forEach(function(key) { extend(new_obj, obj[key]) });
+      return new_obj;
+    }
+
+    //handle labels for rating template options
+    function ratingLabel(index){
+      return index + " - " + descriptions.rating[index].replace(' - ','<br/>');
+    }
+
+    var help = ConfigService.evidenceHelpText;
     var vm = $scope.vm = {};
 
     vm.evidenceModel = Evidence;
@@ -114,7 +176,7 @@
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.entrez_id = $model.entrez_id',
-          helpText: 'Entrez Gene name (e.g. BRAF). Gene name must be known to the Entrez database.',
+          helpText: help['Gene Entrez Name'],
           data: {
             entrez_id: '--',
             typeaheadSearch: function(val) {
@@ -152,7 +214,7 @@
           required: true,
           value: 'vm.newEvidence.variant',
           minLength: 32,
-          helpText: 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).',
+          helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
           editable: true
@@ -186,7 +248,7 @@
           data: {
             description: '--'
           },
-          helpText: 'PubMed ID for the publication associated with the evidence statement (e.g. 23463675)'
+          helpText: help['Pubmed ID']
         },
         modelOptions: {
           updateOn: 'default blur',
@@ -281,26 +343,13 @@
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
-          options: [
-            { value: '', label: 'Please select a Variant Origin' },
-            { value: 'Somatic Mutation', label: 'Somatic Mutation'},
-            { value: 'Germline Mutation', label: 'Germline Mutation' },
-            { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
-            { value: 'Unknown', label: 'Unknown' },
-            { value: 'N/A', label: 'N/A' },
-          ],
+          options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Origin of variant',
+          helpText: help['Variant Origin'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Somatic Mutation': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
-              'Germline Mutation': 'Variant is a mutation, found in every cell, not restricted to tumor/diseased cells, is expected to have arisen de novo in the germ cells responsible for the current generation or only very recent generations (e.g., close family members), and is not thought to exist in the population at large.',
-              'Germline Polymorphism': 'Variant is found in every cell, not restricted to tumor/diseased cells, and thought to represent common (or relatively rare) variation in the population at large.',
-              'Unknown': 'The variant origin is uncertain based on the available evidence.',
-              'N/A': 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concepts of variant origin.'
-            }
+            attributeDefinitions: descriptions.variant_origin
           },
           onChange: function(value, options) {
             // set attribute definition
@@ -317,7 +366,7 @@
           value: 'vm.newEvidence.doid',
           required: true,
           minLength: 32,
-          helpText: 'Please enter a disease name. If you are unable to locate the disease in the dropdown, please check the \'Could not find disease\' checkbox below and enter the disease in the field that appears.',
+          helpText: help['Disease'],
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.doid = $model.doid',
           templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
@@ -361,7 +410,7 @@
           label: 'Disease Name',
           value: 'vm.newEvidence.disease_name',
           minLength: 32,
-          helpText: 'Enter the name of the disease here.'
+          helpText: help['Disease Name']
         },
         hideExpression: '!model.noDoid'
       },
@@ -373,7 +422,7 @@
           label: 'Evidence Statement',
           value: 'vm.newEvidence.description',
           minLength: 32,
-          helpText: 'Description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.'
+          helpText: help['Evidence Statement']
         }
       },
       {
@@ -384,13 +433,7 @@
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [
-            { value: '', label: 'Please select an Evidence Type' },
-            { value: 'Predictive', label: 'Predictive' },
-            { value: 'Diagnostic', label: 'Diagnostic' },
-            { value: 'Prognostic', label: 'Prognostic' },
-            { value: 'Predisposing', label: 'Predisposing' }
-          ],
+          options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type)),
           onChange: function(value, options, scope) {
             // reset clinical_significance, as its options will change
             scope.model.clinical_significance = '';
@@ -408,15 +451,10 @@
               edField.templateOptions.data.updateDefinition(null, edField, scope);
             }
           },
-          helpText: 'Type of clinical outcome associated with the evidence statement.',
+          helpText: help['Evidence Type'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-              'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
-              'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
-              'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease'
-            }
+            attributeDefinitions: descriptions.evidence_type
           }
         }
       },
@@ -427,31 +465,17 @@
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.newEvidence.rating',
-          options: [
-            { value: '', label: 'Please select an Evidence Level' },
-            { value: 'A', label: 'A - Validated'},
-            { value: 'B', label: 'B - Clinical'},
-            { value: 'C', label: 'C - Case Study'},
-            { value: 'D', label: 'D - Preclinical'},
-            { value: 'E', label: 'E - Inferential'}
-          ],
+          options: ([{ value: '', label: 'Please select an Evidence Level' }].concat(el_options(descriptions.evidence_level_brief))),
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Type of study performed to produce the evidence statement',
+          helpText: help['Evidence Level'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              A: 'Proven/consensus association in human medicine',
-              B: 'Clinical trial or other primary patient data supports association',
-              C: 'Individual case reports from clinical journals',
-              D: 'In vivo or in vitro models support association',
-              E: 'Indirect evidence'
-            }
+            attributeDefinitions: descriptions.evidence_level
           },
           onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
-
         }
       },
       {
@@ -461,34 +485,13 @@
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.newEvidence.evidence_direction',
-          options: [
-            { value: '', label: 'Please select an Evidence Direction' },
-            { value: 'Supports', label: 'Supports'},
-            { value: 'Does Not Support', label: 'Does Not Support' }
-          ],
+          options: [{ value: '', label: 'Please select an Evidence Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
+          helpText: help['Evidence Direction'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Predictive': {
-                'Supports': 'The experiment or study supports this variant\'s response to a drug',
-                'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between the variant and a drug'
-              },
-              'Diagnostic': {
-                'Supports': 'The experiment or study supports variant\'s impact on the diagnosis of disease or subtype',
-                'Does Not Support': 'The experiment or study does not support the variant\'s impact on diagnosis of disease or subtype'
-              },
-              'Prognostic': {
-                'Supports': 'The experiment or study supports a variant\'s impact on prognostic outcome',
-                'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
-              },
-            'Predisposing': {
-              'Supports': 'The experiment or study supports a variant\'s role in conferring susceptibility to a disease',
-              'Does Not Support': 'The experiment or study does not support a variant\'s role in conferring susceptibility to a disease'
-            }
-            },
+            attributeDefinitions: descriptions.evidence_direction,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
@@ -511,57 +514,15 @@
           label: 'Clinical Significance',
           required: true,
           value: 'vm.newEvidence.clinical_significance',
-          clinicalSignificanceOptions: [ // stores unmodified options array for expressionProperties
-            { type: 'default', value: '', label: 'Please select a Clinical Significance' },
-            { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
-            { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
-            { type: 'Predictive', value: 'Adverse Response', label: 'Adverse Response' },
-            { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
-            { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
-            { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
-            { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
-            { type: 'Predisposing', value: 'Pathogenic', label: 'Pathogenic' },
-            { type: 'Predisposing', value: 'Likely Pathogenic', label: 'Likely Pathogenic' },
-            { type: 'Predisposing', value: 'Benign', label: 'Benign' },
-            { type: 'Predisposing', value: 'Likely Benign', label: 'Likely Benign' },
-            { type: 'Predisposing', value: 'Uncertain Significance', label: 'Uncertain Significance' },
-            { type: 'N/A', value: 'N/A', label: 'N/A' }
-          ],
+          // stores unmodified options array for expressionProperties
+          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [ // actual options displayed in the select, modified by expressionProperties
-            { type: 'default', value: '', label: 'Please select a Clinical Significance' },
-            { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
-            { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
-            { type: 'Predictive', value: 'Adverse Response', label: 'Adverse Response' },
-            { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
-            { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
-            { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
-            { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
-            { type: 'Predisposing', value: 'Pathogenic', label: 'Pathogenic' },
-            { type: 'Predisposing', value: 'Likely Pathogenic', label: 'Likely Pathogenic' },
-            { type: 'Predisposing', value: 'Benign', label: 'Benign' },
-            { type: 'Predisposing', value: 'Likely Benign', label: 'Likely Benign' },
-            { type: 'Predisposing', value: 'Uncertain Significance', label: 'Uncertain Significance' },
-            { type: 'N/A', value: 'N/A', label: 'N/A' }
-          ],
-          helpText: 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
+          // actual options displayed in the select, modified by expressionProperties
+          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
+          helpText: help['Clinical Significance'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Sensitivity': 'Variant is associated with positive response to treatment ',
-              'Resistance or Non-Response': 'Variant is associated with negative treatment response',
-              'Adverse Response': 'Subject exhibits an adverse response to drug treatment',
-              'Better Outcome': 'Demonstrates better than expected clinical outcome',
-              'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
-              'Positive': 'Associated with diagnosis of disease or subtype',
-              'Negative': 'Variant is associated with the lack of diagnosis of disease or subtype',
-              'Pathogenic': 'Very strong evidence the variant is pathogenic',
-              'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic',
-              'Benign': 'Very strong evidence the variant is benign',
-              'Likely Benign': 'Not expected to have a major effect on disease',
-              'Uncertain Significance': 'The variant fullfills the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
-              'N/A': 'Variant does not inform clinical action'
-            },
+            attributeDefinitions: merge_props(descriptions.clinical_significance),
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
@@ -611,7 +572,7 @@
               }
             }
           },
-          helpText: 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).'
+          helpText: help['Drug Names']
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return  scope.model.evidence_type !== 'Predictive';
@@ -624,22 +585,13 @@
         templateOptions: {
           label: 'Drug Interaction Type',
           value: 'vm.newEvidence.drug_interaction_type',
-          options: [
-            { type: 'default', value: '', label: 'Please select a Drug Interaction Type' },
-            { value: 'Combination', label: 'Combination'},
-            { value: 'Sequential', label: 'Sequential'},
-            { value: 'Substitutes', label: 'Substitutes'}
-          ],
+          options: [{ type: 'default', value: '', label: 'Please select a Drug Interaction Type' }].concat(make_options(descriptions.drug_interaction_type)),
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
+          helpText: help['Drug Interaction Type'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: {
-              'Combination': 'The drugs listed were used in as part of a combination therapy approach',
-              'Sequential': 'The drugs listed were used at separate timepoints in the same treatment plan',
-              'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
-            }
+            attributeDefinitions: descriptions.drug_interaction_type
           },
           onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
@@ -648,7 +600,6 @@
         hideExpression: function($viewValue, $modelValue, scope) {
           return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
           _.without(scope.model.drugs, '').length > 1);
-
         }
       },
       {
@@ -656,18 +607,17 @@
         type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
-
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
-            { value: 1, label: '1 - Poor<br/>Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims.' },
-            { value: 2, label: '2 - Adequate<br/>Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.' },
-            { value: 3, label: '3 - Average<br/>Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.' },
-            { value: 4, label: '4 - Good<br/>Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.' },
-            { value: 5, label: '5 - Excellent<br/>Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'}
+            { value: 1, label: ratingLabel(1) },
+            { value: 2, label: ratingLabel(2) },
+            { value: 3, label: ratingLabel(3) },
+            { value: 4, label: ratingLabel(4) },
+            { value: 5, label: ratingLabel(5) }
           ],
           valueProp: 'value',
           labelProp: 'label',
-          helpText: '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>'
+          helpText: help['Rating']
         }
       },
       {
@@ -680,7 +630,7 @@
         },
         templateOptions: {
           label: 'Originating source suggestion supports the creation of additional evidence items',
-          helpText: 'Check this box if you wish the originating source suggestion to keep its un-curated status. Otherwise, it will be marked as curated and removed from the source suggestion queues.'
+          helpText: help['keepSourceStatus']
         }
       },
       {
@@ -699,7 +649,7 @@
           currentUser: Security.currentUser,
           value: 'text',
           required: false,
-          helpText: 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.'
+          helpText: help['Additional Comments']
         },
         validators: {
           length: {
