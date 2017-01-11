@@ -104,7 +104,10 @@
   }
 
   // @ngInject
-  function SourcesService(SourcesResource) {
+  function SourcesService($cacheFactory, SourcesResource) {
+    var cache = $cacheFactory.get('$http');
+
+
     var item = {};
     var collection = [];
     var suggested = [];
@@ -122,7 +125,11 @@
       suggest: suggest,
       getSuggested: getSuggested,
       setStatus: setStatus,
-      queryComments: queryComments
+      queryComments: queryComments,
+      submitComment: submitComment,
+      getComment: getComment,
+      updateComment: updateComment,
+      deleteComment: deleteComment
     };
 
     function query() {

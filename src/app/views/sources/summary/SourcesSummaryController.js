@@ -4,7 +4,7 @@
     .controller('SourcesSummaryController', SourcesSummaryController);
 
   // @ngInject
-  function SourcesSummaryController($scope, _, source, Sources, Security, Search) {
+  function SourcesSummaryController($scope, _, source, comments, Sources, Security, Search) {
     console.log('SourcesSummaryController called.');
     var vm = $scope.vm = {};
 
@@ -35,6 +35,9 @@
     }
 
     vm.source = parseSource(source);
+    vm.source.submitComment = Sources.submitComment;
+    vm.source.deleteComment = Sources.deleteComment;
+    vm.comments = Sources.data.comments;
 
     // fetch evidence items associated w/ source
     var query = {
