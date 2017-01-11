@@ -82,13 +82,9 @@
 
       // Logout the current user and redirect
       logout: function(redirectTo) {
-        console.log("called logout");
         $http.get('/api/sign_out').then(function() { // success
-          console.log("called get");
           service.currentUser = null;
-          console.log("set currentUser null");
-          redirect(redirectTo);
-          console.log("redirected");
+          $state.go('home');
         }, function(response) { // failure
           $log.warn('COULD NOT LOG OUT' + JSON.stringify(response));
         });
