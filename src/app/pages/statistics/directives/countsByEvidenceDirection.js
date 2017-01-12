@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .directive('countsByEvidenceLevel', countsByEvidenceLevel)
-    .controller('countsByEvidenceLevelController', countsByEvidenceLevelController);
+    .directive('countsByEvidenceDirection', countsByEvidenceDirection)
+    .controller('countsByEvidenceDirectionController', countsByEvidenceDirectionController);
 
   // @ngInject
-  function countsByEvidenceLevel() {
+  function countsByEvidenceDirection() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -13,19 +13,19 @@
         palette: '='
       },
       template: '<div class="chart-pie"></div>',
-      controller: countsByEvidenceLevelController
+      controller: countsByEvidenceDirectionController
     };
     return directive;
   }
 
   // @ngInject
-  function countsByEvidenceLevelController($scope,
+  function countsByEvidenceDirectionController($scope,
                                           $rootScope,
                                           $element,
                                           d3,
                                           dimple,
                                           _) {
-    console.log('countsByEvidenceLevel loaded.');
+    console.log('countsByEvidenceDirection loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
@@ -49,12 +49,12 @@
     // chart.setBounds(20, 20, 460, 360);
     var p = chart.addMeasureAxis("p", "Count");
     p.tickFormat = d3.format(",.0f");
-    chart.addSeries("Level", dimple.plot.pie);
+    chart.addSeries("Direction", dimple.plot.pie);
     chart.addLegend(240, 20, 90, 300, "left");
 
     chart.data = _.map(options.data, function(key, value) {
       return {
-        Level: _.capitalize(value),
+        Direction: _.capitalize(value),
         Count: key
       };
     });

@@ -56,6 +56,13 @@
         title: 'Counts by Evidence Direction',
         margin: margins,
         data: data.counts_by_evidence_direction
+      },
+      countsByVariantOrigin: {
+        width: chartWidth,
+        height: chartHeight,
+        title: 'Counts by Variant Origin',
+        margin: margins,
+        data: data.counts_by_variant_origin
       }
     };
   }
