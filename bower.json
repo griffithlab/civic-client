@@ -25,8 +25,7 @@
     "angular-elastic": "~2.5.1",
     "please-wait": "~0.0.5",
     "ment.io": "~0.9.24",
-    "vega": "^2.6.5",
-    "vega-embed": "^2.2.0"
+    "dimple": "^2.3.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0"
