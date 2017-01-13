@@ -1,6 +1,10 @@
-0.0.6 / 2016-09-29
+0.0.7 / 2017-01-12
 ==================
-* improved documentation
+* improved documentation with new 'Getting Started' section, figure updates, more extensive documentation
+* added Statistics page showing various Evidence metrics
+* Source summary pages now provide a comments thread
+* ConfigService now contains all attribute help strings for add/edit forms
+* signout now returns users to home page, mooting various sign-out UI state issues
 
 0.0.6 / 2016-09-29
 ==================
