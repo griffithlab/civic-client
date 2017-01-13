@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="name">
-          <h3>Statistics</h3>
+          <h3>Evidence Statistics</h3>
         </div>
       </div>
     </div>
@@ -31,15 +31,22 @@
       options="vm.options.countsByVariantOrigin">
       </counts-by-variant-origin>
     </div>
-    <!-- <div class="col-xs-4" > -->
-    <!-- <counts-by-evidence-level -->
-    <!-- options="vm.options.countsByEvidenceLevel"> -->
-    <!-- </counts-by-evidence-level> -->
-    <!-- </div> -->
-    <!-- <div class="col-xs-4" > -->
-    <!-- <counts-by-evidence-direction -->
-    <!-- options="vm.options.countsByEvidenceDirection"> -->
-    <!-- </counts-by-evidence-direction> -->
-    <!-- </div> -->
+    <div class="col-xs-4" >
+      <counts-by-clinical-significance
+          options="vm.options.countsByClinicalSignificance">
+      </counts-by-clinical-significance>
+    </div>
+    <div class="col-xs-4" >
+      <counts-by-rating
+          options="vm.options.countsByRating">
+      </counts-by-rating>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4" >
+      <counts-by-status
+      options="vm.options.countsByStatus">
+      </counts-by-status>
+    </div>
   </div>
 </div>

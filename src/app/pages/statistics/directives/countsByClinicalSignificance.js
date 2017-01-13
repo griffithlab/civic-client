@@ -1,11 +1,12 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .directive('countsByEvidenceDirection', countsByEvidenceDirection)
-    .controller('countsByEvidenceDirectionController', countsByEvidenceDirectionController);
+    .directive('countsByClinicalSignificance', countsByClinicalSignificance)
+    .controller('countsByClinicalSignificanceController',
+                countsByClinicalSignificanceController);
 
   // @ngInject
-  function countsByEvidenceDirection() {
+  function countsByClinicalSignificance() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -13,19 +14,19 @@
         palette: '='
       },
       template: '<div class="chart-pie"></div>',
-      controller: countsByEvidenceDirectionController
+      controller: countsByClinicalSignificanceController
     };
     return directive;
   }
 
   // @ngInject
-  function countsByEvidenceDirectionController($scope,
+  function countsByClinicalSignificanceController($scope,
                                           $rootScope,
                                           $element,
                                           d3,
                                           dimple,
                                           _) {
-    console.log('countsByEvidenceDirection loaded.');
+    console.log('countsByClinicalSignificance loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
@@ -48,12 +49,12 @@
 
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
-    chart.addSeries('Direction', dimple.plot.pie);
-    chart.addLegend(240, 20, 90, 300, 'left');
+    chart.addSeries('Clinical Significance', dimple.plot.pie);
+    chart.addLegend(270, 20, 90, 300, 'left');
 
     chart.data = _.map(options.data, function(key, value) {
       return {
-        Direction: _.capitalize(value),
+        'Clinical Significance': _.capitalize(value),
         Count: key
       };
     });

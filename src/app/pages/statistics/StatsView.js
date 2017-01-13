@@ -63,7 +63,30 @@
         title: 'Counts by Variant Origin',
         margin: margins,
         data: data.counts_by_variant_origin
+      },
+      countsByClinicalSignificance: {
+        width: chartWidth,
+        height: chartHeight,
+        title: 'Counts by Clinical Significance',
+        margin: margins,
+        data: data.counts_by_clinical_significance
+      },
+      countsByRating: {
+        width: chartWidth,
+        height: chartHeight,
+        title: 'Counts by Rating',
+        margin: margins,
+        data: data.counts_by_rating
+      },
+      countsByStatus: {
+        width: chartWidth,
+        height: chartHeight,
+        title: 'Counts by Status',
+        margin: margins,
+        data: data.counts_by_status
       }
+
+
     };
   }
 })();
