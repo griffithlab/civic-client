@@ -47,10 +47,16 @@
     var chart = new dimple.chart(svg);
 
     // chart.setBounds(20, 20, 460, 360);
-    var p = chart.addMeasureAxis("p", "Count");
-    p.tickFormat = d3.format(",.0f");
-    chart.addSeries("Origin", dimple.plot.pie);
-    chart.addLegend(260, 20, 90, 300, "left");
+    var p = chart.addMeasureAxis('p', 'Count');
+    p.tickFormat = d3.format(',.0f');
+    chart.addSeries('Origin', dimple.plot.pie);
+    var l = chart.addLegend(260, 20, 90, 300, 'left');
+
+    // override legend sorting
+    l._getEntries_old = l._getEntries;
+    l._getEntries = function() {
+      return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
+    };
 
     chart.data = _.map(options.data, function(key, value) {
       return {
