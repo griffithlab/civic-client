@@ -47,6 +47,10 @@
           state: 'meetings'
         },
         {
+          label: 'Statistics',
+          state: 'statistics'
+        },
+        {
           label: 'Contact',
           state: 'contact'
         }
