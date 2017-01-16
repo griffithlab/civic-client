@@ -50,9 +50,10 @@
 
     chart.addMeasureAxis('x', 'Count');
     var y = chart.addCategoryAxis('y', 'Drug');
-    y.addOrderRule('Drug');
+    y.addOrderRule('Count');
     chart.addSeries('Level', dimple.plot.bar);
     var l = chart.addLegend(340, 10, 510, 20, 'left');
+    chart.draw();
 
     // override legend sorting
     l._getEntries_old = l._getEntries;

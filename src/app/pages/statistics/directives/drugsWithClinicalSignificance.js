@@ -50,9 +50,9 @@
 
     chart.addMeasureAxis('x', 'Count');
     var y = chart.addCategoryAxis('y', 'Drug');
-    y.addOrderRule('Drug');
+    y.addOrderRule('Count');
     chart.addSeries('Clinical Significance', dimple.plot.bar);
-    var l = chart.addLegend(340, 10, 510, 20, 'left');
+    var l = chart.addLegend(350, 350, 300, 500, 'left');
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
@@ -62,9 +62,11 @@
 
     chart.data =  _.chain(options.data)
       .map((val, key) => {
-        return _.map(val, (v,k) =>{
-          return { Drug: key, 'Clinical Significance': _.capitalize(k), Count: v };
-        });
+        return _.chain(val)
+          .map(function(v,k) {
+            return { Drug: key, 'Clinical Significance': _.capitalize(k), Count: v };
+          })
+          .value();
       })
       .flatten()
       .value();
