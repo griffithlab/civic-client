@@ -84,6 +84,13 @@
       left: 150
     };
 
+    var barMarginsWide = {
+      top: 25,
+      right: 10,
+      bottom: 30,
+      left: 250
+    };
+
     vm.options = {
       countsByEvidenceType: {
         width: pieChartWidth,
@@ -147,6 +154,20 @@
         title: 'Top Drugs with Clinical Significance',
         margin: barMargins, 
         data: data.top_drugs_with_clinical_significance
+      },
+      diseasesWithLevels: {
+        width: 1110,
+        height: barChartHeight,
+        title: 'Top Diseases with Levels',
+        margin: barMarginsWide,
+        data: data.top_diseases_with_levels
+      },
+      diseasesWithTypes: {
+        width: 1110,
+        height: barChartHeight,
+        title: 'Top Diseases with Types',
+        margin: barMarginsWide,
+        data: data.top_diseases_with_types
       }
     };
   }
