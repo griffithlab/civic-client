@@ -168,6 +168,20 @@
         title: 'Top Diseases with Types',
         margin: barMarginsWide,
         data: data.top_diseases_with_types
+      },
+      sourcesWithLevels: {
+        width: 1110,
+        height: barChartHeight,
+        title: 'Top Sources with Levels',
+        margin: barMarginsWide,
+        data: data.top_journals_with_levels
+      },
+      sourcesWithTypes: {
+        width: 1110,
+        height: barChartHeight,
+        title: 'Top Sources with Types',
+        margin: barMarginsWide,
+        data: data.top_journals_with_types
       }
     };
   }
