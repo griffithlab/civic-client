@@ -131,15 +131,25 @@
         width: barChartWidth,
         height: barChartHeight,
         title: 'Top Drugs with Levels',
-        margin: margins,
+        margin:  {
+          top: 30,
+          right: 0,
+          bottom: 30,
+          left: 150
+        },
         data: data.top_drugs_with_levels
       },
-      drugsWithLevels: {
+      drugsWithClinicalSignificance: {
         width: barChartWidth,
         height: barChartHeight,
-        title: 'Top Drugs with Levels',
-        margin: margins,
-        data: data.top_drugs_with_levels
+        title: 'Top Drugs with Clinical Significance',
+        margin:  {
+          top: 30,
+          right: 0,
+          bottom: 30,
+          left: 150
+        },
+        data: data.top_drugs_with_clinical_significance
       }
     };
   }

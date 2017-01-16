@@ -46,6 +46,7 @@
 
     var chart = new dimple.chart(svg);
 
+    chart.setMargins(options.margin.left, options.margin.top, options.margin.right, options.margin.bottom);
     // var p = chart.addMeasureAxis('p', 'Count');
     // p.tickFormat = d3.format(',.0f');
     // chart.addSeries('Origin', dimple.plot.pie);
@@ -55,7 +56,7 @@
     var y = chart.addCategoryAxis('y', 'Drug');
     y.addOrderRule('Drug');
     chart.addSeries('Level', dimple.plot.bar);
-    var l = chart.addLegend(300, 10, 510, 20, 'left');
+    var l = chart.addLegend(340, 10, 510, 20, 'left');
     chart.draw();
 
     // override legend sorting
