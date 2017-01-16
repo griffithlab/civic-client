@@ -61,7 +61,7 @@
     };
 
     chart.data =  _.chain(options.data)
-      .map((val, key) => {
+      .map(function(val, key){
         return _.chain(val)
           .map(function(v,k) {
             return { Disease: key, 'Level': _.capitalize(k), Count: v };

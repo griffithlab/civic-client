@@ -62,8 +62,8 @@
     };
 
     chart.data =  _.chain(options.data)
-      .map((val, key) => {
-        return _.map(val, (v,k) =>{ return { Drug: key, Level: _.capitalize(k), Count: v }; });
+      .map(function(val, key){
+        return _.map(val, function(v,k){ return { Drug: key, Level: _.capitalize(k), Count: v }; });
       })
       .flatten()
       .value();
