@@ -48,7 +48,7 @@
         },
         {
           label: 'Statistics',
-          state: 'statistics'
+          state: 'statistics.evidence'
         },
         {
           label: 'Contact',
