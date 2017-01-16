@@ -1,0 +1,76 @@
+(function() {
+  'use strict';
+  angular.module('civic.pages')
+    .directive('drugsWithClinicalSignificance', drugsWithClinicalSignificance)
+    .controller('drugsWithClinicalSignificanceController', drugsWithClinicalSignificanceController);
+
+  // @ngInject
+  function drugsWithClinicalSignificance() {
+    var directive = {
+      restrict: 'E',
+      scope: {
+        options: '=',
+        palette: '='
+      },
+      template: '<div class="bar-chart"></div>',
+      controller: drugsWithClinicalSignificanceController
+    };
+    return directive;
+  }
+
+  // @ngInject
+  function drugsWithClinicalSignificanceController($scope,
+                                          $rootScope,
+                                          $element,
+                                          d3,
+                                          dimple,
+                                          _) {
+    console.log('drugsWithClinicalSignificance loaded.');
+    var options = $scope.options;
+
+    var svg = d3.select($element[0])
+        .append('svg')
+      .attr('width', options.width)
+      .attr('height', options.height)
+      .attr('id', options.id)
+      .style('overflow', 'visible');
+
+    // title
+    svg.append('text')
+      .attr('x', options.margin.left)
+      .attr('y', options.margin.top - 10)
+      .style('text-anchor', 'left')
+      .style('font-family', 'sans-serif')
+      .style('font-weight', 'bold')
+      .text(options.title);
+
+    var chart = new dimple.chart(svg);
+
+    chart.setMargins(options.margin.left, options.margin.top, options.margin.right, options.margin.bottom);
+
+    chart.addMeasureAxis('x', 'Count');
+    var y = chart.addCategoryAxis('y', 'Drug');
+    y.addOrderRule('Drug');
+    chart.addSeries('Clinical Significance', dimple.plot.bar);
+    var l = chart.addLegend(340, 10, 510, 20, 'left');
+
+    // override legend sorting
+    l._getEntries_old = l._getEntries;
+    l._getEntries = function() {
+      return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
+    };
+
+    chart.data =  _.chain(options.data)
+      .map((val, key) => {
+        return _.map(val, (v,k) =>{
+          return { Drug: key, 'Clinical Significance': _.capitalize(k), Count: v };
+        });
+      })
+      .flatten()
+      .value();
+
+    chart.draw();
+
+    $scope.chart = chart;
+  }
+})();

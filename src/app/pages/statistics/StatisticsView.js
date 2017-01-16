@@ -67,14 +67,21 @@
     var pieChartWidth = 290,
         pieChartHeight = 290;
 
-    var barChartWidth = 550,
-        barChartHeight = 550;
+    var barChartWidth = 540,
+        barChartHeight = 540;
 
-    var margins = {
+    var pieMargins = {
       top: 25,
       right: 10,
       bottom: 10,
       left: 10
+    };
+
+    var barMargins = {
+      top: 25,
+      right: 10,
+      bottom: 30,
+      left: 150
     };
 
     vm.options = {
@@ -82,73 +89,63 @@
         width: pieChartWidth,
         height: pieChartHeight,
         title: 'Counts by Evidence Type',
-        margin: margins,
+        margin: pieMargins,
         data: data.counts_by_evidence_type
       },
       countsByEvidenceLevel: {
         width: pieChartWidth,
         height: pieChartHeight,
         title: 'Counts by Evidence Level',
-        margin: margins,
+        margin: pieMargins,
         data: data.counts_by_evidence_level
       },
       countsByEvidenceDirection: {
         width: pieChartWidth,
         height: pieChartHeight,
         title: 'Counts by Evidence Direction',
-        margin: margins,
+        margin: pieMargins,
         data: data.counts_by_evidence_direction
       },
       countsByVariantOrigin: {
         width: pieChartWidth,
         height: pieChartHeight,
         title: 'Counts by Variant Origin',
-        margin: margins,
+        margin: pieMargins,
         data: data.counts_by_variant_origin
       },
       countsByClinicalSignificance: {
         width: pieChartWidth,
         height: pieChartHeight,
         title: 'Counts by Clinical Significance',
-        margin: margins,
+        margin: pieMargins,
         data: data.counts_by_clinical_significance
       },
       countsByRating: {
         width: pieChartWidth,
         height: pieChartHeight,
         title: 'Counts by Rating',
-        margin: margins,
+        margin: pieMargins,
         data: data.counts_by_rating
       },
       countsByStatus: {
         width: pieChartWidth,
         height: pieChartHeight,
         title: 'Counts by Status',
-        margin: margins,
+        margin: pieMargins,
         data: data.counts_by_status
       },
       drugsWithLevels: {
         width: barChartWidth,
         height: barChartHeight,
         title: 'Top Drugs with Levels',
-        margin:  {
-          top: 30,
-          right: 0,
-          bottom: 30,
-          left: 150
-        },
+        margin: barMargins, 
         data: data.top_drugs_with_levels
       },
       drugsWithClinicalSignificance: {
         width: barChartWidth,
         height: barChartHeight,
         title: 'Top Drugs with Clinical Significance',
-        margin:  {
-          top: 30,
-          right: 0,
-          bottom: 30,
-          left: 150
-        },
+        margin: barMargins, 
         data: data.top_drugs_with_clinical_significance
       }
     };

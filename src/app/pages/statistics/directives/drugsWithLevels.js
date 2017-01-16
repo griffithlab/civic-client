@@ -47,17 +47,12 @@
     var chart = new dimple.chart(svg);
 
     chart.setMargins(options.margin.left, options.margin.top, options.margin.right, options.margin.bottom);
-    // var p = chart.addMeasureAxis('p', 'Count');
-    // p.tickFormat = d3.format(',.0f');
-    // chart.addSeries('Origin', dimple.plot.pie);
-    // var l = chart.addLegend(260, 20, 90, 300, 'left');
 
     chart.addMeasureAxis('x', 'Count');
     var y = chart.addCategoryAxis('y', 'Drug');
     y.addOrderRule('Drug');
     chart.addSeries('Level', dimple.plot.bar);
     var l = chart.addLegend(340, 10, 510, 20, 'left');
-    chart.draw();
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
@@ -67,7 +62,7 @@
 
     chart.data =  _.chain(options.data)
       .map((val, key) => {
-        return _.map(val, (v,k) =>{ return { Drug: key, Level: _.capitalize(k), Count: v } })
+        return _.map(val, (v,k) =>{ return { Drug: key, Level: _.capitalize(k), Count: v }; });
       })
       .flatten()
       .value();
