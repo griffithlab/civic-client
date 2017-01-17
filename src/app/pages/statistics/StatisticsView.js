@@ -67,7 +67,7 @@
     var pieChartWidth = 290,
         pieChartHeight = 290;
 
-    var barChartWidth = 540,
+    var barChartWidth = 1110,
         barChartHeight = 540;
 
     var pieMargins = {
@@ -145,42 +145,42 @@
         width: barChartWidth,
         height: barChartHeight,
         title: 'Top Drugs with Levels',
-        margin: barMargins, 
+        margin: barMargins,
         data: data.top_drugs_with_levels
       },
       drugsWithClinicalSignificance: {
         width: barChartWidth,
         height: barChartHeight,
         title: 'Top Drugs with Clinical Significance',
-        margin: barMargins, 
+        margin: barMargins,
         data: data.top_drugs_with_clinical_significance
       },
       diseasesWithLevels: {
-        width: 1110,
+        width: barChartWidth,
         height: barChartHeight,
         title: 'Top Diseases with Levels',
         margin: barMarginsWide,
         data: data.top_diseases_with_levels
       },
       diseasesWithTypes: {
-        width: 1110,
+        width: barChartWidth,
         height: barChartHeight,
         title: 'Top Diseases with Types',
         margin: barMarginsWide,
         data: data.top_diseases_with_types
       },
       sourcesWithLevels: {
-        width: 1110,
+        width: barChartWidth,
         height: barChartHeight,
         title: 'Top Sources with Levels',
-        margin: barMarginsWide,
+        margin: barMargins,
         data: data.top_journals_with_levels
       },
       sourcesWithTypes: {
-        width: 1110,
+        width: barChartWidth,
         height: barChartHeight,
         title: 'Top Sources with Types',
-        margin: barMarginsWide,
+        margin: barMargins,
         data: data.top_journals_with_types
       }
     };
