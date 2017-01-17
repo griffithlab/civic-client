@@ -3,56 +3,56 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
+@tabPaddingH: .5em;
+@tabPaddingV: .25em;
+
 .variantMenu {
   .clearfix();
   .fullBleed();
   border-bottom-right-radius: @border-radius-large;
-  min-height: 30em;
   padding-top: 3px; // get the bottom edges of top .title to align w/ bottom of variant tab header
   padding-bottom: 2*@contentPadding;
-  @tabPadding: .5em;
 
   > a.btn {
     margin-top: 1.5 * @contentPadding;
   }
 
   .title {
-    .leftBleed();
-    padding: @tabPadding;
+    .fullBleed();
+    padding: @tabPaddingV @tabPaddingH;
     background-color: @pageBackground3;
-    border-top-right-radius: @border-radius-base;
-    border-bottom-right-radius: @border-radius-base;
   }
 
   .sub-title {
     font-weight: bold;
     text-decoration: underline;
-    padding: @tabPadding;
+    padding: @tabPaddingV @tabPaddingH;
   }
 
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-bottom: @contentPadding/2;
 
     li {
-      margin-right: -@contentPadding; // pull li background all the way to edge of adjacent ui-view
-      padding: 0;
-      margin-top: 3px;
-
+      display: inline-block;
+      margin-top: @contentPadding/2;
+      margin-right: @contentPadding/2;
       a {
         display: block;
         text-decoration: none;
-        padding: @tabPadding;
+        padding: @tabPaddingV @tabPaddingH;
         border-radius: @border-radius-base;
-        margin-right: @contentPadding;
+        background-color: @pageBackground;
 
         &:hover, &.active {
-          background-color: @pageBackground;
+          background-color: yellow;
         }
 
         &.active {
           font-weight: bold;
+          border-color: #FFF;
         }
 
         .gene-name {
@@ -64,26 +64,7 @@
       }
 
       a.active {
-        margin-right: 0;
-        padding-right: @contentPadding;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
       }
     }
-  }
-
-  ul ul li {
-    margin-right: 0;
-    a {
-      margin-left: @contentPadding/2;
-      padding-right: @contentPadding/2;
-    }
-    a.active {
-      margin-right: -@contentPadding/2;
-    }
-  }
-
-  .variant-groups {
-
   }
 }

@@ -1,41 +1,57 @@
 <div class="variantMenu {{ options.backgroundColor }}">
-  <h4 class="title"><span ng-bind="gene.name"></span></h4>
-  <ul class="variants">
-    <li ng-repeat="variant in variants|orderBy:'name'" ng-show="hasValidEvidenceItems(variant)">
-      <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
-         ng-class="{ active: variant.id == stateParams.variantId }">
-        <span ng-bind="variant.name">Variant Name</span>
-      </a>
-    </li>
-  </ul>
-  <div ng-if="variantGroups.length > 0">
-    <h4 class="title">Variant Groups</h4>
+  <div class="row" >
+    <div class="col-xs-12" >
+      <h4 class="title"><span ng-bind="gene.name"></span></h4>
+    </div>
   </div>
-  <ul class="variant-groups" ng-if="variantGroups.length > 0">
-    <li ng-repeat="variantGroup in variantGroups|orderBy:'name'">
-      <a class="sub-title"
+  <div class="row" >
+    <div class="col-xs-{{12 - (variantGroups.length * 2)}}" >
+      <ul class="variants">
+        <li ng-repeat="variant in variants|orderBy:'name'" ng-show="hasValidEvidenceItems(variant)">
+          <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
+             ng-class="{ active: variant.id == stateParams.variantId }">
+            <span ng-bind="variant.name">Variant Name</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-2 variant-group" ng-repeat="variantGroup in variantGroups | orderBy: 'name'">
+      <a class="group-title"
          ng-class="{ active: variantGroup.id == stateParams.variantGroupId }"
          ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id, '#': 'variant-group' })">
         <span ng-bind="variantGroup.name">Variant Group Name</span>
       </a>
-      <ul class="variants">
-        <li ng-repeat="variant in variantGroup.variants|orderBy:'name'" ng-show="hasValidEvidenceItems(variant)">
-          <a
-             ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
-             ng-class="{ active: variant.id == stateParams.variantId }">
-            <span ng-bind="variant.name" class="variant-name">Variant Name</span>
-            <div ng-hide="variantGroup.singleGene">
-              <span class="small gene-name">(<span ng-bind="variant.entrez_name"></span>)</span>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <a
-    ng-show="security.isAdmin || security.isEditor"
-    ng-href="{{ addVarGroupUrl }}"
-    class="btn btn-xs btn-default btn-block">
-    Add Variant Group
-  </a>
+    </div>
+  </div>
 </div>
+    <!-- <div ng-if="variantGroups.length > 0"> -->
+    <!-- <h4 class="title">Variant Groups</h4> -->
+    <!-- </div> -->
+    <!-- <ul class="variant-groups" ng-if="variantGroups.length > 0"> -->
+    <!-- <li ng-repeat="variantGroup in variantGroups|orderBy:'name'"> -->
+    <!-- <a class="sub-title" -->
+    <!-- ng-class="{ active: variantGroup.id == stateParams.variantGroupId }" -->
+    <!-- ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id, '#': 'variant-group' })"> -->
+    <!-- <span ng-bind="variantGroup.name">Variant Group Name</span> -->
+    <!-- </a> -->
+    <!-- <ul class="variants"> -->
+    <!-- <li ng-repeat="variant in variantGroup.variants|orderBy:'name'" ng-show="hasValidEvidenceItems(variant)"> -->
+    <!-- <a -->
+    <!-- ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })" -->
+    <!-- ng-class="{ active: variant.id == stateParams.variantId }"> -->
+    <!-- <span ng-bind="variant.name" class="variant-name">Variant Name</span> -->
+    <!-- <div ng-hide="variantGroup.singleGene"> -->
+    <!-- <span class="small gene-name">(<span ng-bind="variant.entrez_name"></span>)</span> -->
+    <!-- </div> -->
+    <!-- </a> -->
+    <!-- </li> -->
+    <!-- </ul> -->
+    <!-- </li> -->
+    <!-- </ul> -->
+    <!-- <a -->
+    <!-- ng-show="security.isAdmin || security.isEditor" -->
+    <!-- ng-href="{{ addVarGroupUrl }}" -->
+    <!-- class="btn btn-xs btn-default btn-block"> -->
+    <!-- Add Variant Group -->
+    <!-- </a> -->
+    <!-- </div> -->
