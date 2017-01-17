@@ -1,3 +1,7 @@
+0.0.8 / 2017-01-19
+==================
+* added Drugs, Diseases, and Sources statistics pages
+
 0.0.7 / 2017-01-12
 ==================
 * improved documentation with new 'Getting Started' section, figure updates, more extensive documentation
