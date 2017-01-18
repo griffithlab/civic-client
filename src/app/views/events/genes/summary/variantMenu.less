@@ -67,4 +67,21 @@
       }
     }
   }
+  .variant-group {
+    border-radius: @border-radius-large;
+    border: 1px solid #CCC;
+    padding: @contentPadding/2;
+    padding-bottom: 0;
+    overflow: hidden;
+    .group-title {
+      background-color: @pageBackground;
+      font-weight: bold;
+      display: block;
+      margin: -@contentPadding/2 -@contentPadding/2 @contentPadding/2 -@contentPadding/2;
+      padding: @contentPadding;
+      border-radius-top-right: @border-radius-large;
+      border-radius-top-left: @border-radius-large;
+      line-height: 1em;
+    }
+  }
 }
