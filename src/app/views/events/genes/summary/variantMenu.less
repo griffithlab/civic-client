@@ -19,7 +19,7 @@
 
   .title {
     .fullBleed();
-    padding: @tabPaddingV @tabPaddingH;
+    padding: @contentPadding/2 @contentPadding;
     background-color: @pageBackground3;
   }
 
@@ -45,14 +45,16 @@
         padding: @tabPaddingV @tabPaddingH;
         border-radius: @border-radius-base;
         background-color: @pageBackground;
+        border: 1px solid #FFF;
 
         &:hover, &.active {
-          background-color: yellow;
+          border-color: @civicPurple;
+          color: @civicPurple;
         }
 
         &.active {
           font-weight: bold;
-          border-color: #FFF;
+          text-decoration: underline;
         }
 
         .gene-name {
@@ -69,16 +71,27 @@
   }
   .variant-group {
     border-radius: @border-radius-large;
-    border: 1px solid #CCC;
+    background-color: darken(@pageBackground2, 5%);
+    // border: 1px solid #CCC;
     padding: @contentPadding/2;
     padding-bottom: 0;
     overflow: hidden;
+    border: 1px solid darken(@pageBackground2, 5%);
+
+    &.active {
+      border-color: @civicPurple !important;
+      .group-title {
+        text-decoration: underline;
+        color: @civicPurple;
+      }
+    }
     .group-title {
-      background-color: @pageBackground;
+      // background-color: @pageBackground;
       font-weight: bold;
       display: block;
-      margin: -@contentPadding/2 -@contentPadding/2 @contentPadding/2 -@contentPadding/2;
-      padding: @contentPadding;
+      margin: -@contentPadding/2 -@contentPadding/2 0 -@contentPadding/2;
+      padding: @contentPadding/2;
+      padding-bottom: 0;
       border-radius-top-right: @border-radius-large;
       border-radius-top-left: @border-radius-large;
       line-height: 1em;

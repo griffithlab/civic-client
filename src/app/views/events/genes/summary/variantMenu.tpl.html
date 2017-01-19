@@ -21,13 +21,13 @@
     </div>
   </div>
 
-  <div class="row" ng-if="variantGroups.length > 0">
+  <div class="row" ng-if="variantGroups.length > 0" style="margin-top: 8px;">
     <ng-include src="'variantGroupBlock.tpl.html'" ng-repeat="variantGroup in variantGroups"></ng-include>
   </div>
 
   <script type="text/ng-template" id="variantGroupBlock.tpl.html">
     <div class="col-xs-4">
-      <div class="variant-group">
+      <div class="variant-group" ng-class="{ 'active': $state.includes('events.genes.summary.variantGroups')}">
         <a class="group-title"
            ng-class="{ active: variantGroup.id == stateParams.variantGroupId }"
            ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id, '#': 'variant-group' })">
