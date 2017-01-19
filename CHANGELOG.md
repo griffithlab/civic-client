@@ -1,6 +1,7 @@
 0.0.8 / 2017-01-19
 ==================
-* added Drugs, Diseases, and Sources statistics pages
+* added Evidence, Drugs, Diseases, and Sources statistics pages
+* redesigned variant menu to accomodate larger collections of variants/groups
 
 0.0.7 / 2017-01-12
 ==================
