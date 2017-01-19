@@ -131,7 +131,7 @@ gulp.task('cdnize', ['wiredep'], function () {
       {
         file: '**/api-check/**/*.js',
         package: 'api-check',
-        cdn: 'cdnjs:api-check:${ filenameMin }@7.5.3',
+        cdn: 'cdnjs:api-check:${ filenameMin }',
         test: 'window.apiCheck'
       },
       {
@@ -163,6 +163,17 @@ gulp.task('cdnize', ['wiredep'], function () {
         package: 'angular-formly-templates-bootstrap',
         cdn: 'cdnjs:angular-formly-templates-bootstrap:${ filenameMin }',
         test: 'testModule("formlyBootstrap")'
+      },
+      {
+        file: '**/d3/*.js',
+        package: 'd3',
+        cdn: 'cdnjs:d3:${ filenameMin }'
+      },
+      {
+        file : '**/dimple/**/*.js',
+        package: 'dimple',
+        cdn: '//cdnjs.cloudflare.com/ajax/libs/dimple/${ version }/dimple.latest.min.js',
+        test: 'window.dimple'
       }
     ]
   }))
