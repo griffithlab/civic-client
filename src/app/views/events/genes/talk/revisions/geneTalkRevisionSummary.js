@@ -16,7 +16,7 @@
   }
 
   // @ngInject
-  function GeneTalkRevisionSummaryController($scope, $stateParams, GeneRevisions, Security, formConfig) {
+  function GeneTalkRevisionSummaryController($scope, $stateParams, GeneRevisions, Security, formConfig, $rootScope) {
     var vm = $scope.vm = {};
     vm.isEditor = Security.isEditor;
     vm.isAdmin = Security.isAdmin;
@@ -43,6 +43,7 @@
       GeneRevisions.acceptRevision($stateParams.geneId, $stateParams.revisionId)
         .then(function() {
           vm.formMessages.acceptSuccess = true;
+          $rootScope.$broadcast('revisionDecision');
         })
         .catch(function(error) {
           console.error('revision accept error!');
@@ -59,6 +60,7 @@
       GeneRevisions.rejectRevision($stateParams.geneId, $stateParams.revisionId)
         .then(function() {
           vm.formMessages.rejectSuccess = true;
+          $rootScope.$broadcast('revisionDecision');
         })
         .catch(function(error) {
           console.error('revision reject error!');

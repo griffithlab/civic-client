@@ -26,9 +26,9 @@
       <span ng-switch-when="submitted">&nbsp;submitted</span>
       <span ng-switch-when="accepted">&nbsp;accepted</span>
       <span ng-switch-when="rejected">&nbsp;rejected</span>
-      <span ng-switch-when="revision suggested">&nbsp;suggested a revision to</span>
-      <span ng-switch-when="revision accepted">&nbsp;accepted a revision to</span>
-      <span ng-switch-when="revision rejected">&nbsp;rejected a revision to</span>
+      <span ng-switch-when="change suggested">&nbsp;suggested a revision to</span>
+      <span ng-switch-when="change accepted">&nbsp;accepted a revision to</span>
+      <span ng-switch-when="change rejected">&nbsp;rejected a revision to</span>
       <span ng-switch-default></span>
     </span>
     <span ng-switch="notification.type">
@@ -45,7 +45,7 @@
         <span class="subject-type">evidence item</span>
       </span>
       <span ng-switch-when="suggestedchanges">
-        <span class="subject-type">a suggested revision to</span>
+        <span class="subject-type">a suggested a revision to</span>
       </span>
     </span>
       <strong>
