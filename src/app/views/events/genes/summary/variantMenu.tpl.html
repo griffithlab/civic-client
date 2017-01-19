@@ -1,17 +1,20 @@
 <div class="variantMenu {{ options.backgroundColor }}">
   <div class="row" >
-    <div class="col-xs-12" >
+    <div class="col-xs-8" >
       <h4 class="title">
         <span ng-bind="gene.name"></span> Variants
         <span ng-if="variantGroups.length > 0">&amp; Variant Groups</span>
       </h4>
+    </div>
+    <div class="col-xs-4">
+      <input ng-model="query" class="form-control form-control-small" placeholder="filter variants..." aria-label="filter friends" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-12">
       <ul class="variants">
-        <li ng-repeat="variant in variants | orderBy:'name'" ng-show="hasValidEvidenceItems(variant)">
+        <li ng-repeat="variant in variants | orderBy:'name' | filter:{ name: query } as results" ng-show="hasValidEvidenceItems(variant)">
           <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
              ng-class="{ active: variant.id == stateParams.variantId }">
             <span ng-bind="variant.name">Variant Name</span>
