@@ -56,7 +56,7 @@
         padding: @tabPaddingV @tabPaddingH;
         border-radius: @border-radius-base;
         background-color: @pageBackground;
-        border: 1px solid #FFF;
+        border: 1px solid @pageBackground3;
 
         &:hover, &.active {
           border-color: @civicPurple;
@@ -82,12 +82,11 @@
   }
   .variant-group {
     border-radius: @border-radius-large;
-    background-color: darken(@pageBackground2, 5%);
-    // border: 1px solid #CCC;
+    background-color: @pageBackground3;
+    border: 1px solid darken(@pageBackground3, 10%);
     padding: @contentPadding/2;
     padding-bottom: 0;
     overflow: hidden;
-    border: 1px solid darken(@pageBackground2, 5%);
 
     &.active {
       border-color: @civicPurple !important;
