@@ -24,6 +24,12 @@
           method: 'GET',
           isArray: false,
           cache: false
+        },
+        dashboard: {
+          url: '/api/stats/dashboard',
+          method: 'GET',
+          isArray: false,
+          cache: false
         }
       }
     );
@@ -38,7 +44,8 @@
         item: item
       },
       site: site,
-      user: user
+      user: user,
+      dashboard: dashboard
     };
 
     function site() {
@@ -50,6 +57,12 @@
 
     function user(userId) {
       return StatsResource.user({ userId: userId}).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
+    function dashboard() {
+      return StatsResource.dashboard().$promise
         .then(function(response) {
           return response.$promise;
         });

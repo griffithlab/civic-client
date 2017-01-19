@@ -91,7 +91,7 @@
     // function message(to, toP, from, fromP) {
     //   return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
     // }
-    //
+
     // $rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
     //   console.log('Start:   ' + message(to, toP, from, fromP));
     // });

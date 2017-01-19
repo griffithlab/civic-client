@@ -2,10 +2,8 @@
   <h3 class="subtitle">Variants</h3>
   <p>Variants are a user-defined genomic alteration related to a specific clinical outcome. New Variants are created by the addition of a new Evidence Item associated with the Variant.</p>
 
-  <tabset>
-    <tab ng-repeat="tab in vm.tabs.variant" heading="{{ tab.heading }}" active="tab.active">
-      <div ng-include="tab.template"></div>
-    </tab>
-  </tabset>
+
+  <simple-tabs tabs="vm.tabs.variant"></simple-tabs>
+
 </div>
 </div>

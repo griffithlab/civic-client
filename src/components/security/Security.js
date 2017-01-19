@@ -84,7 +84,7 @@
       logout: function(redirectTo) {
         $http.get('/api/sign_out').then(function() { // success
           service.currentUser = null;
-          redirect(redirectTo);
+          $state.go('home');
         }, function(response) { // failure
           $log.warn('COULD NOT LOG OUT' + JSON.stringify(response));
         });

@@ -12,8 +12,12 @@
                                    Genes,
                                    Datatables,
                                    Publications,
-                                   Sources) {
+                                   Sources,
+                                   ConfigService) {
     console.log('SuggestSourceController called.');
+    
+    var help = ConfigService.evidenceHelpText;
+
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated();
     vm.showSuccessMessage = false;
@@ -44,7 +48,7 @@
           data: {
             description: '--'
           },
-          helpText: 'PubMed ID for your suggested source (e.g. 23463675)'
+          helpText: help['Pubmed ID']
         },
         modelOptions: {
           updateOn: 'default blur',
@@ -105,7 +109,7 @@
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.entrez_id = $model.entrez_id',
-          helpText: 'Entrez Gene name (e.g. BRAF). Gene name must be known to the Entrez database.',
+          helpText: help['Gene Entrez Name'],
           data: {
             entrez_id: '--',
             typeaheadSearch: function(val) {
@@ -138,7 +142,7 @@
         templateOptions: {
           label: 'Variant Name',
           minLength: 32,
-          helpText: 'Description of the type of variant (e.g., V600E, BCR-ABL fusion, Loss-of-function, exon 12 mutations). Should be as specific as possible (i.e., specific amino acid changes).',
+          helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
           required: false,
@@ -172,7 +176,7 @@
           required: false,
           editable: true,
           minLength: 32,
-          helpText: 'Please enter a disease name.',
+          helpText: help['Disease'],
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.doid = $model.doid',
           templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
@@ -261,7 +265,7 @@
           currentUser: Security.currentUser,
           value: 'text',
           required: true,
-          helpText: 'Please provide any additional comments you wish to make about this source. This comment will aid curators when evaluating your suggested source for inclusion.'
+          helpText: help['suggestionComment']
         }
       }
     ];

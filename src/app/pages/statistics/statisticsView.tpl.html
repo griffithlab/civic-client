@@ -1,0 +1,41 @@
+
+<div class="browseView">
+  <div class="row">
+    <div class="subTabs col-xs-12">
+      <div class="row">
+        <div class="col-xs-3 name">
+          <h3>
+           Statistics
+          </h3>
+        </div>
+
+        <div class="col-xs-9 tabs">
+          <ul class="nav nav-tabs" style="float: right;">
+            <li ui-sref-active="active">
+              <a ui-sref="statistics.evidence">Evidence</a>
+            </li>
+
+            <li ui-sref-active="active">
+              <a ui-sref="statistics.drugs">Drugs</a>
+            </li>
+
+            <li ui-sref-active="active">
+              <a ui-sref="statistics.diseases">Diseases</a>
+            </li>
+
+            <li ui-sref-active="active">
+              <a ui-sref="statistics.sources">Sources</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ui-view></ui-view>
+    </div>
+  </div>
+
+</div>
