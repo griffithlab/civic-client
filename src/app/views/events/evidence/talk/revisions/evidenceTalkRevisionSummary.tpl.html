@@ -97,7 +97,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 admin-buttons" ng-if="(vm.isEditor() || vm.isAdmin()) || vm.ownerIsCurrentUser && vm.evidenceTalkModel.data.item.status ==='new'">
+    <div class="col-xs-12 admin-buttons" ng-if="(vm.isEditor() || vm.isAdmin() || vm.ownerIsCurrentUser) && vm.evidenceTalkModel.data.item.status ==='new'">
       <div class="pull-right">
         <span tooltip={{vm.disabled_text}}
               tooltip-append-to-body="true"
