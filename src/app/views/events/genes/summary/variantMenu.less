@@ -16,10 +16,22 @@
     margin-top: 1.5 * @contentPadding;
   }
 
-  .title {
+  .filter {
+    height: 22px;
+    padding: 2px 5px;
+    font-size: 12px;
+    line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+    border-radius: 3px;
+  }
+  .title-bg {
     .fullBleed();
-    padding: @contentPadding/2 @contentPadding;
     background-color: @pageBackground3;
+    padding: @contentPadding/2;
+  }
+  .title {
+    margin: 0;
+    padding: 0;
+    margin-left: @contentPadding/2;
   }
 
   .sub-title {
