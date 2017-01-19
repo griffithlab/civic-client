@@ -167,7 +167,8 @@ gulp.task('cdnize', ['wiredep'], function () {
       {
         file: '**/d3/*.js',
         package: 'd3',
-        cdn: 'cdnjs:d3:${ filenameMin }'
+        cdn: 'cdnjs:d3:${ filenameMin }',
+        test: 'window.d3'
       },
       {
         file : '**/dimple/**/*.js',
