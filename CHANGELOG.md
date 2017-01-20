@@ -2,7 +2,7 @@
 ==================
 * added Evidence, Drugs, Diseases, and Sources statistics pages
 * redesigned variant menu to accomodate larger collections of variants/groups
-* adde evidence form can now pre-populate Clinical Significance, Evidence Type, and Evidence Direction
+* add evidence form can now pre-populate Clinical Significance, Evidence Type, and Evidence Direction
 
 
 0.0.7 / 2017-01-12

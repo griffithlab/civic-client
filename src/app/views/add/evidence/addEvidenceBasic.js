@@ -346,6 +346,7 @@
             var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.variant_origin);
             if(_.contains(permitted, vo)) {
               $scope.model.variant_origin = $stateParams.variantOrigin;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[vo];
             } else {
               console.warn('Ignoring pre-population of Variant Origin with invalid value: ' + vo);
             }
@@ -442,12 +443,13 @@
         wrapper: 'attributeDefinition',
         controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
           if($stateParams.evidenceType) {
-            var vo = $stateParams.evidenceType;
+            var et = $stateParams.evidenceType;
             var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type);
-            if(_.contains(permitted, vo)) {
+            if(_.contains(permitted, et)) {
               $scope.model.evidence_type = $stateParams.evidenceType;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et];
             } else {
-              console.warn('Ignoring pre-population of Evidence Type with invalid value: ' + vo);
+              console.warn('Ignoring pre-population of Evidence Type with invalid value: ' + et);
             }
           }
         },
@@ -513,6 +515,7 @@
               var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction[et]);
               if(_.contains(permitted, ed)) {
                 $scope.model.evidence_direction = $stateParams.evidenceDirection;
+                $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et][ed];
               } else {
                 console.warn('Ignoring pre-population of Evidence Direction with invalid value: ' + ed);
               }
