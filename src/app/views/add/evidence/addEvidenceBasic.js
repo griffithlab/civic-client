@@ -340,6 +340,17 @@
         key: 'variant_origin',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.variantOrigin) {
+            var vo = $stateParams.variantOrigin;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.variant_origin);
+            if(_.contains(permitted, vo)) {
+              $scope.model.variant_origin = $stateParams.variantOrigin;
+            } else {
+              console.warn('Ignoring pre-population of Variant Origin with invalid value: ' + vo);
+            }
+          }
+        },
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
@@ -429,6 +440,17 @@
         key: 'evidence_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.evidenceType) {
+            var vo = $stateParams.evidenceType;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type);
+            if(_.contains(permitted, vo)) {
+              $scope.model.evidence_type = $stateParams.evidenceType;
+            } else {
+              console.warn('Ignoring pre-population of Evidence Type with invalid value: ' + vo);
+            }
+          }
+        },
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_type',
