@@ -504,6 +504,24 @@
         key: 'evidence_direction',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.evidenceDirection) {
+            // ensure evidence type defined before setting evidence direction
+            if($stateParams.evidenceType) {
+              var et = $stateParams.evidenceType;
+              var ed = $stateParams.evidenceDirection;
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction[et]);
+              if(_.contains(permitted, ed)) {
+                $scope.model.evidence_direction = $stateParams.evidenceDirection;
+              } else {
+                console.warn('Ignoring pre-population of Evidence Direction with invalid value: ' + ed);
+              }
+
+            } else {
+              console.warn('Cannot pre-populate Evidence Direction without specifying Evidence Type.');
+            }
+          }
+        },
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.newEvidence.evidence_direction',
