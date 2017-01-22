@@ -340,6 +340,18 @@
         key: 'variant_origin',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.variantOrigin) {
+            var vo = $stateParams.variantOrigin;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.variant_origin);
+            if(_.contains(permitted, vo)) {
+              $scope.model.variant_origin = $stateParams.variantOrigin;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[vo];
+            } else {
+              console.warn('Ignoring pre-population of Variant Origin with invalid value: ' + vo);
+            }
+          }
+        },
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
@@ -429,6 +441,18 @@
         key: 'evidence_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.evidenceType) {
+            var et = $stateParams.evidenceType;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type);
+            if(_.contains(permitted, et)) {
+              $scope.model.evidence_type = $stateParams.evidenceType;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et];
+            } else {
+              console.warn('Ignoring pre-population of Evidence Type with invalid value: ' + et);
+            }
+          }
+        },
         templateOptions: {
           label: 'Evidence Type',
           value: 'vm.newEvidence.evidence_type',
@@ -482,6 +506,25 @@
         key: 'evidence_direction',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.evidenceDirection) {
+            // ensure evidence type defined before setting evidence direction
+            if($stateParams.evidenceType) {
+              var et = $stateParams.evidenceType;
+              var ed = $stateParams.evidenceDirection;
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction[et]);
+              if(_.contains(permitted, ed)) {
+                $scope.model.evidence_direction = $stateParams.evidenceDirection;
+                $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et][ed];
+              } else {
+                console.warn('Ignoring pre-population of Evidence Direction with invalid value: ' + ed);
+              }
+
+            } else {
+              console.warn('Cannot pre-populate Evidence Direction without specifying Evidence Type.');
+            }
+          }
+        },
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.newEvidence.evidence_direction',

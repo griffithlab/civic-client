@@ -16,7 +16,7 @@
   }
 
   // @ngInject
-  function VariantGroupTalkRevisionSummaryController($scope, $stateParams, VariantGroupRevisions, Security, formConfig) {
+  function VariantGroupTalkRevisionSummaryController($scope, $stateParams, VariantGroupRevisions, Security, formConfig, $rootScope) {
     var vm = $scope.vm = {};
     vm.isEditor = Security.isEditor;
     vm.isAdmin = Security.isAdmin;
@@ -42,6 +42,7 @@
       VariantGroupRevisions.acceptRevision($stateParams.variantGroupId, $stateParams.revisionId)
         .then(function() {
           vm.formMessages.acceptSuccess = true;
+          $rootScope.$broadcast('revisionDecision');
         })
         .catch(function(error) {
           console.error('revision accept error!');
@@ -58,6 +59,7 @@
       VariantGroupRevisions.rejectRevision($stateParams.variantGroupId, $stateParams.revisionId)
         .then(function() {
           vm.formMessages.rejectSuccess = true;
+          $rootScope.$broadcast('revisionDecision');
         })
         .catch(function(error) {
           console.error('revision reject error!');

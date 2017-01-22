@@ -3,56 +3,69 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
+@tabPaddingH: .5em;
+@tabPaddingV: .25em;
+
 .variantMenu {
   .clearfix();
   .fullBleed();
   border-bottom-right-radius: @border-radius-large;
-  min-height: 30em;
   padding-top: 3px; // get the bottom edges of top .title to align w/ bottom of variant tab header
-  padding-bottom: 2*@contentPadding;
-  @tabPadding: .5em;
-
+  padding-bottom: @contentPadding;
   > a.btn {
     margin-top: 1.5 * @contentPadding;
   }
 
-  .title {
-    .leftBleed();
-    padding: @tabPadding;
+  .filter {
+    height: 22px;
+    padding: 2px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+  }
+  .title-bg {
+    .fullBleed();
     background-color: @pageBackground3;
-    border-top-right-radius: @border-radius-base;
-    border-bottom-right-radius: @border-radius-base;
+    padding: @contentPadding/2;
+  }
+  .title {
+    margin: 0;
+    padding: 0;
+    margin-left: @contentPadding/2;
   }
 
   .sub-title {
     font-weight: bold;
     text-decoration: underline;
-    padding: @tabPadding;
+    padding: @tabPaddingV @tabPaddingH;
   }
 
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-bottom: @contentPadding/2;
 
     li {
-      margin-right: -@contentPadding; // pull li background all the way to edge of adjacent ui-view
-      padding: 0;
-      margin-top: 3px;
-
+      display: inline-block;
+      margin-top: @contentPadding/2;
+      margin-right: @contentPadding/2;
       a {
         display: block;
         text-decoration: none;
-        padding: @tabPadding;
+        padding: @tabPaddingV @tabPaddingH;
         border-radius: @border-radius-base;
-        margin-right: @contentPadding;
+        background-color: @pageBackground;
+        border: 1px solid @pageBackground3;
 
         &:hover, &.active {
-          background-color: @pageBackground;
+          border-color: @civicPurple;
+          color: @civicPurple;
         }
 
         &.active {
           font-weight: bold;
+          text-decoration: underline;
         }
 
         .gene-name {
@@ -64,26 +77,34 @@
       }
 
       a.active {
-        margin-right: 0;
-        padding-right: @contentPadding;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
       }
     }
   }
+  .variant-group {
+    border-radius: @border-radius-large;
+    background-color: @pageBackground3;
+    border: 1px solid darken(@pageBackground3, 10%);
+    padding: @contentPadding/2;
+    padding-bottom: 0;
+    overflow: hidden;
 
-  ul ul li {
-    margin-right: 0;
-    a {
-      margin-left: @contentPadding/2;
-      padding-right: @contentPadding/2;
+    &.active {
+      border-color: @civicPurple !important;
+      .group-title {
+        text-decoration: underline;
+        color: @civicPurple;
+      }
     }
-    a.active {
-      margin-right: -@contentPadding/2;
+    .group-title {
+      // background-color: @pageBackground;
+      font-weight: bold;
+      display: block;
+      margin: -@contentPadding/2 -@contentPadding/2 0 -@contentPadding/2;
+      padding: @contentPadding/2;
+      padding-bottom: 0;
+      border-radius-top-right: @border-radius-large;
+      border-radius-top-left: @border-radius-large;
+      line-height: 1em;
     }
-  }
-
-  .variant-groups {
-
   }
 }

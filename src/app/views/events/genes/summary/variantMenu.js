@@ -24,6 +24,8 @@
       isAdmin: Security.isAdmin()
     };
 
+    $scope.$state = $state;
+
     $scope.hasValidEvidenceItems = function(variant) {
       var non_rejected_count = _.reduce(variant.evidence_items, function(acc, val, key) {
         if(key !== 'rejected_count') {

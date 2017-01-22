@@ -1,6 +1,9 @@
 0.0.8 / 2017-01-19
 ==================
-* added Drugs, Diseases, and Sources statistics pages
+* added Evidence, Drugs, Diseases, and Sources statistics pages
+* redesigned variant menu to accomodate larger collections of variants/groups
+* add evidence form can now pre-populate Clinical Significance, Evidence Type, and Evidence Direction
+
 
 0.0.7 / 2017-01-12
 ==================
@@ -9,6 +12,7 @@
 * Source summary pages now provide a comments thread
 * ConfigService now contains all attribute help strings for add/edit forms
 * signout now returns users to home page, mooting various sign-out UI state issues
+
 
 0.0.6 / 2016-09-29
 ==================
@@ -21,6 +25,7 @@
 * added custom header to client requests so server can better differentiate between client and direct API access
 * variant name on add evidence for now a required field.
 * gene variant sidebar now shows all variants instead just the first 25 returned from query
+
 
 0.0.5 / 2016-08-26
 ==================

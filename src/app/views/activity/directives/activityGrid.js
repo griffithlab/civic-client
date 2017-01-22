@@ -250,6 +250,11 @@
           stateExtension.commented = '.talk.revisions.list.summary';
         }
 
+        // sources display comments right on their summary page
+        if(event.subject_type === 'sources') {
+          stateExtension.commented = '.summary';
+        }
+
         var stateParams = {};
         _.each(event.state_params, function(obj, entity) {
           var entityId;

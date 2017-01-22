@@ -28,7 +28,6 @@
     return /* @ngInject */ {
       restrict: 'E',
       scope: {
-        showCorner: '=',
         justified: '=',
         vertical: '='
       },
@@ -59,11 +58,20 @@
 
     vm.actions = {};
     vm.actions = entityViewModel.data.item.lifecycle_actions;
-    entityViewRevisions.getPendingFields(entityViewModel.data.item.id)
+    
+    var fetchPending = function(){
+      entityViewRevisions.getPendingFields(entityViewModel.data.item.id)
       .then(function(fields) {
         vm.pendingFields = _.keys(entityViewRevisions.data.pendingFields);
         vm.hasPendingFields = fields.length > 0;
       });
+    }
+
+    fetchPending();
+
+    scope.$on('revisionDecision', function(event, args){
+      fetchPending();
+    })
 
     vm.anchorId = _.kebabCase(vm.type);
 
@@ -75,7 +83,6 @@
       vm.actions = lifecycle_actions;
     });
 
-    // scope.showCorner = (vm.type === 'variant' || vm.type === 'variant_group');
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;
     scope.viewForeground = 'view-' + entityViewOptions.styles.view.foregroundColor;
     scope.tabs = entityViewOptions.tabData;

@@ -1,41 +1,66 @@
 <div class="variantMenu {{ options.backgroundColor }}">
-  <h4 class="title"><span ng-bind="gene.name"></span></h4>
-  <ul class="variants">
-    <li ng-repeat="variant in variants|orderBy:'name'" ng-show="hasValidEvidenceItems(variant)">
-      <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
-         ng-class="{ active: variant.id == stateParams.variantId }">
-        <span ng-bind="variant.name">Variant Name</span>
-      </a>
-    </li>
-  </ul>
-  <div ng-if="variantGroups.length > 0">
-    <h4 class="title">Variant Groups</h4>
+  <div class="title-bg">
+    <div class="row">
+      <div class="col-xs-8" >
+        <h4 class="title">
+          <span ng-bind="gene.name"></span> Variants
+          <span ng-if="variantGroups.length > 0">&amp; Variant Group{{variantGroups.length > 1 ? 's' : ''}}</span>
+        </h4>
+      </div>
+      <div ng-class="{'col-xs-2': security.isAdmin || security.isEditor, 'col-xs-4': !(security.isAdmin || security.isEditor)}">
+        <input ng-model="query" class="form-control filter" placeholder="filter variants..." aria-label="filter friends" />
+      </div>
+      <div class="col-xs-2" ng-if="security.isAdmin || security.isEditor">
+        <a ng-show="security.isAdmin || security.isEditor"
+           ng-href="{{ addVarGroupUrl }}"
+           class="btn btn-xs btn-default btn-block">
+          Add Variant Group
+        </a>
+      </div>
+    </div>
   </div>
-  <ul class="variant-groups" ng-if="variantGroups.length > 0">
-    <li ng-repeat="variantGroup in variantGroups|orderBy:'name'">
-      <a class="sub-title"
-         ng-class="{ active: variantGroup.id == stateParams.variantGroupId }"
-         ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id, '#': 'variant-group' })">
-        <span ng-bind="variantGroup.name">Variant Group Name</span>
-      </a>
+
+  <div class="row">
+    <div class="col-xs-{{ variantGroups.length === 1 ? '8' : '12'}}">
       <ul class="variants">
-        <li ng-repeat="variant in variantGroup.variants|orderBy:'name'" ng-show="hasValidEvidenceItems(variant)">
-          <a
-             ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
-             ng-class="{ active: variant.id == stateParams.variantId }">
-            <span ng-bind="variant.name" class="variant-name">Variant Name</span>
-            <div ng-hide="variantGroup.singleGene">
-              <span class="small gene-name">(<span ng-bind="variant.entrez_name"></span>)</span>
-            </div>
-          </a>
+        <li ng-repeat="variant in variants | orderBy:'name' | filter:{ name: query } as results" ng-show="hasValidEvidenceItems(variant)">
+          <ng-include src="'variantTag.tpl.html'"></ng-include>
         </li>
+        <li ng-if="results.length === 0">No variants match filter query.</li>
       </ul>
-    </li>
-  </ul>
-  <a
-    ng-show="security.isAdmin || security.isEditor"
-    ng-href="{{ addVarGroupUrl }}"
-    class="btn btn-xs btn-default btn-block">
-    Add Variant Group
-  </a>
+    </div>
+    <div ng-if="variantGroups.length === 1" style="margin-top: 8px;">
+      <ng-include src="'variantGroupBlock.tpl.html'" ng-repeat="variantGroup in variantGroups"></ng-include>
+    </div>
+  </div>
+
+  <div class="row" ng-if="variantGroups.length > 1" style="margin-top: 8px;">
+    <ng-include src="'variantGroupBlock.tpl.html'" ng-repeat="variantGroup in variantGroups"></ng-include>
+  </div>
+
+  <script type="text/ng-template" id="variantTag.tpl.html">
+    <span tooltip="{{'Evidence Items: ' + variant.evidence_items.accepted_count}}">
+    <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
+       ng-class="{ active: variant.id == stateParams.variantId }">
+      <span ng-bind="variant.name">Variant Name</span>
+    </a>
+    </span>
+  </script>
+
+  <script type="text/ng-template" id="variantGroupBlock.tpl.html">
+    <div class="col-xs-4">
+      <div class="variant-group" ng-class="{ 'active': $state.includes('events.genes.summary.variantGroups', {geneId: gene.id, variantGroupId: variantGroup.id})}">
+        <a class="group-title"
+           ng-class="{ active: variantGroup.id == stateParams.variantGroupId }"
+           ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id, '#': 'variant-group' })">
+          <span ng-bind="variantGroup.name">Variant Group Name</span>
+        </a>
+        <ul class="variants">
+          <li ng-repeat="variant in variantGroup.variants|orderBy:'name' | filter:{ name: query } as results"" ng-show="hasValidEvidenceItems(variant)">
+            <ng-include src="'variantTag.tpl.html'"></ng-include>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </script>
 </div>
