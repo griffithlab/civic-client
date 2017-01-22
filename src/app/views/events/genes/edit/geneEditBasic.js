@@ -26,7 +26,8 @@
                                    Genes,
                                    GeneHistory,
                                    GenesViewOptions,
-                                   formConfig) {
+                                   formConfig,
+                                   $rootScope) {
     var geneModel, vm;
 
     vm = $scope.vm = {};
@@ -208,6 +209,7 @@
           vm.pendingFields = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
+          $rootScope.$broadcast('revisionDecision');
           // options.resetModel();
         })
         .catch(function(error) {

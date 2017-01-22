@@ -28,7 +28,8 @@
                                            TypeAheadResults,
                                            Publications,
                                            formConfig,
-                                           _) {
+                                           _,
+                                           $rootScope) {
     var variantGroupModel, vm;
 
     vm = $scope.vm = {};
@@ -224,6 +225,7 @@
           vm.showSuccessMessage = true;
           vm.showInstructions = false;
           vm.pendingFields = false;
+          $rootScope.$broadcast('revisionDecision');
         })
         .catch(function(error) {
           console.error('revision submit error!');
