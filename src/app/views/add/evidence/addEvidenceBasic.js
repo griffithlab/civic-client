@@ -33,61 +33,13 @@
                                       ConfigService) {
     var descriptions = ConfigService.evidenceAttributeDescriptions;
 
-    var make_obj = function(val, lbl) {
-      return { value: val, label: lbl };
-    }
-
-    // make options for pull down
-    var make_options = function(obj) {
-      var options = [];
-      var keys = Object.keys(obj);
-      for (var i = 0; i < keys.length; i++) {
-        var new_obj = make_obj(keys[i], keys[i]);
-        options.push(new_obj);
-      }
-      return options;
-    }
-
-    // make options for evidence level
-    var el_options = function(obj) {
-      var options = [];
-      var keys = Object.keys(obj);
-      for (var i = 0; i < keys.length; i++) {
-        var new_obj = make_obj(keys[i], keys[i] + " - " + obj[keys[i]]);
-        options.push(new_obj);
-      }
-      return options;
-    }
-
-    // make options for clinical significance
-    var cs_options = function(obj) {
-      var options = [];
-      var keys = Object.keys(obj);
-      for (var i = 0; i < keys.length; i++) {
-        var subkeys = Object.keys(obj[keys[i]]);
-        for (var j = 0; j < subkeys.length; j++){
-          var new_obj = { type: keys[i], value: subkeys[j], label: subkeys[j] };
-          options.push(new_obj);
-        }
-      }
-      return options;
-    }
-
-    // merge two objects, obj and src
-    var extend = function(obj, src) {
-      Object.keys(src).forEach(function(key) { obj[key] = src[key]; });
-      return obj;
-    }
-
-    // reduce depth of object tree by 1; by merging properties of properties of obj
-    var merge_props = function(obj) {
-      var new_obj = {};
-      Object.keys(obj).forEach(function(key) { extend(new_obj, obj[key]) });
-      return new_obj;
-    }
-
-    //handle labels for rating template options
-    function ratingLabel(index){
+    var make_obj = ConfigService.optionMethods.make_obj;
+    var make_options = ConfigService.optionMethods.make_options; // make options for pull down
+    var el_options = ConfigService.optionMethods.el_options; // make options for evidence level
+    var cs_options = ConfigService.optionMethods.cs_options; // make options for clinical significance
+    var extend = ConfigService.optionMethods.extend; // merge two objects, obj and src
+    var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
+    var ratingLabel = function(index) { //handle labels for rating template options
       return index + " - " + descriptions.rating[index].replace(' - ','<br/>');
     }
 

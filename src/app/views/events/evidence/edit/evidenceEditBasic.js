@@ -34,8 +34,13 @@
 
     var descriptions = ConfigService.evidenceAttributeDescriptions;
 
-    //handle labels for rating template options
-    function ratingLabel(index){
+    var make_obj = ConfigService.optionMethods.make_obj;
+    var make_options = ConfigService.optionMethods.make_options; // make options for pull down
+    var el_options = ConfigService.optionMethods.el_options; // make options for evidence level
+    var cs_options = ConfigService.optionMethods.cs_options; // make options for clinical significance
+    var extend = ConfigService.optionMethods.extend; // merge two objects, obj and src
+    var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
+    var ratingLabel = function(index) { //handle labels for rating template options
       return index + " - " + descriptions.rating[index].replace(' - ','<br/>');
     }
 
@@ -87,14 +92,7 @@
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.evidenceEdit.variant_origin',
-          options: [
-            { value: '', label: 'Please select a Variant Origin' },
-            { value: 'Somatic Mutation', label: 'Somatic Mutation' },
-            { value: 'Germline Mutation', label: 'Germline Mutation' },
-            { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
-            { value: 'Unknown', label: 'Unknown' },
-            { value: 'N/A', label: 'N/A' },
-          ],
+          options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Variant Origin'],
@@ -209,13 +207,7 @@
           label: 'Evidence Type',
           value: 'vm.evidenceEdit.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [
-            { value: '', label: 'Please select an Evidence Type' },
-            { value: 'Predictive', label: 'Predictive' },
-            { value: 'Diagnostic', label: 'Diagnostic' },
-            { value: 'Prognostic', label: 'Prognostic' },
-            { value: 'Predisposing', label: 'Predisposing' }
-          ],
+          options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type)),
           onChange: function(value, options, scope) {
             // reset clinical_significance, as its options will change
             scope.model.clinical_significance = '';
@@ -252,14 +244,7 @@
         templateOptions: {
           label: 'Evidence Level',
           value: 'vm.evidenceEdit.rating',
-          options: [
-            { value: '', label: 'Please select an Evidence Level' },
-            { value: 'A', label: 'A - Validated'},
-            { value: 'B', label: 'B - Clinical'},
-            { value: 'C', label: 'C - Case Study'},
-            { value: 'D', label: 'D - Preclinical'},
-            { value: 'E', label: 'E - Inferential'}
-          ],
+          options: ([{ value: '', label: 'Please select an Evidence Level' }].concat(el_options(descriptions.evidence_level_brief))),
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Evidence Level'],
@@ -285,11 +270,7 @@
         templateOptions: {
           label: 'Evidence Direction',
           value: 'vm.evidenceEdit.evidence_direction',
-          options: [
-            { value: '', label: 'Please select an Evidence Direction' },
-            { value: 'Supports', label: 'Supports'},
-            { value: 'Does Not Support', label: 'Does Not Support' }
-          ],
+          options: [{ value: '', label: 'Please select an Evidence Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])),
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Evidence Direction'],
@@ -323,39 +304,9 @@
           label: 'Clinical Significance',
           required: true,
           value: 'vm.evidenceEdit.clinical_significance',
-          clinicalSignificanceOptions: [ // stores unmodified options array for expressionProperties
-            { type: 'default', value: '', label: 'Please select a Clinical Significance' },
-            { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
-            { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
-            { type: 'Predictive', value: 'Adverse Response', label: 'Adverse Response' },
-            { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
-            { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
-            { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
-            { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
-            { type: 'Predisposing', value: 'Pathogenic', label: 'Pathogenic' },
-            { type: 'Predisposing', value: 'Likely Pathogenic', label: 'Likely Pathogenic' },
-            { type: 'Predisposing', value: 'Benign', label: 'Benign' },
-            { type: 'Predisposing', value: 'Likely Benign', label: 'Likely Benign' },
-            { type: 'Predisposing', value: 'Uncertain Significance', label: 'Uncertain Significance' },
-            { type: 'N/A', value: 'N/A', label: 'N/A' }
-          ],
+          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [ // acutal options displayed in the select, modified by expressionProperties
-            { type: 'default', value: '', label: 'Please select a Clinical Significance' },
-            { type: 'Predictive', value: 'Sensitivity', label: 'Sensitivity' },
-            { type: 'Predictive', value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
-            { type: 'Predictive', value: 'Adverse Response', label: 'Adverse Response' },
-            { type: 'Prognostic', value: 'Better Outcome', label: 'Better Outcome' },
-            { type: 'Prognostic', value: 'Poor Outcome', label: 'Poor Outcome' },
-            { type: 'Diagnostic', value: 'Positive', label: 'Positive' },
-            { type: 'Diagnostic', value: 'Negative', label: 'Negative' },
-            { type: 'Predisposing', value: 'Pathogenic', label: 'Pathogenic' },
-            { type: 'Predisposing', value: 'Likely Pathogenic', label: 'Likely Pathogenic' },
-            { type: 'Predisposing', value: 'Benign', label: 'Benign' },
-            { type: 'Predisposing', value: 'Likely Benign', label: 'Likely Benign' },
-            { type: 'Predisposing', value: 'Uncertain Significance', label: 'Uncertain Significance' },
-            { type: 'N/A', value: 'N/A', label: 'N/A' }
-          ],
+          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
           helpText: help['Clinical Significance'],
           data: {
             attributeDefinition: '&nbsp;',
@@ -426,12 +377,7 @@
         templateOptions: {
           label: 'Drug Interaction Type',
           value: 'vm.evidenceEdit.drug_interaction_type',
-          options: [
-            { type: 'default', value: '', label: 'Please select a Drug Interaction Type' },
-            { value: 'Combination', label: 'Combination'},
-            { value: 'Sequential', label: 'Sequential'},
-            { value: 'Substitutes', label: 'Substitutes'}
-          ],
+          options: [{ type: 'default', value: '', label: 'Please select a Drug Interaction Type' }].concat(make_options(descriptions.drug_interaction_type)),
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Drug Interaction Type'],
@@ -457,11 +403,11 @@
           label: 'Rating',
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
-            { value: 1, label: (ratingLabel(1)) },
-            { value: 2, label: (ratingLabel(2)) },
-            { value: 3, label: (ratingLabel(3)) },
-            { value: 4, label: (ratingLabel(4)) },
-            { value: 5, label: (ratingLabel(5)) }
+            { value: 1, label: ratingLabel(1) },
+            { value: 2, label: ratingLabel(2) },
+            { value: 3, label: ratingLabel(3) },
+            { value: 4, label: ratingLabel(4) },
+            { value: 5, label: ratingLabel(5) }
           ],
           valueProp: 'value',
           labelProp: 'label',
