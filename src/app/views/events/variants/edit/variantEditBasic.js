@@ -27,7 +27,8 @@
                                       VariantsViewOptions,
                                       Publications,
                                       formConfig,
-                                      _) {
+                                      _,
+                                      $rootScope) {
     var variantModel, vm;
     vm = $scope.vm = {};
     variantModel = vm.variantModel = Variants;
@@ -471,6 +472,7 @@
           vm.pendingFields = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
+          $rootScope.$broadcast('revisionDecision');
         })
         .catch(function(error) {
           console.error('revision submit error!');

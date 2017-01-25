@@ -30,7 +30,8 @@
                                        EvidenceViewOptions,
                                        formConfig,
                                        _,
-                                       ConfigService) {
+                                       ConfigService,
+                                       $rootScope) {
 
     var descriptions = ConfigService.evidenceAttributeDescriptions;
 
@@ -459,6 +460,7 @@
           vm.showForm = false;
           vm.showSuccessMessage = true;
           vm.showInstructions = false;
+          $rootScope.$broadcast('revisionDecision');
         })
         .catch(function(error) {
           console.error('revision submit error!');
