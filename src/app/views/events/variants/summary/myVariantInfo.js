@@ -36,7 +36,11 @@
     // calculate adjusted allele frequency
     if(!_.isUndefined(ctrl.variantInfo.exac)) {
       if(!_.isUndefined(ctrl.variantInfo.exac.an) && !_.isUndefined(ctrl.variantInfo.exac.ac)) {
-        ctrl.variantInfo.exac.adj_allele_freq = _.round(ctrl.variantInfo.exac.ac.ac_adj / ctrl.variantInfo.exac.an.an_adj, 5);
+        //ctrl.variantInfo.exac.adj_allele_freq = _.round(ctrl.variantInfo.exac.ac.ac_adj / ctrl.variantInfo.exac.an.an_adj, 5);
+        ctrl.variantInfo.exac.adj_allele_freq = _.round(
+          _.last(_.flatten(_.values(ctrl.variantInfo.exac.ac))) / _.last(_.flatten(_.values(ctrl.variantInfo.exac.an))),
+          5
+        );
       }
     }
 
