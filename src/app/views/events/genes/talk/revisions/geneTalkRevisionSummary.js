@@ -37,6 +37,8 @@
       vm.ownerIsCurrentUser = false;
     }
 
+    vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? "Contributors may not accept their own suggested revisions." : "Suggested revisions must be approved by an editor." ;
+
     $scope.acceptRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};

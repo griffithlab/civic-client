@@ -70,9 +70,9 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 admin-buttons" ng-if="(vm.isEditor() || vm.isAdmin()) && vm.variantGroupTalkModel.data.item.status === 'new'">
+    <div class="col-xs-12 admin-buttons" ng-if="(vm.isEditor() || vm.isAdmin() || vm.ownerIsCurrentUser) && vm.variantGroupTalkModel.data.item.status === 'new'">
       <div class="pull-right">
-        <span tooltip="Contributors may not accept their own suggested revisions."
+        <span tooltip={{vm.disabled_text}}
               tooltip-append-to-body="true"
               tooltip-enable="vm.ownerIsCurrentUser">
           <button type="submit"
