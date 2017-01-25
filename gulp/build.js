@@ -69,10 +69,7 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
       }))
 
 
-
     // parse index.html for links to asset (scripts, html, css), group, concatenate, add to stream
-    .pipe($.useref()) //Run useref on any vendor files which couldn't be cdnized
-
     //This call to useref will parse all app assets and concatenate
     //It also filters out any remote assets which have been cdnized,
     //leaving only those which couldn't behind to be parsed into vendor files
@@ -82,9 +79,9 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
         var scripts = content.split(/\r?\n/gm);
         var output = "";
         //prepare the build tag for the next run of useref
-        var parse = "<!-- build:"+mode+"("+altPath+") "+target+" -->\n";
+        var parse = "<!-- build:"+mode+(altPath?"("+altPath+") ":' ')+target+" -->\n";
         scripts.forEach(function(line){
-          if(line.search(/(cloudflare.com|googleapis.com|jsdelivr.net)/g)!=-1)
+          if(line.search(/(cloudflare\.com|googleapis\.com|jsdelivr\.net)/g)!=-1)
           {
             output+=line+"\n";
           }
@@ -96,6 +93,9 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
         return output+"\n"+parse;
       }
     }))
+
+    .pipe($.useref()) //Second call to useref picks up the vendor files which weren't cdnized
+    //and concatenates into vendor.{js,css}
 
     // init asset revisioning with gulp-rev on each block
     .pipe($.if("!*.html",$.rev()))
