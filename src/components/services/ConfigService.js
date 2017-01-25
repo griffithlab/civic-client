@@ -1,8 +1,70 @@
 (function() {
   'use strict';
+
+  var make_obj = function(val, lbl) {
+    return { value: val, label: lbl };
+  }
+
+  // make options for pull down
+  var make_options = function(obj) {
+    var options = [];
+    var keys = Object.keys(obj);
+    for (var i = 0; i < keys.length; i++) {
+      var new_obj = make_obj(keys[i], keys[i]);
+      options.push(new_obj);
+    }
+    return options;
+  }
+
+  // make options for evidence level
+  var el_options = function(obj) {
+    var options = [];
+    var keys = Object.keys(obj);
+    for (var i = 0; i < keys.length; i++) {
+      var new_obj = make_obj(keys[i], keys[i] + " - " + obj[keys[i]]);
+      options.push(new_obj);
+    }
+    return options;
+  }
+
+  // make options for clinical significance
+  var cs_options = function(obj) {
+    var options = [];
+    var keys = Object.keys(obj);
+    for (var i = 0; i < keys.length; i++) {
+      var subkeys = Object.keys(obj[keys[i]]);
+      for (var j = 0; j < subkeys.length; j++){
+        var new_obj = { type: keys[i], value: subkeys[j], label: subkeys[j] };
+        options.push(new_obj);
+      }
+    }
+    return options;
+  }
+
+  // merge two objects, obj and src
+  var extend = function(obj, src) {
+    Object.keys(src).forEach(function(key) { obj[key] = src[key]; });
+    return obj;
+  }
+
+  // reduce depth of object tree by 1; by merging properties of properties of obj
+  var merge_props = function(obj) {
+    var new_obj = {};
+    Object.keys(obj).forEach(function(key) { extend(new_obj, obj[key]) });
+    return new_obj;
+  }
+
   angular.module('civic.services')
     .constant('ConfigService', {
       serverUrl: 'http://127.0.0.1:3000/',
+      optionMethods: {
+        make_obj: make_obj,
+        make_options: make_options,
+        el_options: el_options,
+        cs_options: cs_options,
+        extend: extend,
+        merge_props: merge_props
+      },
       mainMenuItems: [
         {
           label: 'About',
