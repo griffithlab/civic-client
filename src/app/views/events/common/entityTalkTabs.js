@@ -41,7 +41,7 @@
   function entityTalkTabsLink(scope, element, attributes, entityTalkView) {
     var viewModel = scope.viewModel = entityTalkView.viewModel;
     var viewOptions = scope.viewOptions = entityTalkView.viewOptions;
-
+    //console.log(viewOptions.tabData);
     scope.type = viewModel.data.item.type;
     scope.name = viewModel.data.item.name;
     scope.showCorner = (scope.type === 'variant' || scope.type === 'variant group');
@@ -56,6 +56,27 @@
     if (!angular.isArray(scope.tabs)) {
       throw new Error('entityTalkTabs: \'data\' attribute must be an array of tab data with at least one tab defined.');
     }
+
+    scope.$on('revisionDecision', function(event, args){
+      entityTalkView.viewModel.get(entityTalkView.viewModel.data.item.id)
+      .then(function(fields) {
+        //variant.name + ' Revisions'
+        scope.tabs.forEach(function(elem, index, arr){
+          var end = elem.heading.split(" ")[1];
+          arr[index].heading = fields.name + " " + end;
+        });
+      });
+      //scope.tabs = entityTalkView.viewOptions.tabData;
+      //console.log(viewOptions);
+      // console.log(entityTalkView.viewOptions);
+      // console.log("I heard you");
+      // entityTalkView.viewOptions.query(entityTalkView.viewOptions.data.id)
+      // .then(function(fields) {
+      //   console.log(entityTalkView.viewOptions.tabData);
+      //   console.log("what it do");
+      //   console.log(fields);
+      // });
+    });
 
     var unbindStateChangeSuccess = scope.$on(
       '$stateChangeSuccess',

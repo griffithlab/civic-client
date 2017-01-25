@@ -14,7 +14,7 @@
     });
 
   //@ngInject
-  function VariantMenuController($scope, $state, $stateParams, Genes, Security, _) {
+  function VariantMenuController($scope, $state, $stateParams, Genes, Variants, Security, _) {
     $scope.gene = Genes.data.item;
     $scope.variants = Genes.data.variants;
     $scope.stateParams = $stateParams;
@@ -25,6 +25,19 @@
     };
 
     $scope.$state = $state;
+
+    $scope.$on('revisionDecision', function(){
+      Genes.get(Genes.data.item.id)
+      Genes.queryVariants(Genes.data.item.id)
+      .then(function(fields){
+        $scope.variants.forEach(function(elem, index, arr){
+          Variants.get(arr[index].id)
+          .then(function(fields){
+            arr[index].name = fields.name; // need to deal with evidence_items and make sure no hiccups with adding variant groups
+          });
+        });
+      });
+    });
 
     $scope.hasValidEvidenceItems = function(variant) {
       var non_rejected_count = _.reduce(variant.evidence_items, function(acc, val, key) {
@@ -44,13 +57,12 @@
         $scope.addVarGroupUrl = addVarGroupUrlBase + '?geneId=' + stateParams.geneId;
       }
     });
-
+    
     $scope.$watchCollection(
       function() { return Genes.data.variants; },
       function(variants){
         $scope.variants = variants;
       });
-
 
     $scope.$watchCollection(
       function() { return Genes.data.variantGroups; },
