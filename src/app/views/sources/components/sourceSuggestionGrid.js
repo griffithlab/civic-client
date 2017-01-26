@@ -236,16 +236,16 @@
         return _.map(suggestions, function(source) {
           var urlBase = '/add/evidence/basic';
           var urlElements = [];
-          if(_.has(source, 'gene')) {
+          if(_.has(source, 'gene') && source.gene !== null) {
             urlElements.push('geneName=' + source.gene);
           }
-          if(_.has(source, 'variant')) {
+          if(_.has(source, 'variant') && source.variant !== null) {
             urlElements.push('variantName=' + source.variant);
           }
-          if(_.has(source, 'disease')) {
+          if(_.has(source, 'disease') && source.disease !== null) {
             urlElements.push('diseaseName=' + source.disease);
           }
-          if(_.has(source, 'pubmed_id')) {
+          if(_.has(source, 'pubmed_id') && source.pubmed_id !== null) {
             urlElements.push('pubmedId=' + source.pubmed_id);
           }
 
