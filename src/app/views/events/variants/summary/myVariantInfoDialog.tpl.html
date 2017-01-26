@@ -130,11 +130,11 @@
           <tbody>
             <tr>
               <td class="key">Allele Count</td>
-              <td class="value">{{variantInfo.exac.ac.ac_adj | ifEmpty: '--'}}</td>
+              <td class="value">{{variantInfo.exac.ac.ac_adj[0] | ifEmpty: '--'}}</td>
             </tr>
             <tr>
               <td class="key">Allele Number</td>
-              <td class="value">{{variantInfo.exac.an.an_adj | ifEmpty: '--'}}</td>
+              <td class="value">{{variantInfo.exac.an.an_adj[0] | ifEmpty: '--'}}</td>
             </tr>
             <tr>
               <td class="key">Adjusted Allele Frequency</td>
