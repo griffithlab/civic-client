@@ -23,6 +23,7 @@
 
   // @ngInject
   function SourceSuggestionGridController($scope,
+                                          $location,
                                           Sources,
                                           _,
                                           Security,
@@ -39,6 +40,9 @@
       });
     };
 
+    vm.setLocation = function(url) {
+      $location.url(url);
+    }
     vm.hasEditorPerms = function() {
       return (Security.isAdmin() || Security.isEditor());
     };
@@ -230,7 +234,7 @@
 
       function prepSuggestions(suggestions) {
         return _.map(suggestions, function(source) {
-          var urlBase = '#/add/evidence/basic';
+          var urlBase = '/add/evidence/basic';
           var urlElements = [];
           if(_.has(source, 'gene')) {
             urlElements.push('geneName=' + source.gene);

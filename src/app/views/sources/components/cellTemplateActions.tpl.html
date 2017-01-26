@@ -1,7 +1,7 @@
 <div class="ui-grid-cell-contents">
   <span tooltip="Add Evidence Item"
         tooltip-append-to-body="true">
-    <button ng-href="{{row.entity.addEvidenceUrl}}"
+    <button ng-click="grid.appScope.vm.setLocation(row.entity.addEvidenceUrl)"
        ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
        class="btn btn-xs btn-cell-add">
       <i class="glyphicon glyphicon-plus"></i>
