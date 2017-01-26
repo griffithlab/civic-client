@@ -34,7 +34,7 @@
     ];
     _.each(multiTypeFields, function(field) {
       var val = _.get(ctrl.variantInfo,field);
-      if (!_.isArray(val)) { _.set(ctrl.variantInfo, field, [val]); }
+      if (!(_.isUndefined(val) || _.isArray(val))) { _.set(ctrl.variantInfo, field, [val]); }
     });
 
     // calculate adjusted allele frequency
