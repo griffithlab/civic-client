@@ -172,7 +172,10 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: '<div class="ui-grid-cell-contents" search-highlighting="col" highlight-content="row.entity.state_params.gene.name"></div>',
           width: '6%'
         },
         { name: 'variant',
@@ -184,7 +187,10 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: '<div class="ui-grid-cell-contents" search-highlighting="col" highlight-content="row.entity.state_params.variant.name"></div>',
           width: '8%'
         },
         { name: 'description',
