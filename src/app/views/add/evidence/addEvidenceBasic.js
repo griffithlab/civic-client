@@ -126,7 +126,7 @@
           required: true,
           editable: false,
           formatter: 'model[options.key].name',
-          typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+          typeahead: 'item as item.name + " aliases: ("+ item.aliases.join(", ") + ")" for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.entrez_id = $model.entrez_id',
           helpText: help['Gene Entrez Name'],
           data: {
