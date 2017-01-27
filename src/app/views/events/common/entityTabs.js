@@ -77,10 +77,13 @@
 
     scope.$watch('entityViewModel.data.item.name', function(name) {
       vm.name = name;
+      console.log(entityViewModel.data); // new variant object "LAST"
+      console.log(name); // new value for name "LAST"
     });
 
     scope.$watchCollection('entityViewModel.data.item.lifecycle_actions', function(lifecycle_actions) {
       vm.actions = lifecycle_actions;
+      console.log("actions");
     });
 
     scope.viewBackground = 'view-' + entityViewOptions.styles.view.backgroundColor;

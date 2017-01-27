@@ -26,18 +26,21 @@
 
     $scope.$state = $state;
 
+    /*
     $scope.$on('revisionDecision', function(){
-      Genes.get(Genes.data.item.id)
-      Genes.queryVariants(Genes.data.item.id)
+      //Genes.get(Genes.data.item.id);
+      Genes.update(Genes.data.item.id)
       .then(function(fields){
-        $scope.variants.forEach(function(elem, index, arr){
-          Variants.get(arr[index].id)
-          .then(function(fields){
-            arr[index].name = fields.name; // need to deal with evidence_items and make sure no hiccups with adding variant groups
-          });
-        });
+        console.log(fields); // giving me old value
+        //$scope.variants.forEach(function(elem, index, arr){
+          //Variants.get(arr[index].id)
+          //.then(function(fields){
+            //arr[index].name = fields.name; // need to deal with evidence_items and make sure no hiccups with adding variant groups
+          //});
+        //}); 
       });
     });
+    */
 
     $scope.hasValidEvidenceItems = function(variant) {
       var non_rejected_count = _.reduce(variant.evidence_items, function(acc, val, key) {
