@@ -25,7 +25,7 @@
   function highlightSearch(){
     return function (input, query) {
       //var filter = _.get(query, 'filters[0].term');
-      return input.replace(RegExp('('+ query+ ')', 'gi'), '<strong>$1</strong>');
+      return input.replace(RegExp('('+ _.escapeRegExp(query)+ ')', 'gi'), '<strong>$1</strong>');
     }
   }
 
