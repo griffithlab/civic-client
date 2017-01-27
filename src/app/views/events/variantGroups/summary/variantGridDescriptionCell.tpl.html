@@ -4,7 +4,7 @@
      tooltip-placement="top"
      tooltip-append-to-body="true">
   <div ng-switch on="row.entity[col.field].length > 0">
-    <div ng-switch-when="true" class="ui-grid-cell-contents">
+    <div ng-switch-when="true" class="ui-grid-cell-contents" search-highlighting='col' highlight-content='row.entity[col.field]'>
       {{ row.entity[col.field] }}
     </div>
     <div ng-switch-when="false" class="ui-grid-cell-contents">

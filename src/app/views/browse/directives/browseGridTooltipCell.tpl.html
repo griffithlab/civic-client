@@ -1,7 +1,7 @@
 <div class="ngCellText" ng-class="col.colIndex()"
      tooltip="{{row.entity[col.field]}}"
      tooltip-append-to-body="true">
-  <div class="ui-grid-cell-contents">
+  <div class="ui-grid-cell-contents" search-highlighting='col' highlight-content='row.entity[col.field]'>
     {{ row.entity[col.field] }}
   </div>
 </div>

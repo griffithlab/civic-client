@@ -172,6 +172,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           width: '6%'
         },
         { name: 'variant',
@@ -183,12 +184,14 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           width: '8%'
         },
         { name: 'description',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           displayName: 'DESC',
           headerTooltip: 'Description',
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,

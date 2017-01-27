@@ -61,6 +61,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           width: '10%'
         },
         { name: 'variant_list',
@@ -76,7 +77,7 @@
         },
         { name: 'variant_count',
           displayName: 'Count',
-          enableFiltering: true,
+          enableFiltering: false,
           allowCellFocus: false,
           type: 'number',
           width: '8%',

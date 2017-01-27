@@ -3,7 +3,7 @@
      tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
      tooltip-placement="right"
      tooltip-append-to-body="true">
-  <div class="ui-grid-cell-contents">
-    {{COL_FIELD; CUSTOM_FILTERS}}
+  <div class="ui-grid-cell-contents" search-highlighting='col' highlight-content="COL_FIELD">
+    {{ COL_FIELD; CUSTOM_FILTERS }}
   </div>
 </div>
