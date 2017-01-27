@@ -48,6 +48,12 @@
         $scope.typedTerm = '';
       }
     });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalCommentHelp',
+      extends: 'comment',
+      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    });
   }
 
 })();

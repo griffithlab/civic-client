@@ -67,11 +67,11 @@
       wrapper: ['horizontalBootstrapHelpNoLabel', 'bootstrapHasError']
     });
 
-    formlyConfigProvider.setType({
-      name: 'horizontalCommentHelp',
-      extends: 'comment',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
-    });
+    // formlyConfigProvider.setType({
+    //   name: 'horizontalCommentHelp',
+    //   extends: 'comment',
+    //   wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+    // });
 
     /*
     * EXTENDED FIELD TYPES
