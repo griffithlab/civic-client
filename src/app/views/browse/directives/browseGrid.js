@@ -285,6 +285,10 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           width: '8%'
         },
         {
