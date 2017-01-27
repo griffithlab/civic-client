@@ -28,7 +28,7 @@
         },
         beginsWith: {
           method: 'GET',
-          url: '/api/diseases?name=:name',
+          url: '/api/diseases?query=:query',
           isArray: true,
           cache: true
         }
@@ -74,8 +74,8 @@
           return response.$promise;
         });
     }
-    function beginsWith(name) {
-      return DiseasesResource.beginsWith({name: name}).$promise
+    function beginsWith(query) {
+      return DiseasesResource.beginsWith({query: query}).$promise
         .then(function(response) {
           return response.$promise;
         });
