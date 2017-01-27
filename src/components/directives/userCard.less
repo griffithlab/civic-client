@@ -15,32 +15,37 @@
   min-height: 250px;
   overflow: hidden;
 
-  // borders
-  // border-width: 2px 2px 4px 2px;
-  // border-style: solid;
-
-  &.curator {
-    border-color: @curatorColor;
-  }
-  &.editor {
-    border-color: @editorColor;
-  }
-  &.admin {
-    border-color: @adminColor;
-  }
-
   .user-avatar {
     margin-right: -(@contentPadding);
-    background-color: #CCF;
+    .avatar-bg {
+      background-color: #CCC;
+    }
     img {
       width: 100%;
+      min-height: 128px;
+    }
+    .card-name {
+      display: block;
+      padding: @contentPadding/4 @contentPadding/2;
+      text-align: center;
+      border-bottom-right-radius: @border-radius-large;
+
+      &.curator {
+        background-color: @curatorColor;
+      }
+      &.editor {
+        background-color: @editorColor;
+      }
+      &.admin {
+        background-color: @adminColor;
+      }
     }
   }
 
   .user-attributes {
     margin-left: -(@contentPadding);
-    background-color: #CFC;
     padding: 0;
+    padding-top: @contentPadding/3;
     ul {
       padding: 0;
       margin:0;
@@ -52,7 +57,7 @@
       }
       .attr-key {
         font-size: small;
-        background-color: #CCC;
+        color: #999;
       }
       .attr-value {
 

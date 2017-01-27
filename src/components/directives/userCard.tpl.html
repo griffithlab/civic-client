@@ -3,7 +3,10 @@
   <div class="row" >
     <div class="col-xs-6">
       <div class="user-avatar">
-        <img ng-src="{{vm.user.avatars.x128}}" class="img-responsive"/>
+        <div class="avatar-bg" >
+          <img ng-src="{{vm.user.avatars.x128}}" class="img-responsive"/>
+        </div>
+        <span ng-bind="vm.user.username" class="card-name" ng-class="vm.user.role"></span>
       </div>
     </div>
     <div class="col-xs-6">
@@ -11,10 +14,10 @@
 
       <ul class="">
         <li class="attr-key" >
-          Username
+          Name
         </li>
         <li class="attr-value" >
-          <span ng-bind="vm.user.username"></span>
+          <span ng-bind="vm.user.name"></span>
         </li>
 
 
@@ -26,21 +29,18 @@
         </li>
 
         <li class="attr-key" >
-          Last Seen
+          Area of Expertise
         </li>
         <li class="attr-value" >
-          <span ng-bind="vm.user.role"></span>
-        </li>
-
-        <li class="attr-key" >
-          Action Count
-        </li>
-        <li class="attr-value" >
-          <span ng-bind="vm.user.role"></span>
+          <span ng-bind="vm.user.area_of_expertise"></span>
         </li>
 
       </ul>
       </div>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-xs-6" >
     </div>
   </div>
 </div>
