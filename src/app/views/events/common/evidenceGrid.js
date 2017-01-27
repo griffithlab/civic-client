@@ -175,7 +175,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: '<div class="ui-grid-cell-contents" search-highlighting="col" highlight-content="row.entity.state_params.gene.name"></div>',
+          cellTemplate: '<div search-highlighting="col" highlight-content="row.entity.state_params.gene.name"></div>',
           width: '6%'
         },
         { name: 'variant',
@@ -190,7 +190,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: '<div class="ui-grid-cell-contents" search-highlighting="col" highlight-content="row.entity.state_params.variant.name"></div>',
+          cellTemplate: '<div search-highlighting="col" highlight-content="row.entity.state_params.variant.name"></div>',
           width: '8%'
         },
         { name: 'description',
