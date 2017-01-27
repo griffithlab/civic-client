@@ -14,11 +14,10 @@
   display: block;
   min-height: 250px;
   overflow: hidden;
-  padding: 0 @contentPadding/2;
 
   // borders
-  border-width: 2px 2px 4px 2px;
-  border-style: solid;
+  // border-width: 2px 2px 4px 2px;
+  // border-style: solid;
 
   &.curator {
     border-color: @curatorColor;
@@ -30,46 +29,76 @@
     border-color: @adminColor;
   }
 
-  .avatar {
-    width: 64px;
-    height: 64px;
-    margin: @contentPadding/2 auto;
-    border-radius: @border-radius-small;
-    border: 1px solid #CCC;
-    overflow: hidden;
-    cursor: pointer;
-  }
-
-  .social-icons {
-    margin: .5em 0 .5em 0;
-    span {
-      margin: 0 5px;
+  .user-avatar {
+    margin-right: -(@contentPadding);
+    background-color: #CCF;
+    img {
+      width: 100%;
     }
   }
 
-  .info {
-    text-align: center;
-    .display-name {
-      font-weight: bold;
-      font-size: large;
-    }
-    .role {
-      font-style: oblique;
-      &.curator {
-        color: @curatorColor;
-      }
-      &.editor {
-        color: @editorColor;
-      }
-      &.admin {
-        color: @adminColor;
-      }
-    }
-    .title {
-      font-weight: bold;
-    }
-    .last-seen {
+  .user-attributes {
+    margin-left: -(@contentPadding);
+    background-color: #CFC;
+    padding: 0;
+    ul {
+      padding: 0;
+      margin:0;
+      list-style: none;
 
+      li {
+        list-style: none;
+        padding: 0 @contentPadding/2;
+      }
+      .attr-key {
+        font-size: small;
+        background-color: #CCC;
+      }
+      .attr-value {
+
+      }
     }
   }
+  // .avatar {
+  //   width: 64px;
+  //   height: 64px;
+  //   margin: @contentPadding/2 auto;
+  //   border-radius: @border-radius-small;
+  //   border: 1px solid #CCC;
+  //   overflow: hidden;
+  //   cursor: pointer;
+  // }
+
+  // .social-icons {
+  //   margin: .5em 0 .5em 0;
+  //   span {
+  //     margin: 0 5px;
+  //   }
+  // }
+
+  // .info {
+  //   text-align: center;
+  //   .display-name {
+  //     font-weight: bold;
+  //     font-size: large;
+  //   }
+  //   .role {
+  //     font-style: oblique;
+  //     &.curator {
+  //       color: @curatorColor;
+  //     }
+  //     &.editor {
+  //       color: @editorColor;
+  //     }
+  //     &.admin {
+  //       color: @adminColor;
+  //     }
+  //   }
+  //   .title {
+  //     font-weight: bold;
+  //   }
+  //   .last-seen {
+
+  //   }
+  // }
 }
