@@ -12,15 +12,26 @@
   border-radius: @border-radius-large;
   background-color: #EFEFEF;
   display: block;
-  min-height: 250px;
-  overflow: hidden;
-
   .user-avatar {
     margin-right: -(@contentPadding);
     .avatar-bg {
       background-color: #CCC;
+      border-top-left-radius: @border-radius-large;
+      overflow: hidden;
+      border-width: 2px;
+      border-style: solid;
+      &.curator {
+        border-color: @curatorColor;
+      }
+      &.editor {
+        border-color: @editorColor;
+      }
+      &.admin {
+        border-color: @adminColor;
+      }
     }
     img {
+      border-top-left-radius: @border-radius-large;
       width: 100%;
       min-height: 128px;
     }
@@ -29,7 +40,6 @@
       padding: @contentPadding/4 @contentPadding/2;
       text-align: center;
       border-bottom-right-radius: @border-radius-large;
-
       &.curator {
         background-color: @curatorColor;
       }
@@ -63,6 +73,42 @@
 
       }
     }
+  }
+
+  .secondary-user-attributes {
+    padding: 0;
+    padding-top: @contentPadding/3;
+    &.attr-left {}
+    &.attr-right {
+      margin-left: -(@contentPadding);
+    }
+    ul {
+      padding: 0;
+      margin:0;
+      list-style: none;
+
+      li {
+        list-style: none;
+        padding: 0 @contentPadding/2;
+      }
+      .attr-key {
+        font-size: small;
+        color: #999;
+      }
+      .attr-value {
+
+      }
+    }
+  }
+
+  .social-media-buttons {
+    border-bottom-left-radius: @border-radius-large;
+    border-bottom-right-radius: @border-radius-large;
+    background-color: #DDD;
+    text-align: center;
+    margin-top: 6px;
+    padding: 8px;
+    min-height: 40px;
   }
   // .avatar {
   //   width: 64px;
