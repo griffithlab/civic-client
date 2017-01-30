@@ -12,64 +12,147 @@
   border-radius: @border-radius-large;
   background-color: #EFEFEF;
   display: block;
-  min-height: 250px;
-  overflow: hidden;
-  padding: 0 @contentPadding/2;
-
-  // borders
-  border-width: 2px 2px 4px 2px;
-  border-style: solid;
-
-  &.curator {
-    border-color: @curatorColor;
-  }
-  &.editor {
-    border-color: @editorColor;
-  }
-  &.admin {
-    border-color: @adminColor;
-  }
-
-  .avatar {
-    width: 64px;
-    height: 64px;
-    margin: @contentPadding/2 auto;
-    border-radius: @border-radius-small;
-    border: 1px solid #CCC;
-    overflow: hidden;
-    cursor: pointer;
-  }
-
-  .social-icons {
-    margin: .5em 0 .5em 0;
-    span {
-      margin: 0 5px;
-    }
-  }
-
-  .info {
-    text-align: center;
-    .display-name {
-      font-weight: bold;
-      font-size: large;
-    }
-    .role {
-      font-style: oblique;
+  .user-avatar {
+    margin-right: -(@contentPadding);
+    .avatar-bg {
+      background-color: #CCC;
+      border-top-left-radius: @border-radius-large;
+      overflow: hidden;
+      border-width: 2px;
+      border-style: solid;
       &.curator {
-        color: @curatorColor;
+        border-color: @curatorColor;
       }
       &.editor {
-        color: @editorColor;
+        border-color: @editorColor;
       }
       &.admin {
-        color: @adminColor;
+        border-color: @adminColor;
       }
     }
-    .title {
-      font-weight: bold;
+    img {
+      border-top-left-radius: @border-radius-large;
+      width: 100%;
+      min-height: 128px;
     }
-    .last-seen {
-
+    .card-name {
+      display: block;
+      padding: @contentPadding/4 @contentPadding/2;
+      text-align: center;
+      border-bottom-right-radius: @border-radius-large;
+      &.curator {
+        background-color: @curatorColor;
+        color: lighten(@curatorColor, 50%);
+      }
+      &.editor {
+        background-color: @editorColor;
+        color: lighten(@editorColor, 50%);
+      }
+      &.admin {
+        background-color: @adminColor;
+        color: lighten(@adminColor, 50%);
+      }
     }
   }
+
+  .user-attributes {
+    margin-left: -(@contentPadding);
+    padding: 0;
+    padding-top: @contentPadding/3;
+    ul {
+      padding: 0;
+      margin:0;
+      list-style: none;
+
+      li {
+        list-style: none;
+        padding: 0 @contentPadding/2;
+      }
+      .attr-key {
+        font-size: small;
+        color: #999;
+      }
+      .attr-value {
+
+      }
+    }
+  }
+
+  .secondary-user-attributes {
+    padding: 0;
+    padding-top: @contentPadding/3;
+    &.attr-left {}
+    &.attr-right {
+      margin-left: -(@contentPadding);
+    }
+    ul {
+      padding: 0;
+      margin:0;
+      list-style: none;
+
+      li {
+        list-style: none;
+        padding: 0 @contentPadding/2;
+      }
+      .attr-key {
+        font-size: small;
+        color: #999;
+      }
+      .attr-value {
+
+      }
+    }
+  }
+
+  .social-media-buttons {
+    border-bottom-left-radius: @border-radius-large;
+    border-bottom-right-radius: @border-radius-large;
+    background-color: #DDD;
+    text-align: center;
+    margin-top: 6px;
+    padding: 8px;
+    min-height: 40px;
+  }
+  // .avatar {
+  //   width: 64px;
+  //   height: 64px;
+  //   margin: @contentPadding/2 auto;
+  //   border-radius: @border-radius-small;
+  //   border: 1px solid #CCC;
+  //   overflow: hidden;
+  //   cursor: pointer;
+  // }
+
+  // .social-icons {
+  //   margin: .5em 0 .5em 0;
+  //   span {
+  //     margin: 0 5px;
+  //   }
+  // }
+
+  // .info {
+  //   text-align: center;
+  //   .display-name {
+  //     font-weight: bold;
+  //     font-size: large;
+  //   }
+  //   .role {
+  //     font-style: oblique;
+  //     &.curator {
+  //       color: @curatorColor;
+  //     }
+  //     &.editor {
+  //       color: @editorColor;
+  //     }
+  //     &.admin {
+  //       color: @adminColor;
+  //     }
+  //   }
+  //   .title {
+  //     font-weight: bold;
+  //   }
+  //   .last-seen {
+
+  //   }
+  // }
 }
