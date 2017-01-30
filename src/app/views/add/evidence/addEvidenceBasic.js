@@ -127,6 +127,7 @@
           editable: false,
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+          templateUrl: 'components/forms/fieldTypes/geneTypeahead.tpl.html',
           onSelect: 'to.data.entrez_id = $model.entrez_id',
           helpText: help['Gene Entrez Name'],
           data: {
@@ -134,7 +135,14 @@
             typeaheadSearch: function(val) {
               return Genes.beginsWith(val)
                 .then(function(response) {
-                  return response;
+                  var labelLimit = 75;
+                  return _.map(response, function(gene) {
+                    if (gene.aliases.length > 0) {
+                      gene.alias_list = gene.name + " -- Aliases: "+ gene.aliases.join(", ");
+                      if(gene.alias_list.length > labelLimit) { _.trunc(gene.alias_list, labelLimit); }
+                    }
+                    return gene;
+                  });
                 });
             }
           }
