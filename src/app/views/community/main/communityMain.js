@@ -137,28 +137,6 @@
         }
       },
       {
-        key: 'limit',
-        type: 'select',
-        className: 'col-xs-2',
-        defaultValue: 'all_time',
-        templateOptions: {
-          label: 'Limit To',
-          required: false,
-          options: [
-            // this_week, this_month, this_year, all_time
-            {name: 'All time', value: 'all_time'},
-            {name: 'This week', value: 'this_week'},
-            {name: 'This month', value: 'this_month'},
-            {name: 'This year', value: 'this_year'}
-          ]
-        },
-        watcher: {
-          listener: function() {
-            updateData();
-          }
-        }
-      },
-      {
         key: 'sort_by',
         type: 'select',
         className: 'col-xs-2',
@@ -201,7 +179,29 @@
             updateData();
           }
         }
-      }
+      },
+      {
+        key: 'limit',
+        type: 'select',
+        className: 'col-xs-2',
+        defaultValue: 'all_time',
+        templateOptions: {
+          label: 'Limit To',
+          required: false,
+          options: [
+            // this_week, this_month, this_year, all_time
+            {name: 'All time', value: 'all_time'},
+            {name: 'This week', value: 'this_week'},
+            {name: 'This month', value: 'this_month'},
+            {name: 'This year', value: 'this_year'}
+          ]
+        },
+        watcher: {
+          listener: function() {
+            updateData();
+          }
+        }
+      },
     ];
 
     updateData();
