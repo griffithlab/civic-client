@@ -2,7 +2,7 @@
      ng-class="vm.user.role">
   <div class="row" >
     <div class="col-xs-6">
-      <div class="user-avatar">
+      <div class="user-avatar" ng-click="vm.userClick(vm.user.id)">
         <div class="avatar-bg" ng-class="vm.user.role">
           <img ng-src="{{vm.user.avatars.x128}}" class="img-responsive"/>
         </div>
