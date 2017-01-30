@@ -138,7 +138,7 @@
                   var labelLimit = 75;
                   return _.map(response, function(gene) {
                     if (gene.aliases.length > 0) {
-                      gene.alias_list = gene.name + " -- Aliases: "+ gene.aliases.join(", ");
+                      gene.alias_list = " -- Aliases: "+ gene.aliases.join(", ");
                       if(gene.alias_list.length > labelLimit) { _.trunc(gene.alias_list, labelLimit); }
                     }
                     return gene;
