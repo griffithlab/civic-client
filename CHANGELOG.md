@@ -1,3 +1,10 @@
+0.0.9 / 2017/01-30
+==================
+* new user card design
+* gene typeahead on Add Evidence form now shows gene aliases
+* added new simplified overview infographic to Presentation Graphics section
+
+
 0.0.8 / 2017-01-19
 ==================
 * added Evidence, Drugs, Diseases, and Sources statistics pages
