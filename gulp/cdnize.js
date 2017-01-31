@@ -112,6 +112,11 @@ gulp.task('cdnize', ['wiredep'], function () {
         test: 'testModule("ui.grid")'
       },
       {
+        file: '**/angular-ui-grid/**/*.css',
+        package: 'angular-ui-grid',
+        cdn: 'cdnjs:angular-ui-grid:${ filenameMin }'
+      },
+      {
         file: '**/angular-loading-bar/**/*.js',
         package: 'angular-loading-bar',
         cdn: 'cdnjs:angular-loading-bar:${ filenameMin }',
@@ -175,6 +180,11 @@ gulp.task('cdnize', ['wiredep'], function () {
         package: 'dimple',
         cdn: '//cdnjs.cloudflare.com/ajax/libs/dimple/${ version }/dimple.latest.min.js',
         test: 'window.dimple'
+      },
+      {
+        file: '**/font-awesome/css/*.css',
+        package: 'font-awesome',
+        cdn: 'cdnjs:font-awesome:${ filenameMin }'
       }
     ]
   }))
