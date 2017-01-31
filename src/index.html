@@ -41,6 +41,7 @@
     <!-- endbuild -->
 
     <!-- build:css({.tmp,src}) styles/app.css -->
+    <!-- inject:style -->
 
     <link rel="stylesheet" href="app/vendor.css">
 
@@ -197,7 +198,7 @@
     <!-- Curation Tools Styles -->
     <link rel="stylesheet" href="app/views/curation/sources/sourcesQueue.css">
     <link rel="stylesheet" href="app/views/curation/evidence/evidenceQueues.css">
-
+    <!-- endinject -->
     <!-- endbuild -->
   </head>
   <body ng-class="{ home: $root.view.navMode === 'home', sub: $root.view.navMode === 'sub' }">
@@ -406,7 +407,7 @@
 
     <!-- build:js({.tmp,src}) scripts/app.js -->
 
-    <!-- inject:appjs -->
+    <!-- inject:app -->
 
     <!-- endinject -->
 

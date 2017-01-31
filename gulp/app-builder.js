@@ -1,8 +1,8 @@
 var through = require('through2');
 var BufferStreams = require("bufferstreams");
-var moduleGroups = {};
-var files = [];
-var skipped = [];
+var moduleGroups;
+var files;
+var skipped;
 var optionList;
 var core;
 
@@ -110,6 +110,9 @@ var scanner = function(path, contents) {
 //coreModule is the name of the angular module which forms the root of the app
 //It will be the starting point for resolving the dependency tree
 module.exports = function(coreModule, options) {
+  moduleGroups = {};
+  files = [];
+  skipped = [];
   optionList = options || {};
   core = coreModule;
   console.log("Starting up angular app injection");

@@ -5,7 +5,6 @@ var es = require("event-stream")
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
-var appBuilder = require("./app-builder.js");
 // TODO require gulp plugins normally instead of using gulp-load-plugins - makes the code easier to understand
 
 var connect = require('gulp-connect');
@@ -54,17 +53,15 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
-  var htmlFilter = $.filter('*.html', {restore: true});
-  var jsFilter = $.filter('**/*.js', {restore: true});
-  var cssFilter = $.filter('**/*.css', {restore: true});
+gulp.task('inject', ['scripts', 'wiredep'], function(){
   var specFilter = function(){
     return $.filter(function(file){
       return !file.path.endsWith(".spec.js");
     });
   };
+  var appBuilder = require("./app-builder.js");
 
-  return gulp.src('.tmp/*.html')
+  return gulp.src('src/*.html')
     .pipe($.inject(
       gulp.src("src/{app,components}/**/*.js")
         .pipe(specFilter()) //filter out test files
@@ -75,11 +72,21 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
           ]
         })),
         {
-          starttag: '<!-- inject:appjs -->',
+          starttag: '<!-- inject:app -->',
           addRootSlash: false,
           ignorePath: 'src/'
         }
     ))
+    .pipe(gulp.dest('.tmp'))
+})
+
+gulp.task('html', ['styles', 'partials', 'cdnize'], function () {
+  var htmlFilter = $.filter('*.html', {restore: true});
+  var jsFilter = $.filter('**/*.js', {restore: true});
+  var cssFilter = $.filter('**/*.css', {restore: true});
+
+
+  return gulp.src('.tmp/*.html')
     .pipe($.inject(
       // stream JS files in app/component directories
       gulp.src('.tmp/{app,components}/**/*.js'),
