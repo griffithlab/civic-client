@@ -5,6 +5,7 @@ var es = require("event-stream")
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
+var appBuilder = require("./app-builder.js");
 // TODO require gulp plugins normally instead of using gulp-load-plugins - makes the code easier to understand
 
 var connect = require('gulp-connect');
@@ -57,21 +58,6 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
   var htmlFilter = $.filter('*.html', {restore: true});
   var jsFilter = $.filter('**/*.js', {restore: true});
   var cssFilter = $.filter('**/*.css', {restore: true});
-  var fieldTypeFilter = function(){
-    return $.filter(function(file){
-      return !file.path.endsWith('src/components/forms/fieldTypes/comment.js');
-    });
-  };
-  var indexFilter = function(){
-    return $.filter(function(file){
-      return !file.path.endsWith('src/app/index.js');
-    });
-  };
-  var loginFilter = function(){
-    return $.filter(function(file){
-      return !file.path.endsWith('src/components/directives/looginToolbar.js')
-    });
-  };
   var specFilter = function(){
     return $.filter(function(file){
       return !file.path.endsWith(".spec.js");
@@ -79,187 +65,19 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
   };
 
   return gulp.src('.tmp/*.html')
-    // .pipe($.inject(
-    //   gulp.src("src/components/forms/**/*.js")
-    //   .pipe(fieldTypeFilter())
-    //   .pipe(specFilter()),
-    //   {
-    //     starttag: '<!-- inject:forms -->',
-    //     addRootSlash: false,
-    //   }
-    // ))
-    // .pipe($.inject(
-    //   gulp.src('src/app/**/*.js')
-    //   .pipe(indexFilter())
-    //   .pipe(specFilter()),
-    //   {
-    //     starttag: '<!-- inject:appjs -->',
-    //     addRootSlash: false,
-    //   }
-    // ))
-    // .pipe($.inject(
-    //   gulp.src('src/components/**/*.js')
-    //   .pipe(fieldTypeFilter())
-    //   .pipe(loginFilter())
-    //   .pipe(specFilter()),
-    //   {
-    //     starttag: '<!-- inject:components -->',
-    //     addRootSlash: false
-    //   }
-    // ))
     .pipe($.inject(
       gulp.src("src/{app,components}/**/*.js")
-        .pipe(specFilter())
-        .pipe(function(coreModule, exceptions) {
-          var through = require('through2');
-          var BufferStreams = require("bufferstreams");
-          var exceptionList = exceptions || {};
-          var core = coreModule;
-          var moduleGroups = {};
-          var files = [];
-          var skipped = [];
-          var add_to_group = function(name, toGroup){
-            if (!moduleGroups[toGroup]){
-              moduleGroups[toGroup] = [];
-            }
-            moduleGroups[toGroup].push(name);
-          };
-
-          var resolve = function(name, chain) {
-            var callChain = chain;
-            if (callChain === undefined) {
-              callChain = [];
-            }
-            if (callChain.find(function(elem) { return elem == name;})) {
-              console.log("---------Dependency loop detected--------");
-              console.log(callChain);
-              return [];
-            }
-            if (moduleGroups[name]) {
-              var output = moduleGroups[name];
-              if (moduleGroups[name+"_deps"]) {
-                moduleGroups[name+"_deps"].forEach(function(dep_name) {
-                  output = output.concat(resolve(dep_name, callChain.concat([name])));
-                });
-              }
-              if (moduleGroups[name+"_child"]) {
-                output = output.concat(moduleGroups[name+"_child"]);
-              }
-              if (moduleGroups[name+"_exceptions"]) {
-                output = output.concat(moduleGroups[name+"_exceptions"]);
-              }
-              return output;
-            }
-            return [];
-          };
-
-          console.log("Starting up angular app injection");
-          var scanner = function(path, contents) {
-            var regex = /(?:angular|ng)(?:.|[\r\n])*?\.module\(((?:.|[\r\n])+?)\)/gmi;
-            var raw_modules = contents.toString().match(regex);
-            if (!raw_modules){
-              // console.log("====================>");
-              // console.log(path+" does not contain a matched angular expression");
-              skipped.push(path);
-              return;
-            }
-            raw_modules.forEach(function(elem){
-              //console.log("============>\n\n");
-              //console.log(elem);
-              var name_regex = /(?:angular|ng)(?:.|[\r\n])*?\.module\((?:.|[\r\n])*?[\'\"]([.\-\/\w]+)[\'\"].*?[,\)]/mi;
-              var name = name_regex.exec(elem)[1];
-              //console.log(name);
-              var deps_regex = RegExp(name+"[\'\"]([^\)]*)", 'gm');
-              //name -> ) is a module call.
-              //name -> ,[ interest ]) is a module def
-              //load order:
-              //modle def: angular.module(a, [b,c,d]) name
-              //module dependents: angular.module(b,[]) name_deps
-              //module children: angular.module(a) name_child
-              var deps = deps_regex.exec(elem);
-              // if (path.endsWith("formConfig.js")) {
-              //   console.log('-----FORM CONFIG------');
-              //   console.log(deps);
-              //   console.log(deps[0]);
-              //   console.log(deps[1]);
-              //   console.log('----------------------');
-              // }
-              Object.keys(exceptionList).forEach(function(excPath) {
-                if(path.includes(excPath)) {
-                  console.log(path," matches exception to ",exceptionList[excPath]);
-                  add_to_group(path, exceptionList[excPath]+"_exceptions");
-                }
-              });
-              if (!deps[1]){
-                //this is a module call
-                add_to_group(path, name+"_child");
-              } else {
-                //console.log("Dependents:");
-                // console.log('-------MODULE DEF----------');
-                // console.log(name);
-                // console.log(deps);
-                // console.log(path);
-                // console.log('---------------------------');
-                add_to_group(path, name);
-                var mods_regex = /[\'\"]([.\-\w\/]+)[\'\"]/gi;
-                var dependents = deps[1].match(mods_regex);
-                if (dependents) {
-                  dependents.forEach(function(dep_mod) {
-                    //console.log(dep_mod.slice(1,-1));
-                    add_to_group(dep_mod.slice(1,-1), name+"_deps");
-                  });
-                }
-              }
-            });
-          };
-
-          return through.obj(
-            function(file, encoding, callback) {
-              //console.log("Scanning: ", file.path)
-              files.push(file);
-              if(file.isBuffer()) {
-                scanner(file.path, file.contents);
-              } else {
-                console.log("Streaming: "+file.path);
-                file.contents.pipe(new BufferStreams(function(err, buffer, cb) {
-                  if(err) return cb(err);
-                  try {
-                    scanner(file.path, buffer);
-                  } catch(e) {
-                    return cb(e);
-                  }
-                }))
-              }
-              callback();
-            },
-            function(callback){
-              var streamCaller = this;
-              console.log("Skipped files:");
-              console.log(skipped);
-              console.log("Resolving dependency tree from module: "+core);
-              resolve(core).forEach(function(filepath) {
-                var index = files.findIndex(function(obj) {
-                  return obj && obj.path == filepath;
-                });
-                if (index == -1) {
-                  return;
-                }
-                streamCaller.push(files[index]);
-                files[index] = null;
-                return;
-              });
-              console.log("Completed app injection");
-              callback();
-            }
-          );
-        }('civicClient', {
-          // 'src/components/filters.js':'civic.states',
-          // 'src/components/security/':'civic.config',
+        .pipe(specFilter()) //filter out test files
+        //now pipe through the custom angular app builder to inject the app files in the right order
+        .pipe(appBuilder('civicClient',{
+          'exclude' : [
+            'uiResolving.js'
+          ]
         })),
         {
           starttag: '<!-- inject:appjs -->',
           addRootSlash: false,
-          //ignorePath: 'src/'
+          ignorePath: 'src/'
         }
     ))
     .pipe($.inject(
@@ -276,28 +94,28 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
     //This call to useref will parse all app assets and concatenate
     //It also filters out any remote assets which have been cdnized,
     //leaving only those which couldn't behind to be parsed into vendor files
-    // .pipe($.useref({
-    //   //this function scans build:filter_cdn blocks for assets which have been cdnized
-    //   filter_cdn: function(content, target, mode, altPath){
-    //     var scripts = content.split(/\r?\n/gm);
-    //     var output = "";
-    //     //prepare the build tag for the next run of useref
-    //     var parse = "<!-- build:"+mode+(altPath?"("+altPath+") ":' ')+target+" -->\n";
-    //     scripts.forEach(function(line){
-    //       if(line.search(/(cloudflare\.com|googleapis\.com|jsdelivr\.net)/g)!=-1)
-    //       {
-    //         output+=line+"\n";
-    //       }
-    //       else {
-    //         parse+=line+"\n";
-    //       }
-    //     });
-    //     parse+="<!-- endbuild -->";
-    //     return output+"\n"+parse;
-    //   }
-    // }))
-    //
-    // .pipe($.useref()) //Second call to useref picks up the vendor files which weren't cdnized
+    .pipe($.useref({
+      //this function scans build:filter_cdn blocks for assets which have been cdnized
+      filter_cdn: function(content, target, mode, altPath){
+        var scripts = content.split(/\r?\n/gm);
+        var output = "";
+        //prepare the build tag for the next run of useref
+        var parse = "<!-- build:"+mode+(altPath?"("+altPath+") ":' ')+target+" -->\n";
+        scripts.forEach(function(line){
+          if(line.search(/(cloudflare\.com|googleapis\.com|jsdelivr\.net)/g)!=-1)
+          {
+            output+=line+"\n";
+          }
+          else {
+            parse+=line+"\n";
+          }
+        });
+        parse+="<!-- endbuild -->";
+        return output+"\n"+parse;
+      }
+    }))
+
+    .pipe($.useref()) //Second call to useref picks up the vendor files which weren't cdnized
     //and concatenates into vendor.{js,css}
 
     // init asset revisioning with gulp-rev on each block
@@ -307,15 +125,15 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
     .pipe(jsFilter)
     //.pipe($.sourcemaps.init()) // initialize sourcemap generation
     .pipe($.ngAnnotate()) // add angular dependency injection to protect from minification
-    // .pipe($.uglify({ // minify js
-    //     preserveComments: $.uglifySaveLicense,
-    //     mangle: true,
-    //     compress: {
-    //       drop_console: true,
-    //       unused: true
-    //     }
-    //   }
-    // ))
+    .pipe($.uglify({ // minify js
+        preserveComments: $.uglifySaveLicense,
+        mangle: true,
+        compress: {
+          drop_console: true,
+          unused: true
+        }
+      }
+    ))
     //.pipe($.sourcemaps.write('.')) // write sourcemaps
     .pipe(jsFilter.restore)
     // restore non-js blocks to stream
@@ -334,11 +152,11 @@ gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
     .pipe($.revReplace())
 
     // pluck HTML, store everything else
-    // .pipe(htmlFilter)
-    // .pipe($.htmlmin({
-    //   collapseWhitespace: true
-    // }))
-    // .pipe(htmlFilter.restore)
+    .pipe(htmlFilter)
+    .pipe($.htmlmin({
+      collapseWhitespace: true
+    }))
+    .pipe(htmlFilter.restore)
     // restore non-HTML files to stream
 
     // save files
