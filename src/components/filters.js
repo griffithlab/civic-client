@@ -10,6 +10,7 @@
     .filter('unsafe', unsafe)
     .filter('ordinal', ordinal)
     .filter('keyToLabel', keyToLabel)
+    .filter('highlightSearch', highlightSearch)
     .filter('words', words);
 
   // @ngInject
@@ -18,6 +19,13 @@
       input = input.replace(/_/g, ' ');
       return input.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
     };
+  }
+
+  // @ngInject
+  function highlightSearch(){
+    return function (input, query) {
+      return input.toString().replace(RegExp('('+ _.escapeRegExp(query)+ ')', 'gi'), '<strong>$1</strong>');
+    }
   }
 
   // @ngInject

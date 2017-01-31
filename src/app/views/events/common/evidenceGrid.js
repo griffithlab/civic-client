@@ -172,6 +172,10 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: '<div search-highlighting="col" highlight-content="row.entity.state_params.gene.name"></div>',
           width: '6%'
         },
         { name: 'variant',
@@ -183,12 +187,17 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: '<div search-highlighting="col" highlight-content="row.entity.state_params.variant.name"></div>',
           width: '8%'
         },
         { name: 'description',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           displayName: 'DESC',
           headerTooltip: 'Description',
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,

@@ -56,6 +56,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           width: '8%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -91,6 +92,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           width: '10%'
         },
         {

@@ -61,6 +61,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           width: '9%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -71,6 +72,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           width: '20%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -80,6 +82,7 @@
           displayName: 'Variant Group(s)',
           enableFiltering: true,
           allowCellFocus: false,
+          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
           type: 'string',
           width: '20%',
           filter: {

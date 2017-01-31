@@ -42,7 +42,7 @@
     <span tooltip="{{'Evidence Items: ' + variant.evidence_items.accepted_count}}">
     <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
        ng-class="{ active: variant.id == stateParams.variantId }">
-      <span ng-bind="variant.name">Variant Name</span>
+      <span ng-bind-html="variant.name | highlightSearch:query">Variant Name</span>
     </a>
     </span>
   </script>

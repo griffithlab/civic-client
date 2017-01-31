@@ -3,7 +3,7 @@
      tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
      tooltip-placement="top"
      tooltip-append-to-body="true">
-  <div class="ui-grid-cell-contents">
+  <div search-highlighting='col' highlight-content='row.entity[col.field]'>
     {{ row.entity[col.field] }}
   </div>
 </div>
