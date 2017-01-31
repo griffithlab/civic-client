@@ -75,11 +75,11 @@
           </div>
         </div>
       </div>
-      <div class="row" ng-if="vm.currentUser.trophy_case.badges.length > 0">
+      <div class="row" ng-if="user.trophy_case.badges.length > 0">
         <div class="col-xs-12">
           <h5 class="sub-title">Badges:</h5>
           <div class="info-block" style="padding-bottom: 10px;">
-            <span ng-repeat="badge in vm.currentUser.trophy_case.badges">
+            <span ng-repeat="badge in user.trophy_case.badges">
               <trophy-badge badge="badge"></trophy-badge>
             </span>
           </div>
@@ -87,10 +87,4 @@
       </div>
     </div>
   </div>
-  <!-- <div class="row"> -->
-  <!-- <div class="col-xs-12"> -->
-  <!-- <h4>user:</h4> -->
-  <!-- <pre ng-bind="vm.currentUser.trophy_case.badges|json"></pre> -->
-  <!-- </div> -->
-  <!-- </div> -->
 </div>
