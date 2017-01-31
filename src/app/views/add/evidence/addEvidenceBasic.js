@@ -135,11 +135,11 @@
             typeaheadSearch: function(val) {
               return Genes.beginsWith(val)
                 .then(function(response) {
-                  var labelLimit = 75;
+                  var labelLimit = 70;
                   return _.map(response, function(gene) {
                     if (gene.aliases.length > 0) {
                       gene.alias_list = " -- Aliases: "+ gene.aliases.join(", ");
-                      if(gene.alias_list.length > labelLimit) { _.trunc(gene.alias_list, labelLimit); }
+                      if(gene.alias_list.length > labelLimit) { disease.alias_list = _.trunc(gene.alias_list, labelLimit); }
                     }
                     return gene;
                   });
