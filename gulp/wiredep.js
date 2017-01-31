@@ -19,5 +19,5 @@ gulp.task('wiredep', function () {
         /SHA-1.js/
       ]
     }))
-    .pipe(gulp.dest('src'));
+    .pipe(gulp.dest('.tmp'));
 });

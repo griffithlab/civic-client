@@ -3,8 +3,8 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 
-gulp.task('watch', ['styles', 'inject'] ,function () {
-  gulp.watch('src/{app,components}/**/*.less', ['styles'])
+gulp.task('watch', ['inject'] ,function () {
+  gulp.watch('src/{app,components}/**/*.less', ['inject'])
     .on('change', function(file) {gulp.src(file.path).pipe(connect.reload());});
 
   gulp.watch('src/assets/images/**/*', ['images'])
