@@ -332,7 +332,7 @@
       {
         key: 'disease',
         type: 'horizontalTypeaheadHelp',
-        wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
+        wrapper: ['loader', 'diseasedisplay'],
         templateOptions: {
           label: 'Disease',
           value: 'vm.newEvidence.doid',
