@@ -20,11 +20,12 @@
 
   // @ngInject
   function diseasesWithLevelsController($scope,
-                                          $rootScope,
-                                          $element,
-                                          d3,
-                                          dimple,
-                                          _) {
+                                        $window,
+                                        $rootScope,
+                                        $element,
+                                        d3,
+                                        dimple,
+                                        _) {
     console.log('diseasesWithLevels loaded.');
     var options = $scope.options;
 

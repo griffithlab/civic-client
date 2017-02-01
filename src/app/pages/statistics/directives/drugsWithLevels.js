@@ -20,20 +20,21 @@
 
   // @ngInject
   function drugsWithLevelsController($scope,
-                                          $rootScope,
-                                          $element,
-                                          d3,
-                                          dimple,
-                                          _) {
+                                     $window,
+                                     $rootScope,
+                                     $element,
+                                     d3,
+                                     dimple,
+                                     _) {
     console.log('drugsWithLevels loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
         .append('svg')
-      .attr('width', options.width)
-      .attr('height', options.height)
-      .attr('id', options.id)
-      .style('overflow', 'visible');
+        .attr('width', options.width)
+        .attr('height', options.height)
+        .attr('id', options.id)
+        .style('overflow', 'visible');
 
     // title
     svg.append('text')

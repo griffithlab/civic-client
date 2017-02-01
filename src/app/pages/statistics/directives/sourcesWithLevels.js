@@ -20,11 +20,12 @@
 
   // @ngInject
   function sourcesWithLevelsController($scope,
-                                          $rootScope,
-                                          $element,
-                                          d3,
-                                          dimple,
-                                          _) {
+                                       $window,
+                                       $rootScope,
+                                       $element,
+                                       d3,
+                                       dimple,
+                                       _) {
     console.log('sourcesWithLevels loaded.');
     var options = $scope.options;
 
