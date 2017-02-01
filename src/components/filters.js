@@ -22,7 +22,7 @@
   }
 
   // @ngInject
-  function highlightSearch(){
+  function highlightSearch(_){
     return function (input, query) {
       return input.toString().replace(RegExp('('+ _.escapeRegExp(query)+ ')', 'gi'), '<strong>$1</strong>');
     }
