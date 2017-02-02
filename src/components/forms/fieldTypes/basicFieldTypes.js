@@ -50,7 +50,7 @@
     formlyConfigProvider.setType({
       name: 'horizontalTextareaHelp',
       extends: 'textarea',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
 
