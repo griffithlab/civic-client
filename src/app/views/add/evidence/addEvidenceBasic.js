@@ -399,6 +399,7 @@
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 5,
+          required: true,
           label: 'Evidence Statement',
           value: 'vm.newEvidence.description',
           minLength: 32,
@@ -423,6 +424,7 @@
         },
         templateOptions: {
           label: 'Evidence Type',
+          required: true,
           value: 'vm.newEvidence.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type)),
@@ -456,7 +458,6 @@
         wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'Evidence Level',
-          value: 'vm.newEvidence.rating',
           options: ([{ value: '', label: 'Please select an Evidence Level' }].concat(el_options(descriptions.evidence_level_brief))),
           valueProp: 'value',
           labelProp: 'label',
@@ -514,7 +515,7 @@
           labelProp: 'label',
           helpText: help['Evidence Direction'],
           data: {
-            attributeDefinition: '&nbsp;',
+            attributeDefinition: 'Please choose Evidence Type before selecting Evidence Direction.',
             attributeDefinitions: descriptions.evidence_direction,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
@@ -545,7 +546,7 @@
           options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
           helpText: help['Clinical Significance'],
           data: {
-            attributeDefinition: '&nbsp;',
+            attributeDefinition: 'Please choose Evidence Type before selecting Clinical Significance.',
             attributeDefinitions: merge_props(descriptions.clinical_significance),
             updateDefinition: function(value, options, scope) {
               // set attribute definition
@@ -631,6 +632,7 @@
         type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
+          required: true,
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
             { value: 1, label: ratingLabel(1) },
