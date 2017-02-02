@@ -109,7 +109,7 @@
               $scope.to.data.entrez_id = gene.entrez_id;
             });
           }
-          // if gene name provide, get id, entrez_id
+          // if gene name provided, get id, entrez_id
           if($stateParams.geneName){
             Genes.beginsWith($stateParams.geneName)
               .then(function(response) {
@@ -467,6 +467,19 @@
           },
           onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
+        },
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService) {
+          // populate field if evidenceLevel provided
+          if($stateParams.evidenceLevel){
+            var vo = $stateParams.evidenceLevel;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_level);
+            if(_.contains(permitted, vo)) {
+              $scope.model.evidence_level = $stateParams.evidenceLevel;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[vo];
+            } else {
+              console.warn('Ignoring pre-population of Evidence Level with invalid value: ' + vo);
+            }
           }
         }
       },
