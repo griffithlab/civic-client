@@ -53,7 +53,7 @@
     var y = chart.addCategoryAxis('y', 'Drug');
     y.addOrderRule('Count');
     chart.addSeries('Clinical Significance', dimple.plot.bar);
-    var l = chart.addLegend(350, 350, 300, 500, 'left');
+    var l = chart.addLegend('50%', '80%', 50, 200, 'left');
 
     // override legend sorting
     l._getEntries_old = l._getEntries;

@@ -53,7 +53,7 @@
     var y = chart.addCategoryAxis('y', 'Source');
     y.addOrderRule('Count');
     chart.addSeries('Type', dimple.plot.bar);
-    var l = chart.addLegend(650, 350, 100, 500, 'left');
+    var l = chart.addLegend('60%', '80%', 50, 200, 'left');
 
     // override legend sorting
     l._getEntries_old = l._getEntries;

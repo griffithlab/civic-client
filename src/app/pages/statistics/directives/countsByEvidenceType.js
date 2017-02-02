@@ -45,7 +45,8 @@
       .style('font-weight', 'bold')
       .text(options.title);
 
-    var chart = new dimple.chart(svg);
+    var chart = new dimple.chart(svg)
+        .setBounds(100,0, '90%', '90%');
 
     // chart.setBounds(20, 20, 460, 360);
     var p = chart.addMeasureAxis('p', 'Count');
