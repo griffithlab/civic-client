@@ -57,7 +57,7 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('inject', ['styles', 'scripts', 'wiredep'], function(){
+gulp.task('inject', ['styles', 'wiredep'], function(){
   var specFilter = function(){
     return $.filter(function(file){
       return !file.path.endsWith(".spec.js");
@@ -98,7 +98,7 @@ gulp.task('inject', ['styles', 'scripts', 'wiredep'], function(){
     .pipe(gulp.dest('.tmp'))
 })
 
-gulp.task('html', ['partials', 'cdnize'], function () {
+gulp.task('html', ['partials', 'scripts', 'cdnize'], function () {
   var htmlFilter = $.filter('*.html', {restore: true});
   var jsFilter = $.filter('**/*.js', {restore: true});
   var cssFilter = $.filter('**/*.css', {restore: true});
