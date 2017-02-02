@@ -138,6 +138,12 @@
       },
       {
         key: 'sort_by',
+
+
+
+
+
+
         type: 'select',
         className: 'col-xs-2',
         defaultValue: 'most_active',
@@ -184,7 +190,7 @@
         key: 'limit',
         type: 'select',
         className: 'col-xs-2',
-        defaultValue: 'all_time',
+        defaultValue: 'this_month',
         templateOptions: {
           label: 'Limit To',
           required: false,
