@@ -1,3 +1,11 @@
+0.0.10 / 2017-02-02
+===================
+* Add Evidence can now pre-populate Evidence Level based on URL query string
+* Evidence Rating, Evidence Summary, Evidence Type now required fields
+* Filtered strings now bolded in most data grid columns
+* Stats charts now adapt to responsive breakpoints
+* Disease typeahead in Add Evidence form now shows disease aliases
+
 0.0.9 / 2017/01-30
 ==================
 * new user card design
