@@ -51,14 +51,12 @@
             <cancel-button></cancel-button>
           </div>
           <div class="pull-right">
-            <span ng-if="vm.isAuthenticated">
             <button type="submit"
                     class="btn btn-default"
-                    ng-disabled="vm.form.$invalid"
+                    ng-disabled="vm.form.$invalid || vm.isAuthenticated === false"
                     ng-click="vm.submit(vm.newEvidence, vm.options)">
               Submit Evidence for Inclusion
             </button>
-          </span>
           </div>
         </div>
       </div>
