@@ -318,7 +318,7 @@
             'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic.',
             'Benign': 'Very strong evidence the variant is benign',
             'Likely Benign': 'Not expected to have a major effect on disease',
-            'Uncertain Significance': 'Fullfills the ACMG criteria for pathogenic/benign, or the evidence is conflicting'
+            'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting'
           },
           'N/A': {
             'N/A': 'Variant does not inform clinical action'
