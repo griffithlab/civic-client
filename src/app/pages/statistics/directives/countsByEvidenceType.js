@@ -20,6 +20,7 @@
 
   // @ngInject
   function countsByEvidenceTypeController($scope,
+                                          $window,
                                           $rootScope,
                                           $element,
                                           d3,
@@ -65,6 +66,13 @@
       };
     });
     chart.draw();
+
+    var onResize = function () { chart.draw(0, true); };
+
+    angular.element($window).on('resize', onResize);
+    $scope.$on('$destroy', function () {
+      angular.element($window).off('resize', onResize);
+    });
 
     $scope.chart = chart;
   }

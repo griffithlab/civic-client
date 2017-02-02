@@ -54,7 +54,6 @@
     y.addOrderRule('Count');
     chart.addSeries('Level', dimple.plot.bar);
     var l = chart.addLegend(340, 10, 510, 20, 'left');
-    chart.draw();
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
@@ -70,6 +69,13 @@
       .value();
 
     chart.draw();
+
+    var onResize = function () { chart.draw(0, true); };
+
+    angular.element($window).on('resize', onResize);
+    $scope.$on('$destroy', function () {
+      angular.element($window).off('resize', onResize);
+    });
 
     $scope.chart = chart;
   }

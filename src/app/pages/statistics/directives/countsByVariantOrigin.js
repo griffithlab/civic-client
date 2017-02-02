@@ -20,11 +20,12 @@
 
   // @ngInject
   function countsByVariantOriginController($scope,
-                                          $rootScope,
-                                          $element,
-                                          d3,
-                                          dimple,
-                                          _) {
+                                           $window,
+                                           $rootScope,
+                                           $element,
+                                           d3,
+                                           dimple,
+                                           _) {
     console.log('countsByVariantOrigin loaded.');
     var options = $scope.options;
 
@@ -65,6 +66,13 @@
       };
     });
     chart.draw();
+
+    var onResize = function () { chart.draw(0, true); };
+
+    angular.element($window).on('resize', onResize);
+    $scope.$on('$destroy', function () {
+      angular.element($window).off('resize', onResize);
+    });
 
     $scope.chart = chart;
   }
