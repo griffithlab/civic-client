@@ -227,6 +227,7 @@
           validPubmedId: {
             expression: function($viewValue, $modelValue, scope) {
               if ($viewValue.length > 0) {
+                if ($viewValue.match(/[^0-9]+/)) return false;
                 var deferred = $q.defer();
                 scope.options.templateOptions.loading = true;
                 Publications.verify($viewValue).then(
