@@ -45,6 +45,7 @@
                   { value: 'gene_name', name: 'Gene Name' },
                   { value: 'publication_year', name: 'Publication Year' },
                   { value: 'pubmed_id', name: 'Pubmed ID' },
+                  { value: 'pmc_id', name: 'Pubmed Central ID (PMCID)'},
                   { value: 'rating', name: 'Rating' },
                   { value: 'status', name: 'Status' },
                   { value: 'submitter', name: 'Submitter Display Name' },
@@ -64,6 +65,33 @@
             }
           ],
           conditionFields: {
+            pmc_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                  ],
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
             pubmed_id: [
               {
                 key: 'name',
@@ -2528,7 +2556,7 @@
           tooltip: 'Variants with a variant starting between 16 and 60K in its primary chromosome',
           search: {'operator':'AND','queries':[{'field':'start','condition':{'name':'is_in_the_range','parameters':['16000000','60000000']}}]}
         },
-        { 
+        {
           name: 'Variant type contains frameshift',
           tooltip: 'Variants with a variant type that contains the world frameshift',
           search: {'operator':'AND','queries':[{'field':'variant_types','condition':{'name':'contains','parameters':['frameshift']}}]}
