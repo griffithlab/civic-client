@@ -20,13 +20,11 @@
 
     $scope.gene = Genes.data.item;
     $scope.variants = Genes.data.variants;
-    console.log($scope.variants);
     $scope.variants = Genes.data.variants.map(function(elem){
       // add statuses property to each variant
       elem.pendingStatuses = _.find(variantStatuses, function(obj) {
         return obj.id == elem.id;
       })
-      console.log(elem);
       return elem;
     });
     $scope.stateParams = $stateParams;
