@@ -42,11 +42,11 @@
     <div>
         {{'Evidence Items: ' + variant.evidence_items.accepted_count}}
         <ul>
-          <li ng-if="variant.pendingStatuses.has_pending_evidence">
-            New evidence items or pending evidence revisions
-          </li>
           <li ng-if="variant.pendingStatuses.has_pending_fields">
             Pending variant revisions
+          </li>
+          <li ng-if="variant.pendingStatuses.has_pending_evidence">
+            New evidence items or pending evidence revisions
           </li>
         </ul>
     </div>
@@ -55,8 +55,14 @@
   <script type="text/ng-template" id="variantTag.tpl.html">
     <span tooltip-template="'/variantMenuTooltip.tpl.html'">
       <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
-         ng-class="{ active: variant.id == stateParams.variantId }">
+         ng-class="{ active: variant.id == stateParams.variantId }" style="text-decoration: none">
         <span ng-bind-html="variant.name | highlightSearch:query">Variant Name</span>
+        <span ng-if="variant.pendingStatuses.has_pending_fields">
+          <i class="glyphicon glyphicon-exclamation-sign" style="color:green"></i>
+        </span>
+        <span ng-if="variant.pendingStatuses.has_pending_evidence">
+          <i class="glyphicon glyphicon-exclamation-sign" style="color:purple"></i>
+        </span>
       </a>
     </span>
   </script>
