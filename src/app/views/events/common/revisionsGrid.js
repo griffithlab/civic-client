@@ -26,7 +26,7 @@
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
 
-    ctrl.rowsToShow = 3;
+    ctrl.rowsToShow = 6;
 
     ctrl.revisionsGridOptions = {
       //enablePaginationControls: true,
