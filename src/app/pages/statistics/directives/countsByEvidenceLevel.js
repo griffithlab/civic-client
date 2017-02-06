@@ -12,7 +12,7 @@
         options: '=',
         palette: '='
       },
-      template: '<div class="row"><div class="col-xs-9"><div class="chart-pie"></div></div><div class="col-xs-3"></div></div>',
+      templateUrl: 'app/pages/statistics/directives/chartPie.tpl.html',
       controller: countsByEvidenceLevelController
     };
     return directive;
@@ -32,10 +32,10 @@
     var svg = d3.select($element[0])
         .selectAll('.chart-pie')
         .append('svg')
-      .attr('width', options.width)
-      .attr('height', options.height)
-      .attr('id', options.id)
-      .style('overflow', 'visible');
+        .attr('width', options.width)
+        .attr('height', options.height)
+        .attr('id', options.id)
+        .style('overflow', 'visible');
 
     // title
     svg.append('text')

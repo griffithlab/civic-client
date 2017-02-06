@@ -12,7 +12,7 @@
         options: '=',
         palette: '='
       },
-      template: '<div class="row"><div class="col-xs-9"><div class="chart-pie"></div></div><div class="col-xs-3"></div></div>',
+      templateUrl: 'app/pages/statistics/directives/chartPie.tpl.html',
       controller: countsByEvidenceTypeController
     };
     return directive;
@@ -49,7 +49,6 @@
     var chart = new dimple.chart(svg)
         .setMargins(0,25,0,25);
 
-    // chart.setBounds(20, 20, 460, 360);
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
     chart.addSeries('Type', dimple.plot.pie);

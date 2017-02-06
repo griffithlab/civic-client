@@ -53,10 +53,9 @@
     var y = chart.addCategoryAxis('y', 'Disease');
     y.addOrderRule('Count');
     chart.addSeries('Level', dimple.plot.bar);
-    var l = chart.addLegend('50%', '90%', 220, 20, 'left');
 
     // override legend sorting
-    var l = chart.addLegend(650, 350, 300, 500, 'left');
+    var l = chart.addLegend('50%', '90%', 220, 20, 'left');
     l._getEntries_old = l._getEntries;
     l._getEntries = function() {
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
