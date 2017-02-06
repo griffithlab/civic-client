@@ -47,7 +47,6 @@
       .text(options.title);
 
     var chart = new dimple.chart(svg)
-        // .setBounds('50%', '0%', '90%', '90%');
         .setMargins(0,25,0,25);
 
     // chart.setBounds(20, 20, 460, 360);
