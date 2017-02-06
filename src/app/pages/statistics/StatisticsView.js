@@ -64,10 +64,10 @@
   // @ngInject
   function StatisticsController($scope, data) {
     var vm = $scope.vm = {};
-    var pieChartWidth = 290,
-        pieChartHeight = 290;
+    var pieChartWidth = '100%',
+        pieChartHeight = 360;
 
-    var barChartWidth = 1110,
+    var barChartWidth = '100%',
         barChartHeight = 540;
 
     var pieMargins = {

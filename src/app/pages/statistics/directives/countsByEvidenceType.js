@@ -12,7 +12,7 @@
         options: '=',
         palette: '='
       },
-      template: '<div class="chart-pie"></div>',
+      templateUrl: 'app/pages/statistics/directives/chartPie.tpl.html',
       controller: countsByEvidenceTypeController
     };
     return directive;
@@ -20,6 +20,7 @@
 
   // @ngInject
   function countsByEvidenceTypeController($scope,
+                                          $window,
                                           $rootScope,
                                           $element,
                                           d3,
@@ -29,11 +30,12 @@
     var options = $scope.options;
 
     var svg = d3.select($element[0])
+        .selectAll('.chart-pie')
         .append('svg')
-      .attr('width', options.width)
-      .attr('height', options.height)
-      .attr('id', options.id)
-      .style('overflow', 'visible');
+        .attr('width', options.width)
+        .attr('height', options.height)
+        .attr('id', options.id)
+        .style('overflow', 'visible');
 
     // title
     svg.append('text')
@@ -44,13 +46,13 @@
       .style('font-weight', 'bold')
       .text(options.title);
 
-    var chart = new dimple.chart(svg);
+    var chart = new dimple.chart(svg)
+        .setMargins(0,25,0,25);
 
-    // chart.setBounds(20, 20, 460, 360);
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
     chart.addSeries('Type', dimple.plot.pie);
-    var l = chart.addLegend(260, 20, 90, 300, 'left');
+    var l = chart.addLegend('100%', 25, 90, 300, 'left');
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
@@ -65,6 +67,13 @@
       };
     });
     chart.draw();
+
+    var onResize = function () { chart.draw(0, true); };
+
+    angular.element($window).on('resize', onResize);
+    $scope.$on('$destroy', function () {
+      angular.element($window).off('resize', onResize);
+    });
 
     $scope.chart = chart;
   }
