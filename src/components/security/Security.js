@@ -126,6 +126,8 @@
 
       // Is the current user authenticated?
       isAuthenticated: function(){
+        //console.log(service.currentUser);
+        //console.log(!!service.currentUser);
         return !!service.currentUser;
       },
 

@@ -1,7 +1,10 @@
 <div class="addEvidenceBasic" id="add-evidence-basic" ng-init="vm.scroll()">
   <div class="row" ng-if="vm.showInstructions">
     <div class="col-xs-12">
-      <div class="edit-instructions">
+      <div class="edit-instructions" ng-hide="vm.isAuthenticated">
+        <p>Only those with CIViC curation accounts may add evidence items. Please sign in or create an account to contribute to the CIViC database.</p>
+      </div>
+      <div class="edit-instructions" ng-show="vm.isAuthenticated">
         <p>To add an evidence item, please complete the following form, provide a short statement supporting its inclusion into the CIViC database, then click the 'Submit Evidence for Inclusion' button.</p>
         <p style="margin-top: .5em;"><strong>Please ensure that your submission contains no <a href="http://www.hipaa.com/hipaa-protected-health-information-what-does-phi-include/" title="HIPAA.com Protected Health Information description" target="_blank">Protected Health Information</a>, and is your own original work. By submitting evidence to CIViC you agree to release it to the public domain as described by the <a href="https://creativecommons.org/publicdomain/zero/1.0/" title="CreativeCommons.org CC0 license" target="_blank">Creative Commons Public Domain Dedication (CC0 1.0 Universal)</a>.</strong></p>
       </div>
@@ -37,11 +40,13 @@
   <div class="form" ng-if="vm.showForm">
     <div class="row">
       <div class="col-xs-12">
-        <form class="form-horizontal" name="vm.form" novalidate>
-          <formly-form options="vm.options" model="vm.newEvidence" fields="vm.evidenceFields">
+        <fieldset ng-disabled="!(vm.isAuthenticated)">
+          <form class="form-horizontal" name="vm.form" novalidate>
+            <formly-form options="vm.options" model="vm.newEvidence" fields="vm.evidenceFields">
 
-          </formly-form>
-        </form>
+            </formly-form>
+          </form>
+        </fieldset>
       </div>
     </div>
     <div class="row">
@@ -51,7 +56,7 @@
             <cancel-button></cancel-button>
           </div>
           <div class="pull-right">
-            <span ng-if="vm.isAuthenticated">
+            <span>
             <button type="submit"
                     class="btn btn-default"
                     ng-disabled="vm.form.$invalid"
