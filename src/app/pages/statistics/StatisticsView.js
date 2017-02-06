@@ -65,7 +65,7 @@
   function StatisticsController($scope, data) {
     var vm = $scope.vm = {};
     var pieChartWidth = '100%',
-        pieChartHeight = 290;
+        pieChartHeight = 360;
 
     var barChartWidth = '100%',
         barChartHeight = 540;
