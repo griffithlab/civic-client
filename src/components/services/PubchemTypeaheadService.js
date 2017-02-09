@@ -4,22 +4,15 @@
     .factory('PubchemTypeaheadResource', PubchemTypeaheadResource)
     .factory('PubchemTypeahead', PubchemTypeaheadService);
 
-  /*
-   * This resource uses the Pubchem autocomplete service, as documented here:
-   * https://pubchem.ncbi.nlm.nih.gov/widget/docs/widget_autocomplete_help.html#pc_compoundnames
-   */
 
   // @ngInject
   function PubchemTypeaheadResource($resource) {
-    return $resource('https://pubchem.ncbi.nlm.nih.gov/pcautocp/pcautocp.cgi',
-      {
-        dict: 'pc_compoundnames',
-        n: '20'
-      },
+    return $resource('/api/drugs/suggestions',
+      {},
       {
         get: {
           method: 'GET',
-          isArray: false,
+          isArray: true,
           cache: true
         }
       }
@@ -40,7 +33,7 @@
     function get(query) {
       return PubchemTypeaheadResource.get({q: query}).$promise
         .then(function(response) {
-          angular.copy(response.autocp_array, collection);
+          angular.copy(response, collection);
           return response.$promise;
         });
     }
