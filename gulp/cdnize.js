@@ -184,7 +184,7 @@ gulp.task('cdnize', ['wiredep'], function () {
       {
         file: '**/font-awesome/css/*.css',
         package: 'font-awesome',
-        cdn: 'cdnjs:font-awesome:${ filenameMin }'
+        cdn: '//cdnjs.cloudflare.com/ajax/libs/font-awesome/${ version }/css/${ filenameMin }'
       }
     ]
   }))
