@@ -8,34 +8,25 @@
   .tab-row {
     .fullBleed();
     border-top: 1px solid #CCC;
-    .name h3 {
-      padding: .5em 0 0;
-      margin: 0;
+    .name {
       display: inline-block;
+      h3 {
+        padding: .5em 0 0;
+        margin: 0;
+        display: inline-block;
+      }
     }
 
+    .pending-icon {
+      display: inline-block;
+      line-height: 30px;
+      margin: -10px 0 0 25px;
+    }
     #gradient > .vertical-three-colors(@pageBackground3, @pageBackground3, 60%, darken(@pageBackground3, 8%));
 
     > .row {
       border-bottom: 1px solid #CCC;
       background-image: url('/assets/images/grey_stripes.png');
-    }
-
-    .detail-corner {
-      @event-corner-radius: 10px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: @event-corner-radius;
-      height: @event-corner-radius;
-      background-color: @pageBackground2;
-      .corner-edge {
-        border-top-left-radius: @event-corner-radius;
-        width: @event-corner-radius;
-        height: @event-corner-radius;
-        background-color: @pageBackground3;
-        background-image: url('/assets/images/grey_stripes.png');
-      }
     }
 
     .entity-type {

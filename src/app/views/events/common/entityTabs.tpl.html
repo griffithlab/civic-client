@@ -13,7 +13,6 @@
             <span ng-include="'/entityTitle.tpl.html'"></span>
           </div>
         </div>
-
       </div>
       <div class="col-xs-12 col-md-6 tabs {{ viewBackground }}">
         <tabset class="tab-container"
@@ -28,11 +27,17 @@
                ng-click="go(tab)">
           </tab>
         </tabset>
-        <div class="tab-info" ng-if="vm.pendingFields.length > 0">
-          <span tooltip-template="'/pendingTooltip.tpl.html'"
-                tooltip-placement="left"
-                tooltip-append-to-body="true">
-            <i class="glyphicon glyphicon-exclamation-sign"></i>
+        <div class="tab-info">
+          <span dropdown on-toggle="toggled(open)">
+            <a href id="simple-dropdown" dropdown-toggle>
+              <i class="glyphicon glyphicon-cog"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="simple-dropdown"
+            style="margin-left: -200px;">
+              <li>
+                <a href>Subscribe to Notifications</a>
+              </li>
+            </ul>
           </span>
         </div>
       </div>
@@ -59,6 +64,13 @@
     <span ng-bind="vm.type" class="entity-type">Entity</span>
     <span ng-bind="vm.name" class="entity-name">Name</span>
   </h3>
+  <span ng-if="vm.pendingFields.length > 0"
+        tooltip-template="'/pendingTooltip.tpl.html'"
+        tooltip-placement="left"
+        tooltip-append-to-body="true"
+        class="pending-icon">
+    <i class="glyphicon glyphicon-exclamation-sign"></i>
+  </span>
 </script>
 
 <script type="text/ng-template" id="/pendingTooltip.tpl.html">
