@@ -14,10 +14,20 @@
     });
 
   //@ngInject
-  function VariantMenuController($scope, $state, $stateParams, Genes, Security, _) {
+  function VariantMenuController($scope, $state, $stateParams, Genes, VariantRevisions, Security, _) {
+    // get statuses
+    var variantStatuses = Genes.data.variantStatuses;
+
     $scope.gene = Genes.data.item;
     $scope.currentVariantId = $stateParams.variantId;
     $scope.variants = Genes.data.variants;
+    $scope.variants = Genes.data.variants.map(function(elem){
+      // add statuses property to each variant
+      elem.pendingStatuses = _.find(variantStatuses, function(obj) {
+        return obj.id == elem.id;
+      })
+      return elem;
+    });
     $scope.stateParams = $stateParams;
     $scope.security = {
       isAuthenticated: Security.isAuthenticated(),
