@@ -26,7 +26,7 @@ function connectInit(baseDir, livereload) {
         var options = url.parse('http://127.0.0.1:3000/api');
         // comment out the line above, and uncomment the line below to query the
         // production API. Note that login will not work
-        // var options = url.parse('http://civic.genome.wustl.edu/api');
+        //var options = url.parse('http://civic.genome.wustl.edu/api');
         options.route = '/api';
         return proxy(options);
       })(),
