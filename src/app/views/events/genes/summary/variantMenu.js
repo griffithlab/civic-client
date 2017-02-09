@@ -16,6 +16,7 @@
   //@ngInject
   function VariantMenuController($scope, $state, $stateParams, Genes, Security, _) {
     $scope.gene = Genes.data.item;
+    $scope.currentVariantId = $stateParams.variantId;
     $scope.variants = Genes.data.variants;
     $scope.stateParams = $stateParams;
     $scope.security = {
