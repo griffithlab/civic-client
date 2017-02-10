@@ -9,7 +9,7 @@
     var cache = $cacheFactory.get('$http');
 
     var cacheInterceptor = function(response) {
-      // console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(' '));
+      console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(' '));
       cache.remove(response.config.url);
       return response.$promise;
     };
@@ -129,13 +129,13 @@
           method: 'GET',
           url: '/api/genes/:geneId/variants',
           isArray: false,
-          cache: cache
+          cache: false
         },
         queryVariantGroups: {
           method: 'GET',
           url: '/api/genes/:geneId/variant_groups',
           isArray: false,
-          cache: cache
+          cache: false
         },
 
         // Gene Comments Resources
@@ -278,8 +278,8 @@
           return response.$promise;
         });
     }
-    function update(reqObj) {
-      return GenesResource.update(reqObj).$promise
+    function update(reqObj) { // geneId to reqObj
+      return GenesResource.update(reqObj).$promise //obj to reqObj
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
@@ -330,8 +330,11 @@
     function queryVariants(geneId) {
       return GenesResource.queryVariants({geneId: geneId, count: 999}).$promise
         .then(function(response) {
+          console.log(response); // old value
+          console.log(variants); // old value
           angular.copy(response.records, variants);
-          return response.$promise;
+          console.log(variants); // old value
+          return response.$promise; // old value
         });
     }
     function queryVariantGroups(geneId) {
