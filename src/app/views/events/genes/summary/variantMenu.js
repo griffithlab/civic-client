@@ -18,6 +18,8 @@
     $scope.gene = Genes.data.item;
     $scope.variants = Genes.data.variants;
     $scope.stateParams = $stateParams;
+    $scope.hasHiddenVariants = false;
+
     $scope.security = {
       isAuthenticated: Security.isAuthenticated(),
       isEditor: Security.isEditor(),
@@ -48,6 +50,9 @@
     $scope.$watchCollection(
       function() { return Genes.data.variants; },
       function(variants){
+        $scope.hasHiddenVariants = !_.every(variants, function(variant) {
+          return $scope.hasValidEvidenceItems(variant);
+        });
         $scope.variants = variants;
       });
 

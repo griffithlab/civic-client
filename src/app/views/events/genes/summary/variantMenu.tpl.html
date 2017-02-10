@@ -8,7 +8,8 @@
         </h4>
       </div>
       <div class="col-xs-2 show-all">
-        <div tooltip="Toggle display of variants with no accepted evidence" style="display: inline-block;">
+        <div tooltip="Toggle display of variants with no accepted evidence"
+             ng-show="hasHiddenVariants === true">
           <label for="showAll">Show&nbsp;all:</label>&nbsp;&nbsp;<input type="checkbox"
                                                                         id="showAll"
                                                                         ng-model="showAll">
