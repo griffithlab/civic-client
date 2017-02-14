@@ -7,6 +7,7 @@
   function routesConfig($locationProvider, $stateProvider, $urlRouterProvider) {
 
     $locationProvider.hashPrefix('');
+    $locationProvider.html5Mode(true);
 
     // 404
     $urlRouterProvider.otherwise('home');
