@@ -16,17 +16,28 @@
   //@ngInject
   function VariantMenuController($scope, $state, $stateParams, Genes, VariantRevisions, Security, _) {
     // get statuses
+
+    var addStatuses = function(variants){
+      return variants.map(function(elem){
+        // add statuses property to each variant
+        elem.pendingStatuses = _.find(variantStatuses, function(obj) {
+          return obj.id == elem.id;
+        })
+        return elem;
+      });
+    }
+
     var variantStatuses = Genes.data.variantStatuses;
 
     $scope.gene = Genes.data.item;
-    var rawVariants = Genes.data.variants;
-    $scope.menuVariants = rawVariants.map(function(elem){
-      // add statuses property to each variant
-      elem.pendingStatuses = _.find(variantStatuses, function(obj) {
-        return obj.id == elem.id;
-      })
+    $scope.menuVariants = addStatuses(Genes.data.variants);
+    console.log(Genes.data.variantGroups);
+    $scope.menuVariantGroups = Genes.data.variantGroups.map(function(elem){
+      elem.variants = addStatuses(elem.variants);
       return elem;
     });
+    console.log($scope.menuVariantGroups);
+
     $scope.stateParams = $stateParams;
     $scope.security = {
       isAuthenticated: Security.isAuthenticated(),
@@ -54,13 +65,9 @@
       Genes.queryVariantStatuses(Genes.data.item.id)
       .then(function(fields){
         console.log("query");
-        variantStatuses = Genes.data.variantStatuses;
-        $scope.menuVariants = rawVariants.map(function(elem){
-          // add statuses property to each variant
-          elem.pendingStatuses = _.find(variantStatuses, function(obj) {
-            return obj.id == elem.id;
-          })
-          return elem;
+        $scope.menuVariants = addStatuses(Genes.data.variants);
+        $scope.menuVariantGroups = Genes.data.variantGroups.map(function(elem){
+          addStatuses(elem);
         });
       });
     });
@@ -74,6 +81,7 @@
     $scope.$watchCollection(
       function() { return Genes.data.variants; },
       function(variants){
+        console.log("watchme");
         $scope.variants = variants;
       }
     );

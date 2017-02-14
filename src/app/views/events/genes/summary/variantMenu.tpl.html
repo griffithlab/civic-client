@@ -4,7 +4,7 @@
       <div class="col-xs-8" >
         <h4 class="title">
           <span ng-bind="gene.name"></span> Variants
-          <span ng-if="variantGroups.length > 0">&amp; Variant Group{{variantGroups.length > 1 ? 's' : ''}}</span>
+          <span ng-if="menuVariantGroups.length > 0">&amp; Variant Group{{variantGroups.length > 1 ? 's' : ''}}</span>
         </h4>
       </div>
       <div ng-class="{'col-xs-2': security.isAdmin || security.isEditor, 'col-xs-4': !(security.isAdmin || security.isEditor)}">
@@ -21,7 +21,7 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-{{ variantGroups.length === 1 ? '8' : '12'}}">
+    <div class="col-xs-{{ menuVariantGroups.length === 1 ? '8' : '12'}}">
       <ul class="variants">
         <li ng-repeat="variant in menuVariants | orderBy:'name' | filter:{ name: query } as results" ng-show="hasValidEvidenceItems(variant)">
           <ng-include src="'variantTag.tpl.html'"></ng-include>
@@ -29,13 +29,13 @@
         <li ng-if="results.length === 0">No variants match filter query.</li>
       </ul>
     </div>
-    <div ng-if="variantGroups.length === 1" style="margin-top: 8px;">
-      <ng-include src="'variantGroupBlock.tpl.html'" ng-repeat="variantGroup in variantGroups"></ng-include>
+    <div ng-if="menuVariantGroups.length === 1" style="margin-top: 8px;">
+      <ng-include src="'variantGroupBlock.tpl.html'" ng-repeat="variantGroup in menuVariantGroups"></ng-include>
     </div>
   </div>
 
-  <div class="row" ng-if="variantGroups.length > 1" style="margin-top: 8px;">
-    <ng-include src="'variantGroupBlock.tpl.html'" ng-repeat="variantGroup in variantGroups"></ng-include>
+  <div class="row" ng-if="menuVariantGroups.length > 1" style="margin-top: 8px;">
+    <ng-include src="'variantGroupBlock.tpl.html'" ng-repeat="variantGroup in menuVariantGroups"></ng-include>
   </div>
 
   <script type="text/ng-template" id="/variantMenuTooltip.tpl.html">
