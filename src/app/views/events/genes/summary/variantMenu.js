@@ -31,12 +31,10 @@
 
     $scope.gene = Genes.data.item;
     $scope.menuVariants = addStatuses(Genes.data.variants);
-    console.log(Genes.data.variantGroups);
     $scope.menuVariantGroups = Genes.data.variantGroups.map(function(elem){
       elem.variants = addStatuses(elem.variants);
       return elem;
     });
-    console.log($scope.menuVariantGroups);
 
     $scope.stateParams = $stateParams;
     $scope.security = {
@@ -61,10 +59,8 @@
     var addVarGroupUrlBase = $scope.addVarGroupUrl = '#/add/variantGroup';
 
     $scope.$on('revisionDecision', function(event, args){
-      console.log("$on");
       Genes.queryVariantStatuses(Genes.data.item.id)
       .then(function(fields){
-        console.log("query");
         $scope.menuVariants = addStatuses(Genes.data.variants);
         $scope.menuVariantGroups = Genes.data.variantGroups.map(function(elem){
           elem.variants = addStatuses(elem.variants);
@@ -82,7 +78,6 @@
     $scope.$watchCollection(
       function() { return Genes.data.variants; },
       function(variants){
-        console.log("watchme");
         $scope.variants = variants;
       }
     );
