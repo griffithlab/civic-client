@@ -44,6 +44,7 @@
     vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? "Contributors may not accept their own suggested revisions." : "Suggested revisions must be approved by an editor." ;
 
     $scope.acceptRevision = function() {
+      console.log("acceptRevision");
       vm.formErrors = {};
       vm.formMessages = {};
       VariantRevisions.acceptRevision($stateParams.variantId, $stateParams.revisionId)

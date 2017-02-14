@@ -59,6 +59,9 @@
         .then(function(response) {
           $log.debug('Accept success.');
           $log.debug(response);
+          $rootScope.$broadcast('revisionDecision'); 
+          // need to figure out a way to clean this broadcast up in case we ever need to distinguish 
+          // revision decisions and accepting/rejecting an evidence item
         })
         .catch(function(response) {
           $log.error('Ooops! There was an error accepting this evidence item.');

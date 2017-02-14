@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col-xs-{{ variantGroups.length === 1 ? '8' : '12'}}">
       <ul class="variants">
-        <li ng-repeat="variant in variants | orderBy:'name' | filter:{ name: query } as results" ng-show="hasValidEvidenceItems(variant)">
+        <li ng-repeat="variant in menuVariants | orderBy:'name' | filter:{ name: query } as results" ng-show="hasValidEvidenceItems(variant)">
           <ng-include src="'variantTag.tpl.html'"></ng-include>
         </li>
         <li ng-if="results.length === 0">No variants match filter query.</li>
@@ -57,11 +57,14 @@
       <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
          ng-class="{ active: variant.id == stateParams.variantId }" style="text-decoration: none">
         <span ng-bind-html="variant.name | highlightSearch:query">Variant Name</span>
-        <span ng-if="variant.pendingStatuses.has_pending_fields">
+        <span ng-if="variant.pendingStatuses.has_pending_fields && !variant.pendingStatuses.has_pending_evidence">
           <i class="glyphicon glyphicon-exclamation-sign" style="color:purple"></i>
         </span>
-        <span ng-if="variant.pendingStatuses.has_pending_evidence">
-          <i class="glyphicon glyphicon-exclamation-sign" style="color:green"></i>
+        <span ng-if="variant.pendingStatuses.has_pending_evidence && !variant.pendingStatuses.has_pending_fields">
+          <i class="glyphicon glyphicon-exclamation-sign" style="color:blue"></i>
+        </span>
+        <span ng-if="variant.pendingStatuses.has_pending_evidence && variant.pendingStatuses.has_pending_fields">
+          <i class="glyphicon glyphicon-exclamation-sign" style="color:red"></i>
         </span>
       </a>
     </span>

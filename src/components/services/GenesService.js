@@ -355,8 +355,6 @@
       return GenesResource.queryVariantStatuses({geneId: geneId}).$promise
         .then(function(response) {
           angular.copy(response, variantStatuses);
-          console.log("queryVariantStatuses");
-          console.log(response);
           return response.$promise;
         });
     }

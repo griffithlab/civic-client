@@ -19,8 +19,8 @@
     var variantStatuses = Genes.data.variantStatuses;
 
     $scope.gene = Genes.data.item;
-    $scope.variants = Genes.data.variants;
-    $scope.variants = Genes.data.variants.map(function(elem){
+    var rawVariants = Genes.data.variants;
+    $scope.menuVariants = rawVariants.map(function(elem){
       // add statuses property to each variant
       elem.pendingStatuses = _.find(variantStatuses, function(obj) {
         return obj.id == elem.id;
@@ -49,6 +49,22 @@
 
     var addVarGroupUrlBase = $scope.addVarGroupUrl = '#/add/variantGroup';
 
+    $scope.$on('revisionDecision', function(event, args){
+      console.log("$on");
+      Genes.queryVariantStatuses(Genes.data.item.id)
+      .then(function(fields){
+        console.log("query");
+        variantStatuses = Genes.data.variantStatuses;
+        $scope.menuVariants = rawVariants.map(function(elem){
+          // add statuses property to each variant
+          elem.pendingStatuses = _.find(variantStatuses, function(obj) {
+            return obj.id == elem.id;
+          })
+          return elem;
+        });
+      });
+    });
+
     $scope.$watchCollection('stateParams', function(stateParams){
       if(_.has(stateParams, 'geneId')) {
         $scope.addVarGroupUrl = addVarGroupUrlBase + '?geneId=' + stateParams.geneId;
@@ -59,8 +75,8 @@
       function() { return Genes.data.variants; },
       function(variants){
         $scope.variants = variants;
-      });
-
+      }
+    );
 
     $scope.$watchCollection(
       function() { return Genes.data.variantGroups; },
