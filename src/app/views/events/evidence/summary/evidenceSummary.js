@@ -19,7 +19,8 @@
                                      Security,
                                      EvidenceViewOptions,
                                      _,
-                                     ConfigService) {
+                                     ConfigService,
+                                     $rootScope) {
     $scope.isEditor = Security.isEditor;
     $scope.isAdmin = Security.isAdmin;
     $scope.isAuthenticated = Security.isAuthenticated;
@@ -78,6 +79,7 @@
         .then(function(response) {
           $log.debug('Reject success.');
           $log.debug(response);
+          $rootScope.$broadcast('revisionDecision'); 
         })
         .catch(function(response) {
           $log.error('Ooops! There was an error rejecting this evidence item.');
