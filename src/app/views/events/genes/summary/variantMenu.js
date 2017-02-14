@@ -67,7 +67,8 @@
         console.log("query");
         $scope.menuVariants = addStatuses(Genes.data.variants);
         $scope.menuVariantGroups = Genes.data.variantGroups.map(function(elem){
-          addStatuses(elem);
+          elem.variants = addStatuses(elem.variants);
+          return elem;
         });
       });
     });

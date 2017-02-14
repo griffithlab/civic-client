@@ -58,7 +58,7 @@
          ng-class="{ active: variant.id == stateParams.variantId }" style="text-decoration: none">
         <span ng-bind-html="variant.name | highlightSearch:query">Variant Name</span>
         <span ng-if="variant.pendingStatuses.has_pending_fields && !variant.pendingStatuses.has_pending_evidence">
-          <i class="glyphicon glyphicon-exclamation-sign" style="color:purple"></i>
+          <i class="glyphicon glyphicon-exclamation-sign" style="color:green"></i>
         </span>
         <span ng-if="variant.pendingStatuses.has_pending_evidence && !variant.pendingStatuses.has_pending_fields">
           <i class="glyphicon glyphicon-exclamation-sign" style="color:blue"></i>
