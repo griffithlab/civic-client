@@ -4,7 +4,16 @@
     .controller('HomeCtrl', HomeCtrl);
 
   // @ngInject
-  function HomeCtrl($scope, $interval, Stats, Events) {
+  function HomeCtrl($scope, $interval, $rootScope, Stats, Events) {
+    if($rootScope._civicStateError) {
+      var callback;
+      callback = $scope.$on('$viewContentLoaded', function(){
+        alert("Civic has encountered an error loading the requested page\nYou have been returned to the home page\nPlease try again later");
+        console.log("Failed transition to state: ", $rootScope._civicStateError);
+        $rootScope._civicStateError = undefined;
+        (function(){return callback})();
+      });
+    }
     var vm = $scope.vm = {};
 
     vm.stats = {};
