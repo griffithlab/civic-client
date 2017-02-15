@@ -4,7 +4,7 @@
     .controller('HomeCtrl', HomeCtrl);
 
   // @ngInject
-  function HomeCtrl($scope, $interval, Stats, Events) {
+  function HomeCtrl($scope, $interval, Stats, Events, $state) {
     var vm = $scope.vm = {};
 
     vm.stats = {};
