@@ -16,6 +16,19 @@
     margin-top: 1.5 * @contentPadding;
   }
 
+  .show-all {
+    text-align: right;
+    div { display: inline-block; }
+    label {
+      font-size: small;
+      font-weight: normal !important;
+      color: #666;
+    }
+    label, input {
+      cursor: pointer;
+    }
+  }
+
   .filter {
     height: 22px;
     padding: 2px 5px;
@@ -66,6 +79,12 @@
         &.active {
           font-weight: bold;
           text-decoration: underline;
+        }
+
+        &.statusRejected {
+          background-color: #ECA2C0 !important;
+          color: #47161C !important;
+          border-color: #47161C !important;
         }
 
         .gene-name {

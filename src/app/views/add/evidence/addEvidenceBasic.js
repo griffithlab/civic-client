@@ -535,6 +535,25 @@
         key: 'clinical_significance',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.clinicalSignificance) {
+            // ensure evidence type defined before setting evidence direction
+            if($stateParams.evidenceType) {
+              var et = $stateParams.evidenceType;
+              var cs = $stateParams.clinicalSignificance;
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance[et]);
+              if(_.contains(permitted, cs)) {
+                $scope.model.clinical_significance = $stateParams.clinicalSignificance;
+                $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[cs];
+              } else {
+                console.warn('Ignoring pre-population of Clinical Significance with invalid value: ' + cs);
+              }
+
+            } else {
+              console.warn('Cannot pre-populate Clinical Significance without specifying Evidence Type.');
+            }
+          }
+        },
         templateOptions: {
           label: 'Clinical Significance',
           required: true,

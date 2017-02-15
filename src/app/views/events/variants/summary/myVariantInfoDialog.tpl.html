@@ -7,6 +7,23 @@
   </div>
   <div class="row">
     <div class="col-xs-6">
+      <div class="well" >
+        <table class="table table-compact" >
+          <colgroup>
+            <col width="20%"/>
+            <col width="80%"/>
+          </colgroup>
+          <tr>
+            <td class="key">
+              HGVS ID:
+            </td>
+            <td class="value" >
+              {{variantInfo._id}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
       <div class="well">
         <div class="group-title">ClinVar</div>
         <table class="table table-compact">
@@ -90,26 +107,6 @@
         </table>
       </div>
       <div class="well">
-        <div class="group-title">COSMIC</div>
-        <table class="table table-compact">
-          <tbody>
-            <tr>
-              <td class="key">COSMIC ID</td>
-              <td class="value">
-               <span ng-switch="!!variantInfo.cosmic.cosmic_id">
-                  <span ng-switch-when="true">
-                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{variantInfo.cosmic.cosmic_id_short}}" target="_blank">{{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}</a>
-                  </span>
-                  <span ng-switch-default>
-                    {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
-                  </span>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="well">
         <div class="group-title">SNPEff</div>
         <table class="table table-compact">
           <tbody>
@@ -146,6 +143,25 @@
     </div>
 
     <div class="col-xs-6">
+      <div class="well">
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">COSMIC ID:</td>
+              <td class="value">
+               <span ng-switch="!!variantInfo.cosmic.cosmic_id">
+                  <span ng-switch-when="true">
+                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{variantInfo.cosmic.cosmic_id_short}}" target="_blank">{{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="well">
         <div class="group-title">Combined Annotation Dependent Depletion</div>
         <table class="table table-compact">
