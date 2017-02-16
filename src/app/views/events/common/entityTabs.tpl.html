@@ -38,19 +38,39 @@
                 <a href>Subscribe to Notifications</a>
               </li>
             </ul>
+
           </span>
+
+          <script type="text/ng-template" id="subscriptionsPopover.html">
+            <div>{{dynamicPopover.content}}</div>
+            <div class="form-group">
+              <label>Popup Title:</label>
+              <input type="text" ng-model="dynamicPopover.title" class="form-control">
+            </div>
+          </script>
+
         </div>
       </div>
     </div>
   </div>
   <div class="user-info-row">
     <div class="row">
-      <div class="col-xs-12 {{ viewBackground }}">
+      <div class="{{ viewBackground }}" ng-class="{ 'col-xs-11': vm.pendingFields.length > 0, 'col-xs-12': vm.pendingFields.length === 0 }">
         <ul class="actions-list">
           <li>
             <action-block actions="vm.actions"></action-block>
           </li>
         </ul>
+      </div>
+      <div class="col-xs-1 {{ viewBackground }}" ng-show="vm.pendingFields.length > 0">
+        <div ng-if="vm.pendingFields.length > 0" class="pending-notice">
+          <span tooltip-template="'/pendingTooltip.tpl.html'"
+                tooltip-placement="left"
+                tooltip-append-to-body="true">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+            <span class="pending-count">{{vm.pendingFields.length}}</span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -64,13 +84,6 @@
     <span ng-bind="vm.type" class="entity-type">Entity</span>
     <span ng-bind="vm.name" class="entity-name">Name</span>
   </h3>
-  <span ng-if="vm.pendingFields.length > 0"
-        tooltip-template="'/pendingTooltip.tpl.html'"
-        tooltip-placement="left"
-        tooltip-append-to-body="true"
-        class="pending-icon">
-    <i class="glyphicon glyphicon-exclamation-sign"></i>
-  </span>
 </script>
 
 <script type="text/ng-template" id="/pendingTooltip.tpl.html">

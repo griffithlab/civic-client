@@ -17,11 +17,6 @@
       }
     }
 
-    .pending-icon {
-      display: inline-block;
-      line-height: 30px;
-      margin: -10px 0 0 25px;
-    }
     #gradient > .vertical-three-colors(@pageBackground3, @pageBackground3, 60%, darken(@pageBackground3, 8%));
 
     > .row {
@@ -70,6 +65,15 @@
 
   .user-info-row {
     .fullBleed();
+
+    .pending-notice {
+      text-align: right;
+      padding: @contentPadding/2 0 0 0;
+      .pending-count {
+        font-size: small;
+        color: #666;
+      }
+    }
 
     ul {
       margin: 0;
