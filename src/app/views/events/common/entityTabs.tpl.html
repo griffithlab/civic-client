@@ -28,27 +28,9 @@
           </tab>
         </tabset>
         <div class="tab-info">
-          <span dropdown on-toggle="toggled(open)">
-            <a href id="simple-dropdown" dropdown-toggle>
-              <i class="glyphicon glyphicon-cog"></i>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="simple-dropdown"
-            style="margin-left: -200px;">
-              <li>
-                <a href>Subscribe to Notifications</a>
-              </li>
-            </ul>
-
-          </span>
-
-          <script type="text/ng-template" id="subscriptionsPopover.html">
-            <div>{{dynamicPopover.content}}</div>
-            <div class="form-group">
-              <label>Popup Title:</label>
-              <input type="text" ng-model="dynamicPopover.title" class="form-control">
-            </div>
-          </script>
-
+          <i popover-template="'subscriptionsPopover.tpl.html'"
+             popover-title="'Popover Title'"
+             class="glyphicon glyphicon-cog"></i>
         </div>
       </div>
     </div>
@@ -93,4 +75,12 @@
       <li ng-repeat="field in vm.pendingFields">{{ field | keyToLabel}}</li>
     </ul>
 </div>
+</script>
+
+<script type="text/ng-template" id="subscriptionsPopover.tpl.html">
+  <div>Subscriptions</div>
+  <div class="form-group">
+    <label>Popup Title:</label>
+    <input type="text" ng-model="dynamicPopover.title" class="form-control">
+  </div>
 </script>
