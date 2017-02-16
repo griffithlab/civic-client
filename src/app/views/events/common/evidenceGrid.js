@@ -417,6 +417,7 @@
 
     ctrl.evidenceGridOptions.onRegisterApi = function(gridApi){
       ctrl.gridApi = gridApi;
+      console.log('----- suppressGo: onRegisterApi init, set to false');
       var suppressGo = false;
 
       ctrl.evidenceGridOptions.data = prepareDrugArray($scope.evidence);
@@ -465,10 +466,11 @@
                 statusFilters.push('rejected');
               }
             }
-
+            console.log('----- suppressGo rowsRendered, set true');
             suppressGo = true;
             gridApi.selection.selectRow(rowEntity);
             gridApi.grid.scrollTo(rowEntity);
+            console.log('----- suppressGo post-select, scroll set to false');
             suppressGo = false;
           }
         }
@@ -481,6 +483,7 @@
         if($stateParams.geneId !== undefined && $stateParams.variantId !== undefined) {
           params = _.merge($stateParams, { evidenceId: row.entity.id, '#': 'evidence' });
 
+          console.log('----- suppressGo rowSelectionChanged, checking suppressGo: ' + suppressGo);
           // the highlight in onRowsRendered will trigger a state change unless we catch it here
           if(!suppressGo) {
             if(event.metaKey) {

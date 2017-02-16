@@ -43,7 +43,7 @@
   // @ngInject
   function SubscriptionsService(SubscriptionsResource) {
     var item = { };
-
+    var data = {};
     return {
       data: {
         subscriptions: item
@@ -54,7 +54,7 @@
     };
 
     function getSubscriptions() {
-      return SubscriptionsResource.getSubscriptions().$promise
+      return SubscriptionsResource.subscriptions().$promise
         .then(function(response) {
           angular.copy(response.records, data.subscriptions);
           return response.$promise;

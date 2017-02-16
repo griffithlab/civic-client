@@ -58,7 +58,7 @@
 
     vm.actions = {};
     vm.actions = entityViewModel.data.item.lifecycle_actions;
-    
+
     var fetchPending = function(){
       entityViewRevisions.getPendingFields(entityViewModel.data.item.id)
       .then(function(fields) {
@@ -112,6 +112,7 @@
                                 $location,
                                 $document,
                                 Security,
+                                Subscriptions,
                                 _) {
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated;

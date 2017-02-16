@@ -8,10 +8,13 @@
   .tab-row {
     .fullBleed();
     border-top: 1px solid #CCC;
-    .name h3 {
-      padding: .5em 0 0;
-      margin: 0;
+    .name {
       display: inline-block;
+      h3 {
+        padding: .5em 0 0;
+        margin: 0;
+        display: inline-block;
+      }
     }
 
     #gradient > .vertical-three-colors(@pageBackground3, @pageBackground3, 60%, darken(@pageBackground3, 8%));
@@ -19,23 +22,6 @@
     > .row {
       border-bottom: 1px solid #CCC;
       background-image: url('/assets/images/grey_stripes.png');
-    }
-
-    .detail-corner {
-      @event-corner-radius: 10px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: @event-corner-radius;
-      height: @event-corner-radius;
-      background-color: @pageBackground2;
-      .corner-edge {
-        border-top-left-radius: @event-corner-radius;
-        width: @event-corner-radius;
-        height: @event-corner-radius;
-        background-color: @pageBackground3;
-        background-image: url('/assets/images/grey_stripes.png');
-      }
     }
 
     .entity-type {
@@ -62,6 +48,9 @@
         bottom: 12px;
       }
     }
+    .settings-content {
+      min-width: 200px;
+    }
     // override default bootstrap with view background,
     // assigned to ctrl.viewBackground in entityTabs.js
     // applied with ng-class in entityTabs.tpl.html
@@ -79,6 +68,17 @@
 
   .user-info-row {
     .fullBleed();
+
+    .pending-notice {
+      text-align: right;
+      padding: @contentPadding/2 0 0 0;
+      color: @civicPurple;
+      margin-right: -3px;
+      .pending-count {
+        font-size: small;
+        color: #666;
+      }
+    }
 
     ul {
       margin: 0;

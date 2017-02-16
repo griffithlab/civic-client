@@ -13,7 +13,6 @@
             <span ng-include="'/entityTitle.tpl.html'"></span>
           </div>
         </div>
-
       </div>
       <div class="col-xs-12 col-md-6 tabs {{ viewBackground }}">
         <tabset class="tab-container"
@@ -28,24 +27,33 @@
                ng-click="go(tab)">
           </tab>
         </tabset>
-        <div class="tab-info" ng-if="vm.pendingFields.length > 0">
-          <span tooltip-template="'/pendingTooltip.tpl.html'"
-                tooltip-placement="left"
-                tooltip-append-to-body="true">
-            <i class="glyphicon glyphicon-exclamation-sign"></i>
-          </span>
+        <div class="tab-info">
+          <i popover-template="'settingsPopover.tpl.html'"
+             popover-title="{{vm.type}} Settings"
+             popover-placement="left"
+             class="glyphicon glyphicon-cog"></i>
         </div>
       </div>
     </div>
   </div>
   <div class="user-info-row">
     <div class="row">
-      <div class="col-xs-12 {{ viewBackground }}">
+      <div class="{{ viewBackground }}" ng-class="{ 'col-xs-11': vm.pendingFields.length > 0, 'col-xs-12': vm.pendingFields.length === 0 }">
         <ul class="actions-list">
           <li>
             <action-block actions="vm.actions"></action-block>
           </li>
         </ul>
+      </div>
+      <div class="col-xs-1 {{ viewBackground }}" ng-show="vm.pendingFields.length > 0">
+        <div ng-if="vm.pendingFields.length > 0" class="pending-notice">
+          <span tooltip-template="'/pendingTooltip.tpl.html'"
+                tooltip-placement="left"
+                tooltip-append-to-body="true">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+            <span class="pending-count"></span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -68,4 +76,14 @@
       <li ng-repeat="field in vm.pendingFields">{{ field | keyToLabel}}</li>
     </ul>
 </div>
+</script>
+
+<script type="text/ng-template" id="settingsPopover.tpl.html">
+  <div class="settings-content">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" >Receive notifications
+      </label>
+    </div>
+  </div>
 </script>

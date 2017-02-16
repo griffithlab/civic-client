@@ -63,7 +63,7 @@
       display: inline-block;
       margin-top: @contentPadding/2;
       margin-right: @contentPadding/2;
-      a {
+      .variant-tag {
         display: block;
         text-decoration: none;
         padding: @tabPaddingV @tabPaddingH;
@@ -73,12 +73,27 @@
 
         &:hover, &.active {
           border-color: @civicPurple;
-          color: @civicPurple;
+          .variant-name {
+            color: @civicPurple;
+          }
         }
+        .pending-alert {
 
+        }
+        .pending-alert.variant {
+          color: lighten(@civicPurple, 30%) !important;
+        }
+        .pending-alert.evidence {
+          color: #F3BC94;
+        }
+        .pending-alert.both {
+          color: @civicRed !important;
+        }
         &.active {
-          font-weight: bold;
-          text-decoration: underline;
+          .variant-name {
+            font-weight: bold;
+            text-decoration: underline;
+          }
         }
 
         &.statusRejected {
