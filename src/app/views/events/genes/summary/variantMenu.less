@@ -63,7 +63,7 @@
       display: inline-block;
       margin-top: @contentPadding/2;
       margin-right: @contentPadding/2;
-      a {
+      .variant-tag {
         display: block;
         text-decoration: none;
         padding: @tabPaddingV @tabPaddingH;
@@ -75,10 +75,23 @@
           border-color: @civicPurple;
           color: @civicPurple;
         }
+        .pending-alert {
 
+        }
+        .pending-alert.var {
+          color: inherit;
+        }
+        .pending-alert.evidence {
+          color: orange;
+        }
+        .pending-alert.both {
+          color: red;
+        }
         &.active {
-          font-weight: bold;
-          text-decoration: underline;
+          .variant-name {
+            font-weight: bold;
+            text-decoration: underline;
+          }
         }
 
         &.statusRejected {

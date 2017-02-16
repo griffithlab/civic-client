@@ -50,8 +50,12 @@
   <script type="text/ng-template" id="variantTag.tpl.html">
     <span tooltip="{{'Evidence Items: ' + variant.evidence_items.accepted_count}}">
     <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
+       class="variant-tag"
        ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">
-      <span ng-bind-html="variant.name | highlightSearch:query">Variant Name</span>
+      <i class="glyphicon glyphicon-exclamation-sign pending-alert"
+         ng-if="variant.statuses.has_pending_fields === true || variant.statuses.has_pending_evidence === true"
+      ng-class="{'variant': variant.statuses.has_pending_fields === true, 'evidence': variant.statuses.has_pending_evidence === true, both: variant.statuses.has_pending_fields === true && variant.statuses.has_pending_evidence === true }"></i>
+      <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
     </a>
     </span>
   </script>

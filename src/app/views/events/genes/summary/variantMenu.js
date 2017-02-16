@@ -16,9 +16,16 @@
   //@ngInject
   function VariantMenuController($scope, $state, $stateParams, Genes, Security, _) {
     $scope.gene = Genes.data.item;
-    $scope.variants = Genes.data.variants;
     $scope.stateParams = $stateParams;
     $scope.hasHiddenVariants = false;
+
+    $scope.variants = _.map(Genes.data.variants, function(variant) {
+      variant.statuses = _.chain(Genes.data.variantStatuses)
+        .find({id:variant.id})
+        .pick(['has_pending_fields', 'has_pending_evidence'])
+        .value();
+      return variant;
+    });
 
     $scope.security = {
       isAuthenticated: Security.isAuthenticated(),

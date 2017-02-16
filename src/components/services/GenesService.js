@@ -137,7 +137,12 @@
           isArray: false,
           cache: cache
         },
-
+        queryVariantStatuses: {
+          method: 'GET',
+          url: '/api/genes/:geneId/variant_statuses',
+          isArray: true,
+          cache: false
+        },
         // Gene Comments Resources
         queryComments: {
           method: 'GET',
@@ -201,6 +206,7 @@
     var variants = [];
     var variantGroups = [];
     var comments = [];
+    var variantStatuses = [];
 
     return {
       initBase: initBase,
@@ -211,6 +217,7 @@
         myGeneInfo: myGeneInfo,
         variants: variants,
         variantGroups: variantGroups,
+        variantStatuses: variantStatuses,
         comments: comments
       },
 
@@ -231,6 +238,7 @@
       // Gene Collections
       queryVariants: queryVariants,
       queryVariantGroups: queryVariantGroups,
+      queryVariantStatuses: queryVariantStatuses,
 
       // Gene Comments
       queryComments: queryComments,
@@ -248,7 +256,8 @@
         get(geneId),
         getMyGeneInfo(geneId),
         queryVariants(geneId),
-        queryVariantGroups(geneId)
+        queryVariantGroups(geneId),
+        queryVariantStatuses(geneId)
       ]);
     }
 
@@ -338,6 +347,14 @@
       return GenesResource.queryVariantGroups({geneId: geneId}).$promise
         .then(function(response) {
           angular.copy(response.records, variantGroups);
+          return response.$promise;
+        });
+    }
+
+    function queryVariantStatuses(geneId) {
+      return GenesResource.queryVariantStatuses({geneId: geneId}).$promise
+        .then(function(response) {
+          angular.copy(response, variantStatuses);
           return response.$promise;
         });
     }
