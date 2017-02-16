@@ -73,19 +73,21 @@
 
         &:hover, &.active {
           border-color: @civicPurple;
-          color: @civicPurple;
+          .variant-name {
+            color: @civicPurple;
+          }
         }
         .pending-alert {
 
         }
-        .pending-alert.var {
-          color: inherit;
+        .pending-alert.variant {
+          color: lighten(@civicPurple, 30%) !important;
         }
         .pending-alert.evidence {
-          color: orange;
+          color: #F3BC94;
         }
         .pending-alert.both {
-          color: red;
+          color: @civicRed !important;
         }
         &.active {
           .variant-name {
