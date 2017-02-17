@@ -37,15 +37,16 @@
     </div>
   </div>
   <div class="user-info-row">
-    <div class="row">
-      <div class="col-xs-11 {{ viewBackground }}">
+    <div class="row {{viewBackground}}">
+      <div class="col-xs-11">
         <ul class="actions-list">
           <li>
             <action-block actions="vm.actions"></action-block>
           </label edits in variant menulabel edits in variant menuli>
         </ul>
       </div>
-      <div class="col-xs-1 {{ viewBackground }}">
+      <div class="col-xs-1">
+        &nbsp;
         <div ng-if="vm.pendingFields.length > 0" class="pending-notice">
           <span tooltip-template="'pendingTooltip.tpl.html'"
                 tooltip-placement="left"
