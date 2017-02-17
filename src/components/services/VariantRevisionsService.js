@@ -242,6 +242,9 @@
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + response.gene_id + '/variants');
           Genes.queryVariants(response.gene_id);
+          // flush variant statuses and refresh
+          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.gene_id);
           return $q.when(response);
         },
         function(error) {

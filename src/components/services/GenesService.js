@@ -141,7 +141,7 @@
           method: 'GET',
           url: '/api/genes/:geneId/variant_statuses',
           isArray: true,
-          cache: false
+          cache: cache
         },
         // Gene Comments Resources
         queryComments: {
