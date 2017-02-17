@@ -183,8 +183,8 @@
           get(response.id);
           Variants.get(variantId);
           // flush variant statuses and refresh
-          cache.remove('/api/genes/' + response.id + '/variant_statuses');
-          Genes.queryVariantStatuses(response.id);
+          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.gene_id);
           return response.$promise;
         });
     }
@@ -198,8 +198,8 @@
           get(response.id);
           Variants.get(variantId);
           // flush variant statuses and refresh
-          cache.remove('/api/genes/' + response.id + '/variant_statuses');
-          Genes.queryVariantStatuses(response.id);
+          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.gene_id);
           return response.$promise;
         });
     }
