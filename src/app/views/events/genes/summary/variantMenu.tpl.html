@@ -48,15 +48,23 @@
   </div>
 
   <script type="text/ng-template" id="variantTag.tpl.html">
-    <span tooltip="{{'Evidence Items: ' + variant.evidence_items.accepted_count}}">
+    <span tooltip-template="'variantTagTooltip.tpl.html'">
     <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
        class="variant-tag"
        ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">
       <i class="glyphicon glyphicon-exclamation-sign pending-alert"
          ng-if="variant.statuses.has_pending_fields === true || variant.statuses.has_pending_evidence === true"
-      ng-class="{'variant': variant.statuses.has_pending_fields === true, 'evidence': variant.statuses.has_pending_evidence === true, both: variant.statuses.has_pending_fields === true && variant.statuses.has_pending_evidence === true }"></i>
+      ng-class="{'pending-changes': variant.statuses.has_pending_fields === true, 'pending-evidence': variant.statuses.has_pending_evidence === true, 'pending-both': variant.statuses.has_pending_fields === true && variant.statuses.has_pending_evidence === true }"></i>
       <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
     </a>
+    </span>
+  </script>
+
+  <script type="text/ng-template" id="variantTagTooltip.tpl.html" >
+    <span>
+      Evidence Items: {{ variant.evidence_items.accepted_count }}<br/>
+      <span ng-if="variant.statuses.has_pending_fields === true" style="display: block;">Has pending changes</span>
+      <span ng-if="variant.statuses.has_pending_evidence === true" style="display: block;">Has pending evidence</span>
     </span>
   </script>
 

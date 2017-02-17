@@ -6,11 +6,11 @@
         <div ng-switch="vm.isAuthenticated()">
           <div ng-switch-when="false">
             <span tooltip="Please sign in to suggest a revision" tooltip-append-to-body="true">
-              <span ng-include="'/entityTitle.tpl.html'"></span>
+              <span ng-include="'entityTitle.tpl.html'"></span>
             </span>
           </div>
           <div ng-switch-when="true">
-            <span ng-include="'/entityTitle.tpl.html'"></span>
+            <span ng-include="'entityTitle.tpl.html'"></span>
           </div>
         </div>
       </div>
@@ -38,20 +38,19 @@
   </div>
   <div class="user-info-row">
     <div class="row">
-      <div class="{{ viewBackground }}" ng-class="{ 'col-xs-11': vm.pendingFields.length > 0, 'col-xs-12': vm.pendingFields.length === 0 }">
+      <div class="col-xs-11 {{ viewBackground }}">
         <ul class="actions-list">
           <li>
             <action-block actions="vm.actions"></action-block>
-          </li>
+          </label edits in variant menulabel edits in variant menuli>
         </ul>
       </div>
-      <div class="col-xs-1 {{ viewBackground }}" ng-show="vm.pendingFields.length > 0">
+      <div class="col-xs-1 {{ viewBackground }}">
         <div ng-if="vm.pendingFields.length > 0" class="pending-notice">
-          <span tooltip-template="'/pendingTooltip.tpl.html'"
+          <span tooltip-template="'pendingTooltip.tpl.html'"
                 tooltip-placement="left"
                 tooltip-append-to-body="true">
-            <i class="glyphicon glyphicon-exclamation-sign"></i>
-            <span class="pending-count"></span>
+            <i class="glyphicon glyphicon-exclamation-sign pending-changes"></i>
           </span>
         </div>
       </div>
@@ -59,7 +58,7 @@
   </div>
 </div>
 
-<script type="text/ng-template" id="/entityTitle.tpl.html">
+<script type="text/ng-template" id="entityTitle.tpl.html">
   <h3 editable-field class="edit-icon-lg tab-name"
       entity-view-model="entityViewModel"
       entity-view-revisions="entityViewRevisions"
@@ -69,7 +68,7 @@
   </h3>
 </script>
 
-<script type="text/ng-template" id="/pendingTooltip.tpl.html">
+<script type="text/ng-template" id="pendingTooltip.tpl.html">
 <div>
     This {{ vm.type.toLowerCase() }} has pending revisions to:
     <ul>
