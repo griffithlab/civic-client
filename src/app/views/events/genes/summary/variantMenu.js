@@ -18,14 +18,7 @@
     $scope.gene = Genes.data.item;
     $scope.stateParams = $stateParams;
     $scope.hasHiddenVariants = false;
-
-    $scope.variants = _.map(Genes.data.variants, function(variant) {
-      variant.statuses = _.chain(Genes.data.variantStatuses)
-        .find({id:variant.id})
-        .pick(['has_pending_fields', 'has_pending_evidence'])
-        .value();
-      return variant;
-    });
+    $scope.variants = Genes.data.variants;
 
     $scope.security = {
       isAuthenticated: Security.isAuthenticated(),
@@ -53,6 +46,18 @@
         $scope.addVarGroupUrl = addVarGroupUrlBase + '?geneId=' + stateParams.geneId;
       }
     });
+
+    $scope.$watchCollection(
+      function() { return Genes.data.variantStatuses; },
+      function(variantStatuses) {
+        $scope.variants = _.map(Genes.data.variants, function(variant) {
+          variant.statuses = _.chain(variantStatuses)
+            .find({id:variant.id})
+            .pick(['has_pending_fields', 'has_pending_evidence'])
+            .value();
+          return variant;
+        });
+      });
 
     $scope.$watchCollection(
       function() { return Genes.data.variants; },

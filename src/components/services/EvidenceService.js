@@ -110,7 +110,7 @@
   }
 
   // @ngInject
-  function EvidenceService(EvidenceResource, Variants, $q, $cacheFactory) {
+  function EvidenceService(EvidenceResource, Variants, Genes, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
     // Base Evidence and Evidence Collection
@@ -165,6 +165,11 @@
           // flush cached variant and evidence item lists
           cache.remove('/api/variants/' + response.variant.id);
           cache.remove('/api/variants/' + response.variant.id + '/evidence_items');
+
+          // flush variant statuses and refresh
+          cache.remove('/api/genes/' + response.gene.id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.gene.id);
+
           return response.$promise;
         });
     }
@@ -177,6 +182,9 @@
           cache.remove('/api/variants/' + variantId + '/evidence_items');
           get(response.id);
           Variants.get(variantId);
+          // flush variant statuses and refresh
+          cache.remove('/api/genes/' + response.id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.id);
           return response.$promise;
         });
     }
@@ -189,6 +197,9 @@
           cache.remove('/api/variants/' + variantId + '/evidence_items');
           get(response.id);
           Variants.get(variantId);
+          // flush variant statuses and refresh
+          cache.remove('/api/genes/' + response.id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.id);
           return response.$promise;
         });
     }
