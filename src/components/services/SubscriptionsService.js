@@ -10,13 +10,13 @@
     return $resource('',
       { },
       {
-        subscriptions: {
+        query: {
           url: '/api/subscriptions',
           method: 'GET',
           isArray: false,
           cache: false
         },
-        subscription: {
+        get: {
           url: '/api/subscriptions/:subscriptionId',
           params: {
             subscriptionId: '@subscriptionId'
@@ -42,19 +42,27 @@
 
   // @ngInject
   function SubscriptionsService(SubscriptionsResource) {
-    var item = { };
     var data = {};
     return {
       data: {
-        subscriptions: item
+        subscriptions: []
       },
-      getSubscriptions: getSubscriptions,
+      query: query,
+      get: get,
       unsubscribe: unsubscribe,
       subscribe: subscribe
     };
 
-    function getSubscriptions() {
-      return SubscriptionsResource.subscriptions().$promise
+    function query() {
+      return SubscriptionsResource.query().$promise
+        .then(function(response) {
+          angular.copy(response.records, data.subscriptions);
+          return response.$promise;
+        });
+    }
+
+    function get(subscriptionId) {
+      return SubscriptionsResource.get({subscriptionId: subscriptionId}).$promise
         .then(function(response) {
           angular.copy(response.records, data.subscriptions);
           return response.$promise;
@@ -64,14 +72,14 @@
     function unsubscribe(subscriptionId) {
       return SubscriptionsResource.unsubscribe(subscriptionId).$promise
         .then(function(response) {
-          getSubscriptions();
+          query();
           return response.$promise;
         });
     }
     function subscribe() {
       return SubscriptionsResource.subscribe().$promise
         .then(function(response) {
-          getSubscriptions();
+          query();
           return response.$promise;
         });
     }
