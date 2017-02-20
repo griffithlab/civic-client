@@ -76,7 +76,7 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>http://civic.genome.wustl.edu/links.html</loc>
+    <loc>http://civic.genome.wustl.edu/list.html</loc>
     <priority>0.5</priority>
     <changefreq>daily</changefreq>
   </url>
