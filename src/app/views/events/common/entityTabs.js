@@ -65,13 +65,13 @@
         vm.pendingFields = _.keys(entityViewRevisions.data.pendingFields);
         vm.hasPendingFields = fields.length > 0;
       });
-    }
+    };
 
     fetchPending();
 
     scope.$on('revisionDecision', function(event, args){
       fetchPending();
-    })
+    });
 
     vm.anchorId = _.kebabCase(vm.type);
 
@@ -118,6 +118,8 @@
     vm.isAuthenticated = Security.isAuthenticated;
     vm.isEditor = Security.isEditor;
     vm.isAdmin = Security.isAdmin;
+    vm.subscribed = null;
+    vm.hasSubscription = false;
 
     $scope.scroll = function() {
       var loc = $location.hash();
@@ -130,12 +132,24 @@
       }
     };
 
+    // set subscription flag
+    $scope.$watchCollection(function() {return Subscriptions.data.collection; }, function(subscriptions) {
+      console.log('$watch subscriptions called.');
+      var subscribableType = _.startCase(_.camelCase($scope.entityViewModel.data.item.type));
+      var paramType = $scope.entityViewModel.data.item.type;
+      var entityId = $scope.entityViewModel.data.item.id;
+      $scope.vm.subscription = _.find(subscriptions, function(sub) {
+        return sub.subscribable.type === subscribableType && sub.subscribable.state_params[paramType].id === entityId;
+      });
+      $scope.vm.hasSubscription = _.isObject($scope.subscription);
+    });
+
     // store latest stateParams on rootscope, primarily so the Add Evidence button can
     // include gene and variantIds in the URL
     $rootScope.stateParams = $stateParams;
 
     // TODO not sure why this watch is necessary for tabs to be properly set to active on 1st load
-    var unwatch = $scope.$watchCollection('entityViewModel', function() {
+    var unwatch = $scope.$watchCollection('entityViewModel', function(viewModel) {
       var currentStateEqualTo = function (tab) {
         var isEqual = $state.is(tab.route, tab.params, tab.options);
         return isEqual;

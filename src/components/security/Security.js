@@ -92,7 +92,6 @@
 
       // Ask the backend to see if a user is already authenticated - this may be from a previous session.
       requestCurrentUser: function() {
-        Subscriptions.getSubscriptions();
         if ( service.isAuthenticated() ) {
           return $q.when(service.currentUser);
         } else {
@@ -101,6 +100,7 @@
             // and if there are any we assume an authenticated user
             if(Object.keys(response.data).length > 0) {
               service.currentUser = response.data;
+              Subscriptions.query();
             } else {
               service.currentUser = null;
             }
@@ -110,12 +110,13 @@
       },
 
       reloadCurrentUser: function() {
-        Subscriptions.getSubscriptions();
+        Subscriptions.query();
         return $http.get('/api/current_user.json').then(function(response) {
           // unauthenticated request returns an empty JSON object, so we count the keys
           // and if there are any we assume an authenticated user
           if(Object.keys(response.data).length > 0) {
             service.currentUser = response.data;
+            Subscriptions.query();
           } else {
             service.currentUser = null;
           }

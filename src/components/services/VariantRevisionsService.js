@@ -25,11 +25,13 @@
           isArray: true,
           cache: cache
         },
+
         get: {
           method: 'GET',
           isArray: false,
           cache: cache
         },
+
         getPendingFields: {
           method: 'GET',
           url: '/api/variants/:variantId/fields_with_pending_changes',
@@ -38,10 +40,12 @@
           },
           cache: false
         },
+
         submitRevision: {
           method: 'POST',
           cache: false
         },
+
         acceptRevision: {
           method: 'POST',
           url: '/api/variants/:variantId/suggested_changes/:revisionId/accept',
@@ -52,6 +56,7 @@
           },
           cache: false
         },
+
         rejectRevision: {
           method: 'POST',
           url: '/api/variants/:variantId/suggested_changes/:revisionId/reject',
@@ -73,6 +78,7 @@
           },
           cache: false
         },
+
         updateComment: {
           method: 'PATCH',
           url: '/api/variants/:variantId/suggested_changes/:revisionId/comments/:commentId',
@@ -85,6 +91,7 @@
             response: cacheResponseInterceptor
           }
         },
+
         queryComments: {
           method: 'GET',
           url: '/api/variants/:variantId/suggested_changes/:revisionId/comments',
@@ -95,6 +102,7 @@
           isArray: true,
           cache: cache
         },
+
         getComment: {
           method: 'GET',
           url: '/api/variants/:variantId/suggested_changes/:revisionId/comments/:commentId',
@@ -106,6 +114,7 @@
           isArray: false,
           cache: cache
         },
+
         deleteComment: {
           method: 'DELETE',
           url: '/api/variants/:variantId/suggested_changes/:revisionId/comments/:commentId',
@@ -214,6 +223,10 @@
       return VariantRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
           cache.remove('/api/variants/' + reqObj.id + '/suggested_changes/');
+
+          // flush variant statuses and refresh
+          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.gene_id);
           return $q.when(response);
         },
         function(error) { //fail
@@ -242,6 +255,10 @@
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + response.gene_id + '/variants');
           Genes.queryVariants(response.gene_id);
+
+          // flush variant statuses and refresh
+          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.gene_id);
           return $q.when(response);
         },
         function(error) {
@@ -259,6 +276,10 @@
           // flush revision and refresh
           cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId);
           get(variantId, revisionId);
+
+          // flush variant statuses and refresh
+          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses');
+          Genes.queryVariantStatuses(response.gene_id);
 
           return $q.when(response);
         },

@@ -141,7 +141,7 @@
           method: 'GET',
           url: '/api/genes/:geneId/variant_statuses',
           isArray: true,
-          cache: false
+          cache: cache
         },
         // Gene Comments Resources
         queryComments: {
@@ -352,7 +352,7 @@
     }
 
     function queryVariantStatuses(geneId) {
-      return GenesResource.queryVariantStatuses({geneId: geneId}).$promise
+      return GenesResource.queryVariantStatuses({geneId: geneId, count: 999}).$promise
         .then(function(response) {
           angular.copy(response, variantStatuses);
           return response.$promise;
