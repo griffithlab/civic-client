@@ -141,7 +141,7 @@
       $scope.vm.subscription = _.find(subscriptions, function(sub) {
         return sub.subscribable.type === subscribableType && sub.subscribable.state_params[paramType].id === entityId;
       });
-      $scope.vm.hasSubscription = _.isObject($scope.subscription);
+      $scope.vm.hasSubscription = _.isObject($scope.vm.subscription);
     });
 
     // store latest stateParams on rootscope, primarily so the Add Evidence button can

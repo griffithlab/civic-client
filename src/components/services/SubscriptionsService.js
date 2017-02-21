@@ -12,6 +12,9 @@
       {
         query: {
           url: '/api/subscriptions',
+          params: {
+            count: 999
+          },
           method: 'GET',
           isArray: false,
           cache: false
