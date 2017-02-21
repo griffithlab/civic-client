@@ -121,6 +121,14 @@
     vm.subscribed = null;
     vm.hasSubscription = false;
 
+    vm.toggleSubscription = function(subscription) {
+      console.log('toggling subscription: ');
+      if(_.isObject(subscription)) {
+        console.log('has subscription, unsubscribing.');
+      } else {
+        console.log('does not have subscription, subscribing');
+      }
+    };
     $scope.scroll = function() {
       var loc = $location.hash();
       if(!_.isEmpty(loc) &&
