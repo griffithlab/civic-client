@@ -81,9 +81,10 @@
   <div class="settings-content">
     <div class="checkbox">
       <label>
-        <input type="checkbox">
+        <input type="checkbox" ng-checked="vm.hasSubscription">
         <span tooltip="If checked, you will receive notifications when users update or comment upon this {{vm.type|lowercase}}{{ vm.type !== 'EVIDENCE' ?  ' or its child entities.' : '.' }}">Receive notifications</span>
       </label>
     </div>
+    hasSubscription: {{ vm.hasSubscription }}
   </div>
 </script>

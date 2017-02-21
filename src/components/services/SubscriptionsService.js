@@ -42,10 +42,12 @@
 
   // @ngInject
   function SubscriptionsService(SubscriptionsResource) {
-    var data = {};
+    var collection = [];
+    var item = {};
     return {
       data: {
-        subscriptions: []
+        item: item,
+        collection: collection
       },
       query: query,
       get: get,
@@ -56,7 +58,7 @@
     function query() {
       return SubscriptionsResource.query().$promise
         .then(function(response) {
-          angular.copy(response.records, data.subscriptions);
+          angular.copy(response.records, collection);
           return response.$promise;
         });
     }
@@ -64,7 +66,7 @@
     function get(subscriptionId) {
       return SubscriptionsResource.get({subscriptionId: subscriptionId}).$promise
         .then(function(response) {
-          angular.copy(response.records, data.subscriptions);
+          angular.copy(response.records, item);
           return response.$promise;
         });
     }
