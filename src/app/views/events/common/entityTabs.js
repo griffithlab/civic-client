@@ -125,8 +125,13 @@
       console.log('toggling subscription: ');
       if(_.isObject(subscription)) {
         console.log('has subscription, unsubscribing.');
+        Subscriptions.unsubscribe(subscription.id)
+          .then(function(response) { console.log('unsubscribe successful.');});
       } else {
         console.log('does not have subscription, subscribing');
+        var subscribableType = _.startCase(_.camelCase($scope.entityViewModel.data.item.type));
+        Subscriptions.subscribe({subscribable_type: subscribableType, subscribable_id: $scope.entityViewModel.data.item.id})
+          .then(function(response) {console.log('subscription successful.');});
       }
     };
     $scope.scroll = function() {

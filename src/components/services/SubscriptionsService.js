@@ -75,14 +75,15 @@
     }
 
     function unsubscribe(subscriptionId) {
-      return SubscriptionsResource.unsubscribe(subscriptionId).$promise
+      return SubscriptionsResource.unsubscribe({subscriptionId: subscriptionId}).$promise
         .then(function(response) {
           query();
           return response.$promise;
         });
     }
-    function subscribe() {
-      return SubscriptionsResource.subscribe().$promise
+    function subscribe(reqObj) {
+      // reqObj: { subscribable_type: ['Variant' | 'Gene' | 'EvidenceItem'], subscribable_id: [variantId | geneId | evidenceId]}
+      return SubscriptionsResource.subscribe(reqObj).$promise
         .then(function(response) {
           query();
           return response.$promise;
