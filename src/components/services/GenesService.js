@@ -352,8 +352,10 @@
     }
 
     function queryVariantStatuses(geneId) {
+      cache.info();
       return GenesResource.queryVariantStatuses({geneId: geneId, count: 999}).$promise
         .then(function(response) {
+          cache.info();
           angular.copy(response, variantStatuses);
           return response.$promise;
         });
