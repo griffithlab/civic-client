@@ -56,6 +56,7 @@
          ng-if="variant.statuses.has_pending_fields === true || variant.statuses.has_pending_evidence === true"
       ng-class="{'pending-changes': variant.statuses.has_pending_fields === true, 'pending-evidence': variant.statuses.has_pending_evidence === true, 'pending-both': variant.statuses.has_pending_fields === true && variant.statuses.has_pending_evidence === true }"></i>
       <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
+      <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.entrez_name">Gene Name</span>)</span>
     </a>
     </span>
   </script>

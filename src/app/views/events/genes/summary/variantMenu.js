@@ -87,9 +87,9 @@
         $scope.variantGroups = _.map(variantGroups, function(vg){
           // determine if all variants in this variant group are from a single gene
           // (if so, template will show gene names in variant tags)
-          var singleGene = _.every(vg.variants, { gene_id: vg.variants[0].gene_id });
+          var multiGeneGroup = !_.every(vg.variants, { gene_id: vg.variants[0].gene_id });
           vg.variants = _.map(vg.variants, function(variant) {
-            variant.singleGene = singleGene;
+            variant.multiGeneGroup = multiGeneGroup;
             return variant;
           });
           mapVariantStatuses(vg.variants, Genes.data.variantStatuses);
