@@ -49,7 +49,7 @@
 
   <script type="text/ng-template" id="variantTag.tpl.html">
     <span tooltip-template="'variantTagTooltip.tpl.html'">
-    <a ui-sref="events.genes.summary.variants.summary({ geneId: gene.id, variantId: variant.id, '#': 'variant' })"
+    <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
        class="variant-tag"
        ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">
       <i class="glyphicon glyphicon-exclamation-sign pending-alert"
