@@ -166,10 +166,6 @@
           cache.remove('/api/variants/' + response.variant.id);
           cache.remove('/api/variants/' + response.variant.id + '/evidence_items');
 
-          // flush variant statuses and refresh
-          cache.remove('/api/genes/' + response.gene.id + '/variant_statuses?count=999');
-          Genes.queryVariantStatuses(response.gene.id);
-
           return response.$promise;
         });
     }
@@ -182,9 +178,7 @@
           cache.remove('/api/variants/' + variantId + '/evidence_items');
           get(response.id);
           Variants.get(variantId);
-          // flush variant statuses and refresh
-          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses?count=999');
-          Genes.queryVariantStatuses(response.gene_id);
+
           return response.$promise;
         });
     }
@@ -197,9 +191,7 @@
           cache.remove('/api/variants/' + variantId + '/evidence_items');
           get(response.id);
           Variants.get(variantId);
-          // flush variant statuses and refresh
-          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses?count=999');
-          Genes.queryVariantStatuses(response.gene_id);
+
           return response.$promise;
         });
     }

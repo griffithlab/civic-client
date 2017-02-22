@@ -224,9 +224,10 @@
         function(response) { // success
           cache.remove('/api/variants/' + reqObj.id + '/suggested_changes/');
 
-          // flush variant statuses and refresh
-          cache.remove('/api/genes/' + reqObj.gene_id + '/variant_statuses?count=999');
-          Genes.queryVariantStatuses(reqObj.gene_id);
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + reqObj.gene_id + '/variants');
+          Genes.queryVariants(reqObj.gene_id);
+
           return $q.when(response);
         },
         function(error) { //fail
@@ -256,9 +257,6 @@
           cache.remove('/api/genes/' + response.gene_id + '/variants');
           Genes.queryVariants(response.gene_id);
 
-          // flush variant statuses and refresh
-          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses?count=999');
-          Genes.queryVariantStatuses(response.gene_id);
           return $q.when(response);
         },
         function(error) {
@@ -277,9 +275,9 @@
           cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId);
           get(variantId, revisionId);
 
-          // flush variant statuses and refresh
-          cache.remove('/api/genes/' + response.gene_id + '/variant_statuses?count=999');
-          Genes.queryVariantStatuses(response.gene_id);
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants');
+          Genes.queryVariants(response.gene_id);
 
           return $q.when(response);
         },

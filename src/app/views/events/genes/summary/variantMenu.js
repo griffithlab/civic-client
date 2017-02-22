@@ -41,47 +41,22 @@
 
     var addVarGroupUrlBase = $scope.addVarGroupUrl = '#/add/variantGroup';
 
-    function mapVariantStatuses(variants, statuses) {
-      return _.map(variants, function(variant) {
-        variant.statuses = _.chain(statuses)
-          .find({id:variant.id})
-          .pick(['has_pending_fields', 'has_pending_evidence'])
-          .value();
-        return variant;
-      });
-    }
-
     $scope.$watchCollection('stateParams', function(stateParams){
       if(_.has(stateParams, 'geneId')) {
         $scope.addVarGroupUrl = addVarGroupUrlBase + '?geneId=' + stateParams.geneId;
       }
     });
 
-    $scope.$watchCollection(
-      function() { return Genes.data.variantStatuses; },
-      function(variantStatuses) {
-
-        $scope.variants = mapVariantStatuses(Genes.data.variants, variantStatuses);
-        // _.map(Genes.data.variants, function(variant) {
-        //   variant.statuses = _.chain(variantStatuses)
-        //     .find({id:variant.id})
-        //     .pick(['has_pending_fields', 'has_pending_evidence'])
-        //     .value();
-        //   return variant;
-        // });
-      });
-
-    $scope.$watchCollection(
+    $scope.$watch(
       function() { return Genes.data.variants; },
       function(variants){
         $scope.hasHiddenVariants = !_.every(variants, function(variant) {
           return $scope.hasValidEvidenceItems(variant);
         });
         $scope.variants = variants;
-      });
+      }, true);
 
-
-    $scope.$watchCollection(
+    $scope.$watch(
       function() { return Genes.data.variantGroups; },
       function(variantGroups){
         $scope.variantGroups = _.map(variantGroups, function(vg){
@@ -92,9 +67,8 @@
             variant.multiGeneGroup = multiGeneGroup;
             return variant;
           });
-          mapVariantStatuses(vg.variants, Genes.data.variantStatuses);
           return vg;
         });
-      });
+      }, true);
   }
 })();

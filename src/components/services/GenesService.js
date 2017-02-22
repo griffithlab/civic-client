@@ -137,12 +137,7 @@
           isArray: false,
           cache: cache
         },
-        queryVariantStatuses: {
-          method: 'GET',
-          url: '/api/genes/:geneId/variant_statuses',
-          isArray: true,
-          cache: cache
-        },
+
         // Gene Comments Resources
         queryComments: {
           method: 'GET',
@@ -238,7 +233,6 @@
       // Gene Collections
       queryVariants: queryVariants,
       queryVariantGroups: queryVariantGroups,
-      queryVariantStatuses: queryVariantStatuses,
 
       // Gene Comments
       queryComments: queryComments,
@@ -251,13 +245,22 @@
       beginsWith: beginsWith
     };
 
+    function mapVariantStatuses(variants, statuses) {
+      return _.map(variants, function(variant) {
+        variant.statuses = _.chain(statuses)
+          .find({id:variant.id})
+          .pick(['has_pending_fields', 'has_pending_evidence'])
+          .value();
+        return variant;
+      });
+    }
+
     function initBase(geneId) {
       return $q.all([
         get(geneId),
         getMyGeneInfo(geneId),
         queryVariants(geneId),
-        queryVariantGroups(geneId),
-        queryVariantStatuses(geneId)
+        queryVariantGroups(geneId)
       ]);
     }
 
@@ -347,16 +350,6 @@
       return GenesResource.queryVariantGroups({geneId: geneId}).$promise
         .then(function(response) {
           angular.copy(response.records, variantGroups);
-          return response.$promise;
-        });
-    }
-
-    function queryVariantStatuses(geneId) {
-      cache.info();
-      return GenesResource.queryVariantStatuses({geneId: geneId, count: 999}).$promise
-        .then(function(response) {
-          cache.info();
-          angular.copy(response, variantStatuses);
           return response.$promise;
         });
     }
