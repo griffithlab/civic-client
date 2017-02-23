@@ -6,7 +6,8 @@
   // @ngInject
   function SearchController($scope,
                             _,
-                            Diseases) {
+                            Diseases,
+                            ConfigService) {
     var vm = $scope.vm = {};
 
     vm.suggestedSearch = {};
@@ -1506,12 +1507,15 @@
               },
               {
                 key: 'parameters[0]',
-                type: 'input',
+                type: 'queryBuilderSelect',
                 className: 'inline-field',
-                hideExpression: 'model.name === "is_empty"',
+                data: {
+                  defaultValue: '1'
+                },
                 templateOptions: {
                   label: '',
-                  required: true
+                  required: true,
+                  options: ConfigService.valid_chromosomes
                 }
               }
             ],
@@ -1663,12 +1667,15 @@
               },
               {
                 key: 'parameters[0]',
-                type: 'input',
+                type: 'queryBuilderSelect',
                 className: 'inline-field',
-                hideExpression: 'model.name === "is_empty"',
+                data: {
+                  defaultValue: '1'
+                },
                 templateOptions: {
                   label: '',
-                  required: true
+                  required: true,
+                  options: ConfigService.valid_chromosomes
                 }
               }
             ],
