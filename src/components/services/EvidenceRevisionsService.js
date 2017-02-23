@@ -160,7 +160,8 @@
     $q,
     Variants,
     EvidenceRevisionsResource,
-    Evidence) {
+    Evidence,
+    Genes) {
     // fetch evidence cache, need to delete evidence record when revision is submitted
     var cache = $cacheFactory.get('$http');
 
@@ -259,6 +260,11 @@
       return EvidenceRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
           cache.remove('/api/evidence_items/' + reqObj.id + '/suggested_changes/');
+
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + reqObj.gene_id + '/variants?count=999');
+          Genes.queryVariants(reqObj.gene_id);
+
           return $q.when(response);
         },
         function(error) { //fail
@@ -282,6 +288,11 @@
           get(evidenceId, revisionId);
           cache.remove('/api/evidence_items/' + evidenceId );
           Evidence.get(evidenceId);
+
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
+          Genes.queryVariants(response.gene_id);
+
           return $q.when(response);
         },
         function(error) {
@@ -295,6 +306,11 @@
           query(evidenceId);
           cache.remove('/api/evidence_items/' + response.id + '/suggested_changes/' + revisionId);
           get(evidenceId, revisionId);
+
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
+          Genes.queryVariants(response.gene_id);
+
           return $q.when(response);
         },
         function(error) {

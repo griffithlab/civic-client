@@ -225,7 +225,7 @@
           cache.remove('/api/variants/' + reqObj.id + '/suggested_changes/');
 
           // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + reqObj.gene_id + '/variants');
+          cache.remove('/api/genes/' + reqObj.gene_id + '/variants?count=999');
           Genes.queryVariants(reqObj.gene_id);
 
           return $q.when(response);
@@ -254,7 +254,7 @@
           get(variantId, revisionId);
 
           // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + response.gene_id + '/variants');
+          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
 
           return $q.when(response);
@@ -276,7 +276,7 @@
           get(variantId, revisionId);
 
           // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + response.gene_id + '/variants');
+          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
 
           return $q.when(response);

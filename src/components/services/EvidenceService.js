@@ -166,6 +166,10 @@
           cache.remove('/api/variants/' + response.variant.id);
           cache.remove('/api/variants/' + response.variant.id + '/evidence_items');
 
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + reqObj.gene.id + '/variants?count=999');
+          Genes.queryVariants(reqObj.gene.id);
+
           return response.$promise;
         });
     }
@@ -179,6 +183,10 @@
           get(response.id);
           Variants.get(variantId);
 
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
+          Genes.queryVariants(response.gene_id);
+
           return response.$promise;
         });
     }
@@ -191,6 +199,10 @@
           cache.remove('/api/variants/' + variantId + '/evidence_items');
           get(response.id);
           Variants.get(variantId);
+
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
+          Genes.queryVariants(response.gene_id);
 
           return response.$promise;
         });

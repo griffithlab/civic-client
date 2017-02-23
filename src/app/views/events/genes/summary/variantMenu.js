@@ -47,14 +47,14 @@
       }
     });
 
-    $scope.$watch(
+    $scope.$watchCollection(
       function() { return Genes.data.variants; },
       function(variants){
         $scope.hasHiddenVariants = !_.every(variants, function(variant) {
           return $scope.hasValidEvidenceItems(variant);
         });
         $scope.variants = variants;
-      }, true);
+      });
 
     $scope.$watch(
       function() { return Genes.data.variantGroups; },
