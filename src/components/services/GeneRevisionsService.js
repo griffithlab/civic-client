@@ -120,7 +120,7 @@
     );
   }
 
-  function GeneRevisionsService(GeneRevisionsResource, Genes, $cacheFactory, $q) {
+  function GeneRevisionsService(GeneRevisionsResource, Genes, Subscriptions, $cacheFactory, $q) {
     // fetch genes cache, need to delete gene record when revision is submitted
     var cache = $cacheFactory.get('$http');
 
@@ -210,6 +210,11 @@
       return GeneRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
           cache.remove('/api/genes/' + reqObj.id + '/suggested_changes/');
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) { //fail
@@ -226,6 +231,11 @@
           get(geneId, revisionId);
           cache.remove('/api/genes/' + geneId );
           Genes.get(geneId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) {
@@ -239,6 +249,11 @@
           query(geneId);
           cache.remove('/api/genes/' + response.id + '/suggested_changes/' + revisionId);
           get(geneId, revisionId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) {
@@ -266,6 +281,11 @@
         .then(function(response) {
           cache.remove('/api/genes/' + reqObj.geneId + '/suggested_changes/' + reqObj.revisionId + '/comments');
           queryComments(reqObj.geneId, reqObj.revisionId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }

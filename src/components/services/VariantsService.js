@@ -132,7 +132,7 @@
   }
 
   // @ngInject
-  function VariantsService(VariantsResource, $q, $cacheFactory) {
+  function VariantsService(VariantsResource, Subscriptions, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
     // Base Variant and Variant Collection
@@ -226,6 +226,11 @@
         function(response) { // success
           cache.remove('/api/variants/' + response.id);
           get(reqObj.variantId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) { // fail
@@ -270,6 +275,11 @@
         .then(function(response) {
           cache.remove('/api/variants/' + reqObj.variantId + '/comments');
           queryComments(reqObj.variantId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }

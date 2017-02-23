@@ -107,7 +107,7 @@
   }
 
   // @ngInject
-  function VariantGroupsService(VariantGroupsResource, $q, $cacheFactory) {
+  function VariantGroupsService(VariantGroupsResource, Subscriptions, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
     // Base VariantGroup and VariantGroup Collection
     var item = {};
@@ -237,6 +237,11 @@
         .then(function(response) {
           cache.remove('/api/variant_groups/' + reqObj.variantGroupId + '/comments');
           queryComments(reqObj.variantGroupId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }

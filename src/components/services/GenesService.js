@@ -187,7 +187,7 @@
   }
 
   // @ngInject
-  function GenesService(GenesResource, $q, $cacheFactory) {
+  function GenesService(GenesResource, Subscriptions, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
     // Base Gene and Gene Collection
@@ -373,6 +373,11 @@
         .then(function(response) {
           cache.remove('/api/genes/' + reqObj.geneId + '/comments');
           queryComments(reqObj.geneId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }

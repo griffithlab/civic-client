@@ -132,6 +132,7 @@
   function VariantRevisionsService(VariantRevisionsResource,
                                    Variants,
                                    Genes,
+                                   Subscriptions,
                                    $cacheFactory,
                                    $q) {
     // fetch variants cache, need to delete variant record when revision is submitted
@@ -228,6 +229,10 @@
           cache.remove('/api/genes/' + reqObj.gene_id + '/variants?count=999');
           Genes.queryVariants(reqObj.gene_id);
 
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) { //fail
@@ -257,6 +262,10 @@
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
 
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) {
@@ -278,6 +287,10 @@
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
 
           return $q.when(response);
         },
@@ -305,6 +318,11 @@
         .then(function(response) {
           cache.remove('/api/variants/' + reqObj.variantId + '/suggested_changes/' + reqObj.revisionId + '/comments');
           queryComments(reqObj.variantId, reqObj.revisionId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }

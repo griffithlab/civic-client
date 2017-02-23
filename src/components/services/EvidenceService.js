@@ -110,7 +110,7 @@
   }
 
   // @ngInject
-  function EvidenceService(EvidenceResource, Variants, Genes, $q, $cacheFactory) {
+  function EvidenceService(EvidenceResource, Variants, Genes, Subscriptions, $q, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
     // Base Evidence and Evidence Collection
@@ -266,6 +266,11 @@
         .then(function(response) {
           cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/comments');
           queryComments(reqObj.evidenceId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }

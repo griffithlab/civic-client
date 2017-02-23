@@ -125,6 +125,7 @@
   function VariantGroupRevisionsService(VariantGroupRevisionsResource,
                                         VariantGroups,
                                         Genes,
+                                        Subscriptions,
                                         $cacheFactory,
                                         $q,
                                         _) {
@@ -217,6 +218,11 @@
       return VariantGroupRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
           cache.remove('/api/variant_groups/' + reqObj.id + '/suggested_changes/');
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) { //fail
@@ -239,6 +245,11 @@
             cache.remove('/api/genes/' + id + '/variant_groups');
             Genes.queryVariantGroups(id);
           });
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) {
@@ -252,6 +263,11 @@
           query(variantGroupId);
           cache.remove('/api/variant_groups/' + response.id + '/suggested_changes/' + revisionId);
           get(variantGroupId, revisionId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) {
@@ -279,6 +295,11 @@
         .then(function(response) {
           cache.remove('/api/variant_groups/' + reqObj.variantGroupId + '/suggested_changes/' + reqObj.revisionId + '/comments');
           queryComments(reqObj.variantGroupId, reqObj.revisionId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }

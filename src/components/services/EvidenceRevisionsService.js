@@ -158,6 +158,7 @@
   function EvidenceRevisionsService(
     $cacheFactory,
     $q,
+    Subscriptions,
     Variants,
     EvidenceRevisionsResource,
     Evidence,
@@ -265,6 +266,10 @@
           cache.remove('/api/genes/' + reqObj.gene_id + '/variants?count=999');
           Genes.queryVariants(reqObj.gene_id);
 
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) { //fail
@@ -293,6 +298,10 @@
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
 
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return $q.when(response);
         },
         function(error) {
@@ -310,6 +319,10 @@
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
 
           return $q.when(response);
         },
@@ -353,6 +366,11 @@
       return EvidenceRevisionsResource.submitComment(reqObj).$promise
         .then(function(response) {
           queryCommentsFresh(reqObj.evidenceId, reqObj.revisionId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }
