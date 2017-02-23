@@ -149,7 +149,10 @@
     $scope.$watchCollection(function() {return Subscriptions.data.collection; }, function(subscriptions) {
       console.log('$watch subscriptions called.');
       var subscribableType = _.startCase(_.camelCase($scope.entityViewModel.data.item.type));
+      if(subscribableType === 'Evidence') {subscribableType = 'EvidenceItem';}
+      if(subscribableType === 'Variant Group') {subscribableType = 'VariantGroup';}
       var paramType = $scope.entityViewModel.data.item.type;
+      if(paramType === 'evidence') {paramType = 'evidence_item';}
       var entityId = $scope.entityViewModel.data.item.id;
       $scope.vm.subscription = _.find(subscriptions, function(sub) {
         return sub.subscribable.type === subscribableType && sub.subscribable.state_params[paramType].id === entityId;
