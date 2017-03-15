@@ -63,7 +63,7 @@
   <div ng-if="vm.showForm">
     <div class="row edit-form">
       <div class="col-xs-12">
-        <form class="form-horizontal">
+        <form class="form-horizontal" name="vm.form" novalidate>
           <formly-form options="vm.options" model="vm.evidenceEdit" fields="vm.evidenceFields">
 
           </formly-form>
@@ -71,16 +71,27 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-5 col-xs-offset-2">
         <div class="buttons">
           <div class="pull-left">
             <cancel-button></cancel-button>
           </div>
           <div class="pull-right">
-              <span ng-if="vm.isAuthenticated">
-                <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.evidenceEdit, vm.options)">Submit Revision for Review</button>
-              </span>
+            <span ng-if="vm.isAuthenticated">
+              <button type="submit" class="btn btn-default"
+                      ng-click="vm.submit(vm.evidenceEdit, vm.options)"
+                      ng-disabled="vm.form.$invalid">
+                Submit Revision for Review
+              </button>
+            </span>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.form.$invalid" style="margin-top: 1em;">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="alert alert-info">
+          The Submit Revision button is disabled because the Evidence Edit form is incomplete or contains errors. Please ensure that all required fields (indicated with an *) are completed and error free.
         </div>
       </div>
     </div>
@@ -92,10 +103,14 @@
       <p><a ng-href="#/events/genes/{{vm.stateParams.geneId}}/summary/variants/{{vm.stateParams.variantId}}/summary/evidence/{{vm.stateParams.evidenceId}}/talk/revisions/list/{{vm.newRevisionId}}/summary" class="btn btn-small btn-default">View it here</a></p>
     </div>
   </div>
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<hr/>-->
-      <!--<pre ng-bind="vm.evidenceEdit|json"></pre>-->
-    <!--</div>-->
-  <!--</div>-->
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <h3>vm.newEvidence</h3> -->
+  <!-- <pre ng-bind="vm.evidenceEdit|json" class="small"></pre> -->
+  <!-- </div> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <h3>vm.evidenceFields</h3> -->
+  <!-- <pre ng-bind="vm.evidenceFields|json" class="small"></pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
 </div>

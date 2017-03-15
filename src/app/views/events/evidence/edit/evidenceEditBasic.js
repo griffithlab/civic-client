@@ -92,6 +92,7 @@
         wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'Variant Origin',
+          required: true,
           value: 'vm.evidenceEdit.variant_origin',
           options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
           valueProp: 'value',
@@ -189,6 +190,7 @@
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 5,
+          required: true,
           label: 'Evidence Statement',
           value: 'vm.evidenceEdit.description',
           minLength: 32,
@@ -206,12 +208,14 @@
         },
         templateOptions: {
           label: 'Evidence Type',
+          required: true,
           value: 'vm.evidenceEdit.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type)),
           onChange: function(value, options, scope) {
-            // reset clinical_significance, as its options will change
+            // reset clinical_significance, as its options will change then update $touched to ensure user notices
             scope.model.clinical_significance = '';
+            var csField = _.find(scope.fields, { key: 'clinical_significance'}).formControl.$touched = true;
 
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
@@ -244,6 +248,7 @@
         },
         templateOptions: {
           label: 'Evidence Level',
+          required: true,
           value: 'vm.evidenceEdit.rating',
           options: ([{ value: '', label: 'Please select an Evidence Level' }].concat(el_options(descriptions.evidence_level_brief))),
           valueProp: 'value',
@@ -270,6 +275,7 @@
         },
         templateOptions: {
           label: 'Evidence Direction',
+          required: true,
           value: 'vm.evidenceEdit.evidence_direction',
           options: [{ value: '', label: 'Please select an Evidence Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])),
           valueProp: 'value',
@@ -402,6 +408,7 @@
         type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
+          required: true,
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
             { value: 1, label: ratingLabel(1) },
@@ -428,7 +435,7 @@
           rows: 5,
           minimum_length: 3,
           label: 'Revision Description',
-          required: false,
+          required: true,
           value: 'text',
           helpText: help['Revision Description']
         },
