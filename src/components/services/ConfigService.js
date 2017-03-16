@@ -306,12 +306,12 @@
             'Adverse Response': 'Associated with an adverse response to drug treatment'
           },
           'Diagnostic': {
-            'Better Outcome': 'Demonstrates better than expected clinical outcome',
-            'Poor Outcome': 'Demonstrates worse than expected clinical outcome'
-          },
-          'Prognostic': {
             'Positive': 'Associated with diagnosis of disease or subtype',
             'Negative': 'Associated with lack of disease or subtype'
+          },
+          'Prognostic': {
+            'Better Outcome': 'Demonstrates better than expected clinical outcome',
+            'Poor Outcome': 'Demonstrates worse than expected clinical outcome'
           },
           'Predisposing': {
             'Pathogenic': 'Very strong evidence the variant is pathogenic',
