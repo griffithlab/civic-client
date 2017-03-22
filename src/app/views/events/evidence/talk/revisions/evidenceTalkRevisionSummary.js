@@ -46,7 +46,7 @@
     $scope.acceptRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};
-      EvidenceRevisions.acceptRevision($stateParams.evidenceId, $stateParams.revisionId,$stateParams.variantId)
+      EvidenceRevisions.acceptRevision($stateParams.evidenceId, $stateParams.revisionId, $stateParams.variantId)
         .then(function() {
           vm.formMessages.acceptSuccess = true;
           $rootScope.$broadcast('revisionDecision');
@@ -63,7 +63,7 @@
     $scope.rejectRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};
-      EvidenceRevisions.rejectRevision($stateParams.evidenceId, $stateParams.revisionId)
+      EvidenceRevisions.rejectRevision($stateParams.evidenceId, $stateParams.revisionId, $stateParams.variantId)
         .then(function() {
           vm.formMessages.rejectSuccess = true;
           $rootScope.$broadcast('revisionDecision');
