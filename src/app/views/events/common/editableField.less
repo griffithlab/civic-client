@@ -12,72 +12,9 @@
 @bgActiveColor: rgba(255,255,255, 0.8);
 
 .editableField {
-  .clearfix();
-  border-radius: @border-radius-base;
-  display: inline-block;
-  padding: 3px 5px;
-  margin: -3px -5px;
-  border: 1px solid @borderColor;
-  position: relative;
-
-  &::after  {
-    position: absolute;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    font-size: .5em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: @borderColor;
-    content: "\270f";
+  .flag-content {
+    min-width: 200px;
+    border: 1px solid red;
   }
 
-  &.pending::after {
-    content:"\e101";
-  }
-
-  &.hover {
-    cursor: pointer;
-    background-color: @bgHoverColor;
-    border-color: @borderHoverColor;
-    &::after {
-      color: @borderHoverColor;
-    }
-  }
-
-  &.active {
-    background-color: @bgActiveColor;
-    border-color: @borderActiveColor;
-    &::after {
-      color: @borderActiveColor;
-    }
-  }
-
-}
-
-
-// lg/small sizes necessary for different sized fields, e.g. entity titles vs.
-// entity fields. These styles specify the size and location of the edit icon
-.edit-icon-lg {
-  .editableField {
-    margin-right: -25px;
-    padding-right: 25px;
-  }
-  .editableField::after, .editableField::after {
-    top: 7px;
-    right: 7px;
-    font-size: .5em;
-  }
-}
-
-.edit-icon-sm {
-  .editableField {
-    margin-right: -20px;
-    padding-right: 20px;
-  }
-  .editableField::after {
-    top: 5px;
-    right: 5px;
-    font-size: .7em;
-  }
 }

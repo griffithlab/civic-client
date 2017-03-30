@@ -13,7 +13,9 @@
       scope: {
         entityViewModel: '=',
         entityViewRevisions: '=',
-        entityViewOptions: '='
+        entityViewOptions: '=',
+        type: '=',
+        name: '='
       },
       controller: 'EditableFieldController',
       templateUrl: 'app/views/events/common/editableField.tpl.html'
@@ -25,6 +27,7 @@
     var ctrl = $scope.ctrl = {};
     ctrl.baseState = '';
     ctrl.stateParams = {};
+    ctrl.isAuthenticated = Security.isAuthenticated;
 
     ctrl.baseState  = $scope.entityViewOptions.state.baseState;
     ctrl.gstateParams = $scope.entityViewOptions.state.params;
@@ -35,18 +38,14 @@
       ctrl.active = $state.includes(ctrl.baseState + '.edit.*');
     });
 
-    ctrl.mouseOver = function() {
-      Security.isAuthenticated() ? ctrl.hover = true: ctrl.hover = false;
-    };
-
-    ctrl.mouseLeave = function() {
-      ctrl.hover = false;
-    };
-
-    ctrl.click = function() {
+    ctrl.edit= function() {
       if (Security.isAuthenticated()) {
         $state.go(ctrl.baseState + '.edit.basic', ctrl.stateParams);
       }
+    };
+
+    ctrl.flag = function() {
+      console.log('ctrl.flag() called.');
     };
 
   }

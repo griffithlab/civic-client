@@ -1,6 +1,15 @@
-<div class="editableField" ng-transclude
-     ng-mouseover="ctrl.mouseOver()"
-     ng-mouseleave="ctrl.mouseLeave()"
-     ng-click="ctrl.click()"
-     ng-class="{hover: ctrl.hover, active: ctrl.active }">
+<div class="editableField">
+  <button class="btn btn-default btn-xs" ng-click="ctrl.edit()" ng-disabled="!ctrl.isAuthenticated()">E</button>
+  <button class="btn btn-default btn-xs"
+          popover-template="'flagPopover.tpl.html'"
+          popover-title="Flag {{type}} {{name}} "
+          popover-placement="right"
+          ng-disabled="!ctrl.isAuthenticated()">F</button>
+  <ng-transclude></ng-transclude>
 </div>
+
+<script type="text/ng-template" id="flagPopover.tpl.html">
+  <div class="flag-content">
+    Flag UI goes here.
+  </div>
+</script>

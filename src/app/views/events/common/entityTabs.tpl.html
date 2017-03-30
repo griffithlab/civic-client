@@ -3,16 +3,17 @@
   <div class="tab-row">
     <div class="row">
       <div class="col-xs-12 col-md-6 name">
-        <div ng-switch="vm.isAuthenticated()">
-          <div ng-switch-when="false">
-            <span tooltip="Please sign in to suggest a revision" tooltip-append-to-body="true">
-              <span ng-include="'entityTitle.tpl.html'"></span>
-            </span>
-          </div>
-          <div ng-switch-when="true">
-            <span ng-include="'entityTitle.tpl.html'"></span>
-          </div>
-        </div>
+        <span ng-include="'entityTitle.tpl.html'"></span>
+        <!-- <div ng-switch="vm.isAuthenticated()"> -->
+        <!-- <div ng-switch-when="false"> -->
+        <!-- <span tooltip="Please sign in to suggest a revision" tooltip-append-to-body="true"> -->
+        <!-- <span ng-include="'entityTitle.tpl.html'"></span> -->
+        <!-- </span> -->
+        <!-- </div> -->
+        <!-- <div ng-switch-when="true"> -->
+        <!-- <span ng-include="'entityTitle.tpl.html'"></span> -->
+        <!-- </div> -->
+        <!-- </div> -->
       </div>
       <div class="col-xs-12 col-md-6 tabs {{ viewBackground }}">
         <tabset class="tab-container"
@@ -60,6 +61,8 @@
 
 <script type="text/ng-template" id="entityTitle.tpl.html">
   <h3 editable-field class="edit-icon-lg tab-name"
+      type="vm.type"
+      name="vm.name"
       entity-view-model="entityViewModel"
       entity-view-revisions="entityViewRevisions"
       entity-view-options="entityViewOptions">
