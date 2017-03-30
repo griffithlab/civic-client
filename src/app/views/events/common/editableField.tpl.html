@@ -10,6 +10,10 @@
 
 <script type="text/ng-template" id="flagPopover.tpl.html">
   <div class="flag-content">
-    Flag UI goes here.
+    <p>Flag this {{type|lowercase}} by describing why you feel it requires the attention of CIViC curators:</p>
+    <div class="form-group">
+      <textarea class="form-control" rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-danger">Flag</button>
   </div>
 </script>
