@@ -28,7 +28,8 @@
     ctrl.baseState = '';
     ctrl.stateParams = {};
     ctrl.isAuthenticated = Security.isAuthenticated;
-
+    ctrl.isEditor = Security.isEditor;
+    ctrl.isAdmin = Security.isAdmin;
 
     ctrl.baseState = $scope.entityViewOptions.state.baseState;
     ctrl.gstateParams = $scope.entityViewOptions.state.params;
@@ -44,6 +45,13 @@
       }
     };
 
+    ctrl.resolveFlag = {
+      entityId: $scope.entityViewModel.data.item.id,
+      comment: {
+        title: 'Flag Resolve Comment for ' + $scope.type + ' ' + $scope.name,
+        text: ''
+      }
+    };
     $scope.$watchCollection(function() {
       return $scope.entityViewModel.data.flags;
     }, function(flags) {
