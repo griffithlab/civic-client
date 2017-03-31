@@ -40,33 +40,66 @@
 
 <script type="text/ng-template" id="flagPopover.tpl.html">
   <div class="flag-content">
-    <div class="row" >
-      <div class="col-xs-12" >
-        <p>Flag this {{type|lowercase}} by describing why you feel it requires the attention of CIViC curators:</p>
-        <div class="form-group">
-          <textarea class="form-control" rows="5"></textarea>
+    <div class="submit-flag-form" ng-if="ctrl.hasActiveFlag === false">
+      <div class="row" >
+        <div class="col-xs-12" >
+          <p style="font-size: small;">Flag this {{type|lowercase}} by describing why you feel it requires the attention of CIViC curators:</p>
+          <div class="form-group">
+            <textarea ng-model="ctrl.newFlag.comment.text" class="form-control flag-comment" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-xs-12 panel-buttons" >
+          <a type="submit"
+             class="btn btn-danger"
+             ng-click="ctrl.flag(ctrl.newFlag)"
+             ng-disabled="ctrl.newFlag.comment.text.length < 3"
+             tooltip-enable="ctrl.newFlag.comment.text.length < 3"
+             tooltip="Please add comment before submitting flag.">
+            Flag
+          </a>
         </div>
       </div>
     </div>
-    <div class="row" >
-      <div class="col-xs-12 panel-buttons" >
-        <button type="submit" class="btn btn-danger">Flag</button>
+    <div class="active-flag" ng-if="ctrl.hasActiveFlag" >
+      <div class="row" >
+        <div class="col-xs-12" class="panel-subheader active">
+          <h4>Active Flag</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" >
+          <ul>
+            <li ng-repeat="flag in ctrl.flags | filter: {state: 'flagged'}" >
+              <div class="comment-header">Users go here</div>
+              <div class="comment">{{flag.flagComment.text}}</div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="row" >
-      <div class="col-xs-12" class="panel-subheader">
-        <h4>Previous Flags</h4>
+    <div class="resolved-flags" ng-if="ctrl.hasResolvedFlags">
+      <div class="row" >
+        <div class="col-xs-12" class="panel-subheader resolved">
+          <h4>Resolved Flags</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" >
+          <ul>
+            <li ng-repeat="flag in ctrl.flags | filter: {state: 'resolved'}" >
+              <div class="comment-header">Users go here</div>
+              <div class="comment">{{flag.resolveComment.text}}</div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12" >
-        <ul>
-          <li ng-repeat="flag in ctrl.flags" >
-            <div class="comment-header"></div>
-            <div class="comment">{{flag.comment}}</div>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <!-- <div class="row" > -->
+    <!-- <div class="col-xs-12" > -->
+    <!-- <pre ng-bind="ctrl.newFlag|json" ></pre> -->
+    <!-- </div> -->
+    <!-- </div> -->
   </div>
 </script>

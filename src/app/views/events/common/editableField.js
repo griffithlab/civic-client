@@ -33,14 +33,33 @@
     ctrl.baseState = $scope.entityViewOptions.state.baseState;
     ctrl.gstateParams = $scope.entityViewOptions.state.params;
     ctrl.flags = [];
-    ctrl.hasActiveFlags = false;
+    ctrl.hasActiveFlag = false;
+    ctrl.hasResolvedFlag = false;
+
+    ctrl.newFlag = {
+      entityId: $scope.entityViewModel.data.item.id,
+      comment: {
+        title: 'Flag Comment for ' + $scope.type + ' ' + $scope.name,
+        text: ''
+      }
+    };
 
     $scope.$watchCollection(function() {
       return $scope.entityViewModel.data.flags;
     }, function(flags) {
-      ctrl.flags = flags;
+      ctrl.flags = _.map(flags, function(flag) {
+        flag.comments = _.sortBy(flag.comments, 'id');
+        flag.flagComment = flag.comments[0];
+        flag.resolveComment = flag.comments[1];
+        return flag;
+      });
+
       ctrl.hasActiveFlag = _.some(flags, {
-        status: 'flagged'
+        state: 'flagged'
+      });
+
+      ctrl.hasResolvedFlag = _.some(flags, {
+        state: 'resolved'
       });
     });
 
@@ -55,8 +74,9 @@
       }
     };
 
-    ctrl.flag = function() {
+    ctrl.flag = function(newFlag) {
       console.log('ctrl.flag() called.');
+      $scope.entityViewModel.submitFlag(newFlag);
     };
 
     ctrl.resolve = function() {
