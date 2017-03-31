@@ -1,13 +1,14 @@
 <div class="editableField">
   <span ng-switch="ctrl.isAuthenticated()" >
     <span ng-switch-when="false" >
-      <a class="btn btn-default btn-xs"
+      <a class="btn btn-default btn-xs btn-edit"
          tooltip="Please sign in to edit this {{type|lowercase}}"
          tooltip-append-to-body="true"
          ng-disabled="true">
         E
       </a>
-      <a class="btn btn-default btn-xs"
+      <a class="btn btn-default btn-xs btn-flag"
+         ng-class="{'flagged': ctrl.flags.length > 0}"
          tooltip="Please sign in to flag this {{type|lowercase}}"
          tooltip-append-to-body="true"
          ng-disabled="true">
@@ -15,14 +16,16 @@
       </a>
     </span>
     <span ng-switch-when="true" >
-      <button class="btn btn-default btn-xs"
+      <button class="btn btn-default btn-xs btn-edit"
+              ng-class="{'flagged': ctrl.flags.length > 0}"
               tooltip="Edit this {{type|lowercase}}"
               tooltip-append-to-body="true"
               ng-click="ctrl.edit()"
               ng-disabled="!ctrl.isAuthenticated()">
         E
       </button>
-      <button class="btn btn-default btn-xs"
+      <button class="btn btn-default btn-xs btn-flag"
+              ng-class="{'flagged': ctrl.flags.length > 0}"
               tooltip="Flag this {{type|lowercase}}"
               tooltip-append-to-body="true"
               popover-template="'flagPopover.tpl.html'"
