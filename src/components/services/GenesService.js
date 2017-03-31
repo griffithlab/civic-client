@@ -148,6 +148,15 @@
         url: '/api/genes/:geneId/flags',
         cache: false
       },
+      resolveFlag: {
+        method: 'PATCH',
+        url: '/api/genes/:geneId/flags/:flagId',
+        params: {
+          geneId: '@geneId',
+          flagId: '@flagId'
+        },
+        cache: false
+      },
 
       // Gene Comments Resources
       queryComments: {
@@ -247,6 +256,7 @@
       queryVariantGroups: queryVariantGroups,
       queryFlags: queryFlags,
       submitFlag: submitFlag,
+      resolveFlag: resolveFlag,
 
       // Gene Comments
       queryComments: queryComments,
@@ -418,6 +428,22 @@
           return response.$promise;
         });
     }
+    function resolveFlag(reqObj) {
+      reqObj.geneId = reqObj.entityId;
+      reqObj.state = 'resolved';
+      return GenesResource.resolveFlag(reqObj).$promise
+        .then(function(response) {
+          cache.remove('/api/genes/' + reqObj.geneId + '/flags');
+          queryFlags(reqObj.geneId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
+          return response.$promise;
+        });
+    }
+
     // Gene Comments
     function queryComments(geneId) {
       return GenesResource.queryComments({

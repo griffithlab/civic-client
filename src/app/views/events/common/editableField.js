@@ -47,6 +47,7 @@
 
     ctrl.resolveFlag = {
       entityId: $scope.entityViewModel.data.item.id,
+      flagId: undefined,
       comment: {
         title: 'Flag Resolve Comment for ' + $scope.type + ' ' + $scope.name,
         text: ''
@@ -55,20 +56,26 @@
     $scope.$watchCollection(function() {
       return $scope.entityViewModel.data.flags;
     }, function(flags) {
-      ctrl.flags = _.map(flags, function(flag) {
-        flag.comments = _.sortBy(flag.comments, 'id');
-        flag.flagComment = flag.comments[0];
-        flag.resolveComment = flag.comments[1];
-        return flag;
-      });
+      if(!_.isUndefined(flags) && flags.length > 0) {
+        ctrl.flags = _.map(flags, function(flag) {
+          flag.comments = _.sortBy(flag.comments, 'id');
+          flag.flagComment = flag.comments[0];
+          flag.resolveComment = flag.comments[1];
+          return flag;
+        });
 
-      ctrl.hasActiveFlag = _.some(flags, {
-        state: 'flagged'
-      });
+        var activeFlag = _.chain(flags).filter({state:'open'}).value()[0];
+        if(!_.isUndefined(activeFlag)) {
+          ctrl.activeFlagId = activeFlag.id;
+        }
+        ctrl.hasActiveFlag = _.some(flags, {
+          state: 'open'
+        });
 
-      ctrl.hasResolvedFlag = _.some(flags, {
-        state: 'resolved'
-      });
+        ctrl.hasResolvedFlag = _.some(flags, {
+          state: 'resolved'
+        });
+      }
     });
 
     ctrl.active = $state.includes(ctrl.baseState + '.edit.*');
@@ -87,8 +94,10 @@
       $scope.entityViewModel.submitFlag(newFlag);
     };
 
-    ctrl.resolve = function() {
+    ctrl.resolve = function(resolveFlag) {
       console.log('ctrl.resolve() called');
+      resolveFlag.flagId = ctrl.activeFlagId;
+      $scope.entityViewModel.resolveFlag(resolveFlag);
     };
   }
 

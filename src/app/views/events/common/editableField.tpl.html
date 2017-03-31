@@ -71,7 +71,7 @@
       <div class="row">
         <div class="col-xs-12" >
           <ul>
-            <li ng-repeat="flag in ctrl.flags | filter: {state: 'flagged'}" >
+            <li ng-repeat="flag in ctrl.flags | filter: {state: 'open'}" >
               <div class="comment-header">Users go here</div>
               <div class="comment">{{flag.flagComment.text}}</div>
             </li>
@@ -101,7 +101,7 @@
         </div>
       </div>
     </div>
-    <div class="resolved-flags" ng-if="ctrl.hasResolvedFlags">
+    <div class="resolved-flags" ng-if="ctrl.hasResolvedFlag">
       <div class="row" >
         <div class="col-xs-12" class="panel-subheader resolved">
           <h4>Resolved Flags</h4>
@@ -112,6 +112,7 @@
           <ul>
             <li ng-repeat="flag in ctrl.flags | filter: {state: 'resolved'}" >
               <div class="comment-header">Users go here</div>
+              <div class="comment">{{flag.flagComment.text}}</div>
               <div class="comment">{{flag.resolveComment.text}}</div>
             </li>
           </ul>
