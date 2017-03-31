@@ -9,8 +9,13 @@
     .fullBleed();
     border-top: 1px solid #CCC;
     h3.tab-name {
+      margin: 7px 0 0 0;
+      padding: 0;
+      font-size: 30px;
       display: inline-block;
-      margin: 0;
+      .entity-type {
+        color: #999;
+      }
     }
 
     #gradient > .vertical-three-colors(@pageBackground3, @pageBackground3, 60%, darken(@pageBackground3, 8%));
@@ -20,10 +25,6 @@
       background-image: url('/assets/images/grey_stripes.png');
     }
 
-    .entity-type {
-      // text-transform: capitalize;
-      color: #999;
-    }
 
     .tabs {
       min-height: 3.5em;

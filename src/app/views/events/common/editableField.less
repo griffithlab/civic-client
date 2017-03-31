@@ -12,11 +12,34 @@
 @bgActiveColor: rgba(255,255,255, 0.8);
 
 .editableField {
-  .btn-flag {
-    &.flagged {
-      border-color: red;
-    }
+  .btn {
+    margin: 0;
+    margin-top: -5px;
   }
+  .btn-edit-entity {
+    border-color: #4b2065;
+    background-color: #e7d4f3;
+    border-width: 2px;
+    color: #4b2065;
+  }
+  .btn-flag {
+    border-color: #942830;
+    border-width: 2px;
+    color: #942830;
+    background-color: #f6cdd0;
+    // border-width: 2px;
+    // color: #942830;
+  }
+  .flagged {
+    border-color: #942830;
+    background-color: #942830;
+    color: white;
+  }
+  // btn-flag.flagged {
+  //   border-color: #942830;
+  //   background-color: #942830 !important;
+  //   color: #FFF;
+  // }
   .popover {
     min-width: 400px;
     .panel-buttons {
