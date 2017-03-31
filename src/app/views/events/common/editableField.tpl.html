@@ -1,19 +1,70 @@
 <div class="editableField">
-  <button class="btn btn-default btn-xs" ng-click="ctrl.edit()" ng-disabled="!ctrl.isAuthenticated()">E</button>
-  <button class="btn btn-default btn-xs"
-          popover-template="'flagPopover.tpl.html'"
-          popover-title="Flag {{type}} {{name}} "
-          popover-placement="right"
-          ng-disabled="!ctrl.isAuthenticated()">F</button>
+  <span ng-switch="ctrl.isAuthenticated()" >
+    <span ng-switch-when="false" >
+      <a class="btn btn-default btn-xs"
+         tooltip="Please sign in to edit this {{type|lowercase}}"
+         tooltip-append-to-body="true"
+         ng-disabled="true">
+        E
+      </a>
+      <a class="btn btn-default btn-xs"
+         tooltip="Please sign in to flag this {{type|lowercase}}"
+         tooltip-append-to-body="true"
+         ng-disabled="true">
+        F
+      </a>
+    </span>
+    <span ng-switch-when="true" >
+      <button class="btn btn-default btn-xs"
+              tooltip="Edit this {{type|lowercase}}"
+              tooltip-append-to-body="true"
+              ng-click="ctrl.edit()"
+              ng-disabled="!ctrl.isAuthenticated()">
+        E
+      </button>
+      <button class="btn btn-default btn-xs"
+              tooltip="Flag this {{type|lowercase}}"
+              tooltip-append-to-body="true"
+              popover-template="'flagPopover.tpl.html'"
+              popover-title="Flag {{type}} {{name}} "
+              popover-placement="right"
+              ng-disabled="!ctrl.isAuthenticated()">
+        F
+      </button>
+    </span>
+  </span>
   <ng-transclude></ng-transclude>
 </div>
 
 <script type="text/ng-template" id="flagPopover.tpl.html">
   <div class="flag-content">
-    <p>Flag this {{type|lowercase}} by describing why you feel it requires the attention of CIViC curators:</p>
-    <div class="form-group">
-      <textarea class="form-control" rows="5"></textarea>
+    <div class="row" >
+      <div class="col-xs-12" >
+        <p>Flag this {{type|lowercase}} by describing why you feel it requires the attention of CIViC curators:</p>
+        <div class="form-group">
+          <textarea class="form-control" rows="5"></textarea>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-danger">Flag</button>
+    <div class="row" >
+      <div class="col-xs-12 panel-buttons" >
+        <button type="submit" class="btn btn-danger">Flag</button>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-xs-12" class="panel-subheader">
+        <h4>Previous Flags</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12" >
+        <ul>
+          <li ng-repeat="flag in ctrl.flags" >
+            <div class="comment-header"></div>
+            <div class="comment">{{flag.comment}}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </script>
