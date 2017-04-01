@@ -1,21 +1,15 @@
-
   <div class="editableFieldFlag">
     <div class="row" >
-      <div class="col-xs-12" class="panel-subheader active">
-        <h4>Active Flag</h4>
+      <div class="col-xs-12" class="action-bar">
+        ACTION BAR
       </div>
     </div>
-    <div class="row">
+    <div class="row" >
       <div class="col-xs-12" >
-        <ul>
-          <li ng-repeat="flag in ctrl.flags | filter: {state: 'open'}" >
-            <div class="comment-header">Users go here</div>
-            <div class="comment">{{flag.flagComment.text}}</div>
-          </li>
-        </ul>
+        <p>{{ flag.flagComment.text }}</p>
       </div>
     </div>
-    <div class="resolve-flag-form" ng-if="ctrl.hasActiveFlag && (ctrl.isEditor() || ctrl.isAdmin())">
+    <div class="resolve-flag-form" ng-if="ctrl.isEditor() || ctrl.isAdmin()">
       <div class="row" >
         <div class="col-xs-12" >
           <p style="font-size: small;">Resolve this flag by describing how you fixed the issue.</p>
@@ -28,13 +22,23 @@
         <div class="col-xs-12 panel-buttons" >
           <a type="submit"
              class="btn btn-success"
-             ng-click="ctrl.resolve(ctrl.resolveFlag)"
+             ng-click="resolveFn(ctrl.resolveFlag)"
              ng-disabled="ctrl.resolveFlag.comment.text.length < 3"
              tooltip-enable="ctrl.resolveFlag.comment.text.length < 3"
              tooltip="Please add comment before resolving flag.">
             Resolve
           </a>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12" >
+        <ul>
+          <li ng-repeat="flag in ctrl.flags | filter: {state: 'open'}" >
+            <div class="comment-header">Users go here</div>
+            <div class="comment">{{flag.flagComment.text}}</div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

@@ -36,6 +36,8 @@
     ctrl.flags = [];
     ctrl.hasActiveFlag = false;
     ctrl.hasResolvedFlag = false;
+    ctrl.activeFlag = undefined;
+    ctrl.entityId = $scope.entityViewModel.data.item.id;
 
     ctrl.newFlag = {
       entityId: $scope.entityViewModel.data.item.id,
@@ -45,14 +47,6 @@
       }
     };
 
-    ctrl.resolveFlag = {
-      entityId: $scope.entityViewModel.data.item.id,
-      flagId: undefined,
-      comment: {
-        title: 'Flag Resolve Comment for ' + $scope.type + ' ' + $scope.name,
-        text: ''
-      }
-    };
     $scope.$watchCollection(function() {
       return $scope.entityViewModel.data.flags;
     }, function(flags) {
@@ -66,7 +60,7 @@
           })
           .value();
 
-        var activeFlag = _.chain(flags).filter({state:'open'}).value()[0];
+        var activeFlag = ctrl.activeFlag = _.chain(flags).filter({state:'open'}).value()[0];
         if(!_.isUndefined(activeFlag)) {
           ctrl.activeFlagId = activeFlag.id;
         }
@@ -91,7 +85,7 @@
       }
     };
 
-    ctrl.flag = function(newFlag) {
+    ctrl.submit = function(newFlag) {
       console.log('ctrl.flag() called.');
       $scope.entityViewModel.submitFlag(newFlag).then(function(response) { console.log('flag accepted.'); });
     };
