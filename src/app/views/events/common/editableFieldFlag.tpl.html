@@ -1,9 +1,14 @@
   <div class="editableFieldFlag">
     <div class="row" >
       <div class="col-xs-12">
-        <div class="action-bar" >
-          ACTION BAR
-        </div>
+        <ul class="actions-list">
+          <li>
+            Flagged by: <user-block user="ctrl.actions.flagged.user"></user-block>
+          </li>
+          <li ng-if="ctrl.actions.resolved">
+            Resolved by: <user-block user="ctrl.actions.resolved.user"></user-block>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="row" >

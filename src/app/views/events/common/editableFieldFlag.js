@@ -27,6 +27,21 @@
     console.log('editable field flag controller called. ----------------');
     ctrl.isAdmin = Security.isAdmin;
     ctrl.isEditor = Security.isEditor;
+    ctrl.actions = {
+      flagged: {
+        order: 0,
+        timestamp: $scope.flag.flagComment.created_at,
+        user: $scope.flag.flagging_user
+      }
+    };
+
+    if(!_.isUndefined($scope.flag.resolving_user.id)) {
+      ctrl.actions.resolved = {
+        order: 1,
+        timestamp: $scope.flag.resolveComment.created_at,
+        user: $scope.flag.flagging_user
+      };
+    }
 
     ctrl.resolveFlag = {
       entityId: $scope.entityId,
