@@ -57,12 +57,14 @@
       return $scope.entityViewModel.data.flags;
     }, function(flags) {
       if(!_.isUndefined(flags) && flags.length > 0) {
-        ctrl.flags = _.map(flags, function(flag) {
-          flag.comments = _.sortBy(flag.comments, 'id');
-          flag.flagComment = flag.comments[0];
-          flag.resolveComment = flag.comments[1];
-          return flag;
-        });
+        ctrl.flags = _.chain(flags)
+          .map(function(flag) {
+            flag.comments = _.sortBy(flag.comments, 'id');
+            flag.flagComment = flag.comments[0];
+            flag.resolveComment = flag.comments[1];
+            return flag;
+          })
+          .value();
 
         var activeFlag = _.chain(flags).filter({state:'open'}).value()[0];
         if(!_.isUndefined(activeFlag)) {
@@ -91,7 +93,7 @@
 
     ctrl.flag = function(newFlag) {
       console.log('ctrl.flag() called.');
-      $scope.entityViewModel.submitFlag(newFlag);
+      $scope.entityViewModel.submitFlag(newFlag).then(function(response) { console.log('flag accepted.'); });
     };
 
     ctrl.resolve = function(resolveFlag) {
