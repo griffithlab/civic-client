@@ -32,7 +32,7 @@
     ctrl.isAdmin = Security.isAdmin;
 
     ctrl.baseState = $scope.entityViewOptions.state.baseState;
-    ctrl.gstateParams = $scope.entityViewOptions.state.params;
+    ctrl.stateParams = $scope.entityViewOptions.state.params;
     ctrl.flags = [];
     ctrl.hasActiveFlag = false;
     ctrl.hasResolvedFlag = false;

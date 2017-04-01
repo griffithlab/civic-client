@@ -63,7 +63,26 @@
           isArray: false,
           cache: cache
         },
-
+        queryFlags: {
+          method: 'GET',
+          url: '/api/variants/:variantId/flags',
+          isArray: false,
+          cache: cache
+        },
+        submitFlag: {
+          method: 'POST',
+          url: '/api/variants/:variantId/flags',
+          cache: false
+        },
+        resolveFlag: {
+          method: 'PATCH',
+          url: '/api/variants/:variantId/flags/:flagId',
+          params: {
+            geneId: '@variantId',
+            flagId: '@flagId'
+          },
+          cache: false
+        },
         // Variant Comments Resources
         queryComments: {
           method: 'GET',
@@ -143,6 +162,7 @@
     // Variant Collections
     var evidence = [];
     var comments = [];
+    var flags = [];
 
     return {
       initBase: initBase,
@@ -152,7 +172,8 @@
         collection: collection,
         myVariantInfo: myVariantInfo,
         evidence: evidence,
-        comments: comments
+        comments: comments,
+        flags: flags
       },
 
       // Variant Base
@@ -167,6 +188,9 @@
 
       // Variant Collections
       queryEvidence: queryEvidence,
+      queryFlags: queryFlags,
+      submitFlag: submitFlag,
+      resolveFlag: resolveFlag,
 
       // Variant Comments
       queryComments: queryComments,
@@ -183,6 +207,7 @@
       return $q.all([
         get(variantId),
         queryEvidence(variantId),
+        queryFlags(variantId),
         getMyVariantInfo(variantId)
       ]);
     }
@@ -252,6 +277,43 @@
       return VariantsResource.queryEvidence({variantId: variantId}).$promise
         .then(function(response) {
           angular.copy(response.records, evidence);
+          return response.$promise;
+        });
+    }
+
+    function queryFlags(variantId) {
+      return VariantsResource.queryFlags({variantId: variantId}).$promise
+        .then(function(response) {
+          angular.copy(response.records, flags);
+          return response.$promise;
+        });
+    }
+    function submitFlag(reqObj) {
+      reqObj.variantId = reqObj.entityId;
+      return VariantsResource.submitFlag(reqObj).$promise
+        .then(function(response) {
+          cache.remove('/api/variants/' + reqObj.variantId + '/flags');
+          queryFlags(reqObj.variantId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
+          return response.$promise;
+        });
+    }
+    function resolveFlag(reqObj) {
+      reqObj.variantId = reqObj.entityId;
+      reqObj.state = 'resolved';
+      return VariantsResource.resolveFlag(reqObj).$promise
+        .then(function(response) {
+          cache.remove('/api/variants/' + reqObj.variantId + '/flags');
+          queryFlags(reqObj.variantId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
           return response.$promise;
         });
     }
