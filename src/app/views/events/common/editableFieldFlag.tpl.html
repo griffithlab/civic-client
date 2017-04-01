@@ -1,15 +1,26 @@
   <div class="editableFieldFlag">
     <div class="row" >
-      <div class="col-xs-12" class="action-bar">
-        ACTION BAR
+      <div class="col-xs-12">
+        <div class="action-bar" >
+          ACTION BAR
+        </div>
       </div>
     </div>
     <div class="row" >
       <div class="col-xs-12" >
-        <p>{{ flag.flagComment.text }}</p>
+        <div class="flag-comment" >
+          <p>{{ flag.flagComment.text }}</p>
+        </div>
       </div>
     </div>
-    <div class="resolve-flag-form" ng-if="ctrl.isEditor() || ctrl.isAdmin()">
+    <div class="row" >
+      <div class="col-xs-12" >
+        <div class="resolve-comment" >
+          <p>{{ flag.resolveComment.text }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="resolve-flag-form" ng-if="flag.state ==='open' && (ctrl.isEditor() || ctrl.isAdmin())">
       <div class="row" >
         <div class="col-xs-12" >
           <p style="font-size: small;">Resolve this flag by describing how you fixed the issue.</p>
@@ -29,16 +40,6 @@
             Resolve
           </a>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12" >
-        <ul>
-          <li ng-repeat="flag in ctrl.flags | filter: {state: 'open'}" >
-            <div class="comment-header">Users go here</div>
-            <div class="comment">{{flag.flagComment.text}}</div>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
