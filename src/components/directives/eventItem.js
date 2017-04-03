@@ -73,6 +73,10 @@
       if(event.subject_type === 'suggestedchanges') {
         stateExtension.commented = '.talk.revisions.list.summary';
       }
+      // source summaries have no talk section, display comments in summary view
+      if(event.subject_type === 'sources') {
+        stateExtension.commented = '.summary';
+      }
 
       var stateParams = {};
       _.each(event.state_params, function(obj, entity) {
