@@ -17,13 +17,15 @@
     <div class="row" >
       <div class="col-xs-12" >
         <div class="flag-comment" >
+          <span class="flag-comment-notice">Flagged comment:</span><br/>
           <p>{{ flag.flagComment.text }}</p>
         </div>
       </div>
     </div>
-    <div class="row" >
+    <div class="row" ng-if="flag.resolveComment">
       <div class="col-xs-12" >
         <div class="resolve-comment" >
+          <span class="flag-comment-notice">Resolved comment:</span><br/>
           <p>{{ flag.resolveComment.text }}</p>
         </div>
       </div>
@@ -31,9 +33,9 @@
     <div class="resolve-flag-form" ng-if="flag.state ==='open' && (ctrl.isEditor() || ctrl.isAdmin())">
       <div class="row" >
         <div class="col-xs-12" >
-          <p style="font-size: small;">Resolve this flag by describing how you fixed the issue.</p>
           <div class="form-group">
-            <textarea ng-model="ctrl.resolveFlag.comment.text" class="form-control resolve-comment" rows="3"></textarea>
+            <textarea ng-model="ctrl.resolveFlag.comment.text" class="form-control resolve-comment" rows="3"
+            placeholder="To resolve, describe here how flag was addressed then click 'Resolve'."></textarea>
           </div>
         </div>
       </div>

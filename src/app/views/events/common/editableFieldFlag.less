@@ -6,8 +6,8 @@
 @panelPadding: @contentPadding/2;
 @openFlagBgColor: lighten(#942830, 60%);
 @openFlagBorderColor: lighten(#942830, 30%);
-// @resolvedFlagBgColore: ;
-// @resolvedFlagBorderColor:
+@resolvedFlagBgColor: lighten(@civicGreen, 60%);
+@resolvedFlagBorderColor: @civicGreen;
 
 .editableFieldFlag {
   border: 1px solid #CCC;
@@ -17,20 +17,39 @@
   padding: @panelPadding;
 
   &.state-open {
-    background-color: lighten(#942830, 60%) !important;
-    border-color: @civicRed !important;
+    background-color: @openFlagBgColor;
+    border-color: @openFlagBorderColor;
+    .actions-list {
+      border-bottom-color: @openFlagBorderColor;
+    }
+    .flag-comment {
+      border-color: @openFlagBorderColor;
+     .flag-comment-notice {
+       color: @openFlagBorderColor;
+     }
+    }
   }
 
   &.state-resolved {
-    background-color: lighten(#942830, 60%);
-    border-color: @civicRed;
+    background-color: @resolvedFlagBgColor;
+    border-color: @resolvedFlagBorderColor;
+    .actions-list {
+      border-bottom-color: @resolvedFlagBorderColor;
+    }
+    .flag-comment {
+      border-color: @resolvedFlagBorderColor;
+      .flag-comment-notice {
+        color: @resolvedFlagBorderColor;
+      }
+    }
   }
 
   .actions-list {
     margin: -@panelPadding -@panelPadding @panelPadding -@panelPadding;
     border-top-left-radius: @border-radius-base;
     border-top-right-radius: @border-radius-base;
-    border-bottom: 1px dashed @openFlagBorderColor;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
     ul {
       margin: 0;
       padding: 0;
@@ -50,9 +69,28 @@
       }
     }
   }
+  .flag-comment {
+    margin-left: -@panelPadding;
+    margin-right: -@panelPadding;
+    padding-left: @panelPadding;
+    padding-right: @panelPadding;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+    .flag-comment-notice {
+      font-size: small;
+      font-style: oblique;
+    }
+  }
 
 
   .resolve-flag-form {
-    border: 1px solid lighten(#942830, 30%);
+    background-color: @pageBackground;
+    border-radius: @border-radius-base;
+    padding: @panelPadding;
+    margin-top: @panelPadding;
+    .resolve-comment {
+      font-size: small;
+      color: #333;
+    }
   }
 }

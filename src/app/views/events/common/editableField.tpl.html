@@ -47,9 +47,9 @@
       <div class="submit-flag-form">
         <div class="row" >
           <div class="col-xs-12" >
-            <p style="font-size: small;">Flag this {{type|lowercase}} by describing why you feel it requires the attention of CIViC curators:</p>
             <div class="form-group">
-              <textarea ng-model="ctrl.newFlag.comment.text" class="form-control flag-comment" rows="2"></textarea>
+              <textarea ng-model="ctrl.newFlag.comment.text" class="form-control flag-comment" rows="2"
+              ng-attr-placeholder="Flag this {{type|lowercase}} by describing why it requires the attention of the CIViC editors."></textarea>
             </div>
           </div>
         </div>
