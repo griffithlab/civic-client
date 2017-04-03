@@ -1,14 +1,17 @@
-  <div class="editableFieldFlag" ng-class="{'state-open': flag.state === 'open', 'state-resolved': flag.state === 'resolved'}">
+<div class="editableFieldFlag" ng-class="{'state-open': flag.state === 'open', 'state-resolved': flag.state === 'resolved'}">
+  <div class="flag-block" >
     <div class="row" >
       <div class="col-xs-12">
-        <ul class="actions-list">
-          <li>
-            Flagged: <user-block user="ctrl.actions.flagged.user"></user-block>
-          </li>
-          <li ng-if="ctrl.actions.resolved">
-            Resolved:  <user-block user="ctrl.actions.resolved.user"></user-block>
-          </li>
-        </ul>
+        <div class="actions-list" >
+          <ul>
+            <li>
+              <span class="action-label">Flagged:</span> <user-block user="ctrl.actions.flagged.user"></user-block>
+            </li>
+            <li ng-if="ctrl.actions.resolved">
+              <span class="action-label" >Resolved:</span> <user-block user="ctrl.actions.resolved.user"></user-block>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="row" >
@@ -48,3 +51,4 @@
       </div>
     </div>
   </div>
+</div>

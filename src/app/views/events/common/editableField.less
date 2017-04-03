@@ -16,12 +16,14 @@
     margin: 0;
     margin-top: -5px;
   }
+
   .btn-edit-entity {
     border-color: #4b2065;
     background-color: #e7d4f3;
     border-width: 2px;
     color: #4b2065;
   }
+
   .btn-flag {
     border-color: #942830;
     border-width: 2px;
@@ -29,21 +31,12 @@
     background-color: #f6cdd0;
     // border-width: 2px;
     // color: #942830;
-  }
-  .flagged {
-    border-color: #942830;
-    background-color: #942830;
-    color: white;
-  }
-  .actions-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    li {
-      margin: 0;
-      font-size: small;
+    &.flagged {
+      background-color: #942830;
+      color: white;
     }
   }
+
   .popover {
     min-width: 400px;
     .flag-comment {
@@ -55,10 +48,7 @@
       }
     }
     .resolved-flags{
-      margin-top: .5em;
       .resolved-flags-title {
-        border-top-left-radius: @border-radius-small;
-        border-bottom-left-radius: @border-radius-small;
         background-color: #EFEFEF;
         font-size: 1em;
         line-height: 2em;
@@ -71,6 +61,5 @@
         line-height: 2em;
       }
     }
-
   }
 }

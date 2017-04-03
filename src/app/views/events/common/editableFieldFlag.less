@@ -6,8 +6,8 @@
 @panelPadding: @contentPadding/2;
 @openFlagBgColor: lighten(#942830, 60%);
 @openFlagBorderColor: lighten(#942830, 30%);
-@resolvedFlagBgColore: ;
-@resolvedFlagBorderColor:
+// @resolvedFlagBgColore: ;
+// @resolvedFlagBorderColor:
 
 .editableFieldFlag {
   border: 1px solid #CCC;
@@ -16,22 +16,41 @@
   border-style: solid;
   padding: @panelPadding;
 
-  .actions-list {
-    margin: -@panelPadding -@panelPadding @panelPadding -@panelPadding;
-    border-top-left-radius: @border-radius-base;
-    border-top-right-radius: @border-radius-base;
-    border-bottom: 1px solid green;
-  }
-
   &.state-open {
-    background-color: lighten(#942830, 60%);
-    border-color: @civicRed;
+    background-color: lighten(#942830, 60%) !important;
+    border-color: @civicRed !important;
   }
 
   &.state-resolved {
     background-color: lighten(#942830, 60%);
     border-color: @civicRed;
   }
+
+  .actions-list {
+    margin: -@panelPadding -@panelPadding @panelPadding -@panelPadding;
+    border-top-left-radius: @border-radius-base;
+    border-top-right-radius: @border-radius-base;
+    border-bottom: 1px dashed @openFlagBorderColor;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        background-color: @pageBackground;
+        display: inline-block;
+        border-radius: @border-radius-small;
+        border: 1px solid #CCC;
+        padding: 5px 5px 3px 5px;
+        margin: 5px;
+        .action-label {
+          color: #666;
+          font-size: small;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
 
   .resolve-flag-form {
     border: 1px solid lighten(#942830, 30%);
