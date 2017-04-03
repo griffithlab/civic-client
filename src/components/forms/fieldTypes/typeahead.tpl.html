@@ -1,11 +1,12 @@
 <input
   type="text"
   ng-model="model[options.key]"
-  uib-typeahead="{{ to.typeahead }}"
   class="form-control"
-  typeahead-editable="{{ to.editable || false}}"
+  typeahead-editable="to.editable || false"
   typeahead-focus-first="true"
   typeahead-append-to-body="true"
-  typeahead-on-select="{{ to.onSelect }}"
+  typeahead-on-select="to.onSelect"
   typeahead-input-formatter="{{ to.inputFormatter }}"
-    typeahead-template-url="{{ to.templateUrl }}">
+  typeahead-template-url="{{ to.templateUrl }}"
+  ng-attr-uib-typeahead="{{ to.typeahead }}"
+>
