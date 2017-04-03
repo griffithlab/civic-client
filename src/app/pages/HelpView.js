@@ -256,7 +256,7 @@
   }
 
   // @ngInject
-  function HelpViewController($scope, $state, $modal, ConfigService) {
+  function HelpViewController($scope, $state, $uibModal, ConfigService) {
     var menuItems = ConfigService.helpMenuItems;
     var vm = $scope.vm = {};
     vm.$state = $state;
@@ -270,7 +270,7 @@
       variant_group: menuItems.variant_group
     };
     vm.imgPopup = function imgPopup(src) {
-      $modal.open({
+      $uibModal.open({
         animation: false,
         backdrop: true,
         template: '<div><img src="' + src + '"' +

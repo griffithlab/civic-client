@@ -1,5 +1,5 @@
 <div class="ui-grid-cell-contents">
-  <span tooltip="Add Evidence Item"
+  <span uib-tooltip="Add Evidence Item"
         tooltip-append-to-body="true">
     <button ng-click="grid.appScope.vm.setLocation(row.entity.addEvidenceUrl)"
        ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
@@ -8,7 +8,7 @@
     </button>
     </span>
   &nbsp;
-  <span tooltip="Reject Suggestion"
+  <span uib-tooltip="Reject Suggestion"
         tooltip-append-to-body="true">
     <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'rejected')"
        ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.hasEditorPerms()"
@@ -17,7 +17,7 @@
     </button>
   </span>
   &nbsp;
-  <span tooltip="Mark Suggestion as Curated"
+  <span uib-tooltip="Mark Suggestion as Curated"
         tooltip-append-to-body="true">
     <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
        ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.hasEditorPerms()"
@@ -26,7 +26,7 @@
     </button>
   </span>
   &nbsp;
-  <span tooltip="Re-queue Suggestion"
+  <span uib-tooltip="Re-queue Suggestion"
         tooltip-append-to-body="true">
     <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'new')"
        ng-disabled="row.entity['status'] === 'new' || !grid.appScope.vm.hasEditorPerms()"

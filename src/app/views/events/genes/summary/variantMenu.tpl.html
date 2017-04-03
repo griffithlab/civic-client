@@ -8,7 +8,7 @@
         </h4>
       </div>
       <div class="col-xs-2 show-all">
-        <div tooltip="Toggle display of variants with no accepted evidence"
+        <div uib-tooltip="Toggle display of variants with no accepted evidence"
              ng-show="hasHiddenVariants === true">
           <label for="showAll">Show&nbsp;all:</label>&nbsp;&nbsp;<input type="checkbox"
                                                                         id="showAll"
@@ -48,7 +48,7 @@
   </div>
 
   <script type="text/ng-template" id="variantTag.tpl.html">
-    <span tooltip-template="'variantTagTooltip.tpl.html'">
+    <span uib-tooltip-template="'variantTagTooltip.tpl.html'">
     <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
        class="variant-tag"
        ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">

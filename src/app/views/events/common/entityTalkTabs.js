@@ -5,7 +5,7 @@
    * Permits declarative (and dynamic) definitions of tab links with full routes.
    *
    * requires 'ui.router' and 'ui.bootstrap'
-   * (uses tabset and tab directives in ui.bootstrap and route changes in ui.router)
+   * (uses ui-tabset and tab directives in ui.bootstrap and route changes in ui.router)
    *
    * You can define (for styling) the attributes type="pills" and vertical="true | false" and justified="true | false"
    *

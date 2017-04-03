@@ -16,7 +16,7 @@
           <td class="value">
             <span class="levelBadge"
                   ng-class="{'levelA': evidence.evidence_level === 'A', 'levelB': evidence.evidence_level === 'B','levelC': evidence.evidence_level === 'C', 'levelD': evidence.evidence_level === 'D', 'levelE': evidence.evidence_level === 'E' }"
-                  tooltip="{{tipText.evidence_level[evidence.evidence_level]}}"
+                  uib-tooltip="{{tipText.evidence_level[evidence.evidence_level]}}"
                   tooltip-placement="right"
                   class="help-tooltip">
               {{ evidence.evidence_level_string }}
@@ -27,7 +27,7 @@
           <td class="name">Evidence Type:</td>
           <td class="value">
             <span ng-bind="evidence.evidence_type"
-                  tooltip="{{tipText.evidence_type[evidence.evidence_type]}}"
+                  uib-tooltip="{{tipText.evidence_type[evidence.evidence_type]}}"
                   tooltip-placement="right"
                   class="help-tooltip">
               evidence type</span>
@@ -37,7 +37,7 @@
           <td class="name">Evidence Direction:</td>
           <td class="value">
             <span ng-bind="evidence.evidence_direction"
-                  tooltip="{{tipText.evidence_direction[evidence.evidence_type][evidence.evidence_direction]}}"
+                  uib-tooltip="{{tipText.evidence_direction[evidence.evidence_type][evidence.evidence_direction]}}"
                   tooltip-placement="right"
                   class="help-tooltip">
               evidence.evidence_direction
@@ -49,7 +49,7 @@
           <td class="name">Clinical Significance:</td>
           <td class="value">
             <span ng-bind="evidence.clinical_significance"
-                  tooltip="{{tipText.clinical_significance[evidence.clinical_significance]}}"
+                  uib-tooltip="{{tipText.clinical_significance[evidence.clinical_significance]}}"
                   tooltip-placement="right"
                   class="help-tooltip"
                   class="help-tooltip">
@@ -62,7 +62,7 @@
           <td class="name">Variant Origin:</td>
           <td class="value">
             <span ng-bind="evidence.variant_origin"
-                  tooltip="{{tipText.variant_origin[evidence.variant_origin]}}"
+                  uib-tooltip="{{tipText.variant_origin[evidence.variant_origin]}}"
                   tooltip-placement="right"
                   class="help-tooltip">
               evidence.variant_origin
@@ -116,11 +116,11 @@
         <tr>
           <td class="name">Trust Rating:</td>
           <td class="value">
-            <rating ng-model="evidence.rating" max="5" readonly="true"
-                    tooltip="{{tipText.rating[evidence.rating]}}"
+            <uib-rating ng-model="evidence.rating" max="5" read-only="true"
+                    uib-tooltip="{{tipText.rating[evidence.rating]}}"
                     tooltip-placement="left"
                     class="help-tooltip">
-            </rating>
+            </uib-rating>
           </td>
         </tr>
         <tr ng-if="">
@@ -138,7 +138,7 @@
       </button>
     </div>
     <div class="col-xs-6">
-      <span tooltip="Contributors may not accept their own submissions."
+      <span uib-tooltip="Contributors may not accept their own submissions."
             tooltip-append-to-body="true"
             tooltip-enable="ownerIsCurrentUser"
             class="help-tooltip">

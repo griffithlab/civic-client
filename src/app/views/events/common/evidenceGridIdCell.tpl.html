@@ -1,5 +1,5 @@
 <div class="ngCellText idCell" ng-class="col.colIndex()"
-     tooltip="EID{{row.entity[col.field]}}: {{row.entity['status']|capitalize}}{{row.entity['open_change_count'] > 0 ? '; ' + row.entity['open_change_count'] + ' revisions pending' : ''}}"
+     uib-tooltip="EID{{row.entity[col.field]}}: {{row.entity['status']|capitalize}}{{row.entity['open_change_count'] > 0 ? '; ' + row.entity['open_change_count'] + ' revisions pending' : ''}}"
      tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
      tooltip-placement="right"
      tooltip-append-to-body="true">

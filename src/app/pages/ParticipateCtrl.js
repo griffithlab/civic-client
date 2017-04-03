@@ -5,11 +5,11 @@
     .controller('ParticipateCtrl', ParticipateCtrl);
 
 // @ngInject
-  function ParticipateCtrl ($scope, $modal) {
+  function ParticipateCtrl ($scope, $uibModal) {
     var vm = $scope.vm = {};
 
     vm.imgPopup = function imgPopup() {
-      $modal.open({
+      $uibModal.open({
         animation: false,
         backdrop: true,
         template: '<div><img src="assets/images/GP-113_CIViC_schema-collaboration_PROCESS_v1a.png" ' +

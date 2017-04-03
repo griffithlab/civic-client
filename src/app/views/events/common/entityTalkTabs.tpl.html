@@ -2,18 +2,18 @@
   <div class="{{ tabRowBackground }}">
     <div class="row">
       <div class="col-xs-12 tabs {{ viewBackground }}">
-        <tabset class="tab-container"
+        <uib-tabset class="tab-container"
                 type="{{'tabs'}}"
                 vertical="{{false}}"
                 justified="{{false}}">
-          <tab class="tab"
+          <uib-tab class="tab"
                ng-repeat="tab in tabs"
                heading="{{tab.heading}}"
                active="tab.active"
                disable="tab.disabled"
                ng-click="go(tab)">
-          </tab>
-        </tabset>
+          </uib-tab>
+        </uib-tabset>
       </div>
     </div>
   </div>

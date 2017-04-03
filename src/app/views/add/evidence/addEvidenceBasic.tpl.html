@@ -10,27 +10,27 @@
   <div class="row messages">
     <div class="col-xs-12">
       <div ng-messages="vm.formMessages" class="edit-messages">
-        <div ng-message="submitSuccess" class="alert alert-success">
+        <div ng-message="submitSuccess"><div uib-alert type="success">
           <strong class="status">Success</strong> - <span class="message">Your new evidence item was successfully submitted.</span>
-        </div>
+        </div></div>
       </div>
     </div>
   </div>
   <div class="row errors">
     <div class="col-xs-12">
       <div ng-messages="vm.formErrors" class="edit-errors">
-        <div ng-message="500" class="alert alert-danger">
+        <div ng-message="500"><div uib-alert type="danger">
           <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
-        </div>
-        <div ng-message="401" class="alert alert-danger">
+        </div></div>
+        <div ng-message="401"><div uib-alert type="danger">
           <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
-        </div>
-        <div ng-message="403" class="alert alert-danger">
+        </div></div>
+        <div ng-message="403"><div uib-alert type="danger">
           <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
-        </div>
-        <div ng-message="409" class="alert alert-danger">
+        </div></div>
+        <div ng-message="409"><div uib-alert type="danger">
           <strong class="status">409 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
-        </div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
     </div>
     <div class="row" ng-if="vm.form.$invalid">
       <div class="col-xs-5 col-xs-offset-2">
-        <div class="alert alert-info">
+        <div uib-alert type="info">
           The Submit button is disabled because the Evidence form is incomplete or contains errors. Please ensure that all required fields (marked with an *) are completed and error free.
         </div>
       </div>

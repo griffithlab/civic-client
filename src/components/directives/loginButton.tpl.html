@@ -1,6 +1,6 @@
 <div class="loginButton">
   <div ng-show="isAuthenticated()" class="user-controls">
-    <div class="btn-group" dropdown>
+    <div class="btn-group" uib-dropdown>
       <button
         type="button"
         class="btn btn-xs btn-info"
@@ -10,11 +10,11 @@
           </span>
         <span class="username">{{currentUser.display_name}}</span>
       </button>
-      <button type="button" class="btn btn-xs btn-info dropdown-toggle" dropdown-toggle>
+      <button type="button" class="btn btn-xs btn-info dropdown-toggle" uib-dropdown-toggle>
         <span ng-bind="totalNotifications" class="badge small" ng-if="hasNotifications"></span>
         <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+      <ul class="dropdown-menu-right" uib-dropdown-menu role="menu">
         <li ng-if="hasNotifications" class="dropdown-header">Notifications<br/>
         </li>
         <li ng-if="count > 0"

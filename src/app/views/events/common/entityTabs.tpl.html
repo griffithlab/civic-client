@@ -16,20 +16,20 @@
         <!-- </div> -->
       </div>
       <div class="col-xs-12 col-md-6 tabs {{ viewBackground }}">
-        <tabset class="tab-container"
+        <uib-tabset class="tab-container"
                 type="{{'tabs'}}"
                 vertical="{{vertical}}"
                 justified="{{justified}}">
-          <tab class="tab"
+          <uib-tab classes="tab"
                ng-repeat="tab in tabs"
                heading="{{tab.heading}}"
                active="tab.active"
                disable="tab.disabled"
                ng-click="go(tab)">
-          </tab>
-        </tabset>
+          </uib-tab>
+        </uib-tabset>
         <div class="tab-info">
-          <i popover-template="'settingsPopover.tpl.html'"
+          <i uib-popover-template="'settingsPopover.tpl.html'"
              popover-title="{{vm.type}} Settings"
              popover-placement="left"
              class="glyphicon glyphicon-cog"></i>
@@ -48,7 +48,7 @@
       </div>
       <div class="col-xs-1">
         <div ng-if="vm.pendingFields.length > 0" class="pending-notice">
-          <span tooltip-template="'pendingTooltip.tpl.html'"
+          <span uib-tooltip-template="'pendingTooltip.tpl.html'"
                 tooltip-placement="left"
                 tooltip-append-to-body="true">
             <i class="glyphicon glyphicon-exclamation-sign pending-changes"></i>
@@ -85,7 +85,7 @@
     <div class="checkbox">
       <label>
         <input type="checkbox" ng-model="vm.hasSubscription" ng-change="vm.toggleSubscription(vm.subscription)">
-        <span tooltip="If checked, you will receive notifications when users update or comment upon this {{vm.type|lowercase}}{{ vm.type !== 'EVIDENCE' ?  ' or its child entities.' : '.' }}">Receive notifications</span>
+        <span uib-tooltip="If checked, you will receive notifications when users update or comment upon this {{vm.type|lowercase}}{{ vm.type !== 'EVIDENCE' ?  ' or its child entities.' : '.' }}">Receive notifications</span>
       </label>
     </div>
   </div>

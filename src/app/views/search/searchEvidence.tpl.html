@@ -6,7 +6,7 @@
         <ul class="nav nav-pills">
           <li ng-repeat="suggestion in vm.suggestedSearches.evidence">
             <a ng-click="vm.setSearch(suggestion.search)"
-               tooltip="{{suggestion.tooltip}}"
+               uib-tooltip="{{suggestion.tooltip}}"
                ng-bind="suggestion.name">
               NAME
             </a>

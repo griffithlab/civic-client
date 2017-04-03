@@ -30,22 +30,22 @@
   <div class="row">
     <div class="col-xs-12">
       <div ng-messages="vm.formErrors" class="edit-errors">
-        <div ng-message="500" class="alert alert-danger">
+        <div ng-message="500"><div uib-alert type="danger">
           <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
           <span class="server-message">{{ vm.serverMsg }}</span>
-        </div>
-        <div ng-message="401" class="alert alert-danger">
+        </div></div>
+        <div ng-message="401"><div uib-alert type="danger">
           <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
           <span class="server-message">{{ vm.serverMsg }}</span>
-        </div>
-        <div ng-message="403" class="alert alert-danger">
+        </div></div>
+        <div ng-message="403"><div uib-alert type="danger">
           <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
           <span class="server-message">{{ vm.serverMsg }}</span>
-        </div>
-        <div ng-message="409" class="alert alert-danger">
+        </div></div>
+        <div ng-message="409"><div uib-alert type="danger">
           <strong class="status">409 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
           <span class="server-message">{{ vm.serverMsg }}</span>
-        </div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -53,12 +53,12 @@
   <div class="row ">
     <div class="col-xs-12">
       <div ng-messages="vm.formMessages" class="edit-messages">
-        <div ng-message="submitSuccess" class="alert alert-success">
+        <div ng-message="submitSuccess"><div uib-alert type="success">
           <strong class="status">Success</strong> - <span class="message">Your revision was successfully submitted.</span>
-        </div>
-        <div ng-message="applySuccess" class="alert alert-success">
+        </div></div>
+        <div ng-message="applySuccess"><div uib-alert type="success">
           <strong class="status">Success</strong> - <span class="message">Your revision was successfully applied.</span>
-        </div>
+        </div></div>
       </div>
     </div>
   </div>

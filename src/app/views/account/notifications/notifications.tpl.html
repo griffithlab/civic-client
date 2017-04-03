@@ -61,7 +61,7 @@
       <div class="row">
         <div class="col-xs-12 text-center grid-pagination"
         ng-hide="vm.notifications.length === 0">
-          <pagination
+          <ul uib-pagination
             ng-if="vm.totalItems"
             class="pagination-sm"
             ng-change="vm.pageChanged()"
@@ -73,7 +73,7 @@
             align="true"
             total-items="vm.totalItems"
             direction-links="true">
-          </pagination>
+          </ul>
           <p class="page-info small">
             {{ vm.totalItems }} {{ vm.isFiltered ? "filtered" : "total" }} {{ vm.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
             Page {{ vm.page }} of {{ vm.totalPages }}

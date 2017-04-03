@@ -12,7 +12,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 text-center grid-pagination">
-      <pagination
+      <ul uib-pagination
         ng-if="ctrl.totalItems"
         class="pagination-sm"
         ng-change="ctrl.pageChanged()"
@@ -24,7 +24,7 @@
         align="true"
         total-items="ctrl.totalItems"
         direction-links="true">
-      </pagination>
+      </ul>
       <p class="page-info small">
         {{ ctrl.totalItems }} {{ ctrl.isFiltered ? "filtered" : "total" }} {{ ctrl.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
         Page {{ ctrl.page }} of {{ ctrl.totalPages }}

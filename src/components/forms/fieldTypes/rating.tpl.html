@@ -1,10 +1,10 @@
 <div class="formRating">
-  <rating ng-model="model[options.key]"
+  <uib-rating ng-model="model[options.key]"
           max="5"
-          readonly="false"
+          read-only="false"
           on-hover="hoveringOver(value)"
           on-leave="leave()"
           class="rating-block">
-  </rating>
+  </uib-rating>
   <span class="description small" ng-bind-html="(to.options | findWhere: { value: overStar }).label|unsafe"></span>
 </div>
