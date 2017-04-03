@@ -1,12 +1,12 @@
-  <div class="editableFieldFlag">
+  <div class="editableFieldFlag" ng-class="{'state-open': flag.state === 'open', 'state-resolved': flag.state === 'resolved'}">
     <div class="row" >
       <div class="col-xs-12">
         <ul class="actions-list">
           <li>
-            Flagged by: <user-block user="ctrl.actions.flagged.user"></user-block>
+            Flagged: <user-block user="ctrl.actions.flagged.user"></user-block>
           </li>
           <li ng-if="ctrl.actions.resolved">
-            Resolved by: <user-block user="ctrl.actions.resolved.user"></user-block>
+            Resolved:  <user-block user="ctrl.actions.resolved.user"></user-block>
           </li>
         </ul>
       </div>
@@ -37,7 +37,7 @@
       <div class="row" >
         <div class="col-xs-12 panel-buttons" >
           <a type="submit"
-             class="btn btn-success"
+             class="btn btn-xs btn-success"
              ng-click="resolveFn(ctrl.resolveFlag)"
              ng-disabled="ctrl.resolveFlag.comment.text.length < 3"
              tooltip-enable="ctrl.resolveFlag.comment.text.length < 3"

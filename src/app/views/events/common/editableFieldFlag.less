@@ -1,4 +1,17 @@
-.editableFieldFlag {
-  border: 1px solid blue;
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
 
+.editableFieldFlag {
+  border: 1px solid #CCC;
+  border-radius: @border-radius-base;
+  border-width: 1px;
+  border-style: solid;
+  padding: @contentPadding/2;
+
+  &.state-open {
+    background-color: lighten(#942830, 60%);
+    border-color: @civicRed;
+  }
 }

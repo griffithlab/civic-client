@@ -35,7 +35,15 @@
     background-color: #942830;
     color: white;
   }
-
+  .actions-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 0;
+      font-size: small;
+    }
+  }
   .popover {
     min-width: 400px;
     .flag-comment {
@@ -46,5 +54,23 @@
         float: right;
       }
     }
+    .resolved-flags{
+      margin-top: .5em;
+      .resolved-flags-title {
+        border-top-left-radius: @border-radius-small;
+        border-bottom-left-radius: @border-radius-small;
+        background-color: #EFEFEF;
+        font-size: 1em;
+        line-height: 2em;
+        font-weight: bold;
+      }
+      .toggle-btn {
+        border-top-right-radius: @border-radius-small;
+        border-bottom-right-radius: @border-radius-small;
+        background-color: #EFEFEF;
+        line-height: 2em;
+      }
+    }
+
   }
 }
