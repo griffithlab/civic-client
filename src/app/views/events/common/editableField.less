@@ -38,10 +38,7 @@
   }
 
   .popover {
-    min-width: 400px;
-    .flag-comment {
-      font-size: small;
-    }
+    min-width: 450px;
     .panel-buttons {
       .btn {
         float: right;
@@ -49,10 +46,14 @@
     }
     .resolved-flags{
       margin-top: @contentPadding/2;
+      margin-left: -@contentPadding;
+      margin-right: -@contentPadding;
+      padding-left: @contentPadding;
+      padding-right: @contentPadding;
       &.closed {
-        margin-bottom: -@contentPadding/2;
-        border-bottom-right-radius: @border-radius-small;
-        border-bottom-left-radius: @border-radius-small;
+        margin-bottom: -10px;
+        border-bottom-right-radius: @border-radius-base;
+        border-bottom-left-radius: @border-radius-base;
       }
       .resolved-flags-title {
         background-color: #EFEFEF;
@@ -63,6 +64,7 @@
       .toggle-btn {
         background-color: #EFEFEF;
         line-height: 2em;
+        text-align: right;
       }
       .resolved-flags-list {
         padding-top: @contentPadding/2;

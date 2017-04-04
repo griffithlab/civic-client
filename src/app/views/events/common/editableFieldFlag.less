@@ -16,7 +16,9 @@
   border-style: solid;
   padding: @panelPadding;
   margin-bottom: @panelPadding;
-
+  .resolve-comment {
+    padding-top: @panelPadding;
+  }
   &.state-open {
     background-color: @openFlagBgColor;
     border-color: @openFlagBorderColor;
@@ -37,7 +39,7 @@
     .actions-list {
       border-bottom-color: @resolvedFlagBorderColor;
     }
-    .flag-comment {
+    .flag-comment, .resolve-comment {
       border-color: @resolvedFlagBorderColor;
       .flag-comment-notice {
         color: @resolvedFlagBorderColor;

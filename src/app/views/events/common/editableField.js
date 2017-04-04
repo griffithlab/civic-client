@@ -99,7 +99,10 @@
     ctrl.resolve = function(resolveFlag) {
       console.log('ctrl.resolve() called');
       resolveFlag.flagId = ctrl.activeFlagId;
-      $scope.entityViewModel.resolveFlag(resolveFlag);
+      $scope.entityViewModel.resolveFlag(resolveFlag).then(function(response) {
+        console.log('flag resolved.');
+        ctrl.showResolved = true;
+      });
     };
   }
 

@@ -68,12 +68,12 @@
       </div>
     </div>
   </div>
-  <div class="resolved-flags" ng-if="ctrl.hasResolvedFlag">
+  <div class="resolved-flags" ng-if="ctrl.hasResolvedFlag" ng-class="{'closed': !ctrl.showResolved}">
     <div class="row">
-      <div class="col-xs-10 resolved-flags-title">
+      <div class="col-xs-8 resolved-flags-title">
         {{ctrl.resolvedCount}} Resolved Flag{{ ctrl.resolvedCount > 1 ? 's' : '' }}
       </div>
-      <div class="col-xs-2 toggle-btn">
+      <div class="col-xs-4 toggle-btn">
         <a class="btn btn-xs btn-default" ng-click="ctrl.toggleResolved()">{{ctrl.showResolved ? 'HIDE' : 'SHOW'}}</a>
       </div>
     </div>
