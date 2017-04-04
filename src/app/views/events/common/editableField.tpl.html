@@ -69,7 +69,7 @@
     </div>
   </div>
   <div class="resolved-flags" ng-if="ctrl.hasResolvedFlag">
-    <div class="row" class="resolved-flags">
+    <div class="row">
       <div class="col-xs-10 resolved-flags-title">
         {{ctrl.resolvedCount}} Resolved Flag{{ ctrl.resolvedCount > 1 ? '' : 's' }}
       </div>
@@ -78,7 +78,7 @@
       </div>
     </div>
     <div class="row" ng-if="ctrl.showResolved">
-      <div class="col-xs-12" >
+      <div class="col-xs-12" style="padding-top: 8px;">
         <div class="flag-container" ng-repeat="flag in ctrl.flags | filter: {state: 'resolved'} | orderBy:'id':true">
           <editable-field-flag flag="flag" resolve-fn="ctrl.resolve" entity-id="ctrl.entityId" type="type" name="name"></editable-field-flag>
         </div>

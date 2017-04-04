@@ -15,6 +15,7 @@
   border-width: 1px;
   border-style: solid;
   padding: @panelPadding;
+  margin-bottom: @panelPadding;
 
   &.state-open {
     background-color: @openFlagBgColor;
@@ -82,9 +83,9 @@
     }
   }
 
-
   .resolve-flag-form {
-    background-color: @pageBackground;
+    border: 1px solid @resolvedFlagBorderColor;
+    background-color: @resolvedFlagBgColor;
     border-radius: @border-radius-base;
     padding: @panelPadding;
     margin-top: @panelPadding;

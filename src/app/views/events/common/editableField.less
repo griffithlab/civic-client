@@ -48,6 +48,12 @@
       }
     }
     .resolved-flags{
+      margin-top: @contentPadding/2;
+      &.closed {
+        margin-bottom: -@contentPadding/2;
+        border-bottom-right-radius: @border-radius-small;
+        border-bottom-left-radius: @border-radius-small;
+      }
       .resolved-flags-title {
         background-color: #EFEFEF;
         font-size: 1em;
@@ -55,10 +61,11 @@
         font-weight: bold;
       }
       .toggle-btn {
-        border-top-right-radius: @border-radius-small;
-        border-bottom-right-radius: @border-radius-small;
         background-color: #EFEFEF;
         line-height: 2em;
+      }
+      .resolved-flags-list {
+        padding-top: @contentPadding/2;
       }
     }
   }

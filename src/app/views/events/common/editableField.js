@@ -61,7 +61,7 @@
             return flag;
           })
           .value();
-        var resolvedCount =  _.chain(flags).filter({state:'resolve'}).value().length;
+        var resolvedCount =  _.chain(flags).filter({state:'resolved'}).value().length;
         var activeFlag = ctrl.activeFlag = _.chain(flags).filter({state:'open'}).value()[0];
         if(!_.isUndefined(activeFlag)) {
           ctrl.activeFlagId = activeFlag.id;
