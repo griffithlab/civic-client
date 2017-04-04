@@ -139,7 +139,7 @@
                   return _.map(response, function(gene) {
                     if (gene.aliases.length > 0) {
                       gene.alias_list = " -- Aliases: "+ gene.aliases.join(", ");
-                      if(gene.alias_list.length > labelLimit) { disease.alias_list = _.trunc(gene.alias_list, labelLimit); }
+                      if(gene.alias_list.length > labelLimit) { gene.alias_list = _.trunc(gene.alias_list, labelLimit); }
                     }
                     return gene;
                   });
