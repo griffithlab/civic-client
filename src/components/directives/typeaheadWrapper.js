@@ -3,32 +3,42 @@
   angular.module('civic.events')
     .directive('typeaheadWrapper', typeaheadWrapper)
     // @ngInject
-    function typeaheadWrapper($templateCache, $compile, _) {
+    function typeaheadWrapper($compile, _) {
       var directive = {
         restrict: 'A',
         scope: false, //bypassing the scope isolation
+        // templateUrl: 'typeahead.tpl.html',
         link: function(scope, elem, attrs)
         {
-          //sha1(''+new Date().getTime())
-          console.log("A:", attrs);
+          console.log("Attrs:", attrs);
           var template = "<input ";
           template+='type="'+attrs['type']+'" ';
+          if(attrs['formlyCustomValidation'] !== undefined) template += 'formlyCustomValidation ';
+          var id = attrs['id'];
+          if(id !== undefined) template+='id="'+id+'" ';
+          var name = attrs['name'];
+          if(name !== undefined) template+='name="'+name+'" ';
+          var required = _.get(scope,'to.required');
+          if(required === true) template+='required="true" ';
           template+='ng-model="'+attrs['ngModel']+'" ';
           template+='class="'+attrs['class']+'" ';
           template+='typeahead-editable="'+attrs['typeaheadEditable']+'" ';
           template+='typeahead-focus-first="'+attrs['typeaheadFocusFirst']+'" ';
           template+='typeahead-append-to-body="'+attrs['typeaheadAppendToBody']+'" ';
-          template+='typeahead-on-select="'+attrs['typeaheadOnSelect']+'" ';
-          template+='typeahead-input-formatter="'+_.get(scope,attrs['typeaheadInputFormatter'])+'" ';
-          template+='typeahead-template-url="'+_.get(scope,attrs['typeaheadTemplateUrl'])+'" ';
+          var onSelect = _.get(scope, attrs['typeaheadOnSelect']);
+          if(onSelect !== undefined) template+='typeahead-on-select="'+onSelect+'" ';
+          var inputFormatter = _.get(scope,attrs['typeaheadInputFormatter']);
+          if(inputFormatter !== undefined) template+='typeahead-input-formatter="'+inputFormatter+'" ';
+          var templateUrl = _.get(scope,attrs['typeaheadTemplateUrl']);
+          if(templateUrl !== undefined) template+='typeahead-template-url="'+templateUrl+'" ';
           template+='uib-typeahead="'+_.get(scope, attrs['typeaheadWrapper'])+'" ';
           template+='>';
-          console.log("Linking:", scope);
-          console.log("ELem:", angular.element(template));
-          $templateCache.put('typeahead.tpl.html', template);
-          $compile($templateCache.get('typeahead.tpl.html'))(scope, function(replacement){
-            elem.replaceWith(replacement);
-          });
+          $compile(template)(
+            scope,
+            function(replacement){
+              elem.replaceWith(replacement);
+            }
+          )
         }
 
       };
