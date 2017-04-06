@@ -61,6 +61,28 @@
           cache: false
         },
 
+        // Evidence Collections
+        queryFlags: {
+          method: 'GET',
+          url: '/api/evidence_items/:evidenceId/flags',
+          isArray: false,
+          cache: cache
+        },
+        submitFlag: {
+          method: 'POST',
+          url: '/api/evidence_items/:evidenceId/flags',
+          cache: false
+        },
+        resolveFlag: {
+          method: 'PATCH',
+          url: '/api/evidence_items/:evidenceId/flags/:flagId',
+          params: {
+            evidenceId: '@evidenceId',
+            flagId: '@flagId'
+          },
+          cache: false
+        },
+
         // Evidence Comments Resources
         queryComments: {
           method: 'GET',
@@ -117,8 +139,10 @@
     var item = {};
     var collection = [];
 
-    // Evidence Collections
     var comments = [];
+
+    // Evidence Collections
+    var flags = [];
 
     return {
       initBase: initBase,
@@ -126,7 +150,8 @@
       data: {
         item: item,
         collection: collection,
-        comments: comments
+        comments: comments,
+        flags: flags
       },
 
       // Evidence Base
@@ -144,12 +169,18 @@
       getComment: getComment,
       submitComment: submitComment,
       updateComment: updateComment,
-      deleteComment: deleteComment
+      deleteComment: deleteComment,
+
+      // Evidence Collections
+      queryFlags: queryFlags,
+      submitFlag: submitFlag,
+      resolveFlag: resolveFlag
     };
 
     function initBase(evidenceId) {
       return $q.all([
-        get(evidenceId)
+        get(evidenceId),
+        queryFlags(evidenceId)
       ]);
     }
 
@@ -250,6 +281,44 @@
         },
         function(error) { // fail
           return $q.reject(error);
+        });
+    }
+
+    // Evidence Collections
+    function queryFlags(evidenceId) {
+      return EvidenceResource.queryFlags({evidenceId: evidenceId}).$promise
+        .then(function(response) {
+          angular.copy(response.records, flags);
+          return response.$promise;
+        });
+    }
+    function submitFlag(reqObj) {
+      reqObj.evidenceId = reqObj.entityId;
+      return EvidenceResource.submitFlag(reqObj).$promise
+        .then(function(response) {
+          cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/flags');
+          queryFlags(reqObj.evidenceId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
+          return response.$promise;
+        });
+    }
+    function resolveFlag(reqObj) {
+      reqObj.evidenceId = reqObj.entityId;
+      reqObj.state = 'resolved';
+      return EvidenceResource.resolveFlag(reqObj).$promise
+        .then(function(response) {
+          cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/flags');
+          queryFlags(reqObj.evidenceId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
+          return response.$promise;
         });
     }
 
