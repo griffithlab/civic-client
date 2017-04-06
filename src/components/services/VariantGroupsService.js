@@ -57,6 +57,26 @@
           isArray: true,
           cache: cache
         },
+        queryFlags: {
+          method: 'GET',
+          url: '/api/variant_groups/:variantGroupId/flags',
+          isArray: false,
+          cache: cache
+        },
+        submitFlag: {
+          method: 'POST',
+          url: '/api/variant_groups/:variantGroupId/flags',
+          cache: false
+        },
+        resolveFlag: {
+          method: 'PATCH',
+          url: '/api/variant_groups/:variantGroupId/flags/:flagId',
+          params: {
+            variantGroupId: '@variantGroupId',
+            flagId: '@flagId'
+          },
+          cache: false
+        },
 
         // VariantGroup Comments Resources
         queryComments: {
@@ -137,6 +157,9 @@
 
       // VariantGroup Collections
       queryVariants: queryVariants,
+      queryFlags: queryFlags,
+      submitFlag: submitFlag,
+      resolveFlag: resolveFlag,
 
       // VariantGroup Comments
       queryComments: queryComments,
@@ -150,7 +173,8 @@
     function initBase(variantGroupId) {
       return $q.all([
         get(variantGroupId),
-        queryVariants(variantGroupId)
+        queryVariants(variantGroupId),
+        queryFlags(variantGroupId)
       ]);
     }
 
@@ -218,6 +242,42 @@
       //  });
     }
 
+    function queryFlags(variantGroupId) {
+      return VariantGroupsResource.queryFlags({variantGroupId: variantGroupId}).$promise
+        .then(function(response) {
+          angular.copy(response.records, flags);
+          return response.$promise;
+        });
+    }
+    function submitFlag(reqObj) {
+      reqObj.variantGroupId = reqObj.entityId;
+      return VariantGroupsResource.submitFlag(reqObj).$promise
+        .then(function(response) {
+          cache.remove('/api/variant_groups/' + reqObj.variantGroupId + '/flags');
+          queryFlags(reqObj.variantGroupId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
+          return response.$promise;
+        });
+    }
+    function resolveFlag(reqObj) {
+      reqObj.variantGroupId = reqObj.entityId;
+      reqObj.state = 'resolved';
+      return VariantGroupsResource.resolveFlag(reqObj).$promise
+        .then(function(response) {
+          cache.remove('/api/variant_groups/' + reqObj.variantGroupId + '/flags');
+          queryFlags(reqObj.variantGroupId);
+
+          // flush subscriptions and refresh
+          cache.remove('/api/subscriptions?count=999');
+          Subscriptions.query();
+
+          return response.$promise;
+        });
+    }
     // VariantGroup Comments
     function queryComments(variantGroupId) {
       return VariantGroupsResource.queryComments({variantGroupId: variantGroupId}).$promise
