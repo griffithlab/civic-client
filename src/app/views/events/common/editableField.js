@@ -93,7 +93,11 @@
 
     ctrl.submit = function(newFlag) {
       console.log('ctrl.flag() called.');
-      $scope.entityViewModel.submitFlag(newFlag).then(function(response) { console.log('flag accepted.'); });
+      $scope.entityViewModel.submitFlag(newFlag).then(function(response) {
+        console.log('flag accepted.');
+
+        ctrl.newFlag.comment.text = '';
+      });
     };
 
     ctrl.resolve = function(resolveFlag) {
