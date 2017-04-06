@@ -12,7 +12,7 @@
          popover-template="'flagPopover.tpl.html'"
          popover-title="Flag {{type}} {{name}} "
          popover-placement="right"
-         tooltip="{{ctrl.flags.length > 0 ? 'This ' + (type|lowercase) + ' has been flagged' : 'Sign in to flag this ' + (type|lowercase)}}":
+         tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Sign in to flag this ' + (type|lowercase)}}":
          tooltip-append-to-body="true">
         <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
       </a>
@@ -26,7 +26,7 @@
       </a>
       <a class="btn  btn-xs btn-flag"
          ng-class="{'flagged': ctrl.hasActiveFlag}"
-         tooltip="{{ctrl.flags.length > 0 ? 'This ' + (type|lowercase) + ' has been flagged' : 'Flag this ' + (type|lowercase)}}"
+         tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Flag this ' + (type|lowercase)}}"
          tooltip-append-to-body="true"
          popover-template="'flagPopover.tpl.html'"
          popover-title="Flag {{type}} {{name}} "
