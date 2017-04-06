@@ -61,6 +61,7 @@
       var stateExtension = {
         'commented': '.talk.comments',
         'flagged': '.summary',
+        'flag resolved': '.summary',
         'submitted': '.summary',
         'accepted': '.summary',
         'rejected': '.summary',
