@@ -79,19 +79,26 @@
     padding-right: @panelPadding;
     border-bottom-width: 1px;
     border-bottom-style: dashed;
+    font-size: small;
     .flag-comment-notice {
       font-size: small;
       font-style: oblique;
     }
   }
-
+  .resolve-comment {
+    font-size: small;
+    .flag-comment-notice {
+      font-size: small;
+      font-style: oblique;
+    }
+  }
   .resolve-flag-form {
     border: 1px solid @resolvedFlagBorderColor;
     background-color: @resolvedFlagBgColor;
     border-radius: @border-radius-base;
     padding: @panelPadding;
     margin-top: @panelPadding;
-    .resolve-comment {
+    textarea.resolve-comment {
       font-size: small;
       color: #333;
     }
