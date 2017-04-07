@@ -10,7 +10,6 @@
         // templateUrl: 'typeahead.tpl.html',
         link: function(scope, elem, attrs)
         {
-          console.log("Attrs:", attrs);
           var template = "<input ";
           template+='type="'+attrs['type']+'" ';
           if(attrs['formlyCustomValidation'] !== undefined) template += 'formlyCustomValidation ';
