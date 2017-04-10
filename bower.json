@@ -4,7 +4,7 @@
   "dependencies": {
     "angular": "^1.6.4",
     "angular-ui-router": "^0.4.2",
-    "angular-sanitize": "1.4.7",
+    "angular-sanitize": "^1.5.0",
     "angular-formly": "7.1.2",
     "ui-router-extras": "^0.1.0",
     "angular-ui-grid": "^4.0.4",
@@ -46,7 +46,6 @@
   },
   "resolutions": {
     "angular-bootstrap": "^2.5.0",
-    "angular-sanitize": "^1.5.0",
     "angular": "^1.6.4",
     "angular-ui-router": "^0.4.2"
   }
