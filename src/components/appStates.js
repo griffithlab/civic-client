@@ -4,7 +4,9 @@
     .config(routesConfig);
 
   // @ngInject
-  function routesConfig($stateProvider, $urlRouterProvider) {
+  function routesConfig($locationProvider, $stateProvider, $urlRouterProvider) {
+
+    $locationProvider.hashPrefix('');
 
     // 404
     $urlRouterProvider.otherwise('home');
