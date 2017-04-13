@@ -40,11 +40,12 @@ function connectInit(baseDir, livereload) {
   });
 }
 
+
 gulp.task('serve', ['images', 'fonts', 'watch'], function () {
   connectInit([
-    './src',
-    './.tmp',
-    './docs',
+    '.tmp',
+    'src',
+    'docs',
     path.resolve('./') // include root (kludge necessary to make bower_components available where index.html expects them)
   ], true);
 });
@@ -54,7 +55,7 @@ gulp.task('serve:dist', ['build'], function () {
 });
 
 gulp.task('serve:e2e', ['watch'], function () {
-  connectInit(['src', '.tmp', path.resolve('./')], false);
+  connectInit(['.tmp', 'src', path.resolve('./')], false);
 });
 
 gulp.task('serve:e2e-dist', ['e2e:build', 'watch'], function () {
