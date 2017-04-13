@@ -313,7 +313,7 @@
           if($stateParams.variantOrigin) {
             var vo = $stateParams.variantOrigin;
             var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.variant_origin);
-            if(_.contains(permitted, vo)) {
+            if(_.includes(permitted, vo)) {
               $scope.model.variant_origin = $stateParams.variantOrigin;
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[vo];
             } else {
@@ -423,7 +423,7 @@
           if($stateParams.evidenceType) {
             var et = $stateParams.evidenceType;
             var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type);
-            if(_.contains(permitted, et)) {
+            if(_.includes(permitted, et)) {
               $scope.model.evidence_type = $stateParams.evidenceType;
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et];
             } else {
@@ -485,7 +485,7 @@
           if($stateParams.evidenceLevel){
             var vo = $stateParams.evidenceLevel;
             var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_level);
-            if(_.contains(permitted, vo)) {
+            if(_.includes(permitted, vo)) {
               $scope.model.evidence_level = $stateParams.evidenceLevel;
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[vo];
             } else {
@@ -505,7 +505,7 @@
               var et = $stateParams.evidenceType;
               var ed = $stateParams.evidenceDirection;
               var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction[et]);
-              if(_.contains(permitted, ed)) {
+              if(_.includes(permitted, ed)) {
                 $scope.model.evidence_direction = $stateParams.evidenceDirection;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et][ed];
               } else {
@@ -552,7 +552,7 @@
               var et = $stateParams.evidenceType;
               var cs = $stateParams.clinicalSignificance;
               var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance[et]);
-              if(_.contains(permitted, cs)) {
+              if(_.includes(permitted, cs)) {
                 $scope.model.clinical_significance = $stateParams.clinicalSignificance;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[cs];
               } else {

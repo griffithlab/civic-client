@@ -44,7 +44,7 @@
     $scope.$watchCollection('evidence', function() {
       $scope.evidence.evidence_level_string = $scope.evidence.evidence_level + ' - ' + evidence_levels[$scope.evidence.evidence_level];
       if($scope.evidence.drugs.length > 0) {
-        $scope.evidence.drugsStr = _.chain($scope.evidence.drugs).pluck('name').value().join(', ');
+        $scope.evidence.drugsStr = _.chain($scope.evidence.drugs).map('name').value().join(', ');
       } else {
         $scope.evidence.drugsStr = 'N/A';
       }

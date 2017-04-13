@@ -109,13 +109,13 @@
       'difference',
       ['uniq', 'unique'],
       'zip',
-      'object',
+      ['zipObject', 'object'],
       'indexOf',
       'lastIndexOf',
       'sortedIndex',
       'keys',
       'values',
-      'pairs',
+      ['toPairs','pairs'],
       'invert',
       ['functions', 'methods'],
       'pick',
@@ -132,8 +132,6 @@
     if(!(_.isArray(filterNames))) {
       filterNames = [filterNames];
     }
-
-    console.log(filterNames[0], _[filterNames[0]]);
 
     var
       filter = _.bind(_[filterNames[0]], _),

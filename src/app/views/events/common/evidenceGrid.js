@@ -112,7 +112,7 @@
         {
           title: 'Show Accepted',
           active: function() {
-            return _.contains(statusFilters, 'accepted');
+            return _.includes(statusFilters, 'accepted');
           },
           action: function($event) {
             filterByStatus('accepted', this.grid, $event);
@@ -121,7 +121,7 @@
         {
           title: 'Show Submitted',
           active: function() {
-            return _.contains(statusFilters, 'submitted');
+            return _.includes(statusFilters, 'submitted');
           },
           action: function($event) {
             filterByStatus('submitted', this.grid, $event);
@@ -130,7 +130,7 @@
         {
           title: 'Show Rejected',
           active: function() {
-            return _.contains(statusFilters, 'rejected');
+            return _.includes(statusFilters, 'rejected');
           },
           action: function($event) {
             filterByStatus('rejected', this.grid, $event);
@@ -148,7 +148,7 @@
           filter: {
             noTerm: true,
             condition: function(searchTerm, cellValue) {
-              return _.contains(statusFilters, cellValue);
+              return _.includes(statusFilters, cellValue);
             }
           }
         },
@@ -407,7 +407,7 @@
         return;
       }
 
-      if(_.contains(statusFilters, status)) {
+      if(_.includes(statusFilters, status)) {
         _.pull(statusFilters, status);
       } else {
         statusFilters.push(status);
@@ -514,7 +514,7 @@
       function prepareDrugArray(evidence) {
         return _.map(evidence, function(item){
           if (_.isArray(item.drugs) && item.drugs.length > 0) {
-            item.druglist = _.chain(item.drugs).pluck('name').value().join(', ');
+            item.druglist = _.chain(item.drugs).map('name').value().join(', ');
             return item;
           } else {
             item.druglist = 'N/A';

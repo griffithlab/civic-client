@@ -77,7 +77,7 @@
           filter: {
             noTerm: true,
             condition: function(searchTerm, cellValue) {
-              return _.contains(statusFilters, cellValue);
+              return _.includes(statusFilters, cellValue);
             }
           }
         },
@@ -198,7 +198,7 @@
         {
           title: 'Show Curated',
           active: function() {
-            return _.contains(statusFilters, 'curated');
+            return _.includes(statusFilters, 'curated');
           },
           action: function($event) {
             filterByStatus('curated', this.grid, $event);
@@ -207,7 +207,7 @@
         {
           title: 'Show Rejected',
           active: function() {
-            return _.contains(statusFilters, 'rejected');
+            return _.includes(statusFilters, 'rejected');
           },
           action: function($event) {
             filterByStatus('rejected', this.grid, $event);
@@ -217,7 +217,7 @@
     };
 
     function filterByStatus(status, grid) {
-     if(_.contains(statusFilters, status)) {
+     if(_.includes(statusFilters, status)) {
         _.pull(statusFilters, status);
       } else {
         statusFilters.push(status);

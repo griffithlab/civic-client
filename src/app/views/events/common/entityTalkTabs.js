@@ -97,7 +97,7 @@
       $scope.active = function (tab) {
         //var route = tab.route;
         //// TODO: this is a kludge to fix misbehaving sub-tabs that we have in talk views, almost certainly not the most elegant solution.
-        //if (_.contains(tab.route, 'talk')) {
+        //if (_.includes(tab.route, 'talk')) {
         //  // drop the last route element so all talk ancestor $state.includes() evaluates to true
         //  route = _.chain(tab.route.split('.')).dropRight().value().join('.');
         //}
