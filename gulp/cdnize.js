@@ -16,24 +16,26 @@ gulp.task('cdnize', ['wiredep'], function () {
       //including tests for missing individual angular modules
       {
         file: '**/angular/angular.js',
-        cdn: 'google:angular:${ filenameMin }'
+        package: 'angular',
+        // cdn: 'cdnjs:angular:${ filenameMin }'
+        cdn: '//cdnjs.cloudflare.com/ajax/libs/angular.js/${ version }/${ filenameMin }',
       },
       {
         file: '**/angular-sanitize/*.js',
         package: 'angular-sanitize',
-        cdn: 'google:angular:${ filenameMin }',
+        cdn: '//cdnjs.cloudflare.com/ajax/libs/angular.js/${ version }/${ filenameMin }',
         test: 'testModule("ngSanitize")'
       },
       {
         file: '**/angular-touch/*.js',
         package: 'angular-touch',
-        cdn: 'google:angular:${ filenameMin }',
+        cdn: '//cdnjs.cloudflare.com/ajax/libs/angular.js/${ version }/${ filenameMin }',
         test: 'testModule("ngTouch")'
       },
       {
         file: '**/angular-messages/*.js',
         package: 'angular-messages',
-        cdn: 'google:angular:${ filenameMin }',
+        cdn: '//cdnjs.cloudflare.com/ajax/libs/angular.js/${ version }/${ filenameMin }',
         test: 'testModule("ngMessages")'
       },
       {
@@ -90,7 +92,7 @@ gulp.task('cdnize', ['wiredep'], function () {
       {
         file: '**/angular-resource/*.js',
         package: 'angular-resource',
-        cdn: 'google:angular:${ filenameMin }',
+        cdn: '//cdnjs.cloudflare.com/ajax/libs/angular.js/${ version }/${ filenameMin }',
         test: 'testModule("ngResource")'
       },
       {
