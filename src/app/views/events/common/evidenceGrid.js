@@ -175,7 +175,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: '<div search-highlighting="col" highlight-content="row.entity.state_params.gene.name"></div>',
+          cellTemplate: 'app/views/events/common/evidenceGridGeneCell.tpl.html',
           width: '6%'
         },
         { name: 'variant',
@@ -190,7 +190,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          cellTemplate: '<div search-highlighting="col" highlight-content="row.entity.state_params.variant.name"></div>',
+          cellTemplate: 'app/views/events/common/evidenceGridVariantCell.tpl.html',
           width: '8%'
         },
         { name: 'description',
