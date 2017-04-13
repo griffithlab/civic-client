@@ -101,7 +101,12 @@
           allowCellFocus: false,
           type: 'string',
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
+            // condition: uiGridConstants.filter.CONTAINS
+            condition: function(search, value, row, col)
+            {
+                var query = new RegExp(search, 'i');
+                return query.exec(value.username);
+            }
           },
           cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>',
         },
