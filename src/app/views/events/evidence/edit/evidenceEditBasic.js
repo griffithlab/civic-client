@@ -62,7 +62,7 @@
     vm.evidenceEdit = angular.copy(vm.evidence);
     vm.evidenceEdit.pubmed_id = vm.evidence.source.pubmed_id;
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
-    vm.evidenceEdit.drugs = _.filter(_.pluck(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
+    vm.evidenceEdit.drugs = _.filter(_.map(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};

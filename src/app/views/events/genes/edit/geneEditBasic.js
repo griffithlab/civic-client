@@ -46,7 +46,7 @@
     vm.geneHistory = GeneHistory;
     vm.geneEdit = angular.copy(vm.gene);
     vm.geneEdit.comment = { title: 'GENE ' + vm.gene.name + ' Revision Description', text:'' };
-    vm.geneEdit.source_ids = _.pluck(vm.gene.sources, 'pubmed_id');
+    vm.geneEdit.source_ids = _.map(vm.gene.sources, 'pubmed_id');
     vm.myGeneInfo = geneModel.data.myGeneInfo;
     vm.variants = geneModel.data.variants;
     vm.variantGroups = geneModel.data.variantGroups;

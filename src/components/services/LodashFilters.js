@@ -60,7 +60,7 @@
 
   // begin register angular-lodash/utils
 
-  _.each(_.methods(_), function(methodName) {
+  _.each(_.functions(_), function(methodName) {
     function register($rootScope) {$rootScope[methodName] = _.bind(_[methodName], _);}
 
     _.each([
@@ -79,16 +79,16 @@
 
   var
     adapList = [
-      ['map', 'collect'],
+      ['map', 'collect', 'pluck'],
       ['reduce', 'inject', 'foldl'],
       ['reduceRight', 'foldr'],
-      ['find', 'detect'],
-      ['filter', 'select'],
-      'where',
-      'findWhere',
+      ['find', 'detect', 'findWhere'],
+      ['filter', 'select', 'where'],
+      // 'where',
+      // 'findWhere',
       'reject',
       'invoke',
-      'pluck',
+      // 'pluck',
       'max',
       'min',
       'sortBy',
@@ -132,6 +132,8 @@
     if(!(_.isArray(filterNames))) {
       filterNames = [filterNames];
     }
+
+    console.log(filterNames[0], _[filterNames[0]]);
 
     var
       filter = _.bind(_[filterNames[0]], _),

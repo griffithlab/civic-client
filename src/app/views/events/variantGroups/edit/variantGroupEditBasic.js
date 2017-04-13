@@ -49,7 +49,7 @@
     vm.variantGroupHistory = VariantGroupHistory;
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
-    vm.variantGroupEdit.sources = _.pluck(vm.variantGroup.sources, 'pubmed_id');
+    vm.variantGroupEdit.sources = _.map(vm.variantGroup.sources, 'pubmed_id');
     vm.variantGroupEdit.variantsEdit = _.map(vm.variantGroupEdit.variants, function(variant) {
       return { name: variant.entrez_name + ' - ' + variant.name, id: variant.id };
     });
@@ -214,7 +214,7 @@
       vm.formErrors = {};
       vm.formMessages = {};
       // prep variant edit obj for submission to server
-      variantGroupEdit.variants = _.pluck(variantGroupEdit.variantsEdit, 'id');
+      variantGroupEdit.variants = _.map(variantGroupEdit.variantsEdit, 'id');
 
       VariantGroupRevisions.submitRevision(variantGroupEdit)
         .then(function(response) {

@@ -10,7 +10,7 @@
     "angular-ui-grid": "^4.0.4",
     "angular-bootstrap": "^2.5.0",
     "angular-dialog-service": "5.3.0",
-    "lodash": "3.10.0",
+    "lodash": "^4.0.0",
     "angular-resource": "1.4.7",
     "angular-timeago": "0.1.6",
     "font-awesome": "4.3.0",

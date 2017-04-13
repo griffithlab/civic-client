@@ -48,7 +48,7 @@
               label = label + ' -- ' + variantAliasLabel + ': ' + event.variant_aliases.join(', ');
             }
 
-            if (label.length > labelLimit) { label = _.trunc(label, labelLimit); }
+            if (label.length > labelLimit) { label = _.truncate(label, labelLimit); }
 
             result = {
               /*jshint camelcase: false */
