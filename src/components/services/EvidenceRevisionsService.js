@@ -260,7 +260,17 @@
     function submitRevision(reqObj) {
       return EvidenceRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
+
+          // flush evidence_item cache and refresh, in order to update the variant summary evidence grid
+          cache.remove('/api/variants/' + reqObj.variant_id);
+          Variants.get(reqObj.variant_id);
+
+          cache.remove('/api/variants/' + reqObj.variant_id + '/evidence_items');
+          Variants.queryEvidence(reqObj.variant_id);
+
+          // refresh suggested changes
           cache.remove('/api/evidence_items/' + reqObj.id + '/suggested_changes/');
+          query(reqObj.id);
 
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + reqObj.gene_id + '/variants?count=999');
@@ -280,17 +290,23 @@
     function acceptRevision(evidenceId, revisionId, variantId) {
       return EvidenceRevisionsResource.acceptRevision({ evidenceId: evidenceId, revisionId: revisionId }).$promise.then(
         function(response) {
+
           // flush evidence_item cache and refresh, in order to update the variant summary evidence grid
           cache.remove('/api/variants/' + variantId);
+          Variants.get(variantId);
+
           cache.remove('/api/variants/' + variantId + '/evidence_items');
           Variants.queryEvidence(variantId);
+
           // refresh suggested changes
           cache.remove('/api/evidence_items/' + evidenceId + '/suggested_changes/');
           query(evidenceId);
+
           // refresh revision
           cache.remove('/api/evidence_items/' + evidenceId + '/suggested_changes/' + revisionId);
-          // refresh evidence item
           get(evidenceId, revisionId);
+
+          // refresh evidence item
           cache.remove('/api/evidence_items/' + evidenceId );
           Evidence.get(evidenceId);
 
@@ -308,11 +324,21 @@
           return $q.reject(error);
         });
     }
-    function rejectRevision(evidenceId, revisionId) {
+    function rejectRevision(evidenceId, revisionId, variantId) {
       return EvidenceRevisionsResource.rejectRevision({ evidenceId: evidenceId, revisionId: revisionId }).$promise.then(
         function(response) {
+          // flush evidence_item cache and refresh, in order to update the variant summary evidence grid
+          cache.remove('/api/variants/' + variantId);
+          Variants.get(variantId);
+
+          cache.remove('/api/variants/' + variantId + '/evidence_items');
+          Variants.queryEvidence(variantId);
+
+          // refresh suggested changes
           cache.remove('/api/evidence_items/' + response.id + '/suggested_changes/');
           query(evidenceId);
+
+          // refresh revision
           cache.remove('/api/evidence_items/' + response.id + '/suggested_changes/' + revisionId);
           get(evidenceId, revisionId);
 
