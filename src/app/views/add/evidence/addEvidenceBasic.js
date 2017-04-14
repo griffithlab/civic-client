@@ -460,6 +460,7 @@
           label: 'Evidence Level',
           options: ([{ value: '', label: 'Please select an Evidence Level' }].concat(el_options(descriptions.evidence_level_brief))),
           valueProp: 'value',
+          required: true,
           labelProp: 'label',
           helpText: help['Evidence Level'],
           data: {
