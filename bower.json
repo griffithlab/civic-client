@@ -42,6 +42,14 @@
         "dist/fonts/glyphicons-halflings-regular.woff",
         "dist/fonts/glyphicons-halflings-regular.woff2"
       ]
+    },
+    "angular-ui-grid": {
+      "main": [
+        "./ui-grid.css",
+        "./ui-grid.js",
+        "./ui-grid.woff",
+        "./ui-grid.ttf"
+      ]
     }
   },
   "resolutions": {
