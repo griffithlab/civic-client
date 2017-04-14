@@ -16,8 +16,7 @@
   // @ngInject
   function cancelButtonController($scope, $state, $previousState, $window) {
     $scope.cancel = function() {
-      //$previousState.get() ? $previousState.go() : $state.go('browse');
-      $window.history.back();
+      $previousState.get() ? $window.history.back() : $state.go('home');
     };
   }
 })();
