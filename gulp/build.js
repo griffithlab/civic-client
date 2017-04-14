@@ -77,7 +77,8 @@ gulp.task('inject', ['styles', 'wiredep'], function(){
         //now pipe through the custom angular app builder to inject the app files in the right order
         .pipe(appBuilder('civicClient',{
           'exclude' : [
-            'uiResolving.js'
+            'uiResolving.js',
+            'entityEditView.js'
           ]
         })),
         {
