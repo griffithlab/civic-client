@@ -78,7 +78,11 @@ gulp.task('inject', ['styles', 'wiredep'], function(){
         .pipe(appBuilder('civicClient',{
           'exclude' : [
             'uiResolving.js',
-            'entityEditView.js'
+            'entityEditView.js',
+            'GoogleAnalyticsService.js',
+            'MyVariantInfoService.js',
+            'EvidenceQueuesController.js',
+            'authTestCtrl.js'
           ]
         })),
         {
