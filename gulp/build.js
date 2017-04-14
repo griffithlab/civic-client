@@ -33,9 +33,13 @@ gulp.task('styles', ['wiredep'],  function () {
 });
 
 gulp.task('scripts', function () {
-  var angularticsFilter = $.filter('!**/angulartics-ga.js');
+  var angularticsFilter = function(){
+    return $.filter(function(file){
+      return !file.path.endsWith('angulartics-ga.js');
+    });
+  };
   return gulp.src('src/{app,components}/**/*.js')
-    .pipe(angularticsFilter)
+    .pipe(angularticsFilter())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.size());
@@ -53,10 +57,57 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts', 'partials', 'cdnize'], function () {
+gulp.task('inject', ['styles', 'wiredep'], function(){
+  var specFilter = function(){
+    return $.filter(function(file){
+      return !file.path.endsWith(".spec.js");
+    });
+  };
+  var vendorFilter = function(){
+    return $.filter(function(file){
+      return !file.path.endsWith("app/vendor.css");
+    });
+  };
+  var appBuilder = require("./app-builder.js");
+
+  return gulp.src(['.tmp/index.html', 'src/404.html'])
+    .pipe($.inject(
+      gulp.src("src/{app,components}/**/*.js")
+        .pipe(specFilter()) //filter out test files
+        //now pipe through the custom angular app builder to inject the app files in the right order
+        .pipe(appBuilder('civicClient',{
+          'exclude' : [
+            'uiResolving.js',
+            'entityEditView.js',
+            'GoogleAnalyticsService.js',
+            'MyVariantInfoService.js',
+            'EvidenceQueuesController.js',
+            'authTestCtrl.js'
+          ]
+        })),
+        {
+          starttag: '<!-- inject:app -->',
+          addRootSlash: false,
+          ignorePath: 'src/'
+        }
+    ))
+    .pipe($.inject(
+      gulp.src(".tmp/{app,components}/**/*.css")
+        .pipe(vendorFilter()),
+      {
+        starttag: '<!-- inject:style -->',
+        addRootSlash: false,
+        ignorePath: '.tmp/'
+      }
+    ))
+    .pipe(gulp.dest('.tmp'))
+})
+
+gulp.task('html', ['partials', 'scripts', 'cdnize'], function () {
   var htmlFilter = $.filter('*.html', {restore: true});
   var jsFilter = $.filter('**/*.js', {restore: true});
   var cssFilter = $.filter('**/*.css', {restore: true});
+
 
   return gulp.src('.tmp/*.html')
     .pipe($.inject(
