@@ -53,6 +53,13 @@
     vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
+    // TODO: watch expression is a temp fix, should refactor isAuth to return a promise
+    // in order to cover situations where components load faster than the auth info
+    // is returned from the server
+    $scope.$watch(function() { return Security.isAuthenticated();}, function(isAuth) {
+      vm.isAuthenticated = isAuth;
+    });
+
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
