@@ -41,6 +41,8 @@
     ctrl.entityId = $scope.entityViewModel.data.item.id;
     ctrl.showResolved = false;
 
+    ctrl.popoverPlacement = $scope.type === 'GENE' ? 'right-top' : 'right';
+
     ctrl.newFlag = {
       entityId: $scope.entityViewModel.data.item.id,
       comment: {

@@ -2,35 +2,35 @@
   <span ng-switch="ctrl.isAuthenticated()" >
     <span ng-switch-when="false" >
       <a class="btn  btn-xs btn-edit-entity"
-         tooltip="Please sign in to edit this {{type|lowercase}}"
-         tooltip-append-to-body="true"
+         uib-tooltip="Please sign in to edit this {{type|lowercase}}"
+         uib-tooltip-append-to-body="true"
          ng-disabled="true">
         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       </a>
       <a class="btn btn-xs btn-flag"
          ng-class="{'flagged': ctrl.hasActiveFlag}"
-         popover-template="'flagPopover.tpl.html'"
+         uib-popover-template="'flagPopover.tpl.html'"
          popover-title="Flag {{type}} {{name}} "
-         popover-placement="right"
-         tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Sign in to flag this ' + (type|lowercase)}}":
-         tooltip-append-to-body="true">
+         popover-placement="{{ctrl.popoverPlacement}}"
+         uib-tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Sign in to flag this ' + (type|lowercase)}}":
+         uib-tooltip-append-to-body="true">
         <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
       </a>
     </span>
     <span ng-switch-when="true" >
       <a class="btn  btn-xs btn-edit-entity"
-         tooltip="Edit this {{type|lowercase}}"
-         tooltip-append-to-body="true"
+         uib-tooltip="Edit this {{type|lowercase}}"
+         uib-tooltip-append-to-body="true"
          ng-click="ctrl.edit()">
         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       </a>
       <a class="btn  btn-xs btn-flag"
          ng-class="{'flagged': ctrl.hasActiveFlag}"
-         tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Flag this ' + (type|lowercase)}}"
-         tooltip-append-to-body="true"
-         popover-template="'flagPopover.tpl.html'"
+         uib-tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Flag this ' + (type|lowercase)}}"
+         uib-tooltip-append-to-body="true"
+         uib-popover-template="'flagPopover.tpl.html'"
          popover-title="Flag {{type}} {{name}} "
-         popover-placement="right">
+         popover-placement="{{ctrl.popoverPlacement}}">
         <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
       </a>
     </span>
@@ -59,8 +59,8 @@
                class="btn btn-xs btn-danger"
                ng-click="ctrl.submit(ctrl.newFlag)"
                ng-disabled="ctrl.newFlag.comment.text.length < 3"
-               tooltip-enable="ctrl.newFlag.comment.text.length < 3"
-               tooltip="Please add comment before submitting flag.">
+               uib-tooltip-enable="ctrl.newFlag.comment.text.length < 3"
+               uib-tooltip="Please add comment before submitting flag.">
               Flag
             </a>
           </div>
