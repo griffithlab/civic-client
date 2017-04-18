@@ -79,6 +79,12 @@
       $analytics.eventTrack(toState.name);
       $analytics.pageTrack(window.location.hash);
     });
+    $rootScope.$on('$stateChangeError', function (evt, toState, params) {
+      $rootScope._civicStateError = _.merge(params, {
+        'stateName': toState.name
+      });
+      $state.go('home');
+    });
     $rootScope.$on('duScrollspy:becameActive', function($event, $element){
       //Automatically update location
       var hash = $element.prop('hash');
@@ -91,7 +97,7 @@
     // function message(to, toP, from, fromP) {
     //   return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
     // }
-
+    
     // $rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
     //   console.log('Start:   ' + message(to, toP, from, fromP));
     // });

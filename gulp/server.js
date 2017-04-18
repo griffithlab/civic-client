@@ -13,6 +13,7 @@ var connect = require('gulp-connect');
 var url = require('url');
 var path = require('path');
 var proxy = require('proxy-middleware');
+var historyAPI = require('connect-history-api-fallback');
 
 function connectInit(baseDir, livereload) {
   connect.server({
@@ -34,7 +35,8 @@ function connectInit(baseDir, livereload) {
           var options = url.parse('http://127.0.0.1:3000/badges');
           options.route = '/badges';
           return proxy(options);
-        })()
+        })(),
+        historyAPI()
       ];
     }
   });

@@ -39,7 +39,7 @@
       return non_rejected_count > 0;
     };
 
-    var addVarGroupUrlBase = $scope.addVarGroupUrl = '#/add/variantGroup';
+    var addVarGroupUrlBase = $scope.addVarGroupUrl = 'add/variantGroup';
 
     $scope.$watchCollection('stateParams', function(stateParams){
       if(_.has(stateParams, 'geneId')) {
