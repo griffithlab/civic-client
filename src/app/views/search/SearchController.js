@@ -146,10 +146,14 @@
                     { value: 'is_less_than', name: 'is less than' },
                     { value: 'is_less_than_or_equal_to', name: 'is less than or equal to' },
                     { value: 'is_equal_to', name: 'is equal to' },
-                    { value: 'is_in_the_range', name: 'is in the range'}
+                    { value: 'is_in_the_range', name: 'is in the range'},
+                    { value: 'is_undefined', name: 'is undefined'}
                   ],
                   onChange: function(value, options, scope) {
-                    _.pullAt(scope.model.parameters, 1,2);
+                    _.pullAt(scope.model.parameters, 1);
+                    if (scope.model.name == "is_undefined"){
+                      _.pullAt(scope.model.parameters, 0);
+                    }
                   }
                 }
               },
@@ -157,6 +161,7 @@
                 key: 'parameters[0]',
                 type: 'rating',
                 className: 'inline-field',
+                hideExpression: 'model.name == "is_undefined"',
                 templateOptions: {
                   label: '',
                   required: true
