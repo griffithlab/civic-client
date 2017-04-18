@@ -105,12 +105,23 @@
   }
 
   // @ngInject
-  function GeneTalkController(Genes, GeneRevisions, GenesTalkViewOptions) {
+  function GeneTalkController($scope, Genes, GeneRevisions, GenesTalkViewOptions) {
+    var self = this;
     console.log('GenesTalkController called.');
     GenesTalkViewOptions.init();
     this.GenesTalkViewModel = Genes; // we're re-using the Genes model here but could in the future have a GenesTalk model if warranted
     this.GeneRevisionsModel = GeneRevisions;
     this.GenesTalkViewOptions = GenesTalkViewOptions;
+
+    $scope.$watch(
+      function() { return self.GenesTalkViewModel.data.item.name; },
+      function(newName) {
+        _.each(self.GenesTalkViewOptions.tabData, function(tab) {
+          var type = tab.heading.split(' ')[1];
+          tab.heading = newName + ' ' + type;
+        });
+      }
+    );
   }
 
 })();

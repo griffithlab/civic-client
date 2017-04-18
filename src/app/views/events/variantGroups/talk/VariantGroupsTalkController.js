@@ -105,12 +105,23 @@
   }
 
   // @ngInject
-  function VariantGroupsTalkController(VariantGroups, VariantGroupRevisions, VariantGroupsTalkViewOptions) {
+  function VariantGroupsTalkController($scope, VariantGroups, VariantGroupRevisions, VariantGroupsTalkViewOptions) {
+    var self = this;
     console.log('VariantGroupsTalkController called.');
     VariantGroupsTalkViewOptions.init();
     this.VariantGroupsTalkViewModel = VariantGroups; // we're re-using the VariantGroups model here but could in the future have a VariantGroupsTalk model if warranted
     this.VariantGroupRevisionsModel = VariantGroupRevisions;
     this.VariantGroupsTalkViewOptions = VariantGroupsTalkViewOptions;
+
+    $scope.$watch(
+      function() { return self.VariantsTalkViewModel.data.item.name; },
+      function(newName) {
+        _.each(self.VariantsTalkViewOptions.tabData, function(tab) {
+          var type = tab.heading.split(' ')[1];
+          tab.heading = newName + ' ' + type;
+        });
+      }
+    );
   }
 
 })();
