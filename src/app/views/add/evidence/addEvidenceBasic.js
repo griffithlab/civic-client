@@ -41,7 +41,7 @@
     var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
     var ratingLabel = function(index) { //handle labels for rating template options
       return index + " - " + descriptions.rating[index].replace(' - ','<br/>');
-    }
+    };
 
     var help = ConfigService.evidenceHelpText;
     var vm = $scope.vm = {};
