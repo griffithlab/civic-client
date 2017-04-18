@@ -26,6 +26,7 @@
                                       VariantHistory,
                                       VariantsViewOptions,
                                       Publications,
+                                      ConfigService,
                                       formConfig,
                                       _,
                                       $rootScope) {
@@ -323,10 +324,12 @@
       {
         model: vm.variantEdit.coordinates,
         key: 'chromosome',
-        type: 'horizontalInputHelp',
+        type: 'horizontalSelectHelp',
         templateOptions: {
           label: 'Chromosome',
           value: vm.variantEdit.coordinates.chromosome,
+          ngOptions: 'option["value"] as option["name"] for option in to.options',
+          options: ConfigService.valid_chromosomes,
           helpText: 'Chromosome in which this variant occurs (e.g. 17).'
         }
       },
@@ -386,10 +389,12 @@
       {
         model: vm.variantEdit.coordinates,
         key: 'chromosome2',
-        type: 'horizontalInputHelp',
+        type: 'horizontalSelectHelp',
         templateOptions: {
-          label: 'Chromosome 2',
+          label: 'Chromosome2',
           value: vm.variantEdit.coordinates.chromosome2,
+          ngOptions: 'option["value"] as option["name"] for option in to.options',
+          options: ConfigService.valid_chromosomes,
           helpText: 'If this variant is a fusion (e.g. BCR-ABL1), specify the chromosome name, coordinates, and representative transcript for the 3-prime partner.'
         }
       },

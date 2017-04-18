@@ -253,6 +253,33 @@
           }
         ]
       },
+      valid_chromosomes: [
+        { value: '1', name: '1' },
+        { value: '2', name: '2' },
+        { value: '3', name: '3' },
+        { value: '4', name: '4' },
+        { value: '5', name: '5' },
+        { value: '6', name: '6' },
+        { value: '7', name: '7' },
+        { value: '8', name: '8' },
+        { value: '9', name: '9' },
+        { value: '10', name: '10' },
+        { value: '11', name: '11' },
+        { value: '12', name: '12' },
+        { value: '13', name: '13' },
+        { value: '14', name: '14' },
+        { value: '15', name: '15' },
+        { value: '16', name: '16' },
+        { value: '17', name: '17' },
+        { value: '18', name: '18' },
+        { value: '19', name: '19' },
+        { value: '20', name: '20' },
+        { value: '21', name: '21' },
+        { value: '22', name: '22' },
+        { value: 'X', name: 'X' },
+        { value: 'Y', name: 'Y' },
+        { value: 'MT', name: 'MT' }
+      ],
       evidenceAttributeDescriptions: {
         variant_origin: {
           'Somatic Mutation': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
