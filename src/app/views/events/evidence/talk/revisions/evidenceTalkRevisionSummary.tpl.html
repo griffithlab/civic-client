@@ -24,16 +24,16 @@
   <div class="row">
     <div class="col-xs-12">
       <div ng-messages="vm.formErrors" class="revision-errors">
-        <div ng-message="500"><div uib-alert type="danger">
+        <div ng-message="500"><div class="alert alert-danger">
           <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
         </div></div>
-        <div ng-message="401"><div uib-alert type="danger">
+        <div ng-message="401"><div class="alert alert-danger">
           <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
         </div></div>
-        <div ng-message="403"><div uib-alert type="danger">
+        <div ng-message="403"><div class="alert alert-danger">
           <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
         </div></div>
-        <div ng-message="409"><div uib-alert type="danger">
+        <div ng-message="409"><div class="alert alert-danger">
           <strong class="status">403 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
         </div></div>
       </div>
@@ -42,10 +42,10 @@
   <div class="row ">
     <div class="col-xs-12">
       <div ng-messages="vm.formMessages" class="revision-messages">
-        <div ng-message="acceptSuccess"><div uib-alert type="success">
+        <div ng-message="acceptSuccess"><div class="alert alert-success">
           <strong class="status">Success</strong> - <span class="message">The revision was successfully applied.</span>
         </div></div>
-        <div ng-message="rejectSuccess"><div uib-alert type="success">
+        <div ng-message="rejectSuccess"><div class="alert alert-success">
           <strong class="status">Success</strong> - <span class="message">The revision was successfully rejected.</span>
         </div></div>
       </div>

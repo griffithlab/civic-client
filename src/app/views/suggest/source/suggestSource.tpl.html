@@ -16,7 +16,7 @@
     </div>
     <div class="row" ng-if="vm.error.status">
       <div class="col-xs-12">
-        <div uib-alert type="danger">
+        <div class="alert alert-danger">
           <p><strong>Error: {{ vm.error.status }}:</strong> {{vm.error.statusText}}
           <span ng-if="vm.error.status === 409"><br/>This source suggetion appears to conflict with a previously submitted suggestion.</span></p>
         </div>
@@ -52,7 +52,7 @@
     </div>
     <div class="row" ng-if="vm.form.$invalid" style="margin-top: 1em;">
       <div class="col-xs-5 col-xs-offset-2">
-        <div uib-alert type="info">
+        <div class="alert alert-info">
           The Submit button is disabled because the Suggest Source form is incomplete or contains errors. Please ensure that all required fields are completed and error free.
         </div>
       </div>

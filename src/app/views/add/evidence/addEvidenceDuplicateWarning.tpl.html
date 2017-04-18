@@ -1,6 +1,6 @@
 <div class="row" ng-show="vm.duplicates.length > 0">
   <div class="col-xs-offset-1 col-xs-10">
-    <div uib-alert type="warning">
+    <div class="alert alert-warning">
       <p>Evidence items already exist that use <em ng-bind="pubmedField.templateOptions.data.description">this publication</em> to support a clinical interpretation of a mutation in {{model.gene.name}} {{model.variant.name}}. Please check the following evidence items to ensure that your intended contribution does not replicate the efforts of other curators:</p>
       <evidence-grid
         style="background-color: white;border-radius: 8px;margin-top: 1em; padding: .5em;"
@@ -16,4 +16,3 @@
     </div>
   </div>
 </div>
-
