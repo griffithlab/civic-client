@@ -40,7 +40,7 @@
             variant: 'V',
             variant_group: 'VG',
             evidence_item: 'E',
-            revision: 'R'
+            suggested_change: 'R'
           };
           return '#' + types[entity.type] + entity.id;
         };
