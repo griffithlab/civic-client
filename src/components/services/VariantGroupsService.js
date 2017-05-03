@@ -136,6 +136,7 @@
     // VariantGroup Collections
     var variants = [];
     var comments = [];
+    var flags = [];
 
     return {
       initBase: initBase,
@@ -144,7 +145,8 @@
         item: item,
         collection: collection,
         variants: variants,
-        comments: comments
+        comments: comments,
+        flags: flags
       },
 
       // VariantGroup Base

@@ -6,17 +6,17 @@
     <div class="alert alert-info">Sign in by choosing one of the methods below:</div>
     <ul class="providers">
       <li class="google">
-          <a href="api/auth/google_oauth2?origin={{ location | encodeUri }}">
+        <a href="api/auth/google_oauth2?origin={{ location | encodeUri }}" target="_self">
             <div class="btn-label">Sign in with Google</div>
           </a>
       </li>
       <li class="orcid">
-        <a href="api/auth/orcid?origin={{ location | encodeUri }}">
+        <a href="api/auth/orcid?origin={{ location | encodeUri }}" target="_self">
           <div class="btn-label">Sign in with OrcID</div>
         </a>
       </li>
       <li class="github">
-        <a href="api/auth/github?origin={{ location | encodeUri }}">
+        <a href="api/auth/github?origin={{ location | encodeUri }}" target="_self">
           <div class="btn-label">Sign in with Github</div>
         </a>
       </li>
