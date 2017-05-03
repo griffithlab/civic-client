@@ -872,6 +872,7 @@
                   required: true,
                   options: [
                     {value: 'contains', name: 'contains'},
+                    {value: 'does_not_contain', name: 'does not contain'},
                     {value: 'begins_with', name: 'begins with'}
                   ]
                 }
