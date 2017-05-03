@@ -114,9 +114,9 @@
     this.VariantGroupsTalkViewOptions = VariantGroupsTalkViewOptions;
 
     $scope.$watch(
-      function() { return self.VariantsTalkViewModel.data.item.name; },
+      function() { return self.VariantGroupsTalkViewModel.data.item.name; },
       function(newName) {
-        _.each(self.VariantsTalkViewOptions.tabData, function(tab) {
+        _.each(self.VariantGroupsTalkViewOptions.tabData, function(tab) {
           var type = tab.heading.split(' ')[1];
           tab.heading = newName + ' ' + type;
         });
