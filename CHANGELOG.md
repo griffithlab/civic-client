@@ -1,3 +1,9 @@
+0.0.11 / 2017-05-04
+===================
+* added flag feature, allowing users to flag individual entities for urgent curator attention
+* switching to HTML5 mode, eliminating '#' in URLs to allow better search engine indexing 
+* upgraded all ui-bootstrap components to latest version
+
 0.0.10 / 2017-02-02
 ===================
 * Add Evidence can now pre-populate Evidence Level based on URL query string
