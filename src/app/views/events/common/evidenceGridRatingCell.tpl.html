@@ -1,3 +1,9 @@
 <div class="ratingCell" ng-class="col.colIndex()">
-  <span ng-bind="row.entity[col.field]"></span> <i class="glyphicon glyphicon-star"></i>
+  <div ng-switch="row.entity[col.field]" >
+    <div ng-switch-when="0" >
+      <span class="glyphicon glyphicon-remove-circle"></span>
+    </div>
+    <div ng-switch-default>
+      <span ng-bind="row.entity[col.field]"></span> <i class="glyphicon glyphicon-star"></i>
+    </div>
 </div>

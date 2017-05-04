@@ -420,7 +420,7 @@
       console.log('----- suppressGo: onRegisterApi init, set to false');
       var suppressGo = false;
 
-      ctrl.evidenceGridOptions.data = prepareDrugArray($scope.evidence);
+      ctrl.evidenceGridOptions.data = prepareEvidence($scope.evidence);
 
       ctrl.exportData = function() {
         ctrl.evidenceGridOptions.exporterCsvFilename = getFilename($scope.variant);
@@ -445,7 +445,7 @@
           ctrl.gridApi.grid.queueRefresh().then(function() {
             // fixes intermittent bug where col headers wouldn't render on reloaded Search pages
             // forcing data update after a refresh I think prevents the update from interrupting col render
-            ctrl.evidenceGridOptions.data = prepareDrugArray(evidence);
+            ctrl.evidenceGridOptions.data = prepareEvidence(evidence);
           });
         }
       });
@@ -511,15 +511,19 @@
         }
       });
 
-      function prepareDrugArray(evidence) {
+      function prepareEvidence(evidence) {
         return _.map(evidence, function(item){
+          // convert drug array to string
           if (_.isArray(item.drugs) && item.drugs.length > 0) {
             item.druglist = _.chain(item.drugs).map('name').value().join(', ');
-            return item;
           } else {
             item.druglist = 'N/A';
-            return item;
           }
+          // convert null ratings to zero
+          if(item.rating === null || item.rating === undefined) {
+            item.rating = 0;
+          }
+          return item;
         });
       }
       function getFilename(variant) {
