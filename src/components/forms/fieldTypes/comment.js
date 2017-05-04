@@ -26,12 +26,14 @@
         };
 
         $scope.searchEntities = function(term) {
-          CommentSuggestions.getEntitySuggestions(term).then(function(response) {
-            $scope.entities = _.map(response, function(entity) {
-              entity.display_type = $filter('keyToLabel')(entity.type).toUpperCase();
-              return entity;
+          if(term.length > 0) {
+            CommentSuggestions.getEntitySuggestions(term).then(function(response) {
+              $scope.entities = _.map(response, function(entity) {
+                entity.display_type = $filter('keyToLabel')(entity.type).toUpperCase();
+                return entity;
+              });
             });
-          });
+          }
         };
 
         $scope.getEntity= function(entity) {
