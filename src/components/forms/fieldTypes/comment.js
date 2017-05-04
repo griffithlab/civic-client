@@ -16,9 +16,11 @@
       },
       controller: /* @ngInject */ function($scope, $filter, CommentSuggestions) {
         $scope.searchUsers = function(term) {
-          CommentSuggestions.getUserSuggestions(term).then(function(response) {
-            $scope.users = response;
-          });
+          if(term.length > 0) {
+            CommentSuggestions.getUserSuggestions(term).then(function(response) {
+              $scope.users = response;
+            });
+          }
         };
 
         $scope.getUser = function(user) {
