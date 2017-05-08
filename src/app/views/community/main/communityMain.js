@@ -79,11 +79,13 @@
         });
     }, 250);
 
+    var fieldClassName = 'col-xs-6 col-sm-4 col-md-2';
+
     vm.formFields = [
       {
         key: 'filter',
         type: 'input',
-        className: 'col-xs-2',
+        className: fieldClassName,
         templateOptions: {
           label: 'Find User',
           required: false
@@ -97,7 +99,7 @@
       {
         key: 'role',
         type: 'select',
-        className: 'col-xs-2',
+        className: fieldClassName,
         defaultValue: undefined,
         templateOptions: {
           label: 'Role',
@@ -118,7 +120,7 @@
       {
         key: 'area_of_expertise',
         type: 'select',
-        className: 'col-xs-2',
+        className: fieldClassName,
         defaultValue: undefined,
         templateOptions: {
           label: 'Area of Expertise',
@@ -145,7 +147,7 @@
 
 
         type: 'select',
-        className: 'col-xs-2',
+        className: fieldClassName,
         defaultValue: 'most_active',
         templateOptions: {
           label: 'Sort By',
@@ -170,7 +172,7 @@
       {
         key: 'sort_order',
         type: 'select',
-        className: 'col-xs-2',
+        className: fieldClassName,
         defaultValue: 'desc',
         templateOptions: {
           label: 'Sort Order',
@@ -189,7 +191,7 @@
       {
         key: 'limit',
         type: 'select',
-        className: 'col-xs-2',
+        className: fieldClassName,
         defaultValue: 'this_month',
         templateOptions: {
           label: 'Limit To',
