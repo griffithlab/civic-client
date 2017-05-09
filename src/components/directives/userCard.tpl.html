@@ -39,6 +39,20 @@
       </div>
     </div>
   </div>
+  <div class="row" ng-if="vm.user.organization.name != undefined">
+    <div class="col-xs-12" >
+      <div class="secondary-user-attributes">
+      <ul>
+        <li class="attr-key" >
+          Organization
+        </li>
+        <li class="attr-value" >
+            <span ng-bind="vm.user.organization.name | ifEmpty: '--'"></span>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
   <div class="row" ng-if="vm.user.community_params != undefined">
     <div class="col-xs-4" >
       <div class="secondary-user-attributes attr-left">

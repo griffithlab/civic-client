@@ -34,6 +34,10 @@
                 <td class="key">Area of Expertise:</td>
                 <td class="value">{{user.area_of_expertise|ifEmpty: '--'}}</td>
               </tr>
+              <tr>
+                <td class="key">Organization:</td>
+                <td class="value">{{user.organization.name|ifEmpty: '--'}}</td>
+              </tr>
               <tr ng-if="user.bio.length > 0">
                 <td colspan="2">
                   <p><span class="key">Biography:</span><br/>
