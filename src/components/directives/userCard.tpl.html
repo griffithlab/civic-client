@@ -47,7 +47,9 @@
           Organization
         </li>
         <li class="attr-value" >
-            <span ng-bind="vm.user.organization.name | ifEmpty: '--'"></span>
+          <a ui-sref="organizations.summary({organizationId: vm.user.organization.id})">
+            {{vm.user.organization.name|ifEmpty: '--'}}
+          </a>
         </li>
       </ul>
       </div>
