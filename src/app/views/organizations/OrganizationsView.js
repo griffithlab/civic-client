@@ -8,7 +8,7 @@
     $stateProvider
       .state('organizations', {
         abstract: true,
-        url: '/organizations/:organizationsId',
+        url: '/organizations/:organizationId',
         template: '<ui-view id="organizations-view"></ui-view>',
         data: {
           titleExp: '"Organizations"',
@@ -24,11 +24,8 @@
           navMode: 'sub'
         },
         resolve: {
-          source: function($stateParams, Organizations) {
-            return Organizations.get($stateParams.organizationsId);
-          },
-          comments: function($stateParams, Organizations) {
-            return Organizations.queryComments($stateParams.organizationsId);
+          organization: function($stateParams, Organizations) {
+            return Organizations.get($stateParams.organizationId);
           }
         }
       });

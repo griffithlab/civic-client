@@ -36,7 +36,14 @@
               </tr>
               <tr>
                 <td class="key">Organization:</td>
-                <td class="value">{{user.organization.name|ifEmpty: '--'}}</td>
+                <td class="value" ng-if="user.organization.name == undefined">
+                  --
+                </td>
+                <td class="value">
+                  <a ui-sref="organizations.summary({organizationId: user.organization.id})">
+                    {{user.organization.name|ifEmpty: '--'}}
+                  </a>
+                </td>
               </tr>
               <tr ng-if="user.bio.length > 0">
                 <td colspan="2">
