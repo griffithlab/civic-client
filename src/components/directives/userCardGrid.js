@@ -36,10 +36,16 @@
     vm.model = {};
 
     var updateData = _.debounce(function () {
-      var filters = [{
-        field: 'display_name',
-        term: vm.model.filter
-      }];
+      var filters = [
+        {
+          field: 'display_name',
+          term: vm.model.filter
+        },
+        {
+          field: 'organization',
+          term: vm.model.org_filter
+        }
+      ];
 
       var sorting = [{
         field: vm.model.sort_by,
@@ -63,7 +69,21 @@
         type: 'input',
         className: fieldClassName,
         templateOptions: {
-          label: 'Find User',
+          label: 'Filter Display Name',
+          required: false
+        },
+        watcher: {
+          listener: function() {
+            updateData();
+          }
+        }
+      },
+      {
+        key: 'org_filter',
+        type: 'input',
+        className: fieldClassName,
+        templateOptions: {
+          label: 'Filter Organization',
           required: false
         },
         watcher: {
@@ -161,7 +181,7 @@
       {
         key: 'limit',
         type: 'select',
-        className: fieldClassName,
+        className: 'col-xs-6 col-sm-4 col-md-2',
         defaultValue: 'this_month',
         templateOptions: {
           label: 'Limit To',
