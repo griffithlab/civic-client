@@ -129,39 +129,7 @@
       <h3 class="sub-title">Users</h3>
     </div>
   </div>
-  <div class="row users-form">
-    <form novalidate class="form-horizontal">
-      <formly-form
-        model="vm.model"
-        fields="vm.formFields"
-        options="vm.formOptions">
-      </formly-form>
-    </form>
-  </div>
-  <div class="row users-rows">
-    <user-card user="user"
-               class="col-xs-6 col-sm-4 col-lg-3"
-               ng-repeat="user in vm.users">
-    </user-card>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 text-center users-pagination">
-      <ul uib-pagination
-        class="pagination-sm"
-        ng-change="vm.pageChanged()"
-        ng-model="vm.page"
-        items-per-page="vm.count"
-        max-size="15"
-        boundary-links="true"
-        rotate="false"
-        align="true"
-        total-items="vm.totalItems"
-        direction-links="true">
-      </ul>
-      <p class="page-info small">
-        {{ vm.totalItems }} {{ vm.isFiltered ? "filtered" : "total" }} {{ vm.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
-        Page {{ vm.page }} of {{ vm.totalPages }}
-      </p>
-    </div>
+  <div class="col-xs-12" >
+    <user-card-grid></user-card-grid>
   </div>
 </div>

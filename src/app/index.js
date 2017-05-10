@@ -43,6 +43,7 @@
     'civic.events',
     'civic.sources',
     'civic.users',
+    'civic.organizations',
     'civic.add',
     'civic.community',
     'civic.curation'
@@ -97,7 +98,7 @@
     // function message(to, toP, from, fromP) {
     //   return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
     // }
-    
+
     // $rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
     //   console.log('Start:   ' + message(to, toP, from, fromP));
     // });
@@ -136,6 +137,7 @@
     'civic.users.profile',
     'civic.users.common'
   ]);
+  angular.module('civic.organizations', []);
 
   angular.module('civic.add', [
     'ui.router',
