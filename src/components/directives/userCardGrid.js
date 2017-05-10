@@ -61,7 +61,8 @@
         });
     }, 250);
 
-    var fieldClassName = 'col-xs-6 col-sm-4 col-md-2';
+    var fieldClassName = 'col-xs-6 col-sm-4';
+    var fieldClassNameShort = 'col-xs-3 col-sm-2';
 
     vm.formFields = [
       {
@@ -162,14 +163,14 @@
       {
         key: 'sort_order',
         type: 'select',
-        className: fieldClassName,
+        className: fieldClassNameShort,
         defaultValue: 'desc',
         templateOptions: {
-          label: 'Sort Order',
+          label: 'Sort',
           required: false,
           options: [
-            { name: 'Ascending', value: 'asc' },
-            { name: 'Descending', value: 'desc' }
+            { name: 'Asc', value: 'asc' },
+            { name: 'Desc', value: 'desc' }
           ]
         },
         watcher: {
@@ -181,17 +182,17 @@
       {
         key: 'limit',
         type: 'select',
-        className: 'col-xs-6 col-sm-4 col-md-2',
+        className: fieldClassNameShort,
         defaultValue: 'this_month',
         templateOptions: {
           label: 'Limit To',
           required: false,
           options: [
             // this_week, this_month, this_year, all_time
-            {name: 'All time', value: 'all_time'},
-            {name: 'This week', value: 'this_week'},
-            {name: 'This month', value: 'this_month'},
-            {name: 'This year', value: 'this_year'}
+            {name: 'All', value: 'all_time'},
+            {name: 'Week', value: 'this_week'},
+            {name: 'Month', value: 'this_month'},
+            {name: 'Year', value: 'this_year'}
           ]
         },
         watcher: {
