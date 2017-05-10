@@ -10,6 +10,8 @@
       restrict: 'E',
       replace: true,
       scope: {
+        entity: '=', // site, user, organization
+        id: '='
       },
       templateUrl: 'app/views/activity/directives/activityGrid.tpl.html',
       controller: 'ActivityGridController'
@@ -277,22 +279,36 @@
         }
       });
     };
+    $scope.$watchCollection(function() {
+      return Events.data.collection;
+    }, function(events) {
+      ctrl.gridOptions.data = events;
+
+    });
 
     function updateData() {
       fetchData(ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
-        .then(function(data){
-          ctrl.gridOptions.data = data.result;
-          ctrl.totalItems = data.total;
+        .then(function(response) {
+          if(_.isUndefined(response.total) && !_.isUndefined(response._meta)) {
+            ctrl.totalItems = response._meta.total_count;
+          } else if(!_.isUndefined(response.total)) {
+            ctrl.totalItems = response.total;
+          }
         });
     }
 
     function fetchData(count, page, sorting, filters) {
       var request;
+      var entity = $scope.entity;
+      var queryFunc;
 
       request= {
         count: count,
         page: page
       };
+      if($scope.id) {
+        request.id = $scope.id;
+      }
 
       if (filters.length > 0) {
         _.each(filters, function(filter) {
@@ -305,7 +321,18 @@
           request['sorting[' + sort.field + ']'] = sort.direction;
         });
       }
-      return Events.query(request);
+
+      if(entity === 'site') {
+        queryFunc = Events.query;
+      } else if (entity === 'user') {
+        queryFunc = Events.queryUserEvents;
+      } else if(entity === 'organization') {
+        queryFunc = Events.queryOrganizationEvents;
+      } else {
+        queryFunc = Events.query;
+      }
+
+      return queryFunc(request);
     }
 
     updateData();

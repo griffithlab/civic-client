@@ -13,7 +13,25 @@
         page: '@page'
       },
       {
-        query: {
+        querySiteEvents: {
+          method: 'GET',
+          isArray: false,
+          cache: false
+        },
+        queryUserEvents: {
+          url: '/api/users/:id',
+          params: {
+            id: '@id'
+          },
+          method: 'GET',
+          isArray: false,
+          cache: false
+        },
+        queryOrganizationEvents: {
+          url: '/api/organizations/:id/events',
+          params: {
+            id: '@id'
+          },
           method: 'GET',
           isArray: false,
           cache: false
@@ -30,13 +48,31 @@
       data: {
         collection: collection
       },
-      query: query
+      query: query,
+      queryOrganizationEvents: queryOrganizationEvents,
+      queryUserEvents: queryUserEvents
     };
 
     function query(reqObj) {
-      return EventsResource.query(reqObj).$promise
+      return EventsResource.querySiteEvents(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response.result, collection);
+          return response.$promise;
+        });
+    }
+
+    function queryUserEvents(reqObj) {
+      return EventsResource.queryUserEvents(reqObj).$promise
         .then(function(response) {
           angular.copy(response, collection);
+          return response.$promise;
+        });
+    }
+
+    function queryOrganizationEvents(reqObj) {
+      return EventsResource.queryOrganizationEvents(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response.records, collection);
           return response.$promise;
         });
     }
