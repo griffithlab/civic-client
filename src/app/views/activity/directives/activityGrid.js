@@ -241,6 +241,8 @@
           'submitted': '.summary',
           'accepted': '.summary',
           'rejected': '.summary',
+          'flagged': '.summary',
+          'flag resolved': '.summary',
           'publication suggested': '.summary',
           'change suggested': '.talk.revisions.list.summary',
           'change accepted': '.talk.revisions.list.summary',
