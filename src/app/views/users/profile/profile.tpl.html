@@ -10,32 +10,30 @@
     <div class="row">
       <div class="col-xs-12 evidence-table-block">
         <evidence-grid
-          evidence="vm.evidence"
-          show-gene-col="true"
-          show-variant-col="true"
-          rows="10"
-          context="'profile'"
-          rounded="true">
+            evidence="vm.evidence"
+            show-gene-col="true"
+            show-variant-col="true"
+            rows="10"
+            context="'profile'"
+            rounded="true">
         </evidence-grid>
       </div>
     </div>
   </div>
   <div class="row col-headers" style="margin-top: 1em;">
     <div class="col-xs-12">
-      <h4>Events:</h4>
+      <h4>User Activity</h4>
     </div>
   </div>
-  <div class="col-xs-12 events-block">
-    <div ng-switch="vm.events.length > 0">
-      <div ng-switch-when="true">
-        <ul>
-          <li ng-repeat="event in vm.events">
-            <event-item event="event" theme="'light'">EVENT</event-item>
-          </li>
-        </ul>
-      </div>
-      <div ng-switch-when="false">
-        <p>User has not generated any CIViC events.</p>
+  <div class="row">
+    <div class="col-xs-12 events-block">
+      <div ng-switch="vm.events.length > 0">
+        <div ng-switch-when="true">
+          <activity-grid entity="'user'" id="vm.user.id"></activity-grid>
+        </div>
+        <div ng-switch-when="false">
+          <p>User has not generated any CIViC events.</p>
+        </div>
       </div>
     </div>
   </div>
