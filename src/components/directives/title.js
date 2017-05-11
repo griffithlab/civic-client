@@ -12,7 +12,7 @@
         var listener = function(event, data) {
           // console.log('title title:update listener called. ****************');
           $timeout(function() {
-            $rootScope.title = (typeof data.newTitle !== 'undefined') ? 'CIViC: ' + data.newTitle : 'CIViC - Clinincal Interpretation of Variants in Cancer';
+            $rootScope.title = (typeof data.newTitle !== 'undefined') ? 'CIViC: ' + data.newTitle : 'CIViC - Clinical Interpretation of Variants in Cancer';
           });
         };
         $rootScope.$on('title:update', listener); // updates titles app-wide (e.g. 'subheader' directive)
