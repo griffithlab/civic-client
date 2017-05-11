@@ -19,7 +19,7 @@
           cache: false
         },
         queryUserEvents: {
-          url: '/api/users/:id',
+          url: '/api/users/:id/events',
           params: {
             id: '@id'
           },
@@ -64,7 +64,7 @@
     function queryUserEvents(reqObj) {
       return EventsResource.queryUserEvents(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, collection);
+          angular.copy(response.result, collection);
           return response.$promise;
         });
     }
