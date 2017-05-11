@@ -13,8 +13,11 @@
           </div>
         </div>
         <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-12">
+          <div class="row description-block">
+            <div class="col-xs-2 org-image" ng-if="organization.profile_image.hasOwnProperty('x256') === true" >
+              <img ng-src="{{organization.profile_image.x256}}" class="img-responsive" width="256" height="256"/>
+            </div>
+            <div ng-class="{'col-xs-12': organization.profile_image.hasOwnProperty('x256') === false, 'col-xs-10': organization.profile_image.hasOwnProperty('x256') === true}">
               <p ng-bind="organization.description"></p>
             </div>
           </div>
