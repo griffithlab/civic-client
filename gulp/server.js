@@ -36,6 +36,11 @@ function connectInit(baseDir, livereload) {
           options.route = '/badges';
           return proxy(options);
         })(),
+        (function() {
+          var options = url.parse('http://127.0.0.1:3000/system');
+          options.route = '/system';
+          return proxy(options);
+        })(),
         historyAPI()
       ];
     }
