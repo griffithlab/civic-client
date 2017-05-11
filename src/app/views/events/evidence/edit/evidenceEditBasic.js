@@ -305,7 +305,7 @@
         controller: /* @ngInject */ function($scope) {
           // set attribute definition
           $scope.options.templateOptions.data.attributeDefinition =
-            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.clinical_significance];
+            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type][$scope.model.clinical_significance];
         },
         templateOptions: {
           label: 'Clinical Significance',

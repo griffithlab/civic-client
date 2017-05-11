@@ -330,24 +330,25 @@
           'Predictive': {
             'Sensitivity': 'Associated with positive response to treatment ',
             'Resistance or Non-Response': 'Associated with negative treatment response',
-            'Adverse Response': 'Associated with an adverse response to drug treatment'
+            'Adverse Response': 'Associated with an adverse response to drug treatment',
+            'N/A': 'Variant does not inform clinical action'
           },
           'Diagnostic': {
             'Positive': 'Associated with diagnosis of disease or subtype',
-            'Negative': 'Associated with lack of disease or subtype'
+            'Negative': 'Associated with lack of disease or subtype',
+            'N/A': 'Variant does not inform clinical action'
           },
           'Prognostic': {
             'Better Outcome': 'Demonstrates better than expected clinical outcome',
-            'Poor Outcome': 'Demonstrates worse than expected clinical outcome'
+            'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
+            'N/A': 'Variant does not inform clinical action'
           },
           'Predisposing': {
             'Pathogenic': 'Very strong evidence the variant is pathogenic',
             'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic.',
             'Benign': 'Very strong evidence the variant is benign',
             'Likely Benign': 'Not expected to have a major effect on disease',
-            'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting'
-          },
-          'N/A': {
+            'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
             'N/A': 'Variant does not inform clinical action'
           }
         },
