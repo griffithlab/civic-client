@@ -79,83 +79,69 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         },
-        { name: 'flagging_comment',
+        {
+          name: 'gene',
+          field: 'state_params.gene.name',
+          displayName: 'Gene',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'variant',
+          field: 'state_params.variant.name',
+          displayName: 'Variant',
+          type: 'string',
+          width: '15%',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'evidence_item',
+          field: 'state_params.evidence_item.name',
+          displayName: 'Item',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'flagging_comment',
           displayName: 'Flagging Comment',
           enableFiltering: true,
           allowCellFocus: false,
           enableSorting: false,
           type: 'string',
-          width: '85%',
+          width: '40%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
-        // { name: 'event_type',
-        //   displayName: 'Event Type',
-        //   enableFiltering: true,
-        //   allowCellFocus: false,
-        //   enableSorting: false,
-        //   type: 'string',
-        //   width: '20%',
-        //   cellTemplate: '<div class="ui-grid-cell-contents">' +
-        //   '{{row.entity[col.field]}}' +
-        //   '<span ng-if="row.entity.unlinkable === true" style="color: #999;" class="small"> (unlinkable)</span>' +
-        //   '</div>',
-        //   filter: {
-        //     condition: uiGridConstants.filter.CONTAINS
-        //   }
-        // },
-        // {
-        //   name: 'gene',
-        //   field: 'state_params.gene.name',
-        //   displayName: 'Gene',
-        //   type: 'string',
-        //   allowCellFocus: false,
-        //   enableFiltering: false,
-        //   enableSorting: false,
-        //   filter: {
-        //     condition: uiGridConstants.filter.CONTAINS
-        //   }
-        // },
-        // {
-        //   name: 'variant',
-        //   field: 'state_params.variant.name',
-        //   displayName: 'Variant',
-        //   type: 'string',
-        //   width: '15%',
-        //   allowCellFocus: false,
-        //   enableFiltering: false,
-        //   enableSorting: false,
-        //   filter: {
-        //     condition: uiGridConstants.filter.CONTAINS
-        //   }
-        // },
-        // {
-        //   name: 'evidence_item',
-        //   field: 'state_params.evidence_item.name',
-        //   displayName: 'Item',
-        //   type: 'string',
-        //   allowCellFocus: false,
-        //   enableFiltering: false,
-        //   enableSorting: false,
-        //   filter: {
-        //     condition: uiGridConstants.filter.CONTAINS
-        //   }
-        // },
-        // {
-        //   name: 'timestamp',
-        //   field: 'timestamp',
-        //   displayName: 'Timestamp',
-        //   type: 'date',
-        //   sort: {direction: uiGridConstants.DESC},
-        //   allowCellFocus: false,
-        //   enableFiltering: false,
-        //   enableSorting: true,
-        //   cellTemplate: '<div class="ui-grid-cell-contents"><span ng-bind="row.entity[col.field]|timeAgo"></span></div>',
-        //   filter: {
-        //     condition: uiGridConstants.filter.CONTAINS
-        //   }
-        // }
+        {
+          name: 'created_at',
+          displayName: 'Timestamp',
+          type: 'date',
+          sort: {direction: uiGridConstants.DESC},
+          width: '20%',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: true,
+          cellTemplate: '<div class="ui-grid-cell-contents"><span ng-bind="row.entity[col.field]|timeAgo"></span></div>',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        }
 
       ]
     };
@@ -281,7 +267,13 @@
     $scope.$watchCollection(function() {
       return Flags.data.collection;
     }, function(flags) {
-      ctrl.gridOptions.data = flags;
+      ctrl.gridOptions.data = _.map(flags, function(flag) {
+        flag.flagging_comment = flag.comments[0].text;
+        if(!_.isUndefined(flag.comments[1])) {
+          flag.resolving_comment = flag.comments[1].text;
+        }
+        return flag; 
+      });
 
     });
 
