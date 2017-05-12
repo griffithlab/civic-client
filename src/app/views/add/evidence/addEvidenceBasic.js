@@ -196,7 +196,7 @@
             };
             return Datatables.query(request)
               .then(function(response) {
-                return _.map(_.unique(response.result, 'variant'), function(event) {
+                return _.map(_.uniq(response.result, 'variant'), function(event) {
                   return { name: event.variant };
                 });
               });
