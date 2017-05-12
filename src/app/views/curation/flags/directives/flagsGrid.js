@@ -18,12 +18,13 @@
 
   // @ngInject
   function FlagsGridController($log,
-                                  $scope,
-                                  $state,
-                                  $location,
-                                  uiGridConstants,
-                                  _,
-                                  Flags) {
+                               $scope,
+                               $filter,
+                               $state,
+                               $location,
+                               uiGridConstants,
+                               _,
+                               Flags) {
     var ctrl = $scope.ctrl = {};
     console.log('flag grid loaded.');
 
@@ -60,7 +61,8 @@
 
       enableFiltering: false,
       enableColumnMenus: false,
-      enableSorting: true,
+      // enableSorting: true,
+      enableSorting: false,
       enableRowSelection: true,
       enableRowHeaderSelection: false,
       multiSelect: false,
@@ -80,38 +82,25 @@
           }
         },
         {
-          name: 'gene',
-          field: 'state_params.gene.name',
-          displayName: 'Gene',
+          name: 'entity_type',
+          displayName: 'Entity Type',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: false,
           enableSorting: false,
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
-        },
-        {
-          name: 'variant',
-          field: 'state_params.variant.name',
-          displayName: 'Variant',
-          type: 'string',
           width: '15%',
-          allowCellFocus: false,
-          enableFiltering: false,
-          enableSorting: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
-          name: 'evidence_item',
-          field: 'state_params.evidence_item.name',
-          displayName: 'Item',
+          name: 'entity_name',
+          displayName: 'Entity Name',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: false,
           enableSorting: false,
+          width: '20%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -123,17 +112,16 @@
           allowCellFocus: false,
           enableSorting: false,
           type: 'string',
-          width: '40%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
           name: 'created_at',
-          displayName: 'Timestamp',
+          displayName: 'Flagged',
           type: 'date',
           sort: {direction: uiGridConstants.DESC},
-          width: '20%',
+          width: '15%',
           allowCellFocus: false,
           enableFiltering: false,
           enableSorting: true,
@@ -268,11 +256,16 @@
       return Flags.data.collection;
     }, function(flags) {
       ctrl.gridOptions.data = _.map(flags, function(flag) {
+        // pull out comments
         flag.flagging_comment = flag.comments[0].text;
         if(!_.isUndefined(flag.comments[1])) {
           flag.resolving_comment = flag.comments[1].text;
         }
-        return flag; 
+        // set up entity type, name
+        var type = _.chain(flag.state_params).findKey({id: flag.flaggable_id}).value();
+        flag.entity_type = $filter('keyToLabel')(type).toUpperCase();
+        flag.entity_name = _.chain(flag.state_params).find({id: flag.flaggable_id}).value().name;
+        return flag;
       });
 
     });
