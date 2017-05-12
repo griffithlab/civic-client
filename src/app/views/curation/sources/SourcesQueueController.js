@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('civic.account')
+  angular.module('civic.curation')
     .controller('SourcesQueueController', SourcesQueueController);
 
 

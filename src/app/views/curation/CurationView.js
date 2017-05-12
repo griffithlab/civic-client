@@ -15,6 +15,20 @@
           navMode: 'sub'
         }
       })
+      .state('curation.flags', {
+        url: '/flags',
+        templateUrl: 'app/views/curation/flags/flags.tpl.html',
+        controller: 'FlagsQueueController',
+        resolve: {
+          'openFlags': function(Flags) {
+            return Flags.queryOpen();
+          }
+        },
+        data: {
+          titleExp: '"Curation: Open Flags"',
+          navMode: 'sub'
+        }
+      })
       .state('curation.sources', {
         url: '/sources',
         templateUrl: 'app/views/curation/sources/sourcesQueue.tpl.html',

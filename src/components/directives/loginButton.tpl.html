@@ -25,9 +25,21 @@
           </a>
         </li>
 
-        <li class="dropdown-header">Curator Tools</li>
+        <li class="dropdown-header">
+          Curator Tools
+        </li>
         <li>
-          <a ui-sref="curation.sources">Source Suggestions</a>
+          <a ui-sref="curation.sources">
+            <span>Source Suggestions</span>
+            <span ng-bind="currentUser.curation_counts.new_source_suggestions" class="badge">count</span>
+          </a>
+        </li>
+
+        <li>
+          <a ui-sref="curation.flags">
+            <span>Open Flags</span>
+            <span ng-bind="currentUser.curation_counts.open_flags" class="badge">count</span>
+          </a>
         </li>
 
         <li ng-if="isAdmin()" class="dropdown-header">Administrator Tools</li>
