@@ -63,7 +63,7 @@
       enableColumnMenus: false,
       // enableSorting: true,
       enableSorting: false,
-      enableRowSelection: true,
+      enableRowSelection: false,
       enableRowHeaderSelection: false,
       multiSelect: false,
       modifierKeysToMultiSelect: false,
@@ -129,6 +129,20 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'action',
+          displayName: 'Actions',
+          width: '15%',
+          allowCellFocus: false,
+          enableFiltering: false,
+          cellTemplate:
+            '<div class="ui-grid-cell-contents text-right">' +
+            '<button ng-click="grid.appScope.ctrl.viewFlag(row)"' +
+            'class="btn btn-xs btn-primary">' +
+            'View Flagged Entity' +
+            '</button>' +
+            '</div>'
         }
 
       ]
@@ -180,78 +194,38 @@
       });
 
       // called when user clicks on a row
-      gridApi.selection.on.rowSelectionChanged($scope, function(row){
+      ctrl.viewFlag = function(row){
         var event = row.entity;
         var subjectStates = {
-          genes: 'events.genes',
-          variants: 'events.genes.summary.variants',
-          variantgroups: 'events.genes.summary.variantGroups',
-          evidenceitems: 'events.genes.summary.variants.summary.evidence',
-          sources: 'sources'
+          Gene: 'events.genes',
+          Variant: 'events.genes.summary.variants',
+          VariantGroup: 'events.genes.summary.variantGroups',
+          EvidenceItem: 'events.genes.summary.variants.summary.evidence'
         };
-
-        // revision comments require some more logic to determine the proper state
-        if(event.subject_type === 'suggestedchanges') {
-          var state;
-          var type = event.state_params.suggested_change.subject_type;
-          if(type === 'evidenceitems') {
-            state = 'events.genes.summary.variants.summary.evidence';
-          } else if (type === 'variantgroups') {
-            state = 'events.genes.summary.variantGroups';
-          } else if (type === 'variants') {
-            state = 'events.genes.summary.variants';
-          } else if (type === 'genes') {
-            state = 'events.genes';
-          }
-          subjectStates.suggestedchanges = state;
-        }
-
-
-        var stateExtension = {
-          'commented': '.talk.comments',
-          'submitted': '.summary',
-          'accepted': '.summary',
-          'rejected': '.summary',
-          'flagged': '.summary',
-          'flag resolved': '.summary',
-          'publication suggested': '.summary',
-          'change suggested': '.talk.revisions.list.summary',
-          'change accepted': '.talk.revisions.list.summary',
-          'change rejected': '.talk.revisions.list.summary'
-        };
-
-        // revision comments are shown in their revision's summary view, override commented extension
-        if(event.subject_type === 'suggestedchanges') {
-          stateExtension.commented = '.talk.revisions.list.summary';
-        }
-
-        // sources display comments right on their summary page
-        if(event.subject_type === 'sources') {
-          stateExtension.commented = '.summary';
-        }
 
         var stateParams = {};
         _.each(event.state_params, function(obj, entity) {
           var entityId;
-          if(entity === 'suggested_change') {
-            entityId = 'revisionId';
-          } else if (entity === 'evidence_item') {
+          if(entity === 'evidence_item') {
             entityId = 'evidenceId';
+          } else if (entity === 'variant') {
+            entityId = 'variantId';
           } else if (entity === 'variant_group') {
             entityId = 'variantGroupId';
-          } else if (entity === 'source') {
-            entityId = 'sourceId';
           } else {
             entityId = entity + 'Id';
           }
           stateParams[entityId] = obj.id;
         });
 
-        if (event.unlinkable === false) {
-          $state.go(subjectStates[event.subject_type] + stateExtension[event.event_type], stateParams);
+        // temporarily check to check existence of unlinkable attribute, until implemented
+        // TODO: remove check when unlinkable attr implemented
+        if (_.isUndefined(event.unlinkable) === true || event.unlinkable === false) {
+          $state.go(subjectStates[event.flaggable_type] + '.summary', stateParams);
         }
-      });
+      };
     };
+
     $scope.$watchCollection(function() {
       return Flags.data.collection;
     }, function(flags) {
