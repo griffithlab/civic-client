@@ -206,16 +206,21 @@
         var stateParams = {};
         _.each(event.state_params, function(obj, entity) {
           var entityId;
+          var hash;
           if(entity === 'evidence_item') {
             entityId = 'evidenceId';
+            hash='evidence';
           } else if (entity === 'variant') {
             entityId = 'variantId';
+            hash = 'variant';
           } else if (entity === 'variant_group') {
             entityId = 'variantGroupId';
+            hash = 'variant-group';
           } else {
             entityId = entity + 'Id';
           }
           stateParams[entityId] = obj.id;
+          stateParams['#'] = hash;
         });
 
         // temporarily check to check existence of unlinkable attribute, until implemented
