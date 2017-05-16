@@ -1,2 +1,35 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
 .flagsGrid {
+  .clearfix();
+  @ui-grid-border-radius: @border-radius-large;
+  .ui-grid {
+    border: 1px solid #DEDEDE;
+    -webkit-border-radius: @ui-grid-border-radius;
+    -moz-border-radius: @ui-grid-border-radius;
+    border-radius: @ui-grid-border-radius;
+
+
+    .ui-grid-top-panel {
+      -webkit-border-top-right-radius: @ui-grid-border-radius;
+      -webkit-border-top-left-radius: @ui-grid-border-radius;
+      -moz-border-radius-topright: @ui-grid-border-radius;
+      -moz-border-radius-topleft: @ui-grid-border-radius;
+      border-top-right-radius: @ui-grid-border-radius;
+      border-top-left-radius: @ui-grid-border-radius;
+    }
+
+  }
+
+  .record-info {
+    font-size: small;
+    color: #999;
+  }
+
+  .ui-grid-pager-row-count-picker {
+    display: none;
+  }
 }
