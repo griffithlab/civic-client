@@ -262,6 +262,10 @@
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
 
+          // flush gene variant groups and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variant_groups');
+          Genes.queryVariantGroups(response.gene_id);
+
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');
           Subscriptions.query();
