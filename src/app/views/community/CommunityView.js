@@ -13,6 +13,9 @@
         url: '/community',
         template: '<ui-view id="community-view"></ui-view>',
         controller: 'CommunityViewController',
+        data: {
+          titleExp: '"Community"'
+        },
         onExit: /* @ngInject */ function($deepStateRedirect) {
           $deepStateRedirect.reset();
         }
