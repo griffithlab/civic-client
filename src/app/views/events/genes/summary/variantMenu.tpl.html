@@ -65,9 +65,9 @@
 
   <script type="text/ng-template" id="variantTagTooltip.tpl.html" >
     <span>
-      Evidence Items: {{ variant.evidence_items.accepted_count }}<br/>
-      <span ng-if="variant.statuses.has_pending_fields === true" style="display: block;">Has pending changes</span>
-      <span ng-if="variant.statuses.has_pending_evidence === true" style="display: block;">Has pending evidence</span>
+      Evidence Items: {{ variant.evidence_item_statuses.accepted_count }}<br/>
+      <span ng-if="variant.statuses.pending_evidence_count > 0" style="display: block;">Has {{ variant.statuses.pending_evidence_count }} pending evidence</span>
+      <span ng-if="variant.statuses.open_change_count > 0" style="display: block;">Has {{ variant.statuses.open_change_count }} pending change{{variant.statuses.open_change_count > 1 ? 's' : '' }}</span>
     </span>
   </script>
 
