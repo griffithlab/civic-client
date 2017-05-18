@@ -55,19 +55,19 @@
        class="variant-tag"
        ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">
       <i class="glyphicon glyphicon-exclamation-sign pending-alert"
-         ng-if="variant.statuses.has_pending_fields === true || variant.statuses.has_pending_evidence === true"
-      ng-class="{'pending-changes': variant.statuses.has_pending_fields === true, 'pending-evidence': variant.statuses.has_pending_evidence === true, 'pending-both': variant.statuses.has_pending_fields === true && variant.statuses.has_pending_evidence === true }"></i>
+         ng-if="variant.statuses.pending_evidence_count > 0 || variant.statuses.open_change_count > 0"
+      ng-class="{'pending-changes': variant.statuses.open_change_count > 0, 'pending-evidence': variant.statuses.pending_evidence_count > 0, 'pending-both': variant.statuses.open_change_count > 0 && variant.statuses.pending_evidence_count > 0}"></i>
       <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
-      <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.entrez_name">Gene Name</span>)</span>
+      <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.gene_entrez_name">Gene Name</span>)</span>
     </a>
     </span>
   </script>
 
   <script type="text/ng-template" id="variantTagTooltip.tpl.html" >
     <span>
-      Evidence Items: {{ variant.evidence_items.accepted_count }}<br/>
-      <span ng-if="variant.statuses.has_pending_fields === true" style="display: block;">Has pending changes</span>
-      <span ng-if="variant.statuses.has_pending_evidence === true" style="display: block;">Has pending evidence</span>
+      Evidence Items: {{ variant.evidence_item_statuses.accepted_count }}<br/>
+      <span ng-if="variant.statuses.pending_evidence_count > 0" style="display: block;">Has {{ variant.statuses.pending_evidence_count }} pending evidence</span>
+      <span ng-if="variant.statuses.open_change_count > 0" style="display: block;">Has {{ variant.statuses.open_change_count }} pending change{{variant.statuses.open_change_count > 1 ? 's' : '' }}</span>
     </span>
   </script>
 

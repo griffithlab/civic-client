@@ -272,9 +272,9 @@
           cache.remove('/api/evidence_items/' + reqObj.id + '/suggested_changes/');
           query(reqObj.id);
 
-          // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + reqObj.gene_id + '/variants?count=999');
-          Genes.queryVariants(reqObj.gene_id);
+          // flush variants status and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants_status');
+          Genes.getVariantsStatus(response.gene_id);
 
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');
@@ -310,9 +310,9 @@
           cache.remove('/api/evidence_items/' + evidenceId );
           Evidence.get(evidenceId);
 
-          // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
-          Genes.queryVariants(response.gene_id);
+          // flush variants status and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants_status');
+          Genes.getVariantsStatus(response.gene_id);
 
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');
@@ -342,9 +342,9 @@
           cache.remove('/api/evidence_items/' + response.id + '/suggested_changes/' + revisionId);
           get(evidenceId, revisionId);
 
-          // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
-          Genes.queryVariants(response.gene_id);
+          // flush variants status and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants_status');
+          Genes.getVariantsStatus(response.gene_id);
 
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');

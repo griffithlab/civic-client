@@ -29,14 +29,8 @@
     $scope.$state = $state;
 
     $scope.hasValidEvidenceItems = function(variant) {
-      var non_rejected_count = _.reduce(variant.evidence_items, function(acc, val, key) {
-        if(key !== 'rejected_count') {
-          return acc + val;
-        } else {
-          return acc;
-        }
-      });
-      return non_rejected_count > 0;
+      var statuses = variant.evidence_item_statuses;
+      return (statuses.accepted_count + statuses.submitted_count) > 0;
     };
 
     var addVarGroupUrlBase = $scope.addVarGroupUrl = 'add/variantGroup';
@@ -48,7 +42,7 @@
     });
 
     $scope.$watchCollection(
-      function() { return Genes.data.variants; },
+      function() { return Genes.data.variantsStatus.variants; },
       function(variants){
         $scope.hasHiddenVariants = !_.every(variants, function(variant) {
           return $scope.hasValidEvidenceItems(variant);
@@ -57,9 +51,10 @@
       });
 
     $scope.$watch(
-      function() { return Genes.data.variantGroups; },
-      function(variantGroups){
-        $scope.variantGroups = _.map(variantGroups, function(vg){
+      function() { return Genes.data.variantsStatus.variant_groups; },
+      function(variant_groups){
+
+        $scope.variantGroups = _.map(variant_groups, function(vg){
           // determine if all variants in this variant group are from a single gene
           // (if so, template will show gene names in variant tags)
           var multiGeneGroup = !_.every(vg.variants, { gene_id: vg.variants[0].gene_id });
