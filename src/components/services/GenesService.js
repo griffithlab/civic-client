@@ -126,7 +126,7 @@
       getVariantsStatus: {
         url: '/api/genes/:geneId/variants_status',
         method: 'GET',
-        isArray: true,
+        isArray: false,
         cache: cache
       },
       // Gene Collections
