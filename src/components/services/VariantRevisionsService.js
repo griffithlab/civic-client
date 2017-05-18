@@ -225,9 +225,9 @@
         function(response) { // success
           cache.remove('/api/variants/' + reqObj.id + '/suggested_changes/');
 
-          // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + reqObj.gene_id + '/variants?count=999');
-          Genes.queryVariants(reqObj.gene_id);
+          // flush variants status and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants_status');
+          Genes.getVariantsStatus(response.gene_id);
 
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');
@@ -258,13 +258,9 @@
           cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId);
           get(variantId, revisionId);
 
-          // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
-          Genes.queryVariants(response.gene_id);
-
-          // flush gene variant groups and refresh (for variant menu)
-          cache.remove('/api/genes/' + response.gene_id + '/variant_groups');
-          Genes.queryVariantGroups(response.gene_id);
+          // flush variants status and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants_status');
+          Genes.getVariantsStatus(response.gene_id);
 
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');
@@ -288,9 +284,9 @@
           cache.remove('/api/variants/' + variantId + '/suggested_changes/' + revisionId);
           get(variantId, revisionId);
 
-          // flush gene variants and refresh (for variant menu)
-          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
-          Genes.queryVariants(response.gene_id);
+          // flush variants status and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants_status');
+          Genes.getVariantsStatus(response.gene_id);
 
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');
