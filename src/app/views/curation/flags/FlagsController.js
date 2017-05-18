@@ -8,8 +8,7 @@
   function FlagsQueueController($scope,
                                 $state,
                                 openFlags,
-                                Sources,
-                               ) {
+                                Sources) {
     var vm = $scope.vm = {};
     vm.openFlags = openFlags;
 
