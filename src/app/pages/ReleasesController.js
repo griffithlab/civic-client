@@ -14,7 +14,7 @@
           return _.last(filename.split('/'));
         });
         release.fileUrls = _.map(release.files, function(filename) {
-          return $window.location.origin + filename;
+          return filename;
         });
         return release;
       });
