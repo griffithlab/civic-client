@@ -408,7 +408,7 @@
         type: 'horizontalRatingHelp',
         templateOptions: {
           label: 'Rating',
-          required: true,
+          required: false,
           options: [
             { value: '', label: 'Please select an Evidence Rating' },
             { value: 1, label: ratingLabel(1) },
