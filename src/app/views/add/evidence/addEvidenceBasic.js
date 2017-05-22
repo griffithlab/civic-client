@@ -145,14 +145,11 @@
                   var labelLimit = 70;
                   var list = _.map(response, function(gene, idx) {
                     if (gene.aliases.length > 0) {
-                      console.log("Generating aliases for (index: " + idx + "):");
-                      console.log(gene);
                       gene.alias_list = gene.aliases.join(", ");
                       if(gene.alias_list.length > labelLimit) { gene.alias_list = _.truncate(gene.alias_list, labelLimit); }
                     }
                     return gene;
                   });
-                  console.log(list);
                   return list;
                 });
             }
@@ -266,13 +263,11 @@
       { // duplicates warning row
         templateUrl: 'app/views/add/evidence/addEvidenceDuplicateWarning.tpl.html',
         controller: /* @ngInject */ function($scope, Search) {
-          console.log('dup warning controller loaded.');
           var vm = $scope.vm = {};
           vm.duplicates = [];
           vm.pubmedName = '';
 
           function searchForDups(values) {
-            console.log("searchForDups");
             if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
               vm.duplicates = [];
               Search.post({
@@ -364,7 +359,7 @@
                   var labelLimit = 70;
                   return _.map(response, function(disease) {
                     if (disease.aliases.length > 0) {
-                      disease.alias_list = " -- Aliases: "+ disease.aliases.join(", ");
+                      disease.alias_list = disease.aliases.join(", ");
                       if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
                     }
                     return disease;
@@ -747,7 +742,6 @@
 
       Evidence.add(newEvidence)
         .then(function(response) {
-          console.log('add evidence success!');
           vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
           vm.showForm = false;

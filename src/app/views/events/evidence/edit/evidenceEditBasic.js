@@ -179,6 +179,14 @@
             typeaheadSearch: function(val) {
               return Diseases.beginsWith(val)
                 .then(function(response) {
+                  var labelLimit = 70;
+                  return _.map(response, function(disease) {
+                    if (disease.aliases.length > 0) {
+                      disease.alias_list = disease.aliases.join(", ");
+                      if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
+                    }
+                    return disease;
+                  });
                   return response;
                 });
             }
