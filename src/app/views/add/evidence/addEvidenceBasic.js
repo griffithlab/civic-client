@@ -143,13 +143,17 @@
               return Genes.beginsWith(val)
                 .then(function(response) {
                   var labelLimit = 70;
-                  return _.map(response, function(gene) {
+                  var list = _.map(response, function(gene, idx) {
                     if (gene.aliases.length > 0) {
-                      gene.alias_list = " -- Aliases: "+ gene.aliases.join(", ");
-                      if(gene.alias_list.length > labelLimit) { gene.alias_list = _.trunc(gene.alias_list, labelLimit); }
+                      console.log("Generating aliases for (index: " + idx + "):");
+                      console.log(gene);
+                      gene.alias_list = gene.aliases.join(", ");
+                      if(gene.alias_list.length > labelLimit) { gene.alias_list = _.truncate(gene.alias_list, labelLimit); }
                     }
                     return gene;
                   });
+                  console.log(list);
+                  return list;
                 });
             }
           }
