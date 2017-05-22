@@ -1,1 +1,7 @@
-<a tabindex="-1" ng-bind-html="match.label + match.model.alias_list  | uibTypeaheadHighlight:query"></a>
+<a tabindex="-1">
+  <span ng-bind-html="match.label|uibTypeaheadHighlight:query">GENE NAME</span>
+  <span ng-if="match.model.alias_list.length > 0">
+    <span style="color: #AAA;">&nbsp;--&nbsp;Aliases:&nbsp;</span>
+    <span ng-bind-html="match.model.alias_list | uibTypeaheadHighlight:query">ALIAS LIST</span>
+  </span>
+</a>
