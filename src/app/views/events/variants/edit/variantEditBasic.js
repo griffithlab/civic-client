@@ -429,6 +429,16 @@
         }
       },
       {
+        model: vm.variantEdit.coordinates.secondary_gene,
+        key: 'name',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Secondary Gene',
+          value: vm.variantEdit.coordinates.secondary_gene.id,
+          helpText: 'For fusion variants, a secondary gene may be specified.'
+        }
+      },
+      {
         template: '<hr/>'
       },
       {

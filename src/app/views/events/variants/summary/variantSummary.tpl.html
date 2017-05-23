@@ -208,6 +208,26 @@
             </tbody>
           </table>
         </div>
+        <div ng-if="variant.coordinates.secondary_gene">
+          <div class="section-title">
+            SECONDARY GENE
+          </div>
+          <table class="table table-condensed borderless">
+            <tbody class="common">
+              <tr>
+                <td class="key">
+                  Gene Name
+                </td>
+              <tr>
+                <td class="value">
+                  <a ng-href="#/events/genes/{{variant.coordinates.secondary_gene.id}}/summary">
+                      {{variant.coordinates.secondary_gene.name | ifEmpty: '--'}}
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div ng-if="isAuthenticated() && !isEdit">
           <a class="btn btn-default btn-xs btn-block"
              ng-click="editClick()">Edit Coordinates</a>
