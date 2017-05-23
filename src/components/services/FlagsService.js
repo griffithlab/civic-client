@@ -5,15 +5,7 @@
     .factory('Flags', FlagsService);
 
   // @ngInject
-  function FlagsResource($resource, $cacheFactory) {
-    var cache = $cacheFactory.get('$http');
-
-    var cacheInterceptor = function(response) {
-      // console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(' '));
-      cache.remove(response.config.url);
-      return response.$promise;
-    };
-
+  function FlagsResource($resource) {
     return $resource(
       '/api/curation/open_flags',
       {},
@@ -27,10 +19,7 @@
   }
 
   // @ngInject
-  function FlagsService($cacheFactory, FlagsResource) {
-    var cache = $cacheFactory.get('$http');
-
-
+  function FlagsService(Factory, FlagsResource) {
     var collection = [];
 
     return {

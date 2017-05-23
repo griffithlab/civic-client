@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('civic.pages')
     .config(StatisticsConfig)
     .controller('StatisticsController', StatisticsController);

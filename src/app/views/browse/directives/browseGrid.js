@@ -81,7 +81,7 @@
           width: '25%',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -91,7 +91,7 @@
           width: '15%',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -138,7 +138,7 @@
           width: '15%',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -207,7 +207,7 @@
           width: '20%',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -236,7 +236,7 @@
           width: '23%',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -260,7 +260,7 @@
           displayName: 'Pubmed ID',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           type: 'string',
           width: '8%',
           filter: {

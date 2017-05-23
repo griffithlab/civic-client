@@ -14,7 +14,5 @@
     });
 
   // @ngInject
-  function OrganizationSummaryController($scope) {
-    var vm = $scope.vm = {};
-  }
+  function OrganizationSummaryController() {}
 })();

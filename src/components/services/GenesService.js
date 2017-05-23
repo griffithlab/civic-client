@@ -275,17 +275,17 @@
       beginsWith: beginsWith
     };
 
-    function mapVariantStatuses(variants, statuses) {
-      return _.map(variants, function(variant) {
-        variant.statuses = _.chain(statuses)
-          .find({
-            id: variant.id
-          })
-          .pick(['has_pending_fields', 'has_pending_evidence'])
-          .value();
-        return variant;
-      });
-    }
+    // function mapVariantStatuses(variants, statuses) {
+    //   return _.map(variants, function(variant) {
+    //     variant.statuses = _.chain(statuses)
+    //       .find({
+    //         id: variant.id
+    //       })
+    //       .pick(['has_pending_fields', 'has_pending_evidence'])
+    //       .value();
+    //     return variant;
+    //   });
+    // }
 
     function initBase(geneId) {
       return $q.all([

@@ -5,14 +5,7 @@
     .factory('Organizations', OrganizationsService);
 
   // @ngInject
-  function OrganizationsResource($resource, $cacheFactory) {
-    var cache = $cacheFactory.get('$http');
-
-    var cacheInterceptor = function(response) {
-      // console.log(['GenesResource: removing', response.config.url, 'from $http cache.'].join(' '));
-      cache.remove(response.config.url);
-      return response.$promise;
-    };
+  function OrganizationsResource($resource) {
 
     return $resource('/api/organizations',
                      {},
@@ -32,8 +25,7 @@
   }
 
   // @ngInject
-  function OrganizationsService($cacheFactory, OrganizationsResource) {
-    var cache = $cacheFactory.get('$http');
+  function OrganizationsService(OrganizationsResource) {
 
     var item = {};
     var collection = [];

@@ -42,7 +42,8 @@
 
     vm.setLocation = function(url) {
       $location.url(url);
-    }
+    };
+
     vm.hasEditorPerms = function() {
       return (Security.isAdmin() || Security.isEditor());
     };
@@ -102,13 +103,13 @@
           type: 'string',
           filter: {
             // condition: uiGridConstants.filter.CONTAINS
-            condition: function(search, value, row, col)
+            condition: function(search, value)
             {
                 var query = new RegExp(search, 'i');
                 return query.exec(value.username);
             }
           },
-          cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>',
+          cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>'
         },
         {
           name: 'pubmed_id',

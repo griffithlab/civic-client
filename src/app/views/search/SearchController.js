@@ -151,7 +151,7 @@
                   ],
                   onChange: function(value, options, scope) {
                     _.pullAt(scope.model.parameters, 1);
-                    if (scope.model.name == "is_undefined"){
+                    if (scope.model.name === 'is_undefined'){
                       _.pullAt(scope.model.parameters, 0);
                     }
                   }

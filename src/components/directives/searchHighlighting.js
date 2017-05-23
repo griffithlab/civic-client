@@ -20,9 +20,7 @@
       return directive;
     }
 
-
     // @ngInject
-    function searchHighlightingCtrl($scope){
-    }
+    function searchHighlightingCtrl(){ }
 
 })();

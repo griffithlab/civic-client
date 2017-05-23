@@ -7,10 +7,8 @@
   // @ngInject
   function FlagsQueueController($scope,
                                 $state,
-                                openFlags,
-                                Sources) {
+                                openFlags) {
     var vm = $scope.vm = {};
     vm.openFlags = openFlags;
-
   }
 })();

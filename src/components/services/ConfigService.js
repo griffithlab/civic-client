@@ -3,7 +3,7 @@
 
   var make_obj = function(val, lbl) {
     return { value: val, label: lbl };
-  }
+  };
 
   // make options for pull down
   var make_options = function(obj) {
@@ -14,18 +14,18 @@
       options.push(new_obj);
     }
     return options;
-  }
+  };
 
   // make options for evidence level
   var el_options = function(obj) {
     var options = [];
     var keys = Object.keys(obj);
     for (var i = 0; i < keys.length; i++) {
-      var new_obj = make_obj(keys[i], keys[i] + " - " + obj[keys[i]]);
+      var new_obj = make_obj(keys[i], keys[i] + ' - ' + obj[keys[i]]);
       options.push(new_obj);
     }
     return options;
-  }
+  };
 
   // make options for clinical significance
   var cs_options = function(obj) {
@@ -39,20 +39,20 @@
       }
     }
     return options;
-  }
+  };
 
   // merge two objects, obj and src
   var extend = function(obj, src) {
     Object.keys(src).forEach(function(key) { obj[key] = src[key]; });
     return obj;
-  }
+  };
 
   // reduce depth of object tree by 1; by merging properties of properties of obj
   var merge_props = function(obj) {
     var new_obj = {};
-    Object.keys(obj).forEach(function(key) { extend(new_obj, obj[key]) });
+    Object.keys(obj).forEach(function(key) { extend(new_obj, obj[key]); });
     return new_obj;
-  }
+  };
 
   angular.module('civic.services')
     .constant('ConfigService', {

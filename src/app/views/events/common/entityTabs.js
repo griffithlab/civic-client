@@ -69,7 +69,7 @@
 
     fetchPending();
 
-    scope.$on('revisionDecision', function(event, args){
+    scope.$on('revisionDecision', function(){
       fetchPending();
     });
 
@@ -126,12 +126,12 @@
       if(_.isObject(subscription)) {
         console.log('has subscription, unsubscribing.');
         Subscriptions.unsubscribe(subscription.id)
-          .then(function(response) { console.log('unsubscribe successful.');});
+          .then(function() { console.log('unsubscribe successful.');});
       } else {
         console.log('does not have subscription, subscribing');
         var subscribableType = _.startCase(_.camelCase($scope.entityViewModel.data.item.type));
         Subscriptions.subscribe({subscribable_type: subscribableType, subscribable_id: $scope.entityViewModel.data.item.id})
-          .then(function(response) {console.log('subscription successful.');});
+          .then(function() {console.log('subscription successful.');});
       }
     };
     $scope.scroll = function() {
@@ -165,7 +165,7 @@
     $rootScope.stateParams = $stateParams;
 
     // TODO not sure why this watch is necessary for tabs to be properly set to active on 1st load
-    var unwatch = $scope.$watchCollection('entityViewModel', function(viewModel) {
+    var unwatch = $scope.$watchCollection('entityViewModel', function() {
       var currentStateEqualTo = function (tab) {
         var isEqual = $state.is(tab.route, tab.params, tab.options);
         return isEqual;

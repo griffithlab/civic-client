@@ -81,7 +81,7 @@
       },
 
       // Logout the current user and redirect
-      logout: function(redirectTo) {
+      logout: function() {
         $http.get('/api/sign_out').then(function() { // success
           service.currentUser = null;
           $state.go('home');

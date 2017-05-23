@@ -95,7 +95,7 @@
 
     ctrl.submit = function(newFlag) {
       console.log('ctrl.flag() called.');
-      $scope.entityViewModel.submitFlag(newFlag).then(function(response) {
+      $scope.entityViewModel.submitFlag(newFlag).then(function() {
         console.log('flag accepted.');
 
         ctrl.newFlag.comment.text = '';
@@ -105,7 +105,7 @@
     ctrl.resolve = function(resolveFlag) {
       console.log('ctrl.resolve() called');
       resolveFlag.flagId = ctrl.activeFlagId;
-      $scope.entityViewModel.resolveFlag(resolveFlag).then(function(response) {
+      $scope.entityViewModel.resolveFlag(resolveFlag).then(function() {
         console.log('flag resolved.');
         ctrl.showResolved = true;
       });

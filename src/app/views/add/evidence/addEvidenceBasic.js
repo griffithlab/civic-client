@@ -33,14 +33,12 @@
                                       ConfigService) {
     var descriptions = ConfigService.evidenceAttributeDescriptions;
 
-    var make_obj = ConfigService.optionMethods.make_obj;
     var make_options = ConfigService.optionMethods.make_options; // make options for pull down
     var el_options = ConfigService.optionMethods.el_options; // make options for evidence level
     var cs_options = ConfigService.optionMethods.cs_options; // make options for clinical significance
-    var extend = ConfigService.optionMethods.extend; // merge two objects, obj and src
     var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
     var ratingLabel = function(index) { //handle labels for rating template options
-      return index + " - " + descriptions.rating[index].replace(' - ','<br/>');
+      return index + ' - ' + descriptions.rating[index].replace(' - ','<br/>');
     };
 
     var help = ConfigService.evidenceHelpText;
@@ -143,9 +141,9 @@
               return Genes.beginsWith(val)
                 .then(function(response) {
                   var labelLimit = 70;
-                  var list = _.map(response, function(gene, idx) {
+                  var list = _.map(response, function(gene) {
                     if (gene.aliases.length > 0) {
-                      gene.alias_list = gene.aliases.join(", ");
+                      gene.alias_list = gene.aliases.join(', ');
                       if(gene.alias_list.length > labelLimit) { gene.alias_list = _.truncate(gene.alias_list, labelLimit); }
                     }
                     return gene;
@@ -235,7 +233,7 @@
           validPubmedId: {
             expression: function($viewValue, $modelValue, scope) {
               if ($viewValue.length > 0) {
-                if ($viewValue.match(/[^0-9]+/)) return false;
+                if ($viewValue.match(/[^0-9]+/)) { return false; }
                 var deferred = $q.defer();
                 scope.options.templateOptions.loading = true;
                 Publications.verify($viewValue).then(
@@ -359,12 +357,11 @@
                   var labelLimit = 70;
                   return _.map(response, function(disease) {
                     if (disease.aliases.length > 0) {
-                      disease.alias_list = disease.aliases.join(", ");
+                      disease.alias_list = disease.aliases.join(', ');
                       if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
                     }
                     return disease;
                   });
-                  return response;
                 });
             }
           }

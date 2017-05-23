@@ -196,12 +196,12 @@
           // flush cached variant, variant groups, and evidence item lists
           cache.remove('/api/variants/' + response.variant.id);
           cache.remove('/api/variants/' + response.variant.id + '/evidence_items');
-          cache.remove('/api/genes/' + response.gene.id + '/variant_groups'); 
+          cache.remove('/api/genes/' + response.gene.id + '/variant_groups');
 
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + reqObj.gene.id + '/variants?count=999');
           Genes.queryVariants(reqObj.gene.id);
-          Genes.queryVariantGroups(reqObj.gene.id)
+          Genes.queryVariantGroups(reqObj.gene.id);
 
           return response.$promise;
         });
@@ -213,14 +213,14 @@
           cache.remove('/api/evidence_items/' + response.id);
           cache.remove('/api/variants/' + variantId);
           cache.remove('/api/variants/' + variantId + '/evidence_items');
-          cache.remove('/api/genes/' + response.gene_id + '/variant_groups'); 
+          cache.remove('/api/genes/' + response.gene_id + '/variant_groups');
           get(response.id);
           Variants.get(variantId);
 
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
-          Genes.queryVariantGroups(response.gene_id)
+          Genes.queryVariantGroups(response.gene_id);
 
           return response.$promise;
         });
@@ -232,7 +232,7 @@
           cache.remove('/api/evidence_items/' + response.id);
           cache.remove('/api/variants/' + variantId);
           cache.remove('/api/variants/' + variantId + '/evidence_items');
-          cache.remove('/api/genes/' + response.gene_id + '/variant_groups'); 
+          cache.remove('/api/genes/' + response.gene_id + '/variant_groups');
           get(response.id);
           Variants.get(variantId);
 

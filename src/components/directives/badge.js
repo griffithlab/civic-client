@@ -16,7 +16,7 @@
   }
 
   // @ngInject
-  function badgeController($scope, $state, $previousState) {
+  function badgeController($scope) {
     var vm = $scope.vm = {};
     vm.badge = $scope.badge;
   }
