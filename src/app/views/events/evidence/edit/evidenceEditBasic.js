@@ -42,8 +42,8 @@
     var extend = ConfigService.optionMethods.extend; // merge two objects, obj and src
     var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
     var ratingLabel = function(index) { //handle labels for rating template options
-      return index + " - " + descriptions.rating[index].replace(' - ','<br/>');
-    }
+      return index + ' - ' + descriptions.rating[index].replace(' - ','<br/>');
+    };
 
     var help = ConfigService.evidenceHelpText;
     var vm = $scope.vm = {};
@@ -182,7 +182,7 @@
                   var labelLimit = 70;
                   return _.map(response, function(disease) {
                     if (disease.aliases.length > 0) {
-                      disease.alias_list = disease.aliases.join(", ");
+                      disease.alias_list = disease.aliases.join(', ');
                       if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
                     }
                     return disease;
@@ -329,7 +329,7 @@
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
-                options.templateOptions.data.attributeDefinitions[scope.model.clinical_significance];
+                options.templateOptions.data.attributeDefinitions[scope.model.evidence_type][scope.model.clinical_significance];
             }
           },
           onChange: function(value, options, scope) {
