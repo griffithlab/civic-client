@@ -16,10 +16,10 @@
   }
 
   // @ngInject
-  function VariantTalkRevisionSummaryController($scope, 
-                                                $stateParams, 
-                                                VariantRevisions, 
-                                                Security, 
+  function VariantTalkRevisionSummaryController($scope,
+                                                $stateParams,
+                                                VariantRevisions,
+                                                Security,
                                                 formConfig,
                                                 $rootScope) {
     var vm = $scope.vm = {};
@@ -41,7 +41,7 @@
       vm.ownerIsCurrentUser = false;
     }
 
-    vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? "Contributors may not accept their own suggested revisions." : "Suggested revisions must be approved by an editor." ;
+    vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? 'Contributors may not accept their own suggested revisions.' : 'Suggested revisions must be approved by an editor.';
 
     $scope.acceptRevision = function() {
       vm.formErrors = {};

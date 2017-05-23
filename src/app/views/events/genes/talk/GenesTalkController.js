@@ -105,7 +105,7 @@
   }
 
   // @ngInject
-  function GeneTalkController($scope, Genes, GeneRevisions, GenesTalkViewOptions) {
+  function GeneTalkController($scope, _, Genes, GeneRevisions, GenesTalkViewOptions) {
     var self = this;
     console.log('GenesTalkController called.');
     GenesTalkViewOptions.init();

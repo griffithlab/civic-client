@@ -106,7 +106,7 @@
   }
 
   // @ngInject
-  function VariantTalkController($scope, Variants, VariantRevisions, VariantsTalkViewOptions) {
+  function VariantTalkController($scope, _, Variants, VariantRevisions, VariantsTalkViewOptions) {
     var self = this;
     console.log('VariantsTalkController called.');
     VariantsTalkViewOptions.init();

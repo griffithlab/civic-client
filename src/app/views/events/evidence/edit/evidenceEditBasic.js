@@ -35,12 +35,9 @@
 
     var descriptions = ConfigService.evidenceAttributeDescriptions;
 
-    var make_obj = ConfigService.optionMethods.make_obj;
     var make_options = ConfigService.optionMethods.make_options; // make options for pull down
     var el_options = ConfigService.optionMethods.el_options; // make options for evidence level
     var cs_options = ConfigService.optionMethods.cs_options; // make options for clinical significance
-    var extend = ConfigService.optionMethods.extend; // merge two objects, obj and src
-    var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
     var ratingLabel = function(index) { //handle labels for rating template options
       return index + ' - ' + descriptions.rating[index].replace(' - ','<br/>');
     };
@@ -187,7 +184,6 @@
                     }
                     return disease;
                   });
-                  return response;
                 });
             }
           }
@@ -223,7 +219,7 @@
           onChange: function(value, options, scope) {
             // reset clinical_significance, as its options will change then update $touched to ensure user notices
             scope.model.clinical_significance = '';
-            var csField = _.find(scope.fields, { key: 'clinical_significance'}).formControl.$touched = true;
+            _.find(scope.fields, { key: 'clinical_significance'}).formControl.$touched = true;
 
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array

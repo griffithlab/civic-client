@@ -58,7 +58,7 @@
         { name: 'desc',
           displayName: 'Protein Domains',
           enableFiltering: true,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
@@ -67,7 +67,7 @@
         { name: 'id',
           displayName: 'ID',
           enableFiltering: true,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
@@ -75,7 +75,7 @@
         },
         { name: 'short_desc',
           displayName: 'Identifier',
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
@@ -96,7 +96,7 @@
       columnDefs: [
         { name: 'name',
           displayName: 'Pathways',
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           enableFiltering: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -106,7 +106,7 @@
         { name: 'src',
           displayName: 'Source',
           enableFiltering: true,
-          cellTemplate: "app/views/events/common/genericHighlightCell.tpl.html",
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },

@@ -105,7 +105,7 @@
   }
 
   // @ngInject
-  function VariantGroupsTalkController($scope, VariantGroups, VariantGroupRevisions, VariantGroupsTalkViewOptions) {
+  function VariantGroupsTalkController($scope, _, VariantGroups, VariantGroupRevisions, VariantGroupsTalkViewOptions) {
     var self = this;
     console.log('VariantGroupsTalkController called.');
     VariantGroupsTalkViewOptions.init();
