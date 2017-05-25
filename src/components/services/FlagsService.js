@@ -19,7 +19,7 @@
   }
 
   // @ngInject
-  function FlagsService(Factory, FlagsResource) {
+  function FlagsService(FlagsResource) {
     var collection = [];
 
     return {
