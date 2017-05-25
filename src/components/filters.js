@@ -24,11 +24,14 @@
   // @ngInject
   function highlightSearch(_){
     return function (input, query) {
-      if(typeof input === "string")
-      return (typeof query === "string" && query.length > 0) ? input.toString().replace(
-        RegExp('('+ _.escapeRegExp(query)+ ')', 'gi'), '<strong>$1</strong>'
-      ) : input;
-    }
+      if(typeof input === 'string') {
+        return (typeof query === 'string' && query.length > 0) ? input.toString().replace(
+          new RegExp('('+ _.escapeRegExp(query)+ ')', 'gi'), '<strong>$1</strong>'
+        ) : input;
+      } else {
+        return input;
+      }
+    };
   }
 
   // @ngInject
@@ -132,12 +135,12 @@
       return Math.floor(n / 10) === 1
         ? 'th' // jshint ignore: line
         : (n % 10 === 1
-        ? 'st' // jshint ignore: line
-        : (n % 10 === 2
-        ? 'nd' // jshint ignore: line
-        : (n % 10 === 3
-        ? 'rd' // jshint ignore: line
-        : 'th')));
+           ? 'st' // jshint ignore: line
+           : (n % 10 === 2
+              ? 'nd' // jshint ignore: line
+              : (n % 10 === 3
+                 ? 'rd' // jshint ignore: line
+                 : 'th')));
     }
 
   }
