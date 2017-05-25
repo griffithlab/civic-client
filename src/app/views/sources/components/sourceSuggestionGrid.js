@@ -186,7 +186,7 @@
         {
           name: 'action',
           displayName: 'Actions',
-          width: '15%',
+          width: '140',
           allowCellFocus: false,
           enableFiltering: false,
           cellTemplate: 'app/views/sources/components/cellTemplateActions.tpl.html'
