@@ -387,8 +387,9 @@
         },
         templateOptions: {
           label: 'Drug Interaction Type',
+          required: true,
           value: 'vm.evidenceEdit.drug_interaction_type',
-          options: [{ type: 'default', value: '', label: 'Please select a Drug Interaction Type' }].concat(make_options(descriptions.drug_interaction_type)),
+          options: [{ type: 'default', value: null, label: 'Please select a Drug Interaction Type' }].concat(make_options(descriptions.drug_interaction_type)),
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Drug Interaction Type'],
