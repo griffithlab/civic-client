@@ -18,7 +18,8 @@
       </a>
     </span>
     <span ng-switch-when="true" >
-      <a class="btn  btn-xs btn-edit-entity"
+      <a class="btn btn-xs btn-edit-entity"
+         ng-class="{ 'active': ctrl.active === true }"
          uib-tooltip="Edit this {{type|lowercase}}"
          uib-tooltip-append-to-body="true"
          ng-click="ctrl.edit()">

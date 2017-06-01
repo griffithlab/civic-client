@@ -23,14 +23,20 @@
     border-width: 2px;
     color: #4b2065;
     margin-right: .25em;
+    &.flagged, &:hover, &.active {
+      border-color: #4b2065;
+      background-color: #4b2065;
+      color: white;
+    }
   }
 
   .btn-flag {
-    border-color: #942830;
+    border-color: #888888;
     border-width: 2px;
-    color: #942830;
-    background-color: #f6cdd0;
-    &.flagged {
+    color: #888888;
+    background-color: #ececec;
+    &.flagged, &:hover, &.active {
+      border-color: #942830;
       background-color: #942830;
       color: white;
     }
