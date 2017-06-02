@@ -49,23 +49,33 @@
 
     chart.setMargins(options.margin.left, options.margin.top, options.margin.right, options.margin.bottom);
 
-    chart.addMeasureAxis('x', 'Count');
+    var x = chart.addMeasureAxis('x', 'Count');
+    x.addGroupOrderRule('Level', true);
+
     var y = chart.addCategoryAxis('y', 'Drug');
-    y.addOrderRule('Count');
-    chart.addSeries('Level', dimple.plot.bar);
+    y.addOrderRule('Count', false);
+
+    var s = chart.addSeries('Level', dimple.plot.bar);
+
     var l = chart.addLegend('50%', '90%', 220, 20, 'left');
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
     l._getEntries = function() {
-      return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
+      return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['desc']);
     };
 
     chart.data =  _.chain(options.data)
       .map(function(val, key){
-        return _.map(val, function(v,k){ return { Drug: key, Level: _.capitalize(k), Count: v }; });
+        var complete = _.merge({a:0,b:0,c:0,d:0,e:0}, val);
+        return _.chain(complete)
+          .map(function(v,k){
+            return { Drug: key, Level: _.capitalize(k), Count: v };
+          })
+          .value();
       })
       .flatten()
+      .orderBy(['Drug', 'Level'], ['asc', 'desc'])
       .value();
 
     chart.draw();
