@@ -50,20 +50,24 @@
     chart.setMargins(options.margin.left, options.margin.top, options.margin.right, options.margin.bottom);
 
     chart.addMeasureAxis('x', 'Count');
+
     var y = chart.addCategoryAxis('y', 'Disease');
-    y.addOrderRule('Count');
-    chart.addSeries('Level', dimple.plot.bar);
+    y.addOrderRule('Count', false);
+
+    var s = chart.addSeries('Level', dimple.plot.bar);
+    s.addOrderRule('Level', true);
 
     // override legend sorting
     var l = chart.addLegend('50%', '90%', 220, 20, 'left');
     l._getEntries_old = l._getEntries;
     l._getEntries = function() {
-      return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
+      return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['desc']);
     };
 
     chart.data =  _.chain(options.data)
       .map(function(val, key){
-        return _.chain(val)
+        var complete = _.merge({a:0,b:0,c:0,d:0,e:0}, val);
+        return _.chain(complete)
           .map(function(v,k) {
             return { Disease: key, 'Level': _.capitalize(k), Count: v };
           })

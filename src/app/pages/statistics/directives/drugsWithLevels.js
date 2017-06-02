@@ -49,13 +49,13 @@
 
     chart.setMargins(options.margin.left, options.margin.top, options.margin.right, options.margin.bottom);
 
-    var x = chart.addMeasureAxis('x', 'Count');
-    x.addGroupOrderRule('Level', true);
+    chart.addMeasureAxis('x', 'Count');
 
     var y = chart.addCategoryAxis('y', 'Drug');
     y.addOrderRule('Count', false);
 
     var s = chart.addSeries('Level', dimple.plot.bar);
+    s.addOrderRule('Level', true);
 
     var l = chart.addLegend('50%', '90%', 220, 20, 'left');
 
