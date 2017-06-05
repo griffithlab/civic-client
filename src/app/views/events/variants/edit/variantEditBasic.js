@@ -181,6 +181,7 @@
       {
         key: 'clinvar_entries[0]',
         type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'ClinVar Absence',
           value: vm.variantEdit.clinvar_entries[0],
@@ -191,7 +192,21 @@
             { value: 'NONE SPECIFIED', label: 'None specified' },
             { value: 'N/A', label: 'Not applicable' }
           ],
-          helpText: 'If a ClinVar ID cannot be found, please select the best reason for its absence.'
+          helpText: 'If a ClinVar ID cannot be found, please select the best reason for its absence.',
+          onChange: function(viewValue, model) {
+            model.templateOptions.data.attributeDefinition =
+              model.templateOptions.data.attributeDefinitions[model.value()];
+          },
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions:  {
+              null: '&nbsp;',
+              undefined: '&nbsp;',
+              'N/A': 'ClinVar record is not applicable to the variant (e.g. "Overexpression" variants)',
+              'NONE FOUND': 'An attempt was made to find a matching ClinVar Entry, but none exists',
+              'NONE SPECIFIED': 'Variant has not been evaluated for a ClinVar ID'
+            }
+          }
         },
         controller: /* @ngInject */ function($scope) {
           var entries = $scope.model.clinvar_entries;
@@ -199,6 +214,10 @@
           // one of the approved 'not found' choices.
           if(entries.length > 1 || !_.includes(['N/A', 'NOT FOUND', 'NONE SPECIFIED'], entries[0])) {
             $scope.model.clinvar_entries = [null];
+          }
+          if(entries[0] !== null || entries[0] !== undefined) {
+            $scope.to.data.attributeDefinition =
+              $scope.to.data.attributeDefinitions[entries[0]];
           }
         },
         hideExpression: '!model.noClinVar',
