@@ -46,10 +46,12 @@
 
     vm.variantRevisions = VariantRevisions;
     vm.variantHistory = VariantHistory;
-    vm.variantEdit = angular.copy(vm.variant);
+    vm.variantEdit = angular.copy(_.omit(vm.variant, ['evidence_items', 'lifecycle_actions']));
 
     vm.variantEdit.comment = { title: 'VARIANT ' + vm.variant.name + ' Suggested Revision', text:'' };
     vm.variantEdit.sources = _.map(vm.variant.sources, 'pubmed_id');
+    vm.variantEdit.noClinVar = false;
+
     vm.myVariantInfo = variantModel.data.myVariantInfo;
     vm.variants = variantModel.data.variants;
     vm.variantGroups = variantModel.data.variantGroups;
@@ -153,6 +155,56 @@
               required: true
             }
           }
+        },
+        hideExpression: 'model.noClinVar',
+        expressionProperties: {
+          'templateOptions.disabled': 'model.noClinVar === true', // deactivate if noClinVar is checked
+          'templateOptions.required': 'model.noClinVar === false' // required only if noClinVar is unchecked
+        }
+      },
+      {
+        key: 'noClinVar',
+        type: 'horizontalCheckbox',
+        templateOptions: {
+          label: 'Could not locate ClinVar ID'
+        },
+        controller: function($scope){
+          var entries = $scope.model.clinvar_entries;
+          // if entries is non-null, only one item, and that item is not a number,
+          // check noClinVar to show ClinVar Absence field
+          if(entries[0] !== null && entries.length === 1 && !/^\d+$/.test(entries[0])) {
+            $scope.model.noClinVar = true;
+          }
+        },
+        hideExpression: 'model.clinvar_entries.length > 1'
+      },
+      {
+        key: 'clinvar_entries[0]',
+        type: 'horizontalSelectHelp',
+        templateOptions: {
+          label: 'ClinVar Absence',
+          value: vm.variantEdit.clinvar_entries[0],
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [
+            { type: 'default', value: null, label: 'Please select a reason for ClinVar ID absence' },
+            { value: 'NONE FOUND', label: 'None found' },
+            { value: 'NONE SPECIFIED', label: 'None specified' },
+            { value: 'N/A', label: 'Not applicable' }
+          ],
+          helpText: 'If a ClinVar ID cannot be found, please select the best reason for its absence.'
+        },
+        controller: /* @ngInject */ function($scope) {
+          var entries = $scope.model.clinvar_entries;
+          // clear clinvar entries if there are more than one, or if the only does not specify
+          // one of the approved 'not found' choices.
+          if(entries.length > 1 || !_.includes(['N/A', 'NOT FOUND', 'NONE SPECIFIED'], entries[0])) {
+            $scope.model.clinvar_entries = [null];
+          }
+        },
+        hideExpression: '!model.noClinVar',
+        expressionProperties: {
+          'templateOptions.disabled': 'model.noClinVar === false', // deactivate if noClinVar is checked
+          'templateOptions.required': 'model.noClinVar === true' // required only if noClinVar is unchecked
         }
       },
       {
