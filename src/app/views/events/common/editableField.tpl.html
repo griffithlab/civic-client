@@ -56,14 +56,14 @@
         </div>
         <div class="row">
           <div class="col-xs-12 panel-buttons" >
-            <a type="submit"
+            <button type="submit"
                class="btn btn-xs btn-danger"
                ng-click="ctrl.submit(ctrl.newFlag)"
                ng-disabled="ctrl.newFlag.comment.text.length < 3"
                uib-tooltip-enable="ctrl.newFlag.comment.text.length < 3"
                uib-tooltip="Please add comment before submitting flag.">
               Flag
-            </a>
+            </button>
           </div>
         </div>
       </div>
