@@ -189,7 +189,6 @@
           options: [
             { type: 'default', value: null, label: 'Please select a reason for ClinVar ID absence' },
             { value: 'NONE FOUND', label: 'None found' },
-            { value: 'NONE SPECIFIED', label: 'None specified' },
             { value: 'N/A', label: 'Not applicable' }
           ],
           helpText: 'If a ClinVar ID cannot be found, please select the best reason for its absence.',
