@@ -39,7 +39,7 @@
       ctrl.actions.resolved = {
         order: 1,
         timestamp: $scope.flag.resolveComment.created_at,
-        user: $scope.flag.flagging_user
+        user: $scope.flag.resolving_user
       };
     }
 
