@@ -92,8 +92,8 @@
                         variant.clinvar_entries.length > 2 ? ', and ' : ' and '
                       ) : ', '
                     }}
-                    <a ng-if="clinvar_id !== 'N/A'" ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{ clinvar_id }}/" target="_blank">{{ clinvar_id }}</a>
-                    <span ng-if="clinvar_id == 'N/A'">{{ clinvar_id }}</span>
+                    <a ng-if="clinvar_ignore.indexOf(clinvar_id) == -1" ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{ clinvar_id }}/" target="_blank">{{ clinvar_id }}</a>
+                    <span ng-if="clinvar_ignore.indexOf(clinvar_id) !== -1">{{ clinvar_id }}</span>
                   </span>
                 </span>
                 <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
