@@ -25,6 +25,15 @@
           isArray: false,
           cache: false
         },
+        organization: {
+          url: '/api/organizations/:organizationId/stats',
+          params: {
+            organizationId: '@organizationId'
+          },
+          method: 'GET',
+          isArray: false,
+          cache: false
+        },
         dashboard: {
           url: '/api/stats/dashboard',
           method: 'GET',
@@ -45,6 +54,7 @@
       },
       site: site,
       user: user,
+      organization: organization,
       dashboard: dashboard
     };
 
@@ -57,6 +67,12 @@
 
     function user(userId) {
       return StatsResource.user({ userId: userId}).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
+    function organization(organizationId) {
+      return StatsResource.organization({ organizationId: organizationId}).$promise
         .then(function(response) {
           return response.$promise;
         });

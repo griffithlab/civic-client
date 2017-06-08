@@ -14,5 +14,11 @@
     });
 
   // @ngInject
-  function OrganizationSummaryController() {}
+  function OrganizationSummaryController($scope, Stats) {
+    var vm = $scope.vm = {};
+
+    Stats.organization($scope.organization.id).then(function(stats) {
+      vm.stats = stats;
+    });
+  }
 })();
