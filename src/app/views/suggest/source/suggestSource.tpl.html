@@ -18,7 +18,9 @@
       <div class="col-xs-12">
         <div class="alert alert-danger">
           <p><strong>Error: {{ vm.error.status }}:</strong> {{vm.error.statusText}}
-          <span ng-if="vm.error.status === 409"><br/>This source suggetion appears to conflict with a previously submitted suggestion.</span></p>
+              <span ng-if="vm.error.status === 409"><br/>This source suggetion appears to conflict with a previously submitted suggestion. <a ng-href="/sources/{{ vm.error.data.id }}/summary">Visit the conflicting source page</a> to view the conflicting source's details and add further comments.</span>
+              
+          </p>
         </div>
       </div>
     </div>
