@@ -28,7 +28,7 @@
     $scope.variant = parseVariant(Variants.data.item);
     $scope.evidence = Variants.data.evidence;
 
-    $scope.clinvar_ignore = ['N/A', 'NONE FOUND']
+    $scope.clinvar_ignore = ['N/A', 'NONE FOUND'];
 
     // watches any changes to the variant itself, but will also update evidence to pass to grid
     $scope.$watch(function() { return Variants.data.item; }, function(variant) {
