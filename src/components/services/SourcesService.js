@@ -32,7 +32,8 @@
           method: 'PATCH',
           url: '/api/source_suggestions/:suggestionId',
           params: {
-            suggestionId: '@suggestionId'
+            suggestionId: '@suggestionId',
+            reason: '@reason'
           },
           isArray: false,
           cache: false

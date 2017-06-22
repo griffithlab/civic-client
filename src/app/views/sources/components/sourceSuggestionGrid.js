@@ -3,7 +3,8 @@
 
   angular.module('civic.sources')
     .directive('sourceSuggestionGrid', sourceSuggestionGrid)
-    .controller('SourceSuggestionGridController', SourceSuggestionGridController);
+    .controller('SourceSuggestionGridController', SourceSuggestionGridController)
+    .controller('cellTemplateActionsController', CellTemplateActionsController);
 
   // @ngInject
   function sourceSuggestionGrid() {
@@ -22,6 +23,16 @@
   }
 
   // @ngInject
+  function CellTemplateActionsController($scope, Sources) {
+    $scope.rejectSuggestion = function(id, status, reason) {
+      Sources.setStatus({suggestionId: id, status: status, reason: reason}).then(function() {
+        $scope.$emit('suggestion:updated');
+      });
+      $scope.popoverIsOpen=false;
+    };
+  }
+
+  // @ngInject
   function SourceSuggestionGridController($scope,
                                           $location,
                                           Sources,
@@ -34,8 +45,8 @@
 
     var mode = $scope.mode;
 
-    vm.setSuggestion = function(id, status) {
-      Sources.setStatus({suggestionId: id, status: status}).then(function() {
+    vm.setSuggestion = function(id, status, reason) {
+      Sources.setStatus({suggestionId: id, status: status, reason: reason}).then(function() {
         $scope.$emit('suggestion:updated');
       });
     };
