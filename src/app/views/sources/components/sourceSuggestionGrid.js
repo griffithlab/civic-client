@@ -95,7 +95,8 @@
                 return _.includes(statusFilters, cellValue);
               }
             }
-          }
+          },
+          cellTemplate: 'app/views/sources/components/cellTemplateStatus.tpl.html'
         },
         {
           name: 'created_at',

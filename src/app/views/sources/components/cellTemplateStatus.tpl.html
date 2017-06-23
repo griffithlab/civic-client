@@ -1,0 +1,14 @@
+<div class="ui-grid-cell-contents" ng-controller="cellTemplateActionsController">
+  <span ng-bind="row.entity[col.field]"></span>
+  <i class="glyphicon glyphicon-info-sign"
+     ng-if="row.entity[col.field] === 'rejected' && row.entity.reason !== null"
+     uib-tooltip-template="'rejectedReason.tpl.html'"
+     tooltip-append-to-body="true"
+     tooltip-placement="right"
+     style="color: #d74c48;"></i>
+
+  <script type="text/ng-template" id="rejectedReason.tpl.html" >
+    <span ng-bind="row.entity.reason">REASON</span>
+  </script>
+
+</div>
