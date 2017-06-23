@@ -85,11 +85,15 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
-          width: '6%',
+          width: '8%',
           filter: {
             noTerm: true,
             condition: function(searchTerm, cellValue) {
-              return _.includes(statusFilters, cellValue);
+              if(!_.isUndefined(searchTerm)) {
+                return _.includes(statusFilters, cellValue) && _.includes(cellValue, searchTerm);
+              } else {
+                return _.includes(statusFilters, cellValue);
+              }
             }
           }
         },
