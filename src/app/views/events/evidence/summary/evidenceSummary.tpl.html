@@ -49,7 +49,7 @@
           <td class="name">Clinical Significance:</td>
           <td class="value">
             <span ng-bind="evidence.clinical_significance"
-                  uib-tooltip="{{tipText.clinical_significance[evidence.clinical_significance]}}"
+                  uib-tooltip="{{tipText.clinical_significance[evidence.evidence_type][evidence.clinical_significance]}}"
                   tooltip-placement="right"
                   class="help-tooltip"
                   class="help-tooltip">

@@ -73,6 +73,11 @@
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
 
+
+    vm.chromosome_dropdown=ConfigService.valid_chromosomes.slice();
+    vm.chromosome_dropdown.unshift({type:'default', value: null, name: "Pleaes select a chromosome"});
+
+
     // scroll to form header
     $document.ready(function() {
       var elem = document.getElementById('variant-edit-form');
@@ -399,7 +404,7 @@
           label: 'Chromosome',
           value: vm.variantEdit.coordinates.chromosome,
           ngOptions: 'option["value"] as option["name"] for option in to.options',
-          options: ConfigService.valid_chromosomes,
+          options: vm.chromosome_dropdown, //ConfigService.valid_chromosomes,
           helpText: 'Chromosome in which this variant occurs (e.g. 17).'
         }
       },
@@ -464,7 +469,7 @@
           label: 'Chromosome2',
           value: vm.variantEdit.coordinates.chromosome2,
           ngOptions: 'option["value"] as option["name"] for option in to.options',
-          options: ConfigService.valid_chromosomes,
+          options: vm.chromosome_dropdown, //ConfigService.valid_chromosomes,
           helpText: 'If this variant is a fusion (e.g. BCR-ABL1), specify the chromosome name, coordinates, and representative transcript for the 3-prime partner.'
         }
       },
