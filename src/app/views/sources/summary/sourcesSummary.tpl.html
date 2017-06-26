@@ -64,6 +64,12 @@
                   <span ng-bind="vm.source.status"> Source Status</span>
                 </td>
               </tr>
+              <tr ng-if="vm.source.is_review">
+                <td class="key">Article Type:</td>
+                <td class="value">
+                  <span class="label label-warning" nf-if="vm.source.is_review">Review</span>
+                </td>
+              </tr>
             </table>
 
           </div>
