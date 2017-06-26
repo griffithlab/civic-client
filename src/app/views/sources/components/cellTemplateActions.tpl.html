@@ -1,6 +1,7 @@
 <div class="ui-grid-cell-contents" ng-controller="cellTemplateActionsController">
   <span uib-tooltip="Add Evidence Item"
-        tooltip-append-to-body="true">
+        tooltip-append-to-body="true"
+        tooltip-enable="row.entity['status'] != 'rejected'">
     <button ng-click="grid.appScope.vm.setLocation(row.entity.addEvidenceUrl)"
             ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
             class="btn btn-xs btn-cell-add">
@@ -9,7 +10,8 @@
   </span>
   &nbsp;
   <span uib-tooltip="Reject Suggestion"
-        tooltip-append-to-body="true">
+        tooltip-append-to-body="true"
+        tooltip-enable="row.entity['status'] != 'rejected'">
     <button ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.hasEditorPerms()"
             class="btn btn-xs btn-danger"
             uib-popover-template="'rejectPopover.tpl.html'"
@@ -22,7 +24,8 @@
   </span>
   &nbsp;
   <span uib-tooltip="Mark Suggestion as Curated"
-        tooltip-append-to-body="true">
+        tooltip-append-to-body="true"
+        tooltip-enable="row.entity['status'] != 'rejected'">
     <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
             ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.hasEditorPerms()"
             class="btn btn-xs btn-success">
