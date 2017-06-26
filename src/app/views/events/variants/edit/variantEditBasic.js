@@ -75,7 +75,7 @@
 
 
     vm.chromosome_dropdown=ConfigService.valid_chromosomes.slice();
-    vm.chromosome_dropdown.unshift({type:'default', value: null, name: "Pleaes select a chromosome"});
+    vm.chromosome_dropdown.unshift({type:'default', value: null, name: 'Please select a chromosome'});
 
 
     // scroll to form header
