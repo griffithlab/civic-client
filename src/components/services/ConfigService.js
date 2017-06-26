@@ -94,7 +94,7 @@
         },
         {
           label: 'API Documentation',
-          url: 'https://genome.github.io/civic-api-docs/'
+          url: 'https://griffithlab.github.io/civic-api-docs/'
         },
         {
           label: 'Data Releases',

@@ -1,6 +1,6 @@
 <div class="help-sub-tab">
   <p>
-  Variant types are used to classify variants within the structured ontology terms provided by <a href='http://www.sequenceontology.org/'>The Sequence Ontology Project</a>. Multiple terms for a variant are allowed to facilitate functional and structural effects of the variant. Ideally, the most specific child terms of a branch are used. These variant types can be used to search for variants within the CIViC database that meet a users' criteria via the <a ui-sref='search.variants'>advanced search page</a> or through the <a href='https://genome.github.io/civic-api-docs/'>API</a>.</p>
+  Variant types are used to classify variants within the structured ontology terms provided by <a href='http://www.sequenceontology.org/'>The Sequence Ontology Project</a>. Multiple terms for a variant are allowed to facilitate functional and structural effects of the variant. Ideally, the most specific child terms of a branch are used. These variant types can be used to search for variants within the CIViC database that meet a users' criteria via the <a ui-sref='search.variants'>advanced search page</a> or through the <a href='https://griffithlab.github.io/civic-api-docs/'>API</a>.</p>
   <p>
   <h4>General Guidelines</h4>
   1) Choose the most specific terms.<br>
@@ -116,10 +116,10 @@
       </td>
       <td class="definition">
         <p>[ gene_variant: A sequence variant where the structure of the gene is changed.<br>
-        OR<br> 
+        OR<br>
         transcript_variant: A sequence variant that changes the structure of the transcript ]</p>
 
-        <p>AND</p> 
+        <p>AND</p>
 
         <p>[ loss_of_function_variant: A sequence variant whereby the gene product has diminished or abolished function.<br>
         OR <br>
@@ -147,12 +147,12 @@
     </tr>
     <tr>
       <td class="term">
-        <p>transcript_fusion</p> 
+        <p>transcript_fusion</p>
         <p>OR RARELY...</p>
         gene_fusion
       </td>
       <td class="definition">
-        <p>transcript_fusion: A feature fusion where the deletion brings together transcript regions.</p> 
+        <p>transcript_fusion: A feature fusion where the deletion brings together transcript regions.</p>
         <p>OR</p>
         <p>gene_fusion: A sequence variant whereby a two genes have become joined.</p>
       </td>
@@ -172,8 +172,8 @@
         <p>missense_variant</p>
       </td>
       <td class="definition">
-        <p>transcript_fusion: A feature fusion where the deletion brings together transcript regions.</p> 
-        <p>AND<p> 
+        <p>transcript_fusion: A feature fusion where the deletion brings together transcript regions.</p>
+        <p>AND<p>
         <p>missense_variant: A sequence variant that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved.</p>
       </td>
       <td class="comments">
@@ -195,7 +195,7 @@
         <p>OR</p>
         <p>feature_translocation: A sequence variant, caused by an alteration of the genomic sequence, where the structural change, a translocation, is greater than the extent of the underlying genomic features.</p>
         <p>OR</p>
-        <p>transcript_fusion: A feature fusion where the deletion brings together transcript regions.</p> 
+        <p>transcript_fusion: A feature fusion where the deletion brings together transcript regions.</p>
       </td>
       <td class="comments">
         Depends on situation.
@@ -289,7 +289,7 @@
       </td>
       <td class="definition">
         <p>loss_of_fuction_variant: A sequence variant whereby the gene product has diminished or abolished function.</p>
-        <p>transcript_ablation: A feature ablation whereby the deleted region includes a transcript feature.</br> 
+        <p>transcript_ablation: A feature ablation whereby the deleted region includes a transcript feature.</br>
       </td>
       <td class="comments">
         Depends on situation.
