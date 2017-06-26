@@ -117,6 +117,16 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
+          sortingAlgorithm: function(a, b) {
+            if (undefined === a && undefined === b) { return 0; }
+            else if (undefined === a) {return -1;}
+            else if (undefined === b) {return 1;}
+            else {
+              if (a.display_name.toLowerCase() < b.display_name.toLowerCase()) { return -1; }
+              else if (a.display_name.toLowerCase() > b.display_name.toLowerCase()) { return 1; }
+              else {return 0;}
+            }
+          },
           filter: {
             // condition: uiGridConstants.filter.CONTAINS
             condition: function(search, value)
