@@ -25,7 +25,13 @@
             <table class="table">
               <tr>
                 <td class="key">Published:</td>
-                <td class="value" ng-bind="vm.source.publication_date_string"></td>
+                <td class="value" >
+                  <span ng-bind="vm.source.publication_date_string"></span>
+                  &nbsp;
+                  <span class="label label-warning"
+                        ng-if="vm.source.is_review"
+                  uib-tooltip="This is a review article.">review</span>
+                </td>
               </tr>
               <tr>
                 <td class="key">Citation:</td>
