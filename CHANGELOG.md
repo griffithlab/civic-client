@@ -1,3 +1,9 @@
+0.0.12 / 2017-06-29
+===================
+* rejecting a source suggestion requires curator to select from 1 of 3 possible choices
+* 'source suggestion exists' notice after submitting an identical source suggestion includes link to previosuly suggested source
+* misc bug fixes
+
 0.0.11 / 2017-05-04
 ===================
 * added flag feature, allowing users to flag individual entities for urgent curator attention
