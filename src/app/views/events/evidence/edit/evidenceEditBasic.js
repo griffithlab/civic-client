@@ -158,10 +158,6 @@
         key: 'disease',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
-        value: '',
-        controller: /* @ngInject */ function($scope) {
-          $scope.to.data.doid = $scope.model.disease.doid;
-        },
         templateOptions: {
           label: 'Disease',
           value: 'vm.evidenceEdit.doid',
@@ -187,7 +183,33 @@
                 });
             }
           }
+        },
+        controller: /* @ngInject */ function($scope) {
+            $scope.to.data.doid=$scope.model.disease.doid;
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
+          'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
+        },
+        hideExpression: 'model.noDoid'
+      },
+      {
+        key: 'noDoid',
+        type: 'horizontalCheckbox',
+        templateOptions: {
+          label: 'Could not find disease.'
         }
+      },
+      {
+        key: 'disease_name',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Disease Name',
+          value: 'vm.evidenceEdit.disease_name',
+          minLength: 32,
+          helpText: help['Disease Name']
+        },
+        hideExpression: '!model.noDoid'
       },
       {
         key: 'description',
