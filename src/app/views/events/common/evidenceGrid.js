@@ -47,8 +47,8 @@
     };
 
     ctrl.exportPopover = {
-      templateUrl: 'app/views/events/common/evidenceGridExport.tpl.html',
-      title: 'Save a PDF or CSV',
+      templateUrl: 'app/views/events/common/gridExportPopover.tpl.html',
+      title: 'Save CSV',
       include: 'all',
       type: 'csv'
     };
