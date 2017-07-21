@@ -25,11 +25,20 @@
   function SourceGridController($scope,
                                 $state,
                                 $window,
+                                $filter,
+                                uiGridExporterConstants,
                                 uiGridConstants,
                                 _) {
     console.log('SourceGridController Loaded.');
 
     var vm = $scope.vm = {};
+
+    vm.exportPopover = {
+      templateUrl: 'app/views/events/common/gridExportPopover.tpl.html',
+      title: 'Save CSV',
+      include: 'all',
+      type: 'csv'
+    };
 
     vm.rowsToShow = $scope.rows ? $scope.rows : 10;
     vm.sourceGridOptions = {
@@ -129,6 +138,21 @@
         vm.sourceGridOptions.minRowsToShow = sources.length + 1;
         vm.sourceGridOptions.data = prepSources(sources);
       });
+
+      vm.exportData = function() {
+        vm.sourceGridOptions.exporterCsvFilename = getFilename($scope.variant);
+        var rows = vm.exportPopover.include === 'all' ? uiGridExporterConstants.ALL : uiGridExporterConstants.VISIBLE;
+        if(vm.exportPopover.type === 'csv') {
+          gridApi.exporter.csvExport(rows, uiGridExporterConstants.ALL);
+        } else {
+          gridApi.exporter.pdfExport(rows, uiGridExporterConstants.ALL);
+        }
+      };
+
+      function getFilename() {
+        var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
+        return 'CIViC_genes_' + dateTime + '.csv';
+      }
 
       gridApi.selection.on.rowSelectionChanged($scope, function (row, event) {
         var params = {sourceId: row.entity.id};

@@ -132,7 +132,7 @@
       ctrl.variantGridOptions.data = prepVariants(variants);
 
       ctrl.exportData = function() {
-        ctrl.variantGridOptions.exporterCsvFilename = getFilename($scope.variant);
+        ctrl.variantGridOptions.exporterCsvFilename = getFilename();
         var rows = ctrl.exportPopover.include === 'all' ? uiGridExporterConstants.ALL : uiGridExporterConstants.VISIBLE;
         if(ctrl.exportPopover.type === 'csv') {
           gridApi.exporter.csvExport(rows, uiGridExporterConstants.ALL);
@@ -142,14 +142,8 @@
       };
 
       function getFilename(variant) {
-        var filename;
         var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
-        if(_.isUndefined(variant)) {
-          filename = 'CIViC_variants_' + dateTime + '.csv';
-        } else {
-          filename = 'CIViC_' + variant.name+ '_variants_' + dateTime + '.csv';
-        }
-        return filename;
+        return 'CIViC_' + variant.name+ '_variants_' + dateTime + '.csv';
       }
 
       $scope.$watchCollection('variants', function(variants) {

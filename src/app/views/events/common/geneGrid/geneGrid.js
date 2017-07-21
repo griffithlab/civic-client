@@ -26,10 +26,19 @@
                               $window,
                               $stateParams,
                               $state,
+                              $filter,
+                              uiGridExporterConstants,
                               uiGridConstants,
                               _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
+
+    ctrl.exportPopover = {
+      templateUrl: 'app/views/events/common/gridExportPopover.tpl.html',
+      title: 'Save CSV',
+      include: 'all',
+      type: 'csv'
+    };
 
     ctrl.rowsToShow = $scope.rows === undefined ? 5 : $scope.rows;
     ctrl.geneGridOptions = {
@@ -111,6 +120,21 @@
         ctrl.geneGridOptions.minRowsToShow = genes.length + 1;
         ctrl.geneGridOptions.data = prepGeneData(genes);
       });
+
+      ctrl.exportData = function() {
+        ctrl.geneGridOptions.exporterCsvFilename = getFilename($scope.variant);
+        var rows = ctrl.exportPopover.include === 'all' ? uiGridExporterConstants.ALL : uiGridExporterConstants.VISIBLE;
+        if(ctrl.exportPopover.type === 'csv') {
+          gridApi.exporter.csvExport(rows, uiGridExporterConstants.ALL);
+        } else {
+          gridApi.exporter.pdfExport(rows, uiGridExporterConstants.ALL);
+        }
+      };
+
+      function getFilename() {
+        var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
+        return 'CIViC_genes_' + dateTime + '.csv';
+      }
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row, event){
         var params = _.merge($stateParams, {  geneId: row.entity.id });
