@@ -141,9 +141,9 @@
         }
       };
 
-      function getFilename(variant) {
+      function getFilename() {
         var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
-        return 'CIViC_' + variant.name+ '_variants_' + dateTime + '.csv';
+        return 'CIViC_variants_' + dateTime + '.csv';
       }
 
       $scope.$watchCollection('variants', function(variants) {
