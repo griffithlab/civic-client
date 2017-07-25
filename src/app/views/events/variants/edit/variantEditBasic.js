@@ -173,7 +173,7 @@
         templateOptions: {
           label: 'Could not locate ClinVar ID'
         },
-        controller: function($scope){
+        controller: /* @ngInject */ function($scope){
           var entries = $scope.model.clinvar_entries;
           // if entries is non-null, only one item, and that item is not a number,
           // check noClinVar to show ClinVar Absence field
