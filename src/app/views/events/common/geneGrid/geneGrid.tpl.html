@@ -1,6 +1,6 @@
 <div class="geneGrid">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-10">
       <h4>
         <span ng-switch="ctrl.context">
           <span ng-switch-when="summary">Genes</span>
@@ -14,6 +14,18 @@
         </span>
       </h4>
     </div>
+    <div class="col-xs-2">
+      <button
+        class="btn btn-default btn-xs pull-right col-key btn-block"
+        uib-popover-template="ctrl.exportPopover.templateUrl"
+        ng-disabled="ctrl.geneGridOptions.data.length < 1"
+        popover-placement="bottom">
+        <span class="glyphicon glyphicon-export"
+              aria-hidden="true">
+        </span>
+        Get Data
+      </button>
+    </div>
 
   </div>
   <div class="row">
@@ -21,6 +33,7 @@
       <div ui-grid="ctrl.geneGridOptions"
            ui-grid-cellnav
            ui-grid-auto-resize
+           ui-grid-exporter
            ui-grid-selection></div>
     </div>
   </div>

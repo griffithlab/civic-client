@@ -26,10 +26,20 @@
                                  $window,
                                  $stateParams,
                                  $state,
+                                 $filter,
                                  uiGridConstants,
+                                 uiGridExporterConstants,
                                  _) {
     /*jshint camelcase: false */
     var ctrl = $scope.ctrl = {};
+
+    ctrl.exportPopover = {
+      templateUrl: 'app/views/events/common/gridExportPopover.tpl.html',
+      title: 'Save CSV',
+      include: 'all',
+      type: 'csv'
+    };
+
 
     ctrl.rowsToShow = $scope.rows === undefined ? 5 : $scope.rows;
     ctrl.variantGridOptions = {
@@ -120,6 +130,21 @@
       ctrl.context = $scope.context;
       ctrl.variantGroup = $scope.variantGroup;
       ctrl.variantGridOptions.data = prepVariants(variants);
+
+      ctrl.exportData = function() {
+        ctrl.variantGridOptions.exporterCsvFilename = getFilename();
+        var rows = ctrl.exportPopover.include === 'all' ? uiGridExporterConstants.ALL : uiGridExporterConstants.VISIBLE;
+        if(ctrl.exportPopover.type === 'csv') {
+          gridApi.exporter.csvExport(rows, uiGridExporterConstants.ALL);
+        } else {
+          gridApi.exporter.pdfExport(rows, uiGridExporterConstants.ALL);
+        }
+      };
+
+      function getFilename() {
+        var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
+        return 'CIViC_variants_' + dateTime + '.csv';
+      }
 
       $scope.$watchCollection('variants', function(variants) {
         ctrl.variantGridOptions.minRowsToShow = variants.length + 1;

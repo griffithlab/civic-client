@@ -23,6 +23,7 @@
       <button
         class="btn btn-default btn-xs pull-right col-key btn-block"
         uib-popover-template="ctrl.exportPopover.templateUrl"
+        ng-disabled="ctrl.evidenceGridOptions.data.length < 1"
         popover-placement="bottom">
         <span class="glyphicon glyphicon-export"
               aria-hidden="true">

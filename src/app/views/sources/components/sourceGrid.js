@@ -25,15 +25,24 @@
   function SourceGridController($scope,
                                 $state,
                                 $window,
+                                $filter,
+                                uiGridExporterConstants,
                                 uiGridConstants,
                                 _) {
     console.log('SourceGridController Loaded.');
 
-    var vm = $scope.vm = {};
+    var ctrl = $scope.ctrl = {};
 
-    vm.rowsToShow = $scope.rows ? $scope.rows : 10;
-    vm.sourceGridOptions = {
-      minRowsToShow: vm.rowsToShow - 1,
+    ctrl.exportPopover = {
+      templateUrl: 'app/views/events/common/gridExportPopover.tpl.html',
+      title: 'Save CSV',
+      include: 'all',
+      type: 'csv'
+    };
+
+    ctrl.rowsToShow = $scope.rows ? $scope.rows : 10;
+    ctrl.sourceGridOptions = {
+      minRowsToShow: ctrl.rowsToShow - 1,
       //enablePaginationControls: true,
       //paginationPageSizes: [8],
       //paginationPageSize: 8,
@@ -118,17 +127,32 @@
       ]
     };
 
-    vm.sourceGridOptions.onRegisterApi = function (gridApi) {
+    ctrl.sourceGridOptions.onRegisterApi = function (gridApi) {
       var sources = $scope.sources;
-      vm.gridApi = gridApi;
+      ctrl.gridApi = gridApi;
 
-      vm.context = $scope.context;
-      vm.sourceGridOptions.data = prepSources(sources);
+      ctrl.context = $scope.context;
+      ctrl.sourceGridOptions.data = prepSources(sources);
 
       $scope.$watchCollection('sources', function (sources) {
-        vm.sourceGridOptions.minRowsToShow = sources.length + 1;
-        vm.sourceGridOptions.data = prepSources(sources);
+        ctrl.sourceGridOptions.minRowsToShow = sources.length + 1;
+        ctrl.sourceGridOptions.data = prepSources(sources);
       });
+
+      ctrl.exportData = function() {
+        ctrl.sourceGridOptions.exporterCsvFilename = getFilename($scope.variant);
+        var rows = ctrl.exportPopover.include === 'all' ? uiGridExporterConstants.ALL : uiGridExporterConstants.VISIBLE;
+        if(ctrl.exportPopover.type === 'csv') {
+          gridApi.exporter.csvExport(rows, uiGridExporterConstants.ALL);
+        } else {
+          gridApi.exporter.pdfExport(rows, uiGridExporterConstants.ALL);
+        }
+      };
+
+      function getFilename() {
+        var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
+        return 'CIViC_sources_' + dateTime + '.csv';
+      }
 
       gridApi.selection.on.rowSelectionChanged($scope, function (row, event) {
         var params = {sourceId: row.entity.id};
