@@ -23,6 +23,8 @@
                                        Publications,
                                        DrugSuggestions,
                                        Diseases,
+                                       Datatables,
+                                       Variants,
                                        Security,
                                        EvidenceRevisions,
                                        Evidence,
@@ -57,6 +59,7 @@
     vm.evidenceRevisions = EvidenceRevisions;
     vm.evidenceHistory = EvidenceHistory;
     vm.evidenceEdit = angular.copy(vm.evidence);
+
     vm.evidenceEdit.pubmed_id = vm.evidence.source.pubmed_id;
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
     vm.evidenceEdit.drugs = _.filter(_.map(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
@@ -83,6 +86,50 @@
     });
 
     vm.evidenceFields = [
+      {
+        key: 'variant',
+        type: 'horizontalTypeaheadHelp',
+        className: 'input-caps',
+        controller: /* @ngInject */ function($scope, $stateParams, Variants) {
+          // populate field if variantId provided
+          if($stateParams.variantId){
+            Variants.get($stateParams.variantId).then(function(variant) {
+              $scope.model.variant = { name: variant.name };
+            });
+          }
+          // just drop in the variant name string if provided
+          if($stateParams.variantName){
+            $scope.model.variant = { name: $stateParams.variantName };
+          }
+        },
+        templateOptions: {
+          label: 'Variant Name',
+          required: true,
+          value: 'vm.evidenceEdit.variant',
+          minLength: 32,
+          helpText: help['Variant Name'],
+          formatter: 'model[options.key].name',
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+          onSelect: 'to.data.variant_id=$model.id',
+          editable: true
+        },
+        data: {
+          typeaheadSearch: function(val) {
+            var request = {
+              mode: 'variants',
+              count: 10,
+              page: 0,
+              'filter[variant]': val
+            };
+            return Datatables.query(request)
+              .then(function(response) {
+                return _.map(_.uniq(response.result, 'variant'), function(event) {
+                    return { name: event.variant, id: event.variant_id };
+                });
+              });
+          }
+        }
+      },
       {
         key: 'variant_origin',
         type: 'horizontalSelectHelp',
@@ -479,6 +526,7 @@
     ];
 
     vm.submit = function(evidenceEdit) {
+      evidenceEdit.variant_id = evidenceEdit.variant.id;
       evidenceEdit.evidenceId = evidenceEdit.id;
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, ''); // delete blank input values
       if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delbete interaction if only 1 drug
@@ -507,6 +555,7 @@
     };
 
     vm.apply = function(evidenceEdit) {
+      evidenceEdit.variant_id = evidenceEdit.variant.id; 
       evidenceEdit.evidenceId = evidenceEdit.id;
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, '');
       if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delete interaction if only 1 drug
