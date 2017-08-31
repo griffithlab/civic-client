@@ -3,6 +3,9 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
+@tabPaddingH: .5em;
+@tabPaddingV: .25em;
+
 .variantSummary {
   padding-top: @contentPadding;
   .evidence-view {
@@ -75,5 +78,61 @@
     margin-left: @contentPadding;
     padding: 0;
   }
-}
 
+  .assertions {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      padding-bottom: @contentPadding/2;
+
+      li {
+        display: inline-block;
+        margin-top: @contentPadding/2;
+        margin-right: @contentPadding/2;
+        .assertion-tag {
+          display: block;
+          text-decoration: none;
+          padding: @tabPaddingV @tabPaddingH;
+          border-radius: @border-radius-base;
+          background-color: @pageBackground2;
+          border: 1px solid @pageBackground3;
+
+          &:hover, &.active {
+            border-color: @civicPurple;
+            .variant-name {
+              color: @civicPurple;
+            }
+          }
+          .pending-alert {
+
+          }
+          .pending-alert.variant {
+            color: lighten(@civicPurple, 30%) !important;
+          }
+          .pending-alert.evidence {
+            color: #F3BC94;
+          }
+          .pending-alert.both {
+            color: @civicRed !important;
+          }
+          &.active {
+            background-color: lighten(@civicPurple, 70%);
+            .variant-name {
+              // font-weight: bold;
+            }
+          }
+
+          &.statusRejected {
+            background-color: #ECA2C0 !important;
+            color: #47161C !important;
+            border-color: #47161C !important;
+          }
+        }
+
+        a.active {
+        }
+      }
+    }
+  }
+}
