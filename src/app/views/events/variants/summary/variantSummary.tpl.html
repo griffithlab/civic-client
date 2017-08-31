@@ -253,9 +253,10 @@
       </div>
     </div>
   </div>
+
   <script type="text/ng-template" id="assertionTag.tpl.html">
     <span uib-tooltip-template="'assertionTagTooltip.tpl.html'">
-      <a ui-sref="events.assertions.summary({ id: assertion.id })"
+      <a ui-sref="assertions.summary({ id: assertion.id })"
          class="assertion-tag">
         <span ng-bind-html="assertion.name" class="assertion-name">AssertionName</span>
       </a>
