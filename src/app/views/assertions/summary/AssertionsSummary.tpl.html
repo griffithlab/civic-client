@@ -3,14 +3,60 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="name">
-          <h3>Assertion Summary</h3>
+          <h3>ASR{{vm.assertion.id}} Summary</h3>
         </div>
       </div>
     </div>
   </div>
-  <div class="row" >
-    <div class="col-xs-12" >
-      <pre ng-bind="vm.assertion|json" ></pre>
+  <div class="row">
+    <div class="col-xs-12 col-md-7 col-lg-6">
+      <p><span ng-bind="vm.assertion.description">Description</span></p>
+    </div>
+    <div class="col-xs-12 col-md-5 col-lg-6">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="well">
+            <table class="table">
+              <tr>
+                <td class="key">FDA Approved:</td>
+                <td class="value" >
+                  <span ng-switch="vm.assertion.fda_approved" >
+                    <span ng-switch-when="true" >
+                      <i class="glyphicon glyphicon-ok" style="color: green"></i>
+                    </span>
+                    <span ng-switch-when="false" >
+                      <i class="glyphicon glyphicon-remove" style="color: red"></i>
+                    </span>
+                    </span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="key">FDA Approval Info:</td>
+                <td class="value" ng-bind="vm.assertion.fda_approval_information"></td>
+              </tr>
+              <tr>
+                <td class="key">NCCN Guideline:</td>
+                <td class="value" ng-bind="vm.assertion.nccn_guideline"></td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 1.5em">
+    <div class="col-xs-12">
+      <evidence-grid
+        evidence="vm.assertion.evidence_items"
+        rows="8"
+        show-gene-col="true"
+        show-variant-col="true"
+        context="'assertion'"
+        source="vm.assertion"
+        rounded="true">
+      </evidence-grid>
     </div>
   </div>
 </div>
