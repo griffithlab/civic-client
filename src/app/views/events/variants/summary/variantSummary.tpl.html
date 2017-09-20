@@ -266,7 +266,16 @@
   <script type="text/ng-template" id="assertionTagTooltip.tpl.html" >
     <span>
       {{ assertion.description }}<br/><br/>
-      <strong>FDA Approval:</strong> x
+      <strong>Evidence Items: <span ng-bind="assertion.evidence_item_count">item count</span><br/>
+      <strong>FDA Approval:</strong>
+      <span ng-switch="assertion.fda_approved" >
+        <span ng-switch-when="true" >
+          <i class="glyphicon glyphicon-ok" style="color: green"></i>
+        </span>
+        <span ng-switch-when="false" >
+          <i class="glyphicon glyphicon-remove" style="color: red"></i>
+        </span>
+      </span>
     </span>
   </script>
 </div>
