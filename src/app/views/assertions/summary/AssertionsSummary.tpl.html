@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="name">
-          <h3>ASR{{vm.assertion.id}} Summary</h3>
+          <h3>Assertion ASR{{vm.assertion.id}} Summary</h3>
         </div>
       </div>
     </div>
@@ -20,15 +20,14 @@
               <tr>
                 <td class="key">FDA Approved:</td>
                 <td class="value" >
-                  <span ng-switch="vm.assertion.fda_approved" >
+                  <div ng-switch="vm.assertion.fda_approved" >
                     <span ng-switch-when="true" >
                       <i class="glyphicon glyphicon-ok" style="color: green"></i>
                     </span>
                     <span ng-switch-when="false" >
                       <i class="glyphicon glyphicon-remove" style="color: red"></i>
                     </span>
-                    </span>
-                  </span>
+                  </div>
                 </td>
               </tr>
               <tr>

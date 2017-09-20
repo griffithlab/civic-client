@@ -52,68 +52,15 @@
         $state.go('events.genes.summary.variants.edit.basic', $stateParams);
       }
     };
-  }
 
-  function parseVariant(variant) {
-    variant.assertions = [
-      {
-        id: 12345,
-        name: 'ASR12345',
-        description: 'Nam vestibulum accumsan nisl phasellus at dui in ligula mollis ultricies. Etiam vel tortor sodales tellus ultricies commodo.',
-        fda_approved: true,
-        fda_approval_information: 'Curabitur vulputate vestibulum lorem.',
-        nccn_guideline: 'Gastric Cancer'
-      },
-      {
-        id: 54321,
-        name: 'ASR54321',
-        description: 'Donec at pede nullam rutrum. In id erat non orci commodo lobortis nunc rutrum turpis sed pede. Donec at pede nullam rutrum. In id erat non orci commodo lobortis nunc rutrum turpis sed pede.',
-        fda_approved: true,
-        fda_approval_information: 'Nunc porta vulputate tellus.',
-        nccn_guideline: 'Cutaneous Melanoma'
-      },
-      {
-        id: 43243,
-        name: 'ASR42343',
-        description: 'Nam vestibulum accumsan nisl phasellus at dui in ligula mollis ultricies. Etiam vel tortor sodales tellus ultricies commodo.',
-        fda_approved: false,
-        fda_approval_information: 'Curabitur vulputate vestibulum lorem.',
-        nccn_guideline: 'Kidney Cancer'
-      },
-      {
-        id: 1923,
-        name: 'ASR1923',
-        description: 'Donec at pede nullam rutrum. In id erat non orci commodo lobortis nunc rutrum turpis sed pede. Donec at pede nullam rutrum. In id erat non orci commodo lobortis nunc rutrum turpis sed pede.',
-        fda_approved: true,
-        fda_approval_information: 'Curabitur vulputate vestibulum lorem.',
-        nccn_guideline: 'Neuroendocrine Tumors'
-      },
-      {
-        id: 521,
-        name: 'ASR521',
-        description: 'Nam vestibulum accumsan nisl phasellus at dui in ligula mollis ultricies. Etiam vel tortor sodales tellus ultricies commodo.',
-        fda_approved: false,
-        fda_approval_information: 'Curabitur vulputate vestibulum lorem.',
-        nccn_guideline: 'Occult Primary'
-      },
-      {
-        id: 543,
-        name: 'ASR543',
-        description: 'Donec at pede nullam rutrum. In id erat non orci commodo lobortis nunc rutrum turpis sed pede. Donec at pede nullam rutrum. In id erat non orci commodo lobortis nunc rutrum turpis sed pede.',
-        fda_approved: false,
-        fda_approval_information: 'Curabitur vulputate vestibulum lorem.',
-        nccn_guideline: 'Cancer-related Fatigue'
-      },
-      {
-        id: 549,
-        name: 'ASR549',
-        description: 'Donec at pede nullam rutrum. In id erat non orci commodo lobortis nunc rutrum turpis sed pede. Donec at pede nullam rutrum. In id erat non orci commodo lobortis nunc rutrum turpis sed pede.',
-        fda_approved: false,
-        fda_approval_information: 'Curabitur vulputate vestibulum lorem.',
-        nccn_guideline: 'Soft Tissue Sarcoma'
-      },
-    ];
-
-    return variant;
+    function parseVariant(variant) {
+      if(variant.assertions.length > 0) {
+        _.each(variant.assertions, function (assertion) {
+          assertion.name = 'ASR' + assertion.id;
+          return assertion;
+        });
+      }
+      return variant;
+    }
   }
 })();
