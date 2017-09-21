@@ -6,7 +6,8 @@
       return {
         restrict: 'E',
         scope: {
-          organization: '='
+          organization: '=',
+          evidence: '='
         },
         controller: 'OrganizationSummaryController',
         templateUrl: 'app/views/organizations/components/organizationSummary.tpl.html'

@@ -20,6 +20,12 @@
                          url: '/api/organizations/:organizationId',
                          isArray: false,
                          cache: true
+                       },
+                       queryEvidence: {
+                         method: 'GET',
+                         url: '/api/organizations/:organizationId/evidence_items',
+                         isArray: false,
+                         cache: false
                        }
                      });
   }
@@ -29,14 +35,17 @@
 
     var item = {};
     var collection = [];
+    var evidence_items = [];
 
     return {
       data: {
         item: item,
-        collection: collection
+        collection: collection,
+        evidence_items: evidence_items
       },
       query: query,
-      get: get
+      get: get,
+      queryEvidence: queryEvidence
     };
 
     function query() {
@@ -51,6 +60,18 @@
       return OrganizationsResource.get({organizationId: organizationId}).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function queryEvidence(organizationId) {
+      return OrganizationsResource.queryEvidence(
+        {
+          organizationId: organizationId,
+          count: 999
+        }).$promise
+        .then(function(response) {
+          angular.copy(response.records, evidence_items);
           return response.$promise;
         });
     }
