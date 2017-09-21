@@ -230,6 +230,14 @@
           navMode: 'sub'
         }
       })
+      .state('help.editor', {
+        url: '/editor',
+        templateUrl: 'app/pages/help_becoming_an_editor.tpl.html',
+        data: {
+          titleExp: '"Help: Becoming an Editor"',
+          navMode: 'sub'
+        }
+      })
       .state('help.get', {
         url: '/get',
         templateUrl: 'app/pages/help_get.tpl.html',

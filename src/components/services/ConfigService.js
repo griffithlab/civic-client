@@ -152,6 +152,11 @@
             parent: 'help.variant-groups'
           },
           {
+            heading: 'Becoming an Editor',
+            state: 'help.editor',
+            parent: 'help.editor'
+          },
+          {
             heading: 'Get Help',
             state: 'help.get',
             parent: 'help.get'
