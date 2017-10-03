@@ -147,7 +147,7 @@
                 Stop
               </td>
               <td class="key">
-                Ref. Bases
+                Ref. s
               </td>
               <td class="key">
                 Var. Bases
@@ -222,7 +222,7 @@
         </div>
         <div ng-if="isAuthenticated() && !isEdit">
           <a class="btn btn-default btn-xs btn-block"
-             ng-click="editClick()">Edit Coordinates</a>
+            ng-click="editClick()">Edit Coordinates</a>
         </div>
       </div>
       <my-variant-info variant-info="myVariantInfo" ng-if="myVariantInfo._id"></my-variant-info>
@@ -257,7 +257,7 @@
   <script type="text/ng-template" id="assertionTag.tpl.html">
     <span uib-tooltip-template="'assertionTagTooltip.tpl.html'">
       <a ui-sref="assertions.summary({ assertionId: assertion.id })"
-         class="assertion-tag">
+        class="assertion-tag">
         <span ng-bind-html="assertion.name" class="assertion-name">AssertionName</span>
       </a>
     </span>
@@ -266,16 +266,21 @@
   <script type="text/ng-template" id="assertionTagTooltip.tpl.html" >
     <span>
       {{ assertion.description }}<br/><br/>
-      <strong>Evidence Items: <span ng-bind="assertion.evidence_item_count">item count</span><br/>
-      <strong>FDA Approval:</strong>
-      <span ng-switch="assertion.fda_approved" >
-        <span ng-switch-when="true" >
-          <i class="glyphicon glyphicon-ok" style="color: green"></i>
+      <strong>Evidence Items:</strong> <span ng-bind="assertion.evidence_item_count">item count</span><br/>
+        <strong>Reg. Approval:</strong>
+        <span ng-switch="assertion.regulatory_agency_approval.length > 0" >
+          <span ng-switch-when="true" >
+            <span ng-repeat="approval in assertion.regulatory_agency_approval">
+              {{
+                $first ? '' : $last ? (assertion.regulatory_agency_approval > 2 ? ', and ' : ' and ') : ', '
+              }}
+              {{ approval.abbreviation }}
+            </span>
+          </span>
+          <span ng-switch-when="false" >
+            <i class="glyphicon glyphicon-remove" style="color: red"></i>
+          </span>
         </span>
-        <span ng-switch-when="false" >
-          <i class="glyphicon glyphicon-remove" style="color: red"></i>
-        </span>
-      </span>
     </span>
   </script>
 </div>
