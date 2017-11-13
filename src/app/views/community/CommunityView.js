@@ -11,7 +11,7 @@
       .state('community', {
         abstract: true,
         url: '/community',
-        template: '<ui-view id="community-view"></ui-view>',
+        templateUrl: 'app/views/community/CommunityView.tpl.html',
         controller: 'CommunityViewController',
         data: {
           titleExp: '"Community"'
