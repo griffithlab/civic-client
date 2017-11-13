@@ -3,136 +3,198 @@
     <div class="col-xs-12 col-md-7">
       <div class="row">
         <div class="col-xs-12">
-          <div ng-if="variant.variant_aliases.length > 0">
-            <p><strong>Aliases: </strong>
-              <span ng-repeat="alias in variant.variant_aliases">
-                {{
-                $first ? '' : $last ? (
-                variant.variant_aliases.length > 2 ? ', and ' : ' and '
-                ) : ', '
-                }}
-                {{ alias }}
-              </span>
-            </p>
-          </div>
-          <div ng-switch="variant.description.length > 0">
-            <div ng-switch-when="true">
-              <p ng-bind="variant.description" class="description">
-                Variant Summary.
+          <div class="row">
+            <div class="col-xs-8" ng-if="variant.variant_aliases.length > 0">
+              <p><strong>Aliases: </strong>
+                <span ng-repeat="alias in variant.variant_aliases">
+                  {{
+                  $first ? '' : $last ? (
+                  variant.variant_aliases.length > 2 ? ', and ' : ' and '
+                  ) : ', '
+                  }}
+                  {{ alias }}
+                </span>
               </p>
             </div>
-            <div ng-switch-default="false">
-              <p class="description">
-                This Variant does not currently have a Summary.
-              </p>
-              <div ng-if="isAuthenticated() && !isEdit">
-                <p>
-                  <a class="btn btn-small btn-default" ui-sref="events.genes.summary.variants.edit.basic({ geneId: stateParams.geneId, variantId: variant.id })">
-                    Add a Summary
-                  </a>
-                </p>
-              </div>
+            <div class="col-xs-4" ng-if="variant.allele_registry_id !== null && variant.allele_registry_id.length > 0">
+              <p><strong>Allele Registry ID: </strong> <a ng-href="https://reg.genome.network/allele/{{variant.allele_registry_id}}.html" target="_blank">{{variant.allele_registry_id}}</a></p>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-md-6">
-          <div class="variant-types">
-            <p>
-              <strong>Variant Type<span ng-if="variant.variant_types.length > 1">s</span>:</strong><br/>
-              <span ng-switch="variant.variant_types.length > 0">
-                <span ng-switch-when="true">
-                  <span ng-repeat="type in variant.variant_types">
-                    {{
-                    $first ? '' : $last ? (
-                    variant.variant_types.length > 2 ? ', and ' : ' and '
-                    ) : ', '
-                    }}
-                    <span  ng-if="type.display_name !== 'N/A'">
-                      <a ng-href="{{ type.url }}" target="_blank">{{type.display_name}}</a>
-                    </span>
-                    <span ng-if="type.display_name === 'N/A'">{{type.display_name}}</span>
-                  </span>
-                </span>
-                <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
-                  None specified.
-                </span>
-              </span>
+      <div class="row" >
+        <div class="col-xs-12" >
+        <div ng-switch="variant.description.length > 0">
+          <div ng-switch-when="true">
+            <p ng-bind="variant.description" class="description">
+              Variant Summary.
             </p>
           </div>
-          <div class="hgvs-expressions">
-            <p>
-              <strong>HGVS Expression<span ng-if="variant.hgvs_expressions.length > 1">s</span>:</strong><br/>
-              <span ng-switch="variant.hgvs_expressions.length > 0">
-                <span ng-switch-when="true">
-                  <span ng-repeat="expression in variant.hgvs_expressions" class="small">
-                    {{
-                    $first ? '' : $last ? (
-                    variant.hgvs_expressions.length > 2 ? ', and ' : ' and '
-                    ) : ', '
-                    }}
-                    {{ expression }}
-                  </span>
-                </span>
-                <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
-                  None specified.
-                </span>
-              </span>
+          <div ng-switch-default="false">
+            <p class="description">
+              This Variant does not currently have a Summary.
             </p>
-          </div>
-          <div class="clinvar-ids">
-            <p>
-              <strong>ClinVar ID<span ng-if="variant.clinvar_entries.length > 1">s</span>:</strong><br/>
-              <span ng-switch="variant.clinvar_entries.length > 0">
-                <span ng-switch-when="true">
-                  <span ng-repeat="clinvar_id in variant.clinvar_entries" class="small">
-                    {{
-                    $first ? '' : $last ? (
-                    variant.clinvar_entries.length > 2 ? ', and ' : ' and '
-                    ) : ', '
-                    }}
-                    <a ng-if="clinvar_ignore.indexOf(clinvar_id) == -1" ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{ clinvar_id }}/" target="_blank">{{ clinvar_id }}</a>
-                    <span ng-if="clinvar_ignore.indexOf(clinvar_id) !== -1">{{ clinvar_id }}</span>
-                  </span>
-                </span>
-                <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
-                  None specified.
-                </span>
-              </span>
-            </p>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-          <div ng-if="variant.sources.length > 0">
-            <strong>Sources:</strong>
-            <ul class="sources">
-              <li ng-repeat="source in variant.sources">
-                <a ui-sref="sources.summary({sourceId:source.id})"><span class="small" ng-bind="source.citation"></span></a>
-              </li>
-            </ul>
-          </div>
-          <div class="row" ng-if="variant.assertions.length > 0">
-            <div class="col-xs-12" >
-              <div class="assertions" >
-                <strong>Assertions:</strong><br/>
-                <ul>
-                  <li ng-repeat="assertion in variant.assertions | orderBy:'id'">
-                    <ng-include src="'assertionTag.tpl.html'"></ng-include>
-                  </li>
-                </ul>
-              </div>
+            <div ng-if="isAuthenticated() && !isEdit">
+              <p>
+                <a class="btn btn-small btn-default" ui-sref="events.genes.summary.variants.edit.basic({ geneId: stateParams.geneId, variantId: variant.id })">
+                  Add a Summary
+                </a>
+              </p>
             </div>
           </div>
         </div>
-
       </div>
     </div>
-    <div class="col-xs-12 col-md-5">
-      <div class="coordinates-block">
-        <div class="section-title first">
-          Ref. Build: <span class="val">{{ variant.coordinates.reference_build | ifEmpty: '--' }}</span>&nbsp;&nbsp;
-          Ensembl Version: <span class="val">{{ variant.coordinates.ensembl_version| ifEmpty: '--' }}</span>
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <div class="variant-types">
+          <p>
+            <strong>Variant Type<span ng-if="variant.variant_types.length > 1">s</span>:</strong><br/>
+            <span ng-switch="variant.variant_types.length > 0">
+              <span ng-switch-when="true">
+                <span ng-repeat="type in variant.variant_types">
+                  {{
+                  $first ? '' : $last ? (
+                  variant.variant_types.length > 2 ? ', and ' : ' and '
+                  ) : ', '
+                  }}
+                  <span  ng-if="type.display_name !== 'N/A'">
+                    <a ng-href="{{ type.url }}" target="_blank">{{type.display_name}}</a>
+                  </span>
+                  <span ng-if="type.display_name === 'N/A'">{{type.display_name}}</span>
+                </span>
+              </span>
+              <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
+                None specified.
+              </span>
+            </span>
+          </p>
+        </div>
+        <div class="hgvs-expressions">
+          <p>
+            <strong>HGVS Expression<span ng-if="variant.hgvs_expressions.length > 1">s</span>:</strong><br/>
+            <span ng-switch="variant.hgvs_expressions.length > 0">
+              <span ng-switch-when="true">
+                <span ng-repeat="expression in variant.hgvs_expressions" class="small">
+                  {{
+                  $first ? '' : $last ? (
+                  variant.hgvs_expressions.length > 2 ? ', and ' : ' and '
+                  ) : ', '
+                  }}
+                  {{ expression }}
+                </span>
+              </span>
+              <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
+                None specified.
+              </span>
+            </span>
+          </p>
+        </div>
+        <div class="clinvar-ids">
+          <p>
+            <strong>ClinVar ID<span ng-if="variant.clinvar_entries.length > 1">s</span>:</strong><br/>
+            <span ng-switch="variant.clinvar_entries.length > 0">
+              <span ng-switch-when="true">
+                <span ng-repeat="clinvar_id in variant.clinvar_entries" class="small">
+                  {{
+                  $first ? '' : $last ? (
+                  variant.clinvar_entries.length > 2 ? ', and ' : ' and '
+                  ) : ', '
+                  }}
+                  <a ng-if="clinvar_ignore.indexOf(clinvar_id) == -1" ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{ clinvar_id }}/" target="_blank">{{ clinvar_id }}</a>
+                  <span ng-if="clinvar_ignore.indexOf(clinvar_id) !== -1">{{ clinvar_id }}</span>
+                </span>
+              </span>
+              <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
+                None specified.
+              </span>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div ng-if="variant.sources.length > 0">
+          <strong>Sources:</strong>
+          <ul class="sources">
+            <li ng-repeat="source in variant.sources">
+              <a ui-sref="sources.summary({sourceId:source.id})"><span class="small" ng-bind="source.citation"></span></a>
+            </li>
+          </ul>
+        </div>
+        <div class="row" ng-if="variant.assertions.length > 0">
+          <div class="col-xs-12" >
+            <div class="assertions" >
+              <strong>Assertions:</strong><br/>
+              <ul>
+                <li ng-repeat="assertion in variant.assertions | orderBy:'id'">
+                  <ng-include src="'assertionTag.tpl.html'"></ng-include>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-5">
+    <div class="coordinates-block">
+      <div class="section-title first">
+        Ref. Build: <span class="val">{{ variant.coordinates.reference_build | ifEmpty: '--' }}</span>&nbsp;&nbsp;
+        Ensembl Version: <span class="val">{{ variant.coordinates.ensembl_version| ifEmpty: '--' }}</span>
+      </div>
+      <table class="table table-condensed borderless">
+        <tbody class="common">
+          <tr>
+            <td class="key">
+              Chr.
+            </td>
+            <td class="key">
+              Start
+            </td>
+            <td class="key ">
+              Stop
+            </td>
+            <td class="key">
+              Ref. s
+            </td>
+            <td class="key">
+              Var. Bases
+            </td>
+          </tr>
+          <tr>
+            <td class="value">
+              {{variant.coordinates.chromosome | ifEmpty: '--'}}
+            </td>
+            <td class="value">
+              {{variant.coordinates.start | ifEmpty: '--'}}
+            </td>
+            <td class="value">
+              {{variant.coordinates.stop | ifEmpty: '--'}}
+            </td>
+            <td class="value">
+              {{variant.coordinates.reference_bases | ifEmpty: '--'}}
+            </td>
+            <td class="value">
+              {{variant.coordinates.variant_bases | ifEmpty: '--'}}
+            </td>
+          </tr>
+
+          <tr>
+            <td class="key small" colspan="5">
+              Rep. Transcript
+            </td>
+          </tr>
+          <tr>
+            <td class="value" colspan="5">
+              {{variant.coordinates.representative_transcript | ifEmpty: '--'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div ng-if="variant.coordinates.chromosome2">
+        <div class="section-title">
+          COORDINATE 2
         </div>
         <table class="table table-condensed borderless">
           <tbody class="common">
@@ -140,147 +202,94 @@
               <td class="key">
                 Chr.
               </td>
-              <td class="key">
+              <td class="key small">
                 Start
               </td>
-              <td class="key ">
+              <td class="key small">
                 Stop
               </td>
-              <td class="key">
-                Ref. s
-              </td>
-              <td class="key">
-                Var. Bases
-              </td>
-            </tr>
-            <tr>
-              <td class="value">
-                {{variant.coordinates.chromosome | ifEmpty: '--'}}
-              </td>
-              <td class="value">
-                {{variant.coordinates.start | ifEmpty: '--'}}
-              </td>
-              <td class="value">
-                {{variant.coordinates.stop | ifEmpty: '--'}}
-              </td>
-              <td class="value">
-                {{variant.coordinates.reference_bases | ifEmpty: '--'}}
-              </td>
-              <td class="value">
-                {{variant.coordinates.variant_bases | ifEmpty: '--'}}
-              </td>
-            </tr>
-
-            <tr>
-              <td class="key small" colspan="5">
+              <td class="key small">
                 Rep. Transcript
               </td>
             </tr>
             <tr>
-              <td class="value" colspan="5">
-                {{variant.coordinates.representative_transcript | ifEmpty: '--'}}
+              <td class="value">
+                {{variant.coordinates.chromosome2 | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variant.coordinates.start2 | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variant.coordinates.stop2 | ifEmpty: '--'}}
+              </td>
+              <td class="value">
+                {{variant.coordinates.representative_transcript2 | ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
         </table>
-        <div ng-if="variant.coordinates.chromosome2">
-          <div class="section-title">
-            COORDINATE 2
+      </div>
+      <div ng-if="isAuthenticated() && !isEdit">
+        <a class="btn btn-default btn-xs btn-block"
+          ng-click="editClick()">Edit Coordinates</a>
+      </div>
+    </div>
+    <my-variant-info variant-info="myVariantInfo" ng-if="myVariantInfo._id"></my-variant-info>
+  </div>
+</div>
+<div ng-if="showEvidenceGrid === true">
+  <div class="row">
+    <div class="col-xs-12 evidence-item-grid">
+      <evidence-grid
+        evidence="evidence"
+        variant="variant"
+        show-gene-col="false"
+        show-variant-col="false"
+        context="'summary'"
+        rounded="false">
+      </evidence-grid>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="evidence-view">
+        <ui-view>
+          <div class="alert alert-info select-prompt">
+            &uparrow; Click on an <strong>Evidence Item</strong> above to view its details here.
           </div>
-          <table class="table table-condensed borderless">
-            <tbody class="common">
-              <tr>
-                <td class="key">
-                  Chr.
-                </td>
-                <td class="key small">
-                  Start
-                </td>
-                <td class="key small">
-                  Stop
-                </td>
-                <td class="key small">
-                  Rep. Transcript
-                </td>
-              </tr>
-              <tr>
-                <td class="value">
-                  {{variant.coordinates.chromosome2 | ifEmpty: '--'}}
-                </td>
-                <td class="value">
-                  {{variant.coordinates.start2 | ifEmpty: '--'}}
-                </td>
-                <td class="value">
-                  {{variant.coordinates.stop2 | ifEmpty: '--'}}
-                </td>
-                <td class="value">
-                  {{variant.coordinates.representative_transcript2 | ifEmpty: '--'}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div ng-if="isAuthenticated() && !isEdit">
-          <a class="btn btn-default btn-xs btn-block"
-            ng-click="editClick()">Edit Coordinates</a>
-        </div>
-      </div>
-      <my-variant-info variant-info="myVariantInfo" ng-if="myVariantInfo._id"></my-variant-info>
-    </div>
-  </div>
-  <div ng-if="showEvidenceGrid === true">
-    <div class="row">
-      <div class="col-xs-12 evidence-item-grid">
-        <evidence-grid
-          evidence="evidence"
-          variant="variant"
-          show-gene-col="false"
-          show-variant-col="false"
-          context="'summary'"
-          rounded="false">
-        </evidence-grid>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="evidence-view">
-          <ui-view>
-            <div class="alert alert-info select-prompt">
-              &uparrow; Click on an <strong>Evidence Item</strong> above to view its details here.
-            </div>
-          </ui-view>
-        </div>
+        </ui-view>
       </div>
     </div>
   </div>
+</div>
 
-  <script type="text/ng-template" id="assertionTag.tpl.html">
-    <span uib-tooltip-template="'assertionTagTooltip.tpl.html'">
-      <a ui-sref="assertions.summary({ assertionId: assertion.id })"
-        class="assertion-tag">
-        <span ng-bind-html="assertion.name" class="assertion-name">AssertionName</span>
-      </a>
-    </span>
-  </script>
+<script type="text/ng-template" id="assertionTag.tpl.html">
+  <span uib-tooltip-template="'assertionTagTooltip.tpl.html'">
+    <a ui-sref="assertions.summary({ assertionId: assertion.id })"
+      class="assertion-tag">
+      <span ng-bind-html="assertion.name" class="assertion-name">AssertionName</span>
+    </a>
+  </span>
+</script>
 
-  <script type="text/ng-template" id="assertionTagTooltip.tpl.html" >
-    <span>
-      {{ assertion.description }}<br/><br/>
-      <strong>Evidence Items:</strong> <span ng-bind="assertion.evidence_item_count">item count</span><br/>
-        <strong>Reg. Approval:</strong>
-        <span ng-switch="assertion.regulatory_agency_approval.length > 0" >
-          <span ng-switch-when="true" >
-            <span ng-repeat="approval in assertion.regulatory_agency_approval">
-              {{
-                $first ? '' : $last ? (assertion.regulatory_agency_approval > 2 ? ', and ' : ' and ') : ', '
-              }}
-              {{ approval.abbreviation }}
-            </span>
-          </span>
-          <span ng-switch-when="false" >
-            <i class="glyphicon glyphicon-remove" style="color: red"></i>
-          </span>
+<script type="text/ng-template" id="assertionTagTooltip.tpl.html" >
+  <span>
+    {{ assertion.description }}<br/><br/>
+    <strong>Evidence Items:</strong> <span ng-bind="assertion.evidence_item_count">item count</span><br/>
+    <strong>Reg. Approval:</strong>
+    <span ng-switch="assertion.regulatory_agency_approval.length > 0" >
+      <span ng-switch-when="true" >
+        <span ng-repeat="approval in assertion.regulatory_agency_approval">
+          {{
+          $first ? '' : $last ? (assertion.regulatory_agency_approval > 2 ? ', and ' : ' and ') : ', '
+          }}
+          {{ approval.abbreviation }}
         </span>
+      </span>
+      <span ng-switch-when="false" >
+        <i class="glyphicon glyphicon-remove" style="color: red"></i>
+      </span>
     </span>
-  </script>
+  </span>
+</script>
 </div>
