@@ -1,0 +1,126 @@
+<div class="communityMain">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="sub-title">Leaderboards</h3>
+    </div>
+  </div>
+
+  <div class="row leaderboards-block">
+
+    <!-- COMMENTS LEADERBOARD -->
+    <div class="col-xs-6 col-lg-3">
+      <div class="leaderboard">
+        <h4>Top Commentors</h4>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="user">
+                User
+              </th>
+              <th class="count">
+                Comments
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in vm.leaderboards.most_comments">
+              <td class="user">
+                <user-block user="row.user"></user-block>
+              </td>
+              <td class="count" ng-bind="row.count"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SUBMISSIONS LEADERBOARD -->
+    <div class="col-xs-6 col-lg-3">
+      <div class="leaderboard">
+        <h4>Top Submittors</h4>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="user">
+                User
+              </th>
+              <th class="count">
+                Submissions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in vm.leaderboards.most_submissions">
+              <td class="user">
+                <user-block user="row.user"></user-block>
+              </td>
+              <td class="count" ng-bind="row.count"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REVISIONS LEADERBOARD -->
+    <div class="col-xs-6 col-lg-3">
+      <div class="leaderboard">
+        <h4>Top Revisors</h4>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="user">
+                User
+              </th>
+              <th class="count">
+                Revisions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in vm.leaderboards.most_suggested_changes">
+              <td class="user">
+                <user-block user="row.user"></user-block>
+              </td>
+              <td class="count" ng-bind="row.count"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODERATIONS LEADERBOARD -->
+    <div class="col-xs-6 col-lg-3">
+      <div class="leaderboard">
+        <h4>Top Moderators</h4>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="user">
+                User
+              </th>
+              <th class="count">
+                Moderations
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in vm.leaderboards.most_moderations">
+              <td class="user">
+                <user-block user="row.user"></user-block>
+              </td>
+              <td class="count" ng-bind="row.count"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="sub-title">Users</h3>
+    </div>
+  </div>
+  <div class="col-xs-12" >
+    <user-card-grid></user-card-grid>
+  </div>
+</div>

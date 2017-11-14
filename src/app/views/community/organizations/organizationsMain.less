@@ -1,0 +1,46 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.communityMain {
+  padding-top: 0;
+  .sub-title {
+    .fullBleed();
+    margin-top: 0;
+    margin-bottom: .25em;
+    padding-top: .25em;
+    padding-bottom: .25em;
+    border-top: 1px solid #FEFEEF;
+    border-bottom: 1px solid #DEDEDE;
+    background-color: #EFEFEF;
+  }
+
+  .leaderboards-block {
+    .leaderboard {
+      .user {
+        width: 80%
+      }
+      .count {
+        width: 20%;
+        text-align: right;
+      }
+    }
+  }
+
+  .users-form {
+    .form-horizontal .form-group {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+
+  .users-rows .userCard {
+    margin-bottom: @contentPadding;
+  }
+
+  .users-pagination {
+
+  }
+
+}
