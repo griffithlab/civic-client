@@ -11,15 +11,32 @@
 
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <p>
-        <strong>Gene: </strong>
-        <a ui-sref="events.genes.summary({geneId: vm.assertion.gene.id})"> {{ vm.assertion.gene.name }}</a>&nbsp;&nbsp;
-        <strong>Variant: </strong>
-        <a ui-sref="events.genes.summary.variants.summary({geneId: vm.assertion.gene.id, variantId: vm.assertion.variant.id})">{{ vm.assertion.variant.name }}</a>&nbsp;&nbsp;
-        <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
-      </p>
-      <p><strong>Summary:</strong> <span ng-bind="vm.assertion.summary">Description</span></p>
-      <p><strong>Description:</strong> <span ng-bind="vm.assertion.description">Description</span></p>
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+            <strong>Gene: </strong>
+            <a ui-sref="events.genes.summary({geneId: vm.assertion.gene.id})"> {{ vm.assertion.gene.name }}</a>&nbsp;&nbsp;
+            <strong>Variant: </strong>
+            <a ui-sref="events.genes.summary.variants.summary({geneId: vm.assertion.gene.id, variantId: vm.assertion.variant.id})">{{ vm.assertion.variant.name }}</a>&nbsp;&nbsp;
+            <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <p><strong>Summary:</strong> <span ng-bind="vm.assertion.summary">Description</span></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <p><strong>Description:</strong> <span ng-bind="vm.assertion.description">Description</span></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <my-variant-info-assert variant-info="vm.myVariantInfo"></my-variant-info>
+        </div>
+      </div>
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="row">
@@ -28,25 +45,25 @@
             <table class="table">
               <tr>
                 <td class="key">Evidence Type:</td>
-                <td class="value" >
+                <td class="value">
                   {{vm.assertion.evidence_type}}
                 </td>
               </tr>
               <tr>
                 <td class="key">Evidence Direction:</td>
-                <td class="value" >
+                <td class="value">
                   {{vm.assertion.evidence_direction}}
                 </td>
               </tr>
               <tr>
                 <td class="key">Clinical Significance:</td>
-                <td class="value" >
+                <td class="value">
                   {{ vm.assertion.clinical_significance }}
                 </td>
               </tr>
               <tr ng-if="vm.assertion.drugs.length > 0">
                 <td class="key">Drugs:</td>
-                <td class="value" >
+                <td class="value">
                   <span ng-repeat="drug in vm.assertion.drugs">
                     {{
                       $first ? '' : $last ? (vm.assertion.drugs > 2 ? ', and ' : ' and ') : ', '
@@ -57,19 +74,19 @@
               </tr>
               <tr ng-if="vm.drug_interaction_type !== null">
                 <td class="key">Drug Interaction Type</td>
-                <td class="value" >
+                <td class="value">
                   {{ vm.assertion.drug_interaction_type }}
                 </td>
               </tr>
               <tr>
                 <td class="key">AMP Level:</td>
-                <td class="value" >
+                <td class="value">
                   {{ vm.assertion.amp_level }}
                 </td>
               </tr>
               <tr>
                 <td class="key">ACMG Codes:</td>
-                <td class="value" >
+                <td class="value">
                   <span ng-switch="vm.assertion.acmg_codes.length > 0">
                     <span ng-switch-when="true" >
                       <span ng-repeat="code in vm.assertion.acmg_codes"
@@ -79,8 +96,8 @@
                         }}
                         {{ code.code}}
                       </span>
-                    </span>
-                    <span ng-switch-when="false">
+                  </span>
+                  <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -104,8 +121,8 @@
                         }}
                         {{ approval.abbreviation }}
                       </span>
-                    </span>
-                    <span ng-switch-when="false">
+                  </span>
+                  <span ng-switch-when="false">
                       <i class="glyphicon glyphicon-remove" style="color: red"></i>
                     </span>
                   </span>

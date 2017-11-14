@@ -23,9 +23,12 @@
           titleExp: '"Assertion Summary"',
           navMode: 'sub'
         },
-        resolve: {
+        resolve: /* @ngInject */ {
           assertion: function(Assertions, $stateParams) {
             return Assertions.get($stateParams.assertionId);
+          },
+          myVariantInfo: function(assertion, Variants) {
+            return Variants.getMyVariantInfo(assertion.variant.id);
           }
         }
       });

@@ -4,7 +4,7 @@
     .controller('AssertionsSummaryController', AssertionsSummaryController);
 
   // @ngInject
-  function AssertionsSummaryController($scope, _, Security, assertion) {
+  function AssertionsSummaryController($scope, _, Security, assertion, myVariantInfo) {
     console.log('AssertionsSummaryController called.');
     var vm = $scope.vm = {};
 
@@ -12,5 +12,6 @@
     vm.isAdmin = Security.isAdmin();
 
     vm.assertion = assertion;
+    vm.myVariantInfo = myVariantInfo;
   }
 })();
