@@ -1,0 +1,287 @@
+<div class="myVariantInfoDialogAssert">
+  <div class="row header">
+    <div class="col-xs-12">
+      <h3>Variant {{ variantInfo.entrez_id }} Details from <a href="http://myvariant.info/"
+                                                              target="_new">MyVariant.info</a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="well" >
+        <table class="table table-compact" >
+          <colgroup>
+            <col width="20%"/>
+            <col width="80%"/>
+          </colgroup>
+          <tr>
+            <td class="key">
+              HGVS ID:
+            </td>
+            <td class="value" >
+              {{variantInfo._id}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="well">
+        <div class="group-title">ClinVar</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">ClinVar ID:</td>
+              <td class="value">
+                <span ng-switch="!!variantInfo.clinvar.variant_id">
+                  <span ng-switch-when="true">
+                    <a ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{variantInfo.clinvar.variant_id}}/" target="_blank">{{variantInfo.clinvar.variant_id}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Clinical Significance:</td>
+              <td class="value">
+                {{variantInfo.clinvar.rcv[0].clinical_significance | ifEmpty: '--'}}
+              </td>
+            </tr>
+            <tr>
+              <td class="key">HGVS Coding</td>
+              <td class="value">
+              <span ng-switch="variantInfo.clinvar.hgvs.coding.length > 0">
+                <span ng-switch-when="true">
+                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.coding">{{hgvs}}{{$last ? '' : ', '}}</span>
+                </span>
+                <span ng-switch-default>
+                  --
+                </span>
+              </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">HGVS Genomic</td>
+              <td class="value">
+              <span ng-switch="variantInfo.clinvar.hgvs.genomic.length > 0">
+                <span ng-switch-when="true">
+                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.genomic">{{hgvs}}{{$last ? '' : ', '}}</span>
+                </span>
+                <span ng-switch-default>
+                  --
+                </span>
+              </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">HGVS Non-coding</td>
+              <td class="value">
+              <span ng-switch="variantInfo.clinvar.hgvs.non-coding.length > 0">
+                <span ng-switch-when="true">
+                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.non-coding">{{hgvs}}{{$last ? '' : ', '}}</span>
+                </span>
+                <span ng-switch-default>
+                  --
+                </span>
+              </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">HGVA Protein</td>
+              <td class="value">{{variantInfo.clinvar.hgvs.protein| ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Omim</td>
+              <td class="value">
+                <span ng-switch="!!variantInfo.clinvar.omim">
+                  <span ng-switch-when="true">
+                    <a ng-href="http://omim.org/entry/{{variantInfo.clinvar.omim.split('.')[0]}}" target="_blank">{{variantInfo.clinvar.omim | ifEmpty: '--'}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    {{variantInfo.clinvar.omim | ifEmpty: '--'}}
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
+        <div class="group-title">SNPEff</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">SNP Effect</td>
+              <td class="value">{{variantInfo.snpeff.ann[0].effect | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">SNP Impact</td>
+              <td class="value">{{variantInfo.snpeff.ann[0].putative_impact| ifEmpty: '--'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
+        <div class="group-title">The Exome Aggregation Consortium</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">Allele Count</td>
+              <td class="value">{{variantInfo.exac.ac.ac_adj[0] | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Allele Number</td>
+              <td class="value">{{variantInfo.exac.an.an_adj[0] | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Adjusted Allele Frequency</td>
+              <td class="value">{{variantInfo.exac.adj_allele_freq | ifEmpty: '--'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <div class="well">
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">COSMIC ID:</td>
+              <td class="value">
+               <span ng-switch="!!variantInfo.cosmic.cosmic_id">
+                  <span ng-switch-when="true">
+                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{variantInfo.cosmic.cosmic_id_short}}" target="_blank">{{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
+        <div class="group-title">Combined Annotation Dependent Depletion</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">Consequence</td>
+              <td class="value">
+                <span ng-switch="variantInfo.cadd.consequence.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="consequence in variantInfo.cadd.consequence">{{consequence}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Consequence Detail</td>
+              <td class="value">
+                <span ng-switch="variantInfo.cadd.consdetail.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="detail in variantInfo.cadd.consdetail">{{detail}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">SIFT Effect Cateogry</td>
+              <td class="value">{{variantInfo.cadd.sift.cat | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">SIFT Effect Score</td>
+              <td class="value">{{variantInfo.cadd.sift.val | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">PolyPhen Effect Category</td>
+              <td class="value">{{variantInfo.cadd.polyphen.cat | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">PolyPhen Effect Score</td>
+              <td class="value">{{variantInfo.cadd.polyphen.val | ifEmpty: '--'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
+        <div class="group-title">dbSNP</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">dbSNP RSID</td>
+              <td class="value">
+                <span ng-switch="!!variantInfo.dbsnp.rsid">
+                  <span ng-switch-when="true">
+                    <a ng-href="https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?searchType=adhoc_search&type=rs&rs={{variantInfo.dbsnp.rsid}}" target="_blank">{{variantInfo.dbsnp.rsid}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    --
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
+        <div class="group-title">dbNSFP</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">InterPro Domain</td>
+              <td class="value">{{variantInfo.dbnsfp.interpro_domain | ifEmpty: '--'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
+        <div class="group-title">Emory Genetics Lab Variant Classification</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">EGL Class</td>
+              <td class="value">{{variantInfo.emv.egl_classification | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Protein Variant Name</td>
+              <td class="value">{{variantInfo.emv.egl_protein | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Transcript Variant Name</td>
+              <td class="value">{{variantInfo.emv.egl_variant | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">HGVS</td>
+              <td class="value">
+                <span ng-switch="variantInfo.emv.hgvs.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="hgvs in variantInfo.emv.hgvs">{{hgvs}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row buttons">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <button type="button" class="btn btn-default close" ng-click="ctrl.closeDialog()">Done</button>
+      </div>
+    </div>
+  </div>
+</div>

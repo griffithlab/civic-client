@@ -1,0 +1,56 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.myVariantInfoDialogAssert {
+  padding: 0;
+
+  .header {
+    background-color: #EFEFEF;
+    margin-bottom: 1em;
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .group-title {
+    border-bottom: 1px solid @table-border-color;
+    font-weight: bold;
+    font-size: 120%;
+  }
+
+  table {
+    margin-bottom: 0;
+    .key {
+      width: 35%;
+      font-weight: bold;
+      font-size: small;
+      color: #333;
+      text-align: right;
+      white-space: nowrap !important;
+      border: none;
+    }
+    .value {
+      width: 65%;
+      font-size: small;
+      border: none;
+    }
+  }
+
+  .dataGrid {
+    width: auto;
+    height: 200px;
+  }
+
+  .grid-row {
+    margin-bottom: 1em;
+  }
+
+  .button-row {
+    margin-bottom: 1em;
+    padding: @contentPadding;
+    background-color: #EFEFEF;
+    margin-bottom: 0;
+  }
+}
