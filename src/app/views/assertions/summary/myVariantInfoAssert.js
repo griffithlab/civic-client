@@ -53,7 +53,7 @@
     }
 
     ctrl.popupOptions = {
-      template: 'app/views/assertions/summary/myVariantInfoAssertDialog.tpl.html',
+      template: 'app/views/assertions/summary/myVariantInfoDialogAssert.tpl.html',
       scope: $scope
     };
 
