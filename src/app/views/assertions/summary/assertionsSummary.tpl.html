@@ -27,14 +27,14 @@
           <p><strong>Summary:</strong> <span ng-bind="vm.assertion.summary">Description</span></p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" ng-if="vm.assertion.description.length > 0">
         <div class="col-xs-12">
           <p><strong>Description:</strong> <span ng-bind="vm.assertion.description">Description</span></p>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <my-variant-info-assert variant-info="vm.myVariantInfo"></my-variant-info>
+          <my-variant-info-assert variant-info="vm.myVariantInfo" ng-if="vm.myVariantInfo._id"></my-variant-info>
         </div>
       </div>
     </div>
@@ -66,13 +66,13 @@
                 <td class="value">
                   <span ng-repeat="drug in vm.assertion.drugs">
                     {{
-                      $first ? '' : $last ? (vm.assertion.drugs > 2 ? ', and ' : ' and ') : ', '
+                    $first ? '' : $last ? (vm.assertion.drugs > 2 ? ', and ' : ' and ') : ', '
                     }}
                     {{drug.name}}
                   </span>
                 </td>
               </tr>
-              <tr ng-if="vm.drug_interaction_type !== null">
+              <tr ng-if="vm.assertion.drug_interaction_type !== null">
                 <td class="key">Drug Interaction Type</td>
                 <td class="value">
                   {{ vm.assertion.drug_interaction_type }}
@@ -112,16 +112,10 @@
               <tr>
                 <td class="key">Regulatory Approval:</td>
                 <td class="value">
-                  <span ng-switch="vm.assertion.regulatory_agency_approval.length > 0">
+                  <span ng-switch="vm.assertion.fda_regulatory_approval">
                     <span ng-switch-when="true" >
-                      <span ng-repeat="approval in vm.assertion.regulatory_agency_approval"
-                        uib-tooltip="{{ approval.name }} ({{approval.country}})">
-                        {{
-                        $first ? '' : $last ? (vm.assertion.regulatory_agency_approval > 2 ? ', and ' : ' and ') : ', '
-                        }}
-                        {{ approval.abbreviation }}
-                      </span>
-                  </span>
+                      <i class="glyphicon glyphicon-ok" style="color: green"></i>
+                    </span>
                   <span ng-switch-when="false">
                       <i class="glyphicon glyphicon-remove" style="color: red"></i>
                     </span>

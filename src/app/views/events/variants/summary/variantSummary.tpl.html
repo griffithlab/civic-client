@@ -279,14 +279,9 @@
       {{ assertion.summary }}<br/><br/>
       <strong>Evidence Items:</strong> <span ng-bind="assertion.evidence_item_count">item count</span><br/>
       <strong>Reg. Approval:</strong>
-      <span ng-switch="assertion.regulatory_agency_approval.length > 0" >
+      <span ng-switch="assertion.fda_regulatory_approval">
         <span ng-switch-when="true" >
-          <span ng-repeat="approval in assertion.regulatory_agency_approval">
-            {{
-            $first ? '' : $last ? (assertion.regulatory_agency_approval > 2 ? ', and ' : ' and ') : ', '
-            }}
-            {{ approval.abbreviation }}
-          </span>
+          <i class="glyphicon glyphicon-ok" style="color: green"></i>
         </span>
         <span ng-switch-when="false" >
           <i class="glyphicon glyphicon-remove" style="color: red"></i>
