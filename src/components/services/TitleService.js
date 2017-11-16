@@ -6,11 +6,12 @@
   // @ngInject
   // Titles are constructed by parsing the state's data.titleExp string within a scope constructed
   // of the relevant CIViC entities (gene, variant, evidenceItem, variantGroup)
-  function TitleService($rootScope, Genes, Variants, Evidence, VariantGroups, Users, _, $q, $parse) {
+  function TitleService($rootScope, Assertions, Genes, Variants, Evidence, VariantGroups, Users, _, $q, $parse) {
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams) {
       var title = '';
 
       var titleScope = {
+        assertion: {},
         gene: {},
         variant: {},
         evidence: {},
@@ -18,7 +19,7 @@
         user: {}
       };
 
-      var genePromise, variantPromise, variantGroupsPromise, evidencePromise, usersPromise;
+      var assertionPromise, genePromise, variantPromise, variantGroupsPromise, evidencePromise, usersPromise;
 
       // TODO: get needed entity resources by querying $state.$current.globals
       // note: requires that all resources necessary for parsing a state's titleExp must be resolved by ui-router state config
@@ -44,8 +45,12 @@
         usersPromise = Users.get(toParams.userId);
       }
 
+      if(_.has(toParams, 'assertionId') && titleScope.assertion.id !== toParams.assertionId) {
+        assertionPromise = Assertions.get(toParams.assertionId);
+      }
       // resolve promises, apply $parse with constructed title scope
       $q.all({
+        assertion: assertionPromise,
         gene: genePromise,
         variant: variantPromise,
         evidence: evidencePromise,
@@ -57,6 +62,7 @@
           titleScope.evidence = resolutions.evidence;
           titleScope.variantGroup = resolutions.variantGroup;
           titleScope.user = resolutions.user;
+          titleScope.assertion = resolutions.assertion;
 
           title = $parse(toState.data.titleExp)(titleScope);
 

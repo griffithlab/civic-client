@@ -20,7 +20,7 @@
         templateUrl: 'app/views/assertions/summary/assertionsSummary.tpl.html',
         controller: 'AssertionsSummaryController',
         data: {
-          titleExp: '"Assertion Summary"',
+          titleExp: '"Assertion " + assertion.name',
           navMode: 'sub'
         },
         resolve: /* @ngInject */ {
