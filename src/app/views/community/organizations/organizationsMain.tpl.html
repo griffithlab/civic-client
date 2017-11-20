@@ -25,7 +25,7 @@
           <tbody>
             <tr ng-repeat="row in vm.leaderboards.most_comments">
               <td class="user">
-                <user-block user="row.user"></user-block>
+                <organization-block user="row.user"></organization-block>
               </td>
               <td class="count" ng-bind="row.count"></td>
             </tr>
@@ -52,7 +52,7 @@
           <tbody>
             <tr ng-repeat="row in vm.leaderboards.most_submissions">
               <td class="user">
-                <user-block user="row.user"></user-block>
+                <organization-block user="row.user"></organization-block>
               </td>
               <td class="count" ng-bind="row.count"></td>
             </tr>
@@ -79,7 +79,7 @@
           <tbody>
             <tr ng-repeat="row in vm.leaderboards.most_suggested_changes">
               <td class="user">
-                <user-block user="row.user"></user-block>
+                <organization-block user="row.user"></organization-block>
               </td>
               <td class="count" ng-bind="row.count"></td>
             </tr>
@@ -106,7 +106,7 @@
           <tbody>
             <tr ng-repeat="row in vm.leaderboards.most_moderations">
               <td class="user">
-                <user-block user="row.user"></user-block>
+                <organization-block user="row.user"></organization-block>
               </td>
               <td class="count" ng-bind="row.count"></td>
             </tr>
@@ -117,10 +117,10 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <h3 class="sub-title">Users</h3>
+      <h3 class="sub-title">Organization</h3>
     </div>
   </div>
   <div class="col-xs-12" >
-    <user-card-grid></user-card-grid>
+    <organization-card-grid></organization-card-grid>
   </div>
 </div>
