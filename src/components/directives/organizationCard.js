@@ -10,7 +10,7 @@
     return /* @ngInject */ {
       restrict: 'E',
       scope: {
-        user: '='
+        organization: '='
       },
       controller: 'OrganizationCardController as vm',
       bindToController: true,
@@ -22,7 +22,7 @@
   function OrganizationCardController($state, $scope, _) {
     var vm = this;
 
-    $scope.$watch('vm.user', function(user) {
+    $scope.$watch('vm.organization', function(user) {
       vm.hasSocialProfile = !_.isEmpty(user.twitter_handle) ||
         !_.isEmpty(user.linkedin_profile) ||
         !_.isEmpty(user.facebook_profile);

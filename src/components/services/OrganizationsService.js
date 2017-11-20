@@ -50,7 +50,7 @@
     function query(reqObj) {
       return OrganizationsResource.query(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, collection);
+          angular.copy(response.records, collection);
           return response.$promise;
         });
     }

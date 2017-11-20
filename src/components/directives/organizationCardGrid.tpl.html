@@ -9,9 +9,9 @@
     </form>
   </div>
   <div class="row auto-clear users-rows">
-    <organization-card user="user"
+    <organization-card organization="organization"
                class="col-xs-6 col-sm-4 col-lg-3"
-               ng-repeat="user in vm.users">
+               ng-repeat="organization in vm.organizations">
     </organization-card>
   </div>
   <div class="row" ng-if="vm.users.length < 1">
@@ -39,6 +39,11 @@
         {{ vm.totalItems }} {{ vm.isFiltered ? "filtered" : "total" }} {{ vm.browseMode }} &nbsp;&nbsp;&nbsp;&nbsp;
         Page {{ vm.page }} of {{ vm.totalPages }}
       </p>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-xs-12" >
+      <pre ng-bind="vm.organizations|json" ></pre>
     </div>
   </div>
 </div>

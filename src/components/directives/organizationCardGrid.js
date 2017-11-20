@@ -52,7 +52,7 @@
 
       fetchOrganizations(vm.count, vm.page, sorting, filters, limit, vm.model.name)
         .then(function(data) {
-          angular.copy(data.result, vm.organizations);
+          angular.copy(data.records, vm.organizations);
           vm.totalItems = data.total;
         });
     }, 250);

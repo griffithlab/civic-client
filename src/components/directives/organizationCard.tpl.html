@@ -1,93 +1,64 @@
 <div class="organizationCard"
-     ng-class="vm.user.role">
+     ng-class="vm.organization.role">
   <div class="row" >
-    <div class="col-xs-6">
-      <div class="user-avatar" ng-click="vm.userClick(vm.user.id)">
-        <div class="avatar-bg" ng-class="vm.user.role">
-          <img ng-src="{{vm.user.avatars.x128}}" class="img-responsive"/>
+    <div class="col-xs-12">
+      <div class="organization-avatar" ng-click="vm.organizationClick(vm.organization.id)">
+        <div class="avatar-bg">
+          <img ng-src="{{vm.organization.profile_image.x128}}" class="img-responsive"/>
         </div>
-        <span ng-bind="vm.user.username" class="card-name" ng-class="vm.user.role"></span>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <div class="user-attributes" >
-
-        <ul>
-          <li class="attr-key" >
-            Name
-          </li>
-          <li class="attr-value" >
-            <span ng-bind="vm.user.name"></span>
-          </li>
-
-
-          <li class="attr-key" >
-            Role
-          </li>
-          <li class="attr-value" >
-            <span ng-bind="vm.user.role | capitalize"></span>
-          </li>
-
-          <li class="attr-key" >
-            Expertise
-          </li>
-          <li class="attr-value" >
-            <span ng-bind="vm.user.area_of_expertise | ifEmpty: '--'"></span>
-          </li>
-
-        </ul>
+        <span ng-bind="vm.organization.name" class="card-name"></span>
       </div>
     </div>
   </div>
-  <div class="row" ng-if="vm.user.organization.name != undefined">
+  <div class="row" ng-if="vm.organization.organization.name != undefined">
     <div class="col-xs-12" >
-      <div class="secondary-user-attributes">
+      <div class="secondary-organization-attributes">
       <ul>
         <li class="attr-key" >
           Organization
         </li>
         <li class="attr-value" >
-          <a ui-sref="organizations.summary({organizationId: vm.user.organization.id})">
-            {{vm.user.organization.name|ifEmpty: '--'}}
+          <a ui-sref="organizations.summary({organizationId: vm.organization.organization.id})">
+            {{vm.organization.organization.name|ifEmpty: '--'}}
           </a>
         </li>
       </ul>
       </div>
     </div>
-  </div>
-  <div class="row" ng-if="vm.user.community_params != undefined">
+
+  <div class="row" ng-if="vm.organization.community_params != undefined">
     <div class="col-xs-4" >
-      <div class="secondary-user-attributes attr-left">
+      <div class="secondary-organization-attributes attr-left">
         <ul>
           <li class="attr-key" >
             Actions
           </li>
           <li class="attr-value" >
-            <span ng-bind="vm.user.community_params.action_count | ifEmpty: '--'"></span>
+            <span ng-bind="vm.organization.community_params.action_count | ifEmpty: '--'"></span>
           </li>
         </ul>
       </div>
     </div>
-    <div class="col-xs-8" ng-if="vm.user.community_params.most_recent_action_timestamp !== null">
-      <div class="secondary-user-attributes attr-right">
+    <div class="col-xs-8" ng-if="vm.organization.community_params.most_recent_action_timestamp !== null">
+      <div class="secondary-organization-attributes attr-right">
       <ul>
         <li class="attr-key" >
        Last Action
         </li>
         <li class="attr-value" >
-          <span ng-bind="vm.user.community_params.most_recent_action_timestamp | timeAgo"></span>
+          <span ng-bind="vm.organization.community_params.most_recent_action_timestamp | timeAgo"></span>
         </li>
       </ul>
       </div>
     </div>
-    <div class="col-xs-8" ng-if="vm.user.community_params.most_recent_action_timestamp === null">
-      <div class="secondary-user-attributes attr-right">
+    <div class="col-xs-8" ng-if="vm.organization.community_params.most_recent_action_timestamp === null">
+      <div class="secondary-organization-attributes attr-right">
       <ul>
         <li class="attr-key" >
       Join Date
         </li>
         <li class="attr-value" >
-          <span ng-bind="vm.user.created_at | timeAgo"></span>
+          <span ng-bind="vm.organization.created_at | timeAgo"></span>
         </li>
       </ul>
       </div>
@@ -98,18 +69,18 @@
       <div class="social-media-buttons">
         <div class="social-icons">
           <div ng-if="vm.hasSocialProfile" class="social-icons">
-            <span ng-show="vm.user.twitter_handle.length > 0">
-              <a ng-href="https://twitter.com/{{vm.user.twitter_handle}}" target="_blanks">
+            <span ng-show="vm.organization.twitter_handle.length > 0">
+              <a ng-href="https://twitter.com/{{vm.organization.twitter_handle}}" target="_blanks">
                 <img src="assets/images/social_icons/twitter-ico.png" width="24" height="24"/>
               </a>
             </span>
-            <span ng-show="vm.user.linkedin_profile.length > 0">
-              <a ng-href="https://linkedin.com/in/{{vm.user.linkedin_profile}}" target="_blank">
+            <span ng-show="vm.organization.linkedin_profile.length > 0">
+              <a ng-href="https://linkedin.com/in/{{vm.organization.linkedin_profile}}" target="_blank">
                 <img src="assets/images/social_icons/linkedin-ico.png" width="24" height="24"/>
               </a>
             </span>
-            <span ng-show="vm.user.facebook_profile.length > 0">
-              <a ng-href="https://facebook.com/{{vm.user.facebook_profile}}" target="_blank">
+            <span ng-show="vm.organization.facebook_profile.length > 0">
+              <a ng-href="https://facebook.com/{{vm.organization.facebook_profile}}" target="_blank">
                 <img src="assets/images/social_icons/facebook-ico.png" width="24" height="24"/>
               </a>
             </span>

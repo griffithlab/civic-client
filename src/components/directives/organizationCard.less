@@ -14,9 +14,8 @@
   display: block;
   // max-height: 247px !important;
   // overflow: hidden;
-  .user-avatar {
+  .organization-avatar {
     cursor: pointer;
-    margin-right: -(@contentPadding);
     .avatar-bg {
       background-color: #CCC;
       border-top-left-radius: @border-radius-large;
@@ -35,29 +34,17 @@
     }
     img {
       border-top-left-radius: @border-radius-large;
+      border-top-right-radius: @border-radius-large;
       width: 100%;
     }
     .card-name {
       display: block;
       padding: @contentPadding/4 @contentPadding/2;
       text-align: center;
-      border-bottom-right-radius: @border-radius-large;
-      &.curator {
-        background-color: @curatorColor;
-        color: lighten(@curatorColor, 50%);
-      }
-      &.editor {
-        background-color: @editorColor;
-        color: lighten(@editorColor, 50%);
-      }
-      &.admin {
-        background-color: @adminColor;
-        color: lighten(@adminColor, 50%);
-      }
     }
   }
 
-  .user-attributes {
+  .organization-attributes {
     margin-left: -(@contentPadding);
     padding: 0;
     padding-top: @contentPadding/3;
@@ -80,7 +67,7 @@
     }
   }
 
-  .secondary-user-attributes {
+  .secondary-organization-attributes {
     padding: 0;
     padding-top: @contentPadding/3;
     &.attr-left {}
