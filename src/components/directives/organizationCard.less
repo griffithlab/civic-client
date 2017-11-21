@@ -17,26 +17,22 @@
   .organization-avatar {
     cursor: pointer;
     .avatar-bg {
-      background-color: #CCC;
+      background-color: #FFF;
       border-top-left-radius: @border-radius-large;
+      border-top-right-radius: @border-radius-large;
       overflow: hidden;
       border-width: 2px;
       border-style: solid;
-      &.curator {
-        border-color: @curatorColor;
-      }
-      &.editor {
-        border-color: @editorColor;
-      }
-      &.admin {
-        border-color: @adminColor;
-      }
+      border-color: @curatorColor;
+      height: 160px;
     }
     img {
-      border-top-left-radius: @border-radius-large;
-      border-top-right-radius: @border-radius-large;
-      width: 100%;
-    }
+      max-width: 128px;
+      max-height: 128px;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);}
     .card-name {
       display: block;
       padding: @contentPadding/4 @contentPadding/2;
