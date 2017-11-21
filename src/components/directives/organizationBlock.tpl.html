@@ -1,18 +1,14 @@
-<span class="userBlock">
+<span class="organizationBlock">
     <button
       type="button"
-      class="btn btn-xs btn-user"
-      ui-sref="users.profile({userId: user.id})">
-      <div ng-switch="user.username === 'Admin'">
-        <div ng-switch-when="false">
+      class="btn btn-xs btn-organization"
+      ui-sref="organizations.summary({organizationId: organization.id})">
           <span class="avatar">
-            <img ng-src="{{user.avatars.x14}}" width="14" height="14"/>
+            <img ng-src="{{organization.profile_image.x14}}" width="14" height="14"/>
           </span>
-          <span class="username">{{user.display_name}}</span>
-        </div>
-        <div ng-switch-when="true">
-          <span class="username" style="margin-left: 5px;">Admin</span>
-        </div>
+          <span class="organization-name">
+            {{organization.name}}
+          </span>
       </div>
     </button>
 </span>

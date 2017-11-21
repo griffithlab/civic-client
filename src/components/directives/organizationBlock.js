@@ -10,7 +10,7 @@
     return /* @ngInject */ {
       restrict: 'E',
       scope: {
-        user: '='
+        organization: '='
       },
       templateUrl: 'components/directives/organizationBlock.tpl.html'
     };
