@@ -29,8 +29,8 @@
     }, true);
 
 
-    vm.userClick = function(id) {
-      $state.go('users.profile', { userId: id});
+    vm.organizationClick = function(id) {
+      $state.go('organizations.summary', { organizationId: id});
     };
 
   }

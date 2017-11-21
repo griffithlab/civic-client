@@ -1,39 +1,38 @@
-<div class="organizationCard"
-     ng-class="vm.organization.role">
-  <div class="row" >
+<div class="organizationCard" ng-class="vm.organization.role">
+  <div class="row">
     <div class="col-xs-12">
       <div class="organization-avatar" ng-click="vm.organizationClick(vm.organization.id)">
         <div class="avatar-bg">
-          <img ng-src="{{vm.organization.profile_image.x128}}" class="img-responsive"/>
+          <img ng-src="{{vm.organization.profile_image.x128}}" class="img-responsive" />
         </div>
-        <span ng-bind="vm.organization.name" class="card-name"></span>
+        <a ng-href="{{vm.organization.url}}" target="_blank"><span ng-bind="vm.organization.name" class="card-name"></span></a>
       </div>
     </div>
   </div>
   <div class="row" ng-if="vm.organization.organization.name != undefined">
-    <div class="col-xs-12" >
+    <div class="col-xs-12">
       <div class="secondary-organization-attributes">
-      <ul>
-        <li class="attr-key" >
-          Organization
-        </li>
-        <li class="attr-value" >
-          <a ui-sref="organizations.summary({organizationId: vm.organization.organization.id})">
+        <ul>
+          <li class="attr-key">
+            Organization
+          </li>
+          <li class="attr-value">
+            <a ui-sref="organizations.summary({organizationId: vm.organization.organization.id})">
             {{vm.organization.organization.name|ifEmpty: '--'}}
           </a>
-        </li>
-      </ul>
+          </li>
+        </ul>
       </div>
     </div>
-
-  <div class="row" ng-if="vm.organization.community_params != undefined">
-    <div class="col-xs-4" >
+  </div>
+  <div class="row" ng-if="vm.organization.community_params !== undefined">
+    <div class="col-xs-4">
       <div class="secondary-organization-attributes attr-left">
         <ul>
-          <li class="attr-key" >
+          <li class="attr-key">
             Actions
           </li>
-          <li class="attr-value" >
+          <li class="attr-value">
             <span ng-bind="vm.organization.community_params.action_count | ifEmpty: '--'"></span>
           </li>
         </ul>
@@ -41,54 +40,27 @@
     </div>
     <div class="col-xs-8" ng-if="vm.organization.community_params.most_recent_action_timestamp !== null">
       <div class="secondary-organization-attributes attr-right">
-      <ul>
-        <li class="attr-key" >
-       Last Action
-        </li>
-        <li class="attr-value" >
-          <span ng-bind="vm.organization.community_params.most_recent_action_timestamp | timeAgo"></span>
-        </li>
-      </ul>
+        <ul>
+          <li class="attr-key">
+            Last Action
+          </li>
+          <li class="attr-value">
+            <span ng-bind="vm.organization.community_params.most_recent_action_timestamp | timeAgo"></span>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-xs-8" ng-if="vm.organization.community_params.most_recent_action_timestamp === null">
       <div class="secondary-organization-attributes attr-right">
-      <ul>
-        <li class="attr-key" >
-      Join Date
-        </li>
-        <li class="attr-value" >
-          <span ng-bind="vm.organization.created_at | timeAgo"></span>
-        </li>
-      </ul>
+        <ul>
+          <li class="attr-key">
+            Join Date
+          </li>
+          <li class="attr-value">
+            <span ng-bind="vm.organization.created_at | timeAgo"></span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="social-media-buttons">
-        <div class="social-icons">
-          <div ng-if="vm.hasSocialProfile" class="social-icons">
-            <span ng-show="vm.organization.twitter_handle.length > 0">
-              <a ng-href="https://twitter.com/{{vm.organization.twitter_handle}}" target="_blanks">
-                <img src="assets/images/social_icons/twitter-ico.png" width="24" height="24"/>
-              </a>
-            </span>
-            <span ng-show="vm.organization.linkedin_profile.length > 0">
-              <a ng-href="https://linkedin.com/in/{{vm.organization.linkedin_profile}}" target="_blank">
-                <img src="assets/images/social_icons/linkedin-ico.png" width="24" height="24"/>
-              </a>
-            </span>
-            <span ng-show="vm.organization.facebook_profile.length > 0">
-              <a ng-href="https://facebook.com/{{vm.organization.facebook_profile}}" target="_blank">
-                <img src="assets/images/social_icons/facebook-ico.png" width="24" height="24"/>
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
 </div>
