@@ -29,6 +29,9 @@
           },
           evidence_items: function($stateParams, Organizations) {
             return Organizations.queryEvidence($stateParams.organizationId);
+          },
+          stats: function($stateParams, Stats) {
+            return Stats.organization($stateParams.organizationId);
           }
         }
       });

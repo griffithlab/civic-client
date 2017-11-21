@@ -4,14 +4,13 @@
     .controller('OrganizationsSummaryController', OrganizationsSummaryController);
 
   // @ngInject
-  function OrganizationsSummaryController($scope, _, Security, organization, evidence_items) {
+  function OrganizationsSummaryController($scope, organization, evidence_items, stats) {
     console.log('OrganizationsSummaryController called.');
-    var vm = $scope.vm = {};
-
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-
-    vm.organization = organization;
-    vm.evidence_items = evidence_items.records;
+    $scope.organization = organization;
+    $scope.evidence_items = evidence_items.records;
+    $scope.stats = stats;
+    // vm.organization = organization;
+    // vm.evidence_items = evidence_items.records;
+    // vm.stats = stats;
   }
 })();

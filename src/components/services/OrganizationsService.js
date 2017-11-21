@@ -8,7 +8,6 @@
   function OrganizationsResource($resource) {
 
     return $resource('/api/organizations', {
-      organizationId: '@organizationId'
     }, {
       query: {
         method: 'GET',
@@ -16,6 +15,8 @@
         cache: true
       },
       get: {
+        url:'/api/organizations/:organizationId',
+        params: {organizationId: '@organizationId'},
         method: 'GET',
         isArray: false,
         cache: true
