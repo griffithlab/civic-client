@@ -122,6 +122,45 @@
         </table>
       </div>
       <div class="well">
+        <div class="group-title">The Genome Aggregation Database</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">Exome Allele Frequency</td>
+              <td class="value">{{variantInfo.gnomad_exome.af.af | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Exome Allele Count</td>
+              <td class="value">{{variantInfo.gnomad_exome.ac.ac | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Exome Allele Number</td>
+              <td class="value">{{variantInfo.gnomad_exome.an.an | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Exome Filter</td>
+              <td class="value">{{variantInfo.gnomad_exome.filter | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Genome Allele Frequency</td>
+              <td class="value">{{variantInfo.gnomad_genome.af.af | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Genome Allele Count</td>
+              <td class="value">{{variantInfo.gnomad_genome.ac.ac | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Genome Allele Number</td>
+              <td class="value">{{variantInfo.gnomad_genome.an.an | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Genome Filter</td>
+              <td class="value">{{variantInfo.gnomad_genome.filter | ifEmpty: '--'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
         <div class="group-title">The Exome Aggregation Consortium</div>
         <table class="table table-compact">
           <tbody>
