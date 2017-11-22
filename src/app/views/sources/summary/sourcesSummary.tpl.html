@@ -48,6 +48,20 @@
                   </a>
                 </td>
               </tr>
+              <tr ng-if="vm.source.clinical_trials.length > 0">
+                <td class="key">Clinical Trial<span
+                    ng-if="vm.source.clinical_trials.length > 1">s</span>:</td>
+                <td class="value">
+                  <span ng-repeat="trial in vm.source.clinical_trials">
+                    {{
+                    $first ? '' : $last ? (
+                    vm.source.clinical_trials.length > 2 ? ', and ' : ' and '
+                    ) : ', '
+                    }}
+                    <a ng-href="{{trial.clinical_trial_url}}" target="_blank">{{trial.nct_id}}</a>
+                  </span>
+                </td>
+              </tr>
               <tr>
                 <td class="key">Journal:</td>
                 <td class="value" ng-bind="vm.source.full_journal_title ? vm.source.full_journal_title : vm.source.journal"></td>
