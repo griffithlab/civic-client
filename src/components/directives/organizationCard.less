@@ -39,7 +39,11 @@
       text-align: center;
     }
   }
-
+  .organization-link {
+    text-align: center;
+    padding-top: @contentPadding/3;
+    padding-bottom: @contentPadding/3;
+  }
   .organization-attributes {
     margin-left: -(@contentPadding);
     padding: 0;
@@ -67,8 +71,6 @@
     padding: 0;
     padding-top: @contentPadding/3;
     padding-bottom: @contentPadding/3;
-    border-bottom-left-radius: @border-radius-large;
-    border-bottom-right-radius: @border-radius-large;
 
     &.attr-left {}
     &.attr-right {
@@ -97,12 +99,19 @@
     }
   }
 
-  .social-media-buttons {
+  .website-link {
     background-color: #DDD;
     text-align: center;
     margin-top: 6px;
     padding: 8px;
     min-height: 40px;
+    border-bottom-left-radius: @border-radius-large;
+    border-bottom-right-radius: @border-radius-large;
+    .url {
+      display: block;
+      padding: @contentPadding/4 @contentPadding/2;
+      text-align: center;
+    }
   }
   // .avatar {
   //   width: 64px;

@@ -52,21 +52,10 @@
 
       fetchOrganizations(vm.count, vm.page, sorting, filters, limit, vm.model.name)
         .then(function(data) {
-          angular.copy(parseOrgs(data.records), vm.organizations);
+          angular.copy(data.result, vm.organizations);
           vm.totalItems = data.total;
         });
     }, 250);
-
-    function parseOrgs(orgs) {
-      return _.map(orgs, function(org) {
-        org.community_params = {
-          action_count: 99999,
-          most_recent_action_timestamp: '2015-12-22T20:19:13.541Z',
-          members: 99999
-        };
-        return org;
-      });
-    }
 
     var fieldClassName = 'col-xs-6 col-sm-4';
     var fieldClassNameShort = 'col-xs-3 col-sm-2';
@@ -156,7 +145,7 @@
         key: 'limit',
         type: 'select',
         className: fieldClassNameShort,
-        defaultValue: 'this_month',
+        defaultValue: 'all_time',
         templateOptions: {
           label: 'Limit To',
           required: false,
