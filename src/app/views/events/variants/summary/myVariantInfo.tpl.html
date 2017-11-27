@@ -110,6 +110,9 @@
               </td>
               <td class="value">
                 {{variantInfo.gnomad_adj_allele_freq | ifEmpty: '--'}}
+                <i class="glyphicon glyphicon-info-sign"
+                  style="color: #aca;"
+                  uib-tooltip-html="'{{variantInfo.gnomad_adj_af_tooltip}}'"></i>
               </td>
             </tr>
           </tbody>
@@ -123,5 +126,3 @@
     </tr>
   </table>
 </div>
-
-
