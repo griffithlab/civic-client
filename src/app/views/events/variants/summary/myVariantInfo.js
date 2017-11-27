@@ -44,6 +44,15 @@
       }
     }
 
+    // calculate gnomAD allele frequency
+    if(!_.isUndefined(ctrl.variantInfo.gnomad_exome) && _.isUndefined(ctrl.variantInfo.gnomad_genome)) {
+      ctrl.variantInfo.gnomad_adj_allele_freq = _.round(ctrl.variantInfo.gnomad_exome.af.af, 5);
+    } else if(!_.isUndefined(ctrl.variantInfo.gnomad_genome) && _.isUndefined(ctrl.variantInfo.gnomad_exome)) {
+      ctrl.variantInfo.gnomad_adj_allele_freq = _.round(ctrl.variantInfo.gnomad_genome.af.af, 5);
+    } else if(!_.isUndefined(ctrl.variantInfo.gnomad_exome) && !_.isUndefined(ctrl.variantInfo.gnomad_genome)) {
+      ctrl.variantInfo.gnomad_adj_allele_freq = _.round((ctrl.variantInfo.gnomad_exome.ac.ac + ctrl.variantInfo.gnomad_genome.ac.ac) / (ctrl.variantInfo.gnomad_exome.an.an + ctrl.variantInfo.gnomad_genome.an.an), 5);
+    }
+
     // replace ampersands with commas in SnpEff Effect strings
     if(!_.isUndefined(ctrl.variantInfo.snpeff) && !_.isUndefined(ctrl.variantInfo.snpeff.ann[0])) {
       if(!_.isUndefined(ctrl.variantInfo.snpeff.ann[0])) {
