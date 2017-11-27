@@ -29,8 +29,8 @@
                   <span ng-bind="vm.source.publication_date_string"></span>
                   &nbsp;
                   <span class="label label-warning"
-                        ng-if="vm.source.is_review"
-                  uib-tooltip="This is a review article.">review</span>
+                    ng-if="vm.source.is_review"
+                    uib-tooltip="This is a review article.">review</span>
                 </td>
               </tr>
               <tr>
@@ -41,26 +41,29 @@
                 <td class="key">Pubmed ID:</td>
                 <td class="value">
                   <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{vm.source.pubmed_id}}"
-                     class="btn btn-xs button-pubmed"
-                     target="_blank">
+                    class="btn btn-xs button-new-window"
+                    target="_blank">
                     <span class="glyphicon glyphicon-new-window"></span>
                     <span ng-bind="vm.source.pubmed_id"></span>
                   </a>
                 </td>
               </tr>
               <tr ng-if="vm.source.clinical_trials.length > 0">
-                <td class="key">Clinical Trial<span
-                    ng-if="vm.source.clinical_trials.length > 1">s</span>:</td>
+                <td class="key">Clinical Trial<span ng-if="vm.source.clinical_trials.length > 1">s</span>:</td>
                 <td class="value">
                   <span ng-repeat="trial in vm.source.clinical_trials">
                     {{
                     $first ? '' : $last ? (
-                    vm.source.clinical_trials.length > 2 ? ', and ' : ' and '
-                    ) : ', '
+                    evidence.source.clinical_trials.length > 2 ? ' and ' : ' and '
+                    ) : ' '
                     }}
-                    <a ng-href="{{trial.clinical_trial_url}}" target="_blank">{{trial.nct_id}}</a>
+                    <a ng-href="{{trial.clinical_trial_url}}"
+                      class="btn btn-xs button-new-window" style="margin-bottom: 4px;"
+                      target="_blank">
+                      <span class="glyphicon glyphicon-new-window"></span>
+                      <span ng-bind="trial.nct_id"></span>
+                    </a>
                   </span>
-                </td>
               </tr>
               <tr>
                 <td class="key">Journal:</td>
@@ -119,8 +122,8 @@
           <ul class="comments">
             <li ng-repeat="comment in vm.comments">
               <entity-comment
-                  comment-data="comment"
-                  entity-model="vm.source">
+                comment-data="comment"
+                entity-model="vm.source">
               </entity-comment>
             </li>
           </ul>
