@@ -98,7 +98,7 @@
                 SnpEff&nbsp;Impact
               </td>
               <td class="key">
-                ExAC&nbsp;Adj.&nbsp;AF
+                gnomAD&nbsp;Adj.&nbsp;AF
               </td>
             </tr>
             <tr>
@@ -109,7 +109,7 @@
                 {{variantInfo.snpeff.ann[0].putative_impact | ifEmpty: '--'}}
               </td>
               <td class="value">
-                {{variantInfo.exac.adj_allele_freq | ifEmpty: '--'}}
+                {{variantInfo.gnomad_adj_allele_freq | ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
