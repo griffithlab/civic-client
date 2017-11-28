@@ -183,7 +183,7 @@
       updateData();
     };
 
-    function fetchOrganizations(count, page, sorting, filters, limit, name) {
+    function fetchOrganizations(count, page, sorting, filters, limit) {
       var request;
 
       request = {
