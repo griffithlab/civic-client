@@ -1,3 +1,55 @@
-.organizationsSummary {
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
 
+.organizationsSummary {
+  .users-rows .userCard {
+    margin-bottom: @contentPadding;
+  }
+  .org-image {
+    min-height: 160px;
+  }
+  .description-block {
+    margin-bottom: 1em;
+  }
+
+  .info-block {
+    padding: @contentPadding;
+    border-radius: @border-radius-large;
+    background-color: #EFEFEF;
+    margin-bottom: @contentPadding;
+  }
+
+  .table-info {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+
+    .key {
+      font-weight: bold;
+      width: 50%;
+      white-space: nowrap;
+      text-align: right;
+      padding-right: .5em;
+    }
+
+    .value {
+      width: 50%;
+    }
+
+    caption, tbody, tfoot, thead, tr, th, td {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+    }
+  }
 }

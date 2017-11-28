@@ -1,10 +1,23 @@
 <div class="CommunityView">
   <div class="row">
-    <div class="gradient-bg">
-      <div class="col-xs-12 title stripes-bg">
-        <h3>
-          <span class="entity-action">COMMUNITY</span>
-        </h3>
+    <div class="subTabs col-xs-12">
+      <div class="row">
+        <div class="col-xs-3 name">
+          <h3>Community</h3>
+        </div>
+
+        <div class="col-xs-9 tabs">
+          <ul class="nav nav-tabs" style="float: right;">
+            <li ui-sref-active="active">
+              <a ui-sref="community.main">Individuals</a>
+            </li>
+
+            <li ui-sref-active="active">
+              <a ui-sref="community.organizations">Organizations</a>
+            </li>
+
+          </ul>
+        </div>
       </div>
     </div>
   </div>

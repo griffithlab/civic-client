@@ -7,27 +7,27 @@
   // @ngInject
   function OrganizationsResource($resource) {
 
-    return $resource('/api/organizations',
-                     {},
-                     {
-                       query: {
-                         method: 'GET',
-                         isArray: true,
-                         cache: true
-                       },
-                       get: {
-                         method: 'GET',
-                         url: '/api/organizations/:organizationId',
-                         isArray: false,
-                         cache: true
-                       },
-                       queryEvidence: {
-                         method: 'GET',
-                         url: '/api/organizations/:organizationId/evidence_items',
-                         isArray: false,
-                         cache: false
-                       }
-                     });
+    return $resource('/api/organizations', {
+    }, {
+      query: {
+        method: 'GET',
+        isArray: false,
+        cache: true
+      },
+      get: {
+        url:'/api/organizations/:organizationId',
+        params: {organizationId: '@organizationId'},
+        method: 'GET',
+        isArray: false,
+        cache: true
+      },
+      queryEvidence: {
+        method: 'GET',
+        url: '/api/organizations/:organizationId/evidence_items',
+        isArray: false,
+        cache: false
+      }
+    });
   }
 
   // @ngInject
@@ -48,16 +48,18 @@
       queryEvidence: queryEvidence
     };
 
-    function query() {
-      return OrganizationsResource.query().$promise
+    function query(reqObj) {
+      return OrganizationsResource.query(reqObj).$promise
         .then(function(response) {
-          angular.copy(response, collection);
+          angular.copy(response.records, collection);
           return response.$promise;
         });
     }
 
     function get(organizationId) {
-      return OrganizationsResource.get({organizationId: organizationId}).$promise
+      return OrganizationsResource.get({
+          organizationId: organizationId
+        }).$promise
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
@@ -65,8 +67,7 @@
     }
 
     function queryEvidence(organizationId) {
-      return OrganizationsResource.queryEvidence(
-        {
+      return OrganizationsResource.queryEvidence({
           organizationId: organizationId,
           count: 999
         }).$promise

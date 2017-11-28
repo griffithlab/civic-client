@@ -1,0 +1,75 @@
+<div class="organizationCard" ng-class="vm.organization.role">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="organization-avatar" ng-click="vm.organizationClick(vm.organization.id)">
+        <div class="avatar-bg">
+          <img ng-src="{{vm.organization.profile_image.x128}}" class="img-responsive" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-xs-12 organization-link" >
+        <a ui-sref="organizations.summary({organizationId: vm.organization.id})"><span ng-bind="vm.organization.name" class="card-name"></span></a>
+    </div>
+  </div>
+  <div class="row" ng-if="vm.organization.organization.name != undefined">
+    <div class="col-xs-12">
+      <div class="secondary-organization-attributes">
+        <ul>
+          <li class="attr-key">
+            Organization
+          </li>
+          <li class="attr-value">
+            <a ui-sref="organizations.summary({organizationId: vm.organization.organization.id})">
+            {{vm.organization.organization.name|ifEmpty: '--'}}
+          </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="vm.organization.community_params !== undefined">
+    <div class="col-xs-3">
+      <div class="secondary-organization-attributes attr-left">
+        <ul>
+          <li class="attr-key">
+            Actions
+          </li>
+          <li class="attr-value">
+            <span ng-bind="vm.organization.community_params.action_count | number:0 | ifEmpty: '--'"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xs-5" ng-if="vm.organization.community_params.most_recent_action_timestamp !== null">
+      <div class="secondary-organization-attributes attr-right">
+        <ul>
+          <li class="attr-key">
+            Last Action
+          </li>
+          <li class="attr-value">
+            <span ng-bind="vm.organization.community_params.most_recent_action_timestamp | timeAgo"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xs-4" ng-if="vm.organization.community_params.member_count != null">
+      <div class="secondary-organization-attributes attr-right">
+        <ul>
+          <li class="attr-key">Members</li>
+          <li class="attr-value">
+            <span ng-bind="vm.organization.community_params.member_count"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-xs-12" >
+      <div class="website-link" >
+        <a ng-href="{{vm.organization.url}}" target="_blank"><span ng-bind="vm.organization.url" class="url"></span></a>
+      </div>
+    </div>
+  </div>
+</div>

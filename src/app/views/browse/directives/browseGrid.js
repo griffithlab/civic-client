@@ -40,7 +40,7 @@
 
     ctrl.filters = [];
     ctrl.sorting = [{
-      field: 'evidence_item_count',
+      field: 'civic_actionability_score',
       direction: 'desc'
     }];
 
@@ -78,7 +78,7 @@
       'variants': [
         {
           name: 'variant',
-          width: '25%',
+          width: '20%',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -110,7 +110,7 @@
         {
           name: 'drugs',
           displayName: 'Drugs',
-          width: '25%',
+          width: '20%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -119,12 +119,25 @@
           cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html'
         },
         {
-          name: 'evidence_item_count',
+          name: 'civic_actionability_score',
+          displayName: 'Score',
+          headerTooltip: 'CIViC Actionability Score derived from variant\'s Evidence Item Levels and Ratings',
           width: '10%',
-          displayName: 'Evidence',
+          type: 'number',
+          headerCellTemplate: 'app/views/browse/directives/browseGridTooltipHeader.tpl.html',
           sort: {
             direction: uiGridConstants.DESC
           },
+          enableFiltering: false,
+          allowCellFocus: false
+        },
+        {
+          name: 'evidence_item_count',
+          displayName: 'Evidence',
+          headerTooltip: 'Total Evidence Item count',
+          width: '10%',
+          type: 'number',
+          headerCellTemplate: 'app/views/browse/directives/browseGridTooltipHeader.tpl.html',
           enableFiltering: false,
           allowCellFocus: false,
           filter: {

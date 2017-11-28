@@ -106,11 +106,29 @@
           <td class="name">Pubmed ID:</td>
           <td class="value">
             <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{evidence.source.pubmed_id}}"
-               class="btn btn-xs button-pubmed"
+               class="btn btn-xs button-new-window"
                target="_blank">
               <span class="glyphicon glyphicon-new-window"></span>
               <span ng-bind="evidence.source.pubmed_id"></span>
             </a>
+          </td>
+        </tr>
+        <tr ng-if="evidence.source.clinical_trials.length > 0">
+          <td class="name">Clinical Trial<span ng-if="evidence.source.clinical_trials.length > 1">s</span>:</td>
+          <td class="value">
+            <span ng-repeat="trial in evidence.source.clinical_trials">
+              {{
+              $first ? '' : $last ? (
+              evidence.source.clinical_trials.length > 2 ? ' and ' : ' and '
+              ) : ' '
+              }}
+            <a ng-href="{{trial.clinical_trial_url}}"
+               class="btn btn-xs button-new-window" style="margin-bottom: 4px;"
+               target="_blank">
+              <span class="glyphicon glyphicon-new-window"></span>
+              <span ng-bind="trial.nct_id"></span>
+            </a>
+            </span>
           </td>
         </tr>
         <tr>

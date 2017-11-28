@@ -41,7 +41,7 @@
     vm.leaderboards = {};
     vm.users = [];
 
-    Community.getLeaderboards()
+    Community.getOrganizationLeaderboards()
       .then(function(response) {
         angular.copy(response, vm.leaderboards);
       });

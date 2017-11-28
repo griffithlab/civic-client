@@ -4,14 +4,32 @@
     .controller('OrganizationsSummaryController', OrganizationsSummaryController);
 
   // @ngInject
-  function OrganizationsSummaryController($scope, _, Security, organization, evidence_items) {
+  function OrganizationsSummaryController($scope, Search, organization, stats) {
     console.log('OrganizationsSummaryController called.');
-    var vm = $scope.vm = {};
+    $scope.organization = organization;
+    $scope.stats = stats;
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
+    var query = {
+      'entity': 'evidence_items',
+      'operator': 'AND',
+      'save': false,
+      'queries': [{
+        'field': 'organization_id',
+        'condition': {
+          'name': 'is_equal_to',
+          'parameters': [$scope.organization.id]
+        }
+      }]
+    };
 
-    vm.organization = organization;
-    vm.evidence_items = evidence_items.records;
+    Search.post(query).then(
+      function(response) {
+        $scope.evidence = response.results;
+      },
+      function() {
+        console.log('User has no events events associated with their profile.');
+        $scope.evidence = [];
+      });
+
   }
 })();

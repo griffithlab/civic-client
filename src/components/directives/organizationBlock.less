@@ -1,0 +1,62 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.organizationBlock {
+  .btn-organization {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #EFEFEF;
+    padding-right: 10px;
+    padding-left: 2px;
+    margin-left: 3px;
+    margin-top: -2px;
+
+    border: none;
+    position: relative;
+    line-height: 20px;
+
+    .avatar {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      display: inline-block;
+      border-radius: 3px;
+      overflow: hidden;
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  .btn-organization:focus, .btn-organization:active:focus, .btn-organization.active:focus {
+    outline: 0 none;
+  }
+
+  .btn-organization {
+    background: @civicLightBlue;
+    color: #ffffff;
+  }
+
+  .btn-organization:hover, .btn-organization:focus, .btn-organization:active, .btn-organization.active, .open > .dropdown-toggle.btn-primary {
+    background: darken(@civicLightBlue, 10%);
+  }
+
+  .btn-organization:active, .btn-organization.active {
+    background: #007299;
+    box-shadow: none;
+  }
+
+  .organization-name {
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 20px;
+  }
+}

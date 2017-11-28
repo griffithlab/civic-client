@@ -6,20 +6,16 @@
 
   // @ngInject
   function CommunityResource($resource) {
-    //var cache = $cacheFactory.get('$http');
 
-    //var cacheInterceptor = function(response) {
-    //  console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(' '));
-    //  cache.remove(response.config.url);
-    //  return response.$promise;
-    //};
-
-
-    return $resource('/api/community',
-      {},
-      {
-        leaderboards: {
-          url: '/api/community/leaderboards/',
+    return $resource('/api/community', {}, {
+        organizationLeaderboards: {
+          url: '/api/community/leaderboards/organizations',
+          method: 'GET',
+          isArray: false,
+          cache: false
+        },
+        userLeaderboards: {
+          url: '/api/community/leaderboards/users',
           method: 'GET',
           isArray: false,
           cache: false
@@ -30,19 +26,30 @@
 
   // @ngInject
   function CommunityService(CommunityResource) {
-    var leaderboards = { };
+    var userLeaderboards = {};
+    var organizationLeaderboards = {};
 
     return {
       data: {
-        leaderboards: leaderboards
+        userLeaderboards: userLeaderboards,
+        organizationLeaderboards: organizationLeaderboards
       },
-      getLeaderboards: getLeaderboards
+      getUserLeaderboards: getUserLeaderboards,
+      getOrganizationLeaderboards: getOrganizationLeaderboards
     };
 
-    function getLeaderboards() {
-      return CommunityResource.leaderboards().$promise
+    function getUserLeaderboards() {
+      return CommunityResource.userLeaderboards().$promise
         .then(function(response) {
-          angular.copy(response, leaderboards);
+          angular.copy(response, userLeaderboards);
+          return response.$promise;
+        });
+    }
+
+    function getOrganizationLeaderboards() {
+      return CommunityResource.organizationLeaderboards().$promise
+        .then(function(response) {
+          angular.copy(response, organizationLeaderboards);
           return response.$promise;
         });
     }

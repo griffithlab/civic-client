@@ -8,12 +8,104 @@
       </div>
     </div>
   </div>
-  <div class="row" >
-    <div class="col-xs-12" >
-      <organization-summary
-        organization="vm.organization"
-        evidence="vm.evidence_items">
-      </organization-summary>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-6">
+              <h3 style="margin: 0;padding: 0;">{{organization.name}}</h3>
+            </div>
+            <div class="col-xs-6 text-right">
+              <a class="btn btn-primary" target="_blank" href="{{organization.url}}" ng-bind="organization.url"></a>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="row description-block">
+            <div class="col-xs-2 org-image" ng-if="organization.profile_image.hasOwnProperty('x256') === true" >
+              <img ng-src="{{organization.profile_image.x256}}" class="img-responsive" width="256" height="256"/>
+            </div>
+            <div ng-class="{'col-xs-12': organization.profile_image.hasOwnProperty('x256') === false, 'col-xs-10': organization.profile_image.hasOwnProperty('x256') === true}">
+              <p ng-bind="organization.description"></p>
+            </div>
+          </div>
+          <h4>Members</h4>
+          <div class="row auto-clear users-rows">
+            <user-card user="user"
+                       class="col-xs-6 col-sm-4 col-lg-3"
+                       ng-repeat="user in organization.members|orderBy:'id'">
+            </user-card>
+          </div>
+          <div class="row" >
+            <div class="col-xs-12" >
+              <h4>Organization Statistics</h4>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-xs-12" >
+              <div class="info-block" >
+                <div class="row">
+                  <div class="col-xs-6">
+                    <table class="table-info">
+                      <tr>
+                        <td class="key">Comments:</td>
+                        <td class="value">{{stats.comments}}</td>
+                      </tr>
+                      <tr>
+                        <td class="key">Suggested Revisions:</td>
+                        <td class="value">{{stats.suggested_changes}}</td>
+                      </tr>
+                      <tr>
+                        <td class="key">Applied Revisions:</td>
+                        <td class="value">{{stats.applied_changes}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-xs-6" >
+                    <table class="table-info">
+                      <tr>
+                        <td class="key">Submitted Evidence:</td>
+                        <td class="value">{{stats.submitted_evidence_items}}</td>
+                      </tr>
+                      <tr>
+                        <td class="key">Accepted Evidence:</td>
+                        <td class="value">{{stats.accepted_evidence_items}}</td>
+                      </tr>
+                      <tr>
+                        <td class="key">Suggested Sources:</td>
+                        <td class="value">{{stats.suggested_sources}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-xs-12" >
+              <evidence-grid
+                evidence="evidence"
+                show-gene-col="true"
+                show-variant-col="true"
+                rows="10"
+                context="'profile'"
+                rounded="true">
+              </evidence-grid>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-xs-12" >
+              <h4>Organization Activity</h4>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-xs-12" >
+              <activity-grid entity="'organization'" id="organization.id"></activity-grid>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
