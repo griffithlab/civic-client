@@ -1168,7 +1168,7 @@
                   { value: 'evidence_item_count', name: 'Evidence Items' },
                   { value: 'gene', name: 'Gene' },
                   { value: 'name', name: 'Name' },
-                  { value: 'civic_actionability_score', name: 'CIViC Score' },
+                  { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
                   { value: 'reference_bases', name: 'Reference Base(s)' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
