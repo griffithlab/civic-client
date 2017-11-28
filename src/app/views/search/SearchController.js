@@ -1168,6 +1168,7 @@
                   { value: 'evidence_item_count', name: 'Evidence Items' },
                   { value: 'gene', name: 'Gene' },
                   { value: 'name', name: 'Name' },
+                  { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
                   { value: 'reference_bases', name: 'Reference Base(s)' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
@@ -1186,6 +1187,34 @@
             }
           ],
           conditionFields: {
+            civic_actionability_score: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_above'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_above', name: 'is above'},
+                    {value: 'is_below', name: 'is below'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
             name: [
               {
                 key: 'name',
