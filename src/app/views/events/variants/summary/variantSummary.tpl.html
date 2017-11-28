@@ -116,7 +116,7 @@
           <div class="civic-variant-score">
             <p>
               <strong>CIViC Variant Score: </strong><br/>
-              {{variant.civic_actionability_score}}
+              {{variant.civic_actionability_score | ifEmpty: '--' }}
             </p>
           </div>
         </div>
