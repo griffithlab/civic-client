@@ -29,6 +29,10 @@
           method: 'GET',
           isArray: false,
           cache: false
+        },
+        add: {
+          method: 'POST',
+          cache: false
         }
       }
     );
@@ -45,7 +49,8 @@
         collection: collection
       },
       query: query,
-      get: get
+      get: get,
+      add: add
     };
 
     function query() {
@@ -55,10 +60,19 @@
           return response.$promise;
         });
     }
+
     function get(id) {
       return AssertionsResource.get({assertionId: id}).$promise
         .then(function(response) {
           angular.copy(response, item);
+          return response.$promise;
+        });
+    }
+
+    function add(reqObj) {
+      return AssertionsResource.add(reqObj).$promise
+        .then(function(response) {
+          console.log('Assertion submitted!');
           return response.$promise;
         });
     }

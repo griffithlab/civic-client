@@ -22,10 +22,25 @@
       </div>
       <div ng-if="vm.isAuthenticated()"
            ng-class="{'col-xs-3': vm.isAuthenticated(), 'col-xs-4': !vm.isAuthenticated()}">
-        <a type="button"
-           class="btn btn-default btn-sm btn-block btn-subhead-default"
-           ng-disabled="!vm.isAuthenticated()"
-           ui-sref="add.evidence.basic">Add</a>
+        <span uib-dropdown>
+          <a href type="button"
+            class="btn btn-default btn-sm btn-block btn-subhead-default"
+            id="add-dropdown"
+            uib-dropdown-toggle>
+            Add&nbsp;&nbsp;<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu" uib-dropdown-menu aria-labelledby="add-dropdown">
+            <li role="menuitem">
+              <a ui-sref="add.evidence.basic">Add Evidence Item</a>
+            </li>
+            <li role="menuitem">
+              <a ui-sref="add.assertion">Add Assertion</a>
+            </li>
+            <li role="menuitem">
+              <a ui-sref="suggest.source">Add Source Suggestion</a>
+            </li>
+          </ul>
+        </span>
       </div>
     </div>
   </div>

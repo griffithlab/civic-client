@@ -1,0 +1,97 @@
+<div class="addAssertion">
+  <div class="row">
+    <div class="gradient-bg">
+      <div class="col-xs-12 title stripes-bg">
+        <h3>
+          <span class="entity-action">ADD</span>
+          <span ng-bind="vm.type" class="entity-type">ASSERTION</span>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSTRUCTIONS -->
+  <div class="row" ng-if="vm.showInstructions">
+    <div class="col-xs-12">
+      <div class="add-instructions">
+        <p>To add a Assertion, please complete the following form, then click the 'Add Assertion' button.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MESSAGES -->
+  <div class="row messages">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formMessages" class="add-messages">
+        <div ng-message="submitSuccess"><div class="alert alert-success">
+          <strong class="status">Success</strong> - <span class="message">Your new evidence item was successfully submitted.</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ERRORS -->
+  <div class="row errors">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formErrors" class="add-errors">
+        <div ng-message="500"><div class="alert alert-danger">
+          <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
+        </div></div>
+        <div ng-message="401"><div class="alert alert-danger">
+          <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
+        </div></div>
+        <div ng-message="403"><div class="alert alert-danger">
+          <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
+        </div></div>
+        <div ng-message="409"><div class="alert alert-danger">
+          <strong class="status">409 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <form class="form-horizontal" ng-if="vm.showForm">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <formly-form
+          options="vm.options"
+          model="vm.assertion"
+          fields="vm.assertionFields">
+        </formly-form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-5 col-xs-offset-2">
+        <div class="buttons">
+          <div class="pull-left">
+            <cancel-button></cancel-button>
+          </div>
+          <div class="pull-right">
+            <button type="submit" class="btn btn-default" ng-click="vm.add(vm.assertion, vm.options)">Add Assertion</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="successMessage" ng-if="vm.showSuccessMessage">
+    <div class="col-xs-12 jumbotron">
+      <h1>Thank you.</h1>
+      <p>Your new Assertion has been added.</p>
+      <p>
+        <a ng-href="/events/genes/{{vm.newGeneId}}/summary/assertions/{{vm.newGroupId}}/summary"
+           class="btn btn-small btn-default">View it here</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>Assertion</h4>
+      <pre ng-bind="vm.assertion | json"></pre>
+    </div>
+    <div class="col-xs-6">
+      <h4>vm.options</h4>
+      <pre ng-bind="vm.options | json"></pre>
+    </div>
+  </div>
+</div>

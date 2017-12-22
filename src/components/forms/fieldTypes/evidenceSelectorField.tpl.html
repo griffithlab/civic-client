@@ -1,0 +1,20 @@
+<div>
+  <label for="{{::id}}" class="col-sm-2 control-label">
+    <span ng-if="to.required" style="color:#999;">*&nbsp;</span>
+    {{to.label}}
+  </label>
+  <div class="col-sm-10" >
+    <evidence-selector
+      mode="'browse'"
+      page="1"
+      items="model.evidence_items"></evidence-selector>
+  </div>
+  <div class="col-sm-offset-2 col-sm-10">
+    <p>Included Items:</p>
+    <ul>
+      <li ng-repeat="item in model.evidence_items">
+        <a ng-click="ctrl.removeItem(item)">{{item.id}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
