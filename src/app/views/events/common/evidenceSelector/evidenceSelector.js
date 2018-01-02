@@ -62,14 +62,16 @@
     });
 
     ctrl.addItem = function(item) {
-      console.log('evidenceSelector addItem:');
-      console.log(item);
       $scope.items.push(item);
     };
 
     ctrl.removeItem = function(item) {
-      console.log('evidenceSelector removeItem:');
-      console.log(item);
+      $scope.items = _.reject($scope.items, {id: item.id});
+    };
+
+    ctrl.isInItems = function(id){
+      console.log('checking for item ID: ' + id);
+      return _.some($scope.items, { 'id': id});
     };
 
     ctrl.gridOptions = {
