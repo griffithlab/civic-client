@@ -33,12 +33,13 @@
 
   // @ngInject
   function EvidenceSelectorController($scope,
-                                $state,
-                                $window,
-                                $location,
-                                uiGridConstants,
-                                Datatables,
-                                _) {
+                                      $state,
+                                      $window,
+                                      $location,
+                                      uiGridConstants,
+                                      Datatables,
+                                      Evidence,
+                                      _) {
     var ctrl = $scope.ctrl = {};
 
     var pageCount = 5;
@@ -61,8 +62,10 @@
       ctrl.totalPages = Math.ceil(ctrl.totalItems / pageCount);
     });
 
-    ctrl.addItem = function(item) {
-      $scope.items.push(item);
+    ctrl.addItem = function(rowItem) {
+      Evidence.get(rowItem.id).then(function(item) {
+        $scope.items.push(item);
+      });
     };
 
     ctrl.removeItem = function(item) {

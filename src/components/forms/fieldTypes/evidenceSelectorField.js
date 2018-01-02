@@ -23,8 +23,7 @@
         };
 
         $scope.removeItem = function(item) {
-          console.log('item removed.');
-          console.log(item);
+          $scope.model.evidence_items = _.reject($scope.model.evidence_items, {id: item.id});
         };
       }
     });

@@ -13,7 +13,8 @@
     <p>Included Items:</p>
     <ul>
       <li ng-repeat="item in model.evidence_items">
-        <a ng-click="ctrl.removeItem(item)">{{item.id}}</a>
+        <evidence-selector-item item="item" remove-fn="removeItem"></evidence-selector-item>
+        <!-- <a ng-click="ctrl.removeItem(item)">{{item.id}}</a> -->
       </li>
     </ul>
   </div>
