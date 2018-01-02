@@ -78,7 +78,7 @@
         } else {
           item.drugsStr = 'N/A';
         }
-        $scope.items.push(item);
+        $scope.items.unshift(item);
       });
     };
 

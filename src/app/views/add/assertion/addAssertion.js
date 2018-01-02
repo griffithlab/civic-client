@@ -524,8 +524,10 @@
       }
     ];
 
-    vm.add = function(newAssertion) {
+    vm.add = function(assertion) {
+      var newAssertion = _.cloneDeep(assertion);
       newAssertion.drugs = _.without(newAssertion.drugs, '');
+      newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
       Assertions.add(newAssertion)
         .then(function(response) {
           console.log('new assertion created!');
@@ -533,7 +535,7 @@
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
-          vm.newAssertionId = response.id; // grab gene id from first variant in group
+          vm.newAssertionId = response.id;
         })
         .catch(function(error) {
           console.error('assertion submit error!');
