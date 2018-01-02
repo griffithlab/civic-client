@@ -1,30 +1,30 @@
-<div class="evidenceSelectorItem" >
-  <div class="row">
-    <div class="col-xs-10 explanation">
-      <p ng-bind-html="ctrl.item.description | linky"></p>
+<div class="evidenceSelectorItem">
+  <div class="row header">
+    <div class="col-xs-10 title" >
+      <h4>EID{{ ctrl.item.id }}</h4>
     </div>
-    <div class="col-xs-2" >
-      <button ng-click="ctrl.removeItem(ctrl.item)"
-        class="btn btn-xs btn-cell-remove">
+    <div class="col-xs-2 actions">
+      <button ng-click="ctrl.removeItem(ctrl.item)" class="btn btn-xs btn-cell-remove">
         <i class="glyphicon glyphicon-minus"></i>
       </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 explanation">
+      <p ng-bind-html="ctrl.item.description | linky"></p>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6 details">
       <table class="table table-condensed summary-details">
         <colgroup>
-          <col width="40%"/>
-          <col width="60%"/>
+          <col width="40%" />
+          <col width="60%" />
         </colgroup>
         <tr>
           <td class="name" style="line-height: 2em;">Evidence Level:</td>
           <td class="value">
-            <span class="levelBadge"
-              ng-class="{'levelA': ctrl.item.evidence_level === 'A', 'levelB': ctrl.item.evidence_level === 'B','levelC': ctrl.item.evidence_level === 'C', 'levelD': ctrl.item.evidence_level === 'D', 'levelE': ctrl.item.evidence_level === 'E' }"
-              uib-tooltip="{{tipText.evidence_level[ctrl.item.evidence_level]}}"
-              tooltip-placement="right"
-              class="help-tooltip">
+            <span class="levelBadge" ng-class="{'levelA': ctrl.item.evidence_level === 'A', 'levelB': ctrl.item.evidence_level === 'B','levelC': ctrl.item.evidence_level === 'C', 'levelD': ctrl.item.evidence_level === 'D', 'levelE': ctrl.item.evidence_level === 'E' }" uib-tooltip="{{tipText.evidence_level[ctrl.item.evidence_level]}}" tooltip-placement="right" class="help-tooltip">
               {{ ctrl.item.evidence_level_string }}
             </span>
           </td>
@@ -32,20 +32,14 @@
         <tr>
           <td class="name">Evidence Type:</td>
           <td class="value">
-            <span ng-bind="ctrl.item.evidence_type"
-              uib-tooltip="{{tipText.evidence_type[ctrl.item.evidence_type]}}"
-              tooltip-placement="right"
-              class="help-tooltip">
+            <span ng-bind="ctrl.item.evidence_type" uib-tooltip="{{tipText.evidence_type[ctrl.item.evidence_type]}}" tooltip-placement="right" class="help-tooltip">
               evidence type</span>
           </td>
         </tr>
         <tr>
           <td class="name">Evidence Direction:</td>
           <td class="value">
-            <span ng-bind="ctrl.item.evidence_direction"
-              uib-tooltip="{{tipText.evidence_direction[ctrl.item.evidence_type][ctrl.item.evidence_direction]}}"
-              tooltip-placement="right"
-              class="help-tooltip">
+            <span ng-bind="ctrl.item.evidence_direction" uib-tooltip="{{tipText.evidence_direction[ctrl.item.evidence_type][ctrl.item.evidence_direction]}}" tooltip-placement="right" class="help-tooltip">
               ctrl.item.evidence_direction
             </span>
           </td>
@@ -54,11 +48,7 @@
         <tr>
           <td class="name">Clinical Significance:</td>
           <td class="value">
-            <span ng-bind="ctrl.item.clinical_significance"
-              uib-tooltip="{{tipText.clinical_significance[ctrl.item.evidence_type][ctrl.item.clinical_significance]}}"
-              tooltip-placement="right"
-              class="help-tooltip"
-              class="help-tooltip">
+            <span ng-bind="ctrl.item.clinical_significance" uib-tooltip="{{tipText.clinical_significance[ctrl.item.evidence_type][ctrl.item.clinical_significance]}}" tooltip-placement="right" class="help-tooltip" class="help-tooltip">
               ctrl.item.clinical_significance
             </span>
           </td>
@@ -67,10 +57,7 @@
         <tr>
           <td class="name">Variant Origin:</td>
           <td class="value">
-            <span ng-bind="ctrl.item.variant_origin"
-              uib-tooltip="{{tipText.variant_origin[ctrl.item.variant_origin]}}"
-              tooltip-placement="right"
-              class="help-tooltip">
+            <span ng-bind="ctrl.item.variant_origin" uib-tooltip="{{tipText.variant_origin[ctrl.item.variant_origin]}}" tooltip-placement="right" class="help-tooltip">
               ctrl.item.variant_origin
             </span>
           </td>
@@ -80,8 +67,8 @@
     <div class="col-xs-12 col-md-6 details">
       <table class="table table-condensed summary-details">
         <colgroup>
-          <col width="40%"/>
-          <col width="60%"/>
+          <col width="40%" />
+          <col width="60%" />
         </colgroup>
 
         <tr>
@@ -111,9 +98,7 @@
         <tr>
           <td class="name">Pubmed ID:</td>
           <td class="value">
-            <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{ctrl.item.source.pubmed_id}}"
-              class="btn btn-xs button-new-window"
-              target="_blank">
+            <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{ctrl.item.source.pubmed_id}}" class="btn btn-xs button-new-window" target="_blank">
               <span class="glyphicon glyphicon-new-window"></span>
               <span ng-bind="ctrl.item.source.pubmed_id"></span>
             </a>
@@ -132,18 +117,15 @@
                 class="btn btn-xs button-new-window" style="margin-bottom: 4px;"
                 target="_blank">
                 <span class="glyphicon glyphicon-new-window"></span>
-                <span ng-bind="trial.nct_id"></span>
-              </a>
+            <span ng-bind="trial.nct_id"></span>
+            </a>
             </span>
           </td>
         </tr>
         <tr>
           <td class="name">Trust Rating:</td>
           <td class="value">
-            <span uib-rating ng-model="ctrl.item.rating" max="5" read-only="true"
-              uib-tooltip="{{tipText.rating[ctrl.item.rating]}}"
-              tooltip-placement="left"
-              class="help-tooltip">
+            <span uib-rating ng-model="ctrl.item.rating" max="5" read-only="true" uib-tooltip="{{tipText.rating[ctrl.item.rating]}}" tooltip-placement="left" class="help-tooltip">
             </span>
           </td>
         </tr>

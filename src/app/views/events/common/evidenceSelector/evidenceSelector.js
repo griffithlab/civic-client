@@ -62,8 +62,22 @@
       ctrl.totalPages = Math.ceil(ctrl.totalItems / pageCount);
     });
 
+    var evidence_levels = {
+      A: 'Validated',
+      B: 'Clinical',
+      C: 'Case Study',
+      D: 'Preclinical',
+      E: 'Inferential'
+    };
+
     ctrl.addItem = function(rowItem) {
       Evidence.get(rowItem.id).then(function(item) {
+        item.evidence_level_string = item.evidence_level + ' - ' + evidence_levels[item.evidence_level];
+        if(item.drugs.length > 0) {
+          item.drugsStr = _.chain(item.drugs).map('name').value().join(', ');
+        } else {
+          item.drugsStr = 'N/A';
+        }
         $scope.items.push(item);
       });
     };
@@ -73,7 +87,6 @@
     };
 
     ctrl.isInItems = function(id){
-      console.log('checking for item ID: ' + id);
       return _.some($scope.items, { 'id': id});
     };
 
@@ -98,7 +111,8 @@
       enableRowHeaderSelection: false,
       multiSelect: false,
       modifierKeysToMultiSelect: false,
-      noUnselect: true
+      noUnselect: true,
+      rowTemplate: 'app/views/events/common/evidenceSelector/evidenceSelectorRowTemplate.tpl.html'
     };
 
     // set up column defs and data transforms for each mode

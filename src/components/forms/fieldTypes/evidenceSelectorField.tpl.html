@@ -1,4 +1,4 @@
-<div>
+<div class="evidenceSelectorField">
   <label for="{{::id}}" class="col-sm-2 control-label">
     <span ng-if="to.required" style="color:#999;">*&nbsp;</span>
     {{to.label}}<br/>
@@ -10,8 +10,8 @@
       page="1"
       items="model.evidence_items">
     </evidence-selector>
-    <div class="col-sm-offset-2 col-sm-10">
-      <ul>
+    <div class="col-sm-12">
+      <ul class="evidenceSelectorItems">
         <li ng-repeat="item in model.evidence_items">
           <evidence-selector-item item="item" remove-fn="removeItem"></evidence-selector-item>
           <!-- <a ng-click="ctrl.removeItem(item)">{{item.id}}</a> -->
