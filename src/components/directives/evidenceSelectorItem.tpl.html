@@ -1,7 +1,7 @@
 <div class="evidenceSelectorItem">
   <div class="row header">
     <div class="col-xs-10 title" >
-      <h4>EID{{ ctrl.item.id }}</h4>
+      <h3>EID{{ ctrl.item.id }}</h3>
     </div>
     <div class="col-xs-2 actions">
       <button ng-click="ctrl.removeItem(ctrl.item)" class="btn btn-xs btn-cell-remove">
@@ -9,7 +9,7 @@
       </button>
     </div>
   </div>
-  <div class="row">
+  <div class="row summary">
     <div class="col-xs-12 explanation">
       <p ng-bind-html="ctrl.item.description | linky"></p>
     </div>

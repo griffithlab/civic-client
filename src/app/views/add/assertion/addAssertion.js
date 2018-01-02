@@ -518,7 +518,7 @@
         type: 'evidenceSelectorField',
         wrapper: ['simpleHasError'],
         templateOptions: {
-          label: 'Evidence Items',
+          label: 'Supporting Evidence',
           helpText: 'Please use the grids to add/remove evidence items.'
         }
       }

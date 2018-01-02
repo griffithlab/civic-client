@@ -3,4 +3,30 @@
 @import 'src/app/styles/_civic-variables.less';
 
 .evidenceSelector {
+  @ui-grid-border-radius: @border-radius-large;
+  .ui-grid {
+    border: 1px solid #DEDEDE;
+    border-radius: @ui-grid-border-radius;
+
+    .ui-grid-viewport, .ui-grid-canvas {
+      border-bottom-right-radius: @ui-grid-border-radius;
+      border-bottom-left-radius: @ui-grid-border-radius;
+    }
+
+    .ui-grid-top-panel {
+      border-top-right-radius: @ui-grid-border-radius;
+      border-top-left-radius: @ui-grid-border-radius;
+    }
+
+    .ui-grid-cell-contents {
+      cursor: pointer
+    }
+  }
+  .grid-pagination {
+    ul {
+      margin-top: @contentPadding/2;
+      width: 100%;
+      margin-bottom: @contentPadding/2;
+    }
+  }
 }
