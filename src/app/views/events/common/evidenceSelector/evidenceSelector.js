@@ -33,12 +33,13 @@
 
   // @ngInject
   function EvidenceSelectorController($scope,
-                                $state,
-                                $window,
-                                $location,
-                                uiGridConstants,
-                                Datatables,
-                                _) {
+                                      $state,
+                                      $window,
+                                      $location,
+                                      uiGridConstants,
+                                      Datatables,
+                                      Evidence,
+                                      _) {
     var ctrl = $scope.ctrl = {};
 
     var pageCount = 5;
@@ -61,15 +62,19 @@
       ctrl.totalPages = Math.ceil(ctrl.totalItems / pageCount);
     });
 
-    ctrl.addItem = function(item) {
-      console.log('evidenceSelector addItem:');
-      console.log(item);
-      $scope.items.push(item);
+    ctrl.addItem = function(rowItem) {
+      Evidence.get(rowItem.id).then(function(item) {
+        $scope.items.push(item);
+      });
     };
 
     ctrl.removeItem = function(item) {
-      console.log('evidenceSelector removeItem:');
-      console.log(item);
+      $scope.items = _.reject($scope.items, {id: item.id});
+    };
+
+    ctrl.isInItems = function(id){
+      console.log('checking for item ID: ' + id);
+      return _.some($scope.items, { 'id': id});
     };
 
     ctrl.gridOptions = {
