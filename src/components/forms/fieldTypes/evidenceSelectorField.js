@@ -15,7 +15,7 @@
           }
         }
       },
-      controller: /* @ngInject */ function($scope) {
+      controller: /* @ngInject */ function($scope, _) {
 
         $scope.selectItem = function(item) {
           console.log('item selected.');
