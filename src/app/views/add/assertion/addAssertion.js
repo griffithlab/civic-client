@@ -398,7 +398,7 @@
                 model.splice(index+1, 0, '');
               },
               typeaheadSearch: function(val) {
-                return DrugSuggestions.query(val)
+                return DrugSuggestions.localQuery(val)
                   .then(function(response) {
                     return _.map(response, function(drugname) {
                       return { name: drugname };
