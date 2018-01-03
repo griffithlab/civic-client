@@ -56,7 +56,7 @@
     function parseVariant(variant) {
       if(!_.isUndefined(variant.assertions) && variant.assertions.length > 0) {
         _.each(variant.assertions, function (assertion) {
-          assertion.name = 'ASR' + assertion.id;
+          assertion.name = 'AID' + assertion.id;
           return assertion;
         });
       }
