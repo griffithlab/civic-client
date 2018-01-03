@@ -39,12 +39,13 @@
 
     var help = ConfigService.evidenceHelpText;
     var descriptions = ConfigService.evidenceAttributeDescriptions;
+    var assertDescriptions = ConfigService.assertionAttributeDescriptions;
     var make_options = ConfigService.optionMethods.make_options; // make options for pull down
     var el_options = ConfigService.optionMethods.el_options; // make options for evidence level
     var cs_options = ConfigService.optionMethods.cs_options; // make options for clinical significance
     var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
-    var ampLevels = ConfigService.ampLevels;
-    var nccnGuidelines = ConfigService.nccnGuidelines;
+    var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
+    var nccnGuidelines = ConfigService.assertionAttributeDescriptions.nccnGuidelines;
 
     vm.isEditor = Security.isEditor();
     vm.isAdmin = Security.isAdmin();
@@ -443,15 +444,13 @@
         wrapper: 'attributeDefinition',
         templateOptions: {
           label: 'AMP Level',
-          options: ([{ value: '', label: 'Please select an AMP Level' }].concat(_.map(ampLevels, function(level) {
-            return {value: level, label: level};
-          }))),
+          options: ([{ value: '', label: 'Please select an AMP Level' }].concat(make_options(ampLevels))),
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'AMP Level help goes here.',
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.evidence_level
+            attributeDefinitions: assertDescriptions.ampLevels
           },
           onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
