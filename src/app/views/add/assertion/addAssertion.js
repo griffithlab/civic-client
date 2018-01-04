@@ -543,7 +543,7 @@
         templateOptions: {
           label: 'Summary',
           required: true,
-          minLength: 32,
+          minLength: 24,
           helpText: 'A short, one sentence summary of this new assertion'
         }
       },
@@ -564,6 +564,7 @@
         wrapper: ['simpleHasError'],
         templateOptions: {
           label: 'Supporting Evidence',
+          required: true,
           helpText: 'Please use the grids to add/remove evidence items.'
         }
       }
