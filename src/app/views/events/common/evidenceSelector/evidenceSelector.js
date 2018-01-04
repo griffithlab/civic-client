@@ -47,7 +47,7 @@
     // declare ui paging/sorting/filtering vars
     ctrl.mode = $scope.mode;
     ctrl.totalItems = Number();
-    ctrl.page = $scope.page;
+    ctrl.page = 1;
     ctrl.count= Number();
 
     ctrl.filters = [];
