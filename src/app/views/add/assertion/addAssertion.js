@@ -530,7 +530,11 @@
               scope.model.fda_companion_test = false;
             }
           }
+        },
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return  scope.model.evidence_type !== 'Predictive';
         }
+
       },
       {
         key: 'fda_companion_test',
