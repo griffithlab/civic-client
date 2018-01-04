@@ -464,6 +464,9 @@
           onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
+        },
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return scope.model.evidence_type === 'Predisposing';
         }
       },
       {
