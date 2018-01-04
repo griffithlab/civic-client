@@ -35,7 +35,6 @@
   function EvidenceSelectorController($scope,
                                       $state,
                                       $window,
-                                      $location,
                                       uiGridConstants,
                                       Datatables,
                                       Evidence,
@@ -237,7 +236,6 @@
       ctrl.gridApi = gridApi;
       // called from pagination directive when page changes
       ctrl.pageChanged = function() {
-        $location.search('page', ctrl.page);
         updateData();
       };
 
