@@ -17,9 +17,18 @@
   }
 
   // @ngInject
-  function evidenceSelectorItemController($scope, $state, _) {
+  function evidenceSelectorItemController($scope, $state, _, Genes, Variants) {
     var ctrl = $scope.ctrl = {};
     ctrl.item = $scope.item;
     ctrl.removeItem = $scope.removeFn;
+
+    Genes.get(ctrl.item.gene_id).then(function(gene) {
+      ctrl.item.gene = gene;
+    });
+
+    Variants.get(ctrl.item.variant_id).then(function(variant) {
+      ctrl.item.variant = variant;
+    });
+
   }
 })();
