@@ -11,7 +11,10 @@
         url: '/assertion?geneId?variantId',
         templateUrl: 'app/views/add/assertion/addAssertion.tpl.html',
         resolve: {
-          Assertions: 'Assertions'
+          Assertions: 'Assertions',
+          acmgCodes: function(Assertions) {
+            return Assertions.queryAcmgCodes();
+          }
         },
         controller: 'AddAssertionController',
         controllerAs: 'vm',
@@ -29,6 +32,7 @@
                                   formConfig,
                                   ConfigService,
                                   Assertions,
+                                  acmgCodes,
                                   Datatables,
                                   Security,
                                   Genes,
@@ -74,6 +78,7 @@
       evidence_type: '',
       clinical_significance: '',
       amp_level: '',
+      acmg_codes: [''],
       nccn_guideline: '',
       nccn_guideline_version: '',
       fda_regulatory_approval: false,
@@ -459,6 +464,34 @@
           onChange: function(value, options) {
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
+        }
+      },
+      {
+        key: 'acmg_codes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'ACMG Code(s)',
+          inputOptions: {
+            type: 'select',
+            wrapper: null,
+            templateOptions: {
+              onSelect: 'options.data.setNote(model, index)',
+              ngOptions: 'option["value"] as option["label"] for option in to.options',
+              options: _.chain(acmgCodes).map(function(code) {
+                return { value: code.code, label: code.code };
+              }).unshift({value: '', label:'Please choose an ACMG Code'}).value(),
+              valueProp: 'value',
+              labelProp: 'label'
+            },
+            data: {
+              setNote: function(model, index) {
+                console.log('Setting acmg code to: ' + model);
+              }
+            }
+          }
+        },
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return  scope.model.evidence_type !== 'Predisposing';
         }
       },
       {
