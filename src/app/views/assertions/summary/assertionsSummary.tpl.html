@@ -78,7 +78,7 @@
                   {{ vm.assertion.drug_interaction_type }}
                 </td>
               </tr>
-              <tr>
+              <tr ng-if="vm.asserion.amp_level.length > 0">
                 <td class="key">AMP Level:</td>
                 <td class="value">
                   {{ vm.assertion.amp_level }}
