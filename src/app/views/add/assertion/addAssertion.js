@@ -76,9 +76,13 @@
       amp_level: '',
       nccn_guideline: '',
       nccn_guideline_version: '',
-      fda_regulatory_approval: null,
-      fda_companion_test: null,
+      fda_regulatory_approval: false,
+      fda_companion_test: false,
       evidence_items: []
+    };
+
+    vm.options= {
+      removeChromeAutoComplete: true
     };
 
     vm.assertionFields = [
@@ -501,15 +505,24 @@
         hideExpression: '!model.fda_regulatory_approval'
       },
       {
+        key: 'summary',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Summary',
+          required: true,
+          minLength: 32,
+          helpText: 'A short, one sentence summary of this new assertion'
+        }
+      },
+      {
         key: 'description',
         type: 'horizontalTextareaHelp',
         templateOptions: {
           rows: 8,
           label: 'Description',
-          value: 'vm.assertion.description',
           required: true,
           minLength: 32,
-          helpText: 'A brief description of this new assertion.'
+          helpText: 'A complete description of this new assertion, limited to one paragraph'
         }
       },
       {
@@ -534,7 +547,7 @@
           vm.showInstructions = false;
           vm.showForm = false;
           vm.showSuccessMessage = true;
-          vm.newAssertionId = response.id;
+          vm.newAssertionId = response.assertion.id;
         })
         .catch(function(error) {
           console.error('assertion submit error!');

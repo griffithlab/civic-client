@@ -71,7 +71,7 @@
       <div class="col-xs-10 col-xs-offset-2">
         <div class="buttons">
           <div class="pull-right">
-            <button type="submit" class="btn btn-default" ng-click="vm.add(vm.assertion, vm.options)">Add Assertion</button>
+            <a class="btn btn-default" ng-click="vm.add(vm.assertion, vm.options)">Add Assertion</a>
           </div>
         </div>
       </div>
@@ -82,19 +82,19 @@
       <h1>Thank you.</h1>
       <p>Your new Assertion has been added.</p>
       <p>
-        <a ng-href="/events/genes/{{vm.newGeneId}}/summary/assertions/{{vm.newGroupId}}/summary" class="btn btn-small btn-default">View it here</a>
+        <a ng-href="/assertions/{{vm.newAssertionId}}/summary" class="btn btn-small btn-default">View it here</a>
       </p>
     </div>
   </div>
 
-  <!-- <div class="row"> -->
-  <!-- <div class="col-xs-6"> -->
-  <!-- <h4>Assertion</h4> -->
-  <!-- <pre ng-bind="vm.assertion | json"></pre> -->
-  <!-- </div> -->
-  <!-- <div class="col-xs-6"> -->
-  <!-- <h4>vm.options</h4> -->
-  <!-- <pre ng-bind="vm.options | json"></pre> -->
-  <!-- </div> -->
-  <!-- </div> -->
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>Assertion</h4>
+      <pre ng-bind="vm.assertion | json"></pre>
+    </div>
+    <div class="col-xs-6">
+      <h4>vm.options</h4>
+      <pre ng-bind="vm.options | json"></pre>
+    </div>
+  </div>
 </div>
