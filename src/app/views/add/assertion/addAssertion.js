@@ -541,8 +541,7 @@
         type: 'horizontalCheckbox',
         templateOptions: {
           label: 'Assertion has FDA companion test.'
-        },
-        hideExpression: '!model.fda_regulatory_approval'
+        }
       },
       {
         key: 'summary',
@@ -580,6 +579,7 @@
     vm.add = function(assertion) {
       var newAssertion = _.cloneDeep(assertion);
       newAssertion.drugs = _.without(newAssertion.drugs, '');
+      newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
       newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
       Assertions.add(newAssertion)
         .then(function(response) {
