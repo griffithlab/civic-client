@@ -33,6 +33,12 @@
         add: {
           method: 'POST',
           cache: false
+        },
+        queryAcmgCodes: {
+          url: '/api/acmg_codes',
+          method: 'GET',
+          isArray: true,
+          cache: true
         }
       }
     );
@@ -42,15 +48,18 @@
   function AssertionsService(AssertionsResource) {
     var collection = { };
     var item = { };
+    var acmg_codes = [];
 
     return {
       data: {
         item: item,
-        collection: collection
+        collection: collection,
+        acmg_codes: acmg_codes
       },
       query: query,
       get: get,
-      add: add
+      add: add,
+      queryAcmgCodes: queryAcmgCodes
     };
 
     function query() {
@@ -73,6 +82,14 @@
       return AssertionsResource.add(reqObj).$promise
         .then(function(response) {
           console.log('Assertion submitted!');
+          return response.$promise;
+        });
+    }
+
+    function queryAcmgCodes() {
+      return AssertionsResource.queryAcmgCodes().$promise
+        .then(function(response) {
+          angular.copy(response, acmg_codes);
           return response.$promise;
         });
     }
