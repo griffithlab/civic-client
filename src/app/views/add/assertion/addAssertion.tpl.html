@@ -80,7 +80,7 @@
   <div class="successMessage" ng-if="vm.showSuccessMessage">
     <div class="col-xs-12 jumbotron">
       <h1>Thank you.</h1>
-      <p>Your new Assertion has been added.</p>
+      <p>Your new Assertion, {{ vm.assertionName }}, has been added.</p>
       <p>
         <a ng-href="/assertions/{{vm.newAssertionId}}/summary" class="btn btn-small btn-default">View it here</a>
       </p>

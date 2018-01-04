@@ -548,6 +548,7 @@
           vm.showForm = false;
           vm.showSuccessMessage = true;
           vm.newAssertionId = response.assertion.id;
+          vm.newAssertionName = response.assertion.name;
         })
         .catch(function(error) {
           console.error('assertion submit error!');
