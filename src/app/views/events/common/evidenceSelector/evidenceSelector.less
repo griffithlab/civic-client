@@ -24,9 +24,21 @@
   }
   .grid-pagination {
     ul {
-      margin-top: @contentPadding/2;
-      width: 100%;
+      margin-top: 0;
       margin-bottom: @contentPadding/2;
+      .pagination-first a,
+      .pagination-last a,
+      .pagination-prev a,
+      .pagination-next a,
+      .pagination-page a {
+        border-top: none;
+      }
+      .pagination-first a {
+        border-top-left-radius: 0;
+      }
+      .pagination-last a {
+        border-top-right-radius: 0;
+      }
     }
   }
 }
