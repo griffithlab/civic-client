@@ -48,7 +48,7 @@
     ctrl.mode = $scope.mode;
     ctrl.totalItems = Number();
     ctrl.page = 1;
-    ctrl.count= Number();
+    ctrl.count= maxRows;
 
     ctrl.filters = [];
 
