@@ -142,6 +142,26 @@
       </div>
     </div>
   </div>
+  <div class="row" ng-if="(isEditor() || isAdmin()) && evidence.status === 'submitted'" style="margin-top: 1em;">
+    <div class="col-xs-6">
+      <button class="btn btn-default btn-block btn-danger"
+              ng-click="rejectItem(vm.assertion.id)">
+        Reject Evidence Item
+      </button>
+    </div>
+    <div class="col-xs-6">
+      <span uib-tooltip="Contributors may not accept their own submissions."
+            tooltip-append-to-body="true"
+            tooltip-enable="ownerIsCurrentUser"
+            class="help-tooltip">
+      <button class="btn btn-default btn-block btn-success"
+              ng-disabled="ownerIsCurrentUser"
+              ng-click="acceptItem(vm.assertion.id)">
+        Accept Evidence Item
+      </button>
+        </span>
+    </div>
+  </div>
   <div class="row" style="margin-top: 1.5em">
     <div class="col-xs-12">
       <evidence-grid evidence="vm.assertion.evidence_items" rows="8" show-gene-col="true" show-variant-col="true" context="'assertion'" source="vm.assertion" rounded="true">

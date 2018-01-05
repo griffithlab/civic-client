@@ -34,6 +34,16 @@
           method: 'POST',
           cache: false
         },
+        accept: {
+          url: '/api/assertions/:assertionId/accept',
+          method: 'POST',
+          cache: false
+        },
+        reject: {
+          url: '/api/assertions/:assertionId/reject',
+          method: 'POST',
+          cache: false
+        },
         queryAcmgCodes: {
           url: '/api/acmg_codes',
           method: 'GET',
@@ -59,6 +69,8 @@
       query: query,
       get: get,
       add: add,
+      accept: accept,
+      reject: reject,
       queryAcmgCodes: queryAcmgCodes
     };
 
@@ -82,6 +94,20 @@
       return AssertionsResource.add(reqObj).$promise
         .then(function(response) {
           console.log('Assertion submitted!');
+          return response.$promise;
+        });
+    }
+
+    function accept(assertionId) {
+      return Assertion.accept({ assertionId: assertionId }).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
+
+    function reject(assertionId) {
+      return Assertion.reject({ assertionId: assertionId }).$promise
+        .then(function(response) {
           return response.$promise;
         });
     }
