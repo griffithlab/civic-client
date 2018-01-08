@@ -106,7 +106,7 @@
       enableFiltering: true,
       enableColumnMenus: false,
       enableSorting: true,
-      enableRowSelection: true,
+      enableRowSelection: false,
       enableRowHeaderSelection: false,
       multiSelect: false,
       modifierKeysToMultiSelect: false,
