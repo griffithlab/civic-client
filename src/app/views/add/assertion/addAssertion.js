@@ -177,7 +177,7 @@
           minLength: 32,
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
-          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)'
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)'
         },
         expressionProperties: {
           'templateOptions.disabled': function($viewValue, $modelValue, scope) {
@@ -186,7 +186,7 @@
           }
         },
         data: {
-          typeaheadSearch: function(val) {
+          typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
               count: 10,
