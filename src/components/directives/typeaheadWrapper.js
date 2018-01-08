@@ -20,6 +20,8 @@
         if(name !== undefined) { template+='name="'+name+'" '; }
         var required = _.get(scope,'to.required');
         if(required === true) { template+='required="true" '; }
+        var disabled = attrs['ngDisabled'];
+        if(disabled !== undefined) { template+='ng-disabled="'+disabled+'" '; }
         template+='ng-model="'+attrs['ngModel']+'" ';
         template+='class="'+attrs['class']+'" ';
         template+='typeahead-editable="'+attrs['typeaheadEditable']+'" ';
@@ -32,6 +34,7 @@
         var templateUrl = _.get(scope,attrs['typeaheadTemplateUrl']);
         if(templateUrl !== undefined) { template+='typeahead-template-url="'+templateUrl+'" '; }
         template+='uib-typeahead="'+_.get(scope, attrs['typeaheadWrapper'])+'" ';
+        template+='autofill="autofill-typeahead-off"';
         template+='>';
         $compile(template)(
           scope,
