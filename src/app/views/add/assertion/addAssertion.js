@@ -172,12 +172,18 @@
         templateOptions: {
           label: 'Variant Name',
           required: true,
+          editable: true,
           value: 'vm.newEvidence.variant',
           minLength: 32,
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
-          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
-          editable: true
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)'
+        },
+        expressionProperties: {
+          'templateOptions.disabled': function($viewValue, $modelValue, scope) {
+            var geneField = _.find(scope.fields, { key: 'gene'});
+            return geneField.formControl.$invalid;
+          }
         },
         data: {
           typeaheadSearch: function(val) {
