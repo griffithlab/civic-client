@@ -122,6 +122,7 @@
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           templateUrl: 'components/forms/fieldTypes/geneTypeahead.tpl.html',
           onSelect: 'to.data.entrez_id = $model.entrez_id',
+          selectOnBlur: true,
           helpText: help['Gene Entrez Name'],
           data: {
             entrez_id: '--',
@@ -172,12 +173,13 @@
         templateOptions: {
           label: 'Variant Name',
           required: true,
-          editable: true,
+          editable: false,
           value: 'vm.newEvidence.variant',
           minLength: 32,
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
-          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)'
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
+          selectOnBlur: true
         },
         expressionProperties: {
           'templateOptions.disabled': function($viewValue, $modelValue, scope) {
@@ -191,7 +193,8 @@
               mode: 'variants',
               count: 10,
               page: 0,
-              'filter[variant]': val
+              'filter[variant]': val,
+              'filter[entrez_gene]': gene
             };
             return Datatables.query(request)
               .then(function(response) {

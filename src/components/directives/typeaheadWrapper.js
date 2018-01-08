@@ -33,8 +33,9 @@
         if(inputFormatter !== undefined) { template+='typeahead-input-formatter="'+inputFormatter+'" '; }
         var templateUrl = _.get(scope,attrs['typeaheadTemplateUrl']);
         if(templateUrl !== undefined) { template+='typeahead-template-url="'+templateUrl+'" '; }
+        var selectOnBlur = _.get(scope, attrs['to.selectOnBlur']);
+        if (selectOnBlur !== undefined) { template+='typeahead-select-on-blur="' + selectOnBlur + '" '; }
         template+='uib-typeahead="'+_.get(scope, attrs['typeaheadWrapper'])+'" ';
-        template+='autofill="autofill-typeahead-off"';
         template+='>';
         $compile(template)(
           scope,
