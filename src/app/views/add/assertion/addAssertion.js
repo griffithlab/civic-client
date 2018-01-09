@@ -190,6 +190,7 @@
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
+          typeaheadMinLength: 0,
           selectOnBlur: true,
           data: {
             message: ''

@@ -27,6 +27,8 @@
         template+='typeahead-editable="'+attrs['typeaheadEditable']+'" ';
         template+='typeahead-focus-first="'+attrs['typeaheadFocusFirst']+'" ';
         template+='typeahead-append-to-body="'+attrs['typeaheadAppendToBody']+'" ';
+        var minLength = _.get(scope, attrs['typeaheadMinLength']);
+        if(minLength !== undefined) { template+='typeahead-min-length="'+attrs['typeaheadMinLength']+'" '; }
         var onSelect = _.get(scope, attrs['typeaheadOnSelect']);
         if(onSelect !== undefined) { template+='typeahead-on-select="'+onSelect+'" '; }
         var inputFormatter = _.get(scope,attrs['typeaheadInputFormatter']);
