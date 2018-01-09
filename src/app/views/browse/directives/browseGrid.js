@@ -83,6 +83,35 @@
 
     // set up column defs and data transforms for each mode
     var modeColumnDefs = {
+      'assertions': [
+        {
+          name: 'gene_name',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'variant_name',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'disease',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        }
+      ],
       'evidence_items': [
         {
           name: 'gene_name',
@@ -451,6 +480,11 @@
           state = 'sources.summary';
           params = {
             sourceId: row.entity.id
+          };
+        } else if (ctrl.mode === 'assertions') {
+          state = 'assertions.summary';
+          params = {
+            assertionId: row.entity.id
           };
         } else if (ctrl.mode === 'evidence_items') {
           state = 'events.genes.summary.variants.summary.evidence.summary';
