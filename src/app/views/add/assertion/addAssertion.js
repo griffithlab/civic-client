@@ -127,7 +127,7 @@
           data: {
             entrez_id: '--',
             typeaheadSearch: function(val) {
-              return Genes.beginsWith(val)
+              return Genes.queryLocal(val)
                 .then(function(response) {
                   var labelLimit = 70;
                   var list = _.map(response, function(gene) {

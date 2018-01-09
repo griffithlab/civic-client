@@ -23,6 +23,11 @@
         isArray: false,
         cache: cache
       },
+      queryLocal: {
+        url: '/api/genes/local_suggestions/:q',
+        method: 'GET',
+        isArray: true
+      },
       get: { // get a single gene
         method: 'GET',
         isArray: false,
@@ -217,6 +222,7 @@
     // Base Gene and Gene Collection
     var item = {};
     var collection = [];
+    var suggestions = [];
 
     // Additional Gene Data
     var myGeneInfo = {};
@@ -234,6 +240,7 @@
       data: {
         item: item,
         collection: collection,
+        suggestions: suggestions,
         myGeneInfo: myGeneInfo,
         variants: variants,
         variantGroups: variantGroups,
@@ -244,6 +251,7 @@
 
       // Gene Base
       query: query,
+      queryLocal: queryLocal,
       get: get,
       getName: getName,
       update: update,
@@ -275,18 +283,6 @@
       beginsWith: beginsWith
     };
 
-    // function mapVariantStatuses(variants, statuses) {
-    //   return _.map(variants, function(variant) {
-    //     variant.statuses = _.chain(statuses)
-    //       .find({
-    //         id: variant.id
-    //       })
-    //       .pick(['has_pending_fields', 'has_pending_evidence'])
-    //       .value();
-    //     return variant;
-    //   });
-    // }
-
     function initBase(geneId) {
       return $q.all([
         get(geneId),
@@ -307,6 +303,15 @@
       return GenesResource.query().$promise
         .then(function(response) {
           angular.copy(response.records, collection);
+          return response.$promise;
+        });
+    }
+
+    function queryLocal(str) {
+      var reqObj = { q: str };
+      return GenesResource.queryLocal(reqObj).$promise
+        .then(function(response) {
+          angular.copy(response.records, suggestions);
           return response.$promise;
         });
     }
