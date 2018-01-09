@@ -11,7 +11,7 @@
     vm.isEditor = Security.isEditor();
     vm.isAdmin = Security.isAdmin();
 
-    vm.assertion = assertion;
+    vm.assertion = Assertions.data.item;
     vm.myVariantInfo = myVariantInfo;
 
     if(Security.currentUser) {
