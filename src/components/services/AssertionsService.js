@@ -36,11 +36,17 @@
         },
         accept: {
           url: '/api/assertions/:assertionId/accept',
+          params: {
+            assertionId: '@assertionId'
+          },
           method: 'POST',
           cache: false
         },
         reject: {
           url: '/api/assertions/:assertionId/reject',
+          params: {
+            assertionId: '@assertionId'
+          },
           method: 'POST',
           cache: false
         },
@@ -93,20 +99,19 @@
     function add(reqObj) {
       return AssertionsResource.add(reqObj).$promise
         .then(function(response) {
-          console.log('Assertion submitted!');
           return response.$promise;
         });
     }
 
-    function accept(assertionId) {
-      return Assertion.accept({ assertionId: assertionId }).$promise
+    function accept(id) {
+      return AssertionsResource.accept({ assertionId: id}).$promise
         .then(function(response) {
           return response.$promise;
         });
     }
 
-    function reject(assertionId) {
-      return Assertion.reject({ assertionId: assertionId }).$promise
+    function reject(id) {
+      return AssertionsResource.reject({ assertionId: id }).$promise
         .then(function(response) {
           return response.$promise;
         });
