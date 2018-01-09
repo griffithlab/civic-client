@@ -135,7 +135,7 @@
       name: 'fieldMessage',
       template: [
         '<formly-transclude></formly-transclude>',
-        '<span class="small" ng-if="to.data.message">.</span>'
+        '<span class="small" ng-if="to.data.message && to.data.message.length > 0">{{to.data.message}}</span>'
       ].join(' ')
     });
 

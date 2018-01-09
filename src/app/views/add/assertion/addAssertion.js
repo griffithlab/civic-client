@@ -144,6 +144,16 @@
             }
           }
         },
+        watcher: {
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
+              _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = '';
+            }
+            if(_.isUndefined(field.formControl) || field.formControl.$invalid) {
+              _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = 'Please specify a gene before selecting a variant.';
+            }
+          }
+        },
         modelOptions: {
           debounce: {
             default: 300
@@ -153,6 +163,7 @@
       {
         key: 'variant',
         type: 'horizontalTypeaheadHelp',
+        wrapper: ['fieldMessage'],
         className: 'input-caps',
         controller: /* @ngInject */ function($scope, $stateParams, Variants) {
           // populate field if variantId provided
@@ -179,7 +190,10 @@
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
-          selectOnBlur: true
+          selectOnBlur: true,
+          data: {
+            message: ''
+          }
         },
         expressionProperties: {
           'templateOptions.disabled': function($viewValue, $modelValue, scope) {
@@ -188,6 +202,7 @@
           }
         },
         data: {
+          message: 'Please specify a Gene before choosing a Variant.',
           typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
