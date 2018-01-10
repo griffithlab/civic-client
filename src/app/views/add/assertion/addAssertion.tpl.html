@@ -25,7 +25,7 @@
       <div ng-messages="vm.formMessages" class="add-messages">
         <div ng-message="submitSuccess">
           <div class="alert alert-success">
-            <strong class="status">Success</strong> - <span class="message">Your new evidence item was successfully submitted.</span>
+            <strong class="status">Success</strong> - <span class="message">Your new Assertion was successfully submitted.</span>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@
         <div class="buttons">
           <div class="pull-right">
             <button type="submit" class="btn btn-default" ng-disabled="vm.form.$invalid || vm.isAuthenticated === false" ng-click="vm.add(vm.assertion, vm.options)">
-              Submit Evidence for Inclusion
+              Submit Assertion
             </button>
           </div>
         </div>
