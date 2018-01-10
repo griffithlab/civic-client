@@ -481,7 +481,7 @@
           options: ([{ value: '', label: 'Please select an AMP Level' }].concat(make_options(ampLevels))),
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'AMP Level help goes here.',
+          helpText: 'If applicable, please provide the <a href="http://www.ncbi.nlm.nih.gov/pubmed/27993330" target="_blank">AMP somatic variant classification</a>.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: assertDescriptions.ampLevels
@@ -532,7 +532,7 @@
           }))),
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'NCCN Guideline help goes here.'
+          helpText: 'If applicable, please provide cancer (e.g., Breast Cancer) and version (e.g., 05.2016) for the appropriate <a href="http://www.nccn.org/professionals/physician_gls/default.aspx#site" target="_blank">NCCN guideline</a>.'
         }
       },
       {
@@ -541,7 +541,7 @@
         templateOptions: {
           label: 'NCCN Guideline Version',
           minLength: 32,
-          helpText: 'NCCN Guideline version, in the form of its volume number followed by a dot followed by its year, e.g. "5.2017"'
+          helpText: ''
         }
       },
       {
