@@ -61,7 +61,7 @@
 
     vm.formErrors = {};
     vm.formMessages = {};
-    vm.errorMessages = formConfig.errorMessages;
+    vm.validationMessages = formConfig.validationMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
 
@@ -619,7 +619,7 @@
         })
         .catch(function(error) {
           console.error('assertion submit error!');
-          vm.formErrors[error.status] = true;
+          vm.formErrors[error.status] = error;
         })
         .finally(function() {
           console.log('assertion submit done!');

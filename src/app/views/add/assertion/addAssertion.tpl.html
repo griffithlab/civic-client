@@ -38,22 +38,27 @@
       <div ng-messages="vm.formErrors" class="add-errors">
         <div ng-message="500">
           <div class="alert alert-danger">
-            <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
+            <strong class="status">500 <span ng-bind="vm.validationMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
+          </div>
+        </div>
+        <div ng-message="400">
+          <div class="alert alert-danger">
+            <strong class="status">400 <span ng-bind="vm.validationMessages['400']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['400']">error prompt</span>
           </div>
         </div>
         <div ng-message="401">
           <div class="alert alert-danger">
-            <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
+            <strong class="status">401 <span ng-bind="vm.validationMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
           </div>
         </div>
         <div ng-message="403">
           <div class="alert alert-danger">
-            <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
+            <strong class="status">403 <span ng-bind="vm.validationMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
           </div>
         </div>
         <div ng-message="409">
           <div class="alert alert-danger">
-            <strong class="status">409 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
+            <strong class="status">409 <span ng-bind="vm.validationMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
           </div>
         </div>
       </div>
