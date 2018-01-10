@@ -24,7 +24,7 @@
     formlyConfigProvider.setType({
       name: 'horizontalInputHelp',
       extends: 'input',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
     // select
@@ -37,7 +37,7 @@
     formlyConfigProvider.setType({
       name: 'horizontalSelectHelp',
       extends: 'select',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
     });
 
     // textarea
