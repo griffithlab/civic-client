@@ -5,15 +5,8 @@
     .factory('Assertions', AssertionsService);
 
   // @ngInject
-  function AssertionsResource($resource) {
-    //var cache = $cacheFactory.get('$http');
-
-    //var cacheInterceptor = function(response) {
-    //  console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(' '));
-    //  cache.remove(response.config.url);
-    //  return response.$promise;
-    //};
-
+  function AssertionsResource($resource, $cacheFactory) {
+    var cache = $cacheFactory.get('$http');
 
     return $resource('/api/assertions',
       {},
@@ -22,13 +15,13 @@
           url: '/api/assertions',
           method: 'GET',
           isArray: true,
-          cache: false
+          cache: cache
         },
         get: {
           url: '/api/assertions/:assertionId',
           method: 'GET',
           isArray: false,
-          cache: false
+          cache: cache
         },
         add: {
           method: 'POST',
@@ -61,7 +54,9 @@
   }
 
   // @ngInject
-  function AssertionsService(AssertionsResource) {
+  function AssertionsService(AssertionsResource, $cacheFactory) {
+    var cache = $cacheFactory.get('$http');
+
     var collection = { };
     var item = { };
     var acmg_codes = [];
@@ -106,6 +101,14 @@
     function accept(id) {
       return AssertionsResource.accept({ assertionId: id}).$promise
         .then(function(response) {
+          // flush cached assertion and variant
+          cache.remove('/api/assertions');
+          cache.remove('/api/assertions/' + response.id);
+          cache.remove('/api/variants/' + response.variant.id);
+
+          // reload assertion
+          get(response.id);
+
           return response.$promise;
         });
     }
@@ -113,6 +116,14 @@
     function reject(id) {
       return AssertionsResource.reject({ assertionId: id }).$promise
         .then(function(response) {
+          // flush cached assertion and variant
+          cache.remove('/api/assertions');
+          cache.remove('/api/assertions/' + response.id);
+          cache.remove('/api/variants/' + response.variant.id);
+
+          // reload assertion
+          get(response.id);
+
           return response.$promise;
         });
     }
