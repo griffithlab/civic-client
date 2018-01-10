@@ -395,7 +395,8 @@
           'A': 'Biomarkers showing therapeutic response to FDA-approved therapy, or therapy included in professional guidelines',
           'B': 'Biomarkers showing therapeutic response based on well-powered studies with consensus from experts in the field',
           'C': 'FDA-approved therapies for different tumor types or investigational therapies, or multiple small published studies with some consensus',
-          'D': 'Biomarkers that show plausible therapeutic significance based on preclinical studies'
+          'D': 'Biomarkers that show plausible therapeutic significance based on preclinical studies',
+          'Not Applicable': 'AMP level is not relevant to this assertion.'
         },
         nccnGuidelines: [
           'Acute Lymphoblastic Leukemia',
