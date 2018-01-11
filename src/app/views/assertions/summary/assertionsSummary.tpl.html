@@ -94,13 +94,13 @@
                   {{ vm.assertion.drug_interaction_type }}
                 </td>
               </tr>
-              <tr ng-if="vm.asserion.amp_level.length > 0">
+              <tr ng-if="vm.assertion.amp_level.length > 0">
                 <td class="key">AMP Level:</td>
                 <td class="value">
                   {{ vm.assertion.amp_level }}
                 </td>
               </tr>
-              <tr>
+              <tr ng-if="vm.assertion.acmg_codes.length > 0" >
                 <td class="key">ACMG Codes:</td>
                 <td class="value">
                   <span ng-switch="vm.assertion.acmg_codes.length > 0">
