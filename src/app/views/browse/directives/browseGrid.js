@@ -90,9 +90,8 @@
           visible: true,
           width: '7%',
           type: 'number',
-          enableSorting: true,
-          enableFiltering: true,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          enableSorting: false,
+          enableFiltering: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
