@@ -307,6 +307,18 @@
             attributeDefinition: '&nbsp;',
             attributeDefinitions: descriptions.evidence_type
           }
+        },
+        watcher: {
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
+              _.find(scope.fields, { key: 'evidence_direction'}).templateOptions.data.attributeDefinition= '';
+              _.find(scope.fields, { key: 'clinical_significance'}).templateOptions.data.attributeDefinition= '';
+            }
+            if(_.isUndefined(field.formControl) || field.formControl.$invalid) {
+              _.find(scope.fields, { key: 'evidence_direction'}).templateOptions.data.attributeDefinition= 'Please choose Assertion Type before selecting Assertion Direction.';
+              _.find(scope.fields, { key: 'clinical_significance'}).templateOptions.data.attributeDefinition= 'Please choose Assertion Type before selecting Assertion Direction.';
+            }
+          }
         }
       },
       {
@@ -341,7 +353,7 @@
           labelProp: 'label',
           helpText: help['Evidence Direction'],
           data: {
-            attributeDefinition: 'Please choose Assertion Type before selecting Assertion Direction.',
+            attributeDefinition: '',
             attributeDefinitions: descriptions.evidence_direction,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
