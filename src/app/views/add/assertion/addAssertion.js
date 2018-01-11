@@ -301,11 +301,28 @@
             if (edField.value() !== '') { // only update if user has selected an option
               edField.templateOptions.data.updateDefinition(null, edField, scope);
             }
+
+            // reset ACMG codes if new Type != Predisposing
+            if(value !== 'Predisposing') {
+              _.find(scope.fields, { key: 'acmg_codes'}).value(['']);
+            }
           },
-          helpText: help['Evidence Type'],
+          helpText: 'Type of clinical outcome associated with the assertion description.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: descriptions.evidence_type
+          }
+        },
+        watcher: {
+          listener: function(field, newValue, oldValue, scope, stopWatching) {
+            if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
+              _.find(scope.fields, { key: 'evidence_direction'}).templateOptions.data.attributeDefinition= '';
+              _.find(scope.fields, { key: 'clinical_significance'}).templateOptions.data.attributeDefinition= '';
+            }
+            if(_.isUndefined(field.formControl) || field.formControl.$invalid) {
+              _.find(scope.fields, { key: 'evidence_direction'}).templateOptions.data.attributeDefinition= 'Please choose Assertion Type before selecting Assertion Direction.';
+              _.find(scope.fields, { key: 'clinical_significance'}).templateOptions.data.attributeDefinition= 'Please choose Assertion Type before selecting Assertion Direction.';
+            }
           }
         }
       },
@@ -324,11 +341,11 @@
                 $scope.model.evidence_direction = $stateParams.evidenceDirection;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et][ed];
               } else {
-                console.warn('Ignoring pre-population of Evidence Direction with invalid value: ' + ed);
+                console.warn('Ignoring pre-population of Assertion Direction with invalid value: ' + ed);
               }
 
             } else {
-              console.warn('Cannot pre-populate Evidence Direction without specifying Evidence Type.');
+              console.warn('Cannot pre-populate Assertion Direction without specifying Assertion Type.');
             }
           }
         },
@@ -339,9 +356,9 @@
           options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
           labelProp: 'label',
-          helpText: help['Evidence Direction'],
+          helpText: 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Assertion Type must be selected before this field is enabled.',
           data: {
-            attributeDefinition: 'Please choose Assertion Type before selecting Assertion Direction.',
+            attributeDefinition: '',
             attributeDefinitions: descriptions.evidence_direction,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
@@ -389,7 +406,7 @@
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           // actual options displayed in the select, modified by expressionProperties
           options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
-          helpText: help['Clinical Significance'],
+          helpText: 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing assertion types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Assertion Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: 'Please choose Assertion Type before selecting Clinical Significance.',
             attributeDefinitions: merge_props(descriptions.clinical_significance),
@@ -532,7 +549,7 @@
           }))),
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'If applicable, please provide cancer (e.g., Breast Cancer) and version (e.g., 05.2016) for the appropriate <a href="http://www.nccn.org/professionals/physician_gls/default.aspx#site" target="_blank">NCCN guideline</a>.'
+          helpText: 'If applicable, please provide cancer (e.g., Breast Cancer) and version (e.g., 5.2016) for the appropriate <a href="http://www.nccn.org/professionals/physician_gls/default.aspx#site" target="_blank">NCCN guideline</a>.'
         }
       },
       {

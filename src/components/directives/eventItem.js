@@ -37,7 +37,7 @@
     vm.eventClick = function(event) {
       var subjectStates = {
         genes: 'events.genes',
-        assertion: 'assertion.summary',
+        assertions: 'assertions',
         variants: 'events.genes.summary.variants',
         variantgroups: 'events.genes.summary.variantGroups',
         evidenceitems: 'events.genes.summary.variants.summary.evidence',
@@ -66,6 +66,9 @@
         'flag resolved': '.summary',
         'submitted': '.summary',
         'accepted': '.summary',
+        'assertion submitted': '.summary',
+        'assertion accepted': '.summary',
+        'assertion rejected': '.summary',
         'rejected': '.summary',
         'publication suggested': '.summary',
         'change suggested': '.talk.revisions.list.summary',

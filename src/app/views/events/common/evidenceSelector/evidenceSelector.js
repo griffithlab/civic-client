@@ -119,7 +119,15 @@
       'browse': [
         {
           name: 'id',
-          visible: false
+          displayName: 'EID',
+          visible: true,
+          width: '5%',
+          type: 'number',
+          enableSorting: false,
+          enableFiltering: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         },
         {
           name: 'gene_name',
