@@ -110,7 +110,20 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
-        }
+        },
+        {
+          name: 'status',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          type: 'string',
+          sort: {
+            direction: uiGridConstants.DESC
+          },
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
       ],
       'evidence_items': [
         {
