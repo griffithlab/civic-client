@@ -83,7 +83,7 @@
           allowCellFocus: false,
           type: 'string',
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
-          width: '15%',
+          width: '20%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -94,7 +94,7 @@
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           type: 'string',
-          width: '15%',
+          width: '20%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -119,39 +119,12 @@
             condition: uiGridConstants.filter.CONTAINS
           },
           cellTemplate: 'app/views/events/variantGroups/summary/variantGridDescriptionCell.tpl.html'
-        },
-        {
-          name: 'civic_actionability_score',
-          displayName: 'Score',
-          headerTooltip: 'CIViC Actionability Score derived from variant\'s Evidence Item Levels and Ratings',
-          width: '10%',
-          type: 'number',
-          headerCellTemplate: 'app/views/events/variantGroups/summary/variantGridTooltipHeader.tpl.html',
-          sort: {
-            direction: uiGridConstants.DESC
-          },
-          enableFiltering: false,
-          allowCellFocus: false
-        },
-        // {
-        //   name: 'evidence_item_count',
-        //   displayName: 'Evidence',
-        //   headerTooltip: 'Total Evidence Item count',
-        //   width: '10%',
-        //   type: 'number',
-        //   headerCellTemplate: 'app/views/events/variantGroups/summary/variantGridTooltipHeader.tpl.html',
-        //   enableFiltering: false,
-        //   allowCellFocus: false,
-        //   filter: {
-        //     condition: uiGridConstants.filter.CONTAINS
-        //   }
-        // }
-
+        }
       ]
     };
 
     ctrl.variantGridOptions.onRegisterApi = function(gridApi){
-      var variants = prepVariants($scope.variants);
+      var variants = $scope.variants;
       ctrl.gridApi = gridApi;
 
       ctrl.context = $scope.context;
@@ -167,7 +140,6 @@
           gridApi.exporter.pdfExport(rows, uiGridExporterConstants.ALL);
         }
       };
-
 
       function getFilename() {
         var dateTime = $filter('date')(new Date(), 'yyyy-MM-ddTHH:MM:ss');
@@ -206,11 +178,6 @@
             item.variant_type_list = _.map(item.variant_types, 'display_name').join(', ');
           } else {
             item.variant_type_list = 'N/A';
-          }
-
-          // add evidence item count attribute
-          if (_.isArray(item.evidence_items)) {
-            item.evidence_item_count = _.reject(item.evidence_items, { status: 'rejected' }).length;
           }
           return item;
         });

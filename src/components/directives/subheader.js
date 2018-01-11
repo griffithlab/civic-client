@@ -28,13 +28,16 @@
     $scope.$rootScope = $rootScope;
 
     $scope.addEvidenceUrlBase = $scope.addEvidenceUrl = 'add/evidence/basic';
+    $scope.addAssertionUrlBase = $scope.addAssertionUrl = 'add/assertion';
 
     $scope.$watchCollection('$rootScope.stateParams', function(stateParams){
       if(_.has(stateParams, 'geneId')) {
         $scope.addEvidenceUrl = $scope.addEvidenceUrlBase + '?geneId=' + stateParams.geneId;
+        $scope.addAssertionUrl = $scope.addAssertionUrlBase + '?geneId=' + stateParams.geneId;
 
         if(_.has(stateParams, 'variantId')) {
           $scope.addEvidenceUrl = $scope.addEvidenceUrl + '&variantId=' + stateParams.variantId;
+          $scope.addAssertionUrl = $scope.addAssertionUrl + '&variantId=' + stateParams.variantId;
         }
       }
     });

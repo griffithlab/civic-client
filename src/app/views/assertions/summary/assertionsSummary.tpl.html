@@ -1,10 +1,26 @@
 <div class="assertionsSummary">
   <div class="title-row">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-10">
         <div class="name">
           <h3>Assertion {{vm.assertion.name}}</h3>
         </div>
+      </div>
+      <div class="col-xs-2 notices">
+        <span class="label label-warning" ng-if="vm.assertion.status === 'submitted'">Not Yet Accepted</span>
+        <span class="label label-danger" ng-if="vm.assertion.status === 'rejected'">Rejected</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info-row">
+    <div class="row view-pageBackground">
+      <div class="col-xs-12">
+        <ul class="actions-list">
+          <li>
+            <action-block actions="vm.assertion.lifecycle_actions"></action-block>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -78,7 +94,7 @@
                   {{ vm.assertion.drug_interaction_type }}
                 </td>
               </tr>
-              <tr>
+              <tr ng-if="vm.asserion.amp_level.length > 0">
                 <td class="key">AMP Level:</td>
                 <td class="value">
                   {{ vm.assertion.amp_level }}
@@ -140,6 +156,26 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row" ng-if="(vm.isEditor || vm.isAdmin) && vm.assertion.status === 'submitted'" style="margin-top: 1em;">
+    <div class="col-xs-6">
+      <a class="btn btn-default btn-block btn-danger"
+              ng-click="rejectItem(vm.assertion.id)">
+        Reject Assertion
+      </a>
+    </div>
+    <div class="col-xs-6">
+      <span uib-tooltip="Contributors may not accept their own submissions."
+            tooltip-append-to-body="true"
+            tooltip-enable="vm.ownerIsCurrentUser"
+            class="help-tooltip">
+      <a class="btn btn-default btn-block btn-success"
+              ng-disabled="vm.ownerIsCurrentUser"
+              ng-click="acceptItem(vm.assertion.id)">
+        Accept Assertion
+      </a>
+        </span>
     </div>
   </div>
   <div class="row" style="margin-top: 1.5em">

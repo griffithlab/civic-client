@@ -86,6 +86,44 @@
             else { return 1; }
           }
         }
+      })
+      .state('browse.evidence', {
+        url: '/evidence?page',
+        reloadOnSearch: false,
+        controller: 'BrowseController',
+        templateUrl: 'app/views/browse/browseViews.tpl.html',
+        data: {
+          titleExp: '"Browse Evidence Items"',
+          navMode: 'sub'
+        },
+        resolve: {
+          mode: function() {
+            return 'evidence_items';
+          },
+          page: /* @ngInject */ function($stateParams, _) {
+            if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
+            else { return 1; }
+          }
+        }
+      })
+      .state('browse.assertions', {
+        url: '/assertions?page',
+        reloadOnSearch: false,
+        controller: 'BrowseController',
+        templateUrl: 'app/views/browse/browseViews.tpl.html',
+        data: {
+          titleExp: '"Browse Assertions"',
+          navMode: 'sub'
+        },
+        resolve: {
+          mode: function() {
+            return 'assertions';
+          },
+          page: /* @ngInject */ function($stateParams, _) {
+            if(!_.isUndefined($stateParams.page)) { return $stateParams.page; }
+            else { return 1; }
+          }
+        }
       });
   }
 

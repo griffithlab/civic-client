@@ -2,76 +2,63 @@
   <div class="container-fluid">
     <div class="subheader-bg">
       <div class="row">
-        <div class="col-xs-3 subhead-input">
+        <div class="col-xs-4 subhead-input">
           <quick-search></quick-search>
         </div>
 
         <div class="col-xs-2 subhead-btn">
           <a type="button"
-             class="btn btn-sm btn-default btn-block btn-subhead-default"
-             ng-disabled="$state.includes('browse')"
-             ui-sref="browse.variants">Browse</a>
+            class="btn btn-sm btn-default btn-block btn-subhead-default"
+            ng-disabled="$state.includes('browse')"
+            ui-sref="browse.variants">Browse</a>
         </div>
 
         <div class="col-xs-2 subhead-btn">
           <a type="button"
-             class="btn btn-default btn-sm btn-block btn-subhead-default"
-             ng-disabled="$state.includes('search')"
-             ui-sref="search.evidence">Search</a>
+            class="btn btn-default btn-sm btn-block btn-subhead-default"
+            ng-disabled="$state.includes('search')"
+            ui-sref="search.evidence">Search</a>
         </div>
 
         <div class="col-xs-2 subhead-btn">
           <a type="button"
-             class="btn btn-default btn-sm btn-block btn-subhead-default"
-             ng-disabled="$state.includes('activity')"
-             ui-sref="activity">Activity</a>
+            class="btn btn-default btn-sm btn-block btn-subhead-default"
+            ng-disabled="$state.includes('activity')"
+            ui-sref="activity">Activity</a>
         </div>
-        <div class="col-xs-3">
 
-          <div class="row">
-            <div class="col-xs-6 subhead-btn">
-              <div ng-switch="isAuthenticated()">
-                <div ng-switch-when="false">
-              <span uib-tooltip="Please sign in to add Evidence" tooltip-append-to-body="true">
+        <div class="col-xs-2 subhead-btn">
+          <div ng-switch="isAuthenticated()">
+            <div ng-switch-when="false">
+              <span uib-tooltip="Please sign in to add Evidence Item, Assertions, or Source Suggestions" tooltip-append-to-body="true">
                 <a type="button"
-                   class="btn btn-sm btn-subhead-add btn-block disabled">
+                  class="btn btn-sm btn-subhead-add btn-block disabled">
                   Add
                 </a>
               </span>
-                </div>
-                <div ng-switch-when="true">
-                  <span uib-tooltip="Add an Evidence Item" tooltip-append-to-body="true">
-                    <a type="button"
-                       class="btn btn-sm btn-subhead-add btn-block"
-                       ng-disabled="$state.includes('add.evidence')"
-                       ng-href="{{ addEvidenceUrl }}">
-                      Add
-                    </a>
-                  </span>
-                </div>
-              </div>
             </div>
-            <div class="col-xs-6 subhead-btn">
-              <div ng-switch="isAuthenticated()">
-                <div ng-switch-when="false">
-              <span uib-tooltip="Please sign in to Suggest a source" tooltip-append-to-body="true">
-                <a type="button"
-                   class="btn btn-sm btn-subhead-suggest btn-block disabled">
-                  Suggest
-                </a>
+            <div ng-switch-when="true">
+              <span uib-tooltip="Add an Evidence Item, Assertion, or Source Suggestion " tooltip-append-to-body="true">
+                <span uib-dropdown>
+                  <a href type="button"
+                    class="btn btn-sm btn-subhead-add btn-block"
+                    id="add-dropdown"
+                    uib-dropdown-toggle>
+                    Add&nbsp;&nbsp;<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" role="menu" uib-dropdown-menu aria-labelledby="add-dropdown">
+                    <li role="menuitem">
+                      <a ng-href="{{ addEvidenceUrl }}" ng-disabled="$state.includes('add.evidence')">Add Evidence Item</a>
+                    </li>
+                    <li role="menuitem">
+                      <a ng-href="{{ addAssertionUrl }}" ng-disabled="$state.includes('add.assertion')">Add Assertion</a>
+                    </li>
+                    <li role="menuitem">
+                      <a ui-sref="suggest.source" ng-disabled="$state.includes('suggest.source')">Add Source Suggestion</a>
+                    </li>
+                  </ul>
+                </span>
               </span>
-                </div>
-                <div ng-switch-when="true">
-                  <span uib-tooltip="Suggest a publication" tooltip-append-to-body="true">
-                    <a type="button"
-                       class="btn btn-sm btn-subhead-suggest btn-block"
-                       ng-disabled="$state.includes('suggest.source')"
-                       ui-sref="suggest.source">
-                      Suggest
-                    </a>
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

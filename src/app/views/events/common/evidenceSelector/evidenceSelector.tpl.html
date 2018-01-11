@@ -1,0 +1,30 @@
+<div class="evidenceSelector">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="gridContainer">
+        <div ui-grid="ctrl.gridOptions"
+             ui-grid-cellnav
+             ui-grid-selection
+             ui-grid-pagination
+             ui-grid-auto-resize></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 text-center grid-pagination">
+      <ul uib-pagination
+        ng-if="ctrl.totalItems"
+        class="pagination-sm"
+        ng-change="ctrl.pageChanged()"
+        ng-model="ctrl.page"
+        items-per-page="ctrl.maxRows"
+        max-size="15"
+        boundary-links="true"
+        rotate="false"
+        align="true"
+        total-items="ctrl.totalItems"
+        direction-links="true">
+      </ul>
+    </div>
+  </div>
+</div>

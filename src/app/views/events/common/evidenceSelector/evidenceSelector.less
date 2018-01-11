@@ -1,0 +1,40 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.evidenceSelector {
+  @ui-grid-border-radius: @border-radius-large;
+  .ui-grid {
+    border: 1px solid #DEDEDE;
+    border-radius: @ui-grid-border-radius;
+
+    .ui-grid-viewport, .ui-grid-canvas {
+      border-bottom-right-radius: @ui-grid-border-radius;
+      border-bottom-left-radius: @ui-grid-border-radius;
+    }
+
+    .ui-grid-top-panel {
+      border-top-right-radius: @ui-grid-border-radius;
+      border-top-left-radius: @ui-grid-border-radius;
+    }
+  }
+  .grid-pagination {
+    ul {
+      margin-top: 0;
+      margin-bottom: @contentPadding/2;
+      .pagination-first a,
+      .pagination-last a,
+      .pagination-prev a,
+      .pagination-next a,
+      .pagination-page a {
+        border-top: none;
+      }
+      .pagination-first a {
+        border-top-left-radius: 0;
+      }
+      .pagination-last a {
+        border-top-right-radius: 0;
+      }
+    }
+  }
+}

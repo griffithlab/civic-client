@@ -1,0 +1,119 @@
+<div class="addAssertion">
+  <div class="row">
+    <div class="gradient-bg">
+      <div class="col-xs-12 title stripes-bg">
+        <h3>
+          <span class="entity-action">ADD</span>
+          <span ng-bind="vm.type" class="entity-type">ASSERTION</span>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSTRUCTIONS -->
+  <div class="row" ng-if="vm.showInstructions">
+    <div class="col-xs-12">
+      <div class="add-instructions">
+        <p>To add a Assertion, please complete the following form, then click the 'Add Assertion' button.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MESSAGES -->
+  <div class="row messages">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formMessages" class="add-messages">
+        <div ng-message="submitSuccess">
+          <div class="alert alert-success">
+            <strong class="status">Success</strong> - <span class="message">Your new Assertion was successfully submitted.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ERRORS -->
+  <div class="row errors">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formErrors" class="add-errors">
+        <div ng-message="500">
+          <div class="alert alert-danger">
+            <strong class="status">500 <span ng-bind="vm.validationMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
+          </div>
+        </div>
+        <div ng-message="400">
+          <div class="alert alert-danger">
+            <strong class="status">400 <span ng-bind="vm.validationMessages['400']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['400']">error prompt</span>
+          </div>
+        </div>
+        <div ng-message="401">
+          <div class="alert alert-danger">
+            <strong class="status">401 <span ng-bind="vm.validationMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
+          </div>
+        </div>
+        <div ng-message="403">
+          <div class="alert alert-danger">
+            <strong class="status">403 <span ng-bind="vm.validationMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
+          </div>
+        </div>
+        <div ng-message="409">
+          <div class="alert alert-danger">
+            <strong class="status">409 <span ng-bind="vm.validationMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form class="form-horizontal" name="vm.form" ng-if="vm.showForm" autocomplete="off">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <formly-form options="vm.options" model="vm.assertion" fields="vm.assertionFields">
+        </formly-form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-2">
+        <div class="buttons">
+          <div class="pull-right">
+            <button type="submit" class="btn btn-default" ng-disabled="vm.form.$invalid || vm.isAuthenticated === false" ng-click="vm.add(vm.assertion, vm.options)">
+              Submit Assertion
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.form.$invalid">
+      <div class="col-xs-5 col-xs-offset-7">
+        <div class="alert alert-info" style="margin-top: 16px;">
+          The Submit button is disabled because the Assertion form is incomplete or contains errors. Please ensure that all required fields (marked with an *) are completed and error free.
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <div class="successMessage" ng-if="vm.showSuccessMessage">
+    <div class="col-xs-12 jumbotron">
+      <h1>Thank you.</h1>
+      <p>Your new Assertion, {{ vm.newAssertionName }}, has been added.</p>
+      <p>
+        <a ng-href="/assertions/{{vm.newAssertionId}}/summary" class="btn btn-small btn-default">View it here</a>
+        &nbsp;or&nbsp;
+        <a ui-sref="add.assertion"
+           ui-sref-opts="{reload:true, inherit: true}"
+           class="btn btn-small btn-default">Add Another Assertion</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <h4>Assertion</h4> -->
+  <!-- <pre ng-bind="vm.assertion | json"></pre> -->
+  <!-- </div> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <h4>vm.form</h4> -->
+  <!-- <pre ng-bind="vm.form | json"></pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
+</div>

@@ -26,6 +26,7 @@
 
     vm.entityNames = [];
 
+    if(_.has(params, 'assertion')) {vm.entityNames.push(params.assertion.name);}
     if(_.has(params, 'gene')) {vm.entityNames.push(params.gene.name);}
     if(_.has(params, 'variant')) {vm.entityNames.push(params.variant.name);}
     if(_.has(params, 'evidence_item')) {vm.entityNames.push(params.evidence_item.name);}
@@ -36,6 +37,7 @@
     vm.eventClick = function(event) {
       var subjectStates = {
         genes: 'events.genes',
+        assertion: 'assertion.summary',
         variants: 'events.genes.summary.variants',
         variantgroups: 'events.genes.summary.variantGroups',
         evidenceitems: 'events.genes.summary.variants.summary.evidence',

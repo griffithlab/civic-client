@@ -4,6 +4,42 @@
 @import 'src/app/styles/_mixins.less';
 
 .assertionsSummary {
+  .title-row {
+    margin-bottom: 0;
+
+    .notices {
+      text-align: right;
+      padding-top: @contentPadding;
+    }
+  }
+  .user-info-row {
+    .fullBleed();
+    margin-bottom: @contentPadding;
+
+    ul {
+      margin: 0;
+      margin-left: -5px;
+      padding: @contentPadding/2 0 0 0;
+
+      li {
+        display: inline-block;
+      }
+    }
+
+    .view-pageBackground2 {
+      background-color: @pageBackground2 !important;
+    }
+    .view-pageBackground {
+      background-color: @pageBackground !important;
+    }
+
+    .info-box {
+      border-radius: @border-radius-small;
+      background-color: #AAA;
+      padding: @contentPadding/2;
+    }
+  }
+
   .table {
     th {
       border: none;

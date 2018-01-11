@@ -1,15 +1,26 @@
 @import 'bower_components/bootstrap/less/mixins.less';
 @import 'bower_components/bootstrap/less/variables.less';
 @import 'src/app/styles/_civic-variables.less';
-@import 'src/app/styles/_mixins.less';
 
-.evidenceSummary {
-  .fullBleed();
-  padding-top: @contentPadding;
-  padding-bottom: @contentPadding;
-  border-bottom-right-radius: @border-radius-large;
-  border-bottom-left-radius: @border-radius-large;
-
+.evidenceSelectorItem {
+  background-color: @pageBackground2;
+  padding: @contentPadding/2 @contentPadding;
+  border-radius: @border-radius-large;
+  .header {
+    border-bottom: 1px solid #CCC;
+    .title h3 {
+      padding: 0 0 @contentPadding/2 0;
+    }
+    .actions {
+      text-align: right;
+      padding-top: @contentPadding/3;
+    }
+  }
+  .summary {
+    .explanation {
+      padding-top: @contentPadding/2;
+    }
+  }
   .table {
     margin-bottom: 0!important;
 
