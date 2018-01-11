@@ -40,7 +40,7 @@
 
     ctrl.filters = [];
 
-    if(ctrl.mode !== 'evidence_items') {
+    if(ctrl.mode !== 'evidence_items' && ctrl.mode !== 'assertions') {
       ctrl.sorting = [{
         field: 'evidence_item_count',
         direction: 'desc'
@@ -85,6 +85,19 @@
     var modeColumnDefs = {
       'assertions': [
         {
+          name: 'id',
+          displayName: 'AID',
+          visible: true,
+          width: '7%',
+          type: 'number',
+          enableSorting: true,
+          enableFiltering: true,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
           name: 'gene_name',
           enableFiltering: true,
           allowCellFocus: false,
@@ -126,6 +139,18 @@
         },
       ],
       'evidence_items': [
+        {
+          name: 'id',
+          displayName: 'EID',
+          visible: true,
+          type: 'number',
+          enableSorting: true,
+          enableFiltering: true,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
         {
           name: 'gene_name',
           enableFiltering: true,
