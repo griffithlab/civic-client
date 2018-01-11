@@ -121,6 +121,7 @@
           name: 'id',
           displayName: 'EID',
           visible: true,
+          width: '5%',
           type: 'number',
           enableSorting: true,
           enableFiltering: true,
