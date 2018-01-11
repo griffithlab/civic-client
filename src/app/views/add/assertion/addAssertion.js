@@ -301,6 +301,11 @@
             if (edField.value() !== '') { // only update if user has selected an option
               edField.templateOptions.data.updateDefinition(null, edField, scope);
             }
+
+            // reset ACMG codes if new Type != Predisposing
+            if(value !== 'Predisposing') {
+              _.find(scope.fields, { key: 'acmg_codes'}).value(['']);
+            }
           },
           helpText: 'Type of clinical outcome associated with the assertion description.',
           data: {
