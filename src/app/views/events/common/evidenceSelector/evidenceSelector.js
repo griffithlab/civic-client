@@ -119,7 +119,15 @@
       'browse': [
         {
           name: 'id',
-          visible: false
+          displayName: 'EID',
+          visible: true,
+          type: 'number',
+          enableSorting: true,
+          enableFiltering: true,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         },
         {
           name: 'gene_name',
