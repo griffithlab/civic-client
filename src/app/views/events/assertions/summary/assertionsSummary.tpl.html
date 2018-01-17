@@ -1,32 +1,12 @@
 <div class="assertionsSummary">
-  <div class="title-row">
-    <div class="row">
-      <div class="col-xs-10">
-        <div class="name">
-          <h3>Assertion {{vm.assertion.name}}</h3>
-        </div>
-      </div>
-      <div class="col-xs-2 notices">
-        <span class="label label-warning" ng-if="vm.assertion.status === 'submitted'">Not Yet Accepted</span>
-        <span class="label label-danger" ng-if="vm.assertion.status === 'rejected'">Rejected</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="user-info-row">
-    <div class="row view-pageBackground">
-      <div class="col-xs-12">
-        <ul class="actions-list">
-          <li>
-            <action-block actions="vm.assertion.lifecycle_actions"></action-block>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-xs-12 col-md-6">
+      <div class="row" ng-if="vm.assertion.status !== 'accepted'">
+        <div class="col-xs-12 notices" >
+          <div class="label label-warning" ng-if="vm.assertion.status === 'submitted'">This Assertion Has Not Yet Been Accepted</div>
+          <div class="label label-danger" ng-if="vm.assertion.status === 'rejected'">This Assertion Has Been Rejected</div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xs-12">
           <p>

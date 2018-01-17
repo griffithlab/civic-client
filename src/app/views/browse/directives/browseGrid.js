@@ -520,7 +520,7 @@
             sourceId: row.entity.id
           };
         } else if (ctrl.mode === 'assertions') {
-          state = 'assertions.summary';
+          state = 'events.assertions.summary';
           params = {
             assertionId: row.entity.id
           };
