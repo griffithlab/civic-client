@@ -29,6 +29,9 @@
     </span>
 
     <span ng-switch="event.subject_type">
+      <span ng-switch-when="assertions">
+        <span class="subject-type">assertion</span>
+      </span>
       <span ng-switch-when="genes">
         <span class="subject-type">gene</span>
       </span>
