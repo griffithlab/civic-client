@@ -30,15 +30,18 @@
 
     vm.entityNames = [];
 
+    if(_.has(params, 'assertion')) {vm.entityNames.push(params.assertion.name);}
     if(_.has(params, 'gene')) {vm.entityNames.push(params.gene.name);}
     if(_.has(params, 'variant')) {vm.entityNames.push(params.variant.name);}
     if(_.has(params, 'evidence_item')) {vm.entityNames.push(params.evidence_item.name);}
+    if(_.has(params, 'source')) {vm.entityNames.push(params.source.name);}
 
     vm.entityName = _.compact(vm.entityNames).join(' / ');
 
     vm.eventClick = function(notification) {
       var subjectStates = {
         genes: 'events.genes',
+        assertions: 'assertions',
         variants: 'events.genes.summary.variants',
         variantgroups: 'events.genes.summary.variantGroups',
         evidenceitems: 'events.genes.summary.variants.summary.evidence'
@@ -63,9 +66,15 @@
 
       var stateExtension = {
         'commented': '.talk.comments',
+        'flagged': '.summary',
+        'flag resolved': '.summary',
         'submitted': '.summary',
         'accepted': '.summary',
+        'assertion submitted': '.summary',
+        'assertion accepted': '.summary',
+        'assertion rejected': '.summary',
         'rejected': '.summary',
+        'publication suggested': '.summary',
         'change suggested': '.talk.revisions.list.summary',
         'change accepted': '.talk.revisions.list.summary',
         'change rejected': '.talk.revisions.list.summary'
