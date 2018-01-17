@@ -95,13 +95,13 @@
 
   // @ngInject
   function AssertionsController(Assertions,
-                                // AssertionRevisions,
+                                AssertionRevisions,
                                 AssertionsViewOptions) {
     AssertionsViewOptions.init();
     // these will be passed to the entity-view directive controller, to be required by child entity component so that they
     // can get references to the view model and view options
     this.AssertionsViewModel = Assertions;
-    // this.AssertionsViewRevisions = AssertionRevisions;
+    this.AssertionsViewRevisions = AssertionRevisions;
     this.AssertionsViewOptions = AssertionsViewOptions;
   }
 })();
