@@ -1,0 +1,172 @@
+<div class="assertionsSummaryCmp">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="row" ng-if="vm.assertion.status !== 'accepted'">
+        <div class="col-xs-12 notices" >
+          <div class="label label-warning" ng-if="vm.assertion.status === 'submitted'">This Assertion Has Not Yet Been Accepted</div>
+          <div class="label label-danger" ng-if="vm.assertion.status === 'rejected'">This Assertion Has Been Rejected</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+            <strong>Gene: </strong>
+            <a ui-sref="events.genes.summary({geneId: vm.assertion.gene.id})"> {{ vm.assertion.gene.name }}</a>&nbsp;&nbsp;
+            <strong>Variant: </strong>
+            <a ui-sref="events.genes.summary.variants.summary({geneId: vm.assertion.gene.id, variantId: vm.assertion.variant.id})">{{ vm.assertion.variant.name }}</a>&nbsp;&nbsp;
+            <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <p><strong>Summary:</strong> <span ng-bind="vm.assertion.summary">Description</span></p>
+        </div>
+      </div>
+      <div class="row" ng-if="vm.assertion.description.length > 0">
+        <div class="col-xs-12">
+          <p><strong>Description:</strong> <span ng-bind="vm.assertion.description">Description</span></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <my-variant-info variant-info="vm.myVariantInfo" ng-if="vm.myVariantInfo._id"></my-variant-info>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="well">
+            <table class="table">
+              <tr>
+                <td class="key">Evidence Type:</td>
+                <td class="value">
+                  {{vm.assertion.evidence_type}}
+                </td>
+              </tr>
+              <tr>
+                <td class="key">Evidence Direction:</td>
+                <td class="value">
+                  {{vm.assertion.evidence_direction}}
+                </td>
+              </tr>
+              <tr>
+                <td class="key">Clinical Significance:</td>
+                <td class="value">
+                  {{ vm.assertion.clinical_significance }}
+                </td>
+              </tr>
+              <tr ng-if="vm.assertion.drugs.length > 0">
+                <td class="key">Drugs:</td>
+                <td class="value">
+                  <span ng-repeat="drug in vm.assertion.drugs">
+                    {{
+                    $first ? '' : $last ? (vm.assertion.drugs > 2 ? ', and ' : ' and ') : ', '
+                    }}
+                    {{drug.name}}
+                  </span>
+                </td>
+              </tr>
+              <tr ng-if="vm.assertion.drug_interaction_type !== null">
+                <td class="key">Drug Interaction Type</td>
+                <td class="value">
+                  {{ vm.assertion.drug_interaction_type }}
+                </td>
+              </tr>
+              <tr ng-if="vm.assertion.amp_level.length > 0">
+                <td class="key">AMP Level:</td>
+                <td class="value">
+                  {{ vm.assertion.amp_level }}
+                </td>
+              </tr>
+              <tr ng-if="vm.assertion.acmg_codes.length > 0" >
+                <td class="key">ACMG Codes:</td>
+                <td class="value">
+                  <span ng-switch="vm.assertion.acmg_codes.length > 0">
+                    <span ng-switch-when="true" >
+                      <span ng-repeat="code in vm.assertion.acmg_codes"
+                        uib-tooltip="{{code.description}}">
+                        {{
+                        $first ? '' : $last ? (vm.assertion.acmd_codes > 2 ? ', and ' : ' and ') : ', '
+                        }}
+                        {{ code.code}}
+                      </span>
+                  </span>
+                  <span ng-switch-when="false">
+                      --
+                    </span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="key">NCCN Guideline:</td>
+                <td class="value">{{ vm.assertion.nccn_guideline }}
+                  <span ng-if="vm.assertion.nccn_guideline_version">(v{{vm.assertion.nccn_guideline_version}})</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="key">Regulatory Approval:</td>
+                <td class="value">
+                  <span ng-switch="vm.assertion.fda_regulatory_approval">
+                    <span ng-switch-when="true" >
+                      <i class="glyphicon glyphicon-ok" style="color: green"></i>
+                    </span>
+                  <span ng-switch-when="false">
+                      <i class="glyphicon glyphicon-remove" style="color: red"></i>
+                    </span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="key">FDA Companion Test:</td>
+                <td class="value">
+                  <div ng-switch="vm.assertion.fda_companion_test">
+                    <span ng-switch-when="true">
+                      <i class="glyphicon glyphicon-ok" style="color: green"></i>
+                    </span>
+                    <span ng-switch-when="false">
+                      <i class="glyphicon glyphicon-remove" style="color: red"></i>
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="(vm.isEditor || vm.isAdmin) && vm.assertion.status === 'submitted'" style="margin-top: 1em;">
+    <div class="col-xs-6">
+      <a class="btn btn-default btn-block btn-danger"
+              ng-click="rejectItem(vm.assertion.id)">
+        Reject Assertion
+      </a>
+    </div>
+    <div class="col-xs-6">
+      <span uib-tooltip="Contributors may not accept their own submissions."
+            tooltip-append-to-body="true"
+            tooltip-enable="vm.ownerIsCurrentUser"
+            class="help-tooltip">
+      <a class="btn btn-default btn-block btn-success"
+              ng-disabled="vm.ownerIsCurrentUser"
+              ng-click="acceptItem(vm.assertion.id)">
+        Accept Assertion
+      </a>
+        </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <evidence-grid evidence="vm.assertion.evidence_items" rows="8" show-gene-col="true" show-variant-col="true" context="'assertion'" source="vm.assertion" rounded="true">
+      </evidence-grid>
+    </div>
+  </div>
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-12"> -->
+  <!-- <pre ng-bind="vm.assertion|json"></pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
+</div>
