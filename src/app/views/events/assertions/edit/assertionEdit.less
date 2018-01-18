@@ -1,0 +1,69 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.assertionEdit {
+  .fullBleed();
+  .form-header {
+    margin-bottom: 1em;
+    border-top: 1px solid #AAA;
+
+    #gradient > .vertical-three-colors(@pageBackground3,@pageBackground3, 60%, darken(@pageBackground3, 8%));
+    .stripes-bg {
+      .clearfix();
+      background-image: url('/assets/images/grey_stripes.png');
+    }
+    .name {
+      h3 {
+        display: block;
+        margin: 0;
+        padding: @contentPadding/2 0;
+      }
+    }
+  }
+
+  .edit-instructions  {
+    background-color: @pageBackground2;
+    border-radius: @border-radius-small;
+    padding: @contentPadding;
+    margin-bottom: @contentPadding;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .edit-warning {
+    background-color: lightyellow;
+    border-radius: @border-radius-small;
+    padding: @contentPadding;
+    border: 1px solid darken(yellow, 10%);
+    margin-bottom: @contentPadding;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .field-list {
+    margin: .5em 0;
+  }
+
+  .edit-form {
+    .clearfix();
+  }
+
+  .edit-errors, .edit-messages {
+    .alert {
+      margin-bottom: @contentPadding;
+    }
+  }
+
+  .edit-errors {
+  }
+
+  .edit-messages {
+  }
+  .successMessage {
+    .clearfix();
+  }
+}

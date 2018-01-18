@@ -1,0 +1,16 @@
+<div class="AssertionEditView">
+  <entity-edit-view view-model="vm.AssertionEditViewModel" revisions-model="vm.AssertionRevisionsModel" view-options="vm.AssertionsTalkViewOptions">
+    <div class="row">
+      <div class="col-xs-12">
+        <assertion-summary></assertion-summary>
+      </div>
+    </div>
+    <div class="row entity-talk-content {{ vm.AssertionEditViewOptions.styles.view.talkBackgroundColor }}">
+      <div class="col-xs-12">
+        <ui-view>
+
+        </ui-view>
+      </div>
+    </div>
+  </entity-edit-view>
+</div>
