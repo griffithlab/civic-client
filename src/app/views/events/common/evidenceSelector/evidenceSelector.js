@@ -71,15 +71,22 @@
 
     ctrl.addItem = function(rowItem) {
       Evidence.get(rowItem.id).then(function(item) {
-        item.evidence_level_string = item.evidence_level + ' - ' + evidence_levels[item.evidence_level];
-        if(item.drugs.length > 0) {
-          item.drugsStr = _.chain(item.drugs).map('name').value().join(', ');
-        } else {
-          item.drugsStr = 'N/A';
-        }
         $scope.items.unshift(item);
       });
     };
+
+    $scope.$watchCollection('items', function(items) {
+      _.each(items, function(item) {
+        if(_.isUndefined(item.evidence_level_string)){
+          item.evidence_level_string = item.evidence_level + ' - ' + evidence_levels[item.evidence_level];
+          if(item.drugs.length > 0) {
+            item.drugsStr = _.chain(item.drugs).map('name').value().join(', ');
+          } else {
+            item.drugsStr = 'N/A';
+          }
+        }
+      });
+    });
 
     ctrl.removeItem = function(item) {
       $scope.items = _.reject($scope.items, {id: item.id});
