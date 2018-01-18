@@ -351,6 +351,7 @@
         },
         templateOptions: {
           label: 'Assertion Direction',
+          required: true,
           value: 'vm.newEvidence.evidence_direction',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'

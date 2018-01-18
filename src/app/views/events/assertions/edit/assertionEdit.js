@@ -57,6 +57,7 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.assertion = {};
+
     angular.copy(Assertions.data.item, vm.assertion);
     vm.assertion.acmg_codes = _.map(vm.assertion.acmg_codes, 'code');
     vm.pendingFields = _.keys(AssertionRevisions.data.pendingFields).length > 0;
@@ -354,6 +355,7 @@
         },
         templateOptions: {
           label: 'Assertion Direction',
+          required: true,
           value: 'vm.newEvidence.evidence_direction',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
