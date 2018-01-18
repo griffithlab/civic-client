@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('civic.assertions')
+  angular.module('civic.events.assertions')
     .config(AssertionsConfig)
     .factory('AssertionsViewOptions', AssertionsViewOptions)
     .controller('AssertionsController', AssertionsController);

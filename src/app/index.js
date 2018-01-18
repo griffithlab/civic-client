@@ -37,7 +37,6 @@
     // app root views
     'civic.pages',
     'civic.activity',
-    'civic.assertions',
     'civic.search',
     'civic.account',
     'civic.browse',
@@ -96,19 +95,19 @@
       }
     });
     /*  ui-router debug logging - uncomment these if you run into links/routes silently failing. */
-    // function message(to, toP, from, fromP) {
-    //   return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
-    // }
+    function message(to, toP, from, fromP) {
+      return from.name + angular.toJson(fromP) + ' -> ' + to.name + angular.toJson(toP);
+    }
 
-    // $rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
-    //   console.log('Start:   ' + message(to, toP, from, fromP));
-    // });
-    // $rootScope.$on('$stateChangeSuccess', function (evt, to, toP, from, fromP) {
-    //   console.log('Success: ' + message(to, toP, from, fromP));
-    // });
-    // $rootScope.$on('$stateChangeError', function (evt, to, toP, from, fromP, err) {
-    //   console.error('Error:   ' + message(to, toP, from, fromP), err);
-    // });
+    $rootScope.$on('$stateChangeStart', function (evt, to, toP, from, fromP) {
+      console.log('Start:   ' + message(to, toP, from, fromP));
+    });
+    $rootScope.$on('$stateChangeSuccess', function (evt, to, toP, from, fromP) {
+      console.log('Success: ' + message(to, toP, from, fromP));
+    });
+    $rootScope.$on('$stateChangeError', function (evt, to, toP, from, fromP, err) {
+      console.error('Error:   ' + message(to, toP, from, fromP), err);
+    });
 
   }
 
@@ -139,7 +138,6 @@
     'civic.users.common'
   ]);
   angular.module('civic.organizations', []);
-  angular.module('civic.assertions', []);
 
   angular.module('civic.add', [
     'ui.router',
@@ -157,6 +155,7 @@
     'angular-lodash/filters',
     'civic.events.common',
     'civic.events.genes',
+    'civic.events.assertions',
     'civic.events.variants',
     'civic.events.variantGroups',
     'civic.events.evidence'
