@@ -87,7 +87,7 @@
           talkBackgroundColor: 'pageBackground'
         },
         tabs: {
-          tabRowBackground: 'pageBackground2Gradient'
+          tabRowBackground: 'pageBackgroundGradient'
         }
       }, styles);
     }

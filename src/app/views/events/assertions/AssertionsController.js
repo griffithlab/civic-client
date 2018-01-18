@@ -74,19 +74,10 @@
 
       angular.copy({
         view: {
-          backgroundColor: 'pageBackground2'
+          backgroundColor: 'pageBackground'
         },
         summary: {
-          backgroundColor: 'pageBackground2'
-        },
-        myAssertionInfo: {
-          backgroundColor: 'pageBackground2'
-        },
-        variantMenu: {
-          backgroundColor: 'pageBackground2'
-        },
-        edit: {
-          summaryBackgroundColor: 'pageBackground2'
+          backgroundColor: 'pageBackground'
         }
       }, this.styles);
     }
