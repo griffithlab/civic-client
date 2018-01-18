@@ -158,22 +158,149 @@
           }
         },
         {
-          name: 'source_citation',
+          name: 'drugs',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
+            condition: uiGridConstants.filter.CONTAINS,
           }
         },
         {
-          name: 'source_title',
+          name: 'evidence_level',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          displayName: 'EL',
+          headerTooltip: 'Evidence Level',
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'A', label: 'A - Validated'},
+              { value: 'B', label: 'B - Clinical'},
+              { value: 'C', label: 'C - Case Study'},
+              { value: 'D', label: 'D - Preclinical'},
+              { value: 'E', label: 'E - Inferential'}]
+          },
+        },
+        {
+          name: 'evidence_type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          displayName: 'ET',
+          headerTooltip: 'Evidence Type',
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              {
+                value: null,
+                label: '--'
+              },
+              {
+                value: 'Predictive',
+                label: 'Predictive'
+              },
+              {
+                value: 'Diagnostic',
+                label: 'Diagnostic'
+              },
+              {
+                value: 'Prognostic',
+                label: 'Prognostic'
+              },
+              {
+                value: 'Predisposing',
+                label: 'Predisposing'
+              }
+            ]
+          },
+        },
+        {
+          name: 'evidence_direction',
+          displayName: 'ED',
+          headerTooltip: 'Evidence Direction',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Supports', label: 'Supports' },
+              { value: 'Does Not Support', label: 'Does not Support' }
+            ]
+          },
+        },
+        {
+          name: 'clinical_significance',
+          displayName: 'CS',
+          headerTooltip: 'Clinical Significance',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Sensitivity', label: 'Sensitivity' },
+              { value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+              { value: 'Better Outcome', label: 'Better Outcome' },
+              { value: 'Poor Outcome', label: 'Poor Outcome' },
+              { value: 'Positive', label: 'Positive' },
+              { value: 'Negative', label: 'Negative' },
+              { value: 'Adverse Response', label: 'Adverse Response' },
+              { value: 'N/A', label: 'N/A' }
+            ]
+          },
+        },
+        {
+          name: 'variant_origin',
+          displayName: 'VO',
+          headerTooltip: 'Variant Origin',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Somatic Mutation', label: 'Somatic Mutation'},
+              { value: 'Germline Mutation', label: 'Germline Mutation' },
+              { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
+              { value: 'Unknown', label: 'Unknown' },
+              { value: 'N/A', label: 'N/A' },
+            ]
+          },
+        },
+        {
+          name: 'rating',
+          displayName: 'TR',
+          headerTooltip: 'Trust Rating',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: '5', label: '5 stars'},
+              { value: '4', label: '4 stars'},
+              { value: '3', label: '3 stars'},
+              { value: '2', label: '2 stars'},
+              { value: '1', label: '1 stars'},
+            ]
+          },
         },
         {
           name: 'action_add',
@@ -213,22 +340,149 @@
           }
         },
         {
-          name: 'source_citation',
+          name: 'drugs',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
+            condition: uiGridConstants.filter.CONTAINS,
           }
         },
         {
-          name: 'source_title',
+          name: 'evidence_level',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          displayName: 'EL',
+          headerTooltip: 'Evidence Level',
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'A', label: 'A - Validated'},
+              { value: 'B', label: 'B - Clinical'},
+              { value: 'C', label: 'C - Case Study'},
+              { value: 'D', label: 'D - Preclinical'},
+              { value: 'E', label: 'E - Inferential'}]
+          },
+        },
+        {
+          name: 'evidence_type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          displayName: 'ET',
+          headerTooltip: 'Evidence Type',
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              {
+                value: null,
+                label: '--'
+              },
+              {
+                value: 'Predictive',
+                label: 'Predictive'
+              },
+              {
+                value: 'Diagnostic',
+                label: 'Diagnostic'
+              },
+              {
+                value: 'Prognostic',
+                label: 'Prognostic'
+              },
+              {
+                value: 'Predisposing',
+                label: 'Predisposing'
+              }
+            ]
+          },
+        },
+        {
+          name: 'evidence_direction',
+          displayName: 'ED',
+          headerTooltip: 'Evidence Direction',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Supports', label: 'Supports' },
+              { value: 'Does Not Support', label: 'Does not Support' }
+            ]
+          },
+        },
+        {
+          name: 'clinical_significance',
+          displayName: 'CS',
+          headerTooltip: 'Clinical Significance',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Sensitivity', label: 'Sensitivity' },
+              { value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+              { value: 'Better Outcome', label: 'Better Outcome' },
+              { value: 'Poor Outcome', label: 'Poor Outcome' },
+              { value: 'Positive', label: 'Positive' },
+              { value: 'Negative', label: 'Negative' },
+              { value: 'Adverse Response', label: 'Adverse Response' },
+              { value: 'N/A', label: 'N/A' }
+            ]
+          },
+        },
+        {
+          name: 'variant_origin',
+          displayName: 'VO',
+          headerTooltip: 'Variant Origin',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Somatic Mutation', label: 'Somatic Mutation'},
+              { value: 'Germline Mutation', label: 'Germline Mutation' },
+              { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
+              { value: 'Unknown', label: 'Unknown' },
+              { value: 'N/A', label: 'N/A' },
+            ]
+          },
+        },
+        {
+          name: 'rating',
+          displayName: 'TR',
+          headerTooltip: 'Trust Rating',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          allowCellFocus: false,
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: '5', label: '5 stars'},
+              { value: '4', label: '4 stars'},
+              { value: '3', label: '3 stars'},
+              { value: '2', label: '2 stars'},
+              { value: '1', label: '1 stars'},
+            ]
+          },
         },
         {
           name: 'action_remove',
