@@ -12,6 +12,12 @@
         abstract: true,
         url: '/assertions/:assertionId',
         templateUrl: 'app/views/events/assertions/AssertionsView.tpl.html',
+        resolve: /* @ngInject */ {
+          Assertions: 'Assertions',
+          initAssertion: function(Assertions, $stateParams) {
+            return Assertions.initBase($stateParams.assertionId);
+          }
+        },
         controller: 'AssertionsController',
         controllerAs: 'vm',
         data: {

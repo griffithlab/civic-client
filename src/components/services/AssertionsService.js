@@ -60,6 +60,9 @@
       submitFlag: {
         method: 'POST',
         url: '/api/assertions/:assertionId/flags',
+        params: {
+          assertionId: '@assertionId'
+        },
         cache: false
       },
       resolveFlag: {
@@ -121,7 +124,7 @@
   }
 
   // @ngInject
-  function AssertionsService(AssertionsResource, $cacheFactory) {
+  function AssertionsService(AssertionsResource, $cacheFactory, $q, Subscriptions) {
     var cache = $cacheFactory.get('$http');
 
     // Base Assertion
@@ -134,6 +137,8 @@
     var flags = [];
 
     return {
+      initBase: initBase,
+      initComments: initComments,
       data: {
         item: item,
         collection: collection,
@@ -163,6 +168,19 @@
       updateComment: updateComment,
       deleteComment: deleteComment
     };
+
+    function initBase(assertionId) {
+      return $q.all([
+        get(assertionId),
+        queryFlags(assertionId)
+      ]);
+    }
+
+    function initComments(assertionId) {
+      return $q.all([
+        queryComments(assertionId)
+      ]);
+    }
 
     function query() {
       return AssertionsResource.query().$promise
