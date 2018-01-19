@@ -274,7 +274,15 @@
   <script type="text/ng-template" id="assertionTag.tpl.html">
     <span uib-tooltip-template="'assertionTagTooltip.tpl.html'">
       <a ui-sref="events.assertions.summary({ assertionId: assertion.id })" class="assertion-tag" ng-class="{ 'statusAccepted': assertion.status === 'accepted', 'statusSubmitted': assertion.status === 'submitted', 'statusRejected': assertion.status === 'rejected' }">
-        <span ng-bind-html="assertion.name" class="assertion-name">AssertionName</span>
+        <i class="glyphicon glyphicon-exclamation-sign pending-alert"
+          ng-if="assertion.pending_evidence_count > 0 || assertion.open_change_count > 0"
+          ng-class="{'pending-evidence': assertion.pending_evidence_count > 0,
+            'pending-changes': assertion.open_change_count > 0,
+            'pending-both': assertion.pending_evidence_count > 0 &&
+            assertion.open_change_count > 0}"></i>
+        <span ng-bind-html="assertion.name" class="assertion-name">
+          AssertionName
+        </span>
       </a>
     </span>
   </script>
