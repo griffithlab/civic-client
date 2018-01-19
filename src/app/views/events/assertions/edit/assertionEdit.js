@@ -68,10 +68,6 @@
     vm.assertionHistory = AssertionHistory;
     vm.assertionEdit = angular.copy(vm.assertion);
     vm.assertionEdit.comment = { title: 'ASSERTION ' + vm.assertion.name + ' Revision Description', text:'' };
-    vm.assertionEdit.source_ids = _.map(vm.assertion.sources, 'pubmed_id');
-    vm.myAssertionInfo = assertionModel.data.myAssertionInfo;
-    vm.variants = assertionModel.data.variants;
-    vm.variantGroups = assertionModel.data.variantGroups;
 
     vm.styles = AssertionsViewOptions.styles;
 
@@ -625,12 +621,14 @@
     ];
 
     vm.submit = function(assertionEdit) {
-      assertionEdit.assertionId = assertionEdit.id;
-      assertionEdit.sources = assertionEdit.source_ids;
+      var newAssertion = _.cloneDeep(assertionEdit);
+      newAssertion.drugs = _.without(newAssertion.drugs, '');
+      newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
+      newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
       vm.formErrors = {};
       vm.formMessages = {};
 
-      AssertionRevisions.submitRevision(assertionEdit)
+      AssertionRevisions.submitRevision(newAssertion)
         .then(function(response) {
           console.log('revision submit success!');
           vm.newRevisionId = response.id;
@@ -649,24 +647,6 @@
         })
         .finally(function(){
           console.log('revision submit done!');
-        });
-    };
-
-    vm.apply = function(assertionEdit) {
-      assertionEdit.assertionId = assertionEdit.id;
-      vm.formErrors = {};
-      vm.formMessages = {};
-      Assertions.apply(assertionEdit)
-        .then(function() {
-          console.log('revision apply success!');
-          vm.formMessages.applySuccess = true;
-        })
-        .catch(function(response) {
-          console.error('revision application error!');
-          vm.formErrors[response.status] = true;
-        })
-        .finally(function(){
-          console.log('revision apply done!');
         });
     };
 

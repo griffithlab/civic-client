@@ -207,6 +207,7 @@
     }
 
     function submitRevision(reqObj) {
+      reqObj.assertionId = reqObj.id;
       return AssertionRevisionsResource.submitRevision(reqObj).$promise.then(
         function(response) { // success
           cache.remove('/api/assertions/' + reqObj.id + '/suggested_changes/');
