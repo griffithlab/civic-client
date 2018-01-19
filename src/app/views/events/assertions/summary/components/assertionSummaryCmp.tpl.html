@@ -107,8 +107,16 @@
               </tr>
               <tr>
                 <td class="key">NCCN Guideline:</td>
-                <td class="value">{{ vm.assertion.nccn_guideline }}
-                  <span ng-if="vm.assertion.nccn_guideline_version">(v{{vm.assertion.nccn_guideline_version}})</span>
+                <td class="value">
+                  <span ng-switch="vm.assertion.nccn_guideline !== null">
+                    <span ng-switch-when="true">
+                      {{ vm.assertion.nccn_guideline }}
+                      <span ng-if="vm.assertion.nccn_guideline_version">(v{{vm.assertion.nccn_guideline_version}})</span>
+                    </span>
+                    <span ng-switch-when="false">
+                      --
+                    </span>
+                  </span>
                 </td>
               </tr>
               <tr>
@@ -118,8 +126,8 @@
                     <span ng-switch-when="true" >
                       <i class="glyphicon glyphicon-ok" style="color: green"></i>
                     </span>
-                  <span ng-switch-when="false">
-                      <i class="glyphicon glyphicon-remove" style="color: red"></i>
+                    <span ng-switch-when="false">
+                      --
                     </span>
                   </span>
                 </td>
@@ -132,7 +140,7 @@
                       <i class="glyphicon glyphicon-ok" style="color: green"></i>
                     </span>
                     <span ng-switch-when="false">
-                      <i class="glyphicon glyphicon-remove" style="color: red"></i>
+                      --
                     </span>
                   </div>
                 </td>
