@@ -273,7 +273,7 @@
 
   <script type="text/ng-template" id="assertionTag.tpl.html">
     <span uib-tooltip-template="'assertionTagTooltip.tpl.html'">
-      <a ui-sref="assertions.summary({ assertionId: assertion.id })" class="assertion-tag" ng-class="{ 'statusAccepted': assertion.status === 'accepted', 'statusSubmitted': assertion.status === 'submitted', 'statusRejected': assertion.status === 'rejected' }">
+      <a ui-sref="events.assertions.summary({ assertionId: assertion.id })" class="assertion-tag" ng-class="{ 'statusAccepted': assertion.status === 'accepted', 'statusSubmitted': assertion.status === 'submitted', 'statusRejected': assertion.status === 'rejected' }">
         <span ng-bind-html="assertion.name" class="assertion-name">AssertionName</span>
       </a>
     </span>
