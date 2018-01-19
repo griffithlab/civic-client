@@ -14,6 +14,12 @@
             <a ui-sref="events.genes.summary({geneId: vm.assertion.gene.id})"> {{ vm.assertion.gene.name }}</a>&nbsp;&nbsp;
             <strong>Variant: </strong>
             <a ui-sref="events.genes.summary.variants.summary({geneId: vm.assertion.gene.id, variantId: vm.assertion.variant.id})">{{ vm.assertion.variant.name }}</a>&nbsp;&nbsp;
+            <span ng-if="vm.assertion.allele_registry_id !== null">
+              <strong>Variant Allele Registry ID: </strong>
+              <a ng-href="https://reg.genome.network/allele/{{vm.assertion.allele_registry_id}}.html">{{vm.assertion.allele_registry_id}}</a>
+            </span>
+          </p>
+          <p>
             <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
           </p>
         </div>
@@ -40,13 +46,13 @@
           <div class="well">
             <table class="table">
               <tr>
-                <td class="key">Evidence Type:</td>
+                <td class="key">Assertion Type:</td>
                 <td class="value">
                   {{vm.assertion.evidence_type}}
                 </td>
               </tr>
               <tr>
-                <td class="key">Evidence Direction:</td>
+                <td class="key">Assertion Direction:</td>
                 <td class="value">
                   {{vm.assertion.evidence_direction}}
                 </td>
@@ -101,8 +107,16 @@
               </tr>
               <tr>
                 <td class="key">NCCN Guideline:</td>
-                <td class="value">{{ vm.assertion.nccn_guideline }}
-                  <span ng-if="vm.assertion.nccn_guideline_version">(v{{vm.assertion.nccn_guideline_version}})</span>
+                <td class="value">
+                  <span ng-switch="vm.assertion.nccn_guideline !== null">
+                    <span ng-switch-when="true">
+                      {{ vm.assertion.nccn_guideline }}
+                      <span ng-if="vm.assertion.nccn_guideline_version">(v{{vm.assertion.nccn_guideline_version}})</span>
+                    </span>
+                    <span ng-switch-when="false">
+                      --
+                    </span>
+                  </span>
                 </td>
               </tr>
               <tr>
@@ -112,8 +126,8 @@
                     <span ng-switch-when="true" >
                       <i class="glyphicon glyphicon-ok" style="color: green"></i>
                     </span>
-                  <span ng-switch-when="false">
-                      <i class="glyphicon glyphicon-remove" style="color: red"></i>
+                    <span ng-switch-when="false">
+                      --
                     </span>
                   </span>
                 </td>
@@ -126,7 +140,7 @@
                       <i class="glyphicon glyphicon-ok" style="color: green"></i>
                     </span>
                     <span ng-switch-when="false">
-                      <i class="glyphicon glyphicon-remove" style="color: red"></i>
+                      --
                     </span>
                   </div>
                 </td>
