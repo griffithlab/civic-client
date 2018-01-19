@@ -83,7 +83,8 @@
       nccn_guideline_version: '',
       fda_regulatory_approval: false,
       fda_companion_test: false,
-      evidence_items: []
+      evidence_items: [],
+      comment: { title: 'Additional Comments', text:'' }
     };
 
     vm.options= {
@@ -616,6 +617,34 @@
           required: true,
           minLength: 2,
           helpText: 'Please use the grids to add/remove evidence items.'
+        }
+      },
+      {
+        key: 'text',
+        type: 'horizontalCommentHelp',
+        model: vm.assertion.comment,
+        ngModelElAttrs: {
+          'msd-elastic': 'true',
+          'mentio': '',
+          'mentio-id': '"commentForm"'
+        },
+        templateOptions: {
+          rows: 5,
+          minimum_length: 3,
+          label: 'Additional Comments',
+          currentUser: Security.currentUser,
+          value: 'text',
+          required: false,
+          helpText: help['Additional Comments']
+        },
+        validators: {
+          length: {
+            expression: function(viewValue, modelValue, scope) {
+              var value = viewValue || modelValue;
+              return value.length >= scope.to.minimum_length || value.length === 0;
+            },
+            message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
+          }
         }
       }
     ];

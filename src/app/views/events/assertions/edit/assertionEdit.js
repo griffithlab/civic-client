@@ -66,6 +66,7 @@
     });
     vm.assertionRevisions = AssertionRevisions;
     vm.assertionHistory = AssertionHistory;
+
     vm.assertionEdit = angular.copy(vm.assertion);
     vm.assertionEdit.comment = { title: 'ASSERTION ' + vm.assertion.name + ' Revision Description', text:'' };
 
@@ -617,7 +618,35 @@
           minLength: 2,
           helpText: 'Please use the grids to add/remove evidence items.'
         }
+      },
+      {
+        key: 'text',
+        type: 'horizontalCommentHelp',
+        ngModelElAttrs: {
+          'msd-elastic': 'true',
+          'mentio': '',
+          'mentio-id': '"commentForm"'
+        },
+        model: vm.assertionEdit.comment,
+        templateOptions: {
+          rows: 5,
+          minimum_length: 3,
+          label: 'Revision Description',
+          required: true,
+          value: 'text',
+          helpText: help['Revision Description']
+        },
+        validators: {
+          length: {
+            expression: function(viewValue, modelValue, scope) {
+              var value = viewValue || modelValue;
+              return value.length >= scope.to.minimum_length;
+            },
+            message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
+          }
+        }
       }
+
     ];
 
     vm.submit = function(assertionEdit) {
