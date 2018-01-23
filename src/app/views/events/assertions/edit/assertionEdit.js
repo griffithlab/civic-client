@@ -86,10 +86,10 @@
     vm.showInstructions = true;
 
     // scroll to form header
-    // $document.ready(function() {
-    //   var elem = document.getElementById('assertion-edit-form');
-    //   $document.scrollToElementAnimated(elem);
-    // });
+    $document.ready(function() {
+      var elem = document.getElementById('assertion-edit-form');
+      $document.scrollToElementAnimated(elem);
+    });
 
     vm.assertionFields = [
       {
