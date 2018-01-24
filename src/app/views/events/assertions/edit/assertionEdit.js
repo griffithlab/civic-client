@@ -89,7 +89,9 @@
     // scroll to form header
     $document.ready(function() {
       var elem = document.getElementById('assertion-edit-form');
-      $document.scrollToElementAnimated(elem);
+      if(!_.isUndefined(elem)) {
+        $document.scrollToElementAnimated(elem);
+      }
     });
 
     vm.assertionFields = [
