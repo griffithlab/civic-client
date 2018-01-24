@@ -27,29 +27,6 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <div ng-messages="vm.formErrors" class="edit-errors">
-        <div ng-message="500"><div class="alert alert-danger">
-          <strong class="status">500 <span ng-bind="vm.errorMessages['500']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['500']">error prompt</span>
-          <span class="server-message">{{ vm.serverMsg }}</span>
-        </div></div>
-        <div ng-message="401"><div class="alert alert-danger">
-          <strong class="status">401 <span ng-bind="vm.errorMessages['401']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['401']">error prompt</span>
-          <span class="server-message">{{ vm.serverMsg }}</span>
-        </div></div>
-        <div ng-message="403"><div class="alert alert-danger">
-          <strong class="status">403 <span ng-bind="vm.errorMessages['403']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['403']">error prompt</span>
-          <span class="server-message">{{ vm.serverMsg }}</span>
-        </div></div>
-        <div ng-message="409"><div class="alert alert-danger">
-          <strong class="status">409 <span ng-bind="vm.errorMessages['409']" class="message">error msg</span></strong> - <span ng-bind="vm.errorPrompts['409']">error prompt</span>
-          <span class="server-message">{{ vm.serverMsg }}</span>
-        </div></div>
-      </div>
-    </div>
-  </div>
-
   <div class="row ">
     <div class="col-xs-12">
       <div ng-messages="vm.formMessages" class="edit-messages">
@@ -87,6 +64,24 @@
         </div>
       </div>
     </div>
+    <div class="row" ng-if="vm.serverError">
+      <div class="col-xs-10 col-xs-offset-2 server-error-message">
+        <div class="alert alert-danger">
+          <strong class="status">
+            {{vm.serverErrorStatus}}
+            <span ng-bind="vm.serverErrorStatusTxt" class="message">error msg</span>
+          </strong> - <span ng-bind="vm.serverErrorPrompt">error prompt</span>
+          <span class="error-message">
+            <ul>
+              <li ng-repeat="message in vm.serverErrorMessages">
+                {{message}}
+              </li>
+            </ul>
+          </span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="successMessage" ng-if="vm.showSuccessMessage">
@@ -98,11 +93,12 @@
       </p>
     </div>
   </div>
-  <!--<div class="row">-->
-  <!--<div class="col-xs-12">-->
-  <!--<pre ng-bind="vm.assertionEdit|json">-->
-
-  <!--</pre>-->
-  <!--</div>-->
-  <!--</div>-->
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <pre ng-bind="vm.formErrors|json"></pre> -->
+  <!-- </div> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <pre ng-bind="vm.errorMessages|json"></pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
 </div>
