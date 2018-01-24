@@ -208,7 +208,7 @@
           typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
-              count: 10,
+              count: 999,
               page: 0,
               'filter[variant]': val,
               'filter[entrez_gene]': gene
