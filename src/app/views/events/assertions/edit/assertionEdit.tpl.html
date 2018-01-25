@@ -43,7 +43,7 @@
   <div ng-if="vm.showForm">
     <div class="row edit-form">
       <div class="col-xs-12">
-        <form class="form-horizontal">
+        <form class="form-horizontal" autocomplete="off">
           <formly-form options="vm.options" model="vm.assertionEdit" fields="vm.assertionFields">
           </formly-form>
 
@@ -94,11 +94,8 @@
     </div>
   </div>
   <!-- <div class="row"> -->
-  <!-- <div class="col-xs-6"> -->
-  <!-- <pre ng-bind="vm.formErrors|json"></pre> -->
-  <!-- </div> -->
-  <!-- <div class="col-xs-6"> -->
-  <!-- <pre ng-bind="vm.errorMessages|json"></pre> -->
+  <!-- <div class="col-xs-12"> -->
+  <!-- <pre ng-bind="vm.assertionEdit|json"></pre> -->
   <!-- </div> -->
   <!-- </div> -->
 </div>

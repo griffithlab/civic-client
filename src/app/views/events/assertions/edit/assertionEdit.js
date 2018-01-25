@@ -150,10 +150,13 @@
         },
         watcher: {
           listener: function(field, newValue, oldValue, scope, stopWatching) {
+            // if gene is valid, remove the variant's 'please specify gene...' message
             if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
               _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = '';
             }
-            if(_.isUndefined(field.formControl) || field.formControl.$invalid) {
+            // if gene is invalid, remove any defined variant and show 'pls specify gene' msg
+            if(!_.isUndefined(field.formControl) && field.formControl.$invalid) {
+              scope.model.variant = {name:''};
               _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = 'Please specify a gene before selecting a variant.';
             }
           }
@@ -211,7 +214,7 @@
           typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
-              count: 10,
+              count: 999,
               page: 0,
               'filter[variant]': val,
               'filter[entrez_gene]': gene
@@ -308,7 +311,7 @@
 
             // reset ACMG codes if new Type != Predisposing
             if(value !== 'Predisposing') {
-              _.find(scope.fields, { key: 'acmg_codes'}).value(['']);
+              scope.model.acmg_codes = [''];
             }
           },
           helpText: 'Type of clinical outcome associated with the assertion description.',
