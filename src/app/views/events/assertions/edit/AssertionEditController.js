@@ -12,7 +12,6 @@
         abstract: true,
         url: '/edit',
         templateUrl: 'app/views/events/assertions/edit/AssertionEditView.tpl.html',
-        controller: 'AssertionEditController',
         controllerAs: 'vm',
         resolve: {
           AssertionRevisions: 'AssertionRevisions',
