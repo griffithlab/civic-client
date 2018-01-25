@@ -16,6 +16,9 @@
           Assertions: 'Assertions',
           initAssertion: function(Assertions, $stateParams) {
             return Assertions.initBase($stateParams.assertionId);
+          },
+          myVariantInfo: function(initAssertion, Assertions) {
+            return Assertions.getMyVariantInfo(initAssertion[0].variant.id);
           }
         },
         controller: 'AssertionsController',
@@ -32,14 +35,6 @@
         data: {
           titleExp: '"Assertion " + assertion.name',
           navMode: 'sub'
-        },
-        resolve: /* @ngInject */ {
-          assertion: function(Assertions, $stateParams) {
-            return Assertions.get($stateParams.assertionId);
-          },
-          myVariantInfo: function(assertion, Variants) {
-            return Variants.getMyVariantInfo(assertion.variant.id);
-          }
         }
       });
   }

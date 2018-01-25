@@ -118,8 +118,15 @@
           commentId: '@commentId'
         },
         cache: false
+      },
+      // My Variant Info
+      getMyVariantInfo: {
+        url: '/api/variants/:variantId/myvariant_info_proxy',
+        params: {
+          variantId: '@variantId'
+        },
+        cache: cache
       }
-
     });
   }
 
@@ -132,6 +139,8 @@
     var item = {};
     var acmg_codes = [];
 
+    var myVariantInfo = {};
+
     // Collections
     var comments = [];
     var flags = [];
@@ -141,6 +150,7 @@
       initComments: initComments,
       data: {
         item: item,
+        myVariantInfo: myVariantInfo,
         collection: collection,
         acmg_codes: acmg_codes,
         flags: flags,
@@ -155,6 +165,7 @@
 
       // Additional Info
       queryAcmgCodes: queryAcmgCodes,
+      getMyVariantInfo: getMyVariantInfo,
 
       // Collections
       queryFlags: queryFlags,
@@ -245,6 +256,14 @@
       return AssertionsResource.queryAcmgCodes().$promise
         .then(function(response) {
           angular.copy(response, acmg_codes);
+          return response.$promise;
+        });
+    }
+
+    function getMyVariantInfo(variantId) {
+      return AssertionsResource.getMyVariantInfo({variantId: variantId}).$promise
+        .then(function(response) {
+          angular.copy(response, myVariantInfo);
           return response.$promise;
         });
     }

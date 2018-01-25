@@ -9,7 +9,7 @@
     formlyConfigProvider.setType({
       name: 'comment',
       extends: 'textarea',
-      wrapper: ['validationMessages', 'horizontalBootstrapComment', 'bootstrapHasError', 'mentioCommentMenus'],
+      wrapper: ['horizontalBootstrapComment', 'bootstrapHasError', 'mentioCommentMenus'],
       data: {
         users: [],
         entities: []
@@ -56,7 +56,7 @@
     formlyConfigProvider.setType({
       name: 'horizontalCommentHelp',
       extends: 'comment',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['validationMessages', 'horizontalBootstrapHelp']
     });
   }
 

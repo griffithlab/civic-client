@@ -74,22 +74,25 @@
 
     vm.user = {};
 
-    vm.formErrors = {};
-    vm.formMessages = {};
-    vm.errorMessages = formConfig.errorMessages;
-    vm.errorPrompts = formConfig.errorPrompts;
-    vm.serverMsg = '';
     vm.newRevisionId = Number();
 
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
 
+    // server errors
+    vm.serverError = false;
+    vm.serverErrorStatus = '';
+    vm.serverErrorStatusTxt = '';
+    vm.serverErrorMessages = [];
+
     // scroll to form header
-    // $document.ready(function() {
-    //   var elem = document.getElementById('assertion-edit-form');
-    //   $document.scrollToElementAnimated(elem);
-    // });
+    $document.ready(function() {
+      var elem = document.getElementById('assertion-edit-form');
+      if(!_.isUndefined(elem)) {
+        $document.scrollToElementAnimated(elem);
+      }
+    });
 
     vm.assertionFields = [
       {
@@ -660,6 +663,7 @@
       AssertionRevisions.submitRevision(newAssertion)
         .then(function(response) {
           console.log('revision submit success!');
+          vm.serverError = false;
           vm.newRevisionId = response.id;
           vm.formMessages.submitSuccess = true;
           vm.showInstructions = false;
@@ -671,8 +675,11 @@
         })
         .catch(function(error) {
           console.error('revision submit error!');
-          vm.formErrors[error.status] = true;
-          vm.serverMsg = error.data.error;
+          vm.serverError = true;
+          vm.serverErrorStatus = error.status;
+          vm.serverErrorStatusTxt = error.statusText;
+          vm.serverErrorPrompt = 'Please correct the following errors and resubmit.';
+          vm.serverErrorMessages = error.data.errors;
         })
         .finally(function(){
           console.log('revision submit done!');
