@@ -146,63 +146,87 @@
           type: 'number',
           enableSorting: true,
           enableFiltering: true,
+          headerTooltip: 'Evidence ID',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
-        },
-        {
-          name: 'description',
-          enableFiltering: true,
-          allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          minWidth: 50,
+          width: '5%'
         },
         {
           name: 'gene_name',
+          displayName: 'GENE',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          headerTooltip: 'Gene Entrez Name',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceGridGeneCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          width: '6%'
         },
         {
           name: 'variant_name',
+          displayName: 'VARIANT',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          headerTooltip: 'Variant Name',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceGridVariantCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          width: '8%'
+        },
+        {
+          name: 'description',
+          displayName: 'DESC',
+          headerTooltip: 'Description',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/evidenceGridEvidenceCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
           name: 'disease',
+          displayName: 'DIS',
+          headerTooltip: 'Disease',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceGridDiseaseCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
           name: 'drugs',
+          displayName: 'DRUGS',
+          headerTooltip: 'Drugs',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceGridDrugCell.tpl.html',
           filter: {
-            condition: uiGridConstants.filter.CONTAINS,
+            condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
           name: 'evidence_level',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           displayName: 'EL',
           headerTooltip: 'Evidence Level',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceGridLevelCell.tpl.html',
+          width: '6%',
+          minWidth: 50,
           filter: {
             type: uiGridConstants.filter.SELECT,
             term: null,
@@ -214,15 +238,15 @@
               { value: 'C', label: 'C - Case Study'},
               { value: 'D', label: 'D - Preclinical'},
               { value: 'E', label: 'E - Inferential'}]
-          },
+          }
         },
         {
           name: 'evidence_type',
-          enableFiltering: true,
-          allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           displayName: 'ET',
           headerTooltip: 'Evidence Type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           filter: {
             type: uiGridConstants.filter.SELECT,
             term: null,
@@ -250,12 +274,16 @@
               }
             ]
           },
+          width: '6%',
+          minWidth: 50,
+          cellTemplate: 'app/views/events/common/evidenceGridTypeCell.tpl.html'
         },
         {
           name: 'evidence_direction',
           displayName: 'ED',
           headerTooltip: 'Evidence Direction',
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceDirectionCell.tpl.html',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           allowCellFocus: false,
           filter: {
             type: uiGridConstants.filter.SELECT,
@@ -267,12 +295,14 @@
               { value: 'Does Not Support', label: 'Does not Support' }
             ]
           },
+          width: '6%',
+          minWidth: 50
         },
         {
           name: 'clinical_significance',
           displayName: 'CS',
           headerTooltip: 'Clinical Significance',
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           allowCellFocus: false,
           filter: {
             type: uiGridConstants.filter.SELECT,
@@ -290,12 +320,15 @@
               { value: 'N/A', label: 'N/A' }
             ]
           },
+          width: '6%',
+          minWidth: 50,
+          cellTemplate: 'app/views/events/common/evidenceGridClinicalSignificanceCell.tpl.html'
         },
         {
           name: 'variant_origin',
           displayName: 'VO',
           headerTooltip: 'Variant Origin',
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           allowCellFocus: false,
           filter: {
             type: uiGridConstants.filter.SELECT,
@@ -310,12 +343,15 @@
               { value: 'N/A', label: 'N/A' },
             ]
           },
+          width: '6%',
+          minWidth: 50,
+          cellTemplate: 'app/views/events/common/evidenceGridVariantOriginCell.tpl.html'
         },
         {
           name: 'rating',
           displayName: 'TR',
           headerTooltip: 'Trust Rating',
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           allowCellFocus: false,
           filter: {
             type: uiGridConstants.filter.SELECT,
@@ -331,6 +367,9 @@
               { value: '1', label: '1 stars'},
             ]
           },
+          width: '6%',
+          minWidth: 50,
+          cellTemplate: 'app/views/events/common/evidenceGridRatingCell.tpl.html'
         },
       ],
       'variants': [
