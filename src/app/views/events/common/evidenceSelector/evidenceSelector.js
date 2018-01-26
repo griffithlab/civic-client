@@ -138,6 +138,15 @@
           }
         },
         {
+          name: 'description',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
           name: 'gene_name',
           enableFiltering: true,
           allowCellFocus: false,
@@ -319,6 +328,15 @@
         }
       ],
       'list': [
+        {
+          name: 'description',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
         {
           name: 'gene_name',
           enableFiltering: true,
