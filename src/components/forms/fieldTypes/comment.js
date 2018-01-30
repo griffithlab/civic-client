@@ -9,7 +9,9 @@
     formlyConfigProvider.setType({
       name: 'comment',
       extends: 'textarea',
-      wrapper: [ 'bootstrapHasError', 'mentioCommentMenus'],
+      // these wrappers must be included in this exact order for the mentio menus to work
+      // i have no idea why this is the case.
+      wrapper: ['horizontalBootstrapComment', 'bootstrapHasError', 'mentioCommentMenus'],
       data: {
         users: [],
         entities: []
