@@ -638,7 +638,7 @@
           currentUser: Security.currentUser,
           value: 'text',
           required: false,
-          helpText: help['Additional Comments']
+          helpText: 'Please provide any additional comments you wish to make about this assertion. This comment will appear as the first comment in this assertion\'s comment thread.'
         },
         validators: {
           length: {
