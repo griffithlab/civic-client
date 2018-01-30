@@ -368,7 +368,7 @@
         },
         controller: /* @ngInject */ function($scope, $stateParams, Diseases) {
           if($stateParams.diseaseName) {
-            Diseases.beginsWith($stateParams.diseaseName)
+            Diseases.exactMatch($stateParams.diseaseName)
               .then(function(response) {
                 $scope.model.disease = response[0];
                 $scope.to.data.doid = response[0].doid;
