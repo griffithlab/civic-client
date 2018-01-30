@@ -212,7 +212,7 @@
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var event = row.entity;
         var subjectStates = {
-          assertions: 'assertions',
+          assertions: 'events.assertions',
           genes: 'events.genes',
           variants: 'events.genes.summary.variants',
           variantgroups: 'events.genes.summary.variantGroups',
