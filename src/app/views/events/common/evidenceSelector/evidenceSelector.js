@@ -355,6 +355,14 @@
           width: '6%',
           minWidth: 50,
           cellTemplate: 'app/views/events/common/evidenceGridRatingCell.tpl.html'
+        },
+        {
+          name: 'action_add',
+          displayName: '',
+          width: '40',
+          allowCellFocus: false,
+          enableFiltering: false,
+          cellTemplate: 'app/views/events/common/evidenceSelector/evidenceSelectorAddCell.tpl.html'
         }
       ],
       'list': [
