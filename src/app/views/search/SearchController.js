@@ -2185,6 +2185,7 @@
                   { value: 'evidence_item_count', name: 'Evidence Items' },
                   { value: 'gene', name: 'Gene' },
                   { value: 'journal', name: 'Journal Name' },
+                  { value: 'nct_id', name: 'NCT ID'},
                   { value: 'pmc_id', name: 'PMC ID' },
                   { value: 'publication_year', name: 'Publication Year' },
                   { value: 'pubmed_id', name: 'PubMed ID' },
@@ -2273,6 +2274,35 @@
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
+                    {value: 'is_empty', name: 'is empty'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                hideExpression: 'model.name === "is_empty"',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            nct_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
                     {value: 'is_empty', name: 'is empty'}
                   ]
                 }
