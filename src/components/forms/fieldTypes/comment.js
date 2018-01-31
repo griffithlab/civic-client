@@ -8,7 +8,13 @@
     var _ = window._;
     formlyConfigProvider.setType({
       name: 'comment',
-      extends: 'textarea',
+      template: '<textarea class="form-control" ng-model="model[options.key]"></textarea>',
+      defaultOptions: {
+        ngModelAttrs: {
+          rows: {attribute: 'rows'},
+          cols: {attribute: 'cols'}
+        }
+      },
       // these wrappers must be included in this exact order for the mentio menus to work
       // i have no idea why this is the case.
       wrapper: ['horizontalBootstrapComment', 'bootstrapHasError', 'mentioCommentMenus'],
