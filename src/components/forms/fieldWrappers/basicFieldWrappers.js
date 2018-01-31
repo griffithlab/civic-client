@@ -34,11 +34,6 @@
       '</div>'
     });
 
-    formlyConfigProvider.setWrapper({
-      name: 'mentioCommentMenus',
-      templateUrl: 'components/forms/fieldWrappers/mentioCommentMenus.tpl.html'
-    });
-
     /*
      * FIELD WRAPPERS
      */

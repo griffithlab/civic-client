@@ -71,7 +71,7 @@
     vm.newCommentFields = [
       {
         key: 'text',
-        type: 'comment',
+        type: 'basicComment',
         ngModelElAttrs: {
           'msd-elastic': 'true',
           'mentio': '',
