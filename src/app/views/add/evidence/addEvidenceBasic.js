@@ -189,7 +189,7 @@
           typeaheadSearch: function(val) {
             var request = {
               mode: 'variants',
-              count: 10,
+              count: 50,
               page: 0,
               'filter[variant]': val
             };
