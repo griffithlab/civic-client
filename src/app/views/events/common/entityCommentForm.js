@@ -72,11 +72,6 @@
       {
         key: 'text',
         type: 'basicComment',
-        ngModelElAttrs: {
-          'msd-elastic': 'true',
-          'mentio': '',
-          'mentio-id': '"commentForm"'
-        },
         templateOptions: {
           label: 'Add Comment:',
           rows: 4,

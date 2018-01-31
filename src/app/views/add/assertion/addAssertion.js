@@ -626,11 +626,6 @@
         key: 'text',
         type: 'horizontalCommentHelp',
         model: vm.assertion.comment,
-        ngModelElAttrs: {
-          'msd-elastic': 'true',
-          'mentio': '',
-          'mentio-id': '"commentForm"'
-        },
         templateOptions: {
           rows: 5,
           minimum_length: 3,

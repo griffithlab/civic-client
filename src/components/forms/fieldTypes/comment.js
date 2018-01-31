@@ -13,6 +13,11 @@
         ngModelAttrs: {
           rows: {attribute: 'rows'},
           cols: {attribute: 'cols'}
+        },
+        ngModelElAttrs: {
+          'msd-elastic': 'true',
+          'mentio': '',
+          'mentio-id': '"commentForm"'
         }
       },
       data: {
