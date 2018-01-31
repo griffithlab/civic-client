@@ -45,7 +45,6 @@
     var descriptions = ConfigService.evidenceAttributeDescriptions;
     var assertDescriptions = ConfigService.assertionAttributeDescriptions;
     var make_options = ConfigService.optionMethods.make_options; // make options for pull down
-    var el_options = ConfigService.optionMethods.el_options; // make options for evidence level
     var cs_options = ConfigService.optionMethods.cs_options; // make options for clinical significance
     var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
     var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
@@ -146,7 +145,7 @@
           }
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue, oldValue, scope) {
             // if gene is valid, remove the 'please specify gene...' message
             if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
               _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = '';
@@ -318,7 +317,7 @@
           }
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue, oldValue, scope) {
             if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
               _.find(scope.fields, { key: 'evidence_direction'}).templateOptions.data.attributeDefinition= '';
               _.find(scope.fields, { key: 'clinical_significance'}).templateOptions.data.attributeDefinition= '';
@@ -534,7 +533,7 @@
               labelProp: 'label'
             },
             data: {
-              setNote: function(model, index) {
+              setNote: function(model) {
                 console.log('Setting acmg code to: ' + model);
               }
             }

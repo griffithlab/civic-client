@@ -11,8 +11,10 @@
       };
     });
 
+  /* @ngInject */
   function AssertionSummaryController($scope,
                                       $log,
+                                      _,
                                       Security,
                                       Assertions,
                                       AssertionsViewOptions) {

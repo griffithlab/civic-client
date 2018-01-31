@@ -4,7 +4,6 @@
     .controller('AssertionsSummaryController', AssertionsSummaryController);
 
   // @ngInject
-  function AssertionsSummaryController($scope) {
-    var vm = $scope.vm = {};
+  function AssertionsSummaryController() {
   }
 })();
