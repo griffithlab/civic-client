@@ -44,22 +44,26 @@
       }
     }
 
+    var gnomad_exome_af;
     var gnomad_exome_af_rounded;
+    var gnomad_genome_af;
     var gnomad_genome_af_rounded;
     // calculate gnomAD allele frequency
     if(!_.isUndefined(ctrl.variantInfo.gnomad_exome) && _.isUndefined(ctrl.variantInfo.gnomad_genome)) {
-      gnomad_exome_af_rounded = _.round(ctrl.variantInfo.gnomad_exome.af.af, 5);
+      gnomad_exome_af = ctrl.variantInfo.gnomad_exome.af.af;
+      gnomad_exome_af_rounded = _.round(gnomad_exome_af, 5);
       ctrl.variantInfo.gnomad_adj_allele_freq = gnomad_exome_af_rounded;
-      ctrl.variantInfo.gnomad_adj_af_tooltip = 'Exome Allele Freq: ' + gnomad_exome_af_rounded + '</br> Genome Allele Freq: --';
+      ctrl.variantInfo.gnomad_adj_af_tooltip = 'Exome Allele Freq: ' + gnomad_exome_af + '</br> Genome Allele Freq: --';
     } else if(!_.isUndefined(ctrl.variantInfo.gnomad_genome) && _.isUndefined(ctrl.variantInfo.gnomad_exome)) {
-      gnomad_genome_af_rounded = _.round(ctrl.variantInfo.gnomad_genome.af.af, 5);
+      gnomad_genome_af = ctrl.variantInfo.gnomad_genome.af.af;
+      gnomad_genome_af_rounded = _.round(gnomad_genome_af, 5);
       ctrl.variantInfo.gnomad_adj_allele_freq = gnomad_genome_af_rounded;
-      ctrl.variantInfo.gnomad_adj_af_tooltip = 'Exome Allele Freq: --</br>Genome Allele Freq: ' + gnomad_genome_af_rounded;
+      ctrl.variantInfo.gnomad_adj_af_tooltip = 'Exome Allele Freq: --</br>Genome Allele Freq: ' + gnomad_genome_af;
     } else if(!_.isUndefined(ctrl.variantInfo.gnomad_exome) && !_.isUndefined(ctrl.variantInfo.gnomad_genome)) {
-      gnomad_exome_af_rounded = _.round(ctrl.variantInfo.gnomad_exome.af.af, 5);
-      gnomad_genome_af_rounded = _.round(ctrl.variantInfo.gnomad_genome.af.af, 5);
+      gnomad_exome_af = ctrl.variantInfo.gnomad_exome.af.af;
+      gnomad_genome_af = ctrl.variantInfo.gnomad_genome.af.af;
       ctrl.variantInfo.gnomad_adj_allele_freq = _.round((ctrl.variantInfo.gnomad_exome.ac.ac + ctrl.variantInfo.gnomad_genome.ac.ac) / (ctrl.variantInfo.gnomad_exome.an.an + ctrl.variantInfo.gnomad_genome.an.an), 5);
-      ctrl.variantInfo.gnomad_adj_af_tooltip = 'Exome Allele Freq: ' + gnomad_exome_af_rounded + '</br>Genome Allele Freq: ' + gnomad_genome_af_rounded;
+      ctrl.variantInfo.gnomad_adj_af_tooltip = 'Exome Allele Freq: ' + gnomad_exome_af + '</br>Genome Allele Freq: ' + gnomad_genome_af;
     }
 
     // replace ampersands with commas in SnpEff Effect strings

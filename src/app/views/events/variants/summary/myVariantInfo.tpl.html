@@ -112,6 +112,7 @@
                 {{variantInfo.gnomad_adj_allele_freq | ifEmpty: '--'}}
                 <i class="glyphicon glyphicon-info-sign"
                   style="color: #aca;"
+                  ng-if="variantInfo.gnomad_adj_allele_freq !== undefined"
                   uib-tooltip-html="'{{variantInfo.gnomad_adj_af_tooltip}}'"></i>
               </td>
             </tr>

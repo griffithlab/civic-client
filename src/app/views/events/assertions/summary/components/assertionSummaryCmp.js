@@ -1,18 +1,33 @@
 (function() {
   'use strict';
-  angular.module('civic.assertions')
-    .controller('AssertionsSummaryController', AssertionsSummaryController);
+  angular.module('civic.events.assertions')
+    .controller('AssertionSummaryController', AssertionSummaryController)
+    .directive('assertionSummary', function() {
+      return {
+        restrict: 'E',
+        scope: {},
+        controller: 'AssertionSummaryController',
+        templateUrl: 'app/views/events/assertions/summary/components/assertionSummaryCmp.tpl.html'
+      };
+    });
 
-  // @ngInject
-  function AssertionsSummaryController($scope, $log, _, Security, Assertions, assertion, myVariantInfo) {
-    console.log('AssertionsSummaryController called.');
+  /* @ngInject */
+  function AssertionSummaryController($scope,
+                                      $log,
+                                      _,
+                                      Security,
+                                      Assertions,
+                                      AssertionsViewOptions) {
     var vm = $scope.vm = {};
 
     vm.isEditor = Security.isEditor();
     vm.isAdmin = Security.isAdmin();
 
     vm.assertion = Assertions.data.item;
-    vm.myVariantInfo = myVariantInfo;
+    vm.myVariantInfo = Assertions.data.myVariantInfo;
+
+    vm.AssertionsViewOptions = AssertionsViewOptions;
+    vm.backgroundColor = AssertionsViewOptions.styles.view.backgroundColor;
 
     if(Security.currentUser) {
       var currentUserId = Security.currentUser.id;

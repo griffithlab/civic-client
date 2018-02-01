@@ -8,8 +8,18 @@
     var _ = window._;
     formlyConfigProvider.setType({
       name: 'comment',
-      extends: 'textarea',
-      wrapper: ['validationMessages', 'horizontalBootstrapComment', 'bootstrapHasError', 'mentioCommentMenus'],
+      templateUrl: 'src/components/forms/fieldTypes/comment.tpl.html',
+      defaultOptions: {
+        ngModelAttrs: {
+          rows: {attribute: 'rows'},
+          cols: {attribute: 'cols'}
+        },
+        ngModelElAttrs: {
+          'msd-elastic': 'true',
+          'mentio': '',
+          'mentio-id': '"commentForm"'
+        }
+      },
       data: {
         users: [],
         entities: []
@@ -56,7 +66,13 @@
     formlyConfigProvider.setType({
       name: 'horizontalCommentHelp',
       extends: 'comment',
-      wrapper: ['horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'basicComment',
+      extends: 'comment',
+      wrapper: ['validationMessages', 'horizontalBootstrapComment', 'bootstrapHasError']
     });
   }
 

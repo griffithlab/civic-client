@@ -17,6 +17,8 @@
       <span ng-switch-when="flag resolved">&nbsp;resolved flagged on</span>
       <span ng-switch-when="submitted">&nbsp;submitted</span>
       <span ng-switch-when="assertion submitted">&nbsp;submitted</span>
+      <span ng-switch-when="assertion rejected">&nbsp;rejected</span>
+      <span ng-switch-when="assertion accepted">&nbsp;accepted</span>
       <span ng-switch-when="accepted">&nbsp;accepted</span>
       <span ng-switch-when="rejected">&nbsp;rejected</span>
       <span ng-switch-when="assertion rejected">&nbsp;rejected</span>
@@ -29,6 +31,9 @@
     </span>
 
     <span ng-switch="event.subject_type">
+      <span ng-switch-when="assertions">
+        <span class="subject-type">assertion</span>
+      </span>
       <span ng-switch-when="genes">
         <span class="subject-type">gene</span>
       </span>

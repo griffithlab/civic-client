@@ -34,11 +34,6 @@
       '</div>'
     });
 
-    formlyConfigProvider.setWrapper({
-      name: 'mentioCommentMenus',
-      templateUrl: 'components/forms/fieldWrappers/mentioCommentMenus.tpl.html'
-    });
-
     /*
      * FIELD WRAPPERS
      */
@@ -105,10 +100,7 @@
     formlyConfigProvider.setWrapper({
       name: 'horizontalBootstrapComment',
       template: [
-        //'<label for="{{::id}}" class="col-sm-1 control-label">',
-        //'<user-image user="to.currentUser" height="32" width="32"></user-image>',
-        //'</label>',
-        '<div class="col-sm-12">',
+        '<div class="col-xs-12">',
         '<formly-transclude></formly-transclude>',
         '</div>'
       ].join(' ')

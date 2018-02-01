@@ -1,0 +1,101 @@
+<div class="assertionEdit{{ vm.styles.edit.editBackgroundColor }}" id="assertion-edit">
+  <div class="row form-header" id="assertion-edit-form">
+    <div class="stripes-bg">
+      <div class="col-xs-12 name">
+        <h3>EDIT ASSERTION <span ng-bind="vm.assertion.name">NAME</span></h3>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="vm.showInstructions">
+    <div class="col-xs-12">
+      <div class="edit-instructions">
+        <p>Complete your edits, then click the 'Submit Revision for Review' button.</p>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="vm.pendingFields">
+    <div class="col-xs-12">
+      <div class="edit-warning">
+        <p>This Assertion has pending revisions to the following fields:</p>
+        <ul class="field-list">
+          <li ng-repeat="field in vm.pendingFieldsList">
+            {{ field | keyToLabel }}
+          </li>
+        </ul>
+        <p>Please <a href="" ng-click="vm.revisionsClick()" style="text-decoration: underline; font-weight: bold;">review all pending revisions</a> in order to prevent conflicting submissions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-xs-12">
+      <div ng-messages="vm.formMessages" class="edit-messages">
+        <div ng-message="submitSuccess"><div class="alert alert-success">
+          <strong class="status">Success</strong> - <span class="message">Your revision was successfully submitted.</span>
+        </div></div>
+        <div ng-message="applySuccess"><div class="alert alert-success">
+          <strong class="status">Success</strong> - <span class="message">Your revision was successfully applied.</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="vm.showForm">
+    <div class="row edit-form">
+      <div class="col-xs-12">
+        <form class="form-horizontal" autocomplete="off">
+          <formly-form options="vm.options" model="vm.assertionEdit" fields="vm.assertionFields">
+          </formly-form>
+
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-2">
+        <div class="buttons">
+          <div class="pull-left">
+            <cancel-button></cancel-button>
+          </div>
+          <div class="pull-right">
+            <div ng-if="vm.isAuthenticated">
+              <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.assertionEdit, vm.options)">Submit Revision for Review</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.serverError">
+      <div class="col-xs-10 col-xs-offset-2 server-error-message">
+        <div class="alert alert-danger">
+          <strong class="status">
+            {{vm.serverErrorStatus}}
+            <span ng-bind="vm.serverErrorStatusTxt" class="message">error msg</span>
+          </strong> - <span ng-bind="vm.serverErrorPrompt">error prompt</span>
+          <span class="error-message">
+            <ul>
+              <li ng-repeat="message in vm.serverErrorMessages">
+                {{message}}
+              </li>
+            </ul>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="successMessage" ng-if="vm.showSuccessMessage">
+    <div class="col-xs-12 jumbotron">
+      <h1>Thank you.</h1>
+      <p>Your suggested revision for Assertion {{ vm.assertion.name }} has been submitted for review.</p>
+      <p>
+        <a ng-href="/events/assertions/{{vm.assertion.id}}/talk/revisions/list/{{vm.newRevisionId}}/summary" class="btn btn-small btn-default">View it here</a>
+      </p>
+    </div>
+  </div>
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-12"> -->
+  <!-- <pre ng-bind="vm.assertionEdit|json"></pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
+</div>

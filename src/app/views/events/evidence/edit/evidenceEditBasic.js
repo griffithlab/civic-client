@@ -430,11 +430,6 @@
       {
         key: 'text',
         type: 'horizontalCommentHelp',
-        ngModelElAttrs: {
-          'msd-elastic': 'true',
-          'mentio': '',
-          'mentio-id': '"commentForm"'
-        },
         model: vm.evidenceEdit.comment,
         templateOptions: {
           rows: 5,

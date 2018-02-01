@@ -1,0 +1,26 @@
+<div class="assertionTalkComments">
+  <div class="row">
+    <div class="col-xs-12 comment-list">
+      <div ng-switch="ctrl.assertionTalkModel.data.comments.length > 0">
+        <div ng-switch-when="true">
+          <ul class="comments">
+            <li ng-repeat="comment in ctrl.assertionTalkModel.data.comments">
+              <entity-comment
+                comment-data="comment"
+                entity-model="ctrl.assertionTalkModel">
+              </entity-comment>
+            </li>
+          </ul>
+        </div>
+        <div ng-switch-default>
+          <p>No Comments for Assertion {{ ctrl.assertionTalkModel.data.item.name }}.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 comment-form">
+      <entity-comment-form type="entity" entity-model="ctrl.assertionTalkModel"></entity-comment-form>
+    </div>
+  </div>
+</div>

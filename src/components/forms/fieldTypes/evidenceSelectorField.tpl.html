@@ -1,27 +1,29 @@
-<div class="form-group evidenceSelectorField">
-  <label for="{{::id}}" class="col-sm-2 control-label">
-    <span ng-if="to.required" style="color:#999;">*&nbsp;</span> {{to.label}}
-  </label>
-  <div class="col-sm-10">
-    <div class="row">
-      <div class="col-xs-12">
-        <evidence-selector mode="'browse'" page="1" items="model.evidence_items">
-        </evidence-selector>
-      </div>
+<div class="evidenceSelectorField">
+  <div class="row">
+    <div class="col-xs-12">
+      <label for="{{::id}}" class="col-sm-2 control-label">
+        <span ng-if="to.required" style="color:#999;">*&nbsp;</span> {{to.label}}
+      </label>
     </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="itemContainer">
-          <div ng-if="model.evidence_items.length < 1" class="alert alert-info" style="margin: 0">
-            &#8673; Use the data grid above to filter evidence items, then click the '+' button to add supporting evidence to this assertion.
-          </div>
-          <ul class="evidenceSelectorItems" ng-if="model.evidence_items.length > 0">
-            <li ng-repeat="item in model.evidence_items">
-              <evidence-selector-item item="item" remove-fn="removeItem"></evidence-selector-item>
-              <!-- <a ng-click="ctrl.removeItem(item)">{{item.id}}</a> -->
-            </li>
-          </ul>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <evidence-selector mode="'browse'" page="1" items="model.evidence_items">
+      </evidence-selector>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="itemContainer">
+        <div ng-if="model.evidence_items.length < 1" class="alert alert-info" style="margin: 0">
+          &#8673; Use the data grid above to filter evidence items, then click the '+' button to add supporting evidence to this assertion.
         </div>
+        <ul class="evidenceSelectorItems" ng-if="model.evidence_items.length > 0">
+          <li ng-repeat="item in model.evidence_items">
+            <evidence-selector-item item="item" remove-fn="removeItem"></evidence-selector-item>
+            <!-- <a ng-click="ctrl.removeItem(item)">{{item.id}}</a> -->
+          </li>
+        </ul>
       </div>
     </div>
   </div>

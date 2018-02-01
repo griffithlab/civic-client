@@ -45,7 +45,6 @@
     var descriptions = ConfigService.evidenceAttributeDescriptions;
     var assertDescriptions = ConfigService.assertionAttributeDescriptions;
     var make_options = ConfigService.optionMethods.make_options; // make options for pull down
-    var el_options = ConfigService.optionMethods.el_options; // make options for evidence level
     var cs_options = ConfigService.optionMethods.cs_options; // make options for clinical significance
     var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
     var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
@@ -83,7 +82,8 @@
       nccn_guideline_version: '',
       fda_regulatory_approval: false,
       fda_companion_test: false,
-      evidence_items: []
+      evidence_items: [],
+      comment: { title: 'Additional Comments', text:'' }
     };
 
     vm.options= {
@@ -145,11 +145,14 @@
           }
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue, oldValue, scope) {
+            // if gene is valid, remove the 'please specify gene...' message
             if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
               _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = '';
             }
-            if(_.isUndefined(field.formControl) || field.formControl.$invalid) {
+            // if gene is invalid, remove any defined variant and show 'pls specify gene' msg
+            if(!_.isUndefined(field.formControl) && field.formControl.$invalid) {
+              scope.model.variant = {name:''};
               _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = 'Please specify a gene before selecting a variant.';
             }
           }
@@ -207,7 +210,7 @@
           typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
-              count: 10,
+              count: 50,
               page: 0,
               'filter[variant]': val,
               'filter[entrez_gene]': gene
@@ -304,7 +307,7 @@
 
             // reset ACMG codes if new Type != Predisposing
             if(value !== 'Predisposing') {
-              _.find(scope.fields, { key: 'acmg_codes'}).value(['']);
+              scope.model.acmg_codes = [''];
             }
           },
           helpText: 'Type of clinical outcome associated with the assertion description.',
@@ -314,7 +317,7 @@
           }
         },
         watcher: {
-          listener: function(field, newValue, oldValue, scope, stopWatching) {
+          listener: function(field, newValue, oldValue, scope) {
             if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
               _.find(scope.fields, { key: 'evidence_direction'}).templateOptions.data.attributeDefinition= '';
               _.find(scope.fields, { key: 'clinical_significance'}).templateOptions.data.attributeDefinition= '';
@@ -351,6 +354,7 @@
         },
         templateOptions: {
           label: 'Assertion Direction',
+          required: true,
           value: 'vm.newEvidence.evidence_direction',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
@@ -529,7 +533,7 @@
               labelProp: 'label'
             },
             data: {
-              setNote: function(model, index) {
+              setNote: function(model) {
                 console.log('Setting acmg code to: ' + model);
               }
             }
@@ -615,6 +619,29 @@
           required: true,
           minLength: 2,
           helpText: 'Please use the grids to add/remove evidence items.'
+        }
+      },
+      {
+        key: 'text',
+        type: 'horizontalCommentHelp',
+        model: vm.assertion.comment,
+        templateOptions: {
+          rows: 5,
+          minimum_length: 3,
+          label: 'Additional Comments',
+          currentUser: Security.currentUser,
+          value: 'text',
+          required: false,
+          helpText: 'Please provide any additional comments you wish to make about this assertion. This comment will appear as the first comment in this assertion\'s comment thread.'
+        },
+        validators: {
+          length: {
+            expression: function(viewValue, modelValue, scope) {
+              var value = viewValue || modelValue;
+              return value.length >= scope.to.minimum_length || value.length === 0;
+            },
+            message: '"Comment must be at least " + to.minimum_length + " characters long to submit."'
+          }
         }
       }
     ];

@@ -40,7 +40,7 @@
   <div class="form" ng-if="vm.showForm && vm.isAuthenticated === true">
     <div class="row">
       <div class="col-xs-12">
-        <form class="form-horizontal" name="vm.form" novalidate>
+        <form class="form-horizontal" name="vm.form" autocomplete="off" novalidate>
           <formly-form options="vm.options" model="vm.newEvidence" fields="vm.evidenceFields">
 
           </formly-form>
