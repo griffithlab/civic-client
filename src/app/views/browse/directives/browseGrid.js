@@ -266,7 +266,15 @@
             direction: uiGridConstants.DESC
           },
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'submitted', label: 'submitted' },
+              { value: 'accepted', label: 'accepted' },
+              { value: 'rejected', label: 'rejected' },
+            ]
           }
         },
       ],
