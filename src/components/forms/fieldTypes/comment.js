@@ -8,7 +8,7 @@
     var _ = window._;
     formlyConfigProvider.setType({
       name: 'comment',
-      templateUrl: 'src/components/forms/fieldTypes/comment.tpl.html',
+      templateUrl: 'components/forms/fieldTypes/comment.tpl.html',
       defaultOptions: {
         ngModelAttrs: {
           rows: {attribute: 'rows'},
