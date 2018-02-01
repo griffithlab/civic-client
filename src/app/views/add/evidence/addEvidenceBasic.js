@@ -189,7 +189,7 @@
           typeaheadSearch: function(val) {
             var request = {
               mode: 'variants',
-              count: 10,
+              count: 50,
               page: 0,
               'filter[variant]': val
             };
@@ -368,7 +368,7 @@
         },
         controller: /* @ngInject */ function($scope, $stateParams, Diseases) {
           if($stateParams.diseaseName) {
-            Diseases.beginsWith($stateParams.diseaseName)
+            Diseases.exactMatch($stateParams.diseaseName)
               .then(function(response) {
                 $scope.model.disease = response[0];
                 $scope.to.data.doid = response[0].doid;
@@ -690,11 +690,6 @@
         key: 'text',
         type: 'horizontalCommentHelp',
         model: vm.newEvidence.comment,
-        ngModelElAttrs: {
-          'msd-elastic': 'true',
-          'mentio': '',
-          'mentio-id': '"commentForm"'
-        },
         templateOptions: {
           rows: 5,
           minimum_length: 3,

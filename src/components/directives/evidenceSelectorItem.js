@@ -22,11 +22,15 @@
     ctrl.item = $scope.item;
     ctrl.removeItem = $scope.removeFn;
 
-    Genes.get(ctrl.item.gene_id).then(function(gene) {
+    // item data could be provided by two different evidence item endpoints, extracting gene/variant id differs
+    var gene_id = _.isUndefined(ctrl.item.gene_id) ? ctrl.item.state_params.gene.id : ctrl.item.gene_id;
+    var variant_id = _.isUndefined(ctrl.item.variant_id) ? ctrl.item.state_params.variant.id : ctrl.item.variant_id;
+
+    Genes.get(gene_id).then(function(gene) {
       ctrl.item.gene = gene;
     });
 
-    Variants.get(ctrl.item.variant_id).then(function(variant) {
+    Variants.get(variant_id).then(function(variant) {
       ctrl.item.variant = variant;
     });
 

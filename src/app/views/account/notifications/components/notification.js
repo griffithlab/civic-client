@@ -41,7 +41,7 @@
     vm.eventClick = function(notification) {
       var subjectStates = {
         genes: 'events.genes',
-        assertions: 'assertions',
+        assertions: 'events.assertions',
         variants: 'events.genes.summary.variants',
         variantgroups: 'events.genes.summary.variantGroups',
         evidenceitems: 'events.genes.summary.variants.summary.evidence'
