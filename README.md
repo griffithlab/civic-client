@@ -1,21 +1,28 @@
 civic-client
 ============
-Developing for CIViC involves setting up a development environment. To get started quickly, we recommend launching an AWS EC2 instance from our pre-configured and maintained AMI ([getting started wiki page](https://github.com/genome/civic-server/wiki/Getting-Started-with-CIViC-Development-on-AWS)). Alternatively, you may set up your own local development environment using the following setup instructions.
+Developing for CIViC involves setting up a development environment. To get started quickly, we recommend launching an AWS EC2 instance from our pre-configured and maintained AMI ([getting started wiki page](https://github.com/genome/civic-server/wiki/Getting-Started-with-CIViC-Development-on-AWS)).
+
+Alternatively, you may set up your own local development environment using the following setup instructions.
+
 ## To Install
 
-civic-client uses npm for development, build, and resource server tasks, so ensure that you have npm (and node) installed and running. Checkout this repository and cd to it, then:
+civic-client uses yarn for development, build, and resource server tasks, so ensure that you have yarn (and nodeJS) installed and running. Yarn installation instructions are here:
+
+https://yarnpkg.com/lang/en/docs/install/
+
+Once you've installed Yarn, clone the civic-client repository and cd to it, then:
 
 ```bash
-npm install
+yarn install
 ```
 
-Then head to Starbucks, get a coffee, read that new Pikettey book everyone's been talking about, return to your workstation and install the bower package management system:
+Yarn will determine the packages it needs to install, download, and install them for you - it may take awhile. Then we need to install bower, which manages client-side packages:
 
 ```bash
-npm install -g bower
+yarn global add bower
 ```
 
-and finally, use bower to install civic-client's runtime libraries:
+Once bower is installed, use it to install civic-client's runtime libraries:
 
 ```bash
 bower install
@@ -25,13 +32,19 @@ If bower becomes confused about which Angular version to use, pick the first one
 
 ## Development
 
-Fire up the civic-server on port 3000 and run:
+CIViC client uses the gulp workflow system for serving, watching, building, and testing the client codebase. Let's install that:
+
+```bash
+yarn global add gulp
+```
+
+Once we have gulp installed, start up the CIViC server (execute `rails s` from the server's root directory), then start up the client server with:
 
 ```bash
 gulp serve
 ```
 
-Then head to `http://127.0.0.1:3001` in your browser. *NOTE:* use `127.0.0.1`, not `localhost`. A couple of the OAuth providers we use for authentication will only work if the app is loaded from `127.0.0.1`. 
+Then load `http://127.0.0.1:3001` in your browser. *NOTE:* use `127.0.0.1`, not `localhost`. A couple of the OAuth providers we use for authentication will only work if the app is loaded from `127.0.0.1`. 
 
 The `serve` tasks starts a static file server, and a proxy that routes calls to /api to the civic-server listening on port 3000. It serves the AngularJS application, and a starts a watch task which watches all files for changes and lints, builds and injects them into the index.html accordingly.
 
@@ -57,7 +70,7 @@ This task executes a build, then serves the /dist directory from the same port a
 As the civic-client is under heavy development, we'll be pushing releases to the master branch at a fairly rapid rate. Often, we'll update various packages and modules that are part of the workflow and/or production codebase. So after you do a `git pull` to update your local repository, be sure to:
 
 ```bash
-npm install
+yarn install
 bower install
 ```
 
