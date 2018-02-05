@@ -521,9 +521,7 @@
         templateOptions: {
           label: 'ACMG Code(s)',
           entityName: 'ACMG Code',
-          data: {
-            message: 'test msg'
-          },
+          data: { message: '' },
           inputOptions: {
             type: 'select',
             wrapper: null,
