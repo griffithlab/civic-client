@@ -428,8 +428,8 @@
           'templateOptions.options': function($viewValue, $modelValue, scope) {
             return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
               return !!(option.type === scope.model.evidence_type ||
-              option.type === 'default' ||
-              option.type === 'N/A');
+                        option.type === 'default' ||
+                        option.type === 'N/A');
             });
           },
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
@@ -490,7 +490,7 @@
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
-          _.without(scope.model.drugs, '').length > 1);
+                   _.without(scope.model.drugs, '').length > 1);
         }
       },
       {
@@ -520,6 +520,10 @@
         type: 'multiInput',
         templateOptions: {
           label: 'ACMG Code(s)',
+          entityName: 'ACMG Code',
+          data: {
+            message: 'test msg'
+          },
           inputOptions: {
             type: 'select',
             wrapper: null,
@@ -536,6 +540,16 @@
               setNote: function(model) {
                 console.log('Setting acmg code to: ' + model);
               }
+            }
+          }
+        },
+        expressionProperties: {
+          isUnique: function (viewValue, modelValue, scope) {
+            var codes = _.without(modelValue, '');
+            if(_.uniq(codes).length < codes.length) {
+              scope.to.data.message = 'NOTE: Duplicate ACMG codes will be ignored.';
+            } else {
+              scope.to.data.message = '';
             }
           }
         },
