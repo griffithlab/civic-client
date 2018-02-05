@@ -3,7 +3,7 @@
      tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
      tooltip-placement="right"
      tooltip-append-to-body="true">
-  <span class="btn-block" ng-class="{ 'statusAccepted': row.entity['status'] === 'accepted', 'statusSubmitted': row.entity['status'] === 'submitted', 'statusRejected': row.entity['status'] === 'rejected' || row.entity['status'] === 'assertion rejected'  }">
+  <span class="btn-block" ng-class="{ 'statusAccepted': row.entity['status'] === 'accepted', 'statusSubmitted': row.entity['status'] === 'submitted', 'statusRejected': row.entity['status'] === 'rejected' }">
     <i class="glyphicon glyphicon-exclamation-sign pending-alert pending-changes"
        ng-if="row.entity['open_change_count'] > 0"></i>
     {{ row.entity[col.field] }}
