@@ -523,15 +523,17 @@
         type: 'multiInput',
         templateOptions: {
           label: 'ACMG Code(s)',
+          entityName: 'ACMG Code',
+          data: { message: '' },
           inputOptions: {
             type: 'select',
             wrapper: null,
             templateOptions: {
               onSelect: 'options.data.setNote(model, index)',
               ngOptions: 'option["value"] as option["label"] for option in to.options',
-              options: _.chain(acmgCodes)
-                .map(function(code) { return { value: code.code, label: code.code }; })
-                .unshift({value: '', label:'Please choose an ACMG Code'}).value(),
+              options: _.chain(acmgCodes).map(function(code) {
+                return { value: code.code, label: code.code };
+              }).unshift({value: '', label:'Please choose an ACMG Code'}).value(),
               valueProp: 'value',
               labelProp: 'label'
             },
@@ -539,6 +541,16 @@
               setNote: function(model) {
                 console.log('Setting acmg code to: ' + model);
               }
+            }
+          }
+        },
+        expressionProperties: {
+          isUnique: function (viewValue, modelValue, scope) {
+            var codes = _.without(modelValue, '');
+            if(_.uniq(codes).length < codes.length) {
+              scope.to.data.message = 'NOTE: Duplicate ACMG codes will be ignored.';
+            } else {
+              scope.to.data.message = '';
             }
           }
         },

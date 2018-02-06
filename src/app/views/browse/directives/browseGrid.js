@@ -85,17 +85,27 @@
     var modeColumnDefs = {
       'assertions': [
         {
+          name: 'status',
+          headerTooltip: 'Status',
+          displayName: 'ST',
+          type: 'string',
+          visible: false
+        },
+        {
           name: 'id',
           displayName: 'AID',
           visible: true,
-          width: '7%',
           type: 'number',
           enableSorting: true,
           enableFiltering: true,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          headerTooltip: 'Assertion ID',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceGridIdCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          minWidth: 75,
+          width: '5%'
         },
         {
           name: 'gene_name',
@@ -255,22 +265,16 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
-        },
-        {
-          name: 'status',
-          enableFiltering: true,
-          allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
-          type: 'string',
-          sort: {
-            direction: uiGridConstants.DESC
-          },
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
-        },
+        }
       ],
       'evidence_items': [
+        {
+          name: 'status',
+          headerTooltip: 'Status',
+          displayName: 'ST',
+          type: 'string',
+          visible: false
+        },
         {
           name: 'id',
           displayName: 'EID',
@@ -280,11 +284,11 @@
           enableFiltering: true,
           headerTooltip: 'Evidence ID',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceGridIdCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          minWidth: 50,
+          minWidth: 75,
           width: '5%'
         },
         {
