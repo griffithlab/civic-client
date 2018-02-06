@@ -124,7 +124,14 @@
     // set up column defs and data transforms for each mode
     var modeColumnDefs = {
       'browse': [
-                {
+        {
+          name: 'status',
+          headerTooltip: 'Status',
+          displayName: 'ST',
+          type: 'string',
+          visible: false
+        },
+        {
           name: 'id',
           displayName: 'EID',
           visible: true,
@@ -133,11 +140,11 @@
           enableFiltering: true,
           headerTooltip: 'Evidence ID',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          cellTemplate: 'app/views/events/common/evidenceGridIdCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          minWidth: 50,
+          minWidth: 75,
           width: '5%'
         },
         {
