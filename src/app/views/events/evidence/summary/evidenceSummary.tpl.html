@@ -69,6 +69,11 @@
             </span>
           </td>
         </tr>
+
+        <tr>
+          <td class="name">Phenotype{{ evidence.phenotypes.length > 1 ? 's' : '' }}:</td>
+          <td class="value">{{ evidence.phenotypesStr }}</td>
+        </tr>
       </table>
     </div>
     <div class="col-xs-12 col-md-6 details">
@@ -141,10 +146,6 @@
             </span>
           </td>
         </tr>
-        <tr ng-if="">
-          <td colspan="2">Trust Rating:</td>
-        </tr>
-
       </table>
     </div>
   </div>

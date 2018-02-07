@@ -24,6 +24,7 @@
                                       Genes,
                                       Publications,
                                       Diseases,
+                                      Phenotypes,
                                       Datatables,
                                       Sources,
                                       DrugSuggestions,
@@ -83,6 +84,7 @@
       drugs: [],
       drug_interaction_type: null,
       rating: '',
+      phenotypes: [],
       evidence_level: '',
       evidence_type: '',
       evidence_direction: '',
@@ -655,6 +657,37 @@
         }
       },
       {
+        key: 'phenotypes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Phenotypes',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)',
+              editable: true
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Phenotypes.query(val)
+                  .then(function(response) {
+                    return _.map(response, function(phenotype) {
+                      return { name: phenotype.hpo_class };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: help['Phenotypes']
+        }
+      },
+      {
         key: 'rating',
         type: 'horizontalRatingHelp',
         templateOptions: {
@@ -714,6 +747,7 @@
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
+      newEvidence.phenotypes = _.without(newEvidence.phenotypes, ''); // delete blank input values
       if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
       // convert variant name to object, if a string
       // TODO: figure out how to handle this more elegantly using angular-formly config object

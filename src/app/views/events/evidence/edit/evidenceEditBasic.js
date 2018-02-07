@@ -23,6 +23,7 @@
                                        Publications,
                                        DrugSuggestions,
                                        Diseases,
+                                       Phenotypes,
                                        Security,
                                        EvidenceRevisions,
                                        Evidence,
@@ -60,6 +61,7 @@
     vm.evidenceEdit.pubmed_id = vm.evidence.source.pubmed_id;
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
     vm.evidenceEdit.drugs = _.filter(_.map(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
+    vm.evidenceEdit.phenotypes = _.map(vm.evidenceEdit.phenotypes, function(phenotype) { return phenotype.hpo_class; });
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -409,6 +411,37 @@
         }
       },
       {
+        key: 'phenotypes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Phenotypes',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)',
+              editable: true
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Phenotypes.query(val)
+                  .then(function(response) {
+                    return _.map(response, function(phenotype) {
+                      return { name: phenotype.hpo_class };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: help['Phenotypes']
+        }
+      },
+      {
         key: 'rating',
         type: 'horizontalRatingHelp',
         templateOptions: {
@@ -454,6 +487,7 @@
     vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, ''); // delete blank input values
+      evidenceEdit.phenotypes = _.without(evidenceEdit.phenotypes, ''); // delete blank input values
       if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delbete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};

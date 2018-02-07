@@ -48,6 +48,11 @@
       } else {
         $scope.evidence.drugsStr = 'N/A';
       }
+      if($scope.evidence.phenotypes.length > 0) {
+        $scope.evidence.phenotypesStr = _.chain($scope.evidence.phenotypes).map('hpo_class').value().join(', ');
+      } else {
+        $scope.evidence.phenotypesStr = 'N/A';
+      }
     });
 
     $scope.EvidenceViewOptions = EvidenceViewOptions;
@@ -68,7 +73,7 @@
           $log.debug('Accept Item done.');
         });
     };
-    
+
     $scope.rejectItem = function(id) {
       $log.debug('reject item ' + id);
       Evidence.reject(id, $stateParams.variantId)
