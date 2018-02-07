@@ -37,6 +37,7 @@
                                   Security,
                                   Genes,
                                   Diseases,
+                                  Phenotypes,
                                   DrugSuggestions) {
     var vm = this;
     vm.type = 'ASSERTION';
@@ -78,6 +79,7 @@
       clinical_significance: '',
       amp_level: '',
       acmg_codes: [''],
+      phenotypes: [],
       nccn_guideline: '',
       nccn_guideline_version: '',
       fda_regulatory_approval: false,
@@ -556,6 +558,37 @@
         }
       },
       {
+        key: 'phenotypes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Phenotypes',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)',
+              editable: true
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Phenotypes.query(val)
+                  .then(function(response) {
+                    return _.map(response, function(phenotype) {
+                      return { name: phenotype.hpo_class };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: help['Phenotypes']
+        }
+      },
+      {
         key: 'nccn_guideline',
         type: 'horizontalSelectHelp',
         templateOptions: {
@@ -663,6 +696,7 @@
       newAssertion.drugs = _.without(newAssertion.drugs, '');
       newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
       newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
+      newAssertion.phenotypes = _.without(newAssertion.phenotypes, ''); // delete blank input values
       Assertions.add(newAssertion)
         .then(function(response) {
           console.log('new assertion created!');

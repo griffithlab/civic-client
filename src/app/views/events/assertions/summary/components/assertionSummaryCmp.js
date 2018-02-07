@@ -29,6 +29,13 @@
     vm.AssertionsViewOptions = AssertionsViewOptions;
     vm.backgroundColor = AssertionsViewOptions.styles.view.backgroundColor;
 
+    $scope.$watchCollection('vm.assertion', function(assertion) {
+      if(assertion.phenotypes.length > 0) {
+        vm.phenotypesStr = _.chain(assertion.phenotypes).map('hpo_class').value().join(', ');
+      } else {
+        vm.phenotypesStr = 'N/A';
+      }
+    });
     if(Security.currentUser) {
       var currentUserId = Security.currentUser.id;
       var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
