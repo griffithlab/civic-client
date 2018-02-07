@@ -32,6 +32,7 @@
                                    Datatables,
                                    Genes,
                                    Diseases,
+                                   Phenotypes,
                                    DrugSuggestions) {
     var assertionModel, vm;
     var acmgCodes = Assertions.data.acmg_codes;
@@ -59,6 +60,7 @@
 
     angular.copy(Assertions.data.item, vm.assertion);
     vm.assertion.acmg_codes = _.map(vm.assertion.acmg_codes, 'code');
+    vm.assertion.phenotypes = _.map(vm.assertion.phenotypes, function(phenotype) { return phenotype.hpo_class; });
     vm.pendingFields = _.keys(AssertionRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(AssertionRevisions.data.pendingFields), function(field) {
       return field.charAt(0).toUpperCase() + field.slice(1);
@@ -519,6 +521,37 @@
         }
       },
       {
+        key: 'phenotypes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Phenotypes',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)',
+              editable: true
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Phenotypes.query(val)
+                  .then(function(response) {
+                    return _.map(response, function(phenotype) {
+                      return { name: phenotype.hpo_class };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: help['Phenotypes']
+        }
+      },
+      {
         key: 'acmg_codes',
         type: 'multiInput',
         templateOptions: {
@@ -665,7 +698,7 @@
       var newAssertion = _.cloneDeep(assertionEdit);
       newAssertion.drugs = _.without(newAssertion.drugs, '');
       newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
-      newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
+      newAssertion.phenotypes = _.without(newAssertion.phenotypes, ''); // delete blank input values
       vm.formErrors = {};
       vm.formMessages = {};
 
