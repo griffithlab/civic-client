@@ -34,6 +34,7 @@
       $scope.ownerIsCurrentUser = false;
     }
 
+    // TODO: fetch and generate these from config service
     var evidence_levels = {
       A: 'Validated',
       B: 'Clinical',

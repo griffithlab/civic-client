@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-6">
       <div class="row" ng-if="vm.assertion.status !== 'accepted'">
-        <div class="col-xs-12 notices" >
+        <div class="col-xs-12 notices">
           <div class="label label-warning" ng-if="vm.assertion.status === 'submitted'">This Assertion Has Not Yet Been Accepted</div>
           <div class="label label-danger" ng-if="vm.assertion.status === 'rejected'">This Assertion Has Been Rejected</div>
         </div>
@@ -86,7 +86,7 @@
                   {{ vm.assertion.amp_level }}
                 </td>
               </tr>
-              <tr ng-if="vm.assertion.acmg_codes.length > 0" >
+              <tr ng-if="vm.assertion.acmg_codes.length > 0">
                 <td class="key">ACMG Codes:</td>
                 <td class="value">
                   <span ng-switch="vm.assertion.acmg_codes.length > 0">
@@ -118,8 +118,8 @@
                     <span ng-switch-when="true">
                       {{ vm.assertion.nccn_guideline }}
                       <span ng-if="vm.assertion.nccn_guideline_version">(v{{vm.assertion.nccn_guideline_version}})</span>
-                    </span>
-                    <span ng-switch-when="false">
+                  </span>
+                  <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -132,7 +132,7 @@
                     <span ng-switch-when="true" >
                       <i class="glyphicon glyphicon-ok" style="color: green"></i>
                     </span>
-                    <span ng-switch-when="false">
+                  <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -160,16 +160,12 @@
   </div>
   <div class="row" ng-if="(vm.isEditor || vm.isAdmin) && vm.assertion.status === 'submitted'" style="margin-top: 1em;">
     <div class="col-xs-6">
-      <a class="btn btn-default btn-block btn-danger"
-              ng-click="rejectItem(vm.assertion.id)">
+      <a class="btn btn-default btn-block btn-danger" ng-click="rejectItem(vm.assertion.id)">
         Reject Assertion
       </a>
     </div>
     <div class="col-xs-6">
-      <span uib-tooltip="Contributors may not accept their own submissions."
-            tooltip-append-to-body="true"
-            tooltip-enable="vm.ownerIsCurrentUser"
-            class="help-tooltip">
+      <span uib-tooltip="Contributors may not accept their own submissions." tooltip-append-to-body="true" tooltip-enable="vm.ownerIsCurrentUser" class="help-tooltip">
       <a class="btn btn-default btn-block btn-success"
               ng-disabled="vm.ownerIsCurrentUser"
               ng-click="acceptItem(vm.assertion.id)">
@@ -180,8 +176,21 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <evidence-grid evidence="vm.assertion.evidence_items" rows="8" show-gene-col="true" show-variant-col="true" context="'assertion'" source="vm.assertion" rounded="true">
-      </evidence-grid>
+      <uib-tabset active="active">
+        <uib-tab index="0" heading="Evidence Grid">
+          <evidence-grid evidence="vm.assertion.evidence_items" rows="8" show-gene-col="true" show-variant-col="true" context="'assertion'" source="vm.assertion" rounded="true">
+          </evidence-grid>
+        </uib-tab>
+        <uib-tab index="1" heading="Evidence Cards">
+          <div class="itemContainer">
+            <ul class="evidenceSelectorItems">
+              <li ng-repeat="item in vm.assertion.evidence_items">
+                <evidence-selector-item item="item" remove-fn="removeItem"></evidence-selector-item>
+              </li>
+            </ul>
+          </div>
+        </uib-tab>
+      </uib-tabset>
     </div>
   </div>
   <!-- <div class="row"> -->

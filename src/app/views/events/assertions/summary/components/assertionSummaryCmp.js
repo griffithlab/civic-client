@@ -29,12 +29,41 @@
     vm.AssertionsViewOptions = AssertionsViewOptions;
     vm.backgroundColor = AssertionsViewOptions.styles.view.backgroundColor;
 
+    // TODO: fetch and generate these from config service
+    var evidence_levels = {
+      A: 'Validated',
+      B: 'Clinical',
+      C: 'Case Study',
+      D: 'Preclinical',
+      E: 'Inferential'
+    };
+
     $scope.$watchCollection('vm.assertion', function(assertion) {
       if(assertion.phenotypes.length > 0) {
         vm.phenotypesStr = _.chain(assertion.phenotypes).map('hpo_class').value().join(', ');
       } else {
         vm.phenotypesStr = 'N/A';
       }
+      _.each(assertion.evidence_items, function(item) {
+        item.evidence_level_string = item.evidence_level + ' - ' + evidence_levels[item.evidence_level];
+        if(item.drugs.length > 0) {
+          item.drugsStr = _.chain(item.drugs).map('name').value().join(', ');
+        } else {
+          item.drugsStr = 'N/A';
+        }
+
+        if(item.drugs.length > 0) {
+          item.drugsStr = _.chain(item.drugs).map('name').value().join(', ');
+        } else {
+          item.drugsStr = 'N/A';
+        }
+        if(item.phenotypes.length > 0) {
+          vm.phenotypesStr = _.chain(item.phenotypes).map('hpo_class').value().join(', ');
+        } else {
+          vm.phenotypesStr = 'N/A';
+        }
+      });
+
     });
     if(Security.currentUser) {
       var currentUserId = Security.currentUser.id;
