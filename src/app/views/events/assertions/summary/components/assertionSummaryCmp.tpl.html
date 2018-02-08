@@ -178,11 +178,14 @@
     <div class="col-xs-12">
       <uib-tabset active="active">
         <uib-tab index="0" heading="Evidence Grid">
-          <evidence-grid evidence="vm.assertion.evidence_items" rows="8" show-gene-col="true" show-variant-col="true" context="'assertion'" source="vm.assertion" rounded="true">
-          </evidence-grid>
+          <div class="gridContainer">
+            <evidence-grid evidence="vm.assertion.evidence_items" rows="8" show-gene-col="true" show-variant-col="true" context="'assertion'" source="vm.assertion" rounded="true">
+            </evidence-grid>
+          </div>
         </uib-tab>
         <uib-tab index="1" heading="Evidence Cards">
           <div class="itemContainer">
+            <h4>Evidence Supporting AID{{vm.assertion.id}} <span class="record-info" >{{vm.assertion.evidence_items.length}} total items</span></h4>
             <ul class="evidenceSelectorItems">
               <li ng-repeat="item in vm.assertion.evidence_items">
                 <evidence-selector-item item="item" remove-fn="removeItem"></evidence-selector-item>

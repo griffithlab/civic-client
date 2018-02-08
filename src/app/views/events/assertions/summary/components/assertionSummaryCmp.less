@@ -33,13 +33,24 @@
       vertical-align: middle;
     }
   }
-  .itemContainer {
-    padding: @contentPadding;
+  .gridContainer, .itemContainer {
+    padding: 0 @contentPadding @contentPadding @contentPadding;
     border-bottom-left-radius: @border-radius-large;
     border-bottom-right-radius: @border-radius-large;
     border: 1px solid #CCC;
     border-top: none;
-
+  }
+  .itemContainer {
+    padding-top: 10px;
+    h4 {
+      margin: 0;
+      padding: 0;
+      padding-bottom: @contentPadding/2;
+    }
+    .record-info {
+      font-size: small;
+      color: #999;
+    }
     .evidenceSelectorItems {
       list-style: none;
       margin: 0;
