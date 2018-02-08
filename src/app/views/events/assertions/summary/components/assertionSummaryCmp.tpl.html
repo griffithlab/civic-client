@@ -158,7 +158,7 @@
       </div>
     </div>
   </div>
-  <div class="row" ng-if="(vm.isEditor || vm.isAdmin) && vm.assertion.status === 'submitted'" style="margin-top: 1em;">
+  <div class="row" ng-if="(vm.isEditor || vm.isAdmin) && vm.assertion.status === 'submitted'" style="margin-top: 1em; margin-bottom: 1em;">
     <div class="col-xs-6">
       <a class="btn btn-default btn-block btn-danger" ng-click="rejectItem(vm.assertion.id)">
         Reject Assertion
