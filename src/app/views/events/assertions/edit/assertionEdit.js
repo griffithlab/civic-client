@@ -254,6 +254,8 @@
                     if (disease.aliases.length > 0) {
                       disease.alias_list = disease.aliases.join(', ');
                       if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
+                    } else {
+                      disease.alias_list = '--';
                     }
                     return disease;
                   });
