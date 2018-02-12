@@ -422,6 +422,7 @@
             wrapper: null,
             templateOptions: {
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)',
               editable: true
@@ -434,7 +435,7 @@
                 return Phenotypes.query(val)
                   .then(function(response) {
                     return _.map(response, function(phenotype) {
-                      return { name: phenotype.hpo_class };
+                      return { id: phenotype.hpo_id, name: phenotype.hpo_class };
                     });
                   });
               }
@@ -488,9 +489,9 @@
 
     vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
-      evidenceEdit.drugs = _.without(evidenceEdit.drugs, ''); // delete blank input values
-      evidenceEdit.phenotypes = _.without(evidenceEdit.phenotypes, ''); // delete blank input values
-      if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delbete interaction if only 1 drug
+      evidenceEdit.drugs = _.without(evidenceEdit.drugs, '');
+      evidenceEdit.phenotypes = _.without(evidenceEdit.phenotypes, '');
+      if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
 

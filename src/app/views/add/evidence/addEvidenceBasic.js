@@ -667,7 +667,7 @@
             type: 'typeahead',
             wrapper: null,
             templateOptions: {
-              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
               templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)',
@@ -749,8 +749,8 @@
 
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
-      newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
-      newEvidence.phenotypes = _.chain(newAssertion.phenotypes).without('').map('name').value(); // delete blank input values, pluck hpo classes to create array of strings
+      newEvidence.drugs = _.without(newEvidence.drugs, '');
+      newEvidence.phenotypes = _.without(newEvidence.phenotypes, '');
       if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
       // convert variant name to object, if a string
       // TODO: figure out how to handle this more elegantly using angular-formly config object
