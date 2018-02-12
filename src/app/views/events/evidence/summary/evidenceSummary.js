@@ -47,12 +47,12 @@
       if($scope.evidence.drugs.length > 0) {
         $scope.evidence.drugsStr = _.chain($scope.evidence.drugs).map('name').value().join(', ');
       } else {
-        $scope.evidence.drugsStr = 'N/A';
+        $scope.evidence.drugsStr = '--';
       }
       if($scope.evidence.phenotypes.length > 0) {
         $scope.evidence.phenotypesStr = _.chain($scope.evidence.phenotypes).map('hpo_class').sort().value().join(', ');
       } else {
-        $scope.evidence.phenotypesStr = 'N/A';
+        $scope.evidence.phenotypesStr = '--';
       }
     });
 

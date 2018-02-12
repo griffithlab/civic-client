@@ -526,7 +526,7 @@
         key: 'phenotypes',
         type: 'multiInput',
         templateOptions: {
-          label: 'Phenotypes',
+          label: 'Associated Phenotypes',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,

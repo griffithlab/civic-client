@@ -662,12 +662,13 @@
         key: 'phenotypes',
         type: 'multiInput',
         templateOptions: {
-          label: 'Phenotypes',
+          label: 'Associated Phenotypes',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
             templateOptions: {
-              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+              templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)',
               editable: true
@@ -680,7 +681,7 @@
                 return Phenotypes.query(val)
                   .then(function(response) {
                     return _.map(response, function(phenotype) {
-                      return { name: phenotype.hpo_class };
+                      return { id: phenotype.hpo_id, name: phenotype.hpo_class };
                     });
                   });
               }
