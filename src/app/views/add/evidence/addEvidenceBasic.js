@@ -750,7 +750,7 @@
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
-      newEvidence.phenotypes = _.without(newEvidence.phenotypes, ''); // delete blank input values
+      newEvidence.phenotypes = _.chain(newAssertion.phenotypes).without('').map('name').value(); // delete blank input values, pluck hpo classes to create array of strings
       if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
       // convert variant name to object, if a string
       // TODO: figure out how to handle this more elegantly using angular-formly config object
