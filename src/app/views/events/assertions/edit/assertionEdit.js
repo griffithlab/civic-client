@@ -701,6 +701,7 @@
       var newAssertion = _.cloneDeep(assertionEdit);
       newAssertion.drugs = _.without(newAssertion.drugs, '');
       newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
+      newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
       newAssertion.phenotypes = _.without(newAssertion.phenotypes, '');
       vm.formErrors = {};
       vm.formMessages = {};
