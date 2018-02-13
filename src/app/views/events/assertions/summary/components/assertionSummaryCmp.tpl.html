@@ -22,6 +22,9 @@
           <p>
             <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
           </p>
+          <p>
+            <strong>Associated Phenotype{{ vm.assertion.phenotypes.length > 1 ? 's' : '' }}:</strong> {{ vm.phenotypesStr }}
+          </p>
         </div>
       </div>
       <div class="row">
@@ -106,10 +109,6 @@
                 </td>
               </tr>
 
-              <tr>
-                <td class="key">Associated Phenotype{{ vm.assertion.phenotypes.length > 1 ? 's' : '' }}:</td>
-                <td class="value">{{ vm.phenotypesStr }}</td>
-              </tr>
 
               <tr>
                 <td class="key">NCCN Guideline:</td>
