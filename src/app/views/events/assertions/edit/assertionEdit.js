@@ -32,6 +32,7 @@
                                    Datatables,
                                    Genes,
                                    Diseases,
+                                   Phenotypes,
                                    DrugSuggestions) {
     var assertionModel, vm;
     var acmgCodes = Assertions.data.acmg_codes;
@@ -59,6 +60,7 @@
 
     angular.copy(Assertions.data.item, vm.assertion);
     vm.assertion.acmg_codes = _.map(vm.assertion.acmg_codes, 'code');
+    vm.assertion.phenotypes = _.map(vm.assertion.phenotypes, function(phenotype) { return phenotype.hpo_class; });
     vm.pendingFields = _.keys(AssertionRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(AssertionRevisions.data.pendingFields), function(field) {
       return field.charAt(0).toUpperCase() + field.slice(1);
@@ -252,6 +254,8 @@
                     if (disease.aliases.length > 0) {
                       disease.alias_list = disease.aliases.join(', ');
                       if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
+                    } else {
+                      disease.alias_list = '--';
                     }
                     return disease;
                   });
@@ -519,6 +523,38 @@
         }
       },
       {
+        key: 'phenotypes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Associated Phenotypes',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)',
+              editable: true
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Phenotypes.query(val)
+                  .then(function(response) {
+                    return _.map(response, function(phenotype) {
+                      return { id: phenotype.hpo_id, name: phenotype.hpo_class };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: help['Phenotypes']
+        }
+      },
+      {
         key: 'acmg_codes',
         type: 'multiInput',
         templateOptions: {
@@ -666,6 +702,7 @@
       newAssertion.drugs = _.without(newAssertion.drugs, '');
       newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
       newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
+      newAssertion.phenotypes = _.without(newAssertion.phenotypes, '');
       vm.formErrors = {};
       vm.formMessages = {};
 

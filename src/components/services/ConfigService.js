@@ -384,6 +384,7 @@
         'Clinical Significance' : 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
         'Drug Names' : 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).',
         'Drug Interaction Type' : 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
+        'Phenotypes' : 'Please provide any <a href="http://compbio.charite.de/hpoweb/showterm?id=HP:0000118" target="_blank">HPO phenotypes.</a>',
         'Rating' : '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>',
         'Revision Description' : 'Please provide a short description of your edits to this Evidence record.',
         'Additional Comments' : 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.',

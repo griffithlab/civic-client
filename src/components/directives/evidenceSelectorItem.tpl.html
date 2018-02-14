@@ -3,7 +3,7 @@
     <div class="col-xs-10 title" >
       <h3>EID{{ ctrl.item.id }} <span ng-if="ctrl.item.gene != undefined && ctrl.item.variant != undefined"> <span style="color: #AAA" >GENE</span> {{ ctrl.item.gene.name }} <span style="color: #AAA" >VARIANT</span> {{ ctrl.item.variant.name }}</span></h3>
     </div>
-    <div class="col-xs-2 actions">
+    <div class="col-xs-2 actions" ng-if="ctrl.removeItem !== undefined">
       <button ng-click="ctrl.removeItem(ctrl.item)" class="btn btn-xs btn-cell-remove">
         <i class="glyphicon glyphicon-minus"></i>
       </button>
