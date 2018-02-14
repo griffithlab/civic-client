@@ -37,6 +37,7 @@
                                   Security,
                                   Genes,
                                   Diseases,
+                                  Phenotypes,
                                   DrugSuggestions) {
     var vm = this;
     vm.type = 'ASSERTION';
@@ -78,6 +79,7 @@
       clinical_significance: '',
       amp_level: '',
       acmg_codes: [''],
+      phenotypes: [],
       nccn_guideline: '',
       nccn_guideline_version: '',
       fda_regulatory_approval: false,
@@ -249,7 +251,10 @@
                     if (disease.aliases.length > 0) {
                       disease.alias_list = disease.aliases.join(', ');
                       if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
+                    } else {
+                      disease.alias_list = '--';
                     }
+
                     return disease;
                   });
                 });
@@ -556,6 +561,38 @@
         }
       },
       {
+        key: 'phenotypes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Associated Phenotypes',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+              templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)',
+              editable: true
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Phenotypes.query(val)
+                  .then(function(response) {
+                    return _.map(response, function(phenotype) {
+                      return { id: phenotype.hpo_id, name: phenotype.hpo_class };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: help['Phenotypes']
+        }
+      },
+      {
         key: 'nccn_guideline',
         type: 'horizontalSelectHelp',
         templateOptions: {
@@ -663,6 +700,7 @@
       newAssertion.drugs = _.without(newAssertion.drugs, '');
       newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
       newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
+      newAssertion.phenotypes = _.chain(newAssertion.phenotypes).without('').map('name').value(); // delete blank input values, pluck hpo classes to create array of strings
       Assertions.add(newAssertion)
         .then(function(response) {
           console.log('new assertion created!');

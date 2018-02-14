@@ -34,6 +34,7 @@
       $scope.ownerIsCurrentUser = false;
     }
 
+    // TODO: fetch and generate these from config service
     var evidence_levels = {
       A: 'Validated',
       B: 'Clinical',
@@ -46,7 +47,12 @@
       if($scope.evidence.drugs.length > 0) {
         $scope.evidence.drugsStr = _.chain($scope.evidence.drugs).map('name').value().join(', ');
       } else {
-        $scope.evidence.drugsStr = 'N/A';
+        $scope.evidence.drugsStr = '--';
+      }
+      if($scope.evidence.phenotypes.length > 0) {
+        $scope.evidence.phenotypesStr = _.chain($scope.evidence.phenotypes).map('hpo_class').sort().value().join(', ');
+      } else {
+        $scope.evidence.phenotypesStr = '--';
       }
     });
 
@@ -68,7 +74,7 @@
           $log.debug('Accept Item done.');
         });
     };
-    
+
     $scope.rejectItem = function(id) {
       $log.debug('reject item ' + id);
       Evidence.reject(id, $stateParams.variantId)

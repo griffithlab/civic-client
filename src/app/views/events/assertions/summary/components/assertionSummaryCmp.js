@@ -29,6 +29,40 @@
     vm.AssertionsViewOptions = AssertionsViewOptions;
     vm.backgroundColor = AssertionsViewOptions.styles.view.backgroundColor;
 
+    vm.phenotypesStr = '';
+
+    // TODO: fetch and generate these from config service
+    var evidence_levels = {
+      A: 'Validated',
+      B: 'Clinical',
+      C: 'Case Study',
+      D: 'Preclinical',
+      E: 'Inferential'
+    };
+
+    $scope.$watchCollection('vm.assertion', function(assertion) {
+      if(assertion.phenotypes.length > 0) {
+        vm.phenotypesStr = _.chain(assertion.phenotypes).map('hpo_class').sort().value().join(', ');
+        console.log('generating phenotypes str: ' + vm.phenotypesStr);
+      } else {
+        vm.phenotypesStr = '--';
+      }
+      _.each(assertion.evidence_items, function(item) {
+        item.evidence_level_string = item.evidence_level + ' - ' + evidence_levels[item.evidence_level];
+
+        if(item.drugs.length > 0) {
+          item.drugsStr = _.chain(item.drugs).map('name').value().join(', ');
+        } else {
+          item.drugsStr = '--';
+        }
+        if(item.phenotypes.length > 0) {
+          item.phenotypesStr = _.chain(item.phenotypes).map('hpo_class').sort().value().join(', ');
+        } else {
+          item.phenotypesStr = '--';
+        }
+      });
+
+    });
     if(Security.currentUser) {
       var currentUserId = Security.currentUser.id;
       var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
