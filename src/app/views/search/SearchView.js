@@ -24,6 +24,16 @@
           navMode: 'sub'
         }
       })
+      .state('search.assertion', {
+        url: '/assertions/:token',
+        reloadOnSearch: false,
+        controller: 'SearchController',
+        templateUrl: 'app/views/search/searchAssertion.tpl.html',
+        data: {
+          titleExp: '"Search Assertions"',
+          navMode: 'sub'
+        }
+      })
       .state('search.genes', {
         url: '/genes/:token',
         reloadOnSearch: false,
