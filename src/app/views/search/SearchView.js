@@ -24,11 +24,11 @@
           navMode: 'sub'
         }
       })
-      .state('search.assertion', {
+      .state('search.assertions', {
         url: '/assertions/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
-        templateUrl: 'app/views/search/searchAssertion.tpl.html',
+        templateUrl: 'app/views/search/searchAssertions.tpl.html',
         data: {
           titleExp: '"Search Assertions"',
           navMode: 'sub'

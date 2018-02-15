@@ -1,10 +1,10 @@
-<div class="searchAssertion">
+<div class="searchAssertions">
   <div class="row">
     <div class="col-xs-12">
       <div class="well suggested-searches">
         <h4>Example Searches:</h4>
         <ul class="nav nav-pills">
-          <li ng-repeat="suggestion in vm.suggestedSearches.assertion">
+          <li ng-repeat="suggestion in vm.suggestedSearches.assertions">
             <a ng-click="vm.setSearch(suggestion.search)"
                uib-tooltip="{{suggestion.tooltip}}"
                ng-bind="suggestion.name">
