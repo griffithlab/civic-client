@@ -34,8 +34,8 @@
                   { value: '', name: 'Please select a field' },
                   { value: 'clinical_significance', name: 'Clinical Significance' },
                   { value: 'disease_doid', name: 'Disease DOID' },
-                  { value: 'interaction_type', name: 'Drug Interaction Type' },
                   { value: 'disease_name', name: 'Disease Name' },
+                  { value: 'interaction_type', name: 'Drug Interaction Type' },
                   { value: 'drug_id', name: 'Drug PubChem ID' },
                   { value: 'drug_name', name: 'Drug Name' },
                   { value: 'evidence_direction', name: 'Evidence Direction' },
@@ -44,6 +44,8 @@
                   { value: 'evidence_type', name: 'Evidence Type' },
                   { value: 'description', name: 'Evidence Statement' },
                   { value: 'gene_name', name: 'Gene Name' },
+                  { value: 'phenotype_hpo_class', name: 'Phenotype HPO class' },
+                  { value: 'phenotype_hpo_id', name: 'Phenotype HPO ID' },
                   { value: 'publication_year', name: 'Publication Year' },
                   { value: 'pubmed_id', name: 'Pubmed ID' },
                   { value: 'pmc_id', name: 'Pubmed Central ID (PMCID)'},
@@ -560,6 +562,63 @@
                     { value: 'accepted', name: 'Accepted'},
                     { value: 'rejected', name: 'Rejected'}
                   ]
+                }
+              }
+            ],
+            phenotype_hpo_class: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'}
+
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            phenotype_hpo_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-small',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
                 }
               }
             ],
