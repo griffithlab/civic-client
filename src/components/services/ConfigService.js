@@ -393,10 +393,12 @@
       },
       assertionAttributeDescriptions: {
         ampLevels: {
-          'A': 'Biomarkers showing therapeutic response to FDA-approved therapy, or therapy included in professional guidelines',
-          'B': 'Biomarkers showing therapeutic response based on well-powered studies with consensus from experts in the field',
-          'C': 'FDA-approved therapies for different tumor types or investigational therapies, or multiple small published studies with some consensus',
-          'D': 'Biomarkers that show plausible therapeutic significance based on preclinical studies',
+          'Tier I - Level A': 'Biomarkers showing therapeutic response to FDA-approved therapy, or therapy included in professional guidelines',
+          'Tier I - Level B': 'Biomarkers showing therapeutic response based on well-powered studies with consensus from experts in the field',
+          'Tier II - Level C': 'FDA-approved therapies for different tumor types or investigational therapies, or multiple small published studies with some consensus',
+          'Tier II - Level D': 'Biomarkers that show plausible therapeutic significance based on preclinical studies',
+          'Tier III': 'Variants of Unknown Clinical Significance',
+          'Tier IV': 'Benign or Likely Benign Variants',
           'Not Applicable': 'AMP level is not relevant to this assertion.'
         },
         nccnGuidelines: [
