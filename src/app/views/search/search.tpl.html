@@ -9,6 +9,9 @@
               <span ng-switch-when="search.evidence">
                 Evidence
               </span>
+              <span ng-switch-when="search.assertions">
+                Assertions
+              </span>
               <span ng-switch-when="search.genes">
                 Genes
               </span>
@@ -26,6 +29,10 @@
           <ul class="nav nav-tabs" style="float: right;">
             <li ui-sref-active="active">
               <a ui-sref="search.evidence">Evidence</a>
+            </li>
+
+            <li ui-sref-active="active">
+              <a ui-sref="search.assertions">Assertions</a>
             </li>
 
             <li ui-sref-active="active">
