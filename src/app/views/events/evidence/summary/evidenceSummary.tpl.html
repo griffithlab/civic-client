@@ -69,6 +69,14 @@
             </span>
           </td>
         </tr>
+        <tr>
+          <td class="name">Drug:</td>
+          <td class="value">{{ evidence.drugsStr }}</td>
+        </tr>
+        <tr ng-show="evidence.drug_interaction_type">
+          <td class="name">Drug Interaction:</td>
+          <td class="value">{{ evidence.drug_interaction_type }}</td>
+        </tr>
       </table>
     </div>
     <div class="col-xs-12 col-md-6 details">
@@ -91,14 +99,6 @@
           <td class="value">{{ evidence.phenotypesStr }}</td>
         </tr>
         <tr>
-          <td class="name">Drug:</td>
-          <td class="value">{{ evidence.drugsStr }}</td>
-        </tr>
-        <tr ng-show="evidence.drug_interaction_type">
-          <td class="name">Drug Interaction:</td>
-          <td class="value">{{ evidence.drug_interaction_type }}</td>
-        </tr>
-        <tr>
           <td class="name">Citation:</td>
           <td class="value">
             <a ui-sref="sources.summary({sourceId: evidence.source.id })">
@@ -117,10 +117,10 @@
             </a>
           </td>
         </tr>
-        <tr ng-if="evidence.source.clinical_trials.length > 0">
+        <tr>
           <td class="name">Clinical Trial<span ng-if="evidence.source.clinical_trials.length > 1">s</span>:</td>
           <td class="value">
-            <span ng-repeat="trial in evidence.source.clinical_trials">
+            <span ng-repeat="trial in evidence.source.clinical_trials" ng-if="evidence.source.clinical_trials.length > 0">
               {{
               $first ? '' : $last ? (
               evidence.source.clinical_trials.length > 2 ? ' and ' : ' and '
@@ -133,6 +133,7 @@
               <span ng-bind="trial.nct_id"></span>
             </a>
             </span>
+            <span ng-if="evidence.source.clinical_trials.length == 0">--</span>
           </td>
         </tr>
         <tr>
