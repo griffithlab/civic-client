@@ -252,8 +252,8 @@
         });
     }
 
-    function queryAcmgCodes() {
-      return AssertionsResource.queryAcmgCodes().$promise
+    function queryAcmgCodes(code) {
+      return AssertionsResource.queryAcmgCodes({ code: code }).$promise
         .then(function(response) {
           angular.copy(response, acmg_codes);
           return response.$promise;
