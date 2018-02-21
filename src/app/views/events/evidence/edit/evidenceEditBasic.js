@@ -191,7 +191,35 @@
                 });
             }
           }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
+          'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
+        },
+        hideExpression: 'model.noDoid'
+      },
+      {
+        key: 'noDoid',
+        type: 'horizontalCheckbox',
+        templateOptions: {
+          label: 'Could not find disease.',
+          onChange: function(value,options,scope) {
+            if(value === true) {
+              scope.model.disease = '';
+            }
+          }
         }
+      },
+      {
+        key: 'disease_name',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Disease Name',
+          value: 'vm.newEvidence.disease_name',
+          minLength: 32,
+          helpText: help['Disease Name']
+        },
+        hideExpression: '!model.noDoid'
       },
       {
         key: 'description',
@@ -494,6 +522,11 @@
       if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
+
+      // if noDoid, construct disease obj w/ disease_name
+      if(evidenceEdit.noDoid) {
+        evidenceEdit.disease = { name: evidenceEdit.disease_name };
+      }
 
       EvidenceRevisions.submitRevision(evidenceEdit)
         .then(function(response) {
