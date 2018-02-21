@@ -198,7 +198,7 @@
           typeaheadMinLength: 0,
           selectOnBlur: true,
           data: {
-            message: ''
+            message: 'Please specify a Gene before choosing a Variant.'
           }
         },
         expressionProperties: {
@@ -208,7 +208,6 @@
           }
         },
         data: {
-          message: 'Please specify a Gene before choosing a Variant.',
           typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
