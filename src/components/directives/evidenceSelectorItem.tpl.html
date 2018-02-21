@@ -1,0 +1,139 @@
+<div class="evidenceSelectorItem">
+  <div class="row header">
+    <div class="col-xs-10 title" >
+      <h3>EID{{ ctrl.item.id }} <span ng-if="ctrl.item.gene != undefined && ctrl.item.variant != undefined"> <span style="color: #AAA" >GENE</span> {{ ctrl.item.gene.name }} <span style="color: #AAA" >VARIANT</span> {{ ctrl.item.variant.name }}</span></h3>
+    </div>
+    <div class="col-xs-2 actions" ng-if="ctrl.removeItem !== undefined">
+      <button ng-click="ctrl.removeItem(ctrl.item)" class="btn btn-xs btn-cell-remove">
+        <i class="glyphicon glyphicon-minus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row summary">
+    <div class="col-xs-12 explanation">
+      <p ng-bind-html="ctrl.item.description | linky"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-6 details">
+      <table class="table table-condensed summary-details">
+        <colgroup>
+          <col width="40%" />
+          <col width="60%" />
+        </colgroup>
+        <tr>
+          <td class="name" style="line-height: 2em;">Evidence Level:</td>
+          <td class="value">
+            <span class="levelBadge" ng-class="{'levelA': ctrl.item.evidence_level === 'A', 'levelB': ctrl.item.evidence_level === 'B','levelC': ctrl.item.evidence_level === 'C', 'levelD': ctrl.item.evidence_level === 'D', 'levelE': ctrl.item.evidence_level === 'E' }" uib-tooltip="{{tipText.evidence_level[ctrl.item.evidence_level]}}" tooltip-placement="right" class="help-tooltip">
+              {{ ctrl.item.evidence_level_string }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="name">Evidence Type:</td>
+          <td class="value">
+            <span ng-bind="ctrl.item.evidence_type" uib-tooltip="{{tipText.evidence_type[ctrl.item.evidence_type]}}" tooltip-placement="right" class="help-tooltip">
+              evidence type</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="name">Evidence Direction:</td>
+          <td class="value">
+            <span ng-bind="ctrl.item.evidence_direction" uib-tooltip="{{tipText.evidence_direction[ctrl.item.evidence_type][ctrl.item.evidence_direction]}}" tooltip-placement="right" class="help-tooltip">
+              ctrl.item.evidence_direction
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="name">Clinical Significance:</td>
+          <td class="value">
+            <span ng-bind="ctrl.item.clinical_significance" uib-tooltip="{{tipText.clinical_significance[ctrl.item.evidence_type][ctrl.item.clinical_significance]}}" tooltip-placement="right" class="help-tooltip" class="help-tooltip">
+              ctrl.item.clinical_significance
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="name">Variant Origin:</td>
+          <td class="value">
+            <span ng-bind="ctrl.item.variant_origin" uib-tooltip="{{tipText.variant_origin[ctrl.item.variant_origin]}}" tooltip-placement="right" class="help-tooltip">
+              ctrl.item.variant_origin
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-12 col-md-6 details">
+      <table class="table table-condensed summary-details">
+        <colgroup>
+          <col width="40%" />
+          <col width="60%" />
+        </colgroup>
+
+        <tr>
+          <td class="name">Disease:</td>
+          <td class="value">
+            <a target="_blank" href="{{ ctrl.item.disease.url }}" _target="blank">
+              {{ ctrl.item.disease.name }}
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="name">Drug:</td>
+          <td class="value">{{ ctrl.item.drugsStr }}</td>
+        </tr>
+        <tr ng-show="ctrl.item.drug_interaction_type">
+          <td class="name">Drug Interaction:</td>
+          <td class="value">{{ ctrl.item.drug_interaction_type }}</td>
+        </tr>
+        <tr>
+          <td class="name">Citation:</td>
+          <td class="value">
+            <a ui-sref="sources.summary({sourceId: ctrl.item.source.id })">
+              {{ ctrl.item.source.citation }}
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="name">Pubmed ID:</td>
+          <td class="value">
+            <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{ctrl.item.source.pubmed_id}}" class="btn btn-xs button-new-window" target="_blank">
+              <span class="glyphicon glyphicon-new-window"></span>
+              <span ng-bind="ctrl.item.source.pubmed_id"></span>
+            </a>
+          </td>
+        </tr>
+        <tr ng-if="ctrl.item.source.clinical_trials.length > 0">
+          <td class="name">Clinical Trial<span ng-if="ctrl.item.source.clinical_trials.length > 1">s</span>:</td>
+          <td class="value">
+            <span ng-repeat="trial in ctrl.item.source.clinical_trials">
+              {{
+              $first ? '' : $last ? (
+              ctrl.item.source.clinical_trials.length > 2 ? ' and ' : ' and '
+              ) : ' '
+              }}
+              <a ng-href="{{trial.clinical_trial_url}}"
+                class="btn btn-xs button-new-window" style="margin-bottom: 4px;"
+                target="_blank">
+                <span class="glyphicon glyphicon-new-window"></span>
+            <span ng-bind="trial.nct_id"></span>
+            </a>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="name">Trust Rating:</td>
+          <td class="value">
+            <span uib-rating ng-model="ctrl.item.rating" max="5" read-only="true" uib-tooltip="{{tipText.rating[ctrl.item.rating]}}" tooltip-placement="left" class="help-tooltip">
+            </span>
+          </td>
+        </tr>
+        <tr ng-if="">
+          <td colspan="2">Trust Rating:</td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+</div>

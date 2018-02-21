@@ -24,7 +24,7 @@
     $scope.isAuthenticated = Security.isAuthenticated;
     $scope.isEdit = $state.includes('**.edit.**');
     $scope.stateParams = $stateParams;
-
+    $scope.hasHiddenAssertions = false;
     $scope.variant = parseVariant(Variants.data.item);
     $scope.evidence = Variants.data.evidence;
 
@@ -56,8 +56,12 @@
     function parseVariant(variant) {
       if(!_.isUndefined(variant.assertions) && variant.assertions.length > 0) {
         _.each(variant.assertions, function (assertion) {
-          assertion.name = 'ASR' + assertion.id;
+          assertion.name = 'AID' + assertion.id;
           return assertion;
+        });
+
+        $scope.hasHiddenAssertions = _.some(variant.assertions, function(assertion) {
+          return assertion.status === 'rejected';
         });
       }
 

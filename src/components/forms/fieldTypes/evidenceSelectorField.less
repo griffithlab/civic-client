@@ -1,0 +1,30 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.evidenceSelectorField {
+  margin-bottom: @contentPadding;
+  .control-label {
+    text-align: left !important;
+    margin-bottom: @contentPadding/2;
+    display: block;
+    padding-left: 0;
+  }
+  .itemContainer {
+    padding: @contentPadding;
+    border-radius: @border-radius-large;
+    border: 1px solid #CCC;
+
+    .evidenceSelectorItems {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        margin-bottom: @contentPadding;
+      }
+      :last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

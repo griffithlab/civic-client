@@ -31,7 +31,14 @@
           url: '/api/diseases?query=:query',
           isArray: true,
           cache: true
+        },
+        exactMatch: {
+          method: 'GET',
+          url: '/api/diseases?query=:query&exact_match=true',
+          isArray: true,
+          cache: true
         }
+
       }
     );
   }
@@ -49,7 +56,8 @@
       query: query,
       get: get,
       verify: verify,
-      beginsWith: beginsWith
+      beginsWith: beginsWith,
+      exactMatch: exactMatch
     };
 
     function query() {
@@ -76,6 +84,12 @@
     }
     function beginsWith(query) {
       return DiseasesResource.beginsWith({query: query}).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
+    function exactMatch(query) {
+      return DiseasesResource.exactMatch({query: query}).$promise
         .then(function(response) {
           return response.$promise;
         });

@@ -23,6 +23,7 @@
                                        Publications,
                                        DrugSuggestions,
                                        Diseases,
+                                       Phenotypes,
                                        Security,
                                        EvidenceRevisions,
                                        Evidence,
@@ -60,6 +61,7 @@
     vm.evidenceEdit.pubmed_id = vm.evidence.source.pubmed_id;
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
     vm.evidenceEdit.drugs = _.filter(_.map(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
+    vm.evidenceEdit.phenotypes = _.map(vm.evidenceEdit.phenotypes, function(phenotype) { return phenotype.hpo_class; });
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -181,6 +183,8 @@
                     if (disease.aliases.length > 0) {
                       disease.alias_list = disease.aliases.join(', ');
                       if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
+                    } else {
+                      disease.alias_list = '--';
                     }
                     return disease;
                   });
@@ -409,6 +413,38 @@
         }
       },
       {
+        key: 'phenotypes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Associated Phenotypes',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)',
+              editable: true
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Phenotypes.query(val)
+                  .then(function(response) {
+                    return _.map(response, function(phenotype) {
+                      return { id: phenotype.hpo_id, name: phenotype.hpo_class };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: help['Phenotypes']
+        }
+      },
+      {
         key: 'rating',
         type: 'horizontalRatingHelp',
         templateOptions: {
@@ -430,11 +466,6 @@
       {
         key: 'text',
         type: 'horizontalCommentHelp',
-        ngModelElAttrs: {
-          'msd-elastic': 'true',
-          'mentio': '',
-          'mentio-id': '"commentForm"'
-        },
         model: vm.evidenceEdit.comment,
         templateOptions: {
           rows: 5,
@@ -458,8 +489,9 @@
 
     vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
-      evidenceEdit.drugs = _.without(evidenceEdit.drugs, ''); // delete blank input values
-      if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delbete interaction if only 1 drug
+      evidenceEdit.drugs = _.without(evidenceEdit.drugs, '');
+      evidenceEdit.phenotypes = _.without(evidenceEdit.phenotypes, '');
+      if(evidenceEdit.drugs.length < 2) { evidenceEdit.drug_interaction_type = null; } // delete interaction if only 1 drug
       vm.formErrors = {};
       vm.formMessages = {};
 

@@ -37,7 +37,6 @@
     // app root views
     'civic.pages',
     'civic.activity',
-    'civic.assertions',
     'civic.search',
     'civic.account',
     'civic.browse',
@@ -139,7 +138,6 @@
     'civic.users.common'
   ]);
   angular.module('civic.organizations', []);
-  angular.module('civic.assertions', []);
 
   angular.module('civic.add', [
     'ui.router',
@@ -157,6 +155,7 @@
     'angular-lodash/filters',
     'civic.events.common',
     'civic.events.genes',
+    'civic.events.assertions',
     'civic.events.variants',
     'civic.events.variantGroups',
     'civic.events.evidence'

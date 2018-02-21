@@ -1,0 +1,22 @@
+<div class="ui-grid-cell-contents">
+  <span ng-switch="grid.appScope.ctrl.isInItems(row.entity.id)">
+    <span ng-switch-when="true" >
+      <span uib-tooltip="Remove Evidence Item"
+        tooltip-append-to-body="true">
+        <button ng-click="grid.appScope.ctrl.removeItem(row.entity)"
+          class="btn btn-xs btn-cell-remove">
+          <i class="glyphicon glyphicon-minus"></i>
+        </button>
+      </span>
+    </span>
+    <span ng-switch-when="false">
+      <span uib-tooltip="Add Evidence Item"
+        tooltip-append-to-body="true">
+        <a ng-click="grid.appScope.ctrl.addItem(row.entity)"
+          class="btn btn-xs btn-cell-add">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+      </span>
+    </span>
+  </span>
+</div>

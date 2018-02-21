@@ -24,6 +24,7 @@
                                       Genes,
                                       Publications,
                                       Diseases,
+                                      Phenotypes,
                                       Datatables,
                                       Sources,
                                       DrugSuggestions,
@@ -83,6 +84,7 @@
       drugs: [],
       drug_interaction_type: null,
       rating: '',
+      phenotypes: [],
       evidence_level: '',
       evidence_type: '',
       evidence_direction: '',
@@ -189,7 +191,7 @@
           typeaheadSearch: function(val) {
             var request = {
               mode: 'variants',
-              count: 10,
+              count: 50,
               page: 0,
               'filter[variant]': val
             };
@@ -359,6 +361,8 @@
                     if (disease.aliases.length > 0) {
                       disease.alias_list = disease.aliases.join(', ');
                       if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
+                    } else {
+                      disease.alias_list = '--';
                     }
                     return disease;
                   });
@@ -368,7 +372,7 @@
         },
         controller: /* @ngInject */ function($scope, $stateParams, Diseases) {
           if($stateParams.diseaseName) {
-            Diseases.beginsWith($stateParams.diseaseName)
+            Diseases.exactMatch($stateParams.diseaseName)
               .then(function(response) {
                 $scope.model.disease = response[0];
                 $scope.to.data.doid = response[0].doid;
@@ -655,6 +659,38 @@
         }
       },
       {
+        key: 'phenotypes',
+        type: 'multiInput',
+        templateOptions: {
+          label: 'Associated Phenotypes',
+          inputOptions: {
+            type: 'typeahead',
+            wrapper: null,
+            templateOptions: {
+              typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+              templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
+              // focus: true,
+              onSelect: 'options.data.pushNew(model, index)',
+              editable: true
+            },
+            data: {
+              pushNew: function(model, index) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Phenotypes.query(val)
+                  .then(function(response) {
+                    return _.map(response, function(phenotype) {
+                      return { id: phenotype.hpo_id, name: phenotype.hpo_class };
+                    });
+                  });
+              }
+            }
+          },
+          helpText: help['Phenotypes']
+        }
+      },
+      {
         key: 'rating',
         type: 'horizontalRatingHelp',
         templateOptions: {
@@ -690,11 +726,6 @@
         key: 'text',
         type: 'horizontalCommentHelp',
         model: vm.newEvidence.comment,
-        ngModelElAttrs: {
-          'msd-elastic': 'true',
-          'mentio': '',
-          'mentio-id': '"commentForm"'
-        },
         templateOptions: {
           rows: 5,
           minimum_length: 3,
@@ -718,7 +749,8 @@
 
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
-      newEvidence.drugs = _.without(newEvidence.drugs, ''); // delete blank input values
+      newEvidence.drugs = _.without(newEvidence.drugs, '');
+      newEvidence.phenotypes = _.without(newEvidence.phenotypes, '');
       if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
       // convert variant name to object, if a string
       // TODO: figure out how to handle this more elegantly using angular-formly config object

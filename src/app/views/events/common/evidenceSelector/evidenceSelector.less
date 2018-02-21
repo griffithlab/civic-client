@@ -1,0 +1,95 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.evidenceSelector {
+  @ui-grid-border-radius: @border-radius-large;
+  .ui-grid {
+    border: 1px solid #DEDEDE;
+    border-radius: @ui-grid-border-radius;
+
+    .ui-grid-viewport, .ui-grid-canvas {
+      border-bottom-right-radius: @ui-grid-border-radius;
+      border-bottom-left-radius: @ui-grid-border-radius;
+    }
+
+    .ui-grid-top-panel {
+      border-top-right-radius: @ui-grid-border-radius;
+      border-top-left-radius: @ui-grid-border-radius;
+    }
+  }
+  .grid-pagination {
+    ul {
+      margin-top: 0;
+      margin-bottom: @contentPadding/2;
+      .pagination-first a,
+      .pagination-last a,
+      .pagination-prev a,
+      .pagination-next a,
+      .pagination-page a {
+        border-top: none;
+      }
+      .pagination-first a {
+        border-top-left-radius: 0;
+      }
+      .pagination-last a {
+        border-top-right-radius: 0;
+      }
+    }
+  }
+
+  // id
+  .idCell {
+    text-align: center;
+    color: #FFF;
+    padding: 5px 4px;
+
+    span {
+      display: inline-block;
+      padding: 4px 5px;
+      line-height: 12px;
+      border-radius: @border-radius-small;
+      font-size: small;
+      font-weight: bold;
+    }
+ }
+
+  // level
+  .levelCell {
+    text-align: center;
+    color: #FFF;
+    padding: 5px 4px;
+
+    span {
+      display: inline-block;
+      padding: 4px 5px;
+      line-height: 12px;
+      border-radius: @border-radius-small;
+      // background-color: #666;
+    }
+  }
+
+  .ratingCell {
+    text-align:center;
+    padding-top:5px;
+    color: #666;
+  }
+
+  // icon cells
+  .directionCell,
+  .typeCell,
+  .evidenceDirectionCell,
+  .clinicalCell,
+  .originCell {
+    text-align: center;
+    color: #FFF;
+    padding: 5px 4px;
+    span {
+      display: inline-block;
+      padding: 4px 5px;
+      line-height: 12px;
+      border-radius: @border-radius-small;
+      background-color: #666;
+    }
+  }
+}

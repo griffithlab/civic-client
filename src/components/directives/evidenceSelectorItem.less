@@ -1,0 +1,45 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+
+.evidenceSelectorItem {
+  background-color: @pageBackground2;
+  padding: @contentPadding/2 @contentPadding;
+  border-radius: @border-radius-large;
+  .header {
+    border-bottom: 1px solid #CCC;
+    .title h3 {
+      margin-top: 0;
+      padding: 0 0 @contentPadding/2 0;
+    }
+    .actions {
+      text-align: right;
+      padding-top: @contentPadding/3;
+    }
+  }
+  .summary {
+    .explanation {
+      padding-top: @contentPadding/2;
+    }
+  }
+  .table {
+    margin-bottom: 0!important;
+
+    .name {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .value span.help-tooltip {
+      cursor: help;
+    }
+  }
+
+  .levelBadge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    text-align: center;
+    color: #FFF;
+  }
+}

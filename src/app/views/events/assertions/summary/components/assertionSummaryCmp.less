@@ -1,0 +1,66 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.assertionsSummaryCmp {
+  margin-top: @contentPadding;
+  margin-bottom: @contentPadding;
+  .notices {
+    padding-bottom: @contentPadding/2;
+  }
+  .table {
+    th {
+      border: none;
+    }
+    td {
+      border: none;
+    }
+
+    margin-bottom: 0;
+
+    .key {
+      width: 40%;
+      text-align: right;
+      vertical-align: middle;
+      padding-right: @contentPadding/2;
+      font-weight: bold;
+    }
+    .value {
+      width: 60%;
+      text-align: left;
+      padding-left: @contentPadding/2;
+      vertical-align: middle;
+    }
+  }
+  .gridContainer, .itemContainer {
+    padding: 0 @contentPadding @contentPadding @contentPadding;
+    border-bottom-left-radius: @border-radius-large;
+    border-bottom-right-radius: @border-radius-large;
+    border: 1px solid #CCC;
+    border-top: none;
+  }
+  .itemContainer {
+    padding-top: 10px;
+    h4 {
+      margin: 0;
+      padding: 0;
+      padding-bottom: @contentPadding/2;
+    }
+    .record-info {
+      font-size: small;
+      color: #999;
+    }
+    .evidenceSelectorItems {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        margin-bottom: @contentPadding;
+      }
+      :last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

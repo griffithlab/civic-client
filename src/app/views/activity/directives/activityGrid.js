@@ -212,6 +212,7 @@
       gridApi.selection.on.rowSelectionChanged($scope, function(row){
         var event = row.entity;
         var subjectStates = {
+          assertions: 'events.assertions',
           genes: 'events.genes',
           variants: 'events.genes.summary.variants',
           variantgroups: 'events.genes.summary.variantGroups',
@@ -240,6 +241,9 @@
           'commented': '.talk.comments',
           'submitted': '.summary',
           'accepted': '.summary',
+          'assertion submitted': '.summary',
+          'assertion accepted': '.summary',
+          'assertion rejected': '.summary',
           'rejected': '.summary',
           'flagged': '.summary',
           'flag resolved': '.summary',

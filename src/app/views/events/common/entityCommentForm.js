@@ -71,12 +71,7 @@
     vm.newCommentFields = [
       {
         key: 'text',
-        type: 'comment',
-        ngModelElAttrs: {
-          'msd-elastic': 'true',
-          'mentio': '',
-          'mentio-id': '"commentForm"'
-        },
+        type: 'basicComment',
         templateOptions: {
           label: 'Add Comment:',
           rows: 4,
