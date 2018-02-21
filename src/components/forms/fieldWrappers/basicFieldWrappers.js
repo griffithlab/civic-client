@@ -132,6 +132,14 @@
     });
 
     formlyConfigProvider.setWrapper({
+      name: 'acmgDescription',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small">{{model[index].description}}</span>'
+      ].join(' ')
+    });
+
+    formlyConfigProvider.setWrapper({
       name: 'genedisplay',
       template: [
         '<formly-transclude></formly-transclude>',

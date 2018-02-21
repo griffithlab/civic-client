@@ -59,7 +59,6 @@
     vm.assertion = {};
 
     angular.copy(Assertions.data.item, vm.assertion);
-    vm.assertion.acmg_codes = _.map(vm.assertion.acmg_codes, 'code');
     vm.assertion.phenotypes = _.map(vm.assertion.phenotypes, function(phenotype) { return phenotype.hpo_class; });
     vm.pendingFields = _.keys(AssertionRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(AssertionRevisions.data.pendingFields), function(field) {
@@ -562,20 +561,31 @@
           entityName: 'ACMG Code',
           data: { message: '' },
           inputOptions: {
-            type: 'select',
-            wrapper: null,
+            type: 'typeahead',
+            wrapper: ['acmgDescription'],
             templateOptions: {
-              onSelect: 'options.data.setNote(model, index)',
-              ngOptions: 'option["value"] as option["label"] for option in to.options',
-              options: _.chain(acmgCodes).map(function(code) {
-                return { value: code.code, label: code.code };
-              }).unshift({value: '', label:'Please choose an ACMG Code'}).value(),
-              valueProp: 'value',
-              labelProp: 'label'
+              formatter: 'model[options.key].name',
+              typeahead: 'item as item.code for item in options.data.typeaheadSearch($viewValue)',
+              onSelect: 'options.data.pushNew(model, index, to)',
+              typeaheadMinLength: 1,
+              selectOnBlur: true,
+              data: {
+                message: ''
+              },
+              controller: function($scope) {
+                controller.log('acmg_codes input controller instantiated');
+              }
             },
             data: {
-              setNote: function(model) {
-                console.log('Setting acmg code to: ' + model);
+              pushNew: function(model, index, to) {
+                to.data.message = model[index].description;
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Assertions.queryAcmgCodes(val)
+                  .then(function(response) {
+                    return response;
+                  });
               }
             }
           }
@@ -700,7 +710,7 @@
     vm.submit = function(assertionEdit) {
       var newAssertion = _.cloneDeep(assertionEdit);
       newAssertion.drugs = _.without(newAssertion.drugs, '');
-      newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
+      newAssertion.acmg_codes = _.chain(newAssertion.acmg_codes).without('').map('code').value();
       newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
       newAssertion.phenotypes = _.without(newAssertion.phenotypes, '');
       vm.formErrors = {};

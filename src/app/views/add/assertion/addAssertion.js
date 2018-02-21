@@ -528,20 +528,16 @@
           data: { message: '' },
           inputOptions: {
             type: 'typeahead',
-            wrapper: ['fieldMessage'],
+            wrapper: ['acmgDescription'],
             templateOptions: {
               formatter: 'model[options.key].name',
               typeahead: 'item as item.code for item in options.data.typeaheadSearch($viewValue)',
               onSelect: 'options.data.pushNew(model, index, to)',
               typeaheadMinLength: 1,
-              selectOnBlur: true,
-              data: {
-                message: ''
-              }
+              selectOnBlur: true
             },
             data: {
               pushNew: function(model, index, to) {
-                to.data.message = model[index].description;
                 model.splice(index+1, 0, '');
               },
               typeaheadSearch: function(val) {
