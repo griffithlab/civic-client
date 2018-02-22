@@ -231,6 +231,39 @@
         }
       },
       {
+        key: 'variant_origin',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.variantOrigin) {
+            var vo = $stateParams.variantOrigin;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.variant_origin);
+            if(_.includes(permitted, vo)) {
+              $scope.model.variant_origin = $stateParams.variantOrigin;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[vo];
+            } else {
+              console.warn('Ignoring pre-population of Variant Origin with invalid value: ' + vo);
+            }
+          }
+        },
+        templateOptions: {
+          label: 'Variant Origin',
+          value: 'vm.newEvidence.variant_origin',
+          options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: help['Variant Origin'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.variant_origin
+          },
+          onChange: function(value, options) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
+        }
+      },
+      {
         key: 'disease',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay'],
