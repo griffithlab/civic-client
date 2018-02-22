@@ -536,8 +536,8 @@
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
         templateOptions: {
-          label: 'AMP Level',
-          options: ([{ value: '', label: 'Please select an AMP Level' }].concat(make_options(ampLevels))),
+          label: 'AMP Category',
+          options: ([{ value: '', label: 'Please select an AMP Category' }].concat(make_options(ampLevels))),
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'If applicable, please provide the <a href="http://www.ncbi.nlm.nih.gov/pubmed/27993330" target="_blank">AMP somatic variant classification</a>.',
