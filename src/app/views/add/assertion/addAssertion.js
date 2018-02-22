@@ -247,7 +247,7 @@
         templateOptions: {
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
-          options: [{ value: null, label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
+          options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Variant Origin'],
@@ -747,6 +747,7 @@
           vm.showSuccessMessage = true;
           vm.newAssertionId = response.assertion.id;
           vm.newAssertionName = response.assertion.name;
+          vm.formErrors = {};
         })
         .catch(function(error) {
           console.error('assertion submit error!');
