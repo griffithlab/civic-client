@@ -215,6 +215,7 @@
         type: 'horizontalInputHelp',
         templateOptions: {
           label: 'Disease Name',
+          required: true,
           value: 'vm.newEvidence.disease_name',
           minLength: 32,
           helpText: help['Disease Name']
