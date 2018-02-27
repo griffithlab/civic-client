@@ -144,10 +144,10 @@
           // if meta key (alt or command) pressed, generate a state URL and open it in a new tab/window
           // shift would be preferable to meta but ui-grid's selection module appears to be capturing shift-clicks for multi-select feature
           // keep an eye on: https://github.com/angular-ui/ui-grid/issues/4926
-          var url = $state.href('assertions.summary', params, {absolute: true});
+          var url = $state.href('events.assertions.summary', params, {absolute: true});
           $window.open(url, '_blank');
         } else {
-          $state.go('assertions.summary', params);
+          $state.go('events.assertions.summary', params);
         }
       });
 
