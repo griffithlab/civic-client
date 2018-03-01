@@ -7,6 +7,7 @@
   function SearchController($scope,
                             _,
                             Diseases,
+                            acmgCodes,
                             ConfigService) {
     var vm = $scope.vm = {};
 
@@ -1004,6 +1005,8 @@
                   { value: 'drug_id', name: 'Drug PubChem ID' },
                   { value: 'drug_name', name: 'Drug Name' },
                   { value: 'gene_name', name: 'Gene Name' },
+                  { value: 'amp_level', name: 'AMP Level' },
+                  { value: 'acmg_code', name: 'ACMG Code' },
                   { value: 'phenotype_hpo_class', name: 'Phenotype HPO class' },
                   { value: 'phenotype_hpo_id', name: 'Phenotype HPO ID' },
                   { value: 'status', name: 'Status' },
@@ -1023,6 +1026,40 @@
             }
           ],
           conditionFields: {
+            acmg_code: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                    {value: 'is_empty', name: 'is empty'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: null
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: _.chain(acmgCodes).map(function(code) {
+                    return { value: code.code, name: code.code };
+                  }).unshift({value: null, name:'Please choose an ACMG Code'}).value()
+                }
+              }
+            ],
             description: [
               {
                 key: 'name',

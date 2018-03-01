@@ -29,6 +29,12 @@
         reloadOnSearch: false,
         controller: 'SearchController',
         templateUrl: 'app/views/search/searchAssertions.tpl.html',
+        resolve: {
+          Assertions: 'Assertions',
+          acmgCodes: function(Assertions) {
+            return Assertions.queryAcmgCodes();
+          }
+        },
         data: {
           titleExp: '"Search Assertions"',
           navMode: 'sub'
