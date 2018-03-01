@@ -12,7 +12,13 @@
         abstract: true,
         url: '/search',
         controller: 'SearchViewController',
-        templateUrl: 'app/views/search/search.tpl.html'
+        templateUrl: 'app/views/search/search.tpl.html',
+        resolve: {
+          Assertions: 'Assertions',
+          acmgCodes: function(Assertions) {
+            return Assertions.queryAcmgCodes();
+          }
+        }
       })
       .state('search.evidence', {
         url: '/evidence/:token',
@@ -29,12 +35,6 @@
         reloadOnSearch: false,
         controller: 'SearchController',
         templateUrl: 'app/views/search/searchAssertions.tpl.html',
-        resolve: {
-          Assertions: 'Assertions',
-          acmgCodes: function(Assertions) {
-            return Assertions.queryAcmgCodes();
-          }
-        },
         data: {
           titleExp: '"Search Assertions"',
           navMode: 'sub'

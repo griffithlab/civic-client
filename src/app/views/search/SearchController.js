@@ -11,6 +11,9 @@
                             ConfigService) {
     var vm = $scope.vm = {};
 
+    var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
+    var make_options = ConfigService.optionMethods.make_options;
+
     vm.suggestedSearch = {};
 
     vm.setSearch = function(search) {
@@ -1026,6 +1029,39 @@
             }
           ],
           conditionFields: {
+            amp_level: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: null
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: ([{ value: null, label: 'Please select an AMP Level' }].concat(make_options(ampLevels))),
+                  valueProp: 'value',
+                  labelProp: 'label'
+                }
+              }
+            ],
             acmg_code: [
               {
                 key: 'name',
