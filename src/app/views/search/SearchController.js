@@ -3459,6 +3459,19 @@
     ];
 
     vm.suggestedSearches = {
+      'assertions': [
+        {
+          name: 'Predictive EGFR Assertions',
+          tooltip: 'Predictive Assertions involving the gene EGFR',
+          search: {"operator":"AND","queries":[{"field":"gene_name","condition":{"name":"contains","parameters":["EGFR"]}},{"field":"assertion_type","condition":{"name":"is_equal_to","parameters":["Predictive"]}}]}
+        },
+        {
+          name: 'Crizotinib Assertions',
+          tooltip: 'Assertions involving the drug Crizotinib',
+          search: {"operator":"AND","queries":[{"field":"drug_name","condition":{"name":"contains","parameters":["Crizotinib"]}}]}
+        },
+
+      ],
       'evidence': [
         {
           name: 'High Quality ALK Evidence',
