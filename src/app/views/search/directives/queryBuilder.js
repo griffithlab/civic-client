@@ -82,8 +82,7 @@
         Search.get({entity: entity, token: $stateParams.token})
           .then(function (response) {
             vm.model.operator = response.params.operator;
-            // vm.model.queries = response.params.queries;
-            angular.copy(response.params.queries, vm.model.queries);
+            vm.model.queries = response.params.queries;
             vm.searchResults = response.results;
             vm.showGrid = true;
           });
