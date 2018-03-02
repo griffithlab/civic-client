@@ -1,0 +1,90 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+.assertionGrid {
+  .clearfix();
+  //   min-height: 210px;
+  // rounded corners for ui-grid
+  @ui-grid-border-radius: @border-radius-large;
+  .ui-grid {
+    border: 1px solid #DEDEDE;
+    -webkit-border-radius: @ui-grid-border-radius;
+    -moz-border-radius: @ui-grid-border-radius;
+    border-radius: @ui-grid-border-radius;
+
+
+    .ui-grid-top-panel {
+      -webkit-border-top-right-radius: @ui-grid-border-radius;
+      -webkit-border-top-left-radius: @ui-grid-border-radius;
+      -moz-border-radius-topright: @ui-grid-border-radius;
+      -moz-border-radius-topleft: @ui-grid-border-radius;
+      border-top-right-radius: @ui-grid-border-radius;
+      border-top-left-radius: @ui-grid-border-radius;
+    }
+
+  }
+
+  .record-info {
+    font-size: small;
+    color: #999;
+  }
+
+  .ui-grid-pager-row-count-picker {
+    display: none;
+  }
+
+  .ui-grid-cell-contents {
+    cursor: pointer;
+  }
+
+  // id
+  .idCell {
+    text-align: center;
+    color: #FFF;
+    padding: 5px 4px;
+
+    span {
+      display: inline-block;
+      padding: 4px 5px;
+      line-height: 12px;
+      border-radius: @border-radius-small;
+      font-size: small;
+      font-weight: bold;
+    }
+  }
+
+  // level
+  .levelCell {
+    text-align: center;
+    color: #FFF;
+    padding: 5px 4px;
+
+    span {
+      display: inline-block;
+      padding: 4px 5px;
+      line-height: 12px;
+      border-radius: @border-radius-small;
+      // background-color: #666;
+    }
+  }
+
+  // icon cells
+  .directionCell,
+  .typeCell,
+  .evidenceDirectionCell,
+  .clinicalCell,
+  .originCell {
+    text-align: center;
+    color: #FFF;
+    padding: 5px 4px;
+    span {
+      display: inline-block;
+      padding: 4px 5px;
+      line-height: 12px;
+      border-radius: @border-radius-small;
+      background-color: #666;
+    }
+  }
+}

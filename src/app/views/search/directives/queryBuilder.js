@@ -34,7 +34,7 @@
 
     vm.model = {
       operator: '',
-      queries: {}
+      queries: [{}]
     };
 
     init();
