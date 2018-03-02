@@ -996,18 +996,19 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'description', name: 'Assertion Description' },
-                  { value: 'assertion_direction', name: 'Assertion Direction' },
                   { value: 'id', name: 'Assertion ID'},
+                  { value: 'gene_name', name: 'Gene Name' },
+                  { value: 'variant_origin', name: 'Variant Origin' },
                   { value: 'summary', name: 'Assertion Summary'},
-                  { value: 'assertion_type', name: 'Assertion Type' },
-                  { value: 'clinical_significance', name: 'Clinical Significance' },
+                  { value: 'description', name: 'Assertion Description' },
                   { value: 'disease_doid', name: 'Disease DOID' },
                   { value: 'disease_name', name: 'Disease Name' },
-                  { value: 'interaction_type', name: 'Drug Interaction Type' },
                   { value: 'drug_id', name: 'Drug PubChem ID' },
                   { value: 'drug_name', name: 'Drug Name' },
-                  { value: 'gene_name', name: 'Gene Name' },
+                  { value: 'assertion_direction', name: 'Assertion Direction' },
+                  { value: 'assertion_type', name: 'Assertion Type' },
+                  { value: 'clinical_significance', name: 'Clinical Significance' },
+                  { value: 'interaction_type', name: 'Drug Interaction Type' },
                   { value: 'amp_level', name: 'AMP Level' },
                   { value: 'acmg_code', name: 'ACMG Code' },
                   { value: 'phenotype_hpo_class', name: 'Phenotype HPO class' },
@@ -1029,6 +1030,43 @@
             }
           ],
           conditionFields: {
+            variant_origin: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'Somatic Mutation'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options:[
+                    { value: 'Somatic Mutation', name: 'Somatic Mutation'},
+                    { value: 'Germline Mutation', name: 'Germline Mutation' },
+                    { value: 'Germline Polymorphism', name: 'Germline Polymorphism' },
+                    { value: 'Unknown', name: 'Unknown' },
+                    { value: 'N/A', name: 'N/A' }
+                  ]
+                }
+              }
+            ],
             amp_level: [
               {
                 key: 'name',
