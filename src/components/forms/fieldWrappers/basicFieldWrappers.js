@@ -119,7 +119,7 @@
       name: 'pubdisplay',
       template: [
         '<formly-transclude></formly-transclude>',
-        '<span class="small">Citation: {{ to.data.description }}</span>'
+        '<span class="small" style="color: #999;">Citation: {{ to.data.description }}</span>'
       ].join(' ')
     });
 
@@ -128,6 +128,14 @@
       template: [
         '<formly-transclude></formly-transclude>',
         '<span class="small" ng-if="to.data.message && to.data.message.length > 0">{{to.data.message}}</span>'
+      ].join(' ')
+    });
+
+    formlyConfigProvider.setWrapper({
+      name: 'acmgDescription',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small">{{model[index].description}}</span>'
       ].join(' ')
     });
 
