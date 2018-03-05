@@ -98,7 +98,7 @@ gulp.task('cdnize', ['inject'], function () {
       {
         file: '**/angular-translate/*.js',
         package: 'angular-translate',
-        cdn: '//cdn.jsdelivr.net/angular.translate/${ version }/${ filenameMin }',
+        cdn: '//cdnjs.cloudflare.com/ajax/libs/angular-translate/${ version }/${ filenameMin }',
         test: 'testModule("pascalprecht.translate")'
       },
       {
