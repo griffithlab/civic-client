@@ -68,6 +68,7 @@
     vm.assertion = {
       gene: {name:''},
       variant: {name:''},
+      variant_origin: '',
       description: '',
       disease: {
         name: ''
@@ -198,7 +199,7 @@
           typeaheadMinLength: 0,
           selectOnBlur: true,
           data: {
-            message: ''
+            message: 'Please specify a Gene before choosing a Variant.'
           }
         },
         expressionProperties: {
@@ -208,7 +209,6 @@
           }
         },
         data: {
-          message: 'Please specify a Gene before choosing a Variant.',
           typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
@@ -225,6 +225,39 @@
                   };
                 });
               });
+          }
+        }
+      },
+      {
+        key: 'variant_origin',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.variantOrigin) {
+            var vo = $stateParams.variantOrigin;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.variant_origin);
+            if(_.includes(permitted, vo)) {
+              $scope.model.variant_origin = $stateParams.variantOrigin;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[vo];
+            } else {
+              console.warn('Ignoring pre-population of Variant Origin with invalid value: ' + vo);
+            }
+          }
+        },
+        templateOptions: {
+          label: 'Variant Origin',
+          value: 'vm.newEvidence.variant_origin',
+          options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: help['Variant Origin'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.variant_origin
+          },
+          onChange: function(value, options) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
           }
         }
       },
@@ -503,8 +536,8 @@
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
         templateOptions: {
-          label: 'AMP Level',
-          options: ([{ value: '', label: 'Please select an AMP Level' }].concat(make_options(ampLevels))),
+          label: 'AMP Category',
+          options: ([{ value: '', label: 'Please select an AMP Category' }].concat(make_options(ampLevels))),
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'If applicable, please provide the <a href="http://www.ncbi.nlm.nih.gov/pubmed/27993330" target="_blank">AMP somatic variant classification</a>.',
@@ -528,20 +561,24 @@
           entityName: 'ACMG Code',
           data: { message: '' },
           inputOptions: {
-            type: 'select',
-            wrapper: null,
+            type: 'typeahead',
+            wrapper: ['acmgDescription'],
             templateOptions: {
-              onSelect: 'options.data.setNote(model, index)',
-              ngOptions: 'option["value"] as option["label"] for option in to.options',
-              options: _.chain(acmgCodes).map(function(code) {
-                return { value: code.code, label: code.code };
-              }).unshift({value: '', label:'Please choose an ACMG Code'}).value(),
-              valueProp: 'value',
-              labelProp: 'label'
+              formatter: 'model[options.key].name',
+              typeahead: 'item as item.code for item in options.data.typeaheadSearch($viewValue)',
+              onSelect: 'options.data.pushNew(model, index, to)',
+              typeaheadMinLength: 1,
+              selectOnBlur: true
             },
             data: {
-              setNote: function(model) {
-                console.log('Setting acmg code to: ' + model);
+              pushNew: function(model, index, to) {
+                model.splice(index+1, 0, '');
+              },
+              typeaheadSearch: function(val) {
+                return Assertions.queryAcmgCodes(val)
+                  .then(function(response) {
+                    return response;
+                  });
               }
             }
           }
@@ -698,9 +735,9 @@
     vm.add = function(assertion) {
       var newAssertion = _.cloneDeep(assertion);
       newAssertion.drugs = _.without(newAssertion.drugs, '');
-      newAssertion.acmg_codes = _.without(newAssertion.acmg_codes, '');
+      newAssertion.acmg_codes = _.chain(newAssertion.acmg_codes).without('').map('code').value();
       newAssertion.evidence_items = _.map(newAssertion.evidence_items, 'id');
-      newAssertion.phenotypes = _.chain(newAssertion.phenotypes).without('').map('name').value(); // delete blank input values, pluck hpo classes to create array of strings
+      newAssertion.phenotypes = _.chain(newAssertion.phenotypes).without('').map('name').value();
       Assertions.add(newAssertion)
         .then(function(response) {
           console.log('new assertion created!');
@@ -710,6 +747,7 @@
           vm.showSuccessMessage = true;
           vm.newAssertionId = response.assertion.id;
           vm.newAssertionName = response.assertion.name;
+          vm.formErrors = {};
         })
         .catch(function(error) {
           console.error('assertion submit error!');

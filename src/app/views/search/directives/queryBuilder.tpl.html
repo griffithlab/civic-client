@@ -87,6 +87,13 @@
               sources="vm.searchResults">
             </source-grid>
           </div>
+          <div ng-switch-when="assertions">
+            <assertion-grid
+              context="'search'"
+              rows="15"
+              assertions="vm.searchResults">
+            </assertion-grid>
+          </div>
           <div ng-switch-when="variantGroups">
             <p>Variant Groups Grid will go here.</p>
           </div>
@@ -94,4 +101,10 @@
       </div>
     </div>
   </div>
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-12"> -->
+  <!-- <pre ng-bind="vm.model|json" ></pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
+
 </div>

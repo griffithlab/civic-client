@@ -1,0 +1,40 @@
+<div class="assertionGrid">
+  <div class="row">
+    <div class="col-xs-10">
+      <h4>
+        <span ng-switch="ctrl.context">
+          <span ng-switch-when="summary">Assertions</span>
+          <span ng-switch-when="search">Search Results</span>
+        </span>
+        <span class="record-info">
+          <span>{{ ctrl.gridApi.grid.rows.length }} total items</span>
+          <span ng-if="ctrl.gridApi.grid.renderContainers.body.visibleRowCache.length !== ctrl.gridApi.grid.rows.length">
+            (showing {{ctrl.gridApi.grid.renderContainers.body.visibleRowCache.length}})
+          </span>
+        </span>
+      </h4>
+    </div>
+    <div class="col-xs-2">
+      <button
+        class="btn btn-default btn-xs pull-right col-key btn-block"
+        uib-popover-template="ctrl.exportPopover.templateUrl"
+        ng-disabled="ctrl.assertionGridOptions.data.length < 1"
+        popover-placement="bottom">
+        <span class="glyphicon glyphicon-export"
+              aria-hidden="true">
+        </span>
+        Get Data
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div ui-grid="ctrl.assertionGridOptions"
+           ui-grid-cellnav
+           ui-grid-auto-resize
+           ui-grid-exporter
+           ui-grid-selection>
+      </div>
+    </div>
+  </div>
+</div>
