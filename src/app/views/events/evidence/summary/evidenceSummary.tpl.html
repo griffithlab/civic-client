@@ -69,7 +69,7 @@
             </span>
           </td>
         </tr>
-        <tr>
+        <tr ng-if="evidence.evidence_type == 'Predictive'">
           <td class="name">Drug:</td>
           <td class="value">{{ evidence.drugsStr }}</td>
         </tr>
