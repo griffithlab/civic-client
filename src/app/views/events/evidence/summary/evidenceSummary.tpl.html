@@ -71,11 +71,9 @@
         </tr>
         <tr ng-if="evidence.evidence_type == 'Predictive'">
           <td class="name">Drug:</td>
-          <td class="value">{{ evidence.drugsStr }}</td>
-        </tr>
-        <tr ng-show="evidence.drug_interaction_type">
-          <td class="name">Drug Interaction:</td>
-          <td class="value">{{ evidence.drug_interaction_type }}</td>
+          <td class="value">
+            {{ evidence.drugsStr }}<span ng-if="evidence.drug_interaction_type">&nbsp;({{ evidence.drug_interaction_type }})</span>
+          </td>
         </tr>
       </table>
     </div>

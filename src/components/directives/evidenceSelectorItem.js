@@ -26,6 +26,12 @@
     var gene_id = _.isUndefined(ctrl.item.gene_id) ? ctrl.item.state_params.gene.id : ctrl.item.gene_id;
     var variant_id = _.isUndefined(ctrl.item.variant_id) ? ctrl.item.state_params.variant.id : ctrl.item.variant_id;
 
+    if($scope.ctrl.item.phenotypes.length > 0) {
+      $scope.ctrl.item.phenotypesStr = _.chain($scope.ctrl.item.phenotypes).map('hpo_class').sort().value().join(', ');
+    } else {
+      $scope.ctrl.item.phenotypesStr = '--';
+    }
+
     Genes.get(gene_id).then(function(gene) {
       ctrl.item.gene = gene;
     });

@@ -62,6 +62,16 @@
             </span>
           </td>
         </tr>
+        <tr ng-if="ctrl.item.evidence_type == 'Predictive'">
+          <td class="name">Drug:</td>
+          <td class="value">
+            {{ ctrl.item.drugsStr }}<span ng-if="ctrl.item.drug_interaction_type">&nbsp;({{ ctrl.item.drug_interaction_type }})</span>
+          </td>
+        </tr>
+        <!-- <tr ng-show="ctrl.item.drug_interaction_type"> -->
+        <!-- <td class="name">Drug Interaction:</td> -->
+        <!-- <td class="value">{{ ctrl.item.drug_interaction_type }}</td> -->
+        <!-- </tr> -->
       </table>
     </div>
     <div class="col-xs-12 col-md-6 details">
@@ -79,13 +89,9 @@
             </a>
           </td>
         </tr>
-        <tr ng-if="ctrl.item.evidence_type == 'Predictive'">
-          <td class="name">Drug:</td>
-          <td class="value">{{ ctrl.item.drugsStr }}</td>
-        </tr>
-        <tr ng-show="ctrl.item.drug_interaction_type">
-          <td class="name">Drug Interaction:</td>
-          <td class="value">{{ ctrl.item.drug_interaction_type }}</td>
+        <tr>
+          <td class="name">Associated Phenotype{{ ctrl.item.phenotypes.length > 1 ? 's' : '' }}:</td>
+          <td class="value">{{ ctrl.item.phenotypesStr }}</td>
         </tr>
         <tr>
           <td class="name">Citation:</td>
