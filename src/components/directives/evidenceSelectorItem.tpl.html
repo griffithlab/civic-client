@@ -91,7 +91,7 @@
         </tr>
         <tr>
           <td class="name">Associated Phenotype{{ ctrl.item.phenotypes.length > 1 ? 's' : '' }}:</td>
-          <td class="value">{{ ctrl.item.phenotypesStr }}</td>
+          <td class="value" ng-bind-html="ctrl.item.phenotypesStr"></td>
         </tr>
         <tr>
           <td class="name">Citation:</td>

@@ -17,7 +17,7 @@
   }
 
   // @ngInject
-  function evidenceSelectorItemController($scope, $state, _, Genes, Variants) {
+  function evidenceSelectorItemController($scope, $state, _, Genes, Variants, ConfigService) {
     var ctrl = $scope.ctrl = {};
     ctrl.item = $scope.item;
     ctrl.removeItem = $scope.removeFn;
@@ -27,7 +27,14 @@
     var variant_id = _.isUndefined(ctrl.item.variant_id) ? ctrl.item.state_params.variant.id : ctrl.item.variant_id;
 
     if($scope.ctrl.item.phenotypes.length > 0) {
-      $scope.ctrl.item.phenotypesStr = _.chain($scope.ctrl.item.phenotypes).map('hpo_class').sort().value().join(', ');
+      var hpoUrl = ConfigService.hpoUrl;
+      $scope.ctrl.item.phenotypesStr = _.chain($scope.ctrl.item.phenotypes)
+        .sortBy('hpo_class')
+        .map(function(item) {
+          return '<a href="' + hpoUrl + item.hpo_id + '" target="_blank">' + item.hpo_class + '</a>';
+        })
+        .value()
+        .join(', ');
     } else {
       $scope.ctrl.item.phenotypesStr = '--';
     }
