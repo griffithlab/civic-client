@@ -57,7 +57,6 @@
   angular.module('civic.services')
     .constant('ConfigService', {
       serverUrl: 'http://127.0.0.1:3000/',
-      hpoUrl: 'http://compbio.charite.de/hpoweb/showterm?id=',
       optionMethods: {
         make_obj: make_obj,
         make_options: make_options,

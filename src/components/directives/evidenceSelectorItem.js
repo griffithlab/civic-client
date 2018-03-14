@@ -27,11 +27,10 @@
     var variant_id = _.isUndefined(ctrl.item.variant_id) ? ctrl.item.state_params.variant.id : ctrl.item.variant_id;
 
     if($scope.ctrl.item.phenotypes.length > 0) {
-      var hpoUrl = ConfigService.hpoUrl;
       $scope.ctrl.item.phenotypesStr = _.chain($scope.ctrl.item.phenotypes)
         .sortBy('hpo_class')
         .map(function(item) {
-          return '<a href="' + hpoUrl + item.hpo_id + '" target="_blank">' + item.hpo_class + '</a>';
+          return '<a href="' + item.url +  '" target="_blank">' + item.hpo_class + '</a>';
         })
         .value()
         .join(', ');

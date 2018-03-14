@@ -50,11 +50,10 @@
         $scope.evidence.drugsStr = '--';
       }
       if($scope.evidence.phenotypes.length > 0) {
-        var hpoUrl = ConfigService.hpoUrl;
         $scope.evidence.phenotypesStr = _.chain($scope.evidence.phenotypes)
           .sortBy('hpo_class')
           .map(function(item) {
-            return '<a href="' + hpoUrl + item.hpo_id + '" target="_blank">' + item.hpo_class + '</a>';
+            return '<a href="' + item.url + '" target="_blank">' + item.hpo_class + '</a>';
           })
           .value()
           .join(', ');
