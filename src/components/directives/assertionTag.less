@@ -3,10 +3,13 @@
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
 
+@tabPaddingH: .5em;
+@tabPaddingV: .25em;
+
 .assertionTag {
-  display: block;
-  .span {
+  a {
     text-decoration: none;
+    padding: @tabPaddingV @tabPaddingH;
     border-radius: @border-radius-base;
     background-color: @pageBackground2;
     border: 1px solid @pageBackground3;
@@ -57,5 +60,6 @@
       color: #4A2B11 !important;
       // border-color: #4A2B11 !important;
     }
+
   }
 }

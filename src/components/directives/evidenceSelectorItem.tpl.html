@@ -68,10 +68,15 @@
             {{ ctrl.item.drugsStr }}<span ng-if="ctrl.item.drug_interaction_type">&nbsp;({{ ctrl.item.drug_interaction_type }})</span>
           </td>
         </tr>
-        <!-- <tr ng-show="ctrl.item.drug_interaction_type"> -->
-        <!-- <td class="name">Drug Interaction:</td> -->
-        <!-- <td class="value">{{ ctrl.item.drug_interaction_type }}</td> -->
-        <!-- </tr> -->
+        <tr ng-if="ctrl.item.assertions.length > 0">
+          <td class="name" style="padding-top: 5px;padding-bottom: 0;">
+            Supports Assertions:
+          </td>
+          <td class="value assertions">
+            <assertion-tag ng-repeat="assertion in ctrl.item.assertions | orderBy:'id'" ng-show="assertion.status !== 'rejected' || showAll === true" assertion="assertion">
+            </assertion-tag>
+          </td>
+        </tr>
       </table>
     </div>
     <div class="col-xs-12 col-md-6 details">
