@@ -1,0 +1,65 @@
+@import 'bower_components/bootstrap/less/mixins.less';
+@import 'bower_components/bootstrap/less/variables.less';
+@import 'src/app/styles/_civic-variables.less';
+@import 'src/app/styles/_mixins.less';
+
+@tabPaddingH: .5em;
+@tabPaddingV: .25em;
+
+.assertionTag {
+  a {
+    text-decoration: none;
+    padding: @tabPaddingV @tabPaddingH;
+    border-radius: @border-radius-base;
+    background-color: @pageBackground2;
+    border: 1px solid @pageBackground3;
+
+    &:hover, &.active {
+      border-color: @civicPurple;
+      .variant-name {
+        color: @civicPurple;
+      }
+    }
+    .pending-alert {
+      text-shadow:
+      -1px -1px 0 #FFF,
+      1px -1px 0 #FFF,
+      -1px 1px 0 #FFF,
+      1px 1px 0 #FFF !important;
+    }
+    .pending-changes {
+      color: lighten(@civicPurple, 30%) !important;
+    }
+    .pending-evidence {
+      color: #F68F37;
+    }
+    .pending-both {
+      color: @civicRed !important;
+    }
+    &.active {
+      background-color: lighten(@civicPurple, 70%);
+      .variant-name {
+        // font-weight: bold;
+      }
+    }
+
+    &.statusRejected {
+      background-color: #ECA2C0 !important;
+      color: #47161C !important;
+      // border-color: #47161C !important;
+    }
+
+    &.statusAccepted {
+      background-color: #B2D49C !important;
+      color: #144522 !important;
+      // border-color: #144522 !important;
+    }
+
+    &.statusSubmitted {
+      background-color: #F3BC94 !important;
+      color: #4A2B11 !important;
+      // border-color: #4A2B11 !important;
+    }
+
+  }
+}

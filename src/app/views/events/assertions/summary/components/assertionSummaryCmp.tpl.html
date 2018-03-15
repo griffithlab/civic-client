@@ -102,8 +102,8 @@
                         }}
                         {{ code.code}}
                       </span>
-                    </span>
-                    <span ng-switch-when="false">
+                  </span>
+                  <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -118,8 +118,8 @@
                     <span ng-switch-when="true">
                       {{ vm.assertion.nccn_guideline }}
                       <span ng-if="vm.assertion.nccn_guideline_version">(v{{vm.assertion.nccn_guideline_version}})</span>
-                    </span>
-                    <span ng-switch-when="false">
+                  </span>
+                  <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -132,7 +132,7 @@
                     <span ng-switch-when="true" >
                       <i class="glyphicon glyphicon-ok" style="color: green"></i>
                     </span>
-                    <span ng-switch-when="false">
+                  <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -185,12 +185,30 @@
         </uib-tab>
         <uib-tab index="1" heading="Evidence Cards">
           <div class="itemContainer">
-            <h4>Evidence Supporting AID{{vm.assertion.id}} <span class="record-info" >{{vm.assertion.evidence_items.length}} total items</span></h4>
-            <ul class="evidenceSelectorItems">
-              <li ng-repeat="item in vm.assertion.evidence_items">
-                <evidence-selector-item item="item" remove-fn="removeItem"></evidence-selector-item>
-              </li>
-            </ul>
+            <div class="row">
+              <div class="col-xs-7">
+                <h4>Evidence Supporting AID{{vm.assertion.id}} <span class="record-info" >{{vm.assertion.evidence_items.length}} total items</span></h4>
+              </div>
+              <div class="col-xs-2" style="text-align: right; padding-top: 6px;">
+                <label for="orderBy">Order by:</label>
+              </div>
+              <div class="col-xs-3" style="padding-bottom: 6px;">
+                <select class="form-control" id="orderBy" ng-model="order_by" ng-init="order_by = 'evidence_level'">
+                  <option value="id">ID</option>
+                  <option value="rating">Rating</option>
+                  <option value="evidence_level">Evidence Level</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <ul class="evidenceSelectorItems">
+                  <li ng-repeat="item in vm.assertion.evidence_items | orderBy: order_by">
+                    <evidence-selector-item item="item" remove-fn="removeItem"></evidence-selector-item>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </uib-tab>
       </uib-tabset>

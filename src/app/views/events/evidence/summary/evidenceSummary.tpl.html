@@ -15,10 +15,10 @@
           <td class="name" style="line-height: 2em;">Evidence Level:</td>
           <td class="value">
             <span class="levelBadge"
-                  ng-class="{'levelA': evidence.evidence_level === 'A', 'levelB': evidence.evidence_level === 'B','levelC': evidence.evidence_level === 'C', 'levelD': evidence.evidence_level === 'D', 'levelE': evidence.evidence_level === 'E' }"
-                  uib-tooltip="{{tipText.evidence_level[evidence.evidence_level]}}"
-                  tooltip-placement="right"
-                  class="help-tooltip">
+              ng-class="{'levelA': evidence.evidence_level === 'A', 'levelB': evidence.evidence_level === 'B','levelC': evidence.evidence_level === 'C', 'levelD': evidence.evidence_level === 'D', 'levelE': evidence.evidence_level === 'E' }"
+              uib-tooltip="{{tipText.evidence_level[evidence.evidence_level]}}"
+              tooltip-placement="right"
+              class="help-tooltip">
               {{ evidence.evidence_level_string }}
             </span>
           </td>
@@ -27,9 +27,9 @@
           <td class="name">Evidence Type:</td>
           <td class="value">
             <span ng-bind="evidence.evidence_type"
-                  uib-tooltip="{{tipText.evidence_type[evidence.evidence_type]}}"
-                  tooltip-placement="right"
-                  class="help-tooltip">
+              uib-tooltip="{{tipText.evidence_type[evidence.evidence_type]}}"
+              tooltip-placement="right"
+              class="help-tooltip">
               evidence type</span>
           </td>
         </tr>
@@ -37,9 +37,9 @@
           <td class="name">Evidence Direction:</td>
           <td class="value">
             <span ng-bind="evidence.evidence_direction"
-                  uib-tooltip="{{tipText.evidence_direction[evidence.evidence_type][evidence.evidence_direction]}}"
-                  tooltip-placement="right"
-                  class="help-tooltip">
+              uib-tooltip="{{tipText.evidence_direction[evidence.evidence_type][evidence.evidence_direction]}}"
+              tooltip-placement="right"
+              class="help-tooltip">
               evidence.evidence_direction
             </span>
           </td>
@@ -49,10 +49,10 @@
           <td class="name">Clinical Significance:</td>
           <td class="value">
             <span ng-bind="evidence.clinical_significance"
-                  uib-tooltip="{{tipText.clinical_significance[evidence.evidence_type][evidence.clinical_significance]}}"
-                  tooltip-placement="right"
-                  class="help-tooltip"
-                  class="help-tooltip">
+              uib-tooltip="{{tipText.clinical_significance[evidence.evidence_type][evidence.clinical_significance]}}"
+              tooltip-placement="right"
+              class="help-tooltip"
+              class="help-tooltip">
               evidence.clinical_significance
             </span>
           </td>
@@ -62,20 +62,27 @@
           <td class="name">Variant Origin:</td>
           <td class="value">
             <span ng-bind="evidence.variant_origin"
-                  uib-tooltip="{{tipText.variant_origin[evidence.variant_origin]}}"
-                  tooltip-placement="right"
-                  class="help-tooltip">
+              uib-tooltip="{{tipText.variant_origin[evidence.variant_origin]}}"
+              tooltip-placement="right"
+              class="help-tooltip">
               evidence.variant_origin
             </span>
           </td>
         </tr>
-        <tr>
+        <tr ng-if="evidence.evidence_type == 'Predictive'">
           <td class="name">Drug:</td>
-          <td class="value">{{ evidence.drugsStr }}</td>
+          <td class="value">
+            {{ evidence.drugsStr }}<span ng-if="evidence.drug_interaction_type">&nbsp;({{ evidence.drug_interaction_type }})</span>
+          </td>
         </tr>
-        <tr ng-show="evidence.drug_interaction_type">
-          <td class="name">Drug Interaction:</td>
-          <td class="value">{{ evidence.drug_interaction_type }}</td>
+        <tr ng-if="evidence.assertions.length > 0">
+          <td class="name" style="padding-top: 5px;padding-bottom: 0;">
+            Supports Assertions:
+          </td>
+          <td class="value assertions">
+            <assertion-tag ng-repeat="assertion in evidence.assertions | orderBy:'id'" ng-show="assertion.status !== 'rejected' || showAll === true" assertion="assertion">
+            </assertion-tag>
+          </td>
         </tr>
       </table>
     </div>
@@ -96,7 +103,7 @@
         </tr>
         <tr>
           <td class="name">Associated Phenotype{{ evidence.phenotypes.length > 1 ? 's' : '' }}:</td>
-          <td class="value">{{ evidence.phenotypesStr }}</td>
+          <td class="value" ng-bind-html="evidence.phenotypesStr"></td>
         </tr>
         <tr>
           <td class="name">Citation:</td>
@@ -110,8 +117,8 @@
           <td class="name">Pubmed ID:</td>
           <td class="value">
             <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{evidence.source.pubmed_id}}"
-               class="btn btn-xs button-new-window"
-               target="_blank">
+              class="btn btn-xs button-new-window"
+              target="_blank">
               <span class="glyphicon glyphicon-new-window"></span>
               <span ng-bind="evidence.source.pubmed_id"></span>
             </a>
@@ -126,12 +133,12 @@
               evidence.source.clinical_trials.length > 2 ? ' and ' : ' and '
               ) : ' '
               }}
-            <a ng-href="{{trial.clinical_trial_url}}"
-               class="btn btn-xs button-new-window" style="margin-bottom: 4px;"
-               target="_blank">
-              <span class="glyphicon glyphicon-new-window"></span>
-              <span ng-bind="trial.nct_id"></span>
-            </a>
+              <a ng-href="{{trial.clinical_trial_url}}"
+                class="btn btn-xs button-new-window" style="margin-bottom: 4px;"
+                target="_blank">
+                <span class="glyphicon glyphicon-new-window"></span>
+                <span ng-bind="trial.nct_id"></span>
+              </a>
             </span>
             <span ng-if="evidence.source.clinical_trials.length == 0">--</span>
           </td>
@@ -140,9 +147,9 @@
           <td class="name">Trust Rating:</td>
           <td class="value">
             <span uib-rating ng-model="evidence.rating" max="5" read-only="true"
-                    uib-tooltip="{{tipText.rating[evidence.rating]}}"
-                    tooltip-placement="left"
-                    class="help-tooltip">
+              uib-tooltip="{{tipText.rating[evidence.rating]}}"
+              tooltip-placement="left"
+              class="help-tooltip">
             </span>
           </td>
         </tr>
@@ -152,21 +159,21 @@
   <div class="row" ng-if="(isEditor() || isAdmin()) && evidence.status === 'submitted'" style="margin-top: 1em;">
     <div class="col-xs-6">
       <button class="btn btn-default btn-block btn-danger"
-              ng-click="rejectItem(evidence.id)">
+        ng-click="rejectItem(evidence.id)">
         Reject Evidence Item
       </button>
     </div>
     <div class="col-xs-6">
       <span uib-tooltip="Contributors may not accept their own submissions."
-            tooltip-append-to-body="true"
-            tooltip-enable="ownerIsCurrentUser"
-            class="help-tooltip">
-      <button class="btn btn-default btn-block btn-success"
-              ng-disabled="ownerIsCurrentUser"
-              ng-click="acceptItem(evidence.id)">
-        Accept Evidence Item
-      </button>
-        </span>
+        tooltip-append-to-body="true"
+        tooltip-enable="ownerIsCurrentUser"
+        class="help-tooltip">
+        <button class="btn btn-default btn-block btn-success"
+          ng-disabled="ownerIsCurrentUser"
+          ng-click="acceptItem(evidence.id)">
+          Accept Evidence Item
+        </button>
+      </span>
     </div>
   </div>
   <!--<div class="row">-->

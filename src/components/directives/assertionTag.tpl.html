@@ -1,0 +1,29 @@
+<div class="assertionTag">
+  <span uib-tooltip-template="'assertionTagTooltip.tpl.html'">
+    <a ui-sref="events.assertions.summary({ assertionId: assertion.id })" class="assertion-tag" ng-class="{ 'statusAccepted': assertion.status === 'accepted', 'statusSubmitted': assertion.status === 'submitted', 'statusRejected': assertion.status === 'rejected' }">
+      <i class="glyphicon glyphicon-exclamation-sign pending-alert"
+        ng-if="assertion.pending_evidence_count > 0 || assertion.open_change_count > 0"
+        ng-class="{'pending-evidence': assertion.pending_evidence_count > 0,
+        'pending-changes': assertion.open_change_count > 0,
+        'pending-both': assertion.pending_evidence_count > 0 &&
+        assertion.open_change_count > 0}"></i>
+      <span ng-bind-html="assertion.name" class="assertion-name">
+        AssertionName
+      </span>
+    </a>
+  </span>
+</div>
+
+<script type="text/ng-template" id="assertionTagTooltip.tpl.html">
+  <span>
+    <span ng-if="assertion.summary.length > 0">{{assertion.summary}}<br/></span>
+  <span ng-if="assertion.status !== 'accepted'">
+      <strong>Status:</strong> {{ assertion.status }}
+      <br/>
+    </span>
+  <strong>Evidence Items:</strong> <span ng-bind="assertion.evidence_item_count">item count</span>
+  <br/>
+  <span ng-if="assertion.pending_evidence_count > 0" style="display:block;">Has {{ assertion.pending_evidence_count }} pending evidence</span>
+  <span ng-if="assertion.open_change_count > 0" style="display:block;">Has {{ assertion.open_change_count }} pending change{{assertion.open_change_count > 1 ? 's' : '' }}</span>
+  </span>
+</script>
