@@ -12,7 +12,7 @@
   <span uib-tooltip="Reject Suggestion"
         tooltip-append-to-body="true"
         tooltip-enable="row.entity['status'] != 'rejected'">
-    <button ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.hasEditorPerms()"
+    <button ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
             class="btn btn-xs btn-danger"
             uib-popover-template="'rejectPopover.tpl.html'"
             popover-is-open="popoverIsOpen"
@@ -27,7 +27,7 @@
         tooltip-append-to-body="true"
         tooltip-enable="row.entity['status'] != 'rejected'">
     <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
-            ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.hasEditorPerms()"
+            ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
             class="btn btn-xs btn-success">
       <i class="glyphicon glyphicon-thumbs-up"></i>
     </button>
@@ -36,7 +36,7 @@
   <span uib-tooltip="Re-queue Suggestion"
         tooltip-append-to-body="true">
     <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'new')"
-            ng-disabled="row.entity['status'] === 'new' || !grid.appScope.vm.hasEditorPerms()"
+            ng-disabled="row.entity['status'] === 'new' || !grid.appScope.vm.isAuthenticated()"
             class="btn btn-xs btn-default">
       <i class="glyphicon glyphicon-repeat"></i>
     </button>
