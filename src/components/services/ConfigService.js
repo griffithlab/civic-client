@@ -221,6 +221,10 @@
             state: 'help.variants.summary'
           },
           {
+            heading: 'CIViC Actionability Score',
+            state: 'help.variants.actionabilityscore'
+          },
+          {
             heading: 'Variant Type',
             state: 'help.variants.type'
           },
