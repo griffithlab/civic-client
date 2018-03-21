@@ -24,7 +24,7 @@
             <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
           </p>
           <p>
-            <strong>Associated Phenotype{{ vm.assertion.phenotypes.length > 1 ? 's' : '' }}:</strong> {{ vm.phenotypesStr }}
+            <strong>Associated Phenotype{{ vm.assertion.phenotypes.length > 1 ? 's' : '' }}:</strong> <span ng-bind-html="vm.phenotypesStr"></span>
           </p>
         </div>
       </div>

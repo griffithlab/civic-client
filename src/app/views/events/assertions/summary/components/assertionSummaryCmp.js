@@ -42,8 +42,13 @@
 
     $scope.$watchCollection('vm.assertion', function(assertion) {
       if(assertion.phenotypes.length > 0) {
-        vm.phenotypesStr = _.chain(assertion.phenotypes).map('hpo_class').sort().value().join(', ');
-        console.log('generating phenotypes str: ' + vm.phenotypesStr);
+        vm.phenotypesStr = _.chain(assertion.phenotypes)
+          .sortBy('hpo_class')
+          .map(function(item) {
+            return '<a href="' + item.url + '" target="_blank">' + item.hpo_class + '</a>';
+          })
+          .value()
+          .join(', ');
       } else {
         vm.phenotypesStr = '--';
       }
@@ -56,7 +61,13 @@
           item.drugsStr = '--';
         }
         if(item.phenotypes.length > 0) {
-          item.phenotypesStr = _.chain(item.phenotypes).map('hpo_class').sort().value().join(', ');
+          item.phenotypesStr = _.chain(item.phenotypes)
+            .sortBy('hpo_class')
+            .map(function(item) {
+              return '<a href="' + item.url + '" target="_blank">' + item.hpo_class + '</a>';
+            })
+            .value()
+            .join(', ');
         } else {
           item.phenotypesStr = '--';
         }
