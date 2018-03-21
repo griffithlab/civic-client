@@ -148,6 +148,14 @@
           navMode: 'sub'
         }
       })
+      .state('help.variants.actionabilityscore', {
+        url: '/actionability-score',
+        templateUrl: 'app/pages/help_variant_actionabilityscore.tpl.html',
+        data: {
+          titleExp: '"Help: CIViC Actionability Score"',
+          navMode: 'sub'
+        }
+      })
       .state('help.variants.type', {
         url: '/variants-type',
         templateUrl: 'app/pages/help_variant_varianttypes.tpl.html',
