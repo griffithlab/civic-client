@@ -841,7 +841,7 @@
             geneId: row.entity.gene_id,
             variantId: row.entity.variant_id,
             evidenceId: row.entity.id,
-            '#': 'variant'
+            '#': 'evidence'
           };
         }
 

@@ -50,7 +50,13 @@
         $scope.evidence.drugsStr = '--';
       }
       if($scope.evidence.phenotypes.length > 0) {
-        $scope.evidence.phenotypesStr = _.chain($scope.evidence.phenotypes).map('hpo_class').sort().value().join(', ');
+        $scope.evidence.phenotypesStr = _.chain($scope.evidence.phenotypes)
+          .sortBy('hpo_class')
+          .map(function(item) {
+            return '<a href="' + item.url + '" target="_blank">' + item.hpo_class + '</a>';
+          })
+          .value()
+          .join(', ');
       } else {
         $scope.evidence.phenotypesStr = '--';
       }
