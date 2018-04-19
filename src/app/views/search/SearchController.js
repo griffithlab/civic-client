@@ -1167,7 +1167,12 @@
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
                     {value: 'is_empty', name: 'is empty'}
-                  ]
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
                 }
               },
               {
@@ -3071,7 +3076,12 @@
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
                     {value: 'is_empty', name: 'is empty'}
-                  ]
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
                 }
               },
               {
@@ -3623,7 +3633,7 @@
                   required: true
                 }
               }
-            ],
+            ]
           }
         }
       }
