@@ -205,7 +205,12 @@
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
                     {value: 'is_empty', name: 'is empty'}
-                  ]
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
                 }
               },
               {
@@ -235,7 +240,12 @@
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
                     {value: 'is_empty', name: 'is empty'}
-                  ]
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
                 }
               },
               {
@@ -248,7 +258,8 @@
                   required: true,
                   typeahead: 'item.name as item.name for item in to.data.typeaheadSearch($viewValue)',
                   editable: true,
-                  templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',                                 data: {
+                  templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
+                  data: {
                     typeaheadSearch: function(val) {
                       return Diseases.beginsWith(val)
                         .then(function(response) {
@@ -274,7 +285,12 @@
                     {value: 'is', name: 'is'},
                     {value: 'is_not', name: 'is not'},
                     {value: 'is_empty', name: 'is empty'}
-                  ]
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
                 }
               },
               {
@@ -870,7 +886,7 @@
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
-		    {value: 'is_empty', name: 'is empty'}
+                    {value: 'is_empty', name: 'is empty'}
                   ]
                 }
               },
@@ -878,7 +894,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
-		hideExpression: 'model.name === "is_empty"',
+                hideExpression: 'model.name === "is_empty"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -1758,7 +1774,7 @@
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
-		    {value: 'is_empty', name: 'is empty'}
+                    {value: 'is_empty', name: 'is empty'}
                   ]
                 }
               },
@@ -1766,7 +1782,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
-		hideExpression: 'model.name === "is_empty"',
+                hideExpression: 'model.name === "is_empty"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -2266,7 +2282,7 @@
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
-		    {value: 'is_empty', name: 'is empty'}
+                    {value: 'is_empty', name: 'is empty'}
                   ]
                 }
               },
@@ -2274,7 +2290,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
-		hideExpression: 'model.name === "is_empty"',
+                hideExpression: 'model.name === "is_empty"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -2453,7 +2469,9 @@
                     {value: 'is_empty', name: 'is empty'},
                   ],
                   onChange: function(value, options, scope) {
-                    if(value === 'is_empty') { scope.model.parameters[0] = null; }
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
                   }
                 }
               },
@@ -2464,7 +2482,7 @@
                 data: {
                   defaultValue: null
                 },
-                hideExpression: 'model.name =="is_empty" || model.name == "is_not_empty"',
+                hideExpression: 'model.name == "is_empty"',
                 templateOptions: {
                   label: '',
                   required: true,
@@ -2607,6 +2625,11 @@
                 className: 'inline-field inline-field-md',
                 data: {
                   defaultValue: 'is_equal_to'
+                },
+                onChange: function(value, options, scope) {
+                  if(scope.model.name.match(/empty/)) {
+                    _.pullAt(scope.model.parameters, 0);
+                  }
                 },
                 templateOptions: {
                   label: '',
@@ -3339,7 +3362,7 @@
                   required: true
                 }
               }
-           ],
+            ],
             evidence_item_count: [
               {
                 template: 'with status',
