@@ -1125,6 +1125,7 @@
                 data: {
                   defaultValue: null
                 },
+                hideExpression: 'model.name =="is_empty" || model.name == "is_not_empty"',
                 templateOptions: {
                   label: '',
                   required: true,
@@ -2449,8 +2450,11 @@
                   options: [
                     {value: 'is_equal_to', name: 'is'},
                     {value: 'is_not_equal_to', name: 'is not'},
-                    {value: 'is_empty', name: 'is empty'}
-                  ]
+                    {value: 'is_empty', name: 'is empty'},
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(value === 'is_empty') { scope.model.parameters[0] = null; }
+                  }
                 }
               },
               {
@@ -2458,12 +2462,13 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: '1'
+                  defaultValue: null
                 },
+                hideExpression: 'model.name =="is_empty" || model.name == "is_not_empty"',
                 templateOptions: {
                   label: '',
                   required: true,
-                  options: ConfigService.valid_chromosomes
+                  options: [{ value: null, name: 'Please choose a chromosome'}].concat(ConfigService.valid_chromosomes)
                 }
               }
             ],
@@ -2609,7 +2614,7 @@
                   options: [
                     {value: 'is_equal_to', name: 'is'},
                     {value: 'is_not_equal_to', name: 'is not'},
-                    {value: 'is_empty', name: 'is empty'}
+                    {value: 'is_empty', name: 'is empty'},
                   ]
                 }
               },
@@ -2620,6 +2625,7 @@
                 data: {
                   defaultValue: '1'
                 },
+                hideExpression: 'model.name =="is_empty" || model.name == "is_not_empty"',
                 templateOptions: {
                   label: '',
                   required: true,
