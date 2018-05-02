@@ -101,7 +101,7 @@
         }
       })
       .state('acknowledgements', {
-        url: '/acknowledgemens',
+        url: '/acknowledgements',
         templateUrl: 'app/pages/acknowledgements.tpl.html',
         data: {
           titleExp: '"Acknowledgements"',
