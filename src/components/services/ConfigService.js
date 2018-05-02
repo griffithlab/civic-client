@@ -113,6 +113,10 @@
           state: 'statistics.evidence'
         },
         {
+          label: 'Acknowledgements',
+          state: 'acknowledgements'
+        },
+        {
           label: 'Contact',
           state: 'contact'
         }
