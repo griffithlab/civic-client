@@ -100,6 +100,14 @@
           navMode: 'sub'
         }
       })
+      .state('acknowledgements', {
+        url: '/acknowledgements',
+        templateUrl: 'app/pages/acknowledgements.tpl.html',
+        data: {
+          titleExp: '"Acknowledgements"',
+          navMode: 'sub'
+        }
+      })
       .state('contact', {
         url: '/contact',
         controller: 'ContactCtrl',
