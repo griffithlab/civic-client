@@ -214,13 +214,14 @@
             disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
-              { value: 'Sensitivity', label: 'Sensitivity' },
-              { value: 'Resistance or Non-Response', label: 'Resistance or Non-Response' },
+              { value: 'Sensitive', label: 'Sensitive' },
+              { value: 'Resistant', label: 'Resistant' },
               { value: 'Better Outcome', label: 'Better Outcome' },
               { value: 'Poor Outcome', label: 'Poor Outcome' },
               { value: 'Positive', label: 'Positive' },
               { value: 'Negative', label: 'Negative' },
               { value: 'Adverse Response', label: 'Adverse Response' },
+              { value: 'Reduced Sensitivity', label: 'Reduced Sensitivity' },
               { value: 'N/A', label: 'N/A' }
             ]
           },

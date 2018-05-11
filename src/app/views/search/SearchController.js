@@ -403,15 +403,16 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'Sensitivity'
+                  defaultValue: 'Sensitive'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
-                    { value: 'Sensitivity', name: 'Sensitivity' },
-                    { value: 'Resistance or Non-Response', name: 'Resistance or Non-Response' },
+                    { value: 'Sensitive', name: 'Sensitive' },
+                    { value: 'Resistant', name: 'Resistant' },
                     { value: 'Adverse Response', name: 'Adverse Response' },
+                    { value: 'Reduced Sensitivity', name: 'Reduced Sensitivity' },
                     { value: 'Positive', name: 'Positive' },
                     { value: 'Negative', name: 'Negative' },
                     { value: 'Better Outcome', name: 'Better Outcome' },
@@ -1378,15 +1379,16 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'Sensitivity'
+                  defaultValue: 'Sensitive'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
-                    { value: 'Sensitivity', name: 'Sensitivity' },
-                    { value: 'Resistance or Non-Response', name: 'Resistance or Non-Response' },
+                    { value: 'Sensitive', name: 'Sensitive' },
+                    { value: 'Resistant', name: 'Resistant' },
                     { value: 'Adverse Response', name: 'Adverse Response' },
+                    { value: 'Reduced Sensitivity', name: 'Reduced Sensitivity' },
                     { value: 'Positive', name: 'Positive' },
                     { value: 'Negative', name: 'Negative' },
                     { value: 'Better Outcome', name: 'Better Outcome' },
