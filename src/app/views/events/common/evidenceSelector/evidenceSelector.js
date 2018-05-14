@@ -510,7 +510,7 @@
               { value: 'Positive', label: 'Positive' },
               { value: 'Negative', label: 'Negative' },
               { value: 'Adverse Response', label: 'Adverse Response' },
-              { value: 'Reduced Sensitivity', label: 'Reduced Sensitivity' }
+              { value: 'Reduced Sensitivity', label: 'Reduced Sensitivity' },
               { value: 'N/A', label: 'N/A' }
             ]
           },
