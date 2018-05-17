@@ -341,8 +341,8 @@
         },
         clinical_significance: {
           'Predictive': {
-            'Sensitivity/Response': 'Associated with positive response to treatment ',
-            'Resistance': 'Associated with negative treatment response',
+            'Sensitivity/Response': 'Associated with a clinical or preclinical response to treatment',
+            'Resistance': 'Associated with clinical or preclinical resistance to treatment',
             'Adverse Response': 'Associated with an adverse response to drug treatment',
             'Reduced Sensitivity': 'Response to treatment is lower than seen in other treatment contexts',
             'N/A': 'Variant does not inform clinical action'
