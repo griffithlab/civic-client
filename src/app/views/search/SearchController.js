@@ -403,14 +403,14 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'Sensitive'
+                  defaultValue: 'Sensitivity/Response'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
-                    { value: 'Sensitive', name: 'Sensitive' },
-                    { value: 'Resistant', name: 'Resistant' },
+                    { value: 'Sensitivity/Response', name: 'Sensitivity/Response' },
+                    { value: 'Resistance', name: 'Resistance' },
                     { value: 'Adverse Response', name: 'Adverse Response' },
                     { value: 'Reduced Sensitivity', name: 'Reduced Sensitivity' },
                     { value: 'Positive', name: 'Positive' },
@@ -1379,14 +1379,14 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'Sensitive'
+                  defaultValue: 'Sensitivity/Response'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
-                    { value: 'Sensitive', name: 'Sensitive' },
-                    { value: 'Resistant', name: 'Resistant' },
+                    { value: 'Sensitivity/Response', name: 'Sensitivity/Response' },
+                    { value: 'Resistance', name: 'Resistance' },
                     { value: 'Adverse Response', name: 'Adverse Response' },
                     { value: 'Reduced Sensitivity', name: 'Reduced Sensitivity' },
                     { value: 'Positive', name: 'Positive' },

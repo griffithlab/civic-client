@@ -302,8 +302,8 @@
             disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
-              { value: 'Sensitive', label: 'Sensitive' },
-              { value: 'Resistant', label: 'Resistant' },
+              { value: 'Sensitivity/Response', label: 'Sensitivity/Response' },
+              { value: 'Resistance', label: 'Resistance' },
               { value: 'Better Outcome', label: 'Better Outcome' },
               { value: 'Poor Outcome', label: 'Poor Outcome' },
               { value: 'Positive', label: 'Positive' },
@@ -503,8 +503,8 @@
             disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
-              { value: 'Sensitive', label: 'Sensitive' },
-              { value: 'Resistant', label: 'Resistant' },
+              { value: 'Sensitivity/Response', label: 'Sensitivity/Response' },
+              { value: 'Resistance', label: 'Resistance' },
               { value: 'Better Outcome', label: 'Better Outcome' },
               { value: 'Poor Outcome', label: 'Poor Outcome' },
               { value: 'Positive', label: 'Positive' },
