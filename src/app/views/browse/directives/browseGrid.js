@@ -40,15 +40,25 @@
 
     ctrl.filters = [];
 
-    if(ctrl.mode !== 'evidence_items' && ctrl.mode !== 'assertions') {
+    if(ctrl.mode == 'evidence_items') {
+      ctrl.sorting = [
+        {
+          field: 'evidence_level',
+          direction: 'asc',
+        },
+        {
+          field: 'rating',
+          direction: 'desc',
+        },
+        {
+          field: 'evidence_type',
+          direction: 'asc',
+        },
+      ];
+    } else {
       ctrl.sorting = [{
         field: 'evidence_item_count',
         direction: 'desc'
-      }];
-    } else {
-      ctrl.sorting = [{
-        field: 'id',
-        direction: 'asc'
       }];
     }
 
