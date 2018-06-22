@@ -3218,14 +3218,15 @@
                   options: [
                     {value: 'is', name: 'is'},
                     {value: 'is_not', name: 'is not'},
-                    {value: 'is_empty', name: 'is empty'}
+                    {value: 'is_empty', name: 'is empty'},
+                    {value: 'is_not_empty', name: 'is not empty'},
                   ]
                 }
               },
               {
                 key: 'parameters[0]',
                 type: 'input',
-                hideExpression: 'model.name === "is_empty"',
+                hideExpression: 'model.name =="is_empty" || model.name == "is_not_empty"',
                 className: 'inline-field',
                 templateOptions: {
                   label: '',
