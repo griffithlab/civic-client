@@ -894,8 +894,12 @@
       }
 
       if (sorting.length > 0) {
-        _.each(sorting, function(sort) {
+        request.sort_priority = '';
+        var length = sorting.length;
+        _.each(sorting, function(sort, index) {
           request['sorting[' + sort.field + ']'] = sort.direction;
+          request.sort_priority += sort.field;
+          if (index+1 < length) { request.sort_priority += ',';}
         });
       }
       return Datatables.query(request);
