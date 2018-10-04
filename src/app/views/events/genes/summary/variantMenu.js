@@ -33,6 +33,11 @@
       return (statuses.accepted_count + statuses.submitted_count) > 0;
     };
 
+    $scope.hasAcceptedEvidenceItems = function(variant) {
+      var statuses = variant.evidence_item_statuses;
+      return (statuses.accepted_count) > 0;
+    };
+
     var addVarGroupUrlBase = $scope.addVarGroupUrl = 'add/variantGroup';
 
     $scope.$watchCollection('stateParams', function(stateParams){
