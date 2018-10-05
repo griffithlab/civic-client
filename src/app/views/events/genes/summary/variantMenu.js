@@ -20,6 +20,10 @@
     $scope.hasHiddenVariants = false;
     $scope.variants = Genes.data.variants;
 
+    $scope.showAccepted = true;
+    $scope.showSubmitted = false;
+    $scope.showRejected = false;
+
     $scope.security = {
       isAuthenticated: Security.isAuthenticated(),
       isEditor: Security.isEditor(),
@@ -28,14 +32,20 @@
 
     $scope.$state = $state;
 
+    // use !hasValidEvidenceItems to get only rejected
     $scope.hasValidEvidenceItems = function(variant) {
       var statuses = variant.evidence_item_statuses;
       return (statuses.accepted_count + statuses.submitted_count) > 0;
     };
 
-    $scope.hasAcceptedEvidenceItems = function(variant) {
+    $scope.hasOnlyAcceptedItems = function(variant) {
       var statuses = variant.evidence_item_statuses;
       return (statuses.accepted_count) > 0;
+    };
+
+    $scope.hasOnlySubmittedItems = function(variant) {
+      var statuses = variant.evidence_item_statuses;
+      return (statuses.accepted_count === 0 && statuses.submitted_count > 0);
     };
 
     var addVarGroupUrlBase = $scope.addVarGroupUrl = 'add/variantGroup';
@@ -49,9 +59,11 @@
     $scope.$watchCollection(
       function() { return Genes.data.variantsStatus.variants; },
       function(variants){
-        $scope.hasHiddenVariants = !_.every(variants, function(variant) {
-          return $scope.hasValidEvidenceItems(variant);
+        // _.reduce(collection, [iteratee=_.identity], [accumulator])
+        $scope.variantsWithOnlySubmitted = _.reduce(variants, function(v) {
+
         });
+        $scope.variantsWithOnlyRejected = 0;
         $scope.variants = variants;
       });
 
