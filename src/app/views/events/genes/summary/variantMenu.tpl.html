@@ -1,30 +1,17 @@
 <div class="variantMenu {{ options.backgroundColor }}">
   <div class="title-bg">
     <div class="row">
-      <div class="col-xs-5">
+      <div class="col-xs-10">
         <h4 class="title">
           <span ng-bind="gene.name"></span> Variants
           <span ng-if="variantGroups.length > 0">&amp; Variant Group{{variantGroups.length > 1 ? 's' : ''}}</span>
         </h4>
       </div>
-      <div class="col-xs-4 checkbox-field">
-        <div class="row">
-          <div class="col-xs-6">
-            <div uib-tooltip="Toggle display of variants with no accepted evidence" ng-show="hasHiddenVariants === true">
-              <label for="showAll">Show&nbsp;Rejected:</label>&nbsp;&nbsp;
-              <input type="checkbox" id="showAll" ng-model="showAll">
-            </div>
-          </div>
-          <div class="col-xs-6">
-            <div uib-tooltip="Toggle display of variants with no accepted evidence" ng-show="hasHiddenVariants === true">
-              <label for="showAll">Show&nbsp;Submitted:</label>&nbsp;&nbsp;
-              <input type="checkbox" id="showAll" ng-model="showAll">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div ng-class="{'col-xs-2': security.isAdmin || security.isEditor, 'col-xs-4': !(security.isAdmin || security.isEditor)}">
-        <input ng-model="query" class="form-control filter" placeholder="filter variants..." aria-label="filter friends" />
+      <div class="col-xs-1" style="text-align: right;">
+        <i uib-popover-template="'filtersPopover.tpl.html'"
+          popover-title="Variant Filters"
+          popover-placement="left"
+          class="glyphicon glyphicon-filter"></i>
       </div>
       <div class="col-xs-1" ng-if="security.isAdmin || security.isEditor">
         <a ng-show="security.isAdmin || security.isEditor" ng-href="{{ addVarGroupUrl }}" class="btn btn-xs btn-default btn-block" style="font-size: 80%;">
@@ -56,15 +43,15 @@
 
   <script type="text/ng-template" id="variantTag.tpl.html">
     <span uib-tooltip-template="'variantTagTooltip.tpl.html'">
-    <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
-       class="variant-tag"
-       ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">
-      <i class="glyphicon glyphicon-exclamation-sign pending-alert"
-         ng-if="variant.statuses.pending_evidence_count > 0 || variant.statuses.open_change_count > 0"
-      ng-class="{'pending-changes': variant.statuses.open_change_count > 0, 'pending-evidence': variant.statuses.pending_evidence_count > 0, 'pending-both': variant.statuses.open_change_count > 0 && variant.statuses.pending_evidence_count > 0}"></i>
-      <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
-    <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.gene_entrez_name">Gene Name</span>)</span>
-    </a>
+      <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
+        class="variant-tag"
+        ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">
+        <i class="glyphicon glyphicon-exclamation-sign pending-alert"
+          ng-if="variant.statuses.pending_evidence_count > 0 || variant.statuses.open_change_count > 0"
+          ng-class="{'pending-changes': variant.statuses.open_change_count > 0, 'pending-evidence': variant.statuses.pending_evidence_count > 0, 'pending-both': variant.statuses.open_change_count > 0 && variant.statuses.pending_evidence_count > 0}"></i>
+        <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
+        <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.gene_entrez_name">Gene Name</span>)</span>
+      </a>
     </span>
   </script>
 
@@ -72,7 +59,7 @@
     <span>
       Evidence Items: {{ variant.evidence_item_statuses.accepted_count }}<br/>
       <span ng-if="variant.statuses.pending_evidence_count > 0" style="display: block;">Has {{ variant.statuses.pending_evidence_count }} pending evidence</span>
-    <span ng-if="variant.statuses.open_change_count > 0" style="display: block;">Has {{ variant.statuses.open_change_count }} pending change{{variant.statuses.open_change_count > 1 ? 's' : '' }}</span>
+      <span ng-if="variant.statuses.open_change_count > 0" style="display: block;">Has {{ variant.statuses.open_change_count }} pending change{{variant.statuses.open_change_count > 1 ? 's' : '' }}</span>
     </span>
   </script>
 
@@ -90,8 +77,44 @@
       </div>
     </div>
   </script>
-  <script type="text/ng-template " id="/variantTooltip.tpl.html ">
-    <div>
-    </div>
-  </script>
 </div>
+
+<script type="text/ng-template" id="filtersPopover.tpl.html">
+  <div class="settings-content">
+    <div>
+      <input ng-model="$parent.query" class="form-control filter" placeholder="Filter by variant name"/>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="$parent.showSubmitted">
+        <span>Show variants with no evidence</span>
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="$parent.showRejected">
+        <span>Show variants with only rejected evidence</span>
+      </label>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="notused.tpl.html" >
+  <div class="row">
+    <div class="col-xs-6">
+      <div uib-tooltip="Toggle display of variants with no accepted evidence" ng-show="hasHiddenVariants === true">
+        <label for="showAll">Show&nbsp;Rejected:</label>&nbsp;&nbsp;
+        <input type="checkbox" id="showAll" ng-model="showSubmitted">
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div uib-tooltip="Toggle display of variants with no accepted evidence" ng-show="hasHiddenVariants === true">
+        <label for="showAll">Show&nbsp;Submitted:</label>&nbsp;&nbsp;
+        <input type="checkbox" id="showAll" ng-model="showRejected">
+      </div>
+    </div>
+  </div>
+  <div ng-class="{'col-xs-2': security.isAdmin || security.isEditor, 'col-xs-4': !(security.isAdmin || security.isEditor)}">
+    <input ng-model="query" class="form-control filter" placeholder="filter variants..." aria-label="filter friends" />
+  </div>
+</script>
