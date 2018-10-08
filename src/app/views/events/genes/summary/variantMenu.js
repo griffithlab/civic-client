@@ -15,6 +15,13 @@
 
   //@ngInject
   function VariantMenuController($scope, $state, $stateParams, Genes, Security, _) {
+    $scope.security = {
+      isAuthenticated: Security.isAuthenticated(),
+      isEditor: Security.isEditor(),
+      isAdmin: Security.isAdmin()
+    };
+
+    $scope.$state = $state;
     $scope.gene = Genes.data.item;
     $scope.stateParams = $stateParams;
     $scope.hasHiddenVariants = false;
@@ -23,22 +30,15 @@
     $scope.showAccepted = true;
     $scope.showSubmitted = false;
     $scope.showRejected = false;
+    $scope.showOnlySubmitted = false;
 
-    $scope.security = {
-      isAuthenticated: Security.isAuthenticated(),
-      isEditor: Security.isEditor(),
-      isAdmin: Security.isAdmin()
-    };
-
-    $scope.$state = $state;
-
-    // use !hasValidEvidenceItems to get only rejected
+    // functions used in ng-show directive on variant buttons
     $scope.hasValidEvidenceItems = function(variant) {
       var statuses = variant.evidence_item_statuses;
       return (statuses.accepted_count + statuses.submitted_count) > 0;
     };
 
-    $scope.hasOnlyAcceptedItems = function(variant) {
+    $scope.hasAcceptedItems = function(variant) {
       var statuses = variant.evidence_item_statuses;
       return (statuses.accepted_count) > 0;
     };
@@ -46,6 +46,10 @@
     $scope.hasOnlySubmittedItems = function(variant) {
       var statuses = variant.evidence_item_statuses;
       return (statuses.accepted_count === 0 && statuses.submitted_count > 0);
+    };
+
+    $scope.hasOnlyRejectedItems = function(variant) {
+      return !$scope.hasValidEvidenceItems(variant);
     };
 
     var addVarGroupUrlBase = $scope.addVarGroupUrl = 'add/variantGroup';
