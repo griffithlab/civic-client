@@ -29,7 +29,7 @@
 
     $scope.showAccepted = true;
     $scope.showSubmitted = false;
-    $scope.showRejected = false;
+    $scope.showNoAccepted = false;
     $scope.showOnlySubmitted = false;
 
     // functions used in ng-show directive on variant buttons
@@ -48,8 +48,13 @@
       return (statuses.accepted_count === 0 && statuses.submitted_count > 0);
     };
 
+    $scope.hasNoAcceptedItems = function(variant) {
+      return !$scope.hasAcceptedItems(variant);
+    };
+
     $scope.hasOnlyRejectedItems = function(variant) {
-      return !$scope.hasValidEvidenceItems(variant);
+      var statuses = variant.evidence_item_statuses;
+      return statuses.rejected_count > 0 && (statuses.accepted_count === 0 && statuses.submitted_count === 0);
     };
 
     var addVarGroupUrlBase = $scope.addVarGroupUrl = 'add/variantGroup';

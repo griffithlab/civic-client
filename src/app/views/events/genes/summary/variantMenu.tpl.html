@@ -34,7 +34,8 @@
         <li ng-repeat="variant in variants | orderBy:'name' | filter:{ name: query } as results"
           ng-show="(showAccepted && hasAcceptedItems(variant))
           || (showSubmitted && hasOnlySubmittedItems(variant))
-          || (showRejected && hasOnlyRejectedItems(variant))
+          || (showNoAccepted && hasNoAcceptedItems(variant))
+          || (showOnlyRejected && hasOnlyRejectedItems(variant))
           || variant.id == stateParams.variantId">
           <ng-include src="'variantTag.tpl.html'"></ng-include>
         </li>
@@ -95,19 +96,25 @@
   <div class="checkbox">
     <label>
       <input type="checkbox" ng-model="$parent.showAccepted">
-      <span>Show variants with accepted evidence</span>
+      <span>Show variants with Accepted evidence</span>
     </label>
   </div>
   <div class="checkbox">
     <label>
       <input type="checkbox" ng-model="$parent.showSubmitted">
-      <span>Show variants with only submitted evidence</span>
+      <span>Show variants with only Submitted evidence</span>
     </label>
   </div>
   <div class="checkbox">
     <label>
-      <input type="checkbox" ng-model="$parent.showRejected">
-      <span>Show variants with only rejected evidence</span>
+      <input type="checkbox" ng-model="$parent.showNoAccepted">
+      <span>Show variants with no Accepted evidence</span>
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="$parent.showOnlyRejected">
+      <span>Show variants with only Rejected evidence</span>
     </label>
   </div>
 </script>
