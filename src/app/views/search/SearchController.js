@@ -1007,6 +1007,7 @@
                   label: '',
                   required: true,
                   options:[
+                    { value: null, name: 'Please choose an Organization' },
                     { value: 'BCCA (POGS)', name: 'BCCA (POGS)' },
                     { value: 'The Charité Comprehensive Cancer Center', name: 'The Charité Comprehensive Cancer Center' },
                     { value: 'ClinGen', name: 'ClinGen' },
@@ -1897,6 +1898,7 @@
                   label: '',
                   required: true,
                   options:[
+                    { value: null, name: 'Please choose an Organization' },
                     { value: 'BCCA (POGS)', name: 'BCCA (POGS)' },
                     { value: 'The Charité Comprehensive Cancer Center', name: 'The Charité Comprehensive Cancer Center' },
                     { value: 'ClinGen', name: 'ClinGen' },
