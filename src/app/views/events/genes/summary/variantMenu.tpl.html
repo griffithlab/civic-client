@@ -9,12 +9,12 @@
       </div>
       <div class="col-xs-2" style="text-align: right;">
         <a uib-popover-template="'filtersPopover.tpl.html'"
-          popover-title="Variant Filters"
+          popover-title="Variant Display Options"
           popover-placement="left"
           popover-class="filters-content"
           class="btn btn-xs btn-default btn-block">
           <i class="glyphicon glyphicon-filter"></i>
-          Filter Variants
+          Display Options
         </a>
       </div>
       <div class="col-xs-2" ng-if="security.isAdmin || security.isEditor">
@@ -96,7 +96,7 @@
   <div class="checkbox">
     <label>
       <input type="checkbox" ng-model="$parent.showAccepted">
-      <span>Show variants with Accepted evidence</span>
+      <span>Show variants with any Accepted evidence</span>
     </label>
   </div>
   <div class="checkbox">
