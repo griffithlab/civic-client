@@ -42,6 +42,9 @@
           <th>
             Evidence Summaries
           </th>
+          <th>
+            Assertion Summaries
+          </th>
         </tr>
         <tr ng-repeat="release in vm.releases">
           <td class="date" ng-bind="release.note | capitalize">
@@ -70,6 +73,14 @@
             <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[2]}}" target="_self">
               <span class="glyphicon glyphicon-download-alt"></span>
               ClinicalEvidenceSummaries.tsv
+            </a>
+          </td>
+          <td class="link">
+            <a class="btn btn-xs btn-default"
+              ng-href="{{release.fileUrls[4]}}"
+              ng-if="release.fileUrls[4] != null" target="_self">
+              <span class="glyphicon glyphicon-download-alt"></span>
+              AssertionSummaries.tsv
             </a>
           </td>
         </tr>
