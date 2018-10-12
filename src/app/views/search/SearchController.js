@@ -57,6 +57,7 @@
                   { value: 'status', name: 'Status' },
                   { value: 'submitter', name: 'Submitter Display Name' },
                   { value: 'submitter_id', name: 'Submitter ID' },
+                  { value: 'submitter_organization', name: 'Submitter Organization' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
                   { value: 'variant_alias', name: 'Variant Alias' },
                   { value: 'variant_name', name: 'Variant Name' },
@@ -993,7 +994,46 @@
                   required: true
                 }
               }
-            ]
+            ],
+            submitter_organization: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: null
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options:[
+                    { value: null, name: 'Please choose an Organization' },
+                    { value: 'BCCA (POGS)', name: 'BCCA (POGS)' },
+                    { value: 'The Charité Comprehensive Cancer Center', name: 'The Charité Comprehensive Cancer Center' },
+                    { value: 'ClinGen', name: 'ClinGen' },
+                    { value: 'Illumina', name: 'Illumina' },
+                    { value: 'The McDonnell Genome Institute', name: 'The McDonnell Genome Institute'},
+                    { value: 'University Health Network (Toronto)', name: 'University Health Network (Toronto)' },
+                  ]
+                }
+              }
+            ],
           }
         }
       }
@@ -1033,6 +1073,7 @@
                   { value: 'status', name: 'Status' },
                   { value: 'submitter', name: 'Submitter Display Name' },
                   { value: 'submitter_id', name: 'Submitter ID' },
+                  { value: 'submitter_organization', name: 'Submitter Organization' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
                   { value: 'variant_alias', name: 'Variant Alias' },
                   { value: 'variant_name', name: 'Variant Name' },
@@ -1850,7 +1891,46 @@
                   required: true
                 }
               }
-            ]
+            ],
+            submitter_organization: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: null
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options:[
+                    { value: null, name: 'Please choose an Organization' },
+                    { value: 'BCCA (POGS)', name: 'BCCA (POGS)' },
+                    { value: 'The Charité Comprehensive Cancer Center', name: 'The Charité Comprehensive Cancer Center' },
+                    { value: 'ClinGen', name: 'ClinGen' },
+                    { value: 'Illumina', name: 'Illumina' },
+                    { value: 'The McDonnell Genome Institute', name: 'The McDonnell Genome Institute'},
+                    { value: 'University Health Network (Toronto)', name: 'University Health Network (Toronto)' },
+                  ]
+                }
+              }
+            ],
           }
         }
       }
