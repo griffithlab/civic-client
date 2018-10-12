@@ -33,9 +33,9 @@
       <ul class="variants">
         <li ng-repeat="variant in variants | orderBy:'name' | filter:{ name: query } as results"
           ng-show="(showAccepted && hasAcceptedItems(variant))
-          || (showSubmitted && hasOnlySubmittedItems(variant))
-          || (showNoAccepted && hasNoAcceptedItems(variant))
-          || (showOnlyRejected && hasOnlyRejectedItems(variant))
+          || (showSubmitted && hasSubmittedItems(variant))
+          || (showRejected && hasRejectedItems(variant))
+          || (showOrphans && hasNoItems(variant))
           || variant.id == stateParams.variantId">
           <ng-include src="'variantTag.tpl.html'"></ng-include>
         </li>

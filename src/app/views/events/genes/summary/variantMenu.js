@@ -33,7 +33,7 @@
     $scope.showOnlySubmitted = false;
 
     // functions used in ng-show directive on variant buttons
-    $scope.hasValidEvidenceItems = function(variant) {
+    $scope.hasValidEvidenceItems = function(variant) { // has accepted and/or submitted items
       var statuses = variant.evidence_item_statuses;
       return (statuses.accepted_count + statuses.submitted_count) > 0;
     };
@@ -43,18 +43,19 @@
       return (statuses.accepted_count) > 0;
     };
 
-    $scope.hasOnlySubmittedItems = function(variant) {
+    $scope.hasSubmittedItems = function(variant) {
       var statuses = variant.evidence_item_statuses;
-      return (statuses.accepted_count === 0 && statuses.submitted_count > 0);
+      return (statuses.submitted_count) > 0;
     };
 
-    $scope.hasNoAcceptedItems = function(variant) {
-      return !$scope.hasAcceptedItems(variant);
+    $scope.hasRejectedItems = function(variant) {
+      var statuses = variant.evidence_item_statuses;
+      return (statuses.submitted_count) > 0;
     };
 
-    $scope.hasOnlyRejectedItems = function(variant) {
+    $scope.hasNoItems = function(variant) { // is orphan
       var statuses = variant.evidence_item_statuses;
-      return statuses.rejected_count > 0 && (statuses.accepted_count === 0 && statuses.submitted_count === 0);
+      return statuses.accepted_count === 0 && statuses.submitted_count === 0 && statuses.rejected_count === 0;
     };
 
     var addVarGroupUrlBase = $scope.addVarGroupUrl = 'add/variantGroup';
@@ -64,15 +65,21 @@
         $scope.addVarGroupUrl = addVarGroupUrlBase + '?geneId=' + stateParams.geneId;
       }
     });
+    $scope.evidence_category_counts = {
+      accepted: 0, // variants with accepted evidence
+      submitted: 0, // variants with submitted evidence
+      rejected: 0 // variants with rejected evidence
+    };
 
     $scope.$watchCollection(
       function() { return Genes.data.variantsStatus.variants; },
       function(variants){
-        // _.reduce(collection, [iteratee=_.identity], [accumulator])
-        $scope.variantsWithOnlySubmitted = _.reduce(variants, function(v) {
-
+        _.forEach(variants, function(variant) {
+          var counts = variant.evidence_item_statuses;
+          if (counts.accepted_count > 0) { $scope.evidence_category_counts.accepted++;}
+          if (counts.submitted_count > 0) { $scope.evidence_category_counts.submitted++;}
+          if (counts.rejected_count > 0) { $scope.evidence_category_counts.rejected++;}
         });
-        $scope.variantsWithOnlyRejected = 0;
         $scope.variants = variants;
       });
 
