@@ -27,7 +27,6 @@
     $scope.hasHiddenVariants = false;
     $scope.variants = Genes.data.variants;
 
-    $scope.options_filter = 'accepted';
 
     // functions used in ng-show directive on variant buttons
     $scope.hasValidEvidenceItems = function(variant) { // has accepted and/or submitted items
@@ -67,6 +66,17 @@
       submitted: 0, // variants with submitted evidence
       rejected: 0,
       orphaned: 0 // variants with rejected evidence
+    };
+
+    $scope.options_filter = 'accepted';
+    $scope.query = '';
+    $scope.variantFilterFn = function(variant) {
+      var show = ( ( $scope.options_filter === 'accepted' && $scope.hasAcceptedItems(variant) )
+                   || ( $scope.options_filter === 'accepted_submitted' && ($scope.hasAcceptedItems(variant) || $scope.hasSubmittedItems(variant)) )
+                   || ( $scope.options_filter === 'submitted' && $scope.hasSubmittedItems(variant) )
+                   || ( variant.id === $scope.stateParams.variantId )
+                   || ( $scope.options_filter === 'all' ) );
+      return show;
     };
 
     $scope.$watchCollection(
