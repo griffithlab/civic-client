@@ -1,27 +1,28 @@
 <div class="variantMenu {{ options.backgroundColor }}">
   <div class="title-bg">
     <div class="row">
-      <div class="col-xs-6" >
+      <div ng-class="{'col-xs-6': security.isAdmin || security.isEditor, 'col-xs-8': !(security.isAdmin || security.isEditor)}">
         <h4 class="title">
           <span ng-bind="gene.name"></span> Variants
           <span ng-if="variantGroups.length > 0">&amp; Variant Group{{variantGroups.length > 1 ? 's' : ''}}</span>
         </h4>
       </div>
-      <div class="col-xs-2 show-all">
-        <div uib-tooltip="Toggle display of variants with no accepted evidence"
-             ng-show="hasHiddenVariants === true">
-          <label for="showAll">Show&nbsp;all:</label>&nbsp;&nbsp;<input type="checkbox"
-                                                                        id="showAll"
-                                                                        ng-model="showAll">
-        </div>
+      <div class="col-xs-2" >
+        <input ng-model="query" class="form-control filter" placeholder="Filter by name" />
       </div>
-      <div ng-class="{'col-xs-2': security.isAdmin || security.isEditor, 'col-xs-4': !(security.isAdmin || security.isEditor)}">
-        <input ng-model="query" class="form-control filter" placeholder="filter variants..." aria-label="filter friends" />
+      <div class="col-xs-2" style="text-align: right;">
+        <a uib-popover-template="'filtersPopover.tpl.html'"
+          popover-title="Variant Display Options"
+          popover-placement="left"
+          popover-class="filters-content"
+          class="btn btn-xs btn-default btn-block">
+          <i class="glyphicon glyphicon-filter"></i>
+          Display Options
+        </a>
       </div>
       <div class="col-xs-2" ng-if="security.isAdmin || security.isEditor">
-        <a ng-show="security.isAdmin || security.isEditor"
-           ng-href="{{ addVarGroupUrl }}"
-           class="btn btn-xs btn-default btn-block">
+        <a ng-show="security.isAdmin || security.isEditor" ng-href="{{ addVarGroupUrl }}" class="btn btn-xs btn-cell-add btn-block">
+          <i class="glyphicon glyphicon-plus"></i>
           Add Group
         </a>
       </div>
@@ -33,11 +34,10 @@
          if none or more than one, show them on a new row  -->
     <div class="col-xs-{{ variantGroups.length === 1 ? '8' : '12'}}">
       <ul class="variants">
-        <li ng-repeat="variant in variants | orderBy:'name' | filter:{ name: query } as results"
-            ng-show="hasValidEvidenceItems(variant) || variant.id == stateParams.variantId || showAll === true">
+        <li ng-repeat="variant in variants | orderBy:'name' | filter:variantFilterFn | filter: {name: query} as results">
           <ng-include src="'variantTag.tpl.html'"></ng-include>
         </li>
-        <li ng-if="results.length === 0">No variants match filter query.</li>
+        <li ng-if="results.length === 0">No matches exist for variant filters.</li>
       </ul>
     </div>
     <div ng-if="variantGroups.length === 1" style="margin-top: 8px;">
@@ -51,19 +51,19 @@
 
   <script type="text/ng-template" id="variantTag.tpl.html">
     <span uib-tooltip-template="'variantTagTooltip.tpl.html'">
-    <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
-       class="variant-tag"
-       ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">
-      <i class="glyphicon glyphicon-exclamation-sign pending-alert"
-         ng-if="variant.statuses.pending_evidence_count > 0 || variant.statuses.open_change_count > 0"
-      ng-class="{'pending-changes': variant.statuses.open_change_count > 0, 'pending-evidence': variant.statuses.pending_evidence_count > 0, 'pending-both': variant.statuses.open_change_count > 0 && variant.statuses.pending_evidence_count > 0}"></i>
-      <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
-      <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.gene_entrez_name">Gene Name</span>)</span>
-    </a>
+      <a ui-sref="events.genes.summary.variants.summary({ geneId: variant.gene_id, variantId: variant.id, '#': 'variant' })"
+        class="variant-tag"
+        ng-class="{ statusRejected: !hasValidEvidenceItems(variant), active: variant.id == stateParams.variantId }">
+        <i class="glyphicon glyphicon-exclamation-sign pending-alert"
+          ng-if="variant.statuses.pending_evidence_count > 0 || variant.statuses.open_change_count > 0"
+          ng-class="{'pending-changes': variant.statuses.open_change_count > 0, 'pending-evidence': variant.statuses.pending_evidence_count > 0, 'pending-both': variant.statuses.open_change_count > 0 && variant.statuses.pending_evidence_count > 0}"></i>
+        <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
+        <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.gene_entrez_name">Gene Name</span>)</span>
+      </a>
     </span>
   </script>
 
-  <script type="text/ng-template" id="variantTagTooltip.tpl.html" >
+  <script type="text/ng-template" id="variantTagTooltip.tpl.html">
     <span>
       Evidence Items: {{ variant.evidence_item_statuses.accepted_count }}<br/>
       <span ng-if="variant.statuses.pending_evidence_count > 0" style="display: block;">Has {{ variant.statuses.pending_evidence_count }} pending evidence</span>
@@ -74,21 +74,42 @@
   <script type="text/ng-template" id="variantGroupBlock.tpl.html">
     <div class="col-xs-4">
       <div class="variant-group" ng-class="{ 'active': $state.includes('events.genes.summary.variantGroups', {geneId: gene.id, variantGroupId: variantGroup.id})}">
-        <a class="group-title"
-           ng-class="{ active: variantGroup.id == stateParams.variantGroupId }"
-           ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id, '#': 'variant-group' })">
+        <a class="group-title" ng-class="{ active: variantGroup.id == stateParams.variantGroupId }" ui-sref="events.genes.summary.variantGroups.summary({ geneId: gene.id, variantGroupId: variantGroup.id, '#': 'variant-group' })">
           <span ng-bind="variantGroup.name">Variant Group Name</span> Group
         </a>
         <ul class="variants">
-          <li ng-repeat="variant in variantGroup.variants|orderBy:'name' | filter:{ name: query } as results"" ng-show="hasValidEvidenceItems(variant)">
-            <ng-include src="'variantTag.tpl.html'"></ng-include>
+          <li ng-repeat="variant in variantGroup.variants | orderBy:'name' | filter: variantFilterFn | filter: { name: query } as results">
+            <ng-include src=" 'variantTag.tpl.html' "></ng-include>
           </li>
         </ul>
       </div>
     </div>
   </script>
-  <script type="text/ng-template" id="/variantTooltip.tpl.html">
-    <div>
-    </div>
-  </script>
 </div>
+
+<script type="text/ng-template" id="filtersPopover.tpl.html">
+  <div class="radio">
+    <label>
+      <input type="radio" ng-model="$parent.options_filter" value="accepted">
+      <span uib-tooltip="Includes variants that have at least one editor-reviewed evidence item">Show variants with accepted evidence <span class="count" >({{$parent.evidence_category_counts.accepted}})</span></span>
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" ng-model="$parent.options_filter" value="accepted_submitted">
+      <span uib-tooltip="Includes variants that have at least one editor-reviewed and/or pending evidence item">Show variants with accepted and/or submitted evidence <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" ng-model="$parent.options_filter" value="submitted">
+      <span uib-tooltip="Includes variants that have at least one item of evidence pending editor review">Show variants with submitted evidence <span class="count" >({{$parent.evidence_category_counts.submitted}})</span></span>
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" ng-model="$parent.options_filter" value="all">
+      <span uib-tooltip="Includes all variants">Show all: variants with accepted, submitted, rejected, and/or no evidence (orphans) <span class="count" >({{$parent.variants.length}})</span></span>
+    </label>
+  </div>
+</script>
