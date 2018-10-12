@@ -1,11 +1,14 @@
 <div class="variantMenu {{ options.backgroundColor }}">
   <div class="title-bg">
     <div class="row">
-      <div ng-class="{'col-xs-8': security.isAdmin || security.isEditor, 'col-xs-10': !(security.isAdmin || security.isEditor)}">
+      <div ng-class="{'col-xs-6': security.isAdmin || security.isEditor, 'col-xs-8': !(security.isAdmin || security.isEditor)}">
         <h4 class="title">
           <span ng-bind="gene.name"></span> Variants
           <span ng-if="variantGroups.length > 0">&amp; Variant Group{{variantGroups.length > 1 ? 's' : ''}}</span>
         </h4>
+      </div>
+      <div class="col-xs-2" >
+        <input ng-model="query" class="form-control filter" placeholder="Filter by name" />
       </div>
       <div class="col-xs-2" style="text-align: right;">
         <a uib-popover-template="'filtersPopover.tpl.html'"
@@ -85,31 +88,28 @@
 </div>
 
 <script type="text/ng-template" id="filtersPopover.tpl.html">
-  <div>
-    <input ng-model="$parent.query" class="form-control filter" placeholder="Filter on variant name" />
-  </div>
   <div class="radio">
     <label>
       <input type="radio" ng-model="$parent.options_filter" value="accepted">
-      <span>Show variants with editor reviewed evidence <span class="count" >({{$parent.evidence_category_counts.accepted}})</span></span>
+      <span uib-tooltip="Includes only variants with accepted evidence">Show variants with editor reviewed evidence <span class="count" >({{$parent.evidence_category_counts.accepted}})</span></span>
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" ng-model="$parent.options_filter" value="accepted_submitted">
-      <span>Show variants with editor reviewed evidence and/or evidence pending review <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
+      <span uib-tooltip="Includes variants with accepted and/or pending evidence">Show variants with editor reviewed evidence and/or evidence pending review <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" ng-model="$parent.options_filter" value="submitted">
-      <span>Show variants with evidence pending review <span class="count" >({{$parent.evidence_category_counts.submitted}})</span></span>
+      <span uib-tooltip="Includes variants with pending evidence">Show variants with evidence pending review <span class="count" >({{$parent.evidence_category_counts.submitted}})</span></span>
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" ng-model="$parent.options_filter" value="all">
-      <span>Show all variants <span class="count" >({{$parent.variants.length}})</span></span>
+      <span uib-tooltip="Includes variants with accepted, pending, rejected evidence, or no evidence at all (orphans)">Show all variants <span class="count" >({{$parent.variants.length}})</span></span>
     </label>
   </div>
 </script>
