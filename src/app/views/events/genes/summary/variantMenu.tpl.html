@@ -91,25 +91,25 @@
   <div class="radio">
     <label>
       <input type="radio" ng-model="$parent.options_filter" value="accepted">
-      <span uib-tooltip="Includes only variants with accepted evidence">Show variants with editor reviewed evidence <span class="count" >({{$parent.evidence_category_counts.accepted}})</span></span>
+      <span uib-tooltip="Includes variants that have at least one editor-reviewed evidence item">Show variants with accepted evidence <span class="count" >({{$parent.evidence_category_counts.accepted}})</span></span>
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" ng-model="$parent.options_filter" value="accepted_submitted">
-      <span uib-tooltip="Includes variants with accepted and/or pending evidence">Show variants with editor reviewed evidence and/or evidence pending review <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
+      <span uib-tooltip="Includes variants that have at least one editor-reviewed and/or pending evidence item">Show variants with accepted and/or submitted evidence <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" ng-model="$parent.options_filter" value="submitted">
-      <span uib-tooltip="Includes variants with pending evidence">Show variants with evidence pending review <span class="count" >({{$parent.evidence_category_counts.submitted}})</span></span>
+      <span uib-tooltip="Includes variants that have at least one item of evidence pending editor review">Show variants with submitted evidence <span class="count" >({{$parent.evidence_category_counts.submitted}})</span></span>
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" ng-model="$parent.options_filter" value="all">
-      <span uib-tooltip="Includes variants with accepted, pending, rejected evidence, or no evidence at all (orphans)">Show all variants <span class="count" >({{$parent.variants.length}})</span></span>
+      <span uib-tooltip="Includes all variants">Show all: variants with accepted, submitted, rejected, and/or no evidence (orphans) <span class="count" >({{$parent.variants.length}})</span></span>
     </label>
   </div>
 </script>
