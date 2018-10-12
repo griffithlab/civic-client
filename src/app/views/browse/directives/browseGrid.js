@@ -110,7 +110,7 @@
           enableFiltering: true,
           headerTooltip: 'Assertion ID',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
-          cellTemplate: 'app/views/events/common/evidenceGridIdCell.tpl.html',
+          cellTemplate: 'app/views/events/common/assertionGrid/assertionGridIdCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
