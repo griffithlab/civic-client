@@ -40,15 +40,25 @@
 
     ctrl.filters = [];
 
-    if(ctrl.mode !== 'evidence_items' && ctrl.mode !== 'assertions') {
+    if(ctrl.mode == 'evidence_items') {
+      ctrl.sorting = [
+        {
+          field: 'evidence_level',
+          direction: 'asc',
+        },
+        {
+          field: 'rating',
+          direction: 'desc',
+        },
+        {
+          field: 'evidence_type',
+          direction: 'asc',
+        },
+      ];
+    } else {
       ctrl.sorting = [{
         field: 'evidence_item_count',
         direction: 'desc'
-      }];
-    } else {
-      ctrl.sorting = [{
-        field: 'id',
-        direction: 'asc'
       }];
     }
 
@@ -894,8 +904,12 @@
       }
 
       if (sorting.length > 0) {
-        _.each(sorting, function(sort) {
+        request.sort_priority = '';
+        var length = sorting.length;
+        _.each(sorting, function(sort, index) {
           request['sorting[' + sort.field + ']'] = sort.direction;
+          request.sort_priority += sort.field;
+          if (index+1 < length) { request.sort_priority += ',';}
         });
       }
       return Datatables.query(request);
