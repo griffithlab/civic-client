@@ -80,7 +80,12 @@
           <span ng-bind="variantGroup.name">Variant Group Name</span> Group
         </a>
         <ul class="variants">
-          <li ng-repeat="variant in variantGroup.variants|orderBy:'name' | filter:{ name: query } as results" " ng-show="hasValidEvidenceItems(variant) ">
+          <li ng-repeat="variant in variantGroup.variants|orderBy:'name' | filter:{ name: query } as results"
+            ng-show="(showAccepted && hasAcceptedItems(variant))
+            || (showSubmitted && hasSubmittedItems(variant))
+            || (showRejected && hasRejectedItems(variant))
+            || (showOrphans && hasNoItems(variant))
+            || variant.id == stateParams.variantId">
             <ng-include src=" 'variantTag.tpl.html' "></ng-include>
           </li>
         </ul>
@@ -96,45 +101,26 @@
   <div class="checkbox">
     <label>
       <input type="checkbox" ng-model="$parent.showAccepted">
-      <span>Show variants with any Accepted evidence</span>
+      <span>Show variants with editor reviewed evidence <span class="count" >({{$parent.evidence_category_counts.accepted}})</span></span>
     </label>
   </div>
   <div class="checkbox">
     <label>
       <input type="checkbox" ng-model="$parent.showSubmitted">
-      <span>Show variants with only Submitted evidence</span>
+      <span>Show variants with editor reviewed evidence and/or evidence pending review <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
     </label>
   </div>
   <div class="checkbox">
     <label>
       <input type="checkbox" ng-model="$parent.showNoAccepted">
-      <span>Show variants with no Accepted evidence</span>
+      <span>Show variants with evidence pending review <span class="count" >({{$parent.evidence_category_counts.submitted}})</span></span>
     </label>
   </div>
   <div class="checkbox">
     <label>
       <input type="checkbox" ng-model="$parent.showOnlyRejected">
-      <span>Show variants with only Rejected evidence</span>
+      <span>Show all variants <span class="count" >({{$parent.variants.length}})</span></span>
     </label>
   </div>
-</script>
-
-<script type="text/ng-template" id="notused.tpl.html" >
-  <div class="row">
-    <div class="col-xs-6">
-      <div uib-tooltip="Toggle display of variants with no accepted evidence" ng-show="hasHiddenVariants === true">
-        <label for="showAll">Show&nbsp;Rejected:</label>&nbsp;&nbsp;
-        <input type="checkbox" id="showAll" ng-model="showSubmitted">
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <div uib-tooltip="Toggle display of variants with no accepted evidence" ng-show="hasHiddenVariants === true">
-        <label for="showAll">Show&nbsp;Submitted:</label>&nbsp;&nbsp;
-        <input type="checkbox" id="showAll" ng-model="showRejected">
-      </div>
-    </div>
-  </div>
-  <div ng-class="{'col-xs-2': security.isAdmin || security.isEditor, 'col-xs-4': !(security.isAdmin || security.isEditor)}">
-    <input ng-model="query" class="form-control filter" placeholder="filter variants..." aria-label="filter friends" />
-  </div>
+  <pre ng-bind="$parent.evidence_category_counts | json" ></pre>
 </script>
