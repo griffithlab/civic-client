@@ -31,7 +31,7 @@
          if none or more than one, show them on a new row  -->
     <div class="col-xs-{{ variantGroups.length === 1 ? '8' : '12'}}">
       <ul class="variants">
-        <li ng-repeat="variant in variants | orderBy:'name' | filter:variantFilterFn as results">
+        <li ng-repeat="variant in variants | orderBy:'name' | filter:variantFilterFn | filter: {name: query} as results">
           <ng-include src="'variantTag.tpl.html'"></ng-include>
         </li>
         <li ng-if="results.length === 0">No matches exist for variant filters.</li>
@@ -75,7 +75,7 @@
           <span ng-bind="variantGroup.name">Variant Group Name</span> Group
         </a>
         <ul class="variants">
-          <li ng-repeat="variant in variantGroup.variants | orderBy:'name' | filter:variantFilterFn as results">
+          <li ng-repeat="variant in variantGroup.variants | orderBy:'name' | filter: variantFilterFn | filter: { name: query } as results">
             <ng-include src=" 'variantTag.tpl.html' "></ng-include>
           </li>
         </ul>

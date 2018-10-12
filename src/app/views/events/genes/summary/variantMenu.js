@@ -71,12 +71,11 @@
     $scope.options_filter = 'accepted';
     $scope.query = '';
     $scope.variantFilterFn = function(variant) {
-      var show = ( ( $scope.options_filter === 'accepted' && $scope.hasAcceptedItems(variant) )
-                   || ( $scope.options_filter === 'accepted_submitted' && ($scope.hasAcceptedItems(variant) || $scope.hasSubmittedItems(variant)) )
-                   || ( $scope.options_filter === 'submitted' && $scope.hasSubmittedItems(variant) )
-                   || ( variant.id === $scope.stateParams.variantId )
-                   || ( $scope.options_filter === 'all' ) );
-      return show;
+      return  ( $scope.options_filter === 'accepted' && $scope.hasAcceptedItems(variant) )
+        || ( $scope.options_filter === 'accepted_submitted' && ($scope.hasAcceptedItems(variant) || $scope.hasSubmittedItems(variant)) )
+        || ( $scope.options_filter === 'submitted' && $scope.hasSubmittedItems(variant) )
+        || ( variant.id === $scope.stateParams.variantId )
+        || ( $scope.options_filter === 'all' ) ;
     };
 
     $scope.$watchCollection(
