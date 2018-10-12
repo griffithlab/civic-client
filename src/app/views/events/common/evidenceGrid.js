@@ -436,7 +436,7 @@
       $scope.$watchCollection('evidence', function(evidence) {
         console.log('ui-grid watchCollection called.');
         // if we get an evidence list that is rejected items only, let's show those instead of showing nothing
-        if(_.every(evidence, 'status', 'rejected')) {
+        if(_.every(evidence, {status: 'rejected' })) {
           statusFilters = ['accepted', 'submitted', 'rejected'];
         } else if (!_.includes(statusFilters, 'rejected')) {
           statusFilters = ['accepted', 'submitted'];
