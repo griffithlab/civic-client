@@ -2186,6 +2186,7 @@
                   { value: 'start2', name: 'CHR2 Start' },
                   { value: 'stop2', name: 'CHR2 Stop' },
                   { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
+                  { value: 'allele_registry_id', name: 'Allele Registry ID' },
                   { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
                   { value: 'description', name: 'Description' },
                   { value: 'ensembl_version', name: 'Ensembl Version' },
@@ -2210,6 +2211,36 @@
             }
           ],
           conditionFields: {
+            allele_registry_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'contains', name: 'contains'},
+                    {value: 'is_empty', name: 'is empty'},
+                    {value: 'is_not_empty', name: 'is not empty'},
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name =="is_empty" || model.name == "is_not_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
             civic_actionability_score: [
               {
                 key: 'name',
