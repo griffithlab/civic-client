@@ -305,7 +305,8 @@
           'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
           'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
           'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
-          'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease'
+          'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
+          'Functional': 'TBD',
         },
         evidence_level_brief: {
           A: 'Validated association',
@@ -335,9 +336,13 @@
             'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
           },
           'Predisposing': {
-            'Supports': 'The experiment or study supports a variant\'s impact on prognostic outcome',
+            'Supports': 'The experiment or study supports a variant\'s impact on predisposing outcome',
             'Does Not Support': 'The experiment or study does not support a predisposing association between variant and outcome'
-          }
+          },
+          'Functional': {
+            'Support': 'TBD',
+            'Does Not Support': 'TBD',
+          },
         },
         clinical_significance: {
           'Predictive': {
@@ -364,7 +369,14 @@
             'Likely Benign': 'Not expected to have a major effect on disease',
             'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
             'N/A': 'Variant does not inform clinical action'
-          }
+          },
+          'Functional': {
+            'Gain of Function': 'TBD',
+            'Loss of Function': 'TBD',
+            'Unaltered Function': 'TBD',
+            'Neomorphic': 'TBD',
+            'Other': 'TBD',
+          },
         },
         drug_interaction_type: {
           'Combination': 'The drugs listed were used in as part of a combination therapy approach',

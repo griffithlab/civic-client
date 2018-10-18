@@ -7,6 +7,11 @@
      tooltip-append-to-body="true">
     <span
       class="glyphicon"
-      ng-class="{ 'glyphicon-eye-open': row.entity[col.field] === 'Predictive', 'glyphicon-search': row.entity[col.field] === 'Diagnostic', 'glyphicon-road': row.entity[col.field] === 'Prognostic','glyphicon-alert': row.entity[col.field] === 'Predisposing' }">
+      ng-class="{ 
+      'glyphicon-eye-open': row.entity[col.field] === 'Predictive',
+      'glyphicon-search': row.entity[col.field] === 'Diagnostic',
+      'glyphicon-road': row.entity[col.field] === 'Prognostic',
+      'glyphicon-alert': row.entity[col.field] === 'Predisposing',
+      'glyphicon-cog': row.entity[col.field] === 'Functional'}">
     </span>
 </div>
