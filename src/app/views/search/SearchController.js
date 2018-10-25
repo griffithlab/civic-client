@@ -439,6 +439,11 @@
                     { value: 'Benign', name: 'Benign' },
                     { value: 'Likely Benign', name: 'Likely Benign' },
                     { value: 'Uncertain Significance', name: 'Uncertain Significance' },
+                    { value: 'Gain of Function', name: 'Gain of Function'},
+                    { value: 'Loss of Function', name: 'Loss of Function'},
+                    { value: 'Unaltered Function', name: 'Unaltered Function'},
+                    { value: 'Neomorphic', name: 'Neomorphic'},
+                    { value: 'Other', name: 'Other'},
                     { value: 'N/A', name: 'N/A' }
                   ]
                 }
@@ -475,7 +480,8 @@
                     { value: 'Predictive', name: 'Predictive' },
                     { value: 'Diagnostic', name: 'Diagnostic' },
                     { value: 'Prognostic', name: 'Prognostic' },
-                    { value: 'Predisposing', name: 'Predisposing' }
+                    { value: 'Predisposing', name: 'Predisposing' },
+                    { value: 'Functional', label: 'Functional'},
                   ]
                 }
               }
@@ -1461,6 +1467,11 @@
                     { value: 'Benign', name: 'Benign' },
                     { value: 'Likely Benign', name: 'Likely Benign' },
                     { value: 'Uncertain Significance', name: 'Uncertain Significance' },
+                    { value: 'Gain of Function', name: 'Gain of Function'},
+                    { value: 'Loss of Function', name: 'Loss of Function'},
+                    { value: 'Unaltered Function', name: 'Unaltered Function'},
+                    { value: 'Neomorphic', name: 'Neomorphic'},
+                    { value: 'Other', name: 'Other'},
                     { value: 'N/A', name: 'N/A' }
                   ]
                 }
@@ -1497,7 +1508,8 @@
                     { value: 'Predictive', name: 'Predictive' },
                     { value: 'Diagnostic', name: 'Diagnostic' },
                     { value: 'Prognostic', name: 'Prognostic' },
-                    { value: 'Predisposing', name: 'Predisposing' }
+                    { value: 'Predisposing', name: 'Predisposing' },
+                    { value: 'Functional', label: 'Functional'},
                   ]
                 }
               }

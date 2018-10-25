@@ -16,7 +16,7 @@
             depending on the same publication.
           </span>
         </span>
-          In order to condense all of the relevant details for each evidence item onto a single row, we've abbreviated the column headers, and have used icons instead of text to indicate the values of various evidence item properties.</p>
+        In order to condense all of the relevant details for each evidence item onto a single row, we've abbreviated the column headers, and have used icons instead of text to indicate the values of various evidence item properties.</p>
       <p>This key shows the meaning of the abbreviations and icons.</p>
       <p>All of the table cells display their values in tooltips. For example, if you wish to read the entire description of an evidence item without clicking on it, or see what an icon means, hold the mouse pointer over the cell and its tooltip will be displayed.</p>
       <p>The <span class="glyphicon glyphicon-remove-circle"></span> symbol means 'Not Applicable' or 'Not Available'.</p>
@@ -190,20 +190,16 @@
                   Predisposing
                 </td>
               </tr>
+              <tr>
+                <td class="symbol typeCell">
+                  <span class="glyphicon glyphicon-cog"></span>
+                </td>
+                <td class="symbol-description">
+                  Functional
+                </td>
+              </tr>
             </table>
           </td>
-        </tr>
-      </table>
-    </div>
-    <div class="col-xs-6">
-      <table class="table table-condensed column-key">
-        <tr>
-          <th class="col-name">
-            Column&nbsp;Abbreviation
-          </th>
-          <th class="col-description">
-            Column&nbsp;Description
-          </th>
         </tr>
         <tr>
           <td class="col-name">
@@ -226,128 +222,6 @@
                 </td>
                 <td class="symbol-description">
                   Does Not Support
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td class="col-name">
-            CS
-          </td>
-          <td class="col-description">
-            <span>Clinical Significance</span>
-            <table class="table table-condensed symbol-key">
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-heart"></span>
-                </td>
-                <td class="symbol-description">
-                  Sensitivity/Response
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-ban-circle"></span>
-                </td>
-                <td class="symbol-description">
-                  Resistance
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-arrow-up"></span>
-                </td>
-                <td class="symbol-description">
-                  Better Outcome
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-arrow-down"></span>
-                </td>
-                <td class="symbol-description">
-                  Poor Outcome
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-plus-sign"></span>
-                </td>
-                <td class="symbol-description">
-                  Positive
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-minus-sign"></span>
-                </td>
-                <td class="symbol-description">
-                  Negative
-                </td>
-              </tr>
-             <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-fire"></span>
-                </td>
-                <td class="symbol-description">
-                  Adverse Response
-                </td>
-             </tr>
-             <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-heart-empty"></span>
-                </td>
-                <td class="symbol-description">
-                  Reduced Sensitivity
-                </td>
-             </tr>
-             <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-th"></span>
-                </td>
-                <td class="symbol-description">
-                  Pathogenic
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-th-large"></span>
-                </td>
-                <td class="symbol-description">
-                  Likely Pathogenic
-                </td>
-              </tr>
-             <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-align-justify"></span>
-                </td>
-                <td class="symbol-description">
-                  Benign
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-align-center"></span>
-                </td>
-                <td class="symbol-description">
-                  Likely Benign
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-exclamation-sign"></span>
-                </td>
-                <td class="symbol-description">
-                 Uncertain Significance
-                </td>
-              </tr>
-              <tr>
-                <td class="symbol clinicalCell">
-                  <span class="glyphicon glyphicon-remove-circle not-applicable"></span>
-                </td>
-                <td class="symbol-description">
-                  N/A
                 </td>
               </tr>
             </table>
@@ -394,6 +268,224 @@
               </tr>
               <tr>
                 <td class="symbol originCell">
+                  <span class="glyphicon glyphicon-remove-circle not-applicable"></span>
+                </td>
+                <td class="symbol-description">
+                  N/A
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-6">
+      <table class="table table-condensed column-key">
+        <tr>
+          <th class="col-name">
+            Column&nbsp;Abbreviation
+          </th>
+          <th class="col-description">
+            Column&nbsp;Description
+          </th>
+        </tr>
+        <tr>
+          <td class="col-name">
+            CS
+          </td>
+          <td class="col-description">
+            <span>Clinical Significance</span>
+            <table class="table table-condensed symbol-key">
+
+              <tr>
+                <td>
+                  &nbsp;
+                </td>
+                <td class="icon-category">
+                  Predictive
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-heart"></span>
+                </td>
+                <td class="symbol-description">
+                  Sensitivity/Response
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-ban-circle"></span>
+                </td>
+                <td class="symbol-description">
+                  Resistance
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-fire"></span>
+                </td>
+                <td class="symbol-description">
+                  Adverse Response
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-heart-empty"></span>
+                </td>
+                <td class="symbol-description">
+                  Reduced Sensitivity
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  &nbsp;
+                </td>
+                <td class="icon-category">
+                  Diagnostic
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-plus-sign"></span>
+                </td>
+                <td class="symbol-description">
+                  Positive
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-minus-sign"></span>
+                </td>
+                <td class="symbol-description">
+                  Negative
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  &nbsp;
+                </td>
+                <td class="icon-category">
+                  Prognostic
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-arrow-up"></span>
+                </td>
+                <td class="symbol-description">
+                  Better Outcome
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-arrow-down"></span>
+                </td>
+                <td class="symbol-description">
+                  Poor Outcome
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  &nbsp;
+                </td>
+                <td class="icon-category">
+                  Predisposing
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-th"></span>
+                </td>
+                <td class="symbol-description">
+                  Pathogenic
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-th-large"></span>
+                </td>
+                <td class="symbol-description">
+                  Likely Pathogenic
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-align-justify"></span>
+                </td>
+                <td class="symbol-description">
+                  Benign
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-align-center"></span>
+                </td>
+                <td class="symbol-description">
+                  Likely Benign
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-question-sign"></span>
+                </td>
+                <td class="symbol-description">
+                  Uncertain Significance
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &nbsp;
+                </td>
+                <td class="icon-category">
+                  Functional
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-upload"></span>
+                </td>
+                <td class="symbol-description">
+                  Gain of Function
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-download"></span>
+                </td>
+                <td class="symbol-description">
+                  Loss of Function
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-resize-horizontal"></span>
+                </td>
+                <td class="symbol-description">
+                  Unaltered Function
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </td>
+                <td class="symbol-description">
+                  Neomorphic
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
+                  <span class="glyphicon glyphicon-log-out"></span>
+                </td>
+                <td class="symbol-description">
+                  Other
+                </td>
+              </tr>
+              <tr>
+                <td class="symbol clinicalCell">
                   <span class="glyphicon glyphicon-remove-circle not-applicable"></span>
                 </td>
                 <td class="symbol-description">

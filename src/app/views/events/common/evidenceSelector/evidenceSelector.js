@@ -263,7 +263,11 @@
               {
                 value: 'Predisposing',
                 label: 'Predisposing'
-              }
+              },
+              {
+                value: 'Functional',
+                label: 'Functional'
+              },
             ]
           },
           width: '6%',
@@ -310,6 +314,11 @@
               { value: 'Negative', label: 'Negative' },
               { value: 'Adverse Response', label: 'Adverse Response' },
               { value: 'Reduced Sensitivity', label: 'Reduced Sensitivity' },
+              { value: 'Gain of Function', label: 'Gain of Function'},
+              { value: 'Loss of Function', label: 'Loss of Function'},
+              { value: 'Unaltered Function', label: 'Unaltered Function'},
+              { value: 'Neomorphic', label: 'Neomorphic'},
+              { value: 'Other', label: 'Other'},
               { value: 'N/A', label: 'N/A' }
             ]
           },
@@ -470,7 +479,11 @@
               {
                 value: 'Predisposing',
                 label: 'Predisposing'
-              }
+              },
+              {
+                value: 'Functional',
+                label: 'Functional'
+              },
             ]
           },
         },
@@ -511,6 +524,11 @@
               { value: 'Negative', label: 'Negative' },
               { value: 'Adverse Response', label: 'Adverse Response' },
               { value: 'Reduced Sensitivity', label: 'Reduced Sensitivity' },
+              { value: 'Gain of Function', label: 'Gain of Function'},
+              { value: 'Loss of Function', label: 'Loss of Function'},
+              { value: 'Unaltered Function', label: 'Unaltered Function'},
+              { value: 'Neomorphic', label: 'Neomorphic'},
+              { value: 'Other', label: 'Other'},
               { value: 'N/A', label: 'N/A' }
             ]
           },
