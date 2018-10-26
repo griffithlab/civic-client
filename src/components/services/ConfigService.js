@@ -355,7 +355,6 @@
           'Diagnostic': {
             'Positive': 'Associated with diagnosis of disease or subtype',
             'Negative': 'Associated with lack of disease or subtype',
-            'N/A': 'Variant does not inform clinical action'
           },
           'Prognostic': {
             'Better Outcome': 'Demonstrates better than expected clinical outcome',
@@ -368,7 +367,6 @@
             'Benign': 'Very strong evidence the variant is benign',
             'Likely Benign': 'Not expected to have a major effect on disease',
             'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
-            'N/A': 'Variant does not inform clinical action'
           },
           'Functional': {
             'Gain of Function': 'TBD',
