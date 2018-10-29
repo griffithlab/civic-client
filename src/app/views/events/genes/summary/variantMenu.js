@@ -56,6 +56,31 @@
 
     var addVarGroupUrlBase = $scope.addVarGroupUrl = 'add/variantGroup';
 
+    $scope.order = {
+      field: 'name',
+      reverse: false
+    };
+
+    $scope.sortOptions = [
+      { value: true, label: 'descending' },
+      { value: false, label: 'ascending' }
+    ];
+
+    $scope.variantMenuOrderBy = function(variant) {
+      var order = 0;
+      switch ($scope.order.field) {
+      case 'name':
+        order = variant.name;
+        break;
+      case 'position':
+        order = variant.coordinates.start;
+        break;
+      default:
+        order = variant.name;
+      }
+      return order;
+    };
+
     $scope.$watchCollection('stateParams', function(stateParams){
       if(_.has(stateParams, 'geneId')) {
         $scope.addVarGroupUrl = addVarGroupUrlBase + '?geneId=' + stateParams.geneId;
@@ -81,12 +106,17 @@
     $scope.$watchCollection(
       function() { return Genes.data.variantsStatus.variants; },
       function(variants){
+        $scope.nullCoordVars = [];
         _.forEach(variants, function(variant) {
           var counts = variant.evidence_item_statuses;
-          if (counts.accepted_count > 0) { $scope.evidence_category_counts.accepted++;}
-          if (counts.submitted_count > 0) { $scope.evidence_category_counts.submitted++;}
+          var hasAccepted = false;
+          var hasSubmitted = false;
+          if (counts.accepted_count > 0) { $scope.evidence_category_counts.accepted++; hasAccepted = true; }
+          if (counts.submitted_count > 0) { $scope.evidence_category_counts.submitted++; hasSubmitted = true; }
           if (counts.rejected_count > 0) { $scope.evidence_category_counts.rejected++;}
           if (counts.accepted_count === 0 && counts.submitted_count === 0 && counts.rejected_count === 0) { $scope.evidence_category_counts.orphaned++;}
+          // if variant has no start coords, add to nullCoordVars list, to be displayed in display options sort menu
+          if (!variant.coordinates.start && (hasAccepted || hasSubmitted)) { $scope.nullCoordVars.push(variant.name); }
         });
         $scope.variants = variants;
       });
