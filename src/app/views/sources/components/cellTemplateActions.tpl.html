@@ -1,43 +1,34 @@
 <div class="ui-grid-cell-contents" ng-controller="cellTemplateActionsController">
-  <span uib-tooltip="Add Evidence Item"
-        tooltip-append-to-body="true"
-        tooltip-enable="row.entity['status'] != 'rejected'">
+  <span uib-tooltip="Add Evidence Item" tooltip-append-to-body="true" tooltip-enable="row.entity['status'] != 'rejected'">
     <button ng-click="grid.appScope.vm.setLocation(row.entity.addEvidenceUrl)"
-            ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
-            class="btn btn-xs btn-cell-add">
+      ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
+      class="btn btn-xs btn-cell-add">
       <i class="glyphicon glyphicon-plus"></i>
     </button>
-  </span>
-  &nbsp;
-  <span uib-tooltip="Reject Suggestion"
-        tooltip-append-to-body="true"
-        tooltip-enable="row.entity['status'] != 'rejected'">
+  </span> &nbsp;
+  <span uib-tooltip="Reject Suggestion" tooltip-append-to-body="true" tooltip-enable="row.entity['status'] != 'rejected'">
     <button ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
-            class="btn btn-xs btn-danger"
-            uib-popover-template="'rejectPopover.tpl.html'"
-            popover-is-open="popoverIsOpen"
-            popover-append-to-body="true"
-            popover-title="Reject Suggestion"
-            popover-placement="left">
+      class="btn btn-xs btn-danger"
+      uib-popover-template="'rejectPopover.tpl.html'"
+      popover-is-open="popoverIsOpen"
+      popover-trigger="'outsideClick'"
+      popover-append-to-body="true"
+      popover-title="Reject Suggestion"
+      popover-placement="left">
       <i class="glyphicon glyphicon-thumbs-down"></i>
     </button>
-  </span>
-  &nbsp;
-  <span uib-tooltip="Mark Suggestion as Curated"
-        tooltip-append-to-body="true"
-        tooltip-enable="row.entity['status'] != 'rejected'">
+  </span> &nbsp;
+  <span uib-tooltip="Mark Suggestion as Curated" tooltip-append-to-body="true" tooltip-enable="row.entity['status'] != 'rejected'">
     <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'curated')"
-            ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
-            class="btn btn-xs btn-success">
+      ng-disabled="row.entity['status'] != 'new' || !grid.appScope.vm.isAuthenticated()"
+      class="btn btn-xs btn-success">
       <i class="glyphicon glyphicon-thumbs-up"></i>
     </button>
-  </span>
-  &nbsp;
-  <span uib-tooltip="Re-queue Suggestion"
-        tooltip-append-to-body="true">
+  </span> &nbsp;
+  <span uib-tooltip="Re-queue Suggestion" tooltip-append-to-body="true">
     <button ng-click="grid.appScope.vm.setSuggestion(row.entity.id, 'new')"
-            ng-disabled="row.entity['status'] === 'new' || !grid.appScope.vm.isAuthenticated()"
-            class="btn btn-xs btn-default">
+      ng-disabled="row.entity['status'] === 'new' || !grid.appScope.vm.isAuthenticated()"
+      class="btn btn-xs btn-default">
       <i class="glyphicon glyphicon-repeat"></i>
     </button>
   </span>
@@ -53,15 +44,15 @@
         </select>
       </div>
     </div>
-    <div class="row" >
+    <div class="row">
       <div class="col-xs-12 text-right" style="margin-top: .5em;">
         <button type="submit"
-                ng-click="rejectSuggestion(row.entity.id, 'rejected', reason)"
-                class="btn btn-xs btn-danger"
-                ng-click="ctrl.submit(ctrl.newFlag)"
-                ng-disabled="reason === 'none'"
-                uib-tooltip-enable="ctrl.newFlag.comment.text.length < 3"
-                uib-tooltip="Please add comment before submitting flag.">
+          ng-click="rejectSuggestion(row.entity.id, 'rejected', reason)"
+          class="btn btn-xs btn-danger"
+          ng-click="ctrl.submit(ctrl.newFlag)"
+          ng-disabled="reason === 'none'"
+          uib-tooltip-enable="ctrl.newFlag.comment.text.length < 3"
+          uib-tooltip="Please add comment before submitting flag.">
           Reject Suggestion
         </button>
       </div>

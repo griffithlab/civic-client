@@ -11,7 +11,12 @@
         <input ng-model="query" class="form-control filter" placeholder="Filter by name" />
       </div>
       <div class="col-xs-2" style="text-align: right;">
-        <a uib-popover-template="'displayOptionsPopover.tpl.html'" popover-title="Variant Display Options" popover-trigger="'outsideClick'" popover-placement="left" popover-class="filters-content" class="btn btn-xs btn-default btn-block">
+        <a uib-popover-template="'displayOptionsPopover.tpl.html'"
+          popover-title="Variant Display Options"
+          popover-trigger="'outsideClick'"
+          popover-placement="left"
+          popover-class="filters-content"
+          class="btn btn-xs btn-default btn-block">
           <i class="glyphicon glyphicon-filter"></i>
           Display Options
         </a>
@@ -54,8 +59,8 @@
           ng-if="variant.statuses.pending_evidence_count > 0 || variant.statuses.open_change_count > 0"
           ng-class="{'pending-changes': variant.statuses.open_change_count > 0, 'pending-evidence': variant.statuses.pending_evidence_count > 0, 'pending-both': variant.statuses.open_change_count > 0 && variant.statuses.pending_evidence_count > 0}"></i>
         <span ng-bind-html="variant.name | highlightSearch:query" class="variant-name">Variant Name</span>
-    <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.gene_entrez_name">Gene Name</span>)</span>
-    </a>
+        <span class="gene-name" ng-if="variant.multiGeneGroup">(<span ng-bind="variant.gene_entrez_name">Gene Name</span>)</span>
+      </a>
     </span>
   </script>
 
@@ -63,7 +68,7 @@
     <span>
       Evidence Items: {{ variant.evidence_item_statuses.accepted_count }}<br/>
       <span ng-if="variant.statuses.pending_evidence_count > 0" style="display: block;">Has {{ variant.statuses.pending_evidence_count }} pending evidence</span>
-    <span ng-if="variant.statuses.open_change_count > 0" style="display: block;">Has {{ variant.statuses.open_change_count }} pending change{{variant.statuses.open_change_count > 1 ? 's' : '' }}</span>
+      <span ng-if="variant.statuses.open_change_count > 0" style="display: block;">Has {{ variant.statuses.open_change_count }} pending change{{variant.statuses.open_change_count > 1 ? 's' : '' }}</span>
     </span>
   </script>
 
