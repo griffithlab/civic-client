@@ -306,7 +306,7 @@
           'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
           'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
           'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
-          'Functional': 'TBD',
+          'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
         },
         evidence_level_brief: {
           A: 'Validated association',
@@ -369,11 +369,11 @@
             'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
           },
           'Functional': {
-            'Gain of Function': 'TBD',
-            'Loss of Function': 'TBD',
-            'Unaltered Function': 'TBD',
+            'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
+            'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
+            'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
             'Neomorphic': 'TBD',
-            'Other': 'TBD',
+            'Other': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
           },
         },
         drug_interaction_type: {
