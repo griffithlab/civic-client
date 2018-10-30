@@ -2,36 +2,37 @@
   <span ng-switch="ctrl.isAuthenticated()" >
     <span ng-switch-when="false" >
       <a class="btn  btn-xs btn-edit-entity"
-         uib-tooltip="Please sign in to edit this {{type|lowercase}}"
-         tooltip-append-to-body="true"
-         ng-disabled="true">
+        uib-tooltip="Please sign in to edit this {{type|lowercase}}"
+        tooltip-append-to-body="true"
+        ng-disabled="true">
         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       </a>
       <a class="btn btn-xs btn-flag"
-         ng-class="{'flagged': ctrl.hasActiveFlag}"
-         uib-popover-template="'flagPopover.tpl.html'"
-         popover-title="Flag {{type}} {{name}} "
-         popover-placement="{{ctrl.popoverPlacement}}"
-         uib-tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Sign in to flag this ' + (type|lowercase)}}":
-         tooltip-append-to-body="true">
+        ng-class="{'flagged': ctrl.hasActiveFlag}"
+        uib-popover-template="'flagPopover.tpl.html'"
+        popover-trigger="'outsideClick'"
+        popover-title="Flag {{type}} {{name}} "
+        popover-placement="{{ctrl.popoverPlacement}}"
+        uib-tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Sign in to flag this ' + (type|lowercase)}}":
+        tooltip-append-to-body="true">
         <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
       </a>
     </span>
     <span ng-switch-when="true" >
       <a class="btn btn-xs btn-edit-entity"
-         ng-class="{ 'active': ctrl.active === true }"
-         uib-tooltip="Edit this {{type|lowercase}}"
-         uib-tooltip-append-to-body="true"
-         ng-click="ctrl.edit()">
+        ng-class="{ 'active': ctrl.active === true }"
+        uib-tooltip="Edit this {{type|lowercase}}"
+        uib-tooltip-append-to-body="true"
+        ng-click="ctrl.edit()">
         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       </a>
       <a class="btn  btn-xs btn-flag"
-         ng-class="{'flagged': ctrl.hasActiveFlag}"
-         uib-tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Flag this ' + (type|lowercase)}}"
-         tooltip-append-to-body="true"
-         uib-popover-template="'flagPopover.tpl.html'"
-         popover-title="Flag {{type}} {{name}} "
-         popover-placement="{{ctrl.popoverPlacement}}">
+        ng-class="{'flagged': ctrl.hasActiveFlag}"
+        uib-tooltip="{{ctrl.hasActiveFlag ? 'This ' + (type|lowercase) + ' has been flagged' : 'Flag this ' + (type|lowercase)}}"
+        tooltip-append-to-body="true"
+        uib-popover-template="'flagPopover.tpl.html'"
+        popover-title="Flag {{type}} {{name}} "
+        popover-placement="{{ctrl.popoverPlacement}}">
         <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
       </a>
     </span>
@@ -50,18 +51,18 @@
           <div class="col-xs-12" >
             <div class="form-group">
               <textarea ng-model="ctrl.newFlag.comment.text" class="form-control flag-comment" rows="2"
-              ng-attr-placeholder="Flag this {{type|lowercase}} by describing why it requires the attention of the CIViC editors."></textarea>
+                ng-attr-placeholder="Flag this {{type|lowercase}} by describing why it requires the attention of the CIViC editors."></textarea>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12 panel-buttons" >
             <button type="submit"
-               class="btn btn-xs btn-danger"
-               ng-click="ctrl.submit(ctrl.newFlag)"
-               ng-disabled="ctrl.newFlag.comment.text.length < 3"
-               uib-tooltip-enable="ctrl.newFlag.comment.text.length < 3"
-               uib-tooltip="Please add comment before submitting flag.">
+              class="btn btn-xs btn-danger"
+              ng-click="ctrl.submit(ctrl.newFlag)"
+              ng-disabled="ctrl.newFlag.comment.text.length < 3"
+              uib-tooltip-enable="ctrl.newFlag.comment.text.length < 3"
+              uib-tooltip="Please add comment before submitting flag.">
               Flag
             </button>
           </div>

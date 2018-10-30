@@ -18,6 +18,7 @@
       <button
         class="btn btn-default btn-xs pull-right col-key btn-block"
         uib-popover-template="ctrl.exportPopover.templateUrl"
+        popover-trigger="'outsideClick'"
         ng-disabled="ctrl.assertionGridOptions.data.length < 1"
         popover-placement="bottom">
         <span class="glyphicon glyphicon-export"

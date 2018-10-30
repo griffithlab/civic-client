@@ -7,22 +7,23 @@
       </div>
       <div class="col-xs-12 col-md-6 tabs {{ viewBackground }}">
         <uib-tabset class="tab-container"
-                type="{{'tabs'}}"
-                vertical="{{vertical}}"
-                justified="{{justified}}">
+          type="{{'tabs'}}"
+          vertical="{{vertical}}"
+          justified="{{justified}}">
           <uib-tab classes="tab"
-               ng-repeat="tab in tabs"
-               heading="{{tab.heading}}"
-               active="tab.active"
-               disable="tab.disabled"
-               ng-click="go(tab)">
+            ng-repeat="tab in tabs"
+            heading="{{tab.heading}}"
+            active="tab.active"
+            disable="tab.disabled"
+            ng-click="go(tab)">
           </uib-tab>
         </uib-tabset>
         <div class="tab-info">
           <i uib-popover-template="'settingsPopover.tpl.html'"
-             popover-title="{{vm.type}} Settings"
-             popover-placement="left"
-             class="glyphicon glyphicon-cog"></i>
+            popover-trigger="'outsideClick'"
+            popover-title="{{vm.type}} Settings"
+            popover-placement="left"
+            class="glyphicon glyphicon-cog"></i>
         </div>
       </div>
     </div>
@@ -39,8 +40,8 @@
       <div class="col-xs-1">
         <div ng-if="vm.pendingFields.length > 0" class="pending-notice">
           <span uib-tooltip-template="'pendingTooltip.tpl.html'"
-                tooltip-placement="left"
-                tooltip-append-to-body="true">
+            tooltip-placement="left"
+            tooltip-append-to-body="true">
             <i class="glyphicon glyphicon-exclamation-sign pending-changes"></i>
           </span>
         </div>
@@ -51,23 +52,23 @@
 
 <script type="text/ng-template" id="entityTitle.tpl.html">
   <h3 editable-field class="tab-name"
-      type="vm.type"
-      name="vm.name"
-      entity-view-model="entityViewModel"
-      entity-view-revisions="entityViewRevisions"
-      entity-view-options="entityViewOptions">
+    type="vm.type"
+    name="vm.name"
+    entity-view-model="entityViewModel"
+    entity-view-revisions="entityViewRevisions"
+    entity-view-options="entityViewOptions">
     <span ng-bind="vm.type" class="entity-type">Entity</span>
     <span ng-bind="vm.name" class="entity-name">Name</span>
   </h3>
 </script>
 
 <script type="text/ng-template" id="pendingTooltip.tpl.html">
-<div>
+  <div>
     This {{ vm.type.toLowerCase() }} has pending revisions to:
     <ul>
       <li ng-repeat="field in vm.pendingFields">{{ field | keyToLabel}}</li>
     </ul>
-</div>
+  </div>
 </script>
 
 <script type="text/ng-template" id="settingsPopover.tpl.html">

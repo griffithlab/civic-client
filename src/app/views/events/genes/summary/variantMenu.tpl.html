@@ -7,12 +7,13 @@
           <span ng-if="variantGroups.length > 0">&amp; Variant Group{{variantGroups.length > 1 ? 's' : ''}}</span>
         </h4>
       </div>
-      <div class="col-xs-2" >
+      <div class="col-xs-2">
         <input ng-model="query" class="form-control filter" placeholder="Filter by name" />
       </div>
       <div class="col-xs-2" style="text-align: right;">
-        <a uib-popover-template="'filtersPopover.tpl.html'"
+        <a uib-popover-template="'displayOptionsPopover.tpl.html'"
           popover-title="Variant Display Options"
+          popover-trigger="'outsideClick'"
           popover-placement="left"
           popover-class="filters-content"
           class="btn btn-xs btn-default btn-block">
@@ -34,7 +35,7 @@
          if none or more than one, show them on a new row  -->
     <div class="col-xs-{{ variantGroups.length === 1 ? '8' : '12'}}">
       <ul class="variants">
-        <li ng-repeat="variant in variants | orderBy:'name' | filter:variantFilterFn | filter: {name: query} as results">
+        <li ng-repeat="variant in variants | orderBy:variantMenuOrderBy:order.reverse | filter:variantFilterFn | filter: {name: query} as results">
           <ng-include src="'variantTag.tpl.html'"></ng-include>
         </li>
         <li ng-if="results.length === 0">No matches exist for variant filters.</li>
@@ -87,29 +88,50 @@
   </script>
 </div>
 
-<script type="text/ng-template" id="filtersPopover.tpl.html">
-  <div class="radio">
-    <label>
-      <input type="radio" ng-model="$parent.options_filter" value="accepted">
-      <span uib-tooltip="Includes variants that have at least one editor-reviewed evidence item">Show variants with accepted evidence <span class="count" >({{$parent.evidence_category_counts.accepted}})</span></span>
-    </label>
+<script type="text/ng-template" id="displayOptionsPopover.tpl.html">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="radio">
+        <label>
+          <input type="radio" ng-model="$parent.options_filter" value="accepted">
+          <span uib-tooltip="Includes variants that have at least one editor-reviewed evidence item">Show variants with accepted evidence <span class="count" >({{$parent.evidence_category_counts.accepted}})</span></span>
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" ng-model="$parent.options_filter" value="accepted_submitted">
+          <span uib-tooltip="Includes variants that have at least one editor-reviewed and/or pending evidence item">Show variants with accepted and/or submitted evidence <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" ng-model="$parent.options_filter" value="submitted">
+          <span uib-tooltip="Includes variants that have at least one item of evidence pending editor review">Show variants with submitted evidence <span class="count" >({{$parent.evidence_category_counts.submitted}})</span></span>
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" ng-model="$parent.options_filter" value="all">
+          <span uib-tooltip="Includes all variants">Show all: variants with accepted, submitted, rejected, and/or no evidence (orphans) <span class="count" >({{$parent.variants.length}})</span></span>
+        </label>
+      </div>
+    </div>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" ng-model="$parent.options_filter" value="accepted_submitted">
-      <span uib-tooltip="Includes variants that have at least one editor-reviewed and/or pending evidence item">Show variants with accepted and/or submitted evidence <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
-    </label>
+  <div class="row" style="border-top: 1px solid #ccc; padding-top: 10px">
+    <div class="col-xs-12">
+      Sort by:
+      <select ng-model="$parent.order.field">
+        <option value="name">name</option>
+        <option value="position">position</option>
+      </select>
+      &nbsp;
+      <select ng-model="$parent.order.reverse" ng-options="o.value as o.label for o in $parent.sortOptions">
+      </select>
+    </div>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" ng-model="$parent.options_filter" value="submitted">
-      <span uib-tooltip="Includes variants that have at least one item of evidence pending editor review">Show variants with submitted evidence <span class="count" >({{$parent.evidence_category_counts.submitted}})</span></span>
-    </label>
-  </div>
-  <div class="radio">
-    <label>
-      <input type="radio" ng-model="$parent.options_filter" value="all">
-      <span uib-tooltip="Includes all variants">Show all: variants with accepted, submitted, rejected, and/or no evidence (orphans) <span class="count" >({{$parent.variants.length}})</span></span>
-    </label>
+  <div class="row null-coord-note" ng-if="$parent.order.field === 'position' && $parent.nullCoordVars.length > 0">
+    <div class="col-xs-12">
+      Note: variant{{$parent.nullCoordVars.length > 1 ? 's' : ''}} <span ng-bind-html="$parent.nullCoordVars | arrayToList:5:'&hellip;':true | unsafe"></span> {{$parent.nullCoordVars.length > 1 ? 'have' : 'has'}} no start coordinate, so will be placed at the end of the list.
+    </div>
   </div>
 </script>
