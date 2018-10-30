@@ -131,9 +131,7 @@
   </div>
   <div class="row null-coord-note" ng-if="$parent.order.field === 'position' && $parent.nullCoordVars.length > 0">
     <div class="col-xs-12">
-      Note: variant{{$parent.nullCoordVars.length > 1 ? 's' : ''}} <span ng-repeat="var in $parent.nullCoordVars">
-      {{$first ? '' : $last ? ($parent.nullCoordVars.length > 2 ? ', and ' : ' and ') : ', '}}
-      {{var}}</span> {{$parent.nullCoordVars.length > 1 ? 'have' : 'has'}} no start coordinate, so will be placed at the end of the list.
+      Note: variant{{$parent.nullCoordVars.length > 1 ? 's' : ''}} <span ng-bind-html="$parent.nullCoordVars | arrayToList:5:'&hellip;':true | unsafe"></span> {{$parent.nullCoordVars.length > 1 ? 'have' : 'has'}} no start coordinate, so will be placed at the end of the list.
     </div>
   </div>
 </script>
