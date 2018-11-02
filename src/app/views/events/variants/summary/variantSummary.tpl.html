@@ -200,7 +200,10 @@
             </tr>
             <tr>
               <td class="value" colspan="5">
-                {{variant.coordinates.representative_transcript | ifEmpty: '--'}}
+                <a ng-if="variants.coordinates.respresentative_transcript !== null" ng-href="http://www.ensembl.org/Homo_sapiens/transview?transcript={{variant.coordinates.representative_transcript}}" target="_blank">
+                  {{ variant.coordinates.representative_transcript }}
+                </a>
+                <span ng-if="variant.coordinates.representative_transcript === null">--</span>
               </td>
             </tr>
           </tbody>
@@ -236,7 +239,10 @@
                   {{variant.coordinates.stop2 | ifEmpty: '--'}}
                 </td>
                 <td class="value">
-                  {{variant.coordinates.representative_transcript2 | ifEmpty: '--'}}
+                  <a ng-if="variants.coordinates.respresentative_transcript2 !== null" ng-href="http://www.ensembl.org/Homo_sapiens/transview?transcript={{variant.coordinates.representative_transcript2}}" target="_blank">
+                    {{ variant.coordinates.representative_transcript2 }}
+                  </a>
+                  <span ng-if="variant.coordinates.representative_transcript2 === null">--</span>
                 </td>
               </tr>
             </tbody>
