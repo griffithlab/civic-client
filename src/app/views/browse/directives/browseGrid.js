@@ -119,7 +119,7 @@
         },
         {
           name: 'gene_name',
-          displayName: 'GENE',
+          displayName: 'Gene',
           enableFiltering: true,
           allowCellFocus: false,
           headerTooltip: 'Gene Entrez Name',
@@ -132,7 +132,7 @@
         },
         {
           name: 'variant_name',
-          displayName: 'VARIANT',
+          displayName: 'Variant',
           enableFiltering: true,
           allowCellFocus: false,
           headerTooltip: 'Variant Name',
@@ -145,7 +145,7 @@
         },
         {
           name: 'summary',
-          displayName: 'SUMM',
+          displayName: 'Summary',
           headerTooltip: 'Summary',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           enableFiltering: true,
@@ -157,7 +157,7 @@
         },
         {
           name: 'disease',
-          displayName: 'DIS',
+          displayName: 'Disease',
           headerTooltip: 'Disease',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           enableFiltering: true,
@@ -169,7 +169,7 @@
         },
         {
           name: 'drugs',
-          displayName: 'DRUGS',
+          displayName: 'Drugs',
           headerTooltip: 'Drugs',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           enableFiltering: true,
@@ -313,7 +313,7 @@
         },
         {
           name: 'gene_name',
-          displayName: 'GENE',
+          displayName: 'Gene',
           enableFiltering: true,
           allowCellFocus: false,
           headerTooltip: 'Gene Entrez Name',
@@ -326,7 +326,7 @@
         },
         {
           name: 'variant_name',
-          displayName: 'VARIANT',
+          displayName: 'Variant',
           enableFiltering: true,
           allowCellFocus: false,
           headerTooltip: 'Variant Name',
@@ -339,7 +339,7 @@
         },
         {
           name: 'description',
-          displayName: 'DESC',
+          displayName: 'Description',
           headerTooltip: 'Description',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           enableFiltering: true,
@@ -351,7 +351,7 @@
         },
         {
           name: 'disease',
-          displayName: 'DIS',
+          displayName: 'Disease',
           headerTooltip: 'Disease',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           enableFiltering: true,
@@ -363,7 +363,7 @@
         },
         {
           name: 'drugs',
-          displayName: 'DRUGS',
+          displayName: 'Drugs',
           headerTooltip: 'Drugs',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           enableFiltering: true,
