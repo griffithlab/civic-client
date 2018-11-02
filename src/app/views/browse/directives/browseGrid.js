@@ -275,7 +275,7 @@
         },
         {
           name: 'evidence_item_count',
-          width: '8%',
+          width: '10%',
           displayName: 'Evidence',
           sort: {
             direction: uiGridConstants.DESC
@@ -678,7 +678,6 @@
         {
           name: 'variants',
           displayName: 'Variants',
-          width: '35%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -707,8 +706,8 @@
         {
           name: 'evidence_item_count',
           type: 'number',
-          displayName: 'Evidence Items',
-          width: '15%',
+          displayName: 'Evidence',
+          width: '10%',
           enableFiltering: false,
           allowCellFocus: false,
           sort: { direction: uiGridConstants.DESC },
@@ -780,7 +779,7 @@
         {
           name: 'evidence_item_count',
           type: 'number',
-          displayName: 'Evidence Items',
+          displayName: 'Evidence',
           width: '10%',
           enableFiltering: false,
           allowCellFocus: false,
