@@ -2229,7 +2229,8 @@
                   { value: 'variant_alias', name: 'Variant Alias' },
                   { value: 'variant_bases', name: 'Variant Base(s)' },
                   { value: 'variant_group', name: 'Variant Group' },
-                  { value: 'variant_types', name: 'Variant Type(s)' }
+                  { value: 'variant_types', name: 'Variant Type(s)' },
+                  { value: 'variant_types_soids', name: "Variant Type(s) Sequence Ontology IDs" },
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -2436,6 +2437,40 @@
                   options: [
                     {value: 'is', name: 'is'},
                     {value: 'is_not', name: 'is not'},
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name === "is_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            variant_types_soids: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'contains'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                    {value: 'is_empty', name: 'is empty'}
                   ],
                   onChange: function(value, options, scope) {
                     if(scope.model.name.match(/empty/)) {
