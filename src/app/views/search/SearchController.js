@@ -2541,7 +2541,7 @@
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
-                    {value: 'none', name: 'none'}
+                    {value: 'is_undefined', name: 'is undefined'}
                   ]
                 }
               },
@@ -2549,7 +2549,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
-                hideExpression: 'model.name === "none"',
+                hideExpression: 'model.name === "is_undefined"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -2609,7 +2609,7 @@
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
-                    {value: 'none', name: 'none'}
+                    {value: 'is_undefined', name: 'is undefined'}
                   ]
                 }
               },
@@ -2617,7 +2617,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
-                hideExpression: 'model.name === "none"',
+                hideExpression: 'model.name === "is_undefined"',
                 templateOptions: {
                   label: '',
                   required: true
