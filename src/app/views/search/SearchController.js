@@ -265,7 +265,14 @@
                     typeaheadSearch: function(val) {
                       return Diseases.beginsWith(val)
                         .then(function(response) {
-                          return response;
+                          return _.map(response, function(disease) {
+                            if ( disease.aliases.length > 0 ) {
+                              disease.alias_list = disease.aliases.join(', ');
+                            } else {
+                              disease.alias_list = '--';
+                            }
+                            return disease;
+                          });
                         });
                     }
                   }
@@ -1299,7 +1306,14 @@
                     typeaheadSearch: function(val) {
                       return Diseases.beginsWith(val)
                         .then(function(response) {
-                          return response;
+                          return _.map(response, function(disease) {
+                            if ( disease.aliases.length > 0 ) {
+                              disease.alias_list = disease.aliases.join(', ');
+                            } else {
+                              disease.alias_list = '--';
+                            }
+                            return disease;
+                          });
                         });
                     }
                   }
