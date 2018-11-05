@@ -231,12 +231,13 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'contains'
+                  defaultValue: 'is'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
+                    {value: 'is_equal_to', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
@@ -1270,12 +1271,13 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'contains'
+                  defaultValue: 'is'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
+                    {value: 'is_equal_to', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
