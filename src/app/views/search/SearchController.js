@@ -1990,6 +1990,7 @@
                 options: [
                   { value: '', name: 'Please select a field' },
                   { value: 'aliases', name: 'Aliases' },
+                  { value: 'assertion_count', name: 'Assertion' },
                   { value: 'description', name: 'Description' },
                   { value: 'entrez_id', name: 'Entrez ID' },
                   { value: 'name', name: 'Name' },
@@ -2005,6 +2006,32 @@
             }
           ],
           conditionFields: {
+            assertion_count: [
+              {
+                template: 'Gene',
+                className: 'inline-field',
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                  ],
+                }
+              },
+              {
+                template: 'associated with an assertion',
+                className: 'inline-field',
+              },
+            ],
             entrez_id: [
               {
                 key: 'name',
