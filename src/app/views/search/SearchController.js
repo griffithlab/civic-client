@@ -231,7 +231,7 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'is'
+                  defaultValue: 'is_equal_to'
                 },
                 templateOptions: {
                   label: '',
@@ -1271,7 +1271,7 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'is'
+                  defaultValue: 'is_equal_to'
                 },
                 templateOptions: {
                   label: '',
@@ -2361,7 +2361,7 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'is'
+                  defaultValue: 'is_equal_to'
                 },
                 templateOptions: {
                   label: '',
