@@ -2381,7 +2381,7 @@
                   label: '',
                   required: true,
                   options: [
-                    {value: 'is_equal_to', name: 'is!'},
+                    {value: 'is_equal_to', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'is_not', name: 'is not'},
