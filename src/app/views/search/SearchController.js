@@ -36,6 +36,7 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
+                  { value: 'assertion_count', name: 'Assertion' },
                   { value: 'clinical_significance', name: 'Clinical Significance' },
                   { value: 'disease_doid', name: 'Disease DOID' },
                   { value: 'disease_name', name: 'Disease Name' },
@@ -73,6 +74,32 @@
             }
           ],
           conditionFields: {
+            assertion_count: [
+              {
+                template: 'Evidence item',
+                className: 'inline-field',
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                  ],
+                }
+              },
+              {
+                template: 'associated with an assertion',
+                className: 'inline-field',
+              },
+            ],
             pmc_id: [
               {
                 key: 'name',
