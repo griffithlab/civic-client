@@ -2253,6 +2253,7 @@
                   { value: 'stop2', name: 'CHR2 Stop' },
                   { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
                   { value: 'allele_registry_id', name: 'Allele Registry ID' },
+                  { value: 'assertion_count', name: 'Assertion' },
                   { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
                   { value: 'description', name: 'Description' },
                   { value: 'ensembl_version', name: 'Ensembl Version' },
@@ -2277,6 +2278,32 @@
             }
           ],
           conditionFields: {
+            assertion_count: [
+              {
+                template: 'Variant',
+                className: 'inline-field',
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                  ],
+                }
+              },
+              {
+                template: 'associated with an assertion',
+                className: 'inline-field',
+              },
+            ],
             allele_registry_id: [
               {
                 key: 'name',
