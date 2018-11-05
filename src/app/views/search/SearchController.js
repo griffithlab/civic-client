@@ -2367,7 +2367,7 @@
                   label: '',
                   required: true,
                   options: [
-                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_equal_to', name: 'is!'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'is_not', name: 'is not'},
@@ -2394,7 +2394,14 @@
                     typeaheadSearch: function(val) {
                       return Diseases.beginsWith(val)
                         .then(function(response) {
-                          return response;
+                          return _.map(response, function(disease) {
+                            if ( disease.aliases.length > 0 ) {
+                              disease.alias_list = disease.aliases.join(', ');
+                            } else {
+                              disease.alias_list = '--';
+                            }
+                            return disease;
+                          });
                         });
                     }
                   }
