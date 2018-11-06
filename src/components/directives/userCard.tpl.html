@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>
-  <div class="row" ng-if="vm.user.organization.name != undefined">
+  <div class="row">
     <div class="col-xs-12" >
       <div class="secondary-user-attributes">
       <ul>
@@ -50,6 +50,18 @@
           <a ui-sref="organizations.summary({organizationId: vm.user.organization.id})">
             {{vm.user.organization.name|ifEmpty: '--'}}
           </a>
+        </li>
+        <li class="attr-key" >
+          URL
+        </li>
+        <li class="attr-value" >
+          <a ng-href="{{vm.user.url}}" target="_blank">{{ vm.user.url | ifEmpty: '--' }}</a>
+        </li>
+        <li class="attr-key" >
+          ORCID iD
+        </li>
+        <li class="attr-value" >
+          <a ng-href="https://orcid.org/{{vm.user.orcid}}" target="_blank">{{ vm.user.orcid | ifEmpty: '--' }}</a>
         </li>
       </ul>
       </div>
