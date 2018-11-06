@@ -2463,7 +2463,7 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'contains'
+                  defaultValue: 'is'
                 },
                 templateOptions: {
                   label: '',
