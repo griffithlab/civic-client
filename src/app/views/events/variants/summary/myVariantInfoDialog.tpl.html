@@ -139,7 +139,16 @@
             </tr>
             <tr>
               <td class="key">Exome Filter</td>
-              <td class="value">{{variantInfo.gnomad_exome.filter | ifEmpty: '--'}}</td>
+              <td class="value">
+                <span ng-switch="variantInfo.gnomad_exome.filter.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="filter in variantInfo.gnomad_exome.filter">{{filter}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td class="key">Genome Allele Frequency</td>
@@ -156,77 +165,6 @@
             <tr>
               <td class="key">Genome Filter</td>
               <td class="value">{{variantInfo.gnomad_genome.filter | ifEmpty: '--'}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="col-xs-6">
-      <div class="well">
-        <table class="table table-compact">
-          <tbody>
-            <tr>
-              <td class="key">COSMIC ID:</td>
-              <td class="value">
-               <span ng-switch="!!variantInfo.cosmic.cosmic_id">
-                  <span ng-switch-when="true">
-                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{variantInfo.cosmic.cosmic_id_short}}" target="_blank">{{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}</a>
-                  </span>
-                  <span ng-switch-default>
-                    {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
-                  </span>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="well">
-        <div class="group-title">Combined Annotation Dependent Depletion</div>
-        <table class="table table-compact">
-          <tbody>
-            <tr>
-              <td class="key">Consequence</td>
-              <td class="value">
-                <span ng-switch="variantInfo.cadd.consequence.length > 0">
-                  <span ng-switch-when="true">
-                    <span ng-repeat="consequence in variantInfo.cadd.consequence">{{consequence}}{{$last ? '' : ', '}}</span>
-                  </span>
-                  <span ng-switch-default>
-                  --
-                  </span>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="key">Consequence Detail</td>
-              <td class="value">
-                <span ng-switch="variantInfo.cadd.consdetail.length > 0">
-                  <span ng-switch-when="true">
-                    <span ng-repeat="detail in variantInfo.cadd.consdetail">{{detail}}{{$last ? '' : ', '}}</span>
-                  </span>
-                  <span ng-switch-default>
-                  --
-                  </span>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="key">SIFT Effect Cateogry</td>
-              <td class="value">{{variantInfo.cadd.sift.cat | ifEmpty: '--'}}</td>
-            </tr>
-            <tr>
-              <td class="key">SIFT Effect Score</td>
-              <td class="value">{{variantInfo.cadd.sift.val | ifEmpty: '--'}}</td>
-            </tr>
-            <tr>
-              <td class="key">PolyPhen Effect Category</td>
-              <td class="value">{{variantInfo.cadd.polyphen.cat | ifEmpty: '--'}}</td>
-            </tr>
-            <tr>
-              <td class="key">PolyPhen Effect Score</td>
-              <td class="value">{{variantInfo.cadd.polyphen.val | ifEmpty: '--'}}</td>
             </tr>
           </tbody>
         </table>
@@ -257,7 +195,47 @@
           <tbody>
             <tr>
               <td class="key">InterPro Domain</td>
-              <td class="value">{{variantInfo.dbnsfp.interpro_domain | ifEmpty: '--'}}</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.interpro_domain.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="domain in variantInfo.dbnsfp.interpro_domain">{{domain}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
+        <div class="group-title">Conservation Analysis Tools</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">phyloP100way</td>
+              <td class="value">{{variantInfo.dbnsfp.phylo.p100way.vertebrate | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">phyloP20way</td>
+              <td class="value">{{variantInfo.dbnsfp.phylo.p20way.mammalian | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">phastConsP100way</td>
+              <td class="value">{{variantInfo.dbnsfp.phastcons.p100way.vertebrate | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">phastConsP20way</td>
+              <td class="value">{{variantInfo.dbnsfp.phastcons.p20way.mammalian | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">GERP++</td>
+              <td class="value">{{variantInfo.dbnsfp['gerp++'].rs | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">SiPhy</td>
+              <td class="value">{{variantInfo.dbnsfp.siphhy_29way_logodds | ifEmpty: '--'}}</td>
             </tr>
           </tbody>
         </table>
@@ -290,6 +268,283 @@
                   </span>
                 </span>
               </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <div class="well">
+        <table class="table table-compact">
+          <tbody>
+            <tr>
+              <td class="key">COSMIC ID:</td>
+              <td class="value">
+               <span ng-switch="!!variantInfo.cosmic.cosmic_id">
+                  <span ng-switch-when="true">
+                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{variantInfo.cosmic.cosmic_id_short}}" target="_blank">{{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="well">
+        <div class="group-title">Effect Predictors</div>
+        <table class="table table-compact">
+          <tbody>
+            <tr class="section-title"><td colspan="2">REVEL</td></tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">{{variantInfo.dbnsfp.revel.score | ifEmpty: '--'}}</td>
+            </tr>
+            <tr class="section-title"><td colspan="2">SIFT</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.sift.pred.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="pred in variantInfo.dbnsfp.sift.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.sift.score.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="score in variantInfo.dbnsfp.sift.score">{{score}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr class="section-title"><td colspan="2">Polyphen2 HDIV</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.polyphen2.hdiv.pred.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="pred in variantInfo.dbnsfp.polyphen2.hdiv.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.polyphen2.hdiv.score.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="score in variantInfo.dbnsfp.polyphen2.hdiv.score">{{score}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr class="section-title"><td colspan="2">Polyphen2 HVAR</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.polyphen2.hvar.pred.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="pred in variantInfo.dbnsfp.polyphen2.hvar.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.polyphen2.hvar.score.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="score in variantInfo.dbnsfp.polyphen2.hvar.score">{{score}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr class="section-title"><td colspan="2">LRT</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">{{variantInfo.dbnsfp.lrt.pred | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">{{variantInfo.dbnsfp.lrt.score | ifEmpty: '--'}}</td>
+            </tr>
+            <tr class="section-title"><td colspan="2">MutationTaster</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.mutationtaster.pred.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="pred in variantInfo.dbnsfp.mutationtaster.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.mutationtaster.score.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="score in variantInfo.dbnsfp.mutationtaster.score">{{score}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr class="section-title"><td colspan="2">MutationAssessor</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">{{variantInfo.dbnsfp.mutationassessor.pred | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">{{variantInfo.dbnsfp.mutationassessor.score | ifEmpty: '--'}}</td>
+            </tr>
+            <tr class="section-title"><td colspan="2">FATHMM</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.fathmm.pred.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="pred in variantInfo.dbnsfp.fathmm.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.fathmm.score.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="score in variantInfo.dbnsfp.fathmm.score">{{score}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr class="section-title"><td colspan="2">PROVEAN</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.provean.pred.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="pred in variantInfo.dbnsfp.provean.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.provean.score.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="score in variantInfo.dbnsfp.provean.score">{{score}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr class="section-title"><td colspan="2">MetaSVM</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">{{variantInfo.dbnsfp.metasvm.pred | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">{{variantInfo.dbnsfp.metasvm.score | ifEmpty: '--'}}</td>
+            </tr>
+            <tr class="section-title"><td colspan="2">MetaLR</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">{{variantInfo.dbnsfp.metalr.pred | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">{{variantInfo.dbnsfp.metalr.score | ifEmpty: '--'}}</td>
+            </tr>
+            <tr class="section-title"><td colspan="2">CADD</td></tr>
+            <tr>
+              <td class="key">Consequence</td>
+              <td class="value">
+                <span ng-switch="variantInfo.cadd.consequence.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="consequence in variantInfo.cadd.consequence">{{consequence}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Consequence Detail</td>
+              <td class="value">
+                <span ng-switch="variantInfo.cadd.consdetail.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="detail in variantInfo.cadd.consdetail">{{detail}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                  --
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="key">Raw Score</td>
+              <td class="value">{{variantInfo.cadd.rawscore | ifEmpty: '--'}}</td>
+            </tr>
+            <tr class="section-title"><td colspan="2">FATHMM-MKL</td></tr>
+            <tr>
+              <td class="key">Effect Prediction</td>
+              <td class="value">{{variantInfo.dbnsfp.fathmm-mkl.coding_pred | ifEmpty: '--'}}</td>
+            </tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">{{variantInfo.dbnsfp.fathmm-mkl.coding_score | ifEmpty: '--'}}</td>
+            </tr>
+            <tr class="section-title"><td colspan="2">fitCons</td></tr>
+            <tr>
+              <td class="key">Effect Score</td>
+              <td class="value">{{variantInfo.dbnsfp.integrated.fitcons_score | ifEmpty: '--'}}</td>
             </tr>
           </tbody>
         </table>
