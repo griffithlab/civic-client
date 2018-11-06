@@ -306,7 +306,7 @@
           'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
           'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
           'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
-          'Functional': 'TBD',
+          'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
         },
         evidence_level_brief: {
           A: 'Validated association',
@@ -355,7 +355,6 @@
           'Diagnostic': {
             'Positive': 'Associated with diagnosis of disease or subtype',
             'Negative': 'Associated with lack of disease or subtype',
-            'N/A': 'Variant does not inform clinical action'
           },
           'Prognostic': {
             'Better Outcome': 'Demonstrates better than expected clinical outcome',
@@ -368,14 +367,13 @@
             'Benign': 'Very strong evidence the variant is benign',
             'Likely Benign': 'Not expected to have a major effect on disease',
             'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
-            'N/A': 'Variant does not inform clinical action'
           },
           'Functional': {
-            'Gain of Function': 'TBD',
-            'Loss of Function': 'TBD',
-            'Unaltered Function': 'TBD',
+            'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
+            'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
+            'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
             'Neomorphic': 'TBD',
-            'Other': 'TBD',
+            'Other': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
           },
         },
         drug_interaction_type: {
