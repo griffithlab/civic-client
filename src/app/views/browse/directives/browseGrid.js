@@ -541,7 +541,7 @@
       'variants': [
         {
           name: 'variant',
-          width: '25%',
+          width: '20%',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -551,7 +551,7 @@
         },
         {
           name: 'entrez_gene',
-          width: '15%',
+          width: '10%',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -593,12 +593,22 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
-        }
+        },
+        {
+          name: 'assertion_count',
+          width: '10%',
+          displayName: 'Assertions',
+          enableFiltering: false,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
       ],
       'genes': [
         {
           name: 'name',
-          width: '15%',
+          width: '10%',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -661,7 +671,17 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
-        }
+        },
+        {
+          name: 'assertion_count',
+          width: '10%',
+          displayName: 'Assertions',
+          enableFiltering: false,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
       ],
       'variant_groups': [
         {
