@@ -36,6 +36,7 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
+                  { value: 'assertion_count', name: 'Assertion' },
                   { value: 'clinical_significance', name: 'Clinical Significance' },
                   { value: 'disease_doid', name: 'Disease DOID' },
                   { value: 'disease_name', name: 'Disease Name' },
@@ -73,6 +74,32 @@
             }
           ],
           conditionFields: {
+            assertion_count: [
+              {
+                template: 'Evidence item',
+                className: 'inline-field',
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                  ],
+                }
+              },
+              {
+                template: 'associated with an assertion',
+                className: 'inline-field',
+              },
+            ],
             pmc_id: [
               {
                 key: 'name',
@@ -1979,6 +2006,7 @@
                 options: [
                   { value: '', name: 'Please select a field' },
                   { value: 'aliases', name: 'Aliases' },
+                  { value: 'assertion_count', name: 'Assertion' },
                   { value: 'description', name: 'Description' },
                   { value: 'entrez_id', name: 'Entrez ID' },
                   { value: 'name', name: 'Name' },
@@ -1994,6 +2022,32 @@
             }
           ],
           conditionFields: {
+            assertion_count: [
+              {
+                template: 'Gene',
+                className: 'inline-field',
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                  ],
+                }
+              },
+              {
+                template: 'associated with an assertion',
+                className: 'inline-field',
+              },
+            ],
             entrez_id: [
               {
                 key: 'name',
@@ -2215,6 +2269,7 @@
                   { value: 'stop2', name: 'CHR2 Stop' },
                   { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
                   { value: 'allele_registry_id', name: 'Allele Registry ID' },
+                  { value: 'assertion_count', name: 'Assertion' },
                   { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
                   { value: 'description', name: 'Description' },
                   { value: 'disease_name', name: 'Disease Implicated (Name)' },
@@ -2241,6 +2296,32 @@
             }
           ],
           conditionFields: {
+            assertion_count: [
+              {
+                template: 'Variant',
+                className: 'inline-field',
+              },
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                  ],
+                }
+              },
+              {
+                template: 'associated with an assertion',
+                className: 'inline-field',
+              },
+            ],
             allele_registry_id: [
               {
                 key: 'name',
