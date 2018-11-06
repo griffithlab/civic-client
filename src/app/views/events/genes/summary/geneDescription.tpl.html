@@ -23,13 +23,18 @@
   </div>
   <div ng-if="geneData.sources.length > 0">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-8">
         <h5>Sources:</h5>
         <ul class="sources">
           <li ng-repeat="source in geneData.sources">
             <a ui-sref="sources.summary({sourceId:source.id})"><span class="small" ng-bind="source.citation"></span></a>
           </li>
         </ul>
+      </div>
+      <div class="col-xs-4">
+        <a class="btn btn-block button-dgidb btn-xs" ng-href="http://dgidb.org/genes/{{geneData.name}}" target="_blank" style="margin-top: 8px;">
+          <span class="glyphicon glyphicon-new-window"></span>&nbsp;DGIdb Details
+        </a>
       </div>
     </div>
   </div>
