@@ -231,12 +231,13 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'contains'
+                  defaultValue: 'is_equal_to'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
+                    {value: 'is_equal_to', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
@@ -264,7 +265,14 @@
                     typeaheadSearch: function(val) {
                       return Diseases.beginsWith(val)
                         .then(function(response) {
-                          return response;
+                          return _.map(response, function(disease) {
+                            if ( disease.aliases.length > 0 ) {
+                              disease.alias_list = disease.aliases.join(', ');
+                            } else {
+                              disease.alias_list = '--';
+                            }
+                            return disease;
+                          });
                         });
                     }
                   }
@@ -1270,12 +1278,13 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'contains'
+                  defaultValue: 'is_equal_to'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
+                    {value: 'is_equal_to', name: 'is'},
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
@@ -1297,7 +1306,14 @@
                     typeaheadSearch: function(val) {
                       return Diseases.beginsWith(val)
                         .then(function(response) {
-                          return response;
+                          return _.map(response, function(disease) {
+                            if ( disease.aliases.length > 0 ) {
+                              disease.alias_list = disease.aliases.join(', ');
+                            } else {
+                              disease.alias_list = '--';
+                            }
+                            return disease;
+                          });
                         });
                     }
                   }
@@ -2201,6 +2217,8 @@
                   { value: 'allele_registry_id', name: 'Allele Registry ID' },
                   { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
                   { value: 'description', name: 'Description' },
+                  { value: 'disease_name', name: 'Disease Implicated (Name)' },
+                  { value: 'disease_doid', name: 'Disease Implicated (DOID)' },
                   { value: 'ensembl_version', name: 'Ensembl Version' },
                   { value: 'evidence_item_count', name: 'Evidence Items' },
                   { value: 'gene', name: 'Gene' },
@@ -2332,6 +2350,92 @@
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
                     {value: 'is_empty', name: 'is empty'}
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name === "is_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
+            disease_name: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'is_not', name: 'is not'},
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'typeahead',
+                className: 'inline-field',
+                hideExpression: 'model.name === "is_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  typeahead: 'item.name as item.name for item in to.data.typeaheadSearch($viewValue)',
+                  editable: true,
+                  templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
+                  data: {
+                    typeaheadSearch: function(val) {
+                      return Diseases.beginsWith(val)
+                        .then(function(response) {
+                          return _.map(response, function(disease) {
+                            if ( disease.aliases.length > 0 ) {
+                              disease.alias_list = disease.aliases.join(', ');
+                            } else {
+                              disease.alias_list = '--';
+                            }
+                            return disease;
+                          });
+                        });
+                    }
+                  }
+                }
+              }
+            ],
+            disease_doid: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-small',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
                   ],
                   onChange: function(value, options, scope) {
                     if(scope.model.name.match(/empty/)) {
