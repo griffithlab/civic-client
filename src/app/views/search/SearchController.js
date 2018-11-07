@@ -2277,6 +2277,7 @@
                   { value: 'ensembl_version', name: 'Ensembl Version' },
                   { value: 'evidence_item_count', name: 'Evidence Items' },
                   { value: 'gene', name: 'Gene' },
+                  { value: 'hgvs_expressions', name: 'HGVS Expression(s)' },
                   { value: 'name', name: 'Name' },
                   { value: 'reference_bases', name: 'Reference Base(s)' },
                   { value: 'reference_build', name: 'Reference Build' },
@@ -2284,7 +2285,8 @@
                   { value: 'variant_alias', name: 'Variant Alias' },
                   { value: 'variant_bases', name: 'Variant Base(s)' },
                   { value: 'variant_group', name: 'Variant Group' },
-                  { value: 'variant_types', name: 'Variant Type(s)' }
+                  { value: 'variant_types', name: 'Variant Type(s)' },
+                  { value: 'variant_types_soids', name: "Variant Type(s) Sequence Ontology IDs" },
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -2536,6 +2538,40 @@
                 }
               }
             ],
+            variant_types_soids: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                    {value: 'is_empty', name: 'is empty'}
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/)) {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name === "is_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
             variant_types: [
               {
                 key: 'name',
@@ -2587,7 +2623,7 @@
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
-                    {value: 'none', name: 'none'}
+                    {value: 'is_undefined', name: 'is undefined'}
                   ]
                 }
               },
@@ -2595,7 +2631,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
-                hideExpression: 'model.name === "none"',
+                hideExpression: 'model.name === "is_undefined"',
                 templateOptions: {
                   label: '',
                   required: true
@@ -2638,6 +2674,38 @@
                 }
               }
             ],
+            hgvs_expressions: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                    {value: 'contains', name: 'contains'},
+                    {value: 'begins_with', name: 'begins with'},
+                    {value: 'does_not_contain', name: 'does not contain'},
+                    {value: 'is_undefined', name: 'is undefined'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name === "is_undefined"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
             gene: [
               {
                 key: 'name',
@@ -2655,7 +2723,7 @@
                     {value: 'contains', name: 'contains'},
                     {value: 'begins_with', name: 'begins with'},
                     {value: 'does_not_contain', name: 'does not contain'},
-                    {value: 'none', name: 'none'}
+                    {value: 'is_undefined', name: 'is undefined'}
                   ]
                 }
               },
@@ -2663,7 +2731,7 @@
                 key: 'parameters[0]',
                 type: 'input',
                 className: 'inline-field',
-                hideExpression: 'model.name === "none"',
+                hideExpression: 'model.name === "is_undefined"',
                 templateOptions: {
                   label: '',
                   required: true
