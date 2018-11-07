@@ -55,6 +55,11 @@
           direction: 'asc',
         },
       ];
+    } else if(ctrl.mode == 'variants') {
+      ctrl.sorting = [{
+        field: 'civic_actionability_score',
+        direction: 'desc',
+      }];
     } else {
       ctrl.sorting = [{
         field: 'evidence_item_count',
@@ -541,7 +546,7 @@
       'variants': [
         {
           name: 'variant',
-          width: '20%',
+          width: '15%',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -551,7 +556,7 @@
         },
         {
           name: 'entrez_gene',
-          width: '10%',
+          width: '9%',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -562,7 +567,7 @@
         {
           name: 'diseases',
           displayName: 'Diseases',
-          width: '25%',
+          width: '23%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -573,7 +578,7 @@
         {
           name: 'drugs',
           displayName: 'Drugs',
-          width: '25%',
+          width: '23%',
           enableFiltering: true,
           allowCellFocus: false,
           filter: {
@@ -583,11 +588,8 @@
         },
         {
           name: 'evidence_item_count',
-          width: '10%',
+          width: '8%',
           displayName: 'Evidence',
-          sort: {
-            direction: uiGridConstants.DESC
-          },
           enableFiltering: false,
           allowCellFocus: false,
           filter: {
@@ -596,10 +598,23 @@
         },
         {
           name: 'assertion_count',
-          width: '10%',
+          width: '9%',
           displayName: 'Assertions',
           enableFiltering: false,
           allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'civic_actionability_score',
+          width: '13%',
+          displayName: 'Actionability Score',
+          enableFiltering: false,
+          allowCellFocus: false,
+          sort: {
+            direction: uiGridConstants.DESC
+          },
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
