@@ -29,8 +29,8 @@
       queryOpen: queryOpen
     };
 
-    function queryOpen() {
-      return FlagsResource.queryOpen().$promise
+    function queryOpen(reqObj) {
+      return FlagsResource.queryOpen(reqObj).$promise
         .then(function(response) {
           angular.copy(response.records, collection);
           return response.$promise;
