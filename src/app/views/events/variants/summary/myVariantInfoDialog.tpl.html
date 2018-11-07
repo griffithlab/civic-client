@@ -52,7 +52,7 @@
               <td class="value">
               <span ng-switch="variantInfo.clinvar.hgvs.coding.length > 0">
                 <span ng-switch-when="true">
-                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.coding">{{hgvs}}{{$last ? '' : ', '}}</span>
+                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.coding track by $index">{{hgvs}}{{$last ? '' : ', '}}</span>
                 </span>
                 <span ng-switch-default>
                   --
@@ -65,7 +65,7 @@
               <td class="value">
               <span ng-switch="variantInfo.clinvar.hgvs.genomic.length > 0">
                 <span ng-switch-when="true">
-                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.genomic">{{hgvs}}{{$last ? '' : ', '}}</span>
+                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.genomic track by $index">{{hgvs}}{{$last ? '' : ', '}}</span>
                 </span>
                 <span ng-switch-default>
                   --
@@ -78,7 +78,7 @@
               <td class="value">
               <span ng-switch="variantInfo.clinvar.hgvs.non-coding.length > 0">
                 <span ng-switch-when="true">
-                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.non-coding">{{hgvs}}{{$last ? '' : ', '}}</span>
+                  <span ng-repeat="hgvs in variantInfo.clinvar.hgvs.non-coding track by $index">{{hgvs}}{{$last ? '' : ', '}}</span>
                 </span>
                 <span ng-switch-default>
                   --
@@ -142,7 +142,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.gnomad_exome.filter.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="filter in variantInfo.gnomad_exome.filter">{{filter}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="filter in variantInfo.gnomad_exome.filter track by $index">{{filter}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -198,7 +198,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.interpro_domain.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="domain in variantInfo.dbnsfp.interpro_domain">{{domain}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="domain in variantInfo.dbnsfp.interpro_domain track by $index">{{domain}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -261,7 +261,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.emv.hgvs.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="hgvs in variantInfo.emv.hgvs">{{hgvs}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="hgvs in variantInfo.emv.hgvs track by $index">{{hgvs}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -309,7 +309,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.sift.pred.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="pred in variantInfo.dbnsfp.sift.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="pred in variantInfo.dbnsfp.sift.pred track by $index">{{pred}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -322,7 +322,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.sift.score.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="score in variantInfo.dbnsfp.sift.score">{{score}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="score in variantInfo.dbnsfp.sift.score track by $index">{{score}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -336,7 +336,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.polyphen2.hdiv.pred.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="pred in variantInfo.dbnsfp.polyphen2.hdiv.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="pred in variantInfo.dbnsfp.polyphen2.hdiv.pred track by $index">{{pred}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -349,7 +349,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.polyphen2.hdiv.score.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="score in variantInfo.dbnsfp.polyphen2.hdiv.score">{{score}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="score in variantInfo.dbnsfp.polyphen2.hdiv.score track by $index">{{score}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -363,7 +363,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.polyphen2.hvar.pred.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="pred in variantInfo.dbnsfp.polyphen2.hvar.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="pred in variantInfo.dbnsfp.polyphen2.hvar.pred track by $index">{{pred}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -376,7 +376,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.polyphen2.hvar.score.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="score in variantInfo.dbnsfp.polyphen2.hvar.score">{{score}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="score in variantInfo.dbnsfp.polyphen2.hvar.score track by $index">{{score}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -399,7 +399,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.mutationtaster.pred.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="pred in variantInfo.dbnsfp.mutationtaster.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="pred in variantInfo.dbnsfp.mutationtaster.pred track by $index">{{pred}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -412,7 +412,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.mutationtaster.score.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="score in variantInfo.dbnsfp.mutationtaster.score">{{score}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="score in variantInfo.dbnsfp.mutationtaster.score track by $index">{{score}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -435,7 +435,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.fathmm.pred.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="pred in variantInfo.dbnsfp.fathmm.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="pred in variantInfo.dbnsfp.fathmm.pred track by $index">{{pred}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -448,7 +448,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.fathmm.score.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="score in variantInfo.dbnsfp.fathmm.score">{{score}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="score in variantInfo.dbnsfp.fathmm.score track by $index">{{score}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -462,7 +462,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.provean.pred.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="pred in variantInfo.dbnsfp.provean.pred">{{pred}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="pred in variantInfo.dbnsfp.provean.pred track by $index">{{pred}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -475,7 +475,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.dbnsfp.provean.score.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="score in variantInfo.dbnsfp.provean.score">{{score}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="score in variantInfo.dbnsfp.provean.score track by $index">{{score}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -507,7 +507,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.cadd.consequence.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="consequence in variantInfo.cadd.consequence">{{consequence}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="consequence in variantInfo.cadd.consequence track by $index">{{consequence}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
@@ -520,7 +520,7 @@
               <td class="value">
                 <span ng-switch="variantInfo.cadd.consdetail.length > 0">
                   <span ng-switch-when="true">
-                    <span ng-repeat="detail in variantInfo.cadd.consdetail">{{detail}}{{$last ? '' : ', '}}</span>
+                    <span ng-repeat="detail in variantInfo.cadd.consdetail track by $index">{{detail}}{{$last ? '' : ', '}}</span>
                   </span>
                   <span ng-switch-default>
                   --
