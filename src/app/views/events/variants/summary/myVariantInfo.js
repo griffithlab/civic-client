@@ -30,7 +30,21 @@
       'clinvar.rcv',
       'exac.ac.ac_adj',
       'exac.an.an_adj',
-      'snpeff.ann'
+      'snpeff.ann',
+      'gnomad_exome.filter',
+      'dbnsfp.interpro_domain',
+      'dbnsfp.sift.pred',
+      'dbnsfp.sift.score',
+      'dbnsfp.polyphen2.hdiv.pred',
+      'dbnsfp.polyphen2.hdiv.score',
+      'dbnsfp.polyphen2.hvar.pred',
+      'dbnsfp.polyphen2.hvar.score',
+      'dbnsfp.mutationtaster.pred',
+      'dbnsfp.mutationtaster.score',
+      'dbnsfp.fathmm.pred',
+      'dbnsfp.fathmm.score',
+      'dbnsfp.provean.pred',
+      'dbnsfp.provean.score',
     ];
     _.each(multiTypeFields, function(field) {
       var val = _.get(ctrl.variantInfo,field);
