@@ -73,7 +73,8 @@
     vm.newEvidence = {
       gene: '',
       variant: '',
-      pubmed_id: '',
+      source_type: '',
+      source_id: '',
       description: '',
       disease: {
         name: ''
@@ -204,17 +205,50 @@
           }
         }
       },
-
       {
-        key: 'pubmed_id',
+        key: 'source_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.sourceType) {
+            var st = $stateParams.sourceType;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.source_type);
+            if(_.includes(permitted, st)) {
+              $scope.model.source_type = st;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
+            } else {
+              console.warn('Ignoring pre-population of Source Type with invalid value: ' + st);
+            }
+          }
+        },
+        templateOptions: {
+          label: 'Source Type',
+          required: true,
+          value: 'vm.newEvidence.source_type',
+          options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: help['Source Type'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.source_type
+          },
+          onChange: function(value, options) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          }
+        }
+      },
+      {
+        key: 'source_id',
         type: 'publication',
         templateOptions: {
-          label: 'Pubmed ID',
-          value: 'vm.newEvidence.pubmed_id',
+          label: 'Source ID',
+          value: 'vm.newEvidence.source_id',
           minLength: 1,
           required: true,
           data: {
-            description: '--'
+            description: 'Please choose a Source Type before entering a Source ID.'
           },
           helpText: help['Pubmed ID']
         },
@@ -226,9 +260,12 @@
             blur: 0
           }
         },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.source_type === ""', // deactivate if no source type specified
+        },
         controller: /* @ngInject */ function($scope, $stateParams) {
-          if($stateParams.pubmedId) {
-            $scope.model.pubmed_id = $stateParams.pubmedId;
+          if($stateParams.sourceId) {
+            $scope.model.source_id = $stateParams.sourceId;
           }
         },
         validators: {
@@ -236,9 +273,15 @@
             expression: function($viewValue, $modelValue, scope) {
               if ($viewValue.length > 0) {
                 if ($viewValue.match(/[^0-9]+/)) { return false; }
+                // get source type
+                var sourceType = _.find(scope.fields, { key: 'source_type' }).value().toLowerCase();
                 var deferred = $q.defer();
                 scope.options.templateOptions.loading = true;
-                Publications.verify($viewValue).then(
+                var reqObj = {
+                  citationId: $viewValue,
+                  sourceType: sourceType
+                };
+                Publications.verify(reqObj).then(
                   function (response) {
                     scope.options.templateOptions.loading = false;
                     scope.options.templateOptions.data.description = response.description;

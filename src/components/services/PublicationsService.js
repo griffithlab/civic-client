@@ -6,28 +6,26 @@
 
   // @ngInject
   function PublicationsResource($resource) {
-    return $resource('/api/sources',
-      {},
-      {
-        query: {
-          method: 'GET',
-          isArray: true,
-          cache: true
-        },
-        get: {
-          method: 'GET',
-          url: '/api/sources/existence/:pubmedId',
-          isArray: false,
-          cache: true
-        },
-        verify: {
-          method: 'GET',
-          url: '/api/sources/existence/:pubmedId',
-          isArray: false,
-          cache: true
-        }
+    return $resource('/api/sources', {
+    }, {
+      query: {
+        method: 'GET',
+        isArray: true,
+        cache: true
+      },
+      get: {
+        method: 'GET',
+        url: '/api/sources/existence/:citationId',
+        isArray: false,
+        cache: true
+      },
+      verify: {
+        method: 'GET',
+        url: '/api/sources/existence/:citationId?source_type=:sourceType',
+        isArray: false,
+        cache: true
       }
-    );
+    });
   }
 
   // @ngInject
@@ -53,16 +51,18 @@
         });
     }
 
-    function get(pubmedId) {
-      return PublicationsResource.get({pubmedId: pubmedId}).$promise
+    function get(citationId) {
+      return PublicationsResource.get({
+          citationId: citationId
+        }).$promise
         .then(function(response) {
           angular.copy(response, item);
           return response.$promise;
         });
     }
 
-    function verify(pubmedId) {
-      return PublicationsResource.verify({pubmedId: pubmedId}).$promise
+    function verify(reqObj) {
+      return PublicationsResource.verify(reqObj).$promise
         .then(function(response) {
           return response.$promise;
         });

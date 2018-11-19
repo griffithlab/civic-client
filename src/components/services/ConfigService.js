@@ -301,6 +301,10 @@
           'Unknown': 'The variant origin is uncertain based on the available evidence.',
           'N/A': 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concepts of variant origin.'
         },
+        source_type: {
+          'PubMed': 'Evidence item source uses a PubMed publication.',
+          'ASCO': 'Evidence item source uses an ASCO abstract.'
+        },
         evidence_type: {
           'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
           'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
