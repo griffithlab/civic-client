@@ -351,8 +351,8 @@
         },
         {
           name: 'rating',
-          displayName: 'TR',
-          headerTooltip: 'Trust Rating',
+          displayName: 'ER',
+          headerTooltip: 'Evidence Rating',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           allowCellFocus: false,
           filter: {
@@ -555,8 +555,8 @@
         },
         {
           name: 'rating',
-          displayName: 'TR',
-          headerTooltip: 'Trust Rating',
+          displayName: 'ER',
+          headerTooltip: 'Evidence Rating',
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           allowCellFocus: false,
           filter: {
