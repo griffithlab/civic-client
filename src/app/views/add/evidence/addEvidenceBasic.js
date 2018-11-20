@@ -74,7 +74,7 @@
       gene: '',
       variant: '',
       source_type: '',
-      source_id: '',
+      pubmed_id: '',
       description: '',
       disease: {
         name: ''
@@ -240,15 +240,15 @@
         }
       },
       {
-        key: 'source_id',
-        type: 'publication',
+        key: 'pubmed_id',
+        type: 'pubmed',
         templateOptions: {
           label: 'Source ID',
           value: 'vm.newEvidence.source_id',
           minLength: 1,
           required: true,
           data: {
-            description: 'Please choose a Source Type before entering a Source ID.'
+            description: '--',
           },
           helpText: help['Pubmed ID']
         },
@@ -260,9 +260,7 @@
             blur: 0
           }
         },
-        expressionProperties: {
-          'templateOptions.disabled': 'model.source_type === ""', // deactivate if no source type specified
-        },
+        hideExpression: 'model.source_type === "" || model.source_type.toLowerCase() != "pubmed"',
         controller: /* @ngInject */ function($scope, $stateParams) {
           if($stateParams.sourceId) {
             $scope.model.source_id = $stateParams.sourceId;

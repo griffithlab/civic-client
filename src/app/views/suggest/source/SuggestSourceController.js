@@ -38,7 +38,7 @@
     vm.suggestionFields =[
       {
         key: 'pubmed_id',
-        type: 'publication',
+        type: 'pubmed',
         model: vm.newSuggestion.suggestion,
         templateOptions: {
           label: 'Pubmed ID',

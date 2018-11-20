@@ -109,7 +109,7 @@
       },
       {
         key: 'pubmed_id',
-        type: 'publication',
+        type: 'pubmed',
         templateOptions: {
           label: 'Pubmed ID',
           value: 'vm.evidenceEdit.pubmed_id',
