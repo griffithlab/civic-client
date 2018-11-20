@@ -240,8 +240,17 @@
         }
       },
       {
-        key: 'pubmed_id',
-        type: 'pubmed',
+        key: 'asco_year',
+        type: 'horizontalInputHelp',
+        hideExpression: 'model.source_type === "" || model.source_type.toLowerCase() === "pubmed"',
+        templateOptions: {
+          label: 'ASCO Year',
+          helpText: 'Year the ASCO Abstract was presented'
+        }
+      },
+      {
+        key: 'citation_id',
+        type: 'citation',
         templateOptions: {
           label: 'Source ID',
           value: 'vm.newEvidence.source_id',
@@ -260,7 +269,7 @@
             blur: 0
           }
         },
-        hideExpression: 'model.source_type === "" || model.source_type.toLowerCase() != "pubmed"',
+        hideExpression: 'model.source_type === "" || model.source_type.toLowerCase() != "pubmed" || (model.source_type.toLowerCase() === "asco" && model.asco_year === "")"',
         controller: /* @ngInject */ function($scope, $stateParams) {
           if($stateParams.sourceId) {
             $scope.model.source_id = $stateParams.sourceId;
