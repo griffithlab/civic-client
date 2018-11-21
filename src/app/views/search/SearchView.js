@@ -50,6 +50,16 @@
           navMode: 'sub'
         }
       })
+      .state('search.suggestedChanges', {
+        url: '/suggested_changes/:token',
+        reloadOnSearch: false,
+        controller: 'SearchController',
+        templateUrl: 'app/views/search/searchSuggestedChanges.tpl.html',
+        data: {
+          titleExp: '"Search Suggested Changes"',
+          navMode: 'sub'
+        }
+      })
       .state('search.variants', {
         url: '/variants/:token',
         reloadOnSearch: false,
