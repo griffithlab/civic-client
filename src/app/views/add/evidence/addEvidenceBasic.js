@@ -245,8 +245,11 @@
         hideExpression: 'model.source_type === "" || model.source_type.toLowerCase() === "pubmed"',
         templateOptions: {
           label: 'ASCO Year',
-          helpText: 'Year the ASCO Abstract was presented'
-        }
+          helpText: 'Year the abstract was presented'
+        },
+        expressionProperties: {
+          'templateOptions.required': 'model.source_type.toLowerCase() === "asco"'
+        },
       },
       {
         key: 'citation_id',
