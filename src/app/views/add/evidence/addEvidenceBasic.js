@@ -74,14 +74,13 @@
       gene: '',
       variant: '',
       source_type: '',
-      pubmed_id: '',
+      citation_id: '',
       description: '',
       disease: {
         name: ''
       },
       disease_name: '',
       noDoid: false,
-      //pubchem_id: '',
       drugs: [],
       drug_interaction_type: null,
       rating: '',
@@ -233,86 +232,111 @@
             attributeDefinition: '&nbsp;',
             attributeDefinitions: descriptions.source_type
           },
-          onChange: function(value, options) {
+          onChange: function(value, options, scope) {
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+            // set source_type on citation_id
+            var citeField = _.find(scope.fields, { key: 'citation_id'});
+            if (citeField.value() !== '') { // only update if user has selected an option
+              citeField.templateOptions.data.source_type = value.toLowerCase();
+            }
           }
         }
-      },
-      {
-        key: 'asco_year',
-        type: 'horizontalInputHelp',
-        hideExpression: 'model.source_type === "" || model.source_type.toLowerCase() === "pubmed"',
-        templateOptions: {
-          label: 'ASCO Year',
-          helpText: 'Year the abstract was presented'
-        },
-        expressionProperties: {
-          'templateOptions.required': 'model.source_type.toLowerCase() === "asco"'
-        },
       },
       {
         key: 'citation_id',
-        type: 'citation',
+        type: 'horizontalTypeaheadHelp',
         templateOptions: {
-          label: 'Source ID',
-          value: 'vm.newEvidence.source_id',
-          minLength: 1,
+          label: 'Citation ID',
           required: true,
+          typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
+          templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
+          onSelect: 'to.data.citation  = $model.citation',
           data: {
-            description: '--',
+            citation: '',
+            sourceType: undefined,
+            typeaheadSearch: function(val, sourceType) {
+              var reqObj = {
+                citationId: val,
+                sourceType: sourceType
+              };
+              return Publications.verify(reqObj)
+                .then(function(response) {
+                  return response;
+                });
+            }
           },
-          helpText: help['Pubmed ID']
+          helpText: help['Citation ID']
         },
-        modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
-          debounce: {
-            default: 300,
-            blur: 0
-          }
+        expressionProperties: {
+          'templateOptions.label': 'model.source_type === "" ? "Citation ID" : model.source_type + " ID"'
         },
-        hideExpression: 'model.source_type === "" || model.source_type.toLowerCase() != "pubmed" || (model.source_type.toLowerCase() === "asco" && model.asco_year === "")"',
         controller: /* @ngInject */ function($scope, $stateParams) {
-          if($stateParams.sourceId) {
-            $scope.model.source_id = $stateParams.sourceId;
+          if($stateParams.citationId) {
+            $scope.model.citation_id = $stateParams.citationId;
           }
         },
-        validators: {
-          validPubmedId: {
-            expression: function($viewValue, $modelValue, scope) {
-              if ($viewValue.length > 0) {
-                if ($viewValue.match(/[^0-9]+/)) { return false; }
-                // get source type
-                var sourceType = _.find(scope.fields, { key: 'source_type' }).value().toLowerCase();
-                var deferred = $q.defer();
-                scope.options.templateOptions.loading = true;
-                var reqObj = {
-                  citationId: $viewValue,
-                  sourceType: sourceType
-                };
-                Publications.verify(reqObj).then(
-                  function (response) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = response.description;
-                    deferred.resolve(response);
-                  },
-                  function (error) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = '--';
-                    deferred.reject(error);
-                  }
-                );
-                return deferred.promise;
-              } else {
-                scope.options.templateOptions.data.description = '--';
-                return true;
-              }
-            },
-            message: '"This does not appear to be a valid Pubmed ID."'
-          }
-        }
       },
+      // {
+      //   key: 'citation_id',
+      //   type: 'citation',
+      //   templateOptions: {
+      //     label: 'Citation ID',
+      //     value: 'vm.newEvidence.citation_id',
+      //     minLength: 1,
+      //     required: true,
+      //     data: {
+      //       description: '--',
+      //     },
+      //     helpText: help['Citation ID']
+      //   },
+      //   modelOptions: {
+      //     updateOn: 'default blur',
+      //     allowInvalid: false,
+      //     debounce: {
+      //       default: 300,
+      //       blur: 0
+      //     }
+      //   },
+      //   controller: /* @ngInject */ function($scope, $stateParams) {
+      //     if($stateParams.sourceId) {
+      //       $scope.model.source_id = $stateParams.sourceId;
+      //     }
+      //   },
+      //   validators: {
+      //     validCitationId: {
+      //       expression: function($viewValue, $modelValue, scope) {
+      //         if ($viewValue.length > 0) {
+      //           if ($viewValue.match(/[^0-9]+/)) { return false; }
+      //           var sourceType = _.find(scope.fields, { key: 'source_type' }).value().toLowerCase();
+      //           var deferred = $q.defer();
+      //           scope.options.templateOptions.loading = true;
+      //           var reqObj = {
+      //             citationId: $viewValue,
+      //             sourceType: sourceType
+      //           };
+      //           Publications.verify(reqObj).then(
+      //             function (response) {
+      //               scope.options.templateOptions.loading = false;
+      //               scope.options.templateOptions.data.description = response.description;
+      //               deferred.resolve(response);
+      //             },
+      //             function (error) {
+      //               scope.options.templateOptions.loading = false;
+      //               scope.options.templateOptions.data.description = '--';
+      //               deferred.reject(error);
+      //             }
+      //           );
+      //           return deferred.promise;
+      //         } else {
+      //           scope.options.templateOptions.data.description = '--';
+      //           return true;
+      //         }
+      //       },
+      //       message: '"This does not appear to be a valid citation ID."'
+      //     }
+      //   }
+      // },
       { // duplicates warning row
         templateUrl: 'app/views/add/evidence/addEvidenceDuplicateWarning.tpl.html',
         controller: /* @ngInject */ function($scope, Search) {
@@ -324,25 +348,25 @@
             if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
               vm.duplicates = [];
               Search.post({
-                  'operator': 'AND',
-                  'queries': [
-                    {
-                      'field': 'gene_name',
-                      'condition': {'name': 'contains', 'parameters': [values[0]]}
-                    },
-                    {
-                      'field': 'variant_name',
-                      'condition': {'name': 'contains', 'parameters': [values[1]]}
-                    },
-                    {
-                      'field': 'pubmed_id',
-                      'condition': {'name': 'is', 'parameters': [values[2]]
-                      }
-                    }
-                  ],
-                  'entity': 'evidence_items',
-                  'save': false
-                })
+                'operator': 'AND',
+                'queries': [
+                  {
+                    'field': 'gene_name',
+                    'condition': {'name': 'contains', 'parameters': [values[0]]}
+                  },
+                  {
+                    'field': 'variant_name',
+                    'condition': {'name': 'contains', 'parameters': [values[1]]}
+                  },
+                  {
+                    'field': 'pubmed_id',
+                    'condition': {'name': 'is', 'parameters': [values[2]]
+                                 }
+                  }
+                ],
+                'entity': 'evidence_items',
+                'save': false
+              })
                 .then(function (response) {
                   vm.duplicates = response.results;
                 });
@@ -646,8 +670,8 @@
           'templateOptions.options': function($viewValue, $modelValue, scope) {
             return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
               return !!(option.type === scope.model.evidence_type ||
-              option.type === 'default' ||
-              option.type === 'N/A');
+                        option.type === 'default' ||
+                        option.type === 'N/A');
             });
           },
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
@@ -709,7 +733,7 @@
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
-          _.without(scope.model.drugs, '').length > 1);
+                   _.without(scope.model.drugs, '').length > 1);
         }
       },
       {
