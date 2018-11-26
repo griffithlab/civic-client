@@ -1,6 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.services')
+
     .factory('PublicationsResource', PublicationsResource)
     .factory('Publications', PublicationsService);
 
@@ -22,7 +23,7 @@
       verify: {
         method: 'GET',
         url: '/api/sources/existence/:citationId?source_type=:sourceType',
-        isArray: false,
+        isArray: true,
         cache: true
       }
     });

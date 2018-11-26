@@ -116,10 +116,10 @@
     });
 
     formlyConfigProvider.setWrapper({
-      name: 'pubdisplay',
+      name: 'citation',
       template: [
         '<formly-transclude></formly-transclude>',
-        '<span class="small" style="color: #999;">Citation: {{ to.data.description }}</span>'
+        '<span class="small" style="color: #999;">Citation: {{ to.data.citation }}</span>'
       ].join(' ')
     });
 

@@ -244,14 +244,15 @@
       {
         key: 'citation_id',
         type: 'horizontalTypeaheadHelp',
+        wrapper: ['citation'],
         templateOptions: {
           label: 'Citation ID',
           required: true,
-          typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
+          typeahead: 'item.citation_id as item.description for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
           templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
-          onSelect: 'to.data.citation  = $model.citation',
+          onSelect: 'to.data.citation  = $model',
           data: {
-            citation: '',
+            citation: '--',
             sourceType: undefined,
             typeaheadSearch: function(val, sourceType) {
               var reqObj = {
@@ -265,9 +266,6 @@
             }
           },
           helpText: help['Citation ID']
-        },
-        expressionProperties: {
-          'templateOptions.label': 'model.source_type === "" ? "Citation ID" : model.source_type + " ID"'
         },
         controller: /* @ngInject */ function($scope, $stateParams) {
           if($stateParams.citationId) {
