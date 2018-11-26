@@ -74,7 +74,7 @@
       gene: '',
       variant: '',
       source_type: '',
-      citation_id: '',
+      source: {},
       description: '',
       disease: {
         name: ''
@@ -236,19 +236,19 @@
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id and clear field
-            var citeField = _.find(scope.fields, { key: 'citation_id'});
-            citeField.value('');
-            citeField.templateOptions.data.citation = '--';
-            citeField.templateOptions.data.sourceType = value.toLowerCase();
+            var sourceField = _.find(scope.fields, { key: 'source'});
+            sourceField.value({});
+            sourceField.templateOptions.data.citation = '--';
+            sourceField.templateOptions.data.sourceType = value.toLowerCase();
           }
         }
       },
       {
-        key: 'citation_id',
+        key: 'source',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['citation'],
         templateOptions: {
-          label: 'Citation ID',
+          label: 'Source',
           required: true,
           editable: false,
           typeahead: 'item as item.description for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
@@ -256,7 +256,7 @@
           onSelect: 'to.data.citation  = $model.description',
           data: {
             citation: '--',
-            sourceType: undefined,
+            sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
             typeaheadSearch: function(val, sourceType) {
               var reqObj = {
                 citationId: val,
@@ -268,11 +268,11 @@
                 });
             }
           },
-          helpText: help['Citation ID']
+          helpText: help['Source']
         },
-        parsers: [function(val) { return val; }],
-        formatters: [function(val) { return val.citation_id;}],
+        formatters: [function(val) { return val.citation_id;}], // this pulls the cit_id from the object to display in the input
         controller: /* @ngInject */ function($scope, $stateParams) {
+          // TODO this won't work, will need to query the server to get the entire source object
           if($stateParams.citationId) {
             $scope.model.citation_id = $stateParams.citationId;
           }
@@ -835,6 +835,7 @@
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, '');
       newEvidence.phenotypes = _.without(newEvidence.phenotypes, '');
+
       if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
       // convert variant name to object, if a string
       // TODO: figure out how to handle this more elegantly using angular-formly config object
