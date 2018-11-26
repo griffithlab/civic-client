@@ -235,8 +235,10 @@
           onChange: function(value, options, scope) {
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
-            // set source_type on citation_id
+            // set source_type on citation_id and clear field
             var citeField = _.find(scope.fields, { key: 'citation_id'});
+            citeField.value('');
+            citeField.templateOptions.data.citation = '--';
             citeField.templateOptions.data.sourceType = value.toLowerCase();
           }
         }
@@ -248,9 +250,10 @@
         templateOptions: {
           label: 'Citation ID',
           required: true,
-          typeahead: 'item.citation_id as item.description for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
+          editable: false,
+          typeahead: 'item as item.description for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
           templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
-          onSelect: 'to.data.citation  = $model',
+          onSelect: 'to.data.citation  = $model.description',
           data: {
             citation: '--',
             sourceType: undefined,
@@ -267,11 +270,18 @@
           },
           helpText: help['Citation ID']
         },
+        parsers: [function(val) { return val; }],
+        formatters: [function(val) { return val.citation_id;}],
         controller: /* @ngInject */ function($scope, $stateParams) {
           if($stateParams.citationId) {
             $scope.model.citation_id = $stateParams.citationId;
           }
         },
+        modelOptions: {
+          debounce: {
+            default: 300
+          }
+        }
       },
       // {
       //   key: 'citation_id',

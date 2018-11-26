@@ -1,4 +1,4 @@
 <a tabindex="-1">
   <strong>ID:</strong> <span ng-bind-html="match.model.citation_id">CITATION ID</span>&nbsp;
-  <strong>CITATION:</strong> <span ng-bind-html="match.label">DESCRIPTIOn</span>
+  <strong>CITATION:</strong> <span ng-bind-html="match.label | uibTypeaheadHighlight:query">DESCRIPTIOn</span>
 </a>
