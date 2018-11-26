@@ -237,9 +237,7 @@
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id
             var citeField = _.find(scope.fields, { key: 'citation_id'});
-            if (citeField.value() !== '') { // only update if user has selected an option
-              citeField.templateOptions.data.source_type = value.toLowerCase();
-            }
+            citeField.templateOptions.data.sourceType = value.toLowerCase();
           }
         }
       },
