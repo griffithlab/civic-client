@@ -106,7 +106,7 @@
           <td class="value" ng-bind-html="evidence.phenotypesStr"></td>
         </tr>
         <tr>
-          <td class="name">Citation:</td>
+          <td class="name">Source:</td>
           <td class="value">
             <a ui-sref="sources.summary({sourceId: evidence.source.id })">
               {{ evidence.source.citation }}
@@ -114,14 +114,36 @@
           </td>
         </tr>
         <tr>
-          <td class="name">Pubmed ID:</td>
+          <td class="name">
+            <span ng-switch="evidence.source.source_type">
+              <span ng-switch-when="pubmed">
+                PubMed ID:
+              </span>
+              <span ng-switch-when="asco">
+                ASCO ID:
+              </span>
+            </span>
+          </td>
           <td class="value">
-            <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{evidence.source.pubmed_id}}"
-              class="btn btn-xs button-new-window"
-              target="_blank">
-              <span class="glyphicon glyphicon-new-window"></span>
-              <span ng-bind="evidence.source.pubmed_id"></span>
-            </a>
+            <span ng-switch="evidence.source.source_type">
+              <span ng-switch-when="pubmed">
+                <a ng-href="{{evidence.source.source_url}}"
+                  class="btn btn-xs button-new-window"
+                  target="_blank">
+                  <span class="glyphicon glyphicon-new-window"></span>
+                  <span ng-bind="evidence.source.pubmed_id"></span>
+                </a>
+              </span>
+              <span ng-switch-when="asco">
+                <a ng-href="{{evidence.source.source_url}}"
+                  class="btn btn-xs button-new-window"
+                  target="_blank">
+                  <span class="glyphicon glyphicon-new-window"></span>
+                  <span ng-bind="evidence.source.publication_date.year"></span>
+                  <span ng-bind="evidence.source.asco_abstract_id"></span>
+                </a>
+              </span>
+            </span>
           </td>
         </tr>
         <tr>
