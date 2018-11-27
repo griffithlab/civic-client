@@ -103,14 +103,14 @@
       <p><a ng-href="/events/genes/{{vm.stateParams.geneId}}/summary/variants/{{vm.stateParams.variantId}}/summary/evidence/{{vm.stateParams.evidenceId}}/talk/revisions/list/{{vm.newRevisionId}}/summary" class="btn btn-small btn-default">View it here</a></p>
     </div>
   </div>
-  <!-- <div class="row"> -->
-  <!-- <div class="col-xs-6"> -->
-  <!-- <h3>vm.newEvidence</h3> -->
-  <!-- <pre ng-bind="vm.evidenceEdit|json" class="small"></pre> -->
-  <!-- </div> -->
-  <!-- <div class="col-xs-6"> -->
-  <!-- <h3>vm.evidenceFields</h3> -->
-  <!-- <pre ng-bind="vm.evidenceFields|json" class="small"></pre> -->
-  <!-- </div> -->
-  <!-- </div> -->
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>vm.evidencEdit</h3>
+      <pre ng-bind="vm.evidenceEdit|json" class="small"></pre>
+    </div>
+    <div class="col-xs-6">
+      <h3>vm.evidenceFields</h3>
+      <pre ng-bind="vm.evidenceFields|json" class="small"></pre>
+    </div>
+  </div>
 </div>
