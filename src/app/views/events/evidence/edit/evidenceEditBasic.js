@@ -58,13 +58,13 @@
     vm.evidenceRevisions = EvidenceRevisions;
     vm.evidenceHistory = EvidenceHistory;
     vm.evidenceEdit = angular.copy(vm.evidence);
+    vm.evidenceEdit = _.omit(vm.evidenceEdit, ['lifecycle_actions']);
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
     vm.evidenceEdit.drugs = _.filter(_.map(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
     vm.evidenceEdit.phenotypes = _.map(vm.evidenceEdit.phenotypes, function(phenotype) { return phenotype.hpo_class; });
     vm.evidenceEdit.source_type = vm.evidenceEdit.source.source_type;
     vm.evidenceEdit.source_citation = vm.evidenceEdit.source.citation;
     vm.evidenceEdit.source =  vm.evidenceEdit.source.citation_id; // replacing source here w/ just the ID b/c source typehead coerces init object to string
-    vm.evidenceEdit = _.omit(vm.evidenceEdit, ['lifecycle_actions']);
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -146,7 +146,7 @@
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id and clear field
             var sourceField = _.find(scope.fields, { key: 'source'});
-            sourceField.value({});
+            sourceField.value({description: '', citation_id: ''});
             sourceField.templateOptions.data.citation = '--';
             sourceField.templateOptions.data.sourceType = value.toLowerCase();
           }
@@ -160,7 +160,7 @@
           label: 'Source',
           required: true,
           editable: true,
-          typeahead: 'item as item.description for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
+          typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
           templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
           onSelect: 'to.data.citation  = $model.description',
           data: {
@@ -179,6 +179,8 @@
           },
           helpText: help['Source']
         },
+        formatters: [function(val) { return val;}], // this pulls the cit_id from the object to display in the input
+        parsers: [function(val) { return val;}],
         controller: /* @ngInject */ function($scope) {
           $scope.to.data.sourceType = $scope.model.source_type;
           $scope.to.data.citation = $scope.model.source_citation;

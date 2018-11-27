@@ -273,9 +273,9 @@
         formatters: [function(val) { return val.citation_id;}], // this pulls the cit_id from the object to display in the input
         controller: /* @ngInject */ function($scope, $stateParams) {
           // TODO this won't work, will need to query the server to get the entire source object
-          if($stateParams.citationId) {
-            $scope.model.citation_id = $stateParams.citationId;
-          }
+          // if($stateParams.citationId) {
+          //   $scope.model.citation_id = $stateParams.citationId;
+          // }
         },
         modelOptions: {
           debounce: {
