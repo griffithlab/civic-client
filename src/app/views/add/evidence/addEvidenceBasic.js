@@ -283,66 +283,6 @@
           }
         }
       },
-      // {
-      //   key: 'citation_id',
-      //   type: 'citation',
-      //   templateOptions: {
-      //     label: 'Citation ID',
-      //     value: 'vm.newEvidence.citation_id',
-      //     minLength: 1,
-      //     required: true,
-      //     data: {
-      //       description: '--',
-      //     },
-      //     helpText: help['Citation ID']
-      //   },
-      //   modelOptions: {
-      //     updateOn: 'default blur',
-      //     allowInvalid: false,
-      //     debounce: {
-      //       default: 300,
-      //       blur: 0
-      //     }
-      //   },
-      //   controller: /* @ngInject */ function($scope, $stateParams) {
-      //     if($stateParams.sourceId) {
-      //       $scope.model.source_id = $stateParams.sourceId;
-      //     }
-      //   },
-      //   validators: {
-      //     validCitationId: {
-      //       expression: function($viewValue, $modelValue, scope) {
-      //         if ($viewValue.length > 0) {
-      //           if ($viewValue.match(/[^0-9]+/)) { return false; }
-      //           var sourceType = _.find(scope.fields, { key: 'source_type' }).value().toLowerCase();
-      //           var deferred = $q.defer();
-      //           scope.options.templateOptions.loading = true;
-      //           var reqObj = {
-      //             citationId: $viewValue,
-      //             sourceType: sourceType
-      //           };
-      //           Publications.verify(reqObj).then(
-      //             function (response) {
-      //               scope.options.templateOptions.loading = false;
-      //               scope.options.templateOptions.data.description = response.description;
-      //               deferred.resolve(response);
-      //             },
-      //             function (error) {
-      //               scope.options.templateOptions.loading = false;
-      //               scope.options.templateOptions.data.description = '--';
-      //               deferred.reject(error);
-      //             }
-      //           );
-      //           return deferred.promise;
-      //         } else {
-      //           scope.options.templateOptions.data.description = '--';
-      //           return true;
-      //         }
-      //       },
-      //       message: '"This does not appear to be a valid citation ID."'
-      //     }
-      //   }
-      // },
       { // duplicates warning row
         templateUrl: 'app/views/add/evidence/addEvidenceDuplicateWarning.tpl.html',
         controller: /* @ngInject */ function($scope, Search) {
