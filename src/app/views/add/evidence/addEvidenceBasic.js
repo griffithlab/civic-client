@@ -74,7 +74,7 @@
       gene: '',
       variant: '',
       source_type: '',
-      source: {},
+      source: {citation_id: '', description: ''},
       description: '',
       disease: {
         name: ''
@@ -237,7 +237,7 @@
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id and clear field
             var sourceField = _.find(scope.fields, { key: 'source'});
-            sourceField.value({});
+            sourceField.value({citation_id: '', description: ''});
             sourceField.templateOptions.data.citation = '--';
             sourceField.templateOptions.data.sourceType = value.toLowerCase();
           }
@@ -251,13 +251,15 @@
           label: 'Source',
           required: true,
           editable: false,
-          typeahead: 'item as item.description for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
+          typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
           templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
           onSelect: 'to.data.citation  = $model.description',
           data: {
             citation: '--',
             sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
             typeaheadSearch: function(val, sourceType) {
+              if (val.match(/[^0-9]+/)) { return false; } // must be numeric
+              if(sourceType === 'asco' && val.length < 2) { return false; } // asco IDs are all > 2 chr
               var reqObj = {
                 citationId: val,
                 sourceType: sourceType
@@ -270,7 +272,7 @@
           },
           helpText: help['Source']
         },
-        formatters: [function(val) { return val.citation_id;}], // this pulls the cit_id from the object to display in the input
+        // formatters: [function(val) { return val.citation_id;}], // this pulls the cit_id from the object to display in the input
         controller: /* @ngInject */ function($scope, $stateParams) {
           // TODO this won't work, will need to query the server to get the entire source object
           // if($stateParams.citationId) {
