@@ -181,8 +181,6 @@
           },
           helpText: help['Source']
         },
-        formatters: [function(val) { return val;}], // this pulls the cit_id from the object to display in the input
-        parsers: [function(val) { return val;}],
         controller: /* @ngInject */ function($scope) {
           $scope.to.data.sourceType = $scope.model.source_type;
           $scope.to.data.citation = $scope.model.source_citation;
