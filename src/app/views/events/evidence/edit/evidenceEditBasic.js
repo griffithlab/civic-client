@@ -123,6 +123,7 @@
         templateOptions: {
           label: 'Source Type',
           required: true,
+          // here we specify options instead of generating from config b/c the server gives us lowercase type strings instead of the multi-case strings used for the labels
           options: [
             { value: '', label: 'Please select a Source Type' },
             { value: 'pubmed', label: 'PubMed' },

@@ -310,9 +310,12 @@
                     'condition': {'name': 'contains', 'parameters': [values[1]]}
                   },
                   {
-                    'field': 'pubmed_id',
-                    'condition': {'name': 'is', 'parameters': [values[2]]
-                                 }
+                    'field': 'source_type',
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[2].toLowerCase()]}
+                  },
+                  {
+                    'field': 'citation_id',
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[3]]}
                   }
                 ],
                 'entity': 'evidence_items',
@@ -329,7 +332,8 @@
           $scope.$watchGroup([
             'model.gene.name',
             'model.variant.name',
-            'model.pubmed_id'
+            'model.source_type',
+            'model.source.citation_id'
           ], searchForDups);
         }
       },
