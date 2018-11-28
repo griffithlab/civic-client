@@ -114,17 +114,11 @@
         key: 'source_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
-        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
-          if($stateParams.sourceType) {
-            var st = $stateParams.sourceType;
-            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.source_type);
-            if(_.includes(permitted, st)) {
-              $scope.model.source_type = st;
-              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
-            } else {
-              console.warn('Ignoring pre-population of Source Type with invalid value: ' + st);
-            }
-          }
+        controller: /* @ngInject */ function($scope) {
+          // set attribute definition
+          var type = $scope.model.source_type === 'asco' ? 'ASCO':'PubMed';
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[type];
         },
         templateOptions: {
           label: 'Source Type',
@@ -143,7 +137,10 @@
           },
           onChange: function(value, options, scope) {
             // set attribute definition
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+            // server returns all lowercase for source_type, we need to convert to the multicase
+            // versions to match the attribute descriptions here...
+            var type = value === 'asco' ? 'ASCO':'PubMed';
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[type];
             // set source_type on citation_id and clear field
             var sourceField = _.find(scope.fields, { key: 'source'});
             sourceField.value({description: '', citation_id: ''});
