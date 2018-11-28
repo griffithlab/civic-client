@@ -239,7 +239,8 @@
             var sourceField = _.find(scope.fields, { key: 'source'});
             sourceField.value({citation_id: '', description: ''});
             sourceField.templateOptions.data.citation = '--';
-            sourceField.templateOptions.data.sourceType = value.toLowerCase();
+            if(value) { sourceField.templateOptions.data.sourceType = value.toLowerCase(); }
+            else {  sourceField.templateOptions.data.sourceType = undefined; }
           }
         }
       },
@@ -272,12 +273,14 @@
           },
           helpText: help['Source']
         },
-        // formatters: [function(val) { return val.citation_id;}], // this pulls the cit_id from the object to display in the input
         controller: /* @ngInject */ function($scope, $stateParams) {
           // TODO this won't work, will need to query the server to get the entire source object
           // if($stateParams.citationId) {
           //   $scope.model.citation_id = $stateParams.citationId;
           // }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined', // deactivate if source type specified
         },
         modelOptions: {
           debounce: {
