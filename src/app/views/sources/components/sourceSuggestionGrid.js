@@ -138,11 +138,30 @@
           cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>'
         },
         {
-          name: 'pubmed_id',
-          displayName: 'Pubmed ID',
-          width: '10%',
+          name: 'source_type',
+          displayName: 'Type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          type: 'string',
+          width: '8%',
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: '0', label: 'pubmed'},
+              { value: '1', label: 'asco'}
+            ]
+          }
+        },
+        {
+          name: 'citation_id',
+          displayName: 'Citation ID',
+          width: '8%',
           visible: true,
-          cellTemplate: '<div class="ui-grid-cell-contents"><a href="https://www.ncbi.nlm.nih.gov/pubmed/{{ row.entity[col.field] }}" target="_blank">{{ row.entity[col.field] }}</a></div>',
+          cellTemplate: '<div class="ui-grid-cell-contents">{{ row.entity[col.field] }}</div>',
           //visible: mode === 'full',
           enableFiltering: true,
           allowCellFocus: false,
@@ -157,7 +176,7 @@
           visible: mode === 'full',
           enableFiltering: true,
           allowCellFocus: false,
-          width: '15%',
+          width: '13%',
           type: 'string',
           cellTemplate: 'app/views/sources/components/cellTemplateCitation.tpl.html',
           filter: {
