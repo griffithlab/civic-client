@@ -753,8 +753,27 @@
       ],
       'sources': [
         {
-          name: 'pubmed_id',
-          displayName: 'Pubmed ID',
+          name: 'source_type',
+          displayName: 'Type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          type: 'string',
+          width: '8%',
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: '0', label: 'pubmed'},
+              { value: '1', label: 'asco'}
+             ]
+          }
+        },
+        {
+          name: 'citation_id',
+          displayName: 'Citation ID',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -770,7 +789,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
-          width: '20%',
+          width: '15%',
           cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -794,7 +813,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
-          width: '15%',
+          width: '12%',
           cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
