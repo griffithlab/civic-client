@@ -17,6 +17,8 @@
     console.log('SuggestSourceController called.');
 
     var help = ConfigService.evidenceHelpText;
+    var descriptions = ConfigService.evidenceAttributeDescriptions;
+    var make_options = ConfigService.optionMethods.make_options; // make options for pull down
 
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated();
@@ -29,6 +31,11 @@
 
     vm.newSuggestion= {
       suggestion: {
+        source_type: '',
+        source: {
+          description: '',
+          citation_id: ''
+        }
       },
       comment: {
         title: 'Source Suggestion Comment'
@@ -37,55 +44,141 @@
 
     vm.suggestionFields =[
       {
-        key: 'pubmed_id',
-        type: 'pubmed',
+        key: 'source_type',
+        type: 'horizontalSelectHelp',
         model: vm.newSuggestion.suggestion,
-        templateOptions: {
-          label: 'Pubmed ID',
-          value: 'vm.newSuggestion.pubmed_id',
-          minLength: 1,
-          required: true,
-          data: {
-            description: '--'
-          },
-          helpText: help['Pubmed ID']
-        },
-        modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
-          debounce: {
-            default: 300,
-            blur: 0
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.sourceType) {
+            var st = $stateParams.sourceType;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.source_type);
+            if(_.includes(permitted, st)) {
+              $scope.model.source_type = st;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
+            } else {
+              console.warn('Ignoring pre-population of Source Type with invalid value: ' + st);
+            }
           }
         },
-        validators: {
-          validPubmedId: {
-            expression: function($viewValue, $modelValue, scope) {
-              if (!_.isUndefined($viewValue) && $viewValue.length > 0) {
-                var deferred = $q.defer();
-                scope.options.templateOptions.loading = true;
-                Publications.verify($viewValue).then(
-                  function (response) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = response.description;
-                    deferred.resolve(response);
-                  },
-                  function (error) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = '--';
-                    deferred.reject(error);
-                  }
-                );
-                return deferred.promise;
-              } else {
-                scope.options.templateOptions.data.description = '--';
-                return true;
-              }
-            },
-            message: '"This does not appear to be a valid Pubmed ID."'
+        templateOptions: {
+          label: 'Source Type',
+          required: true,
+          value: 'vm.newEvidence.source_type',
+          options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: help['Source Type'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.source_type
+          },
+          onChange: function(value, options, scope) {
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+            // set source_type on citation_id and clear field
+            var sourceField = _.find(scope.fields, { key: 'source'});
+            sourceField.value({citation_id: '', description: ''});
+            sourceField.templateOptions.data.citation = '--';
+            if(value) { sourceField.templateOptions.data.sourceType = value.toLowerCase(); }
+            else {  sourceField.templateOptions.data.sourceType = undefined; }
           }
         }
       },
+      {
+        key: 'source',
+        type: 'horizontalTypeaheadHelp',
+        model: vm.newSuggestion.suggestion,
+        wrapper: ['citation'],
+        templateOptions: {
+          label: 'Source',
+          required: true,
+          editable: false,
+          typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
+          templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
+          onSelect: 'to.data.citation  = $model.description',
+          data: {
+            citation: '--',
+            sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
+            typeaheadSearch: function(val, sourceType) {
+              if (val.match(/[^0-9]+/)) { return false; } // must be numeric
+              if(sourceType === 'asco' && val.length < 2) { return false; } // asco IDs are all > 2 chr
+              var reqObj = {
+                citationId: val,
+                sourceType: sourceType
+              };
+              return Publications.verify(reqObj)
+                .then(function(response) {
+                  return response;
+                });
+            }
+          },
+          helpText: help['Source']
+        },
+        controller: /* @ngInject */ function($scope, $stateParams) {
+          // TODO this won't work, will need to query the server to get the entire source object
+          // if($stateParams.citationId) {
+          //   $scope.model.citation_id = $stateParams.citationId;
+          // }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined', // deactivate if source type specified
+        },
+        modelOptions: {
+          debounce: {
+            default: 300
+          }
+        }
+      },
+      // {
+      //   key: 'pubmed_id',
+      //   type: 'pubmed',
+      //   model: vm.newSuggestion.suggestion,
+      //   templateOptions: {
+      //     label: 'Pubmed ID',
+      //     value: 'vm.newSuggestion.pubmed_id',
+      //     minLength: 1,
+      //     required: true,
+      //     data: {
+      //       description: '--'
+      //     },
+      //     helpText: help['Pubmed ID']
+      //   },
+      //   modelOptions: {
+      //     updateOn: 'default blur',
+      //     allowInvalid: false,
+      //     debounce: {
+      //       default: 300,
+      //       blur: 0
+      //     }
+      //   },
+      //   validators: {
+      //     validPubmedId: {
+      //       expression: function($viewValue, $modelValue, scope) {
+      //         if (!_.isUndefined($viewValue) && $viewValue.length > 0) {
+      //           var deferred = $q.defer();
+      //           scope.options.templateOptions.loading = true;
+      //           Publications.verify($viewValue).then(
+      //             function (response) {
+      //               scope.options.templateOptions.loading = false;
+      //               scope.options.templateOptions.data.description = response.description;
+      //               deferred.resolve(response);
+      //             },
+      //             function (error) {
+      //               scope.options.templateOptions.loading = false;
+      //               scope.options.templateOptions.data.description = '--';
+      //               deferred.reject(error);
+      //             }
+      //           );
+      //           return deferred.promise;
+      //         } else {
+      //           scope.options.templateOptions.data.description = '--';
+      //           return true;
+      //         }
+      //       },
+      //       message: '"This does not appear to be a valid Pubmed ID."'
+      //     }
+      //   }
+      // },
       {
         key: 'gene',
         type: 'horizontalTypeaheadHelp',
@@ -268,12 +361,21 @@
     vm.submit = function(req) {
       vm.error = {};
       var reqObj = {
-        pubmed_id: req.suggestion.pubmed_id,
+        source: req.suggestion,
         comment: req.comment
       };
-      if(!_.isUndefined(req.suggestion.gene) && _.isObject(req.suggestion.gene)) {reqObj.gene_name = req.suggestion.gene.name;}
-      if(!_.isUndefined(req.suggestion.variant) && _.isObject(req.suggestion.variant)) {reqObj.variant_name = req.suggestion.variant.name;}
-      if(!_.isUndefined(req.suggestion.disease) && _.isObject(req.suggestion.disease)) {reqObj.disease_name = req.suggestion.disease.name;}
+      if(!_.isUndefined(req.suggestion.gene) && _.isObject(req.suggestion.gene)) {
+        reqObj.gene_name = req.suggestion.gene.name;
+        reqObj.source = _.omit(reqObj.source, 'gene');
+      }
+      if(!_.isUndefined(req.suggestion.variant) && _.isObject(req.suggestion.variant)) {
+        reqObj.variant_name = req.suggestion.variant.name;
+        reqObj.source = _.omit(reqObj.source, 'variant');
+      }
+      if(!_.isUndefined(req.suggestion.disease) && _.isObject(req.suggestion.disease)) {
+        reqObj.disease_name = req.suggestion.disease.name;
+        reqObj.source = _.omit(reqObj.source, 'variant');
+      }
       Sources.suggest(reqObj).then(
         function(response) { // success
           console.log('source suggestion submit success.');
