@@ -296,8 +296,8 @@
           vm.pubmedName = '';
 
           function searchForDups(values) {
+            vm.duplicates = [];
             if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
-              vm.duplicates = [];
               Search.post({
                 'operator': 'AND',
                 'queries': [
