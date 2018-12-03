@@ -63,7 +63,6 @@
     vm.evidenceEdit.drugs = _.filter(_.map(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
     vm.evidenceEdit.phenotypes = _.map(vm.evidenceEdit.phenotypes, function(phenotype) { return phenotype.hpo_class; });
     vm.evidenceEdit.source_type = vm.evidenceEdit.source.source_type;
-    vm.evidenceEdit.source_citation = vm.evidenceEdit.source.citation;
     vm.evidenceEdit.source =  vm.evidenceEdit.source.citation_id; // replacing source here w/ just the ID b/c source typehead coerces init object to string
     vm.styles = EvidenceViewOptions.styles;
 
@@ -163,7 +162,7 @@
             sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
             typeaheadSearch: function(val, sourceType) {
               if (val.match(/[^0-9]+/)) { return false; } // must be numeric
-              if(sourceType === 'asco' && val.length < 2) { return false; } // asco IDs are all > 2 chr
+              if(sourceType === 'ASCO' && val.length < 2) { return false; } // asco IDs are all > 2 chr
               var reqObj = {
                 citationId: val,
                 sourceType: sourceType
