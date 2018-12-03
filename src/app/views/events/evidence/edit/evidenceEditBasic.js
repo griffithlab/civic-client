@@ -124,11 +124,7 @@
           label: 'Source Type',
           required: true,
           // here we specify options instead of generating from config b/c the server gives us lowercase type strings instead of the multi-case strings used for the labels
-          options: [
-            { value: '', label: 'Please select a Source Type' },
-            { value: 'pubmed', label: 'PubMed' },
-            { value: 'asco', label: 'ASCO' }
-          ],
+          options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Source Type'],
@@ -183,6 +179,10 @@
         controller: /* @ngInject */ function($scope) {
           $scope.to.data.sourceType = $scope.model.source_type;
           $scope.to.data.citation = $scope.model.source_citation;
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined',
+          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"'
         },
         modelOptions: {
           debounce: {

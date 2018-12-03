@@ -249,7 +249,7 @@
         type: 'horizontalTypeaheadHelp',
         wrapper: ['citation'],
         templateOptions: {
-          label: 'Source',
+          label: 'Source ID',
           required: true,
           editable: false,
           typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
@@ -283,7 +283,8 @@
           // }
         },
         expressionProperties: {
-          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined', // deactivate if source type specified
+          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined',
+          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"'
         },
         modelOptions: {
           debounce: {
