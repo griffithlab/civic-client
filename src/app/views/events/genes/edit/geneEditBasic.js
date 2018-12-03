@@ -122,7 +122,7 @@
               minLength: 1,
               required: true,
               data: {
-                description: '--'
+                citation: '--'
               }
             },
             modelOptions: {
