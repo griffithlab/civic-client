@@ -9,7 +9,7 @@
     formlyConfigProvider.setType({
       name: 'citation',
       extends: 'input',
-      wrapper: ['loader', 'pubdisplay', 'validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['loader', 'citation', 'validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
     });
   }
 

@@ -38,6 +38,8 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.gene = Genes.data.item;
+    // convert source objects to array of IDs, multi-input field type does not handle objects at this time
+    vm.gene.sources = _.map(vm.gene.sources, 'citation_id');
     vm.pendingFields = _.keys(GeneRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(GeneRevisions.data.pendingFields), function(field) {
       return field.charAt(0).toUpperCase() + field.slice(1);
@@ -108,7 +110,7 @@
         }
       },
       {
-        key: 'source_ids',
+        key: 'sources',
         type: 'multiInput',
         templateOptions: {
           label: 'Sources',
@@ -138,10 +140,14 @@
                   if ($viewValue.length > 0) {
                     var deferred = $q.defer();
                     scope.options.templateOptions.loading = true;
-                    Publications.verify($viewValue).then(
+                    var reqObj = {
+                      citationId: $viewValue,
+                      sourceType: 'PubMed'
+                    };
+                    Publications.verify(reqObj).then(
                       function (response) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.description = response.description;
+                        scope.options.templateOptions.data.citation = response[0].description;
                         deferred.resolve(response);
                       },
                       function (error) {
