@@ -239,7 +239,7 @@
             var sourceField = _.find(scope.fields, { key: 'source'});
             sourceField.value({citation_id: '', description: ''});
             sourceField.templateOptions.data.citation = '--';
-            if(value) { sourceField.templateOptions.data.sourceType = value.toLowerCase(); }
+            if(value) { sourceField.templateOptions.data.sourceType = value; }
             else {  sourceField.templateOptions.data.sourceType = undefined; }
           }
         }
@@ -255,6 +255,9 @@
           typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
           templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
           onSelect: 'to.data.citation  = $model.description',
+          onChange: function(value, options, scope) {
+            // if field invalid, replace data.description with '--'
+          },
           data: {
             citation: '--',
             sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
@@ -311,7 +314,7 @@
                   },
                   {
                     'field': 'source_type',
-                    'condition': {'name': 'is_equal_to', 'parameters': [values[2].toLowerCase()]}
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[2]]}
                   },
                   {
                     'field': 'citation_id',

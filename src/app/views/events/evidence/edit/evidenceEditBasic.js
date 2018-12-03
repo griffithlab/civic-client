@@ -146,7 +146,7 @@
             var sourceField = _.find(scope.fields, { key: 'source'});
             sourceField.value({description: '', citation_id: ''});
             sourceField.templateOptions.data.citation = '--';
-            if(value) { sourceField.templateOptions.data.sourceType = value.toLowerCase(); }
+            if(value) { sourceField.templateOptions.data.sourceType = value; }
             else {  sourceField.templateOptions.data.sourceType = undefined; }
           }
         }

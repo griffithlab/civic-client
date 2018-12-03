@@ -19,7 +19,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-7 col-lg-6">
       <p ng-if="vm.source.source_type === 'pubmed'"><strong>Abstract:</strong> <span ng-bind="vm.source.abstract">Abstract</span></p>
-      <p ng-if="vm.source.source_type === 'asco'"><strong>Abstract:</strong> Due to the limitations of ASCO's copyright, we cannot display this source's abstract here. Please <a ng-href="{{ vm.source.source_url }}">visit the source record on ASCO's website</a> to view the abstract.</p>
+      <p ng-if="vm.source.source_type === 'asco'"><strong>Abstract:</strong> Due to ASCO copyright limitations, we cannot display this source's abstract here. Please <a ng-href="{{ vm.source.source_url }}">visit the source record on ASCO's website</a> to view the abstract.</p>
     </div>
     <div class="col-xs-12 col-md-5 col-lg-6">
       <div class="row">
@@ -43,17 +43,17 @@
               <tr>
                 <td class="key">
                   <span ng-switch="vm.source.source_type">
-                    <span ng-switch-when="pubmed">
+                    <span ng-switch-when="PubMed">
                       PubMed ID:
                     </span>
-                    <span ng-switch-when="asco">
+                    <span ng-switch-when="ASCO">
                       ASCO ID:
                     </span>
                   </span>
                 </td>
                 <td class="value">
                   <span ng-switch="vm.source.source_type">
-                    <span ng-switch-when="pubmed">
+                    <span ng-switch-when="PubMed">
                       <a ng-href="{{vm.source.source_url}}"
                         class="btn btn-xs button-new-window"
                         target="_blank">
@@ -61,7 +61,7 @@
                         <span ng-bind="vm.source.citation_id"></span>
                       </a>
                     </span>
-                    <span ng-switch-when="asco">
+                    <span ng-switch-when="ASCO">
                       <a ng-href="{{vm.source.source_url}}"
                         class="btn btn-xs button-new-window"
                         target="_blank">

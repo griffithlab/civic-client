@@ -116,7 +116,7 @@
         <tr>
           <td class="name">
             <span ng-switch="evidence.source.source_type">
-              <span ng-switch-when="pubmed">
+              <span ng-switch-when="PubMed">
                 PubMed ID:
               </span>
               <span ng-switch-when="asco">
@@ -125,25 +125,12 @@
             </span>
           </td>
           <td class="value">
-            <span ng-switch="evidence.source.source_type">
-              <span ng-switch-when="pubmed">
-                <a ng-href="{{evidence.source.source_url}}"
-                  class="btn btn-xs button-new-window"
-                  target="_blank">
-                  <span class="glyphicon glyphicon-new-window"></span>
-                  <span ng-bind="evidence.source.citation_id"></span>
-                </a>
-              </span>
-              <span ng-switch-when="asco">
-                <a ng-href="{{evidence.source.source_url}}"
-                  class="btn btn-xs button-new-window"
-                  target="_blank">
-                  <span class="glyphicon glyphicon-new-window"></span>
-                  <span ng-bind="evidence.source.publication_date.year"></span>
-                  <span ng-bind="evidence.source.asco_abstract_id"></span>
-                </a>
-              </span>
-            </span>
+            <a ng-href="{{evidence.source.source_url}}"
+              class="btn btn-xs button-new-window"
+              target="_blank">
+              <span class="glyphicon glyphicon-new-window"></span>
+              <span ng-bind="evidence.source.citation_id"></span>
+            </a>
           </td>
         </tr>
         <tr>
