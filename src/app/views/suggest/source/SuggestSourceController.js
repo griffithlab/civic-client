@@ -30,12 +30,10 @@
     vm.error = {};
 
     vm.newSuggestion= {
-      suggestion: {
-        source_type: '',
-        source: {
-          description: '',
-          citation_id: ''
-        }
+      source_type: '',
+      source: {
+        citation_id: '',
+        description: ''
       },
       comment: {
         title: 'Source Suggestion Comment'
@@ -46,7 +44,6 @@
       {
         key: 'source_type',
         type: 'horizontalSelectHelp',
-        model: vm.newSuggestion.suggestion,
         wrapper: 'attributeDefinition',
         controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
           if($stateParams.sourceType) {
@@ -63,7 +60,6 @@
         templateOptions: {
           label: 'Source Type',
           required: true,
-          value: 'vm.newEvidence.source_type',
           options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
           valueProp: 'value',
           labelProp: 'label',
@@ -87,7 +83,6 @@
       {
         key: 'source',
         type: 'horizontalTypeaheadHelp',
-        model: vm.newSuggestion.suggestion,
         wrapper: ['citation'],
         templateOptions: {
           label: 'Source',
@@ -249,35 +244,33 @@
         hideExpression: 'model.noDoid'
       },
       { // duplicates warning row
-        templateUrl: 'app/views/suggest/source/evidenceDuplicateWarning.tpl.html',
+        templateUrl: 'app/views/add/evidence/addEvidenceDuplicateWarning.tpl.html',
         controller: /* @ngInject */ function($scope, Search) {
-          console.log('dup warning controller loaded.');
           var vm = $scope.vm = {};
           vm.duplicates = [];
           vm.pubmedName = '';
 
           function searchForDups(values) {
+            vm.duplicates = [];
             if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
               Search.post({
                 'operator': 'AND',
                 'queries': [
                   {
-                    'field': 'pubmed_id',
-                    'condition': {'name': 'is', 'parameters': [values[0]]
-                                 }
-                  },
-                  {
                     'field': 'gene_name',
-                    'condition': {'name': 'contains', 'parameters': [values[1]]}
+                    'condition': {'name': 'contains', 'parameters': [values[0]]}
                   },
                   {
                     'field': 'variant_name',
-                    'condition': {'name': 'contains', 'parameters': [values[2]]}
+                    'condition': {'name': 'contains', 'parameters': [values[1]]}
                   },
                   {
-                    'field': 'disease_doid',
-                    'condition': {'name': 'is', 'parameters': [values[3]]
-                                 }
+                    'field': 'source_type',
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[2]]}
+                  },
+                  {
+                    'field': 'citation_id',
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[3]]}
                   }
                 ],
                 'entity': 'evidence_items',
@@ -291,13 +284,11 @@
 
           $scope.pubmedField = _.find($scope.fields, { key: 'pubmed_id' });
 
-          // {"operator":"AND","queries":[{"field":"pubmed_id","condition":{"name":"is","parameters":["25589621"]}},{"field":"gene_name","condition":{"name":"contains","parameters":["BRAF"]}},{"field":"variant_name","condition":{"name":"contains","parameters":["V600E"]}},{"field":"disease_doid","condition":{"name":"is","parameters":["9256"]}}]}
-
           $scope.$watchGroup([
-            'model.suggestion.pubmed_id',
-            'model.suggestion.gene.name',
-            'model.suggestion.variant.name',
-            'model.suggestion.disease.doid'
+            'model.gene.name',
+            'model.variant.name',
+            'model.source_type',
+            'model.source.citation_id'
           ], searchForDups);
         }
       },
@@ -320,20 +311,17 @@
     vm.submit = function(req) {
       vm.error = {};
       var reqObj = {
-        source: req.suggestion,
+        source: req.source,
         comment: req.comment
       };
-      if(!_.isUndefined(req.suggestion.gene) && _.isObject(req.suggestion.gene)) {
-        reqObj.gene_name = req.suggestion.gene.name;
-        reqObj.source = _.omit(reqObj.source, 'gene');
+      if(!_.isUndefined(req.gene) && _.isObject(req.gene)) {
+        reqObj.gene_name = req.gene.name;
       }
-      if(!_.isUndefined(req.suggestion.variant) && _.isObject(req.suggestion.variant)) {
-        reqObj.variant_name = req.suggestion.variant.name;
-        reqObj.source = _.omit(reqObj.source, 'variant');
+      if(!_.isUndefined(req.variant) && _.isObject(req.variant)) {
+        reqObj.variant_name = req.variant.name;
       }
-      if(!_.isUndefined(req.suggestion.disease) && _.isObject(req.suggestion.disease)) {
-        reqObj.disease_name = req.suggestion.disease.name;
-        reqObj.source = _.omit(reqObj.source, 'variant');
+      if(!_.isUndefined(req.disease) && _.isObject(req.disease)) {
+        reqObj.disease_name = req.disease.name;
       }
       Sources.suggest(reqObj).then(
         function(response) { // success
