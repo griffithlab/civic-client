@@ -96,7 +96,7 @@
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
     vm.newEvidence.drugs  = [];
 
-    vm.newEvidence.source_suggestion_id = _.isUndefined($stateParams.sourceSuggestionId) ? null : Number($stateParams.sourceSuggestionId);
+    vm.newEvidence.is_suggested_source = _.isUndefined($stateParams.isSuggestedSource) ? false : vm.newEvidence.is_suggested_source;
 
     vm.formErrors = {};
     vm.formMessages = {};
