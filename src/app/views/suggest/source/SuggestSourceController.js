@@ -228,7 +228,16 @@
             typeaheadSearch: function(val) {
               return Diseases.beginsWith(val)
                 .then(function(response) {
-                  return response;
+                  var labelLimit = 70;
+                  return _.map(response, function(disease) {
+                    if (disease.aliases.length > 0) {
+                      disease.alias_list = disease.aliases.join(', ');
+                      if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
+                    } else {
+                      disease.alias_list = '--';
+                    }
+                    return disease;
+                  });
                 });
             }
           }
@@ -255,7 +264,7 @@
                   {
                     'field': 'pubmed_id',
                     'condition': {'name': 'is', 'parameters': [values[0]]
-                    }
+                                 }
                   },
                   {
                     'field': 'gene_name',
@@ -268,7 +277,7 @@
                   {
                     'field': 'disease_doid',
                     'condition': {'name': 'is', 'parameters': [values[3]]
-                    }
+                                 }
                   }
                 ],
                 'entity': 'evidence_items',
