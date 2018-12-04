@@ -79,7 +79,7 @@
             var sourceField = _.find(scope.fields, { key: 'source'});
             sourceField.value({citation_id: '', description: ''});
             sourceField.templateOptions.data.citation = '--';
-            if(value) { sourceField.templateOptions.data.sourceType = value.toLowerCase(); }
+            if(value) { sourceField.templateOptions.data.sourceType = value; }
             else {  sourceField.templateOptions.data.sourceType = undefined; }
           }
         }
@@ -129,56 +129,6 @@
           }
         }
       },
-      // {
-      //   key: 'pubmed_id',
-      //   type: 'pubmed',
-      //   model: vm.newSuggestion.suggestion,
-      //   templateOptions: {
-      //     label: 'Pubmed ID',
-      //     value: 'vm.newSuggestion.pubmed_id',
-      //     minLength: 1,
-      //     required: true,
-      //     data: {
-      //       description: '--'
-      //     },
-      //     helpText: help['Pubmed ID']
-      //   },
-      //   modelOptions: {
-      //     updateOn: 'default blur',
-      //     allowInvalid: false,
-      //     debounce: {
-      //       default: 300,
-      //       blur: 0
-      //     }
-      //   },
-      //   validators: {
-      //     validPubmedId: {
-      //       expression: function($viewValue, $modelValue, scope) {
-      //         if (!_.isUndefined($viewValue) && $viewValue.length > 0) {
-      //           var deferred = $q.defer();
-      //           scope.options.templateOptions.loading = true;
-      //           Publications.verify($viewValue).then(
-      //             function (response) {
-      //               scope.options.templateOptions.loading = false;
-      //               scope.options.templateOptions.data.description = response.description;
-      //               deferred.resolve(response);
-      //             },
-      //             function (error) {
-      //               scope.options.templateOptions.loading = false;
-      //               scope.options.templateOptions.data.description = '--';
-      //               deferred.reject(error);
-      //             }
-      //           );
-      //           return deferred.promise;
-      //         } else {
-      //           scope.options.templateOptions.data.description = '--';
-      //           return true;
-      //         }
-      //       },
-      //       message: '"This does not appear to be a valid Pubmed ID."'
-      //     }
-      //   }
-      // },
       {
         key: 'gene',
         type: 'horizontalTypeaheadHelp',
