@@ -90,7 +90,7 @@
           editable: false,
           typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
           templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
-          onSelect: 'to.data.citation  = $model.description',
+          onSelect: 'to.data.citation  = $model.citation',
           data: {
             citation: '--',
             sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
