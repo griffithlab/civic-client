@@ -96,7 +96,7 @@
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
     vm.newEvidence.drugs  = [];
 
-    vm.newEvidence.is_suggested_source = _.isUndefined($stateParams.isSuggestedSource) ? false : vm.newEvidence.is_suggested_source;
+    vm.newEvidence.source_suggestion_id = _.isUndefined($stateParams.sourceId) ? null : Number($stateParams.sourceId);
 
     vm.formErrors = {};
     vm.formMessages = {};
@@ -215,6 +215,10 @@
             if(_.includes(permitted, st)) {
               $scope.model.source_type = st;
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
+              // update source field info
+              // this unfortunately reproduces code in onChange below, but updating value above doesn't trigger onChange...
+              var sourceField = _.find($scope.fields, { key: 'source'});
+              sourceField.templateOptions.data.sourceType = st;
             } else {
               console.warn('Ignoring pre-population of Source Type with invalid value: ' + st);
             }
@@ -277,10 +281,14 @@
           helpText: help['Source']
         },
         controller: /* @ngInject */ function($scope, $stateParams) {
-          // TODO this won't work, will need to query the server to get the entire source object
-          // if($stateParams.citationId) {
-          //   $scope.model.citation_id = $stateParams.citationId;
-          // }
+          if($stateParams.sourceId) {
+            // get citation
+            Sources.get($stateParams.sourceId)
+              .then(function(response){
+                $scope.model.source = response;
+                $scope.to.data.citation = response.citation;
+              });
+          }
         },
         expressionProperties: {
           'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined',
