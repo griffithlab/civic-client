@@ -359,6 +359,7 @@
         },
         templateOptions: {
           label: 'Variant Origin',
+          required: true,
           value: 'vm.newEvidence.variant_origin',
           options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
           valueProp: 'value',
