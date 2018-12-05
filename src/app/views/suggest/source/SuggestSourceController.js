@@ -117,6 +117,8 @@
         },
         expressionProperties: {
           'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined', // deactivate if source type specified
+          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
+          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : ""'
         },
         modelOptions: {
           debounce: {
