@@ -13,6 +13,7 @@
       {
         var template = '<input ';
         template+='type="'+attrs['type']+'" ';
+        template+='placeholder="{{ to.placeholder }}"';
         if(attrs['formlyCustomValidation'] !== undefined) { template += 'formlyCustomValidation '; }
         var id = attrs['id'];
         if(id !== undefined) { template+='id="'+id+'" '; }
