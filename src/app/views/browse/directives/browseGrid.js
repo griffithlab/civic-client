@@ -766,8 +766,8 @@
             disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
-              { value: '0', label: 'pubmed'},
-              { value: '1', label: 'asco'}
+              { value: '0', label: 'PubMed'},
+              { value: '1', label: 'ASCO'}
              ]
           }
         },
