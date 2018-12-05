@@ -151,8 +151,8 @@
             disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
-              { value: '0', label: 'pubmed'},
-              { value: '1', label: 'asco'}
+              { value: 'PubMed', label: 'PubMed'},
+              { value: 'ASCO', label: 'ASCO'}
             ]
           }
         },
@@ -297,11 +297,14 @@
           if(_.has(source, 'disease') && source.disease !== null) {
             urlElements.push('diseaseName=' + source.disease);
           }
-          if(_.has(source, 'pubmed_id') && source.pubmed_id !== null) {
-            urlElements.push('pubmedId=' + source.pubmed_id);
+          if(_.has(source, 'source_type') && source.source_type !== null) {
+            urlElements.push('sourceType=' + source.source_type);
+          }
+          if(_.has(source, 'citation_id') && source.citation_id !== null) {
+            urlElements.push('citationId=' + source.citation_id);
           }
 
-          urlElements.push('sourceSuggestionId=' + source.id);
+          urlElements.push('sourceId=' + source.source_id);
 
           source.addEvidenceUrl = urlBase + '?' + urlElements.join('&');
           return source;
