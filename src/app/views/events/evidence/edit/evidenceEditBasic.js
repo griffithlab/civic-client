@@ -182,12 +182,14 @@
         expressionProperties: {
           'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined',
           'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
-          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : ""'
+          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"'
         },
         modelOptions: {
           debounce: {
-            default: 300
-          }
+            default: 300,
+            blur: 0
+          },
+          updateOn: 'default blur'
         }
       },
       {
