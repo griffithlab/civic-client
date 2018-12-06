@@ -24,6 +24,7 @@
         var disabled = attrs['ngDisabled'];
         if(disabled !== undefined) { template+='ng-disabled="'+disabled+'" '; }
         template+='ng-model="'+attrs['ngModel']+'" ';
+        template+='ng-model-options="'+attrs['ngModelOptions']+'" ';
         template+='class="'+attrs['class']+'" ';
         template+='typeahead-editable="'+attrs['typeaheadEditable']+'" ';
         template+='typeahead-focus-first="'+attrs['typeaheadFocusFirst']+'" ';
