@@ -58,10 +58,12 @@
     vm.evidenceRevisions = EvidenceRevisions;
     vm.evidenceHistory = EvidenceHistory;
     vm.evidenceEdit = angular.copy(vm.evidence);
-    vm.evidenceEdit.pubmed_id = vm.evidence.source.pubmed_id;
+    vm.evidenceEdit = _.omit(vm.evidenceEdit, ['lifecycle_actions']);
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
     vm.evidenceEdit.drugs = _.filter(_.map(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
     vm.evidenceEdit.phenotypes = _.map(vm.evidenceEdit.phenotypes, function(phenotype) { return phenotype.hpo_class; });
+    vm.evidenceEdit.source_type = vm.evidenceEdit.source.source_type;
+    vm.evidenceEdit.source =  vm.evidenceEdit.source.citation_id; // replacing source here w/ just the ID b/c source typehead coerces init object to string
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -108,52 +110,86 @@
         }
       },
       {
-        key: 'pubmed_id',
-        type: 'publication',
+        key: 'source_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope) {
+          // set attribute definition
+          var type = $scope.model.source_type === 'asco' ? 'ASCO':'PubMed';
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[type];
+        },
         templateOptions: {
-          label: 'Pubmed ID',
-          value: 'vm.evidenceEdit.pubmed_id',
-          minLength: 1,
+          label: 'Source Type',
           required: true,
+          // here we specify options instead of generating from config b/c the server gives us lowercase type strings instead of the multi-case strings used for the labels
+          options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: help['Source Type'],
           data: {
-            description: '--'
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.source_type
           },
-          helpText: help['Pubmed ID']
+          onChange: function(value, options, scope) {
+            // set attribute definition
+            // server returns all lowercase for source_type, we need to convert to the multicase
+            // versions to match the attribute descriptions here...
+            var type = value === 'asco' ? 'ASCO':'PubMed';
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[type];
+            // set source_type on citation_id and clear field
+            var sourceField = _.find(scope.fields, { key: 'source'});
+            sourceField.value({description: '', citation_id: ''});
+            sourceField.templateOptions.data.citation = '--';
+            if(value) { sourceField.templateOptions.data.sourceType = value; }
+            else {  sourceField.templateOptions.data.sourceType = undefined; }
+          }
+        }
+      },
+      {
+        key: 'source',
+        type: 'horizontalTypeaheadHelp',
+        wrapper: ['citation'],
+        templateOptions: {
+          label: 'Source',
+          required: true,
+          editable: true,
+          typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
+          templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
+          onSelect: 'to.data.citation  = $model.citation',
+          data: {
+            citation: '--',
+            sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
+            typeaheadSearch: function(val, sourceType) {
+              if (val.match(/[^0-9]+/)) { return false; } // must be numeric
+              if(sourceType === 'ASCO' && val.length < 2) { return false; } // asco IDs are all > 2 chr
+              var reqObj = {
+                citationId: val,
+                sourceType: sourceType
+              };
+              return Publications.verify(reqObj)
+                .then(function(response) {
+                  return response;
+                });
+            }
+          },
+          helpText: help['Source']
+        },
+        controller: /* @ngInject */ function($scope) {
+          $scope.to.data.sourceType = $scope.model.source_type;
+          $scope.to.data.citation = $scope.model.source_citation;
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined',
+          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
+          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"'
         },
         modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
           debounce: {
             default: 300,
             blur: 0
-          }
-        },
-        validators: {
-          validPubmedId: {
-            expression: function($viewValue, $modelValue, scope) {
-              if ($viewValue.length > 0) {
-                var deferred = $q.defer();
-                scope.options.templateOptions.loading = true;
-                Publications.verify($viewValue).then(
-                  function (response) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = response.description;
-                    deferred.resolve(response);
-                  },
-                  function (error) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = '--';
-                    deferred.reject(error);
-                  }
-                );
-                return deferred.promise;
-              } else {
-                scope.options.templateOptions.data.description = '--';
-                return true;
-              }
-            },
-            message: '"This does not appear to be a valid Pubmed ID."'
-          }
+          },
+          updateOn: 'default blur'
         }
       },
       {
@@ -216,7 +252,6 @@
         templateOptions: {
           label: 'Disease Name',
           required: true,
-          value: 'vm.newEvidence.disease_name',
           minLength: 32,
           helpText: help['Disease Name']
         },
@@ -229,7 +264,6 @@
           rows: 5,
           required: true,
           label: 'Evidence Statement',
-          value: 'vm.evidenceEdit.description',
           minLength: 32,
           helpText: help['Evidence Statement']
         }

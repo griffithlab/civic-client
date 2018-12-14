@@ -138,11 +138,30 @@
           cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>'
         },
         {
-          name: 'pubmed_id',
-          displayName: 'Pubmed ID',
-          width: '10%',
+          name: 'source_type',
+          displayName: 'Type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          type: 'string',
+          width: '8%',
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'PubMed', label: 'PubMed'},
+              { value: 'ASCO', label: 'ASCO'}
+            ]
+          }
+        },
+        {
+          name: 'citation_id',
+          displayName: 'Citation ID',
+          width: '8%',
           visible: true,
-          cellTemplate: '<div class="ui-grid-cell-contents"><a href="https://www.ncbi.nlm.nih.gov/pubmed/{{ row.entity[col.field] }}" target="_blank">{{ row.entity[col.field] }}</a></div>',
+          cellTemplate: '<div class="ui-grid-cell-contents">{{ row.entity[col.field] }}</div>',
           //visible: mode === 'full',
           enableFiltering: true,
           allowCellFocus: false,
@@ -157,7 +176,7 @@
           visible: mode === 'full',
           enableFiltering: true,
           allowCellFocus: false,
-          width: '15%',
+          width: '13%',
           type: 'string',
           cellTemplate: 'app/views/sources/components/cellTemplateCitation.tpl.html',
           filter: {
@@ -278,11 +297,14 @@
           if(_.has(source, 'disease') && source.disease !== null) {
             urlElements.push('diseaseName=' + source.disease);
           }
-          if(_.has(source, 'pubmed_id') && source.pubmed_id !== null) {
-            urlElements.push('pubmedId=' + source.pubmed_id);
+          if(_.has(source, 'source_type') && source.source_type !== null) {
+            urlElements.push('sourceType=' + source.source_type);
+          }
+          if(_.has(source, 'citation_id') && source.citation_id !== null) {
+            urlElements.push('citationId=' + source.citation_id);
           }
 
-          urlElements.push('sourceSuggestionId=' + source.id);
+          urlElements.push('sourceId=' + source.source_id);
 
           source.addEvidenceUrl = urlBase + '?' + urlElements.join('&');
           return source;
