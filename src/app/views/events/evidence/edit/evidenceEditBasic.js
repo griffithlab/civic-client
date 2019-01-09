@@ -162,7 +162,7 @@
             sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
             typeaheadSearch: function(val, sourceType) {
               if (val.match(/[^0-9]+/)) { return false; } // must be numeric
-              if(sourceType === 'ASCO' && val.length < 1) { return false; } // asco IDs are all > 2 chr
+              if(sourceType === 'ASCO' && val.length < 2) { return false; } // asco IDs are all > 2 chr
               var reqObj = {
                 citationId: val,
                 sourceType: sourceType
