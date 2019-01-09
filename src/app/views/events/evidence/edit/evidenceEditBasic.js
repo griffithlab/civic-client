@@ -136,7 +136,7 @@
             // server returns all lowercase for source_type, we need to convert to the multicase
             // versions to match the attribute descriptions here...
             var type = value === 'asco' ? 'ASCO':'PubMed';
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[type];
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id and clear field
             var sourceField = _.find(scope.fields, { key: 'source'});
             sourceField.value({description: '', citation_id: ''});
@@ -162,7 +162,7 @@
             sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
             typeaheadSearch: function(val, sourceType) {
               if (val.match(/[^0-9]+/)) { return false; } // must be numeric
-              if(sourceType === 'ASCO' && val.length < 2) { return false; } // asco IDs are all > 2 chr
+              if(sourceType === 'ASCO' && val.length < 1) { return false; } // asco IDs are all > 2 chr
               var reqObj = {
                 citationId: val,
                 sourceType: sourceType
