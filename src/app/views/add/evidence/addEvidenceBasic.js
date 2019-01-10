@@ -74,7 +74,7 @@
       gene: '',
       variant: '',
       source_type: '',
-      source: {citation_id: '', description: ''},
+      source_id:'',
       description: '',
       disease: {
         name: ''
@@ -240,8 +240,8 @@
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id and clear field
-            var sourceField = _.find(scope.fields, { key: 'source'});
-            sourceField.value({citation_id: '', description: ''});
+            var sourceField = _.find(scope.fields, { key: 'source_id'});
+            sourceField.value('');
             sourceField.templateOptions.data.citation = '--';
             if(value) { sourceField.templateOptions.data.sourceType = value; }
             else {  sourceField.templateOptions.data.sourceType = undefined; }
@@ -249,36 +249,52 @@
         }
       },
       {
-        key: 'source',
-        type: 'horizontalTypeaheadHelp',
-        wrapper: ['citation'],
+        key: 'source_id',
+        type: 'publication',
         templateOptions: {
           label: 'Source ID',
           required: true,
-          editable: false,
-          typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
-          templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
-          onSelect: 'to.data.citation  = $model.citation',
-          onChange: function(value, options, scope) {
-            // if field invalid, replace data.description with '--'
-          },
           data: {
             citation: '--',
-            sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
-            typeaheadSearch: function(val, sourceType) {
-              if (val.match(/[^0-9]+/)) { return false; } // must be numeric
-              if(sourceType === 'ASCO' && val.length < 2) { return false; } // asco IDs are all > 2 chr
-              var reqObj = {
-                citationId: val,
-                sourceType: sourceType
-              };
-              return Publications.verify(reqObj)
-                .then(function(response) {
-                  return response;
-                });
-            }
           },
           helpText: help['Source']
+        },
+        asyncValidators: {
+          validId: {
+            expression: function($viewValue, $modelValue, scope) {
+              var type = scope.model.source_type;
+              if ($viewValue.length > 0 && type !== '') {
+                if ($viewValue.match(/[^0-9]+/)) { return false; } // must be number
+                var deferred = $q.defer();
+                scope.options.templateOptions.loading = true;
+                var reqObj = {
+                  citationId: $viewValue,
+                  sourceType: type
+                };
+                Publications.verify(reqObj).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.citation = response.citation;
+                    deferred.resolve(true);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    if(error.status === 404) {
+                      scope.options.templateOptions.data.citation = 'No ' + type + ' source found with specified ID.';
+                    } else {
+                      scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                    }
+                    deferred.reject(false);
+                  }
+                );
+                return deferred.promise;
+              } else {
+                scope.options.templateOptions.data.description = '--';
+                return true;
+              }
+            },
+            message: '"This does not appear to be a valid source ID."'
+          }
         },
         controller: /* @ngInject */ function($scope, $stateParams) {
           if($stateParams.sourceId) {
