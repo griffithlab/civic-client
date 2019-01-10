@@ -410,7 +410,7 @@
         'Phenotypes' : 'Please provide any <a href="http://compbio.charite.de/hpoweb/showterm?id=HP:0000118" target="_blank">HPO phenotypes.</a>',
         'Rating' : 'Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.',
         'Source Type': 'CIViC accepts PubMed or ASCO Abstracts sources. Please indicate the source of the support for your evidence here.',
-        'Source': 'Please enter a PubMed ID or an ASCO Abstract number to search for your source, then select it from the dropdown (PubMed searches will only show a single record). NOTE: CIViC uses the ASCO ID, not the ASCO Abstract Number to uniquely identify ASCO sources. Upon selection it is the unique ASCO ID that will populate this field, not the ASCO Abstract Number.',
+        'Source': 'Please enter a PubMed or an ASCO ID to specify your source. NOTE: CIViC uses the unique ASCO ID, not the reused ASCO Abstract Numbers to uniquely identify ASCO sources. ASCO only provides its abstract IDs in the URL of the abstract record, following the word \'record\'. Copy and paste that number into this field.',
         'Revision Description' : 'Please provide a short description of your edits to this Evidence record.',
         'Additional Comments' : 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.',
         'keepSourceStatus' : 'Check this box if you wish the originating source suggestion to keep its un-curated status. Otherwise, it will be marked as curated and removed from the source suggestion queues.',
