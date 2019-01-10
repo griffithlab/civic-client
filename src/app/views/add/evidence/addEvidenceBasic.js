@@ -263,9 +263,9 @@
           validId: {
             expression: function($viewValue, $modelValue, scope) {
               var type = scope.model.source_type;
+              var deferred = $q.defer();
               if ($viewValue.length > 0 && type !== '') {
                 if ($viewValue.match(/[^0-9]+/)) { return false; } // must be number
-                var deferred = $q.defer();
                 scope.options.templateOptions.loading = true;
                 var reqObj = {
                   citationId: $viewValue,
@@ -287,11 +287,11 @@
                     deferred.reject(false);
                   }
                 );
-                return deferred.promise;
               } else {
                 scope.options.templateOptions.data.description = '--';
-                return true;
+                deferred.resolve(true);
               }
+              return deferred.promise;
             },
             message: '"This does not appear to be a valid source ID."'
           }
