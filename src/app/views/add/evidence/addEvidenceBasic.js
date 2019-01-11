@@ -74,7 +74,7 @@
       gene: '',
       variant: '',
       source_type: '',
-      source_id:'',
+      source: {citation_id: ''},
       description: '',
       disease: {
         name: ''
@@ -217,7 +217,7 @@
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
               // update source field info
               // this unfortunately reproduces code in onChange below, but updating value above doesn't trigger onChange...
-              var sourceField = _.find($scope.fields, { key: 'source'});
+              var sourceField = _.find($scope.fields, { key: 'source.citation_id'});
               sourceField.templateOptions.data.sourceType = st;
             } else {
               console.warn('Ignoring pre-population of Source Type with invalid value: ' + st);
@@ -240,7 +240,7 @@
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id and clear field
-            var sourceField = _.find(scope.fields, { key: 'source_id'});
+            var sourceField = _.find(scope.fields, { key: 'source.citation_id'});
             sourceField.value('');
             sourceField.templateOptions.data.citation = '--';
             if(value) { sourceField.templateOptions.data.sourceType = value; }
@@ -249,7 +249,7 @@
         }
       },
       {
-        key: 'source_id',
+        key: 'source.citation_id',
         type: 'publication',
         templateOptions: {
           label: 'Source ID',
