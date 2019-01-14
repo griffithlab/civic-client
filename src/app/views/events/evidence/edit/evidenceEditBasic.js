@@ -4,6 +4,7 @@
     .directive('evidenceEditBasic', evidenceEditBasicDirective)
     .controller('EvidenceEditBasicController', EvidenceEditBasicController);
 
+
   // @ngInject
   function evidenceEditBasicDirective() {
     return {
@@ -62,8 +63,10 @@
     vm.evidenceEdit.comment = { title: 'Evidence EID' + vm.evidence.id + ' Revision Description', text:'' };
     vm.evidenceEdit.drugs = _.filter(_.map(vm.evidence.drugs, 'name'), function(name){ return name !== 'N/A'; });
     vm.evidenceEdit.phenotypes = _.map(vm.evidenceEdit.phenotypes, function(phenotype) { return phenotype.hpo_class; });
-    vm.evidenceEdit.source_type = vm.evidenceEdit.source.source_type;
-    vm.evidenceEdit.source_id =  vm.evidenceEdit.source.citation_id; // replacing source here w/ just the ID b/c source typehead coerces init object to string
+    vm.evidenceEdit.source = {
+      source_type: vm.evidenceEdit.source.source_type,
+      citation_id: vm.evidenceEdit.source.citation_id
+    };
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -110,7 +113,7 @@
         }
       },
       {
-        key: 'source_type',
+        key: 'source.source_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
         controller: /* @ngInject */ function($scope) {
@@ -138,7 +141,7 @@
             var type = value === 'asco' ? 'ASCO':'PubMed';
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id and clear field
-            var sourceField = _.find(scope.fields, { key: 'source_id'});
+            var sourceField = _.find(scope.fields, { key: 'source.citation_id'});
             sourceField.value('');
             sourceField.templateOptions.data.citation = '--';
             if(value) { sourceField.templateOptions.data.sourceType = value; }
@@ -147,7 +150,7 @@
         }
       },
       {
-        key: 'source_id',
+        key: 'source.citation_id',
         type: 'publication',
         templateOptions: {
           label: 'Source ID',
@@ -160,7 +163,7 @@
         asyncValidators: {
           validId: {
             expression: function($viewValue, $modelValue, scope) {
-              var type = scope.model.source_type;
+              var type = scope.model.source.source_type;
               var deferred = $q.defer();
               if ($viewValue.length > 0 && type !== '') {
                 if ($viewValue.match(/[^0-9]+/)) { return false; } // must be number
@@ -205,9 +208,11 @@
           }
         },
         expressionProperties: {
-          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined',
-          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
-          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"'
+          'templateOptions.disabled': 'model.source.source_type === "" || model.source.source_type === undefined',
+          'templateOptions.label': 'model.source.source_type ? model.source.source_type === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
+          'templateOptions.placeholder': 'model.source.source_type ? model.source.source_type === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"',
+          'templateOptions.helpText': 'model.source.source_type ? model.source.source_type === "ASCO" ? "' + help['SourceASCO'] + '" : "' + help['SourcePubMed'] + '" : "Please enter a Source Type before entering a Source ID."',
+
         },
         modelOptions: {
           debounce: {
