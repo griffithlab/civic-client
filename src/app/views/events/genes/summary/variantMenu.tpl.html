@@ -100,7 +100,7 @@
       <div class="radio">
         <label>
           <input type="radio" ng-model="$parent.options_filter" value="accepted_submitted">
-          <span uib-tooltip="Includes variants that have at least one editor-reviewed and/or pending evidence item">Show variants with accepted and/or submitted evidence <span class="count" >({{$parent.evidence_category_counts.accepted + $parent.evidence_category_counts.submitted}})</span></span>
+          <span uib-tooltip="Includes variants that have at least one editor-reviewed and/or pending evidence item">Show variants with accepted and/or submitted evidence <span class="count" >({{ $parent.evidence_category_counts.accepted_or_submitted }})</span></span>
         </label>
       </div>
       <div class="radio">
