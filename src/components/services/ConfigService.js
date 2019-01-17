@@ -301,6 +301,10 @@
           'Unknown': 'The variant origin is uncertain based on the available evidence.',
           'N/A': 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concepts of variant origin.'
         },
+        source_type: {
+          'PubMed': 'Evidence item source uses a PubMed publication.',
+          'ASCO': 'Evidence item source uses an ASCO abstract.'
+        },
         evidence_type: {
           'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
           'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
@@ -404,7 +408,10 @@
         'Drug Names' : 'For predictive evidence, specify one or more drug names. Drugs specified must possess a PubChem ID (e.g., 44462760 for Dabrafenib).',
         'Drug Interaction Type' : 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
         'Phenotypes' : 'Please provide any <a href="http://compbio.charite.de/hpoweb/showterm?id=HP:0000118" target="_blank">HPO phenotypes.</a>',
-        'Rating' : '<p>Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.</p>',
+        'Rating' : 'Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.',
+        'Source Type': 'CIViC accepts PubMed or ASCO Abstracts sources. Please indicate the source of the support for your evidence here.',
+        'SourceASCO': 'Please enter an ASCO Web ID to specify your source. NOTE: The ASCO Web ID is not the ASCO abstract number. The ASCO Web ID can be found in the URL of the abstract, e.g. 160900 is the ASCO Web ID for Tyler Stewart, 2018, ASCO Annual Meeting, Abstract 9056 (https://meetinglibrary.asco.org/record/160900/abstract).',
+        'SourcePubMed': 'Please enter the PubMed ID for your source.',
         'Revision Description' : 'Please provide a short description of your edits to this Evidence record.',
         'Additional Comments' : 'Please provide any additional comments you wish to make about this evidence item. This comment will appear as the first comment in this item\'s comment thread.',
         'keepSourceStatus' : 'Check this box if you wish the originating source suggestion to keep its un-curated status. Otherwise, it will be marked as curated and removed from the source suggestion queues.',

@@ -19,7 +19,7 @@
         <div class="alert alert-danger">
           <p><strong>Error: {{ vm.error.status }}:</strong> {{vm.error.statusText}}
               <span ng-if="vm.error.status === 409"><br/>This source suggetion appears to conflict with a previously submitted suggestion. <a ng-href="/sources/{{ vm.error.data.id }}/summary">Visit the conflicting source page</a> to view the conflicting source's details and add further comments.</span>
-              
+
           </p>
         </div>
       </div>
@@ -45,7 +45,7 @@
                     class="btn btn-default"
                     ng-disabled="vm.form.$invalid"
                     ng-click="vm.submit(vm.newSuggestion, vm.formOptions)">
-              Submit Evidence for Inclusion
+              Submit Source for Evaluation
             </button>
           </span>
           </div>
@@ -75,14 +75,14 @@
     </div>
   </div>
 
-  <!--<div class="row" style="margin-top: 3em;">-->
-    <!--<div class="col-xs-6">-->
-      <!--<p>vm.newSuggestion</p>-->
-      <!--<pre ng-bind="vm.newSuggestion|json"></pre>-->
-    <!--</div>-->
-    <!--<div class="col-xs-6">-->
-      <!--<p>Duplicates:</p>-->
-      <!--<pre ng-bind="vm.duplicates|json"></pre>-->
-    <!--</div>-->
-  <!--</div>-->
+  <!-- <div class="row" style="margin-top: 3em;"> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <p>vm.newSuggestion</p> -->
+  <!-- <pre ng-bind="vm.newSuggestion|json"></pre> -->
+  <!-- </div> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <p>Form:</p> -->
+  <!-- <pre ng-bind="vm.suggestionFields|json"></pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
 </div>

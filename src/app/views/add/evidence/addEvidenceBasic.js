@@ -73,14 +73,13 @@
     vm.newEvidence = {
       gene: '',
       variant: '',
-      pubmed_id: '',
+      source: {citation_id: '', source_type: ''},
       description: '',
       disease: {
         name: ''
       },
       disease_name: '',
       noDoid: false,
-      //pubchem_id: '',
       drugs: [],
       drug_interaction_type: null,
       rating: '',
@@ -96,7 +95,7 @@
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
     vm.newEvidence.drugs  = [];
 
-    vm.newEvidence.source_suggestion_id = _.isUndefined($stateParams.sourceSuggestionId) ? null : Number($stateParams.sourceSuggestionId);
+    vm.newEvidence.source_suggestion_id = _.isUndefined($stateParams.sourceId) ? null : Number($stateParams.sourceId);
 
     vm.formErrors = {};
     vm.formMessages = {};
@@ -204,60 +203,122 @@
           }
         }
       },
-
       {
-        key: 'pubmed_id',
+        key: 'source.source_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.sourceType) {
+            var st = $stateParams.sourceType;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.source_type);
+            if(_.includes(permitted, st)) {
+              $scope.model.source_type = st;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
+              // update source field info
+              // this unfortunately reproduces code in onChange below, but updating value above doesn't trigger onChange...
+              var sourceField = _.find($scope.fields, { key: 'source.citation_id'});
+              sourceField.templateOptions.data.sourceType = st;
+            } else {
+              console.warn('Ignoring pre-population of Source Type with invalid value: ' + st);
+            }
+          }
+        },
+        templateOptions: {
+          label: 'Source Type',
+          required: true,
+          options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: help['Source Type'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.source_type
+          },
+          onChange: function(value, options, scope) {
+            // field value is showing up undefined here for some reason, accessing it via options
+            var val = options.value();
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[val];
+            // set source_type on citation_id and clear field
+            var sourceField = _.find(scope.fields, { key: 'source.citation_id'});
+            sourceField.value('');
+            sourceField.templateOptions.data.citation = '--';
+            if(val) { sourceField.templateOptions.data.sourceType = val; }
+            else {  sourceField.templateOptions.data.sourceType = undefined; }
+          }
+        }
+      },
+      {
+        key: 'source.citation_id',
         type: 'publication',
         templateOptions: {
-          label: 'Pubmed ID',
-          value: 'vm.newEvidence.pubmed_id',
-          minLength: 1,
+          label: 'Source ID',
           required: true,
           data: {
-            description: '--'
+            citation: '--',
+            sourceType: undefined,
           },
-          helpText: help['Pubmed ID']
         },
-        modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
-          debounce: {
-            default: 300,
-            blur: 0
-          }
-        },
-        controller: /* @ngInject */ function($scope, $stateParams) {
-          if($stateParams.pubmedId) {
-            $scope.model.pubmed_id = $stateParams.pubmedId;
-          }
-        },
-        validators: {
-          validPubmedId: {
+        asyncValidators: {
+          validId: {
             expression: function($viewValue, $modelValue, scope) {
-              if ($viewValue.length > 0) {
-                if ($viewValue.match(/[^0-9]+/)) { return false; }
-                var deferred = $q.defer();
+              var type = scope.model.source.source_type;
+              var deferred = $q.defer();
+              if ($viewValue.length > 0 && type !== '') {
+                if ($viewValue.match(/[^0-9]+/)) { return false; } // must be number
                 scope.options.templateOptions.loading = true;
-                Publications.verify($viewValue).then(
+                var reqObj = {
+                  citationId: $viewValue,
+                  sourceType: type
+                };
+                Publications.verify(reqObj).then(
                   function (response) {
                     scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = response.description;
-                    deferred.resolve(response);
+                    scope.options.templateOptions.data.citation = response.citation;
+                    deferred.resolve(true);
                   },
                   function (error) {
                     scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = '--';
-                    deferred.reject(error);
+                    if(error.status === 404) {
+                      scope.options.templateOptions.data.citation = 'No ' + type + ' source found with specified ID.';
+                    } else {
+                      scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                    }
+                    deferred.reject(false);
                   }
                 );
-                return deferred.promise;
               } else {
                 scope.options.templateOptions.data.description = '--';
-                return true;
+                deferred.resolve(true);
               }
+              return deferred.promise;
             },
-            message: '"This does not appear to be a valid Pubmed ID."'
+            message: '"This does not appear to be a valid source ID."'
           }
+        },
+        controller: /* @ngInject */ function($scope, $stateParams) {
+          if($stateParams.sourceId) {
+            // get citation
+            Sources.get($stateParams.sourceId)
+              .then(function(response){
+                $scope.model.source = response;
+                $scope.to.data.citation = response.citation;
+              });
+          }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'to.data.sourceType === "" || to.data.sourceType === undefined',
+          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO Web ID" : "PubMed ID" : "Source ID"',
+          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"',
+          // ng expressions here don't have access to config help objects, so we must clumsily insert them into the expression here
+          'templateOptions.helpText': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "' + help['SourceASCO'] + '" : "' + help['SourcePubMed'] + '" : "Please enter a Source Type before entering a Source ID."',
+        },
+        modelOptions: {
+          debounce: {
+            default: 300,
+            blur: 0
+          },
+          updateOn: 'default blur'
         }
       },
       { // duplicates warning row
@@ -268,28 +329,31 @@
           vm.pubmedName = '';
 
           function searchForDups(values) {
+            vm.duplicates = [];
             if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
-              vm.duplicates = [];
               Search.post({
-                  'operator': 'AND',
-                  'queries': [
-                    {
-                      'field': 'gene_name',
-                      'condition': {'name': 'contains', 'parameters': [values[0]]}
-                    },
-                    {
-                      'field': 'variant_name',
-                      'condition': {'name': 'contains', 'parameters': [values[1]]}
-                    },
-                    {
-                      'field': 'pubmed_id',
-                      'condition': {'name': 'is', 'parameters': [values[2]]
-                      }
-                    }
-                  ],
-                  'entity': 'evidence_items',
-                  'save': false
-                })
+                'operator': 'AND',
+                'queries': [
+                  {
+                    'field': 'gene_name',
+                    'condition': {'name': 'contains', 'parameters': [values[0]]}
+                  },
+                  {
+                    'field': 'variant_name',
+                    'condition': {'name': 'contains', 'parameters': [values[1]]}
+                  },
+                  {
+                    'field': 'source_type',
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[2]]}
+                  },
+                  {
+                    'field': 'citation_id',
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[3]]}
+                  }
+                ],
+                'entity': 'evidence_items',
+                'save': false
+              })
                 .then(function (response) {
                   vm.duplicates = response.results;
                 });
@@ -301,7 +365,8 @@
           $scope.$watchGroup([
             'model.gene.name',
             'model.variant.name',
-            'model.pubmed_id'
+            'model.source_type',
+            'model.source.citation_id'
           ], searchForDups);
         }
       },
@@ -323,6 +388,7 @@
         },
         templateOptions: {
           label: 'Variant Origin',
+          required: true,
           value: 'vm.newEvidence.variant_origin',
           options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
           valueProp: 'value',
@@ -593,8 +659,8 @@
           'templateOptions.options': function($viewValue, $modelValue, scope) {
             return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
               return !!(option.type === scope.model.evidence_type ||
-              option.type === 'default' ||
-              option.type === 'N/A');
+                        option.type === 'default' ||
+                        option.type === 'N/A');
             });
           },
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
@@ -656,7 +722,7 @@
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
-          _.without(scope.model.drugs, '').length > 1);
+                   _.without(scope.model.drugs, '').length > 1);
         }
       },
       {
@@ -752,6 +818,7 @@
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, '');
       newEvidence.phenotypes = _.without(newEvidence.phenotypes, '');
+
       if(newEvidence.drugs.length < 2) { newEvidence.drug_interaction_type = null; } // delete interaction if only 1 drug
       // convert variant name to object, if a string
       // TODO: figure out how to handle this more elegantly using angular-formly config object

@@ -1,29 +1,19 @@
 (function() {
   'use strict';
   angular.module('civic.config')
-    .config(publicationConfig)
-    .controller('PublicationController', PublicationController);
+    .config(publicationConfig);
 
   // @ngInject
   function publicationConfig(formlyConfigProvider) {
     formlyConfigProvider.setType({
       name: 'publication',
       extends: 'input',
-      wrapper: ['loader', 'pubdisplay', 'validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
+      wrapper: ['loader', 'citation', 'validationMessages', 'horizontalBootstrapHelp', 'bootstrapHasError']
     });
     formlyConfigProvider.setType({
       name: 'publication-multi',
       extends: 'input',
-      wrapper: ['loader','pubdisplay']
+      wrapper: ['loader','citation']
     });
   }
-
-  // @ngInject
-  function PublicationController($scope, Publications) {
-    console.log('PublicationController called.');
-    $scope.validatePublication = function(pubmedId) {
-      return Publications.verify(pubmedId);
-    };
-  }
-
 })();

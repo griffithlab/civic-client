@@ -10,13 +10,14 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <h3 ng-bind="vm.source.name" class="source-title">Full Source Title</h3>
-      <p><strong>Authors:</strong> <span ng-bind="vm.source.author_list_string">Authors List</span></p>
+      <h3 ng-bind-html="vm.source.name" class="source-title">Full Source Title</h3>
+      <strong>Authors:</strong> <span ng-bind="vm.source.author_string | ifEmpty: '--'">Authors List</span>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-7 col-lg-6">
-      <p><strong>Abstract:</strong> <span ng-bind="vm.source.abstract">Abstract</span></p>
+      <p ng-if="vm.source.source_type === 'PubMed'"><strong>Abstract:</strong> <span ng-bind="vm.source.abstract">Abstract</span></p>
+      <p ng-if="vm.source.source_type === 'ASCO'"><strong>Abstract:</strong> Due to ASCO copyright limitations, we cannot display this source's abstract here. Please <a ng-href="{{ vm.source.source_url }}">visit the source record on ASCO's website</a> to view the abstract.</p>
     </div>
     <div class="col-xs-12 col-md-5 col-lg-6">
       <div class="row">
@@ -38,14 +39,35 @@
                 <td class="value" ng-bind="vm.source.citation"></td>
               </tr>
               <tr>
-                <td class="key">Pubmed ID:</td>
+                <td class="key">
+                  <span ng-switch="vm.source.source_type">
+                    <span ng-switch-when="PubMed">
+                      PubMed ID:
+                    </span>
+                    <span ng-switch-when="ASCO">
+                      ASCO ID:
+                    </span>
+                  </span>
+                </td>
                 <td class="value">
-                  <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{vm.source.pubmed_id}}"
-                    class="btn btn-xs button-new-window"
-                    target="_blank">
-                    <span class="glyphicon glyphicon-new-window"></span>
-                    <span ng-bind="vm.source.pubmed_id"></span>
-                  </a>
+                  <span ng-switch="vm.source.source_type">
+                    <span ng-switch-when="PubMed">
+                      <a ng-href="{{vm.source.source_url}}"
+                        class="btn btn-xs button-new-window"
+                        target="_blank">
+                        <span class="glyphicon glyphicon-new-window"></span>
+                        <span ng-bind="vm.source.citation_id"></span>
+                      </a>
+                    </span>
+                    <span ng-switch-when="ASCO">
+                      <a ng-href="{{vm.source.source_url}}"
+                        class="btn btn-xs button-new-window"
+                        target="_blank">
+                        <span class="glyphicon glyphicon-new-window"></span>
+                        <span ng-bind="vm.source.citation_id"></span>
+                      </a>
+                    </span>
+                  </span>
                 </td>
               </tr>
               <tr ng-if="vm.source.clinical_trials.length > 0">
