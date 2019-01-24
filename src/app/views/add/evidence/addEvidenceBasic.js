@@ -73,8 +73,7 @@
     vm.newEvidence = {
       gene: '',
       variant: '',
-      source_type: '',
-      source: {citation_id: '', description: ''},
+      source: {citation_id: '', source_type: ''},
       description: '',
       disease: {
         name: ''
@@ -205,7 +204,7 @@
         }
       },
       {
-        key: 'source_type',
+        key: 'source.source_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
         controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
@@ -217,7 +216,7 @@
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
               // update source field info
               // this unfortunately reproduces code in onChange below, but updating value above doesn't trigger onChange...
-              var sourceField = _.find($scope.fields, { key: 'source'});
+              var sourceField = _.find($scope.fields, { key: 'source.citation_id'});
               sourceField.templateOptions.data.sourceType = st;
             } else {
               console.warn('Ignoring pre-population of Source Type with invalid value: ' + st);
@@ -227,7 +226,6 @@
         templateOptions: {
           label: 'Source Type',
           required: true,
-          value: 'vm.newEvidence.source_type',
           options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
           valueProp: 'value',
           labelProp: 'label',
@@ -237,48 +235,66 @@
             attributeDefinitions: descriptions.source_type
           },
           onChange: function(value, options, scope) {
+            // field value is showing up undefined here for some reason, accessing it via options
+            var val = options.value();
             // set attribute definition
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[val];
             // set source_type on citation_id and clear field
-            var sourceField = _.find(scope.fields, { key: 'source'});
-            sourceField.value({citation_id: '', description: ''});
+            var sourceField = _.find(scope.fields, { key: 'source.citation_id'});
+            sourceField.value('');
             sourceField.templateOptions.data.citation = '--';
-            if(value) { sourceField.templateOptions.data.sourceType = value; }
+            if(val) { sourceField.templateOptions.data.sourceType = val; }
             else {  sourceField.templateOptions.data.sourceType = undefined; }
           }
         }
       },
       {
-        key: 'source',
-        type: 'horizontalTypeaheadHelp',
-        wrapper: ['citation'],
+        key: 'source.citation_id',
+        type: 'publication',
         templateOptions: {
           label: 'Source ID',
           required: true,
-          editable: false,
-          typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
-          templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
-          onSelect: 'to.data.citation  = $model.citation',
-          onChange: function(value, options, scope) {
-            // if field invalid, replace data.description with '--'
-          },
           data: {
             citation: '--',
-            sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
-            typeaheadSearch: function(val, sourceType) {
-              if (val.match(/[^0-9]+/)) { return false; } // must be numeric
-              if(sourceType === 'ASCO' && val.length < 2) { return false; } // asco IDs are all > 2 chr
-              var reqObj = {
-                citationId: val,
-                sourceType: sourceType
-              };
-              return Publications.verify(reqObj)
-                .then(function(response) {
-                  return response;
-                });
-            }
+            sourceType: undefined,
           },
-          helpText: help['Source']
+        },
+        asyncValidators: {
+          validId: {
+            expression: function($viewValue, $modelValue, scope) {
+              var type = scope.model.source.source_type;
+              var deferred = $q.defer();
+              if ($viewValue.length > 0 && type !== '') {
+                if ($viewValue.match(/[^0-9]+/)) { return false; } // must be number
+                scope.options.templateOptions.loading = true;
+                var reqObj = {
+                  citationId: $viewValue,
+                  sourceType: type
+                };
+                Publications.verify(reqObj).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.citation = response.citation;
+                    deferred.resolve(true);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    if(error.status === 404) {
+                      scope.options.templateOptions.data.citation = 'No ' + type + ' source found with specified ID.';
+                    } else {
+                      scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                    }
+                    deferred.reject(false);
+                  }
+                );
+              } else {
+                scope.options.templateOptions.data.description = '--';
+                deferred.resolve(true);
+              }
+              return deferred.promise;
+            },
+            message: '"This does not appear to be a valid source ID."'
+          }
         },
         controller: /* @ngInject */ function($scope, $stateParams) {
           if($stateParams.sourceId) {
@@ -291,9 +307,11 @@
           }
         },
         expressionProperties: {
-          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined',
-          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
-          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"'
+          'templateOptions.disabled': 'to.data.sourceType === "" || to.data.sourceType === undefined',
+          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO Web ID" : "PubMed ID" : "Source ID"',
+          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"',
+          // ng expressions here don't have access to config help objects, so we must clumsily insert them into the expression here
+          'templateOptions.helpText': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "' + help['SourceASCO'] + '" : "' + help['SourcePubMed'] + '" : "Please enter a Source Type before entering a Source ID."',
         },
         modelOptions: {
           debounce: {
