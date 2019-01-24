@@ -30,10 +30,9 @@
     vm.error = {};
 
     vm.newSuggestion= {
-      source_type: '',
       source: {
         citation_id: '',
-        description: ''
+        source_type: ''
       },
       comment: {
         title: 'Source Suggestion Comment'
@@ -42,24 +41,13 @@
 
     vm.suggestionFields =[
       {
-        key: 'source_type',
+        key: 'source.source_type',
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
-        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
-          if($stateParams.sourceType) {
-            var st = $stateParams.sourceType;
-            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.source_type);
-            if(_.includes(permitted, st)) {
-              $scope.model.source_type = st;
-              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
-            } else {
-              console.warn('Ignoring pre-population of Source Type with invalid value: ' + st);
-            }
-          }
-        },
         templateOptions: {
           label: 'Source Type',
           required: true,
+          // here we specify options instead of generating from config b/c the server gives us lowercase type strings instead of the multi-case strings used for the labels
           options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
           valueProp: 'value',
           labelProp: 'label',
@@ -69,11 +57,10 @@
             attributeDefinitions: descriptions.source_type
           },
           onChange: function(value, options, scope) {
-            // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
             // set source_type on citation_id and clear field
-            var sourceField = _.find(scope.fields, { key: 'source'});
-            sourceField.value({citation_id: '', description: ''});
+            var sourceField = _.find(scope.fields, { key: 'source.citation_id'});
+            sourceField.value('');
             sourceField.templateOptions.data.citation = '--';
             if(value) { sourceField.templateOptions.data.sourceType = value; }
             else {  sourceField.templateOptions.data.sourceType = undefined; }
@@ -81,44 +68,69 @@
         }
       },
       {
-        key: 'source',
-        type: 'horizontalTypeaheadHelp',
-        wrapper: ['citation'],
+        key: 'source.citation_id',
+        type: 'publication',
         templateOptions: {
-          label: 'Source',
+          label: 'Source ID',
           required: true,
-          editable: false,
-          typeahead: 'item as item.citation_id for item in to.data.typeaheadSearch($viewValue, to.data.sourceType)',
-          templateUrl: 'components/forms/fieldTypes/citationTypeahead.tpl.html',
-          onSelect: 'to.data.citation  = $model.citation',
           data: {
             citation: '--',
-            sourceType: undefined, // need to store this here to pass into the typeahead expression as to.data.sourceType
-            typeaheadSearch: function(val, sourceType) {
-              if (val.match(/[^0-9]+/)) { return false; } // must be numeric
-              if(sourceType === 'ASCO' && val.length < 2) { return false; } // asco IDs are all > 2 chr
-              var reqObj = {
-                citationId: val,
-                sourceType: sourceType
-              };
-              return Publications.verify(reqObj)
-                .then(function(response) {
-                  return response;
-                });
-            }
           },
           helpText: help['Source']
         },
+        asyncValidators: {
+          validId: {
+            expression: function($viewValue, $modelValue, scope) {
+              var type = scope.model.source.source_type;
+              var deferred = $q.defer();
+              if ($viewValue.length > 0 && type !== '') {
+                if ($viewValue.match(/[^0-9]+/)) { return false; } // must be number
+                scope.options.templateOptions.loading = true;
+                var reqObj = {
+                  citationId: $viewValue,
+                  sourceType: type
+                };
+                Publications.verify(reqObj).then(
+                  function (response) {
+                    scope.options.templateOptions.loading = false;
+                    scope.options.templateOptions.data.citation = response.citation;
+                    deferred.resolve(true);
+                  },
+                  function (error) {
+                    scope.options.templateOptions.loading = false;
+                    if(error.status === 404) {
+                      scope.options.templateOptions.data.citation = 'No ' + type + ' source found with specified ID.';
+                    } else {
+                      scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                    }
+                    deferred.reject(false);
+                  }
+                );
+              } else {
+                scope.options.templateOptions.data.description = '--';
+                deferred.resolve(true);
+              }
+              return deferred.promise;
+            },
+            message: '"This does not appear to be a valid source ID."'
+          }
+        },
         controller: /* @ngInject */ function($scope, $stateParams) {
-          // TODO this won't work, will need to query the server to get the entire source object
-          // if($stateParams.citationId) {
-          //   $scope.model.citation_id = $stateParams.citationId;
-          // }
+          if($stateParams.sourceId) {
+            // get citation
+            Sources.get($stateParams.sourceId)
+              .then(function(response){
+                $scope.model.source = response;
+                $scope.to.data.citation = response.citation;
+              });
+          }
         },
         expressionProperties: {
-          'templateOptions.disabled': 'model.source_type === "" || model.source_type === undefined', // deactivate if source type specified
-          'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
-          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Select Source Type to enable Source ID"'
+          'templateOptions.disabled': 'model.source.source_type === "" || model.source.source_type === undefined',
+          'templateOptions.label': 'model.source.source_type ? model.source.source_type === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
+          'templateOptions.placeholder': 'model.source.source_type ? model.source.source_type === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"',
+          'templateOptions.helpText': 'model.source.source_type ? model.source.source_type === "ASCO" ? "' + help['SourceASCO'] + '" : "' + help['SourcePubMed'] + '" : "Please enter a Source Type before entering a Source ID."',
+
         },
         modelOptions: {
           debounce: {
@@ -164,7 +176,7 @@
         },
         'modelOptions': {
           'debounce': {
-            'default': 2000,
+            'default': 200,
             'blur': 0
           },
           'updateOn': 'default blur'

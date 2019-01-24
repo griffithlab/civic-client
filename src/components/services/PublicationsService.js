@@ -23,7 +23,7 @@
       verify: {
         method: 'GET',
         url: '/api/sources/existence/:citationId?source_type=:sourceType',
-        isArray: true,
+        isArray: false,
         cache: true
       }
     });
