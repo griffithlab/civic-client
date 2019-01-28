@@ -207,7 +207,7 @@
             state: 'help.evidence.evidence-levels'
           },
           {
-            heading: 'Trust Ratings',
+            heading: 'Evidence Ratings',
             state: 'help.evidence.trust-ratings'
           }
         ],

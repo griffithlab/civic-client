@@ -374,7 +374,7 @@
         { name: 'rating',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           displayName: 'TR',
-          headerTooltip: 'Trust Rating',
+          headerTooltip: 'Evidence Rating',
           type: 'number',
           allowCellFocus: false,
           filter: {
