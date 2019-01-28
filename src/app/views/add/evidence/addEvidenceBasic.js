@@ -309,7 +309,7 @@
         expressionProperties: {
           'templateOptions.disabled': 'to.data.sourceType === "" || to.data.sourceType === undefined',
           'templateOptions.label': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "ASCO Web ID" : "PubMed ID" : "Source ID"',
-          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"',
+          'templateOptions.placeholder': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "Search by ASCO ID" : "Search by PubMed ID" : "Please select Source Type"',
           // ng expressions here don't have access to config help objects, so we must clumsily insert them into the expression here
           'templateOptions.helpText': 'to.data.sourceType ? to.data.sourceType === "ASCO" ? "' + help['SourceASCO'] + '" : "' + help['SourcePubMed'] + '" : "Please enter a Source Type before entering a Source ID."',
         },
