@@ -111,7 +111,7 @@
         url: '/trust-ratings',
         templateUrl: 'app/pages/help_evidence_trust_ratings.tpl.html',
         data:{
-          titleExp: '"Help: Trust Rating"',
+          titleExp: '"Help: Evidence Rating"',
           navMode: 'sub'
         }
       })
