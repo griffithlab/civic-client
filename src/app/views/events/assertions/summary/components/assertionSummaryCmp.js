@@ -22,9 +22,18 @@
 
     vm.isEditor = Security.isEditor();
     vm.isAdmin = Security.isAdmin();
+    vm.isCurator = Security.isCurator();
 
     vm.assertion = Assertions.data.item;
     vm.myVariantInfo = Assertions.data.myVariantInfo;
+
+    if(Security.currentUser) {
+      var currentUserId = Security.currentUser.id;
+      var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
+      vm.ownerIsCurrentUser = submitterId === currentUserId;
+    } else {
+      vm.ownerIsCurrentUser = false;
+    }
 
     vm.AssertionsViewOptions = AssertionsViewOptions;
     vm.backgroundColor = AssertionsViewOptions.styles.view.backgroundColor;
