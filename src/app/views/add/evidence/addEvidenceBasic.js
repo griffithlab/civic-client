@@ -587,6 +587,7 @@
         },
         templateOptions: {
           label: 'Evidence Direction',
+          required: true,
           value: 'vm.newEvidence.evidence_direction',
           options: [{ value: '', label: 'Please select an Evidence Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
