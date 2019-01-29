@@ -178,7 +178,7 @@
           rows: 5,
           minimum_length: 3,
           label: 'Revision Description',
-          required: false,
+          required: true,
           value: 'text',
           helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
         },

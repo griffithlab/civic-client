@@ -517,7 +517,7 @@
         templateOptions: {
           rows: 5,
           minimum_length: 3,
-          required: false,
+          required: true,
           label: 'Revision Description',
           value: 'text',
           helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
