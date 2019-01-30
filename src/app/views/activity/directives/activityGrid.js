@@ -135,7 +135,7 @@
         },
         {
           name: 'entity_id',
-          displayName: 'Entity',
+          displayName: 'Entity ID',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: false,
