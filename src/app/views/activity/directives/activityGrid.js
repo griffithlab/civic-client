@@ -134,9 +134,8 @@
           }
         },
         {
-          name: 'evidence_item',
-          field: 'state_params.evidence_item.name',
-          displayName: 'Item',
+          name: 'entity_id',
+          displayName: 'Entity',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: false,
@@ -288,9 +287,26 @@
     $scope.$watchCollection(function() {
       return Events.data.collection;
     }, function(events) {
-      ctrl.gridOptions.data = events;
-
+      ctrl.gridOptions.data = parseData(events);
     });
+
+    function parseData(events) {
+      return _.map(events, function(event) {
+        // create Entity column values
+        var prefixes =  {
+          assertions: 'AID',
+          genes: 'GID',
+          variants: 'VID',
+          variantgroups: 'VGID',
+          evidenceitems: 'EID',
+          sources: 'SID'
+        };
+
+        var entity_prefix = prefixes[event.subject_type];
+        event.entity_id = entity_prefix + event.subject_id;
+        return event;
+      });
+    }
 
     function updateData() {
       fetchData(ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
