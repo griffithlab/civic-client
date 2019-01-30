@@ -151,7 +151,11 @@
                       },
                       function (error) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.description = '--';
+                        if(error.status === 404) {
+                          scope.options.templateOptions.data.citation = 'No PubMed source found with specified ID.';
+                        } else {
+                          scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                        }
                         deferred.reject(error);
                       }
                     );
