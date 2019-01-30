@@ -268,7 +268,7 @@
                     Publications.verify(reqObj).then(
                       function (response) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.citation = response[0].description;
+                        scope.options.templateOptions.data.citation = response.citation;
                         deferred.resolve(response);
                       },
                       function (error) {
