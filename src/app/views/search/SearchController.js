@@ -516,7 +516,7 @@
                     { value: 'Diagnostic', name: 'Diagnostic' },
                     { value: 'Prognostic', name: 'Prognostic' },
                     { value: 'Predisposing', name: 'Predisposing' },
-                    { value: 'Functional', label: 'Functional'},
+                    { value: 'Functional', name: 'Functional'},
                   ]
                 }
               }
