@@ -56,6 +56,7 @@
                   { value: 'pubmed_id', name: 'PubMed ID' },
                   { value: 'pmc_id', name: 'Pubmed Central ID (PMCID)'},
                   { value: 'rating', name: 'Rating' },
+                  { value: 'source_type', name: 'Source Type' },
                   { value: 'status', name: 'Status' },
                   { value: 'submitter', name: 'Submitter Display Name' },
                   { value: 'submitter_id', name: 'Submitter ID' },
@@ -617,6 +618,40 @@
                   options: [
                     { value: 'Supports', name: 'Supports'},
                     { value: 'Does Not Support', name: 'Does Not Support' }
+                  ]
+                }
+              }
+            ],
+            source_type: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'PubMed'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'ASCO', name: 'ASCO' },
+                    { value: 'PubMed', name: 'PubMed' },
                   ]
                 }
               }
@@ -3580,6 +3615,7 @@
                   { value: 'publication_year', name: 'Publication Year' },
                   { value: 'pubmed_id', name: 'PubMed ID' },
                   { value: 'source_suggestion_count', name: 'Source Suggestions' },
+                  { value: 'source_type', name: 'Source Type' },
                   { value: 'title', name: 'Title' },
                   { value: 'variant', name: 'Variant'},
                 ],
@@ -3979,6 +4015,40 @@
                 templateOptions: {
                   label: '',
                   required: true
+                }
+              }
+            ],
+            source_type: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'PubMed'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'ASCO', name: 'ASCO' },
+                    { value: 'PubMed', name: 'PubMed' },
+                  ]
                 }
               }
             ],
