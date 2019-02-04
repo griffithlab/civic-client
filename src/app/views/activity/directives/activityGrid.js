@@ -140,9 +140,18 @@
           allowCellFocus: false,
           enableFiltering: false,
           enableSorting: false,
+          cellTemplate: 'app/views/activity/directives/entityIdCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'entity_id_tooltip',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          visible: false
         },
         {
           name: 'timestamp',
@@ -301,9 +310,20 @@
           evidenceitems: 'EID',
           sources: 'SID'
         };
-
         var entity_prefix = prefixes[event.subject_type];
         event.entity_id = entity_prefix + event.subject_id;
+
+        // create column for entity id tooltip
+        var tooltipGenerators =  {
+          assertions:function(params) { return params.assertion.name; },
+          genes: function(params){ return params.gene.name; },
+          variants: function(params){ return params.variant.name; },
+          variantgroups: function(params){ return params.variantgroup.name; },
+          evidenceitems: function(params){ return params.evidence_item.name; },
+          sources: function(params){ return params.source.name; }
+        };
+        event.entity_id_tooltip = tooltipGenerators[event.subject_type](event.state_params);
+
         return event;
       });
     }
