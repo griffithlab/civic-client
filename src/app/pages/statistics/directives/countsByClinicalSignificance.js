@@ -48,7 +48,7 @@
       .text(options.title);
 
     var chart = new dimple.chart(svg)
-      .setMargins(0,25,0,25);
+        .setMargins(0,25,0,25);
 
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
@@ -61,13 +61,15 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    chart.data = _.map(options.data, function(key, value) {
-      return {
-        'Clinical Significance': _.capitalize(value),
-        Count: key
-      };
+    $scope.$watch('options', function(options) {
+      chart.data = _.map(options.data, function(key, value) {
+        return {
+          'Clinical Significance': _.capitalize(value),
+          Count: key
+        };
+      });
+      chart.draw();
     });
-    chart.draw();
 
     var onResize = function () { chart.draw(0, true); };
 

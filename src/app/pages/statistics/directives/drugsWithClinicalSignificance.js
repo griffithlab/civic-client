@@ -61,18 +61,20 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    chart.data =  _.chain(options.data)
-      .map(function(val, key){
-        return _.chain(val)
-          .map(function(v,k) {
-            return { Drug: key, 'Clinical Significance': _.capitalize(k), Count: v };
-          })
-          .value();
-      })
-      .flatten()
-      .value();
+    $scope.$watch('options', function(options) {
+      chart.data =  _.chain(options.data)
+        .map(function(val, key){
+          return _.chain(val)
+            .map(function(v,k) {
+              return { Drug: key, 'Clinical Significance': _.capitalize(k), Count: v };
+            })
+            .value();
+        })
+        .flatten()
+        .value();
 
-    chart.draw();
+      chart.draw();
+    });
 
     var onResize = function () { chart.draw(0, true); };
 

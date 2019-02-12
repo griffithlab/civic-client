@@ -61,13 +61,15 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    chart.data = _.map(options.data, function(key, value) {
-      return {
-        'Rating': _.capitalize(value),
-        Count: key
-      };
+    $scope.$watch('options', function(options) {
+      chart.data = _.map(options.data, function(key, value) {
+        return {
+          'Rating': _.capitalize(value),
+          Count: key
+        };
+      });
+      chart.draw();
     });
-    chart.draw();
 
     var onResize = function () { chart.draw(0, true); };
 

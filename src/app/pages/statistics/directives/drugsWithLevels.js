@@ -65,20 +65,22 @@
       return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['desc']);
     };
 
-    chart.data =  _.chain(options.data)
-      .map(function(val, key){
-        var complete = _.merge({a:0,b:0,c:0,d:0,e:0}, val);
-        return _.chain(complete)
-          .map(function(v,k){
-            return { Drug: key, Level: _.capitalize(k), Count: v };
-          })
-          .value();
-      })
-      .flatten()
-      .orderBy(['Drug', 'Level'], ['asc', 'desc'])
-      .value();
+    $scope.$watch('options', function(options) {
+      chart.data =  _.chain(options.data)
+        .map(function(val, key){
+          var complete = _.merge({a:0,b:0,c:0,d:0,e:0}, val);
+          return _.chain(complete)
+            .map(function(v,k){
+              return { Drug: key, Level: _.capitalize(k), Count: v };
+            })
+            .value();
+        })
+        .flatten()
+        .orderBy(['Drug', 'Level'], ['asc', 'desc'])
+        .value();
 
-    chart.draw();
+      chart.draw();
+    });
 
     var onResize = function () { chart.draw(0, true); };
 

@@ -31,10 +31,10 @@
 
     var svg = d3.select($element[0])
         .append('svg')
-      .attr('width', options.width)
-      .attr('height', options.height)
-      .attr('id', options.id)
-      .style('overflow', 'visible');
+        .attr('width', options.width)
+        .attr('height', options.height)
+        .attr('id', options.id)
+        .style('overflow', 'visible');
 
     // title
     svg.append('text')
@@ -60,20 +60,20 @@
     l._getEntries = function() {
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
+    $scope.$watch('options', function(options) {
+      chart.data =  _.chain(options.data)
+        .map(function(val, key) {
+          return _.chain(val)
+            .map(function(v,k) {
+              return { Source: key, 'Type': _.capitalize(k), Count: v };
+            })
+            .value();
+        })
+        .flatten()
+        .value();
 
-    chart.data =  _.chain(options.data)
-      .map(function(val, key) {
-        return _.chain(val)
-          .map(function(v,k) {
-            return { Source: key, 'Type': _.capitalize(k), Count: v };
-          })
-          .value();
-      })
-      .flatten()
-      .value();
-
-    chart.draw();
-
+      chart.draw();
+    });
     var onResize = function () { chart.draw(0, true); };
 
     angular.element($window).on('resize', onResize);
