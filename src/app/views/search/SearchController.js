@@ -478,7 +478,7 @@
                     { value: 'Loss of Function', name: 'Loss of Function'},
                     { value: 'Unaltered Function', name: 'Unaltered Function'},
                     { value: 'Neomorphic', name: 'Neomorphic'},
-                    { value: 'Other', name: 'Other'},
+                    { value: 'Unknown', name: 'Unknown'},
                     { value: 'N/A', name: 'N/A' }
                   ]
                 }
@@ -1514,7 +1514,7 @@
                     { value: 'Loss of Function', name: 'Loss of Function'},
                     { value: 'Unaltered Function', name: 'Unaltered Function'},
                     { value: 'Neomorphic', name: 'Neomorphic'},
-                    { value: 'Other', name: 'Other'},
+                    { value: 'Unknown', name: 'Unknown'},
                     { value: 'N/A', name: 'N/A' }
                   ]
                 }
