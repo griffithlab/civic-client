@@ -60,13 +60,13 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    $scope.$watch('options', function(options) {
-      chart.data = _.map(options.data, function(key, value) {
+    $scope.$watch('options.data', function(data) {
+      chart.data = _.map(data, function(key, value) {
         return {
           Type: _.capitalize(value),
           Count: key
         };
-      });
+      }, true);
       chart.draw();
     });
 

@@ -39,6 +39,16 @@
      */
     // TODO: get all template strings into their own files while preserving the ability to define col widths etc.
     formlyConfigProvider.setWrapper({
+      name: 'horizontalLabel',
+      template: [
+        '<label for="{{id}}" class="control-label {{to.labelSrOnly ? \'sr-only\' : \'\'}}" ng-if="to.label">',
+        '{{to.label}}',
+        '{{to.required ? \'*\' : \'\'}}',
+        '</label>',
+        '<formly-transclude></formly-transclude>',
+      ].join(' ')
+    });
+    formlyConfigProvider.setWrapper({
       // horizontal bootstrap row with label
       name: 'horizontalBootstrapLabel',
       template: [

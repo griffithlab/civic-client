@@ -77,8 +77,8 @@
           return response.$promise;
         });
     }
-    function dashboard() {
-      return StatsResource.dashboard().$promise
+    function dashboard(reqObj) {
+      return StatsResource.dashboard(reqObj).$promise
         .then(function(response) {
           return response.$promise;
         });
