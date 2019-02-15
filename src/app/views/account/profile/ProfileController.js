@@ -84,7 +84,7 @@
           label: 'Personal Website',
           minLength: 5,
           value: 'vm.userEdit.url',
-          helpText: 'Your personal website/blog. Please only include the domain and path, omitting the \'http://\' protocol part.'
+          helpText: 'Your personal website/blog. Please only include the domain and path, omitting the \'https://\' protocol part.'
         }
       },
       {
