@@ -587,6 +587,7 @@
         },
         templateOptions: {
           label: 'Evidence Direction',
+          required: true,
           value: 'vm.newEvidence.evidence_direction',
           options: [{ value: '', label: 'Please select an Evidence Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
@@ -738,7 +739,7 @@
               templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)',
-              editable: true
+              editable: false
             },
             data: {
               pushNew: function(model, index) {

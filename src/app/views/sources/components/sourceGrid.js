@@ -60,8 +60,27 @@
       noUnselect: true,
       columnDefs: [
         {
-          name: 'pubmed_id',
-          displayName: 'Pubmed ID',
+          name: 'source_type',
+          displayName: 'Type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          type: 'string',
+          width: '8%',
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: '0', label: 'PubMed'},
+              { value: '1', label: 'ASCO'}
+            ]
+          }
+        },
+        {
+          name: 'citation_id',
+          displayName: 'Citation ID',
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',

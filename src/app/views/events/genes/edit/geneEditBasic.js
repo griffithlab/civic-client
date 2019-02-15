@@ -146,12 +146,16 @@
                     Publications.verify(reqObj).then(
                       function (response) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.citation = response[0].description;
+                        scope.options.templateOptions.data.citation = response.citation;
                         deferred.resolve(response);
                       },
                       function (error) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.description = '--';
+                        if(error.status === 404) {
+                          scope.options.templateOptions.data.citation = 'No PubMed source found with specified ID.';
+                        } else {
+                          scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                        }
                         deferred.reject(error);
                       }
                     );
@@ -178,7 +182,7 @@
           rows: 5,
           minimum_length: 3,
           label: 'Revision Description',
-          required: false,
+          required: true,
           value: 'text',
           helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
         },
