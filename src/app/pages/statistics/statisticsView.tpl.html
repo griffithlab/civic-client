@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="row">
-    <form novalidate class="">
+    <form novalidate class="" autocomplete="off">
       <formly-form
         model="vm.model"
         fields="vm.formFields"
@@ -48,19 +48,16 @@
       <ui-view></ui-view>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-6" >
-      <h4>vm.model</h4>
-      <pre ng-bind="vm.model | json">
-
-      </pre>
-    </div>
-    <div class="col-xs-6" >
-      <h4>vm.options</h4>
-      <pre ng-bind="vm.options | json">
-
-      </pre>
-    </div>
-
-  </div>
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-6" > -->
+  <!-- <h4>Stats.data.dashboard</h4> -->
+  <!-- <pre ng-bind="vm.Stats.data.dashboard | json"> -->
+  <!-- </pre> -->
+  <!-- </div> -->
+  <!-- <div class="col-xs-6" > -->
+  <!-- <h4>vm.options</h4> -->
+  <!-- <pre ng-bind="vm.options | json"> -->
+  <!-- </pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
 </div>

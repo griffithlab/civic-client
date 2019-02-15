@@ -131,55 +131,17 @@
       limit_by_status: ''
 
     };
+
     function updateData() {
-      Stats.dashboard(vm.model)
-        .then(function(data) {
-          vm.options = {
-            countsByEvidenceType: {
-              data: data.counts_by_evidence_type
-            },
-            countsByEvidenceLevel: {
-              data: data.counts_by_evidence_level
-            },
-            countsByEvidenceDirection: {
-              data: data.counts_by_evidence_direction
-            },
-            countsByVariantOrigin: {
-              data: data.counts_by_variant_origin
-            },
-            countsByClinicalSignificance: {
-              data: data.counts_by_clinical_significance
-            },
-            countsByRating: {
-              data: data.counts_by_rating
-            },
-            countsByStatus: {
-              data: data.counts_by_status
-            },
-            drugsWithLevels: {
-              data: data.top_drugs_with_levels
-            },
-            drugsWithClinicalSignificance: {
-              data: data.top_drugs_with_clinical_significance
-            },
-            diseasesWithLevels: {
-              data: data.top_diseases_with_levels
-            },
-            diseasesWithTypes: {
-              data: data.top_diseases_with_types
-            },
-            sourcesWithLevels: {
-              data: data.top_journals_with_levels
-            },
-            sourcesWithTypes: {
-              data: data.top_journals_with_types
-            }
-          };
-        });
+      Stats.getDashboard(vm.model);
     }
 
+    vm.Stats = Stats;
+
+    // call to initialize dashboard data
     updateData();
 
+    // place on scope for Filter button onClick
     vm.updateData = updateData;
 
     var fieldClassName = 'col-xs-5';
