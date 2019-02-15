@@ -270,7 +270,7 @@
               { value: 'Loss of Function', label: 'Loss of Function'},
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
-              { value: 'Other', label: 'Other'},
+              { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
           },
@@ -487,7 +487,7 @@
               { value: 'Loss of Function', label: 'Loss of Function'},
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
-              { value: 'Other', label: 'Other'},
+              { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
           },
