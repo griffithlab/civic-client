@@ -61,6 +61,7 @@
     function site() {
       return StatsResource.site().$promise
         .then(function(response) {
+          angular.copy(response, site);
           return response.$promise;
         });
     }
@@ -68,18 +69,21 @@
     function user(userId) {
       return StatsResource.user({ userId: userId}).$promise
         .then(function(response) {
+          angular.copy(response, user);
           return response.$promise;
         });
     }
     function organization(organizationId) {
       return StatsResource.organization({ organizationId: organizationId}).$promise
         .then(function(response) {
+          angular.copy(response, organization);
           return response.$promise;
         });
     }
     function dashboard(reqObj) {
       return StatsResource.dashboard(reqObj).$promise
         .then(function(response) {
+          angular.copy(response, dashboar);
           return response.$promise;
         });
     }
