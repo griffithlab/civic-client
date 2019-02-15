@@ -26,7 +26,8 @@
                                     $element,
                                     d3,
                                     dimple,
-                                    _) {
+                                    _,
+                                   Stats) {
     console.log('countsByStatus loaded.');
     var options = $scope.options;
 
@@ -61,8 +62,10 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    $scope.$watch('options', function(options) {
-      chart.data = _.map(options.data, function(key, value) {
+    $scope.$watch(function() {
+      return Stats.data.dashboard.counts_by_status;
+    }, function(data) {
+      chart.data = _.map(data, function(key, value) {
         return {
           'Status': _.capitalize(value),
           Count: key
