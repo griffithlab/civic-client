@@ -4,8 +4,10 @@
     .controller('StatisticsController', StatisticsController);
 
   // @ngInject
-  function StatisticsController($scope, Stats, Genes) {
+  function StatisticsController($scope, $state, Stats, Genes) {
     var vm = $scope.vm = {};
+    vm.stateIncludes = $state.includes;
+
     var pieChartWidth = '100%',
         pieChartHeight = 360;
 
