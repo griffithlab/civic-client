@@ -50,7 +50,8 @@
 
     chart.setMargins(options.margin.left, options.margin.top, options.margin.right, options.margin.bottom);
 
-    chart.addMeasureAxis('x', 'Count');
+    var x = chart.addMeasureAxis('x', 'Count');
+    x.tickFormat = ',.2r';
 
     var y = chart.addCategoryAxis('y', 'Disease');
     y.addOrderRule('Count', false);
