@@ -25,7 +25,8 @@
                                        $element,
                                        d3,
                                        dimple,
-                                       _) {
+                                       _,
+                                       Stats) {
     console.log('diseasesWithTypes loaded.');
     var options = $scope.options;
 
@@ -61,8 +62,10 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    $scope.$watch('options', function(options) {
-      chart.data =  _.chain(options.data)
+    $scope.$watch(function() {
+      return Stats.data.dashboard.top_diseases_with_types;
+    }, function(data) {
+      chart.data =  _.chain(data)
         .map(function(val, key){
           return _.chain(val)
             .map(function(v,k) {
