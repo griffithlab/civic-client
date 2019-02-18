@@ -138,9 +138,6 @@
 
     vm.Stats = Stats;
 
-    // call to initialize dashboard data
-    updateData();
-
     // place on scope for Filter button onClick
     vm.updateData = updateData;
 
@@ -184,13 +181,13 @@
         className: fieldClassName,
         defaultValue: undefined,
         templateOptions: {
-          label: 'Submitter Status',
+          label: 'Submitted Status',
           required: false,
           options: [
             { value: '', name: 'Select Status to Filter'},
-            { value: 'curator', name: 'Curator'},
-            { value: 'editor', name: 'Editor' },
-            { value: 'admin', name: 'Administrator' }
+            { value: 'submitted', name: 'Submitted' },
+            { value: 'accepted', name: 'Accepted'},
+            { value: 'rejected', name: 'Rejected' },
           ]
         },
       },

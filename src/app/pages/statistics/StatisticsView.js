@@ -11,6 +11,11 @@
         abstract: true,
         controller: 'StatisticsController',
         templateUrl: 'app/pages/statistics/statisticsView.tpl.html',
+        resolve: {
+          data: function(Stats) {
+            return Stats.getDashboard();
+          }
+        },
         data: {
           titleExp: '"Statistics"',
           navMode: 'sub'
