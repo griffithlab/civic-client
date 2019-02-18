@@ -25,7 +25,8 @@
                                      $element,
                                      d3,
                                      dimple,
-                                     _) {
+                                     _,
+                                     Stats) {
     console.log('drugsWithLevels loaded.');
     var options = $scope.options;
 
@@ -65,8 +66,10 @@
       return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['desc']);
     };
 
-    $scope.$watch('options', function(options) {
-      chart.data =  _.chain(options.data)
+    $scope.$watch(function() {
+      return Stats.data.dashboard.top_drugs_with_levels;
+    }, function(data) {
+      chart.data =  _.chain(data)
         .map(function(val, key){
           var complete = _.merge({a:0,b:0,c:0,d:0,e:0}, val);
           return _.chain(complete)
