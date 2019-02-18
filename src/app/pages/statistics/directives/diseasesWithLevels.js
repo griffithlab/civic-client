@@ -59,11 +59,43 @@
     var s = chart.addSeries('Level', dimple.plot.bar);
     s.addOrderRule('Level', true);
 
+    // colors
+    var levelColors = [
+      {
+        val: 'A',
+        color: '#33b358'
+      },
+      {
+        val: 'B',
+        color: '#08b1e6'
+      },
+      {
+        val: 'C',
+        color: '#616eb2'
+      },
+      {
+        val: 'D',
+        color: '#f68f47'
+      },
+      {
+        val: 'E',
+        color: '#e24759'
+      },
+      {
+        val: 'F',
+        color: '#fce452'
+      }
+    ];
+
+    _.map(levelColors, function(c) {
+      chart.assignColor(c.val, c.color);
+    });
+
     // override legend sorting
     var l = chart.addLegend('50%', '90%', 220, 20, 'left');
     l._getEntries_old = l._getEntries;
     l._getEntries = function() {
-      return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['desc']);
+      return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
     $scope.$watch(function() {
