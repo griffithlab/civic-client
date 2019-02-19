@@ -2333,7 +2333,7 @@
                   { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
                   { value: 'allele_registry_id', name: 'Allele Registry ID' },
                   { value: 'assertion_count', name: 'Assertion' },
-                  { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
+                  { value: 'civic_actionability_score', name: 'CIViC Variant Evidence Score' },
                   { value: 'description', name: 'Description' },
                   { value: 'disease_name', name: 'Disease Implicated (Name)' },
                   { value: 'disease_doid', name: 'Disease Implicated (DOID)' },

@@ -152,7 +152,7 @@
         url: '/actionability-score',
         templateUrl: 'app/pages/help_variant_actionabilityscore.tpl.html',
         data: {
-          titleExp: '"Help: CIViC Actionability Score"',
+          titleExp: '"Help: CIViC Variant Evidence Score"',
           navMode: 'sub'
         }
       })

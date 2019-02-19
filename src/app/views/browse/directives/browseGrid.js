@@ -609,7 +609,7 @@
         {
           name: 'civic_actionability_score',
           width: '13%',
-          displayName: 'Actionability Score',
+          displayName: 'Evidence Score',
           enableFiltering: false,
           allowCellFocus: false,
           sort: {
