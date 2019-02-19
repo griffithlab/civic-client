@@ -225,8 +225,8 @@
             state: 'help.variants.summary'
           },
           {
-            heading: 'CIViC Variant Evidence Score',
-            state: 'help.variants.actionabilityscore'
+            heading: 'Evidence Score',
+            state: 'help.variants.variant-evidence-score'
           },
           {
             heading: 'Variant Type',
