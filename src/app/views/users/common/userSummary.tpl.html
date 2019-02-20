@@ -36,13 +36,24 @@
               </tr>
               <tr>
                 <td class="key">Organization:</td>
-                <td class="value" ng-if="user.organization.name == undefined">
-                  --
-                </td>
                 <td class="value">
-                  <a ui-sref="organizations.summary({organizationId: user.organization.id})">
-                    {{user.organization.name|ifEmpty: '--'}}
-                  </a>
+                  <span ng-switch="user.organization.id !== undefined">
+                    <!-- org obj -->
+                    <span ng-switch-when="true" >
+                      <a ui-sref="organizations.summary({organizationId: user.organization.id})">
+                        {{ user.organization.name }}</a>
+                      <!-- show parent org if exists -->
+                      <span ng-if="user.organization.parent.id !== undefined" >
+                        &nbsp;at <a ui-sref="organizations.summary({organizationId: user.organization.parent.id})">
+                        {{ user.organization.parent.name }}
+                        </a>
+                      </span>
+                    </span>
+                    <!-- no org obj -->
+                    <span ng-switch-when="false" >
+                      --
+                    </span>
+                  </span>
                 </td>
               </tr>
               <tr ng-if="user.bio.length > 0">
