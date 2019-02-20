@@ -116,7 +116,7 @@
           </div>
           <div class="civic-variant-score">
             <p>
-              <strong>CIViC Actionability Score: </strong>
+              <strong>CIViC Variant Evidence Score: </strong>
               <br/> {{variant.civic_actionability_score | ifEmpty: '--' }}
             </p>
           </div>
@@ -140,7 +140,7 @@
                   </assertion-tag>
                 </div>
               </div>
-              <div ng-show="hasHiddenAssertions" class="small">
+              <div ng-show="hasHiddenAssertions" class="small" style="margin-top: 8px;">
                 <span>Show&nbsp;rejected:</span>&nbsp;&nbsp;
                 <input type="checkbox" id="showAll" ng-model="showAll">
               </div>

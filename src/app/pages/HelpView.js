@@ -148,11 +148,11 @@
           navMode: 'sub'
         }
       })
-      .state('help.variants.actionabilityscore', {
-        url: '/actionability-score',
-        templateUrl: 'app/pages/help_variant_actionabilityscore.tpl.html',
+      .state('help.variants.variant-evidence-score', {
+        url: '/variant-evidence-score',
+        templateUrl: 'app/pages/help_variant_evidence_score.tpl.html',
         data: {
-          titleExp: '"Help: CIViC Actionability Score"',
+          titleExp: '"Help: CIViC Variant Evidence Score"',
           navMode: 'sub'
         }
       })
