@@ -28,7 +28,7 @@
             return Organizations.get($stateParams.organizationId);
           },
           stats: function($stateParams, Stats) {
-            return Stats.organization($stateParams.organizationId);
+            return Stats.getOrganization($stateParams.organizationId);
           }
         }
       });

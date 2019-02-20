@@ -25,7 +25,8 @@
                                                    $element,
                                                    d3,
                                                    dimple,
-                                                   _) {
+                                                   _,
+                                                   Stats) {
     console.log('drugsWithClinicalSignificance loaded.');
     var options = $scope.options;
 
@@ -53,7 +54,7 @@
     var y = chart.addCategoryAxis('y', 'Drug');
     y.addOrderRule('Count');
     chart.addSeries('Clinical Significance', dimple.plot.bar);
-    var l = chart.addLegend('50%', '80%', 50, 200, 'left');
+    var l = chart.addLegend('50%', '75%', 50, 200, 'left');
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
@@ -61,18 +62,22 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    chart.data =  _.chain(options.data)
-      .map(function(val, key){
-        return _.chain(val)
-          .map(function(v,k) {
-            return { Drug: key, 'Clinical Significance': _.capitalize(k), Count: v };
-          })
-          .value();
-      })
-      .flatten()
-      .value();
+    $scope.$watch(function() {
+      return Stats.data.dashboard.top_drugs_with_clinical_significance;
+    }, function(data) {
+      chart.data =  _.chain(data)
+        .map(function(val, key){
+          return _.chain(val)
+            .map(function(v,k) {
+              return { Drug: key, 'Clinical Significance': _.capitalize(k), Count: v };
+            })
+            .value();
+        })
+        .flatten()
+        .value();
 
-    chart.draw();
+      chart.draw();
+    });
 
     var onResize = function () { chart.draw(0, true); };
 

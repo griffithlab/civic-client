@@ -1,11 +1,10 @@
-
-<div class="browseView">
+<div class="statisticsView">
   <div class="row">
     <div class="subTabs col-xs-12">
       <div class="row">
         <div class="col-xs-3 name">
           <h3>
-           Statistics
+            Statistics
           </h3>
         </div>
 
@@ -32,10 +31,34 @@
       </div>
     </div>
   </div>
+  <div class="row filters-row" ng-if="vm.stateIncludes('statistics.evidence')">
+    <form novalidate class="" autocomplete="off">
+      <formly-form
+        model="vm.model"
+        fields="vm.formFields"
+        options="vm.formOptions">
+      </formly-form>
+    </form>
+    <div class="col-xs-2">
+      <label>&nbsp;</label>
+      <a ng-click="vm.updateData()" class="btn btn-block btn-primary" >Filter</a>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12">
       <ui-view></ui-view>
     </div>
   </div>
-
+  <!-- <div class="row"> -->
+  <!-- <div class="col-xs-6" > -->
+  <!-- <h4>Stats.data.dashboard</h4> -->
+  <!-- <pre ng-bind="vm.Stats.data.dashboard | json"> -->
+  <!-- </pre> -->
+  <!-- </div> -->
+  <!-- <div class="col-xs-6" > -->
+  <!-- <h4>vm.options</h4> -->
+  <!-- <pre ng-bind="vm.options | json"> -->
+  <!-- </pre> -->
+  <!-- </div> -->
+  <!-- </div> -->
 </div>

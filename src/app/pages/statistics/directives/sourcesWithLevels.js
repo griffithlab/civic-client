@@ -25,16 +25,17 @@
                                        $element,
                                        d3,
                                        dimple,
-                                       _) {
+                                       _,
+                                      Stats) {
     console.log('sourcesWithLevels loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
         .append('svg')
-      .attr('width', options.width)
-      .attr('height', options.height)
-      .attr('id', options.id)
-      .style('overflow', 'visible');
+        .attr('width', options.width)
+        .attr('height', options.height)
+        .attr('id', options.id)
+        .style('overflow', 'visible');
 
     // title
     svg.append('text')
@@ -55,7 +56,7 @@
     y.addOrderRule('Count', false);
 
     y.addOrderRule('Count');
-   var s = chart.addSeries('Level', dimple.plot.bar);
+    var s = chart.addSeries('Level', dimple.plot.bar);
     s.addOrderRule('Level', true);
 
     var l = chart.addLegend('50%', '90%', 220, 20, 'left');
@@ -66,19 +67,23 @@
       return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['desc']);
     };
 
-    chart.data =  _.chain(options.data)
-      .map(function(val, key) {
-        var complete = _.merge({a:0,b:0,c:0,d:0,e:0}, val);
-        return _.chain(complete)
-          .map(function(v,k) {
-            return { Source: key, 'Level': _.capitalize(k), Count: v };
-          })
-          .value();
-      })
-      .flatten()
-      .value();
+    $scope.$watch(function() {
+      return Stats.data.dashboard.top_journals_with_levels;
+    }, function(data) {
+      chart.data =  _.chain(data)
+        .map(function(val, key) {
+          var complete = _.merge({a:0,b:0,c:0,d:0,e:0}, val);
+          return _.chain(complete)
+            .map(function(v,k) {
+              return { Source: key, 'Level': _.capitalize(k), Count: v };
+            })
+            .value();
+        })
+        .flatten()
+        .value();
 
-    chart.draw();
+      chart.draw();
+    });
 
     var onResize = function () { chart.draw(0, true); };
 
