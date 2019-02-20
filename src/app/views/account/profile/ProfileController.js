@@ -74,7 +74,7 @@
           label: 'ORCID',
           minLength: 5,
           value: 'vm.userEdit.orcid',
-          helpText: 'Your Open Research and Contributor ID.'
+          helpText: 'Your Open Research and Contributor ID. Please only include the ID.'
         }
       },
       {
@@ -84,7 +84,7 @@
           label: 'Personal Website',
           minLength: 5,
           value: 'vm.userEdit.url',
-          helpText: 'Your personal website/blog.'
+          helpText: 'Your personal website/blog. Please only include the domain and path, omitting the \'https://\' protocol part.'
         }
       },
       {

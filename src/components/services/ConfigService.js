@@ -225,8 +225,8 @@
             state: 'help.variants.summary'
           },
           {
-            heading: 'CIViC Actionability Score',
-            state: 'help.variants.actionabilityscore'
+            heading: 'Evidence Score',
+            state: 'help.variants.variant-evidence-score'
           },
           {
             heading: 'Variant Type',
@@ -377,7 +377,7 @@
             'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
             'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
             'Neomorphic': 'TBD',
-            'Other': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
+            'Unknown': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
           },
         },
         drug_interaction_type: {

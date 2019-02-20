@@ -507,7 +507,7 @@
                     { value: 'Loss of Function', name: 'Loss of Function'},
                     { value: 'Unaltered Function', name: 'Unaltered Function'},
                     { value: 'Neomorphic', name: 'Neomorphic'},
-                    { value: 'Other', name: 'Other'},
+                    { value: 'Unknown', name: 'Unknown'},
                     { value: 'N/A', name: 'N/A' }
                   ]
                 }
@@ -545,7 +545,7 @@
                     { value: 'Diagnostic', name: 'Diagnostic' },
                     { value: 'Prognostic', name: 'Prognostic' },
                     { value: 'Predisposing', name: 'Predisposing' },
-                    { value: 'Functional', label: 'Functional'},
+                    { value: 'Functional', name: 'Functional'},
                   ]
                 }
               }
@@ -1577,7 +1577,7 @@
                     { value: 'Loss of Function', name: 'Loss of Function'},
                     { value: 'Unaltered Function', name: 'Unaltered Function'},
                     { value: 'Neomorphic', name: 'Neomorphic'},
-                    { value: 'Other', name: 'Other'},
+                    { value: 'Unknown', name: 'Unknown'},
                     { value: 'N/A', name: 'N/A' }
                   ]
                 }
@@ -2333,7 +2333,7 @@
                   { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
                   { value: 'allele_registry_id', name: 'Allele Registry ID' },
                   { value: 'assertion_count', name: 'Assertion' },
-                  { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
+                  { value: 'civic_actionability_score', name: 'CIViC Variant Evidence Score' },
                   { value: 'description', name: 'Description' },
                   { value: 'disease_name', name: 'Disease Implicated (Name)' },
                   { value: 'disease_doid', name: 'Disease Implicated (DOID)' },
@@ -2342,6 +2342,7 @@
                   { value: 'gene', name: 'Gene' },
                   { value: 'hgvs_expressions', name: 'HGVS Expression(s)' },
                   { value: 'name', name: 'Name' },
+                  { value: 'pipeline_type', name: 'Pipeline Type' },
                   { value: 'reference_bases', name: 'Reference Base(s)' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
@@ -2477,6 +2478,41 @@
                 templateOptions: {
                   label: '',
                   required: true
+                }
+              }
+            ],
+            pipeline_type: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'Proteint-Based'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'Protein-Based', name: 'Protein-Based' },
+                    { value: 'DNA-Based', name: 'DNA-Based' },
+                    { value: 'RNA-Based', name: 'RNA-Based' },
+                  ]
                 }
               }
             ],

@@ -518,7 +518,7 @@
               templateUrl: 'components/forms/fieldTypes/hpoTypeahead.tpl.html',
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)',
-              editable: true
+              editable: false
             },
             data: {
               pushNew: function(model, index) {
