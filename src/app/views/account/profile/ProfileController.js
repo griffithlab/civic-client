@@ -13,7 +13,7 @@
 
     vm.user = user;
     vm.userEdit = angular.copy(user);
-    vm.userEdit.country_id = vm.userEdit.country.id;
+    vm.userEdit.country_id = vm.userEdit.country === null ? null : vm.userEdit.country.id;
     vm.currentUser = Security.currentUser;
 
     // TODO: implement better error handling and success message
