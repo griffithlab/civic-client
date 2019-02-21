@@ -308,7 +308,8 @@
           variants: 'VID',
           variantgroups: 'VGID',
           evidenceitems: 'EID',
-          sources: 'SID'
+          sources: 'SID',
+          suggestedchanges: 'SC'
         };
         var entity_prefix = prefixes[event.subject_type];
         event.entity_id = entity_prefix + event.subject_id;
@@ -320,7 +321,12 @@
           variants: function(params){ return params.variant.name; },
           variantgroups: function(params){ return params.variantgroup.name; },
           evidenceitems: function(params){ return params.evidence_item.name; },
-          sources: function(params){ return params.source.name; }
+          sources: function(params){ return params.source.name; },
+          suggestedchanges: function(params){
+            var id = params.suggested_change.id;
+            return 'SC' + id;
+          },
+
         };
         event.entity_id_tooltip = tooltipGenerators[event.subject_type](event.state_params);
 
