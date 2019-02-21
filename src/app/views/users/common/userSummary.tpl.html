@@ -56,6 +56,10 @@
                   </span>
                 </td>
               </tr>
+              <tr>
+                <td class="key">Country:</td>
+                <td class="value">{{user.country.name | ifEmpty: '--'}}</td>
+              </tr>
               <tr ng-if="user.bio.length > 0">
                 <td colspan="2">
                   <p><span class="key">Biography:</span><br/>
