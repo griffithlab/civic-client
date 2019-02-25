@@ -70,6 +70,13 @@
           Count: key
         };
       });
+
+      if(chart.data.length === 0) {
+        chart.series.forEach(function(series){
+          series.shapes.remove();
+        });
+      }
+
       chart.draw(options.transitionDuration);
     });
 
