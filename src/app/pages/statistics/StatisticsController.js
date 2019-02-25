@@ -35,7 +35,7 @@
       left: 250
     };
 
-    var transitionDuration = 2000;
+    var transitionDuration = 1000;
 
     vm.options = {
       countsByEvidenceType: {
