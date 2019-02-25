@@ -52,7 +52,7 @@
 
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
-    chart.addSeries('Type', dimple.plot.pie);
+    var s = chart.addSeries('Type', dimple.plot.pie);
     var l = chart.addLegend('100%', 25, 90, 300, 'left');
 
     // override legend sorting
@@ -70,7 +70,7 @@
           Count: key
         };
       }, true);
-      chart.draw();
+      chart.draw(options.transitionDuration);
     });
 
     var onResize = function () { chart.draw(0, true); };
