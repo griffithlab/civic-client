@@ -398,7 +398,7 @@
           //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
         },
         {
-          name: 'source.phenotypes_list',
+          name: 'phenotypes_list',
           displayName: 'Associated Phenotypes',
           headerTooltip: 'Associated Phenotypes',
           type: 'string',
@@ -572,10 +572,10 @@
           } else {
             item.source.clinical_trial_ids = null;
           }
-          if (_.isArray(item.source.phenotypes) && item.source.phenotypes.length > 0) {
-            item.source.phenotypes_list = _.chain(item.source.phenotypes).without('').map('name').value().join(', ');
+          if (_.isArray(item.phenotypes) && item.phenotypes.length > 0) {
+            item.phenotypes_list = _.chain(item.phenotypes).without('').map('hpo_class').value().join(', ');
           } else {
-            item.source.phenotypes_list = null;
+            item.phenotypes_list = null;
           }
 
           // convert null ratings to zero
