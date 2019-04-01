@@ -35,12 +35,15 @@
       left: 250
     };
 
+    var transitionDuration = 1000;
+
     vm.options = {
       countsByEvidenceType: {
         width: pieChartWidth,
         height: pieChartHeight,
         title: 'Counts by Evidence Type',
         margin: pieMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       countsByEvidenceLevel: {
@@ -48,6 +51,7 @@
         height: pieChartHeight,
         title: 'Counts by Evidence Level',
         margin: pieMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       countsByEvidenceDirection: {
@@ -55,6 +59,7 @@
         height: pieChartHeight,
         title: 'Counts by Evidence Direction',
         margin: pieMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       countsByVariantOrigin: {
@@ -62,6 +67,7 @@
         height: pieChartHeight,
         title: 'Counts by Variant Origin',
         margin: pieMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       countsByClinicalSignificance: {
@@ -69,6 +75,7 @@
         height: pieChartHeight,
         title: 'Counts by Clinical Significance',
         margin: pieMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       countsByRating: {
@@ -76,6 +83,7 @@
         height: pieChartHeight,
         title: 'Counts by Rating',
         margin: pieMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       countsByStatus: {
@@ -83,6 +91,7 @@
         height: pieChartHeight,
         title: 'Counts by Status',
         margin: pieMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       drugsWithLevels: {
@@ -90,6 +99,7 @@
         height: barChartHeight,
         title: 'Top Drugs with Levels',
         margin: barMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       drugsWithClinicalSignificance: {
@@ -97,6 +107,7 @@
         height: barChartHeight,
         title: 'Top Drugs with Clinical Significance',
         margin: barMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       diseasesWithLevels: {
@@ -104,6 +115,7 @@
         height: barChartHeight,
         title: 'Top Diseases with Levels',
         margin: barMarginsWide,
+        transitionDuration: transitionDuration,
         data: []
       },
       diseasesWithTypes: {
@@ -111,6 +123,7 @@
         height: barChartHeight,
         title: 'Top Diseases with Types',
         margin: barMarginsWide,
+        transitionDuration: transitionDuration,
         data: []
       },
       sourcesWithLevels: {
@@ -118,6 +131,7 @@
         height: barChartHeight,
         title: 'Top Sources with Levels',
         margin: barMargins,
+        transitionDuration: transitionDuration,
         data: []
       },
       sourcesWithTypes: {
@@ -125,6 +139,7 @@
         height: barChartHeight,
         title: 'Top Sources with Types',
         margin: barMargins,
+        transitionDuration: transitionDuration,
         data: []
       }
     };

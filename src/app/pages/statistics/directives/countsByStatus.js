@@ -56,6 +56,25 @@
     chart.addSeries('Status', dimple.plot.pie);
     var l = chart.addLegend('100%', 25, 90, 300, 'left');
 
+    var statusColors = [
+      {
+        val: 'Accepted',
+        color: '#B2D49C'
+      },
+      {
+        val: 'Rejected',
+        color: '#ECA2C0'
+      },
+      {
+        val: 'Submitted',
+        color: '#F3BC94'
+      }
+    ];
+
+    _.map(statusColors, function(c) {
+      chart.assignColor(c.val, c.color);
+    });
+
     // override legend sorting
     l._getEntries_old = l._getEntries;
     l._getEntries = function() {
@@ -71,7 +90,14 @@
           Count: key
         };
       });
-      chart.draw();
+
+      if(chart.data.length === 0) {
+        chart.series.forEach(function(series){
+          series.shapes.remove();
+        });
+      }
+
+      chart.draw(options.transitionDuration);
     });
 
     var onResize = function () { chart.draw(0, true); };

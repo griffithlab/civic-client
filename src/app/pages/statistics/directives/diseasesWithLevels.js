@@ -113,7 +113,7 @@
         .flatten()
         .value();
 
-      chart.draw();
+      chart.draw(options.transitionDuration);
     });
 
     var onResize = function () { chart.draw(0, true); };
