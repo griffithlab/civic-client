@@ -39,6 +39,7 @@
                   { value: 'asco_id', name: 'ASCO ID' },
                   { value: 'assertion_count', name: 'Assertion' },
                   { value: 'clinical_significance', name: 'Clinical Significance' },
+                  { value: 'clinical_trial_id', name: 'Clinical Trial NCT ID' },
                   { value: 'disease_doid', name: 'Disease DOID' },
                   { value: 'disease_name', name: 'Disease Name' },
                   { value: 'interaction_type', name: 'Drug Interaction Type' },
@@ -128,6 +129,42 @@
                 template: 'associated with an assertion',
                 className: 'inline-field',
               },
+            ],
+            clinical_trial_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                    {value: 'is_empty', name: 'is empty'},
+                    {value: 'is_not_empty', name: 'is not empty'}
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/))
+                    {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name =="is_empty" || model.name == "is_not_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
             ],
             pmc_id: [
               {
