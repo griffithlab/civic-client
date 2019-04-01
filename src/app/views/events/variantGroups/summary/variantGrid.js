@@ -119,7 +119,63 @@
             condition: uiGridConstants.filter.CONTAINS
           },
           cellTemplate: 'app/views/events/variantGroups/summary/variantGridDescriptionCell.tpl.html'
-        }
+        },
+        {
+          name: 'coordinates.chromosome',
+          visible: false,
+          displayName: 'Chromosome 1',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+        },
+        {
+          name: 'coordinates.start',
+          visible: false,
+          displayName: 'Chromosome 1 Start',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+        },
+        {
+          name: 'coordinates.stop',
+          visible: false,
+          displayName: 'Chromosome 1 Stop',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+        },
+        {
+          name: 'coordinates.chromosome2',
+          visible: false,
+          displayName: 'Chromosome 2',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+        },
+        {
+          name: 'coordinates.start2',
+          visible: false,
+          displayName: 'Chromosome 2 Start',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+        },
+        {
+          name: 'coordinates.stop2',
+          visible: false,
+          displayName: 'Chromosome 2 Stop',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+        },
+        {
+          name: 'coordinates.reference_build',
+          visible: false,
+          displayName: 'Reference Build',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+        },
       ]
     };
 
