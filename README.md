@@ -1,5 +1,9 @@
 civic-client
 ============
+
+[![DOI](https://zenodo.org/badge/22993377.svg)](https://zenodo.org/badge/latestdoi/22993377)
+
+
 Developing for CIViC involves setting up a development environment. To get started quickly, we recommend launching an AWS EC2 instance from our pre-configured and maintained AMI ([getting started wiki page](https://github.com/genome/civic-server/wiki/Getting-Started-with-CIViC-Development-on-AWS)).
 
 Alternatively, you may set up your own local development environment using the following setup instructions.
