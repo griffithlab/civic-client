@@ -142,6 +142,17 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'evidence_item_count',
+          displayName: 'EIDs',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: false,
+          cellTemplate: 'app/views/sources/components/cellTemplateTooltip.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
         }
       ]
     };
