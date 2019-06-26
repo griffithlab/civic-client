@@ -1,8 +1,7 @@
 <div class="levelCell ngCellText"
      uib-tooltip="{{grid.appScope.ctrl.evidenceLevels[row.entity[col.field]]}}"
-     tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
      tooltip-placement="left"
-     tooltip-append-to-body="true"  >
+     tooltip-append-to-body="true">
   <span class="btn-block" ng-class="{'levelA': row.entity[col.field] === 'A', 'levelB': row.entity[col.field] === 'B','levelC': row.entity[col.field] === 'C', 'levelD': row.entity[col.field] === 'D', 'levelE': row.entity[col.field] === 'E' }">
     {{ row.entity[col.field] }}
   </span>
