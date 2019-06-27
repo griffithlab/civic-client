@@ -520,7 +520,7 @@
         },
         {
           name: 'rating',
-          displayName: 'TR',
+          displayName: 'ER',
           headerTooltip: 'Evidence Rating',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           allowCellFocus: false,
