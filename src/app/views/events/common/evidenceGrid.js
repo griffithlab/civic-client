@@ -101,12 +101,6 @@
       exporterMenuPdf: false,
       enableGridMenu: true,
       gridMenuShowHideColumns: false,
-      appScopeProvider: {
-        onDblClick: function(row) {
-          console.log('dbl-click!');
-          console.log(row);
-        }
-      },
       rowTemplate: 'app/views/events/common/evidenceGridRowTemplate.tpl.html',
       gridMenuCustomItems: [
         {
