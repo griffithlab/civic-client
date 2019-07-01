@@ -101,12 +101,6 @@
       exporterMenuPdf: false,
       enableGridMenu: true,
       gridMenuShowHideColumns: false,
-      appScopeProvider: {
-        onDblClick: function(row) {
-          console.log('dbl-click!');
-          console.log(row);
-        }
-      },
       rowTemplate: 'app/views/events/common/evidenceGridRowTemplate.tpl.html',
       gridMenuCustomItems: [
         {
@@ -373,7 +367,7 @@
         },
         { name: 'rating',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
-          displayName: 'TR',
+          displayName: 'ER',
           headerTooltip: 'Evidence Rating',
           type: 'number',
           allowCellFocus: false,

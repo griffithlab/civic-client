@@ -208,7 +208,7 @@
           },
           {
             heading: 'Evidence Ratings',
-            state: 'help.evidence.trust-ratings'
+            state: 'help.evidence.evidence-ratings'
           }
         ],
         variant: [

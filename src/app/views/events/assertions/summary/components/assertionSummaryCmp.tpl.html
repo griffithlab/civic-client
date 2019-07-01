@@ -3,8 +3,8 @@
     <div class="col-xs-12 col-md-6">
       <div class="row" ng-if="vm.assertion.status !== 'accepted'">
         <div class="col-xs-12 notices">
-          <div class="label label-warning" ng-if="vm.assertion.status === 'submitted'">This Assertion Has Not Yet Been Accepted</div>
-          <div class="label label-danger" ng-if="vm.assertion.status === 'rejected'">This Assertion Has Been Rejected</div>
+          <div class="label label-warning" ng-if="vm.assertion.status === 'submitted'">This Assertion is under active curation and may be incomplete!</div>
+          <div class="label label-danger" ng-if="vm.assertion.status === 'rejected'">WARNING: This Assertion has been rejected!</div>
         </div>
       </div>
       <div class="row">

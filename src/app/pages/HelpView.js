@@ -107,9 +107,9 @@
           navMode: 'sub'
         }
       })
-      .state('help.evidence.trust-ratings', {
-        url: '/trust-ratings',
-        templateUrl: 'app/pages/help_evidence_trust_ratings.tpl.html',
+      .state('help.evidence.evidence-ratings', {
+        url: '/evidence-ratings',
+        templateUrl: 'app/pages/help_evidence_evidence_ratings.tpl.html',
         data:{
           titleExp: '"Help: Evidence Rating"',
           navMode: 'sub'
