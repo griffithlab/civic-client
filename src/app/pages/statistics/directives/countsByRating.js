@@ -67,7 +67,7 @@
     }, function(data) {
       chart.data = _.map(data, function(key, value) {
         return {
-          'Rating': _.capitalize(value),
+          'Rating': value === "" ? "None assigned" : _.capitalize(value),
           Count: key
         };
       });
