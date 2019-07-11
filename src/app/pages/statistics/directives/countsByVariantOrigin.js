@@ -66,7 +66,7 @@
     }, function(data) {
       chart.data = _.map(data, function(key, value) {
         return {
-          Origin: _.capitalize(value),
+          Origin: value === "n/a" ? "N/A" : _.capitalize(value),
           Count: key
         };
       });
