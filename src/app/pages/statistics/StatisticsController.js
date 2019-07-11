@@ -94,6 +94,14 @@
         transitionDuration: transitionDuration,
         data: []
       },
+      countsByPending: {
+        width: pieChartWidth,
+        height: pieChartHeight,
+        title: 'Counts by Suggested Changes',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
       drugsWithLevels: {
         width: barChartWidth,
         height: barChartHeight,
