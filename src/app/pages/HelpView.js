@@ -263,6 +263,9 @@
         }
       });
 
+    // redirect root /help requests to /help/introduction
+    $urlRouterProvider.when('/help', '/help/introduction');
+
     // redirects for old root-level Help pages
     $urlRouterProvider.when('/help/getting-started', '/help/getting-started/introductory-materials');
     $urlRouterProvider.when('/help/evidence', '/help/evidence/overview');
