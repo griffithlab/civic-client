@@ -28,7 +28,10 @@
             </div>
             <div class="col-xs-6 text-right">
               <a ng-if="organization.url.length > 0"
-                class="btn btn-primary" target="_blank" href="{{organization.url}}" ng-bind="organization.url"></a>
+                 class="btn btn-primary" target="_blank" href="{{organization.url}}">
+                <span class="glyphicon glyphicon-new-window"></span>
+                Organization Website
+              </a>
             </div>
           </div>
         </div>
