@@ -48,7 +48,10 @@
         </li>
         <li class="attr-value" >
           <a ui-sref="organizations.summary({organizationId: vm.user.organization.id})">
-            {{vm.user.organization.name|ifEmpty: '--'}}
+            {{vm.user.organization.name | ifEmpty: '--'}}
+            <span ng-if="vm.user.organization.parent.name.length > 0">
+             at {{vm.user.organization.parent.name}}
+            </span>
           </a>
         </li>
         <li class="attr-key" >
