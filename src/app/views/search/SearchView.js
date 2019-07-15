@@ -6,7 +6,7 @@
     .config(SearchView);
 
   // @ngInject
-  function SearchView($stateProvider) {
+  function SearchView($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('search', {
         abstract: true,
@@ -80,6 +80,10 @@
           navMode: 'sub'
         }
       });
+
+    // redirect root /search requests to /search/evidence
+    $urlRouterProvider.when('/search', '/search/evidence/:token');
+
   }
 
   // @ngInject

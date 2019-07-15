@@ -20,8 +20,8 @@
           $deepStateRedirect.reset();
         }
       });
-
   }
+
 
   // @ngInject
   function CommunityViewController() {

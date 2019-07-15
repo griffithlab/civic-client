@@ -6,7 +6,8 @@
 
   // @ngInject
   function CommunityMainConfig($stateProvider,
-                               $resourceProvider) {
+                               $resourceProvider,
+                               $urlRouterProvider) {
     // TODO: toggle trailing-slash trim after civic-server configured to accept either
     $resourceProvider.defaults.stripTrailingSlashes = false;
 
@@ -26,6 +27,8 @@
         }
       });
 
+    // redirect root /community to /community/main
+    $urlRouterProvider.when('/community', '/community/main');
   }
 
   // @ngInject
