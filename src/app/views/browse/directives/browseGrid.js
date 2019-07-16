@@ -289,7 +289,8 @@
           allowCellFocus: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/events/common/assertionGrid/assertionGridEvidenceCell.tpl.html'
         }
       ],
       'evidence_items': [
