@@ -1,12 +1,12 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .directive('countsByRating', countsByRating)
-    .controller('countsByRatingController',
-                countsByRatingController);
+    .directive('countsByPending', countsByPending)
+    .controller('countsByPendingController',
+                countsByPendingController);
 
   // @ngInject
-  function countsByRating() {
+  function countsByPending() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -14,13 +14,13 @@
         palette: '='
       },
       templateUrl: 'app/pages/statistics/directives/chartPie.tpl.html',
-      controller: countsByRatingController
+      controller: countsByPendingController
     };
     return directive;
   }
 
   // @ngInject
-  function countsByRatingController($scope,
+  function countsByPendingController($scope,
                                     $window,
                                     $rootScope,
                                     $element,
@@ -28,7 +28,7 @@
                                     dimple,
                                     _,
                                    Stats) {
-    console.log('countsByRating loaded.');
+    console.log('countsByPending loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
@@ -53,8 +53,23 @@
 
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
-    chart.addSeries('Rating', dimple.plot.pie);
+    chart.addSeries('Status', dimple.plot.pie);
     var l = chart.addLegend('100%', 25, 90, 300, 'left');
+
+    var statusColors = [
+      {
+        val: 'No Pending Changes',
+        color: '#B2D49C'
+      },
+      {
+        val: 'Has Pending Changes',
+        color: '#ECA2C0'
+      }
+    ];
+
+    _.map(statusColors, function(c) {
+      chart.assignColor(c.val, c.color);
+    });
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
@@ -63,11 +78,11 @@
     };
 
     $scope.$watch(function() {
-      return Stats.data.dashboard.counts_by_rating;
+      return Stats.data.dashboard.counts_by_pending_revisions;
     }, function(data) {
       chart.data = _.map(data, function(key, value) {
         return {
-          'Rating': value === "" ? "None assigned" : _.capitalize(value),
+          Status: _.capitalize(value.replace(/_/g, " ")),
           Count: key
         };
       });
