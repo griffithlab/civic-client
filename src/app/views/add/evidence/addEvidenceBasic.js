@@ -300,14 +300,6 @@
           if($stateParams.citationId) {
             $scope.model.source.citation_id = $stateParams.citationId;
           }
-          // if($stateParams.sourceId) {
-          //   // get citation
-          //   Sources.get($stateParams.sourceId)
-          //     .then(function(response){
-          //       $scope.model.source = response;
-          //       $scope.to.data.citation = response.citation;
-          //     });
-          // }
         },
         expressionProperties: {
           'templateOptions.disabled': 'to.data.sourceType === "" || to.data.sourceType === undefined',
