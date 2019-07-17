@@ -1,10 +1,19 @@
 <div class="assertionsSummaryCmp">
   <div class="row">
     <div class="col-xs-12 col-md-6">
+      <!-- status warnings -->
       <div class="row" ng-if="vm.assertion.status !== 'accepted'">
         <div class="col-xs-12 notices">
-          <div class="label label-warning" ng-if="vm.assertion.status === 'submitted'">This Assertion is under active curation and may be incomplete!</div>
+          <div class="label label-warning" ng-if="vm.assertion.status === 'submitted'">CAUTION: This Assertion has not been accepted as accurate or complete!</div>
           <div class="label label-danger" ng-if="vm.assertion.status === 'rejected'">WARNING: This Assertion has been rejected!</div>
+        </div>
+      </div>
+      <!-- attribute warnings -->
+      <div class="row" ng-if="vm.assertion.status !== 'accepted'">
+        <div class="col-xs-12 notices">
+          <div class="label label-danger" ng-if="vm.assertion.evidence_items.length === 0">WARNING: This Assertion has not been assigned any supporting Evidence!</div>
+          <div class="label label-warning" ng-if="vm.assertion.amp_level === null">CAUTION: This Assertion has not been assigned an AMP Category!</div>
+
         </div>
       </div>
       <div class="row">
@@ -84,10 +93,10 @@
                   {{ vm.assertion.drug_interaction_type }}
                 </td>
               </tr>
-              <tr ng-if="vm.assertion.amp_level.length > 0">
+              <tr>
                 <td class="key">AMP Category:</td>
                 <td class="value">
-                  {{ vm.assertion.amp_level }}
+                  {{ vm.assertion.amp_level | ifEmpty: '--' }}
                 </td>
               </tr>
               <tr ng-if="vm.assertion.acmg_codes.length > 0">

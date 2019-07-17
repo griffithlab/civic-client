@@ -1,0 +1,7 @@
+<div class="ngCellText ui-grid-cell-contents" ng-class="col.colIndex()">
+  {{ row.entity[col.field] }}
+  <span ng-if="row.entity[col.field] == 0">
+    &nbsp;<i class="glyphicon glyphicon-exclamation-sign" style="color: #942830"
+            uib-tooltip="Assertion has zero evidence and is likely under active curation."></i>
+  </span>
+</div>
