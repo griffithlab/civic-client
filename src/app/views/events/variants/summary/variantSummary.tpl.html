@@ -17,7 +17,18 @@
               </p>
             </div>
             <div ng-if="variant.allele_registry_id !== null" ng-class="{'col-xs-5': variant.allele_registry_id !== null , 'col-xs-12': variant.variant_aliases.length === 0 }">
-              <p><strong>Allele Registry ID: </strong> <a ng-href="https://reg.genome.network/allele/{{variant.allele_registry_id}}.html" target="_blank">{{variant.allele_registry_id}}</a></p>
+              <p><strong>Allele Registry ID: </strong>
+                <span ng-switch="variant.allele_registry_id">
+                  <span ng-switch-when="_:CA">
+                    <a ng-href="http://reg.clinicalgenome.org/redmine/projects/registry/genboree_registry/landing"
+                      target="_blank"
+                      uib-tooltip="Allele not registered with ClinGen. Click to sign up with ClinGen and register it.">{{variant.allele_registry_id}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    <a ng-href="https://reg.genome.network/allele/{{variant.allele_registry_id}}.html" target="_blank">{{variant.allele_registry_id}}</a>
+                  </span>
+                </span>
+              </p>
             </div>
           </div>
         </div>
