@@ -212,7 +212,7 @@
             var st = $stateParams.sourceType;
             var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.source_type);
             if(_.includes(permitted, st)) {
-              $scope.model.source_type = st;
+              $scope.model.source.source_type = st;
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[st];
               // update source field info
               // this unfortunately reproduces code in onChange below, but updating value above doesn't trigger onChange...
@@ -297,13 +297,8 @@
           }
         },
         controller: /* @ngInject */ function($scope, $stateParams) {
-          if($stateParams.sourceId) {
-            // get citation
-            Sources.get($stateParams.sourceId)
-              .then(function(response){
-                $scope.model.source = response;
-                $scope.to.data.citation = response.citation;
-              });
+          if($stateParams.citationId) {
+            $scope.model.source.citation_id = $stateParams.citationId;
           }
         },
         expressionProperties: {
