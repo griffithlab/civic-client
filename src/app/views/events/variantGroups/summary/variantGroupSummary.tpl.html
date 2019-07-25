@@ -41,11 +41,15 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <div class="variant-prompt">
-          <div class="alert alert-info">
-            &uparrow; Click on an <strong>Variant</strong> above to view its details.
-          </div>
-        </div>
+        <evidence-grid
+          evidence="evidence"
+          variant="variantGroup"
+          show-gene-col="true"
+          show-variant-col="true"
+          rows="10"
+          context="'variant_group_summary'"
+          rounded="true">
+        </evidence-grid>
       </div>
     </div>
   </div>

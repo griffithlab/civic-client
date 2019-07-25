@@ -6,6 +6,7 @@
         <span ng-switch="ctrl.context">
           <!-- TODO: it would be better to pass in the title instead of adding a new condition for every context -->
           <span ng-switch-when="summary">Evidence for {{ variant.name }}</span>
+          <span ng-switch-when="variant_group_summary">All {{variant.name}} Variant Evidence</span>
           <span ng-switch-when="source_summary">Evidence Supported by {{ source.citation}}</span>
           <span ng-switch-when="search">Search Results</span>
           <span ng-switch-when="profile">Submitted Evidence Items</span>
