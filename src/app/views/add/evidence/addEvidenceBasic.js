@@ -365,7 +365,7 @@
           $scope.$watchGroup([
             'model.gene.name',
             'model.variant.name',
-            'model.source_type',
+            'model.source.source_type',
             'model.source.citation_id'
           ], searchForDups);
         }
