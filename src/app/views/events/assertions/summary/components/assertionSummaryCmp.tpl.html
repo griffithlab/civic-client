@@ -4,18 +4,32 @@
       <!-- status warnings -->
       <div class="row" ng-if="vm.assertion.status !== 'accepted'">
         <div class="col-xs-12 notices">
-          <div class="label label-warning" ng-if="vm.assertion.status === 'submitted'">CAUTION: This Assertion has not been accepted as accurate or complete!</div>
-          <div class="label label-danger" ng-if="vm.assertion.status === 'rejected'">WARNING: This Assertion has been rejected!</div>
+          <div class="label label-warning" style="display:block;" ng-if="vm.assertion.status === 'submitted'">CAUTION: This Assertion has not been accepted as accurate or complete!</div>
+          <div class="label label-danger" style="display:block;" ng-if="vm.assertion.status === 'rejected'">WARNING: This Assertion has been rejected!</div>
         </div>
       </div>
-      <!-- attribute warnings -->
-      <div class="row" ng-if="vm.assertion.status !== 'accepted'">
-        <div class="col-xs-12 notices">
-          <div class="label label-danger" ng-if="vm.assertion.evidence_items.length === 0">WARNING: This Assertion has not been assigned any supporting Evidence!</div>
-          <div class="label label-warning" ng-if="vm.assertion.amp_level === null">CAUTION: This Assertion has not been assigned an AMP Category!</div>
 
+      <!-- general assertion warnings -->
+      <div class="row">
+        <div class="col-xs-12 notices">
+          <div class="label label-danger" style="display:block;" ng-if="vm.assertion.evidence_items.length === 0">WARNING: This Assertion has not been assigned any supporting Evidence!</div>
         </div>
       </div>
+
+      <!-- predisposing assertion warnings -->
+      <div class="row" ng-if="vm.assertion.evidence_type === 'Predisposing'">
+        <div class="col-xs-12 notices">
+          <div class="label label-danger" style="display:block;" ng-if="vm.assertion.acmg_codes.length === 0">WARNING: This Predisposing Assertion has not been assigned any ACMG Codes!</div>
+        </div>
+      </div>
+
+      <!-- non-predisposing assertion warnings -->
+      <div class="row" ng-if="vm.assertion.evidence_type !== 'Predisposing'">
+        <div class="col-xs-12 notices">
+          <div class="label label-warning" style="display:block;" ng-if="vm.assertion.amp_level === null">CAUTION: This Assertion has not been assigned an AMP Category!</div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-xs-12">
           <p>
@@ -93,13 +107,13 @@
                   {{ vm.assertion.drug_interaction_type }}
                 </td>
               </tr>
-              <tr>
+              <tr ng-if="vm.assertion.evidence_type !== 'Predisposing'">
                 <td class="key">AMP Category:</td>
                 <td class="value">
                   {{ vm.assertion.amp_level | ifEmpty: '--' }}
                 </td>
               </tr>
-              <tr ng-if="vm.assertion.acmg_codes.length > 0">
+              <tr ng-if="vm.assertion.evidence_type === 'Predisposing'">
                 <td class="key">ACMG Codes:</td>
                 <td class="value">
                   <span ng-switch="vm.assertion.acmg_codes.length > 0">
