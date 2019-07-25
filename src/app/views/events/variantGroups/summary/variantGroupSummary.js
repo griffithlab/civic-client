@@ -25,6 +25,7 @@
     $scope.stateParams = $stateParams;
     $scope.variantGroup = VariantGroups.data.item;
     $scope.variants = VariantGroups.data.variants;
+    $scope.evidence = VariantGroups.data.evidence;
     $scope.VariantGroupsViewOptions = VariantGroupsViewOptions;
     $scope.backgroundColor = VariantGroupsViewOptions.styles.view.backgroundColor;
   }
