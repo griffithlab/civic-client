@@ -19,7 +19,7 @@
     vm.currentUser= Security.currentUser;
     vm.stats = {};
 
-    Stats.user($scope.user.id).then(function(stats) {
+    Stats.getUser($scope.user.id).then(function(stats) {
       vm.stats = stats;
     });
   }

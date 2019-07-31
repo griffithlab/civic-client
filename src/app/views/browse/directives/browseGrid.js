@@ -270,7 +270,7 @@
               { value: 'Loss of Function', label: 'Loss of Function'},
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
-              { value: 'Other', label: 'Other'},
+              { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
           },
@@ -289,7 +289,8 @@
           allowCellFocus: false,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
-          }
+          },
+          cellTemplate: 'app/views/events/common/assertionGrid/assertionGridEvidenceCell.tpl.html'
         }
       ],
       'evidence_items': [
@@ -487,7 +488,7 @@
               { value: 'Loss of Function', label: 'Loss of Function'},
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
-              { value: 'Other', label: 'Other'},
+              { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
           },
@@ -520,8 +521,8 @@
         },
         {
           name: 'rating',
-          displayName: 'TR',
-          headerTooltip: 'Trust Rating',
+          displayName: 'ER',
+          headerTooltip: 'Evidence Rating',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           allowCellFocus: false,
           filter: {
@@ -609,7 +610,7 @@
         {
           name: 'civic_actionability_score',
           width: '13%',
-          displayName: 'Actionability Score',
+          displayName: 'Evidence Score',
           enableFiltering: false,
           allowCellFocus: false,
           sort: {
@@ -753,8 +754,27 @@
       ],
       'sources': [
         {
-          name: 'pubmed_id',
-          displayName: 'Pubmed ID',
+          name: 'source_type',
+          displayName: 'Type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          type: 'string',
+          width: '8%',
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: '0', label: 'PubMed'},
+              { value: '1', label: 'ASCO'}
+             ]
+          }
+        },
+        {
+          name: 'citation_id',
+          displayName: 'Citation ID',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -770,7 +790,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
-          width: '20%',
+          width: '15%',
           cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -794,7 +814,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
-          width: '15%',
+          width: '12%',
           cellTemplate: 'app/views/browse/directives/browseGridTooltipCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS

@@ -65,9 +65,6 @@
         });
       }
 
-      // treat '_:CA' values from registry as null, for now
-      if(variant.allele_registry_id === '_:CA') { variant.allele_registry_id = null; }
-
       return variant;
     }
   }

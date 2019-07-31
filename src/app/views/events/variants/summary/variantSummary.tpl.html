@@ -17,7 +17,18 @@
               </p>
             </div>
             <div ng-if="variant.allele_registry_id !== null" ng-class="{'col-xs-5': variant.allele_registry_id !== null , 'col-xs-12': variant.variant_aliases.length === 0 }">
-              <p><strong>Allele Registry ID: </strong> <a ng-href="https://reg.genome.network/allele/{{variant.allele_registry_id}}.html" target="_blank">{{variant.allele_registry_id}}</a></p>
+              <p><strong>Allele Registry ID: </strong>
+                <span ng-switch="variant.allele_registry_id">
+                  <span ng-switch-when="unregistered">
+                    <a ng-href="http://reg.clinicalgenome.org/redmine/projects/registry/genboree_registry/allele?hgvs={{variant.allele_registry_hgvs}}"
+                      target="_blank"
+                      uib-tooltip="Allele does not appear to be registered. Click to view its page and obtain a canonical allele identifier from ClinGen.">Unregistered</a>
+                  </span>
+                  <span ng-switch-default>
+                    <a ng-href="https://reg.genome.network/allele/{{variant.allele_registry_id}}.html" target="_blank">{{variant.allele_registry_id}}</a>
+                  </span>
+                </span>
+              </p>
             </div>
           </div>
         </div>
@@ -116,7 +127,7 @@
           </div>
           <div class="civic-variant-score">
             <p>
-              <strong>CIViC Actionability Score: </strong>
+              <strong>CIViC Variant Evidence Score: </strong>
               <br/> {{variant.civic_actionability_score | ifEmpty: '--' }}
             </p>
           </div>
@@ -140,7 +151,7 @@
                   </assertion-tag>
                 </div>
               </div>
-              <div ng-show="hasHiddenAssertions" class="small">
+              <div ng-show="hasHiddenAssertions" class="small" style="margin-top: 8px;">
                 <span>Show&nbsp;rejected:</span>&nbsp;&nbsp;
                 <input type="checkbox" id="showAll" ng-model="showAll">
               </div>

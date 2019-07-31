@@ -49,7 +49,7 @@
     vm.variantEdit = angular.copy(_.omit(vm.variant, ['evidence_items', 'lifecycle_actions']));
 
     vm.variantEdit.comment = { title: 'VARIANT ' + vm.variant.name + ' Suggested Revision', text:'' };
-    vm.variantEdit.sources = _.map(vm.variant.sources, 'pubmed_id');
+    vm.variantEdit.sources = _.map(vm.variant.sources, 'citation_id');
     vm.variantEdit.noClinVar = false;
 
     vm.myVariantInfo = variantModel.data.myVariantInfo;
@@ -244,7 +244,7 @@
               minLength: 1,
               required: true,
               data: {
-                description: '--'
+                citation: '--'
               }
             },
             modelOptions: {
@@ -261,10 +261,14 @@
                   if ($viewValue.length > 0) {
                     var deferred = $q.defer();
                     scope.options.templateOptions.loading = true;
-                    Publications.verify($viewValue).then(
+                    var reqObj = {
+                      citationId: $viewValue,
+                      sourceType: 'PubMed'
+                    };
+                    Publications.verify(reqObj).then(
                       function (response) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.description = response.description;
+                        scope.options.templateOptions.data.citation = response.citation;
                         deferred.resolve(response);
                       },
                       function (error) {
@@ -513,7 +517,7 @@
         templateOptions: {
           rows: 5,
           minimum_length: 3,
-          required: false,
+          required: true,
           label: 'Revision Description',
           value: 'text',
           helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'

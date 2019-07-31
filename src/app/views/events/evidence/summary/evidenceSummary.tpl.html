@@ -106,7 +106,7 @@
           <td class="value" ng-bind-html="evidence.phenotypesStr"></td>
         </tr>
         <tr>
-          <td class="name">Citation:</td>
+          <td class="name">Source:</td>
           <td class="value">
             <a ui-sref="sources.summary({sourceId: evidence.source.id })">
               {{ evidence.source.citation }}
@@ -114,13 +114,22 @@
           </td>
         </tr>
         <tr>
-          <td class="name">Pubmed ID:</td>
+          <td class="name">
+            <span ng-switch="evidence.source.source_type">
+              <span ng-switch-when="PubMed">
+                PubMed ID:
+              </span>
+              <span ng-switch-when="ASCO">
+                ASCO ID:
+              </span>
+            </span>
+          </td>
           <td class="value">
-            <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{evidence.source.pubmed_id}}"
+            <a ng-href="{{evidence.source.source_url}}"
               class="btn btn-xs button-new-window"
               target="_blank">
               <span class="glyphicon glyphicon-new-window"></span>
-              <span ng-bind="evidence.source.pubmed_id"></span>
+              <span ng-bind="evidence.source.citation_id"></span>
             </a>
           </td>
         </tr>
@@ -144,7 +153,7 @@
           </td>
         </tr>
         <tr>
-          <td class="name">Trust Rating:</td>
+          <td class="name">Evidence Rating:</td>
           <td class="value">
             <span uib-rating ng-model="evidence.rating" max="5" read-only="true"
               uib-tooltip="{{tipText.rating[evidence.rating]}}"
@@ -156,23 +165,23 @@
       </table>
     </div>
   </div>
-  <div class="row" ng-if="(isEditor() || isAdmin()) && evidence.status === 'submitted'" style="margin-top: 1em;">
+  <div class="row" ng-if="(isEditor() || isAdmin() || (isCurator() && ownerIsCurrentUser)) && evidence.status === 'submitted'" style="margin-top: 1em;">
     <div class="col-xs-6">
-      <button class="btn btn-default btn-block btn-danger"
+      <a class="btn btn-default btn-block btn-danger"
         ng-click="rejectItem(evidence.id)">
         Reject Evidence Item
-      </button>
+      </a>
     </div>
     <div class="col-xs-6">
       <span uib-tooltip="Contributors may not accept their own submissions."
         tooltip-append-to-body="true"
         tooltip-enable="ownerIsCurrentUser"
         class="help-tooltip">
-        <button class="btn btn-default btn-block btn-success"
+        <a class="btn btn-default btn-block btn-success"
           ng-disabled="ownerIsCurrentUser"
           ng-click="acceptItem(evidence.id)">
           Accept Evidence Item
-        </button>
+        </a>
       </span>
     </div>
   </div>

@@ -10,23 +10,11 @@
   </div>
   <div class="row" >
     <div class="col-xs-12 organization-link" >
-        <a ui-sref="organizations.summary({organizationId: vm.organization.id})"><span ng-bind="vm.organization.name" class="card-name"></span></a>
-    </div>
-  </div>
-  <div class="row" ng-if="vm.organization.organization.name != undefined">
-    <div class="col-xs-12">
-      <div class="secondary-organization-attributes">
-        <ul>
-          <li class="attr-key">
-            Organization
-          </li>
-          <li class="attr-value">
-            <a ui-sref="organizations.summary({organizationId: vm.organization.organization.id})">
-            {{vm.organization.organization.name|ifEmpty: '--'}}
-          </a>
-          </li>
-        </ul>
-      </div>
+      <a ui-sref="organizations.summary({organizationId: vm.organization.id})"><span ng-bind="vm.organization.name" class="card-name"></span></a>
+      <span ng-if="vm.organization.parent.id !== undefined" >
+        at
+        <a ui-sref="organizations.summary({organizationId: vm.organization.parent.id})"><span ng-bind="vm.organization.parent.name" class="card-name"></span></a>
+      </span>
     </div>
   </div>
   <div class="row" ng-if="vm.organization.community_params !== undefined">
@@ -68,7 +56,10 @@
   <div class="row" >
     <div class="col-xs-12" >
       <div class="website-link" >
-        <a ng-href="{{vm.organization.url}}" target="_blank"><span ng-bind="vm.organization.url" class="url"></span></a>
+        <a ng-href="{{vm.organization.url}}" target="_blank">
+          <span class="glyphicon glyphicon-new-window"></span>
+          <span>Organization Website</span>
+        </a>
       </div>
     </div>
   </div>

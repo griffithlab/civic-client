@@ -318,7 +318,7 @@
               { value: 'Loss of Function', label: 'Loss of Function'},
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
-              { value: 'Other', label: 'Other'},
+              { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
           },
@@ -351,8 +351,8 @@
         },
         {
           name: 'rating',
-          displayName: 'TR',
-          headerTooltip: 'Trust Rating',
+          displayName: 'ER',
+          headerTooltip: 'Evidence Rating',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           allowCellFocus: false,
           filter: {
@@ -528,7 +528,7 @@
               { value: 'Loss of Function', label: 'Loss of Function'},
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
-              { value: 'Other', label: 'Other'},
+              { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
           },
@@ -555,8 +555,8 @@
         },
         {
           name: 'rating',
-          displayName: 'TR',
-          headerTooltip: 'Trust Rating',
+          displayName: 'ER',
+          headerTooltip: 'Evidence Rating',
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           allowCellFocus: false,
           filter: {

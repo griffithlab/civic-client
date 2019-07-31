@@ -43,14 +43,25 @@
     var query = {
       'operator': 'AND',
       'queries': [
-        {'field': 'pubmed_id',
+        {
+          'field': 'source_type',
           'condition': {
-            'name': 'is',
+            'name': 'is_equal_to',
             'parameters': [
-              source.pubmed_id
+              source.source_type
             ]
           }
-        }],
+        },
+        {
+          'field': 'citation_id',
+          'condition': {
+            'name': 'is_equal_to',
+            'parameters': [
+              source.citation_id
+            ]
+          }
+        }
+      ],
       'entity': 'evidence_items',
       'save': true
     };

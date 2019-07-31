@@ -49,7 +49,7 @@
     vm.variantGroupHistory = VariantGroupHistory;
     vm.variantGroupEdit = angular.copy(vm.variantGroup);
     vm.variantGroupEdit.comment = { title: 'VARIANT GROUP ' + vm.variantGroup.name + ' Revision Description', text:'' };
-    vm.variantGroupEdit.sources = _.map(vm.variantGroup.sources, 'pubmed_id');
+    vm.variantGroupEdit.sources = _.map(vm.variantGroup.sources, 'citation_id');
     vm.variantGroupEdit.variantsEdit = _.map(vm.variantGroupEdit.variants, function(variant) {
       return { name: variant.entrez_name + ' - ' + variant.name, id: variant.id };
     });
@@ -105,7 +105,7 @@
               minLength: 1,
               required: true,
               data: {
-                description: '--'
+                citation: '--'
               }
             },
             modelOptions: {
@@ -122,10 +122,14 @@
                   if ($viewValue.length > 0) {
                     var deferred = $q.defer();
                     scope.options.templateOptions.loading = true;
-                    Publications.verify($viewValue).then(
+                    var reqObj = {
+                      citationId: $viewValue,
+                      sourceType: 'PubMed'
+                    };
+                    Publications.verify(reqObj).then(
                       function (response) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.description = response.description;
+                        scope.options.templateOptions.data.citation = response[0].description;
                         deferred.resolve(response);
                       },
                       function (error) {

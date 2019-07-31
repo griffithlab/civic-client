@@ -17,6 +17,8 @@
     console.log('SuggestSourceController called.');
 
     var help = ConfigService.evidenceHelpText;
+    var descriptions = ConfigService.evidenceAttributeDescriptions;
+    var make_options = ConfigService.optionMethods.make_options; // make options for pull down
 
     var vm = $scope.vm = {};
     vm.isAuthenticated = Security.isAuthenticated();
@@ -28,7 +30,9 @@
     vm.error = {};
 
     vm.newSuggestion= {
-      suggestion: {
+      source: {
+        citation_id: '',
+        source_type: ''
       },
       comment: {
         title: 'Source Suggestion Comment'
@@ -37,53 +41,103 @@
 
     vm.suggestionFields =[
       {
-        key: 'pubmed_id',
-        type: 'publication',
-        model: vm.newSuggestion.suggestion,
+        key: 'source.source_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
         templateOptions: {
-          label: 'Pubmed ID',
-          value: 'vm.newSuggestion.pubmed_id',
-          minLength: 1,
+          label: 'Source Type',
+          required: true,
+          // here we specify options instead of generating from config b/c the server gives us lowercase type strings instead of the multi-case strings used for the labels
+          options: [{ value: '', label: 'Please select a Source Type' }].concat(make_options(descriptions.source_type)),
+          valueProp: 'value',
+          labelProp: 'label',
+          helpText: help['Source Type'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.source_type
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+            // set source_type on citation_id and clear field
+            var sourceField = _.find(scope.fields, { key: 'source.citation_id'});
+            sourceField.value('');
+            sourceField.templateOptions.data.citation = '--';
+            if(value) { sourceField.templateOptions.data.sourceType = value; }
+            else {  sourceField.templateOptions.data.sourceType = undefined; }
+          }
+        }
+      },
+      {
+        key: 'source.citation_id',
+        type: 'publication',
+        templateOptions: {
+          label: 'Source ID',
           required: true,
           data: {
-            description: '--'
+            citation: '--',
           },
-          helpText: help['Pubmed ID']
+          helpText: help['Source']
         },
-        modelOptions: {
-          updateOn: 'default blur',
-          allowInvalid: false,
-          debounce: {
-            default: 300,
-            blur: 0
-          }
-        },
-        validators: {
-          validPubmedId: {
+        asyncValidators: {
+          validId: {
             expression: function($viewValue, $modelValue, scope) {
-              if (!_.isUndefined($viewValue) && $viewValue.length > 0) {
-                var deferred = $q.defer();
+              var type = scope.model.source.source_type;
+              var deferred = $q.defer();
+              if ($viewValue.length > 0 && type !== '') {
+                if ($viewValue.match(/[^0-9]+/)) { return false; } // must be number
                 scope.options.templateOptions.loading = true;
-                Publications.verify($viewValue).then(
+                var reqObj = {
+                  citationId: $viewValue,
+                  sourceType: type
+                };
+                Publications.verify(reqObj).then(
                   function (response) {
                     scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = response.description;
-                    deferred.resolve(response);
+                    scope.options.templateOptions.data.citation = response.citation;
+                    deferred.resolve(true);
                   },
                   function (error) {
                     scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.description = '--';
-                    deferred.reject(error);
+                    if(error.status === 404) {
+                      scope.options.templateOptions.data.citation = 'No ' + type + ' source found with specified ID.';
+                    } else {
+                      scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                    }
+                    deferred.reject(false);
                   }
                 );
-                return deferred.promise;
               } else {
                 scope.options.templateOptions.data.description = '--';
-                return true;
+                deferred.resolve(true);
               }
+              return deferred.promise;
             },
-            message: '"This does not appear to be a valid Pubmed ID."'
+            message: '"This does not appear to be a valid source ID."'
           }
+        },
+        controller: /* @ngInject */ function($scope, $stateParams) {
+          if($stateParams.sourceId) {
+            // get citation
+            Sources.get($stateParams.sourceId)
+              .then(function(response){
+                $scope.model.source = response;
+                $scope.to.data.citation = response.citation;
+              });
+          }
+        },
+        expressionProperties: {
+          'templateOptions.disabled': 'model.source.source_type === "" || model.source.source_type === undefined',
+          'templateOptions.label': 'model.source.source_type ? model.source.source_type === "ASCO" ? "ASCO ID" : "PubMed ID" : "Source ID"',
+          'templateOptions.placeholder': 'model.source.source_type ? model.source.source_type === "ASCO" ? "Search by ASCO Abstract Number" : "Search by PubMed ID" : "Please select Source Type"',
+          'templateOptions.helpText': 'model.source.source_type ? model.source.source_type === "ASCO" ? "' + help['SourceASCO'] + '" : "' + help['SourcePubMed'] + '" : "Please enter a Source Type before entering a Source ID."',
+
+        },
+        modelOptions: {
+          debounce: {
+            default: 300,
+            blur: 0
+          },
+          updateOn: 'default blur'
         }
       },
       {
@@ -120,10 +174,12 @@
             }
           }
         },
-        modelOptions: {
-          debounce: {
-            default: 300
-          }
+        'modelOptions': {
+          'debounce': {
+            'default': 200,
+            'blur': 0
+          },
+          'updateOn': 'default blur'
         }
       },
       {
@@ -185,7 +241,16 @@
             typeaheadSearch: function(val) {
               return Diseases.beginsWith(val)
                 .then(function(response) {
-                  return response;
+                  var labelLimit = 70;
+                  return _.map(response, function(disease) {
+                    if (disease.aliases.length > 0) {
+                      disease.alias_list = disease.aliases.join(', ');
+                      if(disease.alias_list.length > labelLimit) { disease.alias_list = _.truncate(disease.alias_list, labelLimit); }
+                    } else {
+                      disease.alias_list = '--';
+                    }
+                    return disease;
+                  });
                 });
             }
           }
@@ -197,35 +262,33 @@
         hideExpression: 'model.noDoid'
       },
       { // duplicates warning row
-        templateUrl: 'app/views/suggest/source/evidenceDuplicateWarning.tpl.html',
+        templateUrl: 'app/views/add/evidence/addEvidenceDuplicateWarning.tpl.html',
         controller: /* @ngInject */ function($scope, Search) {
-          console.log('dup warning controller loaded.');
           var vm = $scope.vm = {};
           vm.duplicates = [];
           vm.pubmedName = '';
 
           function searchForDups(values) {
+            vm.duplicates = [];
             if(_.every(values, function(val) { return _.isString(val) && val.length > 0; })) {
               Search.post({
                 'operator': 'AND',
                 'queries': [
                   {
-                    'field': 'pubmed_id',
-                    'condition': {'name': 'is', 'parameters': [values[0]]
-                    }
-                  },
-                  {
                     'field': 'gene_name',
-                    'condition': {'name': 'contains', 'parameters': [values[1]]}
+                    'condition': {'name': 'contains', 'parameters': [values[0]]}
                   },
                   {
                     'field': 'variant_name',
-                    'condition': {'name': 'contains', 'parameters': [values[2]]}
+                    'condition': {'name': 'contains', 'parameters': [values[1]]}
                   },
                   {
-                    'field': 'disease_doid',
-                    'condition': {'name': 'is', 'parameters': [values[3]]
-                    }
+                    'field': 'source_type',
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[2]]}
+                  },
+                  {
+                    'field': 'citation_id',
+                    'condition': {'name': 'is_equal_to', 'parameters': [values[3]]}
                   }
                 ],
                 'entity': 'evidence_items',
@@ -239,13 +302,11 @@
 
           $scope.pubmedField = _.find($scope.fields, { key: 'pubmed_id' });
 
-          // {"operator":"AND","queries":[{"field":"pubmed_id","condition":{"name":"is","parameters":["25589621"]}},{"field":"gene_name","condition":{"name":"contains","parameters":["BRAF"]}},{"field":"variant_name","condition":{"name":"contains","parameters":["V600E"]}},{"field":"disease_doid","condition":{"name":"is","parameters":["9256"]}}]}
-
           $scope.$watchGroup([
-            'model.suggestion.pubmed_id',
-            'model.suggestion.gene.name',
-            'model.suggestion.variant.name',
-            'model.suggestion.disease.doid'
+            'model.gene.name',
+            'model.variant.name',
+            'model.source.source_type',
+            'model.source.citation_id'
           ], searchForDups);
         }
       },
@@ -268,12 +329,18 @@
     vm.submit = function(req) {
       vm.error = {};
       var reqObj = {
-        pubmed_id: req.suggestion.pubmed_id,
+        source: req.source,
         comment: req.comment
       };
-      if(!_.isUndefined(req.suggestion.gene) && _.isObject(req.suggestion.gene)) {reqObj.gene_name = req.suggestion.gene.name;}
-      if(!_.isUndefined(req.suggestion.variant) && _.isObject(req.suggestion.variant)) {reqObj.variant_name = req.suggestion.variant.name;}
-      if(!_.isUndefined(req.suggestion.disease) && _.isObject(req.suggestion.disease)) {reqObj.disease_name = req.suggestion.disease.name;}
+      if(!_.isUndefined(req.gene) && _.isObject(req.gene)) {
+        reqObj.gene_name = req.gene.name;
+      }
+      if(!_.isUndefined(req.variant) && _.isObject(req.variant)) {
+        reqObj.variant_name = req.variant.name;
+      }
+      if(!_.isUndefined(req.disease) && _.isObject(req.disease)) {
+        reqObj.disease_name = req.disease.name;
+      }
       Sources.suggest(reqObj).then(
         function(response) { // success
           console.log('source suggestion submit success.');

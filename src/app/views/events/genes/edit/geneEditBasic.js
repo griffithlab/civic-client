@@ -38,6 +38,7 @@
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.gene = Genes.data.item;
+    // convert source objects to array of IDs, multi-input field type does not handle objects at this time
     vm.pendingFields = _.keys(GeneRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(GeneRevisions.data.pendingFields), function(field) {
       return field.charAt(0).toUpperCase() + field.slice(1);
@@ -46,7 +47,7 @@
     vm.geneHistory = GeneHistory;
     vm.geneEdit = angular.copy(vm.gene);
     vm.geneEdit.comment = { title: 'GENE ' + vm.gene.name + ' Revision Description', text:'' };
-    vm.geneEdit.source_ids = _.map(vm.gene.sources, 'pubmed_id');
+    vm.geneEdit.source_ids = _.map(vm.gene.sources, 'citation_id');
     vm.myGeneInfo = geneModel.data.myGeneInfo;
     vm.variants = geneModel.data.variants;
     vm.variantGroups = geneModel.data.variantGroups;
@@ -121,7 +122,7 @@
               minLength: 1,
               required: true,
               data: {
-                description: '--'
+                citation: '--'
               }
             },
             modelOptions: {
@@ -138,15 +139,23 @@
                   if ($viewValue.length > 0) {
                     var deferred = $q.defer();
                     scope.options.templateOptions.loading = true;
-                    Publications.verify($viewValue).then(
+                    var reqObj = {
+                      citationId: $viewValue,
+                      sourceType: 'PubMed'
+                    };
+                    Publications.verify(reqObj).then(
                       function (response) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.description = response.description;
+                        scope.options.templateOptions.data.citation = response.citation;
                         deferred.resolve(response);
                       },
                       function (error) {
                         scope.options.templateOptions.loading = false;
-                        scope.options.templateOptions.data.description = '--';
+                        if(error.status === 404) {
+                          scope.options.templateOptions.data.citation = 'No PubMed source found with specified ID.';
+                        } else {
+                          scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                        }
                         deferred.reject(error);
                       }
                     );
@@ -173,7 +182,7 @@
           rows: 5,
           minimum_length: 3,
           label: 'Revision Description',
-          required: false,
+          required: true,
           value: 'text',
           helpText: 'Please provide a brief description and support, if necessary, for your suggested revision. It will appear as the first comment in this revision\'s comment thread.'
         },

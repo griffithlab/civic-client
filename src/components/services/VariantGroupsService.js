@@ -55,7 +55,13 @@
           method: 'GET',
           url: '/api/variant_groups/:variantGroupId/variants',
           isArray: true,
-          cache: cache
+          cache: false
+        },
+        queryEvidence: {
+          method: 'GET',
+          url: '/api/variant_groups/:variantGroupId/evidence_items',
+          isArray: false,
+          cache: false
         },
         queryFlags: {
           method: 'GET',
@@ -136,6 +142,7 @@
     // VariantGroup Collections
     var variants = [];
     var comments = [];
+    var evidence = [];
     var flags = [];
 
     return {
@@ -145,6 +152,7 @@
         item: item,
         collection: collection,
         variants: variants,
+        evidence: evidence,
         comments: comments,
         flags: flags
       },
@@ -158,6 +166,7 @@
       add: add,
 
       // VariantGroup Collections
+      queryEvidence: queryEvidence,
       queryVariants: queryVariants,
       queryFlags: queryFlags,
       submitFlag: submitFlag,
@@ -176,6 +185,7 @@
       return $q.all([
         get(variantGroupId),
         queryVariants(variantGroupId),
+        queryEvidence(variantGroupId),
         queryFlags(variantGroupId)
       ]);
     }
@@ -237,11 +247,14 @@
     function queryVariants() {
       console.warn('returning copy of variantGroups.variants');
       return $q.when(variants);
-      //return VariantGroupsResource.queryVariants({variantGroupId: variantGroupId}).$promise
-      //  .then(function(response) {
-      //    angular.copy(response, variants);
-      //    return response.$promise;
-      //  });
+    }
+
+    function queryEvidence(variantGroupId) {
+      return VariantGroupsResource.queryEvidence({variantGroupId: variantGroupId}).$promise
+       .then(function(response) {
+         angular.copy(response.records, evidence);
+         return response.$promise;
+       });
     }
 
     function queryFlags(variantGroupId) {

@@ -60,8 +60,27 @@
       noUnselect: true,
       columnDefs: [
         {
-          name: 'pubmed_id',
-          displayName: 'Pubmed ID',
+          name: 'source_type',
+          displayName: 'Type',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          type: 'string',
+          width: '8%',
+          filter: {
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: '0', label: 'PubMed'},
+              { value: '1', label: 'ASCO'}
+            ]
+          }
+        },
+        {
+          name: 'citation_id',
+          displayName: 'Citation ID',
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
@@ -84,7 +103,7 @@
           }
         },
         {
-          name: 'author_list_string',
+          name: 'author_string',
           displayName: 'Authors',
           enableFiltering: true,
           allowCellFocus: false,
@@ -105,7 +124,7 @@
           width: '10%'
         },
         {
-          name: 'full_journal_title',
+          name: 'journal',
           displayName: 'Journal',
           type: 'string',
           enableFiltering: true,
@@ -119,6 +138,17 @@
           type: 'string',
           allowCellFocus: false,
           enableFiltering: true,
+          cellTemplate: 'app/views/sources/components/cellTemplateTooltip.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'evidence_item_count',
+          displayName: 'EIDs',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: false,
           cellTemplate: 'app/views/sources/components/cellTemplateTooltip.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
@@ -182,14 +212,6 @@
 
           source.publication_date_string = pubDate.join('-');
 
-          // format author list
-          source.author_list_string = _(source.author_list)
-            .sortBy('position')
-            .map(function(author) {
-              return [author.fore_name, author.last_name].join(' ');
-            })
-            .value()
-            .join(', ');
           return source;
         });
       }

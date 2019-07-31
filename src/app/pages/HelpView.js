@@ -107,11 +107,11 @@
           navMode: 'sub'
         }
       })
-      .state('help.evidence.trust-ratings', {
-        url: '/trust-ratings',
-        templateUrl: 'app/pages/help_evidence_trust_ratings.tpl.html',
+      .state('help.evidence.evidence-ratings', {
+        url: '/evidence-ratings',
+        templateUrl: 'app/pages/help_evidence_evidence_ratings.tpl.html',
         data:{
-          titleExp: '"Help: Trust Rating"',
+          titleExp: '"Help: Evidence Rating"',
           navMode: 'sub'
         }
       })
@@ -148,11 +148,11 @@
           navMode: 'sub'
         }
       })
-      .state('help.variants.actionabilityscore', {
-        url: '/actionability-score',
-        templateUrl: 'app/pages/help_variant_actionabilityscore.tpl.html',
+      .state('help.variants.variant-evidence-score', {
+        url: '/variant-evidence-score',
+        templateUrl: 'app/pages/help_variant_evidence_score.tpl.html',
         data: {
-          titleExp: '"Help: CIViC Actionability Score"',
+          titleExp: '"Help: CIViC Variant Evidence Score"',
           navMode: 'sub'
         }
       })
@@ -262,6 +262,9 @@
           navMode: 'sub'
         }
       });
+
+    // redirect root /help requests to /help/introduction
+    $urlRouterProvider.when('/help', '/help/introduction');
 
     // redirects for old root-level Help pages
     $urlRouterProvider.when('/help/getting-started', '/help/getting-started/introductory-materials');

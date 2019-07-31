@@ -101,12 +101,6 @@
       exporterMenuPdf: false,
       enableGridMenu: true,
       gridMenuShowHideColumns: false,
-      appScopeProvider: {
-        onDblClick: function(row) {
-          console.log('dbl-click!');
-          console.log(row);
-        }
-      },
       rowTemplate: 'app/views/events/common/evidenceGridRowTemplate.tpl.html',
       gridMenuCustomItems: [
         {
@@ -339,7 +333,7 @@
               { value: 'Loss of Function', label: 'Loss of Function'},
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
-              { value: 'Other', label: 'Other'},
+              { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
 
@@ -373,8 +367,8 @@
         },
         { name: 'rating',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
-          displayName: 'TR',
-          headerTooltip: 'Trust Rating',
+          displayName: 'ER',
+          headerTooltip: 'Evidence Rating',
           type: 'number',
           allowCellFocus: false,
           filter: {
@@ -396,7 +390,44 @@
           minWidth: 50,
           cellTemplate: 'app/views/events/common/evidenceGridRatingCell.tpl.html'
           //cellTemplate: '<div>{{row.entity[col.field]}}</div>'
-        }
+        },
+        {
+          name: 'phenotypes_list',
+          displayName: 'Associated Phenotypes',
+          headerTooltip: 'Associated Phenotypes',
+          type: 'string',
+          visible: false,
+          allowCellFocus: false,
+          enableFiltering: true
+        },
+        {
+          name: 'source.source_type',
+          displayName: 'Source Type',
+          headerTooltip: 'Source Type',
+          type: 'string',
+          visible: false,
+          allowCellFocus: false,
+          enableFiltering: true
+        },
+        {
+          name: 'source.citation_id',
+          displayName: 'Citation ID',
+          headerTooltip: 'Citation ID',
+          type: 'string',
+          visible: false,
+          allowCellFocus: false,
+          enableFiltering: true
+        },
+        {
+          name: 'source.clinical_trial_ids',
+          displayName: 'Clinical Trial IDs',
+          headerTooltip: 'Clinical Trial IDs',
+          type: 'string',
+          visible: false,
+          allowCellFocus: false,
+          enableFiltering: true
+        },
+
       ]
     };
 
@@ -528,6 +559,19 @@
           } else {
             item.druglist = 'N/A';
           }
+
+          // convert clinical trials and associated phenotypes into list
+          if (_.isArray(item.source.clinical_trials) && item.source.clinical_trials.length > 0) {
+            item.source.clinical_trial_ids = _.chain(item.source.clinical_trials).map('nct_id').value().join(', ');
+          } else {
+            item.source.clinical_trial_ids = null;
+          }
+          if (_.isArray(item.phenotypes) && item.phenotypes.length > 0) {
+            item.phenotypes_list = _.chain(item.phenotypes).without('').map('hpo_class').value().join(', ');
+          } else {
+            item.phenotypes_list = null;
+          }
+
           // convert null ratings to zero
           if(item.rating === null || item.rating === undefined) {
             item.rating = 0;

@@ -48,20 +48,24 @@
         </li>
         <li class="attr-value" >
           <a ui-sref="organizations.summary({organizationId: vm.user.organization.id})">
-            {{vm.user.organization.name|ifEmpty: '--'}}
+            {{vm.user.organization.name | ifEmpty: '--'}}
+            <span ng-if="vm.user.organization.parent.name.length > 0">
+             at {{vm.user.organization.parent.name}}
+            </span>
           </a>
-        </li>
-        <li class="attr-key" >
-          URL
-        </li>
-        <li class="attr-value" >
-          <a ng-href="{{vm.user.url}}" target="_blank">{{ vm.user.url | ifEmpty: '--' }}</a>
         </li>
         <li class="attr-key" >
           ORCID iD
         </li>
         <li class="attr-value" >
-          <a ng-href="https://orcid.org/{{vm.user.orcid}}" target="_blank">{{ vm.user.orcid | ifEmpty: '--' }}</a>
+          <span ng-switch="vm.user.orcid.length > 0">
+            <span ng-switch-when="true" >
+              <a ng-href="https://orcid.org/{{vm.user.orcid}}" target="_blank">{{ vm.user.orcid }}</a>
+            </span>
+            <span ng-switch-default>
+              --
+            </span>
+          </span>
         </li>
       </ul>
       </div>
@@ -110,18 +114,29 @@
       <div class="social-media-buttons">
         <div class="social-icons">
           <div ng-if="vm.hasSocialProfile" class="social-icons">
+            <span ng-show="vm.user.url.length > 0">
+              <a ng-href="https://{{vm.user.url}}"
+                target="_blank"
+                uib-tooltip="Personal Website"><img src="assets/images/social_icons/link-ico.png" width="24" height="24"/></a>
+            </span>
             <span ng-show="vm.user.twitter_handle.length > 0">
-              <a ng-href="https://twitter.com/{{vm.user.twitter_handle}}" target="_blanks">
+              <a ng-href="https://twitter.com/{{vm.user.twitter_handle}}"
+                target="_blank"
+                uib-tooltip="Twitter Account">
                 <img src="assets/images/social_icons/twitter-ico.png" width="24" height="24"/>
               </a>
             </span>
             <span ng-show="vm.user.linkedin_profile.length > 0">
-              <a ng-href="https://linkedin.com/in/{{vm.user.linkedin_profile}}" target="_blank">
+              <a ng-href="https://linkedin.com/in/{{vm.user.linkedin_profile}}"
+                target="_blank"
+                uib-tooltip="LinkedIn Account">
                 <img src="assets/images/social_icons/linkedin-ico.png" width="24" height="24"/>
               </a>
             </span>
             <span ng-show="vm.user.facebook_profile.length > 0">
-              <a ng-href="https://facebook.com/{{vm.user.facebook_profile}}" target="_blank">
+              <a ng-href="https://facebook.com/{{vm.user.facebook_profile}}"
+                target="_blank"
+                uib-tooltip="Facebook Account">
                 <img src="assets/images/social_icons/facebook-ico.png" width="24" height="24"/>
               </a>
             </span>

@@ -25,7 +25,8 @@
                                            $element,
                                            d3,
                                            dimple,
-                                           _) {
+                                           _,
+                                          Stats) {
     console.log('countsByVariantOrigin loaded.');
     var options = $scope.options;
 
@@ -47,7 +48,7 @@
       .text(options.title);
 
     var chart = new dimple.chart(svg)
-      .setMargins(0,25,0,25);
+        .setMargins(0,25,0,25);
 
     // chart.setBounds(20, 20, 460, 360);
     var p = chart.addMeasureAxis('p', 'Count');
@@ -60,14 +61,24 @@
     l._getEntries = function() {
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
+    $scope.$watch(function() {
+      return Stats.data.dashboard.counts_by_variant_origin;
+    }, function(data) {
+      chart.data = _.map(data, function(key, value) {
+        return {
+          Origin: value === "n/a" ? "N/A" : _.capitalize(value),
+          Count: key
+        };
+      });
 
-    chart.data = _.map(options.data, function(key, value) {
-      return {
-        Origin: _.capitalize(value),
-        Count: key
-      };
+      if(chart.data.length === 0) {
+        chart.series.forEach(function(series){
+          series.shapes.remove();
+        });
+      }
+
+      chart.draw(options.transitionDuration);
     });
-    chart.draw();
 
     var onResize = function () { chart.draw(0, true); };
 

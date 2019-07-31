@@ -134,16 +134,24 @@
           }
         },
         {
-          name: 'evidence_item',
-          field: 'state_params.evidence_item.name',
-          displayName: 'Item',
+          name: 'entity_id',
+          displayName: 'Entity ID',
           type: 'string',
           allowCellFocus: false,
           enableFiltering: false,
           enableSorting: false,
+          cellTemplate: 'app/views/activity/directives/entityIdCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'entity_id_tooltip',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          visible: false
         },
         {
           name: 'timestamp',
@@ -288,9 +296,43 @@
     $scope.$watchCollection(function() {
       return Events.data.collection;
     }, function(events) {
-      ctrl.gridOptions.data = events;
-
+      ctrl.gridOptions.data = parseData(events);
     });
+
+    function parseData(events) {
+      return _.map(events, function(event) {
+        // create Entity column values
+        var prefixes =  {
+          assertions: 'AID',
+          genes: 'GID',
+          variants: 'VID',
+          variantgroups: 'VGID',
+          evidenceitems: 'EID',
+          sources: 'SID',
+          suggestedchanges: 'SC'
+        };
+        var entity_prefix = prefixes[event.subject_type];
+        event.entity_id = entity_prefix + event.subject_id;
+
+        // create column for entity id tooltip
+        var tooltipGenerators =  {
+          assertions:function(params) { return params.assertion.name; },
+          genes: function(params){ return params.gene.name; },
+          variants: function(params){ return params.variant.name; },
+          variantgroups: function(params){ return params.variantgroup.name; },
+          evidenceitems: function(params){ return params.evidence_item.name; },
+          sources: function(params){ return params.source.name; },
+          suggestedchanges: function(params){
+            var id = params.suggested_change.id;
+            return 'SC' + id;
+          },
+
+        };
+        event.entity_id_tooltip = tooltipGenerators[event.subject_type](event.state_params);
+
+        return event;
+      });
+    }
 
     function updateData() {
       fetchData(ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)

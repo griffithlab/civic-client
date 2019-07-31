@@ -19,7 +19,7 @@
     vm.stats = {};
     vm.events = [];
 
-    Stats.site().then(function(stats) {
+    Stats.getSite().then(function(stats) {
       vm.stats = stats;
     });
     Events.query({count: 7}).then(function(response) {
@@ -28,7 +28,7 @@
 
     // refresh stats and events periodically
     var query = $interval(function() {
-      Stats.site().then(function(stats) {
+      Stats.getSite().then(function(stats) {
         vm.stats = stats;
       });
       Events.query({count: 7}).then(function(response) {

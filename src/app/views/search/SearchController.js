@@ -36,8 +36,10 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
+                  { value: 'asco_id', name: 'ASCO ID' },
                   { value: 'assertion_count', name: 'Assertion' },
                   { value: 'clinical_significance', name: 'Clinical Significance' },
+                  { value: 'clinical_trial_id', name: 'Clinical Trial NCT ID' },
                   { value: 'disease_doid', name: 'Disease DOID' },
                   { value: 'disease_name', name: 'Disease Name' },
                   { value: 'interaction_type', name: 'Drug Interaction Type' },
@@ -49,12 +51,13 @@
                   { value: 'evidence_type', name: 'Evidence Type' },
                   { value: 'description', name: 'Evidence Statement' },
                   { value: 'gene_name', name: 'Gene Name' },
-                  { value: 'phenotype_hpo_class', name: 'Phenotype HPO class' },
+                  { value: 'phenotype_hpo_class', name: 'Phenotype HPO Term' },
                   { value: 'phenotype_hpo_id', name: 'Phenotype HPO ID' },
                   { value: 'publication_year', name: 'Publication Year' },
-                  { value: 'pubmed_id', name: 'Pubmed ID' },
+                  { value: 'pubmed_id', name: 'PubMed ID' },
                   { value: 'pmc_id', name: 'Pubmed Central ID (PMCID)'},
                   { value: 'rating', name: 'Rating' },
+                  { value: 'source_type', name: 'Source Type' },
                   { value: 'status', name: 'Status' },
                   { value: 'submitter', name: 'Submitter Display Name' },
                   { value: 'submitter_id', name: 'Submitter ID' },
@@ -74,6 +77,33 @@
             }
           ],
           conditionFields: {
+            asco_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]', // asco id
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
             assertion_count: [
               {
                 template: 'Evidence item',
@@ -99,6 +129,42 @@
                 template: 'associated with an assertion',
                 className: 'inline-field',
               },
+            ],
+            clinical_trial_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'},
+                    {value: 'is_empty', name: 'is empty'},
+                    {value: 'is_not_empty', name: 'is not empty'}
+                  ],
+                  onChange: function(value, options, scope) {
+                    if(scope.model.name.match(/empty/))
+                    {
+                      _.pullAt(scope.model.parameters, 0);
+                    }
+                  }
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'input',
+                className: 'inline-field',
+                hideExpression: 'model.name =="is_empty" || model.name == "is_not_empty"',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
             ],
             pmc_id: [
               {
@@ -478,7 +544,7 @@
                     { value: 'Loss of Function', name: 'Loss of Function'},
                     { value: 'Unaltered Function', name: 'Unaltered Function'},
                     { value: 'Neomorphic', name: 'Neomorphic'},
-                    { value: 'Other', name: 'Other'},
+                    { value: 'Unknown', name: 'Unknown'},
                     { value: 'N/A', name: 'N/A' }
                   ]
                 }
@@ -516,7 +582,7 @@
                     { value: 'Diagnostic', name: 'Diagnostic' },
                     { value: 'Prognostic', name: 'Prognostic' },
                     { value: 'Predisposing', name: 'Predisposing' },
-                    { value: 'Functional', label: 'Functional'},
+                    { value: 'Functional', name: 'Functional'},
                   ]
                 }
               }
@@ -589,6 +655,40 @@
                   options: [
                     { value: 'Supports', name: 'Supports'},
                     { value: 'Does Not Support', name: 'Does Not Support' }
+                  ]
+                }
+              }
+            ],
+            source_type: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'PubMed'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'ASCO', name: 'ASCO' },
+                    { value: 'PubMed', name: 'PubMed' },
                   ]
                 }
               }
@@ -1094,22 +1194,21 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'id', name: 'Assertion ID'},
-                  { value: 'gene_name', name: 'Gene Name' },
-                  { value: 'variant_origin', name: 'Variant Origin' },
-                  { value: 'summary', name: 'Assertion Summary'},
+                  { value: 'acmg_code', name: 'ACMG Code' },
+                  { value: 'amp_level', name: 'AMP Level' },
                   { value: 'description', name: 'Assertion Description' },
-                  { value: 'disease_doid', name: 'Disease DOID' },
-                  { value: 'disease_name', name: 'Disease Name' },
-                  { value: 'drug_id', name: 'Drug PubChem ID' },
-                  { value: 'drug_name', name: 'Drug Name' },
                   { value: 'assertion_direction', name: 'Assertion Direction' },
+                  { value: 'id', name: 'Assertion ID'},
+                  { value: 'summary', name: 'Assertion Summary'},
                   { value: 'assertion_type', name: 'Assertion Type' },
                   { value: 'clinical_significance', name: 'Clinical Significance' },
+                  { value: 'disease_doid', name: 'Disease DOID' },
+                  { value: 'disease_name', name: 'Disease Name' },
                   { value: 'interaction_type', name: 'Drug Interaction Type' },
-                  { value: 'amp_level', name: 'AMP Level' },
-                  { value: 'acmg_code', name: 'ACMG Code' },
-                  { value: 'phenotype_hpo_class', name: 'Phenotype HPO class' },
+                  { value: 'drug_name', name: 'Drug Name' },
+                  { value: 'drug_id', name: 'Drug PubChem ID' },
+                  { value: 'gene_name', name: 'Gene Name' },
+                  { value: 'phenotype_hpo_class', name: 'Phenotype HPO Class' },
                   { value: 'phenotype_hpo_id', name: 'Phenotype HPO ID' },
                   { value: 'status', name: 'Status' },
                   { value: 'submitter', name: 'Submitter Display Name' },
@@ -1118,6 +1217,7 @@
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
                   { value: 'variant_alias', name: 'Variant Alias' },
                   { value: 'variant_name', name: 'Variant Name' },
+                  { value: 'variant_origin', name: 'Variant Origin' },
                 ],
                 onChange: function(value, options, scope) {
                   scope.model.condition = {
@@ -1514,7 +1614,7 @@
                     { value: 'Loss of Function', name: 'Loss of Function'},
                     { value: 'Unaltered Function', name: 'Unaltered Function'},
                     { value: 'Neomorphic', name: 'Neomorphic'},
-                    { value: 'Other', name: 'Other'},
+                    { value: 'Unknown', name: 'Unknown'},
                     { value: 'N/A', name: 'N/A' }
                   ]
                 }
@@ -2270,7 +2370,7 @@
                   { value: 'representative_transcript2', name: 'CHR2 Representative Transcript' },
                   { value: 'allele_registry_id', name: 'Allele Registry ID' },
                   { value: 'assertion_count', name: 'Assertion' },
-                  { value: 'civic_actionability_score', name: 'CIViC Actionability Score' },
+                  { value: 'civic_actionability_score', name: 'CIViC Variant Evidence Score' },
                   { value: 'description', name: 'Description' },
                   { value: 'disease_name', name: 'Disease Implicated (Name)' },
                   { value: 'disease_doid', name: 'Disease Implicated (DOID)' },
@@ -2279,6 +2379,7 @@
                   { value: 'gene', name: 'Gene' },
                   { value: 'hgvs_expressions', name: 'HGVS Expression(s)' },
                   { value: 'name', name: 'Name' },
+                  { value: 'pipeline_type', name: 'Pipeline Type' },
                   { value: 'reference_bases', name: 'Reference Base(s)' },
                   { value: 'reference_build', name: 'Reference Build' },
                   { value: 'suggested_changes_count', name: 'Suggested Revisions' },
@@ -2414,6 +2515,41 @@
                 templateOptions: {
                   label: '',
                   required: true
+                }
+              }
+            ],
+            pipeline_type: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'Proteint-Based'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'Protein-Based', name: 'Protein-Based' },
+                    { value: 'DNA-Based', name: 'DNA-Based' },
+                    { value: 'RNA-Based', name: 'RNA-Based' },
+                  ]
                 }
               }
             ],
@@ -3542,6 +3678,7 @@
                 options: [
                   { value: '', name: 'Please select a field' },
                   { value: 'abstract', name: 'Abstract' },
+                  { value: 'asco_id', name: 'ASCO ID' },
                   { value: 'author', name: 'Author' },
                   { value: 'evidence_item_count', name: 'Evidence Items' },
                   { value: 'gene', name: 'Gene' },
@@ -3551,6 +3688,7 @@
                   { value: 'publication_year', name: 'Publication Year' },
                   { value: 'pubmed_id', name: 'PubMed ID' },
                   { value: 'source_suggestion_count', name: 'Source Suggestions' },
+                  { value: 'source_type', name: 'Source Type' },
                   { value: 'title', name: 'Title' },
                   { value: 'variant', name: 'Variant'},
                 ],
@@ -3564,6 +3702,33 @@
             }
           ],
           conditionFields: {
+            asco_id: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is', name: 'is'},
+                    {value: 'is_not', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]', // pubmed id
+                type: 'input',
+                className: 'inline-field',
+                templateOptions: {
+                  label: '',
+                  required: true
+                }
+              }
+            ],
             pubmed_id: [
               {
                 key: 'name',
@@ -3923,6 +4088,40 @@
                 templateOptions: {
                   label: '',
                   required: true
+                }
+              }
+            ],
+            source_type: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'PubMed'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    { value: 'ASCO', name: 'ASCO' },
+                    { value: 'PubMed', name: 'PubMed' },
+                  ]
                 }
               }
             ],

@@ -107,11 +107,30 @@
           </td>
         </tr>
         <tr>
-          <td class="name">Pubmed ID:</td>
+          <td class="name">Source:</td>
           <td class="value">
-            <a ng-href="http://www.ncbi.nlm.nih.gov/pubmed/{{ctrl.item.source.pubmed_id}}" class="btn btn-xs button-new-window" target="_blank">
+            <a ui-sref="sources.summary({sourceId: crtl.item.source.id })">
+              {{ ctrl.item.source.citation }}
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="name">
+            <span ng-switch="ctrl.item.source.source_type">
+              <span ng-switch-when="PubMed">
+                PubMed ID:
+              </span>
+              <span ng-switch-when="ASCO">
+                ASCO ID:
+              </span>
+            </span>
+          </td>
+          <td class="value">
+            <a ng-href="{{ctrl.item.source.source_url}}"
+              class="btn btn-xs button-new-window"
+              target="_blank">
               <span class="glyphicon glyphicon-new-window"></span>
-              <span ng-bind="ctrl.item.source.pubmed_id"></span>
+              <span ng-bind="ctrl.item.source.citation_id"></span>
             </a>
           </td>
         </tr>
@@ -134,14 +153,14 @@
           </td>
         </tr>
         <tr>
-          <td class="name">Trust Rating:</td>
+          <td class="name">Evidence Rating:</td>
           <td class="value">
             <span uib-rating ng-model="ctrl.item.rating" max="5" read-only="true" uib-tooltip="{{tipText.rating[ctrl.item.rating]}}" tooltip-placement="left" class="help-tooltip">
             </span>
           </td>
         </tr>
         <tr ng-if="">
-          <td colspan="2">Trust Rating:</td>
+          <td colspan="2">Evidence Rating:</td>
         </tr>
 
       </table>

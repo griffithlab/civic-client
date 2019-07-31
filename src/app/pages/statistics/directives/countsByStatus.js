@@ -26,7 +26,8 @@
                                     $element,
                                     d3,
                                     dimple,
-                                    _) {
+                                    _,
+                                   Stats) {
     console.log('countsByStatus loaded.');
     var options = $scope.options;
 
@@ -48,12 +49,31 @@
       .text(options.title);
 
     var chart = new dimple.chart(svg)
-      .setMargins(0,25,0,25);
+        .setMargins(0,25,0,25);
 
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
     chart.addSeries('Status', dimple.plot.pie);
     var l = chart.addLegend('100%', 25, 90, 300, 'left');
+
+    var statusColors = [
+      {
+        val: 'Accepted',
+        color: '#B2D49C'
+      },
+      {
+        val: 'Rejected',
+        color: '#ECA2C0'
+      },
+      {
+        val: 'Submitted',
+        color: '#F3BC94'
+      }
+    ];
+
+    _.map(statusColors, function(c) {
+      chart.assignColor(c.val, c.color);
+    });
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
@@ -61,13 +81,24 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    chart.data = _.map(options.data, function(key, value) {
-      return {
-        'Status': _.capitalize(value),
-        Count: key
-      };
+    $scope.$watch(function() {
+      return Stats.data.dashboard.counts_by_status;
+    }, function(data) {
+      chart.data = _.map(data, function(key, value) {
+        return {
+          'Status': _.capitalize(value),
+          Count: key
+        };
+      });
+
+      if(chart.data.length === 0) {
+        chart.series.forEach(function(series){
+          series.shapes.remove();
+        });
+      }
+
+      chart.draw(options.transitionDuration);
     });
-    chart.draw();
 
     var onResize = function () { chart.draw(0, true); };
 

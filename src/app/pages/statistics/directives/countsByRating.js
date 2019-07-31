@@ -26,7 +26,8 @@
                                     $element,
                                     d3,
                                     dimple,
-                                    _) {
+                                    _,
+                                   Stats) {
     console.log('countsByRating loaded.');
     var options = $scope.options;
 
@@ -61,13 +62,24 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    chart.data = _.map(options.data, function(key, value) {
-      return {
-        'Rating': _.capitalize(value),
-        Count: key
-      };
+    $scope.$watch(function() {
+      return Stats.data.dashboard.counts_by_rating;
+    }, function(data) {
+      chart.data = _.map(data, function(key, value) {
+        return {
+          'Rating': value === "" ? "None assigned" : _.capitalize(value),
+          Count: key
+        };
+      });
+
+      if(chart.data.length === 0) {
+        chart.series.forEach(function(series){
+          series.shapes.remove();
+        });
+      }
+
+      chart.draw(options.transitionDuration);
     });
-    chart.draw();
 
     var onResize = function () { chart.draw(0, true); };
 

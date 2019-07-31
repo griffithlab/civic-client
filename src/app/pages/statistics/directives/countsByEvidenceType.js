@@ -25,7 +25,8 @@
                                           $element,
                                           d3,
                                           dimple,
-                                          _) {
+                                          _,
+                                         Stats) {
     console.log('countsByEvidenceType loaded.');
     var options = $scope.options;
 
@@ -51,7 +52,7 @@
 
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
-    chart.addSeries('Type', dimple.plot.pie);
+    var s = chart.addSeries('Type', dimple.plot.pie);
     var l = chart.addLegend('100%', 25, 90, 300, 'left');
 
     // override legend sorting
@@ -60,13 +61,22 @@
       return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
     };
 
-    chart.data = _.map(options.data, function(key, value) {
-      return {
-        Type: _.capitalize(value),
-        Count: key
-      };
+    $scope.$watch(function() {
+      return Stats.data.dashboard.counts_by_evidence_type;
+    }, function(data) {
+      chart.data = _.map(data, function(key, value) {
+        return {
+          Type: _.capitalize(value),
+          Count: key
+        };
+      }, true);
+      if(chart.data.length === 0) {
+        chart.series.forEach(function(series){
+          series.shapes.remove();
+        });
+      }
+      chart.draw(options.transitionDuration);
     });
-    chart.draw();
 
     var onResize = function () { chart.draw(0, true); };
 

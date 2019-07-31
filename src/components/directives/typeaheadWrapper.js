@@ -13,6 +13,7 @@
       {
         var template = '<input ';
         template+='type="'+attrs['type']+'" ';
+        template+='placeholder="{{ to.placeholder }}"';
         if(attrs['formlyCustomValidation'] !== undefined) { template += 'formlyCustomValidation '; }
         var id = attrs['id'];
         if(id !== undefined) { template+='id="'+id+'" '; }
@@ -23,6 +24,7 @@
         var disabled = attrs['ngDisabled'];
         if(disabled !== undefined) { template+='ng-disabled="'+disabled+'" '; }
         template+='ng-model="'+attrs['ngModel']+'" ';
+        template+='ng-model-options="'+attrs['ngModelOptions']+'" ';
         template+='class="'+attrs['class']+'" ';
         template+='typeahead-editable="'+attrs['typeaheadEditable']+'" ';
         template+='typeahead-focus-first="'+attrs['typeaheadFocusFirst']+'" ';
