@@ -94,6 +94,13 @@
               assertions="vm.searchResults">
             </assertion-grid>
           </div>
+          <div ng-switch-when="suggested_changes">
+            <changes-grid
+              context="'search'"
+              rows="15"
+              changes="vm.searchResults">
+            </changes-grid>
+          </div>
           <div ng-switch-when="variantGroups">
             <p>Variant Groups Grid will go here.</p>
           </div>

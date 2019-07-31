@@ -50,7 +50,7 @@
           navMode: 'sub'
         }
       })
-      .state('search.suggestedChanges', {
+      .state('search.suggested_changes', {
         url: '/suggested_changes/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
