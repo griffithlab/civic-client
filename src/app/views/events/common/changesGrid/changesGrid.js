@@ -58,8 +58,18 @@
       modifierKeysToMultiSelect: false,
       noUnselect: true,
       columnDefs: [
+        { name: 'created_at',
+          displayName: 'Created',
+          width: '15%',
+          cellTemplate: '<div class="ui-grid-cell-contents"><span ng-bind="row.entity[col.field]|timeAgo"></span></div>',
+          enableFiltering: true,
+          allowCellFocus: false,
+          type: 'date',
+          sort: {direction: uiGridConstants.DESC},
+          enableSorting: true,
+        },
         { name: 'user',
-          displayName: 'User',
+          displayName: 'Created by',
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
@@ -70,67 +80,37 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         },
-        { name: 'created_at',
-          displayName: 'Created',
-          cellTemplate: '<div class="ui-grid-cell-contents"><span ng-bind="row.entity[col.field]|timeAgo"></span></div>',
-          enableFiltering: true,
-          allowCellFocus: false,
-          type: 'date',
-          sort: {direction: uiGridConstants.DESC},
-          enableSorting: true,
-        },
-        { name: 'status',
+        {
+          name: 'status',
           displayName: 'Status',
           type: 'string',
+          width: '10%',
+          allowCellFocus: false,
           enableFiltering: true,
-          allowCellFocus: false,
-        },
-        {
-          name: 'gene',
-          field: 'state_params.gene.name',
-          displayName: 'Gene',
-          type: 'string',
-          allowCellFocus: false,
-          enableFiltering: false,
-          enableSorting: false,
+          enableSorting: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
-          name: 'variant',
-          field: 'state_params.variant.name',
-          displayName: 'Variant',
+          name: 'type',
+          displayName: 'Type',
           type: 'string',
           width: '15%',
           allowCellFocus: false,
-          enableFiltering: false,
-          enableSorting: false,
+          enableFiltering: true,
+          enableSorting: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
         },
         {
-          name: 'variant',
-          field: 'state_params.variant.name',
-          displayName: 'Variant',
+          name: 'full_name',
+          displayName: 'Name',
           type: 'string',
-          width: '15%',
           allowCellFocus: false,
-          enableFiltering: false,
-          enableSorting: false,
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
-        },
-        {
-          name: 'entity_id',
-          displayName: 'Entity',
-          type: 'string',
-          width: '15%',
-          allowCellFocus: false,
-          enableFiltering: false,
-          enableSorting: false,
+          enableFiltering: true,
+          enableSorting: true,
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -206,15 +186,18 @@
       function prepChangesData(changes) {
         changes = _.map(changes, function(change){
           var params = change.state_params;
-          var entity_id;
-          // create new column for assertion or evidence item name
-          if (_.has(params, 'evidence_item')) {
-            entity_id = params.evidence_item.name;
-          }
-          if (_.has(params, 'assertion')) {
-            entity_id = params.assertion.name;
-          }
-          change.entity_id = entity_id;
+
+          // create subject type column
+          change.type = _.startCase(change.moderated_object.type);
+
+          // create full name column
+          var types = ['gene', 'variant', 'variant_group', 'evidence_item', 'assertion'];
+          var names = [];
+          _.each(types, function(type) {
+            if(_.has(params, type)) { names.push(params[type].name); }
+          });
+          change.full_name = names.join(' / ');
+
           return change;
         });
         return changes;
