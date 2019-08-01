@@ -58,11 +58,26 @@
       modifierKeysToMultiSelect: false,
       noUnselect: true,
       columnDefs: [
-        { name: 'created_at',
-          displayName: 'Created',
+        { name: 'user',
+          displayName: 'User',
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
+          enableSorting: false,
+          width: '15%',
+          cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        { name: 'created_at',
+          displayName: 'Created',
+          cellTemplate: '<div class="ui-grid-cell-contents"><span ng-bind="row.entity[col.field]|timeAgo"></span></div>',
+          enableFiltering: true,
+          allowCellFocus: false,
+          type: 'date',
+          sort: {direction: uiGridConstants.DESC},
+          enableSorting: true,
         },
         { name: 'status',
           displayName: 'Status',
@@ -70,6 +85,57 @@
           enableFiltering: true,
           allowCellFocus: false,
         },
+        {
+          name: 'gene',
+          field: 'state_params.gene.name',
+          displayName: 'Gene',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'variant',
+          field: 'state_params.variant.name',
+          displayName: 'Variant',
+          type: 'string',
+          width: '15%',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'variant',
+          field: 'state_params.variant.name',
+          displayName: 'Variant',
+          type: 'string',
+          width: '15%',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'entity_id',
+          displayName: 'Entity',
+          type: 'string',
+          width: '15%',
+          allowCellFocus: false,
+          enableFiltering: false,
+          enableSorting: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+
       ]
     };
 
@@ -104,34 +170,53 @@
       }
 
       gridApi.selection.on.rowSelectionChanged($scope, function(row, event){
-        var params = _.merge($stateParams, {  changesId: row.entity.id });
-        if(event.metaKey) {
-          // if meta key (alt or command) pressed, changesrate a state URL and open it in a new tab/window
-          // shift would be preferable to meta but ui-grid's selection module appears to be capturing shift-clicks for multi-select feature
-          // keep an eye on: https://github.com/angular-ui/ui-grid/issues/4926
-          var url = $state.href('events.changes.summary', params, {absolute: true});
-          $window.open(url, '_blank');
-        } else {
-          $state.go('events.changes.summary', params);
-        }
+        var change = row.entity;
+        var subjectStates = {
+          Assertion: 'events.assertions',
+          Gene: 'events.genes',
+          Variant: 'events.genes.summary.variants',
+          VariantGroup: 'events.genes.summary.variantGroups',
+          EvidenceItem: 'events.genes.summary.variants.summary.evidence',
+        };
+
+        var stateExtension = '.talk.revisions.list.summary';
+
+        // generate state params for router
+        var stateParams = {};
+        _.each(change.state_params, function(obj, entity) {
+          var entityId;
+          if(entity === 'suggested_change') {
+            entityId = 'revisionId';
+          } else if (entity === 'evidence_item') {
+            entityId = 'evidenceId';
+          } else if (entity === 'variant_group') {
+            entityId = 'variantGroupId';
+          } else if (entity === 'source') {
+            entityId = 'sourceId';
+          } else {
+            entityId = entity + 'Id';
+          }
+          stateParams[entityId] = obj.id;
+        });
+        var type = change.moderated_object.type;
+
+        $state.go(subjectStates[type] + '.talk.revisions.list.summary', stateParams);
       });
 
       function prepChangesData(changes) {
-        // changes = _.map(changes, function(item){
-        //   if (_.isArray(item.variants) && item.variants.length > 0) {
-        //     item.variant_list = _.map(item.variants, 'name').sort().join(', ');
-        //     item.variant_count = item.variants.length;
-        //   } else {
-        //     item.variant_list = 'No variants found.';
-        //     item.variant_count = 0;
-        //   }
-
-        //   if(Number(item.description.length) === 0) {
-        //     item.description = 'No description found.';
-        //   }
-
-        //   return item;
-        // });
+        changes = _.map(changes, function(change){
+          var params = change.state_params;
+          var entity_id;
+          // create new column for assertion or evidence item name
+          if (_.has(params, 'evidence_item')) {
+            entity_id = params.evidence_item.name;
+          }
+          if (_.has(params, 'assertion')) {
+            entity_id = params.assertion.name;
+          }
+          change.entity_id = entity_id;
+          return change;
+        });
         return changes;
       }
     };
