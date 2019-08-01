@@ -19,10 +19,10 @@
             <div ng-if="variant.allele_registry_id !== null" ng-class="{'col-xs-5': variant.allele_registry_id !== null , 'col-xs-12': variant.variant_aliases.length === 0 }">
               <p><strong>Allele Registry ID: </strong>
                 <span ng-switch="variant.allele_registry_id">
-                  <span ng-switch-when="_:CA">
+                  <span ng-switch-when="unregistered">
                     <a ng-href="http://reg.clinicalgenome.org/redmine/projects/registry/genboree_registry/allele?hgvs={{variant.allele_registry_hgvs}}"
                       target="_blank"
-                      uib-tooltip="Allele does not appear to be registered. Click to view its page and obtain a canonical allele identifier from ClinGen.">{{variant.allele_registry_id}}</a>
+                      uib-tooltip="Allele does not appear to be registered. Click to view its page and obtain a canonical allele identifier from ClinGen.">Unregistered</a>
                   </span>
                   <span ng-switch-default>
                     <a ng-href="https://reg.genome.network/allele/{{variant.allele_registry_id}}.html" target="_blank">{{variant.allele_registry_id}}</a>
