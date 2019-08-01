@@ -117,21 +117,21 @@
       });
 
       function prepChangesData(changes) {
-        changes = _.map(changes, function(item){
-          if (_.isArray(item.variants) && item.variants.length > 0) {
-            item.variant_list = _.map(item.variants, 'name').sort().join(', ');
-            item.variant_count = item.variants.length;
-          } else {
-            item.variant_list = 'No variants found.';
-            item.variant_count = 0;
-          }
+        // changes = _.map(changes, function(item){
+        //   if (_.isArray(item.variants) && item.variants.length > 0) {
+        //     item.variant_list = _.map(item.variants, 'name').sort().join(', ');
+        //     item.variant_count = item.variants.length;
+        //   } else {
+        //     item.variant_list = 'No variants found.';
+        //     item.variant_count = 0;
+        //   }
 
-          if(Number(item.description.length) === 0) {
-            item.description = 'No description found.';
-          }
+        //   if(Number(item.description.length) === 0) {
+        //     item.description = 'No description found.';
+        //   }
 
-          return item;
-        });
+        //   return item;
+        // });
         return changes;
       }
     };
