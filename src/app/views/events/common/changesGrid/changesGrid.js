@@ -115,7 +115,17 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         },
-
+        {
+          name: 'fields',
+          displayName: 'Fields',
+          type: 'string',
+          allowCellFocus: false,
+          enableFiltering: true,
+          enableSorting: true,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
       ]
     };
 
@@ -197,6 +207,9 @@
             if(_.has(params, type)) { names.push(params[type].name); }
           });
           change.full_name = names.join(' / ');
+
+          // create col for field modification summary
+          change.fields = _.keys(change.suggested_changes).join(', ');
 
           return change;
         });
