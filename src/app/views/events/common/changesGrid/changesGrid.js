@@ -74,17 +74,19 @@
           enableFiltering: true,
           allowCellFocus: false,
           enableSorting: false,
-          width: '15%',
+          width: '18%',
           cellTemplate: '<div class="ui-grid-cell-contents"><user-block user="row.entity[col.field]"</div>',
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
+            condition: function(searchTerm, cellValue, row, col){
+              return cellValue.display_name.includes(searchTerm);
+            }
           }
         },
         {
           name: 'status',
           displayName: 'Status',
           type: 'string',
-          width: '10%',
+          width: '8%',
           allowCellFocus: false,
           enableFiltering: true,
           enableSorting: true,
@@ -107,7 +109,7 @@
           name: 'type',
           displayName: 'Type',
           type: 'string',
-          width: '15%',
+          width: '10%',
           allowCellFocus: false,
           enableFiltering: true,
           enableSorting: true,
@@ -129,6 +131,7 @@
           name: 'full_name',
           displayName: 'Name',
           type: 'string',
+          cellTemplate: 'app/views/events/common/changesGrid/tooltipCell.tpl.html',
           allowCellFocus: false,
           enableFiltering: true,
           enableSorting: true,
