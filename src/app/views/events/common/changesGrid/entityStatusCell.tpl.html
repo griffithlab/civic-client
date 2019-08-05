@@ -1,0 +1,8 @@
+<div class="ngCellText ui-grid-cell-contents" ng-class="col.colIndex()">
+  {{ row.entity[col.field] }}
+  <span ng-if="row.entity['unlinkable'] === true">
+    &nbsp;<i class="glyphicon glyphicon-exclamation-sign" style="color: #942830"
+            uib-tooltip="Entity has been deleted and is not linkable"
+            tooltip-append-to-body="true"></i>
+  </span>
+</div>

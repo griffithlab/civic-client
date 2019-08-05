@@ -88,6 +88,7 @@
           allowCellFocus: false,
           enableFiltering: true,
           enableSorting: true,
+          cellTemplate: 'app/views/events/common/changesGrid/entityStatusCell.tpl.html',
           filter: {
             type: uiGridConstants.filter.SELECT,
             condition: uiGridConstants.filter.EXACT,
@@ -214,7 +215,9 @@
         });
         var type = change.moderated_object.type;
 
-        $state.go(subjectStates[type] + '.talk.revisions.list.summary', stateParams);
+        if (change.unlinkable === false) {
+          $state.go(subjectStates[type] + '.talk.revisions.list.summary', stateParams);
+        }
       });
 
       function prepChangesData(changes) {
