@@ -62,7 +62,7 @@
           displayName: 'Created',
           width: '15%',
           cellTemplate: '<div class="ui-grid-cell-contents"><span ng-bind="row.entity[col.field]|timeAgo"></span></div>',
-          enableFiltering: true,
+          enableFiltering: false,
           allowCellFocus: false,
           type: 'date',
           sort: {direction: uiGridConstants.DESC},
@@ -89,8 +89,18 @@
           enableFiltering: true,
           enableSorting: true,
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
+            type: uiGridConstants.filter.SELECT,
+            condition: uiGridConstants.filter.EXACT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'new', label: 'new'},
+              { value: 'applied', label: 'applied'},
+              { value: 'closed', label: 'closed'},
+              { value: 'rejected', label: 'rejected'},
+            ]
+          },
         },
         {
           name: 'type',
@@ -101,8 +111,18 @@
           enableFiltering: true,
           enableSorting: true,
           filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
+            type: uiGridConstants.filter.SELECT,
+            term: null,
+            disableCancelFilterButton: false,
+            selectOptions: [
+              { value: null, label: '--' },
+              { value: 'Assertion', label: 'Assertion'},
+              { value: 'Evidence Item', label: 'Evidence Item'},
+              { value: 'Gene', label: 'Gene'},
+              { value: 'Variant', label: 'Variant'},
+              { value: 'Variant Group', label: 'Variant Group'},
+            ]
+          },
         },
         {
           name: 'full_name',
@@ -139,6 +159,10 @@
 
       $scope.$watchCollection('changes', function(changes) {
         if(changes) {
+          // workarount for inexact select options matching
+          // https://github.com/angular-ui/ui-grid/issues/5830
+          gridApi.grid.columns[3].filters[0].condition = uiGridConstants.filter.EXACT;
+
           ctrl.changesGridOptions.minRowsToShow = changes.length + 1;
           ctrl.changesGridOptions.data = prepChangesData(changes);
         }
