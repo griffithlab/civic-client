@@ -4289,14 +4289,14 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field inline-field-md',
                 data: {
-                  defaultValue: 'is'
+                  defaultValue: 'is_equal_to'
                 },
                 templateOptions: {
                   label: '',
                   required: true,
                   options: [
-                    {value: 'is', name: 'is'},
-                    {value: 'is_not', name: 'is not'}
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
                   ]
                 }
               },
