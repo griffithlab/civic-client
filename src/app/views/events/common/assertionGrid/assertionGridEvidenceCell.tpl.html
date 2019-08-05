@@ -2,6 +2,7 @@
   {{ row.entity[col.field] }}
   <span ng-if="row.entity[col.field] == 0">
     &nbsp;<i class="glyphicon glyphicon-exclamation-sign" style="color: #942830"
-            uib-tooltip="Assertion has zero evidence and is likely under active curation."></i>
+            uib-tooltip="Assertion has zero evidence and is likely under active curation."
+            tooltip-append-to-body="true"></i>
   </span>
 </div>
