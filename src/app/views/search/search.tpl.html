@@ -21,6 +21,9 @@
               <span ng-switch-when="search.sources">
                 Sources
               </span>
+              <span ng-switch-when="search.suggested_changes">
+                Suggested Changes
+              </span>
             </span>
           </h3>
         </div>
@@ -47,6 +50,9 @@
               <a ui-sref="search.sources">Sources</a>
             </li>
 
+            <li ui-sref-active="active">
+              <a ui-sref="search.suggested_changes">Suggested Changes</a>
+            </li>
           </ul>
         </div>
       </div>

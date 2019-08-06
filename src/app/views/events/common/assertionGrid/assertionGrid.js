@@ -242,6 +242,7 @@
           name: 'evidence_item_count',
           width: '5%',
           displayName: 'EIDs',
+          cellTemplate: 'app/views/events/common/assertionGrid/assertionGridEvidenceCell.tpl.html',
           sort: {
             direction: uiGridConstants.DESC
           },
