@@ -4268,7 +4268,7 @@
                 type: 'queryBuilderSelect',
                 className: 'inline-field',
                 data: {
-                  defaultValue: 'Sensitivity/Response'
+                  defaultValue: 'Assertion'
                 },
                 templateOptions: {
                   label: '',
