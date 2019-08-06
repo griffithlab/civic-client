@@ -13,12 +13,6 @@
         url: '/search',
         controller: 'SearchViewController',
         templateUrl: 'app/views/search/search.tpl.html',
-        resolve: {
-          Assertions: 'Assertions',
-          acmgCodes: function(Assertions) {
-            return Assertions.queryAcmgCodes();
-          }
-        }
       })
       .state('search.evidence', {
         url: '/evidence/:token',
