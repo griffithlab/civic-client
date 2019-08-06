@@ -18,7 +18,7 @@
         url: '/evidence/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
-        templateUrl: 'app/views/search/searchEvidence.tpl.html',
+        templateUrl: 'app/views/search/templates/searchEvidence.tpl.html',
         data: {
           titleExp: '"Search Evidence"',
           navMode: 'sub'
@@ -28,7 +28,7 @@
         url: '/assertions/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
-        templateUrl: 'app/views/search/searchAssertions.tpl.html',
+        templateUrl: 'app/views/search/templates/searchAssertions.tpl.html',
         data: {
           titleExp: '"Search Assertions"',
           navMode: 'sub'
@@ -38,7 +38,7 @@
         url: '/genes/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
-        templateUrl: 'app/views/search/searchGenes.tpl.html',
+        templateUrl: 'app/views/search/templates/searchGenes.tpl.html',
         data: {
           titleExp: '"Search Genes"',
           navMode: 'sub'
@@ -48,7 +48,7 @@
         url: '/suggested_changes/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
-        templateUrl: 'app/views/search/searchSuggestedChanges.tpl.html',
+        templateUrl: 'app/views/search/templates/searchSuggestedChanges.tpl.html',
         data: {
           titleExp: '"Search Suggested Changes"',
           navMode: 'sub'
@@ -58,7 +58,7 @@
         url: '/variants/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
-        templateUrl: 'app/views/search/searchVariants.tpl.html',
+        templateUrl: 'app/views/search/templates/searchVariants.tpl.html',
         data: {
           titleExp: '"Search Variants"',
           navMode: 'sub'
@@ -68,7 +68,7 @@
         url: '/sources/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
-        templateUrl: 'app/views/search/searchSources.tpl.html',
+        templateUrl: 'app/views/search/templates/searchSources.tpl.html',
         data: {
           titleExp: '"Search Sources"',
           navMode: 'sub'
@@ -78,7 +78,7 @@
         url: '/variantGroups/:token',
         reloadOnSearch: false,
         controller: 'SearchController',
-        templateUrl: 'app/views/search/searchVariantGroups.tpl.html',
+        templateUrl: 'app/views/search/templates/searchVariantGroups.tpl.html',
         data: {
           titleExp: '"Search Variant Groups"',
           navMode: 'sub'
