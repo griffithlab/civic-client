@@ -319,7 +319,7 @@
           assertions:function(params) { return params.assertion.name; },
           genes: function(params){ return params.gene.name; },
           variants: function(params){ return params.variant.name; },
-          variantgroups: function(params){ return params.variantgroup.name; },
+          variantgroups: function(params){ return params.variant_group.name; },
           evidenceitems: function(params){ return params.evidence_item.name; },
           sources: function(params){ return params.source.name; },
           suggestedchanges: function(params){
