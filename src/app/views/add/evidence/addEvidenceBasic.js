@@ -501,8 +501,9 @@
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type)),
           onChange: function(value, options, scope) {
-            // reset clinical_significance, as its options will change
+            // reset evidence_direction and clinical_significance, as their options will change
             scope.model.clinical_significance = '';
+            scope.model.evidence_direction = '';
 
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
@@ -567,7 +568,7 @@
             if($stateParams.evidenceType) {
               var et = $stateParams.evidenceType;
               var ed = $stateParams.evidenceDirection;
-              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction[et]);
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction.evidence_item[et]);
               if(_.includes(permitted, ed)) {
                 $scope.model.evidence_direction = $stateParams.evidenceDirection;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et][ed];
@@ -584,13 +585,14 @@
           label: 'Evidence Direction',
           required: true,
           value: 'vm.newEvidence.evidence_direction',
-          options: [{ value: '', label: 'Please select an Evidence Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
+          options: [{ value: '', label: 'Please select an Evidence Direction' }].concat(make_options(descriptions.evidence_direction.evidence_item['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Evidence Direction'],
+          evidenceDirectionOptions: [{ type: 'default', value: '', label: 'Please select an Evidence Direction' }].concat(cs_options(descriptions.evidence_direction.evidence_item)),
           data: {
             attributeDefinition: 'Please choose Evidence Type before selecting Evidence Direction.',
-            attributeDefinitions: descriptions.evidence_direction,
+            attributeDefinitions: descriptions.evidence_direction.evidence_item,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
@@ -602,6 +604,13 @@
           }
         },
         expressionProperties: {
+          'templateOptions.options': function($viewValue, $modelValue, scope) {
+            return  _.filter(scope.to.evidenceDirectionOptions, function(option) {
+              return !!(option.type === scope.model.evidence_type ||
+                        option.type === 'default' ||
+                        option.type === 'N/A');
+            });
+          },
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },
@@ -615,7 +624,7 @@
             if($stateParams.evidenceType) {
               var et = $stateParams.evidenceType;
               var cs = $stateParams.clinicalSignificance;
-              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance[et]);
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance.evidence_item[et]);
               if(_.includes(permitted, cs)) {
                 $scope.model.clinical_significance = $stateParams.clinicalSignificance;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[cs];
@@ -633,14 +642,14 @@
           required: true,
           value: 'vm.newEvidence.clinical_significance',
           // stores unmodified options array for expressionProperties
-          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
+          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           // actual options displayed in the select, modified by expressionProperties
-          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
+          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
           helpText: help['Clinical Significance'],
           data: {
             attributeDefinition: 'Please choose Evidence Type before selecting Clinical Significance.',
-            attributeDefinitions: merge_props(descriptions.clinical_significance),
+            attributeDefinitions: merge_props(descriptions.clinical_significance.evidence_item),
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
