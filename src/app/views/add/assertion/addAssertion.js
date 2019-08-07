@@ -377,7 +377,7 @@
             if($stateParams.evidenceType) {
               var et = $stateParams.evidenceType;
               var ed = $stateParams.evidenceDirection;
-              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction[et]);
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction.assertion[et]);
               if(_.includes(permitted, ed)) {
                 $scope.model.evidence_direction = $stateParams.evidenceDirection;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et][ed];
@@ -395,13 +395,13 @@
           required: true,
           value: 'vm.newEvidence.evidence_direction',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
+          options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction.assertion['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
           labelProp: 'label',
           helpText: 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Assertion Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: '',
-            attributeDefinitions: descriptions.evidence_direction,
+            attributeDefinitions: descriptions.evidence_direction.assertion,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
@@ -426,7 +426,7 @@
             if($stateParams.evidenceType) {
               var et = $stateParams.evidenceType;
               var cs = $stateParams.clinicalSignificance;
-              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance[et]);
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance.assertion[et]);
               if(_.includes(permitted, cs)) {
                 $scope.model.clinical_significance = $stateParams.clinicalSignificance;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[cs];
@@ -444,14 +444,14 @@
           required: true,
           value: 'vm.newEvidence.clinical_significance',
           // stores unmodified options array for expressionProperties
-          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
+          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.assertion)),
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           // actual options displayed in the select, modified by expressionProperties
-          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
+          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.assertion)),
           helpText: 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing assertion types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Assertion Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: 'Please choose Assertion Type before selecting Clinical Significance.',
-            attributeDefinitions: merge_props(descriptions.clinical_significance),
+            attributeDefinitions: merge_props(descriptions.clinical_significance.assertion),
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
