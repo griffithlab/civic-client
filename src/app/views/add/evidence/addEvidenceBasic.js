@@ -502,8 +502,11 @@
           options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type)),
           onChange: function(value, options, scope) {
             // reset evidence_direction and clinical_significance, as their options will change
+            // also update $touched so user notices
             scope.model.clinical_significance = '';
             scope.model.evidence_direction = '';
+            _.find(scope.fields, { key: 'clinical_significance'}).formControl.$touched = true;
+            _.find(scope.fields, { key: 'evidence_direction'}).formControl.$touched = true;
 
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
