@@ -205,8 +205,7 @@
         },
         expressionProperties: {
           'templateOptions.disabled': function($viewValue, $modelValue, scope) {
-            var geneField = _.find(scope.fields, { key: 'gene'});
-            return geneField.formControl.$invalid;
+            return scope.model.gene ? scope.model.gene.name == '': false;
           }
         },
         data: {

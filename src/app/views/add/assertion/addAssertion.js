@@ -151,12 +151,14 @@
           listener: function(field, newValue, oldValue, scope) {
             // if gene is valid, remove the 'please specify gene...' message
             if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
-              _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = '';
+              var varField = _.find(scope.fields, { key: 'variant'});
+              varField.templateOptions.data.message = '';
             }
             // if gene is invalid, remove any defined variant and show 'pls specify gene' msg
             if(!_.isUndefined(field.formControl) && field.formControl.$invalid) {
               scope.model.variant = {name:''};
-              _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = 'Please specify a gene before selecting a variant.';
+              var varField = _.find(scope.fields, { key: 'variant'});
+              varField.templateOptions.data.message = 'Please specify a gene before selecting a variant.';
             }
           }
         },
@@ -199,13 +201,12 @@
           typeaheadMinLength: 0,
           selectOnBlur: true,
           data: {
-            message: 'Please specify a Gene before choosing a Variant.'
+            message: 'Please specify a Gene before choosing a Variant.',
           }
         },
         expressionProperties: {
           'templateOptions.disabled': function($viewValue, $modelValue, scope) {
-            var geneField = _.find(scope.fields, { key: 'gene'});
-            return geneField.formControl.$invalid;
+            return scope.model.gene ? scope.model.gene.name == '': false;
           }
         },
         data: {
