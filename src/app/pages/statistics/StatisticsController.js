@@ -163,15 +163,16 @@
       Stats.getDashboard(vm.model);
     }
 
-    vm.resetForm = function resetForm() {
+    function resetForm() {
       vm.model = _.clone(baseModel);
       updateData();
     };
 
     vm.Stats = Stats;
 
-    // place on scope for Filter button onClick
+    // place on scope for Filter/reset button onClick
     vm.updateData = updateData;
+    vm.resetForm = resetForm;
 
     var fieldClassName = 'col-xs-5';
     vm.formFields = [
