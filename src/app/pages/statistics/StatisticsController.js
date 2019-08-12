@@ -4,7 +4,7 @@
     .controller('StatisticsController', StatisticsController);
 
   // @ngInject
-  function StatisticsController($scope, $state, Stats, Genes) {
+  function StatisticsController($scope, $state, Stats, Genes, _) {
     var vm = $scope.vm = {};
     vm.stateIncludes = $state.includes;
 
@@ -151,15 +151,22 @@
         data: []
       }
     };
-    vm.model = {
+
+    var baseModel = {
       entrez_name: '',
       limit_by_status: ''
-
     };
+
+    vm.model = _.clone(baseModel);
 
     function updateData() {
       Stats.getDashboard(vm.model);
     }
+
+    vm.resetForm = function resetForm() {
+      vm.model = _.clone(baseModel);
+      updateData();
+    };
 
     vm.Stats = Stats;
 
