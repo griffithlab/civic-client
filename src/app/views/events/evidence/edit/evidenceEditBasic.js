@@ -316,10 +316,13 @@
           onChange: function(value, options, scope) {
             // reset clinical_significance, as its options will change
             // then update $touched to ensure user notices
-            scope.model.clinical_significance = '';
-            scope.model.evidence_direction = '';
-            _.find(scope.fields, { key: 'clinical_significance'}).formControl.$touched = true;
-            _.find(scope.fields, { key: 'evidence_direction'}).formControl.$touched = true;
+            var csField = _.find(scope.fields, { key: 'clinical_significance'});
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+
+            csField.value('');
+            edField.value('');
+            csField.templateOptions.data.attributeDefinition = '';
+            edField.templateOptions.data.attributeDefinition = '';
 
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
@@ -328,11 +331,6 @@
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
 
-            // update evidence direction attribute definition
-            var edField = _.find(scope.fields, { key: 'evidence_direction'});
-            if (edField.value() !== '') { // only update if user has selected an option
-              edField.templateOptions.data.updateDefinition(null, edField, scope);
-            }
           },
           helpText: help['Evidence Type'],
           data: {
