@@ -101,7 +101,6 @@
               { value: 'new', label: 'new'},
               { value: 'applied', label: 'applied'},
               { value: 'closed', label: 'closed'},
-              { value: 'rejected', label: 'rejected'},
             ]
           },
         },
