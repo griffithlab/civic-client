@@ -149,6 +149,30 @@
         margin: barMargins,
         transitionDuration: transitionDuration,
         data: []
+      },
+      organizationsByActivityCount: {
+        width: barChartWidth,
+        height: barChartHeight,
+        title: 'Organizations by Activity Count',
+        margin: barMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByBadgeCount: {
+        width: barChartWidth,
+        height: barChartHeight,
+        title: 'Organizations by Badge Count',
+        margin: barMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByUserCount: {
+        width: barChartWidth,
+        height: barChartHeight,
+        title: 'Organizations by User Count',
+        margin: barMargins,
+        transitionDuration: transitionDuration,
+        data: []
       }
     };
     vm.model = {
