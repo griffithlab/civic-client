@@ -14,6 +14,9 @@
     var barChartWidth = '100%',
         barChartHeight = 540;
 
+    var smPieChartWidth = '70%',
+        smPieChartHeight = 320;
+
     var pieMargins = {
       top: 25,
       right: 10,
@@ -150,25 +153,25 @@
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByActivityCount: {
-        width: pieChartWidth,
-        height: pieChartHeight,
-        title: 'Organizations by Activity Count',
+      organizationsByTotalActivityCount: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Total Activity Count',
         margin: pieMargins,
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByBadgeCount: {
-        width: pieChartWidth,
-        height: pieChartHeight,
-        title: 'Organizations by Badge Count',
+      organizationsByTotalBadgeCount: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Total Badge Count',
         margin: pieMargins,
         transitionDuration: transitionDuration,
         data: []
       },
       organizationsByUserCount: {
-        width: pieChartWidth,
-        height: pieChartHeight,
+        width: smPieChartWidth,
+        height: smPieChartHeight,
         title: 'Organizations by User Count',
         margin: pieMargins,
         transitionDuration: transitionDuration,

@@ -54,7 +54,7 @@
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
     chart.addSeries('Organization', dimple.plot.pie);
-    var l = chart.addLegend('100%', 25, 90, 300, 'left');
+    var l = chart.addLegend('110%', 25, 90, 300, 'left');
 
     // override legend sorting
     l._getEntries_old = l._getEntries;

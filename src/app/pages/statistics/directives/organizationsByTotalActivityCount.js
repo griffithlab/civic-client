@@ -1,12 +1,12 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .directive('organizationsByActivityCount', organizationsByActivityCount)
-    .controller('organizationsByActivityCountController',
-                organizationsByActivityCountController);
+    .directive('organizationsByTotalActivityCount', organizationsByTotalActivityCount)
+    .controller('organizationsByTotalActivityCountController',
+                organizationsByTotalActivityCountController);
 
   // @ngInject
-  function organizationsByActivityCount() {
+  function organizationsByTotalActivityCount() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -14,13 +14,13 @@
         palette: '='
       },
       templateUrl: 'app/pages/statistics/directives/chartPie.tpl.html',
-      controller: organizationsByActivityCountController
+      controller: organizationsByTotalActivityCountController
     };
     return directive;
   }
 
   // @ngInject
-  function organizationsByActivityCountController($scope,
+  function organizationsByTotalActivityCountController($scope,
                                     $window,
                                     $rootScope,
                                     $element,
@@ -28,7 +28,7 @@
                                     dimple,
                                     _,
                                    Stats) {
-    console.log('organizationsByActivityCount loaded.');
+    console.log('organizationsByTotalActivityCount loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
@@ -54,7 +54,7 @@
     var p = chart.addMeasureAxis('p', 'Count');
     p.tickFormat = d3.format(',.0f');
     chart.addSeries('Organization', dimple.plot.pie);
-    var l = chart.addLegend('100%', 25, 90, 300, 'left');
+    var l = chart.addLegend('110%', 25, 90, 300, 'left');
 
     // override legend sorting
     l._getEntries_old = l._getEntries;
@@ -65,10 +65,14 @@
     $scope.$watch(function() {
       return Stats.data.dashboard.organization_activity_count;
     }, function(data) {
-      chart.data = _.map(data, function(key, value) {
+      chart.data = _.map(data, function(value, key) {
         return {
-          Organization: value,
-          Count: key
+          Organization: key,
+          Count: _.reduce(value, function(total, value, key) {
+            return total + _.reduce(value, function(total, value, key) {
+              return total + value;
+            }, 0);
+          }, 0)
         };
       });
 
