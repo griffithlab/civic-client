@@ -161,6 +161,14 @@
         transitionDuration: transitionDuration,
         data: []
       },
+      organizationsByUserCount: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by User Count',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
       organizationsByTotalBadgeCount: {
         width: smPieChartWidth,
         height: smPieChartHeight,
@@ -169,14 +177,30 @@
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByUserCount: {
+      organizationsByChangeActivity: {
         width: smPieChartWidth,
         height: smPieChartHeight,
-        title: 'Organizations by User Count',
+        title: 'Organizations by Suggested Changes',
         margin: pieMargins,
         transitionDuration: transitionDuration,
         data: []
-      }
+      },
+      organizationsByEvidenceActivity: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Evidence Actions',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByAssertionActivity: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Assertion Actions',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
     };
     vm.model = {
       entrez_name: '',
