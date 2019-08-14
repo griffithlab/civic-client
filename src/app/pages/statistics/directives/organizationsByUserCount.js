@@ -1,12 +1,12 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .directive('organizationsByActivityCount', organizationsByActivityCount)
-    .controller('organizationsByActivityCountController',
-                organizationsByActivityCountController);
+    .directive('organizationsByUserCount', organizationsByUserCount)
+    .controller('organizationsByUserCountController',
+                organizationsByUserCountController);
 
   // @ngInject
-  function organizationsByActivityCount() {
+  function organizationsByUserCount() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -14,13 +14,13 @@
         palette: '='
       },
       templateUrl: 'app/pages/statistics/directives/chartPie.tpl.html',
-      controller: organizationsByActivityCountController
+      controller: organizationsByUserCountController
     };
     return directive;
   }
 
   // @ngInject
-  function organizationsByActivityCountController($scope,
+  function organizationsByUserCountController($scope,
                                     $window,
                                     $rootScope,
                                     $element,
@@ -28,7 +28,7 @@
                                     dimple,
                                     _,
                                    Stats) {
-    console.log('organizationsByActivityCount loaded.');
+    console.log('organizationsByUserCount loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
@@ -63,7 +63,7 @@
     };
 
     $scope.$watch(function() {
-      return Stats.data.dashboard.organization_activity_count;
+      return Stats.data.dashboard.organization_user_count;
     }, function(data) {
       chart.data = _.map(data, function(key, value) {
         return {

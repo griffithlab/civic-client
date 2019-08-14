@@ -151,26 +151,26 @@
         data: []
       },
       organizationsByActivityCount: {
-        width: barChartWidth,
-        height: barChartHeight,
+        width: pieChartWidth,
+        height: pieChartHeight,
         title: 'Organizations by Activity Count',
-        margin: barMargins,
+        margin: pieMargins,
         transitionDuration: transitionDuration,
         data: []
       },
       organizationsByBadgeCount: {
-        width: barChartWidth,
-        height: barChartHeight,
+        width: pieChartWidth,
+        height: pieChartHeight,
         title: 'Organizations by Badge Count',
-        margin: barMargins,
+        margin: pieMargins,
         transitionDuration: transitionDuration,
         data: []
       },
       organizationsByUserCount: {
-        width: barChartWidth,
-        height: barChartHeight,
+        width: pieChartWidth,
+        height: pieChartHeight,
         title: 'Organizations by User Count',
-        margin: barMargins,
+        margin: pieMargins,
         transitionDuration: transitionDuration,
         data: []
       }
