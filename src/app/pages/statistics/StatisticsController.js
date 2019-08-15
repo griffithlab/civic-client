@@ -14,6 +14,9 @@
     var barChartWidth = '100%',
         barChartHeight = 540;
 
+    var smPieChartWidth = '70%',
+        smPieChartHeight = 320;
+
     var pieMargins = {
       top: 25,
       right: 10,
@@ -149,7 +152,55 @@
         margin: barMargins,
         transitionDuration: transitionDuration,
         data: []
-      }
+      },
+      organizationsByTotalActivityCount: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Total Activity Count',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByUserCount: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by User Count',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByTotalBadgeCount: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Total Badge Count',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByChangeActivity: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Suggested Changes',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByEvidenceActivity: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Evidence Actions',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByAssertionActivity: {
+        width: smPieChartWidth,
+        height: smPieChartHeight,
+        title: 'Organizations by Assertion Actions',
+        margin: pieMargins,
+        transitionDuration: transitionDuration,
+        data: []
+      },
     };
 
     var baseModel = {

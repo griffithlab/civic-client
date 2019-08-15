@@ -56,7 +56,17 @@
           titleExp: '"Statistics: Sources"',
           navMode: 'sub'
         }
+      })
+      .state('statistics.organizations', {
+        url: '/organizations',
+        controller: 'StatisticsController',
+        templateUrl: 'app/pages/statistics/organizations-stats.tpl.html',
+        data: {
+          titleExp: '"Statistics: Organizations"',
+          navMode: 'sub'
+        }
       });
+;
 
     $urlRouterProvider.when('/statistics', '/statistics/evidence');
   }
