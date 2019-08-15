@@ -82,7 +82,7 @@
         .orderBy(['Drug', 'Level'], ['asc', 'desc'])
         .value();
 
-      chart.draw(options.transitionDuration);
+      chart.draw();
     });
 
     var onResize = function () { chart.draw(0, true); };
