@@ -6,7 +6,8 @@
       return {
         restrict: 'E',
         scope: {
-          variantInfo: '='
+          variantInfo: '=',
+          entrezId: '='
         },
         controller: 'MyVariantInfoController',
         templateUrl: 'app/views/events/variants/summary/myVariantInfo.tpl.html'
@@ -17,6 +18,7 @@
   function MyVariantInfoController($scope, ngDialog, _) {
     var ctrl = $scope.ctrl = {};
     ctrl.variantInfo = $scope.variantInfo;
+    ctrl.variantInfo.entrez_id = $scope.entrezId;
 
     // MyVariant.info returns some fields as strings OR arrays, this
     // converts strings to a single-element array
@@ -78,6 +80,11 @@
       gnomad_genome_af = ctrl.variantInfo.gnomad_genome.af.af;
       ctrl.variantInfo.gnomad_adj_allele_freq = _.round((ctrl.variantInfo.gnomad_exome.ac.ac + ctrl.variantInfo.gnomad_genome.ac.ac) / (ctrl.variantInfo.gnomad_exome.an.an + ctrl.variantInfo.gnomad_genome.an.an), 5);
       ctrl.variantInfo.gnomad_adj_af_tooltip = 'Exome Allele Freq: ' + gnomad_exome_af + '</br>Genome Allele Freq: ' + gnomad_genome_af;
+    }
+
+    // create COSMIC short link
+    if(!_.isUndefined(ctrl.variantInfo.cosmic)) {
+      ctrl.variantInfo.cosmic.cosmic_id_short = _.trim(ctrl.variantInfo.cosmic.cosmic_id, 'COSM');
     }
 
     // replace ampersands with commas in SnpEff Effect strings

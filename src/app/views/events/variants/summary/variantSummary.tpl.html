@@ -266,7 +266,7 @@
           <a class="btn btn-default btn-xs btn-block" ng-click="editClick()">Edit Coordinates</a>
         </div>
       </div>
-      <my-variant-info variant-info="myVariantInfo" ng-if="myVariantInfo._id"></my-variant-info>
+      <my-variant-info ng-if="myVariantInfo._id" variant-info="myVariantInfo" entrez-id="variant.name"></my-variant-info>
     </div>
   </div>
   <div ng-if="showEvidenceGrid === true">
