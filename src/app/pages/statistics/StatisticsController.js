@@ -225,7 +225,7 @@
     vm.updateData = updateData;
     vm.resetForm = resetForm;
 
-    var fieldClassName = 'col-xs-5';
+    var fieldClassName = 'col-xs-4';
     vm.formFields = [
       {
         key: 'entrez_name',
