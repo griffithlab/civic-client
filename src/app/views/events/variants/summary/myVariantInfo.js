@@ -43,6 +43,8 @@
       'dbnsfp.polyphen2.hvar.score',
       'dbnsfp.mutationtaster.pred',
       'dbnsfp.mutationtaster.score',
+      'dbnsfp.mutationassessor.pred',
+      'dbnsfp.mutationassessor.score',
       'dbnsfp.fathmm.pred',
       'dbnsfp.fathmm.score',
       'dbnsfp.provean.pred',
