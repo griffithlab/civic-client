@@ -311,7 +311,7 @@
         controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
           if($stateParams.evidenceType) {
             var et = $stateParams.evidenceType;
-            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type);
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type.assertion);
             if(_.includes(permitted, et)) {
               $scope.model.evidence_type = $stateParams.evidenceType;
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et];
@@ -325,7 +325,7 @@
           required: true,
           value: 'vm.newEvidence.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: _.filter([{ value: '', label: 'Please select an Assertion Type' }].concat(make_options(descriptions.evidence_type)), function(t) { return t.value !== 'Functional'; }),
+          options: [{ value: '', label: 'Please select an Assertion Type' }].concat(make_options(descriptions.evidence_type.assertion)),
           onChange: function(value, options, scope) {
             // reset clinical_significance, as its options will change
             scope.model.clinical_significance = '';

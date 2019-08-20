@@ -326,7 +326,7 @@
           required: true,
           value: 'vm.newEvidence.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: _.filter([{ value: '', label: 'Please select an Assertion Type' }].concat(make_options(descriptions.evidence_type)), function(t) { return t.value !== 'Functional'; }),
+          options: [{ value: '', label: 'Please select an Assertion Type' }].concat(make_options(descriptions.evidence_type.assertion)),
           onChange: function(value, options, scope) {
             // reset clinical_significance, as its options will change
             scope.model.clinical_significance = '';

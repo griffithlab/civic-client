@@ -499,7 +499,7 @@
           required: true,
           value: 'vm.newEvidence.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type)),
+          options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type.evidence_item)),
           onChange: function(value, options, scope) {
             // reset evidence_direction and clinical_significance, as their options will change
             // also update $touched so user notices

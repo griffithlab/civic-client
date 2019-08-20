@@ -306,11 +306,19 @@
           'ASCO': 'Evidence item source uses an ASCO abstract.'
         },
         evidence_type: {
-          'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-          'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
-          'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
-          'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
-          'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
+          evidence_item: {
+            'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
+            'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
+            'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
+            'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
+            'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
+          },
+          assertion: {
+            'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
+            'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
+            'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
+            'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
+          }
         },
         evidence_level_brief: {
           A: 'Validated association',
