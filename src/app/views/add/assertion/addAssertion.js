@@ -249,6 +249,7 @@
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
           options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
+          required: true,
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Variant Origin'],
