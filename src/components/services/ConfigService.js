@@ -341,7 +341,7 @@
               'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
             },
             'Predisposing': {
-              'N/A': 'Evidence Direction is Not Applicable for Predisposing Evidence Type'
+              'NA': 'Evidence Direction is Not Applicable for Predisposing Evidence Type. Due to technical limitations, this value must be stored as \'NA\' instead of \'N/A\'.'
             },
             'Functional': {
               'Support': 'TBD',

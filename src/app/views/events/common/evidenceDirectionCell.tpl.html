@@ -6,6 +6,8 @@
      tooltip-append-to-body="true">
   <span
     class="glyphicon"
-    ng-class="{ 'glyphicon-thumbs-up': row.entity[col.field] === 'Supports', 'glyphicon-thumbs-down': row.entity[col.field] === 'Does Not Support'}">
+    ng-class="{ 'glyphicon-thumbs-up': row.entity[col.field] === 'Supports',
+    'glyphicon-thumbs-down': row.entity[col.field] === 'Does Not Support',
+    'glyphicon-remove-circle not-applicable': row.entity[col.field] === 'NA' }">
   </span>
 </div>
