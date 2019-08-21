@@ -125,8 +125,8 @@
                         }}
                         {{ code.code}}
                       </span>
-                  </span>
-                  <span ng-switch-when="false">
+                    </span>
+                    <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -141,8 +141,8 @@
                     <span ng-switch-when="true">
                       {{ vm.assertion.nccn_guideline }}
                       <span ng-if="vm.assertion.nccn_guideline_version">(v{{vm.assertion.nccn_guideline_version}})</span>
-                  </span>
-                  <span ng-switch-when="false">
+                    </span>
+                    <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -155,7 +155,7 @@
                     <span ng-switch-when="true" >
                       <i class="glyphicon glyphicon-ok" style="color: green"></i>
                     </span>
-                  <span ng-switch-when="false">
+                    <span ng-switch-when="false">
                       --
                     </span>
                   </span>
@@ -188,12 +188,22 @@
       </a>
     </div>
     <div class="col-xs-6">
-      <span uib-tooltip="Contributors may not accept their own submissions." tooltip-append-to-body="true" tooltip-enable="vm.ownerIsCurrentUser" class="help-tooltip">
-        <a class="btn btn-default btn-block btn-success"
-          ng-disabled="vm.ownerIsCurrentUser"
-          ng-click="acceptItem(vm.assertion.id)">
-          Accept Assertion
-        </a>
+      <span uib-tooltip="Contributors may not accept their own submissions."
+        tooltip-placement="top"
+        tooltip-append-to-body="true"
+        tooltip-enable="vm.ownerIsCurrentUser"
+        class="help-tooltip">
+        <span uib-tooltip="Assertion must have at least one evidence item to be accepted."
+          tooltip-append-to-body="true"
+          tooltip-placement="bottom"
+          tooltip-enable="vm.assertion.evidence_items.length === 0"
+          class="help-tooltip">
+          <a class="btn btn-default btn-block btn-success"
+            ng-disabled="vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0"
+            ng-click="acceptItem(vm.assertion.id)">
+            Accept Assertion
+          </a>
+        </span>
       </span>
     </div>
   </div>
