@@ -423,11 +423,29 @@
             <tr class="section-title"><td colspan="2">MutationAssessor</td></tr>
             <tr>
               <td class="key">Effect Prediction</td>
-              <td class="value">{{variantInfo.dbnsfp.mutationassessor.pred | ifEmpty: '--'}}</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.mutationassessor.pred.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="pred in variantInfo.dbnsfp.mutationassessor.pred track by $index">{{pred}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                    --
+                  </span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td class="key">Effect Score</td>
-              <td class="value">{{variantInfo.dbnsfp.mutationassessor.score | ifEmpty: '--'}}</td>
+              <td class="value">
+                <span ng-switch="variantInfo.dbnsfp.mutationassessor.score.length > 0">
+                  <span ng-switch-when="true">
+                    <span ng-repeat="score in variantInfo.dbnsfp.mutationassessor.score track by $index">{{score}}{{$last ? '' : ', '}}</span>
+                  </span>
+                  <span ng-switch-default>
+                    --
+                  </span>
+                </span>
+              </td>
             </tr>
             <tr class="section-title"><td colspan="2">FATHMM</td></tr>
             <tr>
