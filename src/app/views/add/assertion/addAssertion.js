@@ -702,8 +702,6 @@
         wrapper: ['simpleHasError'],
         templateOptions: {
           label: 'Supporting Evidence',
-          required: true,
-          minLength: 2,
           helpText: 'Please use the grids to add/remove evidence items.'
         }
       },
