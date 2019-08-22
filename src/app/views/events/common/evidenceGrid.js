@@ -187,18 +187,6 @@
           cellTemplate: 'app/views/events/common/evidenceGridVariantCell.tpl.html',
           width: '8%'
         },
-        { name: 'description',
-          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
-          displayName: 'DESC',
-          headerTooltip: 'Description',
-          type: 'string',
-          enableFiltering: true,
-          allowCellFocus: false,
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          },
-          cellTemplate: 'app/views/events/common/evidenceGridEvidenceCell.tpl.html'
-        },
         { name: 'disease',
           field: 'disease.name',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
@@ -223,6 +211,19 @@
             condition: uiGridConstants.filter.CONTAINS
           },
           cellTemplate: 'app/views/events/common/evidenceGridDrugCell.tpl.html'
+        },
+        { name: 'description',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          displayName: 'DESC',
+          headerTooltip: 'Description',
+          width: '6%',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          cellTemplate: 'app/views/events/common/evidenceGridEvidenceCell.tpl.html'
         },
         { name: 'evidence_level',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
