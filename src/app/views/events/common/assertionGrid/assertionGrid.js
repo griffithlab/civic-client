@@ -93,7 +93,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          width: '6%'
+          width: '8%'
         },
         {
           name: 'variant.name',
@@ -106,19 +106,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          width: '8%'
-        },
-        {
-          name: 'summary',
-          displayName: 'SUMM',
-          headerTooltip: 'Summary',
-          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
-          enableFiltering: true,
-          allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/evidenceGridEvidenceCell.tpl.html',
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
+          width: '12%'
         },
         {
           name: 'disease.name',
@@ -140,6 +128,19 @@
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/evidenceGridDrugCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
+        {
+          name: 'summary',
+          displayName: 'SUMM',
+          width: '6%',
+          headerTooltip: 'Summary',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/evidenceGridEvidenceCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
