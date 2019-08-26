@@ -521,7 +521,7 @@
           helpText: help['Evidence Type'],
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.evidence_type
+            attributeDefinitions: descriptions.evidence_type.evidence_item
           }
         }
       },

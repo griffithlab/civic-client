@@ -634,7 +634,7 @@
                   options: [
                     { value: 'Supports', name: 'Supports'},
                     { value: 'Does Not Support', name: 'Does Not Support' },
-                    { value: 'NA', name: 'NA' }
+                    { value: 'N/A', name: 'N/A' }
                   ]
                 }
               }

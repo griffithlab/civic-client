@@ -303,7 +303,7 @@
               { value: null, label: '--' },
               { value: 'Supports', label: 'Supports' },
               { value: 'Does not Support', label: 'Does not Support' },
-              { value: 'NA', label: 'NA' }
+              { value: 'N/A', label: 'N/A' }
             ]
           },
           width: '6%',
