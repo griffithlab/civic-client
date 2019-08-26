@@ -27,7 +27,7 @@
           <td class="name">Evidence Type:</td>
           <td class="value">
             <span ng-bind="evidence.evidence_type"
-              uib-tooltip="{{tipText.evidence_type[evidence.evidence_type]}}"
+              uib-tooltip="{{tipText.evidence_type.evidence_item[evidence.evidence_type]}}"
               tooltip-placement="right"
               class="help-tooltip">
               evidence type</span>
@@ -37,7 +37,7 @@
           <td class="name">Evidence Direction:</td>
           <td class="value">
             <span ng-bind="evidence.evidence_direction"
-              uib-tooltip="{{tipText.evidence_direction[evidence.evidence_type][evidence.evidence_direction]}}"
+              uib-tooltip="{{tipText.evidence_direction.evidence_item[evidence.evidence_type][evidence.evidence_direction]}}"
               tooltip-placement="right"
               class="help-tooltip">
               evidence.evidence_direction
@@ -49,7 +49,7 @@
           <td class="name">Clinical Significance:</td>
           <td class="value">
             <span ng-bind="evidence.clinical_significance"
-              uib-tooltip="{{tipText.clinical_significance[evidence.evidence_type][evidence.clinical_significance]}}"
+              uib-tooltip="{{tipText.clinical_significance.evidence_item[evidence.evidence_type][evidence.clinical_significance]}}"
               tooltip-placement="right"
               class="help-tooltip"
               class="help-tooltip">

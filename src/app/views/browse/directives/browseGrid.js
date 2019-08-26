@@ -458,7 +458,8 @@
             selectOptions: [
               { value: null, label: '--' },
               { value: 'Supports', label: 'Supports' },
-              { value: 'Does Not Support', label: 'Does not Support' }
+              { value: 'Does Not Support', label: 'Does not Support' },
+              { value: 'N/A', label: 'N/A' }
             ]
           },
           width: '6%',

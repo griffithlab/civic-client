@@ -43,10 +43,9 @@
   <div ng-if="vm.showForm">
     <div class="row edit-form">
       <div class="col-xs-12">
-        <form class="form-horizontal" autocomplete="off">
+        <form class="form-horizontal" name="vm.form" autocomplete="off">
           <formly-form options="vm.options" model="vm.assertionEdit" fields="vm.assertionFields">
           </formly-form>
-
         </form>
       </div>
     </div>
@@ -57,9 +56,12 @@
             <cancel-button></cancel-button>
           </div>
           <div class="pull-right">
-            <div ng-if="vm.isAuthenticated">
-              <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.assertionEdit, vm.options)">Submit Revision for Review</button>
-            </div>
+            <button type="submit"
+              class="btn btn-default"
+              ng-disabled="vm.form.$invalid || vm.isAuthenticated === false"
+              ng-click="vm.submit(vm.assertionEdit, vm.options)">
+              Submit Revision for Review
+            </button>
           </div>
         </div>
       </div>
@@ -94,8 +96,13 @@
     </div>
   </div>
   <!-- <div class="row"> -->
-  <!-- <div class="col-xs-12"> -->
-  <!-- <pre ng-bind="vm.assertionEdit|json"></pre> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <h4>Assertion</h4> -->
+  <!-- <pre ng-bind="vm.assertion | json"></pre> -->
+  <!-- </div> -->
+  <!-- <div class="col-xs-6"> -->
+  <!-- <h4>vm.assertionFields</h4> -->
+  <!-- <pre ng-bind="vm.assertionFields | json"></pre> -->
   <!-- </div> -->
   <!-- </div> -->
 </div>

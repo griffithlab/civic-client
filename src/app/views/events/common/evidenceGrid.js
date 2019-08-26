@@ -303,7 +303,8 @@
             selectOptions: [
               { value: null, label: '--' },
               { value: 'Supports', label: 'Supports' },
-              { value: 'Does not Support', label: 'Does not Support' }
+              { value: 'Does not Support', label: 'Does not Support' },
+              { value: 'N/A', label: 'N/A' }
             ]
           },
           width: '6%',

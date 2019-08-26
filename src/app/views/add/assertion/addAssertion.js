@@ -151,12 +151,14 @@
           listener: function(field, newValue, oldValue, scope) {
             // if gene is valid, remove the 'please specify gene...' message
             if(!_.isUndefined(field.formControl) && field.formControl.$valid) {
-              _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = '';
+              var varField = _.find(scope.fields, { key: 'variant'});
+              varField.templateOptions.data.message = '';
             }
             // if gene is invalid, remove any defined variant and show 'pls specify gene' msg
             if(!_.isUndefined(field.formControl) && field.formControl.$invalid) {
               scope.model.variant = {name:''};
-              _.find(scope.fields, { key: 'variant'}).templateOptions.data.message = 'Please specify a gene before selecting a variant.';
+              var varField = _.find(scope.fields, { key: 'variant'});
+              varField.templateOptions.data.message = 'Please specify a gene before selecting a variant.';
             }
           }
         },
@@ -199,13 +201,12 @@
           typeaheadMinLength: 0,
           selectOnBlur: true,
           data: {
-            message: 'Please specify a Gene before choosing a Variant.'
+            message: 'Please specify a Gene before choosing a Variant.',
           }
         },
         expressionProperties: {
           'templateOptions.disabled': function($viewValue, $modelValue, scope) {
-            var geneField = _.find(scope.fields, { key: 'gene'});
-            return geneField.formControl.$invalid;
+            return scope.model.gene ? scope.model.gene.name == '': false;
           }
         },
         data: {
@@ -248,6 +249,7 @@
           label: 'Variant Origin',
           value: 'vm.newEvidence.variant_origin',
           options: [{ value: '', label: 'Please select a Variant Origin' }].concat(make_options(descriptions.variant_origin)),
+          required: true,
           valueProp: 'value',
           labelProp: 'label',
           helpText: help['Variant Origin'],
@@ -325,10 +327,17 @@
           required: true,
           value: 'vm.newEvidence.evidence_type',
           ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: _.filter([{ value: '', label: 'Please select an Assertion Type' }].concat(make_options(descriptions.evidence_type)), function(t) { return t.value !== 'Functional'; }),
+          options: [{ value: '', label: 'Please select an Assertion Type' }].concat(make_options(descriptions.evidence_type.assertion)),
           onChange: function(value, options, scope) {
-            // reset clinical_significance, as its options will change
-            scope.model.clinical_significance = '';
+            // reset evidence_direction and clinical_significance, as their options will change
+            // also update $touched so user notices
+            var csField = _.find(scope.fields, { key: 'clinical_significance'});
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+
+            csField.value('');
+            edField.value('');
+            csField.templateOptions.data.attributeDefinition = '';
+            edField.templateOptions.data.attributeDefinition = '';
 
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
@@ -336,12 +345,6 @@
 
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
-
-            // update evidence direction attribute definition
-            var edField = _.find(scope.fields, { key: 'evidence_direction'});
-            if (edField.value() !== '') { // only update if user has selected an option
-              edField.templateOptions.data.updateDefinition(null, edField, scope);
-            }
 
             // reset ACMG codes if new Type != Predisposing
             if(value !== 'Predisposing') {
@@ -351,7 +354,7 @@
           helpText: 'Type of clinical outcome associated with the assertion description.',
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.evidence_type
+            attributeDefinitions: descriptions.evidence_type.assertion
           }
         },
         watcher: {
@@ -377,7 +380,7 @@
             if($stateParams.evidenceType) {
               var et = $stateParams.evidenceType;
               var ed = $stateParams.evidenceDirection;
-              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction[et]);
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_direction.assertion[et]);
               if(_.includes(permitted, ed)) {
                 $scope.model.evidence_direction = $stateParams.evidenceDirection;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et][ed];
@@ -394,14 +397,14 @@
           label: 'Assertion Direction',
           required: true,
           value: 'vm.newEvidence.evidence_direction',
-          ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction['Diagnostic'])), //dummy index e.g. 'Diagnostic'
+          options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction.assertion['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Assertion Type must be selected before this field is enabled.',
+          evidenceDirectionOptions: [{ type: 'default', value: '', label: 'Please select an Assertion Direction' }].concat(cs_options(descriptions.evidence_direction.assertion)),
+          helpText: 'An indicator of whether the assertion statement supports or refutes the clinical significance of an event. Assertion Type must be selected before this field is enabled.',
           data: {
-            attributeDefinition: '',
-            attributeDefinitions: descriptions.evidence_direction,
+            attributeDefinition: 'Please choose Assertion Type before selecting Assertion Direction.',
+            attributeDefinitions: descriptions.evidence_direction.assertion,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
@@ -413,6 +416,13 @@
           }
         },
         expressionProperties: {
+          'templateOptions.options': function($viewValue, $modelValue, scope) {
+            return  _.filter(scope.to.evidenceDirectionOptions, function(option) {
+              return !!(option.type === scope.model.evidence_type ||
+                        option.type === 'default' ||
+                        option.type === 'N/A');
+            });
+          },
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },
@@ -426,7 +436,7 @@
             if($stateParams.evidenceType) {
               var et = $stateParams.evidenceType;
               var cs = $stateParams.clinicalSignificance;
-              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance[et]);
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance.assertion[et]);
               if(_.includes(permitted, cs)) {
                 $scope.model.clinical_significance = $stateParams.clinicalSignificance;
                 $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[cs];
@@ -444,14 +454,14 @@
           required: true,
           value: 'vm.newEvidence.clinical_significance',
           // stores unmodified options array for expressionProperties
-          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
+          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.assertion)),
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           // actual options displayed in the select, modified by expressionProperties
-          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance)),
+          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.assertion)),
           helpText: 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing assertion types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Assertion Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: 'Please choose Assertion Type before selecting Clinical Significance.',
-            attributeDefinitions: merge_props(descriptions.clinical_significance),
+            attributeDefinitions: merge_props(descriptions.clinical_significance.assertion),
             updateDefinition: function(value, options, scope) {
               // set attribute definition
               options.templateOptions.data.attributeDefinition =
@@ -584,14 +594,14 @@
           }
         },
         expressionProperties: {
-          isUnique: function (viewValue, modelValue, scope) {
-            var codes = _.without(modelValue, '');
-            if(_.uniq(codes).length < codes.length) {
-              scope.to.data.message = 'NOTE: Duplicate ACMG codes will be ignored.';
-            } else {
-              scope.to.data.message = '';
-            }
-          }
+          // isUnique: function (viewValue, modelValue, scope) {
+          //   var codes = _.without(modelValue, '');
+          //   if(_.uniq(codes).length < codes.length) {
+          //     scope.to.data.message = 'NOTE: Duplicate ACMG codes will be ignored.';
+          //   } else {
+          //     scope.to.data.message = '';
+          //   }
+          // }
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return  scope.model.evidence_type !== 'Predisposing';

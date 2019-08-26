@@ -306,11 +306,19 @@
           'ASCO': 'Evidence item source uses an ASCO abstract.'
         },
         evidence_type: {
-          'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-          'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
-          'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
-          'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
-          'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
+          evidence_item: {
+            'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
+            'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
+            'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
+            'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
+            'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
+          },
+          assertion: {
+            'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
+            'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
+            'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
+            'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
+          }
         },
         evidence_level_brief: {
           A: 'Validated association',
@@ -327,58 +335,106 @@
           E: 'Indirect evidence'
         },
         evidence_direction:{
-          'Predictive': {
-            'Supports': 'The experiment or study supports this variant\'s response to a drug',
-            'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between this variant and a drug'
+          evidence_item: {
+            'Predictive': {
+              'Supports': 'The experiment or study supports this variant\'s response to a drug',
+              'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between this variant and a drug'
+            },
+            'Diagnostic': {
+              'Supports': 'The experiment or study supports this variant\'s impact on the diagnosis of disease or subtype',
+              'Does Not Support': 'The experiment or study does not support this variant\'s impact on diagnosis of disease or subtype'
+            },
+            'Prognostic': {
+              'Supports': 'The experiment or study supports this variant\'s impact on prognostic outcome',
+              'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
+            },
+            'Predisposing': {
+              'N/A': 'Evidence Direction is Not Applicable for Predisposing Evidence Type.'
+            },
+            'Functional': {
+              'Support': 'TBD',
+              'Does Not Support': 'TBD',
+            },
           },
-          'Diagnostic': {
-            'Supports': 'The experiment or study supports this variant\'s impact on the diagnosis of disease or subtype',
-            'Does Not Support': 'The experiment or study does not support this variant\'s impact on diagnosis of disease or subtype'
-          },
-          'Prognostic': {
-            'Supports': 'The experiment or study supports this variant\'s impact on prognostic outcome',
-            'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
-          },
-          'Predisposing': {
-            'Supports': 'The experiment or study supports a variant\'s impact on predisposing outcome',
-            'Does Not Support': 'The experiment or study does not support a predisposing association between variant and outcome'
-          },
-          'Functional': {
-            'Support': 'TBD',
-            'Does Not Support': 'TBD',
-          },
+          assertion: {
+            'Predictive': {
+              'Supports': 'The experiment or study supports this variant\'s response to a drug',
+              'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between this variant and a drug'
+            },
+            'Diagnostic': {
+              'Supports': 'The experiment or study supports this variant\'s impact on the diagnosis of disease or subtype',
+              'Does Not Support': 'The experiment or study does not support this variant\'s impact on diagnosis of disease or subtype'
+            },
+            'Prognostic': {
+              'Supports': 'The experiment or study supports this variant\'s impact on prognostic outcome',
+              'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
+            },
+            'Predisposing': {
+              'N/A': 'Evidence Direction is Not Applicable for Predisposing Assertion Type.'
+            },
+            'Functional': {
+              'Support': 'TBD',
+              'Does Not Support': 'TBD',
+            },
+          }
         },
         clinical_significance: {
-          'Predictive': {
-            'Sensitivity/Response': 'Associated with a clinical or preclinical response to treatment',
-            'Resistance': 'Associated with clinical or preclinical resistance to treatment',
-            'Adverse Response': 'Associated with an adverse response to drug treatment',
-            'Reduced Sensitivity': 'Response to treatment is lower than seen in other treatment contexts',
-            'N/A': 'Variant does not inform clinical action'
+          evidence_item: {
+            'Predictive': {
+              'Sensitivity/Response': 'Associated with a clinical or preclinical response to treatment',
+              'Resistance': 'Associated with clinical or preclinical resistance to treatment',
+              'Adverse Response': 'Associated with an adverse response to drug treatment',
+              'Reduced Sensitivity': 'Response to treatment is lower than seen in other treatment contexts',
+              'N/A': 'Variant does not inform clinical action'
+            },
+            'Diagnostic': {
+              'Positive': 'Associated with diagnosis of disease or subtype',
+              'Negative': 'Associated with lack of disease or subtype',
+            },
+            'Prognostic': {
+              'Better Outcome': 'Demonstrates better than expected clinical outcome',
+              'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
+              'N/A': 'Variant does not inform clinical action'
+            },
+            'Predisposing': {
+              'N/A': 'Clinical Significance is Not Applicable for Predisposing Evidence Type'
+            },
+            'Functional': {
+              'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
+              'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
+              'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
+              'Neomorphic': 'TBD',
+              'Unknown': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
+            },
           },
-          'Diagnostic': {
-            'Positive': 'Associated with diagnosis of disease or subtype',
-            'Negative': 'Associated with lack of disease or subtype',
-          },
-          'Prognostic': {
-            'Better Outcome': 'Demonstrates better than expected clinical outcome',
-            'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
-            'N/A': 'Variant does not inform clinical action'
-          },
-          'Predisposing': {
-            'Pathogenic': 'Very strong evidence the variant is pathogenic',
-            'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic.',
-            'Benign': 'Very strong evidence the variant is benign',
-            'Likely Benign': 'Not expected to have a major effect on disease',
-            'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
-          },
-          'Functional': {
-            'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
-            'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
-            'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
-            'Neomorphic': 'TBD',
-            'Unknown': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
-          },
+          assertion: {
+            'Predictive': {
+              'Sensitivity/Response': 'Associated with a clinical or preclinical response to treatment',
+              'Resistance': 'Associated with clinical or preclinical resistance to treatment',
+              'Adverse Response': 'Associated with an adverse response to drug treatment',
+              'Reduced Sensitivity': 'Response to treatment is lower than seen in other treatment contexts',
+              'N/A': 'Variant does not inform clinical action'
+            },
+            'Diagnostic': {
+              'Positive': 'Associated with diagnosis of disease or subtype',
+              'Negative': 'Associated with lack of disease or subtype',
+            },
+            'Prognostic': {
+              'Better Outcome': 'Demonstrates better than expected clinical outcome',
+              'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
+              'N/A': 'Variant does not inform clinical action'
+            },
+            'Predisposing': {
+              'N/A': 'Clinical Significance is Not Applicable for Predisposing Assertion Type'
+            },
+            'Functional': {
+              'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
+              'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
+              'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
+              'Neomorphic': 'TBD',
+              'Unknown': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
+            },
+          }
         },
         drug_interaction_type: {
           'Combination': 'The drugs listed were used in as part of a combination therapy approach',
