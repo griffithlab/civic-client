@@ -352,7 +352,7 @@
           helpText: 'Type of clinical outcome associated with the assertion description.',
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.evidence_type
+            attributeDefinitions: descriptions.evidence_type.assertion
           }
         },
         watcher: {
@@ -399,6 +399,7 @@
           options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction.assertion['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
           labelProp: 'label',
+          evidenceDirectionOptions: [{ type: 'default', value: '', label: 'Please select an Assertion Direction' }].concat(cs_options(descriptions.evidence_direction.assertion)),
           helpText: 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Assertion Type must be selected before this field is enabled.',
           data: {
             attributeDefinition: '',
@@ -414,6 +415,13 @@
           }
         },
         expressionProperties: {
+          'templateOptions.options': function($viewValue, $modelValue, scope) {
+            return  _.filter(scope.to.evidenceDirectionOptions, function(option) {
+              return !!(option.type === scope.model.evidence_type ||
+                        option.type === 'default' ||
+                        option.type === 'N/A');
+            });
+          },
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },
@@ -624,14 +632,14 @@
           }
         },
         expressionProperties: {
-          isUnique: function (viewValue, modelValue, scope) {
-            var codes = _.without(modelValue, '');
-            if(_.uniq(codes).length < codes.length) {
-              scope.to.data.message = 'NOTE: Duplicate ACMG codes will be ignored.';
-            } else {
-              scope.to.data.message = '';
-            }
-          }
+          // isUnique: function (viewValue, modelValue, scope) {
+          //   var codes = _.without(modelValue, '');
+          //   if(_.uniq(codes).length < codes.length) {
+          //     scope.to.data.message = 'NOTE: Duplicate ACMG codes will be ignored.';
+          //   } else {
+          //     scope.to.data.message = '';
+          //   }
+          // }
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return  scope.model.evidence_type !== 'Predisposing';

@@ -329,8 +329,15 @@
           ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [{ value: '', label: 'Please select an Assertion Type' }].concat(make_options(descriptions.evidence_type.assertion)),
           onChange: function(value, options, scope) {
-            // reset clinical_significance, as its options will change
-            scope.model.clinical_significance = '';
+            // reset evidence_direction and clinical_significance, as their options will change
+            // also update $touched so user notices
+            var csField = _.find(scope.fields, { key: 'clinical_significance'});
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+
+            csField.value('');
+            edField.value('');
+            csField.templateOptions.data.attributeDefinition = '';
+            edField.templateOptions.data.attributeDefinition = '';
 
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
@@ -338,12 +345,6 @@
 
             // set attribute definition
             options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
-
-            // update evidence direction attribute definition
-            var edField = _.find(scope.fields, { key: 'evidence_direction'});
-            if (edField.value() !== '') { // only update if user has selected an option
-              edField.templateOptions.data.updateDefinition(null, edField, scope);
-            }
 
             // reset ACMG codes if new Type != Predisposing
             if(value !== 'Predisposing') {
@@ -593,14 +594,14 @@
           }
         },
         expressionProperties: {
-          isUnique: function (viewValue, modelValue, scope) {
-            var codes = _.without(modelValue, '');
-            if(_.uniq(codes).length < codes.length) {
-              scope.to.data.message = 'NOTE: Duplicate ACMG codes will be ignored.';
-            } else {
-              scope.to.data.message = '';
-            }
-          }
+          // isUnique: function (viewValue, modelValue, scope) {
+          //   var codes = _.without(modelValue, '');
+          //   if(_.uniq(codes).length < codes.length) {
+          //     scope.to.data.message = 'NOTE: Duplicate ACMG codes will be ignored.';
+          //   } else {
+          //     scope.to.data.message = '';
+          //   }
+          // }
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return  scope.model.evidence_type !== 'Predisposing';
