@@ -36,7 +36,7 @@
     ctrl.mode = $scope.mode;
     ctrl.totalItems = Number();
     ctrl.page = $scope.page;
-    ctrl.count= Number();
+    ctrl.count = pageCount;
 
     ctrl.filters = [];
 
@@ -80,7 +80,7 @@
 
       paginationPageSizes: [maxRows],
       paginationPageSize: maxRows,
-      minRowsToShow: maxRows + 1,
+      minRowsToShow: maxRows,
 
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
