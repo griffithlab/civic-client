@@ -353,7 +353,7 @@
           helpText: 'Type of clinical outcome associated with the assertion description.',
           data: {
             attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.evidence_type
+            attributeDefinitions: descriptions.evidence_type.assertion
           }
         },
         watcher: {
@@ -396,13 +396,13 @@
           label: 'Assertion Direction',
           required: true,
           value: 'vm.newEvidence.evidence_direction',
-          ngOptions: 'option["value"] as option["label"] for option in to.options',
           options: [{ value: '', label: 'Please select an Assertion Direction' }].concat(make_options(descriptions.evidence_direction.assertion['Diagnostic'])), //dummy index e.g. 'Diagnostic'
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Assertion Type must be selected before this field is enabled.',
+          evidenceDirectionOptions: [{ type: 'default', value: '', label: 'Please select an Assertion Direction' }].concat(cs_options(descriptions.evidence_direction.assertion)),
+          helpText: 'An indicator of whether the assertion statement supports or refutes the clinical significance of an event. Assertion Type must be selected before this field is enabled.',
           data: {
-            attributeDefinition: '',
+            attributeDefinition: 'Please choose Assertion Type before selecting Assertion Direction.',
             attributeDefinitions: descriptions.evidence_direction.assertion,
             updateDefinition: function(value, options, scope) {
               // set attribute definition
@@ -415,6 +415,13 @@
           }
         },
         expressionProperties: {
+          'templateOptions.options': function($viewValue, $modelValue, scope) {
+            return  _.filter(scope.to.evidenceDirectionOptions, function(option) {
+              return !!(option.type === scope.model.evidence_type ||
+                        option.type === 'default' ||
+                        option.type === 'N/A');
+            });
+          },
           'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
         }
       },

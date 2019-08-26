@@ -370,8 +370,7 @@
               'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
             },
             'Predisposing': {
-              'Supports': 'The experiment or study supports a variant\'s impact on predisposing outcome',
-              'Does Not Support': 'The experiment or study does not support a predisposing association between variant and outcome'
+              'N/A': 'Evidence Direction is Not Applicable for Predisposing Assertion Type.'
             },
             'Functional': {
               'Support': 'TBD',
@@ -426,11 +425,7 @@
               'N/A': 'Variant does not inform clinical action'
             },
             'Predisposing': {
-              'Pathogenic': 'Very strong evidence the variant is pathogenic',
-              'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic.',
-              'Benign': 'Very strong evidence the variant is benign',
-              'Likely Benign': 'Not expected to have a major effect on disease',
-              'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
+              'N/A': 'Clinical Significance is Not Applicable for Predisposing Assertion Type'
             },
             'Functional': {
               'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
