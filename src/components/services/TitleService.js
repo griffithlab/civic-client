@@ -25,27 +25,39 @@
       // note: requires that all resources necessary for parsing a state's titleExp must be resolved by ui-router state config
 
       // construct promises for relevant entities
-      if(_.has(toParams, 'geneId') && titleScope.gene.entrez_id !== toParams.geneId) {
+      if(_.has(toParams, 'geneId')
+         && toParams.geneId !== 'undefined'
+         && titleScope.gene.entrez_id !== toParams.geneId) {
         genePromise = Genes.get(toParams.geneId);
       }
 
-      if(_.has(toParams, 'variantId') && titleScope.variant.id !== toParams.variantId) {
+      if(_.has(toParams, 'variantId')
+         && toParams.variantId!== 'undefined'
+         && titleScope.variant.id !== toParams.variantId) {
         variantPromise = Variants.get(toParams.variantId);
       }
 
-      if(_.has(toParams, 'variantGroupId') && titleScope.variantGroup.id !== toParams.variantGroupId) {
+      if(_.has(toParams, 'variantGroupId')
+         && toParams.variantGroupId !== 'undefined'
+         && titleScope.variantGroup.id !== toParams.variantGroupId) {
         variantGroupsPromise = VariantGroups.get(toParams.variantGroupId);
       }
 
-      if(_.has(toParams, 'evidenceId') && titleScope.evidence.id !== toParams.evidenceId) {
+      if(_.has(toParams, 'evidenceId')
+         && toParams.evidenceId !== 'undefined'
+         && titleScope.evidence.id !== toParams.evidenceId) {
         evidencePromise = Evidence.get(toParams.evidenceId);
       }
 
-      if(_.has(toParams, 'userId') && titleScope.user.id !== toParams.userId) {
+      if(_.has(toParams, 'userId')
+         && toParams.userId !== 'undefined'
+         && titleScope.user.id !== toParams.userId) {
         usersPromise = Users.get(toParams.userId);
       }
 
-      if(_.has(toParams, 'assertionId') && titleScope.assertion.id !== toParams.assertionId) {
+      if(_.has(toParams, 'assertionId')
+         && toParams.assertionId !== 'undefined'
+         && titleScope.assertion.id !== toParams.assertionId) {
         assertionPromise = Assertions.get(toParams.assertionId);
       }
       // resolve promises, apply $parse with constructed title scope
