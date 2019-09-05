@@ -153,19 +153,19 @@
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByTotalActivityCount: {
+      organizationsByUserCount: {
         width: barChartWidth,
-        height: barChartHeight,
-        title: 'Organizations by Total Activity Count',
-        margin: pieMargins,
+        height: barChartHeight/2,
+        title: 'Organizations by User Count',
+        margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByUserCount: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by User Count',
-        margin: barMargins,
+      organizationsByActivityCount: {
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'Organizations by Activity Count',
+        margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
       },
