@@ -154,8 +154,8 @@
         data: []
       },
       organizationsByTotalActivityCount: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
+        width: barChartWidth,
+        height: barChartHeight,
         title: 'Organizations by Total Activity Count',
         margin: pieMargins,
         transitionDuration: transitionDuration,
@@ -165,7 +165,7 @@
         width: smPieChartWidth,
         height: smPieChartHeight,
         title: 'Organizations by User Count',
-        margin: pieMargins,
+        margin: barMargins,
         transitionDuration: transitionDuration,
         data: []
       },

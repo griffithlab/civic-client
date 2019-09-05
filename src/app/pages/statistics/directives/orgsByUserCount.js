@@ -2,8 +2,7 @@
   'use strict';
   angular.module('civic.pages')
     .directive('organizationsByUserCount', organizationsByUserCount)
-    .controller('organizationsByUserCountController',
-                organizationsByUserCountController);
+    .controller('organizationsByUserCountController', organizationsByUserCountController);
 
   // @ngInject
   function organizationsByUserCount() {
@@ -13,7 +12,7 @@
         options: '=',
         palette: '='
       },
-      templateUrl: 'app/pages/statistics/directives/chartPie.tpl.html',
+      template: '<div class="bar-chart"></div>',
       controller: organizationsByUserCountController
     };
     return directive;
@@ -21,18 +20,17 @@
 
   // @ngInject
   function organizationsByUserCountController($scope,
-                                    $window,
-                                    $rootScope,
-                                    $element,
-                                    d3,
-                                    dimple,
-                                    _,
-                                   Stats) {
+                                       $window,
+                                       $rootScope,
+                                       $element,
+                                       d3,
+                                       dimple,
+                                       _,
+                                      Stats) {
     console.log('organizationsByUserCount loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
-        .selectAll('.chart-pie')
         .append('svg')
         .attr('width', options.width)
         .attr('height', options.height)
@@ -48,36 +46,22 @@
       .style('font-weight', 'bold')
       .text(options.title);
 
-    var chart = new dimple.chart(svg)
-        .setMargins(0,25,0,25);
+    var chart = new dimple.chart(svg);
 
-    var p = chart.addMeasureAxis('p', 'Count');
-    p.tickFormat = d3.format(',.0f');
-    chart.addSeries('Organization', dimple.plot.pie);
-    var l = chart.addLegend('110%', 25, 90, 300, 'left');
+    chart.setMargins(options.margin.left, options.margin.top, options.margin.right, options.margin.bottom);
 
-    // override legend sorting
-    l._getEntries_old = l._getEntries;
-    l._getEntries = function() {
-      return _.sortBy(l._getEntries_old.apply(this, arguments), 'key');
-    };
+    chart.addMeasureAxis('x', 'Count');
+
+    var y = chart.addCategoryAxis('y', 'Organization');
+    y.addOrderRule('Count');
+    var s = chart.addSeries('Organization', dimple.plot.bar);
 
     $scope.$watch(function() {
       return Stats.data.dashboard.organization_user_count;
     }, function(data) {
-      chart.data = _.map(data, function(key, value) {
-        return {
-          Organization: value,
-          Count: key
-        };
+      chart.data = _.map(data, function(val, key) {
+        return { Organization: key, Count: val };
       });
-
-      if(chart.data.length === 0) {
-        chart.series.forEach(function(series){
-          series.shapes.remove();
-        });
-      }
-
       chart.draw();
     });
 
