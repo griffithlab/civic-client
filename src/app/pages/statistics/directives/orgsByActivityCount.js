@@ -78,9 +78,9 @@
           var complete = _.merge({evidence_counts:0,suggested_change_counts:0,assertion_count:0}, reduced);
           // rename keys to something more readable
           var keyMap = {
-            evidence_counts: 'Evidence Added',
+            evidence_counts: 'Evidence Submitted',
             suggested_change_counts: 'Suggested Changes',
-            assertion_count: 'Assertions Added'
+            assertion_count: 'Assertions Submitted'
           };
           var named = _.mapKeys(complete, function(val, key) {
             return keyMap[key];

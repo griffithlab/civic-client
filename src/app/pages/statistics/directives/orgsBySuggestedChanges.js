@@ -62,7 +62,7 @@
     // override legend sorting
     l._getEntries_old = l._getEntries;
     l._getEntries = function() {
-      return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['desc']);
+      return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['asc']);
     };
 
     $scope.$watch(function() {
@@ -70,30 +70,13 @@
     }, function(data) {
       chart.data =  _.chain(data)
         .map(function(val, key){
-          // sum categories
-          var reduced = _.mapValues(val, function(value,key) {
-            return _.reduce(value, function(total, val) { return total + val; }, 0);
-          });
-          // ensure complete set of actions
-          var complete = _.merge({evidence_counts:0,suggested_change_counts:0,assertion_count:0}, reduced);
-          // rename keys to something more readable
-          var keyMap = {
-            evidence_counts: 'Evidence Added',
-            suggested_change_counts: 'Suggested Changes',
-            assertion_count: 'Assertions Added'
-          };
-          var named = _.mapKeys(complete, function(val, key) {
-            return keyMap[key];
-          });
-          // create chart object array
-          return _.chain(named)
+          return _.chain(val.suggested_change_counts)
             .map(function(v,k){
-              return { Organization: key, Activity: k, Count: v };
+              return { Organization: key, Activity: _.capitalize(k), Count: v };
             })
             .value();
         })
         .flatten()
-        .filter({Activity: 'Suggested Changes'})
         .value();
 
       chart.draw();
