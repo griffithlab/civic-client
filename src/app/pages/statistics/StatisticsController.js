@@ -185,27 +185,11 @@
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByTotalBadgeCount: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Total Badge Count',
-        margin: pieMargins,
-        transitionDuration: transitionDuration,
-        data: []
-      },
-      organizationsByEvidenceActivity: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Evidence Actions',
-        margin: pieMargins,
-        transitionDuration: transitionDuration,
-        data: []
-      },
-      organizationsByAssertionActivity: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Assertion Actions',
-        margin: pieMargins,
+      organizationsByBadgeCount: {
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'Badge Count',
+        margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
       },
