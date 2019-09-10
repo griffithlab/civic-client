@@ -54,7 +54,7 @@
 
     var y = chart.addCategoryAxis('y', 'Organization');
     y.addOrderRule('Count');
-    var s = chart.addSeries('Organization', dimple.plot.bar);
+    var s = chart.addSeries(null, dimple.plot.bar);
 
     $scope.$watch(function() {
       return Stats.data.dashboard.organization_user_count;

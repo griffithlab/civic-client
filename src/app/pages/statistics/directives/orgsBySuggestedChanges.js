@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .directive('organizationsByActivityCount', organizationsByActivityCount)
-    .controller('organizationsByActivityCountController', organizationsByActivityCountController);
+    .directive('organizationsBySuggestedChanges', organizationsBySuggestedChanges)
+    .controller('organizationsBySuggestedChangesController', organizationsBySuggestedChangesController);
 
   // @ngInject
-  function organizationsByActivityCount() {
+  function organizationsBySuggestedChanges() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -13,13 +13,13 @@
         palette: '='
       },
       template: '<div class="bar-chart"></div>',
-      controller: organizationsByActivityCountController
+      controller: organizationsBySuggestedChangesController
     };
     return directive;
   }
 
   // @ngInject
-  function organizationsByActivityCountController($scope,
+  function organizationsBySuggestedChangesController($scope,
                                        $window,
                                        $rootScope,
                                        $element,
@@ -27,7 +27,7 @@
                                        dimple,
                                        _,
                                       Stats) {
-    console.log('organizationsByActivityCount loaded.');
+    console.log('organizationsBySuggestedChanges loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
@@ -93,7 +93,7 @@
             .value();
         })
         .flatten()
-        .reject({Activity: 'Suggested Changes'})
+        .filter({Activity: 'Suggested Changes'})
         .value();
 
       chart.draw();

@@ -156,7 +156,15 @@
       organizationsByUserCount: {
         width: barChartWidth,
         height: barChartHeight/2,
-        title: 'Organizations by User Count',
+        title: 'User Count',
+        margin: barMarginsWide,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByChangeActivity: {
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'Suggested Changes Submitted',
         margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
@@ -164,7 +172,7 @@
       organizationsByActivityCount: {
         width: barChartWidth,
         height: barChartHeight/2,
-        title: 'Organizations by Activity Count',
+        title: 'Assertions and Evidence Submitted',
         margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
@@ -173,14 +181,6 @@
         width: smPieChartWidth,
         height: smPieChartHeight,
         title: 'Organizations by Total Badge Count',
-        margin: pieMargins,
-        transitionDuration: transitionDuration,
-        data: []
-      },
-      organizationsByChangeActivity: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Suggested Changes',
         margin: pieMargins,
         transitionDuration: transitionDuration,
         data: []
