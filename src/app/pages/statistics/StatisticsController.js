@@ -169,10 +169,18 @@
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByActivityCount: {
+      organizationsByEvidenceSubmitted: {
         width: barChartWidth,
         height: barChartHeight/2,
-        title: 'Assertions and Evidence Submitted',
+        title: 'Evidence Submitted',
+        margin: barMarginsWide,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByAssertionsSubmitted: {
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'Assertions Submitted',
         margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
