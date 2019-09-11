@@ -62,7 +62,10 @@
     // override legend sorting
     l._getEntries_old = l._getEntries;
     l._getEntries = function() {
-      return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['asc']);
+      var order = ['Bronze', 'Silver', 'Gold', 'Platinum'];
+      return _.sortBy(l._getEntries_old.apply(this, arguments),function(item) {
+        return order.indexOf(item.Type);
+      });
     };
 
     $scope.$watch(function() {
