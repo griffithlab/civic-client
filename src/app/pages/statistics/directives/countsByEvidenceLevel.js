@@ -82,7 +82,7 @@
       }
     ];
 
-    _.map(levelColors, function(c) {
+    _.each(levelColors, function(c) {
       chart.assignColor(c.val, c.color);
     });
 

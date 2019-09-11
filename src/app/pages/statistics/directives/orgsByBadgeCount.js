@@ -56,7 +56,28 @@
     y.addOrderRule('Count');
     var s = chart.addSeries('Type', dimple.plot.bar);
 
+    var badgeColors = [
+      {
+        val: 'Bronze',
+        color: '#A77044'
+      },
+      {
+        val: 'Silver',
+        color: '#A7A7AD'
+      },
+      {
+        val: 'Gold',
+        color: '#D6AF36'
+      },
+      {
+        val: 'Platinum',
+        color: '#D7D7D7'
+      },
+    ];
 
+    _.each(badgeColors, function(c) {
+      chart.assignColor(c.val, c.color);
+    });
     var l = chart.addLegend('80%', '70%', 220, 20, 'left');
 
     // override legend sorting
