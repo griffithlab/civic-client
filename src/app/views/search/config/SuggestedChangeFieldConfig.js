@@ -14,8 +14,9 @@
                 required: true,
                 options: [
                   { value: '', name: 'Please select a field' },
-                  { value: 'moderated_type', name: 'Suggested Change Entity' },
-                  { value: 'moderated_id', name: 'Suggested Change Entity ID' },
+                  { value: 'moderated_type', name: 'Entity Type' },
+                  { value: 'moderated_id', name: 'Entity ID' },
+                  { value: 'status', name: 'Status' },
                   { value: 'submitter', name: 'Submitter Display Name' },
                   { value: 'submitter_id', name: 'Submitter ID' },
                 ],
@@ -90,6 +91,43 @@
                 templateOptions: {
                   label: '',
                   required: true
+                }
+              }
+            ],
+            status: [
+              {
+                key: 'name',
+                type: 'queryBuilderSelect',
+                className: 'inline-field inline-field-md',
+                data: {
+                  defaultValue: 'is_equal_to'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'is_equal_to', name: 'is'},
+                    {value: 'is_not_equal_to', name: 'is not'}
+                  ]
+                }
+              },
+              {
+                key: 'parameters[0]',
+                type: 'queryBuilderSelect',
+                className: 'inline-field',
+                data: {
+                  defaultValue: 'new'
+                },
+                templateOptions: {
+                  label: '',
+                  required: true,
+                  options: [
+                    {value: 'active', name: 'Active'},
+                    {value: 'applied', name: 'Applied'},
+                    {value: 'closed', name: 'Closed'},
+                    {value: 'new', name: 'New'},
+                    {value: 'superseded', name: 'Superseded'},
+                  ]
                 }
               }
             ],
