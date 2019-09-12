@@ -16,6 +16,11 @@
     vm.userEdit.country_id = vm.userEdit.country === null ? null : vm.userEdit.country.id;
     vm.currentUser = Security.currentUser;
 
+    vm.coiEdit = {
+      coi_present: false,
+      coi_statement: ''
+    };
+
     // TODO: implement better error handling and success message
     vm.submitSuccess = false;
     vm.submitFail = false;
@@ -370,7 +375,32 @@
           value: 'vm.userEdit.linkedin_profile',
           helpText: 'Your LinkedIn username, displayed on your profile page and user cards.'
         }
-      }
+      },
+    ];
+
+    vm.coiFields = [
+      {
+        template:'<h3 class="form-subheader">Conflict of Interest Statement <i class="badge" style="background-color: #F00;">OUT OF DATE</i></h3>'
+      },
+      {
+        key: 'bio',
+        type: 'horizontalTextareaHelp',
+        templateOptions: {
+          label: 'COI Statement',
+          rows: 4,
+          value: 'vm.userEdit.bio',
+          helpText: 'Provide a short statement that either clearly indicates that you do not have a conflict of interest in curating CIViC, or describe any conflicts of interest you may have.'
+        }
+      },
+      {
+        key: 'coi_present',
+        type: 'horizontalCheckboxHelp',
+        defaultValue: false,
+        templateOptions: {
+          label: 'I have a conflict of interest',
+          helpText: 'Check this box if your COI statement includes a conflict of interest.'
+        }
+      },
     ];
 
     vm.saveProfile = function(userEdit) {
