@@ -339,9 +339,9 @@
             disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
-              { value: 'Somatic Mutation', label: 'Somatic Mutation'},
-              { value: 'Germline Mutation', label: 'Germline Mutation' },
-              { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
+              { value: 'Somatic', label: 'Somatic'},
+              { value: 'Rare Germline', label: 'Rare Germline' },
+              { value: 'Common Germline', label: 'Common Germline' },
               { value: 'Unknown', label: 'Unknown' },
               { value: 'N/A', label: 'N/A' },
             ]
@@ -546,9 +546,9 @@
             disableCancelFilterButton: false,
             selectOptions: [
               { value: null, label: '--' },
-              { value: 'Somatic Mutation', label: 'Somatic Mutation'},
-              { value: 'Germline Mutation', label: 'Germline Mutation' },
-              { value: 'Germline Polymorphism', label: 'Germline Polymorphism' },
+              { value: 'Somatic', label: 'Somatic'},
+              { value: 'Rare Germline', label: 'Rare Germline' },
+              { value: 'Common Germline', label: 'Common Germline' },
               { value: 'Unknown', label: 'Unknown' },
               { value: 'N/A', label: 'N/A' },
             ]
