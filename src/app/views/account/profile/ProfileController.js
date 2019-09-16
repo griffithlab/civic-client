@@ -8,10 +8,13 @@
   function AccountProfileController($scope,
                                     Security,
                                     Users,
-                                    user){
+                                    CurrentUser,
+                                    user,
+                                    statements){
     var vm = $scope.vm = {};
 
     vm.user = user;
+    vm.statements = statements;
     vm.userEdit = angular.copy(user);
     vm.userEdit.country_id = vm.userEdit.country === null ? null : vm.userEdit.country.id;
     vm.currentUser = Security.currentUser;
@@ -24,6 +27,15 @@
     // TODO: implement better error handling and success message
     vm.submitSuccess = false;
     vm.submitFail = false;
+
+    vm.submitCoiSuccess = false;
+    vm.submitCoiFail = false;
+
+    $scope.$watchCollection(function() {
+      return CurrentUser.data.statements;
+    }, function(statements) {
+      vm.statements = statements;
+    });
 
     vm.userEditFields = [
       {
@@ -380,26 +392,27 @@
 
     vm.coiFields = [
       {
-        template:'<h3 class="form-subheader">Conflict of Interest Statement <i class="badge" style="background-color: #F00;">OUT OF DATE</i></h3>'
+        key: 'coi_present',
+        type: 'horizontalRadioHelp',
+        defaultValue: 'false',
+        templateOptions: {
+          label: null,
+          options: [
+            {value: false, name: 'I do not have any potential conflicts of interest'},
+            {value: true, name: 'I do have a potential conflict of interest'},
+          ],
+          helpText: 'Please indicate if you have a conflict of interest in curating CIViC.'
+        }
       },
       {
-        key: 'bio',
+        key: 'coi_statement',
         type: 'horizontalTextareaHelp',
         templateOptions: {
           label: 'COI Statement',
           rows: 4,
-          value: 'vm.userEdit.bio',
-          helpText: 'Provide a short statement that either clearly indicates that you do not have a conflict of interest in curating CIViC, or describe any conflicts of interest you may have.'
-        }
-      },
-      {
-        key: 'coi_present',
-        type: 'horizontalCheckboxHelp',
-        defaultValue: false,
-        templateOptions: {
-          label: 'I have a conflict of interest',
-          helpText: 'Check this box if your COI statement includes a conflict of interest.'
-        }
+          helpText: 'Provide a concise description of any potential or actual conflicts of interest that you may have in curating CIViC.'
+        },
+        hideExpression: '!model.coi_present'
       },
     ];
 
@@ -416,6 +429,18 @@
           vm.submitFail = true;
         });
 
+    };
+
+    vm.saveCoiStatement = function(coiEdit) {
+      CurrentUser.addCoiStatement(coiEdit)
+        .then(function() {
+          console.log('added COI statement successfully.');
+          vm.submitCoiSuccess = true;
+        })
+        .catch(function() {
+          console.error('failed to add COI statement!');
+          vm.submitCoiFail = true;
+        });
     };
   }
 })();

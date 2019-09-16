@@ -38,6 +38,16 @@
           isArray: false,
           cache: false
         },
+        getCoiStatements: {
+          url:'/api/current_user/conflict_of_interest_statements',
+          isArray: true,
+          cache: false
+        },
+        addCoiStatement: {
+          method: 'POST',
+          url:'/api/current_user/conflict_of_interest_statements',
+          cache: false
+        },
         markFeed: {
           method: 'PATCH',
           url: '/api/current_user/feed',
@@ -61,7 +71,7 @@
           url: '/api/current_user/feed',
           isArray: false,
           cache: false
-        }
+        },
 
       }
     );
@@ -70,6 +80,7 @@
   // @ngInject
   function CurrentUserService(CurrentUserResource, Security, _) {
     var user = {};
+    var statements = [];
     var events = [];
     var stats = [];
     var feed = {
@@ -82,6 +93,7 @@
     return {
       data: {
         user: user,
+        statements: statements,
         events: events,
         stats: stats,
         feed: feed,
@@ -91,6 +103,8 @@
       getStats: getStats,
       getEvents: getEvents,
       getFeed: getFeed,
+      getCoiStatements: getCoiStatements,
+      addCoiStatement: addCoiStatement,
       markAllAsRead: markAllAsRead,
       markFeed: markFeed
     };
@@ -128,6 +142,23 @@
       return CurrentUserResource.getFeed(reqObj).$promise
         .then(function(response) {
           angular.copy(response, feed);
+          return response.$promise;
+        });
+    }
+
+    function getCoiStatements() {
+      return CurrentUserResource.getCoiStatements().$promise
+        .then(function(response) {
+          angular.copy(response, statements);
+          return response.$promise;
+        });
+    }
+
+    function addCoiStatement(reqObj) {
+      return CurrentUserResource.addCoiStatement(reqObj).$promise
+        .then(function(response) {
+          Security.reloadCurrentUser();
+          getCoiStatements();
           return response.$promise;
         });
     }

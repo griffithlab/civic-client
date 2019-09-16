@@ -67,6 +67,18 @@
       wrapper: ['horizontalBootstrapHelpNoLabel', 'bootstrapHasError']
     });
 
+    // radio
+    formlyConfigProvider.setType({
+      name: 'horizontalRadio',
+      extends: 'radio',
+      wrapper: ['horizontalBootstrapCheckbox', 'bootstrapHasError']
+    });
+
+    formlyConfigProvider.setType({
+      name: 'horizontalRadioHelp',
+      extends: 'radio',
+      wrapper: ['horizontalBootstrapHelpNoLabel', 'bootstrapHasError']
+    });
     // formlyConfigProvider.setType({
     //   name: 'horizontalCommentHelp',
     //   extends: 'comment',

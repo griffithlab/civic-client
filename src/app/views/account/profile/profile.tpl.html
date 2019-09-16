@@ -44,6 +44,23 @@
         </div>
       </div>
       <form class="form-horizontal">
+        <h3 class="form-subheader">
+          Conflict of Interest Statement
+          <span ng-switch="vm.conflict_of_interest.coi_valid">
+            <span ng-switch-when="'expired'">
+              <i class="badge" style="background-color: #dc3545;">EXPIRED</i>
+            </span>
+            <span ng-switch-when="'missing'">
+              <i class="badge" style="background-color: #dc3545;">MISSING</i>
+            </span>
+            <span ng-switch-when="'conflict'">
+              <i class="badge" style="background-color: #ffc107;">CONFLICT</i>
+            </span>
+            <span ng-switch-when="'valid'">
+              <i class="badge" style="background-color: #28a745;">VALID</i>
+            </span>
+          </span>
+        </h3>
         <formly-form
           options="vm.coiOptions"
           model="vm.coiEdit"
@@ -57,7 +74,7 @@
             type="submit"
             class="btn btn-default"
             ng-disabled="vm.coiForm.$dirty === false"
-            ng-click="vm.saveCOI(vm.coiEdit, vm.coiOptions)">
+            ng-click="vm.saveCoiStatement(vm.coiEdit)">
             Save Conflict of Interest Statement
           </button>
         </div>
@@ -65,12 +82,12 @@
       <div class="row" style="margin-top: 1em;">
         <div class="col-xs-5 col-xs-offset-2">
           <div class="alert alert-success"
-            ng-show="vm.submitSuccess">
-            Profile updates successfully applied.
+            ng-show="vm.submitCoiSuccess">
+            Successfully updated your Conflict of Interest Statement.
           </div>
           <div class="alert alert-danger"
-            ng-show="vm.submitFail">
-            There was an error updating your profile! Please check the browser console for more information.
+            ng-show="vm.submitCoiFail">
+            There was an error updating your Conflict of Interest Statement! Please check the browser console for more information.
           </div>
         </div>
       </div>
@@ -80,10 +97,14 @@
 
 
   </div>
-  <!-- <div class="row"> -->
-  <!-- <div class="col-xs-6"> -->
-  <!-- <p>vm.userEdit:</p> -->
-  <!-- <pre ng-bind="vm.userEdit|json"></pre> -->
-  <!-- </div> -->
-  <!-- </div> -->
+  <div class="row">
+    <div class="col-xs-6">
+      <p>vm.coiEdit:</p>
+      <pre ng-bind="vm.coiEdit|json"></pre>
+    </div>
+    <div class="col-xs-6" >
+      <p>vm.statements</p>
+      <pre ng-bind="vm.statements|json"></pre>
+    </div>
+  </div>
 </div>
