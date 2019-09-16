@@ -5,9 +5,15 @@
         type="button"
         class="btn btn-xs btn-info"
         ui-sref="users.profile({userId: currentUser.id})">
-        <span class="avatar" style="background-color: transparent">
+        <span class="avatar"
+          ng-if="showCoiNotice"
+          style="background-color: transparent">
           <i class="glyphicon glyphicon-exclamation-sign" style="color: #F00;"></i>
-          <!-- <img ng-src="{{currentUser.avatars.x14}}" width="14" height="14"/> -->
+        </span>
+        <span class="avatar"
+          ng-if="!showCoiNotice"
+          style="background-color: transparent">
+          <img ng-src="{{currentUser.avatars.x14}}" width="14" height="14"/>
         </span>
         <span class="username">{{currentUser.display_name}}</span>
       </button>
@@ -51,9 +57,10 @@
         <li class="dropdown-header">Account</li>
         <li><a ui-sref="account.notifications({category: 'all', page: 1, count: 10, show_read: false, show_unlinkable: false})">My Account</a></li>
         <li><a ng-click="logout(currentUrl)">Sign Out</a></li>
-        <li class="coi-button">
+        <li class="coi-button" ng-if="showCoiNotice">
           <a ui-sref="account.profile" class="badge badge-pill badge-danger">
-            Click to update Editor COI Statement
+            <i class="glyphicon glyphicon-hand-up"></i>&nbsp;
+            Please Update COI Statement
           </a>
         </li>
       </ul>
