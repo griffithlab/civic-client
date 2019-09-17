@@ -8,18 +8,14 @@
   function AccountProfileController($scope,
                                     Security,
                                     Users,
-                                    CurrentUser,
-                                    user,
-                                    statements){
+                                    CurrentUser){
     var vm = $scope.vm = {};
     vm.isAdmin = Security.isAdmin;
     vm.isEditor = Security.isEditor;
-    vm.user = user;
-    vm.statements = statements;
-    vm.userEdit = angular.copy(user);
+    vm.user = CurrentUser.data.user;
+    vm.statements = CurrentUser.data.statements;
+    vm.userEdit = angular.copy(vm.user);
     vm.userEdit.country_id = vm.userEdit.country === null ? null : vm.userEdit.country.id;
-    vm.currentUser = CurrentUser.data.user;
-    vm.coi = Security.currentUser.conflict_of_interest;
 
     vm.coiEdit = {
       coi_present: false,
@@ -32,6 +28,12 @@
 
     vm.submitCoiSuccess = false;
     vm.submitCoiFail = false;
+
+    $scope.$watch(function() {
+      return CurrentUser.data.user;
+    }, function(user) {
+      vm.user = user;
+    }, true);
 
     $scope.$watchCollection(function() {
       return CurrentUser.data.statements;
@@ -401,7 +403,7 @@
           label: null,
           options: [
             {value: false, name: 'I do not have any potential conflicts of interest'},
-            {value: true, name: 'I do have a potential conflict of interest'},
+            {value: true, name: 'I do have a potential conflict(s) of interest'},
           ],
           helpText: 'Please indicate if you have a conflict of interest in curating CIViC.'
         }
