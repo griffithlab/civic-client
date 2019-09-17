@@ -34,7 +34,7 @@
       <div class="row" style="margin-top: 1em;">
         <div class="col-xs-5 col-xs-offset-2">
           <div class="alert alert-success"
-          ng-show="vm.submitSuccess">
+            ng-show="vm.submitSuccess">
             Profile updates successfully applied.
           </div>
           <div class="alert alert-danger"
@@ -43,68 +43,95 @@
           </div>
         </div>
       </div>
-      <form class="form-horizontal">
-        <h3 class="form-subheader">
-          Conflict of Interest Statement
-          <span ng-switch="vm.conflict_of_interest.coi_valid">
-            <span ng-switch-when="'expired'">
-              <i class="badge" style="background-color: #dc3545;">EXPIRED</i>
-            </span>
-            <span ng-switch-when="'missing'">
-              <i class="badge" style="background-color: #dc3545;">MISSING</i>
-            </span>
-            <span ng-switch-when="'conflict'">
-              <i class="badge" style="background-color: #ffc107;">CONFLICT</i>
-            </span>
-            <span ng-switch-when="'valid'">
-              <i class="badge" style="background-color: #28a745;">VALID</i>
-            </span>
-          </span>
-        </h3>
-        <formly-form
-          options="vm.coiOptions"
-          model="vm.coiEdit"
-          form="vm.coiForm"
-          fields="vm.coiFields">
-        </formly-form>
-      </form>
-      <div class="row">
-        <div class="col-xs-10 col-xs-offset-2">
-          <button
-            type="submit"
-            class="btn btn-default"
-            ng-disabled="vm.coiForm.$invalid"
-            ng-click="vm.saveCoiStatement(vm.coiEdit, vm.coiOptions)">
-            Save Conflict of Interest Statement
-          </button>
+      <div ng-if="vm.isAdmin() || vm.isEditor()">
+        <form class="form-horizontal">
+          <h3 class="form-subheader">
+            Manage Conflict of Interest Statement
+          </h3>
+          <div class="form-group" >
+            <label class="col-sm-2 control-label">
+              Status:
+            </label>
+            <div class="col-sm-10" style="padding-top: 6px;">
+              <span ng-switch="vm.currentUser.conflict_of_interest.coi_valid">
+                <span ng-switch-when="expired">
+                  <i class="badge" style="background-color: #dc3545;">EXPIRED</i>
+                </span>
+                <span ng-switch-when="missing">
+                  <i class="badge" style="background-color: #dc3545;">MISSING</i>
+                </span>
+                <span ng-switch-when="conflict">
+                  <i class="badge" style="background-color: #ffc107;">CONFLICT</i>
+                </span>
+                <span ng-switch-when="valid">
+                  <i class="badge" style="background-color: #28a745;">VALID</i>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+              <h4 style="margin-bottom:0;">
+                <span ng-switch="vm.currentUser.conflict_of_interest.coi_valid">
+                  <span ng-switch-when="missing" >
+                    Add
+                  </span>
+                  <span ng-switch-default>
+                    Update
+                  </span>
+                </span>
+                 Your Conflict of Interest Statement:
+              </h4>
+            </div>
+          </div>
+          <formly-form
+            options="vm.coiOptions"
+            model="vm.coiEdit"
+            form="vm.coiForm"
+            fields="vm.coiFields">
+          </formly-form>
+        </form>
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-2">
+            <button
+              type="submit"
+              class="btn btn-default"
+              ng-disabled="vm.coiForm.$invalid"
+              ng-click="vm.saveCoiStatement(vm.coiEdit, vm.coiOptions)">
+              Save Conflict of Interest Statement
+            </button>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 1em;">
+          <div class="col-xs-5 col-xs-offset-2">
+            <div class="alert alert-success"
+              ng-show="vm.submitCoiSuccess">
+              Successfully updated your Conflict of Interest Statement.
+            </div>
+            <div class="alert alert-danger"
+              ng-show="vm.submitCoiFail">
+              There was an error updating your Conflict of Interest Statement! Please check the browser console for more information.
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row" style="margin-top: 1em;">
-        <div class="col-xs-5 col-xs-offset-2">
-          <div class="alert alert-success"
-            ng-show="vm.submitCoiSuccess">
-            Successfully updated your Conflict of Interest Statement.
-          </div>
-          <div class="alert alert-danger"
-            ng-show="vm.submitCoiFail">
-            There was an error updating your Conflict of Interest Statement! Please check the browser console for more information.
-          </div>
-        </div>
-      </div>
-
     </div>
 
 
 
   </div>
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-4">
+      <p>vm.coi:</p>
+      <pre ng-bind="vm.coi|json"></pre>
+    </div>
+    <div class="col-xs-4">
       <p>vm.coiEdit:</p>
       <pre ng-bind="vm.coiEdit|json"></pre>
     </div>
-    <div class="col-xs-6" >
-      <p>vm.statements</p>
-      <pre ng-bind="vm.statements|json"></pre>
+    <div class="col-xs-4" >
+      <p>vm.coi_statements</p>
+      <pre ng-bind="vm.coi_statements|json"></pre>
     </div>
   </div>
 </div>

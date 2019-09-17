@@ -12,12 +12,14 @@
                                     user,
                                     statements){
     var vm = $scope.vm = {};
-
+    vm.isAdmin = Security.isAdmin;
+    vm.isEditor = Security.isEditor;
     vm.user = user;
     vm.statements = statements;
     vm.userEdit = angular.copy(user);
     vm.userEdit.country_id = vm.userEdit.country === null ? null : vm.userEdit.country.id;
-    vm.currentUser = Security.currentUser;
+    vm.currentUser = CurrentUser.data.user;
+    vm.coi = Security.currentUser.conflict_of_interest;
 
     vm.coiEdit = {
       coi_present: false,
@@ -34,7 +36,7 @@
     $scope.$watchCollection(function() {
       return CurrentUser.data.statements;
     }, function(statements) {
-      vm.statements = statements;
+      vm.coi_statements = statements;
     });
 
     vm.userEditFields = [

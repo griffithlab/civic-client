@@ -157,7 +157,7 @@
     function addCoiStatement(reqObj) {
       return CurrentUserResource.addCoiStatement(reqObj).$promise
         .then(function(response) {
-          Security.reloadCurrentUser();
+          get();
           getCoiStatements();
           return response.$promise;
         });
