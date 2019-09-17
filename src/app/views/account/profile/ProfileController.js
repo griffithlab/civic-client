@@ -403,7 +403,7 @@
           label: null,
           options: [
             {value: false, name: 'I do not have any potential conflicts of interest'},
-            {value: true, name: 'I do have a potential conflict(s) of interest'},
+            {value: true, name: 'I do have a potential conflict of interest'},
           ],
           helpText: 'Please indicate if you have a conflict of interest in curating CIViC.'
         }

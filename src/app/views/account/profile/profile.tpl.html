@@ -48,7 +48,7 @@
           <h3 class="form-subheader">
             Conflict of Interest Statement
           </h3>
-          <div class="well" >
+          <div class="well" style="margin-bottom: 0; padding-bottom: 5px">
             <div class="form-group" >
               <label class="col-sm-2 control-label">
                 Status:
@@ -86,8 +86,12 @@
                     I do not have any potential conflicts of interest.
                   </span>
                   <span ng-switch-default="valid">
-                    I do have potential conflict(s) of interest:<br/>
-                    <p ng-bind="vm.user.conflict_of_interest.details.coi_statement"></p>
+                    I do have a potential conflict of interest:<br/>
+                    <p style="margin-bottom: 0">
+                      <i>
+                        {{vm.user.conflict_of_interest.details.coi_statement}}
+                      </i>
+                    </p>
                   </span>
                 </span>
               </div>
