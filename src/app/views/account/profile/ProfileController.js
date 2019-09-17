@@ -429,7 +429,7 @@
         .then(function() {
           console.log('updated user successfully');
           vm.submitSuccess = true;
-          vm.user = Security.reloadCurrentUser();
+          CurrentUser.get();
         })
         .catch(function() {
           console.error('update user error!');

@@ -35,7 +35,8 @@
             $scope.hasNotifications = $scope.totalNotifications > 0;
 
             $scope.showCoiNotice = (Security.isAdmin() || Security.isEditor())
-              && currentUser.conflict_of_interest.coi_valid !== 'valid';
+              && (currentUser.conflict_of_interest.coi_valid === 'missing' ||
+                  currentUser.conflict_of_interest.coi_valid === 'expired' );
           }
         });
 

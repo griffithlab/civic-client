@@ -159,6 +159,7 @@
         .then(function(response) {
           get();
           getCoiStatements();
+          Security.reloadCurrentUser();
           return response.$promise;
         });
     }
