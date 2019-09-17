@@ -412,7 +412,10 @@
           rows: 4,
           helpText: 'Provide a concise description of any potential or actual conflicts of interest that you may have in curating CIViC.'
         },
-        hideExpression: '!model.coi_present'
+        hideExpression: '!model.coi_present',
+        expressionProperties: {
+          'templateOptions.required': 'model.coi_present === true'
+        }
       },
     ];
 
@@ -431,11 +434,12 @@
 
     };
 
-    vm.saveCoiStatement = function(coiEdit) {
+    vm.saveCoiStatement = function(coiEdit, coiOptions) {
       CurrentUser.addCoiStatement(coiEdit)
         .then(function() {
           console.log('added COI statement successfully.');
           vm.submitCoiSuccess = true;
+          coiOptions.resetModel();
         })
         .catch(function() {
           console.error('failed to add COI statement!');

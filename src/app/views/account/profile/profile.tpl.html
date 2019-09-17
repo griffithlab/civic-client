@@ -73,8 +73,8 @@
           <button
             type="submit"
             class="btn btn-default"
-            ng-disabled="vm.coiForm.$dirty === false"
-            ng-click="vm.saveCoiStatement(vm.coiEdit)">
+            ng-disabled="vm.coiForm.$invalid"
+            ng-click="vm.saveCoiStatement(vm.coiEdit, vm.coiOptions)">
             Save Conflict of Interest Statement
           </button>
         </div>
