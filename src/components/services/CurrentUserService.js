@@ -159,7 +159,7 @@
         .then(function(response) {
           get();
           getCoiStatements();
-          Security.reloadCurrentUser();
+          Security.reloadCurrentUser(); // required to update user button in header
           return response.$promise;
         });
     }
