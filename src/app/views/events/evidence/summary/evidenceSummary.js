@@ -27,13 +27,32 @@
     $scope.evidence = Evidence.data.item;
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;
 
-    if(Security.currentUser) {
-      var currentUserId = Security.currentUser.id;
-      var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
-      $scope.ownerIsCurrentUser = submitterId === currentUserId;
-    } else {
-      $scope.ownerIsCurrentUser = false;
-    }
+    // determine moderation button visibility
+    var currentUserId = Security.currentUser.id;
+    var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
+    var ownerIsCurrentUser = $scope.ownerIsCurrentUser = submitterId === currentUserId;
+
+    $scope.$watchGroup(
+      [ function() { return Evidence.data.item.status; },
+        function() { return Security.currentUser.conflict_of_interest.coi_valid; } ],
+      function(statuses) {
+        var changeStatus = statuses[0];
+        var coiStatus = statuses[1];
+        var changeIsSubmitted = changeStatus === 'submitted';
+        var coiValid = coiStatus === 'conflict' || coiStatus === 'valid';
+        var isModerator = Security.isEditor() || Security.isAdmin();
+
+        $scope.showModeration = changeIsSubmitted && ((isModerator && coiValid) || ownerIsCurrentUser);
+        $scope.showCoiNotice = changeIsSubmitted && !$scope.showModeration && isModerator;
+      });
+
+    // if(Security.currentUser) {
+    //   var currentUserId = Security.currentUser.id;
+    //   var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
+    //   $scope.ownerIsCurrentUser = submitterId === currentUserId;
+    // } else {
+    //   $scope.ownerIsCurrentUser = false;
+    // }
 
     // TODO: fetch and generate these from config service
     var evidence_levels = {
