@@ -109,9 +109,14 @@
           </div>
         </div>
       </div>
+      <div class="row" >
+        <div class="col-xs-12">
+          <h5 style="color: #CCC; margin-top: 0px;">Editor's Conflict of Interest Statement</h5>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xs-12">
-          <div class="well" style="margin-bottom: 0; padding-bottom: 5px">
+          <div class="well" style="margin-bottom: 0; padding-bottom: 12px">
             <div class="row">
               <div class="col-sm-2" style="text-align: right;">
                 <strong>Status:</strong>
@@ -139,7 +144,7 @@
                 <strong>Expires:</strong> {{user.conflict_of_interest.details.expires_at | date: shortDate }}
               </div>
             </div>
-            <div class="row" ng-if="user.conflict_of_interest.coi_valid !== 'missing'">
+            <div class="row" ng-if="user.conflict_of_interest.coi_valid !== 'missing'" style="padding-top: 8px;">
               <div class="col-sm-2" style="text-align: right;">
                 <strong>Statement:</strong>
               </div>
