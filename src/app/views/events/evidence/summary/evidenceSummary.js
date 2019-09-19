@@ -65,7 +65,17 @@
     $scope.$watchCollection('evidence', function() {
       $scope.evidence.evidence_level_string = $scope.evidence.evidence_level + ' - ' + evidence_levels[$scope.evidence.evidence_level];
       if($scope.evidence.drugs.length > 0) {
-        $scope.evidence.drugsStr = _.chain($scope.evidence.drugs).map('name').value().join(', ');
+        $scope.evidence.drugsStr = _.chain($scope.evidence.drugs)
+          .map(function(item) {
+            if(item.ncit_id) {
+              return '<a href="https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&ns=ncit&code=' + item.ncit_id + '" target="_blank">' + item.name + '</a>';
+            }
+            else {
+              return item.name;
+            }
+          })
+          .value()
+          .join(', ');
       } else {
         $scope.evidence.drugsStr = '--';
       }

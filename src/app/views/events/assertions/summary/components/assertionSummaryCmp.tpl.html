@@ -92,14 +92,7 @@
               </tr>
               <tr ng-if="vm.assertion.drugs.length > 0">
                 <td class="key">Drugs:</td>
-                <td class="value">
-                  <span ng-repeat="drug in vm.assertion.drugs">
-                    {{
-                    $first ? '' : $last ? (vm.assertion.drugs > 2 ? ', and ' : ' and ') : ', '
-                    }}
-                    {{drug.name}}
-                  </span>
-                </td>
+                <td class="value" ng-bind-html="assertion.drugsStr"></td>
               </tr>
               <tr ng-if="vm.assertion.drug_interaction_type !== null">
                 <td class="key">Drug Interaction Type</td>

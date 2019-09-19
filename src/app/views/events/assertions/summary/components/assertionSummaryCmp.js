@@ -63,6 +63,22 @@
     };
 
     $scope.$watchCollection('vm.assertion', function(assertion) {
+      if(assertion.drugs.length > 0) {
+        vm.drugsStr = _.chain(assertion.drugs)
+          .map(function(item) {
+            if(item.ncit_id) {
+              return '<a href="https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&ns=ncit&code=' + item.ncit_id + '" target="_blank">' + item.name + '</a>';
+            }
+            else {
+              return item.name;
+            }
+          })
+          .value()
+          .join(', ');
+        } else {
+          item.drugsStr = '--';
+        }
+      }
       if(assertion.phenotypes.length > 0) {
         vm.phenotypesStr = _.chain(assertion.phenotypes)
           .sortBy('hpo_class')
