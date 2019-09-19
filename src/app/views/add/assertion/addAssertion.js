@@ -100,14 +100,15 @@
         wrapper: ['entrezIdDisplay'],
         controller: /* @ngInject */ function($scope, $stateParams, Genes) {
           // populate field if geneId provided
-          if ($stateParams.geneId) {
+          if ($stateParams.geneId && $stateParams.geneId !== 'undefined') {
             Genes.getName($stateParams.geneId).then(function(gene) {
               $scope.model.gene = _.pick(gene, ['id', 'name', 'entrez_id']);
               $scope.to.data.entrez_id = gene.entrez_id;
             });
           }
+
           // if gene name provided, get id, entrez_id
-          if ($stateParams.geneName) {
+          if ($stateParams.geneName && $stateParams.geneName !== 'undefined') {
             Genes.beginsWith($stateParams.geneName)
               .then(function(response) {
                 // set field to first item on typeahead suggest
@@ -175,7 +176,7 @@
         className: 'input-caps',
         controller: /* @ngInject */ function($scope, $stateParams, Variants) {
           // populate field if variantId provided
-          if ($stateParams.variantId) {
+          if ($stateParams.variantId && $stateParams.variantId !== 'undefined') {
             Variants.get($stateParams.variantId).then(function(variant) {
               $scope.model.variant = {
                 name: variant.name
@@ -183,7 +184,7 @@
             });
           }
           // just drop in the variant name string if provided
-          if ($stateParams.variantName) {
+          if ($stateParams.variantName && $stateParams.variantName !== 'undefined') {
             $scope.model.variant = {
               name: $stateParams.variantName
             };
