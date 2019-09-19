@@ -17,6 +17,9 @@
           'CurrentUser': 'CurrentUser',
           'user': function (CurrentUser) {
             return CurrentUser.get();
+          },
+          'statements': function(CurrentUser) {
+            return CurrentUser.getCoiStatements();
           }
         },
         controller: 'AccountProfileController'

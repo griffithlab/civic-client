@@ -69,8 +69,8 @@
       </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12 admin-buttons" ng-if="(vm.isEditor() || vm.isAdmin() || vm.ownerIsCurrentUser) && vm.variantGroupTalkModel.data.item.status === 'new'">
+  <div class="row" ng-if="vm.showModeration">
+    <div class="col-xs-12 admin-buttons">
       <div class="pull-right">
         <span uib-tooltip={{vm.disabled_text}}
               tooltip-append-to-body="true"
@@ -81,9 +81,18 @@
                   ng-click="acceptRevision()">
             Accept Revision
           </button>
-          </span>
+        </span>
+
         <button type="submit" class="btn btn-default" ng-click="rejectRevision()">Reject Revision</button>
       </div>
+    </div>
+  </div>
+  <div class="row" ng-if="vm.showCoiNotice">
+    <div class="col-xs-10 col-xs-offset-1" style="padding-bottom: 16px">
+      <a ui-sref="account.profile" class="btn btn-danger btn-block">
+        <i class="glyphicon glyphicon-hand-up"></i>&nbsp;
+        Your Editor's Conflict of Interest Statement is missing or expired. Please update it to perform moderation.
+      </a>
     </div>
   </div>
   <div class="row">

@@ -23,6 +23,7 @@
         $scope.logout = Security.logout;
         $scope.showLogin = Security.showLogin;
 
+
         $scope.$watch(function() {
           return Security.currentUser;
         }, function(currentUser) {
@@ -32,6 +33,10 @@
               return acc + value;
             });
             $scope.hasNotifications = $scope.totalNotifications > 0;
+
+            $scope.showCoiNotice = (Security.isAdmin() || Security.isEditor())
+              && (currentUser.conflict_of_interest.coi_valid === 'missing' ||
+                  currentUser.conflict_of_interest.coi_valid === 'expired' );
           }
         });
 

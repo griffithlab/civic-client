@@ -8,17 +8,38 @@
   function AccountProfileController($scope,
                                     Security,
                                     Users,
-                                    user){
+                                    CurrentUser){
     var vm = $scope.vm = {};
-
-    vm.user = user;
-    vm.userEdit = angular.copy(user);
+    vm.isAdmin = Security.isAdmin;
+    vm.isEditor = Security.isEditor;
+    vm.user = CurrentUser.data.user;
+    vm.statements = CurrentUser.data.statements;
+    vm.userEdit = angular.copy(vm.user);
     vm.userEdit.country_id = vm.userEdit.country === null ? null : vm.userEdit.country.id;
-    vm.currentUser = Security.currentUser;
+
+    vm.coiEdit = {
+      coi_present: false,
+      coi_statement: ''
+    };
 
     // TODO: implement better error handling and success message
     vm.submitSuccess = false;
     vm.submitFail = false;
+
+    vm.submitCoiSuccess = false;
+    vm.submitCoiFail = false;
+
+    $scope.$watch(function() {
+      return CurrentUser.data.user;
+    }, function(user) {
+      vm.user = user;
+    }, true);
+
+    $scope.$watchCollection(function() {
+      return CurrentUser.data.statements;
+    }, function(statements) {
+      vm.coi_statements = statements;
+    });
 
     vm.userEditFields = [
       {
@@ -370,7 +391,36 @@
           value: 'vm.userEdit.linkedin_profile',
           helpText: 'Your LinkedIn username, displayed on your profile page and user cards.'
         }
-      }
+      },
+    ];
+
+    vm.coiFields = [
+      {
+        key: 'coi_present',
+        type: 'horizontalRadioHelp',
+        defaultValue: 'false',
+        templateOptions: {
+          label: null,
+          options: [
+            {value: false, name: 'I do not have any potential conflicts of interest'},
+            {value: true, name: 'I do have a potential conflict of interest'},
+          ],
+          helpText: 'Please indicate if you have a conflict of interest in curating CIViC.'
+        }
+      },
+      {
+        key: 'coi_statement',
+        type: 'horizontalTextareaHelp',
+        templateOptions: {
+          label: 'COI Statement',
+          rows: 4,
+          helpText: 'Provide a concise description of any potential or actual conflicts of interest that you may have in curating CIViC.'
+        },
+        hideExpression: '!model.coi_present',
+        expressionProperties: {
+          'templateOptions.required': 'model.coi_present === true'
+        }
+      },
     ];
 
     vm.saveProfile = function(userEdit) {
@@ -379,13 +429,26 @@
         .then(function() {
           console.log('updated user successfully');
           vm.submitSuccess = true;
-          vm.user = Security.reloadCurrentUser();
+          CurrentUser.get();
         })
         .catch(function() {
           console.error('update user error!');
           vm.submitFail = true;
         });
 
+    };
+
+    vm.saveCoiStatement = function(coiEdit, coiOptions) {
+      CurrentUser.addCoiStatement(coiEdit)
+        .then(function() {
+          console.log('added COI statement successfully.');
+          vm.submitCoiSuccess = true;
+          coiOptions.resetModel();
+        })
+        .catch(function() {
+          console.error('failed to add COI statement!');
+          vm.submitCoiFail = true;
+        });
     };
   }
 })();

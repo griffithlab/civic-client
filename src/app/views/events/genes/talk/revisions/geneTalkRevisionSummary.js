@@ -29,13 +29,24 @@
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
-    if(Security.currentUser) {
-      var currentUserId = Security.currentUser.id;
-      var submitterId = GeneRevisions.data.item.user.id;
-      vm.ownerIsCurrentUser = submitterId === currentUserId;
-    } else {
-      vm.ownerIsCurrentUser = false;
-    }
+    // determine moderation button visibility
+    var currentUserId = Security.currentUser.id;
+    var submitterId = GeneRevisions.data.item.user.id;
+    var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
+
+    $scope.$watchGroup(
+      [ function() { return GeneRevisions.data.item.status; },
+        function() { return Security.currentUser.conflict_of_interest.coi_valid; } ],
+      function(statuses) {
+        var changeStatus = statuses[0];
+        var coiStatus = statuses[1];
+        var changeIsNew = changeStatus === 'new';
+        var coiValid = coiStatus === 'conflict' || coiStatus === 'valid';
+        var isModerator = Security.isEditor() || Security.isAdmin();
+
+        vm.showModeration = changeIsNew && ((isModerator && coiValid) || ownerIsCurrentUser);
+        vm.showCoiNotice = changeIsNew && !vm.showModeration && isModerator;
+      });
 
     vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? 'Contributors may not accept their own suggested revisions.' : 'Suggested revisions must be approved by an editor.' ;
 

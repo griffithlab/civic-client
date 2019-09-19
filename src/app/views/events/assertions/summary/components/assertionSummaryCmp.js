@@ -27,13 +27,26 @@
     vm.assertion = Assertions.data.item;
     vm.myVariantInfo = Assertions.data.myVariantInfo;
 
-    if(Security.currentUser) {
-      var currentUserId = Security.currentUser.id;
-      var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
-      vm.ownerIsCurrentUser = submitterId === currentUserId;
-    } else {
-      vm.ownerIsCurrentUser = false;
-    }
+    // (vm.isEditor || vm.isAdmin || (vm.isCurator && vm.ownerIsCurrentUser)) && vm.assertion.status === 'submitted'
+
+    // determine moderation button visibility
+    var currentUserId = Security.currentUser.id;
+    var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
+    var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
+
+    $scope.$watchGroup(
+      [ function() { return Assertions.data.item.status; },
+        function() { return Security.currentUser.conflict_of_interest.coi_valid; } ],
+      function(statuses) {
+        var changeStatus = statuses[0];
+        var coiStatus = statuses[1];
+        var changeIsSubmitted = changeStatus === 'submitted';
+        var coiValid = coiStatus === 'conflict' || coiStatus === 'valid';
+        var isModerator = Security.isEditor() || Security.isAdmin();
+
+        vm.showModeration = changeIsSubmitted && ((isModerator && coiValid) || ownerIsCurrentUser);
+        vm.showCoiNotice = changeIsSubmitted && !vm.showModeration && isModerator;
+      });
 
     vm.AssertionsViewOptions = AssertionsViewOptions;
     vm.backgroundColor = AssertionsViewOptions.styles.view.backgroundColor;
