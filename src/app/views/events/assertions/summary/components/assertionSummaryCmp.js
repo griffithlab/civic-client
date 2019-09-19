@@ -75,9 +75,8 @@
           })
           .value()
           .join(', ');
-        } else {
-          item.drugsStr = '--';
-        }
+      } else {
+        item.drugsStr = '--';
       }
       if(assertion.phenotypes.length > 0) {
         vm.phenotypesStr = _.chain(assertion.phenotypes)
