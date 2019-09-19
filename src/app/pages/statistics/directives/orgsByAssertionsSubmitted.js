@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   angular.module('civic.pages')
-    .directive('organizationsByUserCount', organizationsByUserCount)
-    .controller('organizationsByUserCountController', organizationsByUserCountController);
+    .directive('organizationsByAssertionsSubmitted', organizationsByAssertionsSubmitted)
+    .controller('organizationsByAssertionsSubmittedController', organizationsByAssertionsSubmitted);
 
   // @ngInject
-  function organizationsByUserCount() {
+  function organizationsByAssertionsSubmitted() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -13,13 +13,13 @@
         palette: '='
       },
       template: '<div class="bar-chart"></div>',
-      controller: organizationsByUserCountController
+      controller: organizationsByAssertionsSubmittedController
     };
     return directive;
   }
 
   // @ngInject
-  function organizationsByUserCountController($scope,
+  function organizationsByAssertionsSubmittedController($scope,
                                        $window,
                                        $rootScope,
                                        $element,
@@ -27,7 +27,7 @@
                                        dimple,
                                        _,
                                       Stats) {
-    console.log('organizationsByUserCount loaded.');
+    console.log('organizationsByAssertionsSubmitted loaded.');
     var options = $scope.options;
 
     var svg = d3.select($element[0])
@@ -54,14 +54,31 @@
 
     var y = chart.addCategoryAxis('y', 'Organization');
     y.addOrderRule('Count');
-    var s = chart.addSeries(null, dimple.plot.bar);
+    var s = chart.addSeries('Activity', dimple.plot.bar);
+
+
+    var l = chart.addLegend('80%', '70%', 220, 20, 'left');
+
+    // override legend sorting
+    l._getEntries_old = l._getEntries;
+    l._getEntries = function() {
+      return _.orderBy(l._getEntries_old.apply(this, arguments), ['key'], ['asc']);
+    };
 
     $scope.$watch(function() {
-      return Stats.data.dashboard.organization_user_count;
+      return Stats.data.dashboard.organization_activity_count;
     }, function(data) {
-      chart.data = _.map(data, function(val, key) {
-        return { Organization: key, Count: val };
-      });
+      chart.data =  _.chain(data)
+        .map(function(val, key){
+          return _.chain(val.assertion_count)
+            .map(function(v,k){
+              return { Organization: key, Activity: _.capitalize(k), Count: v };
+            })
+            .value();
+        })
+        .flatten()
+        .value();
+
       chart.draw();
     });
 

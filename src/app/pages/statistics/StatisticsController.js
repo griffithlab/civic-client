@@ -153,51 +153,43 @@
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByTotalActivityCount: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Total Activity Count',
-        margin: pieMargins,
-        transitionDuration: transitionDuration,
-        data: []
-      },
       organizationsByUserCount: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by User Count',
-        margin: pieMargins,
-        transitionDuration: transitionDuration,
-        data: []
-      },
-      organizationsByTotalBadgeCount: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Total Badge Count',
-        margin: pieMargins,
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'User Count',
+        margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
       },
       organizationsByChangeActivity: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Suggested Changes',
-        margin: pieMargins,
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'Suggested Changes Submitted',
+        margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByEvidenceActivity: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Evidence Actions',
-        margin: pieMargins,
+      organizationsByEvidenceSubmitted: {
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'Evidence Submitted',
+        margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
       },
-      organizationsByAssertionActivity: {
-        width: smPieChartWidth,
-        height: smPieChartHeight,
-        title: 'Organizations by Assertion Actions',
-        margin: pieMargins,
+      organizationsByAssertionsSubmitted: {
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'Assertions Submitted',
+        margin: barMarginsWide,
+        transitionDuration: transitionDuration,
+        data: []
+      },
+      organizationsByBadgeCount: {
+        width: barChartWidth,
+        height: barChartHeight/2,
+        title: 'Badge Count',
+        margin: barMarginsWide,
         transitionDuration: transitionDuration,
         data: []
       },
