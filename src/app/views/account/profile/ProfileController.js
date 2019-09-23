@@ -70,6 +70,9 @@
           minLength: 5,
           value: 'vm.userEdit.email',
           helpText: 'Email address will not be visible to others or shared and will only be used for sending CIViC notifications, news, and updates.'
+        },
+        expressionProperties: {
+          'templateOptions.required': 'model.role === "admin" || model.role === "editor"'
         }
       },
       {
