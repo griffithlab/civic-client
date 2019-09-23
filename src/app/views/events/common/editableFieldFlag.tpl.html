@@ -35,18 +35,25 @@
         <div class="col-xs-12" >
           <div class="form-group">
             <textarea ng-model="ctrl.resolveFlag.comment.text" class="form-control resolve-comment" rows="3"
-            placeholder="To resolve this flag, describe here how it was addressed then click 'Resolve'."></textarea>
+              placeholder="To resolve this flag, describe here how it was addressed then click 'Resolve'."></textarea>
           </div>
         </div>
       </div>
       <div class="row" >
-        <div class="col-xs-12 panel-buttons" >
+        <div class="col-xs-12" >
+          <span ng-if="ctrl.showCoiNotice">
+            <a ui-sref="account.profile" class="btn btn-danger btn-block btn-xs">
+              <i class="glyphicon glyphicon-hand-up"></i>&nbsp;
+              Please Update COI Statement to resolve flag.
+            </a>
+          </span>
           <button type="submit"
-             class="btn btn-xs btn-success"
-             ng-click="resolveFn(ctrl.resolveFlag)"
-             ng-disabled="ctrl.resolveFlag.comment.text.length < 3"
-             tooltip-enable="ctrl.resolveFlag.comment.text.length < 3"
-             tooltip="Please add comment before resolving flag.">
+            ng-if="!ctrl.showCoiNotice"
+            class="btn btn-xs btn-success"
+            ng-click="resolveFn(ctrl.resolveFlag)"
+            ng-disabled="ctrl.resolveFlag.comment.text.length < 3"
+            tooltip-enable="ctrl.resolveFlag.comment.text.length < 3"
+            tooltip="Please add comment before resolving flag.">
             Resolve
           </button>
         </div>
