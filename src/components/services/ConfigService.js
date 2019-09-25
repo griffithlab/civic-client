@@ -404,6 +404,7 @@
               'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
               'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
               'Neomorphic': 'TBD',
+              'Dominant Negative': 'TBD',
               'Unknown': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
             },
           },
