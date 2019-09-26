@@ -1,4 +1,11 @@
 <div class="evidenceSummary {{ backgroundColor }}">
+  <!-- status warnings -->
+  <div class="row" ng-if="evidence.status !== 'accepted'" style="margin-bottom: 12px;">
+    <div class="col-xs-12 notices">
+      <div class="label label-warning" style="display:block;" ng-if="evidence.status === 'submitted'">CAUTION: This Evidence Item has not been accepted as accurate or complete!</div>
+      <div class="label label-danger" style="display:block;" ng-if="evidence.status === 'rejected'">WARNING: This Evidence Item has been rejected!</div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12 explanation">
       <p ng-bind-html="evidence.description | linky"></p>
