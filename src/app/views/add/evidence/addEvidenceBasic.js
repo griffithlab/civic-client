@@ -141,7 +141,7 @@
             typeaheadSearch: function(val) {
               return Genes.beginsWith(val)
                 .then(function(response) {
-                  var labelLimit = 70;
+                  var labelLimit = 100;
                   var list = _.map(response, function(gene) {
                     if (gene.aliases.length > 0) {
                       gene.alias_list = gene.aliases.join(', ');
@@ -681,9 +681,9 @@
             wrapper: null,
             templateOptions: {
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
-              // focus: true,
+              templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
               onSelect: 'options.data.pushNew(model, index)',
-              editable: true
+              editable: false
             },
             data: {
               pushNew: function(model, index) {
@@ -692,8 +692,15 @@
               typeaheadSearch: function(val) {
                 return DrugSuggestions.query(val)
                   .then(function(response) {
-                    return _.map(response, function(drugname) {
-                      return { name: drugname };
+                    var labelLimit = 100;
+                    return _.map(response, function(drug) {
+                      if (drug.aliases.length > 0) {
+                        drug.alias_list = drug.aliases.join(', ');
+                        if(drug.alias_list.length > labelLimit) { drug.alias_list = _.truncate(drug.alias_list, labelLimit); }
+                      } else {
+                        drug.alias_list = '--';
+                      }
+                      return drug;
                     });
                   });
               }
