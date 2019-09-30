@@ -456,7 +456,8 @@
             templateOptions: {
               inputFormatter: 'model[options.key]',
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
-              editable: true,
+              templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
+              editable: false,
               // focus: true,
               onSelect: 'options.data.pushNew(model, index)'
             },
@@ -467,9 +468,17 @@
               typeaheadSearch: function(val) {
                 return DrugSuggestions.query(val)
                   .then(function(response) {
-                    return _.map(response, function(drugname) {
-                      return { name: drugname };
+                    var labelLimit = 70;
+                    return _.map(response, function(drug) {
+                      if (drug.aliases.length > 0) {
+                        drug.alias_list = drug.aliases.join(', ');
+                        if(drug.alias_list.length > labelLimit) { drug.alias_list = _.truncate(drug.alias_list, labelLimit); }
+                      } else {
+                        drug.alias_list = '--';
+                      }
+                      return drug;
                     });
+
                   });
               }
             }
@@ -508,7 +517,7 @@
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return !(scope.model.evidence_type === 'Predictive' && // evidence type must be predictive
-            _.without(scope.model.drugs, '').length > 1);
+                   _.without(scope.model.drugs, '').length > 1);
 
         }
       },
