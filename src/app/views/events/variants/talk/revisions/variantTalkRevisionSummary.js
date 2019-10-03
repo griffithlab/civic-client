@@ -34,13 +34,14 @@
     vm.errorPrompts = formConfig.errorPrompts;
 
     // determine moderation button visibility
-    var currentUserId = Security.currentUser.id;
+    var currentUserId;
+    if(Security.currentUser) { currentUserId = Security.currentUser.id; };
     var submitterId = VariantRevisions.data.item.user.id;
     var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
 
     $scope.$watchGroup(
       [ function() { return VariantRevisions.data.item.status; },
-        function() { return Security.currentUser.conflict_of_interest.coi_valid; } ],
+        function() { return Security.currentUser ? Security.currentUser.conflict_of_interest.coi_valid : undefined; } ],
       function(statuses) {
         var changeStatus = statuses[0];
         var coiStatus = statuses[1];
