@@ -1,5 +1,5 @@
 <a tabindex="-1">
   <span ng-bind-html="match.model.name | uibTypeaheadHighlight:query">NAME</span>
-  <span style="color: #AAA;">(NCIT ID: {{match.model.ncit_id}}) -- Aliases: </span>
+  <span style="color: #AAA;">(NCIT ID: <span ng-bind-html="match.model.ncit_id | uibTypeaheadHighlight:query">NCIT ID</span> ) -- Aliases: </span>
   <span ng-bind-html="match.model.alias_list | uibTypeaheadHighlight:query">ALIASES</span>
 </a>
