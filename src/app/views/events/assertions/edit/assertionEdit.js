@@ -69,6 +69,7 @@
 
     vm.assertionEdit = angular.copy(vm.assertion);
     vm.assertionEdit.comment = { title: 'ASSERTION ' + vm.assertion.name + ' Revision Description', text:'' };
+    vm.assertionEdit.drugs = _.filter(_.map(vm.assertion.drugs, 'name'), function(name){ return name !== 'N/A'; });
 
     vm.styles = AssertionsViewOptions.styles;
 
@@ -492,19 +493,26 @@
             wrapper: null,
             templateOptions: {
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
-              // focus: true,
+              templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
               onSelect: 'options.data.pushNew(model, index)',
-              editable: true
+              editable: false
             },
             data: {
               pushNew: function(model, index) {
                 model.splice(index+1, 0, '');
               },
               typeaheadSearch: function(val) {
-                return DrugSuggestions.localQuery(val)
+                return DrugSuggestions.query(val)
                   .then(function(response) {
-                    return _.map(response, function(drugname) {
-                      return { name: drugname };
+                    var labelLimit = 70;
+                    return _.map(response, function(drug) {
+                      if (drug.aliases.length > 0) {
+                        drug.alias_list = drug.aliases.join(', ');
+                        if(drug.alias_list.length > labelLimit) { drug.alias_list = _.truncate(drug.alias_list, labelLimit); }
+                      } else {
+                        drug.alias_list = '--';
+                      }
+                      return drug;
                     });
                   });
               }
