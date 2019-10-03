@@ -28,13 +28,14 @@
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;
 
     // determine moderation button visibility
-    var currentUserId = Security.currentUser.id;
+    var currentUserId;
+    if(Security.currentUser) { currentUserId = Security.currentUser.id; };
     var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
     var ownerIsCurrentUser = $scope.ownerIsCurrentUser = submitterId === currentUserId;
 
     $scope.$watchGroup(
       [ function() { return Evidence.data.item.status; },
-        function() { return Security.currentUser.conflict_of_interest.coi_valid; } ],
+        function() { return Security.currentUser ? Security.currentUser.conflict_of_interest.coi_valid : undefined; } ],
       function(statuses) {
         var changeStatus = statuses[0];
         var coiStatus = statuses[1];
