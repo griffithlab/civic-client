@@ -335,6 +335,7 @@
               { value: 'Loss of Function', label: 'Loss of Function'},
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
+              { value: 'Dominant Negative', label: 'Dominant Negative' },
               { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
