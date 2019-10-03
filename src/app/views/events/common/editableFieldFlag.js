@@ -27,6 +27,19 @@
     console.log('editable field flag controller called. ----------------');
     ctrl.isAdmin = Security.isAdmin;
     ctrl.isEditor = Security.isEditor;
+
+    // set COI notice display
+    $scope.$watch(function() {
+      return Security.currentUser;
+    }, function(currentUser) {
+      if(!_.isNull(currentUser)) {
+        ctrl.currentUser = currentUser;
+        ctrl.showCoiNotice = (Security.isAdmin() || Security.isEditor())
+          && (currentUser.conflict_of_interest.coi_valid === 'missing' ||
+              currentUser.conflict_of_interest.coi_valid === 'expired' );
+      }
+    });
+
     ctrl.actions = {
       flagged: {
         order: 0,
