@@ -52,6 +52,8 @@
     vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
+    vm.showPrefillPrompt = !_.isUndefined(_.find($stateParams, function(val) { return !_.isUndefined(val); })) ? true : false;
+
     // TODO: watch expression is a temp fix, should refactor isAuth to return a promise
     // in order to cover situations where components load faster than the auth info
     // is returned from the server

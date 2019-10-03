@@ -5,8 +5,11 @@
         <p>To add an evidence item, please complete the following form, provide a short statement supporting its inclusion into the CIViC database, then click the 'Submit Evidence for Inclusion' button. If you are having difficulty filling in all of the required fields please use the <a ui-sref="suggest.source"><b>Suggest Source</b></a> form to suggest a publication for curators to review.</p>
         <p style="margin-top: .5em;"><strong>Please ensure that your submission contains no <a href="http://www.hipaa.com/hipaa-protected-health-information-what-does-phi-include/" title="HIPAA.com Protected Health Information description" target="_blank">Protected Health Information</a>, and is your own original work. By contributing to CIViC you agree to release your contributions to the public domain as described by the <a href="https://creativecommons.org/publicdomain/zero/1.0/" title="CreativeCommons.org CC0 license" target="_blank">Creative Commons Public Domain Dedication (CC0 1.0 Universal)</a>.</strong></p>
         </div>
-        <div class="edit-instructions"  ng-if="vm.isAuthenticated === false" >
-          <p style="font-weight: bold; color: red" ng-if="!vm.isAuthenticated">Please click the 'Sign In/Sign Up' button to create an account and add evidence to CIViC.</p>
+        <div class="edit-instructions jumbotron"  ng-if="vm.isAuthenticated === false" >
+          <h2 style="margin-top: 0">You must be logged in to add evidence to CIViC.</h2>
+          <p>Please click the 'Sign In/Sign Up' button in the header to sign in or create an account.</p>
+          <br/>
+          <p ng-if="vm.showPrefillPrompt" ><i>It appears that the link includes form prefill attributes.</i> To prefill the form, sign in or create an account, ensure that you're logged in, and click the link again.</p>
         </div>
     </div>
   </div>
