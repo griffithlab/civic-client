@@ -116,11 +116,11 @@
     // define fields here, then access from SearchController with $scope.$parent.fields
     $scope.fields = {};
     $scope.fields.evidence_items = EvidenceItemFieldConfig.getFields(organizations);
-    $scope.fields.genes = GeneFieldConfig;
-    $scope.fields.variants = VariantFieldConfig;
-    $scope.fields.variantGroups = VariantGroupFieldConfig;
-    $scope.fields.sources = SourceFieldConfig;
-    $scope.fields.suggested_changes = SuggestedChangeFieldConfig;
+    $scope.fields.genes = GeneFieldConfig.getFields();
+    $scope.fields.variants = VariantFieldConfig.getFields();
+    $scope.fields.variantGroups = VariantGroupFieldConfig.getFields();
+    $scope.fields.sources = SourceFieldConfig.getFields();
+    $scope.fields.suggested_changes = SuggestedChangeFieldConfig.getFields();
 
     $scope.fields.assertions = AssertionFieldConfig.getFields(acmgCodes, organizations);
 
