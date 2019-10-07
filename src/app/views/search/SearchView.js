@@ -11,6 +11,16 @@
       .state('search', {
         abstract: true,
         url: '/search',
+        resolve: {
+          acmgCodes: function(Assertions) {
+            return Assertions.queryAcmgCodes();
+          },
+          organizations: function(Organizations) {
+            return Organizations.query().then(function(response) {
+              return response.result;
+            });
+          }
+        },
         controller: 'SearchViewController',
         templateUrl: 'app/views/search/search.tpl.html',
       })
@@ -91,10 +101,33 @@
   }
 
   // @ngInject
-  function SearchViewController($scope, $state) {
+  function SearchViewController($scope,
+                                $state,
+                                acmgCodes,
+                                organizations,
+                                ConfigService,
+                                EvidenceItemFieldConfig,
+                                VariantFieldConfig,
+                                AssertionFieldConfig,
+                                GeneFieldConfig,
+                                SourceFieldConfig,
+                                VariantGroupFieldConfig,
+                                SuggestedChangeFieldConfig) {
+    // define fields here, then access from SearchController with $scope.$parent.fields
+    $scope.fields = {};
+    $scope.fields.evidence_items = EvidenceItemFieldConfig.getFields(organizations);
+    $scope.fields.genes = GeneFieldConfig;
+    $scope.fields.variants = VariantFieldConfig;
+    $scope.fields.variantGroups = VariantGroupFieldConfig;
+    $scope.fields.sources = SourceFieldConfig;
+    $scope.fields.suggested_changes = SuggestedChangeFieldConfig;
+
+    $scope.fields.assertions = AssertionFieldConfig.getFields(acmgCodes, organizations);
+
     $scope.$watch(function() { return $state.current.name; }, function(state) {
       $scope.state = state;
     });
+
   }
 
 })();
