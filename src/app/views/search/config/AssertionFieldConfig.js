@@ -1,10 +1,19 @@
 (function() {
   'use strict';
   angular.module('civic.search')
-    .factory('AssertionFieldConfig', function(ConfigService, Assertions) {
+    .factory('AssertionFieldConfig', function(ConfigService, Assertions, Organizations, $q) {
       var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
       var make_options = ConfigService.optionMethods.make_options;
-      return Assertions.queryAcmgCodes().then(function(acmgCodes) {
+      return $q.all([
+        Assertions.queryAcmgCodes(),
+        Organizations.query()
+      ]).then(function(formValues) {
+        var acmgCodeOptions = _.chain(formValues[0]).map(function(code) {
+          return { value: code.code, name: code.code };
+        }).unshift({value: null, name:'Please choose an ACMG Code'}).value();
+        var organizationOptions = _.chain(formValues[1].result).map(function(org) {
+          return { value: org.name, name: org.name };
+        }).unshift({value: null, name:'Please choose an Organization'}).value();
         return [
           {
             type: 'queryRow',
@@ -153,9 +162,7 @@
                     templateOptions: {
                       label: '',
                       required: true,
-                      options: _.chain(acmgCodes).map(function(code) {
-                        return { value: code.code, name: code.code };
-                      }).unshift({value: null, name:'Please choose an ACMG Code'}).value()
+                      options: acmgCodeOptions
                     }
                   }
                 ],
@@ -900,15 +907,7 @@
                     templateOptions: {
                       label: '',
                       required: true,
-                      options:[
-                        { value: null, name: 'Please choose an Organization' },
-                        { value: 'BCCA (POGS)', name: 'BCCA (POGS)' },
-                        { value: 'The Charité Comprehensive Cancer Center', name: 'The Charité Comprehensive Cancer Center' },
-                        { value: 'ClinGen', name: 'ClinGen' },
-                        { value: 'Illumina', name: 'Illumina' },
-                        { value: 'The McDonnell Genome Institute', name: 'The McDonnell Genome Institute'},
-                        { value: 'University Health Network (Toronto)', name: 'University Health Network (Toronto)' },
-                      ]
+                      options: organizationOptions
                     }
                   }
                 ],
