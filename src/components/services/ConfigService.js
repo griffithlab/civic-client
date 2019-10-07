@@ -400,12 +400,12 @@
               'N/A': 'Clinical Significance is Not Applicable for Predisposing Evidence Type'
             },
             'Functional': {
-              'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
-              'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
-              'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
-              'Neomorphic': 'A sequence variant whereby the gene product creates a novel function',
-              'Dominant Negative': 'A sequence variant whereby the gene product abolishes wild type allele function',
-              'Unknown': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
+              'Gain of Function': 'Sequence variant conferrs a new or enhanced function',
+              'Loss of Function': 'Sequence variant conferrs a diminished or abolished function',
+              'Unaltered Function': 'Gene product of sequence variant is unchanged',
+              'Neomorphic': 'Sequence variant creates a novel function',
+              'Dominant Negative': 'Seuqnce variant abolishes wild type allele function',
+              'Unknown': 'Sequence variant that cannot be precisely defined the other listed categories',
             },
           },
           assertion: {
