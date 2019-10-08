@@ -370,11 +370,11 @@
               'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
             },
             'Predisposing': {
-              'N/A': 'Evidence Direction is Not Applicable for Predisposing Assertion Type.'
+              'N/A': 'Evidence Direction is not applicable for Predisposing Assertion type.'
             },
             'Functional': {
-              'Support': 'TBD',
-              'Does Not Support': 'TBD',
+              'Support': 'The experiment or study supports this variant causing alteration or non-alteration of the gene product function',
+              'Does Not Support': 'The experiment or study does not support this variant causing alteration or non-alteration of the gene product function',
             },
           }
         },
