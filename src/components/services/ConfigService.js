@@ -370,11 +370,11 @@
               'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
             },
             'Predisposing': {
-              'N/A': 'Evidence Direction is Not Applicable for Predisposing Assertion Type.'
+              'N/A': 'Evidence Direction is not applicable for Predisposing Assertion type.'
             },
             'Functional': {
-              'Support': 'TBD',
-              'Does Not Support': 'TBD',
+              'Support': 'The experiment or study supports this variant causing alteration or non-alteration of the gene product function',
+              'Does Not Support': 'The experiment or study does not support this variant causing alteration or non-alteration of the gene product function',
             },
           }
         },
@@ -400,12 +400,12 @@
               'N/A': 'Clinical Significance is Not Applicable for Predisposing Evidence Type'
             },
             'Functional': {
-              'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
-              'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
-              'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
-              'Neomorphic': 'TBD',
-              'Dominant Negative': 'TBD',
-              'Unknown': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
+              'Gain of Function': 'Sequence variant conferrs a new or enhanced function',
+              'Loss of Function': 'Sequence variant conferrs a diminished or abolished function',
+              'Unaltered Function': 'Gene product of sequence variant is unchanged',
+              'Neomorphic': 'Sequence variant creates a novel function',
+              'Dominant Negative': 'Seuqnce variant abolishes wild type allele function',
+              'Unknown': 'Sequence variant that cannot be precisely defined the other listed categories',
             },
           },
           assertion: {
@@ -427,14 +427,7 @@
             },
             'Predisposing': {
               'N/A': 'Clinical Significance is Not Applicable for Predisposing Assertion Type'
-            },
-            'Functional': {
-              'Gain of Function': 'A sequence variant whereby new or enhanced function is conferred on the gene product',
-              'Loss of Function': 'A sequence variant whereby the gene product has diminished or abolished function',
-              'Unaltered Function': 'A sequence variant whereby the function of the gene product is unchanged',
-              'Neomorphic': 'TBD',
-              'Unknown': 'A functional variant that cannot be precisely defined by gain-of-function, loss-of-function, or unaltered function',
-            },
+            }
           }
         },
         drug_interaction_type: {
@@ -444,7 +437,7 @@
         },
         rating: {
           1: 'Poor - Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims.',
-          2: 'Adequate - Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing.',
+          2: 'Adequate - Evidence is not well supported by experimental data, and little follow-up data is available. Experiments may lack proper controls, have small sample size, or are not statistically convincing.',
           3: 'Average - Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning.',
           4: 'Strong - Well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.',
           5: 'Excellent - Solid, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.'
