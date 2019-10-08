@@ -4,47 +4,17 @@
     .controller('SearchController', SearchController);
 
   // @ngInject
-  function SearchController($scope,
-                            _,
-                            Diseases,
-                            ConfigService,
-                            EvidenceItemFieldConfig,
-                            VariantFieldConfig,
-                            AssertionFieldConfig,
-                            GeneFieldConfig,
-                            SourceFieldConfig,
-                            VariantGroupFieldConfig,
-                            SuggestedChangeFieldConfig) {
+  function SearchController($scope) {
+
     var vm = $scope.vm = {};
 
-    var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
-    var make_options = ConfigService.optionMethods.make_options;
+    vm.fields = $scope.$parent.fields; // see SearchViewController for field config
 
     vm.suggestedSearch = {};
 
     vm.setSearch = function(search) {
       $scope.$broadcast('setSearch', search);
     };
-
-    vm.fields = {};
-
-    vm.fields.evidence_items = EvidenceItemFieldConfig;
-
-    vm.fields.genes = GeneFieldConfig;
-
-    vm.fields.variants = VariantFieldConfig;
-
-    vm.fields.variantGroups = VariantGroupFieldConfig;
-
-    vm.fields.sources = SourceFieldConfig;
-
-    vm.fields.suggested_changes = SuggestedChangeFieldConfig;
-
-    // assertion field config is a factory that returns a promise
-    // since it has to query the ACMG codes from the server to construct options
-    AssertionFieldConfig.then(function(config){
-      vm.fields.assertions = config;
-    });
 
     vm.suggestedSearches = {
       'assertions': [
