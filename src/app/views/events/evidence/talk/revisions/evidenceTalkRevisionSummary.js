@@ -36,6 +36,7 @@
     // determine moderation button visibility
     var currentUserId;
     if(Security.currentUser) { currentUserId = Security.currentUser.id; };
+    var submitterId = EvidenceRevisions.data.item.user.id;
     var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
 
     $scope.$watchGroup(
