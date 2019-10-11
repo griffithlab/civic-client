@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.search')
-    .factory('EvidenceItemFieldConfig', function(_) {
+    .factory('EvidenceItemFieldConfig', function(_, Diseases) {
       return {
         getFields: function(organizations) {
 
