@@ -46,8 +46,8 @@
             <span ng-if="vm.assertion.variant_origin"><strong>Variant Origin: </strong>{{vm.assertion.variant_origin}}&nbsp;&nbsp;</span>
             <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
           </p>
-          <p>
-            <strong>Associated Phenotype{{ vm.assertion.phenotypes.length > 1 ? 's' : '' }}:</strong> <span ng-bind-html="vm.phenotypesStr"></span>
+          <p ng-if="vm.assertion.phenotypes.length > 1">
+            <strong>Associated Phenotype{{ vm.assertion.phenotypes.length > 1 ? 's' : '' }}:</strong> <span ng-bind-html="vm.assertion.phenotypesStr"></span>
           </p>
         </div>
       </div>
@@ -91,13 +91,10 @@
                 </td>
               </tr>
               <tr ng-if="vm.assertion.drugs.length > 0">
-                <td class="key">Drugs:</td>
-                <td class="value" ng-bind-html="vm.drugsStr"></td>
-              </tr>
-              <tr ng-if="vm.assertion.drug_interaction_type !== null">
-                <td class="key">Drug Interaction Type</td>
+                <td class="key">Drug(s):</td>
                 <td class="value">
-                  {{ vm.assertion.drug_interaction_type }}
+                  <span ng-bind-html="vm.assertion.drugsStr">DRUGS</span>
+                  <span ng-if="vm.assertion.drug_interaction_type">&nbsp;({{ vm.assertion.drug_interaction_type }})</span>
                 </td>
               </tr>
               <tr ng-if="vm.assertion.evidence_type !== 'Predisposing'">

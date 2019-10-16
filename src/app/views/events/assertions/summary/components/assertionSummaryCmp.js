@@ -63,9 +63,9 @@
       E: 'Inferential'
     };
 
-    $scope.$watchCollection('vm.assertion', function(assertion) {
+    $scope.$watch('vm.assertion', function(assertion) {
       if(assertion.drugs.length > 0) {
-        vm.drugsStr = _.chain(assertion.drugs)
+        assertion.drugsStr = _.chain(assertion.drugs)
           .map(function(item) {
             if(item.ncit_id) {
               return '<a href="https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&ns=ncit&code=' + item.ncit_id + '" target="_blank">' + item.name + '</a>';
@@ -77,10 +77,11 @@
           .value()
           .join(', ');
       } else {
-        item.drugsStr = '--';
+        assertion.drugsStr = '--';
       }
+
       if(assertion.phenotypes.length > 0) {
-        vm.phenotypesStr = _.chain(assertion.phenotypes)
+        assertion.phenotypesStr = _.chain(assertion.phenotypes)
           .sortBy('hpo_class')
           .map(function(item) {
             return '<a href="' + item.url + '" target="_blank">' + item.hpo_class + '</a>';
@@ -88,8 +89,9 @@
           .value()
           .join(', ');
       } else {
-        vm.phenotypesStr = '--';
+        assertion.phenotypesStr = '--';
       }
+
       _.each(assertion.evidence_items, function(item) {
         item.evidence_level_string = item.evidence_level + ' - ' + evidence_levels[item.evidence_level];
 
@@ -110,8 +112,8 @@
           item.phenotypesStr = '--';
         }
       });
+    }, true);
 
-    });
     if(Security.currentUser) {
       var currentUserId = Security.currentUser.id;
       var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
