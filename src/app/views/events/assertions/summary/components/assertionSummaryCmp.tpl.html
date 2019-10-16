@@ -46,7 +46,7 @@
             <span ng-if="vm.assertion.variant_origin"><strong>Variant Origin: </strong>{{vm.assertion.variant_origin}}&nbsp;&nbsp;</span>
             <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
           </p>
-          <p ng-if="vm.assertion.phenotypes.length > 1">
+          <p ng-if="vm.assertion.phenotypes.length > 0">
             <strong>Associated Phenotype{{ vm.assertion.phenotypes.length > 1 ? 's' : '' }}:</strong> <span ng-bind-html="vm.assertion.phenotypesStr"></span>
           </p>
         </div>
