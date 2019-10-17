@@ -100,6 +100,7 @@
       exporterMenuCsv: false,
       exporterMenuPdf: false,
       enableGridMenu: true,
+      exporterMenuExcel: false,
       gridMenuShowHideColumns: false,
       rowTemplate: 'app/views/events/common/evidenceGridRowTemplate.tpl.html',
       gridMenuCustomItems: [
