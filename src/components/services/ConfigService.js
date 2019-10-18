@@ -352,8 +352,8 @@
               'N/A': 'Evidence Direction is Not Applicable for Predisposing Evidence Type.'
             },
             'Functional': {
-              'Support': 'TBD',
-              'Does Not Support': 'TBD',
+              'Support': 'The experiment or study supports this variant causing alteration or non-alteration of the gene product function',
+              'Does Not Support': 'The experiment or study does not support this variant causing alteration or non-alteration of the gene product function',
             },
           },
           assertion: {
