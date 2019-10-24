@@ -78,7 +78,8 @@
         </tr>
         <tr ng-if="evidence.evidence_type == 'Predictive'">
           <td class="name">Drug:</td>
-          <td class="value" ng-bind-html="evidence.drugsStr">
+          <td class="value">
+            <span ng-bind-html="evidence.drugsStr">DRUG</span>
             <span ng-if="evidence.drug_interaction_type">&nbsp;({{ evidence.drug_interaction_type }})</span>
           </td>
         </tr>
