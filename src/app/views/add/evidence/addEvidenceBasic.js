@@ -679,6 +679,7 @@
         templateOptions: {
           label: 'Drug Names',
           entityName: 'Drug',
+          showAddButton: false,
           inputOptions: {
             type: 'typeahead',
             wrapper: null,

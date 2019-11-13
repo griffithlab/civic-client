@@ -11,11 +11,11 @@
             index="$index">
           </formly-field>
         </div>
-        <div class="col-xs-1" style="margin-top:6px; text-align: right;">
+        <div class="col-xs-1" ng-if="to.showAddButton" style="margin-top:6px; text-align: right;">
           <button
             type="button"
             class="btn btn-default btn-xs"
-            uib-tooltip="Create New Drug"
+            uib-tooltip="Create New {{to.entityName}}"
             ng-if="model[options.key][$index] === ''"
             ng-click="deleteItem(model[options.key], $index)">
             <span class="glyphicon glyphicon-edit"></span>
@@ -32,7 +32,7 @@
           <button
             type="button"
             class="btn btn-success btn-xs"
-            uib-tooltip="Add Drug Row"
+            uib-tooltip="Add {{to.entityName}} Row"
             ng-if="$index + 1 === model[options.key].length"
             ng-click="model[options.key].push('')">
             <span class="glyphicon glyphicon-plus"></span> </button>
