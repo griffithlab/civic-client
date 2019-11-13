@@ -2,8 +2,8 @@
   <div class="clearfix">
     <div ng-repeat="item in model[options.key] track by $index"
       ng-init="itemOptions = copyItemOptions()">
-      <div class="row">
-        <div class="col-xs-9">
+      <div class="row" style="margin-bottom: 8px;">
+        <div class="col-md-8 col-lg-9">
           <formly-field class="no-padding"
             options="itemOptions"
             model="model[options.key]"
@@ -14,21 +14,25 @@
         <div class="col-xs-1" style="margin-top:6px; text-align: right;">
           <button
             type="button"
-            class="btn btn-danger btn-xs"
+            class="btn btn-default btn-xs"
+            uib-tooltip="Create New Drug"
+            ng-if="model[options.key][$index] === ''"
             ng-click="deleteItem(model[options.key], $index)">
-            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-edit"></span>
           </button>
         </div>
-        <div class="col-xs-2" style="margin-top:6px; padding-left: 0px; text-align: right;">
+        <div class="col-md-3 col-lg-2" style="margin-top:6px; padding-left: 0px; text-align: right;">
           <button
             type="button"
             class="btn btn-danger btn-xs"
+            uib-tooltip="Remove Drug Row"
             ng-click="deleteItem(model[options.key], $index)">
             <span class="glyphicon glyphicon-remove"></span>
           </button>
           <button
             type="button"
             class="btn btn-success btn-xs"
+            uib-tooltip="Add Drug Row"
             ng-if="$index + 1 === model[options.key].length"
             ng-click="model[options.key].push('')">
             <span class="glyphicon glyphicon-plus"></span> </button>
