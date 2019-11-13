@@ -678,6 +678,7 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Drug Names',
+          entityName: 'Drug',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
