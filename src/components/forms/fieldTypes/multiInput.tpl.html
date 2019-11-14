@@ -16,8 +16,9 @@
             type="button"
             class="btn btn-default btn-xs"
             uib-tooltip="Create New {{to.entityName}}"
-            ng-if="model[options.key][$index] === ''"
-            ng-click="deleteItem(model[options.key], $index)">
+            uib-popover-template="{{to.addFormTemplate}}"
+            popover-append-to-body="true"
+            ng-if="model[options.key][$index] === ''">
             <span class="glyphicon glyphicon-edit"></span>
           </button>
         </div>

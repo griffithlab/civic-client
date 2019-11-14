@@ -679,7 +679,8 @@
         templateOptions: {
           label: 'Drug Names',
           entityName: 'Drug',
-          showAddButton: false,
+          showAddButton: true,
+          addFormTemplate: 'components/forms/fieldTypes/multiInputAddDrugForm.tpl.html',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
