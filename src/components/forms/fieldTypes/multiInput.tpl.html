@@ -16,7 +16,7 @@
             type="button"
             class="btn btn-default btn-xs"
             uib-tooltip="Create New {{to.entityName}}"
-            uib-popover-template="{{to.addFormTemplate}}"
+            uib-popover-template="'{{to.addFormTemplate}}'"
             popover-append-to-body="true"
             ng-if="model[options.key][$index] === ''">
             <span class="glyphicon glyphicon-edit"></span>
