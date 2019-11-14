@@ -16,6 +16,8 @@
             type="button"
             class="btn btn-default btn-xs"
             uib-tooltip="Create New {{to.entityName}}"
+            tooltip-placement="bottom"
+            tooltip-append-to-body="true"
             uib-popover-template="'{{to.addFormTemplate}}'"
             popover-append-to-body="false"
             ng-if="model[options.key][$index] === ''">
@@ -26,7 +28,9 @@
           <button
             type="button"
             class="btn btn-danger btn-xs"
-            uib-tooltip="Remove Drug Row"
+            uib-tooltip="Remove {{to.entityName}} Row"
+            tooltip-placement="bottom"
+            tooltip-append-to-body="true"
             ng-click="deleteItem(model[options.key], $index)">
             <span class="glyphicon glyphicon-remove"></span>
           </button>
@@ -34,6 +38,8 @@
             type="button"
             class="btn btn-success btn-xs"
             uib-tooltip="Add {{to.entityName}} Row"
+            tooltip-placement="bottom"
+            tooltip-append-to-body="true"
             ng-if="$index + 1 === model[options.key].length"
             ng-click="model[options.key].push('')">
             <span class="glyphicon glyphicon-plus"></span> </button>
