@@ -7,16 +7,37 @@
   function addDrugForm() {
     var directive = {
       restrict: 'E',
-      template: '<div>{{message}}</div>',
+      templateUrl: 'components/directives/addDrugForm.tpl.html',
       replace: true,
-      scope: true,
+      scope: {},
       controller: addDrugFormController
     };
 
     return directive;
   }
 
-  function addDrugFormController($scope, ConfigService) {
-    $scope.message = 'This is the addDrugForm directive.';
+  function addDrugFormController($scope,
+                                 ConfigService) {
+    var vm = $scope.vm = {};
+
+    var newDrug = {
+      name: ''
+    };
+
+    var newDrugFields = [
+      {
+        key: 'name',
+        type: 'horizontalTypeahead',
+        wrapper: null,
+        templateOptions: {
+          label: 'Drug Name',
+          required: true
+        }
+      }
+    ];
+
+    vm.submit = function(newDrug, options) {
+      console.log('New Drug Submitted');
+    };
   }
 })();
