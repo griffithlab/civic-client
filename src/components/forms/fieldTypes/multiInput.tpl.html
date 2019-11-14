@@ -1,4 +1,4 @@
-<div style="margin-bottom:14px">
+<div class="multiInput" style="margin-bottom:14px">
   <div class="clearfix">
     <div ng-repeat="item in model[options.key] track by $index"
       ng-init="itemOptions = copyItemOptions()">
@@ -17,7 +17,7 @@
             class="btn btn-default btn-xs"
             uib-tooltip="Create New {{to.entityName}}"
             uib-popover-template="'{{to.addFormTemplate}}'"
-            popover-append-to-body="true"
+            popover-append-to-body="false"
             ng-if="model[options.key][$index] === ''">
             <span class="glyphicon glyphicon-edit"></span>
           </button>

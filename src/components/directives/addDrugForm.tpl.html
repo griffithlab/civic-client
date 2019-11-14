@@ -1,3 +1,27 @@
 <div class="addDrugForm">
-  Add Drug Form directive.
+  <div class="addDrugForm">
+    <div class="row">
+      <div class="col-xs-12" >
+        <form class="form-horizontal" name="vm.form" autocomplete="off" novalidate>
+          <formly-form options="vm.options" model="vm.newDrug" fields="vm.newDrugFields">
+
+          </formly-form>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6" >
+        <cancel-button></cancel-button>
+      </div>
+      <div class="col-xs-6" >
+        <button type="submit"
+          class="btn btn-default"
+          ng-disabled="vm.form.$invalid"
+          ng-click="vm.submit(vm.newDrug, vm.options)">
+          Create New Drug
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

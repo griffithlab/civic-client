@@ -20,14 +20,14 @@
                                  ConfigService) {
     var vm = $scope.vm = {};
 
-    var newDrug = {
+    vm.newDrug = {
       name: ''
     };
 
-    var newDrugFields = [
+    vm.newDrugFields = [
       {
         key: 'name',
-        type: 'horizontalTypeahead',
+        type: 'horizontalInput',
         wrapper: null,
         templateOptions: {
           label: 'Drug Name',
