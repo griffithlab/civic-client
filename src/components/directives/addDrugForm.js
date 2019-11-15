@@ -27,8 +27,7 @@
     vm.newDrugFields = [
       {
         key: 'name',
-        type: 'horizontalInput',
-        wrapper: null,
+        type: 'input',
         templateOptions: {
           label: 'Drug Name',
           required: true
