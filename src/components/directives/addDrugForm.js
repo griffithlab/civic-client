@@ -17,12 +17,18 @@
 
   function addDrugFormController($rootScope,
                                  $scope,
+                                 DrugService,
                                  ConfigService,
                                  _) {
     var vm = $scope.vm = { };
     vm.parentField = _.find($scope.fields, { key: $scope.options.key }); // field object ref
     vm.index = $scope.$index; // $index value assigned by angular-formly
     vm.replaceItem = $scope.replaceItem; // replaceItem on multiInput controller
+    vm.suggestions = [];
+
+    vm.showForm = true;
+    vm.showSuccess = false;
+    vm.showConflict = false;
 
     vm.newDrug = {
       name: ''
@@ -39,9 +45,17 @@
       }
     ];
 
-    vm.submit = function(newDrug) {
+    vm.submit = function() {
       console.log('new drug submitted.');
-      vm.replaceItem(this.parentField.value(), this.index, newDrug.name);
+      DrugsService.add(this.newDrug.name)
+        .then(function(response) {
+          console.log('drug added successfully');
+        });
+      vm.replaceItem(this.parentField.value(), this.index, this.newDrug.name);
+    };
+
+    vm.replaceItem = function(newDrug) {
+      vm.replaceItem(this.parentField.value(), this.index, this.newDrug.name);
     };
   }
 })();
