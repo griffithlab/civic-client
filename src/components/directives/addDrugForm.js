@@ -9,16 +9,20 @@
       restrict: 'E',
       templateUrl: 'components/directives/addDrugForm.tpl.html',
       replace: true,
-      scope: {},
       controller: addDrugFormController
     };
 
     return directive;
   }
 
-  function addDrugFormController($scope,
-                                 ConfigService) {
-    var vm = $scope.vm = {};
+  function addDrugFormController($rootScope,
+                                 $scope,
+                                 ConfigService,
+                                 _) {
+    var vm = $scope.vm = { };
+    vm.parentField = _.find($scope.fields, { key: $scope.options.key }); // field object ref
+    vm.index = $scope.$index; // $index value assigned by angular-formly
+    vm.replaceItem = $scope.replaceItem; // replaceItem on multiInput controller
 
     vm.newDrug = {
       name: ''
@@ -35,8 +39,9 @@
       }
     ];
 
-    vm.submit = function(newDrug, options) {
-      console.log('New Drug Submitted');
+    vm.submit = function(newDrug) {
+      console.log('new drug submitted.');
+      vm.replaceItem(this.parentField.value(), this.index, newDrug.name);
     };
   }
 })();

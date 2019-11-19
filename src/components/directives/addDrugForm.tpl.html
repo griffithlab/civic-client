@@ -1,32 +1,38 @@
 <div class="addDrugForm">
-  <div class="row" >
-    <div class="col-xs-12" >
-      <p class="small" >
-        Please enter a new drug name, then press the Create button.
-      </p>
+  <div>
+    <!-- <div ng-if="vm.showForm"> -->
+    <div class="row" >
+      <div class="col-xs-12" >
+        <p class="small" >
+          Please enter a new drug name, then press the Create button.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal" name="vm.form" autocomplete="off" novalidate>
+          <formly-form options="vm.options" model="vm.newDrug" fields="vm.newDrugFields">
+
+          </formly-form>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6" >
+        <cancel-button></cancel-button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit"
+          class="btn btn-success pull-right"
+          ng-disabled="vm.form.$invalid"
+          ng-click="vm.submit(vm.newDrug, vm.parentModel, vm.parentField)">
+          Create
+        </button>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <form class="form-horizontal" name="vm.form" autocomplete="off" novalidate>
-        <formly-form options="vm.options" model="vm.newDrug" fields="vm.newDrugFields">
-
-        </formly-form>
-      </form>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-6" >
-      <cancel-button></cancel-button>
-    </div>
-    <div class="col-xs-6">
-      <button type="submit"
-        class="btn btn-success pull-right"
-        ng-disabled="vm.form.$invalid"
-        ng-click="vm.submit(vm.newDrug, vm.options)">
-        Create
-      </button>
-    </div>
+  <div ng-if="vm.showSuccess" >
+    <p>Success!</p>
   </div>
 </div>
