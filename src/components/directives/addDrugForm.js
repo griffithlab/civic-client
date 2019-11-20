@@ -17,7 +17,7 @@
 
   function addDrugFormController($rootScope,
                                  $scope,
-                                 DrugService,
+                                 Drugs,
                                  ConfigService,
                                  _) {
     var vm = $scope.vm = { };
@@ -31,12 +31,12 @@
     vm.showConflict = false;
 
     vm.newDrug = {
-      name: ''
+      drug_name: ''
     };
 
     vm.newDrugFields = [
       {
-        key: 'name',
+        key: 'drug_name',
         type: 'input',
         templateOptions: {
           label: 'Drug Name',
@@ -47,14 +47,22 @@
 
     vm.submit = function() {
       console.log('new drug submitted.');
-      DrugsService.add(this.newDrug.name)
-        .then(function(response) {
-          console.log('drug added successfully');
-        });
-      vm.replaceItem(this.parentField.value(), this.index, this.newDrug.name);
+      Drugs.add(this.newDrug)
+        .then(
+          function(response) { // success
+            console.log('Drug successfully added.');
+            vm.showForm = false;
+            vm.showSuccess = true;
+          },
+          function(response) {
+            console.log('Error adding new drug.');
+            vm.showForm = false;
+            vm.showError = true;
+          });
     };
 
-    vm.replaceItem = function(newDrug) {
+    vm.replaceItem = function() {
+      console.log('Replacing model drug name.');
       vm.replaceItem(this.parentField.value(), this.index, this.newDrug.name);
     };
   }

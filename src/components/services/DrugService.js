@@ -6,7 +6,7 @@
     .factory('Drugs', DrugsService);
 
   // @ngInject
-  function DrugsResource($resource) {
+  function DrugsResource($resource, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
     return $resource('/api/drugs/:drugId', {}, {
@@ -34,7 +34,7 @@
   }
 
   // @ngInject
-  function DrugsService(DrugsResource) {
+  function DrugsService(DrugsResource, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
     // base Drug and Drug Colletion
     var item = {},
@@ -71,8 +71,8 @@
         });
     }
 
-    function add(reqObj) {
-      return DrugsResource.add(reqObj).$promise
+    function add(newDrug) {
+      return DrugsResource.add(newDrug).$promise
         .then(function(response) {
           return response.$promise;
         });
@@ -89,12 +89,6 @@
         });
     };
 
-    function add(reqObj) {
-      return DrugsResource.add(reqObj).$promise
-        .then(function(response) {
-          return response.$promise;
-        });
-    }
 
   };
 
