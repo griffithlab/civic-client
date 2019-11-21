@@ -1,7 +1,6 @@
 <div class="addDrugForm">
-  <div>
-    <!-- <div ng-if="vm.showForm"> -->
-    <div class="row" >
+  <div ng-if="vm.showForm">
+    <div class="row">
       <div class="col-xs-12" >
         <p class="small" >
           Please enter a new drug name, then press the Create button.
@@ -32,13 +31,34 @@
       </div>
     </div>
   </div>
-  <div ng-if="vm.showSuccess" >
-    <p>Success!</p>
+  <div ng-if="vm.showSuccess" class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-success" role="alert">
+        <strong>Success:</strong>
+        {{vm.conflictDrug.name}} successfully added to CIViC.
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Add <strong>{{vm.conflictDrug.name}}</strong> to Drug List</button>
+    </div>
   </div>
-  <div ng-if="vm.showConflict" >
-    <p>Conflict!</p>
+  <div ng-if="vm.showConflict" class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-warning" role="alert">
+        <strong>Conflict:</strong>
+        A drug named {{vm.conflictDrug.name}} already exists in the CIViC database.
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Add <strong>{{vm.conflictDrug.name}}</strong> Drug List</button>
+    </div>
   </div>
-  <div ng-if="vm.showError" >
-    <p>Error!</p>
+  <div ng-if="vm.showError" class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong>
+        An unknown server error occurred. Please check the browser console for more information and report an issue if the problem persists.
+      </div>
+    </div>
   </div>
 </div>

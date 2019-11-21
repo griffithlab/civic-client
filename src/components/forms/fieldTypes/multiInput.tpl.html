@@ -19,6 +19,7 @@
             tooltip-placement="bottom"
             tooltip-append-to-body="true"
             uib-popover-template="'{{to.addFormTemplate}}'"
+            popover-trigger="outsideClick"
             popover-title="Create New {{to.entityName}}"
             popover-append-to-body="false"
             ng-if="model[options.key][$index] === ''">

@@ -30,6 +30,8 @@
     vm.showSuccess = false;
     vm.showConflict = false;
 
+    vm.conflictDrug = null;
+
     vm.newDrug = {
       drug_name: ''
     };
@@ -56,14 +58,23 @@
           },
           function(response) {
             console.log('Error adding new drug.');
+            var status = vm.errorStatus = response.status;
             vm.showForm = false;
-            vm.showError = true;
+            vm.showConflict = true;
+            switch(status) {
+            case 409: // conflict, drug exists.
+              vm.conflictDrug = response.data;
+              break;
+            case 500: // server error
+              break;
+            default: // general error
+            }
           });
     };
 
-    vm.replaceItem = function() {
+    vm.addDrug= function() {
       console.log('Replacing model drug name.');
-      vm.replaceItem(this.parentField.value(), this.index, this.newDrug.name);
+      vm.replaceItem(this.parentField.value(), this.index, this.newDrug.drug_name);
     };
   }
 })();
