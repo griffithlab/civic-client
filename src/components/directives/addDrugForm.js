@@ -30,8 +30,6 @@
     vm.showSuccess = false;
     vm.showConflict = false;
 
-    vm.conflictDrug = null;
-
     vm.newDrug = {
       drug_name: ''
     };
@@ -53,6 +51,7 @@
         .then(
           function(response) { // success
             console.log('Drug successfully added.');
+            vm.createdDrug = response;
             vm.showForm = false;
             vm.showSuccess = true;
           },

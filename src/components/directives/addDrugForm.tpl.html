@@ -35,18 +35,18 @@
     <div class="col-xs-12">
       <div class="alert alert-success" role="alert">
         <strong>Success:</strong>
-        {{vm.conflictDrug.name}} successfully added to CIViC.
+        New drug <strong>{{vm.createdDrug.name}}</strong> was created.
       </div>
     </div>
     <div class="col-xs-12">
-      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Add <strong>{{vm.conflictDrug.name}}</strong> to Drug List</button>
+      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Add <strong>{{vm.createdDrug.name}}</strong> to Drug List</button>
     </div>
   </div>
   <div ng-if="vm.showConflict" class="row">
     <div class="col-xs-12">
       <div class="alert alert-warning" role="alert">
         <strong>Conflict:</strong>
-        A drug named {{vm.conflictDrug.name}} already exists in the CIViC database.
+        A drug named <strong>{{vm.conflictDrug.name}}</strong> already exists in the CIViC database.
       </div>
     </div>
     <div class="col-xs-12">
