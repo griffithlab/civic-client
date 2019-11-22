@@ -1,7 +1,7 @@
 <div class="multiInput" style="margin-bottom:14px">
   <div class="clearfix">
     <div ng-repeat="item in model[options.key] track by $index"
-      ng-init="itemOptions = copyItemOptions()">
+      ng-init="itemOptions = copyItemOptions(); addFormIsOpen = false;">
       <div class="row" style="margin-bottom: 8px;">
         <div class="col-md-8 col-lg-9">
           <formly-field class="no-padding"
@@ -20,6 +20,7 @@
             tooltip-append-to-body="true"
             uib-popover-template="'{{to.addFormTemplate}}'"
             popover-trigger="outsideClick"
+            popover-is-open="addFormIsOpen"
             popover-title="Create New {{to.entityName}}"
             popover-append-to-body="false"
             ng-if="model[options.key][$index] === ''">
