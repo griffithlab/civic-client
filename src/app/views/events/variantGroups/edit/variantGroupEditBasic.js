@@ -98,6 +98,7 @@
           label: 'Sources',
           helpText: 'Please specify the Pubmed IDs of any sources used as references in the Variant Group Summary.',
           entityName: 'Source',
+          showAddButton: false,
           inputOptions: {
             type: 'publication-multi',
             templateOptions: {
@@ -156,6 +157,7 @@
         templateOptions: {
           label: 'Variants',
           entityName: 'Variant',
+          showAddButton: false,
           helpText: 'Click the X button to delete a variant, click the + button to add a variant. Note that variants must be known to CIViC to be available for including here. New variants may be added as part of an evidence item using the <a href="/add/evidence/basic" target="_self">Add Evidence form</a>.',
           inputOptions: {
             type: 'typeahead',

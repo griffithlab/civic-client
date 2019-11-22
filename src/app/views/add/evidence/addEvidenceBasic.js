@@ -747,6 +747,8 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Associated Phenotypes',
+          entityName: 'Phenotype',
+          showAddButton: false,
           inputOptions: {
             type: 'typeahead',
             wrapper: null,

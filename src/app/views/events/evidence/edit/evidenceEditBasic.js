@@ -450,6 +450,9 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Drug Names',
+          entityName: 'Drug',
+          showAddButton: true,
+          addFormTemplate: 'components/forms/fieldTypes/multiInputAddDrugForm.tpl.html',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
@@ -525,6 +528,8 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Associated Phenotypes',
+          entityName: 'Phenotype',
+          showAddButton: false,
           inputOptions: {
             type: 'typeahead',
             wrapper: null,

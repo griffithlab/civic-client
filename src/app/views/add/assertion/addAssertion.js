@@ -491,7 +491,9 @@
           label: 'Drug(s)',
           inputOptions: {
             type: 'typeahead',
-            wrapper: null,
+            entityName: 'Drug',
+            showAddButton: true,
+            addFormTemplate: 'components/forms/fieldTypes/multiInputAddDrugForm.tpl.html',
             templateOptions: {
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
               templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
@@ -577,7 +579,7 @@
         templateOptions: {
           label: 'ACMG Code(s)',
           entityName: 'ACMG Code',
-          data: { message: '' },
+          showAddButton: false,
           inputOptions: {
             type: 'typeahead',
             wrapper: ['acmgDescription'],
@@ -599,7 +601,8 @@
                   });
               }
             }
-          }
+          },
+          data: { message: '' }
         },
         expressionProperties: {
           // isUnique: function (viewValue, modelValue, scope) {
@@ -613,13 +616,15 @@
         },
         hideExpression: function($viewValue, $modelValue, scope) {
           return  scope.model.evidence_type !== 'Predisposing';
-        }
+        },
       },
       {
         key: 'phenotypes',
         type: 'multiInput',
         templateOptions: {
           label: 'Associated Phenotypes',
+          entityName: 'Phenotype',
+          showAddButton: false,
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
