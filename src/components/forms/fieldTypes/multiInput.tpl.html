@@ -23,7 +23,7 @@
             popover-is-open="addFormIsOpen"
             popover-title="Create New {{to.entityName}}"
             popover-append-to-body="false"
-            ng-if="model[options.key][$index] === ''">
+            ng-if="!model[options.key][$index]">
             <span class="glyphicon glyphicon-edit"></span>
           </button>
         </div>

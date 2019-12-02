@@ -460,8 +460,8 @@
               inputFormatter: 'model[options.key]',
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
               templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
+              onSelect: 'options.data.pushNew(model, index)',
               editable: false,
-              onSelect: 'options.data.pushNew(model, index)'
             },
             data: {
               pushNew: function(model, index) {
