@@ -21,9 +21,9 @@
                                  ConfigService,
                                  _) {
     var vm = $scope.vm = { };
-    vm.parentField = _.find($scope.fields, { key: $scope.options.key }); // field object ref
+    vm.parentField = _.find($scope.fields, { key: $scope.options.key }); // ref to parent's form field object
     vm.index = $scope.$index; // $index value assigned by angular-formly
-    vm.replaceItem = $scope.replaceItem; // replaceItem on multiInput controller
+    vm.replaceItem = $scope.replaceItem; // ref to replaceItem function on multiInput controller
     vm.suggestions = [];
 
     vm.showForm = true;
@@ -44,6 +44,10 @@
         }
       }
     ];
+
+    vm.close = function() {
+      $scope.$parent.addFormIsOpen = false;
+    };
 
     vm.submit = function() {
       console.log('new drug submitted.');
