@@ -77,7 +77,7 @@
 
     vm.addDrug= function() {
       console.log('Replacing model drug name.');
-      vm.replaceItem(this.parentField.value(), this.index, this.newDrug.drug_name);
+      vm.replaceItem(this.parentField.value(), this.index, vm.createdDrug.name);
     };
   }
 })();
