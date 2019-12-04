@@ -1,0 +1,68 @@
+<div class="addDrugForm">
+  <div ng-if="vm.showForm">
+    <div class="row">
+      <div class="col-xs-12" >
+        <p class="small" >
+          Use this form to add a new drug name to CIViC. Please ensure that the new drug name is inclued in the <a href="https://ncithesaurus.nci.nih.gov/ncitbrowser/pages/advanced_search.jsf?dictionary=NCI%20Thesaurus" alt="NCIthesaurus Advanced Search" target="_blank">NCIt database</a>.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal" name="vm.form" autocomplete="off" novalidate>
+          <formly-form options="vm.options" model="vm.newDrug" fields="vm.newDrugFields">
+
+          </formly-form>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6" >
+        <button type="button"
+          class="btn btn-sm btn-default pull-left"
+          ng-click="vm.close()">
+          Cancel
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="button"
+          class="btn btn-sm btn-success pull-right"
+          ng-disabled="vm.form.$invalid"
+          ng-click="vm.submit(vm.newDrug)">
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+  <div ng-if="vm.showSuccess" class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-success" role="alert">
+        <strong>Success:</strong>
+        New drug <strong>{{vm.createdDrug.name}}</strong> was created.
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Add <strong>{{vm.createdDrug.name}}</strong> to Drug Names</button>
+    </div>
+  </div>
+  <div ng-if="vm.showConflict" class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-warning" role="alert">
+        <strong>Conflict:</strong>
+        A drug named <strong>{{vm.conflictDrug.name}}</strong> already exists in the CIViC database.
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Add <strong>{{vm.conflictDrug.name}}</strong> to Drug Names</button>
+    </div>
+  </div>
+  <div ng-if="vm.showError" class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong>
+        An unknown server error occurred. Please check the browser console for more information and report an issue if the problem persists.
+      </div>
+    </div>
+  </div>
+</div>

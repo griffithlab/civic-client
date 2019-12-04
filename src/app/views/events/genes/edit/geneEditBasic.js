@@ -115,6 +115,7 @@
           label: 'Sources',
           helpText: 'Please specify the Pubmed IDs of any sources used as references in the Gene Summary.',
           entityName: 'Source',
+          showAddButton: false,
           inputOptions: {
             type: 'publication-multi',
             templateOptions: {

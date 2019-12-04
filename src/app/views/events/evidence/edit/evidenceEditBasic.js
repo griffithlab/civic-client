@@ -450,6 +450,9 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Drug Names',
+          entityName: 'Drug',
+          showAddButton: true,
+          addFormTemplate: 'components/forms/fieldTypes/multiInputAddDrugForm.tpl.html',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
@@ -457,8 +460,8 @@
               inputFormatter: 'model[options.key]',
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
               templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
+              onSelect: 'options.data.pushNew(model, index)',
               editable: false,
-              onSelect: 'options.data.pushNew(model, index)'
             },
             data: {
               pushNew: function(model, index) {
@@ -525,6 +528,8 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Associated Phenotypes',
+          entityName: 'Phenotype',
+          showAddButton: false,
           inputOptions: {
             type: 'typeahead',
             wrapper: null,

@@ -487,7 +487,10 @@
         key: 'drugs',
         type: 'multiInput',
         templateOptions: {
-          label: 'Drug(s)',
+          label: 'Drug Name(s)',
+          entityName: 'Drug',
+          showAddButton: true,
+          addFormTemplate: 'components/forms/fieldTypes/multiInputAddDrugForm.tpl.html',
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
@@ -575,6 +578,8 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Associated Phenotypes',
+          entityName: 'Phenotype',
+          showAddButton: false,
           inputOptions: {
             type: 'typeahead',
             wrapper: null,
@@ -608,6 +613,7 @@
         templateOptions: {
           label: 'ACMG Code(s)',
           entityName: 'ACMG Code',
+          showAddButton: false,
           data: { message: '' },
           inputOptions: {
             type: 'typeahead',

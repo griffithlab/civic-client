@@ -19,6 +19,7 @@
       },
       controller: /* @ngInject */ function($scope) {
         $scope.copyItemOptions = copyItemOptions;
+        $scope.replaceItem = replaceItem;
         $scope.deleteItem = deleteItem;
         $scope.addItem = addItem;
 
@@ -28,6 +29,10 @@
 
         function addItem(model, index) {
           model.splice(index+1, 0, '');
+        }
+
+        function replaceItem(model, index, value) {
+          model[index] = value;
         }
 
         function copyItemOptions() {

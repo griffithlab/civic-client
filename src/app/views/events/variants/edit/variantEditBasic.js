@@ -110,8 +110,9 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Aliases',
-          helpText: 'Please specify any aliases commonly used to refer to this variant.',
           entityName: 'Alias',
+          showAddButton: false,
+          helpText: 'Please specify any aliases commonly used to refer to this variant.',
           required: false,
           inputOptions: {
             type: 'basicInput',
@@ -129,9 +130,10 @@
         type: 'multiInput',
         templateOptions: {
           label: 'HGVS Expressions',
-          helpText: 'Please specify any HGVS expressions for this variant.',
-          entityName: 'HGVS Expression',
           required: false,
+          entityName: 'Expression',
+          showAddButton: false,
+          helpText: 'Please specify any HGVS expressions for this variant.',
           inputOptions: {
             type: 'basicInput',
             wrapper: '',
@@ -148,9 +150,10 @@
         type: 'multiInput',
         templateOptions: {
           label: 'ClinVar IDs',
-          helpText: 'Please specify any corresponding ClinVar identifiers for this variant.',
-          entityName: 'ClinVar ID',
           required: false,
+          helpText: 'Please specify any corresponding ClinVar identifiers for this variant.',
+          entityName: 'ID',
+          showAddButton: false,
           inputOptions: {
             type: 'basicInput',
             wrapper: '',
@@ -237,6 +240,7 @@
           label: 'Sources',
           helpText: 'Please specify the Pubmed IDs of any sources used as references in the Variant Summary.',
           entityName: 'Source',
+          showAddButton: false,
           inputOptions: {
             type: 'publication-multi',
             templateOptions: {
@@ -296,6 +300,7 @@
           label: 'Variant Type(s)',
           helpText: 'Add one or more variant types from the <a href="http://www.sequenceontology.org/browser/" title="Opens a new tab for the Sequence Ontology Browser" target="_blank">Sequence Ontology</a> (e.g., missense, loss-of-function).',
           entityName: 'Type',
+          showAddButton: false,
           inputOptions: {
             type: 'typeahead',
             wrapper: ['simpleHasError', 'validationMessages'],
