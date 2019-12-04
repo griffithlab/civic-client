@@ -29,11 +29,13 @@
 
     $scope.addEvidenceUrlBase = $scope.addEvidenceUrl = 'add/evidence/basic';
     $scope.addAssertionUrlBase = $scope.addAssertionUrl = 'add/assertion';
+    $scope.addVariantGroupUrlBase = $scope.addVariantGroupUrl = 'add/variantGroup';
 
     $scope.$watchCollection('$rootScope.stateParams', function(stateParams){
       if(_.has(stateParams, 'geneId')) {
         $scope.addEvidenceUrl = $scope.addEvidenceUrlBase + '?geneId=' + stateParams.geneId;
         $scope.addAssertionUrl = $scope.addAssertionUrlBase + '?geneId=' + stateParams.geneId;
+        $scope.addVariantGroupUrl = $scope.addVariantGroupUrlBase + '?geneId=' + stateParams.geneId;
 
         if(_.has(stateParams, 'variantId')) {
           $scope.addEvidenceUrl = $scope.addEvidenceUrl + '&variantId=' + stateParams.variantId;
