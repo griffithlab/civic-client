@@ -76,8 +76,8 @@
     };
 
     vm.addDrug= function() {
-      console.log('Replacing model drug name.');
-      vm.replaceItem(this.parentField.value(), this.index, vm.createdDrug.name);
+      var drug = vm.createdDrug ? vm.createdDrug.name : vm.conflictDrug.name;
+      vm.replaceItem(this.parentField.value(), this.index, drug);
     };
   }
 })();
