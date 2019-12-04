@@ -15,6 +15,7 @@
     return directive;
   }
 
+  // @ngInject
   function addDrugFormController($rootScope,
                                  $scope,
                                  Drugs,
