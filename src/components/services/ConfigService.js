@@ -455,7 +455,7 @@
         'Evidence Level' : 'Type of study performed to produce the evidence statement',
         'Evidence Direction' : 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
         'Clinical Significance' : 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
-        'Drug Names' : 'For predictive evidence, specify one or more drug names. If the name cannot be found in CIViC\'s database, you may create a new one by clicking on the button adjacent to the input box and following the instructions.',
+        'Drug Names' : 'For predictive evidence, specify one or more drug names. If the type-ahead list does not display your drug\'s name or alias, it likely does not exist in CIViC\'s database. You may click the button adjacent to the input box to show the Add Drug form and add a new drug to the database.',
         'Drug Interaction Type' : 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
         'Phenotypes' : 'Please provide any <a href="http://compbio.charite.de/hpoweb/showterm?id=HP:0000118" target="_blank">HPO phenotypes.</a>',
         'Rating' : 'Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.',
