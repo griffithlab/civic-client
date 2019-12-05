@@ -489,11 +489,11 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Drug(s)',
+          entityName: 'Drug',
+          showAddButton: true,
+          addFormTemplate: 'components/forms/fieldTypes/multiInputAddDrugForm.tpl.html',
           inputOptions: {
             type: 'typeahead',
-            entityName: 'Drug',
-            showAddButton: true,
-            addFormTemplate: 'components/forms/fieldTypes/multiInputAddDrugForm.tpl.html',
             templateOptions: {
               typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
               templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
