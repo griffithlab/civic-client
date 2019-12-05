@@ -44,7 +44,6 @@
         templateOptions: {
           typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
           templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
-          typeaheadAppendToBody: false,
           editable: true
         },
         data: {
