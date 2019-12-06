@@ -17,11 +17,16 @@
           }
         }
       },
-      controller: /* @ngInject */ function($scope) {
+      controller: /* @ngInject */ function(_, $scope) {
         $scope.copyItemOptions = copyItemOptions;
         $scope.replaceItem = replaceItem;
         $scope.deleteItem = deleteItem;
         $scope.addItem = addItem;
+
+        $scope.hasDups = function() {
+          var model = _.without($scope.model[$scope.options.key], '');
+          return _.uniq(model).length !== model.length;
+        };
 
         function deleteItem(model, index) {
           model.splice(index,1);
