@@ -60,9 +60,9 @@
       </button>
     </div>
   </div>
-  <div class="row" ng-if="to.data.message.length > 0">
+  <div class="row" ng-if="hasDups()">
     <div class="col-xs-12" >
-      <span class="small" style="color: #999;font-style:oblique;">{{to.data.message}}</span>
+      <span class="small" style="color: #999;font-style:oblique;">NOTE: {{to.label}} contains duplicate values!</span>
     </div>
   </div>
 </div>

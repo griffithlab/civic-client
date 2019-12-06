@@ -19,6 +19,7 @@
   function addDrugFormController($rootScope,
                                  $scope,
                                  Drugs,
+                                 DrugSuggestions,
                                  ConfigService,
                                  _) {
     var vm = $scope.vm = { };
@@ -38,10 +39,30 @@
     vm.newDrugFields = [
       {
         key: 'drug_name',
-        type: 'input',
+        type: 'typeahead',
+        wrapper: null,
         templateOptions: {
-          label: 'Drug Name',
-          required: true
+          label: 'New Drug Name',
+          typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
+          templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
+          editable: true
+        },
+        data: {
+          typeaheadSearch: function(val) {
+            return DrugSuggestions.query(val)
+              .then(function(response) {
+                var labelLimit = 100;
+                return _.map(response, function(drug) {
+                  if (drug.aliases.length > 0) {
+                    drug.alias_list = drug.aliases.join(', ');
+                    if(drug.alias_list.length > labelLimit) { drug.alias_list = _.truncate(drug.alias_list, labelLimit); }
+                  } else {
+                    drug.alias_list = '--';
+                  }
+                  return drug;
+                });
+              });
+          }
         }
       }
     ];
