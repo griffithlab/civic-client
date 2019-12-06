@@ -42,6 +42,7 @@
         type: 'typeahead',
         wrapper: null,
         templateOptions: {
+          label: 'New Drug Name',
           typeahead: 'item.name for item in options.data.typeaheadSearch($viewValue)',
           templateUrl: 'components/forms/fieldTypes/drugTypeahead.tpl.html',
           editable: true

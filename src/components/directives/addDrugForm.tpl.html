@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12" >
         <p class="small" >
-          Use this form to add a new drug name to CIViC. Please ensure that the new drug name is inclued in the <a href="https://ncithesaurus.nci.nih.gov/ncitbrowser/pages/advanced_search.jsf?dictionary=NCI%20Thesaurus" alt="NCIthesaurus Advanced Search" target="_blank">NCIt database</a>.
+          Enter a new drug name below to add it to CIViC. Please ensure that the new drug name is inclued in the <a href="https://ncithesaurus.nci.nih.gov/ncitbrowser/pages/advanced_search.jsf?dictionary=NCI%20Thesaurus" alt="NCIthesaurus Advanced Search" target="_blank">NCIt database</a>.
         </p>
       </div>
     </div>
@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="col-xs-12">
-      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Add <strong>{{vm.createdDrug.name}}</strong> to Drug Names field</button>
+      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Insert new drug <strong>{{vm.createdDrug.name}}</strong> into Drug Names</button>
     </div>
   </div>
   <div ng-if="vm.showConflict" class="row">
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="col-xs-12">
-      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Add existing drug <strong>{{vm.conflictDrug.name}}</strong> to Drug Names field</button>
+      <button class="btn btn-block btn-sm btn-success" ng-click="vm.addDrug()">Insert existing drug <strong>{{vm.conflictDrug.name}}</strong> to Drug Names field</button>
     </div>
   </div>
   <div ng-if="vm.showError" class="row">
