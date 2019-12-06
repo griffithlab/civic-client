@@ -488,7 +488,7 @@
         key: 'drugs',
         type: 'multiInput',
         templateOptions: {
-          label: 'Drug(s)',
+          label: 'Drug Name(s)',
           entityName: 'Drug',
           showAddButton: true,
           addFormTemplate: 'components/forms/fieldTypes/multiInputAddDrugForm.tpl.html',
