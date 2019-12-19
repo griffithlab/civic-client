@@ -32,7 +32,7 @@
                         { value: 'disease_doid', name: 'Disease DOID' },
                         { value: 'disease_name', name: 'Disease Name' },
                         { value: 'interaction_type', name: 'Drug Interaction Type' },
-                        { value: 'drug_id', name: 'Drug PubChem ID' },
+                        { value: 'drug_id', name: 'Drug ID' },
                         { value: 'drug_name', name: 'Drug Name' },
                         { value: 'evidence_direction', name: 'Evidence Direction' },
                         { value: 'id', name: 'Evidence ID'},
