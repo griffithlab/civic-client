@@ -1,7 +1,7 @@
 <div class="variantMenu {{ options.backgroundColor }}">
   <div class="title-bg">
     <div class="row">
-      <div ng-class="{'col-xs-6': security.isAdmin || security.isEditor, 'col-xs-8': !(security.isAdmin || security.isEditor)}">
+      <div class="col-xs-8">
         <h4 class="title">
           <span ng-bind="gene.name"></span> Variants
           <span ng-if="variantGroups.length > 0">&amp; Variant Group{{variantGroups.length > 1 ? 's' : ''}}</span>
@@ -19,12 +19,6 @@
           class="btn btn-xs btn-default btn-block">
           <i class="glyphicon glyphicon-filter"></i>
           Display Options
-        </a>
-      </div>
-      <div class="col-xs-2" ng-if="security.isAdmin || security.isEditor">
-        <a ng-show="security.isAdmin || security.isEditor" ng-href="{{ addVarGroupUrl }}" class="btn btn-xs btn-cell-add btn-block">
-          <i class="glyphicon glyphicon-plus"></i>
-          Add Group
         </a>
       </div>
     </div>
