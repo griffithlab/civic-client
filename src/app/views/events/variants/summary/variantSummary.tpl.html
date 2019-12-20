@@ -42,15 +42,31 @@
               </p>
             </div>
             <div ng-switch-default="false">
-              <p class="description">
-                This Variant does not currently have a Summary.
-              </p>
-              <div ng-if="isAuthenticated() && !isEdit">
-                <p>
-                  <a class="btn btn-small btn-default" ui-sref="events.genes.summary.variants.edit.basic({ geneId: stateParams.geneId, variantId: variant.id })">
-                    Add a Summary
-                  </a>
-                </p>
+              <!-- check for provisional description -->
+              <div ng-switch="variant.provisional_values.description || '_undefined_'">
+                <div ng-switch-when="_undefined_">
+                  <p class="description">
+                    This Variant does not currently have a Summary.
+                  </p>
+                  <div ng-if="isAuthenticated() && !isEdit">
+                    <p>
+                      <a class="btn btn-small btn-default" ui-sref="events.genes.summary.variants.edit.basic({ geneId: stateParams.geneId, variantId: variant.id })">
+                        Add a Summary
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <div ng-switch-default>
+                  <p>
+                    <div class="label label-warning" style="display:block;">CAUTION: This is a provisional description from a Suggested Change not yet accepted by an Editor.</div>
+                  </p>
+                  <p ng-bind="variant.provisional_values.description.value" class="description">
+                    Variant Provisional Summary
+                  </p>
+                  <p>
+                    <a ng-href="/events/genes/{{stateParams.geneId}}/summary/variants/{{variant.id}}/talk/revisions/list/{{variant.provisional_values.description.revision_id}}/summary" class="btn btn-default btn-block btn-xs">View This Description's Suggested Change</a>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -73,10 +89,10 @@
                     <span  ng-if="type.display_name !== 'N/A'">
                       <a ng-href="{{ type.url }}" target="_blank">{{type.display_name}}</a>
                     </span>
-              <span ng-if="type.display_name === 'N/A'">{{type.display_name}}</span>
-              </span>
-              </span>
-              <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
+                    <span ng-if="type.display_name === 'N/A'">{{type.display_name}}</span>
+                  </span>
+                </span>
+                <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
                   None specified.
                 </span>
               </span>
@@ -96,8 +112,8 @@
                     }}
                     {{ expression }}
                   </span>
-              </span>
-              <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
+                </span>
+                <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
                   None specified.
                 </span>
               </span>
@@ -117,9 +133,9 @@
                     }}
                     <a ng-if="clinvar_ignore.indexOf(clinvar_id) == -1" ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{ clinvar_id }}/" target="_blank">{{ clinvar_id }}</a>
                     <span ng-if="clinvar_ignore.indexOf(clinvar_id) !== -1">{{ clinvar_id }}</span>
-              </span>
-              </span>
-              <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
+                  </span>
+                </span>
+                <span ng-switch-when="false" class="small" style="font-style: oblique; color: #666;">
                   None specified.
                 </span>
               </span>
