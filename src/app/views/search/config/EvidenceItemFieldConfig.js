@@ -40,7 +40,7 @@
                         { value: 'evidence_type', name: 'Evidence Type' },
                         { value: 'description', name: 'Evidence Statement' },
                         { value: 'gene_alias', name: 'Gene Entrez Alias' },
-                        { value: 'gene_name', name: 'Gene Name' },
+                        { value: 'gene_name', name: 'Gene Entrez Name' },
                         { value: 'phenotype_hpo_class', name: 'Phenotype HPO Term' },
                         { value: 'phenotype_hpo_id', name: 'Phenotype HPO ID' },
                         { value: 'publication_year', name: 'Publication Year' },

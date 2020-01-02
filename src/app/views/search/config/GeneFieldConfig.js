@@ -17,11 +17,11 @@
                       required: true,
                       options: [
                         { value: '', name: 'Please select a field' },
-                        { value: 'aliases', name: 'Aliases' },
                         { value: 'assertion_count', name: 'Assertion' },
                         { value: 'description', name: 'Description' },
+                        { value: 'aliases', name: 'Entrez Aliases' },
                         { value: 'entrez_id', name: 'Entrez ID' },
-                        { value: 'name', name: 'Name' },
+                        { value: 'name', name: 'Entrez Name' },
                         { value: 'suggested_changes_count', name: 'Suggested Revisions' }
                       ],
                       onChange: function(value, options, scope) {

@@ -46,7 +46,7 @@
                         { value: 'interaction_type', name: 'Drug Interaction Type' },
                         { value: 'drug_name', name: 'Drug Name' },
                         { value: 'drug_id', name: 'Drug ID' },
-                        { value: 'gene_name', name: 'Gene Name' },
+                        { value: 'gene_name', name: 'Gene Entrez Name' },
                         { value: 'phenotype_hpo_class', name: 'Phenotype HPO Class' },
                         { value: 'phenotype_hpo_id', name: 'Phenotype HPO ID' },
                         { value: 'status', name: 'Status' },
