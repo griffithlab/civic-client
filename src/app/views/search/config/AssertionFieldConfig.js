@@ -46,6 +46,7 @@
                         { value: 'interaction_type', name: 'Drug Interaction Type' },
                         { value: 'drug_name', name: 'Drug Name' },
                         { value: 'drug_id', name: 'Drug ID' },
+                        { value: 'gene_alias', name: 'Gene Entrez Alias' },
                         { value: 'gene_name', name: 'Gene Entrez Name' },
                         { value: 'phenotype_hpo_class', name: 'Phenotype HPO Class' },
                         { value: 'phenotype_hpo_id', name: 'Phenotype HPO ID' },
@@ -735,6 +736,35 @@
                       type: 'input',
                       className: 'inline-field inline-field-xs',
                       hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',
+                      templateOptions: {
+                        label: '',
+                        required: true
+                      }
+                    }
+                  ],
+                  gene_alias: [
+                    {
+                      key: 'name',
+                      type: 'queryBuilderSelect',
+                      className: 'inline-field',
+                      data: {
+                        defaultValue: 'contains'
+                      },
+                      templateOptions: {
+                        label: '',
+                        required: true,
+                        options: [
+                          {value: 'is', name: 'is'},
+                          {value: 'contains', name: 'contains'},
+                          {value: 'begins_with', name: 'begins with'},
+                          {value: 'does_not_contain', name: 'does not contain'}
+                        ]
+                      }
+                    },
+                    {
+                      key: 'parameters[0]',
+                      type: 'input',
+                      className: 'inline-field',
                       templateOptions: {
                         label: '',
                         required: true
