@@ -104,9 +104,16 @@
         <tr>
           <td class="name">Disease:</td>
           <td class="value">
-            <a target="_blank" href="{{ evidence.disease.url }}" _target="blank">
-              {{ evidence.disease.name }}
-            </a>
+            <span ng-switch="evidence.disease.doid !== null" >
+              <span ng-switch-when="true">
+                <a target="_blank" href="{{ evidence.disease.url }}" _target="blank">
+                  {{ evidence.disease.name }}
+                </a>
+              </span>
+              <span ng-switch-default>
+                {{ evidence.disease.name }}
+              </span>
+            </span>
           </td>
         </tr>
         <tr>

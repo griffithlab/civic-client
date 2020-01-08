@@ -44,7 +44,16 @@
           </p>
           <p>
             <span ng-if="vm.assertion.variant_origin"><strong>Variant Origin: </strong>{{vm.assertion.variant_origin}}&nbsp;&nbsp;</span>
-            <strong>Disease:</strong> <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
+            <strong>Disease:</strong>
+
+            <span ng-switch="vm.assertion.disease.url !== null" >
+              <span ng-switch-when="true" >
+                <a ng-href="{{vm.assertion.disease.url}}">{{vm.assertion.disease.display_name}}</a>
+              </span>
+              <span ng-switch-default>
+                {{vm.assertion.disease.display_name}}
+              </span>
+            </span>
           </p>
           <p ng-if="vm.assertion.phenotypes.length > 0">
             <strong>Associated Phenotype{{ vm.assertion.phenotypes.length > 1 ? 's' : '' }}:</strong> <span ng-bind-html="vm.assertion.phenotypesStr"></span>
