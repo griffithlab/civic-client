@@ -671,6 +671,7 @@
         templateOptions: {
           label: 'NCCN Guideline',
           value: 'vm.assertionEdit.nccn_guideline',
+          editable: false,
           required: false,
           helpText: 'If applicable, please provide cancer (e.g., Breast Cancer) and version (e.g., 5.2016) for the appropriate <a href="http://www.nccn.org/professionals/physician_gls/default.aspx#site" target="_blank">NCCN guideline</a>.',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
