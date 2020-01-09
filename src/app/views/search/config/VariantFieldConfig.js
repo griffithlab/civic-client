@@ -35,7 +35,7 @@
                         { value: 'disease_doid', name: 'Disease Implicated (DOID)' },
                         { value: 'ensembl_version', name: 'Ensembl Version' },
                         { value: 'evidence_item_count', name: 'Evidence Items' },
-                        { value: 'gene', name: 'Gene' },
+                        { value: 'gene', name: 'Gene Entrez Name' },
                         { value: 'hgvs_expressions', name: 'HGVS Expression(s)' },
                         { value: 'name', name: 'Name' },
                         { value: 'pipeline_type', name: 'Pipeline Type' },
