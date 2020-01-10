@@ -9,13 +9,29 @@
           </p>
         </div>
         <div ng-switch-default="false">
-          <p class="description">
-            This Gene does not currently have a Summary.
-          </p>
-          <div ng-if="vm.isAuthenticated() && !vm.isEdit">
-            <p>
-              <a class="btn btn-small btn-default" ui-sref="events.genes.edit.basic({ geneId: geneData.id })">Add a Summary</a>
-            </p>
+          <!-- check for provisional description -->
+          <div ng-switch="geneData.provisional_values.description || '_undefined_'">
+            <div ng-switch-when="_undefined_">
+              <p class="description">
+                This Gene does not currently have a Summary.
+              </p>
+              <div ng-if="vm.isAuthenticated() && !vm.isEdit">
+                <p>
+                  <a class="btn btn-small btn-default" ui-sref="events.genes.edit.basic({ geneId: geneData.id })">Add a Summary</a>
+                </p>
+              </div>
+            </div>
+            <div ng-switch-default>
+              <p>
+                <div class="label label-warning" style="display:block;">CAUTION: This is a provisional description from a Suggested Change not yet accepted by an Editor.</div>
+              </p>
+              <p ng-bind="geneData.provisional_values.description.value" class="description">
+                Gene Provisional Summary
+              </p>
+              <p>
+                <a ng-href="/events/genes/{{geneData.id}}/talk/revisions/list/{{geneData.provisional_values.description.revision_id}}/summary" class="btn btn-default btn-block btn-xs">View This Description's Suggested Change</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
