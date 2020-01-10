@@ -426,8 +426,12 @@
               'N/A': 'Variant does not inform clinical action'
             },
             'Predisposing': {
-              'N/A': 'Clinical Significance is Not Applicable for Predisposing Assertion Type'
-            }
+              'Pathogenic': 'Very strong evidence the variant is pathogenic',
+              'Likely Pathogenic': 'Strong evidence (>90% certainty) the variant is pathogenic.',
+              'Benign': 'Very strong evidence the variant is benign',
+              'Likely Benign': 'Not expected to have a major effect on disease',
+              'Uncertain Significance': 'Does not fullfill the ACMG criteria for pathogenic/benign, or the evidence is conflicting',
+            },
           }
         },
         drug_interaction_type: {
