@@ -37,6 +37,7 @@
                                   Security,
                                   Genes,
                                   Diseases,
+                                  NccnGuidelines,
                                   Phenotypes,
                                   DrugSuggestions) {
     var vm = this;
@@ -81,7 +82,9 @@
       amp_level: '',
       acmg_codes: [''],
       phenotypes: [],
-      nccn_guideline: '',
+      nccn_guideline: {
+        name: ''
+      },
       nccn_guideline_version: '',
       fda_regulatory_approval: false,
       fda_companion_test: false,
@@ -654,17 +657,38 @@
       },
       {
         key: 'nccn_guideline',
-        type: 'horizontalSelectHelp',
+        type: 'horizontalTypeaheadHelp',
+        wrapper: ['loader'],
         templateOptions: {
           label: 'NCCN Guideline',
-          options: ([{ value: '', label: 'Please select an NCCN Guideline' }].concat(_.map(nccnGuidelines, function(guideline) {
-            return { value: guideline, label: guideline};
-          }))),
-          valueProp: 'value',
-          labelProp: 'label',
-          helpText: 'If applicable, please provide cancer (e.g., Breast Cancer) and version (e.g., 5.2016) for the appropriate <a href="http://www.nccn.org/professionals/physician_gls/default.aspx#site" target="_blank">NCCN guideline</a>.'
-        }
+          value: 'vm.newEvidence.nccn_guideline',
+          editable: false,
+          required: false,
+          helpText: 'If applicable, please provide cancer (e.g., Breast Cancer) and version (e.g., 5.2016) for the appropriate <a href="http://www.nccn.org/professionals/physician_gls/default.aspx#site" target="_blank">NCCN guideline</a>.',
+          typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+          data: {
+            typeaheadSearch: function(val) {
+              return NccnGuidelines.contains(val)
+                .then(function(response) {
+                  return response;
+                });
+            }
+          }
+        },
       },
+      // {
+      //   key: 'nccn_guideline',
+      //   type: 'horizontalSelectHelp',
+      //   templateOptions: {
+      //     label: 'NCCN Guideline',
+      //     options: ([{ value: '', label: 'Please select an NCCN Guideline' }].concat(_.map(nccnGuidelines, function(guideline) {
+      //       return { value: guideline, label: guideline};
+      //     }))),
+      //     valueProp: 'value',
+      //     labelProp: 'label',
+      //     helpText: 'If applicable, please provide cancer (e.g., Breast Cancer) and version (e.g., 5.2016) for the appropriate <a href="http://www.nccn.org/professionals/physician_gls/default.aspx#site" target="_blank">NCCN guideline</a>.'
+      //   }
+      // },
       {
         key: 'nccn_guideline_version',
         type: 'horizontalInputHelp',
