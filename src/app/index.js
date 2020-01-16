@@ -51,7 +51,7 @@
     .run(appRun)
     .config(appConfig);
 
-// @ngInject
+  // @ngInject
   function appConfig($qProvider,
                      $uiViewScrollProvider,
                      $anchorScrollProvider,
@@ -66,7 +66,7 @@
     $qProvider.errorOnUnhandledRejections(false);
   }
 
-// @ngInject
+  // @ngInject
   function appRun(Security, $rootScope, $http, $state, $analytics, $window, $location, _) {
     $window.loading_screen.finish();
     $rootScope.view = {};
@@ -87,12 +87,10 @@
     });
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-      if(!toState.external) {
-        $rootScope.view.navMode = toState.data.navMode;
-        if(_.isEmpty($location.hash())) { $rootScope.prevScroll = null; }
-        $analytics.eventTrack(toState.name);
-        $analytics.pageTrack(window.location.hash);
-      }
+      $rootScope.view.navMode = toState.data.navMode;
+      if(_.isEmpty($location.hash())) { $rootScope.prevScroll = null; }
+      $analytics.eventTrack(toState.name);
+      $analytics.pageTrack(window.location.hash);
     });
     $rootScope.$on('$stateChangeError', function (evt, toState, params) {
       $rootScope._civicStateError = _.merge(params, {
@@ -125,7 +123,7 @@
 
   }
 
-// define root modules & dependencies
+  // define root modules & dependencies
   angular.module('civic.security', [
     'civic.security.authorization',
     'civic.security.service',
