@@ -676,19 +676,6 @@
           }
         },
       },
-      // {
-      //   key: 'nccn_guideline',
-      //   type: 'horizontalSelectHelp',
-      //   templateOptions: {
-      //     label: 'NCCN Guideline',
-      //     options: ([{ value: '', label: 'Please select an NCCN Guideline' }].concat(_.map(nccnGuidelines, function(guideline) {
-      //       return { value: guideline, label: guideline};
-      //     }))),
-      //     valueProp: 'value',
-      //     labelProp: 'label',
-      //     helpText: 'If applicable, please provide cancer (e.g., Breast Cancer) and version (e.g., 5.2016) for the appropriate <a href="http://www.nccn.org/professionals/physician_gls/default.aspx#site" target="_blank">NCCN guideline</a>.'
-      //   }
-      // },
       {
         key: 'nccn_guideline_version',
         type: 'horizontalInputHelp',
