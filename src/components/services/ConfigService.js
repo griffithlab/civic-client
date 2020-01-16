@@ -80,7 +80,7 @@
         },
         {
           label: 'Help',
-          state: 'help.introduction'
+          state: 'help'
         },
         {
           label: 'FAQ',
@@ -89,12 +89,8 @@
       ],
       footerMenuItems: [
         {
-          label: 'Glossary of Terms',
-          state: 'glossary'
-        },
-        {
           label: 'API Documentation',
-          url: 'https://griffithlab.github.io/civic-api-docs/'
+          state: 'apidocs'
         },
         {
           label: 'Data Releases',
