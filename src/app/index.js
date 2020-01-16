@@ -52,13 +52,18 @@
     .config(appConfig);
 
 // @ngInject
-  function appConfig($uiViewScrollProvider, $anchorScrollProvider, formlyConfigProvider, $compileProvider) {
+  function appConfig($qProvider,
+                     $uiViewScrollProvider,
+                     $anchorScrollProvider,
+                     formlyConfigProvider,
+                     $compileProvider) {
     window.apiCheck.disabled = false; // set to true in production
     $compileProvider.debugInfoEnabled(true); // set to false in production
 
     formlyConfigProvider.extras.removeChromeAutoComplete = true;
     $uiViewScrollProvider.useAnchorScroll();
     $anchorScrollProvider.disableAutoScrolling();
+    $qProvider.errorOnUnhandledRejections(false);
   }
 
 // @ngInject
@@ -74,11 +79,20 @@
     // client header identifier
     $http.defaults.headers.common['Civic-Web-Client-Version'] = '0.0.6';
 
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if (toState.external) {
+        event.preventDefault();
+        $window.open(toState.url, '_blank');
+      }
+    });
+
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-      $rootScope.view.navMode = toState.data.navMode;
-      if(_.isEmpty($location.hash())) { $rootScope.prevScroll = null; }
-      $analytics.eventTrack(toState.name);
-      $analytics.pageTrack(window.location.hash);
+      if(!toState.external) {
+        $rootScope.view.navMode = toState.data.navMode;
+        if(_.isEmpty($location.hash())) { $rootScope.prevScroll = null; }
+        $analytics.eventTrack(toState.name);
+        $analytics.pageTrack(window.location.hash);
+      }
     });
     $rootScope.$on('$stateChangeError', function (evt, toState, params) {
       $rootScope._civicStateError = _.merge(params, {
