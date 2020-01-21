@@ -26,6 +26,7 @@
     $scope.isAuthenticated = Security.isAuthenticated;
     $scope.evidence = Evidence.data.item;
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;
+    $scope.supportsAssertions = [];
 
     // determine moderation button visibility
     var currentUserId;
@@ -90,6 +91,12 @@
           .join(', ');
       } else {
         $scope.evidence.phenotypesStr = '--';
+      }
+
+      if($scope.evidence.assertions.length > 0) {
+        $scope.supportsAssertions = _.filter(
+          $scope.evidence.assertions,
+          function(a) { return a.status !== 'rejected'; });
       }
     });
 
