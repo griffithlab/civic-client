@@ -39,7 +39,7 @@
             <a ui-sref="events.genes.summary.variants.summary({geneId: vm.assertion.gene.id, variantId: vm.assertion.variant.id})">{{ vm.assertion.variant.name }}</a>&nbsp;&nbsp;
             <span ng-if="vm.assertion.allele_registry_id !== null && vm.assertion.allele_registry_id !== undefined">
               <strong>Variant Allele Registry ID: </strong>
-              <a ng-href="https://reg.genome.network/allele/{{vm.assertion.allele_registry_id}}.html">{{vm.assertion.allele_registry_id}}</a>
+              <a ng-href="https://reg.genome.network/allele/{{vm.assertion.allele_registry_id}}.html" target="_blank">{{vm.assertion.allele_registry_id}}</a>
             </span>
           </p>
           <p>
