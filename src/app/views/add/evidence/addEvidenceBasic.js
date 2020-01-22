@@ -487,7 +487,7 @@
         controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
           if($stateParams.evidenceType) {
             var et = $stateParams.evidenceType;
-            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type);
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type.evidence_item);
             if(_.includes(permitted, et)) {
               $scope.model.evidence_type = $stateParams.evidenceType;
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et];
