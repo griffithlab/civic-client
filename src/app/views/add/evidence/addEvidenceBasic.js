@@ -437,8 +437,14 @@
           if($stateParams.diseaseName) {
             Diseases.exactMatch($stateParams.diseaseName)
               .then(function(response) {
-                $scope.model.disease = response[0];
-                $scope.to.data.doid = response[0].doid;
+                if(response[0]) {
+                  // disease found, set model.disease
+                  $scope.model.disease = response[0];
+                  $scope.to.data.doid = response[0].doid;
+                } else {
+                  // disease not found, toggle noDoid checkbox
+                  _.find($scope.fields, { key: 'noDoid'}).value(true);
+                }
               });
           }
         },
