@@ -94,7 +94,7 @@
       orphaned: 0 // variants with rejected evidence
     };
 
-    $scope.options_filter = 'accepted';
+    $scope.options_filter = 'accepted_submitted';
     $scope.query = '';
     $scope.variantFilterFn = function(variant) {
       return  ( $scope.options_filter === 'accepted' && $scope.hasAcceptedItems(variant) )
