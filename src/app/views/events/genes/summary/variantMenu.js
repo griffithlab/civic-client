@@ -97,10 +97,11 @@
     $scope.options_filter = 'accepted_submitted';
     $scope.query = '';
     $scope.variantFilterFn = function(variant) {
-      return  ( $scope.options_filter === 'accepted' && $scope.hasAcceptedItems(variant) )
-        || ( $scope.options_filter === 'accepted_submitted' && ($scope.hasAcceptedItems(variant) || $scope.hasSubmittedItems(variant)) )
+      return ( variant.id === Number($scope.stateParams.variantId) )
+        || ( $scope.options_filter === 'accepted' && $scope.hasAcceptedItems(variant) )
+        || ( $scope.options_filter === 'accepted_submitted' && ($scope.hasAcceptedItems(variant)
+                                                                || $scope.hasSubmittedItems(variant)) )
         || ( $scope.options_filter === 'submitted' && $scope.hasSubmittedItems(variant) )
-        || ( variant.id === $scope.stateParams.variantId )
         || ( $scope.options_filter === 'all' ) ;
     };
 
