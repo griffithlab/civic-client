@@ -45,7 +45,6 @@
                         { value: 'disease_name', name: 'Disease Name' },
                         { value: 'interaction_type', name: 'Drug Interaction Type' },
                         { value: 'drug_name', name: 'Drug Name' },
-                        { value: 'drug_id', name: 'Drug ID' },
                         { value: 'drug_ncit_id', name: 'Drug NCIt ID' },
                         { value: 'gene_alias', name: 'Gene Entrez Alias' },
                         { value: 'gene_name', name: 'Gene Entrez Name' },
@@ -332,33 +331,6 @@
                           {value: 'begins_with', name: 'begins with'},
                           {value: 'does_not_contain', name: 'does not contain'}
 
-                        ]
-                      }
-                    },
-                    {
-                      key: 'parameters[0]',
-                      type: 'input',
-                      className: 'inline-field',
-                      templateOptions: {
-                        label: '',
-                        required: true
-                      }
-                    }
-                  ],
-                  drug_id: [
-                    {
-                      key: 'name',
-                      type: 'queryBuilderSelect',
-                      className: 'inline-field inline-field-small',
-                      data: {
-                        defaultValue: 'is'
-                      },
-                      templateOptions: {
-                        label: '',
-                        required: true,
-                        options: [
-                          {value: 'is', name: 'is'},
-                          {value: 'is_not', name: 'is not'}
                         ]
                       }
                     },
