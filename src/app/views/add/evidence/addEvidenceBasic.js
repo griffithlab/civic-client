@@ -442,8 +442,10 @@
                   $scope.model.disease = response[0];
                   $scope.to.data.doid = response[0].doid;
                 } else {
-                  // disease not found, toggle noDoid checkbox
-                  _.find($scope.fields, { key: 'noDoid'}).value(true);
+                  // disease not found, toggle noDoid checkbox & popupulate disease_name
+                  $scope.model.noDoid = true;
+                  // and populate disease_name
+                  $scope.model.disease_name = $stateParams.diseaseName;
                 }
               });
           }
