@@ -83,12 +83,12 @@
             <span ng-if="evidence.drug_interaction_type">&nbsp;({{ evidence.drug_interaction_type }})</span>
           </td>
         </tr>
-        <tr ng-if="evidence.assertions.length > 0">
+        <tr ng-if="supportsAssertions.length > 0">
           <td class="name" style="padding-top: 5px;padding-bottom: 0;">
             Supports Assertions:
           </td>
           <td class="value assertions">
-            <assertion-tag ng-repeat="assertion in evidence.assertions | orderBy:'id'" ng-show="assertion.status !== 'rejected' || showAll === true" assertion="assertion">
+            <assertion-tag ng-repeat="assertion in supportsAssertions | orderBy:'id'" assertion="assertion">
             </assertion-tag>
           </td>
         </tr>
