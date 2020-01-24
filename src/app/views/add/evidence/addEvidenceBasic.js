@@ -437,8 +437,16 @@
           if($stateParams.diseaseName) {
             Diseases.exactMatch($stateParams.diseaseName)
               .then(function(response) {
-                $scope.model.disease = response[0];
-                $scope.to.data.doid = response[0].doid;
+                if(response[0]) {
+                  // disease found, set model.disease
+                  $scope.model.disease = response[0];
+                  $scope.to.data.doid = response[0].doid;
+                } else {
+                  // disease not found, toggle noDoid checkbox & popupulate disease_name
+                  $scope.model.noDoid = true;
+                  // and populate disease_name
+                  $scope.model.disease_name = $stateParams.diseaseName;
+                }
               });
           }
         },
@@ -487,7 +495,7 @@
         controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
           if($stateParams.evidenceType) {
             var et = $stateParams.evidenceType;
-            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type);
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type.evidence_item);
             if(_.includes(permitted, et)) {
               $scope.model.evidence_type = $stateParams.evidenceType;
               $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et];
