@@ -65,17 +65,17 @@
 
       angular.copy([
         {
-          heading: variantGroup.name + ' Revisions',
+          heading: 'Revisions',
           route: this.state.baseState + '.revisions.list',
           params: $stateParams
         },
         {
-          heading: variantGroup.name  + ' Comments',
+          heading: 'Comments',
           route: this.state.baseState + '.comments',
           params: $stateParams
         },
         {
-          heading: variantGroup.name + ' Log',
+          heading: 'Log',
           route: this.state.baseState + '.log',
           params: $stateParams
         }
@@ -113,15 +113,6 @@
     this.VariantGroupRevisionsModel = VariantGroupRevisions;
     this.VariantGroupsTalkViewOptions = VariantGroupsTalkViewOptions;
 
-    $scope.$watch(
-      function() { return self.VariantGroupsTalkViewModel.data.item.name; },
-      function(newName) {
-        _.each(self.VariantGroupsTalkViewOptions.tabData, function(tab) {
-          var type = tab.heading.split(' ')[1];
-          tab.heading = newName + ' ' + type;
-        });
-      }
-    );
   }
 
 })();
