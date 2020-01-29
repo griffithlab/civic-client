@@ -8,7 +8,7 @@
     $stateProvider
       .state('help', {
         external: true,
-        url: 'https://civic.readthedocs.io/',
+        url: 'https://docs.civicdb.org/',
       });
   }
 })();

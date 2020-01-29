@@ -32,27 +32,27 @@
       })
       .state('about', {
         external: true,
-        url: 'https://civic.readthedocs.io/en/latest/about.html'
+        url: 'https://docs.civicdb.org/en/latest/about.html'
       })
       .state('participate', {
         external: true,
-        url: 'https://civic.readthedocs.io/en/latest/about/participating.html'
+        url: 'https://docs.civicdb.org/en/latest/about/participating.html'
       })
       .state('faq', {
         external: true,
-        url: 'https://civic.readthedocs.io/en/latest/about/faq.html'
+        url: 'https://docs.civicdb.org/en/latest/about/faq.html'
       })
       .state('meetings', {
         external: true,
-        url: 'https://civic.readthedocs.io/en/latest/about/meetings.html'
+        url: 'https://docs.civicdb.org/en/latest/about/meetings.html'
       })
       .state('apidocs', {
         external: true,
-        url: 'https://civic.readthedocs.io/en/latest/api.html'
+        url: 'https://docs.civicdb.org/en/latest/api.html'
       })
       .state('graphics', {
         external: true,
-        url: 'https://civic.readthedocs.io/en/latest/about/figures.html'
+        url: 'https://docs.civicdb.org/en/latest/about/figures.html'
       })
       .state('releases', {
         url: '/releases',
