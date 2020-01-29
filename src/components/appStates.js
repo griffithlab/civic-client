@@ -31,48 +31,28 @@
         }
       })
       .state('about', {
-        url: '/about',
-        controller: 'AboutCtrl',
-        templateUrl: 'app/pages/about.tpl.html',
-        reloadOnSearch: false,
-        data: {
-          titleExp: '"About"',
-          navMode: 'sub'
-        }
+        external: true,
+        url: 'https://docs.civicdb.org/en/latest/about.html'
       })
       .state('participate', {
-        url: '/participate',
-        controller: 'ParticipateCtrl',
-        templateUrl: 'app/pages/participate.tpl.html',
-        data: {
-          titleExp: '"Participate"',
-          navMode: 'sub'
-        }
+        external: true,
+        url: 'https://docs.civicdb.org/en/latest/about/participating.html'
       })
       .state('faq', {
-        url: '/faq',
-        templateUrl: 'app/pages/faq.tpl.html',
-        data: {
-          titleExp: '"FAQ"',
-          navMode: 'sub'
-        }
+        external: true,
+        url: 'https://docs.civicdb.org/en/latest/about/faq.html'
       })
       .state('meetings', {
-        url: '/meetings',
-        templateUrl: 'app/pages/meetings.tpl.html',
-        data: {
-          titleExp: '"Meetings"',
-          navMode: 'sub'
-        }
+        external: true,
+        url: 'https://docs.civicdb.org/en/latest/about/meetings.html'
       })
-      .state('glossary', {
-        url: '/glossary',
-        templateUrl: 'app/pages/glossary.tpl.html',
-        controller: 'GlossaryCtrl',
-        data: {
-          titleExp: '"Glossary"',
-          navMode: 'sub'
-        }
+      .state('apidocs', {
+        external: true,
+        url: 'https://docs.civicdb.org/en/latest/api.html'
+      })
+      .state('graphics', {
+        external: true,
+        url: 'https://docs.civicdb.org/en/latest/about/figures.html'
       })
       .state('releases', {
         url: '/releases',
@@ -81,22 +61,6 @@
         controllerAs: 'vm',
         data: {
           titleExp: '"Data Releases"',
-          navMode: 'sub'
-        }
-      })
-      .state('api', {
-        url: '/api-documentation',
-        templateUrl: 'app/pages/apiDocumentation.tpl.html',
-        data: {
-          titleExp: '"API Documentation"',
-          navMode: 'sub'
-        }
-      })
-      .state('graphics', {
-        url: '/graphics',
-        templateUrl: 'app/pages/graphics.tpl.html',
-        data: {
-          titleExp: '"Presentation Graphics"',
           navMode: 'sub'
         }
       })

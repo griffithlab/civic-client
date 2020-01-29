@@ -80,7 +80,7 @@
         },
         {
           label: 'Help',
-          state: 'help.introduction'
+          state: 'help'
         },
         {
           label: 'FAQ',
@@ -89,12 +89,8 @@
       ],
       footerMenuItems: [
         {
-          label: 'Glossary of Terms',
-          state: 'glossary'
-        },
-        {
           label: 'API Documentation',
-          url: 'https://griffithlab.github.io/civic-api-docs/'
+          state: 'apidocs'
         },
         {
           label: 'Data Releases',
@@ -121,151 +117,6 @@
           state: 'contact'
         }
       ],
-      helpMenuItems: {
-        main: [
-          {
-            heading: 'Introduction',
-            parent: 'help.introduction',
-            // TODO: figure out why ui-sref-active isn't working with the help main menu
-            // thus requireing this parent state & ng-class kludge (see menu links in help.tpl.html)
-            state: 'help.introduction'
-          },
-          {
-            heading: 'Getting Started',
-            state: 'help.getting-started.introductory-materials',
-            parent: 'help.getting-started'
-          },
-          {
-            heading: 'Evidence',
-            state: 'help.evidence.overview',
-            parent: 'help.evidence',
-          },
-          {
-            heading: 'Variants',
-            state: 'help.variants.overview',
-            parent: 'help.variants',
-          },
-          {
-            heading: 'Genes',
-            state: 'help.genes.overview',
-            parent: 'help.genes'
-          },
-          {
-            heading: 'Variant Groups',
-            state: 'help.variant-groups.overview',
-            parent: 'help.variant-groups'
-          },
-          {
-            heading: 'Becoming an Editor',
-            state: 'help.editor',
-            parent: 'help.editor'
-          },
-          {
-            heading: 'Get Help',
-            state: 'help.get',
-            parent: 'help.get'
-          },
-          {
-            heading: 'Report Problem',
-            state: 'help.report',
-            parent: 'help.report'
-          }
-        ],
-        getting_started: [
-          {
-            heading: 'Introductory Materials',
-            state: 'help.getting-started.introductory-materials'
-          },
-          {
-            heading: 'Example Activities',
-            state: 'help.getting-started.example-activities'
-          },
-          {
-            heading: 'Source Ideas',
-            state: 'help.getting-started.source-ideas'
-          },
-          {
-            heading: 'Monitoring',
-            state: 'help.getting-started.monitoring'
-          }
-        ],
-        evidence: [
-          {
-            heading: 'Overview',
-            state: 'help.evidence.overview'
-          },
-          {
-            heading: 'Variant Origin',
-            state: 'help.evidence.variant-origin'
-          },
-          {
-            heading: 'Evidence Types',
-            state: 'help.evidence.evidence-types'
-          },
-          {
-            heading: 'Evidence Levels',
-            state: 'help.evidence.evidence-levels'
-          },
-          {
-            heading: 'Evidence Ratings',
-            state: 'help.evidence.evidence-ratings'
-          }
-        ],
-        variant: [
-          {
-            heading: 'Overview',
-            state: 'help.variants.overview'
-          },
-          {
-            heading: 'Variant Name',
-            state: 'help.variants.naming'
-          },
-          {
-            heading: 'Variant Summary',
-            state: 'help.variants.summary'
-          },
-          {
-            heading: 'Evidence Score',
-            state: 'help.variants.variant-evidence-score'
-          },
-          {
-            heading: 'Variant Type',
-            state: 'help.variants.type'
-          },
-          {
-            heading: 'Variant Coordinates',
-            state: 'help.variants.coordinates'
-          }
-        ],
-        gene: [
-          {
-            heading: 'Overview',
-            state: 'help.genes.overview'
-          },
-          {
-            heading: 'Gene Summary',
-            state: 'help.genes.summary'
-          }
-        ],
-        variant_group: [
-          {
-            heading: 'Overview',
-            state: 'help.variant-groups.overview'
-          },
-          {
-            heading: 'Variant Group Summary',
-            state: 'help.variant-groups.summary'
-          },
-          {
-            heading: 'Create a Variant Group',
-            state: 'help.variant-groups.creating'
-          },
-          {
-            heading: 'Add to a Variant Group',
-            state: 'help.variant-groups.adding'
-          }
-        ]
-      },
       valid_chromosomes: [
         { value: '1', name: '1' },
         { value: '2', name: '2' },

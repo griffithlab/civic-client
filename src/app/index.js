@@ -51,17 +51,22 @@
     .run(appRun)
     .config(appConfig);
 
-// @ngInject
-  function appConfig($uiViewScrollProvider, $anchorScrollProvider, formlyConfigProvider, $compileProvider) {
+  // @ngInject
+  function appConfig($qProvider,
+                     $uiViewScrollProvider,
+                     $anchorScrollProvider,
+                     formlyConfigProvider,
+                     $compileProvider) {
     window.apiCheck.disabled = false; // set to true in production
     $compileProvider.debugInfoEnabled(true); // set to false in production
 
     formlyConfigProvider.extras.removeChromeAutoComplete = true;
     $uiViewScrollProvider.useAnchorScroll();
     $anchorScrollProvider.disableAutoScrolling();
+    $qProvider.errorOnUnhandledRejections(false);
   }
 
-// @ngInject
+  // @ngInject
   function appRun(Security, $rootScope, $http, $state, $analytics, $window, $location, _) {
     $window.loading_screen.finish();
     $rootScope.view = {};
@@ -73,6 +78,13 @@
 
     // client header identifier
     $http.defaults.headers.common['Civic-Web-Client-Version'] = '0.0.6';
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if (toState.external) {
+        event.preventDefault();
+        $window.open(toState.url, '_blank');
+      }
+    });
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
       $rootScope.view.navMode = toState.data.navMode;
@@ -111,7 +123,7 @@
 
   }
 
-// define root modules & dependencies
+  // define root modules & dependencies
   angular.module('civic.security', [
     'civic.security.authorization',
     'civic.security.service',
