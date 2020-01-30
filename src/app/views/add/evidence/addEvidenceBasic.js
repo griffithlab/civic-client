@@ -119,7 +119,7 @@
           }
           // if gene name provided, get id, entrez_id
           if($stateParams.geneName){
-            Genes.beginsWith($stateParams.geneName)
+            Genes.exactMatch($stateParams.geneName)
               .then(function(response) {
                 // set field to first item on typeahead suggest
                 $scope.model.gene = response[0];

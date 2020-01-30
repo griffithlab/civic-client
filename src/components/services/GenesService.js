@@ -73,7 +73,12 @@
         isArray: true,
         cache: cache
       },
-
+      exactMatch: {
+        method: 'GET',
+        url: '/api/genes?name=:name&exact_match=true&detailed=false',
+        isArray: true,
+        cache: cache
+      },
       // Gene Additional Info
       getMyGeneInfo: {
         url: '/api/genes/:geneId/mygene_info_proxy',
@@ -280,7 +285,9 @@
       deleteComment: deleteComment,
 
       // Misc
-      beginsWith: beginsWith
+      beginsWith: beginsWith,
+      exactMatch: exactMatch
+
     };
 
     function initBase(geneId) {
@@ -383,6 +390,14 @@
         });
     }
 
+    function exactMatch(name) {
+      return GenesResource.exactMatch({
+        name: name
+      }).$promise
+        .then(function(response) {
+          return response.$promise;
+        });
+    }
     // Gene Additional Data
     function getMyGeneInfo(geneId) {
       return GenesResource.getMyGeneInfo({
