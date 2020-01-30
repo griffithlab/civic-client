@@ -469,7 +469,13 @@
         key: 'noDoid',
         type: 'horizontalCheckbox',
         templateOptions: {
-          label: 'Could not find disease.'
+          label: 'Could not find disease.',
+          onChange: function(value, options, scope) {
+            // reset disease fields
+            scope.model.disease = { name: '' };
+            scope.model.disease_name = '';
+          }
+
         }
       },
       {
