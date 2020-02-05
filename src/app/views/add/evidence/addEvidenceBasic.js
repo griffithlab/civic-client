@@ -48,6 +48,7 @@
     vm.evidenceModel = Evidence;
     vm.evidenceOptions = AddEvidenceViewOptions;
 
+    vm.currentUser = Security.currentUser;
     vm.isEditor = Security.isEditor();
     vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
