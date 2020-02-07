@@ -52,18 +52,6 @@
 
     vm.showPrefillPrompt = !_.isUndefined(_.find($stateParams, function(val) { return !_.isUndefined(val); })) ? true : false;
 
-    Security.requestCurrentUser().then(function(u) {
-      vm.currentUser = u;
-      vm.isEditor = Security.isEditor();
-      vm.isAdmin = Security.isAdmin();
-      vm.isAuthenticated = Security.isAuthenticated();
-
-      // if user has multiple organizations but no most_recent, assign org
-      if(u.organizations.length > 1 && !u.most_recent_organization) {
-        vm.currentUser.most_recent_organization = u.organizations[0];
-      }
-    });
-
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
@@ -107,6 +95,20 @@
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user has multiple organizations but no most_recent, assign org
+      if(u.organizations.length > 1 && !u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.newEvidence.organization = vm.currentUser.most_recent_organization;
+    });
 
     vm.evidenceFields = [
       {
@@ -844,6 +846,10 @@
         }
       }
     ];
+
+    vm.switchOrg = function(id) {
+      vm.newEvidence.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
 
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
