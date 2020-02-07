@@ -48,12 +48,16 @@
     vm.evidenceModel = Evidence;
     vm.evidenceOptions = AddEvidenceViewOptions;
 
-    vm.currentUser = Security.currentUser;
+    vm.currentUser = null; // will be updated with requestCurrentUser call later
     vm.isEditor = Security.isEditor();
     vm.isAdmin = Security.isAdmin();
     vm.isAuthenticated = Security.isAuthenticated();
 
     vm.showPrefillPrompt = !_.isUndefined(_.find($stateParams, function(val) { return !_.isUndefined(val); })) ? true : false;
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+    });
 
     // TODO: watch expression is a temp fix, should refactor isAuth to return a promise
     // in order to cover situations where components load faster than the auth info
@@ -92,7 +96,8 @@
       evidence_direction: '',
       clinical_significance: '',
       variant_origin: '',
-      keepSourceStatus: false
+      keepSourceStatus: false,
+      organization: null
     };
 
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
