@@ -49,21 +49,19 @@
     vm.evidenceOptions = AddEvidenceViewOptions;
 
     vm.currentUser = null; // will be updated with requestCurrentUser call later
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
 
     vm.showPrefillPrompt = !_.isUndefined(_.find($stateParams, function(val) { return !_.isUndefined(val); })) ? true : false;
 
     Security.requestCurrentUser().then(function(u) {
       vm.currentUser = u;
-    });
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
 
-    // TODO: watch expression is a temp fix, should refactor isAuth to return a promise
-    // in order to cover situations where components load faster than the auth info
-    // is returned from the server
-    $scope.$watch(function() { return Security.isAuthenticated();}, function(isAuth) {
-      vm.isAuthenticated = isAuth;
+      // if user has multiple organizations but no most_recent, assign org
+      if(u.organizations.length > 1 && !u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
     });
 
     vm.showForm = true;
