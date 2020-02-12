@@ -181,12 +181,41 @@
     </div>
   </div>
   <div class="row" ng-if="showModeration" style="margin-top: 1em;">
-    <div class="col-xs-6">
-      <a class="btn btn-default btn-block btn-danger"
-        ng-click="rejectItem(evidence.id)">
-        Reject Evidence Item
-      </a>
-    </div>
+    <span ng-switch="currentUser.organizations.length > 1">
+      <span ng-switch-when="true">
+        <div class="btn-group" uib-dropdown>
+
+          <button id="split-button"
+            type="button"
+            class="btn btn-danger"
+            ng-click="rejectItem(evidence.id)">
+            Reject Evidence Item
+          </button>
+
+          <button type="button" class="btn btn-default" uib-dropdown-toggle>
+            for&nbsp;&nbsp;<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" uib-dropdown-menu
+            role="menu">
+            <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+              <a href ng-click="vm.switchOrg(org.id)">
+                <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+                  ng-class="{'glyphicon-hide': org.id !== vm.newEvidence.organization.id}"></span>
+                {{org.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </span>
+      <span ng-switch-default>
+        <div class="col-xs-6">
+          <a class="btn btn-default btn-block btn-danger"
+            ng-click="rejectItem(evidence.id)">
+            Reject Evidence Item
+          </a>
+        </div>
+      </span>
+    </span>
     <div class="col-xs-6">
       <span uib-tooltip="Contributors may not accept their own submissions."
         tooltip-append-to-body="true"

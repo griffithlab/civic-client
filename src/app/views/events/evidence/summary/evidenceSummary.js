@@ -28,11 +28,26 @@
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;
     $scope.supportsAssertions = [];
 
-    // determine moderation button visibility
-    var currentUserId;
-    if(Security.currentUser) { currentUserId = Security.currentUser.id; };
-    var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
-    var ownerIsCurrentUser = $scope.ownerIsCurrentUser = submitterId === currentUserId;
+    $scope.currentUser = null; // will be updated with requestCurrentUser call later
+
+
+    Security.requestCurrentUser().then(function(u) {
+      $scope.currentUser = u;
+      $scope.isEditor = Security.isEditor();
+      $scope.isAdmin = Security.isAdmin();
+      $scope.isAuthenticated = Security.isAuthenticated();
+
+      // if user has multiple organizations but no most_recent, assign org
+      if(u.organizations.length > 1 && !u.most_recent_organization) {
+        $scope.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      // determine moderation button visibility
+      var currentUserId;
+      if(Security.currentUser) { currentUserId = Security.currentUser.id; };
+      var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
+      var ownerIsCurrentUser = $scope.ownerIsCurrentUser = submitterId === currentUserId;
+    });
 
     $scope.$watchGroup(
       [ function() { return Evidence.data.item.status; },
@@ -48,13 +63,6 @@
         $scope.showCoiNotice = changeIsSubmitted && !$scope.showModeration && isModerator;
       });
 
-    // if(Security.currentUser) {
-    //   var currentUserId = Security.currentUser.id;
-    //   var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
-    //   $scope.ownerIsCurrentUser = submitterId === currentUserId;
-    // } else {
-    //   $scope.ownerIsCurrentUser = false;
-    // }
 
     // TODO: fetch and generate these from config service
     var evidence_levels = {

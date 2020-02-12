@@ -61,19 +61,19 @@
             <span ng-switch="vm.currentUser.organizations.length > 1" >
               <span ng-switch-when="true" >
                 <div class="btn-group" uib-dropdown>
-                  <!-- ng-disabled="vm.form.$invalid || vm.isAuthenticated === false"> -->
                   <button id="split-button"
                     type="button"
                     class="btn btn-default"
-                    ng-click="vm.submit(vm.newEvidence, vm.options)">
+                    ng-click="vm.submit(vm.newEvidence, vm.options)"
+                    ng-disabled="vm.form.$invalid || vm.isAuthenticated === false">
                     Submit Evidence
                   </button>
 
-                  <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                  <button type="button" class="btn btn-default" uib-dropdown-toggle
+                    ng-disabled="vm.form.$invalid || vm.isAuthenticated === false">
                     for&nbsp;&nbsp;<span class="caret"></span>
                   </button>
-                  <ul class="dropdown-menu" uib-dropdown-menu
-                    role="menu">
+                  <ul class="dropdown-menu" uib-dropdown-menu role="menu">
                     <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
                       <a href ng-click="vm.switchOrg(org.id)">
                         <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
