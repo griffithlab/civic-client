@@ -20,10 +20,6 @@
                                      EvidenceViewOptions,
                                      _,
                                      ConfigService) {
-    $scope.isEditor = Security.isEditor;
-    $scope.isAdmin = Security.isAdmin;
-    $scope.isCurator = Security.isCurator;
-    $scope.isAuthenticated = Security.isAuthenticated;
     $scope.evidence = Evidence.data.item;
     $scope.tipText = ConfigService.evidenceAttributeDescriptions;
     $scope.supportsAssertions = [];
@@ -33,35 +29,36 @@
 
     Security.requestCurrentUser().then(function(u) {
       $scope.currentUser = u;
-      $scope.isEditor = Security.isEditor();
-      $scope.isAdmin = Security.isAdmin();
-      $scope.isAuthenticated = Security.isAuthenticated();
 
       // if user has multiple organizations but no most_recent, assign org
       if(u.organizations.length > 1 && !u.most_recent_organization) {
         $scope.currentUser.most_recent_organization = u.organizations[0];
       }
 
+      // set org to be sent with reject/accept actions
+      $scope.actionOrg = $scope.currentUser.most_recent_organization;
+
       // determine moderation button visibility
       var currentUserId;
       if(Security.currentUser) { currentUserId = Security.currentUser.id; };
       var submitterId = _.isUndefined($scope.evidence.lifecycle_actions.submitted) ? null : $scope.evidence.lifecycle_actions.submitted.user.id;
       var ownerIsCurrentUser = $scope.ownerIsCurrentUser = submitterId === currentUserId;
+
+      $scope.$watchGroup(
+        [ function() { return Evidence.data.item.status; },
+          function() { return Security.currentUser ? Security.currentUser.conflict_of_interest.coi_valid : undefined; } ],
+        function(statuses) {
+          var changeStatus = statuses[0];
+          var coiStatus = statuses[1];
+          var changeIsSubmitted = changeStatus === 'submitted';
+          var coiValid = coiStatus === 'conflict' || coiStatus === 'valid';
+          var isModerator = Security.isEditor() || Security.isAdmin();
+
+          $scope.showModeration = changeIsSubmitted && ((isModerator && coiValid) || ownerIsCurrentUser);
+          $scope.showCoiNotice = changeIsSubmitted && !$scope.showModeration && isModerator;
+        });
     });
 
-    $scope.$watchGroup(
-      [ function() { return Evidence.data.item.status; },
-        function() { return Security.currentUser ? Security.currentUser.conflict_of_interest.coi_valid : undefined; } ],
-      function(statuses) {
-        var changeStatus = statuses[0];
-        var coiStatus = statuses[1];
-        var changeIsSubmitted = changeStatus === 'submitted';
-        var coiValid = coiStatus === 'conflict' || coiStatus === 'valid';
-        var isModerator = Security.isEditor() || Security.isAdmin();
-
-        $scope.showModeration = changeIsSubmitted && ((isModerator && coiValid) || ownerIsCurrentUser);
-        $scope.showCoiNotice = changeIsSubmitted && !$scope.showModeration && isModerator;
-      });
 
 
     // TODO: fetch and generate these from config service
