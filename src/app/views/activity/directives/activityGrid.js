@@ -82,7 +82,7 @@
           }
         },
         { name: 'role',
-          field: 'user.role',
+          field: 'user_role',
           displayName: 'Role',
           enableFiltering: true,
           allowCellFocus: false,
