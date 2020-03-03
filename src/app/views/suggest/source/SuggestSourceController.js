@@ -83,33 +83,36 @@
             expression: function($viewValue, $modelValue, scope) {
               var type = scope.model.source.source_type;
               var deferred = $q.defer();
-              if ($viewValue.length > 0 && type !== '') {
-                if ($viewValue.match(/[^0-9]+/)) { return false; } // must be number
-                scope.options.templateOptions.loading = true;
-                var reqObj = {
-                  citationId: $viewValue,
-                  sourceType: type
-                };
-                Publications.verify(reqObj).then(
-                  function (response) {
-                    scope.options.templateOptions.loading = false;
-                    scope.options.templateOptions.data.citation = response.citation;
-                    deferred.resolve(true);
-                  },
-                  function (error) {
-                    scope.options.templateOptions.loading = false;
-                    if(error.status === 404) {
-                      scope.options.templateOptions.data.citation = 'No ' + type + ' source found with specified ID.';
-                    } else {
-                      scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+              scope.options.templateOptions.loading = true;
+              if ($viewValue.length > 0 && type !== '') { // type must be defined
+                if ($viewValue.match(/[^0-9]+/)) { // must be number
+                  scope.options.templateOptions.data.citation = 'Citation ID must be a number';
+                  deferred.reject(false);
+                } else { // get citation
+                  var reqObj = {
+                    citationId: $viewValue,
+                    sourceType: type
+                  };
+                  Publications.verify(reqObj).then(
+                    function (response) {
+                      scope.options.templateOptions.data.citation = response.citation;
+                      deferred.resolve(true);
+                    },
+                    function (error) {
+                      if(error.status === 404) {
+                        scope.options.templateOptions.data.citation = 'No ' + type + ' source found with specified ID.';
+                      } else {
+                        scope.options.templateOptions.data.citation = 'Error fetching source, check console log for details.';
+                      }
+                      deferred.reject(false);
                     }
-                    deferred.reject(false);
-                  }
-                );
+                  );
+                }
               } else {
-                scope.options.templateOptions.data.description = '--';
-                deferred.resolve(true);
+                scope.options.templateOptions.data.citation = '--';
+                deferred.resolve(false);
               }
+              scope.options.templateOptions.loading = false;
               return deferred.promise;
             },
             message: '"This does not appear to be a valid source ID."'
