@@ -416,6 +416,7 @@
           templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
           data: {
             doid: '--',
+            prepopSearched: false, // flag to ensure prepop search only performed once
             typeaheadSearch: function(val) {
               return Diseases.beginsWith(val)
                 .then(function(response) {
@@ -434,7 +435,11 @@
           }
         },
         controller: /* @ngInject */ function($scope, $stateParams, Diseases) {
-          if($stateParams.diseaseName) {
+          if($stateParams.diseaseName && !$scope.to.prepopSearched) {
+            // without the prepopSearched logic, unchecking noDoid checkbox
+            // will show this field, instantiating this controller, and
+            // performing search for the non-existen disease again,
+            // re-checking the noDoid checkbox
             Diseases.exactMatch($stateParams.diseaseName)
               .then(function(response) {
                 if(response[0]) {
@@ -442,11 +447,14 @@
                   $scope.model.disease = response[0];
                   $scope.to.data.doid = response[0].doid;
                 } else {
-                  // disease not found, toggle noDoid checkbox & popupulate disease_name
+                  // disease not found, toggle noDoid checkbox
                   $scope.model.noDoid = true;
                   // and populate disease_name
                   $scope.model.disease_name = $stateParams.diseaseName;
                 }
+                // toggle searched flag, ensuring prepopulation search is
+                // only performed once
+                $scope.to.prepopSearched = true;
               });
           }
         },
@@ -461,7 +469,13 @@
         key: 'noDoid',
         type: 'horizontalCheckbox',
         templateOptions: {
-          label: 'Could not find disease.'
+          label: 'Could not find disease.',
+          onChange: function(value, options, scope) {
+            // reset disease fields
+            scope.model.disease = { name: '' };
+            scope.model.disease_name = '';
+          }
+
         }
       },
       {
