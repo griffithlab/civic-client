@@ -65,17 +65,17 @@
 
       angular.copy([
         {
-          heading: evidence.name + ' Revisions',
+          heading: 'Revisions',
           route: baseState + '.revisions.list',
           params: { evidenceId: evidence.id }
         },
         {
-          heading: evidence.name  + ' Comments',
+          heading: 'Comments',
           route: baseState + '.comments',
           params: { evidenceId: evidence.id }
         },
         {
-          heading: evidence.name + ' Log',
+          heading: 'Log',
           route: baseState + '.log',
           params: { evidenceId: evidence.id }
         }

@@ -69,6 +69,10 @@ gulp.task('serve:e2e', ['watch'], function () {
   connectInit(['./.tmp','./src', path.resolve('./')], true);
 });
 
+gulp.task('serve:nobuild', function () {
+  connectInit(['dist', path.resolve('./')], false);
+});
+
 gulp.task('serve:e2e-dist', ['e2e:build'], function () {
   connectInit(['dist', path.resolve('./')], false);
 });

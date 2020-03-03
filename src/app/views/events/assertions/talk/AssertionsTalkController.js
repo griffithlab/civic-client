@@ -65,17 +65,17 @@
 
       angular.copy([
         {
-          heading: assertion.name + ' Revisions',
+          heading: 'Revisions',
           route: baseState + '.revisions.list',
           params: { assertionId: assertion.id }
         },
         {
-          heading: assertion.name  + ' Comments',
+          heading: 'Comments',
           route: baseState + '.comments',
           params: { assertionId: assertion.id }
         },
         {
-          heading: assertion.name + ' Log',
+          heading: 'Log',
           route: baseState + '.log',
           params: { assertionId: assertion.id }
         }
@@ -113,15 +113,6 @@
     this.AssertionRevisionsModel = AssertionRevisions;
     this.AssertionsTalkViewOptions = AssertionsTalkViewOptions;
 
-    $scope.$watch(
-      function() { return self.AssertionsTalkViewModel.data.item.name; },
-      function(newName) {
-        _.each(self.AssertionsTalkViewOptions.tabData, function(tab) {
-          var type = tab.heading.split(' ')[1];
-          tab.heading = newName + ' ' + type;
-        });
-      }
-    );
   }
 
 })();

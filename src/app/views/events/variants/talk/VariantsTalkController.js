@@ -65,17 +65,17 @@
 
       angular.copy([
         {
-          heading: variant.name + ' Revisions',
+          heading: 'Revisions',
           route: this.state.baseState + '.revisions.list',
           params: {  variantId: variant.id }
         },
         {
-          heading: variant.name  + ' Comments',
+          heading: 'Comments',
           route: this.state.baseState + '.comments',
           params: { variantId: variant.id }
         },
         {
-          heading: variant.name + ' Log',
+          heading: 'Log',
           route: this.state.baseState + '.log',
           params: {  variantId: variant.id }
         },
@@ -113,15 +113,5 @@
     this.VariantsTalkViewModel = Variants; // we're re-using the Variants model here but could in the future have a VariantsTalk model if warranted
     this.VariantRevisionsModel = VariantRevisions;
     this.VariantsTalkViewOptions = VariantsTalkViewOptions;
-
-    $scope.$watch(
-      function() { return self.VariantsTalkViewModel.data.item.name; },
-      function(newName) {
-        _.each(self.VariantsTalkViewOptions.tabData, function(tab) {
-          var type = tab.heading.split(' ')[1];
-          tab.heading = newName + ' ' + type;
-        });
-      }
-    );
   }
 })();

@@ -65,17 +65,17 @@
 
       angular.copy([
         {
-          heading: gene.name + ' Revisions',
+          heading: 'Revisions',
           route: baseState + '.revisions.list',
           params: { geneId: gene.id }
         },
         {
-          heading: gene.name  + ' Comments',
+          heading: 'Comments',
           route: baseState + '.comments',
           params: { geneId: gene.id }
         },
         {
-          heading: gene.name + ' Log',
+          heading: 'Log',
           route: baseState + '.log',
           params: { geneId: gene.id }
         }
@@ -112,16 +112,6 @@
     this.GenesTalkViewModel = Genes; // we're re-using the Genes model here but could in the future have a GenesTalk model if warranted
     this.GeneRevisionsModel = GeneRevisions;
     this.GenesTalkViewOptions = GenesTalkViewOptions;
-
-    $scope.$watch(
-      function() { return self.GenesTalkViewModel.data.item.name; },
-      function(newName) {
-        _.each(self.GenesTalkViewOptions.tabData, function(tab) {
-          var type = tab.heading.split(' ')[1];
-          tab.heading = newName + ' ' + type;
-        });
-      }
-    );
   }
 
 })();
