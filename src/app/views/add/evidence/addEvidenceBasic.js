@@ -909,6 +909,10 @@
             variant: response.variant.name,
             evidence_item: response.evidence_item.name
           };
+          // reload current user if org changed
+          if (newEvidence.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('add evidence error!');
