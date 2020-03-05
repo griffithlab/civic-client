@@ -184,7 +184,7 @@
     <div class="col-xs-6">
       <span ng-switch="currentUser.organizations.length > 1">
         <span ng-switch-when="true">
-          <div class="btn-group pull-right" uib-dropdown>
+          <div class="btn-group pull-right org-select" uib-dropdown>
 
             <button id="split-button"
               type="button"
@@ -194,18 +194,14 @@
             </button>
 
             <button type="button" class="btn btn-danger" uib-dropdown-toggle>
-              for&nbsp;&nbsp;<span class="caret"></span>
+              for
+              <span class="avatar"
+                uib-tooltip="{{actionOrg.name}}">
+                <img ng-src="{{actionOrg.profile_image.x14}}" width="14" height="14"/>
+              </span>&nbsp;&nbsp;<span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" uib-dropdown-menu
-              role="menu">
-              <li role="menuitem" ng-repeat="org in currentUser.organizations">
-                <a href ng-click="switchOrg(org.id)">
-                  <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
-                    ng-class="{'glyphicon-hide': org.id !== actionOrg.id }"></span>
-                  {{org.name}}
-                </a>
-              </li>
-            </ul>
+            <ul ng-include="'org-menu.tpl.html'"
+              uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
           </div>
         </span>
         <span ng-switch-default>
@@ -220,7 +216,7 @@
     <div class="col-xs-6">
       <span ng-switch="currentUser.organizations.length > 1">
         <span ng-switch-when="true">
-          <div class="btn-group"
+          <div class="btn-group org-select"
             uib-dropdown>
 
             <a id="split-button"
@@ -240,17 +236,15 @@
               tooltip-append-to-body="true"
               tooltip-enable="ownerIsCurrentUser"
               uib-dropdown-toggle>
-              for&nbsp;&nbsp;<span class="caret"></span>
+              for
+              <span class="avatar"
+                uib-tooltip="{{actionOrg.name}}">
+                <img ng-src="{{actionOrg.profile_image.x14}}" width="14" height="14"/>
+              </span>&nbsp;&nbsp;<span class="caret"></span>
+
             </a>
-            <ul class="dropdown-menu" uib-dropdown-menu
-              role="menu">
-              <li role="menuitem" ng-repeat="org in currentUser.organizations">
-                <a href ng-click="switchOrg(org.id)">
-                  <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
-                    ng-class="{'glyphicon-hide': org.id !== actionOrg.id }"></span>
-                  {{org.name}}
-                </a>
-              </li>
+            <ul ng-include="'org-menu.tpl.html'"
+              uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
             </ul>
           </div>
         </span>
@@ -283,3 +277,15 @@
   <!--</div>-->
   <!--</div>-->
 </div>
+
+<script type="text/ng-template" id="org-menu.tpl.html">
+  <li role="menuitem" ng-repeat="org in currentUser.organizations">
+    <a href ng-click="switchOrg(org.id)">
+      <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+        ng-class="{'glyphicon-hide': org.id !== actionOrg.id}"></span>
+      <span class="avatar">
+        <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+      </span>&nbsp;&nbsp;{{org.name}}
+    </a>
+  </li>
+</script>

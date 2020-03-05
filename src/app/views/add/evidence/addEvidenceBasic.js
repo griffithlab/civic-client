@@ -102,8 +102,8 @@
       vm.isAdmin = Security.isAdmin();
       vm.isAuthenticated = Security.isAuthenticated();
 
-      // if user has multiple organizations but no most_recent, assign org
-      if(u.organizations.length > 1 && !u.most_recent_organization) {
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
         vm.currentUser.most_recent_organization = u.organizations[0];
       }
 

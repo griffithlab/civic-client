@@ -30,8 +30,8 @@
     Security.requestCurrentUser().then(function(u) {
       $scope.currentUser = u;
 
-      // if user has multiple organizations but no most_recent, assign org
-      if(u.organizations.length > 1 && !u.most_recent_organization) {
+      // if user has most_recent_org, assign org
+      if(!u.most_recent_organization) {
         $scope.currentUser.most_recent_organization = u.organizations[0];
       }
 
@@ -59,7 +59,9 @@
         });
     });
 
-
+    $scope.switchOrg = function(id) {
+      $scope.actionOrg = _.find($scope.currentUser.organizations, { id: id });
+    };
 
     // TODO: fetch and generate these from config service
     var evidence_levels = {
@@ -110,10 +112,14 @@
 
     $scope.acceptItem = function(id) {
       $log.debug('accept item ' + id);
-      Evidence.accept(id, $stateParams.variantId)
+      Evidence.accept(id, $stateParams.variantId, $scope.actionOrg)
         .then(function(response) {
           $log.debug('Accept success.');
           $log.debug(response);
+          // reload current user if org changed
+          if ($scope.actionOrg.id != $scope.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(response) {
           $log.error('Ooops! There was an error accepting this evidence item.');
@@ -126,10 +132,14 @@
 
     $scope.rejectItem = function(id) {
       $log.debug('reject item ' + id);
-      Evidence.reject(id, $stateParams.variantId)
+      Evidence.reject(id, $stateParams.variantId, $scope.actionOrg)
         .then(function(response) {
           $log.debug('Reject success.');
           $log.debug(response);
+          // reload current user if org changed
+          if ($scope.actionOrg.id != $scope.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(response) {
           $log.error('Ooops! There was an error rejecting this evidence item.');

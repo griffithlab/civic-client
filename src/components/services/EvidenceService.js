@@ -206,8 +206,8 @@
           return response.$promise;
         });
     }
-    function accept(evidenceId, variantId) {
-      return EvidenceResource.accept({ evidenceId: evidenceId }).$promise
+    function accept(evidenceId, variantId, actionOrg) {
+      return EvidenceResource.accept({ evidenceId: evidenceId, organization: actionOrg }).$promise
         .then(function(response) {
           // flush cached variant and evidence item lists
           cache.remove('/api/evidence_items/' + response.id);
@@ -225,8 +225,8 @@
           return response.$promise;
         });
     }
-    function reject(evidenceId, variantId) {
-      return EvidenceResource.reject({ evidenceId: evidenceId }).$promise
+    function reject(evidenceId, variantId, actionOrg) {
+      return EvidenceResource.reject({ evidenceId: evidenceId, organization: actionOrg }).$promise
         .then(function(response) {
           // flush cached variant and evidence item lists
           cache.remove('/api/evidence_items/' + response.id);
