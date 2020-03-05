@@ -907,7 +907,7 @@
         } else if (ctrl.mode === 'variant_groups') {
           state = 'events.genes.summary.variantGroups.summary';
           params = {
-            geneId: row.entity.gene_ids[0],
+            geneId: row.entity.gene_ids.split(', ')[0],
             variantGroupId: row.entity.id,
             '#': 'variant-group'
           };
