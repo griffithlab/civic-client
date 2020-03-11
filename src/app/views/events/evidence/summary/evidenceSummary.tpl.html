@@ -232,9 +232,6 @@
 
             <a type="button" class="btn btn-success"
               ng-disabled="ownerIsCurrentUser"
-              uib-tooltip="Contributors may not accept their own submissions."
-              tooltip-append-to-body="true"
-              tooltip-enable="ownerIsCurrentUser"
               uib-dropdown-toggle>
               for
               <span class="avatar"
@@ -245,7 +242,6 @@
             </a>
             <ul ng-include="'org-menu.tpl.html'"
               uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
-            </ul>
           </div>
         </span>
         <span ng-switch-default>

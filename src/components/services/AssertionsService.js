@@ -218,10 +218,11 @@
         });
     }
 
-    function accept(id) {
+    function accept(id, actionOrg) {
       return AssertionsResource.accept({
-          assertionId: id
-        }).$promise
+        assertionId: id,
+        organizations: actionOrg
+      }).$promise
         .then(function(response) {
           // flush cached assertion and variant
           cache.remove('/api/assertions');
@@ -235,10 +236,11 @@
         });
     }
 
-    function reject(id) {
+    function reject(id, actionOrg) {
       return AssertionsResource.reject({
-          assertionId: id
-        }).$promise
+        assertionId: id,
+        organization: actionOrg
+      }).$promise
         .then(function(response) {
           // flush cached assertion and variant
           cache.remove('/api/assertions');
