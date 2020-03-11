@@ -21,9 +21,23 @@
     var make_options = ConfigService.optionMethods.make_options; // make options for pull down
 
     var vm = $scope.vm = {};
-    vm.isAuthenticated = Security.isAuthenticated();
     vm.showSuccessMessage = false;
     vm.showForm = true;
+
+    vm.currentUser = null; // will be updated with requestCurrentUser call later
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isAuthenticated = Security.isAuthenticated();
+      // if user has most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      // set org to be sent with reject/accept actions
+      vm.actionOrg = vm.currentUser.most_recent_organization;
+
+    });
 
     vm.duplicates = [];
 
@@ -329,11 +343,16 @@
       }
     ];
 
+    vm.switchOrg = function(id) {
+      vm.actionOrg = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.submit = function(req) {
       vm.error = {};
       var reqObj = {
         source: req.source,
-        comment: req.comment
+        comment: req.comment,
+        orgnization: vm.actionOrg
       };
       if(!_.isUndefined(req.gene) && _.isObject(req.gene)) {
         reqObj.gene_name = req.gene.name;
@@ -351,6 +370,10 @@
           vm.showForm = false;
           vm.showSuccessMessage = true;
           console.log(response);
+          // reload current user if org changed
+          if (vm.actionOrg.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         },
         function(error) { // fail
           console.error('source suggestion submit error.');

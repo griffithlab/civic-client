@@ -18,7 +18,7 @@
       <div class="col-xs-12">
         <div class="alert alert-danger">
           <p><strong>Error: {{ vm.error.status }}:</strong> {{vm.error.statusText}}
-              <span ng-if="vm.error.status === 409"><br/>This source suggetion appears to conflict with a previously submitted suggestion. <a ng-href="/sources/{{ vm.error.data.id }}/summary">Visit the conflicting source page</a> to view the conflicting source's details and add further comments.</span>
+            <span ng-if="vm.error.status === 409"><br/>This source suggetion appears to conflict with a previously submitted suggestion. <a ng-href="/sources/{{ vm.error.data.id }}/summary">Visit the conflicting source page</a> to view the conflicting source's details and add further comments.</span>
 
           </p>
         </div>
@@ -40,14 +40,48 @@
             <cancel-button></cancel-button>
           </div>
           <div class="pull-right">
-            <span ng-disabled="vm.isAuthenticated">
-            <button type="submit"
+            <span ng-switch="vm.currentUser.organizations.length > 1" >
+              <span ng-switch-when="true" >
+                <div class="btn-group org-select" uib-dropdown>
+                  <button id="split-button"
+                    type="button"
                     class="btn btn-default"
-                    ng-disabled="vm.form.$invalid"
-                    ng-click="vm.submit(vm.newSuggestion, vm.formOptions)">
-              Submit Source for Evaluation
-            </button>
-          </span>
+                    ng-click="vm.submit(vm.newSuggestion, vm.options)"
+                    ng-disabled="vm.form.$invalid || !vm.isAuthenticated">
+                    Submit Source
+                  </button>
+
+                  <button type="button" class="btn btn-default" uib-dropdown-toggle
+                    ng-disabled="vm.form.$invalid || !vm.isAuthenticated">
+                    for
+                    <span class="avatar"
+                      uib-tooltip="{{vm.newSuggestion.organization.name}}"
+                      tooltip-enable="!(vm.form.$invalid || vm.isAuthenticated === false)">
+                      <img ng-src="{{vm.actionOrg.profile_image.x14}}" width="14" height="14"/>
+                    </span>&nbsp;&nbsp;<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                    <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+                      <a href ng-click="vm.switchOrg(org.id)">
+                        <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+                        ng-class="{'glyphicon-hide': org.id !== vm.actionOrg.id}"></span>
+                        <span class="avatar">
+                          <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+                        </span>&nbsp;&nbsp;{{org.name}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </span>
+              <span ng-switch-default>
+                <button type="submit"
+                  class="btn btn-default"
+                  ng-disabled="!vm.isAuthenticated || vm.form.$invalid"
+                  ng-click="vm.submit(vm.newSuggestion)">
+                  Submit Source
+                </button>
+              </span>
+            </span>
           </div>
         </div>
       </div>
@@ -69,8 +103,8 @@
         <a ui-sref="curation.sources">view the Source Curation Queue</a>
         &nbsp;or&nbsp;
         <a ui-sref="suggest.source"
-           ui-sref-opts="{reload:true, inherit: true}"
-           class="btn btn-small btn-default">Suggest Another Source</a>
+          ui-sref-opts="{reload:true, inherit: true}"
+          class="btn btn-small btn-default">Suggest Another Source</a>
       </p>
     </div>
   </div>
@@ -86,3 +120,15 @@
   <!-- </div> -->
   <!-- </div> -->
 </div>
+
+<script type="text/ng-template" id="org-menu.tpl.html">
+  <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+    <a href ng-click="vm.switchOrg(org.id)">
+      <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+        ng-class="{'glyphicon-hide': org.id !== vm.actionOrg.id}"></span>
+      <span class="avatar">
+        <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+      </span>&nbsp;&nbsp;{{org.name}}
+    </a>
+  </li>
+</script>
