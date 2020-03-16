@@ -33,10 +33,6 @@
     var vm = this;
     vm.type = 'VARIANT GROUP';
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
-
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
@@ -46,53 +42,31 @@
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
-
     vm.variantGroup = {
       name: '',
       description: '',
-      variants: [{id: 0, name:''}]
+      variants: [{id: 0, name:''}],
+      organization: null
     };
 
+    vm.currentUser = null; // will be updated with requestCurrentUser
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.variantGroup.organization = vm.currentUser.most_recent_organization;
+    });
+
+
     vm.variantGroupFields = [
-      //{
-      //  key: 'gene',
-      //  type: 'horizontalTypeaheadHelp',
-      //  wrapper: ['entrezIdDisplay', 'validationMessages'],
-      //  controller: /* @ngInject */ function($scope, $stateParams, Genes) {
-      //    // populate field if geneId provided
-      //    if($stateParams.geneId){
-      //      Genes.getName($stateParams.geneId).then(function(gene) {
-      //        $scope.model.gene = _.pick(gene,['id', 'name', 'entrez_id']);
-      //        $scope.to.data.entrez_id = gene.entrez_id;
-      //      });
-      //    }
-      //  },
-      //  templateOptions: {
-      //    label: 'Gene Entrez Name',
-      //    value: 'vm.newEvidence.gene',
-      //    minLength: 32,
-      //    required: true,
-      //    editable: false,
-      //    formatter: 'model[options.key].name',
-      //    typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
-      //    onSelect: 'to.data.entrez_id = $model.entrez_id',
-      //    helpText: 'Entrez Gene name (e.g. BRAF). Gene name must be known to the Entrez database.',
-      //    data: {
-      //      entrez_id: '--',
-      //      typeaheadSearch: function(val) {
-      //        return Genes.beginsWith(val)
-      //          .then(function(response) {
-      //            return response;
-      //          });
-      //      }
-      //    }
-      //  },
-      //  modelOptions: {
-      //    debounce: {
-      //      default: 300
-      //    }
-      //  }
-      //},
       {
         key: 'name',
         type: 'horizontalInputHelp',
@@ -155,6 +129,10 @@
       }
     ];
 
+    vm.switchOrg = function(id) {
+      vm.variantGroup.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.add = function(newVariantGroup) {
       newVariantGroup.variants = _.without(newVariantGroup.variants, ''); // delete blank input values
       VariantGroups.add(newVariantGroup)
@@ -166,6 +144,11 @@
           vm.showSuccessMessage = true;
           vm.newGroupId= response.id;
           vm.newGeneId = response.variants[0].gene_id; // grab gene id from first variant in group
+
+          // reload current user if org changed
+          if (newVariantGroup.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('variant group submit error!');
