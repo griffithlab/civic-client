@@ -35,10 +35,6 @@
     vm = $scope.vm = {};
     variantGroupModel = vm.variantGroupModel = VariantGroups;
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
-
     vm.variantGroup = VariantGroups.data.item;
     vm.pendingFields = _.keys(VariantGroupRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(VariantGroupRevisions.data.pendingFields), function(field) {
@@ -54,9 +50,21 @@
       return { name: variant.entrez_name + ' - ' + variant.name, id: variant.id };
     });
 
-    vm.styles = VariantGroupsViewOptions.styles;
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
 
-    vm.user = {};
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.variantGroupEdit.organization = vm.currentUser.most_recent_organization;
+    });
+
+    vm.styles = VariantGroupsViewOptions.styles;
 
     vm.formErrors = {};
     vm.formMessages = {};
@@ -210,6 +218,10 @@
       }
     ];
 
+    vm.switchOrg = function(id) {
+      vm.variantGroupEdit.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.submit = function(variantGroupEdit) {
       variantGroupEdit.variantGroupId = variantGroupEdit.id;
       vm.formErrors = {};
@@ -227,6 +239,10 @@
           vm.showInstructions = false;
           vm.pendingFields = false;
           $rootScope.$broadcast('revisionDecision');
+          // reload current user if org changed
+          if (variantGroupEdit.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision submit error!');
