@@ -230,8 +230,13 @@
         });
     }
 
-    function acceptRevision(variantGroupId, revisionId) {
-      return VariantGroupRevisionsResource.acceptRevision({ variantGroupId: variantGroupId, revisionId: revisionId }).$promise.then(
+    function acceptRevision(variantGroupId, revisionId, organization) {
+      return VariantGroupRevisionsResource
+        .acceptRevision({
+          variantGroupId: variantGroupId,
+          revisionId: revisionId,
+          organization: organization
+        }).$promise.then(
         function(response) {
           cache.remove('/api/variant_groups/' + variantGroupId + '/suggested_changes/');
           query(variantGroupId);
