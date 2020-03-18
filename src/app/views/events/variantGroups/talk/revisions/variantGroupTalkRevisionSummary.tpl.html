@@ -96,17 +96,8 @@
                   <img ng-src="{{vm.actionOrg.profile_image.x14}}" width="14" height="14"/>
                 </span>&nbsp;&nbsp;<span class="caret"></span>
               </a>
-              <ul class="dropdown-menu" uib-dropdown-menu role="menu">
-                <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
-                  <a href ng-click="vm.switchOrg(org.id)">
-                    <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
-                      ng-class="{'glyphicon-hide': org.id !== vm.actionOrg.id}"></span>
-                    <span class="avatar">
-                      <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
-                    </span>&nbsp;&nbsp;{{org.name}}
-                  </a>
-                </li>
-              </ul>
+              <ul ng-include="'org-menu.tpl.html'"
+                uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
             </div>
           </span>
           <span ng-switch-default>
@@ -123,11 +114,37 @@
           </span>
         </span>
 
-        <button type="submit"
-          class="btn btn-default"
-          xng-click="vm.rejectRevision()">
-          Reject Revision
-        </button>
+        <!-- show org-select button if user is member of > 1 orgs -->
+        <span ng-switch="vm.currentUser.organizations.length > 1" >
+          <span ng-switch-when="true" >
+            <div class="btn-group org-select" uib-dropdown>
+              <a id="split-button"
+                type="button"
+                class="btn btn-default"
+                ng-click="vm.rejectRevision()">
+                Reject Revision
+              </a>
+
+              <a type="button" class="btn btn-default" uib-dropdown-toggle>
+                for
+                <span class="avatar"
+                  uib-tooltip="{{vm.actionOrg.name}}"
+                  tooltip-enable="!vm.ownerIsCurrentUser">
+                  <img ng-src="{{vm.actionOrg.profile_image.x14}}" width="14" height="14"/>
+                </span>&nbsp;&nbsp;<span class="caret"></span>
+              </a>
+              <ul ng-include="'org-menu.tpl.html'"
+                uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
+            </div>
+          </span>
+          <span ng-switch-default>
+            <button type="submit"
+              class="btn btn-default"
+              xng-click="vm.rejectRevision()">
+              Reject Revision
+            </button>
+          </span>
+        </span>
       </div>
     </div>
   </div>
@@ -187,4 +204,15 @@
   <!--</form>-->
   <!--</div>-->
   <!--</div>-->
+  <script type="text/ng-template" id="org-menu.tpl.html">
+    <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+      <a href ng-click="vm.switchOrg(org.id)">
+        <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+          ng-class="{'glyphicon-hide': org.id !== vm.actionOrg.id}"></span>
+        <span class="avatar">
+          <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+        </span>&nbsp;&nbsp;{{org.name}}
+      </a>
+    </li>
+  </script>
 </div>

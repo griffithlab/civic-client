@@ -92,7 +92,7 @@
     vm.rejectRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};
-      VariantGroupRevisions.rejectRevision($stateParams.variantGroupId, $stateParams.revisionId)
+      VariantGroupRevisions.rejectRevision($stateParams.variantGroupId, $stateParams.revisionId, vm.actionOrg)
         .then(function() {
           vm.formMessages.rejectSuccess = true;
           // reload current user if org changed

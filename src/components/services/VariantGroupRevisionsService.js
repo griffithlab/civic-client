@@ -49,6 +49,7 @@
           params: {
             variantGroupId: '@variantGroupId',
             revisionId: '@revisionId',
+            organization: '@organization',
             force: true
           },
           cache: false
@@ -59,6 +60,7 @@
           params: {
             variantGroupId: '@variantGroupId',
             revisionId: '@revisionId',
+            organization: '@organization',
             force: true
           },
           cache: cache
@@ -261,8 +263,8 @@
           return $q.reject(error);
         });
     }
-    function rejectRevision(variantGroupId, revisionId) {
-      return VariantGroupRevisionsResource.rejectRevision({ variantGroupId: variantGroupId, revisionId: revisionId }).$promise.then(
+    function rejectRevision(variantGroupId, revisionId, organization) {
+      return VariantGroupRevisionsResource.rejectRevision({ variantGroupId: variantGroupId, revisionId: revisionId, organization: organization}).$promise.then(
         function(response) {
           cache.remove('/api/variant_groups/' + response.id + '/suggested_changes/');
           query(variantGroupId);
