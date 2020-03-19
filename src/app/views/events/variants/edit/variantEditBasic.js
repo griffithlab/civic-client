@@ -34,10 +34,6 @@
     vm = $scope.vm = {};
     variantModel = vm.variantModel = Variants;
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
-
     vm.variant = Variants.data.item;
     vm.pendingFields = _.keys(VariantRevisions.data.pendingFields).length > 0;
     vm.pendingFieldsList = _.map(_.keys(VariantRevisions.data.pendingFields), function(field) {
@@ -56,6 +52,19 @@
     vm.variants = variantModel.data.variants;
     vm.variantGroups = variantModel.data.variantGroups;
 
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.variantEdit.organization = vm.currentUser.most_recent_organization;
+    });
     vm.styles = VariantsViewOptions.styles;
 
     vm.user = {};
@@ -539,6 +548,10 @@
       }
     ];
 
+    vm.switchOrg = function(id) {
+      vm.variantEdit.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.submit = function(variantEdit) {
       variantEdit.variantId = variantEdit.id;
       variantEdit.variant_types = _.map(variantEdit.variant_types, 'id');
@@ -557,6 +570,10 @@
           vm.showForm = false;
           vm.showSuccessMessage = true;
           $rootScope.$broadcast('revisionDecision');
+          // reload current user if org changed
+          if (variantEdit.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision submit error!');
@@ -576,6 +593,10 @@
         .then(function() {
           console.log('revision appy success!');
           vm.formMessages.applySuccess = true;
+          // reload current user if org changed
+          if (variantEdit.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(response) {
           console.error('revision application error!');
