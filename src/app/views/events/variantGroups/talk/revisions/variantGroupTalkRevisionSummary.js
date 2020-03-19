@@ -61,8 +61,6 @@
         });
     });
 
-
-
     vm.switchOrg = function(id) {
       vm.actionOrg = _.find(vm.currentUser.organizations, { id: id });
     };
