@@ -46,9 +46,6 @@
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:revisionId/accept',
           params: {
-            geneId: '@geneId',
-            revisionId: '@revisionId',
-            organization: '@organization',
             force: true
           },
           cache: false
@@ -57,9 +54,6 @@
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:revisionId/reject',
           params: {
-            geneId: '@geneId',
-            revisionId: '@revisionId',
-            organization: '@organization',
             force: true
           },
           cache: false
