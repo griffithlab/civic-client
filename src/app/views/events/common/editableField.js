@@ -27,9 +27,21 @@
     var ctrl = $scope.ctrl = {};
     ctrl.baseState = '';
     ctrl.stateParams = {};
-    ctrl.isAuthenticated = Security.isAuthenticated;
-    ctrl.isEditor = Security.isEditor;
-    ctrl.isAdmin = Security.isAdmin;
+
+    Security.requestCurrentUser().then(function(u) {
+      ctrl.currentUser = u;
+      ctrl.isEditor = Security.isEditor;
+      ctrl.isAdmin = Security.isAdmin;
+      ctrl.isAuthenticated = Security.isAuthenticated;
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        ctrl.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      ctrl.actionOrg = ctrl.currentUser.most_recent_organization;
+    });
+
 
     ctrl.baseState = $scope.entityViewOptions.state.baseState;
     ctrl.stateParams = $scope.entityViewOptions.state.params;
@@ -93,21 +105,33 @@
       }
     };
 
+    ctrl.switchOrg = function(id) {
+      ctrl.actionOrg.organization = _.find(ctrl.currentUser.organizations, { id: id });
+    };
+
     ctrl.submit = function(newFlag) {
       console.log('ctrl.flag() called.');
+      newFlag.organization = ctrl.actionOrg;
       $scope.entityViewModel.submitFlag(newFlag).then(function() {
-        console.log('flag accepted.');
-
         ctrl.newFlag.comment.text = '';
+        // reload current user if org changed
+        if (newFlag.organization.id != ctrl.currentUser.most_recent_organization.id) {
+          Security.reloadCurrentUser();
+        }
       });
     };
 
     ctrl.resolve = function(resolveFlag) {
       console.log('ctrl.resolve() called');
       resolveFlag.flagId = ctrl.activeFlagId;
+      resolveFlag.organization = ctrl.actionOrg;
       $scope.entityViewModel.resolveFlag(resolveFlag).then(function() {
         console.log('flag resolved.');
         ctrl.showResolved = true;
+        // reload current user if org changed
+        if (resolveFlag.organization.id != ctrl.currentUser.most_recent_organization.id) {
+          Security.reloadCurrentUser();
+        }
       });
     };
   }

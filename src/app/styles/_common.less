@@ -209,6 +209,13 @@ div.validation-error {
 }
 
 // org avatars on action dropdown menus
+@avatar-md: 14px;
+@avatar-sm: 10px;
+@avatar-md-margin: 3px;
+@avatar-sm-margin: 1px;
+@avatar-md-radius: 3px;
+@avatar-sm-radius: 2px;
+
 .org-select {
   .avatar {
     border: 1px solid #AAA;
@@ -230,7 +237,29 @@ div.validation-error {
       height: 14px;
     }
   }
+  .avatar-md {
+    width: @avatar-md;
+    height: @avatar-md;
+    top: @avatar-md-margin;
+    left: @avatar-md-margin;
+    border-radius: @avatar-md-radius;
+    img {
+      width: @avatar-md;
+      height: @avatar-md;
+    }
+  }
 
+  .avatar-sm {
+    width: @avatar-sm;
+    height: @avatar-sm;
+    top: @avatar-sm-margin;
+    left: @avatar-sm-margin;
+    border-radius: @avatar-sm-radius;
+    img {
+      width: @avatar-sm;
+      height: @avatar-sm;
+    }
+  }
 }
 
 // form server error messages
