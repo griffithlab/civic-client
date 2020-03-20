@@ -23,9 +23,6 @@
                                                 formConfig,
                                                 $rootScope) {
     var vm = $scope.vm = {};
-    vm.isEditor = Security.isEditor;
-    vm.isAdmin= Security.isAdmin;
-    vm.isAuthenticated = Security.isAuthenticated;
     vm.variantTalkModel = VariantRevisions;
 
     vm.formErrors = {};
@@ -39,6 +36,20 @@
     var submitterId = VariantRevisions.data.item.user.id;
     var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
 
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.actionOrg = vm.currentUser.most_recent_organization;
+    });
+
     $scope.$watchGroup(
       [ function() { return VariantRevisions.data.item.status; },
         function() { return Security.currentUser ? Security.currentUser.conflict_of_interest.coi_valid : undefined; } ],
@@ -51,17 +62,27 @@
 
         vm.showModeration = changeIsNew && ((isModerator && coiValid) || ownerIsCurrentUser);
         vm.showCoiNotice = changeIsNew && !vm.showModeration && isModerator;
+
+        vm.disabled_text = (Security.isEditor() || Security.isAdmin()) ? 'Contributors may not accept their own suggested revisions.' : 'Suggested revisions must be approved by an editor.';
       });
 
-    vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? 'Contributors may not accept their own suggested revisions.' : 'Suggested revisions must be approved by an editor.';
+    vm.switchOrg = function(id) {
+      vm.actionOrg = _.find(vm.currentUser.organizations, { id: id });
+    };
 
-    $scope.acceptRevision = function() {
+    vm.acceptRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};
-      VariantRevisions.acceptRevision($stateParams.variantId, $stateParams.revisionId)
+      VariantRevisions.acceptRevision($stateParams.variantId,
+                                      $stateParams.revisionId,
+                                      vm.actionOrg)
         .then(function() {
           vm.formMessages.acceptSuccess = true;
           $rootScope.$broadcast('revisionDecision');
+          // reload current user if org changed
+          if (vm.actionOrg.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision accept error!');
@@ -72,13 +93,19 @@
         });
     };
 
-    $scope.rejectRevision = function() {
+    vm.rejectRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};
-      VariantRevisions.rejectRevision($stateParams.variantId, $stateParams.revisionId)
+      VariantRevisions.rejectRevision($stateParams.variantId,
+                                      $stateParams.revisionId,
+                                      vm.actionOrg)
         .then(function() {
           vm.formMessages.rejectSuccess = true;
           $rootScope.$broadcast('revisionDecision');
+          // reload current user if org changed
+          if (vm.actionOrg.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision reject error!');
