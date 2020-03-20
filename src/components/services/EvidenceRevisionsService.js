@@ -46,8 +46,6 @@
           method: 'POST',
           url: '/api/evidence_items/:evidenceId/suggested_changes/:revisionId/accept',
           params: {
-            evidenceId: '@evidenceId',
-            revisionId: '@revisionId',
             force: true
           },
           cache: false
@@ -56,8 +54,6 @@
           method: 'POST',
           url: '/api/evidence_items/:evidenceId/suggested_changes/:revisionId/reject',
           params: {
-            evidenceId: '@evidenceId',
-            revisionId: '@revisionId',
             force: true
           },
           cache: cache
@@ -287,8 +283,13 @@
         });
     }
 
-    function acceptRevision(evidenceId, revisionId, variantId) {
-      return EvidenceRevisionsResource.acceptRevision({ evidenceId: evidenceId, revisionId: revisionId }).$promise.then(
+    function acceptRevision(evidenceId, revisionId, variantId, organization) {
+      return EvidenceRevisionsResource.acceptRevision({
+        evidenceId: evidenceId,
+        revisionId: revisionId,
+        variantId: variantId,
+        organization: organization
+      }).$promise.then(
         function(response) {
 
           // flush evidence_item cache and refresh, in order to update the variant summary evidence grid
@@ -324,8 +325,13 @@
           return $q.reject(error);
         });
     }
-    function rejectRevision(evidenceId, revisionId, variantId) {
-      return EvidenceRevisionsResource.rejectRevision({ evidenceId: evidenceId, revisionId: revisionId }).$promise.then(
+    function rejectRevision(evidenceId, revisionId, variantId, organization) {
+      return EvidenceRevisionsResource.rejectRevision({
+        evidenceId: evidenceId,
+        revisionId: revisionId,
+        variantId: variantId,
+        organization: organization
+      }).$promise.then(
         function(response) {
           // flush evidence_item cache and refresh, in order to update the variant summary evidence grid
           cache.remove('/api/variants/' + variantId);
