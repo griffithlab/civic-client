@@ -54,39 +54,74 @@
           </div>
         </div>
         <div class="row comment-buttons">
-          <div class="col-xs-10">
+          <div class="col-xs-8">
             <div class="markdown-prompt">
               <p>Use
                 <button type="button" class="btn btn-default btn-xs"
-                        ng-click="vm.showMarkdownHelp = !vm.showMarkdownHelp">
-                <span class="glyphicon"
-                      aria-hidden="true"
-                      ng-class="{ 'glyphicon-triangle-right': vm.showMarkdownHelp === false, 'glyphicon-triangle-bottom': vm.showMarkdownHelp === true}">
-                </span>
+                  ng-click="vm.showMarkdownHelp = !vm.showMarkdownHelp">
+                  <span class="glyphicon"
+                    aria-hidden="true"
+                    ng-class="{ 'glyphicon-triangle-right': vm.showMarkdownHelp === false, 'glyphicon-triangle-bottom': vm.showMarkdownHelp === true}">
+                  </span>
                   markdown
                 </button>
                 to add <strong>emphasis</strong>, <span style="font-style: oblique;">styling</span>, images, and links to your comments.<br/> Use @user and #ENTITY
                 <button type="button" class="btn btn-default btn-xs"
-                        ng-click="vm.showMacroHelp = !vm.showMacroHelp">
-                <span class="glyphicon"
-                      aria-hidden="true"
-                      ng-class="{ 'glyphicon-triangle-right': vm.showMacroHelp === false, 'glyphicon-triangle-bottom': vm.showMacroHelp === true}">
-                </span>
-                macros
+                  ng-click="vm.showMacroHelp = !vm.showMacroHelp">
+                  <span class="glyphicon"
+                    aria-hidden="true"
+                    ng-class="{ 'glyphicon-triangle-right': vm.showMacroHelp === false, 'glyphicon-triangle-bottom': vm.showMacroHelp === true}">
+                  </span>
+                  macros
                 </button>
                 to add links to specific users and entity summaries.</p>
             </div>
           </div>
-          <div class="col-xs-2">
+          <div class="col-xs-4">
             <div class="pull-right">
-              <button
-                type="submit"
-                class="btn btn-default"
-                ng-disabled="vm.commentForm.$invalid"
-                ng-click="vm.submit(vm.newComment, vm.options.resetModel)">
-                Submit
-                <span class="hidden-sm">Comment</span>
-              </button>
+              <!-- show org-select button if user is member of > 1 orgs -->
+              <span ng-switch="vm.currentUser.organizations.length > 1" >
+                <span ng-switch-when="true" >
+                  <div class="btn-group org-select" uib-dropdown>
+                    <button id="split-button"
+                      type="button"
+                      class="btn btn-default"
+                      ng-click="vm.submit(vm.newComment, vm.options.resetModel)"
+                      ng-disabled="vm.commentForm.$invalid || vm.isAuthenticated === false">
+                      Comment
+                    </button>
+
+                    <button type="button" class="btn btn-default" uib-dropdown-toggle
+                      ng-disabled="vm.commentForm.$invalid || vm.isAuthenticated === false">
+                      for
+                      <span class="avatar"
+                        uib-tooltip="{{vm.newComment.organization.name}}"
+                        tooltip-enable="!(vm.commentForm.$invalid || vm.isAuthenticated === false)">
+                        <img ng-src="{{vm.newComment.organization.profile_image.x14}}" width="14" height="14"/>
+                      </span>&nbsp;&nbsp;<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                      <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+                        <a href ng-click="vm.switchOrg(org.id)">
+                          <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+                            ng-class="{'glyphicon-hide': org.id !== vm.newComment.organization.id}"></span>
+                          <span class="avatar">
+                            <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+                          </span>&nbsp;&nbsp;{{org.name}}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </span>
+                <span ng-switch-default>
+                  <button type="submit"
+                    class="btn btn-default"
+                    ng-disabled="vm.commentForm.$invalid || vm.isAuthenticated === false"
+                    ng-click="vm.submit(vm.newComment, vm.options.resetModel)">
+                    Comment
+                  </button>
+                </span>
+              </span>
             </div>
           </div>
         </div>
