@@ -106,7 +106,7 @@
     };
 
     ctrl.switchOrg = function(id) {
-      ctrl.actionOrg.organization = _.find(ctrl.currentUser.organizations, { id: id });
+      ctrl.actionOrg = _.find(ctrl.currentUser.organizations, { id: id });
     };
 
     ctrl.submit = function(newFlag) {

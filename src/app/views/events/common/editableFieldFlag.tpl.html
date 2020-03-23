@@ -74,7 +74,7 @@
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu">
                   <li role="menuitem" ng-repeat="org in ctrl.currentUser.organizations">
-                    <a href ng-click="switchOrg(org.id)">
+                    <a href ng-click="switchOrgFn(org.id)">
                       <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
                         ng-class="{'glyphicon-hide': org.id !== ctrl.actionOrg.id}"></span>
                       <span class="avatar">
