@@ -51,7 +51,7 @@
           <!-- show org-select button if user is member of > 1 orgs -->
           <span ng-switch="ctrl.currentUser.organizations.length > 1" >
             <span ng-switch-when="true" >
-              <div class="btn-group org-select" uib-dropdown>
+              <div class="btn-group org-select" uib-dropdown style="float: right;">
                 <button id="split-button"
                   type="button"
                   class="btn btn-xs btn-success"
@@ -59,7 +59,7 @@
                   ng-if="!ctrl.showCoiNotice"
                   ng-disabled="ctrl.resolveFlag.comment.text.length < 3"
                   tooltip-enable="ctrl.resolveFlag.comment.text.length < 3"
-                  tooltip="Please add comment before resolving flag.">
+                  uib-tooltip="Please add comment before resolving flag.">
                   Resolve
                 </button>
 
@@ -67,16 +67,16 @@
                   ng-disabled="ctrl.resolveFlag.comment.text.length < 3">
                   for
                   <span class="avatar avatar-sm"
-                    uib-tooltip="{{ctrl.actionOrg.name}}"
+                    uib-tooltip="{{actionOrg.name}}"
                     tooltip-enable="!(ctrl.resolveFlag.comment.text.length < 3)">
-                    <img ng-src="{{ctrl.actionOrg.profile_image.x14}}" width="14" height="14"/>
+                    <img ng-src="{{actionOrg.profile_image.x14}}" width="14" height="14"/>
                   </span>&nbsp;&nbsp;<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu">
                   <li role="menuitem" ng-repeat="org in ctrl.currentUser.organizations">
                     <a href ng-click="switchOrgFn(org.id)">
                       <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
-                        ng-class="{'glyphicon-hide': org.id !== ctrl.actionOrg.id}"></span>
+                        ng-class="{'glyphicon-hide': org.id !== actionOrg.id}"></span>
                       <span class="avatar">
                         <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
                       </span>&nbsp;&nbsp;{{org.name}}
@@ -92,7 +92,7 @@
                 ng-if="!ctrl.showCoiNotice"
                 ng-disabled="ctrl.resolveFlag.comment.text.length < 3"
                 tooltip-enable="ctrl.resolveFlag.comment.text.length < 3"
-                tooltip="Please add comment before resolving flag.">
+                uib-tooltip="Please add comment before resolving flag.">
                 Resolve
               </button>
             </span>

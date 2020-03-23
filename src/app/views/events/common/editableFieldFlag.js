@@ -43,11 +43,6 @@
       }
     });
 
-    // actionOrg needs its own watch expression
-    $scope.$watch('actionOrg', function(org) {
-      ctrl.actionOrg = org;
-    });
-
     ctrl.actions = {
       flagged: {
         order: 0,
