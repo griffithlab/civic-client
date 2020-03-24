@@ -206,7 +206,7 @@
         </span>
         <span ng-switch-default>
           <a class="btn btn-default btn-block btn-danger"
-            ng-click="vm.rejectItem(assertion.id)">
+            ng-click="vm.rejectItem(vm.assertion.id)">
             Reject Assertion Item
           </a>
         </span>
@@ -230,17 +230,18 @@
                 <a id="split-button"
                   type="button"
                   class="btn btn-success"
-                  ng-disabled="vm.ownerIsCurrentUser"
-                  ng-click="vm.acceptItem(evidence.id)">
+                  ng-disabled="vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0"
+                  ng-click="vm.acceptItem(vm.assertion.id)">
                   Accept Evidence Item
                 </a>
 
                 <a type="button" class="btn btn-success"
-                  ng-disabled="vm.ownerIsCurrentUser"
+                  ng-disabled="vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0"
                   uib-dropdown-toggle>
                   for
                   <span class="avatar"
-                    uib-tooltip="{{vm.actionOrg.name}}">
+                    uib-tooltip="{{vm.actionOrg.name}}"
+                    tooltip-enable="!(vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0)">
                     <img ng-src="{{vm.actionOrg.profile_image.x14}}" width="14" height="14"/>
                   </span>&nbsp;&nbsp;<span class="caret"></span>
 

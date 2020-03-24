@@ -221,7 +221,7 @@
     function accept(id, actionOrg) {
       return AssertionsResource.accept({
         assertionId: id,
-        organizations: actionOrg
+        organization: actionOrg
       }).$promise
         .then(function(response) {
           // flush cached assertion and variant
