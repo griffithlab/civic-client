@@ -52,10 +52,6 @@
     var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
     var nccnGuidelines = ConfigService.assertionAttributeDescriptions.nccnGuidelines;
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
-
     vm.showForm = true;
     vm.showSuccessMessage = false;
     vm.showInstructions = true;
@@ -65,6 +61,21 @@
     vm.validationMessages = formConfig.validationMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
+    vm.currentUser = null; // will be updated with requestCurrentUser call later
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.assertion.organization = vm.currentUser.most_recent_organization;
+    });
 
     vm.assertion = {
       gene: {name:''},
@@ -764,6 +775,10 @@
       }
     ];
 
+    vm.switchOrg = function(id) {
+      vm.assertion.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.add = function(assertion) {
       var newAssertion = _.cloneDeep(assertion);
       newAssertion.drugs = _.without(newAssertion.drugs, '');
@@ -780,6 +795,10 @@
           vm.newAssertionId = response.assertion.id;
           vm.newAssertionName = response.assertion.name;
           vm.formErrors = {};
+          // reload current user if org changed
+          if (assertion.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('assertion submit error!');

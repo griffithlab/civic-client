@@ -33,10 +33,6 @@
     vm = $scope.vm = {};
     geneModel = vm.geneModel = Genes;
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
-
     vm.gene = Genes.data.item;
     // convert source objects to array of IDs, multi-input field type does not handle objects at this time
     vm.pendingFields = _.keys(GeneRevisions.data.pendingFields).length > 0;
@@ -51,6 +47,20 @@
     vm.myGeneInfo = geneModel.data.myGeneInfo;
     vm.variants = geneModel.data.variants;
     vm.variantGroups = geneModel.data.variantGroups;
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.geneEdit.organization = vm.currentUser.most_recent_organization;
+    });
 
     vm.styles = GenesViewOptions.styles;
 
@@ -199,6 +209,10 @@
       }
     ];
 
+    vm.switchOrg = function(id) {
+      vm.geneEdit.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.submit = function(geneEdit) {
       geneEdit.geneId = geneEdit.id;
       geneEdit.sources = geneEdit.source_ids;
@@ -215,7 +229,10 @@
           vm.showForm = false;
           vm.showSuccessMessage = true;
           $rootScope.$broadcast('revisionDecision');
-          // options.resetModel();
+          // reload current user if org changed
+          if (geneEdit.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision submit error!');
@@ -235,6 +252,10 @@
         .then(function() {
           console.log('revision apply success!');
           vm.formMessages.applySuccess = true;
+          // reload current user if org changed
+          if (geneEdit.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(response) {
           console.error('revision application error!');

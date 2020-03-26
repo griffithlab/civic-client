@@ -95,18 +95,79 @@
   <div class="row" ng-if="vm.showModeration">
     <div class="col-xs-12 admin-buttons">
       <div class="pull-right">
-        <span uib-tooltip={{vm.disabled_text}}
+
+        <!-- show org-select button if user is member of > 1 orgs -->
+        <span ng-switch="vm.currentUser.organizations.length > 1" >
+          <span ng-switch-when="true" >
+            <div class="btn-group org-select" uib-dropdown>
+              <a id="split-button"
+                type="button"
+                class="btn btn-default"
+                ng-click="vm.acceptRevision()"
+                ng-disabled="vm.ownerIsCurrentUser"
+                uib-tooltip={{vm.disabled_text}}
+                tooltip-enable="vm.ownerIsCurrentUser"
+                tooltip-append-to-body="true">
+                Accept Revision
+              </a>
+
+              <a type="button" class="btn btn-default" uib-dropdown-toggle
+                ng-disabled="vm.ownerIsCurrentUser">
+                for
+                <span class="avatar"
+                  uib-tooltip="{{vm.actionOrg.name}}"
+                  tooltip-enable="!vm.ownerIsCurrentUser">
+                  <img ng-src="{{vm.actionOrg.profile_image.x14}}" width="14" height="14"/>
+                </span>&nbsp;&nbsp;<span class="caret"></span>
+              </a>
+              <ul ng-include="'org-menu.tpl.html'"
+                uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
+            </div>
+          </span>
+          <span ng-switch-default>
+            <span uib-tooltip={{vm.disabled_text}}
               tooltip-append-to-body="true"
               tooltip-enable="vm.ownerIsCurrentUser">
-          <button type="submit"
-                  class="btn btn-default"
-                  ng-disabled="vm.ownerIsCurrentUser"
-                  ng-click="acceptRevision()">
-            Accept Revision
-          </button>
+              <button type="submit"
+                class="btn btn-default"
+                ng-disabled="vm.ownerIsCurrentUser"
+                ng-click="vm.acceptRevision()">
+                Accept Revision
+              </button>
+            </span>
+          </span>
         </span>
 
-        <button type="submit" class="btn btn-default" ng-click="rejectRevision()">Reject Revision</button>
+        <span ng-switch="vm.currentUser.organizations.length > 1" >
+          <span ng-switch-when="true" >
+            <div class="btn-group org-select" uib-dropdown>
+              <a id="split-button"
+                type="button"
+                class="btn btn-default"
+                ng-click="vm.rejectRevision()">
+                Reject Revision
+              </a>
+
+              <a type="button" class="btn btn-default" uib-dropdown-toggle>
+                for
+                <span class="avatar"
+                  uib-tooltip="{{vm.actionOrg.name}}">
+                  <img ng-src="{{vm.actionOrg.profile_image.x14}}" width="14" height="14"/>
+                </span>&nbsp;&nbsp;<span class="caret"></span>
+              </a>
+              <ul ng-include="'org-menu.tpl.html'"
+                uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
+            </div>
+          </span>
+          <span ng-switch-default>
+            <button type="submit"
+              class="btn btn-default"
+              ng-click="vm.rejectRevision()">
+              Reject Revision
+            </button>
+          </span>
+        </span>
+
       </div>
     </div>
   </div>
@@ -146,24 +207,4 @@
       <entity-comment-form type="revision" entity-model="vm.assertionTalkModel"></entity-comment-form>
     </div>
   </div>
-  <!--<div class="row">-->
-  <!--<div class="col-xs-12">-->
-  <!--<form>-->
-  <!--<p>-->
-  <!--ASSERTION NAME:-->
-  <!--</p>-->
-  <!--<p>-->
-  <!--<input type="text" ng-model="assertionModel.data.entity.name"/>-->
-  <!--</p>-->
-  <!--<p>-->
-  <!--ASSERTION DESCRIPTION:-->
-  <!--</p>-->
-  <!--<p>-->
-  <!--<textarea ng-model="assertionModel.data.entity.description">-->
-
-  <!--</textarea>-->
-  <!--</p>-->
-  <!--</form>-->
-  <!--</div>-->
-  <!--</div>-->
 </div>

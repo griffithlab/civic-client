@@ -43,7 +43,16 @@
 <script type="text/ng-template" id="flagPopover.tpl.html">
   <div ng-switch="ctrl.hasActiveFlag">
     <div ng-switch-when="true" >
-      <editable-field-flag flag="ctrl.activeFlag" resolve-fn="ctrl.resolve" entity-id="ctrl.entityId" type="type" name="name"></editable-field-flag>
+      <editable-field-flag
+        flag="ctrl.activeFlag"
+        current-user="ctrl.currentUser"
+        switch-org-fn="ctrl.switchOrg"
+        action-org="ctrl.actionOrg"
+        resolve-fn="ctrl.resolve"
+        entity-id="ctrl.entityId"
+        type="type"
+        name="name">
+      </editable-field-flag>
     </div>
     <div ng-switch-when="false" >
       <div class="submit-flag-form">
@@ -57,14 +66,61 @@
         </div>
         <div class="row">
           <div class="col-xs-12 panel-buttons" >
-            <button type="submit"
-              class="btn btn-xs btn-danger"
-              ng-click="ctrl.submit(ctrl.newFlag)"
-              ng-disabled="ctrl.newFlag.comment.text.length < 3"
-              uib-tooltip-enable="ctrl.newFlag.comment.text.length < 3"
-              uib-tooltip="Please add comment before submitting flag.">
-              Flag
-            </button>
+            <span ng-if="ctrl.showCoiNotice">
+              <a ui-sref="account.profile" class="btn btn-danger btn-block btn-xs">
+                <i class="glyphicon glyphicon-hand-up"></i>&nbsp;
+                Please Update COI Statement to resolve flag.
+              </a>
+            </span>
+            <!-- show org-select button if user is member of > 1 orgs -->
+            <span ng-switch="ctrl.currentUser.organizations.length > 1" >
+              <span ng-switch-when="true" >
+                <div class="btn-group org-select" uib-dropdown>
+                  <button id="split-button"
+                    type="submit"
+                    class="btn btn-xs btn-danger"
+                    ng-if="!ctrl.showCoiNotice"
+                    ng-click="ctrl.submit(ctrl.newFlag)"
+                    ng-disabled="ctrl.newFlag.comment.text.length < 3"
+                    tooltip-enable="ctrl.newFlag.comment.text.length < 3"
+                    uib-tooltip="Please add comment before submitting flag.">
+                    Flag
+                  </button>
+
+                  <button type="button" class="btn btn-xs btn-danger" uib-dropdown-toggle
+                    ng-disabled="ctrl.newFlag.comment.text.length < 3">
+                    for
+                    <span class="avatar avatar-sm"
+                      uib-tooltip="{{ctrl.actionOrg.name}}"
+                      tooltip-enable="!(ctrl.resolveFlag.comment.text.length < 3)">
+                      <img ng-src="{{ctrl.actionOrg.profile_image.x14}}" width="14" height="14"/>
+                    </span>&nbsp;&nbsp;<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                    <li role="menuitem" ng-repeat="org in ctrl.currentUser.organizations">
+                      <a href ng-click="ctrl.switchOrg(org.id)">
+                        <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+                          ng-class="{'glyphicon-hide': org.id !== ctrl.actionOrg.id}"></span>
+                        <span class="avatar">
+                          <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+                        </span>&nbsp;&nbsp;{{org.name}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </span>
+              <span ng-switch-default>
+                <button type="submit"
+                  class="btn btn-xs btn-danger flag-submit"
+                  ng-if="!ctrl.showCoiNotice"
+                  ng-click="ctrl.submit(ctrl.newFlag)"
+                  ng-disabled="ctrl.newFlag.comment.text.length < 3"
+                  tooltip-enable="ctrl.newFlag.comment.text.length < 3"
+                  uib-tooltip="Please add comment before submitting flag.">
+                  Flag
+                </button>
+              </span>
+            </span>
           </div>
         </div>
       </div>
@@ -82,7 +138,15 @@
     <div class="row" ng-if="ctrl.showResolved">
       <div class="col-xs-12" style="padding-top: 8px;">
         <div class="flag-container" ng-repeat="flag in ctrl.flags | filter: {state: 'resolved'} | orderBy:'id':true">
-          <editable-field-flag flag="flag" resolve-fn="ctrl.resolve" entity-id="ctrl.entityId" type="type" name="name"></editable-field-flag>
+          <editable-field-flag
+            flag="flag"
+            current-user="ctrl.currentUser"
+            switch-org-fn="ctrl.switchOrg"
+            action-org="ctrl.actionOrg"
+            resolve-fn="ctrl.resolve"
+            entity-id="ctrl.entityId"
+            type="type"
+            name="name"></editable-field-flag>
         </div>
       </div>
     </div>

@@ -18,9 +18,6 @@
   // @ngInject
   function GeneTalkRevisionSummaryController($scope, $stateParams, GeneRevisions, Security, formConfig, $rootScope) {
     var vm = $scope.vm = {};
-    vm.isEditor = Security.isEditor;
-    vm.isAdmin = Security.isAdmin;
-    vm.isAuthenticated = Security.isAuthenticated;
 
     vm.geneTalkModel = GeneRevisions;
 
@@ -28,6 +25,20 @@
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.actionOrg = vm.currentUser.most_recent_organization;
+    });
 
     // determine moderation button visibility
     var currentUserId;
@@ -47,17 +58,27 @@
 
         vm.showModeration = changeIsNew && ((isModerator && coiValid) || ownerIsCurrentUser);
         vm.showCoiNotice = changeIsNew && !vm.showModeration && isModerator;
+        vm.disabled_text = (Security.isEditor() || Security.isAdmin()) ? 'Contributors may not accept their own suggested revisions.' : 'Suggested revisions must be approved by an editor.' ;
       });
 
-    vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? 'Contributors may not accept their own suggested revisions.' : 'Suggested revisions must be approved by an editor.' ;
+    vm.switchOrg = function(id) {
+      vm.actionOrg = _.find(vm.currentUser.organizations, { id: id });
+    };
 
-    $scope.acceptRevision = function() {
+    vm.acceptRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};
-      GeneRevisions.acceptRevision($stateParams.geneId, $stateParams.revisionId)
+      GeneRevisions.acceptRevision(
+        $stateParams.geneId,
+        $stateParams.revisionId,
+        vm.actionOrg)
         .then(function() {
           vm.formMessages.acceptSuccess = true;
           $rootScope.$broadcast('revisionDecision');
+          // reload current user if org changed
+          if (vm.actionOrg.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision accept error!');
@@ -68,13 +89,20 @@
         });
     };
 
-    $scope.rejectRevision = function() {
+    vm.rejectRevision = function() {
       vm.formErrors = {};
       vm.formMessages = {};
-      GeneRevisions.rejectRevision($stateParams.geneId, $stateParams.revisionId)
+      GeneRevisions.rejectRevision(
+        $stateParams.geneId,
+        $stateParams.revisionId,
+        vm.actionOrg)
         .then(function() {
           vm.formMessages.rejectSuccess = true;
           $rootScope.$broadcast('revisionDecision');
+          // reload current user if org changed
+          if (vm.actionOrg.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision reject error!');

@@ -47,9 +47,6 @@
     var help = ConfigService.evidenceHelpText;
     var vm = $scope.vm = {};
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
 
     vm.evidence = Evidence.data.item;
     vm.pendingFields = _.keys(EvidenceRevisions.data.pendingFields).length > 0;
@@ -67,6 +64,21 @@
       source_type: vm.evidenceEdit.source.source_type,
       citation_id: vm.evidenceEdit.source.citation_id
     };
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.evidenceEdit.organization = vm.currentUser.most_recent_organization;
+    });
+
     vm.styles = EvidenceViewOptions.styles;
 
     vm.user = {};
@@ -603,6 +615,10 @@
       }
     ];
 
+    vm.switchOrg = function(id) {
+      vm.evidenceEdit.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.submit = function(evidenceEdit) {
       evidenceEdit.evidenceId = evidenceEdit.id;
       evidenceEdit.drugs = _.without(evidenceEdit.drugs, '');
@@ -626,6 +642,10 @@
           vm.showSuccessMessage = true;
           vm.showInstructions = false;
           $rootScope.$broadcast('revisionDecision');
+          // reload current user if org changed
+          if (evidenceEdit.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision submit error!');
@@ -647,7 +667,10 @@
         .then(function() {
           console.log('revision appy success!');
           vm.formMessages.applySuccess = true;
-          // options.resetModel();
+          // reload current user if org changed
+          if (evidenceEdit.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(response) {
           console.error('revision application error!');

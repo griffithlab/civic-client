@@ -223,8 +223,12 @@
         });
     }
 
-    function acceptRevision(assertionId, revisionId) {
-      return AssertionRevisionsResource.acceptRevision({ assertionId: assertionId, revisionId: revisionId }).$promise.then(
+    function acceptRevision(assertionId, revisionId, organization) {
+      return AssertionRevisionsResource.acceptRevision({
+        assertionId: assertionId,
+        revisionId: revisionId,
+        organization: organization
+      }).$promise.then(
         function(response) {
           cache.remove('/api/assertions/' + assertionId + '/suggested_changes/');
           query(assertionId);
@@ -243,8 +247,12 @@
           return $q.reject(error);
         });
     }
-    function rejectRevision(assertionId, revisionId) {
-      return AssertionRevisionsResource.rejectRevision({ assertionId: assertionId, revisionId: revisionId }).$promise.then(
+    function rejectRevision(assertionId, revisionId, organization) {
+      return AssertionRevisionsResource.rejectRevision({
+        assertionId: assertionId,
+        revisionId: revisionId,
+        organization: organization
+      }).$promise.then(
         function(response) {
           cache.remove('/api/assertions/' + response.id + '/suggested_changes/');
           query(assertionId);

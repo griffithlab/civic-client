@@ -182,28 +182,97 @@
   </div>
   <div class="row" ng-if="vm.showModeration" style="margin-top: 1em; margin-bottom: 1em;">
     <div class="col-xs-6">
-      <a class="btn btn-default btn-block btn-danger" ng-click="rejectItem(vm.assertion.id)">
-        Reject Assertion
-      </a>
-    </div>
-    <div class="col-xs-6">
-      <span uib-tooltip="Contributors may not accept their own submissions."
-        tooltip-placement="top"
-        tooltip-append-to-body="true"
-        tooltip-enable="vm.ownerIsCurrentUser"
-        class="help-tooltip">
-        <span uib-tooltip="Assertion must have at least one evidence item to be accepted."
-          tooltip-append-to-body="true"
-          tooltip-placement="bottom"
-          tooltip-enable="vm.assertion.evidence_items.length === 0"
-          class="help-tooltip">
-          <a class="btn btn-default btn-block btn-success"
-            ng-disabled="vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0"
-            ng-click="acceptItem(vm.assertion.id)">
-            Accept Assertion
+      <span ng-switch="vm.currentUser.organizations.length > 1">
+        <span ng-switch-when="true">
+          <div class="btn-group pull-right org-select" uib-dropdown>
+
+            <button id="split-button"
+              type="button"
+              class="btn btn-danger"
+              ng-click="vm.rejectItem(vm.assertion.id)">
+              Reject Assertion Item
+            </button>
+
+            <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+              for
+              <span class="avatar"
+                uib-tooltip="{{vm.actionOrg.name}}">
+                <img ng-src="{{vm.actionOrg.profile_image.x14}}" width="14" height="14"/>
+              </span>&nbsp;&nbsp;<span class="caret"></span>
+            </button>
+            <ul ng-include="'org-menu.tpl.html'"
+              uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
+          </div>
+        </span>
+        <span ng-switch-default>
+          <a class="btn btn-default btn-block btn-danger"
+            ng-click="vm.rejectItem(vm.assertion.id)">
+            Reject Assertion Item
           </a>
         </span>
       </span>
+    </div>
+    <div class="col-xs-6">
+      <span ng-switch="vm.currentUser.organizations.length > 1">
+        <span ng-switch-when="true">
+          <span uib-tooltip="Contributors may not accept their own submissions."
+            tooltip-placement="top"
+            tooltip-append-to-body="true"
+            tooltip-enable="vm.ownerIsCurrentUser"
+            class="help-tooltip">
+            <span uib-tooltip="Assertion must have at least one evidence item to be accepted."
+              tooltip-append-to-body="true"
+              tooltip-placement="bottom"
+              tooltip-enable="vm.assertion.evidence_items.length === 0"
+              class="help-tooltip">
+              <div class="btn-group org-select"
+                uib-dropdown>
+                <a id="split-button"
+                  type="button"
+                  class="btn btn-success"
+                  ng-disabled="vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0"
+                  ng-click="vm.acceptItem(vm.assertion.id)">
+                  Accept Evidence Item
+                </a>
+
+                <a type="button" class="btn btn-success"
+                  ng-disabled="vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0"
+                  uib-dropdown-toggle>
+                  for
+                  <span class="avatar"
+                    uib-tooltip="{{vm.actionOrg.name}}"
+                    tooltip-enable="!(vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0)">
+                    <img ng-src="{{vm.actionOrg.profile_image.x14}}" width="14" height="14"/>
+                  </span>&nbsp;&nbsp;<span class="caret"></span>
+
+                </a>
+                <ul ng-include="'org-menu.tpl.html'"
+                  uib-dropdown-menu class="dropdown-menu" role="menu"></ul>
+              </div>
+            </span>
+          </span>
+        </span>
+        <span ng-switch-default>
+          <span uib-tooltip="Contributors may not accept their own submissions."
+            tooltip-placement="top"
+            tooltip-append-to-body="true"
+            tooltip-enable="vm.ownerIsCurrentUser"
+            class="help-tooltip">
+            <span uib-tooltip="Assertion must have at least one evidence item to be accepted."
+              tooltip-append-to-body="true"
+              tooltip-placement="bottom"
+              tooltip-enable="vm.assertion.evidence_items.length === 0"
+              class="help-tooltip">
+              <a class="btn btn-default btn-success btn-block"
+                ng-disabled="vm.ownerIsCurrentUser || vm.assertion.evidence_items.length === 0"
+                ng-click="vm.acceptItem(vm.assertion.id)">
+                Accept Assertion
+              </a>
+            </span>
+          </span>
+        </span>
+      </span>
+
     </div>
   </div>
   <div class="row" ng-if="vm.showCoiNotice">
@@ -260,3 +329,15 @@
   <!-- </div> -->
   <!-- </div> -->
 </div>
+
+<script type="text/ng-template" id="org-menu.tpl.html">
+  <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+    <a href ng-click="vm.switchOrg(org.id)">
+      <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+        ng-class="{'glyphicon-hide': org.id !== vm.actionOrg.id}"></span>
+      <span class="avatar">
+        <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+      </span>&nbsp;&nbsp;{{org.name}}
+    </a>
+  </li>
+</script>

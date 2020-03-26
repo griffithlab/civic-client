@@ -174,6 +174,11 @@
   border-color: #47161C;
 }
 
+// add to glyphicon for a 'blank' icon placeholder
+.glyphicon-hide {
+  color: transparent !important;
+}
+
 // common form styles
 
 /*requires font awesome*/
@@ -193,8 +198,6 @@ div.validation-error {
   text-align: left;
 }
 
-
-
 // evidence grid
 .ui-grid-menu-button {
   height: 25px;
@@ -203,6 +206,60 @@ div.validation-error {
   border-top-right-radius: @border-radius-base;
   border-top: none;
   border-right: none;
+}
+
+// org avatars on action dropdown menus
+@avatar-md: 14px;
+@avatar-sm: 10px;
+@avatar-md-margin: 3px;
+@avatar-sm-margin: 1px;
+@avatar-md-radius: 3px;
+@avatar-sm-radius: 2px;
+
+.org-select {
+  .avatar {
+    border: 1px solid #AAA;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    top: 3px;
+    left: 3px;
+    display: inline-block;
+    line-height: 1;
+    border-radius: 3px;
+    background-color: transparent;
+    overflow: hidden;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 14px;
+      height: 14px;
+    }
+  }
+  .avatar-md {
+    width: @avatar-md;
+    height: @avatar-md;
+    top: @avatar-md-margin;
+    left: @avatar-md-margin;
+    border-radius: @avatar-md-radius;
+    img {
+      width: @avatar-md;
+      height: @avatar-md;
+    }
+  }
+
+  .avatar-sm {
+    width: @avatar-sm;
+    height: @avatar-sm;
+    top: @avatar-sm-margin;
+    left: @avatar-sm-margin;
+    border-radius: @avatar-sm-radius;
+    img {
+      width: @avatar-sm;
+      height: @avatar-sm;
+    }
+  }
 }
 
 // form server error messages

@@ -20,34 +20,47 @@
                                       AssertionsViewOptions) {
     var vm = $scope.vm = {};
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isCurator = Security.isCurator();
-
     vm.assertion = Assertions.data.item;
     vm.myVariantInfo = Assertions.data.myVariantInfo;
 
-    // (vm.isEditor || vm.isAdmin || (vm.isCurator && vm.ownerIsCurrentUser)) && vm.assertion.status === 'submitted'
+    vm.currentUser = null; // will be updated with requestCurrentUser call later
 
-    // determine moderation button visibility
-    var currentUserId;
-    if(Security.currentUser) { currentUserId = Security.currentUser.id; };
-    var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
-    var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
 
-    $scope.$watchGroup(
-      [ function() { return Assertions.data.item.status; },
-        function() { return Security.currentUser ? Security.currentUser.conflict_of_interest.coi_valid : undefined; } ],
-      function(statuses) {
-        var changeStatus = statuses[0];
-        var coiStatus = statuses[1];
-        var changeIsSubmitted = changeStatus === 'submitted';
-        var coiValid = coiStatus === 'conflict' || coiStatus === 'valid';
-        var isModerator = Security.isEditor() || Security.isAdmin();
+      // if user has most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
 
-        vm.showModeration = changeIsSubmitted && ((isModerator && coiValid) || ownerIsCurrentUser);
-        vm.showCoiNotice = changeIsSubmitted && !vm.showModeration && isModerator;
-      });
+      // set org to be sent with reject/accept actions
+      vm.actionOrg = vm.currentUser.most_recent_organization;
+
+      // determine moderation button visibility
+      var currentUserId;
+      if(Security.currentUser) { currentUserId = Security.currentUser.id; };
+      var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
+      var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
+
+      $scope.$watchGroup(
+        [ function() { return Assertions.data.item.status; },
+          function() { return Security.currentUser ? Security.currentUser.conflict_of_interest.coi_valid : undefined; } ],
+        function(statuses) {
+          var changeStatus = statuses[0];
+          var coiStatus = statuses[1];
+          var changeIsSubmitted = changeStatus === 'submitted';
+          var coiValid = coiStatus === 'conflict' || coiStatus === 'valid';
+          var isModerator = Security.isEditor() || Security.isAdmin();
+
+          vm.showModeration = changeIsSubmitted && ((isModerator && coiValid) || ownerIsCurrentUser);
+          vm.showCoiNotice = changeIsSubmitted && !vm.showModeration && isModerator;
+        });
+
+    });
+
+    vm.switchOrg = function(id) {
+      vm.actionOrg = _.find(vm.currentUser.organizations, { id: id });
+    };
 
     vm.AssertionsViewOptions = AssertionsViewOptions;
     vm.backgroundColor = AssertionsViewOptions.styles.view.backgroundColor;
@@ -114,20 +127,16 @@
       });
     }, true);
 
-    if(Security.currentUser) {
-      var currentUserId = Security.currentUser.id;
-      var submitterId = _.isUndefined(vm.assertion.lifecycle_actions.submitted) ? null : vm.assertion.lifecycle_actions.submitted.user.id;
-      vm.ownerIsCurrentUser = submitterId === currentUserId;
-    } else {
-      vm.ownerIsCurrentUser = false;
-    }
-
-    $scope.acceptItem = function(id) {
+    vm.acceptItem = function(id) {
       $log.debug('accept item ' + id);
-      Assertions.accept(id)
+      Assertions.accept(id, vm.actionOrg)
         .then(function(response) {
           $log.debug('Accept success.');
           $log.debug(response);
+          // reload current user if org changed
+          if (vm.actionOrg.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(response) {
           $log.error('Ooops! There was an error accepting this evidence item.');
@@ -138,12 +147,16 @@
         });
     };
 
-    $scope.rejectItem = function(id) {
+    vm.rejectItem = function(id) {
       $log.debug('reject item ' + id);
-      Assertions.reject(id)
+      Assertions.reject(id, vm.actionOrg)
         .then(function(response) {
           $log.debug('Reject success.');
           $log.debug(response);
+          // reload current user if org changed
+          if (vm.actionOrg.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(response) {
           $log.error('Ooops! There was an error rejecting this evidence item.');

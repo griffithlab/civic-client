@@ -240,10 +240,11 @@
         });
     }
 
-    function acceptRevision(variantId, revisionId) {
+    function acceptRevision(variantId, revisionId, organization) {
       return VariantRevisionsResource.acceptRevision({
         variantId: variantId,
-        revisionId: revisionId
+        revisionId: revisionId,
+        organization: organization
       }).$promise.then(
         function(response) {
           // flush variant cache and refresh
@@ -273,8 +274,12 @@
         });
     }
 
-    function rejectRevision(variantId, revisionId) {
-      return VariantRevisionsResource.rejectRevision({ variantId: variantId, revisionId: revisionId }).$promise.then(
+    function rejectRevision(variantId, revisionId, organization) {
+      return VariantRevisionsResource.rejectRevision({
+        variantId: variantId,
+        revisionId: revisionId,
+        organization: organization
+      }).$promise.then(
         function(response) {
           // flush variant suggested_changes and refresh
           cache.remove('/api/variants/' + variantId + '/suggested_changes/');

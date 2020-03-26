@@ -14,6 +14,8 @@
         flag: '=',
         type: '=',
         name: '=',
+        actionOrg: '=',
+        switchOrgFn: '=',
         resolveFn: '='
       },
       controller: 'EditableFieldFlagController',
@@ -24,9 +26,10 @@
   // @ngInject
   function EditableFieldFlagController($scope, $state, _, Security) {
     var ctrl = $scope.ctrl = {};
-    console.log('editable field flag controller called. ----------------');
     ctrl.isAdmin = Security.isAdmin;
     ctrl.isEditor = Security.isEditor;
+    ctrl.actionOrg = $scope.actionOrg;
+    ctrl.switchOrgFn = $scope.switchOrgFn;
 
     // set COI notice display
     $scope.$watch(function() {

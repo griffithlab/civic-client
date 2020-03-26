@@ -46,8 +46,6 @@
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:revisionId/accept',
           params: {
-            geneId: '@geneId',
-            revisionId: '@revisionId',
             force: true
           },
           cache: false
@@ -56,8 +54,6 @@
           method: 'POST',
           url: '/api/genes/:geneId/suggested_changes/:revisionId/reject',
           params: {
-            geneId: '@geneId',
-            revisionId: '@revisionId',
             force: true
           },
           cache: false
@@ -207,8 +203,10 @@
     }
 
     function submitRevision(reqObj) {
-      return GeneRevisionsResource.submitRevision(reqObj).$promise.then(
-        function(response) { // success
+      return GeneRevisionsResource
+        .submitRevision(reqObj)
+        .$promise.then(
+          function(response) { // success
           cache.remove('/api/genes/' + reqObj.id + '/suggested_changes/');
 
           // flush subscriptions and refresh
@@ -222,8 +220,13 @@
         });
     }
 
-    function acceptRevision(geneId, revisionId) {
-      return GeneRevisionsResource.acceptRevision({ geneId: geneId, revisionId: revisionId }).$promise.then(
+    function acceptRevision(geneId, revisionId, organization) {
+      return GeneRevisionsResource
+        .acceptRevision({
+          geneId: geneId,
+          revisionId: revisionId,
+          organization: organization
+        }).$promise.then(
         function(response) {
           cache.remove('/api/genes/' + geneId + '/suggested_changes/');
           query(geneId);
@@ -242,8 +245,13 @@
           return $q.reject(error);
         });
     }
-    function rejectRevision(geneId, revisionId) {
-      return GeneRevisionsResource.rejectRevision({ geneId: geneId, revisionId: revisionId }).$promise.then(
+    function rejectRevision(geneId, revisionId, organization) {
+      return GeneRevisionsResource
+        .rejectRevision({
+          geneId: geneId,
+          revisionId: revisionId,
+          organization: organization
+        }).$promise.then(
         function(response) {
           cache.remove('/api/genes/' + response.id + '/suggested_changes/');
           query(geneId);

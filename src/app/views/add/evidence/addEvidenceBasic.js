@@ -48,18 +48,9 @@
     vm.evidenceModel = Evidence;
     vm.evidenceOptions = AddEvidenceViewOptions;
 
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
+    vm.currentUser = null; // will be updated with requestCurrentUser call later
 
     vm.showPrefillPrompt = !_.isUndefined(_.find($stateParams, function(val) { return !_.isUndefined(val); })) ? true : false;
-
-    // TODO: watch expression is a temp fix, should refactor isAuth to return a promise
-    // in order to cover situations where components load faster than the auth info
-    // is returned from the server
-    $scope.$watch(function() { return Security.isAuthenticated();}, function(isAuth) {
-      vm.isAuthenticated = isAuth;
-    });
 
     vm.showForm = true;
     vm.showSuccessMessage = false;
@@ -91,7 +82,8 @@
       evidence_direction: '',
       clinical_significance: '',
       variant_origin: '',
-      keepSourceStatus: false
+      keepSourceStatus: false,
+      organization: null
     };
 
     vm.newEvidence.comment = { title: 'Additional Comments', text:'' };
@@ -103,6 +95,20 @@
     vm.formMessages = {};
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.newEvidence.organization = vm.currentUser.most_recent_organization;
+    });
 
     vm.evidenceFields = [
       {
@@ -858,6 +864,10 @@
       }
     ];
 
+    vm.switchOrg = function(id) {
+      vm.newEvidence.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.submit = function(newEvidence) {
       newEvidence.evidenceId = newEvidence.id;
       newEvidence.drugs = _.without(newEvidence.drugs, '');
@@ -899,6 +909,10 @@
             variant: response.variant.name,
             evidence_item: response.evidence_item.name
           };
+          // reload current user if org changed
+          if (newEvidence.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('add evidence error!');

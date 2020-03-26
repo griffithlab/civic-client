@@ -35,14 +35,13 @@
                                    Phenotypes,
                                    NccnGuidelines,
                                    DrugSuggestions) {
-    var assertionModel, vm;
-    var acmgCodes = Assertions.data.acmg_codes;
+    var vm;
 
     vm = $scope.vm = {};
-    assertionModel = vm.assertionModel = Assertions;
 
     vm.type = 'ASSERTION';
 
+    var acmgCodes = Assertions.data.acmg_codes;
     var help = ConfigService.evidenceHelpText;
     var descriptions = ConfigService.evidenceAttributeDescriptions;
     var assertDescriptions = ConfigService.assertionAttributeDescriptions;
@@ -52,10 +51,6 @@
     var merge_props = ConfigService.optionMethods.merge_props; // reduce depth of object tree by 1; by merging properties of properties of obj
     var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
     var nccnGuidelines = ConfigService.assertionAttributeDescriptions.nccnGuidelines;
-
-    vm.isEditor = Security.isEditor();
-    vm.isAdmin = Security.isAdmin();
-    vm.isAuthenticated = Security.isAuthenticated();
 
     vm.assertion = {};
 
@@ -75,6 +70,20 @@
     vm.assertionEdit.nccn_guideline = {
       name: vm.assertionEdit.nccn_guideline ? vm.assertionEdit.nccn_guideline : ''
     };
+
+    Security.requestCurrentUser().then(function(u) {
+      vm.currentUser = u;
+      vm.isEditor = Security.isEditor();
+      vm.isAdmin = Security.isAdmin();
+      vm.isAuthenticated = Security.isAuthenticated();
+
+      // if user no most_recent_org, assign org
+      if(!u.most_recent_organization) {
+        vm.currentUser.most_recent_organization = u.organizations[0];
+      }
+
+      vm.assertionEdit.organization = vm.currentUser.most_recent_organization;
+    });
 
     vm.styles = AssertionsViewOptions.styles;
 
@@ -775,6 +784,10 @@
 
     ];
 
+    vm.switchOrg = function(id) {
+      vm.assertionEdit.organization = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.submit = function(assertionEdit) {
       var newAssertion = _.cloneDeep(assertionEdit);
       newAssertion.drugs = _.without(newAssertion.drugs, '');
@@ -795,7 +808,10 @@
           vm.showForm = false;
           vm.showSuccessMessage = true;
           $rootScope.$broadcast('revisionDecision');
-          // options.resetModel();
+          // reload current user if org changed
+          if (newAssertion.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
         })
         .catch(function(error) {
           console.error('revision submit error!');

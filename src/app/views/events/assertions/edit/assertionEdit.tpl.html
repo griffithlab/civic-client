@@ -50,18 +50,55 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-10 col-xs-offset-2">
+      <div class="col-xs-5 col-xs-offset-2">
         <div class="buttons">
           <div class="pull-left">
             <cancel-button></cancel-button>
           </div>
           <div class="pull-right">
-            <button type="submit"
-              class="btn btn-default"
-              ng-disabled="vm.form.$invalid || vm.isAuthenticated === false"
-              ng-click="vm.submit(vm.assertionEdit, vm.options)">
-              Submit Revision for Review
-            </button>
+            <!-- show org-select button if user is member of > 1 orgs -->
+            <span ng-switch="vm.currentUser.organizations.length > 1" >
+              <span ng-switch-when="true" >
+                <div class="btn-group org-select" uib-dropdown>
+                  <button id="split-button"
+                    type="button"
+                    class="btn btn-default"
+                    ng-click="vm.submit(vm.assertionEdit, vm.options)"
+                    ng-disabled="vm.form.$invalid || vm.isAuthenticated === false">
+                    Submit Revision
+                  </button>
+
+                  <button type="button" class="btn btn-default" uib-dropdown-toggle
+                    ng-disabled="vm.form.$invalid || vm.isAuthenticated === false">
+                    for
+                    <span class="avatar"
+                      uib-tooltip="{{vm.assertionEdit.organization.name}}"
+                      tooltip-enable="!(vm.form.$invalid || vm.isAuthenticated === false)">
+                      <img ng-src="{{vm.assertionEdit.organization.profile_image.x14}}" width="14" height="14"/>
+                    </span>&nbsp;&nbsp;<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                    <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+                      <a href ng-click="vm.switchOrg(org.id)">
+                        <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+                          ng-class="{'glyphicon-hide': org.id !== vm.assertionEdit.organization.id}"></span>
+                        <span class="avatar">
+                          <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+                        </span>&nbsp;&nbsp;{{org.name}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </span>
+              <span ng-switch-default>
+                <button type="submit"
+                  class="btn btn-default"
+                  ng-disabled="vm.form.$invalid || vm.isAuthenticated === false"
+                  ng-click="vm.submit(vm.assertionEdit, vm.options)">
+                  Submit Revision
+                </button>
+              </span>
+            </span>
           </div>
         </div>
       </div>
