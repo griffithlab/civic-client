@@ -352,7 +352,7 @@
       var reqObj = {
         source: req.source,
         comment: req.comment,
-        orgnization: vm.actionOrg
+        organization: vm.actionOrg
       };
       if(!_.isUndefined(req.gene) && _.isObject(req.gene)) {
         reqObj.gene_name = req.gene.name;
