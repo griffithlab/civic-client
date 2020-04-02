@@ -147,10 +147,10 @@
       evidenceAttributeDescriptions: {
         variant_origin: {
           'Somatic': 'Variant is a mutation, found only in tumor cells, having arisen in a specific tissue (non-germ cell), and is not expected to be inherited or passed to offspring.',
-          'Rare Germline': 'Variant is a mutation, found in every cell, not restricted to tumor/diseased cells, is expected to have arisen de novo in the germ cells responsible for the current generation or only very recent generations (e.g., close family members), and is not thought to exist in the population at large.',
-          'Common Germline': 'Variant is found in every cell, not restricted to tumor/diseased cells, and thought to represent common (or relatively rare) variation in the population at large.',
+          'Rare Germline': 'Variant is found in every cell (not restricted to tumor/diseased cells) and is thought to exist in less than 1% of the population relevant to this evidence item.',
+          'Common Germline': 'Variant is found in every cell (not restricted to tumor/diseased cells) and is thought to exist in at least 1% of the population relevant to this evidence item.',
           'Unknown': 'The variant origin is uncertain based on the available evidence.',
-          'N/A': 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concepts of variant origin.'
+          'N/A': 'The variant type (e.g., expression) is not compatible (or easily classified) with the CIViC concept of variant origin.'
         },
         source_type: {
           'PubMed': 'Evidence item source uses a PubMed publication.',
