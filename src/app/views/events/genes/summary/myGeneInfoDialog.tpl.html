@@ -20,6 +20,13 @@
       </p>
     </div>
   </div>
+  <div class="row swissprot">
+    <div class="col-xs-12">
+      <p>
+      <strong>UniProtKB/Swiss-Prot ID: </strong><a href="https://www.uniprot.org/uniprot/{{geneInfo.uniprot['Swiss-Prot']}}" target="_blank"><span ng-bind="geneInfo.uniprot['Swiss-Prot']"></span></a>
+      </p>
+    </div>
+  </div>
   <div class="row grid-row protein-domains">
     <div class="col-xs-12">
       <div ui-grid="ctrl.gridOptions.proteinDomains" class="dataGrid" ui-grid-auto-resize></div>
