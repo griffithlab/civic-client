@@ -7,4 +7,4 @@ wallaby.conf.js
 docs/*
 !docs/img/
 !.gitkeep
-
+.DS_Store
