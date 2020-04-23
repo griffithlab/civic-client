@@ -6,14 +6,6 @@
 
   // @ngInject
   function CommentSuggestionsResource($resource) {
-    //var cache = $cacheFactory.get('$http');
-
-    //var cacheInterceptor = function(response) {
-    //  console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(' '));
-    //  cache.remove(response.config.url);
-    //  return response.$promise;
-    //};
-
 
     return $resource('/api/entity_suggestions',
       { },
