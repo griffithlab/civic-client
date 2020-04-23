@@ -9,7 +9,16 @@
     .factory('Security', Security);
 
 // @ngInject
-  function Security($http, $q, $location, $state, RetryQueue, Subscriptions, dialogs, $log) {
+  function Security($http,
+                    $q,
+                    $location,
+                    $state,
+                    $injector,
+                    RetryQueue,
+                    Subscriptions,
+                    dialogs,
+                    $log) {
+
     // Redirect to the given url (defaults to '/')
     function redirect(url) {
       url = url || '/';
@@ -64,7 +73,9 @@
 
       // Attempt to authenticate a user by the given email and password
       login: function() {
-        var request = $http.get('/api/current_user.json');
+        var request = $injector.get('CurrentUser').get();
+
+        // var request = $http.get('/api/current_user.json');
         return request.then(function(response) {
           service.currentUser = response.data.user;
           if ( service.isAuthenticated() ) {
