@@ -38,11 +38,6 @@
 
       vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? 'Contributors may not accept their own suggested revisions.' : 'Suggested revisions must be approved by an editor.' ;
 
-      // if user has most_recent_org, assign org
-      if(!u.most_recent_organization) {
-        vm.currentUser.most_recent_organization = u.organizations[0];
-      }
-
       // set org to be sent with reject/accept actions
       vm.actionOrg = vm.currentUser.most_recent_organization;
 

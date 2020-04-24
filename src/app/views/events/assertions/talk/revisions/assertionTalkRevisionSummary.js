@@ -43,11 +43,6 @@
       var submitterId = AssertionRevisions.data.item.user.id;
       var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
 
-      // if user no most_recent_org, assign org
-      if(!u.most_recent_organization) {
-        vm.currentUser.most_recent_organization = u.organizations[0];
-      }
-
       vm.disabled_text = (vm.isEditor() || vm.isAdmin()) ? 'Contributors may not accept their own suggested revisions.' : 'Suggested revisions must be approved by an editor.' ;
       vm.actionOrg = vm.currentUser.most_recent_organization;
     });

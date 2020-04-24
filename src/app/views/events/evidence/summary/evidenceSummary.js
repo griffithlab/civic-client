@@ -30,11 +30,6 @@
     Security.reloadCurrentUser().then(function(u) {
       $scope.currentUser = u;
 
-      // if user has most_recent_org, assign org
-      if(!u.most_recent_organization) {
-        $scope.currentUser.most_recent_organization = u.organizations[0];
-      }
-
       // set org to be sent with reject/accept actions
       $scope.actionOrg = $scope.currentUser.most_recent_organization;
 
