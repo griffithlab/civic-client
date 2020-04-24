@@ -127,7 +127,6 @@
   angular.module('civic.security', [
     'civic.security.authorization',
     'civic.security.service',
-    'civic.security.interceptor',
     'civic.security.login'
   ]);
   angular.module('civic.config', ['formly', 'formlyBootstrap']);
