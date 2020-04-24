@@ -101,6 +101,8 @@
       vm.isEditor = Security.isEditor();
       vm.isAdmin = Security.isAdmin();
       vm.isAuthenticated = Security.isAuthenticated();
+
+      vm.newEvidence.organization = vm.currentUser.most_recent_organization;
     });
 
     vm.evidenceFields = [

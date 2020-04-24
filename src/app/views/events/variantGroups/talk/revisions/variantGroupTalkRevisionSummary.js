@@ -25,7 +25,7 @@
     vm.errorMessages = formConfig.errorMessages;
     vm.errorPrompts = formConfig.errorPrompts;
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       var submitterId = VariantGroupRevisions.data.item.user.id;
       var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === u.id;
 

@@ -50,7 +50,7 @@
       return { name: variant.entrez_name + ' - ' + variant.name, id: variant.id };
     });
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       vm.currentUser = u;
       vm.isEditor = Security.isEditor();
       vm.isAdmin = Security.isAdmin();

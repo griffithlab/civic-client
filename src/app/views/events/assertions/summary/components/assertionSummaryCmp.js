@@ -25,7 +25,7 @@
 
     vm.currentUser = null; // will be updated with requestCurrentUser call later
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       vm.currentUser = u;
 
       // if user has most_recent_org, assign org

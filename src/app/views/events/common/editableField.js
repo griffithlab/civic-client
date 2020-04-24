@@ -28,7 +28,7 @@
     ctrl.baseState = '';
     ctrl.stateParams = {};
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       ctrl.currentUser = u;
       ctrl.isEditor = Security.isEditor;
       ctrl.isAdmin = Security.isAdmin;

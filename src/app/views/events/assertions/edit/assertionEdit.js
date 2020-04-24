@@ -71,7 +71,7 @@
       name: vm.assertionEdit.nccn_guideline ? vm.assertionEdit.nccn_guideline : ''
     };
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       vm.currentUser = u;
       vm.isEditor = Security.isEditor();
       vm.isAdmin = Security.isAdmin();

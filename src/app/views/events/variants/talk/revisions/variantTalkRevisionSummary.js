@@ -36,7 +36,7 @@
     var submitterId = VariantRevisions.data.item.user.id;
     var ownerIsCurrentUser = vm.ownerIsCurrentUser = submitterId === currentUserId;
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       vm.currentUser = u;
       vm.isEditor = Security.isEditor();
       vm.isAdmin = Security.isAdmin();

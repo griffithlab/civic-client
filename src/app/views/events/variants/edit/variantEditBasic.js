@@ -52,7 +52,7 @@
     vm.variants = variantModel.data.variants;
     vm.variantGroups = variantModel.data.variantGroups;
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       vm.currentUser = u;
       vm.isEditor = Security.isEditor();
       vm.isAdmin = Security.isAdmin();

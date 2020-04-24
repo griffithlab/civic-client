@@ -27,7 +27,7 @@
     $scope.currentUser = null; // will be updated with requestCurrentUser call later
 
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       $scope.currentUser = u;
 
       // if user has most_recent_org, assign org
