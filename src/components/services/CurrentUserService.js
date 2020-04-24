@@ -5,27 +5,7 @@
     .factory('CurrentUser', CurrentUserService);
 
   // @ngInject
-  function CurrentUserResource($resource, _) {
-
-    var userOrgsInterceptor = function(response) {
-      var user = response.data;
-      if(_.isNull(user.most_recent_organization)) { // most_recent_org not defined
-        if(!_.isEmpty(user.organizations)) { // is a member of at least one org
-          // assign u.orgs[0] to most_recent_org
-          user.most_recent_organization = user.organizations[0];
-        } else { /* no orgs, most_recent remains null */ }
-      } else { // most_recent_org is defined, ensure it's also present in user.orgs array
-        var orgId = user.most_recent_organization.id;
-        if (!_.some(user.organizations, { id: orgId })) { // user is not currently member of most_recent_org
-          if(!_.isEmpty(user.organizations)) { // user is a member of at least one org
-            user.most_recent_organization = user.organizations[0];
-          } else { // user is not a member of their most_recent_org, assign null
-            user.most_recent_organization = null;
-          }
-        }
-      }
-      return user;
-    };
+  function CurrentUserResource($resource, _, UserOrgsInterceptor) {
 
     return $resource('/api/current_user',
       {},
@@ -35,7 +15,7 @@
           isArray: false,
           cache: false,
           interceptor: {
-            response: userOrgsInterceptor
+            response: UserOrgsInterceptor
           }
         },
         getStats: {

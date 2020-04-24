@@ -13,9 +13,9 @@
                     $q,
                     $location,
                     $state,
-                    $injector,
                     RetryQueue,
                     Subscriptions,
+                    UserOrgsInterceptor,
                     dialogs,
                     $log) {
 
@@ -71,20 +71,6 @@
         openLoginDialog();
       },
 
-      // Attempt to authenticate a user by the given email and password
-      login: function() {
-        var request = $injector.get('CurrentUser').get();
-
-        // var request = $http.get('/api/current_user.json');
-        return request.then(function(response) {
-          service.currentUser = response.data.user;
-          if ( service.isAuthenticated() ) {
-            closeLoginDialog(true);
-          }
-          return service.isAuthenticated();
-        });
-      },
-
       // Give up trying to login and clear the retry queue
       cancelLogin: function(url) {
         closeLoginDialog(false);
@@ -110,7 +96,7 @@
             // unauthenticated request returns an empty JSON object, so we count the keys
             // and if there are any we assume an authenticated user
             if(Object.keys(response.data).length > 0) {
-              service.currentUser = response.data;
+              service.currentUser = UserOrgsInterceptor(response);
               Subscriptions.query();
             } else {
               service.currentUser = null;
@@ -126,7 +112,7 @@
           // unauthenticated request returns an empty JSON object, so we count the keys
           // and if there are any we assume an authenticated user
           if(Object.keys(response.data).length > 0) {
-            service.currentUser = response.data;
+            service.currentUser = UserOrgsInterceptor(response);
             Subscriptions.query();
           } else {
             service.currentUser = null;
