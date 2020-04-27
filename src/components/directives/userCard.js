@@ -27,6 +27,14 @@
         !_.isEmpty(user.twitter_handle) ||
         !_.isEmpty(user.linkedin_profile) ||
         !_.isEmpty(user.facebook_profile);
+      // if user is a member of multiple groups,
+      // then construct group tooltip to list them all
+      if(user.organizations.length > 1) {
+        vm.multiple_orgs_tooltip = 'User is a member of multiple organizations: '
+          + user.organizations.map(function(org, i) {
+            return org.name;
+          }).join(', ');
+      }
     }, true);
 
 
