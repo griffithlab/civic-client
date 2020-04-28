@@ -226,7 +226,7 @@
           cache.remove('/api/variants/' + reqObj.id + '/suggested_changes/');
 
           // flush variants status and refresh (for variant menu)
-          cache.remove('/api/genes/' + response.gene_id + '/variants_status');
+          cache.remove('/api/genes/' + reqObj.gene_id + '/variants_status');
           Genes.getVariantsStatus(reqObj.gene_id);
 
           // flush subscriptions and refresh
