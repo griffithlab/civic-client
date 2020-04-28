@@ -65,16 +65,11 @@
       citation_id: vm.evidenceEdit.source.citation_id
     };
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       vm.currentUser = u;
       vm.isEditor = Security.isEditor();
       vm.isAdmin = Security.isAdmin();
       vm.isAuthenticated = Security.isAuthenticated();
-
-      // if user no most_recent_org, assign org
-      if(!u.most_recent_organization) {
-        vm.currentUser.most_recent_organization = u.organizations[0];
-      }
 
       vm.evidenceEdit.organization = vm.currentUser.most_recent_organization;
     });

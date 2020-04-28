@@ -26,27 +26,30 @@
                 <td class="key">Name:</td>
                 <td class="value">{{user.name|ifEmpty: '--'}}</td>
               </tr>
-              <!--<tr>-->
-              <!--<td class="key">Email:</td>-->
-              <!--<td class="value">{{user.email|ifEmpty: '&#45;&#45;'}}</td>-->
-              <!--</tr>-->
               <tr>
                 <td class="key">Area of Expertise:</td>
                 <td class="value">{{user.area_of_expertise|ifEmpty: '--'}}</td>
               </tr>
               <tr>
-                <td class="key">Organization:</td>
+                <td class="key">
+                  Organization<span ng-if="user.organizations.length > 1">s</span>:
+                </td>
                 <td class="value">
-                  <span ng-switch="user.organization.id !== undefined">
-                    <!-- org obj -->
+                  <span ng-switch="user.organizations.length > 0">
+                    <!-- org list -->
                     <span ng-switch-when="true" >
-                      <a ui-sref="organizations.summary({organizationId: user.organization.id})">
-                        {{ user.organization.name }}</a>
-                      <!-- show parent org if exists -->
-                      <span ng-if="user.organization.parent.id !== undefined" >
-                        &nbsp;at <a ui-sref="organizations.summary({organizationId: user.organization.parent.id})">
-                        {{ user.organization.parent.name }}
-                        </a>
+                      <span ng-repeat="org in user.organizations">
+                        <!-- display as list with commas -->
+                        {{
+                        $first ? '' : $last ? (user.organizations.length > 2 ? ', and ' : ' and ') : ', '
+                        }}
+                        <a ui-sref="organizations.summary({organizationId: org.id})">
+                          {{ org.name }}</a>
+                        <!-- show parent org if exists -->
+                        <span ng-if="org.parent.id !== undefined" class="small">
+                          <em>&nbsp;(at {{ org.parent.name }})</em>
+                        </span>
+
                       </span>
                     </span>
                     <!-- no org obj -->

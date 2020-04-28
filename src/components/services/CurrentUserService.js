@@ -5,15 +5,7 @@
     .factory('CurrentUser', CurrentUserService);
 
   // @ngInject
-  function CurrentUserResource($resource) {
-    //var cache = $cacheFactory.get('$http');
-
-    //var cacheInterceptor = function(response) {
-    //  console.log(['EvidenceResource: removing', response.config.url, 'from $http cache.'].join(' '));
-    //  cache.remove(response.config.url);
-    //  return response.$promise;
-    //};
-
+  function CurrentUserResource($resource, _, UserOrgsInterceptor) {
 
     return $resource('/api/current_user',
       {},
@@ -21,7 +13,10 @@
         get: {
           method: 'GET',
           isArray: false,
-          cache: false
+          cache: false,
+          interceptor: {
+            response: UserOrgsInterceptor
+          }
         },
         getStats: {
           ur1l:'/api/current_user/stats',

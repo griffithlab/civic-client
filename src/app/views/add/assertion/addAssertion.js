@@ -63,16 +63,11 @@
 
     vm.currentUser = null; // will be updated with requestCurrentUser call later
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       vm.currentUser = u;
       vm.isEditor = Security.isEditor();
       vm.isAdmin = Security.isAdmin();
       vm.isAuthenticated = Security.isAuthenticated();
-
-      // if user no most_recent_org, assign org
-      if(!u.most_recent_organization) {
-        vm.currentUser.most_recent_organization = u.organizations[0];
-      }
 
       vm.assertion.organization = vm.currentUser.most_recent_organization;
     });

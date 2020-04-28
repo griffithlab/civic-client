@@ -1,5 +1,5 @@
 <div class="userCard"
-     ng-class="vm.user.role">
+  ng-class="vm.user.role">
   <div class="row" >
     <div class="col-xs-6">
       <div class="user-avatar" ng-click="vm.userClick(vm.user.id)">
@@ -42,32 +42,36 @@
   <div class="row">
     <div class="col-xs-12" >
       <div class="secondary-user-attributes">
-      <ul>
-        <li class="attr-key" >
-          Organization
-        </li>
-        <li class="attr-value" >
-          <a ui-sref="organizations.summary({organizationId: vm.user.organization.id})">
-            {{vm.user.organization.name | ifEmpty: '--'}}
-            <span ng-if="vm.user.organization.parent.name.length > 0">
-             at {{vm.user.organization.parent.name}}
+        <ul>
+          <li class="attr-key" >
+            <span ng-if="vm.user.organizations.length > 1">Most Recent </span>Organization
+            <i class="glyphicon glyphicon-info-sign"
+              ng-if="vm.user.organizations.length > 1"
+              uib-tooltip="{{vm.multiple_orgs_tooltip}}">
+            </i>
+          </li>
+          <li class="attr-value" >
+            <a ui-sref="organizations.summary({organizationId: vm.user.most_recent_organization.id})">
+              {{vm.user.most_recent_organization.name | ifEmpty: '--'}}
+            </a>
+            <span ng-if="vm.user.most_recent_organization.parent.name.length > 0">
+              <span class="small"><em>(at {{vm.user.most_recent_organization.parent.name}})</em></span>
             </span>
-          </a>
-        </li>
-        <li class="attr-key" >
-          ORCID iD
-        </li>
-        <li class="attr-value" >
-          <span ng-switch="vm.user.orcid.length > 0">
-            <span ng-switch-when="true" >
-              <a ng-href="https://orcid.org/{{vm.user.orcid}}" target="_blank">{{ vm.user.orcid }}</a>
+          </li>
+          <li class="attr-key" >
+            ORCID iD
+          </li>
+          <li class="attr-value" >
+            <span ng-switch="vm.user.orcid.length > 0">
+              <span ng-switch-when="true" >
+                <a ng-href="https://orcid.org/{{vm.user.orcid}}" target="_blank">{{ vm.user.orcid }}</a>
+              </span>
+              <span ng-switch-default>
+                --
+              </span>
             </span>
-            <span ng-switch-default>
-              --
-            </span>
-          </span>
-        </li>
-      </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -86,26 +90,26 @@
     </div>
     <div class="col-xs-8" ng-if="vm.user.community_params.most_recent_action_timestamp !== null">
       <div class="secondary-user-attributes attr-right">
-      <ul>
-        <li class="attr-key" >
-       Last Action
-        </li>
-        <li class="attr-value" >
-          <span ng-bind="vm.user.community_params.most_recent_action_timestamp | timeAgo"></span>
-        </li>
-      </ul>
+        <ul>
+          <li class="attr-key" >
+            Last Action
+          </li>
+          <li class="attr-value" >
+            <span ng-bind="vm.user.community_params.most_recent_action_timestamp | timeAgo"></span>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-xs-8" ng-if="vm.user.community_params.most_recent_action_timestamp === null">
       <div class="secondary-user-attributes attr-right">
-      <ul>
-        <li class="attr-key" >
-      Join Date
-        </li>
-        <li class="attr-value" >
-          <span ng-bind="vm.user.created_at | timeAgo"></span>
-        </li>
-      </ul>
+        <ul>
+          <li class="attr-key" >
+            Join Date
+          </li>
+          <li class="attr-value" >
+            <span ng-bind="vm.user.created_at | timeAgo"></span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -144,7 +148,7 @@
         </div>
       </div>
     </div>
-    </div>
   </div>
+</div>
 </div>
 </div>

@@ -25,13 +25,8 @@
 
     vm.currentUser = null; // will be updated with requestCurrentUser call later
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       vm.currentUser = u;
-
-      // if user has most_recent_org, assign org
-      if(!u.most_recent_organization) {
-        vm.currentUser.most_recent_organization = u.organizations[0];
-      }
 
       // set org to be sent with reject/accept actions
       vm.actionOrg = vm.currentUser.most_recent_organization;

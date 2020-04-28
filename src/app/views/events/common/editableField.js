@@ -28,16 +28,11 @@
     ctrl.baseState = '';
     ctrl.stateParams = {};
 
-    Security.requestCurrentUser().then(function(u) {
+    Security.reloadCurrentUser().then(function(u) {
       ctrl.currentUser = u;
       ctrl.isEditor = Security.isEditor;
       ctrl.isAdmin = Security.isAdmin;
       ctrl.isAuthenticated = Security.isAuthenticated;
-
-      // if user no most_recent_org, assign org
-      if(!u.most_recent_organization) {
-        ctrl.currentUser.most_recent_organization = u.organizations[0];
-      }
 
       ctrl.actionOrg = ctrl.currentUser.most_recent_organization;
     });
