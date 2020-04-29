@@ -221,7 +221,8 @@
               'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
             },
             'Predisposing': {
-              'N/A': 'Evidence Direction is not applicable for Predisposing Assertion type.'
+              'Supports': 'The experiment or study supports a variant\'s impact on predisposing outcome',
+              'Does Not Support': 'The experiment or study does not support a predisposing association between variant and outcome'
             },
             'Functional': {
               'Supports': 'The experiment or study supports this variant causing alteration or non-alteration of the gene product function',
