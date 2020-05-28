@@ -67,7 +67,7 @@
                   <a ui-sref="organizations.summary({organizationId: user.most_recent_organization.id})">{{ user.most_recent_organization.name }}</a>
                   <!-- show parent org if exists -->
                   <span ng-if="user.most_recent_organization.parent.id !== undefined" class="small">
-                    <em>&nbsp;(at {{ most_recent_organization.parent.name }})</em>
+                    <em>&nbsp;(at {{ user.most_recent_organization.parent.name }})</em>
                   </span>
 
                 </td>
