@@ -1,7 +1,7 @@
 <div class="actionBlock">
   <div class="action-block view-pageBackground"
        ng-repeat="(action, details) in actions"
-       uib-tooltip="{{details.timestamp | timeAgo}}"
+       uib-tooltip="{{details.timestamp | timeAgo}}{{details.organization.name != undefined ? ' for ' + details.organization.name : ''}}"
        tooltip-placement="bottom"
        tooltip-apppend-to-body="true">
     <span class="action-label small">

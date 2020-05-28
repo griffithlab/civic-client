@@ -81,6 +81,18 @@
             condition: uiGridConstants.filter.CONTAINS
           }
         },
+        { name: 'organization',
+          displayName: 'Organization',
+          type: 'string',
+          enableFiltering: true,
+          allowCellFocus: false,
+          enableSorting: false,
+          width: '20%',
+          cellTemplate: '<div class="ui-grid-cell-contents"><span uib-tooltip="{{row.entity[col.field].name}}" tooltip-append-to-body="true"><organization-block organization="row.entity[col.field]"></organization-block></span></div>',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          }
+        },
         { name: 'role',
           field: 'user_role',
           displayName: 'Role',
@@ -88,7 +100,7 @@
           allowCellFocus: false,
           enableSorting: false,
           type: 'string',
-          width: '8%',
+          width: '6%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
@@ -99,7 +111,7 @@
           allowCellFocus: false,
           enableSorting: false,
           type: 'string',
-          width: '20%',
+          width: '15%',
           cellTemplate: '<div class="ui-grid-cell-contents">' +
           '{{row.entity[col.field]}}' +
           '<span ng-if="row.entity.unlinkable === true" style="color: #999;" class="small"> (unlinkable)</span>' +
@@ -116,6 +128,7 @@
           allowCellFocus: false,
           enableFiltering: false,
           enableSorting: false,
+          width: '8%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
