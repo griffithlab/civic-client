@@ -55,5 +55,10 @@
     <strong>
       <span ng-bind="vm.entityName">GENE / VARIANT / EVIDENCE</span>
     </strong>
+
+    <span ng-if="event.organization">
+      <br/>&nbsp;for <organization-block organization="event.organization"></organization-block>
+    </span>
+
   </div>
 </div>
