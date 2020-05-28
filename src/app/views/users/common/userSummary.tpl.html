@@ -59,6 +59,19 @@
                   </span>
                 </td>
               </tr>
+              <tr ng-if="user.most_recent_organization.name">
+                <td class="key">
+                  Most Recent Org:
+                </td>
+                <td class="value">
+                  <a ui-sref="organizations.summary({organizationId: user.most_recent_organization.id})">{{ user.most_recent_organization.name }}</a>
+                  <!-- show parent org if exists -->
+                  <span ng-if="user.most_recent_organization.parent.id !== undefined" class="small">
+                    <em>&nbsp;(at {{ most_recent_organization.parent.name }})</em>
+                  </span>
+
+                </td>
+              </tr>
               <tr>
                 <td class="key">Country:</td>
                 <td class="value">{{user.country.name | ifEmpty: '--'}}</td>
