@@ -2,13 +2,13 @@
     <button
       type="button"
       class="btn btn-xs btn-organization"
+      ng-class="{'highlight': highlight == true}"
       ui-sref="organizations.summary({organizationId: organization.id})">
-          <span class="avatar">
-            <img ng-src="{{organization.profile_image.x14}}" width="14" height="14"/>
-          </span>
-          <span class="organization-name">
-            {{organization.name}}
-          </span>
-      </div>
+      <span class="avatar">
+        <img ng-src="{{organization.profile_image.x14}}" width="14" height="14"/>
+      </span>
+      <span class="organization-name">
+        {{organization.name}}
+      </span>
     </button>
 </span>
