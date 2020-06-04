@@ -5,8 +5,10 @@
      ng-mouseleave="mouseover=false">
 
   <div class="user-time">
-    <user-block user="event.user"></user-block>&nbsp;<span ng-bind="event.timestamp|timeAgo">time ago</span>
-    <span ng-if="event.unlinkable === true" class="small" style="color: #AAA;">(unlinkable)</span><br/>
+    <user-block user="event.user"></user-block><span ng-if="event.organization">&nbsp;for&nbsp;<organization-block organization="event.organization"></organization-block>
+    </span>
+
+    <br/>
   </div>
 
   <div class="entity">
@@ -54,11 +56,9 @@
 
     <strong>
       <span ng-bind="vm.entityName">GENE / VARIANT / EVIDENCE</span>
+      <span ng-if="event.unlinkable === true" class="small" style="color: #AAA;">(unlinkable)</span>
     </strong>
-
-    <span ng-if="event.organization">
-      <br/>&nbsp;for <organization-block organization="event.organization"></organization-block>
-    </span>
+    <br/>&nbsp;<span ng-bind="event.timestamp|timeAgo">time ago</span>
 
   </div>
 </div>

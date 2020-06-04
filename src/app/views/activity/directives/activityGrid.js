@@ -88,7 +88,7 @@
           allowCellFocus: false,
           enableSorting: false,
           width: '20%',
-          cellTemplate: '<div class="ui-grid-cell-contents"><span uib-tooltip="{{row.entity[col.field].name}}" tooltip-append-to-body="true"><organization-block organization="row.entity[col.field]"></organization-block></span></div>',
+          cellTemplate:'app/views/activity/directives/activeOrgCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }

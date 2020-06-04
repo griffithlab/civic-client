@@ -1,0 +1,12 @@
+<div class="ngCellText ui-grid-cell-contents">
+  <span ng-switch="row.entity[col.field] != undefined">
+    <span ng-switch-when="true" >
+      <span uib-tooltip="{{row.entity[col.field].name}}" tooltip-append-to-body="true">
+        <organization-block organization="row.entity[col.field]"></organization-block>
+      </span>
+    </span>
+    <span ng-switch-when="false">
+      &nbsp;<i class="small text-muted">Active org not specified by user.</i>
+    </span>
+  </span>
+</div>

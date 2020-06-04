@@ -39,17 +39,13 @@
                     <!-- org list -->
                     <span ng-switch-when="true" >
                       <span ng-repeat="org in user.organizations">
-                        <!-- display as list with commas -->
-                        {{
-                        $first ? '' : $last ? (user.organizations.length > 2 ? ', and ' : ' and ') : ', '
-                        }}
-                        <a ui-sref="organizations.summary({organizationId: org.id})">
-                          {{ org.name }}</a>
-                        <!-- show parent org if exists -->
-                        <span ng-if="org.parent.id !== undefined" class="small">
-                          <em>&nbsp;(at {{ org.parent.name }})</em>
-                        </span>
-
+                        <div style="display: inline-block; margin-bottom: 4px;">
+                          <span uib-tooltip="at {{org.parent.name}}"
+                            tooltip-append-to-body="true"
+                            tooltip-enable="org.parent.name != undefined">
+                            <organization-block organization="org"></organization-block>
+                          </span>
+                        </div>
                       </span>
                     </span>
                     <!-- no org obj -->
@@ -61,15 +57,15 @@
               </tr>
               <tr ng-if="user.most_recent_organization.name">
                 <td class="key">
-                  Most Recent Org:
+                  <i class="glyphicon glyphicon-info-sign" style="color: #ffdd22"
+                  uib-tooltip="Curators may choose their active org when performing moderation actions, if they are members of more than one org."></i> Most Recent Org:
                 </td>
-                <td class="value">
-                  <a ui-sref="organizations.summary({organizationId: user.most_recent_organization.id})">{{ user.most_recent_organization.name }}</a>
-                  <!-- show parent org if exists -->
-                  <span ng-if="user.most_recent_organization.parent.id !== undefined" class="small">
-                    <em>&nbsp;(at {{ most_recent_organization.parent.name }})</em>
+                <td class="value" style="padding-bottom: 4px;">
+                  <span uib-tooltip="at {{user.most_recent_organization.parent.name}}"
+                    tooltip-append-to-body="true"
+                    tooltip-enable="user.most_recent_organization.parent.name != undefined">
+                    <organization-block organization="user.most_recent_organization"></organization-block>
                   </span>
-
                 </td>
               </tr>
               <tr>
