@@ -50,12 +50,18 @@
               uib-tooltip="{{vm.multiple_orgs_tooltip}}">
             </i>
           </li>
-          <li class="attr-value" >
-            <a ui-sref="organizations.summary({organizationId: vm.user.most_recent_organization.id})">
-              {{vm.user.most_recent_organization.name | ifEmpty: '--'}}
-            </a>
-            <span ng-if="vm.user.most_recent_organization.parent.name.length > 0">
-              <span class="small"><em>(at {{vm.user.most_recent_organization.parent.name}})</em></span>
+          <li class="attr-value">
+            <span ng-switch="vm.user.organizations.length > 0">
+              <span ng-switch-when="true">
+                <span uib-tooltip="at {{vm.user.most_recent_organization.parent.name}}"
+                  tooltip-append-to-body="true"
+                  tooltip-enable="vm.user.most_recent_organization.parent.name != undefined">
+                  <organization-block organization="vm.user.most_recent_organization"></organization-block>
+                </span>
+              </span>
+              <span ng-switch="false" >
+               --
+              </span>
             </span>
           </li>
           <li class="attr-key" >
