@@ -32,7 +32,9 @@
               </tr>
               <tr>
                 <td class="key">
-                  Organization<span ng-if="user.organizations.length > 1">s</span>:
+                  <span ng-if="user.organizations.length > 1 && user.most_recent_organization != undefined">
+                  <i class="glyphicon glyphicon-info-sign" style="color: #ffdd22"
+                    uib-tooltip="Curators may choose their active organization when performing moderation actions, if they are members of more than one organization."></i>&nbsp;</span>Organization<span ng-if="user.organizations.length > 1">s</span>:
                 </td>
                 <td class="value">
                   <span ng-switch="user.organizations.length > 0">
@@ -43,7 +45,9 @@
                           <span uib-tooltip="at {{org.parent.name}}"
                             tooltip-append-to-body="true"
                             tooltip-enable="org.parent.name != undefined">
-                            <organization-block organization="org"></organization-block>
+                            <organization-block organization="org"
+                              highlight="org.id === user.most_recent_organization.id">
+                            </organization-block>
                           </span>
                         </div>
                       </span>
@@ -52,19 +56,6 @@
                     <span ng-switch-when="false" >
                       --
                     </span>
-                  </span>
-                </td>
-              </tr>
-              <tr ng-if="user.most_recent_organization.name">
-                <td class="key">
-                  <i class="glyphicon glyphicon-info-sign" style="color: #ffdd22"
-                  uib-tooltip="Curators may choose their active org when performing moderation actions, if they are members of more than one org."></i> Most Recent Org:
-                </td>
-                <td class="value" style="padding-bottom: 4px;">
-                  <span uib-tooltip="at {{user.most_recent_organization.parent.name}}"
-                    tooltip-append-to-body="true"
-                    tooltip-enable="user.most_recent_organization.parent.name != undefined">
-                    <organization-block organization="user.most_recent_organization"></organization-block>
                   </span>
                 </td>
               </tr>
