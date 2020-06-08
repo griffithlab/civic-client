@@ -5,7 +5,7 @@
     .factory('Users', UsersService);
 
   // @ngInject
-  function UsersResource($resource) {
+  function UsersResource($resource, UserOrgsInterceptor) {
     //var cache = $cacheFactory.get('$http');
 
     //var cacheInterceptor = function(response) {
@@ -23,7 +23,10 @@
         get: {
           method: 'GET',
           isArray: false,
-          cache: false
+          cache: false,
+          interceptor: {
+            response: UserOrgsInterceptor
+          }
         },
         query: {
           method: 'GET',
@@ -48,7 +51,7 @@
   }
 
   // @ngInject
-  function UsersService(UsersResource) {
+  function UsersService($q, UsersResource, UserOrgsInterceptor) {
     var item = { };
     var collection = [];
     var events = [];
@@ -69,12 +72,17 @@
       return UsersResource.get({userId: userId}).$promise
         .then(function(response) {
           angular.copy(response, item);
-          return response.$promise;
+          return $q.when(response); // kludge to handle UserOrgsInterceptor returning $promise-less response
         });
     }
     function query(reqObj) {
       return UsersResource.query(reqObj).$promise
         .then(function(response) {
+          response.result = response.result.map(function(u) {
+            var mock = {};
+            mock.data = u;
+            return UserOrgsInterceptor(mock);
+          });
           angular.copy(response, collection);
           return response.$promise;
         });
