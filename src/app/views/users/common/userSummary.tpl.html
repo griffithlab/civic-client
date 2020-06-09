@@ -46,7 +46,7 @@
                             tooltip-append-to-body="true"
                             tooltip-enable="org.parent.name != undefined">
                             <organization-block organization="org"
-                              highlight="org.id === user.most_recent_organization.id">
+                              highlight="org.id === user.most_recent_organization.id && user.organizations.length > 1">
                             </organization-block>
                           </span>
                         </div>
