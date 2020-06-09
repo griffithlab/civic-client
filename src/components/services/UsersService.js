@@ -24,9 +24,6 @@
           method: 'GET',
           isArray: false,
           cache: false,
-          interceptor: {
-            response: UserOrgsInterceptor
-          }
         },
         query: {
           method: 'GET',
@@ -71,13 +68,18 @@
     function get(userId) {
       return UsersResource.get({userId: userId}).$promise
         .then(function(response) {
+          // use orgs interceptor to apply most recent org logic
+          var mock = {};
+          mock.data = response;
+          response = UserOrgsInterceptor(mock);
           angular.copy(response, item);
-          return $q.when(response); // kludge to handle UserOrgsInterceptor returning $promise-less response
+          return response.$promise;
         });
     }
     function query(reqObj) {
       return UsersResource.query(reqObj).$promise
         .then(function(response) {
+          // use orgs interceptor to apply most recent org logic
           response.result = response.result.map(function(u) {
             var mock = {};
             mock.data = u;
