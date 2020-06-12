@@ -49,17 +49,22 @@
     };
 
     function interceptMembers(organization) {
-      organization.members = organization.members.map(function(user) {
-        var mock = {};
-        mock.data = user;
-        return UserOrgsInterceptor(mock);
-      });
+      if(organization.members) {
+        organization.members = organization.members.map(function(user) {
+          var mock = {};
+          mock.data = user;
+          return UserOrgsInterceptor(mock);
+        });
+      }
       return organization;
     }
 
     function query(reqObj) {
       return OrganizationsResource.query(reqObj).$promise
         .then(function(response) {
+          response.records = response.result.map(function(org) {
+            return interceptMembers(org);
+          });
           angular.copy(response.records, collection);
           return response.$promise;
         });
