@@ -28,7 +28,7 @@
             </div>
             <div class="col-xs-6 text-right">
               <a ng-if="organization.url.length > 0"
-                 class="btn btn-primary" target="_blank" href="{{organization.url}}">
+                class="btn btn-primary" target="_blank" href="{{organization.url}}">
                 <span class="glyphicon glyphicon-new-window"></span>
                 Organization Website
               </a>
@@ -42,6 +42,12 @@
             </div>
             <div ng-class="{'col-xs-12': organization.profile_image.hasOwnProperty('x256') === false, 'col-xs-10': organization.profile_image.hasOwnProperty('x256') === true}">
               <p ng-bind="organization.description"></p>
+              <p ng-if="organization.child_organizations.length > 0"><strong>Child Organizations:</strong>
+                <div ng-repeat="org in organization.child_organizations"
+                  style="display: inline-block; margin-bottom: 4px;">
+                  <organization-block organization="org"></organization-block>
+                </div>
+              </p>
             </div>
           </div>
           <h4>Members</h4>

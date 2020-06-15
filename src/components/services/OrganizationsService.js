@@ -31,7 +31,7 @@
   }
 
   // @ngInject
-  function OrganizationsService(OrganizationsResource) {
+  function OrganizationsService(OrganizationsResource, UserOrgsInterceptor) {
 
     var item = {};
     var collection = [];
@@ -48,9 +48,23 @@
       queryEvidence: queryEvidence
     };
 
+    function interceptMembers(organization) {
+      if(organization.members) {
+        organization.members = organization.members.map(function(user) {
+          var mock = {};
+          mock.data = user;
+          return UserOrgsInterceptor(mock);
+        });
+      }
+      return organization;
+    }
+
     function query(reqObj) {
       return OrganizationsResource.query(reqObj).$promise
         .then(function(response) {
+          response.records = response.result.map(function(org) {
+            return interceptMembers(org);
+          });
           angular.copy(response.records, collection);
           return response.$promise;
         });
@@ -61,6 +75,7 @@
           organizationId: organizationId
         }).$promise
         .then(function(response) {
+          response = interceptMembers(response);
           angular.copy(response, item);
           return response.$promise;
         });

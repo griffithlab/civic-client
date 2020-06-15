@@ -65,14 +65,16 @@
       update: update
     };
 
+    function interceptUser(user) {
+      var mock = {};
+      mock.data = user;
+      return UserOrgsInterceptor(mock);
+    }
+
     function get(userId) {
       return UsersResource.get({userId: userId}).$promise
         .then(function(response) {
-          // use orgs interceptor to apply most recent org logic
-          var mock = {};
-          mock.data = response;
-          response = UserOrgsInterceptor(mock);
-          angular.copy(response, item);
+          angular.copy(interceptUser(response), item);
           return response.$promise;
         });
     }
@@ -80,10 +82,9 @@
       return UsersResource.query(reqObj).$promise
         .then(function(response) {
           // use orgs interceptor to apply most recent org logic
-          response.result = response.result.map(function(u) {
-            var mock = {};
-            mock.data = u;
-            return UserOrgsInterceptor(mock);
+          response.result = response.result
+            .map(function(u) {
+            return interceptUser(u);
           });
           angular.copy(response, collection);
           return response.$promise;
