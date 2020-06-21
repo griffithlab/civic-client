@@ -19,7 +19,8 @@
           'name': 'is_equal_to',
           'parameters': [$scope.organization.id]
         }
-      }]
+      }],
+      'grid-view': true
     };
 
     Search.post(query).then(
