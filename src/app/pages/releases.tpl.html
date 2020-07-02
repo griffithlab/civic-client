@@ -10,26 +10,29 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
+      <p>The CIViC server produces nightly and monthly releases that include a subset of all primary entity records. Both TSV and VCF versions are provided below - just locate the specific entity type and data format you wish to obtain, then click on the relevant button to download. </p>
+
+      <p>These records do not contain user profile data, pending or rejected evidence items, discussion and commentary, data provenance and revision history, or information obtained from resources external to CIViC (e.g. MyVariantInfo, ClinVar).</p>
+
+      <p>As with all curated evidence and interpretations of CIViC, the contents of these files are made freely available, without restriction under the CC0 license (<a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons Public Domain Dedication, CC0 1.0 Universal</a>).</p>
+
+      <p>If you use CIViC content, please consider citing the <a href="http://www.nature.com/ng/journal/v49/n2/full/ng.3774.html">CIViC publication</a>.</p>
+
       <div class="well small" style="margin-bottom: 0;">
-        <p><strong>Disclaimer:</strong> TSV and VCF releases of CIViC data are provided at regular intervals for the convenience of those who require the use of a static file. For most users, we recomend utilizing our API which is documented <a href="https://griffithlab.github.io/civic-api-docs/">here</a>. Using the API will provide you with the richest metadata about CIViC entries as well as the most current versions of all evidence statements. In fact, the entire CIViC web frontend runs off the exact same API that is available for public use.</p>
-
-        <p>These files do not contain user profile data, pending or rejected evidence items, discussion and commentary, or data provenance and revision history.</p>
-
-        <p>As with all curated evidence and interpretations of CIViC, the contents of these files are made freely available, without restriction under the CC0 license (<a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons Public Domain Dedication, CC0 1.0 Universal</a>). If you use CIViC content, please consider citing the <a href="http://www.nature.com/ng/journal/v49/n2/full/ng.3774.html">CIViC publication</a>. No information obtained from resources external to CIViC is redistributed by these files.</p>
-
+        <p style="margin-bottom: 0;"><strong>PLEASE NOTE:</strong> TSV and VCF releases of CIViC data are provided at regular intervals for the convenience of those who require the use of a static file. For most users, we recomend utilizing our API which is documented <a href="https://griffithlab.github.io/civic-api-docs/">here</a>. Using the API will provide you with the richest metadata about CIViC entries as well as the most current versions of all evidence statements. In fact, the entire CIViC web frontend runs off the exact same API that is available for public use.</p>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <h4>CIViC Summaries</h4>
+      <h4>CIViC TSV Releases</h4>
       <div class="gridContainer" >
         <div ui-grid="vm.summariesReleaseGridOptions"
           ui-grid-pagination
           ui-grid-auto-resize> </div>
       </div>
 
-      <h4>CIViC Variants</h4>
+      <h4>CIViC VCF Releases</h4>
       <div class="gridContainer" >
         <div ui-grid="vm.variantsReleaseGridOptions"
           ui-grid-pagination

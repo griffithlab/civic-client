@@ -54,32 +54,32 @@
         },
         {
           name: 'GeneSummaries',
-          displayName: 'Gene Summaries',
+          displayName: 'Genes',
           cellTemplate: 'app/pages/downloadCellTemplate.tpl.html',
           type: 'string',
 
         },
         {
           name: 'VariantSummaries',
-          displayName: 'Variant Summaries',
+          displayName: 'Variants',
           cellTemplate: 'app/pages/downloadCellTemplate.tpl.html',
           type: 'string',
         },
         {
           name: 'ClinicalEvidenceSummaries',
-          displayName: 'Evidence Summaries',
+          displayName: 'Evidence',
           cellTemplate: 'app/pages/downloadCellTemplate.tpl.html',
           type: 'string',
         },
         {
           name: 'VariantGroupSummaries',
-          displayName: 'Variant Group Summaries',
+          displayName: 'Variant Groups',
           cellTemplate: 'app/pages/downloadCellTemplate.tpl.html',
           type: 'string',
         },
         {
           name: 'AssertionSummaries',
-          displayName: 'Assertion Summaries',
+          displayName: 'Assertions',
           cellTemplate: 'app/pages/downloadCellTemplate.tpl.html',
           type: 'string',
         },
