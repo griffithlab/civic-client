@@ -8,22 +8,14 @@
   function ReleasesResource($resource, $cacheFactory) {
     var cache = $cacheFactory.get('$http');
 
-    //var cacheInterceptor = function(response) {
-    //  console.log(['ReleasesResource: removing', response.config.url, 'from $http cache.'].join(" "));
-    //  cache.remove(response.config.url);
-    //  return response.$promise;
-    //};
-
-    return $resource('/api/releases',
-      {
-        // Base Release Resources
-        query: {
-          method: 'GET',
-          isArray: true,
-          cache: cache
-        }
+    return $resource('/api/releases?count=999', // fetch all releases
+      {}, {
+      query: {
+        method: 'GET',
+        isArray: true,
+        cache: false
       }
-    );
+    });
   }
 
   // @ngInject

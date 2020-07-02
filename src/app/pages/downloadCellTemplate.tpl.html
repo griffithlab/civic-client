@@ -1,0 +1,20 @@
+<div class="ui-grid-cell-contents">
+  <span ng-switch="row.entity[col.field] !== null" >
+    <span ng-switch-when="true">
+      <a class="btn btn-xs btn-default" ng-href="row.entity[col.field]" target="_self">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        <span ng-switch="row.entity[col.field].includes('Summaries')">
+          <span ng-switch-when="true" >
+            Summaries TSV
+          </span>
+          <span ng-switch-when="false" >
+            Variants VCF
+          </span>
+        </span>
+      </a>
+    </span>
+    <span ng-switch-when="false">
+      --
+    </span>
+  </span>
+</div>

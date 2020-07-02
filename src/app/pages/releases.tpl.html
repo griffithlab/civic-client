@@ -10,13 +10,10 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="well small">
-        <p><strong>Disclaimer:</strong> TSV releases of CIViC data are provided at regular intervals for the convenience of those who require the use of a static file.
-          For most users, we recomend utilizing our API which is documented <a href="https://griffithlab.github.io/civic-api-docs/">here</a>.
-          Using the API will provide you with the richest metadata about CIViC entries as well as the most current versions of all evidence statements.
-          In fact, the entire CIViC web frontend runs off the exact same API that is available for public use.</p>
+      <div class="well small" style="margin-bottom: 0;">
+        <p><strong>Disclaimer:</strong> TSV and VCF releases of CIViC data are provided at regular intervals for the convenience of those who require the use of a static file. For most users, we recomend utilizing our API which is documented <a href="https://griffithlab.github.io/civic-api-docs/">here</a>. Using the API will provide you with the richest metadata about CIViC entries as well as the most current versions of all evidence statements. In fact, the entire CIViC web frontend runs off the exact same API that is available for public use.</p>
 
-        <p>These TSV files do not contain user profile data, pending or rejected evidence items, discussion and commentary, or data provenance and revision history.</p>
+        <p>These files do not contain user profile data, pending or rejected evidence items, discussion and commentary, or data provenance and revision history.</p>
 
         <p>As with all curated evidence and interpretations of CIViC, the contents of these files are made freely available, without restriction under the CC0 license (<a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons Public Domain Dedication, CC0 1.0 Universal</a>). If you use CIViC content, please consider citing the <a href="http://www.nature.com/ng/journal/v49/n2/full/ng.3774.html">CIViC publication</a>. No information obtained from resources external to CIViC is redistributed by these files.</p>
 
@@ -25,66 +22,20 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <table class="table">
-        <tr>
-          <th class="date">
-            Date
-          </th>
-          <th>
-            Gene Summaries
-          </th>
-          <th>
-            Variant Summaries
-          </th>
-          <th>
-            Variant Group Summaries
-          </th>
-          <th>
-            Evidence Summaries
-          </th>
-          <th>
-            Assertion Summaries
-          </th>
-        </tr>
-        <tr ng-repeat="release in vm.releases">
-          <td class="date" ng-bind="release.note | capitalize">
+      <h4>CIViC Summaries</h4>
+      <div class="gridContainer" >
+        <div ui-grid="vm.summariesReleaseGridOptions"
+          ui-grid-pagination
+          ui-grid-auto-resize> </div>
+      </div>
 
-          </td>
-          <td class="link">
-            <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[0]}}" target="_self">
-              <span class="glyphicon glyphicon-download-alt"></span>
-              GeneSummaries.tsv
-            </a>
-          </td>
-          <td class="link">
-            <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[1]}}" target="_self">
-              <span class="glyphicon glyphicon-download-alt"></span>
-              VariantSummaries.tsv
-            </a>
-          </td>
-          <td class="link">
-            <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[3]}}" target="_self">
-              <span class="glyphicon glyphicon-download-alt"></span>
-              VariantGroupSummaries.tsv
-            </a>
-          </td>
+      <h4>CIViC Variants</h4>
+      <div class="gridContainer" >
+        <div ui-grid="vm.variantsReleaseGridOptions"
+          ui-grid-pagination
+          ui-grid-auto-resize> </div>
+      </div>
 
-          <td class="link">
-            <a class="btn btn-xs btn-default" ng-href="{{release.fileUrls[2]}}" target="_self">
-              <span class="glyphicon glyphicon-download-alt"></span>
-              ClinicalEvidenceSummaries.tsv
-            </a>
-          </td>
-          <td class="link">
-            <a class="btn btn-xs btn-default"
-              ng-href="{{release.fileUrls[4]}}"
-              ng-if="release.fileUrls[4] != null" target="_self">
-              <span class="glyphicon glyphicon-download-alt"></span>
-              AssertionSummaries.tsv
-            </a>
-          </td>
-        </tr>
-      </table>
     </div>
   </div>
 </div>
