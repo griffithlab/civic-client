@@ -37,6 +37,10 @@
         if(inputFormatter !== undefined) { template+='typeahead-input-formatter="'+inputFormatter+'" '; }
         var templateUrl = _.get(scope,attrs['typeaheadTemplateUrl']);
         if(templateUrl !== undefined) { template+='typeahead-template-url="'+templateUrl+'" '; }
+
+        var popupTemplateUrl = _.get(scope,'to.popupTemplateUrl');
+        if(popupTemplateUrl !== undefined) { template+='typeahead-popup-template-url="'+popupTemplateUrl+'" '; }
+
         var selectOnBlur = _.get(scope, attrs['to.selectOnBlur']);
         if (selectOnBlur !== undefined) { template+='typeahead-select-on-blur="' + selectOnBlur + '" '; }
         template+='uib-typeahead="'+_.get(scope, attrs['typeaheadWrapper'])+'" ';
