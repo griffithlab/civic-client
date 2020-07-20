@@ -188,21 +188,24 @@
           minLength: 32,
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
-          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
           editable: true
         },
         data: {
-          typeaheadSearch: function(val) {
+          typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
               count: 50,
               page: 0,
-              'filter[variant]': val
+              'filter[variant]': val,
+              'filter[entrez_gene]': gene
             };
             return Datatables.query(request)
               .then(function(response) {
                 return _.map(_.uniq(response.result, 'variant'), function(event) {
-                  return { name: event.variant };
+                  return {
+                    name: event.variant
+                  };
                 });
               });
           }
