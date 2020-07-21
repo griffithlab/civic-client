@@ -166,6 +166,7 @@
       {
         key: 'variant',
         type: 'horizontalTypeaheadHelp',
+        wrapper: ['noResultsMessage'],
         className: 'input-caps',
         controller: /* @ngInject */ function($scope, $stateParams, Variants) {
           // populate field if variantId provided
@@ -189,7 +190,13 @@
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
-          editable: true
+          typeaheadMinLength: 0,
+          noResults: 'to.data.noResults',
+          editable: true,
+          data: {
+            noResults: false,
+            noResultsMessage: 'Warning: this appears to be a variant unknown to CIViC. Please ensure you wish to create a new variant before submitting.'
+          }
         },
         data: {
           typeaheadSearch: function(val, gene) {
@@ -208,7 +215,7 @@
                   };
                 });
               });
-          }
+          },
         }
       },
       {
