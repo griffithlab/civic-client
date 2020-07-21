@@ -222,7 +222,7 @@
           noResults: 'to.data.noResults',
           data: {
             noResults: false,
-            noResultsMessage: 'Warning: this appears to be a variant unknown to CIViC. Please ensure you wish to submit a new variant.'
+            noResultsMessage: 'WARNING: This appears to be a variant unknown to CIViC. Please ensure you wish to submit a new variant.'
           }
         },
         data: {
