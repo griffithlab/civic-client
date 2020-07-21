@@ -46,6 +46,10 @@
 
         var selectOnBlur = _.get(scope, attrs['to.selectOnBlur']);
         if (selectOnBlur !== undefined) { template+='typeahead-select-on-blur="' + selectOnBlur + '" '; }
+
+        var noResults = _.get(scope,'to.noResults');
+        if(noResults !== undefined) { template+='typeahead-no-results="'+noResults+'" '; }
+
         template+='uib-typeahead="'+_.get(scope, attrs['typeaheadWrapper'])+'" ';
         template+='>';
         $compile(template)(
