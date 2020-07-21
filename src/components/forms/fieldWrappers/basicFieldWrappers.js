@@ -134,6 +134,14 @@
     });
 
     formlyConfigProvider.setWrapper({
+      name: 'noResultsMessage',
+      template: [
+        '<formly-transclude></formly-transclude>',
+        '<span class="small" style="color: #999;" ng-show="to.data.noResults && fc.$touched == true">{{ to.data.noResultsMessage }}</span>',
+      ].join(' ')
+    });
+
+    formlyConfigProvider.setWrapper({
       name: 'fieldMessage',
       template: [
         '<formly-transclude></formly-transclude>',
