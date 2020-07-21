@@ -173,6 +173,7 @@
           editable: true,
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
+          templateUrl: 'components/forms/fieldTypes/geneTypeahead.tpl.html',
           onSelect: 'to.data.entrez_id = $model.entrez_id',
           helpText: help['Gene Entrez Name'],
           data: {

@@ -204,6 +204,8 @@
           required: true,
           editable: false,
           value: 'vm.newEvidence.variant',
+          popupTemplateUrl: '/components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
+          templateUrl: '/components/forms/fieldTypes/variantTypeahead.tpl.html',
           minLength: 32,
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',

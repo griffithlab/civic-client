@@ -191,8 +191,8 @@
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
           typeaheadMinLength: 0,
-          noResults: 'to.data.noResults',
           editable: true,
+          noResults: 'to.data.noResults',
           data: {
             noResults: false,
             noResultsMessage: 'Warning: this appears to be a variant unknown to CIViC. Please ensure you wish to create a new variant before submitting.'
