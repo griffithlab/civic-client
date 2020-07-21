@@ -211,17 +211,25 @@
           minLength: 32,
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
-          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
+          popupTemplateUrl: '/components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
+          templateUrl: '/components/forms/fieldTypes/variantTypeahead.tpl.html',
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
+          typeaheadMinLength: 0,
           required: false,
-          editable: true
+          editable: true,
+          data: {
+            noResults: false,
+            noResultsMessage: 'Warning: this appears to be a variant unknown to CIViC. Please ensure you wish to submit a new variant.'
+          }
         },
         data: {
-          typeaheadSearch: function(val) {
+          typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
-              count: 10,
+              count: 30,
               page: 0,
-              'filter[variant]': val
+              'filter[variant]': val,
+              'filter[entrez_gene]': gene
             };
             return Datatables.query(request)
               .then(function(response) {
