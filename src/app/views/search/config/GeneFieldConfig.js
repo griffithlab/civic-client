@@ -22,8 +22,8 @@
                         { value: 'aliases', name: 'Entrez Aliases' },
                         { value: 'entrez_id', name: 'Entrez ID' },
                         { value: 'name', name: 'Entrez Name' },
+                        { value: 'id', name: 'Gene ID' },
                         { value: 'suggested_changes_count', name: 'Suggested Revisions' },
-                        { value: 'id', name: 'Gene ID' }
                       ],
                       onChange: function(value, options, scope) {
                         scope.model.condition = {

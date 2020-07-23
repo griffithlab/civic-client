@@ -45,9 +45,9 @@
                         { value: 'variant_alias', name: 'Variant Alias' },
                         { value: 'variant_bases', name: 'Variant Base(s)' },
                         { value: 'variant_group', name: 'Variant Group' },
+                        { value: 'id', name: 'Variant ID'},
                         { value: 'variant_types', name: 'Variant Type(s)' },
                         { value: 'variant_types_soids', name: "Variant Type(s) Sequence Ontology IDs" },
-                        { value: 'id', name: 'Variant ID'},
                       ],
                       onChange: function(value, options, scope) {
                         scope.model.condition = {

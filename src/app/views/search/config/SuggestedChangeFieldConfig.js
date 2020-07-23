@@ -19,10 +19,10 @@
                         { value: '', name: 'Please select a field' },
                         { value: 'moderated_type', name: 'Entity Type' },
                         { value: 'moderated_id', name: 'Entity ID' },
+                        { value: 'id', name: 'Revision ID' },
                         { value: 'status', name: 'Status' },
                         { value: 'submitter', name: 'Submitter Display Name' },
                         { value: 'submitter_id', name: 'Submitter ID' },
-                        { value: 'id', name: 'Revision ID' },
                       ],
                       onChange: function(value, options, scope) {
                         scope.model.condition = {

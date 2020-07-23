@@ -28,10 +28,10 @@
                         { value: 'publication_year', name: 'Publication Year' },
                         { value: 'pubmed_id', name: 'PubMed ID' },
                         { value: 'source_suggestion_count', name: 'Source Suggestions' },
+                        { value: 'id', name: 'Source ID'},
                         { value: 'source_type', name: 'Source Type' },
                         { value: 'title', name: 'Title' },
                         { value: 'variant', name: 'Variant'},
-                        { value: 'id', name: 'Source ID'},
                       ],
                       onChange: function(value, options, scope) {
                         scope.model.condition = {
