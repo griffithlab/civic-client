@@ -166,6 +166,7 @@
       {
         key: 'variant',
         type: 'horizontalTypeaheadHelp',
+        wrapper: ['noResultsMessage'],
         className: 'input-caps',
         controller: /* @ngInject */ function($scope, $stateParams, Variants) {
           // populate field if variantId provided
@@ -183,27 +184,38 @@
           label: 'Variant Name',
           required: true,
           value: 'vm.newEvidence.variant',
+          popupTemplateUrl: '/components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
+          templateUrl: '/components/forms/fieldTypes/variantTypeahead.tpl.html',
           minLength: 32,
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
-          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
-          editable: true
+          typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
+          typeaheadMinLength: 0,
+          editable: true,
+          noResults: 'to.data.noResults',
+          data: {
+            noResults: false,
+            noResultsMessage: 'WARNING: This appears to be a variant unknown to CIViC. Please ensure you wish to create a new variant before submitting.'
+          }
         },
         data: {
-          typeaheadSearch: function(val) {
+          typeaheadSearch: function(val, gene) {
             var request = {
               mode: 'variants',
               count: 50,
               page: 0,
-              'filter[variant]': val
+              'filter[variant]': val,
+              'filter[entrez_gene]': gene
             };
             return Datatables.query(request)
               .then(function(response) {
                 return _.map(_.uniq(response.result, 'variant'), function(event) {
-                  return { name: event.variant };
+                  return {
+                    name: event.variant
+                  };
                 });
               });
-          }
+          },
         }
       },
       {
