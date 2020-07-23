@@ -195,7 +195,7 @@
           noResults: 'to.data.noResults',
           data: {
             noResults: false,
-            noResultsMessage: 'WARNING: This appears to be a variant unknown to CIViC. Please ensure you wish to create a new variant before submitting.'
+            noResultsMessage: 'NOTE: This appears to be a new variant for the selected gene. Please ensure it has not already been entered under a similar name before you create it.'
           }
         },
         data: {
