@@ -31,6 +31,7 @@
                         { value: 'source_type', name: 'Source Type' },
                         { value: 'title', name: 'Title' },
                         { value: 'variant', name: 'Variant'},
+                        { value: 'id', name: 'Source ID'},
                       ],
                       onChange: function(value, options, scope) {
                         scope.model.condition = {
@@ -551,7 +552,57 @@
                         required: true
                       }
                     }
-                  ]
+                  ],
+                  id: [
+                    {
+                      key: 'name',
+                      type: 'queryBuilderSelect',
+                      className: 'inline-field',
+                      data: {
+                        defaultValue: 'is_equal_to'
+                      },
+                      templateOptions: {
+                        required: true,
+                        label: '',
+                        options: [
+                          { value: 'is_greater_than_or_equal_to', name: 'is greater than or equal to' },
+                          { value: 'is_greater_than', name: 'is greater than' },
+                          { value: 'is_less_than', name: 'is less than' },
+                          { value: 'is_less_than_or_equal_to', name: 'is less than or equal to' },
+                          { value: 'is_equal_to', name: 'is equal to' },
+                          { value: 'is_in_the_range', name: 'is in the range'}
+                        ],
+                        onChange: function(value, options, scope) {
+                          _.pullAt(scope.model.parameters, 1,2);
+                        }
+                      }
+                    },
+                    {
+                      key: 'parameters[0]', // from value
+                      type: 'input',
+                      className: 'inline-field inline-field-sm',
+                      templateOptions: {
+                        size: 8,
+                        label: '',
+                        required: true
+                      }
+                    },
+                    {
+                      template: 'to',
+                      className: 'inline-field',
+                      hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"'
+                    },
+                    {
+                      key: 'parameters[1]', // to value
+                      type: 'input',
+                      className: 'inline-field inline-field-xs',
+                      hideExpression: 'model.name.length > 0 && model.name !== "is_in_the_range"',
+                      templateOptions: {
+                        label: '',
+                        required: true
+                      }
+                    }
+                  ],
                 }
               }
             }
