@@ -213,8 +213,8 @@
           minLength: 32,
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
-          popupTemplateUrl: '/components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
-          templateUrl: '/components/forms/fieldTypes/variantTypeahead.tpl.html',
+          popupTemplateUrl: 'components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
+          templateUrl: 'components/forms/fieldTypes/variantTypeahead.tpl.html',
           typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
           typeaheadMinLength: 0,
           required: false,
@@ -222,7 +222,7 @@
           noResults: 'to.data.noResults',
           data: {
             noResults: false,
-            noResultsMessage: 'WARNING: This appears to be a variant unknown to CIViC. Please ensure you wish to submit a new variant.'
+            noResultsMessage: 'NOTE: This appears to be a new variant for the selected gene. Please ensure it has not already been entered under a similar name before you create it.'
           }
         },
         data: {

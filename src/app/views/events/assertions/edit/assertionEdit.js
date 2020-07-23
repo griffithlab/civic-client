@@ -207,8 +207,8 @@
           helpText: help['Variant Name'],
           formatter: 'model[options.key].name',
           typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue, model.gene.name)',
-          popupTemplateUrl: '/components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
-          templateUrl: '/components/forms/fieldTypes/variantTypeahead.tpl.html',
+          popupTemplateUrl: 'components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
+          templateUrl: 'components/forms/fieldTypes/variantTypeahead.tpl.html',
           typeaheadMinLength: 0,
           selectOnBlur: true,
           data: {
