@@ -14,7 +14,11 @@
               .value();
 
           var organizationOptions = _.chain(organizations)
-              .map(function(org) { return { value: org.name, name: org.name }; })
+              .map(function(org) {
+                var orgName = org.name +
+                    (_.isUndefined(org.parent.name) ? '' : ' at ' + org.parent.name);
+                return { value: org.name, name: orgName };
+              })
               .sortBy('name')
               .unshift({value: null, name:'Please choose an Organization'})
               .value();
