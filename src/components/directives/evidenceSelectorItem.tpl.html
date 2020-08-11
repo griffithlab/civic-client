@@ -2,14 +2,14 @@
   <div class="row header">
     <div class="col-xs-10 title" >
       <h3>
-        <a ng-href="/links/evidence/{{ctrl.item.id}}">
+        <a ng-href="/links/evidence/{{ctrl.item.id}}" target="_self">
           EID{{ ctrl.item.id }}
         </a>
         <span ng-if="ctrl.item.gene != undefined && ctrl.item.variant != undefined">
-          <a ng-href="/links/gene/{{ctrl.item.gene.id}}">
+          <a ng-href="/links/gene/{{ctrl.item.gene.id}}" target="_self">
             <span style="color: #AAA" >GENE</span> {{ ctrl.item.gene.name }}
           </a>
-          <a ng-href="/links/variant/{{ctrl.item.variant.id}}">
+          <a ng-href="/links/variant/{{ctrl.item.variant.id}}" target="_self">
             <span style="color: #AAA" >VARIANT</span> {{ ctrl.item.variant.name }}
           </a>
         </span>
