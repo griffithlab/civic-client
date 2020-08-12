@@ -232,7 +232,8 @@
               count: 30,
               page: 0,
               'filter[variant]': val,
-              'filter[entrez_gene]': gene
+              'filter[entrez_gene]': gene,
+              'sorting[variant]': 'asc'
             };
             return Datatables.query(request)
               .then(function(response) {
