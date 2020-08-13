@@ -32,6 +32,11 @@ function connectInit(baseDir, livereload) {
           return proxy(options);
         })(),
         (function() {
+          var options = url.parse('http://127.0.0.1:3000/links');
+          options.route = '/links';
+          return proxy(options);
+        })(),
+        (function() {
           var options = url.parse('http://127.0.0.1:3000/badges');
           options.route = '/badges';
           return proxy(options);

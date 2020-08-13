@@ -12,6 +12,11 @@
     // 404
     $urlRouterProvider.otherwise('home');
 
+    // reload page when /links URL requested in order to send req to server
+    $urlRouterProvider.when('/links/:entityType/:entityId', function() {
+      window.location.reload();
+    });
+
     // abstract state redirects
     $urlRouterProvider.when('/events/genes/:geneId', '/events/genes/:geneId/summary');
     $urlRouterProvider.when('/events/genes', '/browse');
