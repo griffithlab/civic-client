@@ -275,7 +275,8 @@
 </div>
 
 <script type="text/ng-template" id="org-menu.tpl.html">
-  <li role="menuitem" ng-repeat="org in currentUser.organizations">
+  <li role="menuitem" ng-repeat="org in currentUser.organizations"
+    ng-class="{'active': org.id == actionOrg.id}">
     <a href ng-click="switchOrg(org.id)">
       <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
         ng-class="{'glyphicon-hide': org.id !== actionOrg.id}"></span>

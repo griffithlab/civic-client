@@ -181,8 +181,10 @@
       <entity-comment-form type="revision" entity-model="vm.variantTalkModel"></entity-comment-form>
     </div>
   </div>
-  <script type="text/ng-template" id="org-menu.tpl.html">
-    <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+  <script type="text/ng-template" id="org-menu.tpl.html"
+    ng-class="{'active': org.id == vm.currentUser.organizations}">
+    <li role="menuitem" ng-repeat="org in vm.currentUser.organizations"
+      ng-class="{'active': org.id == vm.actionOrg.id}">
       <a href ng-click="vm.switchOrg(org.id)">
         <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
           ng-class="{'glyphicon-hide': org.id !== vm.actionOrg.id}"></span>

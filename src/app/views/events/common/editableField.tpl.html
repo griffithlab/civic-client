@@ -97,7 +97,8 @@
                     </span>&nbsp;&nbsp;<span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" uib-dropdown-menu role="menu">
-                    <li role="menuitem" ng-repeat="org in ctrl.currentUser.organizations">
+                    <li role="menuitem" ng-repeat="org in ctrl.currentUser.organizations"
+                      ng-class="{'active': org.id == vm.actionOrg.id}">
                       <a href ng-click="ctrl.switchOrg(org.id)">
                         <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
                           ng-class="{'glyphicon-hide': org.id !== ctrl.actionOrg.id}"></span>
