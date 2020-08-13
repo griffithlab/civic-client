@@ -111,7 +111,10 @@
           enableFiltering: true,
           allowCellFocus: false,
           enableSorting: false,
-          type: 'string',
+          cellTemplate:
+            '<div class="ui-grid-cell-contents" tooltip-placement="left" uib-tooltip="{{row.entity[col.field]}}">' +
+            '<span ng-bind="row.entity[col.field]"></span>' +
+            '</div>',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
