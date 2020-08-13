@@ -109,7 +109,8 @@
                   mode: 'variants',
                   count: 5,
                   page: 0,
-                  'filter[variant]': val
+                  'filter[variant]': val,
+                  'sorting[variant]': 'asc'
                 };
                 return Datatables.query(request)
                   .then(function(response) {
