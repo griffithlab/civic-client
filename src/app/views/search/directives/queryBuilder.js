@@ -58,6 +58,7 @@
       //vm.showEvidenceGrid = true;
       vm.model.entity = entity;
       vm.model.save = true;
+      vm.model.gridView = true;
       vm.formError = false;
       Search.post(vm.model)
         .then(function(response) { // success
