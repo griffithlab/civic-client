@@ -61,7 +61,8 @@
                     </span>&nbsp;&nbsp;<span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" uib-dropdown-menu role="menu">
-                    <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
+                    <li role="menuitem" ng-repeat="org in vm.currentUser.organizations"
+                     ng-class="{'active': org.id == vm.actionOrg.id}">
                       <a href ng-click="vm.switchOrg(org.id)">
                         <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
                         ng-class="{'glyphicon-hide': org.id !== vm.actionOrg.id}"></span>
@@ -120,15 +121,3 @@
   <!-- </div> -->
   <!-- </div> -->
 </div>
-
-<script type="text/ng-template" id="org-menu.tpl.html">
-  <li role="menuitem" ng-repeat="org in vm.currentUser.organizations">
-    <a href ng-click="vm.switchOrg(org.id)">
-      <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
-        ng-class="{'glyphicon-hide': org.id !== vm.actionOrg.id}"></span>
-      <span class="avatar">
-        <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
-      </span>&nbsp;&nbsp;{{org.name}}
-    </a>
-  </li>
-</script>
