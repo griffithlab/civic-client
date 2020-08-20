@@ -133,9 +133,9 @@
         key: 'hgvs_expressions',
         type: 'multiInput',
         templateOptions: {
-          label: 'HGVS Expressions',
+          label: 'HGVS Descriptions',
           required: false,
-          entityName: 'Expression',
+          entityName: 'Description',
           showAddButton: false,
           helpText: 'Please specify any HGVS descriptions for this variant.',
           inputOptions: {
