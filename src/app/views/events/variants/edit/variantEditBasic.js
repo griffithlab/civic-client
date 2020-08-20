@@ -137,7 +137,7 @@
           required: false,
           entityName: 'Expression',
           showAddButton: false,
-          helpText: 'Please specify any HGVS expressions for this variant.',
+          helpText: 'Please specify any HGVS descriptions for this variant.',
           inputOptions: {
             type: 'basicInput',
             wrapper: '',

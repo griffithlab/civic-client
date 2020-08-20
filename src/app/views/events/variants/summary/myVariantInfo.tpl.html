@@ -10,14 +10,23 @@
           <tbody class="common">
             <tr>
               <td class="key">
+                MyVariant.info ID
+              </td>
+              <td class="key">
                 ClinVar ID
               </td>
               <td class="key">
-                ClinVar Clinical Significance
+                COSMIC ID <span class="small">(v68)</span>
               </td>
             </tr>
             <tr>
               <td class="value">
+                <div class="overflow-ellipses">
+                  {{variantInfo._id| ifEmpty: '--'}}
+                </div>
+              </td>
+              <td class="value">
+
                 <span ng-switch="!!variantInfo.clinvar.variant_id">
                   <span ng-switch-when="true">
                     <a ng-href="https://www.ncbi.nlm.nih.gov/clinvar/variation/{{variantInfo.clinvar.variant_id}}/" target="_blank">{{variantInfo.clinvar.variant_id}}</a>
@@ -26,9 +35,17 @@
                     --
                   </span>
                 </span>
+
               </td>
               <td class="value">
-                {{variantInfo.clinvar.rcv[0].clinical_significance | ifEmpty: '--'}}
+                <span ng-switch="!!variantInfo.cosmic.cosmic_id">
+                  <span ng-switch-when="true">
+                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{variantInfo.cosmic.cosmic_id_short}}" target="_blank">{{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}</a>
+                  </span>
+                  <span ng-switch-default>
+                    {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
+                  </span>
+                </span>
               </td>
             </tr>
           </tbody>
@@ -46,26 +63,13 @@
           <tbody class="common">
             <tr>
               <td class="key">
-                COSMIC ID <span class="small">(v68)</span>
-              </td>
-              <td class="key">
                 dbSNP RSID
               </td>
               <td class="key">
-                HGVS ID
+                ClinVar Clinical Significance
               </td>
             </tr>
             <tr>
-              <td class="value">
-                <span ng-switch="!!variantInfo.cosmic.cosmic_id">
-                  <span ng-switch-when="true">
-                    <a ng-href="http://cancer.sanger.ac.uk/cosmic/mutation/overview?id={{variantInfo.cosmic.cosmic_id_short}}" target="_blank">{{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}</a>
-                  </span>
-                  <span ng-switch-default>
-                    {{variantInfo.cosmic.cosmic_id | ifEmpty: '--'}}
-                  </span>
-                </span>
-              </td>
               <td class="value">
                 <span ng-switch="!!variantInfo.dbsnp.rsid">
                   <span ng-switch-when="true">
@@ -77,9 +81,7 @@
                 </span>
               </td>
               <td class="value">
-                <div class="overflow-ellipses">
-                  {{variantInfo._id| ifEmpty: '--'}}
-                </div>
+                {{variantInfo.clinvar.rcv[0].clinical_significance | ifEmpty: '--'}}
               </td>
             </tr>
           </tbody>
