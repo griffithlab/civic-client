@@ -36,7 +36,7 @@
                         { value: 'ensembl_version', name: 'Ensembl Version' },
                         { value: 'evidence_item_count', name: 'Evidence Items' },
                         { value: 'gene', name: 'Gene Entrez Name' },
-                        { value: 'hgvs_expressions', name: 'HGVS Expression(s)' },
+                        { value: 'hgvs_expressions', name: 'HGVS Description(s)' },
                         { value: 'name', name: 'Name' },
                         { value: 'pipeline_type', name: 'Pipeline Type' },
                         { value: 'reference_bases', name: 'Reference Base(s)' },
