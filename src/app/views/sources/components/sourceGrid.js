@@ -83,7 +83,7 @@
           displayName: 'Citation ID',
           enableFiltering: true,
           allowCellFocus: false,
-          type: 'string',
+          type: 'number',
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
           width: '8%',
           filter: {
@@ -117,7 +117,7 @@
         {
           name: 'publication_date_string',
           displayName: 'Date',
-          type: 'string',
+          type: 'date',
           enableFiltering: true,
           allowCellFocus: false,
           cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
@@ -146,7 +146,7 @@
         {
           name: 'evidence_item_count',
           displayName: 'EIDs',
-          type: 'string',
+          type: 'number',
           allowCellFocus: false,
           enableFiltering: false,
           cellTemplate: 'app/views/sources/components/cellTemplateTooltip.tpl.html',
