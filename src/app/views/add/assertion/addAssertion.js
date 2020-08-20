@@ -736,7 +736,7 @@
           label: 'Description',
           required: true,
           minLength: 32,
-          helpText: 'A complete description of this new assertion, limited to one paragraph'
+          helpText: 'Your complete, original description of this new assertion, limited to one paragraph'
         }
       },
       {
