@@ -209,24 +209,24 @@
           },
           assertion: {
             'Predictive': {
-              'Supports': 'The experiment or study supports this variant\'s response to a drug',
-              'Does Not Support': 'The experiment or study does not support, or was inconclusive of an interaction between this variant and a drug'
+              'Supports': 'The Assertion and associated Evidence Items support this variant\'s response to a drug',
+              'Does Not Support': 'The Assertion and associated evidence does not support, or was inconclusive of an interaction between this variant and a drug'
             },
             'Diagnostic': {
-              'Supports': 'The experiment or study supports this variant\'s impact on the diagnosis of disease or subtype',
-              'Does Not Support': 'The experiment or study does not support this variant\'s impact on diagnosis of disease or subtype'
+              'Supports': 'The Assertion and associated Evidence Items support this variant\'s impact on the diagnosis of disease or subtype',
+              'Does Not Support': 'The Assertion and associated evidence does not support this variant\'s impact on diagnosis of disease or subtype'
             },
             'Prognostic': {
-              'Supports': 'The experiment or study supports this variant\'s impact on prognostic outcome',
-              'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
+              'Supports': 'The Assertion and associated Evidence Items support this variant\'s impact on prognostic outcome',
+              'Does Not Support': 'The Assertion and associated evidence does not support a prognostic association between variant and outcome'
             },
             'Predisposing': {
-              'Supports': 'The experiment or study supports a variant\'s impact on predisposing outcome',
-              'Does Not Support': 'The experiment or study does not support a predisposing association between variant and outcome'
+              'Supports': 'TheAssertion and associated Evidence Items support a variant\'s impact on predisposing outcome',
+              'Does Not Support': 'The Assertion and associated evidence does not support a predisposing association between variant and outcome'
             },
             'Functional': {
-              'Supports': 'The experiment or study supports this variant causing alteration or non-alteration of the gene product function',
-              'Does Not Support': 'The experiment or study does not support this variant causing alteration or non-alteration of the gene product function',
+              'Supports': 'The Assertion and associated Evidence Items support this variant causing alteration or non-alteration of the gene product function',
+              'Does Not Support': 'The Assertion and associated evidence does not support this variant causing alteration or non-alteration of the gene product function',
             },
           }
         },
