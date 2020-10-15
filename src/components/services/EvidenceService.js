@@ -162,6 +162,7 @@
       delete: deleteItem,
       apply: apply,
       accept: accept,
+      revert: revert,
       reject: reject,
 
       // Evidence Comments
@@ -282,6 +283,9 @@
         function(error) { // fail
           return $q.reject(error);
         });
+    }
+    function revert(evidenceId) {
+      console.log('EvidenceService.revert(' + evidenceId + ') called');
     }
 
     // Evidence Collections

@@ -51,6 +51,7 @@
 
     vm.type = '';
     vm.name = '';
+    vm.status = '';
 
     vm.type = _.map(entityViewModel.data.item.type.replace('_', ' ').split(' '), function(word) {
       return word.toUpperCase();
@@ -69,11 +70,19 @@
 
     fetchPending();
 
+    vm.revert = function(){
+      entityViewModel.revert(entityViewModel.data.item.id);
+    };
+
     scope.$on('revisionDecision', function(){
       fetchPending();
     });
 
     vm.anchorId = _.kebabCase(vm.type);
+
+    scope.$watch('entityViewModel.data.item.status', function(status) {
+      vm.status = status;
+    });
 
     scope.$watch('entityViewModel.data.item.name', function(name) {
       vm.name = name;

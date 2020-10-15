@@ -79,5 +79,11 @@
         <span uib-tooltip="If checked, you will receive notifications when users update or comment upon this {{vm.type|lowercase}}{{ vm.type !== 'EVIDENCE' ?  ' or its child entities.' : '.' }}">Receive notifications</span>
       </label>
     </div>
+    <div ng-if="vm.type == 'EVIDENCE' && vm.status !== 'submitted'">
+      <hr/>
+      <div class="button" >
+        <a ng-click="vm.revert()" class="btn btn-xs btn-danger btn-block">Revert to Submitted</a>
+      </div>
+    </div>
   </div>
 </script>
