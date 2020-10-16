@@ -290,10 +290,22 @@
         });
     }
     function revert(reqObj) {
-      return EvidenceResource.revert(reqObj).$promis.then(
+      return EvidenceResource.revert(reqObj).$promise.then(
         function(response) { // success
+          // flush cached variant and evidence item lists
           cache.remove('/api/evidence_items/' + response.id);
-          get(reqObj.evidenceId);
+          cache.remove('/api/variants/' + response.variant_id);
+          cache.remove('/api/variants/' + response.variant_id + '/evidence_items');
+          cache.remove('/api/genes/' + response.gene_id + '/variant_groups');
+          // refresh evidence item
+          get(response.id);
+          // refresh variant
+          Variants.get(response.variant_id);
+
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
+          Genes.queryVariants(response.gene_id);
+          Genes.queryVariantGroups(response.gene_id);
           return $q.when(response);
         },
         function(error) { // fail
