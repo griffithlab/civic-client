@@ -70,8 +70,8 @@
 
     fetchPending();
 
-    vm.revert = function(){
-      entityViewModel.revert(entityViewModel.data.item.id);
+    vm.revert = function(reqObj){
+      entityViewModel.revert(reqObj);
     };
 
     scope.$on('revisionDecision', function(){
@@ -130,6 +130,40 @@
     vm.subscribed = null;
     vm.hasSubscription = false;
 
+    vm.currentUser = Security.currentUser;
+
+    // revert button stuff init
+    vm.revertReqObj = {evidenceId: null, organization: null};
+    vm.showRevertBtn = false;
+    vm.entityType = null;
+    vm.entityStatus = null;
+
+    // ideally the entity status & type would be available to this controller
+    // at the time of instantiation, but unfortunately the link function
+    // above adds `entityViewModel` after controller instantiation. So we
+    // need to create a watchCollection function that will set up the revert
+    // request object, ensure the most recent org is updated, and toggle
+    // the revert button in the UI
+    $scope.$watchCollection(
+      '[entityViewModel.data.item.status, entityViewModel.data.item.type]',
+      function(updates) {
+        vm.entityStatus = updates[0];
+        vm.entityType = updates[1];
+        if((vm.isEditor()||vm.isAdmin()) && vm.entityType == 'evidence' && vm.entityStatus !== 'submitted') {
+          vm.showRevertBtn = true;
+          Security.reloadCurrentUser().then(function(u) {
+            vm.currentUser = u;
+            // set org to be sent with reject/accept actions
+            vm.revertReqObj.evidenceId = $stateParams.evidenceId;
+            vm.revertReqObj.organization = u.most_recent_organization;
+          });
+        }
+      });
+
+    vm.switchOrg = function(id) {
+      vm.actionOrg = _.find(vm.currentUser.organizations, { id: id });
+    };
+
     vm.toggleSubscription = function(subscription) {
       console.log('toggling subscription: ');
       if(_.isObject(subscription)) {
@@ -155,19 +189,21 @@
     };
 
     // set subscription flag
-    $scope.$watchCollection(function() {return Subscriptions.data.collection; }, function(subscriptions) {
-      console.log('$watch subscriptions called.');
-      var subscribableType = _.startCase(_.camelCase($scope.entityViewModel.data.item.type));
-      if(subscribableType === 'Evidence') {subscribableType = 'EvidenceItem';}
-      if(subscribableType === 'Variant Group') {subscribableType = 'VariantGroup';}
-      var paramType = $scope.entityViewModel.data.item.type;
-      if(paramType === 'evidence') {paramType = 'evidence_item';}
-      var entityId = $scope.entityViewModel.data.item.id;
-      $scope.vm.subscription = _.find(subscriptions, function(sub) {
-        return sub.subscribable.type === subscribableType && sub.subscribable.state_params[paramType].id === entityId;
+    $scope.$watchCollection(
+      function() {return Subscriptions.data.collection; },
+      function(subscriptions) {
+        console.log('$watch subscriptions called.');
+        var subscribableType = _.startCase(_.camelCase($scope.entityViewModel.data.item.type));
+        if(subscribableType === 'Evidence') {subscribableType = 'EvidenceItem';}
+        if(subscribableType === 'Variant Group') {subscribableType = 'VariantGroup';}
+        var paramType = $scope.entityViewModel.data.item.type;
+        if(paramType === 'evidence') {paramType = 'evidence_item';}
+        var entityId = $scope.entityViewModel.data.item.id;
+        $scope.vm.subscription = _.find(subscriptions, function(sub) {
+          return sub.subscribable.type === subscribableType && sub.subscribable.state_params[paramType].id === entityId;
+        });
+        $scope.vm.hasSubscription = _.isObject($scope.vm.subscription);
       });
-      $scope.vm.hasSubscription = _.isObject($scope.vm.subscription);
-    });
 
     // store latest stateParams on rootscope, primarily so the Add Evidence button can
     // include gene and variantIds in the URL
