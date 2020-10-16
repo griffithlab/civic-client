@@ -73,17 +73,61 @@
 
 <script type="text/ng-template" id="settingsPopover.tpl.html">
   <div class="settings-content">
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" ng-model="vm.hasSubscription" ng-change="vm.toggleSubscription(vm.subscription)">
-        <span uib-tooltip="If checked, you will receive notifications when users update or comment upon this {{vm.type|lowercase}}{{ vm.type !== 'EVIDENCE' ?  ' or its child entities.' : '.' }}">Receive notifications</span>
-      </label>
-    </div>
-    <div ng-if="vm.showRevertBtn">
-      <hr/>
-      <div class="button" >
-        <a ng-click="vm.revert(vm.revertReqObj)" class="btn btn-xs btn-danger btn-block">Revert to Submitted</a>
+    <div class="row" >
+      <div class="col-xs-12" >
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="vm.hasSubscription" ng-change="vm.toggleSubscription(vm.subscription)">
+            <span uib-tooltip="If checked, you will receive notifications when users update or comment upon this {{vm.type|lowercase}}{{ vm.type !== 'EVIDENCE' ?  ' or its child entities.' : '.' }}">Receive notifications</span>
+          </label>
+        </div>
       </div>
+    </div>
+    <div class="row" ng-if="vm.showRevertBtn" style="padding-top: 1em; border-top: 1px solid grey">
+      <div class="col-xs-12" >
+        <span ng-switch="vm.currentUser.organizations.length > 1">
+          <span ng-switch-when="true">
+            <div class="btn-group pull-right org-select" uib-dropdown>
+
+              <button id="split-button"
+                type="button"
+                class="btn btn-danger"
+                ng-click="vm.revert(vm.revertReqObj)">
+                Revert to Submitted
+              </button>
+
+              <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+                for
+                <span class="avatar"
+                  uib-tooltip="{{vm.revertReqObj.organization.name}}">
+                  <img ng-src="{{vm.revertReqObj.organization.profile_image.x14}}" width="14" height="14"/>
+                </span>&nbsp;&nbsp;<span class="caret"></span>
+              </button>
+              <ul uib-dropdown-menu class="dropdown-menu" role="menu">
+                <li role="menuitem" ng-repeat="org in vm.currentUser.organizations"
+                  ng-class="{'active': org.id == vm.revertReqObj.organization.id}">
+                  <a href ng-click="vm.switchOrg(org.id)">
+                    <span class="glyphicon glyphicon-ok" style="margin-left: -12px"
+                      ng-class="{'glyphicon-hide': org.id !== vm.revertReqObj.organization.id}"></span>
+                    <span class="avatar">
+                      <img ng-src="{{org.profile_image.x14}}" width="14" height="14"/>
+                    </span>&nbsp;&nbsp;{{org.name}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </span>
+          <span ng-switch-default>
+            <a class="btn btn-default btn-block btn-danger"
+              ng-click="vm.revert(vm.revertReqObj)">
+              Revert to Submitted
+            </a>
+          </span>
+        </span>
+      </div>
+      <!-- <div class="button" >
+           <a ng-click="vm.revert(vm.revertReqObj)" class="btn btn-xs btn-danger btn-block">Revert to Submitted</a>
+           </div> -->
     </div>
   </div>
 </script>
