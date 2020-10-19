@@ -131,40 +131,50 @@
 
     // revert button stuff init, null values to be populated by
     // watchCollection function below
-    vm.revertReqObj = {evidenceId: null, organization: null};
+    vm.revertReqObj = { evidenceId: null, organization: null };
     vm.showRevertBtn = false;
     vm.entityType = null;
     vm.entityStatus = null;
-    vm.revert = null;
 
     // ideally the entity status & type would be available to this controller
     // at the time of instantiation, but unfortunately the link function
     // above adds `entityViewModel` after controller instantiation. So we
-    // need to create a watchCollection function that will set up the revert
-    // request object, revert function, ensure the most recent org is updated,
-    // and toggle
-    // the revert button in the UI
+    // need to create a watchCollection function to toggle the revert button
     $scope.$watchCollection(
       '[entityViewModel.data.item.status, entityViewModel.data.item.type]',
       function(updates) {
         vm.entityStatus = updates[0];
         vm.entityType = updates[1];
-        if((vm.isEditor()||vm.isAdmin()) && vm.entityType == 'evidence' && vm.entityStatus !== 'submitted') {
+        if((vm.isEditor() || vm.isAdmin()) // either editors or admins may revert
+           && vm.entityType == 'evidence' // only evidence may be reverted
+           && vm.entityStatus !== 'submitted') // submitted evidence cannot be reverted
+        {
           vm.showRevertBtn = true;
-          vm.revert = function(reqObj) {
-            $scope.entityViewModel.revert(reqObj);
-          };
-
+          // update current user to ensure most recent org displayed
           Security.reloadCurrentUser().then(function(u) {
             vm.currentUser = u;
             // set org to be sent with reject/accept actions
             vm.revertReqObj.evidenceId = $stateParams.evidenceId;
             vm.revertReqObj.organization = u.most_recent_organization;
           });
-        } else {
-          vm.showRevertBtn = false;
-        }
+        } else { vm.showRevertBtn = false; }
       });
+
+    vm.revert = function(reqObj) {
+      $scope.entityViewModel.revert(reqObj)
+        .then(function(response) {
+          // reload current user if org changed
+          if (vm.revertReqObj.organization.id != vm.currentUser.most_recent_organization.id) {
+            Security.reloadCurrentUser();
+          }
+        })
+        .catch(function(error) {
+          console.error('revert evidence error!');
+        })
+        .finally(function(){
+          console.log('evidence reverted.');
+        });
+    };
 
     vm.switchOrg = function(id) {
       vm.revertReqObj.organization = _.find(vm.currentUser.organizations, { id: id });
