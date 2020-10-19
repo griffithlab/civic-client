@@ -167,7 +167,7 @@
       });
 
     vm.switchOrg = function(id) {
-      vm.actionOrg = _.find(vm.currentUser.organizations, { id: id });
+      vm.revertReqObj.organization = _.find(vm.currentUser.organizations, { id: id });
     };
 
     vm.toggleSubscription = function(subscription) {
