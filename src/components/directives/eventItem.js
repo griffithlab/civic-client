@@ -73,7 +73,8 @@
         'publication suggested': '.summary',
         'change suggested': '.talk.revisions.list.summary',
         'change accepted': '.talk.revisions.list.summary',
-        'change rejected': '.talk.revisions.list.summary'
+        'change rejected': '.talk.revisions.list.summary',
+        'reverted': '.summary'
       };
 
       // revision comments are shown in their revision's summary view, override commented extension
