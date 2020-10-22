@@ -221,7 +221,7 @@
               'Does Not Support': 'The Assertion and associated evidence does not support a prognostic association between variant and outcome'
             },
             'Predisposing': {
-              'Supports': 'TheAssertion and associated Evidence Items support a variant\'s impact on predisposing outcome',
+              'Supports': 'The Assertion and associated Evidence Items support a variant\'s impact on predisposing outcome',
               'Does Not Support': 'The Assertion and associated evidence does not support a predisposing association between variant and outcome'
             },
             'Functional': {
