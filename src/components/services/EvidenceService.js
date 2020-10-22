@@ -15,120 +15,125 @@
     };
 
     return $resource('/api/evidence_items/:evidenceId',
-      {
-        evidenceId: '@evidenceId'
-      },
-      {
-        // Base Evidence Resources
-        query: {
-          method: 'GET',
-          isArray: true,
-          cache: cache
-        },
-        get: { // get a single evidence
-          method: 'GET',
-          isArray: false,
-          cache: cache
-        },
-        update: {
-          method: 'PATCH',
-          interceptor: {
-            response: cacheInterceptor
-          }
-        },
-        delete: {
-          method: 'DELETE',
-          interceptor: {
-            response: cacheInterceptor
-          }
-        },
-        add: {
-          method: 'POST',
-          cache: false
-        },
-        apply: {
-          method: 'PATCH',
-          cache: false
-        },
-        accept: {
-          url: '/api/evidence_items/:evidenceId/accept',
-          method: 'POST',
-          cache: false
-        },
-        reject: {
-          url: '/api/evidence_items/:evidenceId/reject',
-          method: 'POST',
-          cache: false
-        },
+                     {
+                       evidenceId: '@evidenceId'
+                     },
+                     {
+                       // Base Evidence Resources
+                       query: {
+                         method: 'GET',
+                         isArray: true,
+                         cache: cache
+                       },
+                       get: { // get a single evidence
+                         method: 'GET',
+                         isArray: false,
+                         cache: cache
+                       },
+                       update: {
+                         method: 'PATCH',
+                         interceptor: {
+                           response: cacheInterceptor
+                         }
+                       },
+                       delete: {
+                         method: 'DELETE',
+                         interceptor: {
+                           response: cacheInterceptor
+                         }
+                       },
+                       add: {
+                         method: 'POST',
+                         cache: false
+                       },
+                       apply: {
+                         method: 'PATCH',
+                         cache: false
+                       },
+                       accept: {
+                         url: '/api/evidence_items/:evidenceId/accept',
+                         method: 'POST',
+                         cache: false
+                       },
+                       revert: {
+                         url: '/api/evidence_items/:evidenceId/revert',
+                         method: 'POST',
+                         cache: false
+                       },
+                       reject: {
+                         url: '/api/evidence_items/:evidenceId/reject',
+                         method: 'POST',
+                         cache: false
+                       },
 
-        // Evidence Collections
-        queryFlags: {
-          method: 'GET',
-          url: '/api/evidence_items/:evidenceId/flags',
-          isArray: false,
-          cache: cache
-        },
-        submitFlag: {
-          method: 'POST',
-          url: '/api/evidence_items/:evidenceId/flags',
-          cache: false
-        },
-        resolveFlag: {
-          method: 'PATCH',
-          url: '/api/evidence_items/:evidenceId/flags/:flagId',
-          params: {
-            evidenceId: '@evidenceId',
-            flagId: '@flagId'
-          },
-          cache: false
-        },
+                       // Evidence Collections
+                       queryFlags: {
+                         method: 'GET',
+                         url: '/api/evidence_items/:evidenceId/flags',
+                         isArray: false,
+                         cache: cache
+                       },
+                       submitFlag: {
+                         method: 'POST',
+                         url: '/api/evidence_items/:evidenceId/flags',
+                         cache: false
+                       },
+                       resolveFlag: {
+                         method: 'PATCH',
+                         url: '/api/evidence_items/:evidenceId/flags/:flagId',
+                         params: {
+                           evidenceId: '@evidenceId',
+                           flagId: '@flagId'
+                         },
+                         cache: false
+                       },
 
-        // Evidence Comments Resources
-        queryComments: {
-          method: 'GET',
-          url: '/api/evidence_items/:evidenceId/comments',
-          isArray: true,
-          cache: cache
-        },
-        getComment: {
-          method: 'GET',
-          url: '/api/evidence_items/:evidenceId/comments/:commentId',
-          params: {
-            evidenceId: '@evidenceId',
-            commentId: '@commentId'
-          },
-          isArray: false,
-          cache: cache
-        },
+                       // Evidence Comments Resources
+                       queryComments: {
+                         method: 'GET',
+                         url: '/api/evidence_items/:evidenceId/comments',
+                         isArray: true,
+                         cache: cache
+                       },
+                       getComment: {
+                         method: 'GET',
+                         url: '/api/evidence_items/:evidenceId/comments/:commentId',
+                         params: {
+                           evidenceId: '@evidenceId',
+                           commentId: '@commentId'
+                         },
+                         isArray: false,
+                         cache: cache
+                       },
 
-        submitComment: {
-          method: 'POST',
-          url: '/api/evidence_items/:evidenceId/comments',
-          params: {
-            evidenceId: '@evidenceId'
-          },
-          cache: false
-        },
-        updateComment: {
-          method: 'PATCH',
-          url: '/api/evidence_items/:evidenceId/comments/:commentId',
-          params: {
-            evidenceId: '@evidenceId',
-            commentId: '@commentId'
-          },
-          cache: false
-        },
-        deleteComment: {
-          method: 'DELETE',
-          url: '/api/evidence_items/:evidenceId/comments/:commentId',
-          params: {
-            evidenceId: '@evidenceId',
-            commentId: '@commentId'
-          },
-          cache: false
-        }
-      }
-    );
+                       submitComment: {
+                         method: 'POST',
+                         url: '/api/evidence_items/:evidenceId/comments',
+                         params: {
+                           evidenceId: '@evidenceId'
+                         },
+                         cache: false
+                       },
+                       updateComment: {
+                         method: 'PATCH',
+                         url: '/api/evidence_items/:evidenceId/comments/:commentId',
+                         params: {
+                           evidenceId: '@evidenceId',
+                           commentId: '@commentId'
+                         },
+                         cache: false
+                       },
+                       deleteComment: {
+                         method: 'DELETE',
+                         url: '/api/evidence_items/:evidenceId/comments/:commentId',
+                         params: {
+                           evidenceId: '@evidenceId',
+                           commentId: '@commentId'
+                         },
+                         cache: false
+                       }
+                     }
+                    );
   }
 
   // @ngInject
@@ -162,6 +167,7 @@
       delete: deleteItem,
       apply: apply,
       accept: accept,
+      revert: revert,
       reject: reject,
 
       // Evidence Comments
@@ -282,6 +288,30 @@
         function(error) { // fail
           return $q.reject(error);
         });
+    }
+    function revert(reqObj) {
+      return EvidenceResource.revert(reqObj).$promise.then(
+        function(response) { // success
+          // flush cached variant and evidence item lists
+          cache.remove('/api/evidence_items/' + response.id);
+          cache.remove('/api/variants/' + response.variant_id);
+          cache.remove('/api/variants/' + response.variant_id + '/evidence_items');
+          cache.remove('/api/genes/' + response.gene_id + '/variant_groups');
+          // refresh evidence item
+          get(response.id);
+          // refresh variant
+          Variants.get(response.variant_id);
+
+          // flush gene variants and refresh (for variant menu)
+          cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
+          Genes.queryVariants(response.gene_id);
+          Genes.queryVariantGroups(response.gene_id);
+          return $q.when(response);
+        },
+        function(error) { // fail
+          return $q.reject(error);
+        });
+      console.log('EvidenceService.revert(' + reqObj.evidenceId + ') called');
     }
 
     // Evidence Collections

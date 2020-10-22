@@ -53,14 +53,22 @@
     // applied with ng-class in entityTabs.tpl.html
     .view-pageBackground2 {
       li.active a {
-        background-color: @pageBackground2 !important;
+        background-color: @pageBackground2;
       }
     }
     .view-pageBackground {
       li.active a {
-        background-color: @pageBackground !important;
+        background-color: @pageBackground;
       }
     }
+  }
+  // awful kludge to force proper bg color on active
+  // org-select rows in the popover 'Revert' button
+  .tab-row .view-pageBackground2 .dropdown-menu li.active a {
+   background-color: #337ab7 !important;
+  }
+  .tab-row .view-pageBackground .dropdown-menu li.active a {
+    background-color: #337ab7 !important;
   }
 
   .user-info-row {
