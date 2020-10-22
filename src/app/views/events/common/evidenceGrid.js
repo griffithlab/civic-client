@@ -147,6 +147,11 @@
             }
           }
         },
+        {
+          name: 'flag',
+          type: 'boolean',
+          visible: false,
+        },
         { name: 'id',
           headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
           displayName: 'EID',
@@ -155,7 +160,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           minWidth: 50,
-          width: '7%',
+          width: '8%',
           cellTemplate: 'app/views/events/common/evidenceGridIdCell.tpl.html'
         },
         { name: 'gene',
@@ -557,6 +562,7 @@
 
       function prepareEvidence(evidence) {
         return _.map(evidence, function(item){
+
           // convert drug array to string
           if (_.isArray(item.drugs) && item.drugs.length > 0) {
             item.druglist = _.chain(item.drugs).map('name').value().join(', ');

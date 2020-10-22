@@ -4,6 +4,9 @@
       <h3>
         <a ng-href="/links/evidence/{{ctrl.item.id}}" target="_self">
           EID{{ ctrl.item.id }}
+          <span class="glyphicon glyphicon-flag"
+            style="color: #942830; font-size: 80%;"
+            ng-if="ctrl.item.flagged"></span>
         </a>
         <span ng-if="ctrl.item.gene != undefined && ctrl.item.variant != undefined">
           <a ng-href="/links/gene/{{ctrl.item.gene.id}}" target="_self">
