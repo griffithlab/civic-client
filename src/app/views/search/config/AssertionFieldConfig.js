@@ -50,6 +50,7 @@
                         { value: 'interaction_type', name: 'Drug Interaction Type' },
                         { value: 'drug_name', name: 'Drug Name' },
                         { value: 'drug_ncit_id', name: 'Drug NCIt ID' },
+                        { value: 'flagged', name: 'Flagged' },
                         { value: 'gene_alias', name: 'Gene Entrez Alias' },
                         { value: 'gene_name', name: 'Gene Entrez Name' },
                         { value: 'phenotype_hpo_class', name: 'Phenotype HPO Class' },
@@ -745,6 +746,32 @@
                         required: true
                       }
                     }
+                  ],
+                  flagged: [
+                    {
+                      template: 'Assertion',
+                      className: 'inline-field',
+                    },
+                    {
+                      key: 'name',
+                      type: 'queryBuilderSelect',
+                      className: 'inline-field inline-field-md',
+                      data: {
+                        defaultValue: 'is_true'
+                      },
+                      templateOptions: {
+                        label: '',
+                        required: true,
+                        options: [
+                          {value: 'is_true', name: 'is'},
+                          {value: 'is_false', name: 'is not'},
+                        ],
+                      }
+                    },
+                    {
+                      template: 'flagged',
+                      className: 'inline-field',
+                    },
                   ],
                   gene_alias: [
                     {

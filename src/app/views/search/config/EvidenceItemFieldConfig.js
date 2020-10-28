@@ -43,6 +43,7 @@
                         { value: 'evidence_level', name: 'Evidence Level' },
                         { value: 'evidence_type', name: 'Evidence Type' },
                         { value: 'description', name: 'Evidence Statement' },
+                        { value: 'flagged', name: 'Flagged' },
                         { value: 'gene_alias', name: 'Gene Entrez Alias' },
                         { value: 'gene_name', name: 'Gene Entrez Name' },
                         { value: 'phenotype_hpo_class', name: 'Phenotype HPO Term' },
@@ -311,6 +312,32 @@
                         required: true
                       }
                     }
+                  ],
+                  flagged: [
+                    {
+                      template: 'Evidence item',
+                      className: 'inline-field',
+                    },
+                    {
+                      key: 'name',
+                      type: 'queryBuilderSelect',
+                      className: 'inline-field inline-field-md',
+                      data: {
+                        defaultValue: 'is_true'
+                      },
+                      templateOptions: {
+                        label: '',
+                        required: true,
+                        options: [
+                          {value: 'is_true', name: 'is'},
+                          {value: 'is_false', name: 'is not'},
+                        ],
+                      }
+                    },
+                    {
+                      template: 'flagged',
+                      className: 'inline-field',
+                    },
                   ],
                   disease_name: [
                     {
