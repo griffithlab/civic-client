@@ -279,6 +279,19 @@
           cellTemplate: 'app/views/events/common/evidenceGridClinicalSignificanceCell.tpl.html'
         },
         {
+          name: 'amp_level',
+          displayName: 'AMP Cat',
+          enableFiltering: true,
+          allowCellFocus: false,
+          headerTooltip: 'Amp Category',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          width: '10%'
+        },
+        {
           name: 'evidence_item_count',
           width: '8%',
           displayName: 'Evidence',
