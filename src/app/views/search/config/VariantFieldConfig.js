@@ -374,12 +374,13 @@
                       type: 'queryBuilderSelect',
                       className: 'inline-field',
                       data: {
-                        defaultValue: 'contains'
+                        defaultValue: 'is'
                       },
                       templateOptions: {
                         label: '',
                         required: true,
                         options: [
+                          {value: 'is', name: 'is'},
                           {value: 'contains', name: 'contains'},
                           {value: 'does_not_contain', name: 'does not contain'},
                           {value: 'is_empty', name: 'is empty'}
