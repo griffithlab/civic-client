@@ -10,7 +10,7 @@
           var acmgCodeOptions = _.chain(acmgCodes)
               .map(function(code) { return { value: code.code, name: code.code }; })
               .sortBy('name')
-              .unshift({value: null, name:'Please choose an ACMG Code'})
+              .unshift({value: null, name:'Please choose an ACMG/AMP Code'})
               .value();
 
           var organizationOptions = _.chain(organizations)
@@ -37,7 +37,7 @@
                       required: true,
                       options: [
                         { value: '', name: 'Please select a field' },
-                        { value: 'acmg_code', name: 'ACMG Code' },
+                        { value: 'acmg_code', name: 'ACMG/AMP Code' },
                         { value: 'amp_level', name: 'AMP/ASCO/CAP Category' },
                         { value: 'description', name: 'Assertion Description' },
                         { value: 'assertion_direction', name: 'Assertion Direction' },

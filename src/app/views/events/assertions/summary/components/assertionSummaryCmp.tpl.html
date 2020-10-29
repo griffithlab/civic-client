@@ -19,7 +19,7 @@
       <!-- predisposing assertion warnings -->
       <div class="row" ng-if="vm.assertion.evidence_type === 'Predisposing'">
         <div class="col-xs-12 notices">
-          <div class="label label-danger" style="display:block;" ng-if="vm.assertion.acmg_codes.length === 0">WARNING: This Predisposing Assertion has not been assigned any ACMG Codes!</div>
+          <div class="label label-danger" style="display:block;" ng-if="vm.assertion.acmg_codes.length === 0">WARNING: This Predisposing Assertion has not been assigned any ACMG/AMP Codes!</div>
         </div>
       </div>
 
@@ -113,7 +113,7 @@
                 </td>
               </tr>
               <tr ng-if="vm.assertion.evidence_type === 'Predisposing'">
-                <td class="key">ACMG Codes:</td>
+                <td class="key">ACMG/AMP Codes:</td>
                 <td class="value">
                   <span ng-switch="vm.assertion.acmg_codes.length > 0">
                     <span ng-switch-when="true" >

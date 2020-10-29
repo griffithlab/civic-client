@@ -589,8 +589,8 @@
         key: 'acmg_codes',
         type: 'multiInput',
         templateOptions: {
-          label: 'ACMG Code(s)',
-          entityName: 'ACMG Code',
+          label: 'ACMG/AMP Code(s)',
+          entityName: 'ACMG/AMP Code',
           showAddButton: false,
           inputOptions: {
             type: 'typeahead',
