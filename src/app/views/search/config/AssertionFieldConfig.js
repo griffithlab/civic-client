@@ -38,7 +38,7 @@
                       options: [
                         { value: '', name: 'Please select a field' },
                         { value: 'acmg_code', name: 'ACMG Code' },
-                        { value: 'amp_level', name: 'AMP Level' },
+                        { value: 'amp_level', name: 'AMP/ASCO/CAP Category' },
                         { value: 'description', name: 'Assertion Description' },
                         { value: 'assertion_direction', name: 'Assertion Direction' },
                         { value: 'id', name: 'Assertion ID'},
@@ -137,7 +137,7 @@
                       templateOptions: {
                         label: '',
                         required: true,
-                        options: ([{ value: null, label: 'Please select an AMP Level' }].concat(make_options(ampLevels))),
+                        options: ([{ value: null, label: 'Please select an AMP/ASCO/CAP Category' }].concat(make_options(ampLevels))),
                         valueProp: 'value',
                         labelProp: 'label'
                       }

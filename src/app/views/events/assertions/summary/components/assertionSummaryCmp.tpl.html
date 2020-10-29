@@ -26,7 +26,7 @@
       <!-- non-predisposing assertion warnings -->
       <div class="row" ng-if="vm.assertion.evidence_type !== 'Predisposing'">
         <div class="col-xs-12 notices">
-          <div class="label label-warning" style="display:block;" ng-if="vm.assertion.amp_level === null">CAUTION: This Assertion has not been assigned an AMP Category!</div>
+          <div class="label label-warning" style="display:block;" ng-if="vm.assertion.amp_level === null">CAUTION: This Assertion has not been assigned an AMP/ASCO/CAP Category!</div>
         </div>
       </div>
 
@@ -107,7 +107,7 @@
                 </td>
               </tr>
               <tr ng-if="vm.assertion.evidence_type !== 'Predisposing'">
-                <td class="key">AMP Category:</td>
+                <td class="key">AMP/ASCO/CAP Category:</td>
                 <td class="value">
                   {{ vm.assertion.amp_level | ifEmpty: '--' }}
                 </td>

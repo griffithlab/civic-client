@@ -332,7 +332,7 @@
           'Tier II - Level D': 'Biomarkers that show plausible therapeutic significance based on preclinical studies',
           'Tier III': 'Somatic variants in cancer genes reported in the same or different cancer types with unknown clinical significance and variants in cancer genes that have not been reported in any cancers',
           'Tier IV': 'Benign or likely benign germline variants observed at significant allele frequencies in the general population or specific subpopulation',
-          'Not Applicable': 'AMP level is not relevant to this assertion.'
+          'Not Applicable': 'AMP/ASCO/CAP category is not relevant to this assertion.'
         },
         nccnGuidelines: [
           'Acute Lymphoblastic Leukemia',
