@@ -22,6 +22,10 @@
         &nbsp;
         <strong>Entrez ID: </strong>
         <a target="_blank" href="{{ 'http://www.ncbi.nlm.nih.gov/gene/' + geneInfo._id}}" ng-bind="geneInfo._id">ID</a>
+        &nbsp;
+        &nbsp;
+        <strong>UniProtKB ID: </strong>
+        <a href="https://www.uniprot.org/uniprot/{{geneInfo.uniprot['Swiss-Prot']}}" target="_blank"><span ng-bind="geneInfo.uniprot['Swiss-Prot']"></span></a>
       </td>
     </tr>
     <tr>
