@@ -70,12 +70,8 @@
         }
       })
       .state('acknowledgements', {
-        url: '/acknowledgements',
-        templateUrl: 'app/pages/acknowledgements.tpl.html',
-        data: {
-          titleExp: '"Acknowledgements"',
-          navMode: 'sub'
-        }
+        external: true,
+        url: 'https://docs.civicdb.org/en/latest/about/acknowledgements.html'
       })
       .state('contact', {
         url: '/contact',
