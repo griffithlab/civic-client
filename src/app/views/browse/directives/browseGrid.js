@@ -279,6 +279,19 @@
           cellTemplate: 'app/views/events/common/evidenceGridClinicalSignificanceCell.tpl.html'
         },
         {
+          name: 'amp_level_short',
+          displayName: 'AMP/ASCO/CAP Category',
+          enableFiltering: true,
+          allowCellFocus: false,
+          headerTooltip: 'AMP/ASCO/CAP Category',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          cellTemplate: 'app/views/events/common/assertionGrid/assertionGridAmpCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          width: '3%'
+        },
+        {
           name: 'evidence_item_count',
           width: '8%',
           displayName: 'Evidence',
