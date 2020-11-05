@@ -301,6 +301,8 @@
           get(response.id);
           // refresh variant
           Variants.get(response.variant_id);
+          // refresh variant evidence
+          Variants.queryEvidence(response.variant_id);
 
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
