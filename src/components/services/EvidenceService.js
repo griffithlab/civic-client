@@ -308,6 +308,12 @@
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
           Genes.queryVariantGroups(response.gene_id);
+
+          // flush all associated assertions
+          _.each(response.assertions, function(assertion) {
+            cache.remove('/api/assertions/' + assertion.id);
+          });
+
           return $q.when(response);
         },
         function(error) { // fail
