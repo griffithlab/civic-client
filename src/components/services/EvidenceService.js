@@ -319,7 +319,6 @@
         function(error) { // fail
           return $q.reject(error);
         });
-      console.log('EvidenceService.revert(' + reqObj.evidenceId + ') called');
     }
 
     // Evidence Collections
