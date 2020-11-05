@@ -326,12 +326,26 @@
       reqObj.evidenceId = reqObj.entityId;
       return EvidenceResource.submitFlag(reqObj).$promise
         .then(function(response) {
-          cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/flags');
-          queryFlags(reqObj.evidenceId);
+          var evidenceId = response.state_params.evidence_item.id;
+          var variantId = response.state_params.variant.id;
+          cache.remove('/api/evidence_items/' + evidenceId + '/flags');
+          queryFlags(evidenceId);
 
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');
           Subscriptions.query();
+
+          // flush cached variant and evidence item lists
+          cache.remove('/api/evidence_items/' + evidenceId);
+          cache.remove('/api/variants/' + variantId);
+          cache.remove('/api/variants/' + variantId + '/evidence_items');
+
+          // refresh evidence item
+          get(evidenceId);
+          // refresh variant
+          Variants.get(variantId);
+          // refresh variant evidence
+          Variants.queryEvidence(variantId);
 
           return response.$promise;
         });
@@ -341,12 +355,26 @@
       reqObj.state = 'resolved';
       return EvidenceResource.resolveFlag(reqObj).$promise
         .then(function(response) {
+          var evidenceId = response.state_params.evidence_item.id;
+          var variantId = response.state_params.variant.id;
           cache.remove('/api/evidence_items/' + reqObj.evidenceId + '/flags');
           queryFlags(reqObj.evidenceId);
 
           // flush subscriptions and refresh
           cache.remove('/api/subscriptions?count=999');
           Subscriptions.query();
+
+          // flush cached variant and evidence item lists
+          cache.remove('/api/evidence_items/' + evidenceId);
+          cache.remove('/api/variants/' + variantId);
+          cache.remove('/api/variants/' + variantId + '/evidence_items');
+
+          // refresh evidence item
+          get(evidenceId);
+          // refresh variant
+          Variants.get(variantId);
+          // refresh variant evidence
+          Variants.queryEvidence(variantId);
 
           return response.$promise;
         });
