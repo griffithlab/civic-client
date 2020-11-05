@@ -568,11 +568,11 @@
         type: 'horizontalSelectHelp',
         wrapper: 'attributeDefinition',
         templateOptions: {
-          label: 'AMP Category',
-          options: ([{ value: '', label: 'Please select an AMP Category' }].concat(make_options(ampLevels))),
+          label: 'AMP/ASCO/CAP Category',
+          options: ([{ value: '', label: 'Please select an AMP/ASCO/CAP Category' }].concat(make_options(ampLevels))),
           valueProp: 'value',
           labelProp: 'label',
-          helpText: 'If applicable, please provide the <a href="http://www.ncbi.nlm.nih.gov/pubmed/27993330" target="_blank">AMP somatic variant classification</a>.',
+          helpText: 'If applicable, please provide the <a href="http://www.ncbi.nlm.nih.gov/pubmed/27993330" target="_blank">AMP/ASCO/CAP somatic variant classification</a>.',
           data: {
             attributeDefinition: '&nbsp;',
             attributeDefinitions: assertDescriptions.ampLevels
@@ -623,8 +623,8 @@
         key: 'acmg_codes',
         type: 'multiInput',
         templateOptions: {
-          label: 'ACMG Code(s)',
-          entityName: 'ACMG Code',
+          label: 'ACMG/AMP Code(s)',
+          entityName: 'ACMG/AMP Code',
           showAddButton: false,
           data: { message: '' },
           inputOptions: {
