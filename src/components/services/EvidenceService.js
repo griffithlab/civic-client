@@ -301,17 +301,24 @@
           get(response.id);
           // refresh variant
           Variants.get(response.variant_id);
+          // refresh variant evidence
+          Variants.queryEvidence(response.variant_id);
 
           // flush gene variants and refresh (for variant menu)
           cache.remove('/api/genes/' + response.gene_id + '/variants?count=999');
           Genes.queryVariants(response.gene_id);
           Genes.queryVariantGroups(response.gene_id);
+
+          // flush all associated assertions
+          _.each(response.assertions, function(assertion) {
+            cache.remove('/api/assertions/' + assertion.id);
+          });
+
           return $q.when(response);
         },
         function(error) { // fail
           return $q.reject(error);
         });
-      console.log('EvidenceService.revert(' + reqObj.evidenceId + ') called');
     }
 
     // Evidence Collections
