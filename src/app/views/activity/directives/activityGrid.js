@@ -266,6 +266,7 @@
           'assertion accepted': '.summary',
           'assertion rejected': '.summary',
           'rejected': '.summary',
+          'reverted': '.summary',
           'flagged': '.summary',
           'flag resolved': '.summary',
           'publication suggested': '.summary',
