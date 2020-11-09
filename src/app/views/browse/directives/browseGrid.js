@@ -107,6 +107,11 @@
           visible: false
         },
         {
+          name: 'flag',
+          type: 'boolean',
+          visible: false,
+        },
+        {
           name: 'id',
           displayName: 'AID',
           visible: true,
@@ -313,6 +318,11 @@
           displayName: 'ST',
           type: 'string',
           visible: false
+        },
+        {
+          name: 'flag',
+          type: 'boolean',
+          visible: false,
         },
         {
           name: 'id',
