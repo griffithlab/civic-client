@@ -37,9 +37,9 @@
       </div>
     </div>
   </div>
-  <div ng-if="geneData.sources.length > 0">
-    <div class="row">
-      <div class="col-xs-8">
+  <div class="row">
+    <div class="col-xs-8">
+      <div ng-if="geneData.sources.length > 0">
         <h5>Sources:</h5>
         <ul class="sources">
           <li ng-repeat="source in geneData.sources">
@@ -47,14 +47,14 @@
           </li>
         </ul>
       </div>
-      <div class="col-xs-4">
+    </div>
+    <div class="col-xs-4">
         <a class="btn btn-block button-dgidb btn-xs" ng-href="http://dgidb.org/genes/{{geneData.name}}" target="_blank" style="margin-top: 8px;">
           <span class="glyphicon glyphicon-new-window"></span>&nbsp;DGIdb Details
         </a>
         <a class="btn btn-block button-proteinpaint btn-xs" ng-href="https://pecan.stjude.cloud/proteinpaint/{{geneData.name}}/hg19/civic" target="_blank" style="margin-top: 8px;">
           <span class="glyphicon glyphicon-new-window"></span>&nbsp;ProteinPaint Details
         </a>
-      </div>
     </div>
   </div>
 </div>
