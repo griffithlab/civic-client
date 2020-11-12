@@ -1,0 +1,10 @@
+<div class="ngCellText ui-grid-cell-contents"
+  uib-tooltip="{{ COL_FIELD}}"
+  tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
+  tooltip-placement="right"
+  tooltip-append-to-body="true">
+  <span search-highlighting='col' highlight-content='COL_FIELD'>
+    {{COL_FIELD; CUSTOM_FILTERS}}
+  </span>
+  <i class="glyphicon glyphicon-flag" style="color: #942830" ng-if="row.entity['flagged']"></i>
+</div>
