@@ -107,7 +107,7 @@
           visible: false
         },
         {
-          name: 'flag',
+          name: 'flagged',
           type: 'boolean',
           visible: false,
         },
@@ -320,7 +320,7 @@
           visible: false
         },
         {
-          name: 'flag',
+          name: 'flagged',
           type: 'boolean',
           visible: false,
         },
@@ -575,10 +575,15 @@
           width: '15%',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          cellTemplate: 'app/views/browse/directives/browseGridVariantCell.tpl.html',
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'flagged',
+          type: 'boolean',
+          visible: false,
         },
         {
           name: 'entrez_gene',
@@ -656,6 +661,11 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'flagged',
+          type: 'boolean',
+          visible: false,
         },
         {
           name: 'gene_aliases',
@@ -737,6 +747,11 @@
           }
         },
         {
+          name: 'flagged',
+          type: 'boolean',
+          visible: false,
+        },
+        {
           name: 'variants',
           displayName: 'Variants',
           enableFiltering: true,
@@ -796,6 +811,11 @@
               { value: '1', label: 'ASCO'}
              ]
           }
+        },
+        {
+          name: 'flagged',
+          type: 'boolean',
+          visible: false,
         },
         {
           name: 'citation_id',
@@ -970,6 +990,12 @@
     function updateData() {
       fetchData(ctrl.mode, ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
         .then(function(data){
+          // ADD FLAGGED BOOL FOR TESTING
+          _.forEach(data.result, function(entity) {
+            entity.flagged = (Math.random() > .5) ? true : false;
+            return entity;
+          });
+
           if(ctrl.mode === 'variant_groups') {
             // add variant_count attribute
             _.forEach(data.result, function(variant_group) {
