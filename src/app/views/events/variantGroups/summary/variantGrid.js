@@ -82,7 +82,7 @@
           enableFiltering: true,
           allowCellFocus: false,
           type: 'string',
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          cellTemplate: 'app/views/browse/directives/browseGridVariantCell.tpl.html',
           width: '20%',
           filter: {
             condition: uiGridConstants.filter.CONTAINS

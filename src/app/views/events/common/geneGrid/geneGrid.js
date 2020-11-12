@@ -70,7 +70,7 @@
           type: 'string',
           enableFiltering: true,
           allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/genericHighlightCell.tpl.html',
+          cellTemplate: 'app/views/browse/directives/browseGridVariantCell.tpl.html',
           width: '10%'
         },
         { name: 'variant_list',

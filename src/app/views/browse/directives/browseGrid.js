@@ -991,7 +991,7 @@
     function updateData() {
       fetchData(ctrl.mode, ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
         .then(function(data){
-          // ADD FLAGGED BOOL FOR TESTING
+          // REMOVE: ADD FLAGGED BOOL FOR TESTING
           _.forEach(data.result, function(entity) {
             entity.flagged = (Math.random() > .5) ? true : false;
             return entity;

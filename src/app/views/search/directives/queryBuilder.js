@@ -68,6 +68,12 @@
             var state = entity === 'evidence_items' ? 'search.evidence' : 'search.' + entity;
             $state.transitionTo(state, { token: response.token }, {notify: false});
           }
+          // REMOVE: ADD FLAGGED BOOL FOR TESTING
+          _.forEach(vm.searchResults, function(entity) {
+            entity.flagged = (Math.random() > .5) ? true : false;
+            return entity;
+          });
+
         },
         function(response) { // error
           angular.copy([], vm.searchResults);
@@ -85,6 +91,12 @@
             vm.model.operator = response.params.operator;
             vm.model.queries = response.params.queries;
             vm.searchResults = response.results;
+            // REMOVE: ADD FLAGGED BOOL FOR TESTING
+            _.forEach(vm.searchResults, function(entity) {
+              entity.flagged = (Math.random() > .5) ? true : false;
+              return entity;
+            });
+
             vm.showGrid = true;
           });
       } else {
