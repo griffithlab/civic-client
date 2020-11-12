@@ -1,9 +1,9 @@
-<div class="ngCellText"
+<div class="ngCellText ui-grid-cell-contents"
   uib-tooltip="{{ COL_FIELD}}"
   tooltip-popup-delay="{{ctrl.tooltipPopupDelay}}"
   tooltip-placement="right"
   tooltip-append-to-body="true">
-  <div search-highlighting='col' highlight-content='COL_FIELD'>
+  <span search-highlighting='col' highlight-content='COL_FIELD'>
     {{COL_FIELD; CUSTOM_FILTERS}}
-  </div>
+  </span>
 </div>

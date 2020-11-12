@@ -285,7 +285,7 @@
         },
         {
           name: 'amp_level_short',
-          displayName: 'AMP/ASCO/CAP Category',
+          displayName: 'CAT',
           enableFiltering: true,
           allowCellFocus: false,
           headerTooltip: 'AMP/ASCO/CAP Category',
@@ -294,7 +294,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          width: '3%'
+          width: '5%'
         },
         {
           name: 'evidence_item_count',
@@ -351,7 +351,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          width: '6%'
+          width: '8%'
         },
         {
           name: 'variant_name',
@@ -364,19 +364,7 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           },
-          width: '8%'
-        },
-        {
-          name: 'description',
-          displayName: 'Description',
-          headerTooltip: 'Description',
-          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
-          enableFiltering: true,
-          allowCellFocus: false,
-          cellTemplate: 'app/views/events/common/evidenceGridEvidenceCell.tpl.html',
-          filter: {
-            condition: uiGridConstants.filter.CONTAINS
-          }
+          width: '10%'
         },
         {
           name: 'disease',
@@ -401,6 +389,19 @@
           filter: {
             condition: uiGridConstants.filter.CONTAINS
           }
+        },
+        {
+          name: 'description',
+          displayName: 'DESC',
+          headerTooltip: 'Description',
+          headerCellTemplate: 'app/views/events/common/evidenceGridTooltipHeader.tpl.html',
+          enableFiltering: true,
+          allowCellFocus: false,
+          cellTemplate: 'app/views/events/common/evidenceGridEvidenceCell.tpl.html',
+          filter: {
+            condition: uiGridConstants.filter.CONTAINS
+          },
+          width: '6%'
         },
         {
           name: 'evidence_level',
