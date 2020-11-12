@@ -991,12 +991,6 @@
     function updateData() {
       fetchData(ctrl.mode, ctrl.count, ctrl.page, ctrl.sorting, ctrl.filters)
         .then(function(data){
-          // REMOVE: ADD FLAGGED BOOL FOR TESTING
-          _.forEach(data.result, function(entity) {
-            entity.flagged = (Math.random() > .5) ? true : false;
-            return entity;
-          });
-
           if(ctrl.mode === 'variant_groups') {
             // add variant_count attribute
             _.forEach(data.result, function(variant_group) {
