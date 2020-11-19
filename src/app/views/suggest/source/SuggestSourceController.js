@@ -366,8 +366,14 @@
       if(!_.isUndefined(req.variant) && _.isObject(req.variant)) {
         reqObj.variant_name = req.variant.name;
       }
-      if(!_.isUndefined(req.disease) && _.isObject(req.disease)) {
-        reqObj.disease_name = req.disease.name;
+      if(!_.isUndefined(req.disease)) {
+        if(_.isObject(req.disease)) {
+          // disease field populated by disease obj retrieved from db
+          reqObj.disease_name = req.disease.name;
+        } else {
+          // disease field populated by string (wasn't found in db)
+          reqObj.disease_name = req.disease;
+        }
       }
       Sources.suggest(reqObj).then(
         function(response) { // success

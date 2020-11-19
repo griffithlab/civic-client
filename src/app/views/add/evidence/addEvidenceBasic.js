@@ -464,10 +464,8 @@
                   $scope.model.disease = response[0];
                   $scope.to.data.doid = response[0].doid;
                 } else {
-                  // disease not found, toggle noDoid checkbox
-                  $scope.model.noDoid = true;
-                  // and populate disease_name
-                  $scope.model.disease_name = $stateParams.diseaseName;
+                  // disease not found, show msg to user
+                  $scope.to.data.doid = 'Suggested disease "' + $stateParams.diseaseName + '" not found.';
                 }
                 // toggle searched flag, ensuring prepopulation search is
                 // only performed once
