@@ -255,7 +255,7 @@
           required: false,
           editable: true,
           minLength: 32,
-          helpText: help['Disease'],
+          helpText: 'Please enter a disease name.',
           typeahead: 'item as item.name for item in to.data.typeaheadSearch($viewValue)',
           onSelect: 'to.data.doid = $model.doid',
           templateUrl: 'components/forms/fieldTypes/diseaseTypeahead.tpl.html',
