@@ -134,7 +134,7 @@
                       <i class="badge" style="background-color: #dc3545;">MISSING</i>
                     </span>
                     <span ng-switch-when="conflict">
-                      <i class="badge" style="background-color: #ffc107;">CONFLICT</i>
+                      <i class="badge" style="color: #473814; background-color: #ffc107;">CONFLICT</i>
                     </span>
                     <span ng-switch-when="valid">
                       <i class="badge" style="background-color: #28a745;">VALID</i>
@@ -160,16 +160,16 @@
                 </div>
                 <div class="col-sm-10">
                   <span ng-switch="user.conflict_of_interest.coi_valid">
-                    <span ng-switch-when="valid">
-                      I do not have any potential conflicts of interest.
-                    </span>
-                    <span ng-switch-default="valid">
+                    <span ng-switch-when="conflict">
                       I do have a potential conflict of interest:<br/>
                       <p style="margin-bottom: 0">
                         <i>
                           {{user.conflict_of_interest.details.coi_statement}}
                         </i>
                       </p>
+                    </span>
+                    <span ng-switch-default>
+                      I do not have any potential conflicts of interest.
                     </span>
                   </span>
                 </div>

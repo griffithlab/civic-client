@@ -25,9 +25,10 @@
     }, function(currentUser) {
       if(!_.isNull(currentUser)) {
         vm.currentUser = currentUser;
-        vm.showCoiNotice = $scope.user.id === currentUser.id && (Security.isAdmin() || Security.isEditor())
-          && (currentUser.conflict_of_interest.coi_valid === 'missing' ||
-              currentUser.conflict_of_interest.coi_valid === 'expired' );
+        vm.showCoiNotice = $scope.user.id === currentUser.id
+          && (Security.isAdmin() || Security.isEditor())
+          && (currentUser.conflict_of_interest.coi_valid === 'missing'
+              || currentUser.conflict_of_interest.coi_valid === 'expired' );
       }
     });
 
