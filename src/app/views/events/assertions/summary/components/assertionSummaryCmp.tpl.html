@@ -70,6 +70,18 @@
           <p><strong>Description:</strong> <span ng-bind="vm.assertion.description">Description</span></p>
         </div>
       </div>
+      <div class="row" >
+        <div class="col-xs-12" >
+          <a class="btn btn-default btn-block btn-xs"
+            uib-popover-template="'disclaimerPopover.tpl.html'"
+            popover-title="Disclaimer"
+            popover-trigger="'outsideClick'"
+            popover-placement="top">
+            <i class="glyphicon glyphicon-hand-up"></i>
+            For Research Use Only
+          </a>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xs-12">
           <my-variant-info ng-if="vm.myVariantInfo._id" variant-info="vm.myVariantInfo" entrez-id="vm.assertion.variant.name"></my-variant-info>
@@ -330,6 +342,15 @@
   <!-- </div> -->
 </div>
 
+<script type="text/ng-template" id="disclaimerPopover.tpl.html">
+  <div class="disclaimer-content" >
+    <div class="row" >
+      <div class="col-xs-12" >
+        <p>The information in this variant assertion is not intended for direct medical decision-making without consulting a physician or other qualified health provider. Individuals should not change their health behavior solely on the basis of information contained on in this variant assertion. If you have questions about the information contained on this website, please see a health care professional. </p>
+      </div>
+    </div>
+  </div>
+</script>
 <script type="text/ng-template" id="org-menu.tpl.html">
   <li role="menuitem" ng-repeat="org in vm.currentUser.organizations"
     ng-class="{'active': org.id == vm.actionOrg.id}">
