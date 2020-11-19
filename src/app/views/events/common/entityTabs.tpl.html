@@ -129,5 +129,13 @@
            <a ng-click="vm.revert(vm.revertReqObj)" class="btn btn-xs btn-danger btn-block">Revert to Submitted</a>
            </div> -->
     </div>
+    <div class="row" ng-if="vm.showCoiNotice" style="padding-top: 1em; border-top: 1px solid grey">
+      <div class="col-xs-12" >
+        <a ui-sref="account.profile" class="btn btn-xs btn-block btn-danger">
+          <i class="glyphicon glyphicon-hand-up"></i>&nbsp;
+          Please Update COI Statement
+        </a>
+      </div>
+    </div>
   </div>
 </script>

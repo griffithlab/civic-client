@@ -133,6 +133,7 @@
     // watchCollection function below
     vm.revertReqObj = { evidenceId: null, organization: null };
     vm.showRevertBtn = false;
+    vm.showCoiNotice = false;
     vm.entityType = null;
     vm.entityStatus = null;
 
@@ -145,19 +146,30 @@
       function(updates) {
         vm.entityStatus = updates[0];
         vm.entityType = updates[1];
+        var coiStatus = vm.currentUser ? vm.currentUser.conflict_of_interest.coi_valid : undefined;
+        var coiValid = coiStatus === 'conflict' || coiStatus === 'valid';
         if((vm.isEditor() || vm.isAdmin()) // either editors or admins may revert
            && vm.entityType == 'evidence' // only evidence may be reverted
            && vm.entityStatus !== 'submitted') // submitted evidence cannot be reverted
         {
-          vm.showRevertBtn = true;
-          // update current user to ensure most recent org displayed
-          Security.reloadCurrentUser().then(function(u) {
-            vm.currentUser = u;
-            // set org to be sent with reject/accept actions
-            vm.revertReqObj.evidenceId = $stateParams.evidenceId;
-            vm.revertReqObj.organization = u.most_recent_organization;
-          });
-        } else { vm.showRevertBtn = false; }
+          if(coiValid) { // show revert btn, load orgs
+            vm.showRevertBtn = true;
+            vm.showCoiNotice = false;
+            // update current user to ensure most recent org displayed
+            Security.reloadCurrentUser().then(function(u) {
+              vm.currentUser = u;
+              // set org to be sent with reject/accept actions
+              vm.revertReqObj.evidenceId = $stateParams.evidenceId;
+              vm.revertReqObj.organization = u.most_recent_organization;
+            });
+          } else { // hide revert btn, show COI notice if COI invalid
+            vm.showRevertBtn = false;
+            vm.showCoiNotice = true;
+          }
+        } else { // not an EID, not an editor, show no buttons
+          vm.showRevertBtn = false;
+          vm.showCoiNotice = false;
+        }
       });
 
     vm.revert = function(reqObj) {
