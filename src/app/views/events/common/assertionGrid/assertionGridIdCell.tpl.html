@@ -7,5 +7,6 @@
     <i class="glyphicon glyphicon-exclamation-sign pending-alert pending-changes"
        ng-if="row.entity['open_change_count'] > 0"></i>
     {{ row.entity[col.field] }}
+    <i class="glyphicon glyphicon-flag" style="color: #942830" ng-if="row.entity['flagged']"></i>
   </span>
 </div>
