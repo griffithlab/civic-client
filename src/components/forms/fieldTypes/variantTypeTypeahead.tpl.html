@@ -1,0 +1,14 @@
+<a tabindex="-1">
+  <span ng-switch="match.model.so_id === match.model.root_concept.so_id">
+    <span ng-switch-when="false" >
+      <span ng-bind-html="match.label|uibTypeaheadHighlight:query">VARIANT TYPE NAME</span>
+      <span style="color: #AAA;">&nbsp;(<span ng-bind="match.model.root_concept.name"></span>)</span>
+    </span>
+    <span ng-switch-when="true" >
+      <span style="color: #999;">
+        <span ng-bind-html="match.label|uibTypeaheadHighlight:query">VARIANT TYPE NAME</span>
+      </span>
+      <span style="color: #AAA;">&nbsp;(<i>Root Concept</i>)</span>
+    </span>
+  </span>
+</a>

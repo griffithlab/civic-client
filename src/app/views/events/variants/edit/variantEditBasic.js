@@ -302,7 +302,7 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Variant Type(s)',
-          helpText: 'Add one or more variant types from the <a href="http://www.sequenceontology.org/browser/" title="Opens a new tab for the Sequence Ontology Browser" target="_blank">Sequence Ontology</a> (e.g., missense, loss-of-function).',
+          helpText: 'Add one or more variant types from the <a href="http://www.sequenceontology.org/browser/" title="Opens a new tab for the Sequence Ontology Browser" target="_blank">Sequence Ontology</a> (e.g., missense, loss-of-function). Please be specific as possible, and avoid the addition of root concepts.',
           entityName: 'Type',
           showAddButton: false,
           inputOptions: {
@@ -311,11 +311,12 @@
             templateOptions: {
               formatter: 'model[options.key].display_name',
               typeahead: 'item as item.display_name for item in to.data.typeaheadSearch($viewValue)',
+              templateUrl: 'components/forms/fieldTypes/variantTypeTypeahead.tpl.html',
               editable: false,
               data: {
                 typeaheadSearch: function(val) {
                   var request = {
-                    count: 5,
+                    count: 25,
                     page: 0,
                     name: val
                   };
