@@ -105,6 +105,13 @@
       vm.newEvidence.organization = vm.currentUser.most_recent_organization;
     });
 
+    // form helper functions
+    var hideDiseaseFields = function(model) {
+      var isFunctional = model.evidence_type === 'Functional';
+      var isOncogenic = model.clinical_significance === 'Oncogenic';
+      return (isFunctional && !isOncogenic);
+    };
+
     vm.evidenceFields = [
       {
         key: 'gene',
@@ -473,24 +480,12 @@
               });
           }
         },
-
         expressionProperties: {
           'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
           'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
         },
-        hideExpression: 'model.noDoid'
-      },
-      {
-        key: 'noDoid',
-        type: 'horizontalCheckbox',
-        templateOptions: {
-          label: 'Could not find disease.',
-          onChange: function(value, options, scope) {
-            // reset disease fields
-            scope.model.disease = { name: '' };
-            scope.model.disease_name = '';
-          }
-
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return hideDiseaseFields(scope.model) || scope.model.noDoid;
         }
       },
       {
@@ -504,6 +499,22 @@
           helpText: help['Disease Name']
         },
         hideExpression: '!model.noDoid'
+      },
+      {
+        key: 'noDoid',
+        type: 'horizontalCheckbox',
+        templateOptions: {
+          label: 'Could not find disease.',
+          onChange: function(value, options, scope) {
+            // reset disease fields
+            scope.model.disease = { name: '' };
+            scope.model.disease_name = '';
+          }
+
+        },
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return hideDiseaseFields(scope.model);
+        }
       },
       {
         key: 'description',
