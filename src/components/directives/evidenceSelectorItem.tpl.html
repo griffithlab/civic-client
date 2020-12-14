@@ -101,7 +101,7 @@
           <col width="60%" />
         </colgroup>
 
-        <tr>
+        <tr ng-if="ctrl.item.evidence_type !== 'Functional' || (ctrl.item.evidence_type === 'Functional' && ctrl.item.clinical_significance === 'Oncogenic')">
           <td class="name">Disease:</td>
           <td class="value">
             <a target="_blank" href="{{ ctrl.item.disease.url }}" _target="blank">

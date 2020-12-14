@@ -101,7 +101,7 @@
           <col width="60%"/>
         </colgroup>
 
-        <tr>
+        <tr ng-if="evidence.evidence_type !== 'Functional' || (evidence.evidence_type === 'Functional' && evidence.clinical_significance === 'Oncogenic')">
           <td class="name">Disease:</td>
           <td class="value">
             <span ng-switch="evidence.disease.doid !== null" >
@@ -267,11 +267,6 @@
       </a>
     </div>
   </div>
-  <!--<div class="row">-->
-  <!--<div class="col-xs-12">-->
-  <!--<pre ng-bind="evidence|json">evidence</pre>-->
-  <!--</div>-->
-  <!--</div>-->
 </div>
 
 <script type="text/ng-template" id="org-menu.tpl.html">
