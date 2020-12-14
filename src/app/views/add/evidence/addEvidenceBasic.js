@@ -106,7 +106,7 @@
     });
 
     // form helper functions
-    var hideDiseaseFields = function(model) {
+    var hideDiseaseField = function(model) {
       var isFunctional = model.evidence_type === 'Functional';
       var isOncogenic = model.clinical_significance === 'Oncogenic';
       return (isFunctional && !isOncogenic);
@@ -426,6 +426,53 @@
         }
       },
       {
+        key: 'evidence_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.evidenceType) {
+            var et = $stateParams.evidenceType;
+            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type.evidence_item);
+            if(_.includes(permitted, et)) {
+              $scope.model.evidence_type = $stateParams.evidenceType;
+              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et];
+            } else {
+              console.warn('Ignoring pre-population of Evidence Type with invalid value: ' + et);
+            }
+          }
+        },
+        templateOptions: {
+          label: 'Evidence Type',
+          required: true,
+          value: 'vm.newEvidence.evidence_type',
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type.evidence_item)),
+          onChange: function(value, options, scope) {
+            // reset evidence_direction and clinical_significance, as their options will change
+            // also update $touched so user notices
+            var csField = _.find(scope.fields, { key: 'clinical_significance'});
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+
+            csField.value('');
+            edField.value('');
+            csField.templateOptions.data.attributeDefinition = '';
+            edField.templateOptions.data.attributeDefinition = '';
+
+            // if we're switching to Predictive, seed the drugs array w/ a blank entry,
+            // otherwise set to empty array
+            value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
+
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+          },
+          helpText: help['Evidence Type'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.evidence_type.evidence_item
+          }
+        }
+      },
+      {
         key: 'disease',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay'],
@@ -485,7 +532,7 @@
           'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-          return hideDiseaseFields(scope.model) || scope.model.noDoid;
+          return hideDiseaseField(scope.model) || scope.model.noDoid;
         }
       },
       {
@@ -513,7 +560,7 @@
 
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-          return hideDiseaseFields(scope.model);
+          return hideDiseaseField(scope.model);
         }
       },
       {
@@ -526,53 +573,6 @@
           value: 'vm.newEvidence.description',
           minLength: 32,
           helpText: help['Evidence Statement']
-        }
-      },
-      {
-        key: 'evidence_type',
-        type: 'horizontalSelectHelp',
-        wrapper: 'attributeDefinition',
-        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
-          if($stateParams.evidenceType) {
-            var et = $stateParams.evidenceType;
-            var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.evidence_type.evidence_item);
-            if(_.includes(permitted, et)) {
-              $scope.model.evidence_type = $stateParams.evidenceType;
-              $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[et];
-            } else {
-              console.warn('Ignoring pre-population of Evidence Type with invalid value: ' + et);
-            }
-          }
-        },
-        templateOptions: {
-          label: 'Evidence Type',
-          required: true,
-          value: 'vm.newEvidence.evidence_type',
-          ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type.evidence_item)),
-          onChange: function(value, options, scope) {
-            // reset evidence_direction and clinical_significance, as their options will change
-            // also update $touched so user notices
-            var csField = _.find(scope.fields, { key: 'clinical_significance'});
-            var edField = _.find(scope.fields, { key: 'evidence_direction'});
-
-            csField.value('');
-            edField.value('');
-            csField.templateOptions.data.attributeDefinition = '';
-            edField.templateOptions.data.attributeDefinition = '';
-
-            // if we're switching to Predictive, seed the drugs array w/ a blank entry,
-            // otherwise set to empty array
-            value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
-
-            // set attribute definition
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
-          },
-          helpText: help['Evidence Type'],
-          data: {
-            attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.evidence_type.evidence_item
-          }
         }
       },
       {
