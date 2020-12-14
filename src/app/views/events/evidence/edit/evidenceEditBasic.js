@@ -96,6 +96,13 @@
       $document.scrollToElementAnimated(elem);
     });
 
+    // form helper functions
+    var hideDiseaseField = function(model) {
+      var isFunctional = model.evidence_type === 'Functional';
+      var isOncogenic = model.clinical_significance === 'Oncogenic';
+      return (isFunctional && !isOncogenic);
+    };
+
     vm.evidenceFields = [
       {
         key: 'variant_origin',
@@ -352,7 +359,9 @@
           'templateOptions.disabled': 'model.noDoid === true', // deactivate if noDoid is checked
           'templateOptions.required': 'model.noDoid === false' // required only if noDoid is unchecked
         },
-        hideExpression: 'model.noDoid'
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return hideDiseaseField(scope.model) || scope.model.noDoid;
+        }
       },
       {
         key: 'disease_name',
@@ -375,6 +384,9 @@
               scope.model.disease = '';
             }
           }
+        },
+        hideExpression: function($viewValue, $modelValue, scope) {
+          return hideDiseaseField(scope.model);
         }
       },
       {
