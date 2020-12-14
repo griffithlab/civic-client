@@ -233,6 +233,86 @@
         }
       },
       {
+        key: 'evidence_type',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */  function($scope) {
+          // set attribute definition
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type];
+        },
+        templateOptions: {
+          label: 'Evidence Type',
+          required: true,
+          value: 'vm.evidenceEdit.evidence_type',
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type.evidence_item)),
+          onChange: function(value, options, scope) {
+            // reset clinical_significance, as its options will change
+            // then update $touched to ensure user notices
+            var csField = _.find(scope.fields, { key: 'clinical_significance'});
+            var edField = _.find(scope.fields, { key: 'evidence_direction'});
+
+            csField.value('');
+            edField.value('');
+            csField.templateOptions.data.attributeDefinition = '';
+            edField.templateOptions.data.attributeDefinition = '';
+
+            // if we're switching to Predictive, seed the drugs array w/ a blank entry,
+            // otherwise set to empty array
+            value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
+
+            // set attribute definition
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+
+          },
+          helpText: help['Evidence Type'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.evidence_type
+          }
+        }
+      },
+      {
+        key: 'clinical_significance',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope) {
+          // set attribute definition
+          $scope.options.templateOptions.data.attributeDefinition =
+            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type][$scope.model.clinical_significance];
+        },
+        templateOptions: {
+          label: 'Clinical Significance',
+          required: true,
+          value: 'vm.evidenceEdit.clinical_significance',
+          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
+          helpText: help['Clinical Significance'],
+          data: {
+            attributeDefinition: '&nbsp;',
+            attributeDefinitions: descriptions.clinical_significance.evidence_item,
+            updateDefinition: function(value, options, scope) {
+              // set attribute definition
+              options.templateOptions.data.attributeDefinition =
+                options.templateOptions.data.attributeDefinitions[scope.model.evidence_type][scope.model.clinical_significance];
+            }
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.updateDefinition(value, options, scope);
+          }
+        },
+        expressionProperties: {
+          'templateOptions.options': function($viewValue, $modelValue, scope) {
+            return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
+              return !!(option.type === scope.model.evidence_type || option.type === 'default' || option.type === 'N/A');
+            });
+          },
+          'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
+        }
+      },
+      {
         key: 'disease',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay', 'validationMessages'],
@@ -275,6 +355,17 @@
         hideExpression: 'model.noDoid'
       },
       {
+        key: 'disease_name',
+        type: 'horizontalInputHelp',
+        templateOptions: {
+          label: 'Disease Name',
+          required: true,
+          minLength: 32,
+          helpText: help['Disease Name']
+        },
+        hideExpression: '!model.noDoid'
+      },
+      {
         key: 'noDoid',
         type: 'horizontalCheckbox',
         templateOptions: {
@@ -287,17 +378,6 @@
         }
       },
       {
-        key: 'disease_name',
-        type: 'horizontalInputHelp',
-        templateOptions: {
-          label: 'Disease Name',
-          required: true,
-          minLength: 32,
-          helpText: help['Disease Name']
-        },
-        hideExpression: '!model.noDoid'
-      },
-      {
         key: 'description',
         type: 'horizontalTextareaHelp',
         templateOptions: {
@@ -306,47 +386,6 @@
           label: 'Evidence Statement',
           minLength: 32,
           helpText: help['Evidence Statement']
-        }
-      },
-      {
-        key: 'evidence_type',
-        type: 'horizontalSelectHelp',
-        wrapper: 'attributeDefinition',
-        controller: /* @ngInject */  function($scope) {
-          // set attribute definition
-          $scope.options.templateOptions.data.attributeDefinition =
-            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type];
-        },
-        templateOptions: {
-          label: 'Evidence Type',
-          required: true,
-          value: 'vm.evidenceEdit.evidence_type',
-          ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [{ value: '', label: 'Please select an Evidence Type' }].concat(make_options(descriptions.evidence_type.evidence_item)),
-          onChange: function(value, options, scope) {
-            // reset clinical_significance, as its options will change
-            // then update $touched to ensure user notices
-            var csField = _.find(scope.fields, { key: 'clinical_significance'});
-            var edField = _.find(scope.fields, { key: 'evidence_direction'});
-
-            csField.value('');
-            edField.value('');
-            csField.templateOptions.data.attributeDefinition = '';
-            edField.templateOptions.data.attributeDefinition = '';
-
-            // if we're switching to Predictive, seed the drugs array w/ a blank entry,
-            // otherwise set to empty array
-            value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
-
-            // set attribute definition
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
-
-          },
-          helpText: help['Evidence Type'],
-          data: {
-            attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.evidence_type
-          }
         }
       },
       {
@@ -410,45 +449,6 @@
         expressionProperties:{
           'templateOptions.options': function($viewValue, $modelValue, scope) {
             return  _.filter(scope.to.evidenceDirectionOptions, function(option) {
-              return !!(option.type === scope.model.evidence_type || option.type === 'default' || option.type === 'N/A');
-            });
-          },
-          'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
-        }
-      },
-      {
-        key: 'clinical_significance',
-        type: 'horizontalSelectHelp',
-        wrapper: 'attributeDefinition',
-        controller: /* @ngInject */ function($scope) {
-          // set attribute definition
-          $scope.options.templateOptions.data.attributeDefinition =
-            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type][$scope.model.clinical_significance];
-        },
-        templateOptions: {
-          label: 'Clinical Significance',
-          required: true,
-          value: 'vm.evidenceEdit.clinical_significance',
-          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
-          ngOptions: 'option["value"] as option["label"] for option in to.options',
-          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
-          helpText: help['Clinical Significance'],
-          data: {
-            attributeDefinition: '&nbsp;',
-            attributeDefinitions: descriptions.clinical_significance.evidence_item,
-            updateDefinition: function(value, options, scope) {
-              // set attribute definition
-              options.templateOptions.data.attributeDefinition =
-                options.templateOptions.data.attributeDefinitions[scope.model.evidence_type][scope.model.clinical_significance];
-            }
-          },
-          onChange: function(value, options, scope) {
-            options.templateOptions.data.updateDefinition(value, options, scope);
-          }
-        },
-        expressionProperties: {
-          'templateOptions.options': function($viewValue, $modelValue, scope) {
-            return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
               return !!(option.type === scope.model.evidence_type || option.type === 'default' || option.type === 'N/A');
             });
           },
