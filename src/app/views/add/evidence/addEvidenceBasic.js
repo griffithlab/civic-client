@@ -473,6 +473,63 @@
         }
       },
       {
+        key: 'clinical_significance',
+        type: 'horizontalSelectHelp',
+        wrapper: 'attributeDefinition',
+        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
+          if($stateParams.clinicalSignificance) {
+            // ensure evidence type defined before setting evidence direction
+            if($stateParams.evidenceType) {
+              var et = $stateParams.evidenceType;
+              var cs = $stateParams.clinicalSignificance;
+              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance.evidence_item[et]);
+              if(_.includes(permitted, cs)) {
+                $scope.model.clinical_significance = $stateParams.clinicalSignificance;
+                $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[cs];
+              } else {
+                console.warn('Ignoring pre-population of Clinical Significance with invalid value: ' + cs);
+              }
+
+            } else {
+              console.warn('Cannot pre-populate Clinical Significance without specifying Evidence Type.');
+            }
+          }
+        },
+        templateOptions: {
+          label: 'Clinical Significance',
+          required: true,
+          value: 'vm.newEvidence.clinical_significance',
+          // stores unmodified options array for expressionProperties
+          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
+          ngOptions: 'option["value"] as option["label"] for option in to.options',
+          // actual options displayed in the select, modified by expressionProperties
+          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
+          helpText: help['Clinical Significance'],
+          data: {
+            attributeDefinition: 'Please choose Evidence Type before selecting Clinical Significance.',
+            attributeDefinitions: merge_props(descriptions.clinical_significance.evidence_item),
+            updateDefinition: function(value, options, scope) {
+              // set attribute definition
+              options.templateOptions.data.attributeDefinition =
+                options.templateOptions.data.attributeDefinitions[scope.model.clinical_significance];
+            }
+          },
+          onChange: function(value, options, scope) {
+            options.templateOptions.data.updateDefinition(value, options, scope);
+          }
+        },
+        expressionProperties: {
+          'templateOptions.options': function($viewValue, $modelValue, scope) {
+            return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
+              return !!(option.type === scope.model.evidence_type ||
+                        option.type === 'default' ||
+                        option.type === 'N/A');
+            });
+          },
+          'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
+        }
+      },
+      {
         key: 'disease',
         type: 'horizontalTypeaheadHelp',
         wrapper: ['loader', 'diseasedisplay'],
@@ -656,63 +713,6 @@
         expressionProperties: {
           'templateOptions.options': function($viewValue, $modelValue, scope) {
             return  _.filter(scope.to.evidenceDirectionOptions, function(option) {
-              return !!(option.type === scope.model.evidence_type ||
-                        option.type === 'default' ||
-                        option.type === 'N/A');
-            });
-          },
-          'templateOptions.disabled': 'model.evidence_type === ""' // deactivate if evidence_type unselected
-        }
-      },
-      {
-        key: 'clinical_significance',
-        type: 'horizontalSelectHelp',
-        wrapper: 'attributeDefinition',
-        controller: /* @ngInject */ function($scope, $stateParams, ConfigService, _) {
-          if($stateParams.clinicalSignificance) {
-            // ensure evidence type defined before setting evidence direction
-            if($stateParams.evidenceType) {
-              var et = $stateParams.evidenceType;
-              var cs = $stateParams.clinicalSignificance;
-              var permitted = _.keys(ConfigService.evidenceAttributeDescriptions.clinical_significance.evidence_item[et]);
-              if(_.includes(permitted, cs)) {
-                $scope.model.clinical_significance = $stateParams.clinicalSignificance;
-                $scope.to.data.attributeDefinition = $scope.to.data.attributeDefinitions[cs];
-              } else {
-                console.warn('Ignoring pre-population of Clinical Significance with invalid value: ' + cs);
-              }
-
-            } else {
-              console.warn('Cannot pre-populate Clinical Significance without specifying Evidence Type.');
-            }
-          }
-        },
-        templateOptions: {
-          label: 'Clinical Significance',
-          required: true,
-          value: 'vm.newEvidence.clinical_significance',
-          // stores unmodified options array for expressionProperties
-          clinicalSignificanceOptions: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
-          ngOptions: 'option["value"] as option["label"] for option in to.options',
-          // actual options displayed in the select, modified by expressionProperties
-          options: [{ type: 'default', value: '', label: 'Please select a Clinical Significance' }].concat(cs_options(descriptions.clinical_significance.evidence_item)),
-          helpText: help['Clinical Significance'],
-          data: {
-            attributeDefinition: 'Please choose Evidence Type before selecting Clinical Significance.',
-            attributeDefinitions: merge_props(descriptions.clinical_significance.evidence_item),
-            updateDefinition: function(value, options, scope) {
-              // set attribute definition
-              options.templateOptions.data.attributeDefinition =
-                options.templateOptions.data.attributeDefinitions[scope.model.clinical_significance];
-            }
-          },
-          onChange: function(value, options, scope) {
-            options.templateOptions.data.updateDefinition(value, options, scope);
-          }
-        },
-        expressionProperties: {
-          'templateOptions.options': function($viewValue, $modelValue, scope) {
-            return  _.filter(scope.to.clinicalSignificanceOptions, function(option) {
               return !!(option.type === scope.model.evidence_type ||
                         option.type === 'default' ||
                         option.type === 'N/A');
