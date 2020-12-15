@@ -112,6 +112,17 @@
       return (isFunctional && !isOncogenic);
     };
 
+    var resetDiseaseFields = function(scope) {
+      var disField = _.find(scope.fields, { key: 'disease'});
+      var noDoidField = _.find(scope.fields, { key: 'noDoid'});
+      var disNameField = _.find(scope.fields, { key: 'disease_name'});
+
+      disField.value({name: ''});
+      noDoidField.value(false);
+      // disease name field may not be instantiated with a value function
+      if(disNameField.value) { disNameField.value(''); }
+    };
+
     vm.evidenceFields = [
       {
         key: 'gene',
@@ -458,6 +469,11 @@
             csField.templateOptions.data.attributeDefinition = '';
             edField.templateOptions.data.attributeDefinition = '';
 
+            // reset disease fields if switching to Functional
+            if(value === 'Functional') {
+              resetDiseaseFields(scope);
+            }
+
             // if we're switching to Predictive, seed the drugs array w/ a blank entry,
             // otherwise set to empty array
             value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
@@ -516,6 +532,13 @@
           },
           onChange: function(value, options, scope) {
             options.templateOptions.data.updateDefinition(value, options, scope);
+
+            // if switching from Functional Oncogenic, reset disease fields
+            var etField = _.find(scope.fields, { key: 'evidence_type'});
+            if(etField.value() === 'Functional' && value !== 'Oncogenic') {
+              resetDiseaseFields(scope);
+            }
+
           }
         },
         expressionProperties: {
