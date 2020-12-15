@@ -381,7 +381,7 @@
             }
           }
 
-          $scope.pubmedField = _.find($scope.fields, { key: 'pubmed_id' });
+          $scope.sourceField = _.find($scope.fields, { key: 'source.citation_id' });
 
           $scope.$watchGroup([
             'model.gene.name',
