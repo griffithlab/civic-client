@@ -338,7 +338,7 @@
             condition: uiGridConstants.filter.CONTAINS
           },
           minWidth: 75,
-          width: '5%'
+          width: '8%'
         },
         {
           name: 'gene_name',
