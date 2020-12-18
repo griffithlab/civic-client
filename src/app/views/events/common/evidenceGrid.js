@@ -82,8 +82,11 @@
       // data export
       exporterOlderExcelCompatibility: true,
       exporterHeaderFilter: function( displayName ) {
-        // replace short col headers w/ header tooltip strings
-        return _.find(ctrl.evidenceGridOptions.columnDefs, { displayName: displayName}).headerTooltip;
+        // replace short col headers w/ header tooltip
+        // NOTE: column definition, even for hidden columns, must have displayName and headerTooltip
+        // defined or ui-grid's csv exporter will fail silently.
+        var colDef = _.find(ctrl.evidenceGridOptions.columnDefs, { displayName: displayName});
+        return colDef.headerTooltip ? colDef.headerTooltip : displayName;
       },
       exporterPdfDefaultStyle: {fontSize: 7},
       exporterPdfPageSize: 'LETTER',
@@ -150,6 +153,8 @@
         {
           name: 'flag',
           type: 'boolean',
+          headerTooltip: 'Flag',
+          displayName: 'FLAG',
           visible: false,
         },
         { name: 'id',
