@@ -66,7 +66,7 @@
     }, function(data) {
       chart.data = _.map(data, function(key, value) {
         return {
-          Direction: _.capitalize(value),
+          Direction:  value === '' ? 'None assigned' : value,
           Count: key
         };
       });

@@ -67,7 +67,7 @@
     }, function(data) {
       chart.data = _.map(data, function(key, value) {
         return {
-          'Clinical Significance': value === "n/a" ? "N/A" : _.capitalize(value),
+          'Clinical Significance': value === '' ? 'None assigned' : value,
           Count: key
         };
       });
