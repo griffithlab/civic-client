@@ -49,7 +49,7 @@
             </a>
           </span>
           <!-- show org-select button if user is member of > 1 orgs -->
-          <span ng-switch="ctrl.currentUser.organizations.length > 1" >
+          <span ng-switch="ctrl.currentUser.organizations.length > 1 && !ctrl.showCoiNotice" >
             <span ng-switch-when="true" >
               <div class="btn-group org-select" uib-dropdown style="float: right;">
                 <button id="split-button"
