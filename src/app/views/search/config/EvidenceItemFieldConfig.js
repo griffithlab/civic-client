@@ -566,6 +566,7 @@
                           { value: 'Unaltered Function', name: 'Unaltered Function'},
                           { value: 'Neomorphic', name: 'Neomorphic'},
                           { value: 'Dominant Negative', name: 'Dominant Negative' },
+                          { value: 'Oncogenic', name: 'Oncogenic' },
                           { value: 'Unknown', name: 'Unknown'},
                           { value: 'N/A', name: 'N/A' }
                         ]

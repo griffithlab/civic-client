@@ -320,6 +320,7 @@
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
               { value: 'Dominant Negative', label: 'Dominant Negative' },
+              { value: 'Oncogenic', label: 'Oncogenic' },
               { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
@@ -531,6 +532,7 @@
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
               { value: 'Dominant Negative', label: 'Dominant Negative' },
+              { value: 'Oncogenic', name: 'Oncogenic' },
               { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
