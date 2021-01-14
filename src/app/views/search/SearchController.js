@@ -61,6 +61,13 @@
       ],
       'variants': [
         {
+          name: 'Pediatric Cancers',
+          tooltip: '',
+          search:{"operator":"OR","queries":[{"field":"disease_name","condition":{"name":"contains","parameters":["pediatric"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["childhood"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["infantile"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["juvenile"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["teenage"]}}],"entity":"evidence_items"}
+
+
+        },
+        {
           name: 'CHR1 Chromosome is 2',
           tooltip: 'Variants with a primary chromosome of 2',
           search: {'operator':'AND','queries':[{'field':'chromosome','condition':{'name':'is_equal_to','parameters':['2']}}]}
