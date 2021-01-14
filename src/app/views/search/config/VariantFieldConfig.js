@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.search')
-    .factory('VariantFieldConfig', function(ConfigService) {
+    .factory('VariantFieldConfig', function(ConfigService, Diseases) {
       var make_options = ConfigService.optionMethods.make_options;
       return {
         getFields: function() {

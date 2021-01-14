@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.search')
-    .factory('AssertionFieldConfig', function(_, ConfigService) {
+    .factory('AssertionFieldConfig', function(_, ConfigService, Diseases) {
       return {
         getFields: function(acmgCodes, organizations) {
           var ampLevels = ConfigService.assertionAttributeDescriptions.ampLevels;
