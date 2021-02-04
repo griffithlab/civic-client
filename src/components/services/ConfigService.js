@@ -257,7 +257,6 @@
               'Unaltered Function': 'Gene product of sequence variant is unchanged',
               'Neomorphic': 'Sequence variant creates a novel function',
               'Dominant Negative': 'Seuqnce variant abolishes wild type allele function',
-              'Oncogenic': 'Sequence variant that induces or increases oncogenic cellular potential',
               'Unknown': 'Sequence variant that cannot be precisely defined the other listed categories',
             },
           },
