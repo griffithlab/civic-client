@@ -566,7 +566,6 @@
                           { value: 'Unaltered Function', name: 'Unaltered Function'},
                           { value: 'Neomorphic', name: 'Neomorphic'},
                           { value: 'Dominant Negative', name: 'Dominant Negative' },
-                          { value: 'Oncogenic', name: 'Oncogenic' },
                           { value: 'Unknown', name: 'Unknown'},
                           { value: 'N/A', name: 'N/A' }
                         ]
@@ -606,6 +605,7 @@
                           { value: 'Prognostic', name: 'Prognostic' },
                           { value: 'Predisposing', name: 'Predisposing' },
                           { value: 'Functional', name: 'Functional'},
+                          { value: 'Oncogenic', name: 'Oncogenic' },
                         ]
                       }
                     }

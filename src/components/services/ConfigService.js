@@ -163,6 +163,7 @@
             'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
             'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
             'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
+            'Oncogenic': 'Evidence pertains to a variant that variant that induces or increases oncogenic cellular potential',
           },
           assertion: {
             'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
@@ -205,6 +206,9 @@
             'Functional': {
               'Supports': 'The experiment or study supports this variant causing alteration or non-alteration of the gene product function',
               'Does Not Support': 'The experiment or study does not support this variant causing alteration or non-alteration of the gene product function',
+            },
+            'Oncogenic': {
+              'N/A': 'Evidence Direction is Not Applicable for Oncogenic Evidence Type.'
             },
           },
           assertion: {
@@ -259,6 +263,9 @@
               'Dominant Negative': 'Seuqnce variant abolishes wild type allele function',
               'Unknown': 'Sequence variant that cannot be precisely defined the other listed categories',
             },
+            'Oncogenic': {
+              'N/A': 'Clinical Significance is Not Applicable for Oncogenic Evidence Type'
+            }
           },
           assertion: {
             'Predictive': {

@@ -101,7 +101,7 @@
           <col width="60%"/>
         </colgroup>
 
-        <tr ng-if="evidence.evidence_type !== 'Functional' || (evidence.evidence_type === 'Functional' && evidence.clinical_significance === 'Oncogenic')">
+        <tr ng-if="evidence.evidence_type !== 'Functional'">
           <td class="name">Disease:</td>
           <td class="value">
             <span ng-switch="evidence.disease.doid !== null" >
