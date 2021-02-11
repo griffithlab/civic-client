@@ -32,6 +32,13 @@
       ],
       'evidence': [
         {
+          name: 'Pediatric Cancers',
+          tooltip: '',
+          search:{"operator":"OR","queries":[{"field":"disease_name","condition":{"name":"contains","parameters":["pediatric"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["childhood"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["infantile"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["juvenile"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["teenage"]}}],"entity":"evidence_items"}
+
+
+        },
+        {
           name: 'High Quality ALK Evidence',
           tooltip: 'Evidence pertaining to ALK variants with high Evidence Levels and Ratings',
           search: {'operator':'AND','queries':[{'field':'gene_name','condition':{'name':'contains','parameters':['ALK']}},{'field':'rating','condition':{'name':'is_greater_than_or_equal_to','parameters':[4]}},{'field':'evidence_level','condition':{'name':'is_above','parameters':['C']}}]}

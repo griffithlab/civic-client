@@ -4,7 +4,8 @@
       <div class="well suggested-searches">
         <h4>Example Searches:</h4>
         <ul class="nav nav-pills">
-          <li ng-repeat="suggestion in vm.suggestedSearches.sources">
+          <li ng-repeat="suggestion in vm.suggestedSearches.sources"
+            ng-attr-id="{{ suggestion.name | kebabCase }}">
             <a ng-click="vm.setSearch(suggestion.search)"
                uib-tooltip="{{suggestion.tooltip}}"
                tooltip-append-to-body="true"

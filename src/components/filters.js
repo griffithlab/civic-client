@@ -1,6 +1,7 @@
 (function() {
   'use strict';
   angular.module('civic.common')
+    .filter('kebabCase', kebabCaseFilter)
     .filter('labelify', labelifyFilter)
     .filter('arrayToList', arrayToListFilter)
     .filter('encodeUri', encodeUri)
@@ -12,6 +13,15 @@
     .filter('keyToLabel', keyToLabel)
     .filter('highlightSearch', highlightSearch)
     .filter('words', words);
+
+  // @ngInject
+  function kebabCaseFilter() {
+    return function(input) {
+      return input.replace(/([a-z])([A-Z])/g, "$1-$2")
+        .replace(/\s+/g, '-')
+        .toLowerCase();
+    };
+  }
 
   // @ngInject
   function labelifyFilter() {
