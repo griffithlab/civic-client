@@ -99,7 +99,8 @@
     // form helper functions
     var hideDiseaseField = function(model) {
       var isFunctional = model.evidence_type === 'Functional';
-      return (isFunctional);
+      var isOncogenic = model.clinical_significance === 'Oncogenic';
+      return (isFunctional && !isOncogenic);
     };
 
     var resetDiseaseFields = function(scope) {
@@ -324,9 +325,9 @@
           onChange: function(value, options, scope) {
             options.templateOptions.data.updateDefinition(value, options, scope);
 
-            // if switching from Functional, reset disease fields
+            // if switching from Functional Oncogenic, reset disease fields
             var etField = _.find(scope.fields, { key: 'evidence_type'});
-            if(etField.value() === 'Functional') {
+            if(etField.value() === 'Functional' && value !== 'Oncogenic') {
               resetDiseaseFields(scope);
             }
           }
