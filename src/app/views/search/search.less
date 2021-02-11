@@ -2,6 +2,7 @@
 @import 'bower_components/bootstrap/less/variables.less';
 @import 'src/app/styles/_civic-variables.less';
 @import 'src/app/styles/_mixins.less';
+@import 'src/app/styles/_buttons.less';
 
 .searchView{
   .title-row {
@@ -44,6 +45,10 @@
           background-color: lighten(@civicLightBlue, 35%);
         }
       }
+    }
+
+    li#pediatric-cancers a {
+      .pretty-buttons(#FFFFFF, #4fc3f7, 0 0 4px #0288d1);
     }
   }
 
