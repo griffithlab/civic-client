@@ -302,7 +302,7 @@
         type: 'multiInput',
         templateOptions: {
           label: 'Variant Type(s)',
-          helpText: 'Add one or more variant types from the <a href="http://www.sequenceontology.org/browser/" title="Opens a new tab for the Sequence Ontology Browser" target="_blank">Sequence Ontology</a> (e.g., missense, loss-of-function). Please be specific as possible, and avoid the addition of root concepts.',
+          helpText: 'Add one or more variant types from the <a href="http://www.sequenceontology.org/browser/" title="Opens a new tab for the Sequence Ontology Browser" target="_blank">Sequence Ontology</a> (e.g., missense, loss-of-function). Please be specific as possible, avoid the addition of root concepts, and use the <i>sequence_variant</i> tree of the sequence ontology.',
           entityName: 'Type',
           showAddButton: false,
           inputOptions: {
