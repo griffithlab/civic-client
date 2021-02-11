@@ -222,10 +222,6 @@
                 value: 'Predisposing',
                 label: 'Predisposing'
               },
-              {
-                value: 'Functional',
-                label: 'Functional',
-              },
             ]
           },
           width: '6%',
@@ -462,6 +458,10 @@
                 value: 'Functional',
                 label: 'Functional',
               },
+              {
+                value: 'Oncogenic',
+                label: 'Oncogenic'
+              },
             ]
           },
           width: '6%',
@@ -514,7 +514,6 @@
               { value: 'Unaltered Function', label: 'Unaltered Function'},
               { value: 'Neomorphic', label: 'Neomorphic'},
               { value: 'Dominant Negative', label: 'Dominant Negative' },
-              { value: 'Oncogenic', label: 'Oncogenic' },
               { value: 'Unknown', label: 'Unknown'},
               { value: 'N/A', label: 'N/A' }
             ]
