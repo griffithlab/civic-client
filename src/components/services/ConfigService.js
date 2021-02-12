@@ -163,7 +163,7 @@
             'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
             'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
             'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
-            'Oncogenic': 'Evidence pertains to a variant that variant that induces or increases oncogenic cellular potential',
+            'Oncogenic': 'Evidence pertains to a variant that induces or increases oncogenic cellular potential',
           },
           assertion: {
             'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
