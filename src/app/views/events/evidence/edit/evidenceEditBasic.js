@@ -256,7 +256,7 @@
         controller: /* @ngInject */  function($scope) {
           // set attribute definition
           $scope.options.templateOptions.data.attributeDefinition =
-            $scope.options.templateOptions.data.attributeDefinitions[$scope.model.evidence_type];
+            $scope.options.templateOptions.data.attributeDefinitions.evidence_item[$scope.model.evidence_type];
         },
         templateOptions: {
           label: 'Evidence Type',
@@ -285,7 +285,7 @@
             value === 'Predictive' ? scope.model.drugs = [''] : scope.model.drugs = [];
 
             // set attribute definition
-            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions[value];
+            options.templateOptions.data.attributeDefinition = options.templateOptions.data.attributeDefinitions.evidence_item[value];
 
           },
           helpText: help['Evidence Type'],
