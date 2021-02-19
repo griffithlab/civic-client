@@ -161,15 +161,15 @@
             'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
             'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
             'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
-            'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
+            'Predisposing': 'Evidence pertains to a germline variant\'s role in conferring susceptibility to disease (including pathogenicity evaluations)',
             'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
-            'Oncogenic': 'Evidence pertains to a variant that induces or increases oncogenic cellular potential',
+            'Oncogenic': 'Evidence pertains to a somatic variant\'s involvement in tumor pathogenesis as described by the Hallmarks of Cancer',
           },
           assertion: {
             'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
             'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
             'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
-            'Predisposing': 'Evidence pertains to a variant\'s role in conferring susceptibility to a disease',
+            'Predisposing': 'Evidence pertains to a germline variant\'s role in conferring susceptibility to disease (including pathogenicity evaluations)',
           }
         },
         evidence_level_brief: {
@@ -294,7 +294,7 @@
           }
         },
         drug_interaction_type: {
-          'Combination': 'The drugs listed were used in as part of a combination therapy approach',
+          'Combination': 'The drugs listed were used as part of a combination therapy approach',
           'Sequential': 'The drugs listed were used at separate timepoints in the same treatment plan',
           'Substitutes': 'The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting'
         },
@@ -316,8 +316,8 @@
         'Evidence Statement' : 'Your original description of evidence from published medical literature detailing the association of or lack of association of a variant with diagnostic, prognostic or predictive value in relation to a specific disease (and treatment for predictive evidence). Data constituting protected health information (PHI) should not be entered. Please familiarize yourself with your jurisdiction\'s definition of PHI before contributing.',
         'Evidence Type' : 'Type of clinical outcome associated with the evidence statement.',
         'Evidence Level' : 'Type of study performed to produce the evidence statement',
-        'Evidence Direction' : 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. Evidence Type must be selected before this field is enabled.',
-        'Clinical Significance' : 'Positive or negative association of the Variant with predictive, prognostic, diagnostic, or predisposing evidence types. If the variant was not associated with a positive or negative outcome, N/A should be selected. Evidence Type must be selected before this field is enabled.',
+        'Evidence Direction' : 'An indicator of whether the evidence statement supports or refutes the clinical significance of an event. For predisposing and oncogenic evidence, directionality is only applied at the assertion level and N/A should be selected here.',
+        'Clinical Significance' : 'The impact of the variant for predictive, prognostic, diagnostic, or functional evidence types. For predisposing and oncogenic evidence, impact is only applied at the assertion level and N/A should be selected here.',
         'Drug Names' : 'For predictive evidence, specify one or more drug names. If the type-ahead list does not display your drug\'s name or alias, it likely does not exist in CIViC\'s database. You may click the button adjacent to the input box to show the Add Drug form and add a new drug to the database.',
         'Drug Interaction Type' : 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
         'Phenotypes' : 'Please provide any <a href="https://hpo.jax.org/app/browse/term/HP:0000118" target="_blank">HPO phenotypes.</a>',
