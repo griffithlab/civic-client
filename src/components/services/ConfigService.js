@@ -201,7 +201,7 @@
               'Does Not Support': 'The experiment or study does not support a prognostic association between variant and outcome'
             },
             'Predisposing': {
-              'N/A': 'Evidence Direction is Not Applicable for Predisposing Evidence Type.'
+              'N/A': 'Evidence Direction is Not Applicable.'
             },
             'Functional': {
               'Supports': 'The experiment or study supports this variant causing alteration or non-alteration of the gene product function',
@@ -256,12 +256,12 @@
               'N/A': 'Clinical Significance is Not Applicable for Predisposing Evidence Type'
             },
             'Functional': {
-              'Gain of Function': 'Sequence variant conferrs a new or enhanced function',
-              'Loss of Function': 'Sequence variant conferrs a diminished or abolished function',
+              'Gain of Function': 'Sequence variant confers an increase in normal gene function',
+              'Loss of Function': 'Sequence variant confers a diminished or abolished function',
               'Unaltered Function': 'Gene product of sequence variant is unchanged',
               'Neomorphic': 'Sequence variant creates a novel function',
-              'Dominant Negative': 'Seuqnce variant abolishes wild type allele function',
-              'Unknown': 'Sequence variant that cannot be precisely defined the other listed categories',
+              'Dominant Negative': 'Sequence variant abrogates function of wildtype allele gene product',
+              'Unknown': 'Sequence variant that cannot be precisely defined by the other listed categories',
             },
             'Oncogenic': {
               'N/A': 'Clinical Significance is Not Applicable for Oncogenic Evidence Type'
