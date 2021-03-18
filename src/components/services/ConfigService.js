@@ -241,7 +241,7 @@
               'Resistance': 'Associated with clinical or preclinical resistance to treatment',
               'Adverse Response': 'Associated with an adverse response to drug treatment',
               'Reduced Sensitivity': 'Response to treatment is lower than seen in other treatment contexts',
-              'N/A': 'Variant does not inform clinical action'
+              'N/A': 'Clinical Significance is not applicable.'
             },
             'Diagnostic': {
               'Positive': 'Associated with diagnosis of disease or subtype',
@@ -250,10 +250,10 @@
             'Prognostic': {
               'Better Outcome': 'Demonstrates better than expected clinical outcome',
               'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
-              'N/A': 'Variant does not inform clinical action'
+              'N/A': 'Clinical Significance is not applicable.'
             },
             'Predisposing': {
-              'N/A': 'Clinical Significance is Not Applicable for Predisposing Evidence Type'
+              'N/A': 'Clinical Significance is not applicable.'
             },
             'Functional': {
               'Gain of Function': 'Sequence variant confers an increase in normal gene function',
@@ -264,7 +264,7 @@
               'Unknown': 'Sequence variant that cannot be precisely defined by the other listed categories',
             },
             'Oncogenic': {
-              'N/A': 'Clinical Significance is Not Applicable for Oncogenic Evidence Type'
+              'N/A': 'Clinical Significance is not applicable.'
             }
           },
           assertion: {
@@ -273,7 +273,7 @@
               'Resistance': 'Associated with clinical or preclinical resistance to treatment',
               'Adverse Response': 'Associated with an adverse response to drug treatment',
               'Reduced Sensitivity': 'Response to treatment is lower than seen in other treatment contexts',
-              'N/A': 'Variant does not inform clinical action'
+              'N/A': 'Clinical Significance is not applicable.'
             },
             'Diagnostic': {
               'Positive': 'Associated with diagnosis of disease or subtype',
@@ -282,7 +282,7 @@
             'Prognostic': {
               'Better Outcome': 'Demonstrates better than expected clinical outcome',
               'Poor Outcome': 'Demonstrates worse than expected clinical outcome',
-              'N/A': 'Variant does not inform clinical action'
+              'N/A': 'Clinical Significance is not applicable.'
             },
             'Predisposing': {
               'Pathogenic': 'Very strong evidence the variant is pathogenic',
