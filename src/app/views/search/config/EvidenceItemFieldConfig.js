@@ -601,11 +601,11 @@
                         required: true,
                         options: [
                           { value: 'Predictive', name: 'Predictive' },
-                          { value: 'Diagnostic', name: 'Diagnostic' },
                           { value: 'Prognostic', name: 'Prognostic' },
+                          { value: 'Diagnostic', name: 'Diagnostic' },
                           { value: 'Predisposing', name: 'Predisposing' },
-                          { value: 'Functional', name: 'Functional'},
                           { value: 'Oncogenic', name: 'Oncogenic' },
+                          { value: 'Functional', name: 'Functional'},
                         ]
                       }
                     }
