@@ -493,10 +493,9 @@
                         required: true,
                         options: [
                           { value: 'Predictive', name: 'Predictive' },
-                          { value: 'Diagnostic', name: 'Diagnostic' },
                           { value: 'Prognostic', name: 'Prognostic' },
+                          { value: 'Diagnostic', name: 'Diagnostic' },
                           { value: 'Predisposing', name: 'Predisposing' },
-                          { value: 'Functional', label: 'Functional'},
                         ]
                       }
                     }

@@ -211,12 +211,12 @@
                 label: 'Predictive'
               },
               {
-                value: 'Diagnostic',
-                label: 'Diagnostic'
-              },
-              {
                 value: 'Prognostic',
                 label: 'Prognostic'
+              },
+              {
+                value: 'Diagnostic',
+                label: 'Diagnostic'
               },
               {
                 value: 'Predisposing',
@@ -443,24 +443,24 @@
                 label: 'Predictive'
               },
               {
-                value: 'Diagnostic',
-                label: 'Diagnostic'
-              },
-              {
                 value: 'Prognostic',
                 label: 'Prognostic'
+              },
+              {
+                value: 'Diagnostic',
+                label: 'Diagnostic'
               },
               {
                 value: 'Predisposing',
                 label: 'Predisposing'
               },
               {
-                value: 'Functional',
-                label: 'Functional',
-              },
-              {
                 value: 'Oncogenic',
                 label: 'Oncogenic'
+              },
+              {
+                value: 'Functional',
+                label: 'Functional',
               },
             ]
           },

@@ -171,20 +171,16 @@
                 label: 'Predictive'
               },
               {
-                value: 'Diagnostic',
-                label: 'Diagnostic'
-              },
-              {
                 value: 'Prognostic',
                 label: 'Prognostic'
               },
               {
-                value: 'Predisposing',
-                label: 'Predisposing'
+                value: 'Diagnostic',
+                label: 'Diagnostic'
               },
               {
-                value: 'Functional',
-                label: 'Functional',
+                value: 'Predisposing',
+                label: 'Predisposing'
               },
             ]
           },

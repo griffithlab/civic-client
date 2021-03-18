@@ -159,16 +159,16 @@
         evidence_type: {
           evidence_item: {
             'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-            'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
             'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
+            'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
             'Predisposing': 'Evidence pertains to a germline variant\'s role in conferring susceptibility to disease (including pathogenicity evaluations)',
-            'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
             'Oncogenic': 'Evidence pertains to a somatic variant\'s involvement in tumor pathogenesis as described by the Hallmarks of Cancer',
+            'Functional': 'Evidence pertains to a variant that alters biological function from the reference state',
           },
           assertion: {
             'Predictive': 'Evidence pertains to a variant\'s effect on therapeutic response',
-            'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
             'Prognostic': 'Evidence pertains to a variant\'s impact on disease progression, severity, or patient survival',
+            'Diagnostic': 'Evidence pertains to a variant\'s impact on patient diagnosis (cancer subtype)',
             'Predisposing': 'Evidence pertains to a germline variant\'s role in conferring susceptibility to disease (including pathogenicity evaluations)',
           }
         },
