@@ -97,7 +97,7 @@
             templateOptions: {
               formatter: 'model[options.key].name',
               typeahead: 'item as item.name for item in options.data.typeaheadSearch($viewValue)',
-              popupTemplateUrl: '/components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
+              popupTemplateUrl: 'components/forms/fieldTypes/variantTypeaheadPopup.tpl.html',
               onSelect: 'options.data.pushNew(model, index)'
             },
             data: {
