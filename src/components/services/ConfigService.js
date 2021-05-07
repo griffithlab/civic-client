@@ -321,7 +321,7 @@
         'Drug Names' : 'For predictive evidence, specify one or more drug names. If the type-ahead list does not display your drug\'s name or alias, it likely does not exist in CIViC\'s database. You may click the button adjacent to the input box to show the Add Drug form and add a new drug to the database.',
         'Drug Interaction Type' : 'Please indicate whether the drugs specified above are substitutes, or are used in sequential or combination treatments.',
         'Phenotypes' : 'Please provide any <a href="https://hpo.jax.org/app/browse/term/HP:0000118" target="_blank">HPO phenotypes</a>, including <a href="https://hpo.jax.org/app/browse/term/HP:0003674" target="_blank">age of onset</a>.',
-        'Rating' : 'Please rate your evidence on a scale of one to five stars. Use the star rating descriptions for guidance.',
+        'Rating' : 'Please rate your evidence on a scale of one to five stars. Use the evidence rating descriptions for guidance.',
         'Source Type': 'CIViC accepts PubMed or ASCO Abstracts sources. Please indicate the source of the support for your evidence here.',
         'SourceASCO': 'Please enter an ASCO Web ID to specify your source. NOTE: The ASCO Web ID is not the ASCO abstract number. The ASCO Web ID can be found in the URL of the abstract, e.g. 160900 is the ASCO Web ID for Tyler Stewart, 2018, ASCO Annual Meeting, Abstract 9056 (https://meetinglibrary.asco.org/record/160900/abstract).',
         'SourcePubMed': 'Please enter the PubMed ID for your source.',
