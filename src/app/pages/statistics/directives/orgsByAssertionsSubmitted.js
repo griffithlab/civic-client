@@ -59,6 +59,25 @@
 
     var l = chart.addLegend('80%', '70%', 220, 20, 'left');
 
+    var statusColors = [
+      {
+        val: 'Accepted',
+        color: '#B2D49C'
+      },
+      {
+        val: 'Rejected',
+        color: '#ECA2C0'
+      },
+      {
+        val: 'Submitted',
+        color: '#F3BC94'
+      }
+    ];
+
+    _.map(statusColors, function(c) {
+      chart.assignColor(c.val, c.color);
+    });
+
     // override legend sorting
     l._getEntries_old = l._getEntries;
     l._getEntries = function() {
