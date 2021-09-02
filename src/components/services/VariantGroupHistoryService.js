@@ -12,7 +12,7 @@
     //  cache.remove(response.config.url);
     //  return response.$promise;
     //};
-    return $resource('/api/variants/:variantId/revisions',
+    return $resource('/api/variant_groups/:variantId/revisions',
       {
         variantId: '@variantId'
       },
