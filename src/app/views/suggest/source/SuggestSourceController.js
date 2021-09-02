@@ -363,8 +363,15 @@
       if(!_.isUndefined(req.gene) && _.isObject(req.gene)) {
         reqObj.gene_name = req.gene.name;
       }
-      if(!_.isUndefined(req.variant) && _.isObject(req.variant)) {
-        reqObj.variant_name = req.variant.name;
+      if(!_.isUndefined(req.variant)) {
+        if(_.isObject(req.variant)) {
+          //came from typeahead
+          reqObj.variant_name = req.variant.name;
+        } else {
+          //via form
+          reqObj.variant_name = req.variant;
+        }
+
       }
       if(!_.isUndefined(req.disease)) {
         if(_.isObject(req.disease)) {
