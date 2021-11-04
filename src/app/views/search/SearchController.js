@@ -34,8 +34,7 @@
         {
           name: 'Pediatric Cancers',
           tooltip: '',
-          search:{"operator":"OR","queries":[{"field":"disease_name","condition":{"name":"contains","parameters":["pediatric"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["childhood"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["infantile"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["juvenile"]}},{"field":"disease_name","condition":{"name":"contains","parameters":["teenage"]}}],"entity":"evidence_items"}
-
+          search: {"operator":"OR","queries": [{"field":"phenotype_hpo_class","condition":{"name":"is","parameters":["pediatric onset"]}},{"field":"phenotype_hpo_class","condition":{"name":"is","parameters":["infantile onset"]}},{"field":"phenotype_hpo_class","condition":{"name":"is","parameters":["childhood onset"]}},{"field":"phenotype_hpo_class","condition":{"name":"is","parameters":["juvenile onset"]}},{"field":"phenotype_hpo_class","condition":{"name":"is","parameters":["young adult onset"]}}]}
 
         },
         {
