@@ -1,30 +1,69 @@
 <div class="home-view">
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 discover">
-      <div class="row">
-        <div class="col-sm-12 col-md-6 icon">
-          <a ui-sref="browse.variants">
-            <img src="assets/images/icon_discover.svg" alt="Discover" class="img-responsive"/>
-          </a>
-        </div>
-        <div class="col-sm-12 col-md-6 blurb">
-          <p>Discover supported clinical interpretations of mutations related to cancer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 collaborate">
-      <div class="row">
-        <div class="col-sm-12 col-md-6 icon">
-          <a ui-sref="participate">
-            <img src="assets/images/icon_collaborate.svg" alt="Discover" class="img-responsive" width="90%"/>
-          </a>
-        </div>
-        <div class="col-sm-12 col-md-6 blurb">
-          <p>Participate with colleagues to add variants and support for cancer-related mutations.</p>
+  <!-- v2 announcement banner -->
+  <div class="row" style="margin: 24px 0 12px 0;">
+    <img src="assets/images/CIViC_v2-announcement-banner.png" class="img-responsive" width="2160" height="376" />
+  </div>
+  <div class="row" style="margin-bottom: 32px;">
+    <div class="col-xs-12 announcement">
+      <div class="announcement-body">
+        <div class="row">
+          <div class="col-xs-2">
+            <img src="assets/images/CIViC_v2-screenshot.png" class="img-responsive" width="398" height="397" style="margin-right: 10px; float: left;" />
+          </div>
+          <div class="col-xs-10">
+            <h4 style="color: #ffdd22;">A New Redesigned Version of CIViC is Coming Soon!</h4>
+            <p> It will feature a completely redesigned user interface and a more powerful GraphQL API. At launch, CIViC V2 will provide many new ways to browse the knowledgebase while retaining the CIViC knowledge model you are already familiar with. Furthermore, existing links to CIViC entities will continue to function as before. </p>
+            <p>If you have  any questions, or would like help adapting an existing integration to our new API, please email us at <a href="mailto:help@civicdb.org">help@civicdb.org</a></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- <div class="row" style="margin-bottom: 32px;">
+       <div class="col-xs-12 intro-block">
+       <div class="row">
+       <div class="row">
+       <div class="col-xs-12 intro">
+       <div class="col-xs-2">
+       <img src="assets/images/CIViC_v2-screenshot.png" class="img-responsive" width="398" height="397" style="margin-right: 10px; float: left;" />
+       </div>
+       <div class="col-xs-8">
+
+       <h4>A New Redesigned Version of CIViC is Coming Soon!</h4>
+       <p> It will feature a new, completely redesigned user interface and a more powerful GraphQL API. At launch, CIViC V2 will provide many new ways to browse the knowledgebase while retaining the CIViC knowledge model you are already familiar with. Furthermore, existing links to CIViC entities will continue to function as before. </p>
+       <p>If you have  any questions, or would like help adapting an existing integration to our new API, please email us at <a href="mailto:help@civicdb.org">help@civicdb.org</a></p>
+       </div>
+       </div>
+       </div>
+       </div>
+       </div>
+       </div> -->
+  <!-- <div class="row">
+       <div class="col-xs-12 col-sm-6 discover">
+       <div class="row">
+       <div class="col-sm-12 col-md-6 icon">
+       <a ui-sref="browse.variants">
+       <img src="assets/images/icon_discover.svg" alt="Discover" class="img-responsive"/>
+       </a>
+       </div>
+       <div class="col-sm-12 col-md-6 blurb">
+       <p>Discover supported clinical interpretations of mutations related to cancer.</p>
+       </div>
+       </div>
+       </div>
+       <div class="col-xs-12 col-sm-6 collaborate">
+       <div class="row">
+       <div class="col-sm-12 col-md-6 icon">
+       <a ui-sref="participate">
+       <img src="assets/images/icon_collaborate.svg" alt="Discover" class="img-responsive" width="90%"/>
+       </a>
+       </div>
+       <div class="col-sm-12 col-md-6 blurb">
+       <p>Participate with colleagues to add variants and support for cancer-related mutations.</p>
+       </div>
+       </div>
+       </div>
+       </div> -->
   <div class="row" style="margin-top: 16px;">
     <div class="col-xs-12 intro-block">
       <div class="row">
@@ -48,33 +87,32 @@
       <img src="assets/images/become-an-editor_banner.png" class="img-responsive" width="1080"  height="94"/>
     </a>
   </div>
-  <div class="row" >
-    <div class="col-xs-12 section-header" >
+  <div class="row">
+    <div class="col-xs-12 section-header">
       <h4>Announcements</h4>
     </div>
   </div>
-  <div class="row" >
-    <div class="col-xs-12 col-md-6" >
-      <div class="announcement" >
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="announcement">
         <div class="announcement-body" style="margin-bottom: 1em;">
           <p class="date">February 12th, 2021</p>
-          <p><span style="color:#faa51b;">Pediatric Cancer Variants:</span> Through support from the Childhood Cancer Data Initiative (CCDI), we have executed our initial phase of highlighting pediatric cancer variant content. This <a href="https://civicdb.org/search/evidence/72d501b7-3327-409f-971d-6a9cfd8a7fff"  target="_blank" uib-tooltip="Pediatric Cancer Variants Advanced Search"> advanced search query</a> displays childhood relevant data contained in CIViC. Stay tuned for more pediatric-focused features as we launch the first open-access searchable childhood-cancer-specific dataset.
+          <p><span style="color:#faa51b;">Pediatric Cancer Variants:</span> Through support from the Childhood Cancer Data Initiative (CCDI), we have executed our initial phase of highlighting pediatric cancer variant content. This <a href="https://civicdb.org/search/evidence/72d501b7-3327-409f-971d-6a9cfd8a7fff" target="_blank" uib-tooltip="Pediatric Cancer Variants Advanced Search"> advanced search query</a> displays childhood relevant data contained in CIViC. Stay tuned for more pediatric-focused features as we launch the first open-access searchable childhood-cancer-specific dataset.
           </p>
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-md-6" >
-      <div class="announcement" >
+    <div class="col-xs-12 col-md-6">
+      <div class="announcement">
         <div class="announcement-body" style="margin-bottom: 1em;">
           <p class="date">June 29th, 2020</p>
-          <div class="row" >
+          <div class="row">
             <div class="col-xs-6">
               <a href="https://pecan.stjude.cloud/proteinpaint/kras/hg19/civic" target="_blank"><img src="assets/images/partners/protein-paint-integration.png" class="img-responsive" width="500" height="350" style="margin-right: 10px; float: left;" /></a>
             </div>
             <div class="col-xs-6">
               <p>
-                <span style="color:#faa51b;">Explore CIViC Variants in ProteinPaint:</span>
-                St. Jude's <a href="https://pecan.stjude.cloud/proteinpaint/" uib-tooltip="ProteinPaint Information" target="_blank">ProteinPaint</a> now incorporates a CIViC variant track, <a href="https://pecan.stjude.cloud/proteinpaint/kras/hg19/civic" uib-tooltip="KRAS ProteinPaint View" target="_blank">displaying CIViC curated data</a> along with a variety of additional sources, and providing one-click access to CIViC's variant summaries. We've also added ProteinPaint links to <a href="https://civicdb.org/links/gene/30" target="_blank" uib-tooltip="KRAS CIViC View">our</a> <a href="https://civicdb.org/links/gene/5" target="_blank" uib-tooltip="BRAF CIViC View">gene</a> <a href="https://civicdb.org/links/gene/4" target="_blank" uib-tooltip="ABL1 CIViC View">summaries</a>.
+                <span style="color:#faa51b;">Explore CIViC Variants in ProteinPaint:</span> St. Jude's <a href="https://pecan.stjude.cloud/proteinpaint/" uib-tooltip="ProteinPaint Information" target="_blank">ProteinPaint</a> now incorporates a CIViC variant track, <a href="https://pecan.stjude.cloud/proteinpaint/kras/hg19/civic" uib-tooltip="KRAS ProteinPaint View" target="_blank">displaying CIViC curated data</a> along with a variety of additional sources, and providing one-click access to CIViC's variant summaries. We've also added ProteinPaint links to <a href="https://civicdb.org/links/gene/30" target="_blank" uib-tooltip="KRAS CIViC View">our</a> <a href="https://civicdb.org/links/gene/5" target="_blank" uib-tooltip="BRAF CIViC View">gene</a> <a href="https://civicdb.org/links/gene/4" target="_blank" uib-tooltip="ABL1 CIViC View">summaries</a>.
               </p>
             </div>
           </div>
@@ -90,71 +128,31 @@
         </div>
       </div>
       <div class="row">
-        <stats-block
-          stats="vm.stats.genes"
-          title="Genes"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.genes" title="Genes" icon-url="" cols="col-xs-4">
         </stats-block>
-        <stats-block
-          stats="vm.stats.variants"
-          title="Variants"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.variants" title="Variants" icon-url="" cols="col-xs-4">
         </stats-block>
-        <stats-block
-          stats="vm.stats.evidence_items"
-          title="Evidence Items"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.evidence_items" title="Evidence Items" icon-url="" cols="col-xs-4">
         </stats-block>
       </div>
       <div class="row" style="margin-top: 16px;">
-        <stats-block
-          stats="vm.stats.assertions"
-          title="Assertions"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.assertions" title="Assertions" icon-url="" cols="col-xs-4">
         </stats-block>
-        <stats-block
-          stats="vm.stats.drugs"
-          title="Drugs"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.drugs" title="Drugs" icon-url="" cols="col-xs-4">
         </stats-block>
-        <stats-block
-          stats="vm.stats.diseases"
-          title="Diseases"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.diseases" title="Diseases" icon-url="" cols="col-xs-4">
         </stats-block>
       </div>
       <div class="row" style="margin-top: 16px;">
-        <stats-block
-          stats="vm.stats.sources"
-          title="Publications"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.sources" title="Publications" icon-url="" cols="col-xs-4">
         </stats-block>
-        <stats-block
-          stats="vm.stats.suggested_changes"
-          title="Revisions"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.suggested_changes" title="Revisions" icon-url="" cols="col-xs-4">
         </stats-block>
-        <stats-block
-          stats="vm.stats.users"
-          title="Contributors"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.users" title="Contributors" icon-url="" cols="col-xs-4">
         </stats-block>
       </div>
       <div class="row" style="margin-top: 16px;">
-        <stats-block
-          stats="vm.stats.comments"
-          title="Comments"
-          icon-url=""
-          cols="col-xs-4">
+        <stats-block stats="vm.stats.comments" title="Comments" icon-url="" cols="col-xs-4">
         </stats-block>
       </div>
     </div>
