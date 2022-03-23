@@ -1,12 +1,17 @@
 <div class="civicLogo">
-  <a ui-sref="home">
-    <div ng-switch on="$root.view.navMode">
-      <span ng-switch-when="home">
+  <div ng-switch on="$root.view.navMode">
+    <span ng-switch-when="home">
+      <a ui-sref="home">
         <img src="assets/images/CIViC_logo.png" alt="CIViC: Clinical Interpretation of Variations in Cancer" width="375" height="240" class="img-responsive"/>
-      </span>
-      <span ng-switch-when="sub">
+      </a>
+    </span>
+    <span ng-switch-when="sub">
+      <a ui-sref="home">
         <img src="assets/images/CIViC_logo_sm.png" alt="CIViC: Clinical Interpretation of Variations in Cancer" width="155" height="76"/>
-      </span>
-    </div>
-  </a>
+      </a>
+      <a href="http://34.209.114.226" target="_blank">
+        <img src="assets/images/CIViC_v2-announce-btn.png" alt="CIViC version 2.0 coming soon - preview now on our staging server" width="193" height="30"/>
+      </a>
+    </span>
+  </div>
 </div>
